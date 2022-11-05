@@ -1,0 +1,10 @@
+# Do not upload following files to Github
+
+# R project files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# targets folder
+_targets/
