@@ -30,3 +30,18 @@ tar_git_init()
 
 # take a snapshot of target data
 tar_git_snapshot()
+
+# repeat in cycle when working with it
+
+# view log
+tar_git_log()
+
+
+# to check out older code or whatever
+gert::git_branch_checkout("name-of-branch")
+
+# check out data
+# every data snapshot with tar_git_snapshot() creates a new Git branch
+tar_git_checkout()
+
+
