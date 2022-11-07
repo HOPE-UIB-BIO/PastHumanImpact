@@ -6,5 +6,7 @@
 .RData
 .Ruserdata
 
-# targets folder
+
+# Data folders
+Data/
 _targets/
