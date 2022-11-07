@@ -38,7 +38,7 @@ tar_git_log()
 
 
 # to check out older code or whatever
-gert::git_branch_checkout("name-of-branch")
+gert::git_branch_checkout("fix_data_storage")
 
 # check out data
 # every data snapshot with tar_git_snapshot() creates a new Git branch
