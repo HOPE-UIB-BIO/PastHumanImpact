@@ -2,6 +2,13 @@
 library(targets)
 # library(tarchetypes) 
 
+
+mypath <- "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/HOPE_Hypothesis1/_targets"
+
+tar_config_set(
+  store = mypath)
+#tar_config_get("store")
+
 # Set target options:
 tar_option_set(
   packages = c( "assertthat",
@@ -20,9 +27,13 @@ tar_option_set(
                 "GGally",
                 "gittargets"
                ),
-  format = "rds", # default storage format
- 
-)
+  memory = "transient",
+  garbage_collection = TRUE,
+  storage = "worker",
+  retrieval = "worker",
+  repository = "local")
+
+
 
 # tar_make_clustermq() configuration (okay to leave alone):
 options(clustermq.scheduler = "multicore")
@@ -32,11 +43,13 @@ options(clustermq.scheduler = "multicore")
 
 # source R functions:
 source("R/functions.R") 
-#source("R/util.functions.R") # assembly all utility functions
+
+# load data from another repository (Onedrive folder)
+data_file_path <- "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
 
 # the targets list:
 list(
-  tar_target(data_assembly, "Data/assembly/data_assembly-2022-05-23.rds", format = "file"),
+  tar_target(data_assembly, data_file_path, format = "file"),
   tar_target(data_pollen, get_data_pollen(data_assembly)),
   tar_target(data_sites, get_data_site(data_assembly)),
   tar_target(data_filtered, filter_age_levels(data_pollen)),
