@@ -1,6 +1,6 @@
 # function to get change points of pap estimates using regression trees
 
-get_change_points_pap <- function(data_combined_pap){
+get_change_points_pap <- function(data_combine_paps){
   
   data_diversity_cp <-
     data_combine_paps %>%
@@ -70,7 +70,7 @@ get_change_points_pap <- function(data_combined_pap){
     dplyr::select(dataset_id, roc_cp, roc_pp)
   
   # turnover
-  data_turnover_cp <-
+  data_dcca_cp <-
     data_combine_paps %>%
     dplyr::mutate(
       dcca_cp = purrr::map2(
@@ -106,17 +106,10 @@ get_change_points_pap <- function(data_combined_pap){
       by = "dataset_id"
     ) %>%
     dplyr::inner_join(
-      data_turnover_cp,
+      data_dcca_cp,
       by = "dataset_id"
     )
-  
-  # readr::write_rds(
-  #   data_change_points,
-  #   here::here(
-  #     "Data/Processed/Partitions/PAP_change_points_2022-09-29.rds"
-  #   ),
-  #   compress = "gz"
-  # )
+
   return(data_change_points)
   
 }
