@@ -14,7 +14,6 @@ tar_option_set(
   packages = c( "assertthat",
                 "devtools",
                 "REcopol",
-                "RFossilpol",
                 "ggpubr",
                 "mgcv",
                 "here",      
