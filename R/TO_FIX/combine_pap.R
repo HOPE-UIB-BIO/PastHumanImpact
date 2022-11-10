@@ -1,8 +1,8 @@
 # Combine data that represent pollen assembly properties to get all PAP combined 
 
-combine_pap <- function(data_assembly, data_diversity, data_mrt, data_roc, data_dcca){
+combine_pap <- function(data_filtered, data_diversity, data_mrt, data_roc, data_dcca){
   
-  data_levels <- data_assembly %>%
+  data_levels <- data_filtered %>%
     dplyr::select(
       dataset_id,
       levels
@@ -37,7 +37,7 @@ combine_pap <- function(data_assembly, data_diversity, data_mrt, data_roc, data_
       by = "dataset_id"
     ) %>%
     dplyr::inner_join(
-      data_turnover,
+      data_dcca,
       by = "dataset_id"
     ) %>%
     # in order to make sure we have same levels across all data
@@ -85,13 +85,5 @@ combine_pap <- function(data_assembly, data_diversity, data_mrt, data_roc, data_
     dplyr::select(-valid_sample_id)
   
 
-  # readr::write_rds(
-  #   data_combine_paps,
-  #   here::here(
-  #     "Data/Processed/PAP_all/pap_all_2022-09-29.rds"
-  #   ),
-  #   compress = "gz"
-  # )
-  
   return(data_combine_paps)
 } 
