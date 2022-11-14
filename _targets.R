@@ -1,6 +1,5 @@
 # Load packages:
 library(targets)
-library(tarchetypes) 
 library(tidyverse)
 
 # Define directory for external storage for users
@@ -37,20 +36,19 @@ tar_config_set(
 
 # Set target options:
 tar_option_set(
-  packages = c( "assertthat",
+  packages = c( "tidyverse", 
+                "assertthat",
                 "devtools",
-                "REcopol",
-                "ggpubr",
-                "mgcv",
+                "usethis",
                 "here",      
                 "renv",       
                 "roxygen2",
                 "readr",
-                "tidyverse",  
-                "usethis",
+                "ggpubr",
+                "mgcv",
+                "REcopol",
+                "RRatepol",
                 "vegan",
-                "GGally",
-                "gittargets",
                 "arrow"
                ),
   memory = "transient",
