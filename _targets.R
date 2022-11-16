@@ -5,7 +5,7 @@ library(tidyverse)
 # Define directory for external storage for users
 auth_tibble <-
   tibble::tibble(
-    name = c("ondre","omo084","vfe032","sfl046", "kbh022"),
+    name = c("ondre", "omo084", "vfe032", "sfl046", "kbh022"),
     paths = c(
       "C:/Users/ondre/OneDrive - University of Bergen/HOPE_data/",
       "C:/Users/omo084/OneDrive - University of Bergen/HOPE_data/",
@@ -17,13 +17,13 @@ auth_tibble <-
 
 sys_info <- Sys.info()
 
-username <- 
+username <-
   sys_info["user"]
 
 data_storage_path <-
-  auth_tibble %>% 
+  auth_tibble %>%
   dplyr::filter(name == username) %>%
-  purrr::pluck("paths") 
+  purrr::pluck("paths")
 
 
 external_storage_targets <- paste0(data_storage_path, "HOPE_Hypothesis1/_targets")
@@ -31,31 +31,34 @@ data_assembly_path <- paste0(data_storage_path, "HOPE_Hypothesis1/Data/assembly/
 
 # set configuration for _target storage
 tar_config_set(
-  store = external_storage_targets)
+  store = external_storage_targets
+)
 
 
 # Set target options:
 tar_option_set(
-  packages = c( "tidyverse", 
-                "assertthat",
-                "devtools",
-                "usethis",
-                "here",      
-                "renv",       
-                "roxygen2",
-                "readr",
-                "ggpubr",
-                "mgcv",
-                "REcopol",
-                "RRatepol",
-                "vegan",
-                "arrow"
-               ),
+  packages = c(
+    "tidyverse",
+    "assertthat",
+    "devtools",
+    "usethis",
+    "here",
+    "renv",
+    "roxygen2",
+    "readr",
+    "ggpubr",
+    "mgcv",
+    "REcopol",
+    "RRatepol",
+    "vegan",
+    "arrow"
+  ),
   memory = "transient",
   garbage_collection = TRUE,
   storage = "worker",
   retrieval = "worker",
-  repository = "local")
+  repository = "local"
+)
 
 
 
@@ -69,11 +72,13 @@ options(clustermq.scheduler = "multicore")
 # list R functions and source them
 invisible(lapply(
   list.files(
-  path = "R/functions",
-  pattern = "*.R",
-  recursive = TRUE,
-  full.names = TRUE),
-  source))
+    path = "R/functions",
+    pattern = "*.R",
+    recursive = TRUE,
+    full.names = TRUE
+  ),
+  source
+))
 
 
 # the targets list:
@@ -84,9 +89,8 @@ list(
   tar_target(data_filtered, filter_age_levels(data_pollen)),
   tar_target(data_diversity, get_diversity(data_filtered)),
   tar_target(data_mrt, get_mrt(data_filtered))
-  #tar_target(data_dcca, get_dcca(data_filtered)),
-  #tar_target(data_roc, get_roc(data_filtered))
-  
+  # tar_target(data_dcca, get_dcca(data_filtered)),
+  # tar_target(data_roc, get_roc(data_filtered))
 )
 
 # ADD TO TARGETS LIST STEPWISE
@@ -100,12 +104,10 @@ list(
 
 
 # TO BE ADDED
- # make a separate run gam function on  response data first or at the end when all variables are in or incorporate in get_data_h1
+# make a separate run gam function on  response data first or at the end when all variables are in or incorporate in get_data_h1
 
-  #tar_target(data_climate, get_climate())
-  #tar_target(data_spd, get_spd())
-  #tar_target(data_h1, get_data_h1(data_combined_pap, data_density, data_sites, data_events, data_climate, data_spd))
- 
-  #tar_target(model_h1, run_model_h1(data_h1))
-  
+# tar_target(data_climate, get_climate())
+# tar_target(data_spd, get_spd())
+# tar_target(data_h1, get_data_h1(data_combined_pap, data_density, data_sites, data_events, data_climate, data_spd))
 
+# tar_target(model_h1, run_model_h1(data_h1))
