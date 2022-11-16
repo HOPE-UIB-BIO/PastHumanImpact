@@ -88,9 +88,9 @@ list(
   tar_target(data_sites, get_data_site(data_assembly)),
   tar_target(data_filtered, filter_age_levels(data_pollen)),
   tar_target(data_diversity, get_diversity(data_filtered)),
-  tar_target(data_mrt, get_mrt(data_filtered))
-  # tar_target(data_dcca, get_dcca(data_filtered)),
-  # tar_target(data_roc, get_roc(data_filtered))
+  tar_target(data_mrt, get_mrt(data_filtered)),
+  tar_target(data_dcca, get_dcca(data_filtered)),
+  tar_target(data_roc, get_roc(data_filtered))
 )
 
 # ADD TO TARGETS LIST STEPWISE
