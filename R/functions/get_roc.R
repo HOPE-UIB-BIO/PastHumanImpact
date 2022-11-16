@@ -38,7 +38,7 @@ get_roc <- function(data_pollen,
           age_uncertainty, # ..3
           pollen_percentage, # ..4
           dataset_id, # ..5
-          end_of_period_of_interest # ..6
+          end_of_interest_period # ..6
         ),
         .f = ~ {
           current_env <- environment()
