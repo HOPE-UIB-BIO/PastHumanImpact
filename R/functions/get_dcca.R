@@ -50,6 +50,12 @@ get_dcca <- function(data_pollen, ...) {
 
   data_turnover <-
     data_dcca_proc %>%
+    dplyr::filter(
+      purrr::map_lgl(
+        .x = data_dcca_proc$dcca_scores,
+        .f = ~ "data.frame" %in% class(.x)
+      )
+    ) %>%
     dplyr::select(
       dataset_id,
       dcca,
