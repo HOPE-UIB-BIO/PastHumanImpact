@@ -25,7 +25,7 @@ get_roc <- function(data_pollen,
                     n_rand = 1000,
                     n_individuals_to_standardise = 150,
                     transformation_coef = "chisq",
-                    peak_point_method = "trend_linear",
+                    peak_point_method = "trend_non_linear",
                     sd_for_peak_detection = 2,
                     ...) {
   
@@ -39,7 +39,7 @@ get_roc <- function(data_pollen,
           age_uncertainty, # ..3
           pollen_percentage, # ..4
           dataset_id, # ..5
-          end_of_period_of_interest # ..6
+          end_of_interest_period # ..6
         ),
         .f = ~ {
           current_env <- environment()
