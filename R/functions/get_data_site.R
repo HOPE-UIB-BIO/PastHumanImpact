@@ -2,10 +2,9 @@
 #' @description Use data assembly derived from RFossilpol
 #' @return For each site a tibble with dataset_id, geographical coordinates, altitude, depositional environment, country, region, and ecozone
 
-get_data_site <- function(file) {
+get_data_site <- function(data_assembly) {
   
-  read_rds(file) %>% 
-    pluck("data") %>%
+  data_assembly %>%
     dplyr::select(dataset_id, 
                   handle, lat, long,  
                   altitude, depositionalenvironment, 
