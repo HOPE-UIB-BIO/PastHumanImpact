@@ -35,11 +35,6 @@ external_storage_targets <-
     data_storage_path,
     "HOPE_Hypothesis1/_targets"
   )
-data_assembly_path <-
-  paste0(
-    data_storage_path,
-    "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
-  )
 
 # set configuration for _target storage
 tar_config_set(
@@ -91,9 +86,35 @@ invisible(lapply(
 
 # the targets list:
 list(
-  target::tar_target(file_assembly, data_assembly_path, format = "file"),
-  target::tar_target(data_assembly, get_data(file_assembly)),
-  target::tar_target(data_filtered, filter_all_data(data_assembly))
+  # get path to the data assembly
+  targets::tar_target(file_assembly_path,
+    paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
+    ),
+    format = "file"
+  ),
+  # load data assembly from path
+  targets::tar_target(data_assembly, get_data(file_assembly_path)),
+  # filter data
+  targets::tar_target(data_filtered, filter_all_data(data_assembly)),
+  # events
+  # - make the path as a new target
+  targets::tar_target(
+    events_path,
+    paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/events/events_from_diagrams.rds"
+    ),
+    format = "file"
+  ),
+  # - get load the raw data (gathered from pollen diagrams)
+  targets::tar_target(events_raw, get_file_from_path(events_path)),
+  # turn them into binary
+  targets::tar_target(
+    events_binary,
+    get_events_as_binary(events_raw, data_filtered)
+  )
 )
 
 # tar_target(data_diversity, get_diversity(data_filtered)),
