@@ -30,8 +30,16 @@ if (length(data_storage_path) > 1) {
   data_storage_path <- data_storage_path[2]
 }
 
-external_storage_targets <- paste0(data_storage_path, "HOPE_Hypothesis1/_targets")
-data_assembly_path <- paste0(data_storage_path, "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds")
+external_storage_targets <-
+  paste0(
+    data_storage_path,
+    "HOPE_Hypothesis1/_targets"
+  )
+data_assembly_path <-
+  paste0(
+    data_storage_path,
+    "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
+  )
 
 # set configuration for _target storage
 tar_config_set(
@@ -64,14 +72,11 @@ tar_option_set(
   repository = "local"
 )
 
-
-
 # tar_make_clustermq() configuration (okay to leave alone):
 options(clustermq.scheduler = "multicore")
 
 # tar_make_future() configuration (okay to leave alone):
 # Install packages {{future}}, {{future.callr}}, and {{future.batchtools}} to allow use_targets() to configure tar_make_future() options.
-
 
 # list R functions and source them
 invisible(lapply(
@@ -84,12 +89,11 @@ invisible(lapply(
   source
 ))
 
-
 # the targets list:
 list(
-  tar_target(file_assembly, data_assembly_path, format = "file"),
-  tar_target(data_assembly, get_data(file_assembly)),
-  tar_target(data_filtered, filter_all_data(data_assembly))
+  target::tar_target(file_assembly, data_assembly_path, format = "file"),
+  target::tar_target(data_assembly, get_data(file_assembly)),
+  target::tar_target(data_filtered, filter_all_data(data_assembly))
 )
 
 # tar_target(data_diversity, get_diversity(data_filtered)),
