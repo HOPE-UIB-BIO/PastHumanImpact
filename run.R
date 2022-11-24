@@ -11,10 +11,10 @@ targets::tar_make()
 
 
 # inspect output
-tar_read(data)
+targets::tar_read(data)
 
 # check workflow
-tar_visnetwork()
+targets::tar_visnetwork()
 
 
 # commit code to github examples
@@ -23,18 +23,18 @@ gert::git_add("_targets.R")
 gert::git_commit("Building up data derivatives for H1")
 
 # snapshot of the data, but first check that code is up to date
-tar_git_status()
+targets::tar_git_status()
 
 # initialize the data repository
-tar_git_init()
+targets::tar_git_init()
 
 # take a snapshot of target data
-tar_git_snapshot()
+targets::tar_git_snapshot()
 
 # repeat in cycle when working with it
 
 # view log
-tar_git_log()
+targets::tar_git_log()
 
 
 # to check out older code or whatever
@@ -42,6 +42,4 @@ gert::git_branch_checkout("fix_data_storage")
 
 # check out data
 # every data snapshot with tar_git_snapshot() creates a new Git branch
-tar_git_checkout()
-
-
+targets::tar_git_checkout()
