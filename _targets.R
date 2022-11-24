@@ -104,7 +104,7 @@ list(
     events_path,
     paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/events/events_from_diagrams.rds"
+      "HOPE_Hypothesis1/Data/events/events_from_diagrams_2022-11-24.rds"
     ),
     format = "file"
   ),
@@ -114,7 +114,9 @@ list(
   targets::tar_target(
     events_binary,
     get_events_as_binary(events_raw, data_filtered)
-  )
+  ),
+  # add logical rules to the binary values
+  targets::tar_target(events_updated, add_logical_rules(events_binary))
 )
 
 # tar_target(data_diversity, get_diversity(data_filtered)),
