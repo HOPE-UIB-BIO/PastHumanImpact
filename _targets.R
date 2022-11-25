@@ -179,10 +179,18 @@ list(
   # - detect indices in data
   targets::tar_target(
     name = events_indices,
-    command = detect_events_from_indicators(
-      data_source_indicators = events_indices_raw,
+    command = detect_events_from_indices(
+      data_source_indices = events_indices_raw,
       data_source_pollen = data_pollen_filtered,
       sel_region = "Latin America"
+    )
+  ),
+  # - merge all events together
+  targets::tar_target(
+    name = events,
+    command = merge_indicators_and_indices(
+      data_source_indices = events_indices,
+      data_source_indicators = events_indicators
     )
   )
 )
