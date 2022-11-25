@@ -86,48 +86,90 @@ invisible(lapply(
 
 # the targets list:
 list(
+  # 1. Pollen data prepartion -----
   # get path to the data assembly
-  targets::tar_target(file_assembly_path,
-    paste0(
+  targets::tar_target(
+    name = file_assembly_path,
+    command = paste0(
       data_storage_path,
       "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
     ),
     format = "file"
   ),
-  # load data assembly from path
-  targets::tar_target(data_assembly, get_data(file_assembly_path)),
-  # filter data
-  targets::tar_target(data_filtered, filter_all_data(data_assembly)),
-  # events
-  # - make the path as a new target
+  # - load data assembly from path
   targets::tar_target(
-    events_path,
-    paste0(
+    name = data_pollen_assembly,
+    command = get_data(file_assembly_path)
+  ),
+  # - filter data
+  targets::tar_target(
+    name = data_pollen_filtered,
+    command = filter_all_data(data_pollen_assembly)
+  ),
+  # 2. Human events -----
+  # - a path for events from diagrams
+  targets::tar_target(
+    name = events_diag_path,
+    command = paste0(
       data_storage_path,
       "HOPE_Hypothesis1/Data/events/events_from_diagrams_2022-11-24.rds"
     ),
     format = "file"
   ),
-  # - get load the raw data (gathered from pollen diagrams)
-  targets::tar_target(events_raw, get_file_from_path(events_path)),
-  # turn them into binary
+  # - load events from pollen diagrams
   targets::tar_target(
-    events_binary,
-    get_events_as_binary(events_raw, data_filtered)
+    name = events_diag_raw,
+    command = get_file_from_path(events_diag_path)
   ),
-  # add logical rules to the binary values
-  targets::tar_target(events_updated, add_logical_rules(events_binary))
+  # - turn events from diagrams into binary
+  targets::tar_target(
+    name = events_diag_binary,
+    command = get_events_as_binary(events_diag_raw, data_pollen_filtered)
+  ),
+  # add logical rules to the binary values (events from diag)
+  targets::tar_target(
+    name = events_diag_updated,
+    command = add_logical_rules(events_diag_binary)
+  ),
+  # - a path for indicators (from code)
+  targets::tar_target(
+    name = events_indicators_path,
+    command = paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/events/events_from_code_indicators_2022-11-25.rds"
+    ),
+    format = "file"
+  ),
+   # - load indicators
+  targets::tar_target(
+    name = events_indicators_raw,
+    command = get_file_from_path(events_indicators_path)
+  ),
+   # - a path for indices (from code)
+  targets::tar_target(
+    name = events_indices_path,
+    command = paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/events/events_from_code_indices_2022-11-25.rds"
+    ),
+    format = "file"
+  ),
+    # - load indices
+  targets::tar_target(
+    name = events_indices_raw,
+    command = get_file_from_path(events_indices_path)
+  )
 )
 
-# tar_target(data_diversity, get_diversity(data_filtered)),
-# tar_target(data_mrt, get_mrt(data_filtered)),
-# tar_target(data_dcca, get_dcca(data_filtered)),
-# tar_target(data_roc, get_roc(data_filtered))
+# tar_target(data_diversity, get_diversity(data_pollen_filtered)),
+# tar_target(data_mrt, get_mrt(data_pollen_filtered)),
+# tar_target(data_dcca, get_dcca(data_pollen_filtered)),
+# tar_target(data_roc, get_roc(data_pollen_filtered))
 
 
 # tar_target(data_sites, get_data_site(data_assembly))
 # ADD TO TARGETS LIST STEPWISE
-# tar_target(data_combined_pap, combine_pap(data_filtered, data_diversity, data_mrt, data_roc, data_dcca))
+# tar_target(data_combined_pap, combine_pap(data_pollen_filtered, data_diversity, data_mrt, data_roc, data_dcca))
 # tar_target(data_change_points_pap, get_change_points_pap(data_combined_paps))
 
 
