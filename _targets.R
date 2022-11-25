@@ -128,7 +128,7 @@ list(
   ),
   # add logical rules to the binary values (events from diag)
   targets::tar_target(
-    name = events_diag_updated,
+    name = events_diag,
     command = add_logical_rules(events_diag_binary)
   ),
   # - a path for indicators (from code)
@@ -185,12 +185,20 @@ list(
       sel_region = "Latin America"
     )
   ),
-  # - merge all events together
+  # - merge all events detected by code together
   targets::tar_target(
-    name = events,
+    name = events_code,
     command = merge_indicators_and_indices(
       data_source_indices = events_indices,
       data_source_indicators = events_indicators
+    )
+  ),
+  # - merge all events together
+  targets::tar_target(
+    name = events,
+    command = merge_all_events(
+      data_source_events_diag = events_diag,
+      data_source_events_code = events_code
     )
   )
 )
