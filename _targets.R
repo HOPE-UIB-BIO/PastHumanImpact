@@ -140,12 +140,29 @@ list(
     ),
     format = "file"
   ),
-   # - load indicators
+  # - load indicators
   targets::tar_target(
     name = events_indicators_raw,
     command = get_file_from_path(events_indicators_path)
   ),
-   # - a path for indices (from code)
+  # - detect indicators in data
+  targets::tar_target(
+    name = events_indicators,
+    command = detect_events_from_indicators(
+      data_source_indicators = events_indicators_raw,
+      data_source_pollen = data_pollen_filtered,
+      sel_region = "Latin America",
+      # filter out pinus in selected  countries where Pinus is native
+      country_w_pinus = c(
+        "Mexico",
+        "Guatemala",
+        "Honduras",
+        "Nicaragua",
+        "Costa Rica"
+      )
+    )
+  ),
+  # - a path for indices (from code)
   targets::tar_target(
     name = events_indices_path,
     command = paste0(
@@ -154,10 +171,19 @@ list(
     ),
     format = "file"
   ),
-    # - load indices
+  # - load indices
   targets::tar_target(
     name = events_indices_raw,
     command = get_file_from_path(events_indices_path)
+  ),
+  # - detect indices in data
+  targets::tar_target(
+    name = events_indices,
+    command = detect_events_from_indicators(
+      data_source_indicators = events_indices_raw,
+      data_source_pollen = data_pollen_filtered,
+      sel_region = "Latin America"
+    )
   )
 )
 
