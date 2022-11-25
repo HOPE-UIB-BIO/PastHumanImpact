@@ -1,6 +1,9 @@
-detect_events_from_indices <- function(ata_source_indices,
+detect_events_from_indices <- function(data_source_indices,
                                        data_source_pollen,
                                        sel_region = "Latin America") {
+
+`%>%` <- magrittr::`%>%`
+
   # helper function
   detect_indices_combination <-
     function(data_source_taxa,
@@ -8,7 +11,7 @@ detect_events_from_indices <- function(ata_source_indices,
              sel_type,
              sel_dataset_id = NULL) {
       if (
-        is.null(sel_dataset_id) == FALSE
+       isFALSE(is.null(sel_dataset_id))
       ) {
         message(sel_dataset_id)
       }
@@ -92,7 +95,7 @@ detect_events_from_indices <- function(ata_source_indices,
         .y = dataset_id,
         .f = ~ detect_indices_combination(
           data_source_taxa = .x,
-          la_indices_table,
+          data_source_indicies = data_source_indices,
           sel_type = "STRONG",
           sel_dataset_id = .y
         )
@@ -102,7 +105,7 @@ detect_events_from_indices <- function(ata_source_indices,
         .y = dataset_id,
         .f = ~ detect_indices_combination(
           data_source_taxa = .x,
-          la_indices_table,
+          data_source_indicies = data_source_indices,
           sel_type = "WEAK",
           sel_dataset_id = .y
         )
@@ -117,5 +120,5 @@ detect_events_from_indices <- function(ata_source_indices,
       dataset_id, age, weak, strong
     )
 
-    return(data_levels_indicies)
+  return(data_levels_indicies)
 }
