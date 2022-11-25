@@ -10,3 +10,6 @@
 # Data folders
 Data/
 _targets/
+
+# target yaml
+_targets.yaml
