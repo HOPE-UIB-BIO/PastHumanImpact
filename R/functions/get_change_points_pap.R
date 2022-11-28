@@ -1,5 +1,8 @@
-# function to get change points of pap estimates using regression trees
-
+#' @title Estimate change points of input variables
+#' @description A function to get change points of all pap estimates using regression trees
+#' @return New variables of change points in pollen assemblage properties
+#' 
+#' 
 get_change_points_pap <- function(data_combine_paps){
   
   data_diversity_cp <-

@@ -11,7 +11,7 @@ get_mrt <- function(data_pollen, n_rand = 999, transformation_coef = "chisq") {
     data_pollen %>%
     dplyr::mutate(
       PAP_mrt = purrr::map2(
-        .x = pollen_percentages,
+        .x = percentages_harmonised,
         .y = levels,
         .f = ~ REcopol::mv_regression_partition(
           data_source_counts = .x,

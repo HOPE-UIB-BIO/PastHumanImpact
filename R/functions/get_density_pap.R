@@ -1,7 +1,13 @@
-# Function to create density of regression tree change points of the estimates of Hill's diversity, DCCA1, and MRT temporally
 
+#' @title Calculate density of change points
+#' @description A function to get the temporal density of regression tree change points of pollen assemblage properties
+#' @return A new dataset with density variables
+#' 
+#'
 get_density_pap <- function(data_change_points_pap,
                         new_data_general) {
+  
+  # get_density_for_all_vars
   
   data_cp_density_merge <-
     get_density_for_all_vars(
