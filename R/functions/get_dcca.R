@@ -14,7 +14,7 @@ get_dcca <- function(data_pollen, ...) {
     data_pollen %>%
     dplyr::mutate(
       dcca = purrr::map2(
-        .x = pollen_percentages,
+        .x = percentages_harmonised,
         .y = levels,
         .f = ~ REcopol::fit_ordination(
           data_source_community = .x,

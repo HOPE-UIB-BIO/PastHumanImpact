@@ -98,13 +98,13 @@ list(
   ),
   # - load data assembly from path
   targets::tar_target(
-    name = data_pollen_assembly,
+    name = data_assembly,
     command = get_data(file_assembly_path)
   ),
   # - filter data
   targets::tar_target(
-    name = data_pollen_filtered,
-    command = filter_all_data(data_pollen_assembly)
+    name = data_filtered,
+    command = filter_all_data(data_assembly)
   ),
   # 2. Human events -----
   # - a path for events from diagrams
@@ -200,19 +200,96 @@ list(
       data_source_events_diag = events_diag,
       data_source_events_code = events_code
     )
-  )
+  ),
+ # 3. Split data into pollen and site data
+ # - select relevant data and relevant variables for PAP estimation and add percentages
+  targets::tar_target(
+    name = data_pollen, # note cannot reuse existing name, so I changed names higher up to assembly only
+    command = select_data(data_filtered,
+                          variables = c("dataset_id", 
+                                        "counts_harmonised", 
+                                        "levels", 
+                                        "age_uncertainty", 
+                                        "pollen_percentage",
+                                        "end_of_interest_period"),
+                          add_percentages = TRUE)
+  ),
+ # - select only relevant meta data for dataset_id
+ targets::tar_target(
+   name = data_meta,
+   command = select_data(data_filtered,
+                         variables = c("dataset_id",
+                                       "handle",
+                                       "long",
+                                       "lat",
+                                       "altitude",
+                                       "depositionalenvironment",
+                                       "region",
+                                       "ecozone_koppen_5"),
+                         add_percentages = FALSE)
+ ),
+  # 4. Estimate PAPs -----
+  # - calculate diversity
+  targets::tar_target(
+    name = data_diversity, # note cannot reuse existing targets name, any solution?
+    command = get_diversity(data_pollen_filtered_all,
+                            n_rand = 999, 
+                            sel_method = "taxonomic")
+  ),
+  # - run multivariate regression trees (MRT) to estimate compositional change
+  # - use percentages without prior transformation
+  targets::tar_target(
+    name = data_mrt,
+    command = get_mrt(data_pollen_filtered_all,
+                      n_rand = 999, 
+                      transformation_coef = "chisq")
+  ),
+  # - run detrended canonical correspondence analysis (DCCA) to estimate compositional turnover 
+  # - use percentages without prior transformations
+  targets::tar_target(
+    name = data_dcca,
+    command = get_dcca(data_pollen_filtered_all,
+                       sel_method = "constrained",
+                       var_name_pred = "age",
+                       sel_complexity = "poly_2",
+                       transform_to_percentage = FALSE,
+                       tranformation = "none")
+  ),
+  # - calculate Rate-of-change (RoC)
+  targets::tar_target(
+    name = data_roc,
+    command = get_roc(data_pollen_filtered_all,
+                      smoothing_method = "age.w",
+                      min_points_smoothing = 5,
+                      max_points_smoothing = 9,
+                      age_range_smoothing = 500,
+                      working_units_selection = "MW",
+                      size_of_bin = 500,
+                      n_mowing_windows = 5,
+                      which_level_select_in_bin = "random",
+                      n_rand = 1000,
+                      n_individuals_to_standardise = 150,
+                      transformation_coef = "chisq",
+                      peak_point_method = "trend_non_linear",
+                      sd_for_peak_detection = 2)
+  ),
+ # - combine all PAP estimates into one tibble
+ targets::tar_target(
+   name = data_combined_paps,
+   command = combine_pap(data_pollen,
+                         data_diversity,
+                         data_mrt,
+                         data_roc,
+                         data_dcca)
+ ),
+ # - calculate change points of all PAP variables by regression trees (RT)
+ targets::tar_target(
+   name = data_change_points, 
+   command = get_change_points_pap(data_combined_paps)
+ )
 )
 
-# tar_target(data_diversity, get_diversity(data_pollen_filtered)),
-# tar_target(data_mrt, get_mrt(data_pollen_filtered)),
-# tar_target(data_dcca, get_dcca(data_pollen_filtered)),
-# tar_target(data_roc, get_roc(data_pollen_filtered))
 
-
-# tar_target(data_sites, get_data_site(data_assembly))
-# ADD TO TARGETS LIST STEPWISE
-# tar_target(data_combined_pap, combine_pap(data_pollen_filtered, data_diversity, data_mrt, data_roc, data_dcca))
-# tar_target(data_change_points_pap, get_change_points_pap(data_combined_paps))
 
 
 # MODIFYING CODE:
