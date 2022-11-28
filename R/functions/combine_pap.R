@@ -4,9 +4,9 @@
 #' @return A new data set of the relevant PAP estimations
 #' 
 #' 
-combine_pap <- function(data_assembly, data_diversity, data_mrt, data_roc, data_dcca){
+combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dcca){
   
-  data_levels <- data_assembly %>%
+  data_levels <- data_pollen %>%
     dplyr::select(
       dataset_id,
       levels
