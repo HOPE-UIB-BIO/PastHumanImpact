@@ -1,8 +1,12 @@
-# Combine data that represent pollen assembly properties to get all PAP combined 
 
-combine_pap <- function(data_filtered, data_diversity, data_mrt, data_roc, data_dcca){
+#' @title Combine all variables that represent pollen assembly properties 
+#' @description Combining the data of the different pollen assemblage properties
+#' @return A new data set of the relevant PAP estimations
+#' 
+#' 
+combine_pap <- function(data_assembly, data_diversity, data_mrt, data_roc, data_dcca){
   
-  data_levels <- data_filtered %>%
+  data_levels <- data_assembly %>%
     dplyr::select(
       dataset_id,
       levels
@@ -37,7 +41,7 @@ combine_pap <- function(data_filtered, data_diversity, data_mrt, data_roc, data_
       by = "dataset_id"
     ) %>%
     dplyr::inner_join(
-      data_dcca,
+      data_turnover,
       by = "dataset_id"
     ) %>%
     # in order to make sure we have same levels across all data
