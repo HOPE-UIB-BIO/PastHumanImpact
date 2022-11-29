@@ -1,8 +1,8 @@
 detect_events_from_indices <- function(data_source_indices,
                                        data_source_pollen,
+                                       data_source_meta,
                                        sel_region = "Latin America") {
-
-`%>%` <- magrittr::`%>%`
+  `%>%` <- magrittr::`%>%`
 
   # helper function
   detect_indices_combination <-
@@ -11,7 +11,7 @@ detect_events_from_indices <- function(data_source_indices,
              sel_type,
              sel_dataset_id = NULL) {
       if (
-       isFALSE(is.null(sel_dataset_id))
+        isFALSE(is.null(sel_dataset_id))
       ) {
         message(sel_dataset_id)
       }
@@ -45,6 +45,10 @@ detect_events_from_indices <- function(data_source_indices,
 
   data_subset <-
     data_source_pollen %>%
+    dplyr::inner_join(
+      data_source_meta,
+      by = "dataset_id"
+    ) %>%
     dplyr::filter(
       region == sel_region
     ) %>%

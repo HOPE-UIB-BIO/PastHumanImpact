@@ -1,10 +1,9 @@
 #' @title Estimate change points of input variables
-#' @description A function to get change points of all pap estimates using regression trees
+#' @description A function to get change points of all pap estimates
+#' using regression trees
 #' @return New variables of change points in pollen assemblage properties
-#' 
-#' 
-get_change_points_pap <- function(data_combine_paps){
-  
+#'
+get_change_points_pap <- function(data_combine_paps) {
   data_diversity_cp <-
     data_combine_paps %>%
     dplyr::mutate(
@@ -24,7 +23,7 @@ get_change_points_pap <- function(data_combine_paps){
               names_to = "var_name"
             ) %>%
             split(.$var_name)
-          
+
           cp_list <-
             purrr::map(
               .x = var_list,
@@ -35,7 +34,7 @@ get_change_points_pap <- function(data_combine_paps){
               ) %>%
                 purrr::pluck("rpart_change_points")
             )
-          
+
           purrr::map_dfr(
             .x = cp_list,
             .id = "var_name",
@@ -49,7 +48,7 @@ get_change_points_pap <- function(data_combine_paps){
       ),
     ) %>%
     dplyr::select(dataset_id, diversity_cp)
-  
+
   # roc
   data_roc_cp <-
     data_combine_paps %>%
@@ -71,7 +70,7 @@ get_change_points_pap <- function(data_combine_paps){
       )
     ) %>%
     dplyr::select(dataset_id, roc_cp, roc_pp)
-  
+
   # turnover
   data_dcca_cp <-
     data_combine_paps %>%
@@ -93,7 +92,7 @@ get_change_points_pap <- function(data_combine_paps){
     ) %>%
     dplyr::select(dataset_id, dcca_cp)
 
-  
+
   data_change_points <-
     data_combine_paps %>%
     dplyr::select(
@@ -114,5 +113,4 @@ get_change_points_pap <- function(data_combine_paps){
     )
 
   return(data_change_points)
-  
 }
