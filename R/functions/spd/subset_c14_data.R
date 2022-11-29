@@ -77,7 +77,7 @@ subset_c14_data <- function(data_source_c14,
           )
       )
     )  %>% 
-    plyr::select(-c(long, lat))
+    dplyr::select(-c(long, lat))
 
     return(data_with_distance)
 }
