@@ -1,17 +1,20 @@
 
-#' @title Combine all variables that represent pollen assembly properties 
+#' @title Combine all variables that represent pollen assembly properties
 #' @description Combining the data of the different pollen assemblage properties
 #' @return A new data set of the relevant PAP estimations
-#' 
-#' 
-combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dcca){
-  
-  data_levels <- data_pollen %>%
+#'
+combine_pap <- function(data_pollen,
+                        data_diversity,
+                        data_mrt,
+                        data_roc,
+                        data_dcca) {
+  data_levels <-
+    data_pollen %>%
     dplyr::select(
       dataset_id,
       levels
     )
-  
+
   subset_by_vector <-
     function(data_source, var_name, id_vec) {
       data_source %>%
@@ -25,7 +28,7 @@ combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dc
         ) %>%
         return()
     }
-  
+
   data_combine_paps <-
     data_levels %>%
     dplyr::inner_join(
@@ -41,7 +44,7 @@ combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dc
       by = "dataset_id"
     ) %>%
     dplyr::inner_join(
-      data_turnover,
+      data_dcca,
       by = "dataset_id"
     ) %>%
     # in order to make sure we have same levels across all data
@@ -64,7 +67,7 @@ combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dc
             by = "sample_id"
           ) %>%
           dplyr::inner_join(..4,
-                            by = "sample_id"
+            by = "sample_id"
           ) %>%
           purrr::pluck("sample_id")
       )
@@ -85,9 +88,9 @@ combine_pap <- function(data_pollen, data_diversity, data_mrt, data_roc, data_dc
     subset_by_vector(
       var_name = "levels",
       id_vec = "valid_sample_id"
-    )  %>% 
+    ) %>%
     dplyr::select(-valid_sample_id)
-  
+
 
   return(data_combine_paps)
-} 
+}
