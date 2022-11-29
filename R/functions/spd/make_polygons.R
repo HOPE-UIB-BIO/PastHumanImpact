@@ -135,5 +135,13 @@ make_polygons <- function(data_source,
       match.ID = "id"
     )
 
-  return(spatial_polygons_df)
+  data_sf <-
+    sf::st_as_sf(
+      spatial_polygons_df,
+      coords = c("long", "lat"),
+      crs = 4326
+    ) %>%
+    sf::st_make_valid()
+
+  return(data_sf)
 }
