@@ -142,6 +142,7 @@ list(
       variables = c(
         "dataset_id",
         "handle",
+        "country",
         "long",
         "lat",
         "altitude",
