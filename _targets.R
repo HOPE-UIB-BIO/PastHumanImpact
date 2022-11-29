@@ -84,6 +84,16 @@ invisible(lapply(
   source
 ))
 
+min_age <- 0
+max_age <- 12e3
+timestep <- 100
+
+data_dummy_time <-
+  tibble::tibble(
+    age = seq(min_age, max_age, timestep)
+  )
+
+
 # the targets list:
 list(
   # 1. Pollen data prepartion -----
@@ -237,6 +247,14 @@ list(
     command = merge_all_events(
       data_source_events_diag = events_diag,
       data_source_events_code = events_code
+    )
+  ),
+  # - expand events to be present for each time slice
+  targets::tar_target(
+    name = event_temporal_spacing,
+    command = est_events_timeslice(
+      data_source_events = events,
+      data_source_dummy_time = data_dummy_time
     )
   ),
   # 4. Estimate PAPs -----
