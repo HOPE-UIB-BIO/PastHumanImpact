@@ -25,6 +25,7 @@ package_list <-
     "arrow",
     "assertthat",
     "devtools",
+    "geosphere",
     "GGally",
     "ggpubr",
     "gittargets",
