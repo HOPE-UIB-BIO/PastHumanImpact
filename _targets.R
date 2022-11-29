@@ -148,7 +148,12 @@ list(
         "altitude",
         "depositionalenvironment",
         "region",
-        "ecozone_koppen_5"
+        "curve_name",
+        "ecozone_koppen_5",
+        "ecozone_koppen_15",
+        "ecozone_koppen_30",
+        "data_publicity",
+        "doi"
       ),
       add_percentages = FALSE
     )
