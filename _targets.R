@@ -47,6 +47,7 @@ tar_option_set(
     "tidyverse",
     "assertthat",
     "devtools",
+    "geosphere",
     "usethis",
     "here",
     "renv",
@@ -264,6 +265,29 @@ list(
     command = make_polygons(
       data_source = data_meta,
       distance_buffer = 10 # 10° away from site
+    )
+  ),
+   # - a path for c14 data
+  targets::tar_target(
+    name = data_c14_path,
+    command = paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/c14/data_rc_2022-11-29.rds"
+    ),
+    format = "file"
+  ),
+  # - load c14 data
+  targets::tar_target(
+    name = data_c14,
+    command = get_file_from_path(data_c14_path)
+  ),
+  # - subset C14 data for each dataset_id and calculate distance to it
+  targets::tar_target(
+    name = data_c14_subset,
+    command = subset_c14_data(
+      data_source_c14 = data_c14,
+      data_source_polygons = data_polygons,
+      data_source_meta = data_meta
     )
   ),
   # 5. Estimate PAPs -----
