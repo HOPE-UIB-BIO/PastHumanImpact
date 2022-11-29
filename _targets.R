@@ -257,7 +257,16 @@ list(
       data_source_dummy_time = data_dummy_time
     )
   ),
-  # 4. Estimate PAPs -----
+  # 4. C14 and SPD -----
+  # - create a circle polygons within a certain distance from each site
+  targets::tar_target(
+    name = data_polygons,
+    command = make_polygons(
+      data_source = data_meta,
+      distance_buffer = 10 # 10° away from site
+    )
+  ),
+  # 5. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
     # note cannot reuse existing targets name, any solution?
