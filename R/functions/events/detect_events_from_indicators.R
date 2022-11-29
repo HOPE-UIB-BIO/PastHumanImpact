@@ -1,9 +1,14 @@
 detect_events_from_indicators <- function(data_source_indicators,
                                           data_source_pollen,
+                                          data_source_meta,
                                           sel_region = "Latin America",
                                           country_w_pinus = c("Mexico", "Guatemala", "Honduras", "Nicaragua", "Costa Rica")) {
-    data_subset <-
+  data_subset <-
     data_source_pollen %>%
+    dplyr::inner_join(
+      data_source_meta,
+      by = "dataset_id"
+    ) %>%
     dplyr::filter(
       region == sel_region
     ) %>%
@@ -90,7 +95,7 @@ detect_events_from_indicators <- function(data_source_indicators,
     dplyr::full_join(
       data_indicators_evidence_weak,
       data_indicators_evidence_strong,
-      by  = c("country", "dataset_id", "age")
+      by = c("country", "dataset_id", "age")
     ) %>%
     dplyr::select(
       dataset_id, age, weak, strong
@@ -100,5 +105,5 @@ detect_events_from_indicators <- function(data_source_indicators,
       strong = ifelse(is.na(strong), FALSE, strong)
     )
 
-    return(data_levels_indicators)
+  return(data_levels_indicators)
 }
