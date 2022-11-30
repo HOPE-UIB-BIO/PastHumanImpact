@@ -36,7 +36,17 @@ packages_climate <- c("gdalUtils", "httr", "ncdf4", "qpdf", "raster", "RCurl", "
 sapply(packages_climate, library, character.only = TRUE)
 
 
-test <- download_chelsa_trace21k(save.location = here::here(), parameter = "bio", model =  "CHELSA_TraCE21k", bio.var = c(1,5), time.var = c(20:-10))
+test <- download_chelsa_trace21k(save.location = here::here(), 
+                                 parameter = "bio", 
+                                 model =  "CHELSA_TraCE21k", 
+                                 bio.var = c(1,5), 
+                                 time.var = c(20:-10)
+                                 )
+
+
+
+
+
 
 download_chelsa_trace21k <- function(save.location = "./",
                                     parameter = c("bio", "tasmax","tasmin", "pr"),
@@ -102,15 +112,18 @@ for(i in parameter){
                              "pr" = month.var,
                              stop())
   
-
-    # create new directory
+ 
+  # create new directory
+  if(!dir.exists(paste0(save.location, "/", i))){
     dir.create(paste0(save.location, "/", i))
-    temp.save.location <- paste0(save.location, "/", i, "/")
+  }
+  temp.save.location <- paste0(save.location, "/", i, "/")
+  
     
-    temp.temp.save.location <- paste0(temp.save.location, model, "_",
+    temp.temp.save.location <- paste0(temp.save.location,
                                       str_replace_all(interm,
                                                       pattern = "/",
-                                                      "Paleoclimate"),"/")
+                                                      "_"),"Paleoclimate","/")
     if(!dir.exists(temp.temp.save.location)){
       dir.create(temp.temp.save.location)
     }
@@ -119,7 +132,7 @@ for(i in parameter){
     #                                          winslash = "/")
     
     
-    for (timeslice in time.var) {
+    for (timeslice in 1:length(time.var)) {
       
       # download of the requested datasets -------------------------------------
 
