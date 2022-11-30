@@ -1,4 +1,4 @@
-est_events_timeslice <- function(data_source_events,
+get_events_per_timeslice <- function(data_source_events,
                                          data_source_dummy_time) {
 
   # wragler data so that there are grouped by event type

@@ -195,7 +195,7 @@ list(
   # - detect indicators in data
   targets::tar_target(
     name = events_indicators,
-    command = detect_events_from_indicators(
+    command = get_events_from_indicators(
       data_source_indicators = events_indicators_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -227,7 +227,7 @@ list(
   # - detect indices in data
   targets::tar_target(
     name = events_indices,
-    command = detect_events_from_indices(
+    command = get_events_from_indices(
       data_source_indices = events_indices_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -253,7 +253,7 @@ list(
   # - expand events to be present for each time slice
   targets::tar_target(
     name = event_temporal_spacing,
-    command = est_events_timeslice(
+    command = get_events_per_timeslice(
       data_source_events = events,
       data_source_dummy_time = data_dummy_time
     )
