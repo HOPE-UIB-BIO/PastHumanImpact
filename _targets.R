@@ -46,6 +46,7 @@ tar_option_set(
   packages = c(
     "tidyverse",
     "assertthat",
+    "rcarbon",
     "devtools",
     "geosphere",
     "usethis",
@@ -89,14 +90,19 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 100
 
-data_dummy_time <-
-  tibble::tibble(
-    age = seq(min_age, max_age, timestep)
-  )
-
 
 # the targets list:
 list(
+  # 0. setting variables
+  targets::tar_target(
+    name = data_dummy_time,
+    command = tibble::tibble(
+      age = seq(
+        from = min_age,
+        to =  max_age,
+        by = timestep)
+    )
+  ) ,
   # 1. Pollen data prepartion -----
   # get path to the data assembly
   targets::tar_target(
