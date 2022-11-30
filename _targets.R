@@ -262,7 +262,7 @@ list(
   # - create a circle polygons within a certain distance from each site
   targets::tar_target(
     name = data_polygons,
-    command = make_polygons(
+    command = get_polygons(
       data_source = data_meta,
       distance_buffer = 10 # 10° away from site
     )

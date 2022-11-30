@@ -1,4 +1,4 @@
-make_polygons <- function(data_source,
+get_polygons <- function(data_source,
                           n_points = 10,
                           distance_buffer = 10) {
   # helper functions
