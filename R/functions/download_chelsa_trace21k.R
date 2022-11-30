@@ -1,46 +1,29 @@
 #' @title Download CHELSA-TraCE21k – 1km climate timeseries since the LGM
 #' @description This function will download selected climate variables for time series to be extracted for HOPE data
-#' @param 
-#' @param 
-#' @param   
+#' @param parameter climate variables to download. You can choose pr ~ precipitation, tasmin ~ Daily Minimum Near-Surface Air Temperature (K/10), tasmax ~ Daily Maximum Near-Surface Air Temperature (K/10), and bio ~ bioclimatic variables 
+#' @param model The model CHELSA_TraCE21k
+#' @param bio.var A variable of the number of the selected bioclimatic variables
+#' @param bio.var A variable of the timeslice wanted 
 #' @return 
-## bio6 = Min Temperature of Coldest Month [C], 
-## tasmin = Daily Maximum Near-Surface Air Temperature [K/10] 
-## bio18 = Precipitation of Warmest Quarter [kg m-2 quarter-1]
-## bio19 = Precipitation of Coldest Quarter [kg m-2 quarter-1]
-## bio01 = Annual Mean Temperature [C]
-## bio12 = Annual Precipitation [kg m-2 year-1 ]
-## bio15 = Precipitation Seasonality [Unitless]
 
 
-
-
-#CHELSA_TraCE21k_bio1_-10_V1.tif
-# string: [model]_bio[bio.var]_[timeslice]_V1.tif]
-
-
-
-#CHELSA_TraCE21k_bio1_-210_V1.tif
-#CHELSA_TraCE21k_tasmin_10_-210_V1.tif 
-# string: [model]_[parameter]_[month]_[timeslice]_V1.tif]
+# devtools:::install_github("gearslaboratory/gdalUtils")
+# install.packages("https://gitlab.rrz.uni-hamburg.de/helgejentsch/climdatdownloadr/-/archive/master/climdatdownloadr-master.tar.gz", repos = NULL, type = "source")
+# 
+# packages_climate <- c("gdalUtils", "httr", "ncdf4", "qpdf", "raster", "RCurl", "RefManageR", "rgdal", "stringr", "sf", "sp", "svMisc", "utils", "ClimDatDownloadR")
+# 
+# 
+# sapply(packages_climate, library, character.only = TRUE)
 
 bio.var.wanted = c(1, 6, 12, 15, 18, 19)
-here::here()
-
-devtools:::install_github("gearslaboratory/gdalUtils")
-install.packages("https://gitlab.rrz.uni-hamburg.de/helgejentsch/climdatdownloadr/-/archive/master/climdatdownloadr-master.tar.gz", repos = NULL, type = "source")
-
-packages_climate <- c("gdalUtils", "httr", "ncdf4", "qpdf", "raster", "RCurl", "RefManageR", "rgdal", "stringr", "sf", "sp", "svMisc", "utils", "ClimDatDownloadR")
-
-
-sapply(packages_climate, library, character.only = TRUE)
-
+time.var.wanted = c(20:-200)
+parameter.choosen = c("bio", "tasmin")
 
 test <- download_chelsa_trace21k(save.location = here::here(), 
                                  parameter = "bio", 
                                  model =  "CHELSA_TraCE21k", 
                                  bio.var = c(1,5), 
-                                 time.var = c(20:-10)
+                                 time.var = c(20:19)
                                  )
 
 
