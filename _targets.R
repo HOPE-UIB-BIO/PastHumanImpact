@@ -102,7 +102,12 @@ list(
         to =  max_age,
         by = timestep)
     )
-  ) ,
+  ),
+  targets::tar_target(
+    name = spd_distance_vec,
+    command = c(5, 25, 50, 100, 250, 500) %>%
+      rlang::set_names()
+  ),
   # 1. Pollen data prepartion -----
   # get path to the data assembly
   targets::tar_target(
