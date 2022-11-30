@@ -265,9 +265,14 @@ list(
   # - expand events to be present for each time slice
   targets::tar_target(
     name = event_temporal_spacing,
-    command = get_events_per_timeslice(
-      data_source_events = events,
-      data_source_dummy_time = data_dummy_time
+    command = get_per_timeslice_all_col(
+      data_source = events,
+      data_source_dummy_time = data_dummy_time,
+      sel_name = "event_type",
+      col_to_unnest = "events_updated",
+      smooth_basis = "cr",
+      error_family = "stats::binomial(link = 'logit')",
+      max_k = 24
     )
   ),
   # 4. C14 and SPD -----
@@ -302,6 +307,7 @@ list(
       data_source_meta = data_meta
     )
   ),
+  # - estimaet spd for each distance
   targets::tar_target(
     name = data_spd,
     command = get_spd(
@@ -311,6 +317,19 @@ list(
       age_to = max_age,
       age_timestep = timestep,
       min_n_dates = 50
+    )
+  ),
+  # get spd values for each time slice
+  targets::tar_target(
+    name = data_sdp_temporal_spacing,
+    command = get_per_timeslice_all_col(
+      data_source = data_spd,
+      data_source_dummy_time = data_dummy_time,
+      sel_name = "distance",
+      col_to_unnest = "spd",
+      smooth_basis = "cr",
+      error_family = "mgcv::betar(link = 'logit')",
+      max_k = 24
     )
   ),
   # 5. Estimate PAPs -----
