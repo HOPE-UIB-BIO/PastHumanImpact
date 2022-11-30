@@ -6,30 +6,12 @@
 #' @param bio.var A variable of the timeslice wanted 
 #' @return 
 
-
 # devtools:::install_github("gearslaboratory/gdalUtils")
 # install.packages("https://gitlab.rrz.uni-hamburg.de/helgejentsch/climdatdownloadr/-/archive/master/climdatdownloadr-master.tar.gz", repos = NULL, type = "source")
 # 
 # packages_climate <- c("gdalUtils", "httr", "ncdf4", "qpdf", "raster", "RCurl", "RefManageR", "rgdal", "stringr", "sf", "sp", "svMisc", "utils", "ClimDatDownloadR")
-# 
-# 
+
 # sapply(packages_climate, library, character.only = TRUE)
-
-bio.var.wanted = c(1, 6, 12, 15, 18, 19)
-time.var.wanted = c(20:-200)
-parameter.choosen = c("bio", "tasmin")
-
-test <- download_chelsa_trace21k(save.location = here::here(), 
-                                 parameter = "bio", 
-                                 model =  "CHELSA_TraCE21k", 
-                                 bio.var = c(1,5), 
-                                 time.var = c(20:19)
-                                 )
-
-
-
-
-
 
 download_chelsa_trace21k <- function(save.location = "./",
                                     parameter = c("bio", "tasmax","tasmin", "pr"),
