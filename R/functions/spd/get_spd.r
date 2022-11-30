@@ -168,4 +168,9 @@ get_spd <- function(data_source_c14,
         }
       )
     )
+
+  # select only relevant columns and return
+  data_spd %>%
+    dplyr::select(dataset_id, spd) %>%
+    return()
 }
