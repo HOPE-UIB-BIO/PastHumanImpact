@@ -93,14 +93,15 @@ timestep <- 100
 
 # the targets list:
 list(
-  # 0. setting variables
+  # 0. setting variables ----
   targets::tar_target(
     name = data_dummy_time,
     command = tibble::tibble(
       age = seq(
         from = min_age,
-        to =  max_age,
-        by = timestep)
+        to = max_age,
+        by = timestep
+      )
     )
   ),
   targets::tar_target(
@@ -278,7 +279,7 @@ list(
       distance_buffer = 10 # 10° away from site
     )
   ),
-   # - a path for c14 data
+  # - a path for c14 data
   targets::tar_target(
     name = data_c14_path,
     command = paste0(
@@ -299,6 +300,17 @@ list(
       data_source_c14 = data_c14,
       data_source_polygons = data_polygons,
       data_source_meta = data_meta
+    )
+  ),
+  targets::tar_target(
+    name = data_spd,
+    command = get_spd(
+      data_source_c14 = data_c14_subset,
+      data_source_dist_vec = spd_distance_vec,
+      age_from = min_age,
+      age_to = max_age,
+      age_timestep = timestep,
+      min_n_dates = 50
     )
   ),
   # 5. Estimate PAPs -----
