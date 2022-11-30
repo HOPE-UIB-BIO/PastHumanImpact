@@ -31,6 +31,7 @@ package_list <-
     "gittargets",
     "here",
     "mgcv",
+    "rcarbon",
     "readr",
     "renv",
     "roxygen2",
