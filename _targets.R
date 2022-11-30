@@ -272,7 +272,7 @@ list(
       col_to_unnest = "events_updated",
       smooth_basis = "cr",
       error_family = "stats::binomial(link = 'logit')",
-      max_k = 24
+      max_k = round(max(data_dummy_time$age) / 500)
     )
   ),
   # 4. C14 and SPD -----
@@ -329,7 +329,7 @@ list(
       col_to_unnest = "spd",
       smooth_basis = "cr",
       error_family = "mgcv::betar(link = 'logit')",
-      max_k = 24
+      max_k = round(max(data_dummy_time$age) / 500)
     )
   ),
   # 5. Estimate PAPs -----
