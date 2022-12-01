@@ -89,6 +89,15 @@ get_roc <- function(data_pollen,
       )
     )
 
+  data_roc <-
+    data_work_roc %>%
+    dplyr::filter(
+      purrr::map_lgl(
+        .x = data_work_roc$PAP_roc,
+        .f = ~ "data.frame" %in% class(.x)
+      )
+    ) %>%
+    dplyr::select(dataset_id, PAP_roc)
 
-  return(data_work_roc)
+  return(data_roc)
 }
