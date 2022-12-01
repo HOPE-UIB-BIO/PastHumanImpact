@@ -28,7 +28,7 @@ get_events_as_binary <- function(data_source_events, data_source_pollen) {
           data_to_test <-
             REcopol:::util_get_inbetween_values(
               data_source = ..2$age,
-              sel_output = "both"
+              sel_output = "only_inbetween"
             ) %>%
             tibble::enframe(value = "age") %>%
             dplyr::select(age)
