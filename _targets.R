@@ -46,7 +46,9 @@ tar_option_set(
   packages = c(
     "tidyverse",
     "assertthat",
+    "rcarbon",
     "devtools",
+    "geosphere",
     "usethis",
     "here",
     "renv",
@@ -88,14 +90,25 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 100
 
-data_dummy_time <-
-  tibble::tibble(
-    age = seq(min_age, max_age, timestep)
-  )
-
 
 # the targets list:
 list(
+  # 0. setting variables ----
+  targets::tar_target(
+    name = data_dummy_time,
+    command = tibble::tibble(
+      age = seq(
+        from = min_age,
+        to = max_age,
+        by = timestep
+      )
+    )
+  ),
+  targets::tar_target(
+    name = spd_distance_vec,
+    command = c(5, 25, 50, 100, 250, 500) %>%
+      rlang::set_names()
+  ),
   # 1. Pollen data prepartion -----
   # get path to the data assembly
   targets::tar_target(
@@ -200,7 +213,7 @@ list(
   # - detect indicators in data
   targets::tar_target(
     name = events_indicators,
-    command = detect_events_from_indicators(
+    command = get_events_from_indicators(
       data_source_indicators = events_indicators_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -232,7 +245,7 @@ list(
   # - detect indices in data
   targets::tar_target(
     name = events_indices,
-    command = detect_events_from_indices(
+    command = get_events_from_indices(
       data_source_indices = events_indices_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -258,12 +271,83 @@ list(
   # - expand events to be present for each time slice
   targets::tar_target(
     name = event_temporal_spacing,
-    command = est_events_timeslice(
-      data_source_events = events,
+    command = get_per_timeslice_all_col(
+      data_source = events,
+      data_source_dummy_time = data_dummy_time,
+      sel_name = "event_type",
+      col_to_unnest = "events_updated",
+      smooth_basis = "cr",
+      error_family = "stats::binomial(link = 'logit')",
+      max_k = round(max(data_dummy_time$age) / 500)
+    )
+  ),
+  # - subset event types relevant for each region
+  targets::tar_target(
+    name = events_temporal_subset,
+    command = subset_event_types(
+      data_source_events = event_temporal_spacing,
+      data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time
     )
   ),
-  # 4. Estimate PAPs -----
+  # 4. C14 and SPD -----
+  # - create a circle polygons within a certain distance from each site
+  targets::tar_target(
+    name = data_polygons,
+    command = get_polygons(
+      data_source = data_meta,
+      distance_buffer = 10 # 10° away from site
+    )
+  ),
+  # - a path for c14 data
+  targets::tar_target(
+    name = data_c14_path,
+    command = paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/c14/data_rc_2022-11-29.rds"
+    ),
+    format = "file"
+  ),
+  # - load c14 data
+  targets::tar_target(
+    name = data_c14,
+    command = get_file_from_path(data_c14_path)
+  ),
+  # - subset C14 data for each dataset_id and calculate distance to it
+  targets::tar_target(
+    name = data_c14_subset,
+    command = subset_c14_data(
+      data_source_c14 = data_c14,
+      data_source_polygons = data_polygons,
+      data_source_meta = data_meta
+    )
+  ),
+  # - estimaet spd for each distance
+  targets::tar_target(
+    name = data_spd,
+    command = get_spd(
+      data_source_c14 = data_c14_subset,
+      data_source_dist_vec = spd_distance_vec,
+      age_from = min_age,
+      age_to = max_age,
+      age_timestep = timestep,
+      min_n_dates = 50
+    )
+  ),
+  # get spd values for each time slice
+  targets::tar_target(
+    name = data_sdp_temporal_spacing,
+    command = get_per_timeslice_all_col(
+      data_source = data_spd,
+      data_source_dummy_time = data_dummy_time,
+      sel_name = "distance",
+      col_to_unnest = "spd",
+      smooth_basis = "cr",
+      error_family = "mgcv::betar(link = 'logit')",
+      max_k = round(max(data_dummy_time$age) / 500)
+    )
+  ),
+  # 5. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
     # note cannot reuse existing targets name, any solution?

@@ -1,4 +1,4 @@
-detect_events_from_indicators <- function(data_source_indicators,
+get_events_from_indicators <- function(data_source_indicators,
                                           data_source_pollen,
                                           data_source_meta,
                                           sel_region = "Latin America",
