@@ -275,6 +275,15 @@ list(
       max_k = round(max(data_dummy_time$age) / 500)
     )
   ),
+  # - subset event types relevant for each region
+  targets::tar_target(
+    name = events_temporal_subset,
+    command = subset_event_types(
+      data_source_events = event_temporal_spacing,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time
+    )
+  ),
   # 4. C14 and SPD -----
   # - create a circle polygons within a certain distance from each site
   targets::tar_target(
