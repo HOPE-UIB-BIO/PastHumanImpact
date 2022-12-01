@@ -347,6 +347,15 @@ list(
       max_k = round(max(data_dummy_time$age) / 500)
     )
   ),
+  targets::tar_target(
+    name = data_spd_best_dist,
+    command = select_best_spd(
+      data_source_events = events_temporal_subset,
+      data_source_spd = data_sdp_temporal_spacing,
+      data_source_meta = data_meta,
+      data_source_dist_vec = spd_distance_vec
+    )
+  ),
   # 5. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
