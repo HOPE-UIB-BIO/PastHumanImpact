@@ -4,7 +4,30 @@ get_per_timeslice_all_col <- function(data_source,
                                       smooth_basis,
                                       max_k = 24,
                                       error_family,
-                                      data_source_dummy_time) {
+                                      data_source_dummy_time,
+                                      limit_length = FALSE) {
+  data_age_lim <-
+    data_source %>%
+    dplyr::mutate(
+      age_lim = purrr::map(
+        .x = get(col_to_unnest),
+        .f = ~ .x %>%
+          purrr::pluck("age") %>%
+          range()
+      ),
+      age_min = purrr::map_dbl(
+        .x = age_lim,
+        .f = ~ min(.x)
+      ),
+      age_max = purrr::map_dbl(
+        .x = age_lim,
+        .f = ~ max(.x)
+      )
+    ) %>%
+    dplyr::select(
+      dataset_id, age_min, age_max
+    )
+
   # wragler data so that there are grouped by col
   data_to_fit <-
     data_source %>%
@@ -39,14 +62,41 @@ get_per_timeslice_all_col <- function(data_source,
       )
     )
 
-  # predict each GAM using `data_source_dummy_time`
-  data_predicted <-
+  # add data.frame to predict on (age vector)
+  #   this can be limited by the length of the data if
+  #   `limit_length` == TRUE
+  data_to_predict <-
     data_gams %>%
+    dplyr::left_join(
+      data_age_lim,
+      by = "dataset_id"
+    ) %>%
     dplyr::mutate(
-      pred_data = purrr::map(
+      dummy_age = purrr::map2(
+        .x = age_min,
+        .y = age_max,
+        .f = ~ ifelse(
+          test = isTRUE(limit_length),
+          yes = return(
+            data_source_dummy_time %>%
+              dplyr::filter(
+                age <= .y & age >= .x
+              )
+          ),
+          no = return(data_source_dummy_time)
+        )
+      )
+    )
+
+  # predict each GAM
+  data_predicted <-
+    data_to_predict %>%
+    dplyr::mutate(
+      pred_data = purrr::map2(
         .x = mod,
+        .y = dummy_age,
         .f = ~ REcopol::predic_model(
-          data_source = data_source_dummy_time,
+          data_source = .y,
           model_source = .x
         )
       )
