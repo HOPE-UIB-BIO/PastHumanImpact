@@ -18,7 +18,7 @@ select_data <- function(data_assembly,
             )
           )
       ) %>%
-      dplyr::select(dplyr::all_of(variables))
+      dplyr::select(dplyr::all_of(variables), percentages_harmonised)
   } else {
     data_assembly %>%
       dplyr::select(dplyr::all_of(variables))
