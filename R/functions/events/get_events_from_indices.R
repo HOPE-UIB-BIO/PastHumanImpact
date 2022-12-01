@@ -1,4 +1,4 @@
-detect_events_from_indices <- function(data_source_indices,
+get_events_from_indices <- function(data_source_indices,
                                        data_source_pollen,
                                        data_source_meta,
                                        sel_region = "Latin America") {
