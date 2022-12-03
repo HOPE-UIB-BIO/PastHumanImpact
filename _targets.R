@@ -356,7 +356,16 @@ list(
       data_source_dist_vec = spd_distance_vec
     )
   ),
-  # 5. Estimate PAPs -----
+  # 5. Get CHELSA palaeoclimate
+  targets::tar_target(
+    name = data_climate, 
+    command = get_climate_data(variables.selected = c("bio", "tasmin"),
+                               bio.var.selected = c(1, 6, 12, 15, 18, 19),
+                               time.var.selected = c(20:-200),
+                               month.var.selected = c(1:12),
+                               xy = data_meta)
+  ),
+  # 6. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
     # note cannot reuse existing targets name, any solution?
