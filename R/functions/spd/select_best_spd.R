@@ -1,3 +1,12 @@
+#' @title Get the best SPD for each site
+#' @description For each distance class of SPD of each pollen record, noe
+#' RDA is estimated with event types as responses (binary) and SPD values as
+#' predictors. Next, R2 is estimated using for each distance class.
+#' Finally, the distance class with the highest R2 is selected as the
+#' representation of human activity for that pollen record.
+#' As this is only possile for sites with both events and SPD, some sequences
+#' might end without SPD. In that case, the most common distance for each
+#' region is used.
 select_best_spd <- function(data_source_events,
                             data_source_spd,
                             data_source_meta,
@@ -136,7 +145,7 @@ select_best_spd <- function(data_source_events,
     dplyr::mutate(
       ord_res = purrr::map(
         .x = data_to_fit,
-        .f = ~fit_ordination(
+        .f = ~ fit_ordination(
           data_source = .x,
           dist_vec = data_source_dist_vec
         )

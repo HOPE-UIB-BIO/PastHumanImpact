@@ -1,6 +1,6 @@
-#' @title get binary data from event detection
-#' @param data_source_events Data.file with ages of human detection
-#' @param data_source_pollen Data file with filtered pollen data
+#' @title Get binary data from event detection
+#' @param data_source_events Data.frame with ages of human detection
+#' @param data_source_pollen Data.frame with filtered pollen data
 #' @description For each site, get a list of ages of all levels,
 #' add ages of all ages in between levels, an then simply check the start of
 #' huan detection. All ages younger than that have `1`, everything else have `0`
