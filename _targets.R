@@ -361,10 +361,10 @@ list(
   targets::tar_target(
     name = data_climate,
     command = get_climate_data(
-      variables.selected = c("bio", "tasmin"),
-      bio.var.selected = c(1, 6, 12, 15, 18, 19),
-      time.var.selected = c(20:-200),
-      month.var.selected = c(1:12),
+      variables_selected = c("bio", "tasmin"),
+      bio_var_selected = c(1, 6, 12, 15, 18, 19),
+      time_var_selected = c(20:-200),
+      month_var_selected = c(1:12),
       xy = data_meta
     )
   ),
