@@ -2,18 +2,10 @@
 #' @description This is wrapper function that create a tibble with selected variables to be downloaded, download, extract relevant data and delete the downloaded .tif files. 
 #' @return Provide the selected climatic data for each location and a meta data table with the file and url links
 
-#ISSUES
-# can we speed download up in parallel sessions?
-# cores <- parallel::detectCores()-1
-# plan(multisession, workers = cores)
-
-# how to save data stepwise if we need to break download?
-
-
-get_climate_data <- function(variables.selected = c("bio", "tasmin"),
-                             bio.var.selected = c(1, 6, 12, 15, 18, 19),
-                             time.var.selected = c(20:-200),
-                             month.var.selected = c(1:12),
+get_climate_data <- function(variables_selected = c("bio", "tasmin"),
+                             bio_var_selected = c(1, 6, 12, 15, 18, 19),
+                             time_var_selected = c(20:-200),
+                             month_var_selected = c(1:12),
                              xy = data_meta) {
   
   
@@ -23,15 +15,15 @@ get_climate_data <- function(variables.selected = c("bio", "tasmin"),
     column_to_rownames("dataset_id")
   
   # select variables and download CHELSA data
-  climate_dl <- get_chelsa_trace21k_urls(variables = variables.selected, 
-                                           bio.var = bio.var.selected,
-                                           month.var = month.var.selected,
-                                           time.var = time.var.selected) %>%  
-    get_chelsa_download(., extract.data = xy_data) 
+  climate_dl <- get_chelsa_trace21k_urls(variables = variables_selected, 
+                                           bio_var = bio_var_selected,
+                                           month_var = month_var_selected,
+                                           time_var = time_var_selected) %>%  
+    get_chelsa_download(., extract_data = xy_data) 
   
  # restructure downloaded climate data
   climate_tables <-  climate_dl %>% 
-    dplyr::select(variable, time.id, bio, month, climate) %>%
+    dplyr::select(variable, time_id, bio, month, climate) %>%
     unnest(cols = climate) %>%
     dplyr::select(variable:month, dataset_id, value) %>%
     mutate(variable = case_when(
