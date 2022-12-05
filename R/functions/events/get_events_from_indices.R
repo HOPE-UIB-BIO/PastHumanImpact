@@ -1,7 +1,10 @@
+#' @title Detect events based on idices
+#' @description For each site, test each level with the list of event indices
+#' and clasify each level as a event type (binary).
 get_events_from_indices <- function(data_source_indices,
-                                       data_source_pollen,
-                                       data_source_meta,
-                                       sel_region = "Latin America") {
+                                    data_source_pollen,
+                                    data_source_meta,
+                                    sel_region = "Latin America") {
   `%>%` <- magrittr::`%>%`
 
   # helper function

@@ -1,3 +1,7 @@
+#' @title Apply logical rules to binary events
+#' @param data_source Data.file with binary events
+#' @description For each site, apply region-specific rules to the binary data.
+#' For example, in Europe "bit" is stoped by "cc" and "ec", etc
 add_logical_rules <- function(data_source) {
   data_source %>%
     dplyr::mutate(
