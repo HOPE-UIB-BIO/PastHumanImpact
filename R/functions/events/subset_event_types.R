@@ -1,3 +1,6 @@
+#' @title Subset event types to keep only relevant
+#' @description Region-specifically subet event types (only keep relevant).
+#' Add "no impact" if events not present. 
 subset_event_types <- function(data_source_events,
                                data_source_meta,
                                data_source_dummy_time) {

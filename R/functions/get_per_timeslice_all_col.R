@@ -1,3 +1,9 @@
+
+#' @title Get values for each time slice for all variables
+#' @param limit_length Logical. If true, values will be only interolated not 
+#' forecast (limit the prediction data frame).
+#' @description Use `fit_multiple_gams` to fit + predict for all pollen records
+#' for all variables present in the data.
 get_per_timeslice_all_col <- function(data_source,
                                       col_to_unnest,
                                       sel_name,
