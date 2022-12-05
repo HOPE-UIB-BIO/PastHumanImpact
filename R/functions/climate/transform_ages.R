@@ -1,3 +1,7 @@
+#' @title Transform time_id into ages
+#' @description This function use the time reference table in the CHELSA technical documentation for TraCE21k to transform the time_id into ages comparable with the other data.
+#' @return A nested tibble with climate variables per dataset_id
+
 transform_ages <-
   function(data_source,
            trans_data){

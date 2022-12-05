@@ -358,8 +358,22 @@ list(
     )
   ),
   # 5. Get CHELSA palaeoclimate
+  # - a path to time reference table (from code)
   targets::tar_target(
-    name = data_climate,
+    name = time_ref_path,
+    command = paste0(
+      data_storage_path,
+      "HOPE_Hypothesis1/Data/climate/time_reference_table.rds"
+    ),
+    format = "file"
+  ),
+  # - load table
+  targets::tar_target(
+    name = time_ref_table,
+    command = get_file_from_path(time_ref_path)
+  ),
+  targets::tar_target(
+    name = data_climate_chelsa,
     command = get_climate_data(
       variables_selected = c("bio", "tasmin"),
       bio_var_selected = c(1, 6, 12, 15, 18, 19),
@@ -367,6 +381,11 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
+  ),  
+  targets::tar_target(
+    name = data_climate,
+    command = get_climate_indices(source = data_climate_chelsa, 
+                               time_ref = time_ref_table)
   ),
   # 6. Estimate PAPs -----
   # - calculate diversity
