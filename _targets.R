@@ -44,23 +44,24 @@ tar_config_set(
 # Set target options:
 tar_option_set(
   packages = c(
-    "tidyverse",
-    "assertthat",
-    "rcarbon",
+    "arrow",
+    "assertthat", 
     "devtools",
     "geosphere",
-    "usethis",
+    "ggpubr",
     "here",
+    "mgcv",
+    "rcarbon",
+    "readr",
+    "REcopol",
     "renv",
     "roxygen2",
-    "readr",
-    "ggpubr",
-    "mgcv",
-    "REcopol",
     "RRatepol",
     "RUtilpol",
-    "vegan",
-    "arrow"
+    "terra",
+    "tidyverse",
+    "usethis",
+    "vegan"
   ),
   memory = "transient",
   garbage_collection = TRUE,
@@ -358,12 +359,14 @@ list(
   ),
   # 5. Get CHELSA palaeoclimate
   targets::tar_target(
-    name = data_climate, 
-    command = get_climate_data(variables.selected = c("bio", "tasmin"),
-                               bio.var.selected = c(1, 6, 12, 15, 18, 19),
-                               time.var.selected = c(20:-200),
-                               month.var.selected = c(1:12),
-                               xy = data_meta)
+    name = data_climate,
+    command = get_climate_data(
+      variables.selected = c("bio", "tasmin"),
+      bio.var.selected = c(1, 6, 12, 15, 18, 19),
+      time.var.selected = c(20:-200),
+      month.var.selected = c(1:12),
+      xy = data_meta
+    )
   ),
   # 6. Estimate PAPs -----
   # - calculate diversity

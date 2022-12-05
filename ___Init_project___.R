@@ -6,7 +6,7 @@
 #                     Project setup
 #
 #
-#                   V. Felde, O. Mottl 
+#                   V. Felde, O. Mottl
 #                         2022
 #
 #----------------------------------------------------------#
@@ -26,15 +26,14 @@ package_list <-
     "assertthat",
     "devtools",
     "geosphere",
-    "GGally",
     "ggpubr",
-    "gittargets",
     "here",
     "mgcv",
     "rcarbon",
     "readr",
     "renv",
     "roxygen2",
+    "terra",
     "tidyverse",
     "usethis",
     "vegan"
@@ -43,7 +42,6 @@ package_list <-
 # define helper function
 install_packages <-
   function(pkgs_list) {
-
     # install all packages in the lst from CRAN
     sapply(pkgs_list, utils::install.packages, character.only = TRUE)
 
