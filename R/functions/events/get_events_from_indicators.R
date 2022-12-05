@@ -1,3 +1,6 @@
+#' @title Detect events based on indicators
+#' @description For each site, test each level with the list of event indicators
+#' and clasify each level as a event type (binary).
 get_events_from_indicators <- function(data_source_indicators,
                                           data_source_pollen,
                                           data_source_meta,
