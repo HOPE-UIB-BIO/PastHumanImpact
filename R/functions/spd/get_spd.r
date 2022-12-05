@@ -1,3 +1,12 @@
+#' @title Get SPD for each distance class
+#' @description For each pollen record, one SPD was calculated for each distance
+#' class, including all data in the that distance.
+#' Radiocarbon dates were calibrated  with apropriate calibration curves and
+#' assigned by their geographical location following Hua et al., 2013.
+#' SPD was only estimated  for each distance class but only if a distance
+#' class have at least `min_n_dates` RC dates to maintain only robust SPD
+#' estimation. For each SPD a total probability mass of the SPD is normalised
+#' to sum to unity
 get_spd <- function(data_source_c14,
                     data_source_dist_vec,
                     age_from = 0,
