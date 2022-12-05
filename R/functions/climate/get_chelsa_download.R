@@ -1,7 +1,7 @@
 #' @title A function to download all the selected palaeoclimatic variables from CHELSA
 #' @description This function download, extract, and delete downloaded tif files so they do not fill up storage space
 #' @return A tibble with the meta data, and climatic data for all locations in extract data
-get_chelsa_download <- function(md, skip_existing = TRUE, method = "curl", extract.data = NULL){
+get_chelsa_download <- function(md, skip_existing = TRUE, method = "curl", extract_data = NULL){
   
   dest <- tempdir()
   
@@ -43,10 +43,10 @@ get_chelsa_download <- function(md, skip_existing = TRUE, method = "curl", extra
     }
     if(file.exists(md$path[i])) md$status[i] <- "download completed"
     
-    if(!is.null(extract.data) & file.exists(md$path[i])){
+    if(!is.null(extract_data) & file.exists(md$path[i])){
       
       r <- terra::rast(md$path[i]) 
-      climate_table <- data.frame(extract.data, terra::extract(r, extract.data)) %>%
+      climate_table <- data.frame(extract_data, terra::extract(r, extract_data)) %>%
         rownames_to_column("dataset_id") %>%
         rename(value = starts_with("CHELSA_"))
       md$climate[i] <- list(climate_table)

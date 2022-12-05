@@ -13,7 +13,7 @@ transform_ages <-
     
     
     data_source %>% 
-      dplyr::inner_join(trans_data, by = c("time_id_fix" = "timeID")) %>% 
+      dplyr::inner_join(trans_data, by = c("time_id" = "timeID")) %>% 
       dplyr::mutate(
         mid_age = round((startyear + endyear)/ 2, digits = 0), 
         # convert from gregorian to before present (BP)
