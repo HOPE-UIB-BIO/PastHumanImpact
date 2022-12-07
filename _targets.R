@@ -45,7 +45,7 @@ tar_config_set(
 tar_option_set(
   packages = c(
     "arrow",
-    "assertthat", 
+    "assertthat",
     "devtools",
     "geosphere",
     "ggpubr",
@@ -135,8 +135,8 @@ list(
   #     add percentages
   targets::tar_target(
     name = data_pollen,
-    command = select_data(
-      data_assembly_filtered,
+    command = get_pollen_data(
+      data_assembly = data_assembly_filtered,
       variables = c(
         "dataset_id",
         "counts_harmonised",
@@ -144,15 +144,14 @@ list(
         "age_uncertainty",
         "pollen_percentage",
         "end_of_interest_period"
-      ),
-      add_percentages = TRUE
+      )
     )
   ),
   # -- select only relevant meta data for dataset_id
   targets::tar_target(
     name = data_meta,
-    command = select_data(
-      data_assembly_filtered,
+    command = get_meta_data(
+      data_assembly = data_assembly_filtered,
       variables = c(
         "dataset_id",
         "handle",
@@ -168,8 +167,7 @@ list(
         "ecozone_koppen_30",
         "data_publicity",
         "doi"
-      ),
-      add_percentages = FALSE
+      )
     )
   ),
   # 3. Human events -----
@@ -381,11 +379,13 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
-  ),  
+  ),
   targets::tar_target(
     name = data_climate,
-    command = get_climate_indices(source = data_climate_chelsa, 
-                               time_ref = time_ref_table)
+    command = get_climate_indices(
+      source = data_climate_chelsa,
+      time_ref = time_ref_table
+    )
   ),
   # 6. Estimate PAPs -----
   # - calculate diversity
