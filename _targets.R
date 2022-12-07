@@ -45,7 +45,7 @@ tar_config_set(
 tar_option_set(
   packages = c(
     "arrow",
-    "assertthat", 
+    "assertthat",
     "devtools",
     "geosphere",
     "ggpubr",
@@ -135,8 +135,8 @@ list(
   #     add percentages
   targets::tar_target(
     name = data_pollen,
-    command = select_data(
-      data_assembly_filtered,
+    command = get_pollen_data(
+      data_assembly = data_assembly_filtered,
       variables = c(
         "dataset_id",
         "counts_harmonised",
@@ -144,15 +144,14 @@ list(
         "age_uncertainty",
         "pollen_percentage",
         "end_of_interest_period"
-      ),
-      add_percentages = TRUE
+      )
     )
   ),
   # -- select only relevant meta data for dataset_id
   targets::tar_target(
     name = data_meta,
-    command = select_data(
-      data_assembly_filtered,
+    command = get_meta_data(
+      data_assembly = data_assembly_filtered,
       variables = c(
         "dataset_id",
         "handle",
@@ -168,8 +167,7 @@ list(
         "ecozone_koppen_30",
         "data_publicity",
         "doi"
-      ),
-      add_percentages = FALSE
+      )
     )
   ),
   # 3. Human events -----
@@ -275,6 +273,7 @@ list(
     command = get_per_timeslice_all_col(
       data_source = events,
       data_source_dummy_time = data_dummy_time,
+      data_source_meta = data_meta,
       sel_name = "event_type",
       col_to_unnest = "events_updated",
       smooth_basis = "cr",
@@ -341,6 +340,7 @@ list(
     command = get_per_timeslice_all_col(
       data_source = data_spd,
       data_source_dummy_time = data_dummy_time,
+      data_source_meta = data_meta,
       sel_name = "distance",
       col_to_unnest = "spd",
       smooth_basis = "cr",
@@ -357,7 +357,7 @@ list(
       data_source_dist_vec = spd_distance_vec
     )
   ),
-  # 5. Get CHELSA palaeoclimate
+  # 5. Get CHELSA palaeoclimate -----
   # - a path to time reference table (from code)
   targets::tar_target(
     name = time_ref_path,
@@ -381,11 +381,13 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
-  ),  
+  ),
   targets::tar_target(
     name = data_climate,
-    command = get_climate_indices(source = data_climate_chelsa, 
-                               time_ref = time_ref_table)
+    command = get_climate_indices(
+      source = data_climate_chelsa,
+      time_ref = time_ref_table
+    )
   ),
   # 6. Estimate PAPs -----
   # - calculate diversity
