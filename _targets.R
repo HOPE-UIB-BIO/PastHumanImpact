@@ -357,7 +357,7 @@ list(
       data_source_dist_vec = spd_distance_vec
     )
   ),
-  # 5. Get CHELSA palaeoclimate
+  # 5. Get CHELSA palaeoclimate -----
   # - a path to time reference table (from code)
   targets::tar_target(
     name = time_ref_path,
