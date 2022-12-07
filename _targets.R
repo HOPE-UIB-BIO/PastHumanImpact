@@ -273,6 +273,7 @@ list(
     command = get_per_timeslice_all_col(
       data_source = events,
       data_source_dummy_time = data_dummy_time,
+      data_source_meta = data_meta,
       sel_name = "event_type",
       col_to_unnest = "events_updated",
       smooth_basis = "cr",
@@ -339,6 +340,7 @@ list(
     command = get_per_timeslice_all_col(
       data_source = data_spd,
       data_source_dummy_time = data_dummy_time,
+      data_source_meta = data_meta,
       sel_name = "distance",
       col_to_unnest = "spd",
       smooth_basis = "cr",

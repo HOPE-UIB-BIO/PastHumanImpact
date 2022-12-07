@@ -1,10 +1,11 @@
 
 #' @title Get values for each time slice for all variables
-#' @param limit_length Logical. If true, values will be only interolated not 
+#' @param limit_length Logical. If true, values will be only interolated not
 #' forecast (limit the prediction data frame).
 #' @description Use `fit_multiple_gams` to fit + predict for all pollen records
 #' for all variables present in the data.
 get_per_timeslice_all_col <- function(data_source,
+                                      data_source_meta,
                                       col_to_unnest,
                                       sel_name,
                                       smooth_basis,
@@ -13,23 +14,7 @@ get_per_timeslice_all_col <- function(data_source,
                                       data_source_dummy_time,
                                       limit_length = FALSE) {
   data_age_lim <-
-    data_source %>%
-    dplyr::mutate(
-      age_lim = purrr::map(
-        .x = get(col_to_unnest),
-        .f = ~ .x %>%
-          purrr::pluck("age") %>%
-          range()
-      ),
-      age_min = purrr::map_dbl(
-        .x = age_lim,
-        .f = ~ min(.x)
-      ),
-      age_max = purrr::map_dbl(
-        .x = age_lim,
-        .f = ~ max(.x)
-      )
-    ) %>%
+    data_source_meta %>%
     dplyr::select(
       dataset_id, age_min, age_max
     )
@@ -70,7 +55,7 @@ get_per_timeslice_all_col <- function(data_source,
 
   # add data.frame to predict on (age vector)
   #   this can be limited by the length of the data if
-  #   `limit_length` == TRUE
+  #   `limit_length` is TRUE
   data_to_predict <-
     data_gams %>%
     dplyr::left_join(
