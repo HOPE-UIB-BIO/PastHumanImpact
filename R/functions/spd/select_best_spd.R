@@ -101,7 +101,10 @@ select_best_spd <- function(data_source_events,
   # emerge events and spd  -----
   data_merge <-
     dplyr::inner_join(
-      data_source_spd,
+      data_source_spd %>%
+        dplyr::rename(
+          spd = data
+        ),
       data_source_events,
       by = "dataset_id"
     ) %>%
