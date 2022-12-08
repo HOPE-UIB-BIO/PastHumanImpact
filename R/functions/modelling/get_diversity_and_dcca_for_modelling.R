@@ -39,10 +39,10 @@ get_diversity_and_dcca_for_modelling <- function(data_source_diversity,
     tidyr::pivot_longer(
       cols = -c(dataset_id, age, var_weight),
       names_to = "var_name",
-      values_to = "var"
+      values_to = "value"
     ) %>%
-    tidyr::drop_na(var) %>%
-    tidyr::nest(data_to_fit = c(dataset_id, age, var, var_weight))
+    tidyr::drop_na(value) %>%
+    tidyr::nest(data_to_fit = c(dataset_id, age, value, var_weight))
 
   return(data_to_fit)
 }
