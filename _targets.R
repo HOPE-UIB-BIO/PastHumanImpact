@@ -488,12 +488,12 @@ list(
     )
   ),
   # - prepare RoC for modelling
-  targets::tar_make(
+  targets::tar_target(
     name = data_roc_for_modelling,
     command = get_roc_for_modelling(data_roc)
   ),
    # - estimate RoC on equal time slices
-  targets::tar_make(
+  targets::tar_target(
     name = data_roc_temporal_spacing,
     command = get_per_timeslice(
       data_source = data_roc_for_modelling,
