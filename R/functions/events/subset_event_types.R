@@ -13,7 +13,7 @@ subset_event_types <- function(data_source_events,
     ) %>%
     dplyr::mutate(
       have_events = purrr::map_lgl(
-        .x = events_updated,
+        .x = data,
         .f = tibble::is_tibble
       )
     ) %>%
@@ -22,7 +22,7 @@ subset_event_types <- function(data_source_events,
         .l = list(
           have_events, # ..1
           region, # ..2
-          events_updated, # ..3
+          data, # ..3
           dataset_id
         ),
         .f = ~ ifelse(
