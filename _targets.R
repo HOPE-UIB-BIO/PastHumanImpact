@@ -444,6 +444,38 @@ list(
       sd_for_peak_detection = 2
     )
   ),
+  targets::tar_target(
+    name = "data_diversity_and_dcca",
+    command = get_diversity_and_dcca_for_modelling(
+      data_source_diversity = data_diversity,
+      data_source_dcca = data_dcca,
+      data_source_pollen = data_pollen
+    )
+  ),
+  targets::tar_target(
+    name = "data_div_dcca_temporal_spacing",
+    command = get_per_timeslice(
+      data_source = data_diversity_and_dcca,
+      data_source_meta = data_meta,
+      data_error_family = tibble::tribble(
+        ~"var_name", ~"sel_error",
+        "n0", "mgcv::Tweedie(p = 1.1)",
+        "n1", "mgcv::Tweedie(p = 1.1)",
+        "n2", "mgcv::Tweedie(p = 1.1)",
+        "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
+        "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
+        "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
+        "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
+      ),
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weight_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE
+    )
+  ),
   # - combine all PAP estimates into one tibble
   targets::tar_target(
     name = data_combined_paps,
