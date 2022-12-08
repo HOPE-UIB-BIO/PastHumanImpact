@@ -267,18 +267,23 @@ list(
       data_source_events_code = events_code
     )
   ),
+  # - prepare events for modelling
+  targets::tar_target(
+    name = data_events_to_fit,
+    command = get_events_for_modelling(events)
+  ),
   # - expand events to be present for each time slice
   targets::tar_target(
     name = event_temporal_spacing,
-    command = get_per_timeslice_all_col(
-      data_source = events,
+    command = get_per_timeslice(
+      data_source = data_events_to_fit,
       data_source_dummy_time = data_dummy_time,
-      data_source_meta = data_meta,
-      sel_name = "event_type",
-      col_to_unnest = "events_updated",
       smooth_basis = "cr",
-      error_family = "stats::binomial(link = 'logit')",
-      max_k = round(max(data_dummy_time$age) / 500)
+      data_error_family = "stats::binomial(link = 'logit')",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
     )
   ),
   # - subset event types relevant for each region
