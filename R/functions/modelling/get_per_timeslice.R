@@ -6,22 +6,35 @@ get_per_timeslice <- function(data_source,
                               max_k,
                               weights_var = NULL,
                               limit_length = TRUE) {
-  assertthat::assert_that(
-    all(data_source$var_name %in% data_error_family$var_name) &&
-      all(data_error_family$var_name %in% data_source$var_name),
-    msg = paste(
-      "'data_source' and 'data_error_family' must have",
-      "same values is `var_name`"
+  if (
+    is.data.frame(data_error_family)
+  ) {
+    assertthat::assert_that(
+      all(data_source$var_name %in% data_error_family$var_name) &&
+        all(data_error_family$var_name %in% data_source$var_name),
+      msg = paste(
+        "'data_source' and 'data_error_family' must have",
+        "same values is `var_name`"
+      )
     )
-  )
+
+    data_with_error <-
+      dplyr::inner_join(
+        data_source,
+        data_error_family,
+        by = "var_name"
+      )
+  } else {
+    data_with_error <-
+      data_source %>%
+      dplyr::mutate(
+        sel_error = data_error_family
+      )
+  }
 
   # fit GAM for each dataset of reach type
   data_gams <-
-    dplyr::inner_join(
-      data_source,
-      data_error_family,
-      by = "var_name"
-    ) %>%
+    data_with_error %>%
     dplyr::mutate(
       gam_models = purrr::map2(
         .x = data_to_fit,
