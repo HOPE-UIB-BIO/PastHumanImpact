@@ -268,18 +268,23 @@ list(
       data_source_events_code = events_code
     )
   ),
+  # - prepare events for modelling
+  targets::tar_target(
+    name = data_events_to_fit,
+    command = get_events_for_modelling(events)
+  ),
   # - expand events to be present for each time slice
   targets::tar_target(
     name = event_temporal_spacing,
-    command = get_per_timeslice_all_col(
-      data_source = events,
+    command = get_per_timeslice(
+      data_source = data_events_to_fit,
       data_source_dummy_time = data_dummy_time,
-      data_source_meta = data_meta,
-      sel_name = "event_type",
-      col_to_unnest = "events_updated",
       smooth_basis = "cr",
-      error_family = "stats::binomial(link = 'logit')",
-      max_k = round(max(data_dummy_time$age) / 500)
+      data_error_family = "stats::binomial(link = 'logit')",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
     )
   ),
   # - subset event types relevant for each region
@@ -335,18 +340,22 @@ list(
       min_n_dates = 50
     )
   ),
+  # - prepare spd for modelling
+  targets::tar_target(
+    name = data_spd_to_fit,
+    command = get_spd_for_modelling(data_spd)
+  ),
   # get spd values for each time slice
   targets::tar_target(
     name = data_sdp_temporal_spacing,
-    command = get_per_timeslice_all_col(
-      data_source = data_spd,
+    command = get_per_timeslice(
+      data_source = data_spd_to_fit,
+      data_error_family = "stats::binomial(link = 'logit')",
       data_source_dummy_time = data_dummy_time,
-      data_source_meta = data_meta,
-      sel_name = "distance",
-      col_to_unnest = "spd",
       smooth_basis = "cr",
-      error_family = "mgcv::betar(link = 'logit')",
-      max_k = round(max(data_dummy_time$age) / 500)
+      max_k = round(max(data_dummy_time$age) / 500),
+      weights_var = NULL,
+      limit_length = FALSE
     )
   ),
   targets::tar_target(
@@ -443,6 +452,61 @@ list(
       transformation_coef = "chisq",
       peak_point_method = "trend_non_linear",
       sd_for_peak_detection = 2
+    )
+  ),
+  # - merge Diveristy and DCCA and prepare for modelling
+  targets::tar_target(
+    name = "data_diversity_and_dcca",
+    command = get_diversity_and_dcca_for_modelling(
+      data_source_diversity = data_diversity,
+      data_source_dcca = data_dcca,
+      data_source_pollen = data_pollen
+    )
+  ),
+  # - estimate Diveristy and DCCA on equal time slices
+  targets::tar_target(
+    name = "data_div_dcca_temporal_spacing",
+    command = get_per_timeslice(
+      data_source = data_diversity_and_dcca,
+      data_error_family = tibble::tribble(
+        ~"var_name", ~"sel_error",
+        "n0", "mgcv::Tweedie(p = 1.1)",
+        "n1", "mgcv::Tweedie(p = 1.1)",
+        "n2", "mgcv::Tweedie(p = 1.1)",
+        "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
+        "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
+        "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
+        "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
+      ),
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weights_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
+    )
+  ),
+  # - prepare RoC for modelling
+  targets::tar_target(
+    name = data_roc_for_modelling,
+    command = get_roc_for_modelling(data_roc)
+  ),
+   # - estimate RoC on equal time slices
+  targets::tar_target(
+    name = data_roc_temporal_spacing,
+    command = get_per_timeslice(
+      data_source = data_roc_for_modelling,
+      data_error_family = "mgcv::Tweedie(p = 1.1)",
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weights_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
     )
   ),
   # - combine all PAP estimates into one tibble
