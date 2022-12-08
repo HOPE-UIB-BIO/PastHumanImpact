@@ -334,18 +334,23 @@ list(
       min_n_dates = 50
     )
   ),
+  # - prepare spd for modelling
+  targets::tar_target(
+    name = data_spd_to_fit,
+    command = get_spd_for_modelling(data_spd)
+  ),
   # get spd values for each time slice
   targets::tar_target(
     name = data_sdp_temporal_spacing,
-    command = get_per_timeslice_all_col(
-      data_source = data_spd,
-      data_source_dummy_time = data_dummy_time,
+    command = get_per_timeslice(
+      data_source = data_spd_to_fit,
       data_source_meta = data_meta,
-      sel_name = "distance",
-      col_to_unnest = "spd",
+      data_error_family = "stats::binomial(link = 'logit')",
+      data_source_dummy_time = data_dummy_time,
       smooth_basis = "cr",
-      error_family = "mgcv::betar(link = 'logit')",
-      max_k = round(max(data_dummy_time$age) / 500)
+      max_k = round(max(data_dummy_time$age) / 500),
+      weights_var = NULL,
+      limit_length = FALSE
     )
   ),
   targets::tar_target(
