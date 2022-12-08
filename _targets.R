@@ -453,6 +453,7 @@ list(
       sd_for_peak_detection = 2
     )
   ),
+  # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
     name = "data_diversity_and_dcca",
     command = get_diversity_and_dcca_for_modelling(
@@ -461,6 +462,7 @@ list(
       data_source_pollen = data_pollen
     )
   ),
+  # - estimate Diveristy and DCCA on equal time slices
   targets::tar_target(
     name = "data_div_dcca_temporal_spacing",
     command = get_per_timeslice(
@@ -479,7 +481,28 @@ list(
       smooth_basis = "tp",
       max_k = round(max(data_dummy_time$age) / 500),
       # use propagating uncertainy
-      weight_var = "var_weight",
+      weights_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
+    )
+  ),
+  # - prepare RoC for modelling
+  targets::tar_make(
+    name = data_roc_for_modelling,
+    command = get_roc_for_modelling(data_roc)
+  ),
+   # - estimate RoC on equal time slices
+  targets::tar_make(
+    name = data_roc_temporal_spacing,
+    command = get_per_timeslice(
+      data_source = data_roc_for_modelling,
+      data_error_family = "mgcv::Tweedie(p = 1.1)",
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weights_var = "var_weight",
       # interpolate not forecast
       limit_length = TRUE,
       data_source_meta = data_meta
