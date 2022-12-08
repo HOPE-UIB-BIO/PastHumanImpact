@@ -61,7 +61,8 @@ tar_option_set(
     "terra",
     "tidyverse",
     "usethis",
-    "vegan"
+    "vegan",
+    "rdacca.hp"
   ),
   memory = "transient",
   garbage_collection = TRUE,
@@ -465,16 +466,11 @@ list(
 
 
 
-# MODIFYING CODE:
+# DENSITY ESTIMATION:
+# EVEN SPACING; ERROR PROPAGATION; HGAM DENSITY COMBINED VARS
 
 # tar_target(data_density, get_density_pap(data_change_points_pap))
 
-
-# TO BE ADDED
-# make a separate run gam function on  response data first or at the end when all variables are in or incorporate in get_data_h1
-
-# tar_target(data_climate, get_climate())
-# tar_target(data_spd, get_spd())
-# tar_target(data_h1, get_data_h1(data_combined_pap, data_density, data_sites, data_events, data_climate, data_spd))
-
+# H1 targets
+# tar_target(data_h1, get_data_h1(data_meta, data_combined_paps, data_density, data_events, data_climate, data_spd))
 # tar_target(model_h1, run_model_h1(data_h1))
