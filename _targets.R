@@ -344,7 +344,6 @@ list(
     name = data_sdp_temporal_spacing,
     command = get_per_timeslice(
       data_source = data_spd_to_fit,
-      data_source_meta = data_meta,
       data_error_family = "stats::binomial(link = 'logit')",
       data_source_dummy_time = data_dummy_time,
       smooth_basis = "cr",
@@ -461,7 +460,6 @@ list(
     name = "data_div_dcca_temporal_spacing",
     command = get_per_timeslice(
       data_source = data_diversity_and_dcca,
-      data_source_meta = data_meta,
       data_error_family = tibble::tribble(
         ~"var_name", ~"sel_error",
         "n0", "mgcv::Tweedie(p = 1.1)",
@@ -478,7 +476,8 @@ list(
       # use propagating uncertainy
       weight_var = "var_weight",
       # interpolate not forecast
-      limit_length = TRUE
+      limit_length = TRUE,
+      data_source_meta = data_meta
     )
   ),
   # - combine all PAP estimates into one tibble
