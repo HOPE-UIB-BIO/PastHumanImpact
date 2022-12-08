@@ -1,12 +1,28 @@
 #' @title Subset event types to keep only relevant
 #' @description Region-specifically subet event types (only keep relevant).
-#' Add "no impact" if events not present. 
+#' Add "no impact" if events not present.
 subset_event_types <- function(data_source_events,
                                data_source_meta,
                                data_source_dummy_time) {
-  events_prepared <-
+  data_age_limits <-
     data_source_meta %>%
-    dplyr::select(dataset_id, region) %>%
+    dplyr::select(dataset_id, region, age_min, age_max) %>%
+    dplyr::mutate(
+      dummy_table = list(data_source_dummy_time)
+    ) %>%
+    dplyr::mutate(
+      dummy_table = purrr::pmap(
+        .l = list(dummy_table, age_min, age_max),
+        .f = ~ ..1 %>%
+          dplyr::filter(
+            age >= ..2 & age <= ..3
+          )
+      )
+    ) %>%
+    dplyr::select(-c(age_min, age_max))
+
+  events_prepared <-
+    data_age_limits %>%
     dplyr::left_join(
       data_source_events,
       by = "dataset_id"
@@ -23,7 +39,7 @@ subset_event_types <- function(data_source_events,
           have_events, # ..1
           region, # ..2
           data, # ..3
-          dataset_id
+          dummy_table # ..4
         ),
         .f = ~ ifelse(
           test = isTRUE(..1),
@@ -78,47 +94,47 @@ subset_event_types <- function(data_source_events,
             # based on the region
             ..2,
             "Asia" = return(
-              data_source_dummy_time %>%
-                dplyr::mutate(
-                  bi = 1,
-                  fi = 0,
-                  fc = 0,
-                  ei = 0
-                )
+              dplyr::mutate(
+                .data = ..4,
+                bi = 1,
+                fi = 0,
+                fc = 0,
+                ei = 0
+              )
             ),
             "Europe" = return(
-              data_source_dummy_time %>%
-                dplyr::mutate(
-                  bi = 1,
-                  fi = 0,
-                  fc = 0,
-                  ec = 0
-                )
+              dplyr::mutate(
+                .data = ..4,
+                bi = 1,
+                fi = 0,
+                fc = 0,
+                ec = 0
+              )
             ),
             "North America" = return(
-              data_source_dummy_time %>%
-                dplyr::mutate(
-                  bi = 1,
-                  fc = 0,
-                  es = 0
-                )
+              dplyr::mutate(,
+                .data = ..4,
+                bi = 1,
+                fc = 0,
+                es = 0
+              )
             ),
             "Latin America" = return(
-              data_source_dummy_time %>%
-                dplyr::mutate(
-                  no_impact = 1,
-                  weak = 0,
-                  strong = 0
-                )
+              dplyr::mutate(
+                .data = ..4,
+                no_impact = 1,
+                weak = 0,
+                strong = 0
+              )
             ),
             "Oceania" = return(
-              data_source_dummy_time %>%
-                dplyr::mutate(
-                  no_impact = 1,
-                  weak = 0,
-                  medium = 0,
-                  strong = 0
-                )
+              dplyr::mutate(
+                .data = ..4,
+                no_impact = 1,
+                weak = 0,
+                medium = 0,
+                strong = 0
+              )
             ),
             return(NA)
           )
