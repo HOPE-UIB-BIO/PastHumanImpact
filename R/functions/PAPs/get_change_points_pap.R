@@ -1,11 +1,12 @@
 #' @title Estimate change points of input variables
 #' @description A function to get change points of all pap estimates
 #' using regression trees
+#' @data_source input data prepared for change point estimation
 #' @return New variables of change points in pollen assemblage properties
 #'
-get_change_points_pap <- function(data_combine_paps) {
+get_change_points_pap <- function(data_source) {
   data_diversity_cp <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::mutate(
       diversity_cp = purrr::map2(
         .x = PAP_diversity,
@@ -51,7 +52,7 @@ get_change_points_pap <- function(data_combine_paps) {
 
   # roc
   data_roc_cp <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::mutate(
       roc_cp = purrr::map(
         .x = PAP_roc,
@@ -73,7 +74,7 @@ get_change_points_pap <- function(data_combine_paps) {
 
   # turnover
   data_dcca_cp <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::mutate(
       dcca_cp = purrr::map2(
         .x = dcca_scores,
@@ -94,7 +95,7 @@ get_change_points_pap <- function(data_combine_paps) {
 
 
   data_change_points <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::select(
       dataset_id,
       mvrt_cp
