@@ -404,7 +404,7 @@ list(
   targets::tar_target(
     name = data_climate,
     command = get_climate_indices(
-      source = data_climate_chelsa,
+      data_source = data_climate_chelsa,
       time_ref = time_ref_table
     )
   ),
