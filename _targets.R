@@ -367,6 +367,15 @@ list(
       data_source_dist_vec = spd_distance_vec
     )
   ),
+  # - add SPD value for records without humans
+  targets::tar_target(
+    name = data_spd_full,
+    command = add_missing_spd_values(
+      data_source_spd = data_spd_best_dist,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time
+    )
+  ),
   # 5. Get CHELSA palaeoclimate -----
   # - a path to time reference table (from code)
   targets::tar_target(
@@ -493,7 +502,7 @@ list(
     name = data_roc_for_modelling,
     command = get_roc_for_modelling(data_roc)
   ),
-   # - estimate RoC on equal time slices
+  # - estimate RoC on equal time slices
   targets::tar_target(
     name = data_roc_temporal_spacing,
     command = get_per_timeslice(
