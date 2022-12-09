@@ -15,8 +15,22 @@
 
 run_hvarpart <- function(data_source,
                          permutations = 99,
-                         response_vars = NULL,
-                         predictor_vars = NULL,
+                         response_vars = c(
+                           "n0", "n1", "n2",
+                           "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+                           "roc",
+                           "dcca_axis_1"
+                         ),
+                         predictor_vars = list(
+                           human = c("spd"),
+                           climate = c(
+                             "temp_cold",
+                             "prec_summer",
+                             "prec_win",
+                             "gdm"
+                           ),
+                           time = c("age")
+                         ),
                          run_all_predictors = FALSE,
                          time_series = TRUE) {
   res <- data_source %>%
