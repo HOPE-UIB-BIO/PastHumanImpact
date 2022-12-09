@@ -49,6 +49,8 @@ get_density_pap <- function(data_source = check,
              age_min,
              age_max,
              dummy_table, ...) {
+      
+      
       if (
         is.null(data_source)
       ) {
@@ -57,7 +59,35 @@ get_density_pap <- function(data_source = check,
           dplyr::mutate(
             density = 0
           )
-      } else {
+      } else if(is.tibble(data_source)) {
+        
+        extract_data <- data_source %>% 
+          dplyr::filer(varname == varname) %>%
+          purrr::pluck(age)
+        
+        res <-
+          REcopol::get_density(
+            data_source = extract_data,
+            reflected = TRUE,
+            values_range = c(
+              age_min = age_min,
+              age_max = age_max
+            ),
+            bw = 1000 / max(dummy_table$age),
+            n = max(dummy_table$age), 
+            ...) %>%
+          dplyr::mutate(
+            age = round(var)
+          ) %>%
+          dplyr::filter(
+            age %in% dummy_table$age
+          ) %>%
+          dplyr::select(
+            age, density
+          )
+      }
+      return(res)
+      }  else {
         res <-
           REcopol::get_density(
             data_source = data_source,
