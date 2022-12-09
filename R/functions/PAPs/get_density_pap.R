@@ -1,14 +1,18 @@
 #' @title Get density of change points
-#' @description A function to get the temporal density of regression tree change points of pollen assemblage properties
+#' @description
+#' A function to get the temporal density of regression tree change points
+#' of pollen assemblage properties
 #' @param data_source the resulting data from the estimation of change points
 #' @param data_source_meta input is the data_meta to extract site information
-#' @param data_source_dummy_time is a table to create the time variables on even space output for the densities
+#' @param data_source_dummy_time
+#' is a table to create the time variables on even space
+#' output for the densities
 #' @param limit_length Logical. Should the variables be limited by max and min ages?
 #' @return Turn change points of pap variables into density variables
 #'
-get_density_pap <- function(data_source = check,
-                            data_source_meta = tar_read(data_meta),
-                            data_source_dummy_time = tar_read(data_dummy_time),
+get_density_pap <- function(data_soure_change_points,
+                            data_source_meta,
+                            data_source_dummy_time,
                             limit_length = TRUE) {
   if (
     isTRUE(limit_length)
