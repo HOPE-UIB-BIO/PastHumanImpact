@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
+  data_storage_path <- data_storage_path[1]
 }
 
 external_storage_targets <-
@@ -459,24 +459,19 @@ list(
   # - calculate change points of all PAP variables by regression trees (RT)
   targets::tar_target(
     name = data_change_points,
-    command = get_change_points(data_prepared_cp)
+    command = get_change_points_pap(data_prepared_cp)
   ),
   # - calculate density of change points
   targets::tar_target(
     name = data_density,
     command = get_density_pap(datasource = data_change_points,
                               meta_data_source = data_meta,
-                              dummy_table_source = ) 
+                              data_source_dummy_time = data_dummy_time)
   )
 )
 
 
 
 
-# DENSITY ESTIMATION:
-# EVEN SPACING; HGAM DENSITY COMBINED VARS
 
 
-# H1 targets
-# tar_target(data_h1, get_data_h1(data_meta, data_combined_paps, data_density, data_events, data_climate, data_spd))
-# tar_target(model_h1, run_model_h1(data_h1))
