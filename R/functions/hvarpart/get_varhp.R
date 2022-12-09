@@ -3,10 +3,10 @@
 #' hierarchical variation partitioning and permutation
 #' @param data_source full dataset with response and predictor variables
 #' @param run_all_predictors logical; if predictor variables should be assessed
-#' individually or as list of  data.frames
+#' individually or as list of data.frames
 #' @param permutations integers; numbers of permutations
 #' @param resp_vars vector of names of response variables
-#' @param pred_vars vector of names of predictor variables
+#' @param pred_vars vector of names of predictor variables or list with names
 #' @param ... see parameters of functions within
 #' @return List of model outputs and a summary table of the results
 
