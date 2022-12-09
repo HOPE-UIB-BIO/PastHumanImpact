@@ -90,7 +90,7 @@ get_density_pap <- function(data_soure_change_points,
   }
 
   data_cp_density <-
-    data_source_main[1:10, ] %>%
+    data_source_main %>%
     dplyr::mutate(
       mvrt_cp_density = purrr::pmap(
         .l = list(
