@@ -23,36 +23,37 @@ get_density_pap <- function(data_soure_change_points,
              varname = NULL,
              ...) {
       if (
-        is.null(data_source)
+        isTRUE(is.null(data_source))
       ) {
-        dummy_table %>%
+        res <-
+          dummy_table %>%
           dplyr::mutate(
             density = 0
+          )
+      } else {
+        res <-
+          REcopol::get_density(
+            data_source = data_source,
+            reflected = TRUE,
+            values_range = c(
+              age_min = age_min,
+              age_max = age_max
+            ),
+            bw = 1000 / max(dummy_table$age),
+            n = max(dummy_table$age),
+            ...
           ) %>%
-          return()
+          dplyr::mutate(
+            age = round(var)
+          ) %>%
+          dplyr::filter(
+            age %in% dummy_table$age
+          ) %>%
+          dplyr::select(
+            age, density
+          )
       }
-
-      REcopol::get_density(
-        data_source = data_source,
-        reflected = TRUE,
-        values_range = c(
-          age_min = age_min,
-          age_max = age_max
-        ),
-        bw = 1000 / max(dummy_table$age),
-        n = max(dummy_table$age),
-        ...
-      ) %>%
-        dplyr::mutate(
-          age = round(var)
-        ) %>%
-        dplyr::filter(
-          age %in% dummy_table$age
-        ) %>%
-        dplyr::select(
-          age, density
-        ) %>%
-        return()
+      return(res)
     }
 
   data_age_lim <-
@@ -89,7 +90,7 @@ get_density_pap <- function(data_soure_change_points,
   }
 
   data_cp_density <-
-    data_source_main %>%
+    data_source_main[1:10, ] %>%
     dplyr::mutate(
       mvrt_cp_density = purrr::pmap(
         .l = list(
@@ -106,11 +107,11 @@ get_density_pap <- function(data_soure_change_points,
         )
       ),
       roc_cp_density = purrr::pmap(
-        list(
+        .l = list(
           roc_cp,
           dummy_table,
           age_min,
-          age_max          
+          age_max
         ),
         .f = ~ get_density_subset(
           data_source = ..1,
@@ -120,7 +121,7 @@ get_density_pap <- function(data_soure_change_points,
         )
       ),
       roc_pp_density = purrr::pmap(
-        list(
+        .l = list(
           roc_pp,
           dummy_table,
           age_min,
@@ -134,7 +135,7 @@ get_density_pap <- function(data_soure_change_points,
         )
       ),
       dcca_cp_density = purrr::pmap(
-        list(
+        .l = list(
           dcca_cp,
           dummy_table,
           age_min,
@@ -146,67 +147,90 @@ get_density_pap <- function(data_soure_change_points,
           age_min = ..3,
           age_max = ..4
         )
-      )
-    )
-
-
-  test <- data_source_main %>%
-    mutate(
-      n0_density = purrr::pmap(
-        list(
-          dcca_cp,
-          data_source_dummy_time,
-          age_min,
-          age_max,
-          dummy_table
-        ),
-        .f = ~ get_density_subset(
-          data_source = ..1,
-          data_source_dummy_time = ..2,
-          age_min = ..3,
-          age_max = ..4,
-          dummy_table = ..5,
-          varname = "n0"
-        )
       ),
-      n1_density = purrr::map(
-        .x = diversity_cp,
-        .f = ~ .x %>%
+      n0_density = purrr::pmap(
+        .l = list(
+          diversity_cp,
+          dummy_table,
+          age_min,
+          age_max
+        ),
+        .f = ~ ..1 %>%
+          dplyr::filter(var_name == "n0") %>%
+          purrr::pluck("age") %>%
+          get_density_subset(
+            data_source = .,
+            dummy_table = ..2,
+            age_min = ..3,
+            age_max = ..4
+          )
+      ),
+      n1_density = purrr::pmap(
+        .l = list(
+          diversity_cp,
+          dummy_table,
+          age_min,
+          age_max
+        ),
+        .f = ~ ..1 %>%
           dplyr::filter(var_name == "n1") %>%
           purrr::pluck("age") %>%
           get_density_subset(
             data_source = .,
-            age_table = age_table
+            dummy_table = ..2,
+            age_min = ..3,
+            age_max = ..4
           )
       ),
-      n2_density = purrr::map(
-        .x = diversity_cp,
-        .f = ~ .x %>%
+      n2_density = purrr::pmap(
+        .l = list(
+          diversity_cp,
+          dummy_table,
+          age_min,
+          age_max
+        ),
+        .f = ~ ..1 %>%
           dplyr::filter(var_name == "n2") %>%
           purrr::pluck("age") %>%
           get_density_subset(
             data_source = .,
-            age_table = age_table
+            dummy_table = ..2,
+            age_min = ..3,
+            age_max = ..4
           )
       ),
-      n1_divided_by_n0_density = purrr::map(
-        .x = diversity_cp,
-        .f = ~ .x %>%
+      n1_divided_by_n0_density = purrr::pmap(
+        .l = list(
+          diversity_cp,
+          dummy_table,
+          age_min,
+          age_max
+        ),
+        .f = ~ ..1 %>%
           dplyr::filter(var_name == "n1_divided_by_n0") %>%
           purrr::pluck("age") %>%
           get_density_subset(
             data_source = .,
-            age_table = age_table
+            dummy_table = ..2,
+            age_min = ..3,
+            age_max = ..4
           )
       ),
-      n2_divided_by_n1_density = purrr::map(
-        .x = diversity_cp,
-        .f = ~ .x %>%
+      n2_divided_by_n1_density = purrr::pmap(
+        .l = list(
+          diversity_cp,
+          dummy_table,
+          age_min,
+          age_max
+        ),
+        .f = ~ ..1 %>%
           dplyr::filter(var_name == "n2_divided_by_n1") %>%
           purrr::pluck("age") %>%
           get_density_subset(
             data_source = .,
-            age_table = age_table
+            dummy_table = ..2,
+            age_min = ..3,
+            age_max = ..4
           )
       )
     )
@@ -218,16 +242,17 @@ get_density_pap <- function(data_soure_change_points,
         .l = list(
           mvrt_cp_density, # ..1
           roc_cp_density, # ..2
-          roc_pp_denisty, # ..3
+          roc_pp_density, # ..3
           dcca_cp_density, # ..4
           n0_density, # ..5
           n1_density, # ..6
           n2_density, # ..7
           n1_divided_by_n0_density, # ..8
-          n2_divided_by_n1_density # ..9
+          n2_divided_by_n1_density, # ..9
+          dummy_table # ..10
         ),
-        .f = ~ age_table %>%
-          dplyr::left_join(
+        .f = ~ ..10 %>%
+          dplyr::full_join(
             ..1 %>%
               dplyr::select(
                 age,
@@ -235,7 +260,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..2 %>%
               dplyr::select(
                 age,
@@ -243,7 +268,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..4 %>%
               dplyr::select(
                 age,
@@ -251,7 +276,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..4 %>%
               dplyr::select(
                 age,
@@ -259,7 +284,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..5 %>%
               dplyr::select(
                 age,
@@ -267,7 +292,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..6 %>%
               dplyr::select(
                 age,
@@ -275,7 +300,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..7 %>%
               dplyr::select(
                 age,
@@ -283,7 +308,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..8 %>%
               dplyr::select(
                 age,
@@ -291,7 +316,7 @@ get_density_pap <- function(data_soure_change_points,
               ),
             by = "age"
           ) %>%
-          dplyr::left_join(
+          dplyr::full_join(
             ..9 %>%
               dplyr::select(
                 age,
@@ -302,5 +327,7 @@ get_density_pap <- function(data_soure_change_points,
       )
     )
 
-  return(data_cp_density_merge)
+  data_cp_density_merge %>%
+    dplyr::select(dataset_id, pap_density) %>%
+    return()
 }
