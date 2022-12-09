@@ -20,7 +20,6 @@ get_density_pap <- function(data_soure_change_points,
              dummy_table,
              age_min,
              age_max,
-             varname = NULL,
              ...) {
       if (
         isTRUE(is.null(data_source))
