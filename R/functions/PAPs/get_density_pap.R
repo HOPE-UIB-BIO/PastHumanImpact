@@ -1,18 +1,15 @@
-#' @title Get density of change points 
+#' @title Get density of change points
 #' @description A function to get the temporal density of regression tree change points of pollen assemblage properties
 #' @param data_source the resulting data from the estimation of change points
 #' @param data_source_meta input is the data_meta to extract site information
 #' @param data_source_dummy_time is a table to create the time variables on even space output for the densities
 #' @param limit_length Logical. Should the variables be limited by max and min ages?
 #' @return Turn change points of pap variables into density variables
-#' 
+#'
 get_density_pap <- function(data_source = check,
                             data_source_meta = tar_read(data_meta),
                             data_source_dummy_time = tar_read(data_dummy_time),
                             limit_length = TRUE) {
-  
-  
-  
   if (
     isTRUE(limit_length)
   ) {
@@ -39,20 +36,18 @@ get_density_pap <- function(data_source = check,
               age >= ..2 & age <= ..3
             )
         )
-      ) 
-    }
-  
+      )
+  }
+
   # helper function
   get_density_subset <-
     function(data_source,
              data_source_dummy_time,
              age_min,
              age_max,
-             dummy_table, 
+             dummy_table,
              varname = NULL,
              ...) {
-      
-      
       if (
         is.null(data_source)
       ) {
@@ -61,12 +56,11 @@ get_density_pap <- function(data_source = check,
           dplyr::mutate(
             density = 0
           )
-      } else if(is_tibble(data_source)) {
-        
-        extract_data <- data_source %>% 
+      } else if (is_tibble(data_source)) {
+        extract_data <- data_source %>%
           dplyr::filer(varname == varname) %>%
           purrr::pluck(age)
-        
+
         res <-
           REcopol::get_density(
             data_source = extract_data,
@@ -76,8 +70,9 @@ get_density_pap <- function(data_source = check,
               age_max = age_max
             ),
             bw = 1000 / max(dummy_table$age),
-            n = max(dummy_table$age), 
-            ...) %>%
+            n = max(dummy_table$age),
+            ...
+          ) %>%
           dplyr::mutate(
             age = round(var)
           ) %>%
@@ -87,8 +82,7 @@ get_density_pap <- function(data_source = check,
           dplyr::select(
             age, density
           )
-    
-      }  else {
+      } else {
         res <-
           REcopol::get_density(
             data_source = data_source,
@@ -96,10 +90,11 @@ get_density_pap <- function(data_source = check,
             values_range = c(
               age_min = age_min,
               age_max = age_max
-              ),
+            ),
             bw = 1000 / max(dummy_table$age),
-            n = max(dummy_table$age), 
-            ...) %>%
+            n = max(dummy_table$age),
+            ...
+          ) %>%
           dplyr::mutate(
             age = round(var)
           ) %>%
@@ -112,8 +107,8 @@ get_density_pap <- function(data_source = check,
       }
       return(res)
     }
-  
-  
+
+
   # res <-
   #   REcopol::get_density(
   #     data_source = data_source$mvrt_cp[[1]],
@@ -134,30 +129,35 @@ get_density_pap <- function(data_source = check,
   #   dplyr::select(
   #     age, density
   #   )
-  
-  
+
+
   data_cp_density <-
     data_source_main %>%
-    dplyr::mutate(mvrt_cp_density = purrr::pmap(
-      list(mvrt_cp, 
-           data_source_dummy_time, 
-           age_min,
-           age_max, 
-           dummy_table),
-      .f = ~ get_density_subset(
-        data_source = ..1,
-        data_source_dummy_time = ..2,
-        age_min = ..3,
-        age_max = ..4,
-        dummy_table = ..5
+    dplyr::mutate(
+      mvrt_cp_density = purrr::pmap(
+        list(
+          mvrt_cp,
+          data_source_dummy_time,
+          age_min,
+          age_max,
+          dummy_table
+        ),
+        .f = ~ get_density_subset(
+          data_source = ..1,
+          data_source_dummy_time = ..2,
+          age_min = ..3,
+          age_max = ..4,
+          dummy_table = ..5
         )
       ),
       roc_cp_density = purrr::pmap(
-        list(roc_cp, 
-             data_source_dummy_time, 
-             age_min,
-             age_max, 
-             dummy_table), 
+        list(
+          roc_cp,
+          data_source_dummy_time,
+          age_min,
+          age_max,
+          dummy_table
+        ),
         .f = ~ get_density_subset(
           data_source = ..1,
           data_source_dummy_time = ..2,
@@ -167,11 +167,13 @@ get_density_pap <- function(data_source = check,
         )
       ),
       roc_pp_density = purrr::pmap(
-        list(roc_pp, 
-             data_source_dummy_time, 
-             age_min,
-             age_max, 
-             dummy_table), 
+        list(
+          roc_pp,
+          data_source_dummy_time,
+          age_min,
+          age_max,
+          dummy_table
+        ),
         .f = ~ get_density_subset(
           data_source = ..1,
           data_source_dummy_time = ..2,
@@ -181,11 +183,13 @@ get_density_pap <- function(data_source = check,
         )
       ),
       dcca_cp_density = purrr::pmap(
-        list(dcca_cp, 
-             data_source_dummy_time, 
-             age_min,
-             age_max, 
-             dummy_table), 
+        list(
+          dcca_cp,
+          data_source_dummy_time,
+          age_min,
+          age_max,
+          dummy_table
+        ),
         .f = ~ get_density_subset(
           data_source = ..1,
           data_source_dummy_time = ..2,
@@ -194,29 +198,28 @@ get_density_pap <- function(data_source = check,
           dummy_table = ..5
         )
       )
-      )
-  
-  
-   test <- data_source_main %>%
-     mutate(n0_density = purrr::pmap(
-       list(dcca_cp, 
-            data_source_dummy_time, 
-            age_min,
-            age_max, 
-            dummy_table), 
-       .f = ~ get_density_subset(
-         data_source = ..1,
-         data_source_dummy_time = ..2,
-         age_min = ..3,
-         age_max = ..4,
-         dummy_table = ..5,
-         varname = "n0"
-       )
-     )
-     )
-   
-   
-   
+    )
+
+
+  test <- data_source_main %>%
+    mutate(
+      n0_density = purrr::pmap(
+        list(
+          dcca_cp,
+          data_source_dummy_time,
+          age_min,
+          age_max,
+          dummy_table
+        ),
+        .f = ~ get_density_subset(
+          data_source = ..1,
+          data_source_dummy_time = ..2,
+          age_min = ..3,
+          age_max = ..4,
+          dummy_table = ..5,
+          varname = "n0"
+        )
+      ),
       n1_density = purrr::map(
         .x = diversity_cp,
         .f = ~ .x %>%
@@ -258,7 +261,7 @@ get_density_pap <- function(data_source = check,
           )
       )
     )
-  
+
   data_cp_density_merge <-
     data_cp_density %>%
     dplyr::mutate(
@@ -349,6 +352,6 @@ get_density_pap <- function(data_source = check,
           )
       )
     )
-  
+
   return(data_cp_density_merge)
 }

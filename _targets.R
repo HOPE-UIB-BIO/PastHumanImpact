@@ -464,14 +464,10 @@ list(
   # - calculate density of change points
   targets::tar_target(
     name = data_density,
-    command = get_density_pap(datasource = data_change_points,
-                              meta_data_source = data_meta,
-                              data_source_dummy_time = data_dummy_time)
+    command = get_density_pap(
+      datasource = data_change_points,
+      meta_data_source = data_meta,
+      data_source_dummy_time = data_dummy_time
+    )
   )
 )
-
-
-
-
-
-
