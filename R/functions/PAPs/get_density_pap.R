@@ -6,7 +6,7 @@
 #' @param limit_length Logical. Should the variables be limited by max and min ages?
 #' @return Turn change points of pap variables into density variables
 #' 
-get_density_pap <- function(data_source = data_cp,
+get_density_pap <- function(data_source = check,
                             data_source_meta = tar_read(data_meta),
                             data_source_dummy_time = tar_read(data_dummy_time),
                             limit_length = TRUE) {
@@ -83,26 +83,26 @@ get_density_pap <- function(data_source = data_cp,
     }
   
   
-  res <-
-    REcopol::get_density(
-      data_source = data_source$mvrt_cp[[1]],
-      reflected = TRUE,
-      values_range = c(
-        data_source$age_min[1],
-        data_source$age_max[1]
-      ),
-      bw = 1000 / max(data_source$dummy_table[[1]]$age),
-      n = max(data_source$dummy_table[[1]]$age)
-    ) %>%
-    dplyr::mutate(
-      age = round(var)
-    ) %>%
-    dplyr::filter(
-      age %in% data_source$dummy_table[[1]]$age
-    ) %>%
-    dplyr::select(
-      age, density
-    )
+  # res <-
+  #   REcopol::get_density(
+  #     data_source = data_source$mvrt_cp[[1]],
+  #     reflected = TRUE,
+  #     values_range = c(
+  #       data_source$age_min[1],
+  #       data_source$age_max[1]
+  #     ),
+  #     bw = 1000 / max(data_source$dummy_table[[1]]$age),
+  #     n = max(data_source$dummy_table[[1]]$age)
+  #   ) %>%
+  #   dplyr::mutate(
+  #     age = round(var)
+  #   ) %>%
+  #   dplyr::filter(
+  #     age %in% data_source$dummy_table[[1]]$age
+  #   ) %>%
+  #   dplyr::select(
+  #     age, density
+  #   )
   
   
   data_cp_density <-
@@ -162,25 +162,43 @@ get_density_pap <- function(data_source = data_cp,
           age_max = ..4,
           dummy_table = ..5
         )
-      ),
-      n0_density = purrr::map(
-        .x = diversity_cp,
-        .f = ~ .x %>%
-          dplyr::filter(var_name == "n0") %>%
-          purrr::pluck("age") %>% purrr::pmap(
-            list(., 
+      )
+      )
+  
+  
+   test <- data_source_main %>%
+     mutate(n0_density = purrr::pmap(
+            list(diversity_cp, 
                  data_source_dummy_time, 
                  age_min,
                  age_max, 
-                 dummy_table), 
-            .f = ~ get_density_subset(
-              data_source = ..1,
-              data_source_dummy_time = ..2,
-              age_min = ..3,
-              age_max = ..4,
-              dummy_table = ..5
+                 dummy_table
+                 ), 
+            .f = function(diversity_cp = ..1, 
+                            data_source_dummy_time = ..2,
+                            age_min = ..3,
+                            age_max = ..4, 
+                            dummy_table = ..5, 
+                            varname = "n0") {  
+              
+              var_cp <- diveristy_cp %>%
+                dplyr::filter(var_name == var_name) %>%
+                purrr::pluck("age")
+              
+              cp <- get_density_subset(
+              data_source = var_cp,
+              data_source_dummy_time = data_source_dummy_time,
+              age_min = age_min,
+              age_max = age_max,
+              dummy_table = dummy_table
             )
-          ),
+              return(cp)
+              }
+          )
+        )
+   
+   
+   
       n1_density = purrr::map(
         .x = diversity_cp,
         .f = ~ .x %>%
