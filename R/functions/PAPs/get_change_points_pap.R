@@ -52,7 +52,7 @@ get_change_points_pap <- function(data_source) {
 
   # roc
   data_roc_cp <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::mutate(
       roc_cp = purrr::map(
         .x = PAP_roc,
@@ -74,7 +74,7 @@ get_change_points_pap <- function(data_source) {
 
   # turnover
   data_dcca_cp <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::mutate(
       dcca_cp = purrr::map2(
         .x = dcca_scores,
@@ -95,7 +95,7 @@ get_change_points_pap <- function(data_source) {
 
 
   data_change_points <-
-    data_combine_paps %>%
+    data_source %>%
     dplyr::select(
       dataset_id,
       mvrt_cp
