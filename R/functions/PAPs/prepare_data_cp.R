@@ -3,7 +3,7 @@
 #' @description Combining the data of the different pollen assemblage properties
 #' @return A new data set of the relevant PAP estimations
 #'
-combine_pap <- function(data_pollen,
+prepare_data_cp <- function(data_pollen,
                         data_diversity,
                         data_mrt,
                         data_roc,
@@ -29,7 +29,7 @@ combine_pap <- function(data_pollen,
         return()
     }
 
-  data_combine_paps <-
+  data_for_cp <-
     data_levels %>%
     dplyr::inner_join(
       data_diversity,
@@ -92,5 +92,5 @@ combine_pap <- function(data_pollen,
     dplyr::select(-valid_sample_id)
 
 
-  return(data_combine_paps)
+  return(data_for_cp)
 }
