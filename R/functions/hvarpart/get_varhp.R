@@ -5,21 +5,22 @@
 #' @param run_all_predictors logical; if predictor variables should be assessed
 #' individually or as list of data.frames
 #' @param permutations integers; numbers of permutations
-#' @param resp_vars vector of names of response variables
-#' @param pred_vars vector of names of predictor variables or list with names
+#' @param reponse_vars vector of names of response variables
+#' @param predictor_vars vector of names of predictor variables or list with names
+#' @param time_series logical; Should permutation be used for ordered?
 #' @param ... see parameters of functions within
 #' @return List of model outputs and a summary table of the results
 
 get_varhp <- function(data_source,
                       run_all_predictors = FALSE,
                       permutations = 99,
-                      resp_vars = c(
+                      reponse_vars = c(
                         "n0", "n1", "n2",
                         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
                         "roc",
                         "dcca_axis_1"
                       ),
-                      pred_vars = list(
+                      predictor_vars = list(
                         human = c("spd"),
                         climate = c(
                           "temp_cold",
@@ -29,24 +30,25 @@ get_varhp <- function(data_source,
                         ),
                         time = c("age")
                       ),
+                      time_series = TRUE,
                       ...) {
   # prepare responses
   data_resp <-
     data_source %>%
-    dplyr::select(all_of(resp_vars))
+    dplyr::select(all_of(reponse_vars))
 
   # prepare predictors
   # if `run_all_predictors` is true then use all variables individually
   if (
     isTRUE(run_all_predictors)
   ) {
-    pred_vars <-
-      unlist(pred_vars) %>%
+    predictor_vars <-
+      unlist(predictor_vars) %>%
       rlang::set_names(nm = NULL)
 
     data_preds <-
       data_source %>%
-      dplyr::select(dplyr::all_of(pred_vars)) %>%
+      dplyr::select(dplyr::all_of(predictor_vars)) %>%
       # note have to remove empty vars for individual sites or the model
       #  will fail, need to take this into account later (for discussion
       #   - empty vars = different things)
@@ -54,13 +56,13 @@ get_varhp <- function(data_source,
 
     output_table_dummy <-
       tibble::tibble(
-        predictor = pred_vars
+        predictor = predictor_vars
       )
   } else {
     data_preds <-
-      pred_vars %>%
+      predictor_vars %>%
       purrr::map(
-        .x = pred_vars,
+        .x = predictor_vars,
         .f = ~ data_source %>%
           dplyr::select(dplyr::all_of(.x)) %>%
           # note have to remove empty vars for individual sites or the model
@@ -71,7 +73,7 @@ get_varhp <- function(data_source,
 
     output_table_dummy <-
       tibble::tibble(
-        predictor = names(pred_vars)
+        predictor = names(predictor_vars)
       )
   }
 
@@ -98,7 +100,7 @@ get_varhp <- function(data_source,
       add = TRUE,
       type = "adjR2",
       permutations = permutations,
-      series = TRUE,
+      series = time_series,
       verbose = TRUE,
       ...
     )
