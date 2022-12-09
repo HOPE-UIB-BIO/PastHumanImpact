@@ -14,24 +14,69 @@ get_density_pap <- function(data_soure_change_points,
                             data_source_meta,
                             data_source_dummy_time,
                             limit_length = TRUE) {
+  # helper function
+  get_density_subset <-
+    function(data_source,
+             dummy_table,
+             age_min,
+             age_max,
+             varname = NULL,
+             ...) {
+      if (
+        is.null(data_source)
+      ) {
+        dummy_table %>%
+          dplyr::mutate(
+            density = 0
+          ) %>%
+          return()
+      }
+
+      REcopol::get_density(
+        data_source = data_source,
+        reflected = TRUE,
+        values_range = c(
+          age_min = age_min,
+          age_max = age_max
+        ),
+        bw = 1000 / max(dummy_table$age),
+        n = max(dummy_table$age),
+        ...
+      ) %>%
+        dplyr::mutate(
+          age = round(var)
+        ) %>%
+        dplyr::filter(
+          age %in% dummy_table$age
+        ) %>%
+        dplyr::select(
+          age, density
+        ) %>%
+        return()
+    }
+
+  data_age_lim <-
+    data_source_meta %>%
+    dplyr::select(
+      dataset_id, age_min, age_max
+    ) %>%
+    # add dummy table
+    dplyr::mutate(
+      dummy_table = list(data_source_dummy_time)
+    )
+
+  data_source_main <-
+    data_soure_change_points %>%
+    dplyr::left_join(
+      data_age_lim,
+      by = "dataset_id"
+    )
+
   if (
     isTRUE(limit_length)
   ) {
-    data_age_lim <-
-      data_source_meta %>%
-      dplyr::select(
-        dataset_id, age_min, age_max
-      ) %>%
-      dplyr::mutate(
-        dummy_table = list(data_source_dummy_time)
-      )
-    # add dummy table
     data_source_main <-
-      data_source %>%
-      dplyr::left_join(
-        data_age_lim,
-        by = "dataset_id"
-      ) %>%
+      data_source_main %>%
       dplyr::mutate(
         dummy_table = purrr::pmap(
           .l = list(dummy_table, age_min, age_max),
@@ -43,163 +88,63 @@ get_density_pap <- function(data_soure_change_points,
       )
   }
 
-  # helper function
-  get_density_subset <-
-    function(data_source,
-             data_source_dummy_time,
-             age_min,
-             age_max,
-             dummy_table,
-             varname = NULL,
-             ...) {
-      if (
-        is.null(data_source)
-      ) {
-        res <-
-          data_source_dummy_time %>%
-          dplyr::mutate(
-            density = 0
-          )
-      } else if (is_tibble(data_source)) {
-        extract_data <- data_source %>%
-          dplyr::filer(varname == varname) %>%
-          purrr::pluck(age)
-
-        res <-
-          REcopol::get_density(
-            data_source = extract_data,
-            reflected = TRUE,
-            values_range = c(
-              age_min = age_min,
-              age_max = age_max
-            ),
-            bw = 1000 / max(dummy_table$age),
-            n = max(dummy_table$age),
-            ...
-          ) %>%
-          dplyr::mutate(
-            age = round(var)
-          ) %>%
-          dplyr::filter(
-            age %in% dummy_table$age
-          ) %>%
-          dplyr::select(
-            age, density
-          )
-      } else {
-        res <-
-          REcopol::get_density(
-            data_source = data_source,
-            reflected = TRUE,
-            values_range = c(
-              age_min = age_min,
-              age_max = age_max
-            ),
-            bw = 1000 / max(dummy_table$age),
-            n = max(dummy_table$age),
-            ...
-          ) %>%
-          dplyr::mutate(
-            age = round(var)
-          ) %>%
-          dplyr::filter(
-            age %in% dummy_table$age
-          ) %>%
-          dplyr::select(
-            age, density
-          )
-      }
-      return(res)
-    }
-
-
-  # res <-
-  #   REcopol::get_density(
-  #     data_source = data_source$mvrt_cp[[1]],
-  #     reflected = TRUE,
-  #     values_range = c(
-  #       data_source$age_min[1],
-  #       data_source$age_max[1]
-  #     ),
-  #     bw = 1000 / max(data_source$dummy_table[[1]]$age),
-  #     n = max(data_source$dummy_table[[1]]$age)
-  #   ) %>%
-  #   dplyr::mutate(
-  #     age = round(var)
-  #   ) %>%
-  #   dplyr::filter(
-  #     age %in% data_source$dummy_table[[1]]$age
-  #   ) %>%
-  #   dplyr::select(
-  #     age, density
-  #   )
-
-
   data_cp_density <-
     data_source_main %>%
     dplyr::mutate(
       mvrt_cp_density = purrr::pmap(
-        list(
+        .l = list(
           mvrt_cp,
-          data_source_dummy_time,
+          dummy_table,
           age_min,
-          age_max,
-          dummy_table
+          age_max
         ),
         .f = ~ get_density_subset(
           data_source = ..1,
-          data_source_dummy_time = ..2,
+          dummy_table = ..2,
           age_min = ..3,
-          age_max = ..4,
-          dummy_table = ..5
+          age_max = ..4
         )
       ),
       roc_cp_density = purrr::pmap(
         list(
           roc_cp,
-          data_source_dummy_time,
+          dummy_table,
           age_min,
-          age_max,
-          dummy_table
+          age_max          
         ),
         .f = ~ get_density_subset(
           data_source = ..1,
-          data_source_dummy_time = ..2,
+          dummy_table = ..2,
           age_min = ..3,
-          age_max = ..4,
-          dummy_table = ..5
+          age_max = ..4
         )
       ),
       roc_pp_density = purrr::pmap(
         list(
           roc_pp,
-          data_source_dummy_time,
+          dummy_table,
           age_min,
-          age_max,
-          dummy_table
+          age_max
         ),
         .f = ~ get_density_subset(
           data_source = ..1,
-          data_source_dummy_time = ..2,
+          dummy_table = ..2,
           age_min = ..3,
-          age_max = ..4,
-          dummy_table = ..5
+          age_max = ..4
         )
       ),
       dcca_cp_density = purrr::pmap(
         list(
           dcca_cp,
-          data_source_dummy_time,
+          dummy_table,
           age_min,
-          age_max,
-          dummy_table
+          age_max
         ),
         .f = ~ get_density_subset(
           data_source = ..1,
-          data_source_dummy_time = ..2,
+          dummy_table = ..2,
           age_min = ..3,
-          age_max = ..4,
-          dummy_table = ..5
+          age_max = ..4
         )
       )
     )
