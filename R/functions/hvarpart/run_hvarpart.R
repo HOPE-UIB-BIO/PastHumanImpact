@@ -33,17 +33,21 @@ run_hvarpart <- function(data_source,
                          ),
                          run_all_predictors = FALSE,
                          time_series = TRUE) {
-  res <- data_source %>%
-    mutate(varhp = purrr::map(
-      data_merge,
-      ~ get_varhp(.,
-        permutations = permutations,
-        response_vars = response_vars,
-        predictor_vars = predictor_vars,
-        run_all_predictors = run_all_predictors,
-        time_series = time_series
+  res <-
+    data_source %>%
+    dplyr::mutate(
+      varhp = purrr::map(
+        .x = data_merge,
+        .f = ~ get_varhp(
+          data_source = .x,
+          permutations = permutations,
+          response_vars = response_vars,
+          predictor_vars = predictor_vars,
+          run_all_predictors = run_all_predictors,
+          time_series = time_series
+        )
       )
-    ))
+    )
 
   return(res)
 }
