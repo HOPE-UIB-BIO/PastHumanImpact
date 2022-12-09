@@ -61,7 +61,7 @@ get_density_pap <- function(data_source = check,
           dplyr::mutate(
             density = 0
           )
-      } else if(is.tibble(data_source)) {
+      } else if(is_tibble(data_source)) {
         
         extract_data <- data_source %>% 
           dplyr::filer(varname == varname) %>%
@@ -199,34 +199,21 @@ get_density_pap <- function(data_source = check,
   
    test <- data_source_main %>%
      mutate(n0_density = purrr::pmap(
-            list(diversity_cp, 
-                 data_source_dummy_time, 
-                 age_min,
-                 age_max, 
-                 dummy_table
-                 ), 
-            .f = function(diversity_cp = ..1, 
-                            data_source_dummy_time = ..2,
-                            age_min = ..3,
-                            age_max = ..4, 
-                            dummy_table = ..5, 
-                            varname = "n0") {  
-              
-              var_cp <- diveristy_cp %>%
-                dplyr::filter(var_name == var_name) %>%
-                purrr::pluck("age")
-              
-              cp <- get_density_subset(
-              data_source = var_cp,
-              data_source_dummy_time = data_source_dummy_time,
-              age_min = age_min,
-              age_max = age_max,
-              dummy_table = dummy_table
-            )
-              return(cp)
-              }
-          )
-        )
+       list(dcca_cp, 
+            data_source_dummy_time, 
+            age_min,
+            age_max, 
+            dummy_table), 
+       .f = ~ get_density_subset(
+         data_source = ..1,
+         data_source_dummy_time = ..2,
+         age_min = ..3,
+         age_max = ..4,
+         dummy_table = ..5,
+         varname = "n0"
+       )
+     )
+     )
    
    
    
