@@ -89,6 +89,7 @@ get_density_pap <- function(data_source = check,
           )
       }
       return(res)
+    }
       }  else {
         res <-
           REcopol::get_density(
