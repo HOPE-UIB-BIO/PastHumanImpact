@@ -56,7 +56,8 @@ select_best_spd <- function(data_source_events,
       return()
   }
 
-  fit_ordination <- function(data_source, dist_vec) {
+  fit_ordination <- function(data_source,
+                             dist_vec) {
     sel_data <- data_source
 
     data_events <-
@@ -218,7 +219,10 @@ select_best_spd <- function(data_source_events,
     data_source_meta %>%
     dplyr::select(dataset_id, region) %>%
     dplyr::inner_join(
-      data_source_spd,
+      data_source_spd %>%
+        dplyr::rename(
+          spd = data
+        ),
       by = "dataset_id"
     ) %>%
     # filter out sites with known distance
