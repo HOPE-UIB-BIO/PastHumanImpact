@@ -326,7 +326,22 @@ get_density_pap <- function(data_soure_change_points,
       )
     )
 
+  # subset data and rescale to 1
   data_cp_density_merge %>%
     dplyr::select(dataset_id, pap_density) %>%
+    dplyr::mutate(
+      # rescale to 1
+      pap_density_rescale = purrr::map(
+        .x = pap_density,
+        .f = ~ .x %>%
+          dplyr::mutate(
+            dplyr::across(
+              .cols = -age,
+              .fns = ~ scales::rescale(.x, to = c(0, 1))
+            )
+          ) %>%
+          return()
+      )
+    )  %>% 
     return()
 }
