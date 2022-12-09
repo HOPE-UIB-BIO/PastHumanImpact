@@ -10,6 +10,7 @@
 #' @param nperm integer; number of permutation for adj R squared using CCA
 #' method
 #' @param permutations integer; number of permutation for randomised datasets
+#' @param verbose Logical; Should progress be output?
 #' @return provide p-values of varpart
 
 perm_hvarpart <- function(dv,
@@ -17,46 +18,92 @@ perm_hvarpart <- function(dv,
                           method = c("RDA", "dbRDA", "CCA"),
                           type = c("adjR2", "R2"),
                           scale = FALSE,
-                          add = FALSE, sqrt.dist = FALSE,
+                          add = FALSE,
+                          sqrt.dist = FALSE,
                           n.perm = 1000,
                           permutations = 1000,
-                          series = TRUE) {
-  obs <- rdacca.hp(dv, iv,
-    method = method, type = type, scale = scale,
-    add = add, sqrt.dist = sqrt.dist, n.perm = n.perm
-  )
+                          series = TRUE,
+                          verbose = FALSE) {
+  obs <-
+    rdacca.hp::rdacca.hp(
+      dv = dv,
+      iv = iv,
+      method = method,
+      type = type,
+      scale = scale,
+      add = add,
+      sqrt.dist = sqrt.dist,
+      n.perm = n.perm
+    )
 
-  r2q <- obs$Hier.part[, 3]
+  # helper function
+  get_r2q <- function(data_source) {
+    data_source %>%
+      purrr::pluck("Hier.part") %>%
+      as.data.frame() %>%
+      purrr::pluck("Individual") %>%
+      return()
+  }
 
-  if (series == TRUE & is.data.frame(iv)) {
-    n <- dim(iv)[1]
-    nvar <- dim(iv)[2]
+  r2q <-
+    get_r2q(obs)
+
+  if (
+    isTRUE(series) && is.data.frame(iv)
+  ) {
+    n <- nrow(iv)
+    nvar <- ncol(iv)
 
     # permute design for time series
-    ctrl <- permute::how(within = Within(type = "series", mirror = TRUE))
-    perms <- allPerms(seq_len(n), control = ctrl)
+    ctrl <-
+      permute::how(
+        within = permute::Within(type = "series", mirror = TRUE)
+      )
+    perms <-
+      permute::allPerms(seq_len(n), control = ctrl)
+
     permutations <- ncol(perms)
 
     cat("\nPlease wait: running", permutations, "permutations \n")
 
     for (i in 1:permutations) {
+      if (
+        isTRUE(verbose)
+      ) {
+        message(i)
+      }
+
       newiv <- iv
       for (j in 1:nvar) {
         newiv[, j] <- iv[perms[i, ], j]
       }
 
-      simu <- rdacca.hp(dv, newiv,
-        method = method, type = type,
-        scale = scale, add = add, sqrt.dist = sqrt.dist,
-        n.perm = n.perm
-      )
+      simu <-
+        rdacca.hp::rdacca.hp(
+          dv = dv,
+          iv = newiv,
+          method = method,
+          type = type,
+          scale = scale,
+          add = add,
+          sqrt.dist = sqrt.dist,
+          n.perm = n.perm
+        )
 
-      r2q <- cbind(r2q, simu$Hier.part[, 3])
+      r2q <- cbind(r2q, get_r2q(simu))
     }
-  } else if (series == FALSE & is.data.frame(iv)) {
+  } else if (
+    isFALSE(series) && is.data.frame(iv)
+  ) {
     cat("\nPlease wait: running", permutations - 1, "permutations \n")
 
     for (i in 1:permutations - 1) {
+      if (
+        isTRUE(verbose)
+      ) {
+        message(i)
+      }
+
       newiv <- iv
       for (j in 1:nvar) {
         perms <- sample(1:n, n)
@@ -64,44 +111,77 @@ perm_hvarpart <- function(dv,
       }
 
       row.names(newiv) <- 1:n
-      simu <- rdacca.hp(dv, newiv,
-        method = method, type = type,
-        scale = scale, add = add, sqrt.dist = sqrt.dist,
-        n.perm = n.perm
-      )
-      r2q <- cbind(r2q, simu$Hier.part[, 3])
+
+      simu <-
+        rdacca.hp::rdacca.hp(
+          dv = dv,
+          iv = newiv,
+          method = method,
+          type = type,
+          scale = scale,
+          add = add,
+          sqrt.dist = sqrt.dist,
+          n.perm = n.perm
+        )
+
+      r2q <- cbind(r2q, get_r2q(simu))
     }
-  } else if (series == TRUE & !is.data.frame(iv)) {
-    n <- dim(iv[[1]])[1]
+  } else if (
+    isTRUE(series) && isFALSE(is.data.frame(iv))
+  ) {
+    n <- nrow(iv[[1]])
     nvar <- length(iv)
 
-    ctrl <- permute::how(within = Within(type = "series", mirror = TRUE))
-    perms <- allPerms(seq_len(n), control = ctrl)
+    ctrl <-
+      permute::how(
+        within = permute::Within(type = "series", mirror = TRUE)
+      )
+
+    perms <-
+      permute::allPerms(seq_len(n), control = ctrl)
+
     permutations <- ncol(perms)
 
     cat("\nPlease wait: running", permutations, "permutations \n")
 
     for (i in 1:permutations) {
+      if (
+        isTRUE(verbose)
+      ) {
+        message(i)
+      }
+
       newiv <- list()
       for (j in 1:nvar) {
-        newiv[[j]] <- iv[perms[i, ], ]
+        newiv[[j]] <- iv[[j]][perms[i, ], ]
       }
 
       names(newiv) <- names(iv)
-      simu <- rdacca.hp(dv, newiv,
-        method = method, type = type,
-        scale = scale, add = add, sqrt.dist = sqrt.dist,
-        n.perm = n.perm
-      )
-      r2q <- cbind(r2q, simu$Hier.part[, 3])
+
+      simu <-
+        rdacca.hp::rdacca.hp(
+          dv = dv,
+          iv = newiv,
+          method = method, type = type,
+          scale = scale, add = add, sqrt.dist = sqrt.dist,
+          n.perm = n.perm
+        )
+
+      r2q <- cbind(r2q, get_r2q(simu))
     }
   } else {
     cat("\nPlease wait: running", permutations - 1, "permutations \n")
 
-    n <- dim(iv[[1]])[1]
+    n <- nrow(iv[[1]])
     nvar <- length(iv)
 
     for (i in 1:permutations - 1) {
+      if (
+        isTRUE(verbose)
+      ) {
+        message(i)
+      }
+
       perms <- sample(1:n, n)
       newiv <- list()
       for (j in 1:nvar) {
@@ -109,16 +189,22 @@ perm_hvarpart <- function(dv,
         row.names(newiv[[j]]) <- 1:n
       }
       names(newiv) <- names(iv)
-      simu <- rdacca.hp(dv, newiv,
-        method = method, type = type,
-        scale = scale, add = add, sqrt.dist = sqrt.dist,
-        n.perm = n.perm
-      )
-      r2q <- cbind(r2q, simu$Hier.part[, 3])
+      simu <-
+        rdacca.hp::rdacca.hp(
+          dv = dv,
+          iv = newiv,
+          method = method,
+          type = type,
+          scale = scale,
+          add = add,
+          sqrt.dist = sqrt.dist,
+          n.perm = n.perm
+        )
+      r2q <- cbind(r2q, get_r2q(simu))
     }
   }
 
-  Signi <- function(x) {
+  fc_signif <- function(x) {
     pval <- round(
       1 - ecdf(x)(x[1]) + 1 / (permutations + 1),
       nchar(permutations)
@@ -136,8 +222,8 @@ perm_hvarpart <- function(dv,
     }
   }
 
-  p.R2 <- apply(r2q, 1, Signi)
-  result <- data.frame(obs$Hier.part[, 3], Pr = p.R2)
+  p_r2 <- apply(r2q, 1, fc_signif)
+  result <- data.frame(obs$Hier.part[, 3], Pr = p_r2)
   colnames(result) <- c("Individual", "Pr(>I)")
   return(result)
 }
