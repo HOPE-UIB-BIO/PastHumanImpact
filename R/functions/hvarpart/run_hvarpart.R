@@ -10,8 +10,6 @@
 #' @param run_all_predictors logical; if predictor variables should be assessed
 #' individual or as list of data frames
 #' @param time_series logical; Should permutation be used for ordered?
-#' @return List of model outputs and a summary table of the results
-
 
 run_hvarpart <- function(data_source,
                          permutations = 99,
