@@ -48,7 +48,9 @@ get_density_pap <- function(data_source = check,
              data_source_dummy_time,
              age_min,
              age_max,
-             dummy_table, ...) {
+             dummy_table, 
+             varname = NULL,
+             ...) {
       
       
       if (
