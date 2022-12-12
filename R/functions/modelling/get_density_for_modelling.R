@@ -23,14 +23,14 @@ get_density_for_modelling <- function(data_source_density,
   ) {
     data_unnest <-
       data_sub %>%
-      unnest(pap_density_rescale)
+      tidyr::unnest(pap_density_rescale)
   } else {
     data_unnest <-
       data_sub %>%
-      unnest(pap_density)
+      tidyr::unnest(pap_density)
   }
   data_unnest %>%
-    pivot_longer(mvrt:n2_divided_by_n1,
+    tidyr::pivot_longer(mvrt:n2_divided_by_n1,
       names_to = "var_name",
       values_to = "value"
     ) %>%
