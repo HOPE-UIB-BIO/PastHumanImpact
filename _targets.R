@@ -538,9 +538,67 @@ list(
   targets::tar_target(
     name = data_density,
     command = get_density_pap(
-      data_soure_change_points = data_change_points,
+      data_source_change_points = data_change_points,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time,
+      limit_length = TRUE
+    )
+  ),
+  # - get data density of change points diversity
+  targets::tar_target(
+    name = data_density_div_for_modelling,
+    command = get_density_for_modelling(
+      data_source_density = data_density,
+      data_rescaled = TRUE,
+      select_vars = c("no", "n1", "n2", "n2_divided_by_n1", "n1_divided_by_n0")
+    )
+  ),
+  # - get data density of change points compositional turnover
+  targets::tar_target(
+    name = data_density_turnover_for_modelling,
+    command = get_density_for_modelling(
+      data_source_density = data_density,
+      data_rescaled = TRUE,
+      select_vars = c("mvrt", "roc", "peakpoints", "dcca")
+    )
+  ),
+  # - run hgam model to create a common variable for density diversity
+  targets::tar_target(
+    name = data_density_diversity,
+    command = get_hgam_density_vars(
+      data_source_density = data_density_div_for_modelling,
+      data_source_meta = NULL,
+      data_error_family = "mgcv::betar(link = 'logit')",
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      group_var = "dataset_id",
+      weights_var = NULL,
+      sel_k = 10,
+      sel_m = NULL,
+      common_trend = TRUE,
+      use_parallel = TRUE,
+      use_discrete = FALSE,
+      max_iterations = 200,
+      limit_length = TRUE
+    )
+  ),
+  # - run hgam model to create a common variable for density turnover
+  targets::tar_target(
+    name = data_density_turnover,
+    command = get_hgam_density_vars(
+      data_source_density = data_density_turnover_for_modelling,
+      data_source_meta = NULL,
+      data_error_family = "mgcv::betar(link = 'logit')",
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      group_var = "dataset_id",
+      weights_var = NULL,
+      sel_k = 10,
+      sel_m = NULL,
+      common_trend = TRUE,
+      use_parallel = TRUE,
+      use_discrete = FALSE,
+      max_iterations = 200,
       limit_length = TRUE
     )
   )
