@@ -2,18 +2,19 @@
 #' @description Function to select response and predictor variables and run
 #' hierarchical variation partitioning and permutation
 #' @param data_source full dataset with response and predictor variables
+#' @param reponse_vars vector of names of response variables
+#' @param predictor_vars
+#' vector of names of predictor variables or list with names
 #' @param run_all_predictors logical; if predictor variables should be assessed
 #' individually or as list of data.frames
-#' @param permutations integers; numbers of permutations
-#' @param reponse_vars vector of names of response variables
-#' @param predictor_vars vector of names of predictor variables or list with names
 #' @param time_series logical; Should permutation be used for ordered?
+#' @param get_significance logical; Should significance of predictors be
+#' estimated? (takes along time)
+#' @param permutations integers; numbers of permutations
 #' @param ... see parameters of functions within
 #' @return List of model outputs and a summary table of the results
 
 get_varhp <- function(data_source,
-                      run_all_predictors = FALSE,
-                      permutations = 99,
                       reponse_vars = c(
                         "n0", "n1", "n2",
                         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
@@ -30,7 +31,10 @@ get_varhp <- function(data_source,
                         ),
                         time = c("age")
                       ),
+                      run_all_predictors = FALSE,
                       time_series = TRUE,
+                      get_significance = TRUE,
+                      permutations = 99,
                       ...) {
   # prepare responses
   data_resp <-
@@ -90,31 +94,39 @@ get_varhp <- function(data_source,
       ...
     )
 
-  # test significance
-  # should work for both list and just data.frame
-  hp_signif <-
-    perm_hvarpart(
-      dv = vegan::vegdist(data_resp, method = "gower"),
-      iv = data_preds,
-      method = "dbRDA",
-      add = TRUE,
-      type = "adjR2",
-      permutations = permutations,
-      series = time_series,
-      verbose = TRUE,
-      ...
-    )
-
   # extract relevant summary output
   output_table <-
     varhp %>%
     purrr::pluck("Hier.part") %>%
     as.data.frame() %>%
-    tibble::rownames_to_column("predictor") %>%
-    dplyr::left_join(
-      hp_signif,
-      by = "Individual"
-    )
+    tibble::rownames_to_column("predictor")
+
+  # test significance
+  if (
+    isTRUE(get_significance)
+  ) {
+    # should work for both list and just data.frame
+    hp_signif <-
+      perm_hvarpart(
+        dv = vegan::vegdist(data_resp, method = "gower"),
+        iv = data_preds,
+        method = "dbRDA",
+        add = TRUE,
+        type = "adjR2",
+        permutations = permutations,
+        series = time_series,
+        verbose = TRUE,
+        ...
+      )
+
+    # extract relevant summary output
+    output_table <-
+      output_table %>%
+      dplyr::left_join(
+        hp_signif,
+        by = "Individual"
+      )
+  }
 
   # run model to get variation inflation factors of the predictors,
   #   and total unexplained and explained variation
@@ -136,9 +148,8 @@ get_varhp <- function(data_source,
       Unconstrained_eig = Total_eig - Constrained_eig
     )
 
-  # add additional information
+  # add additional VIF information
   # only works for all predictors
-  # NOTE ONDRA: I do not know how to get VIF for groups of predictors
   if (
     isTRUE(run_all_predictors)
   ) {
