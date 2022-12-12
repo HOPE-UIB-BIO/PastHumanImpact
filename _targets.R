@@ -514,7 +514,7 @@ list(
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
-    name = "data_diversity_and_dcca",
+    name = data_diversity_and_dcca,
     command = get_diversity_and_dcca_for_modelling(
       data_source_diversity = data_diversity,
       data_source_dcca = data_dcca,
@@ -523,7 +523,7 @@ list(
   ),
   # - estimate Diveristy and DCCA on equal time slices
   targets::tar_target(
-    name = "data_div_dcca_temporal_spacing",
+    name = data_div_dcca_temporal_spacing,
     command = get_per_timeslice(
       data_source = data_diversity_and_dcca,
       data_error_family = tibble::tribble(
@@ -565,6 +565,45 @@ list(
       # interpolate not forecast
       limit_length = TRUE,
       data_source_meta = data_meta
+    )
+  ),
+  # - merge all data together
+  targets::tar_target(
+    name = data_for_hvarpar,
+    command = get_data_for_hvarpar(
+      data_source_diversity = data_div_dcca_temporal_spacing,
+      data_source_roc = data_roc_temporal_spacing,
+      data_source_density = data_density_variables,
+      data_source_spd = data_spd_full,
+      data_source_climate = data_climate
+    )
+  ),
+  # - run hVARPAR (hypothesis I)
+  targets::tar_target(
+    name = data_hvarpar,
+    command = run_hvarpart(
+      data_source = data_for_hvarpar,
+      response_vars = c(
+        "n0", "n1", "n2",
+        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+        "roc",
+        "dcca_axis_1",
+        "density_diversity", "density_turnover"
+      ),
+      predictor_vars = list(
+        human = c("spd"),
+        climate = c(
+          "temp_cold",
+          "prec_summer",
+          "prec_win",
+          "gdm"
+        ),
+        time = c("age")
+      ),
+      run_all_predictors = FALSE,
+      time_series = TRUE,
+      get_significance = TRUE,
+      permutations = 999
     )
   )
 )
