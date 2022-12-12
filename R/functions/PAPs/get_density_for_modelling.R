@@ -17,7 +17,7 @@ get_density_for_modelling <- function(data_source_density,
       pivot_longer(mvrt:n2_divided_by_n1, 
                    names_to = "var_name", 
                    values_to = "value") %>%
-      dplyr::filter(var_name %in% all_of(select_vars)) %>%
+      dplyr::filter(var_name %in% select_vars) %>%
       return()
       
   } else {
@@ -27,7 +27,7 @@ get_density_for_modelling <- function(data_source_density,
       pivot_longer(mvrt:n2_divided_by_n1, 
                    names_to = "var_name", 
                    values_to = "value") %>%
-      dplyr::filter(var_name %in% all_of(select_vars)) %>%
+      dplyr::filter(var_name %in% select_vars) %>%
       return()
     
   }
