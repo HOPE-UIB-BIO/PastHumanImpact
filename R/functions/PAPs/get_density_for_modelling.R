@@ -7,7 +7,7 @@
 #' 
 
 get_density_for_modelling <- function(data_source_density,
-                                      data_rescaled = FALSE,
+                                      data_rescaled = TRUE,
                                       select_vars = NULL) {
   
   if(data_rescale == TRUE) {
@@ -18,7 +18,10 @@ get_density_for_modelling <- function(data_source_density,
                    names_to = "var_name", 
                    values_to = "value") %>%
       dplyr::filter(var_name %in% select_vars) %>%
+      tidyr::drop_na(value) %>%
+      tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
       return()
+   
       
   } else {
     data_source_density %>%
@@ -28,6 +31,8 @@ get_density_for_modelling <- function(data_source_density,
                    names_to = "var_name", 
                    values_to = "value") %>%
       dplyr::filter(var_name %in% select_vars) %>%
+      tidyr::drop_na(value) %>%
+      tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
       return()
     
   }
