@@ -15,29 +15,27 @@
 get_density_for_modelling <- function(data_source_density,
                                       data_rescaled = TRUE,
                                       select_vars = NULL) {
-  if (data_rescale == TRUE) {
+  data_sub <-
     data_source_density %>%
-      dplyr::select(dataset_id, pap_density_rescale) %>%
-      unnest(pap_density_rescale) %>%
-      pivot_longer(mvrt:n2_divided_by_n1,
-        names_to = "var_name",
-        values_to = "value"
-      ) %>%
-      dplyr::filter(var_name %in% select_vars) %>%
-      tidyr::drop_na(value) %>%
-      tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
-      return()
+    dplyr::select(dataset_id, pap_density_rescale)
+  if (
+    isTRUE(data_rescale)
+  ) {
+    data_unnest <-
+      data_sub %>%
+      unnest(pap_density_rescale)
   } else {
-    data_source_density %>%
-      dplyr::select(dataset_id, pap_density) %>%
-      unnest(pap_density) %>%
-      pivot_longer(mvrt:n2_divided_by_n1,
-        names_to = "var_name",
-        values_to = "value"
-      ) %>%
-      dplyr::filter(var_name %in% select_vars) %>%
-      tidyr::drop_na(value) %>%
-      tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
-      return()
+    data_unnest <-
+      data_sub %>%
+      unnest(pap_density)
   }
+  data_unnest %>%
+    pivot_longer(mvrt:n2_divided_by_n1,
+      names_to = "var_name",
+      values_to = "value"
+    ) %>%
+    dplyr::filter(var_name %in% select_vars) %>%
+    tidyr::drop_na(value) %>%
+    tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
+    return()
 }
