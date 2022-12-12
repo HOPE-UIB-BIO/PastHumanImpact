@@ -538,9 +538,31 @@ list(
   targets::tar_target(
     name = data_density,
     command = get_density_pap(
-      data_soure_change_points = data_change_points,
+      data_source_change_points = data_change_points,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time,
+      limit_length = TRUE
+    )
+  ),
+  # - run hgam model to create a common variable for density diversity and
+  #     turnover
+  targets::tar_target(
+    name = data_density_variables,
+    command = get_hgam_density_vars(
+      data_source_density = data_density,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      diversity_vars = c(
+        "n0", "n1", "n2",
+        "n2_divided_by_n1", "n1_divided_by_n0"
+      ),
+      turnover_vars = c(
+        "mvrt", "roc", "dcca"
+      ),
+      used_rescales = TRUE,
+      data_error_family = "mgcv::betar(link = 'logit')",
+      smooth_basis = "tp",
+      sel_k = round(max(data_dummy_time$age) / 500),
       limit_length = TRUE
     )
   )
