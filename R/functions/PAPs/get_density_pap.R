@@ -10,7 +10,7 @@
 #' @param limit_length Logical. Should the variables be limited by max and min ages?
 #' @return Turn change points of pap variables into density variables
 #'
-get_density_pap <- function(data_soure_change_points,
+get_density_pap <- function(data_source_change_points,
                             data_source_meta,
                             data_source_dummy_time,
                             limit_length = TRUE) {
@@ -66,7 +66,7 @@ get_density_pap <- function(data_soure_change_points,
     )
 
   data_source_main <-
-    data_soure_change_points %>%
+    data_source_change_points %>%
     dplyr::left_join(
       data_age_lim,
       by = "dataset_id"
