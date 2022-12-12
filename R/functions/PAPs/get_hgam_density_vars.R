@@ -1,18 +1,18 @@
 get_hgam_density_vars <- function(data_source_density,
-                             data_source_meta = NULL,
-                             data_source_dummy_time,
-                             diversity_vars = c(
-                               "n0", "n1", "n2",
-                               "n2_divided_by_n1", "n1_divided_by_n0"
-                             ),
-                             turnover_vars = c(
-                               "mvrt", "roc", "peakpoints", "dcca"
-                             ),
-                             used_rescales = TRUE,
-                             error_family = "mgcv::betar(link = 'logit')",
-                             smooth_basis = c("tp", "cr"),
-                             sel_k = 10,
-                             limit_length = TRUE) {
+                                  data_source_meta = NULL,
+                                  data_source_dummy_time,
+                                  diversity_vars = c(
+                                    "n0", "n1", "n2",
+                                    "n2_divided_by_n1", "n1_divided_by_n0"
+                                  ),
+                                  turnover_vars = c(
+                                    "mvrt", "roc", "peakpoints", "dcca"
+                                  ),
+                                  used_rescales = TRUE,
+                                  error_family = "mgcv::betar(link = 'logit')",
+                                  smooth_basis = c("tp", "cr"),
+                                  sel_k = 10,
+                                  limit_length = TRUE) {
   # helper functions
   get_vars_for_modelling <- function(data_source,
                                      select_vars) {
@@ -47,6 +47,7 @@ get_hgam_density_vars <- function(data_source_density,
         common_trend = TRUE,
         use_parallel = FALSE,
         use_discrete = FALSE,
+        max_iterations = 1e3,
         verbose = TRUE
       )
 
@@ -149,7 +150,7 @@ get_hgam_density_vars <- function(data_source_density,
           sel_k = sel_k
         )
       ),
-      denisty_turnover = purrr::map2(
+      density_turnover = purrr::map2(
         .x = data_to_fit_turnover,
         .y = dummy_table,
         .f = ~ fit_and_predict_hgam(
@@ -161,7 +162,7 @@ get_hgam_density_vars <- function(data_source_density,
         )
       )
     ) %>%
-    dplyr::select(dataset_id, density_diversity, denisty_turnover)
+    dplyr::select(dataset_id, density_diversity, density_turnover)
 
   return(data_density_res)
 }
