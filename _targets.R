@@ -557,7 +557,7 @@ list(
         "n2_divided_by_n1", "n1_divided_by_n0"
       ),
       turnover_vars = c(
-        "mvrt", "roc", "peakpoints", "dcca"
+        "mvrt", "roc", "dcca"
       ),
       used_rescales = TRUE,
       data_error_family = "mgcv::betar(link = 'logit')",
