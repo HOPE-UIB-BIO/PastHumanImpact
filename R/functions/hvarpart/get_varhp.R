@@ -1,104 +1,195 @@
 #' @title Hierarchial variation partitioning
-#' @description Function to select response and predictor variables and run hierarchical variation partitioning and permutation 
-#' @param data full dataset with response and predictor variables
-#' @param run_matrix logical; if predictor variables should be assessed individually or as list of data frames
+#' @description Function to select response and predictor variables and run
+#' hierarchical variation partitioning and permutation
+#' @param data_source full dataset with response and predictor variables
+#' @param reponse_vars vector of names of response variables
+#' @param predictor_vars
+#' vector of names of predictor variables or list with names
+#' @param run_all_predictors logical; if predictor variables should be assessed
+#' individually or as list of data.frames
+#' @param time_series logical; Should permutation be used for ordered?
+#' @param get_significance logical; Should significance of predictors be
+#' estimated? (takes along time)
 #' @param permutations integers; numbers of permutations
-#' @param resp_vars vector of names of response variables
-#' @param pred_vars vector of names of predictor variables
 #' @param ... see parameters of functions within
 #' @return List of model outputs and a summary table of the results
 
-get_varhp <- function(data,
-                      run_matrix = FALSE, 
-                      permutations = 99, 
-                      resp_vars = NULL, 
-                      pred_vars = NULL, 
+get_varhp <- function(data_source,
+                      reponse_vars = c(
+                        "n0", "n1", "n2",
+                        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+                        "roc",
+                        "dcca_axis_1"
+                      ),
+                      predictor_vars = list(
+                        human = c("spd"),
+                        climate = c(
+                          "temp_cold",
+                          "prec_summer",
+                          "prec_win",
+                          "gdm"
+                        ),
+                        time = c("age")
+                      ),
+                      run_all_predictors = FALSE,
+                      time_series = TRUE,
+                      get_significance = TRUE,
+                      permutations = 99,
                       ...) {
-  
-  resp <- data %>% 
-    dplyr::select(all_of(resp_vars))
-  
-  preds <- data %>% 
-    dplyr::select(all_of(pred_vars))  %>%
-    dplyr::select(where(~ any(. != 0))) # note have to remove empty vars for individual sites or the model will fail, need to take this into account later (for discussion - empty vars = different things)
-  
-  # run model to get variation inflation factors of the predictors, and total unexplained and explained variation 
-  mod <- vegan::capscale(resp ~ as.matrix(preds), 
-                         dist = "gower",
-                         add = TRUE,
-                         data = resp)
-  
-  
-  vif.preds <- vegan::vif.cca(mod)
-  
-  if(run_matrix == TRUE) {
-    # hierarchial variation partitioning to get the variations explained by all individual terms
-    varhp <- rdacca.hp::rdacca.hp(dv = vegdist(resp, method = "gower"),
-                                  iv = preds, 
-                                  add = TRUE, 
-                                  method = "dbRDA", 
-                                  type = "adjR2", 
-                                  var.part = TRUE, 
-                                  ...)
-    
-    # significant test of the variables and explained variations
-    hp.test <- perm_varpart(dv = vegdist(resp, method = "gower"),
-                            iv = as.data.frame(preds), 
-                            method ="dbRDA", 
-                            add = TRUE, 
-                            permutations = permutations, 
-                            series = TRUE,
-                                   ...)
-    
-    
-    
+  # prepare responses
+  data_resp <-
+    data_source %>%
+    dplyr::select(all_of(reponse_vars))
+
+  # prepare predictors
+  # if `run_all_predictors` is true then use all variables individually
+  if (
+    isTRUE(run_all_predictors)
+  ) {
+    predictor_vars <-
+      unlist(predictor_vars) %>%
+      rlang::set_names(nm = NULL)
+
+    data_preds <-
+      data_source %>%
+      dplyr::select(dplyr::all_of(predictor_vars)) %>%
+      # note have to remove empty vars for individual sites or the model
+      #  will fail, need to take this into account later (for discussion
+      #   - empty vars = different things)
+      dplyr::select(tidyselect:::where(~ any(. != 0)))
+
+    output_table_dummy <-
+      tibble::tibble(
+        predictor = predictor_vars
+      )
   } else {
-    
-    pred.list <- list(
-      human = data.frame(spd = preds$spd),
-      climate = data.frame(preds %>% 
-                             dplyr::select(temp_cold, 
-                                           prec_summer, 
-                                           prec_winter, 
-                                           gdm)),
-      time = data.frame(age = preds$age)
-    )
-    
-    
-    varhp <-  rdacca.hp::rdacca.hp(dv = vegdist(resp, method = "gower"),
-                                   iv = pred.list, 
-                                   add = TRUE, 
-                                   method = "dbRDA", 
-                                   type = "adjR2", 
-                                   var.part = TRUE, 
-                                   ...)
-    
-    hp.test <- permu_varpart(dv = vegdist(resp, method = "gower"),
-                             iv = pred.list, 
-                             method ="dbRDA", 
-                             add = TRUE,
-                             type = "adjR2",
-                             permutations = permutations, 
-                             series = TRUE,
-                                   ...)
+    data_preds <-
+      predictor_vars %>%
+      purrr::map(
+        .x = predictor_vars,
+        .f = ~ data_source %>%
+          dplyr::select(dplyr::all_of(.x)) %>%
+          # note have to remove empty vars for individual sites or the model
+          #  will fail, need to take this into account later (for discussion
+          #   - empty vars = different things)
+          dplyr::select(tidyselect:::where(~ any(. != 0)))
+      )
+
+    # filer out groups with no variables
+    data_preds <-
+      data_preds[purrr::map_lgl(
+        data_preds,
+        .f = ~ ncol(.x) > 0
+      )]
+
+    output_table_dummy <-
+      tibble::tibble(
+        predictor = names(predictor_vars)
+      )
   }
-  
-  
+
+  # run hvarpar
+  # should work for both list and just data.frame
+  varhp <-
+    rdacca.hp::rdacca.hp(
+      dv = vegan::vegdist(data_resp, method = "gower"),
+      iv = data_preds,
+      add = TRUE,
+      method = "dbRDA",
+      type = "adjR2",
+      var.part = TRUE,
+      ...
+    )
+
   # extract relevant summary output
-  output_table <- as.data.frame(varhp$Hier.part) %>%
-    rownames_to_column("Vars") %>%
-    left_join(hp.test, by = "Individual")
-  
-  output_table$Vif <- vif.preds 
-  output_table$Total_eig <- mod$tot.chi
-  output_table$Constrained_eig <- sum(mod$CCA$eig)
-  output_table$Unconstrained_eig = mod$tot.chi - sum(mod$CCA$eig)
-  
-  summary_table <- output_table %>%
-    dplyr::select(Vars, Vif, Total_eig, Constrained_eig, Unconstrained_eig, everything())
-  
-  results <- list(mod = mod, varhp_output = varhp, summary_table = summary_table)
-  
+  output_table <-
+    varhp %>%
+    purrr::pluck("Hier.part") %>%
+    as.data.frame() %>%
+    tibble::rownames_to_column("predictor")
+
+  # test significance
+  if (
+    isTRUE(get_significance)
+  ) {
+    # should work for both list and just data.frame
+    hp_signif <-
+      perm_hvarpart(
+        dv = vegan::vegdist(data_resp, method = "gower"),
+        iv = data_preds,
+        method = "dbRDA",
+        add = TRUE,
+        type = "adjR2",
+        permutations = permutations,
+        series = time_series,
+        verbose = TRUE,
+        ...
+      )
+
+    # extract relevant summary output
+    output_table <-
+      output_table %>%
+      dplyr::left_join(
+        hp_signif,
+        by = "Individual"
+      )
+  }
+
+  # run model to get variation inflation factors of the predictors,
+  #   and total unexplained and explained variation
+  mod <-
+    vegan::capscale(data_resp ~ as.matrix(as.data.frame(data_preds)),
+      dist = "gower",
+      add = TRUE,
+      data_source = data_resp
+    )
+
+  data_variation <-
+    tibble::tibble(
+      Total_eig = mod %>%
+        purrr::pluck("tot.chi"),
+      Constrained_eig = mod %>%
+        purrr::pluck("CCA") %>%
+        purrr::pluck("eig") %>%
+        sum(),
+      Unconstrained_eig = Total_eig - Constrained_eig
+    )
+
+  # add additional VIF information
+  # only works for all predictors
+  if (
+    isTRUE(run_all_predictors)
+  ) {
+    output_table <-
+      output_table %>%
+      dplyr::mutate(
+        Vif = vegan::vif.cca(mod),
+      )
+  }
+
+  # left join with all predictors (from `output_table_dummy`)
+  summary_table <-
+    output_table_dummy %>%
+    dplyr::left_join(
+      output_table,
+      by = "predictor"
+    ) %>%
+    # replace all missing values with 0
+    dplyr::mutate(
+      dplyr::across(
+        tidyselect:::where(
+          is.numeric
+        ),
+        ~ tidyr::replace_na(.x, replace = 0)
+      )
+    )
+
+  results <-
+    list(
+      varhp_output = varhp,
+      summary_table = summary_table,
+      summary_variation = data_variation
+    )
+
   return(results)
-  
 }
