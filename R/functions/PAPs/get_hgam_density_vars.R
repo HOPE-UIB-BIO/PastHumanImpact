@@ -1,71 +1,106 @@
 get_hgam_density_vars <- function(data_source_density,
-                                  data_source_meta = NULL,
-                                  data_error_family = "mgcv::betar(link = 'logit')",
-                                  data_source_dummy_time,
-                                  smooth_basis = c("tp", "cr"),
-                                  group_var = "dataset_id",
-                                  weights_var = NULL,
-                                  sel_k = 10,
-                                  sel_m = NULL,
-                                  common_trend = TRUE,
-                                  use_parallel = TRUE,
-                                  use_discrete = FALSE,
-                                  max_iterations = 200,
-                                  limit_length = TRUE) {
-  if (
-    is.data.frame(data_error_family)
-  ) {
-    assertthat::assert_that(
-      all(data_source_density$var_name %in% data_error_family$var_name) &&
-        all(data_error_family$var_name %in% data_source_density$var_name),
-      msg = paste(
-        "'data_source' and 'data_error_family' must have",
-        "same values is `var_name`"
-      )
-    )
-
-    data_with_error <-
-      dplyr::inner_join(
-        data_source,
-        data_error_family,
-        by = "var_name"
-      )
-  } else {
-    data_with_error <-
-      data_source_density %>%
-      dplyr::mutate(
-        sel_error = data_error_family
-      )
+                             data_source_meta = NULL,
+                             data_source_dummy_time,
+                             diversity_vars = c(
+                               "n0", "n1", "n2",
+                               "n2_divided_by_n1", "n1_divided_by_n0"
+                             ),
+                             turnover_vars = c(
+                               "mvrt", "roc", "peakpoints", "dcca"
+                             ),
+                             used_rescales = TRUE,
+                             error_family = "mgcv::betar(link = 'logit')",
+                             smooth_basis = c("tp", "cr"),
+                             sel_k = 10,
+                             limit_length = TRUE) {
+  # helper functions
+  get_vars_for_modelling <- function(data_source,
+                                     select_vars) {
+    data_source %>%
+      dplyr::select(
+        age,
+        dplyr::all_of(select_vars)
+      ) %>%
+      tidyr::pivot_longer(
+        cols = -age,
+        names_to = "var_name",
+        values_to = "value"
+      ) %>%
+      tidyr::drop_na(value) %>%
+      return()
   }
 
-  # fit GAM for each dataset of reach type
-  data_density_hgams <-
-    data_with_error %>%
+  fit_and_predict_hgam <- function(data_source_to_fit,
+                                   data_source_time,
+                                   error_family = "mgcv::betar(link = 'logit')",
+                                   smooth_basis = c("tp", "cr"),
+                                   sel_k = 10) {
+    data_mod_hgam <-
+      REcopol:::fit_hgam(
+        data_source = data_source_to_fit,
+        x_var = "age",
+        y_var = "value",
+        group_var = "var_name",
+        smooth_basis = smooth_basis,
+        sel_k = sel_k,
+        error_family = error_family,
+        common_trend = TRUE,
+        use_parallel = FALSE,
+        use_discrete = FALSE,
+        verbose = TRUE
+      )
+
+    data_predicted <-
+      REcopol::predic_model(
+        model_source = data_mod_hgam,
+        data_source = data_source_time %>%
+          dplyr::mutate(var_name = data_source_to_fit$var_name[1]),
+        exclude_var = gratia::smooths(data_mod_hgam) %>%
+          stringr::str_subset(., "var_name")
+      ) %>%
+      dplyr::select(-var_name)
+
+    return(data_predicted)
+  }
+
+  # select which data to use
+  if (
+    isTRUE(used_rescales)
+  ) {
+    data_for_hgam <-
+      data_source_density %>%
+      dplyr::mutate(
+        data_work = pap_density_rescale
+      ) %>%
+      dplyr::select(dataset_id, data_work)
+  } else {
+    data_for_hgam <-
+      data_source_density %>%
+      dplyr::mutate(
+        data_work = pap_density
+      ) %>%
+      dplyr::select(dataset_id, data_work)
+  }
+
+  data_cols_selected <-
+    data_for_hgam %>%
     dplyr::mutate(
-      hgam_models = purrr::map2(
-        .x = data_to_fit,
-        .y = sel_error,
-        .f = ~ REcopol:::fit_hgam(
-          data_source = .x,
-          x_var = "age",
-          y_var = "value",
-          group_var = group_var,
-          smooth_basis = smooth_basis,
-          weights_var = weights_var,
-          sel_k = sel_k,
-          error_family = .y,
-          common_trend = common_trend,
-          use_parallel = use_parallel,
-          use_discrete = use_discrete,
-          verbose = TRUE
+      # diversity
+      data_to_fit_diversity = purrr::map(
+        .x = data_work,
+        .f = ~ get_vars_for_modelling(.x,
+          select_vars = diversity_vars
+        )
+      ),
+      # turnover
+      data_to_fit_turnover = purrr::map(
+        .x = data_work,
+        .f = ~ get_vars_for_modelling(.x,
+          select_vars = turnover_vars
         )
       )
-    )
-
-  # add data.frame to predict on (age vector)
-  data_to_predict <-
-    data_density_hgams %>%
-    tidyr::unnest(hgam_models) %>%
+    ) %>%
+    dplyr::select(dataset_id, data_to_fit_diversity, data_to_fit_turnover) %>%
     dplyr::mutate(
       dummy_table = list(data_source_dummy_time)
     )
@@ -81,8 +116,8 @@ get_hgam_density_vars <- function(data_source_density,
         dataset_id, age_min, age_max
       )
 
-    data_to_predict <-
-      data_to_predict %>%
+    data_cols_selected <-
+      data_cols_selected %>%
       dplyr::left_join(
         data_age_lim,
         by = "dataset_id"
@@ -99,28 +134,34 @@ get_hgam_density_vars <- function(data_source_density,
       dplyr::select(-c(age_min, age_max))
   }
 
-  # predict each GAM
-  data_predicted <-
-    data_to_predict %>%
+  # fit GAM for each dataset of reach type
+  data_density_res <-
+    data_cols_selected %>%
     dplyr::mutate(
-      pred_data = purrr::map2(
-        .x = mod,
+      density_diversity = purrr::map2(
+        .x = data_to_fit_diversity,
         .y = dummy_table,
-        .f = ~ REcopol::predic_model(
-          data_source = .y,
-          model_source = .x
+        .f = ~ fit_and_predict_hgam(
+          data_source_to_fit = .x,
+          data_source_time = .y,
+          error_family = error_family,
+          smooth_basis = smooth_basis,
+          sel_k = sel_k
+        )
+      ),
+      denisty_turnover = purrr::map2(
+        .x = data_to_fit_turnover,
+        .y = dummy_table,
+        .f = ~ fit_and_predict_hgam(
+          data_source_to_fit = .x,
+          data_source_time = .y,
+          error_family = error_family,
+          smooth_basis = smooth_basis,
+          sel_k = sel_k
         )
       )
     ) %>%
-    tidyr::unnest(pred_data) %>%
-    dplyr::select(
-      var_name, dataset_id, age, fit
-    ) %>%
-    tidyr::pivot_wider(
-      names_from = var_name,
-      values_from = "fit"
-    ) %>%
-    tidyr::nest(data = -c(dataset_id))
+    dplyr::select(dataset_id, density_diversity, denisty_turnover)
 
-  return(data_predicted)
+  return(data_density_res)
 }
