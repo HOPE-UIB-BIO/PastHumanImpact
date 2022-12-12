@@ -54,12 +54,18 @@ get_per_timeslice <- function(data_source,
     )
 
   # add data.frame to predict on (age vector)
-  data_to_predict <-
-    data_gams %>%
-    tidyr::unnest(gam_models) %>%
-    dplyr::mutate(
-      dummy_table = list(data_source_dummy_time)
-    )
+ data_to_predict <-
+   data_gams %>%
+   tidyr::unnest(gam_models) %>%
+   dplyr::mutate(
+     dummy_table = list(data_source_dummy_time)
+   ) %>%
+   dplyr::mutate(
+     is_model = purrr::map(.x = mod, .f = ~ "lm" %in% class(.x))
+   ) %>%
+   dplyr::filter(
+     is_model == TRUE
+   )
 
   # this can be limited by the length of the data if
   #   `limit_length` is TRUE
