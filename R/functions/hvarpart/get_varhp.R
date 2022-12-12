@@ -75,6 +75,13 @@ get_varhp <- function(data_source,
           dplyr::select(tidyselect:::where(~ any(. != 0)))
       )
 
+    # filer out groups with no variables
+    data_preds <-
+      data_preds[purrr::map_lgl(
+        data_preds,
+        .f = ~ ncol(.x) > 0
+      )]
+
     output_table_dummy <-
       tibble::tibble(
         predictor = names(predictor_vars)
