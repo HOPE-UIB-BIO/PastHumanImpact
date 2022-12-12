@@ -419,16 +419,6 @@ list(
       sel_method = "taxonomic"
     )
   ),
-  # - run multivariate regression trees (MRT) to estimate compositional change
-  # - use percentages without prior transformation
-  targets::tar_target(
-    name = data_mrt,
-    command = get_mrt(
-      data_pollen,
-      n_rand = 999,
-      transformation_coef = "chisq"
-    )
-  ),
   # - run detrended canonical correspondence analysis (DCCA) to estimate
   #     compositional turnover
   # - use percentages without prior transformations
@@ -463,6 +453,65 @@ list(
       sd_for_peak_detection = 2
     )
   ),
+  # - run multivariate regression trees (MRT) to estimate compositional change
+  # - use percentages without prior transformation
+  targets::tar_target(
+    name = data_mrt,
+    command = get_mrt(
+      data_pollen,
+      n_rand = 999,
+      transformation_coef = "chisq"
+    )
+  ),
+  # - combine all PAP estimates into one tibble for get change-points
+  targets::tar_target(
+    name = data_prepared_cp,
+    command = prepare_data_cp(
+      data_pollen,
+      data_diversity,
+      data_mrt,
+      data_roc,
+      data_dcca
+    )
+  ),
+  # - calculate change points of all PAP variables by regression trees (RT)
+  targets::tar_target(
+    name = data_change_points,
+    command = get_change_points_pap(data_prepared_cp)
+  ),
+  # - calculate density of change points
+  targets::tar_target(
+    name = data_density,
+    command = get_density_pap(
+      data_source_change_points = data_change_points,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      limit_length = TRUE
+    )
+  ),
+  # - run hgam model to create a common variable for density diversity and
+  #     turnover
+  targets::tar_target(
+    name = data_density_variables,
+    command = get_hgam_density_vars(
+      data_source_density = data_density,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      diversity_vars = c(
+        "n0", "n1", "n2",
+        "n2_divided_by_n1", "n1_divided_by_n0"
+      ),
+      turnover_vars = c(
+        "mvrt", "roc", "dcca"
+      ),
+      used_rescales = TRUE,
+      data_error_family = "mgcv::betar(link = 'logit')",
+      smooth_basis = "tp",
+      sel_k = round(max(data_dummy_time$age) / 500),
+      limit_length = TRUE
+    )
+  ),
+  # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
     name = "data_diversity_and_dcca",
@@ -516,54 +565,6 @@ list(
       # interpolate not forecast
       limit_length = TRUE,
       data_source_meta = data_meta
-    )
-  ),
-  # - combine all PAP estimates into one tibble
-  targets::tar_target(
-    name = data_prepared_cp,
-    command = prepare_data_cp(
-      data_pollen,
-      data_diversity,
-      data_mrt,
-      data_roc,
-      data_dcca
-    )
-  ),
-  # - calculate change points of all PAP variables by regression trees (RT)
-  targets::tar_target(
-    name = data_change_points,
-    command = get_change_points_pap(data_prepared_cp)
-  ),
-  # - calculate density of change points
-  targets::tar_target(
-    name = data_density,
-    command = get_density_pap(
-      data_source_change_points = data_change_points,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time,
-      limit_length = TRUE
-    )
-  ),
-  # - run hgam model to create a common variable for density diversity and
-  #     turnover
-  targets::tar_target(
-    name = data_density_variables,
-    command = get_hgam_density_vars(
-      data_source_density = data_density,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time,
-      diversity_vars = c(
-        "n0", "n1", "n2",
-        "n2_divided_by_n1", "n1_divided_by_n0"
-      ),
-      turnover_vars = c(
-        "mvrt", "roc", "dcca"
-      ),
-      used_rescales = TRUE,
-      data_error_family = "mgcv::betar(link = 'logit')",
-      smooth_basis = "tp",
-      sel_k = round(max(data_dummy_time$age) / 500),
-      limit_length = TRUE
     )
   )
 )
