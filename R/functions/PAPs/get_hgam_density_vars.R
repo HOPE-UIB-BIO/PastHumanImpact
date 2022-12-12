@@ -11,10 +11,7 @@ get_hgam_density_vars <- function(data_source_density,
                                   use_parallel = TRUE,
                                   use_discrete = FALSE,
                                   max_iterations = 200,
-                                  limit_length = TRUE
-                                  ) {
-  
-  
+                                  limit_length = TRUE) {
   if (
     is.data.frame(data_error_family)
   ) {
@@ -26,7 +23,7 @@ get_hgam_density_vars <- function(data_source_density,
         "same values is `var_name`"
       )
     )
-    
+
     data_with_error <-
       dplyr::inner_join(
         data_source,
@@ -40,7 +37,7 @@ get_hgam_density_vars <- function(data_source_density,
         sel_error = data_error_family
       )
   }
-  
+
   # fit GAM for each dataset of reach type
   data_density_hgams <-
     data_with_error %>%
@@ -64,9 +61,7 @@ get_hgam_density_vars <- function(data_source_density,
         )
       )
     )
-  
-  
-  
+
   # add data.frame to predict on (age vector)
   data_to_predict <-
     data_density_hgams %>%
@@ -74,7 +69,7 @@ get_hgam_density_vars <- function(data_source_density,
     dplyr::mutate(
       dummy_table = list(data_source_dummy_time)
     )
-  
+
   # this can be limited by the length of the data if
   #   `limit_length` is TRUE
   if (
@@ -85,7 +80,7 @@ get_hgam_density_vars <- function(data_source_density,
       dplyr::select(
         dataset_id, age_min, age_max
       )
-    
+
     data_to_predict <-
       data_to_predict %>%
       dplyr::left_join(
@@ -103,7 +98,7 @@ get_hgam_density_vars <- function(data_source_density,
       ) %>%
       dplyr::select(-c(age_min, age_max))
   }
-  
+
   # predict each GAM
   data_predicted <-
     data_to_predict %>%
@@ -126,7 +121,6 @@ get_hgam_density_vars <- function(data_source_density,
       values_from = "fit"
     ) %>%
     tidyr::nest(data = -c(dataset_id))
-  
+
   return(data_predicted)
 }
-  
