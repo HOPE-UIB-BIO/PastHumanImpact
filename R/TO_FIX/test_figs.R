@@ -140,11 +140,15 @@ fract <-
 
 ggvenn::ggvenn(fract,show_element = TRUE)
 
+fract
+plot(venneuler(testvenn2))
 
 # CREATE NEW VENN PLOTS USING GGPLOT AND GGFORCE
 
 # extract var.part fractions from output
 fraction.df <- output_varpart$`3927`$varhp_output$Var.part %>% as.data.frame()
+
+data <- output_varpart$`3927`$varhp_output$Var.part
 
 
 # create dataframe for venn diagram (or circles)
@@ -156,7 +160,8 @@ df.venn <- data.frame(x = c(0, 0.866, -0.866),
 df.vdc <- fraction.df[-8,1] %>% # remove total
   as_tibble %>%
   mutate(x = c(0, 1.2, -1.2, 0.8,  -0.8, 0, 0),
-         y = c(1.2, -0.6, -0.6, 0.5,  0.5, -1, 0))
+         y = c(1.2, -0.6, -0.6, 0.5,  0.5, -1, 0),
+         relsize = fraction.df[-8,2]/100)
 
 tot.expl.var <- fraction.df[8,1]
   
@@ -175,6 +180,27 @@ ggplot(df.venn, aes(x0 = x, y0 = y, r = 1.5, fill = labels)) +
     plot.caption = element_text(size = 12, hjust = 0.1)
     )
 
+# EULER DIAGRAMS
+data 
+
+testvenneuler <- venneuler(c(Human=0.0081, Climate=0.0257 , Time=0.0021, "Human&Climate"=0.0083, "Human&Time"=0.0051, "Climate&Time"=0.0368 ,"Human&Climate&Time"=0.0368))
+plot(testvenneuler)
+
+newdf <- data.frame(testvenneuler$centers, 
+                    diameters = testvenneuler$diameters, 
+                    predictors = testvenneuler$labels, 
+                    stringsAsFactors = FALSE)
+
+
+newdf %>%
+  mutate(r = diameters/2) %>%
+  ggplot() +
+  geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), alpha = .5) +
+  #geom_text(aes(x = x, y = y, label = predictors)) +
+  coord_fixed() +
+ # theme(legend.position = "none") +
+  theme_void() 
+  
 
 
 # CICULAR BARPLOTS
