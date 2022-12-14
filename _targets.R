@@ -419,16 +419,6 @@ list(
       sel_method = "taxonomic"
     )
   ),
-  # - run multivariate regression trees (MRT) to estimate compositional change
-  # - use percentages without prior transformation
-  targets::tar_target(
-    name = data_mrt,
-    command = get_mrt(
-      data_pollen,
-      n_rand = 999,
-      transformation_coef = "chisq"
-    )
-  ),
   # - run detrended canonical correspondence analysis (DCCA) to estimate
   #     compositional turnover
   # - use percentages without prior transformations
@@ -463,62 +453,17 @@ list(
       sd_for_peak_detection = 2
     )
   ),
-  # - merge Diveristy and DCCA and prepare for modelling
+  # - run multivariate regression trees (MRT) to estimate compositional change
+  # - use percentages without prior transformation
   targets::tar_target(
-    name = "data_diversity_and_dcca",
-    command = get_diversity_and_dcca_for_modelling(
-      data_source_diversity = data_diversity,
-      data_source_dcca = data_dcca,
-      data_source_pollen = data_pollen
+    name = data_mrt,
+    command = get_mrt(
+      data_pollen,
+      n_rand = 999,
+      transformation_coef = "chisq"
     )
   ),
-  # - estimate Diveristy and DCCA on equal time slices
-  targets::tar_target(
-    name = "data_div_dcca_temporal_spacing",
-    command = get_per_timeslice(
-      data_source = data_diversity_and_dcca,
-      data_error_family = tibble::tribble(
-        ~"var_name", ~"sel_error",
-        "n0", "mgcv::Tweedie(p = 1.1)",
-        "n1", "mgcv::Tweedie(p = 1.1)",
-        "n2", "mgcv::Tweedie(p = 1.1)",
-        "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
-        "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
-        "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
-        "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
-      ),
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "tp",
-      max_k = round(max(data_dummy_time$age) / 500),
-      # use propagating uncertainy
-      weights_var = "var_weight",
-      # interpolate not forecast
-      limit_length = TRUE,
-      data_source_meta = data_meta
-    )
-  ),
-  # - prepare RoC for modelling
-  targets::tar_target(
-    name = data_roc_for_modelling,
-    command = get_roc_for_modelling(data_roc)
-  ),
-  # - estimate RoC on equal time slices
-  targets::tar_target(
-    name = data_roc_temporal_spacing,
-    command = get_per_timeslice(
-      data_source = data_roc_for_modelling,
-      data_error_family = "mgcv::Tweedie(p = 1.1)",
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "tp",
-      max_k = round(max(data_dummy_time$age) / 500),
-      # use propagating uncertainy
-      weights_var = "var_weight",
-      # interpolate not forecast
-      limit_length = TRUE,
-      data_source_meta = data_meta
-    )
-  ),
-  # - combine all PAP estimates into one tibble
+  # - combine all PAP estimates into one tibble for get change-points
   targets::tar_target(
     name = data_prepared_cp,
     command = prepare_data_cp(
@@ -564,6 +509,101 @@ list(
       smooth_basis = "tp",
       sel_k = round(max(data_dummy_time$age) / 500),
       limit_length = TRUE
+    )
+  ),
+  # 7. Hypothesis I -----
+  # - merge Diveristy and DCCA and prepare for modelling
+  targets::tar_target(
+    name = data_diversity_and_dcca,
+    command = get_diversity_and_dcca_for_modelling(
+      data_source_diversity = data_diversity,
+      data_source_dcca = data_dcca,
+      data_source_pollen = data_pollen
+    )
+  ),
+  # - estimate Diveristy and DCCA on equal time slices
+  targets::tar_target(
+    name = data_div_dcca_temporal_spacing,
+    command = get_per_timeslice(
+      data_source = data_diversity_and_dcca,
+      data_error_family = tibble::tribble(
+        ~"var_name", ~"sel_error",
+        "n0", "mgcv::Tweedie(p = 1.1)",
+        "n1", "mgcv::Tweedie(p = 1.1)",
+        "n2", "mgcv::Tweedie(p = 1.1)",
+        "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
+        "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
+        "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
+        "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
+      ),
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weights_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
+    )
+  ),
+  # - prepare RoC for modelling
+  targets::tar_target(
+    name = data_roc_for_modelling,
+    command = get_roc_for_modelling(data_roc)
+  ),
+  # - estimate RoC on equal time slices
+  targets::tar_target(
+    name = data_roc_temporal_spacing,
+    command = get_per_timeslice(
+      data_source = data_roc_for_modelling,
+      data_error_family = "mgcv::Tweedie(p = 1.1)",
+      data_source_dummy_time = data_dummy_time,
+      smooth_basis = "tp",
+      max_k = round(max(data_dummy_time$age) / 500),
+      # use propagating uncertainy
+      weights_var = "var_weight",
+      # interpolate not forecast
+      limit_length = TRUE,
+      data_source_meta = data_meta
+    )
+  ),
+  # - merge all data together
+  targets::tar_target(
+    name = data_for_hvarpar,
+    command = get_data_for_hvarpar(
+      data_source_diversity = data_div_dcca_temporal_spacing,
+      data_source_roc = data_roc_temporal_spacing,
+      data_source_density = data_density_variables,
+      data_source_spd = data_spd_full,
+      data_source_climate = data_climate
+    )
+  ),
+  # - run hVARPAR (hypothesis I)
+  targets::tar_target(
+    name = data_hvarpar,
+    command = run_hvarpart(
+      data_source = data_for_hvarpar,
+      response_vars = c(
+        "n0", "n1", "n2",
+        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+        "roc",
+        "dcca_axis_1",
+        "density_diversity", "density_turnover"
+      ),
+      predictor_vars = list(
+        human = c("spd"),
+        climate = c(
+          "temp_cold",
+          "prec_summer",
+          "prec_win",
+          "gdm"
+        ),
+        time = c("age")
+      ),
+      run_all_predictors = FALSE,
+      time_series = TRUE,
+      get_significance = TRUE,
+      permutations = 999
     )
   )
 )
