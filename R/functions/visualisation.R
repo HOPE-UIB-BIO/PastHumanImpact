@@ -3,8 +3,8 @@
 #----
 
 # VISUALISATION FUNCTIONS
-# PLOT INDIVIDUAL PREDICTOR BARS PER REGION PER ECOZONE
-# # barplot of predictors mean adjusted r2 uniquely explained or individually explained
+
+# barplot of predictors mean adjusted R2 uniquely explained or individually explained
 plot_individual_predictor_bars <- function(x,
                                            y = "mean_unique_adj_r2",
                                            group_vars = c("region",
@@ -37,3 +37,18 @@ boxplot_expvar_by_region <- function(x) {
     facet_wrap(~region) +
     labs(x = "Ecozones", y = "Explained adjusted R2")
 }
+
+# circular plots 
+plot_circular_plot <- function(x) {
+  
+}
+
+#venn diagrams
+plot_venn_diagrams <- function(x) {
+  
+}
+  
+  
+  
+  
+  
