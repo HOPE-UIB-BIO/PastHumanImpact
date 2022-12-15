@@ -7,6 +7,7 @@ plot_summed_circular <- function(data_source,
                                  sel_mode = c("Individual", "Unique", "Average.share"),
                                  full_scale = FALSE) {
   sel_mode <- match.arg(sel_mode)
+
   # helper function
   # summarise adj_r2 across `group_vars`
   get_r2_summary_varpar <- function(data_source,
@@ -91,6 +92,29 @@ plot_summed_circular <- function(data_source,
         )
       )
     ) +
+    ggplot2::theme_light() +
+    ggplot2::coord_polar() +
+    ggplot2::theme(
+      legend.position = "bottom",
+      axis.title = ggplot2::element_blank()
+    )
+
+  if (
+    isTRUE(full_scale)
+  ) {
+    p_1 <-
+      p_0
+    ggplot2::scale_y_continuous(
+      limits = c(0, 1),
+      breaks = seq(0, 1, by = 0.1),
+      minor_breaks = seq(0, 1, by = 0.2)
+    )
+  } else {
+    p_1 <- p_0
+  }
+
+  p_2 <-
+    p_1 +
     ggplot2::geom_pointrange(
       mapping = ggplot2::aes(
         ymin = get(paste0(sel_mode, "_lwr")),
@@ -108,26 +132,7 @@ plot_summed_circular <- function(data_source,
     ggplot2::geom_point(
       size = 6,
       position = ggplot2::position_dodge(width = 0.5),
-    ) +
-    ggplot2::theme_light() +
-    ggplot2::coord_polar() +
-    ggplot2::theme(
-      legend.position = "bottom",
-      axis.title = ggplot2::element_blank()
     )
 
-  if (
-    isTRUE(full_scale)
-  ) {
-    p_0 +
-      ggplot2::scale_y_continuous(
-        limits = c(0, 1),
-        breaks = seq(0, 1, by = 0.1),
-        minor_breaks = seq(0, 1, by = 0.2)
-      ) %>%
-      return()
-  } else {
-    p_0 %>%
-      return()
-  }
+    return(p_2)
 }
