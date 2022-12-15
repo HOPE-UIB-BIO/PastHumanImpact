@@ -69,7 +69,7 @@ plot_circular <- function(data_source,
       max_value <- 1
 
       if (
-        y_var_name == "i_perc_percent"
+        y_var_name_stripped == "i_perc_percent"
       ) {
         max_value <- 100
       }
