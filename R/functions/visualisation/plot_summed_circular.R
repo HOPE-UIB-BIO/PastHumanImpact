@@ -36,6 +36,7 @@ plot_summed_circular <- function(data_source,
   data_summed <-
     get_r2_summary_varpar(
       data_source = data_source,
+      sel_var = sel_mode,
       group_vars = merged_group_vars
     )
 
@@ -47,7 +48,7 @@ plot_summed_circular <- function(data_source,
       facet_var_name = group_vars,
       add_error = add_error,
       add_polygon = add_polygon,
-      full_scale = FALSEscale
+      full_scale = full_scale
     )
 
   return(plot_res)
