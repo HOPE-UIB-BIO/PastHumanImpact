@@ -41,10 +41,7 @@ plot_summed_circular <- function(data_source,
       data_source %>%
       dplyr::group_by(
         dplyr::across(
-          c(
-            dplyr::all_of(group_vars),
-            predictor
-          )
+          dplyr::all_of(group_vars)
         )
       ) %>%
       dplyr::summarise(
@@ -68,15 +65,21 @@ plot_summed_circular <- function(data_source,
       return()
   }
 
+  # add all grouping vars together
+  merged_group_vars <-
+    c(
+      "predictor", # always has to be there
+      group_vars,
+      col_var
+    ) %>%
+    unique()
+
   # get summary for continents
   data_summed <-
     get_r2_summary_varpar(
       data_source = data_source,
-      group_vars = group_vars
+      group_vars = merged_group_vars
     )
-
-  plot_group_vars <-
-    group_vars[!stringr::str_detect(group_vars, col_var)]
 
   # make a plot
   p_0 <-
