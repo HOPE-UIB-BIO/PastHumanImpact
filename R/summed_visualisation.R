@@ -3,7 +3,7 @@ library(tidyverse)
 library(targets)
 
 # list R functions and source them
-invisible(lapply(
+lapply(
   list.files(
     path = "R/functions",
     pattern = "*.R",
@@ -11,7 +11,8 @@ invisible(lapply(
     full.names = TRUE
   ),
   source
-))
+) %>%
+  invisible()
 
 # get the data
 data_to_run <- RUtilpol::get_latest_file("data_to_run")
@@ -59,30 +60,65 @@ data_for_vis <-
     by = "dataset_id"
   )
 
-# get plot for Individual contribution for each climate zone within continent
+# get plot for perctenage contribution for a single record
+plot_circular(
+  data_source = data_for_vis %>%
+    dplyr::filter(
+      dataset_id == "1758"
+    ),
+  y_var_name = "i_perc_percent"
+)
+
+# get plot for individual contribution for each climate zone within continent
 plot_summed_circular(
   data_source = data_for_vis,
   group_vars = c("region", "ecozone_koppen_5"),
+  sel_mode = "individual"
+)
+
+# get plot for perctenage contribution for each continent on a full scale
+#   with error bars for 95-quantiles
+plot_summed_circular(
+  data_source = data_for_vis,
+  group_vars = "region",
   col_var = "predictor",
+  sel_mode = "i_perc_percent",
+  add_error = "95%",
+  full_scale = TRUE
+)
+
+# get plot for individual contribution for each continent and color by climate
+#   zone. Add polygon for mean values
+plot_summed_circular(
+  data_source = data_for_vis,
+  group_vars = "region",
+  col_var = "ecozone_koppen_5",
   sel_mode = "individual",
-  full_scale = FALSE
+  add_error = FALSE,
+  add_polygon = "mean"
 )
 
-# get plot for Unique contribution for each continent
+# get plot for perentage contribution ffor each continent and color by climate
+#   zone. Add error bars by sd and polygon for 95-quantile values
 plot_summed_circular(
   data_source = data_for_vis,
-  group_vars = c("region"),
-  col_var = "predictor",
-  sel_mode = "unique",
-  full_scale = FALSE
-)
-
-# get plot for Individual contribution for each continent and color by climate
-#   zone
-plot_summed_circular(
-  data_source = data_for_vis,
-  group_vars = c("region", "ecozone_koppen_5"),
+  group_vars = "region",
   col_var = "ecozone_koppen_5",
   sel_mode = "i_perc_percent",
-  full_scale = FALSE
+  add_error = "sd",
+  add_polygon = "95%",
+  full_scale = TRUE
+)
+
+# get plot for perentage contribution for each climate zone, colored by
+#   continent. Add only polygons with mean value, no points
+plot_summed_circular(
+  data_source = data_for_vis,
+  group_vars = "ecozone_koppen_5",
+  col_var = "region",
+  sel_mode = "i_perc_percent",
+  add_error = FALSE,
+  add_polygon = "mean",
+  point_size = 0,
+  full_scale = TRUE
 )
