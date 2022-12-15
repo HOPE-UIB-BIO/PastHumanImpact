@@ -6,7 +6,6 @@ plot_circular <- function(data_source,
                           add_polygon = c("mean", "95%", "sd", FALSE),
                           full_scale = FALSE) {
   y_var_name <- as.character(y_var_name)
-  facet_var_name <- as.character(facet_var_name)
   col_var_name <- as.character(col_var_name)
   add_error <- as.character(add_error)
   add_error <- match.arg(add_error)
@@ -15,22 +14,14 @@ plot_circular <- function(data_source,
   full_scale <- as.character(full_scale)
 
   # make a plot
-  p_0 <-
+  p_theme <-
     data_source %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        y = get(paste0(y_var_name, "_mean")),
+        y = get(y_var_name),
         x = predictor,
         fill = as.factor(get(col_var_name)),
         col = as.factor(get(col_var_name))
-      )
-    ) +
-    ggplot2::facet_wrap(
-      as.formula(
-        paste(
-          "~",
-          paste(facet_var_name, collapse = " + ")
-        )
       )
     ) +
     ggplot2::theme_light() +
@@ -44,6 +35,27 @@ plot_circular <- function(data_source,
       fill = col_var_name,
       col = col_var_name
     )
+
+  # add facet
+  if (
+    isFALSE(is.null(facet_var_name))
+  ) {
+    facet_var_name <- as.character(facet_var_name)
+
+    p_0 <-
+      p_theme +
+      ggplot2::facet_wrap(
+        as.formula(
+          paste(
+            "~",
+            paste(facet_var_name, collapse = " + ")
+          )
+        )
+      )
+  } else {
+    p_0 <-
+      p_theme
+  }
 
   # add scale
   switch(as.character(full_scale),
@@ -72,10 +84,11 @@ plot_circular <- function(data_source,
   # add polygon
   switch(as.character(add_polygon),
     "mean" = {
-      p_2 <- p_1 +
+      p_2 <-
+        p_1 +
         ggplot2::geom_polygon(
           mapping = ggplot2::aes(
-            y = get(paste0(y_var_name, "_mean")),
+            y = get(y_var_name),
             group = as.factor(get(col_var_name))
           ),
           alpha = 0.2,
@@ -83,7 +96,8 @@ plot_circular <- function(data_source,
         )
     },
     "95%" = {
-      p_2 <- p_1 +
+      p_2 <-
+        p_1 +
         ggplot2::geom_polygon(
           mapping = ggplot2::aes(
             y = get(paste0(y_var_name, "_upr")),
@@ -94,10 +108,11 @@ plot_circular <- function(data_source,
         )
     },
     "sd" = {
-      p_2 <- p_1 +
+      p_2 <-
+        p_1 +
         ggplot2::geom_polygon(
           mapping = ggplot2::aes(
-            y = get(paste0(y_var_name, "_mean")) +
+            y = get(y_var_name) +
               get(paste0(y_var_name, "_sd")),
             group = as.factor(get(col_var_name))
           ),
@@ -133,9 +148,9 @@ plot_circular <- function(data_source,
         p_2 +
         ggplot2::geom_pointrange(
           mapping = ggplot2::aes(
-            ymin = get(paste0(y_var_name, "_mean")) -
+            ymin = get(y_var_name) -
               get(paste0(y_var_name, "_sd")),
-            ymax = get(paste0(y_var_name, "_mean")) +
+            ymax = get(y_var_name) +
               get(paste0(y_var_name, "_sd"))
           ),
           fatten = 0,

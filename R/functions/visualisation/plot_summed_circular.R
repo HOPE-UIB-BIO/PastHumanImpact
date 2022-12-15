@@ -43,7 +43,7 @@ plot_summed_circular <- function(data_source,
   plot_res <-
     plot_circular(
       data_source = data_summed,
-      y_var_name = sel_mode,
+      y_var_name = paste0(sel_mode, "_mean"),
       col_var_name = col_var,
       facet_var_name = group_vars,
       add_error = add_error,
