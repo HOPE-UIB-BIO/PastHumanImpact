@@ -38,10 +38,6 @@ boxplot_expvar_by_region <- function(x) {
     labs(x = "Ecozones", y = "Explained adjusted R2")
 }
 
-# circular plots 
-plot_circular_plot <- function(x) {
-  
-}
 
 
 #euler diagrams
@@ -63,32 +59,77 @@ get_data_for_euler <- function(data_source) {
     mutate(labels = stringr::str_replace_all(labels, rep_string),
            labels = stringr::str_replace_all(labels, " ", "")) %>%
     filter(!labels == "Total") %>%
+    
     dplyr::pull(Fractions, labels) %>%
     return()
 }
   
   
-get_plot_euler <- function(data_for_euler) {
+get_plot_euler <- function(data_for_euler, alpha = .7) {
   
   v <- venneuler::venneuler(data_for_euler)
   
   newdf <- data.frame(v$centers, 
                       diameters = v$diameters, 
                       predictors = v$labels, 
-                      stringsAsFactors = FALSE)
+                      stringsAsFactors = FALSE) %>%
+    mutate(r = diameters/2)
+    
   
   
   plt <- newdf %>%
-    mutate(r = diameters/2) %>%
     ggplot() +
-    geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), alpha = .5) +
-    #geom_text(aes(x = x, y = y, label = predictors)) +
+    ggforce::geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), colour = NA, alpha = alpha) +
     coord_fixed() +
-    # theme(legend.position = "none") +
-    theme_void() 
+    theme_void() +
+    theme(legend.position = "none") +
+    theme_transparent()
   
   plt
   
 }   
+
+
+get_euler_on_map <- function(source_data, data_meta) {
   
+  require(ggimage)
+  
+  euler_data <- source_data %>% 
+    purrr::map(pluck(1)) %>%
+    purrr::map(pluck("Var.part")) %>%
+    purrr::map(get_data_for_euler)
+ 
+  data_to_map <- 
+    tibble(dataset_id = names(euler_data), 
+           as_tibble(lst(euler_data))) %>%
+    inner_join(data_meta %>% 
+                 dplyr::select(dataset_id, lat, long), by = "dataset_id") %>%
+    mutate(euler_plot = purrr::map(euler_data,.f = get_plot_euler)) %>%
+    mutate(width = 15)
+  
+  # set theme map
+  maptheme <- theme(
+    panel.background = element_rect(fill = "navy",
+                                    colour = "grey70",
+                                    linewidth = 0.5, linetype = "solid"),
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank()
+  )
+  # get world map
+  worldmap <- map_data("world")
+
+  # create map
+  mapplot1 <- worldmap %>%
+    ggplot(aes(x = long, y = lat, group = group))  +
+    borders(colour = NA, fill = "grey80") +
+    coord_fixed() +
+    maptheme +
+    labs(x = "Longitudes", y = "Latitudes")
+  
+  # add euler plot with geom_subview
+  mapplot1 + geom_subview(aes(x = long, y = lat, width = width, height = width, subview = euler_plot), data = data_to_map)
+  
+  return(mapplot1)
+}
+
   
