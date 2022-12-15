@@ -2,7 +2,7 @@
 
 data_to_run <- read_rds("/Users/vfe032/Dropbox/03_GITHUB/HOPE/Data_for_testing/data_to_run_2022-12-09__429e3f1ff6b24b23b9de0986dad16293__ (1).rds")
 
-test <-
+summary_table <-
   data_to_run$data_for_ord %>%
   rlang::set_names(
     nm = data_to_run$dataset_id
@@ -36,7 +36,7 @@ test <-
   )
 
 data_for_vis <- 
-  test %>% 
+  summary_table %>% 
   group_by(dataset_id) %>%
   mutate(AdjR2_total = sum(Individual)) %>%
   ungroup() %>%
@@ -45,6 +45,20 @@ data_for_vis <-
                dplyr::select(dataset_id, lat, long, region, ecozone_koppen_5))
 
 
+group_vars <- c("region", "ecozone_koppen_5", "predictor")
+input <- data_for_vis %>%
+  group_by(across(all_of(group_vars))) %>%
+  summarise(
+    mean_unique_adj_r2 = mean(Unique),
+    mean_ind_adj_r2 = mean(Individual),
+    mean_shared_adj_r2 = mean(Average.share),
+    sd_unique_adj_r2 = sd(Unique),
+    sd_ind_adj_r2 = sd(Individual),
+    sd_shared_adj_r2 = sd(Average.share),
+    lat = mean(lat),
+    long = mean(long)
+  ) %>% 
+  ungroup()
 
 # get full output
 output_varpart <- 
@@ -81,19 +95,6 @@ data_to_run$data_for_ord %>%
 
 
 
-input <- data_for_vis %>%
-  group_by(across(all_of(group_vars))) %>%
-  summarise(
-    mean_unique_adj_r2 = mean(Unique),
-    mean_ind_adj_r2 = mean(Individual),
-    mean_shared_adj_r2 = mean(Average.share),
-    sd_unique_adj_r2 = sd(Unique),
-    sd_ind_adj_r2 = sd(Individual),
-    sd_shared_adj_r2 = sd(Average.share),
-    lat = mean(lat),
-    long = mean(long)
-  ) %>% 
-  ungroup()
 
 
 
@@ -107,19 +108,13 @@ boxplot_expvar_by_region(data_for_vis)
 
 
 
-# VENN DIAGRAMS
-library(ggplot2)
-library(ggforce)
-library(ggVennDiagram)
+# VENN/EULER DIAGRAMS
+library(ggforce) #draw circles
+library(ggvenn) #create venn diagrams
 
-
-
-# example 1 using ggvenn
-test <- data_for_vis %>%
-  nest(data = -dataset_id)
 
 # new tibble: one vector value, logical for the predictor variables
-testvenn2 <- tibble(
+testvenn <- tibble(
   Fraction = c(0.0140, 0.0466, 0.3090),
   climate = c(TRUE, FALSE, TRUE),
   time =  c(FALSE, TRUE, TRUE)
@@ -131,25 +126,29 @@ ggvenn::ggvenn(testvenn2,
                fill_color = c("blue", "red"),
                stroke_alpha = .3)
 
-# list example
+
+
+# example with lists
 output_varpart$`3927`$varhp_output$Var.part
 fract <- 
-  list(human = c(0.0081, 0.0083, 0.0051, 0.0151 ),
+  list(human = c(0.0081, 0.0083, 0.0051, 0.0151),
        climate = c(0.0257, 0.0083, 0.0368, 0.0151),
        time = c(0.0021, 0.0051, 0.0368, 0.0151))
 
-ggvenn::ggvenn(fract,show_element = TRUE)
-
 fract
-plot(venneuler(testvenn2))
 
-# CREATE NEW VENN PLOTS USING GGPLOT AND GGFORCE
+ggvenn::ggvenn(fract, show_element = TRUE)
+
+
+
+
+# CREATE NEW VENN PLOTS 
 
 # extract var.part fractions from output
 fraction.df <- output_varpart$`3927`$varhp_output$Var.part %>% as.data.frame()
 
 data <- output_varpart$`3927`$varhp_output$Var.part
-
+data2 <- output_varpart$`1758`$varhp_output$Var.part
 
 # create dataframe for venn diagram (or circles)
 df.venn <- data.frame(x = c(0, 0.866, -0.866),
@@ -166,12 +165,12 @@ df.vdc <- fraction.df[-8,1] %>% # remove total
 tot.expl.var <- fraction.df[8,1]
   
 ggplot(df.venn, aes(x0 = x, y0 = y, r = 1.5, fill = labels)) +
-  geom_circle(alpha = .3, size = 1, colour = 'grey') +
+  geom_circle(alpha = .3, linewidth = 1, colour = 'grey') +
   coord_fixed() +
   theme_void() +
   #theme(legend.position = 'bottom') +
   scale_fill_manual(values = c('cornflowerblue', 'firebrick',  'gold')) +
-  scale_colour_manual(values = c('cornflowerblue', 'firebrick', 'gold'), guide = FALSE) +
+  scale_colour_manual(values = c('cornflowerblue', 'firebrick', 'gold'), guide = "none") +
   labs(fill = NULL) +
   annotate("text", x = df.vdc$x, y = df.vdc$y, label = df.vdc$value, size = 5) + 
   labs(caption = paste0("Total explained var = ", tot.expl.var)) +
@@ -180,26 +179,75 @@ ggplot(df.venn, aes(x0 = x, y0 = y, r = 1.5, fill = labels)) +
     plot.caption = element_text(size = 12, hjust = 0.1)
     )
 
-# EULER DIAGRAMS
-data 
-
-testvenneuler <- venneuler(c(Human=0.0081, Climate=0.0257 , Time=0.0021, "Human&Climate"=0.0083, "Human&Time"=0.0051, "Climate&Time"=0.0368 ,"Human&Climate&Time"=0.0368))
-plot(testvenneuler)
-
-newdf <- data.frame(testvenneuler$centers, 
-                    diameters = testvenneuler$diameters, 
-                    predictors = testvenneuler$labels, 
-                    stringsAsFactors = FALSE)
+# EULER DIAGRAMS on map
+library(ggimage)
 
 
-newdf %>%
-  mutate(r = diameters/2) %>%
-  ggplot() +
-  geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), alpha = .5) +
-  #geom_text(aes(x = x, y = y, label = predictors)) +
+ euler_data <- output_varpart %>% 
+  purrr::map(pluck(1)) %>%
+  purrr::map(pluck("Var.part")) %>%
+  purrr::map(get_data_for_euler)
+names(euler_data)
+
+
+data_to_map <- tibble(dataset_id = names(euler_data),
+                      as_tibble(lst(euler_data))) %>%
+               inner_join(data_meta %>% 
+                            dplyr::select(dataset_id, lat, long), 
+                          by = "dataset_id") %>%
+  mutate(euler_plot = purrr::map(euler_data, .f = get_plot_euler)) %>%
+  mutate(width = 15)
+  
+
+
+# set theme map
+maptheme <- theme(
+  panel.background = element_rect(fill = "navy",
+                                  colour = "grey70",
+                                  linewidth = 0.5, linetype = "solid"),
+  panel.grid.major = element_blank(), 
+  panel.grid.minor = element_blank()
+)
+
+# get world map
+worldmap <- map_data("world")
+
+# create map
+mapplot1 <- worldmap %>%
+  ggplot(aes(x = long, y = lat, group = group))  +
+  borders(colour = NA, fill = "grey80") +
   coord_fixed() +
- # theme(legend.position = "none") +
-  theme_void() 
+  maptheme +
+  labs(x = "Longitudes", y = "Latitudes")
+
+# add euler plot with geom_subview
+mapplot1 + geom_subview(aes(x=long, y=lat, width = width, height = width, subview = euler_plot), data = data_to_map)
+
+return(mapplot1)
+
+
+
+# TEST FIGURE 
+
+v <- venneuler::venneuler(data_to_map$euler_data[[3]])
+
+newdf <- data.frame(v$centers, 
+                    diameters = v$diameters, 
+                    predictors = v$labels, 
+                    stringsAsFactors = FALSE) %>%
+  mutate(r = diameters/2)
+
+
+
+plt <- newdf %>%
+  ggplot() +
+  ggforce::geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), colour = NA, alpha = .7) +
+  coord_fixed() +
+  theme_void() +
+  theme(legend.position = "none") +
+  theme_transparent()
+
+plt
   
 
 
@@ -315,6 +363,7 @@ mapplot1 <- worldmap %>%
 
 mapplot1 
 
+testplot <- mapplot1 + geom_subplot2d(aes(long, lat, subplot = geom_bar(aes(Age, ..count.., fill = Age))), bins = c(15,12), ref = NULL, width = rel(0.8), data = simdat2)
 
 # some code example from stack
 # library(ggsubplot)
