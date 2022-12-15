@@ -10,8 +10,15 @@ plot_summed_circular <- function(data_source,
                                    "average_share",
                                    "i_perc_percent"
                                  ),
+                                 add_error = c("95%", "sd", FALSE),
                                  full_scale = FALSE) {
+  group_vars <- as.character(group_vars)
+  col_var <- as.character(col_var)
+  sel_mode <- as.character(sel_mode)
   sel_mode <- match.arg(sel_mode)
+  add_error <- as.character(add_error)
+  add_error <- match.arg(add_error)
+  full_scale <- as.character(full_scale)
 
   # helper function
   # summarise adj_r2 across `group_vars`
@@ -112,38 +119,66 @@ plot_summed_circular <- function(data_source,
       col = col_var
     )
 
-  if (
-    isTRUE(full_scale)
-  ) {
-    max_value <- 1
+  # add scale
+  switch(as.character(full_scale),
+    "TRUE" = {
+      max_value <- 1
 
-    if (
-      sel_mode == "i_perc_percent"
-    ) {
-      max_value <- 100
+      if (
+        sel_mode == "i_perc_percent"
+      ) {
+        max_value <- 100
+      }
+
+      p_1 <-
+        p_0 +
+        ggplot2::scale_y_continuous(
+          limits = c(0, max_value),
+          breaks = seq(0, max_value, by = max_value / 10),
+          minor_breaks = seq(0, max_value, by = max_value / 5)
+        )
+    },
+    "FALSE" = {
+      p_1 <- p_0
     }
+  )
 
-    p_1 <-
-      p_0
-    ggplot2::scale_y_continuous(
-      limits = c(0, max_value),
-      breaks = seq(0, max_value, by = max_value / 10),
-      minor_breaks = seq(0, max_value, by = max_value / 5)
-    )
-  } else {
-    p_1 <- p_0
-  }
+  # add error bars
+  switch(as.character(add_error),
+    "FALSE" = {
+      p_2 <-
+        p_1
+    },
+    "95%" = {
+      p_2 <-
+        p_1 +
+        ggplot2::geom_pointrange(
+          mapping = ggplot2::aes(
+            ymin = get(paste0(sel_mode, "_lwr")),
+            ymax = get(paste0(sel_mode, "_upr"))
+          ),
+          fatten = 0,
+          size = 3
+        )
+    },
+    "sd" = {
+      p_2 <-
+        p_1 +
+        ggplot2::geom_pointrange(
+          mapping = ggplot2::aes(
+            ymin = get(paste0(sel_mode, "_mean")) -
+              get(paste0(sel_mode, "_sd")),
+            ymax = get(paste0(sel_mode, "_mean")) +
+              get(paste0(sel_mode, "_sd"))
+          ),
+          fatten = 0,
+          size = 3
+        )
+    }
+  )
 
-  p_2 <-
-    p_1 +
-    ggplot2::geom_pointrange(
-      mapping = ggplot2::aes(
-        ymin = get(paste0(sel_mode, "_lwr")),
-        ymax = get(paste0(sel_mode, "_upr"))
-      ),
-      fatten = 0,
-      size = 3
-    ) +
+  p_3 <-
+    p_2 +
     ggplot2::geom_point(
       size = 7,
       col = "gray30"
@@ -152,5 +187,5 @@ plot_summed_circular <- function(data_source,
       size = 6
     )
 
-  return(p_2)
+  return(p_3)
 }
