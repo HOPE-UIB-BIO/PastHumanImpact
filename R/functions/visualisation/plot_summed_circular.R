@@ -11,6 +11,7 @@ plot_summed_circular <- function(data_source,
                                    "i_perc_percent"
                                  ),
                                  add_error = c("95%", "sd", FALSE),
+                                 add_polygon = c("mean", "95%", "sd", FALSE),
                                  full_scale = FALSE) {
   group_vars <- as.character(group_vars)
   col_var <- as.character(col_var)
@@ -18,6 +19,8 @@ plot_summed_circular <- function(data_source,
   sel_mode <- match.arg(sel_mode)
   add_error <- as.character(add_error)
   add_error <- match.arg(add_error)
+  add_polygon <- as.character(add_polygon)
+  add_polygon <- match.arg(add_polygon)
   full_scale <- as.character(full_scale)
 
   # helper function
@@ -143,15 +146,56 @@ plot_summed_circular <- function(data_source,
     }
   )
 
+  # add polygon
+  switch(as.character(add_polygon),
+    "mean" = {
+      p_2 <- p_1 +
+        ggplot2::geom_polygon(
+          mapping = ggplot2::aes(
+            y = get(paste0(sel_mode, "_mean")),
+            group = as.factor(get(col_var))
+          ),
+          alpha = 0.2,
+          col = NA
+        )
+    },
+    "95%" = {
+      p_2 <- p_1 +
+        ggplot2::geom_polygon(
+          mapping = ggplot2::aes(
+            y = get(paste0(sel_mode, "_upr")),
+            group = as.factor(get(col_var))
+          ),
+          alpha = 0.2,
+          col = NA
+        )
+    },
+    "sd" = {
+      p_2 <- p_1 +
+        ggplot2::geom_polygon(
+          mapping = ggplot2::aes(
+            y = get(paste0(sel_mode, "_mean")) +
+              get(paste0(sel_mode, "_sd")),
+            group = as.factor(get(col_var))
+          ),
+          alpha = 0.2,
+          col = NA
+        )
+    },
+    "FALSE" = {
+      p_2 <- p_1
+    }
+  )
+
   # add error bars
   switch(as.character(add_error),
     "FALSE" = {
-      p_2 <-
-        p_1
+      p_3 <-
+        p_2
     },
     "95%" = {
-      p_2 <-
-        p_1 +
+      p_3 <-
+        p_2 +
         ggplot2::geom_pointrange(
           mapping = ggplot2::aes(
             ymin = get(paste0(sel_mode, "_lwr")),
@@ -162,8 +206,8 @@ plot_summed_circular <- function(data_source,
         )
     },
     "sd" = {
-      p_2 <-
-        p_1 +
+      p_3 <-
+        p_2 +
         ggplot2::geom_pointrange(
           mapping = ggplot2::aes(
             ymin = get(paste0(sel_mode, "_mean")) -
@@ -177,8 +221,8 @@ plot_summed_circular <- function(data_source,
     }
   )
 
-  p_3 <-
-    p_2 +
+  p_4 <-
+    p_3 +
     ggplot2::geom_point(
       size = 7,
       col = "gray30"
@@ -187,5 +231,5 @@ plot_summed_circular <- function(data_source,
       size = 6
     )
 
-  return(p_3)
+  return(p_4)
 }
