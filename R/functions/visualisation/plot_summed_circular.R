@@ -13,6 +13,8 @@ plot_summed_circular <- function(data_source,
                                  add_error = c("95%", "sd", FALSE),
                                  add_polygon = c("mean", "95%", "sd", FALSE),
                                  point_size = 7,
+                                 text_size = 12,
+                                 line_size = 0.1,
                                  full_scale = FALSE) {
   group_vars <- as.character(group_vars)
   col_var <- as.character(col_var)
@@ -56,6 +58,8 @@ plot_summed_circular <- function(data_source,
       add_error = add_error,
       add_polygon = add_polygon,
       point_size = point_size,
+      text_size = text_size,
+      line_size = line_size,
       full_scale = full_scale
     )
 

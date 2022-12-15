@@ -5,6 +5,8 @@ plot_circular <- function(data_source,
                           add_error = c(FALSE, "95%", "sd"),
                           add_polygon = c(FALSE, "mean", "95%", "sd"),
                           point_size = 7,
+                          text_size = 12,
+                          line_size = 0.1,
                           full_scale = FALSE) {
   y_var_name <- as.character(y_var_name)
   col_var_name <- as.character(col_var_name)
@@ -34,6 +36,8 @@ plot_circular <- function(data_source,
     ggplot2::theme_light() +
     ggplot2::coord_polar() +
     ggplot2::theme(
+      text = ggplot2::element_text(size = text_size),
+      line = ggplot2::element_line(size = line_size),
       legend.position = "bottom",
       axis.title.x = ggplot2::element_blank()
     ) +
