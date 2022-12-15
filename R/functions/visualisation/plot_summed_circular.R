@@ -96,7 +96,7 @@ plot_summed_circular <- function(data_source,
       as.formula(
         paste(
           "~",
-          paste(plot_group_vars, collapse = " + ")
+          paste(group_vars, collapse = " + ")
         )
       )
     ) +
@@ -133,18 +133,15 @@ plot_summed_circular <- function(data_source,
         ymin = get(paste0(sel_mode, "_lwr")),
         ymax = get(paste0(sel_mode, "_upr"))
       ),
-      position = ggplot2::position_dodge(width = 0.5),
       fatten = 0,
       size = 3
     ) +
     ggplot2::geom_point(
       size = 7,
-      col = "gray30",
-      position = ggplot2::position_dodge(width = 0.5),
+      col = "gray30"
     ) +
     ggplot2::geom_point(
-      size = 6,
-      position = ggplot2::position_dodge(width = 0.5),
+      size = 6
     )
 
   return(p_2)
