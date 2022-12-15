@@ -43,12 +43,52 @@ plot_circular_plot <- function(x) {
   
 }
 
-#venn diagrams
-plot_venn_diagrams <- function(x) {
+
+#euler diagrams
+get_data_for_euler <- function(data_source) {
   
+  rep_string <- c("Unique to human" = "Human",
+                  "Unique to climate" = "Climate",
+                  "Unique to time" = "Time",
+                  "Common to human, and climate" = "Human&Climate",
+                  "Common to human, and time" = "Human&Time",
+                  "Common to climate, and time" = "Climate&Time",
+                  "Common to human, climate, and time" = "Human&Climate&Time")
+  
+  
+  data_work <-
+    as.data.frame(data_source) %>%
+    tibble::rownames_to_column("labels") %>%
+    tibble::as_tibble() %>%
+    mutate(labels = stringr::str_replace_all(labels, rep_string),
+           labels = stringr::str_replace_all(labels, " ", "")) %>%
+    filter(!labels == "Total") %>%
+    dplyr::pull(Fractions, labels) %>%
+    return()
 }
   
   
+get_plot_euler <- function(data_for_euler) {
   
+  v <- venneuler::venneuler(data_for_euler)
+  
+  newdf <- data.frame(v$centers, 
+                      diameters = v$diameters, 
+                      predictors = v$labels, 
+                      stringsAsFactors = FALSE)
+  
+  
+  plt <- newdf %>%
+    mutate(r = diameters/2) %>%
+    ggplot() +
+    geom_circle(aes(x0 = x, y0 = y, r = r, fill = predictors), alpha = .5) +
+    #geom_text(aes(x = x, y = y, label = predictors)) +
+    coord_fixed() +
+    # theme(legend.position = "none") +
+    theme_void() 
+  
+  plt
+  
+}   
   
   
