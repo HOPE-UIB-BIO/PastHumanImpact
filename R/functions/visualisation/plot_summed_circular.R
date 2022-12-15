@@ -38,6 +38,12 @@ plot_summed_circular <- function(data_source,
       data_source = data_source,
       sel_var = sel_mode,
       group_vars = merged_group_vars
+    ) %>%
+    dplyr::mutate(
+      dplyr::across(
+        tidyselect:::where(is.numeric),
+        .fns = ~ tidyr::replace_na(.x, 0)
+      )
     )
 
   plot_res <-
