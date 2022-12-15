@@ -4,7 +4,7 @@ plot_summed_circular <- function(data_source,
                                    "ecozone_koppen_5"
                                  ),
                                  col_var = "predictor",
-                                 sel_mode = c("Individual", "Unique", "Average.share"),
+                                 sel_mode = c("individual", "unique", "average_share"),
                                  full_scale = FALSE) {
   sel_mode <- match.arg(sel_mode)
 
@@ -45,7 +45,7 @@ plot_summed_circular <- function(data_source,
       dplyr::summarise(
         .groups = "drop",
         dplyr::across(
-          c("Unique", "Individual", "Average.share"),
+          c("unique", "individual", "average_share"),
           list(
             mean = ~ mean(.x, na.rm = TRUE),
             sd = ~ sd(.x, na.rm = TRUE),

@@ -48,14 +48,11 @@ data_varpart_output <-
       permutations = 99
     ) %>%
       purrr::pluck("summary_table")
-  )
+  ) %>%
+  janitor::clean_names()
 
 data_for_vis <-
   data_varpart_output %>%
-  dplyr::group_by(dataset_id) %>%
-  dplyr::mutate(AdjR2_total = sum(Individual)) %>%
-  dplyr::ungroup() %>%
-  dplyr::rename(I_perc = `I.perc(%)`) %>%
   dplyr::inner_join(
     targets::tar_read(data_meta) %>%
       dplyr::select(dataset_id, lat, long, region, ecozone_koppen_5),
@@ -67,7 +64,7 @@ plot_summed_circular(
   data_source = data_for_vis,
   group_vars = c("region", "ecozone_koppen_5"),
   col_var = "predictor",
-  sel_mode = "Individual",
+  sel_mode = "individual",
   full_scale = FALSE
 )
 
@@ -77,7 +74,7 @@ plot_summed_circular(
   data_source = data_for_vis,
   group_vars = c("region"),
   col_var = "predictor",
-  sel_mode = "Unique",
+  sel_mode = "unique",
   full_scale = FALSE
 )
 
@@ -87,6 +84,6 @@ plot_summed_circular(
   data_source = data_for_vis,
   group_vars = c("region", "ecozone_koppen_5"),
   col_var = "ecozone_koppen_5",
-  sel_mode = "Individual",
+  sel_mode = "individual",
   full_scale = FALSE
 )
