@@ -2,8 +2,8 @@ plot_circular <- function(data_source,
                           y_var_name,
                           col_var_name,
                           facet_var_name = NULL,
-                          add_error = c("95%", "sd", FALSE),
-                          add_polygon = c("mean", "95%", "sd", FALSE),
+                          add_error = c(FALSE, "95%", "sd"),
+                          add_polygon = c(FALSE, "mean", "95%", "sd"),
                           full_scale = FALSE) {
   y_var_name <- as.character(y_var_name)
   col_var_name <- as.character(col_var_name)
