@@ -13,6 +13,12 @@ plot_circular <- function(data_source,
   add_polygon <- match.arg(add_polygon)
   full_scale <- as.character(full_scale)
 
+#  adjust `y_var_name` if has a `_mean`
+  y_var_name_stripped <-
+    stringr::str_replace(
+      y_var_name, "_mean", ""
+    )
+
   # make a plot
   p_theme <-
     data_source %>%
@@ -100,7 +106,7 @@ plot_circular <- function(data_source,
         p_1 +
         ggplot2::geom_polygon(
           mapping = ggplot2::aes(
-            y = get(paste0(y_var_name, "_upr")),
+            y = get(paste0(y_var_name_stripped, "_upr")),
             group = as.factor(get(col_var_name))
           ),
           alpha = 0.2,
@@ -113,7 +119,7 @@ plot_circular <- function(data_source,
         ggplot2::geom_polygon(
           mapping = ggplot2::aes(
             y = get(y_var_name) +
-              get(paste0(y_var_name, "_sd")),
+              get(paste0(y_var_name_stripped, "_sd")),
             group = as.factor(get(col_var_name))
           ),
           alpha = 0.2,
@@ -136,8 +142,8 @@ plot_circular <- function(data_source,
         p_2 +
         ggplot2::geom_pointrange(
           mapping = ggplot2::aes(
-            ymin = get(paste0(y_var_name, "_lwr")),
-            ymax = get(paste0(y_var_name, "_upr"))
+            ymin = get(paste0(y_var_name_stripped, "_lwr")),
+            ymax = get(paste0(y_var_name_stripped, "_upr"))
           ),
           fatten = 0,
           size = 3
@@ -149,9 +155,9 @@ plot_circular <- function(data_source,
         ggplot2::geom_pointrange(
           mapping = ggplot2::aes(
             ymin = get(y_var_name) -
-              get(paste0(y_var_name, "_sd")),
+              get(paste0(y_var_name_stripped, "_sd")),
             ymax = get(y_var_name) +
-              get(paste0(y_var_name, "_sd"))
+              get(paste0(y_var_name_stripped, "_sd"))
           ),
           fatten = 0,
           size = 3
