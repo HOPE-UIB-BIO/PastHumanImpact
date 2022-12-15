@@ -170,15 +170,22 @@ plot_circular <- function(data_source,
     }
   )
 
-  p_4 <-
-    p_3 +
-    ggplot2::geom_point(
-      size = point_size,
-      col = "gray30"
-    ) +
-    ggplot2::geom_point(
-      size = point_size - 1
-    )
+  # add points
+  if (
+    point_size > 0
+  ) {
+    p_4 <-
+      p_3 +
+      ggplot2::geom_point(
+        size = point_size,
+        col = "gray30"
+      ) +
+      ggplot2::geom_point(
+        size = point_size - 1
+      )
+  } else {
+    p_4 <- p_3
+  }
 
   return(p_4)
 }
