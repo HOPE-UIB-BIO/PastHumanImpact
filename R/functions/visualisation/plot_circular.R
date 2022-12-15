@@ -4,6 +4,7 @@ plot_circular <- function(data_source,
                           facet_var_name = NULL,
                           add_error = c(FALSE, "95%", "sd"),
                           add_polygon = c(FALSE, "mean", "95%", "sd"),
+                          point_size = 7,
                           full_scale = FALSE) {
   y_var_name <- as.character(y_var_name)
   col_var_name <- as.character(col_var_name)
@@ -13,7 +14,7 @@ plot_circular <- function(data_source,
   add_polygon <- match.arg(add_polygon)
   full_scale <- as.character(full_scale)
 
-#  adjust `y_var_name` if has a `_mean`
+  #  adjust `y_var_name` if has a `_mean`
   y_var_name_stripped <-
     stringr::str_replace(
       y_var_name, "_mean", ""
@@ -168,11 +169,11 @@ plot_circular <- function(data_source,
   p_4 <-
     p_3 +
     ggplot2::geom_point(
-      size = 7,
+      size = point_size,
       col = "gray30"
     ) +
     ggplot2::geom_point(
-      size = 6
+      size = point_size - 1
     )
 
   return(p_4)
