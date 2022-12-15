@@ -115,12 +115,20 @@ plot_summed_circular <- function(data_source,
   if (
     isTRUE(full_scale)
   ) {
+    max_value <- 1
+
+    if (
+      sel_mode == "i_perc_percent"
+    ) {
+      max_value <- 100
+    }
+
     p_1 <-
       p_0
     ggplot2::scale_y_continuous(
-      limits = c(0, 1),
-      breaks = seq(0, 1, by = 0.1),
-      minor_breaks = seq(0, 1, by = 0.2)
+      limits = c(0, max_value),
+      breaks = seq(0, max_value, by = max_value / 10),
+      minor_breaks = seq(0, max_value, by = max_value / 5)
     )
   } else {
     p_1 <- p_0
