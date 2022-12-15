@@ -68,7 +68,6 @@ plot_summed_circular(
   full_scale = FALSE
 )
 
-
 # get plot for Unique contribution for each continent
 plot_summed_circular(
   data_source = data_for_vis,
@@ -84,6 +83,6 @@ plot_summed_circular(
   data_source = data_for_vis,
   group_vars = c("region", "ecozone_koppen_5"),
   col_var = "ecozone_koppen_5",
-  sel_mode = "individual",
+  sel_mode = "i_perc_percent",
   full_scale = FALSE
 )
