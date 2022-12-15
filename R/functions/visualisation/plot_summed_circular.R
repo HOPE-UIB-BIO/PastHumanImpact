@@ -96,7 +96,12 @@ plot_summed_circular <- function(data_source,
     ggplot2::coord_polar() +
     ggplot2::theme(
       legend.position = "bottom",
-      axis.title = ggplot2::element_blank()
+      axis.title.x = ggplot2::element_blank()
+    ) +
+    ggplot2::labs(
+      y = paste("adjR2", sel_mode, sep = " - "),
+      fill = col_var,
+      col = col_var
     )
 
   if (
@@ -134,5 +139,5 @@ plot_summed_circular <- function(data_source,
       position = ggplot2::position_dodge(width = 0.5),
     )
 
-    return(p_2)
+  return(p_2)
 }
