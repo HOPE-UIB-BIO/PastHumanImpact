@@ -17,11 +17,11 @@ get_data_for_hvarpar <- function(data_source_diversity,
     dplyr::inner_join(
       data_source_density,
       by = "dataset_id"
-    )
-  dplyr::inner_join(
-    data_source_spd,
-    by = "dataset_id"
-  ) %>%
+    ) %>%
+    dplyr::inner_join(
+      data_source_spd,
+      by = "dataset_id"
+    ) %>%
     dplyr::inner_join(
       data_source_climate,
       by = "dataset_id"
@@ -56,7 +56,7 @@ get_data_for_hvarpar <- function(data_source_diversity,
       )
     ) %>%
     dplyr::select(
-      dataset_id, data_merged
+      dataset_id, data_merge
     ) %>%
     return()
 }
