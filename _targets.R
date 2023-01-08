@@ -505,7 +505,7 @@ list(
         "mvrt", "roc", "dcca"
       ),
       used_rescales = TRUE,
-      data_error_family = "mgcv::betar(link = 'logit')",
+      error_family = "mgcv::betar(link = 'logit')",
       smooth_basis = "tp",
       sel_k = round(max(data_dummy_time$age) / 500),
       limit_length = TRUE
