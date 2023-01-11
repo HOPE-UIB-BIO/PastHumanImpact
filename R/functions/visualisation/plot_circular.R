@@ -37,7 +37,7 @@ plot_circular <- function(data_source,
     ggplot2::coord_polar() +
     ggplot2::theme(
       text = ggplot2::element_text(size = text_size),
-      line = ggplot2::element_line(size = line_size),
+      line = ggplot2::element_line(linewidth = line_size),
       legend.position = "bottom",
       axis.title.x = ggplot2::element_blank()
     ) +
