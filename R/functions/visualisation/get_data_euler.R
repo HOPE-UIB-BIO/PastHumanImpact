@@ -4,7 +4,7 @@
 #' @return Data structure for input to plot Euler diagrams
 
 
-get_data_for_euler <- function(data_source) {
+get_data_euler <- function(data_source) {
   
   rep_string <- c("Unique to human" = "Human",
                   "Unique to climate" = "Climate",
