@@ -151,7 +151,7 @@ get_hgam_density_vars <- function(data_source_density,
         ) %>%
           dplyr::select(
             age,
-            fit = density_diversity
+            density_diversity = fit
           )
       ),
       density_turnover = purrr::map2(
@@ -166,7 +166,7 @@ get_hgam_density_vars <- function(data_source_density,
         ) %>%
           dplyr::select(
             age,
-            fit = density_turnover
+            density_turnover = fit
           )
       )
     ) %>%

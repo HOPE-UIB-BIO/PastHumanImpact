@@ -73,6 +73,7 @@ select_best_spd <- function(data_source_events,
     get_distance_character(dist_vec) %>%
       purrr::map_dbl(
         .f = ~ {
+
           res_model <-
             vegan::rda(
               as.formula(
@@ -134,7 +135,13 @@ select_best_spd <- function(data_source_events,
         .f = ~ {
           dplyr::inner_join(
             .x %>%
-              janitor::clean_names(),
+              janitor::clean_names()  %>% 
+              dplyr::mutate(
+                dplyr::across(
+                  dplyr::everything(),
+                  ~ tidyr::replace_na(.x, 0)
+                )
+              ),
             .y,
             by = "age"
           ) %>%
