@@ -62,7 +62,10 @@ tar_option_set(
     "tidyverse",
     "usethis",
     "vegan",
-    "rdacca.hp"
+    "rdacca.hp",
+    "ggimage",
+    "ggforce",
+    "venneuler"
   ),
   memory = "transient",
   garbage_collection = TRUE,
