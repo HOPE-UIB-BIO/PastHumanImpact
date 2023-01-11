@@ -15,7 +15,7 @@
 #' @return List of model outputs and a summary table of the results
 
 get_varhp <- function(data_source,
-                      reponse_vars = c(
+                      response_vars = c(
                         "n0", "n1", "n2",
                         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
                         "roc",
@@ -39,7 +39,7 @@ get_varhp <- function(data_source,
   # prepare responses
   data_resp <-
     data_source %>%
-    dplyr::select(all_of(reponse_vars))
+    dplyr::select(all_of(response_vars))
 
   # prepare predictors
   # if `run_all_predictors` is true then use all variables individually
@@ -52,7 +52,7 @@ get_varhp <- function(data_source,
 
     data_preds <-
       data_source %>%
-      dplyr::select(dplyr::all_of(predictor_vars)) %>%
+      dplyr::select(all_of(predictor_vars)) %>%
       # note have to remove empty vars for individual sites or the model
       #  will fail, need to take this into account later (for discussion
       #   - empty vars = different things)
@@ -68,7 +68,7 @@ get_varhp <- function(data_source,
       purrr::map(
         .x = predictor_vars,
         .f = ~ data_source %>%
-          dplyr::select(dplyr::all_of(.x)) %>%
+          dplyr::select(any_of(.x)) %>%
           # note have to remove empty vars for individual sites or the model
           #  will fail, need to take this into account later (for discussion
           #   - empty vars = different things)
