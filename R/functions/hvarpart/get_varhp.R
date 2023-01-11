@@ -39,7 +39,8 @@ get_varhp <- function(data_source,
   # prepare responses
   data_resp <-
     data_source %>%
-    dplyr::select(all_of(response_vars))
+    dplyr::select(all_of(response_vars)) %>%
+    drop_na()
 
   # prepare predictors
   # if `run_all_predictors` is true then use all variables individually
