@@ -40,7 +40,7 @@ plot_euler <- function(data_source,
       legend.position = legend.position,
       ...
     ) +
-    theme_transparent(
+    ggpubr::theme_transparent(
     ...
     )
   
