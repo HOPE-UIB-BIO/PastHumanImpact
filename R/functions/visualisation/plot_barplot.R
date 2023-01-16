@@ -4,6 +4,7 @@ plot_barplot <- function(data_source,
                          facet_name = "region",
                          x_label = "Predictor",
                          y_label = "Explained variation",
+                         theme_map = FALSE,
                          ...) {
   
 
@@ -50,6 +51,17 @@ plot_barplot <- function(data_source,
      ggplot2::theme(
        legend.position = "none"
      ) 
+ }
+ 
+ # plot theme for map
+ if(
+   isTRUE(theme_map)
+ ) {
+   finalplot <- 
+     finalplot +
+     ggpubr::theme_transparent(
+       ...
+     )
  }
  
  return(finalplot)
