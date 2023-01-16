@@ -1,14 +1,15 @@
-plot_boxplot <- function(datasource,
+plot_boxplot <- function(data_source,
                          y_var_name = "adj_r2_total",
                          groupings = "ecozone_koppen_5",
                          facet_name = "region",
                          label_x = "Ecozones",
                          label_y = "Total adjusted R2") {
+
   
  y_var_name <- as.character(y_var_name)
  groupings <- as.character(groupings)
  
- baseplot <- datasource %>%
+ baseplot <- data_source %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         y = get(y_var_name), 
