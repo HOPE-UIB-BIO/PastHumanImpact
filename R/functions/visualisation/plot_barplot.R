@@ -24,7 +24,10 @@ plot_barplot <- function(data_source,
     ggplot2::labs(
       x = x_label, 
       y = y_label
-      )
+      ) + 
+   ggplot2::theme(
+     legend.position = "none"
+   ) 
  
  # add facet
  if (
@@ -41,16 +44,10 @@ plot_barplot <- function(data_source,
            paste(facet_name, collapse = " + ")
          )
        )
-     ) + 
-     ggplot2::theme(
-       legend.position = "none"
      ) 
  } else {
    finalplot <-
-     baseplot + 
-     ggplot2::theme(
-       legend.position = "none"
-     ) 
+     baseplot 
  }
  
  # plot theme for map
@@ -59,9 +56,13 @@ plot_barplot <- function(data_source,
  ) {
    finalplot <- 
      finalplot +
-     ggpubr::theme_transparent(
-       ...
-     )
+     ggplot2::theme(
+       panel.background = element_rect(fill = "transparent"),
+       plot.background = element_rect(fill = "transparent"),
+       panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       axis.text.x = element_blank()
+     ) 
  }
  
  return(finalplot)
