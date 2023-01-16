@@ -18,9 +18,6 @@ plot_boxplot <- function(data_source,
         )
       ) +
     ggplot2::geom_boxplot() +
-   ggplot2::theme(
-     legend.position = "none"
-     ) +
     ggplot2::labs(
       x = label_x, 
       y = label_y
@@ -40,11 +37,18 @@ plot_boxplot <- function(data_source,
            paste(facet_name, collapse = " + ")
          )
        )
-     )
+     ) + 
+     ggplot2::theme(
+       legend.position = "none"
+     ) 
  } else {
    finalplot <-
-     baseplot
+     baseplot + 
+     ggplot2::theme(
+       legend.position = "none"
+     ) 
  }
+ return(finalplot)
  
 }
 
