@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Visualisation - example of figures
 
 
-``` r
+``` {r}
 library(tidyverse)
 library(usethis)
 library(targets)
@@ -31,7 +31,7 @@ lapply(
   invisible()
 ```
 
-``` r
+``` {r}
 # Define directory for external storage for users
 auth_tibble <-
   tibble::tibble(
@@ -76,7 +76,7 @@ targets::tar_config_set(
 
 In order to do so, you have to have `data_to_run` in root folder
 
-``` r
+``` {r}
 # get the data
 data_to_run <- RUtilpol::get_latest_file("data_to_run")
 ```
@@ -85,7 +85,7 @@ data_to_run <- RUtilpol::get_latest_file("data_to_run")
 
 Get the list of full output for hVArPart
 
-``` r
+``` {r}
 # get full output
 data_varpart_output <-
   data_to_run$data_for_ord %>%
@@ -120,9 +120,11 @@ data_varpart_output <-
     
 ```
 
-Create a tibble with data to produce figures. It is nested as different figures need different input either based on the summary table output or to create Euler diagrams.  
+## Create a tibble with data to produce figures
+
+It is nested as different figures need different input either based on the summary table output or to create Euler diagrams.  
     
-``` r
+``` {r}
 data_for_vis <-
   data_varpart_output %>%
   purrr::map(pluck("summary_table")) %>%
@@ -141,13 +143,14 @@ data_for_vis <-
 
 ```
 
-## Visualisation of explained variation among and between predictors 
 
-Summary figures with boxplot 
+## Visualisation with boxplot 
+
+### Visualisation of explained variation among and between predictors 
 
 Display total explained variation of human, climate, and time between regions and ecozones
 
-``` r
+``` {r}
 plot_boxplot(
   data_source = data_for_vis %>%
     unnest(summary_table) %>%
@@ -161,9 +164,12 @@ plot_boxplot(
   label_y = "Total explained variation"
 )
 ```
-Display explained individual variation by humans between and within regions and ecozones (single predictor)
 
-``` r
+### Select single predictor variable to compare
+
+Display explained individual variation by humans between and within regions and ecozones 
+
+``` {r}
 plot_boxplot(
   data_source = data_for_vis %>%
     unnest(summary_table) %>%
@@ -176,8 +182,10 @@ plot_boxplot(
 )
 ```
 
+
 Alternatively display explained individual variation by climate between and within regions and ecozones
-``` r
+
+``` {r}
 plot_boxplot(
   data_source = data_for_vis %>%
     unnest(summary_table) %>%
@@ -190,39 +198,16 @@ plot_boxplot(
 )
 ```
 
-## Compare explained variation between predictor variables 
 
-Examples with barplot
+## Visualisation with barplot
 
-Display explained variation between predictor variables between individual datasets
+### Compare explained variation between predictor variables 
 
-``` r
-plot_barplot(
-  data_source = data_for_vis %>%
-    unnest(summary_table),
-  y_var_name = "unique",
-  facet_name = "dataset_id",
-  x_label = "Predictor",
-  y_label = "Explained variation"
-)
-```
-Display explained variation between predictor variables between regions and ecozones
-
-``` r
-plot_barplot(
-  data_source = data_for_vis %>%
-    unnest(summary_table),
-  y_var_name = "individual",
-  facet_name = "region",
-  x_label = "Predictor",
-  y_label = "Mean explained variation"
-)
-
-```
+### Single records
 
 Display explained variation between predictor variables for a selected site
 
-``` r
+``` {r}
 plot_barplot(
   data_source = data_for_vis %>%
     unnest(summary_table) %>%
@@ -234,13 +219,45 @@ plot_barplot(
 )
 ```
 
+
+Display explained variation between predictor variables between the individual datasets
+
+``` {r}
+plot_barplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table),
+  y_var_name = "unique",
+  facet_name = "dataset_id",
+  x_label = "Predictor",
+  y_label = "Explained variation"
+)
+```
+
+
+### Multiple records
+
+Display explained variation between predictor variables between regions 
+
+``` {r}
+plot_barplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table),
+  y_var_name = "individual",
+  facet_name = "region",
+  x_label = "Predictor",
+  y_label = "Mean explained variation"
+)
+
+```
+
+
 ## Visualisation of circular plots
 
 ### Individual record
 
 Get plot for percentage contribution for a single record
 
-``` r
+``` {r}
 plot_circular(
   data_source = data_for_vis %>%
     unnest(summary_table) %>%
@@ -251,14 +268,14 @@ plot_circular(
 )
 ```
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-1-1.png)
+
 
 ### Multiple records
 
 Get plot for individual contribution for each climate zone within
 continent
 
-``` r
+``` {r}
 plot_summed_circular(
   data_source = data_for_vis %>% 
     unnest(summary_table),
@@ -267,12 +284,12 @@ plot_summed_circular(
 )
 ```
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-2-1.png)
+
 
 Get plot for perctenage contribution for each continent on a full scale
 with error bars for 95-quantiles
 
-``` r
+``` {r}
 plot_summed_circular(
   data_source = data_for_vis %>% 
     unnest(summary_table),
@@ -285,12 +302,12 @@ plot_summed_circular(
 )
 ```
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-3-1.png)
+
 
 Get plot for individual contribution for each continent and color by
 climate zone. Add polygon for mean values
 
-``` r
+``` {r}
 plot_summed_circular(
   data_source = data_for_vis %>% 
     unnest(summary_table),
@@ -303,15 +320,14 @@ plot_summed_circular(
 )
 ```
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-4-1.png)
 
 Get plot for perentage contribution for each continent and color by
 climate zone. Add error bars by sd and polygon for 95-quantile values
 
-``` r
+``` {r}
 plot_summed_circular(
   data_source = data_for_vis %>% 
-    unnest(summary_table)
+    unnest(summary_table),
   group_vars = "region",
   col_var = "ecozone_koppen_5",
   sel_mode = "i_perc_percent",
@@ -322,15 +338,11 @@ plot_summed_circular(
 )
 ```
 
-    Warning: Removed 1 rows containing missing values (geom_segment).
-    Removed 1 rows containing missing values (geom_segment).
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-5-1.png)
-
-Get plot for perentage contribution for each climate zone, colored by
+Get plot for percentage contribution for each climate zone, colored by
 continent. Add only polygons with mean value, no points
 
-``` r
+``` {r}
 plot_summed_circular(
   data_source = data_for_vis %>% 
     unnest(summary_table),
@@ -344,14 +356,14 @@ plot_summed_circular(
 )
 ```
 
-![](summed_visualisation_files/figure-gfm/unnamed-chunk-6-1.png)
+
 
 
 ## Create Euler diagrams to put on a global map
 
-This example provide figures for individual datasets 
+First produce and save figures for individual records in object data_to_map
 
-``` r
+``` {r}
 data_to_map <- 
   data_for_vis %>%
   mutate(subview_figs = 
@@ -369,9 +381,9 @@ plot_figures_on_map(
 
 It is also possible to put other figures on a map, switch input data to summary_table and type of figure, but it might need some fiddling to adjust transparency etc. 
 
-## Example adding barplots
+### Alternative adding barplots on map
 
-``` r
+``` {r}
 data_to_map2 <-  
   data_for_vis %>%
   mutate(
@@ -397,8 +409,3 @@ plot_figures_on_map(data_to_map = data_to_map2,
 
 Circular plots or barplots can also be plotted for regions and/or ecozone using aggregated data in data_to_map instead. 
 
-## Example adding summary figures for regions and ecozones
-
-``` r
-
-```  
