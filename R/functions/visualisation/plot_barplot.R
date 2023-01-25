@@ -4,6 +4,7 @@ plot_barplot <- function(data_source,
                          facet_name = "region",
                          x_label = "Predictor",
                          y_label = "Explained variation",
+                         alpha = 0.5,
                          theme_map = FALSE,
                          ...) {
   
@@ -19,7 +20,7 @@ plot_barplot <- function(data_source,
     ) +
     ggplot2::geom_bar(
       stat = "identity", 
-      alpha = 0.5
+      alpha = alpha
       ) +
     ggplot2::labs(
       x = x_label, 
@@ -61,7 +62,8 @@ plot_barplot <- function(data_source,
        plot.background = element_rect(fill = "transparent"),
        panel.grid.major = element_blank(),
        panel.grid.minor = element_blank(),
-       axis.text.x = element_blank()
+       axis.title.x = element_blank(),
+       axis.title.y = element_blank()
      ) 
  }
  
