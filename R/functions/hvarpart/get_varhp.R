@@ -40,7 +40,7 @@ get_varhp <- function(data_source,
   data_resp <-
     data_source %>%
     dplyr::select(all_of(response_vars)) %>%
-    drop_na()
+    dplyr::select(tidyselect:::where(~ any(!is.na(.))))
 
   # prepare predictors
   # if `run_all_predictors` is true then use all variables individually
@@ -57,7 +57,8 @@ get_varhp <- function(data_source,
       # note have to remove empty vars for individual sites or the model
       #  will fail, need to take this into account later (for discussion
       #   - empty vars = different things)
-      dplyr::select(tidyselect:::where(~ any(. != 0)))
+      dplyr::select(tidyselect:::where(~ any(. != 0)))%>%
+      dplyr::select(tidyselect:::where(~ any(!is.na(.))))
 
     output_table_dummy <-
       tibble::tibble(
