@@ -8,12 +8,8 @@ plot_euler <- function(data_source,
                        legend.position = "none",
                        ...) {
   
-  data_euler <- data_source %>%
-    purrr::map(pluck(1)) %>%
-    purrr::map(pluck("Var.part")) %>%
-    purrr::map(get_data_euler)
   
-  v <- venneuler::venneuler(data_euler)
+  v <- venneuler::venneuler(data_source)
   
    euler_df <- data.frame(v$centers, 
                       diameters = v$diameters, 
@@ -32,6 +28,7 @@ plot_euler <- function(data_source,
         r = r, 
         fill = predictors), 
       colour = NA, 
+      alpha = alpha,
       ...) +
     ggplot2::coord_fixed(
       ...
@@ -40,10 +37,11 @@ plot_euler <- function(data_source,
       ...
     ) +
     ggplot2::theme(
+      legend.position = legend.position,
       ...
     ) +
-    theme_transparent(
-      ...
+    ggpubr::theme_transparent(
+    ...
     )
   
   eulerdiagram 

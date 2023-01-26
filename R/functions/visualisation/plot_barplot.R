@@ -1,29 +1,34 @@
-plot_barplot <- function(datasource,
-                         y_var_name,
-                         grouping = "predictor",
-                         facet_var_name = NULL,
+plot_barplot <- function(data_source,
+                         y_var_name = "individual",
+                         #grouping =  "ecozone_koppen_5",
+                         facet_name = "region",
                          x_label = "Predictor",
-                         y_label = "Mean adj r2",
+                         y_label = "Explained variation",
+                         alpha = 0.5,
+                         theme_map = FALSE,
                          ...) {
   
-  
+
   y_var_name <- as.character(y_var_name)
-  grouping <- as.character(grouping)
+  #grouping <- as.character(grouping)
   
- baseplot <- datasource %>% 
+ baseplot <- data_source %>% 
    ggplot(mapping = ggplot2::aes(
      y = get(y_var_name), 
-     x = reorder(as.factor(get(predictor)), - get(y_var_name)), 
-               fill = as.factor(get(predictor))), 
-     ...) +
+     x = reorder(as.factor(predictor), - get(y_var_name)), 
+               fill = as.factor(predictor)), 
+    ) +
     ggplot2::geom_bar(
       stat = "identity", 
-      alpha = 0.5,
-      ...) +
+      alpha = alpha
+      ) +
     ggplot2::labs(
       x = x_label, 
-      y = y_label,
-      ...)
+      y = y_label
+      ) + 
+   ggplot2::theme(
+     legend.position = "none"
+   ) 
  
  # add facet
  if (
@@ -40,11 +45,29 @@ plot_barplot <- function(datasource,
            paste(facet_name, collapse = " + ")
          )
        )
-     )
+     ) 
  } else {
    finalplot <-
-     baseplot
+     baseplot 
  }
+ 
+ # plot theme for map
+ if(
+   isTRUE(theme_map)
+ ) {
+   finalplot <- 
+     finalplot +
+     ggplot2::theme(
+       panel.background = element_rect(fill = "transparent"),
+       plot.background = element_rect(fill = "transparent"),
+       panel.grid.major = element_blank(),
+       panel.grid.minor = element_blank(),
+       axis.title.x = element_blank(),
+       axis.title.y = element_blank()
+     ) 
+ }
+ 
+ return(finalplot)
  
 }
 

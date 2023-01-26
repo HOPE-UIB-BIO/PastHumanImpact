@@ -1,0 +1,411 @@
+---
+title: "Visualisation examples"
+author: "Vivian Astrup Felde"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Visualisation - example of figures
+
+
+``` {r}
+library(tidyverse)
+library(usethis)
+library(targets)
+library(here)
+
+# list R functions and source them
+lapply(
+  list.files(
+    path = here::here("R/functions"),
+    pattern = "*.R",
+    recursive = TRUE,
+    full.names = TRUE
+  ),
+  source
+) %>%
+  invisible()
+```
+
+``` {r}
+# Define directory for external storage for users
+auth_tibble <-
+  tibble::tibble(
+    name = c("ondre", "omo084", "vfe032", "vfe032", "sfl046", "kbh022"),
+    paths = c(
+      "C:/Users/ondre/OneDrive - University of Bergen/HOPE_data/",
+      "C:/Users/omo084/OneDrive - University of Bergen/HOPE_data/",
+      "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/",
+      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data/",
+      "C:/Users/sfl046/University of Bergen/Ondrej Mottl - HOPE_data/",
+      "C:/Users/kbh022/University of Bergen/Ondrej Mottl - HOPE_data/"
+    )
+  )
+
+sys_info <- Sys.info()
+
+username <-
+  sys_info["user"]
+
+data_storage_path <-
+  auth_tibble %>%
+  dplyr::filter(name == username) %>%
+  purrr::pluck("paths")
+
+if (length(data_storage_path) > 1) {
+  data_storage_path <- data_storage_path[1]
+}
+
+external_storage_targets <-
+  paste0(
+    data_storage_path,
+    "HOPE_Hypothesis1/_targets"
+  )
+
+# set configuration for _target storage
+targets::tar_config_set(
+  store = external_storage_targets
+)
+```
+
+## Load data
+
+In order to do so, you have to have `data_to_run` in root folder
+
+``` {r}
+# get the data
+data_to_run <- RUtilpol::get_latest_file("data_to_run")
+```
+
+## Estimate hVArPart
+
+Get the list of full output for hVArPart
+
+``` {r}
+# get full output
+data_varpart_output <-
+  data_to_run$data_for_ord %>%
+  rlang::set_names(
+    nm = data_to_run$dataset_id
+  ) %>%
+  purrr::map(
+    .id = "dataset_id",
+    .f = ~ get_varhp(
+      data_source = .x,
+      response_vars = c(
+        "n0", "n1", "n2",
+        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+        "roc",
+        "dcca_axis_1"
+      ),
+      predictor_vars = list(
+        human = c("spd"),
+        climate = c(
+          "temp_cold",
+          "prec_summer",
+          "prec_win",
+          "gdm"
+        ),
+        time = c("age")
+      ),
+      run_all_predictors = FALSE,
+      time_series = TRUE,
+      get_significance = FALSE,
+      permutations = 99
+    ) )
+    
+```
+
+## Create a tibble with data to produce figures
+
+It is nested as different figures need different input either based on the summary table output or to create Euler diagrams.  
+    
+``` {r}
+data_for_vis <-
+  data_varpart_output %>%
+  purrr::map(pluck("summary_table")) %>%
+  purrr::map_dfr(~ as_tibble(.), .id = "dataset_id") %>%
+  janitor::clean_names() %>%
+  nest(summary_table = -dataset_id) %>%
+  mutate(euler_data = data_varpart_output %>% 
+           purrr::map(pluck(1)) %>%
+           purrr::map(pluck("Var.part")) %>%
+           purrr::map(get_data_euler)) %>%
+  dplyr::inner_join(
+    targets::tar_read(data_meta) %>%
+      dplyr::select(dataset_id, lat, long, region, ecozone_koppen_5),
+    by = "dataset_id"
+  )
+
+```
+
+
+## Visualisation with boxplot 
+
+### Visualisation of explained variation among and between predictors 
+
+Display total explained variation of human, climate, and time between regions and ecozones
+
+``` {r}
+plot_boxplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table) %>%
+    group_by(dataset_id) %>%
+    mutate(adj_r2_total = sum(individual)) %>%
+    ungroup(),
+  y_var_name = "adj_r2_total",
+  groupings = "ecozone_koppen_5",
+  facet_name = "region",
+  label_x = "Ecozones",
+  label_y = "Total explained variation"
+)
+```
+
+### Select single predictor variable to compare
+
+Display explained individual variation by humans between and within regions and ecozones 
+
+``` {r}
+plot_boxplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table) %>%
+    filter(predictor == "human"),
+  y_var_name = "individual",
+  groupings = "ecozone_koppen_5",
+  facet_name = "region",
+  label_x = "Ecozones",
+  label_y = "Individual variation explained by human"
+)
+```
+
+
+Alternatively display explained individual variation by climate between and within regions and ecozones
+
+``` {r}
+plot_boxplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table) %>%
+    filter(predictor == "climate"),
+  y_var_name = "individual",
+  groupings = "ecozone_koppen_5",
+  facet_name = "region",
+  label_x = "Ecozones",
+  label_y = "Individual variation explained by climate"
+)
+```
+
+
+## Visualisation with barplot
+
+### Compare explained variation between predictor variables 
+
+### Single records
+
+Display explained variation between predictor variables for a selected site
+
+``` {r}
+plot_barplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table) %>%
+    filter(dataset_id == "40448"),
+  y_var_name = "individual",
+  facet_name = NULL,
+  x_label = "Predictor",
+  y_label = "Mean explained variation"
+)
+```
+
+
+Display explained variation between predictor variables between the individual datasets
+
+``` {r}
+plot_barplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table),
+  y_var_name = "unique",
+  facet_name = "dataset_id",
+  x_label = "Predictor",
+  y_label = "Explained variation"
+)
+```
+
+
+### Multiple records
+
+Display explained variation between predictor variables between regions 
+
+``` {r}
+plot_barplot(
+  data_source = data_for_vis %>%
+    unnest(summary_table),
+  y_var_name = "individual",
+  facet_name = "region",
+  x_label = "Predictor",
+  y_label = "Mean explained variation"
+)
+
+```
+
+
+## Visualisation of circular plots
+
+### Individual record
+
+Get plot for percentage contribution for a single record
+
+``` {r}
+plot_circular(
+  data_source = data_for_vis %>%
+    unnest(summary_table) %>%
+    dplyr::filter(
+      dataset_id == "1758"
+    ),
+  y_var_name = "i_perc_percent"
+)
+```
+
+
+
+### Multiple records
+
+Get plot for individual contribution for each climate zone within
+continent
+
+``` {r}
+plot_summed_circular(
+  data_source = data_for_vis %>% 
+    unnest(summary_table),
+  group_vars = c("region", "ecozone_koppen_5"),
+  sel_mode = "individual"
+)
+```
+
+
+
+Get plot for perctenage contribution for each continent on a full scale
+with error bars for 95-quantiles
+
+``` {r}
+plot_summed_circular(
+  data_source = data_for_vis %>% 
+    unnest(summary_table),
+  group_vars = "region",
+  col_var = "predictor",
+  sel_mode = "i_perc_percent",
+  add_error = "95%",
+  point_size = 3,
+  full_scale = TRUE
+)
+```
+
+
+
+Get plot for individual contribution for each continent and color by
+climate zone. Add polygon for mean values
+
+``` {r}
+plot_summed_circular(
+  data_source = data_for_vis %>% 
+    unnest(summary_table),
+  group_vars = "region",
+  col_var = "ecozone_koppen_5",
+  sel_mode = "individual",
+  add_error = FALSE,
+  add_polygon = "mean",
+  point_size = 3,
+)
+```
+
+
+Get plot for perentage contribution for each continent and color by
+climate zone. Add error bars by sd and polygon for 95-quantile values
+
+``` {r}
+plot_summed_circular(
+  data_source = data_for_vis %>% 
+    unnest(summary_table),
+  group_vars = "region",
+  col_var = "ecozone_koppen_5",
+  sel_mode = "i_perc_percent",
+  add_error = "sd",
+  add_polygon = "95%",
+  point_size = 3,
+  full_scale = TRUE
+)
+```
+
+
+Get plot for percentage contribution for each climate zone, colored by
+continent. Add only polygons with mean value, no points
+
+``` {r}
+plot_summed_circular(
+  data_source = data_for_vis %>% 
+    unnest(summary_table),
+  group_vars = "ecozone_koppen_5",
+  col_var = "region",
+  sel_mode = "i_perc_percent",
+  add_error = FALSE,
+  add_polygon = "mean",
+  point_size = 0,
+  full_scale = TRUE
+)
+```
+
+
+
+
+## Create Euler diagrams to put on a global map
+
+First produce and save figures for individual records in object data_to_map
+
+``` {r}
+data_to_map <- 
+  data_for_vis %>%
+  mutate(subview_figs = 
+  purrr::map(euler_data, .f = plot_euler)) %>%
+  mutate(width_subplot = 15)
+
+plot_figures_on_map(
+  data_to_map = data_to_map,
+  fill_background_map = "navy",
+  colour_map_line = "grey70",
+  fill_colour_map = "grey80",
+  linewidth_map = 0.5)
+                    
+```
+
+It is also possible to put other figures on a map, switch input data to summary_table and type of figure, but it might need some fiddling to adjust transparency etc. 
+
+### Alternative adding barplots on map
+
+``` {r}
+data_to_map2 <-  
+  data_for_vis %>%
+  mutate(
+    subview_figs = 
+      purrr::map(summary_table, 
+                 .f = ~plot_barplot(.x, 
+                                    y_var_name = "unique",
+                                    facet_name = NULL,
+                                    x_label = "",
+                                    y_label = "",
+                                    theme_map = TRUE
+                                    ))
+         ) %>%
+  mutate(width_subplot = 30)
+  
+plot_figures_on_map(data_to_map = data_to_map2,
+                    fill_background_map = "navy",
+                    colour_map_line = "grey70",
+                    fill_colour_map = "grey80",
+                    linewidth_map = 0.5)  
+  
+```  
+
+Circular plots or barplots can also be plotted for regions and/or ecozone using aggregated data in data_to_map instead. 
+
