@@ -10,13 +10,11 @@
 #' @return A ggmap with selected figures distributed globally with the coordinates in data_to_map 
 
 plot_figures_on_map <- function(data_to_map,
-                                subview_plot = "euler_plot", 
+                                #subview_plot = "euler_diagram", 
                                 fill_background_map = "navy",
                                 colour_map_line = "grey70",
                                 fill_colour_map = "grey80",
                                 linewidth_map = 0.5,
-                                width_subplot = 15,
-                                height_subplot = 15,
                                 ...) {
   
   
@@ -26,11 +24,11 @@ plot_figures_on_map <- function(data_to_map,
   maptheme <- ggplot2::theme(
     panel.background = element_rect(
       fill = fill_background_map,
-      colour = colour_map,
+      colour = fill_colour_map,
       linewidth = linewidth_map, 
       linetype = "solid"),
-    panel.grid.major = element_blank(...), 
-    panel.grid.minor = element_blank(...)
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank()
   )
   # get world map
   worldmap <- map_data("world")
@@ -45,7 +43,7 @@ plot_figures_on_map <- function(data_to_map,
     ggplot2::borders(
       colour = NA, 
       fill = fill_colour_map) +
-    ggplot2::coord_fixed(...) +
+    ggplot2::coord_fixed() +
     maptheme +
     labs(
       x = "Longitudes", 
@@ -58,11 +56,11 @@ plot_figures_on_map <- function(data_to_map,
     x = long, 
     y = lat, 
     width = width_subplot, 
-    height = height_subplot, 
-    subview = subview_plot,
-    ...), 
+    height = width_subplot, 
+    subview = subview_figs), 
     data = data_to_map
     )
   
   return(fig_on_map)
 }
+
