@@ -34,7 +34,7 @@ get_data_for_hvarpar <- function(data_source_diversity,
           density_diversity, # ..3
           density_turnover, # ..4
           climate_data, # ..5
-          spd
+          spd #..6
         ),
         .f = ~ dplyr::inner_join(
           ..1,
@@ -51,6 +51,10 @@ get_data_for_hvarpar <- function(data_source_diversity,
           ) %>%
           dplyr::inner_join(
             ..5,
+            by = "age"
+          ) %>%
+          dplyr::inner_join(
+            ..6,
             by = "age"
           )
       )
