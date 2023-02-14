@@ -28,7 +28,7 @@ get_spd <- function(data_source_c14,
         min_n_dates = min_n_dates,
         max_age = max_age,
         sel_smooth_size = sel_smooth_size,
-        normalise_to_one = TRUE
+        normalise_to_one = FALSE
       )
     if (
       all(is.na(try_spd))
@@ -48,7 +48,7 @@ get_spd <- function(data_source_c14,
                        max_age,
                        sel_smooth_size = 100,
                        min_n_dates = 50,
-                       normalise_to_one = TRUE) {
+                       normalise_to_one = FALSE) {
     data_sub <-
       data_source %>%
       dplyr::filter(dist < sel_dist) %>%
