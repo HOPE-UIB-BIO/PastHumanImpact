@@ -38,6 +38,8 @@ get_climate_indices <- function(data_source, time_ref) {
         dplyr::ungroup() %>%
         transform_ages(., time_ref) %>%
         dplyr::select(time_id, age, bio1:bio6, gdm) %>%
+        dplyr::mutate(bio1 = bio1/10,
+                      bio6 = bio6/10) %>%
         dplyr::distinct() %>%
         dplyr::rename(
           temp_annual = bio1,
