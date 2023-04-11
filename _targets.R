@@ -91,9 +91,11 @@ invisible(lapply(
   source
 ))
 
+
+
 min_age <- 0
 max_age <- 12e3
-timestep <- 100
+timestep <- 500
 
 
 # the targets list:
@@ -109,6 +111,13 @@ list(
       )
     )
   ),
+  targets::tar_target(  
+    name = age_cutoff_region,
+    command = tibble::tibble(
+      region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
+      age_from = c(2000, 2000, 2000, 2000, 500, 500)
+      )
+    ),
   targets::tar_target(
     name = spd_distance_vec,
     command = c(5, 25, 50, 100, 250, 500) %>%
@@ -276,25 +285,42 @@ list(
     name = data_events_to_fit,
     command = get_events_for_modelling(events)
   ),
-  # - expand events to be present for each time slice
+  # - interpolate data for even time steps
   targets::tar_target(
-    name = event_temporal_spacing,
-    command = get_per_timeslice(
+    name = events_interpolated,
+    command = get_interpolated_data(
       data_source = data_events_to_fit,
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "cr",
-      data_error_family = "stats::binomial(link = 'logit')",
-      max_k = round(max(data_dummy_time$age) / 500),
-      # interpolate not forecast
-      limit_length = TRUE,
-      data_source_meta = data_meta
+      variable = "var_name",
+      vars_interpolate = c("age", "value"),
+      group_var = "dataset_id",
+      method = "constant",  
+      rule = 1:2,
+      ties = "ordered",
+      age_min = 0,
+      age_max = 12e03,
+      timestep = 500,
+      verbose = TRUE
     )
   ),
-  # - subset event types relevant for each region
+  # - expand events to be present for each time slice
+  # targets::tar_target(
+  #   name = event_temporal_spacing,
+  #   command = get_per_timeslice(
+  #     data_source = data_events_to_fit,
+  #     data_source_dummy_time = data_dummy_time,
+  #     smooth_basis = "cr",
+  #     data_error_family = "stats::binomial(link = 'logit')",
+  #     max_k = round(max(data_dummy_time$age) / 500),
+  #     # interpolate not forecast
+  #     limit_length = TRUE,
+  #     data_source_meta = data_meta
+  #   )
+  # ),
+  # # - subset event types relevant for each region 
   targets::tar_target(
     name = events_temporal_subset,
     command = subset_event_types(
-      data_source_events = event_temporal_spacing,
+      data_source_events = events_interpolated,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time
     )
@@ -337,7 +363,8 @@ list(
     command = get_spd(
       data_source_c14 = data_c14_subset,
       data_source_dist_vec = spd_distance_vec,
-      age_from = min_age,
+      data_meta = data_meta,
+      age_cutoff_region = age_cutoff_region,
       age_to = max_age,
       age_timestep = timestep,
       min_n_dates = 50
@@ -348,24 +375,41 @@ list(
     name = data_spd_to_fit,
     command = get_spd_for_modelling(data_spd)
   ),
-  # get spd values for each time slice
+  # - get interpolated spd values for each time slice
   targets::tar_target(
-    name = data_sdp_temporal_spacing,
-    command = get_per_timeslice(
+    name = data_sdp_interpolated,
+    command = get_interpolated_data(
       data_source = data_spd_to_fit,
-      data_error_family = "stats::binomial(link = 'logit')",
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "cr",
-      max_k = round(max(data_dummy_time$age) / 500),
-      weights_var = NULL,
-      limit_length = FALSE
+      variable = "var_name",
+      vars_interpolate = c("age", "value"),
+      group_var = "dataset_id",
+      method = "linear",
+      rule = 1:2,
+      ties = mean,
+      age_min = 0,
+      age_max = 12e03,
+      timestep = 500,
+      verbose = TRUE
     )
   ),
+  # # get spd values for each time slice
+  # # targets::tar_target(
+  # #   name = data_sdp_temporal_spacing,
+  # #   command = get_per_timeslice(
+  # #     data_source = data_spd_to_fit,
+  # #     data_error_family = "stats::binomial(link = 'logit')",
+  # #     data_source_dummy_time = data_dummy_time,
+  # #     smooth_basis = "cr",
+  # #     max_k = round(max(data_dummy_time$age) / 500),
+  # #     weights_var = NULL,
+  # #     limit_length = FALSE
+  # #   )
+  # # ),
   targets::tar_target(
     name = data_spd_best_dist,
     command = select_best_spd(
       data_source_events = events_temporal_subset,
-      data_source_spd = data_sdp_temporal_spacing,
+      data_source_spd = data_sdp_interpolated,
       data_source_meta = data_meta,
       data_source_dist_vec = spd_distance_vec
     )
@@ -403,18 +447,44 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
-  ),
+  ), #fix this - check time ref table and variables output and interpolate values
   targets::tar_target(
     name = data_climate,
     command = get_climate_indices(
       data_source = data_climate_chelsa,
       time_ref = time_ref_table
     )
+  ), # need to interpolate data climate 
+  targets::tar_target(
+    name = data_climate_for_interpolation,
+    command = get_climate_data_for_interpolation(
+      data_source = data_climate,
+      sel_var = c("temp_annual",
+                  "temp_cold",
+                  "prec_annual", 
+                  "prec_summer", 
+                  "prec_win")
+      )
+  ),
+  targets::tar_target(
+    name = data_climate_interpolated,
+    command = get_interpolated_data(
+      data_source = data_climate_for_interpolation,   
+      variable = "var_name",
+      vars_interpolate = c("age", "value"),
+      group_var = "dataset_id",
+      method = "linear", 
+      rule = 1:2,
+      ties = mean,
+      age_min = 0,
+      age_max = 12e03,
+      timestep = 500,
+      verbose = TRUE
+    )
   ),
   # 6. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
-    # note cannot reuse existing targets name, any solution?
     name = data_diversity,
     command = get_diversity(
       data_pollen,
@@ -494,26 +564,26 @@ list(
   ),
   # - run hgam model to create a common variable for density diversity and
   #     turnover
-  targets::tar_target(
-    name = data_density_variables,
-    command = get_hgam_density_vars(
-      data_source_density = data_density,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time,
-      diversity_vars = c(
-        "n0", "n1", "n2",
-        "n2_divided_by_n1", "n1_divided_by_n0"
-      ),
-      turnover_vars = c(
-        "mvrt", "roc", "dcca"
-      ),
-      used_rescales = TRUE,
-      error_family = "mgcv::betar(link = 'logit')",
-      smooth_basis = "tp",
-      sel_k = round(max(data_dummy_time$age) / 500),
-      limit_length = TRUE
-    )
-  ),
+  # targets::tar_target(
+  #   name = data_density_variables,
+  #   command = get_hgam_density_vars(
+  #     data_source_density = data_density,
+  #     data_source_meta = data_meta,
+  #     data_source_dummy_time = data_dummy_time,
+  #     diversity_vars = c(
+  #       "n0", "n1", "n2",
+  #       "n2_divided_by_n1", "n1_divided_by_n0"
+  #     ),
+  #     turnover_vars = c(
+  #       "mvrt", "roc", "dcca"
+  #     ),
+  #     used_rescales = TRUE,
+  #     error_family = "mgcv::betar(link = 'logit')",
+  #     smooth_basis = "tp",
+  #     sel_k = round(max(data_dummy_time$age) / 2000),
+  #     limit_length = TRUE
+  #   )
+  # ),
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
@@ -524,82 +594,116 @@ list(
       data_source_pollen = data_pollen
     )
   ),
-  # - estimate Diveristy and DCCA on equal time slices
+  # - estimate Diveristy and DCCA on equal time slices with linear interpolation
   targets::tar_target(
-    name = data_div_dcca_temporal_spacing,
-    command = get_per_timeslice(
+    name = data_div_dcca_interpolated,
+    command = get_interpolated_data(
       data_source = data_diversity_and_dcca,
-      data_error_family = tibble::tribble(
-        ~"var_name", ~"sel_error",
-        "n0", "mgcv::Tweedie(p = 1.1)",
-        "n1", "mgcv::Tweedie(p = 1.1)",
-        "n2", "mgcv::Tweedie(p = 1.1)",
-        "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
-        "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
-        "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
-        "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
-      ),
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "tp",
-      max_k = round(max(data_dummy_time$age) / 500),
-      # use propagating uncertainy
-      weights_var = "var_weight",
-      # interpolate not forecast
-      limit_length = TRUE,
-      data_source_meta = data_meta
+      variable = "var_name",
+      vars_interpolate = c("age", "value"),
+      group_var = "dataset_id",
+      method = "linear", 
+      rule = 1:2,
+      ties = mean,
+      age_min = 0,
+      age_max = 12e03,
+      timestep = 500,
+      verbose = TRUE
     )
   ),
+  # targets::tar_target(
+  #   name = data_div_dcca_temporal_spacing,
+  #   command = get_per_timeslice(
+  #     data_source = data_diversity_and_dcca,
+  #     data_error_family = tibble::tribble(
+  #       ~"var_name", ~"sel_error",
+  #       "n0", "mgcv::Tweedie(p = 1.1)",
+  #       "n1", "mgcv::Tweedie(p = 1.1)",
+  #       "n2", "mgcv::Tweedie(p = 1.1)",
+  #       "n1_minus_n2", "mgcv::Tweedie(p = 1.1)",
+  #       "n2_divided_by_n1", "mgcv::betar(link = 'logit')",
+  #       "n1_divided_by_n0", "mgcv::betar(link = 'logit')",
+  #       "dcca_axis_1", "mgcv::Tweedie(p = 1.1)"
+  #     ),
+  #     data_source_dummy_time = data_dummy_time,
+  #     smooth_basis = "tp",
+  #     max_k = round(max(data_dummy_time$age) / 500),
+  #     # use propagating uncertainy
+  #     weights_var = "var_weight",
+  #     # interpolate not forecast
+  #     limit_length = TRUE,
+  #     data_source_meta = data_meta
+  #   )
+  # ),
   # - prepare RoC for modelling
   targets::tar_target(
     name = data_roc_for_modelling,
     command = get_roc_for_modelling(data_roc)
   ),
-  # - estimate RoC on equal time slices
+  # - estimate RoC on equal time slices with linear interpolation
   targets::tar_target(
-    name = data_roc_temporal_spacing,
-    command = get_per_timeslice(
+    name = data_roc_interpolated,
+    command = get_interpolated_data(
       data_source = data_roc_for_modelling,
-      data_error_family = "mgcv::Tweedie(p = 1.1)",
-      data_source_dummy_time = data_dummy_time,
-      smooth_basis = "tp",
-      max_k = round(max(data_dummy_time$age) / 500),
-      # use propagating uncertainy
-      weights_var = "var_weight",
-      # interpolate not forecast
-      limit_length = TRUE,
-      data_source_meta = data_meta
-    )
+      variable = "var_name",
+      vars_interpolate = c("age", "value"),
+      group_var = "dataset_id",
+      method = "linear", 
+      rule = 1:2,
+      ties = mean,
+      age_min = 0,
+      age_max = 12e03,
+      timestep = 500,
+      verbose = TRUE
+      )
   ),
-  # - merge all data together
+  # targets::tar_target(
+  #   name = data_roc_temporal_spacing,
+  #   command = get_per_timeslice(
+  #     data_source = data_roc_for_modelling,
+  #     data_error_family = "mgcv::Tweedie(p = 1.1)",
+  #     data_source_dummy_time = data_dummy_time,
+  #     smooth_basis = "tp",
+  #     max_k = round(max(data_dummy_time$age) / 500),
+  #     # use propagating uncertainy
+  #     weights_var = "var_weight",
+  #     # interpolate not forecast
+  #     limit_length = TRUE,
+  #     data_source_meta = data_meta
+  #   )
+  # ),
+ # - merge all data together, [remember to add density vars when done!!]
   targets::tar_target(
     name = data_for_hvarpar,
     command = get_data_for_hvarpar(
-      data_source_diversity = data_div_dcca_temporal_spacing,
-      data_source_roc = data_roc_temporal_spacing,
-      data_source_density = data_density_variables,
+      data_source_diversity = data_div_dcca_interpolated,
+      data_source_roc = data_roc_interpolated,
+     # data_source_density = data_density_variables,
       data_source_spd = data_spd_full,
-      data_source_climate = data_climate
+      data_source_climate = data_climate_interpolated
     )
   ),
-  # - run hVARPAR (hypothesis I)
+  # # - run hVARPAR (hypothesis I)
   targets::tar_target(
-    name = data_hvarpar,
+    name = result_hvarpar_timeserie,
     command = run_hvarpart(
       data_source = data_for_hvarpar,
       response_vars = c(
         "n0", "n1", "n2",
         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
         "roc",
-        "dcca_axis_1",
-        "density_diversity", "density_turnover"
+        "dcca_axis_1"
+        #,
+        #"density_diversity", "density_turnover"
       ),
       predictor_vars = list(
         human = c("spd"),
         climate = c(
+          "temp_annual",
           "temp_cold",
-          "prec_summer",
-          "prec_win",
-          "gdm"
+          "prec_summer", 
+          "prec_win"
+          
         ),
         time = c("age")
       ),
@@ -608,5 +712,41 @@ list(
       get_significance = TRUE,
       permutations = 999
     )
-  )
+  ),
+ targets::tar_target(
+   name = data_hvar_timebin,
+   command = get_data_hvar_timebin(
+     data_source = data_for_hvarpar,
+     data_meta = data_meta
+   )
+ ),
+ targets::tar_target(
+   name = result_hvarpar_timebin,
+   command = run_hvarpart(
+     data_source = data_hvar_timebin,
+     response_vars = c(
+       "n0", "n1", "n2",
+       "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+       "roc",
+       "dcca_axis_1"
+       #,
+       #"density_diversity", "density_turnover"
+     ),
+     predictor_vars = list(
+       human = c("spd"),
+       climate = c(
+         "temp_annual",
+         "temp_cold",
+         "prec_summer",
+         "prec_win"
+
+       )),
+     run_all_predictors = FALSE,
+     time_series = FALSE,
+     get_significance = FALSE,
+     permutations = 19
+   )
+ )
+
 )
+
