@@ -1,6 +1,6 @@
 get_data_for_hvarpar <- function(data_source_diversity,
                                  data_source_roc,
-                                 data_source_density,
+                                 #data_source_density,
                                  data_source_spd,
                                  data_source_climate) {
   dplyr::inner_join(
@@ -14,16 +14,19 @@ get_data_for_hvarpar <- function(data_source_diversity,
       ),
     by = "dataset_id"
   ) %>%
-    dplyr::inner_join(
-      data_source_density,
-      by = "dataset_id"
-    ) %>%
+    # dplyr::inner_join(
+    #   data_source_density,
+    #   by = "dataset_id"
+    # ) %>%
     dplyr::inner_join(
       data_source_spd,
       by = "dataset_id"
     ) %>%
     dplyr::inner_join(
-      data_source_climate,
+      data_source_climate %>%
+        dplyr::rename(
+          climate_data = data
+        ),
       by = "dataset_id"
     ) %>%
     dplyr::mutate(
@@ -31,8 +34,8 @@ get_data_for_hvarpar <- function(data_source_diversity,
         .l = list(
           diversity, # ..1
           roc, # ..2
-          density_diversity, # ..3
-          density_turnover, # ..4
+          #density_diversity, # ..3
+          #density_turnover, # ..4
           climate_data, # ..5
           spd #..6
         ),
@@ -48,19 +51,22 @@ get_data_for_hvarpar <- function(data_source_diversity,
           dplyr::inner_join(
             ..4,
             by = "age"
-          ) %>%
-          dplyr::inner_join(
-            ..5,
-            by = "age"
-          ) %>%
-          dplyr::inner_join(
-            ..6,
-            by = "age"
-          )
-      )
+           ) #%>%
+          # dplyr::inner_join(
+          #   ..5,
+          #   by = "age"
+          # ) #%>%
+          # dplyr::inner_join(
+          #   ..6,
+          #   by = "age"
+          # ) 
+        %>%
+          drop_na()
+      ) 
     ) %>%
     dplyr::select(
       dataset_id, data_merge
     ) %>%
+   
     return()
 }

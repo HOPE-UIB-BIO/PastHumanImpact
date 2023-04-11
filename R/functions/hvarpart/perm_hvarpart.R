@@ -73,6 +73,16 @@ perm_hvarpart <- function(dv,
 
     permutations <- ncol(perms)
   } else {
+    if (
+      is.data.frame(iv)
+    ) {
+      n <- nrow(iv)
+      nvar <- ncol(iv)
+    } else {
+      n <- nrow(iv[[1]])
+      nvar <- length(iv)
+    }
+    
     permutations <- permutations - 1
   }
 
