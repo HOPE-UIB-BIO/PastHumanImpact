@@ -54,11 +54,8 @@ get_varhp <- function(data_source,
     data_preds <-
       data_source %>%
       dplyr::select(all_of(predictor_vars)) %>%
-      # note have to remove empty vars for individual sites or the model
-      #  will fail, need to take this into account later (for discussion
-      #   - empty vars = different things)
-      dplyr::select(tidyselect:::where(~ any(. != 0)))%>%
-      dplyr::select(tidyselect:::where(~ any(!is.na(.))))
+      dplyr::select(tidyselect:::where(~ any(. != 0))) %>%
+      tidyr::select(tidyselect:::where(~ any(!is.na(.))))
 
     output_table_dummy <-
       tibble::tibble(
@@ -71,10 +68,8 @@ get_varhp <- function(data_source,
         .x = predictor_vars,
         .f = ~ data_source %>%
           dplyr::select(any_of(.x)) %>%
-          # note have to remove empty vars for individual sites or the model
-          #  will fail, need to take this into account later (for discussion
-          #   - empty vars = different things)
-          dplyr::select(tidyselect:::where(~ any(. != 0)))
+          dplyr::select(tidyselect:::where(~ any(. != 0))) %>%
+          dplyr::select(tidyselect:::where(~ any(!is.na(.))))
       )
 
     # filer out groups with no variables
@@ -89,6 +84,7 @@ get_varhp <- function(data_source,
         predictor = names(predictor_vars)
       )
   }
+  
 
   # run hvarpar
   # should work for both list and just data.frame

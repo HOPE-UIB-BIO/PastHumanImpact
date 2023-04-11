@@ -67,7 +67,7 @@ select_best_spd <- function(data_source_events,
           get_distance_character(dist_vec) %>%
             dplyr::any_of(),
           "age"
-        )
+        ) 
       )
 
     get_distance_character(dist_vec) %>%
@@ -136,13 +136,15 @@ select_best_spd <- function(data_source_events,
           dplyr::inner_join(
             .x %>%
               janitor::clean_names()  %>% 
+              drop_na() %>%
               dplyr::mutate(
                 dplyr::across(
                   dplyr::everything(),
                   ~ tidyr::replace_na(.x, 0)
                 )
               ),
-            .y,
+            .y %>% 
+              drop_na(),
             by = "age"
           ) %>%
             dplyr::arrange(age)

@@ -9,17 +9,33 @@
 #' to sum to unity
 get_spd <- function(data_source_c14,
                     data_source_dist_vec,
-                    age_from = 0,
+                    data_meta,
+                    age_cutoff_region,
                     age_to = 12e3,
-                    age_timestep = 100,
-                    min_n_dates = 50) {
+                    age_timestep = 500,
+                    min_n_dates = 50,
+                    normalise_to_one = FALSE) {
+  
+  
+
+ # combine minimum cutoff age 
+  age_cutoff_rc <- data_meta %>%
+    dplyr::select(dataset_id, region) %>%
+    left_join(age_cutoff_region)
+  
+  # join minimum cut-off age per region
+  data_source_c14 <- data_source_c14 %>%
+    inner_join(age_cutoff_rc, by = "dataset_id")
+  
   # helper functions
   get_spd_density <- function(data_source,
                               sel_dist,
                               sel_calcurve,
                               min_n_dates,
                               max_age,
-                              sel_smooth_size) {
+                              min_age,
+                              sel_smooth_size,
+                              normalise_to_one = normalise_to_one) {
     try_spd <-
       make_spd(
         data_source = data_source,
@@ -27,8 +43,9 @@ get_spd <- function(data_source_c14,
         sel_calcurve = sel_calcurve,
         min_n_dates = min_n_dates,
         max_age = max_age,
+        min_age = min_age,
         sel_smooth_size = sel_smooth_size,
-        normalise_to_one = FALSE
+        normalise_to_one = normalise_to_one
       )
     if (
       all(is.na(try_spd))
@@ -46,9 +63,10 @@ get_spd <- function(data_source_c14,
                        sel_dist,
                        sel_calcurve,
                        max_age,
+                       min_age,
                        sel_smooth_size = 100,
                        min_n_dates = 50,
-                       normalise_to_one = FALSE) {
+                       normalise_to_one = normalise_to_one) {
     data_sub <-
       data_source %>%
       dplyr::filter(dist < sel_dist) %>%
@@ -76,7 +94,7 @@ get_spd <- function(data_source_c14,
     cptspd <-
       rcarbon::spd(
         x = cptcal,
-        timeRange = c(max_age, 0),
+        timeRange = c(max_age, min_age),
         spdnormalised = normalise_to_one,
         runm = sel_smooth_size,
         verbose = TRUE
@@ -131,15 +149,27 @@ get_spd <- function(data_source_c14,
       )
     )
 
-  # dummay table to bind all the results
-  dummy_age_table <-
-    tibble::tibble(
-      age = seq(
-        from = age_to, # [config]
-        to = age_from,
-        by = -1
-      )
+  # dummy table to bind all the results
+
+  data_rc_calcurve <- 
+    data_rc_calcurve %>%
+    mutate(dummy_age_table = 
+             purrr::map(
+               .x = age_from,
+               .f = function(.x) {
+                 
+                 dummy_age <- tibble::tibble(
+                   age = seq(
+                     from = age_to, # [config]
+                     to = .x, 
+                     by = -1
+                   )
+                 )  
+                 return(dummy_age)
+               }
+             )
     )
+  
 
   data_spd <-
     data_rc_calcurve %>%
@@ -148,15 +178,21 @@ get_spd <- function(data_source_c14,
         .l = list(
           rc, # ..1
           calcurve, # ..2
-          dataset_id # ..3
+          dataset_id, # ..3
+          age_from, #..4
+          dummy_age_table #..5
         ),
         .f = ~ {
           message(..3)
-
+          
           sel_data <- ..1
-
+          
           sel_cal_curve <- ..2
-
+          
+          age_from <- ..4
+          
+          dummy_age_table <- ..5
+          
           res <-
             dplyr::bind_cols(
               dummy_age_table,
@@ -168,16 +204,17 @@ get_spd <- function(data_source_c14,
                     sel_calcurve = sel_cal_curve,
                     min_n_dates = min_n_dates,
                     max_age = age_to,
-                    sel_smooth_size = age_timestep
+                    min_age = age_from,
+                    sel_smooth_size = age_timestep,
+                    normalise_to_one = normalise_to_one
                   )
                 )
             )
-
+          
           return(res)
         }
       )
     )
-
   # select only relevant columns and return
   data_spd %>%
     dplyr::select(dataset_id, spd) %>%
