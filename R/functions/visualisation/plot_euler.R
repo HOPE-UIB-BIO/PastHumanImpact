@@ -28,20 +28,13 @@ plot_euler <- function(data_source,
         r = r, 
         fill = predictors), 
       colour = NA, 
-      alpha = alpha,
-      ...) +
-    ggplot2::coord_fixed(
-      ...
+      alpha = alpha
       ) +
-    ggplot2::theme_void(
-      ...
-    ) +
+    ggplot2::coord_fixed() +
+    ggplot2::theme_void() +
+    ggpubr::theme_transparent() +
     ggplot2::theme(
-      legend.position = legend.position,
-      ...
-    ) +
-    ggpubr::theme_transparent(
-    ...
+      legend.position = legend.position
     )
   
   eulerdiagram 
