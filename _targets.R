@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[1]
+  data_storage_path <- data_storage_path[2]
 }
 
 external_storage_targets <-
@@ -67,6 +67,7 @@ tar_option_set(
     "ggforce",
     "venneuler"
   ),
+  error = "null",
   memory = "transient",
   garbage_collection = TRUE,
   storage = "worker",
@@ -447,14 +448,14 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
-  ), #fix this - check time ref table and variables output and interpolate values
+  ), 
   targets::tar_target(
     name = data_climate,
     command = get_climate_indices(
       data_source = data_climate_chelsa,
       time_ref = time_ref_table
     )
-  ), # need to interpolate data climate 
+  ),
   targets::tar_target(
     name = data_climate_for_interpolation,
     command = get_climate_data_for_interpolation(
@@ -682,8 +683,8 @@ list(
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
-  ),
-  # # - run hVARPAR (hypothesis I)
+  )
+, # # - run hVARPAR (hypothesis I)
   targets::tar_target(
     name = result_hvarpar_timeserie,
     command = run_hvarpart(
@@ -701,9 +702,9 @@ list(
         climate = c(
           "temp_annual",
           "temp_cold",
-          "prec_summer", 
+          "prec_summer",
           "prec_win"
-          
+
         ),
         time = c("age")
       ),
