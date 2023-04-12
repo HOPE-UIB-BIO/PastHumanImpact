@@ -184,305 +184,305 @@ list(
       )
     )
   ),
-  # 3. Human events -----
-  # - a path for events from diagrams
-  targets::tar_target(
-    name = events_diag_path,
-    command = paste0(
-      data_storage_path,
-      "HOPE_Hypothesis1/Data/events/events_from_diagrams_2022-11-24.rds"
-    ),
-    format = "file"
-  ),
-  # - load events from pollen diagrams
-  targets::tar_target(
-    name = events_diag_raw,
-    command = get_file_from_path(events_diag_path)
-  ),
-  # - turn events from diagrams into binary
-  targets::tar_target(
-    name = events_diag_binary,
-    command = get_events_as_binary(events_diag_raw, data_pollen)
-  ),
-  # add logical rules to the binary values (events from diag)
-  targets::tar_target(
-    name = events_diag,
-    command = add_logical_rules(events_diag_binary)
-  ),
-  # - a path for indicators (from code)
-  targets::tar_target(
-    name = events_indicators_path,
-    command = paste0(
-      data_storage_path,
-      "HOPE_Hypothesis1/Data/events/events_from_code_indicators_2022-11-25.rds"
-    ),
-    format = "file"
-  ),
-  # - load indicators
-  targets::tar_target(
-    name = events_indicators_raw,
-    command = get_file_from_path(events_indicators_path)
-  ),
-  # - detect indicators in data
-  targets::tar_target(
-    name = events_indicators,
-    command = get_events_from_indicators(
-      data_source_indicators = events_indicators_raw,
-      data_source_pollen = data_pollen,
-      data_source_meta = data_meta,
-      sel_region = "Latin America",
-      # filter out pinus in selected  countries where Pinus is native
-      country_w_pinus = c(
-        "Mexico",
-        "Guatemala",
-        "Honduras",
-        "Nicaragua",
-        "Costa Rica"
-      )
-    )
-  ),
-  # - a path for indices (from code)
-  targets::tar_target(
-    name = events_indices_path,
-    command = paste0(
-      data_storage_path,
-      "HOPE_Hypothesis1/Data/events/events_from_code_indices_2022-11-25.rds"
-    ),
-    format = "file"
-  ),
-  # - load indices
-  targets::tar_target(
-    name = events_indices_raw,
-    command = get_file_from_path(events_indices_path)
-  ),
-  # - detect indices in data
-  targets::tar_target(
-    name = events_indices,
-    command = get_events_from_indices(
-      data_source_indices = events_indices_raw,
-      data_source_pollen = data_pollen,
-      data_source_meta = data_meta,
-      sel_region = "Latin America"
-    )
-  ),
-  # - merge all events detected by code together
-  targets::tar_target(
-    name = events_code,
-    command = merge_indicators_and_indices(
-      data_source_indices = events_indices,
-      data_source_indicators = events_indicators
-    )
-  ),
-  # - merge all events together
-  targets::tar_target(
-    name = events,
-    command = merge_all_events(
-      data_source_events_diag = events_diag,
-      data_source_events_code = events_code
-    )
-  ),
-  # - prepare events for modelling
-  targets::tar_target(
-    name = data_events_to_fit,
-    command = get_events_for_modelling(events)
-  ),
-  # - interpolate data for even time steps
-  targets::tar_target(
-    name = events_interpolated,
-    command = get_interpolated_data(
-      data_source = data_events_to_fit,
-      variable = "var_name",
-      vars_interpolate = c("age", "value"),
-      group_var = "dataset_id",
-      method = "constant",  
-      rule = 1:2,
-      ties = "ordered",
-      age_min = 0,
-      age_max = 12e03,
-      timestep = 500,
-      verbose = TRUE
-    )
-  ),
-  # - expand events to be present for each time slice
+  # # 3. Human events -----
+  # # - a path for events from diagrams
   # targets::tar_target(
-  #   name = event_temporal_spacing,
-  #   command = get_per_timeslice(
+  #   name = events_diag_path,
+  #   command = paste0(
+  #     data_storage_path,
+  #     "HOPE_Hypothesis1/Data/events/events_from_diagrams_2022-11-24.rds"
+  #   ),
+  #   format = "file"
+  # ),
+  # # - load events from pollen diagrams
+  # targets::tar_target(
+  #   name = events_diag_raw,
+  #   command = get_file_from_path(events_diag_path)
+  # ),
+  # # - turn events from diagrams into binary
+  # targets::tar_target(
+  #   name = events_diag_binary,
+  #   command = get_events_as_binary(events_diag_raw, data_pollen)
+  # ),
+  # # add logical rules to the binary values (events from diag)
+  # targets::tar_target(
+  #   name = events_diag,
+  #   command = add_logical_rules(events_diag_binary)
+  # ),
+  # # - a path for indicators (from code)
+  # targets::tar_target(
+  #   name = events_indicators_path,
+  #   command = paste0(
+  #     data_storage_path,
+  #     "HOPE_Hypothesis1/Data/events/events_from_code_indicators_2022-11-25.rds"
+  #   ),
+  #   format = "file"
+  # ),
+  # # - load indicators
+  # targets::tar_target(
+  #   name = events_indicators_raw,
+  #   command = get_file_from_path(events_indicators_path)
+  # ),
+  # # - detect indicators in data
+  # targets::tar_target(
+  #   name = events_indicators,
+  #   command = get_events_from_indicators(
+  #     data_source_indicators = events_indicators_raw,
+  #     data_source_pollen = data_pollen,
+  #     data_source_meta = data_meta,
+  #     sel_region = "Latin America",
+  #     # filter out pinus in selected  countries where Pinus is native
+  #     country_w_pinus = c(
+  #       "Mexico",
+  #       "Guatemala",
+  #       "Honduras",
+  #       "Nicaragua",
+  #       "Costa Rica"
+  #     )
+  #   )
+  # ),
+  # # - a path for indices (from code)
+  # targets::tar_target(
+  #   name = events_indices_path,
+  #   command = paste0(
+  #     data_storage_path,
+  #     "HOPE_Hypothesis1/Data/events/events_from_code_indices_2022-11-25.rds"
+  #   ),
+  #   format = "file"
+  # ),
+  # # - load indices
+  # targets::tar_target(
+  #   name = events_indices_raw,
+  #   command = get_file_from_path(events_indices_path)
+  # ),
+  # # - detect indices in data
+  # targets::tar_target(
+  #   name = events_indices,
+  #   command = get_events_from_indices(
+  #     data_source_indices = events_indices_raw,
+  #     data_source_pollen = data_pollen,
+  #     data_source_meta = data_meta,
+  #     sel_region = "Latin America"
+  #   )
+  # ),
+  # # - merge all events detected by code together
+  # targets::tar_target(
+  #   name = events_code,
+  #   command = merge_indicators_and_indices(
+  #     data_source_indices = events_indices,
+  #     data_source_indicators = events_indicators
+  #   )
+  # ),
+  # # - merge all events together
+  # targets::tar_target(
+  #   name = events,
+  #   command = merge_all_events(
+  #     data_source_events_diag = events_diag,
+  #     data_source_events_code = events_code
+  #   )
+  # ),
+  # # - prepare events for modelling
+  # targets::tar_target(
+  #   name = data_events_to_fit,
+  #   command = get_events_for_modelling(events)
+  # ),
+  # # - interpolate data for even time steps
+  # targets::tar_target(
+  #   name = events_interpolated,
+  #   command = get_interpolated_data(
   #     data_source = data_events_to_fit,
-  #     data_source_dummy_time = data_dummy_time,
-  #     smooth_basis = "cr",
-  #     data_error_family = "stats::binomial(link = 'logit')",
-  #     max_k = round(max(data_dummy_time$age) / 500),
-  #     # interpolate not forecast
-  #     limit_length = TRUE,
+  #     variable = "var_name",
+  #     vars_interpolate = c("age", "value"),
+  #     group_var = "dataset_id",
+  #     method = "constant",  
+  #     rule = 1:2,
+  #     ties = "ordered",
+  #     age_min = 0,
+  #     age_max = 12e03,
+  #     timestep = 500,
+  #     verbose = TRUE
+  #   )
+  # ),
+  # # - expand events to be present for each time slice
+  # # targets::tar_target(
+  # #   name = event_temporal_spacing,
+  # #   command = get_per_timeslice(
+  # #     data_source = data_events_to_fit,
+  # #     data_source_dummy_time = data_dummy_time,
+  # #     smooth_basis = "cr",
+  # #     data_error_family = "stats::binomial(link = 'logit')",
+  # #     max_k = round(max(data_dummy_time$age) / 500),
+  # #     # interpolate not forecast
+  # #     limit_length = TRUE,
+  # #     data_source_meta = data_meta
+  # #   )
+  # # ),
+  # # # - subset event types relevant for each region 
+  # targets::tar_target(
+  #   name = events_temporal_subset,
+  #   command = subset_event_types(
+  #     data_source_events = events_interpolated,
+  #     data_source_meta = data_meta,
+  #     data_source_dummy_time = data_dummy_time
+  #   )
+  # ),
+  # # 4. C14 and SPD -----
+  # # - create a circle polygons within a certain distance from each site
+  # targets::tar_target(
+  #   name = data_polygons,
+  #   command = get_polygons(
+  #     data_source = data_meta,
+  #     distance_buffer = 10 # 10° away from site
+  #   )
+  # ),
+  # # - a path for c14 data
+  # targets::tar_target(
+  #   name = data_c14_path,
+  #   command = paste0(
+  #     data_storage_path,
+  #     "HOPE_Hypothesis1/Data/c14/data_rc_2022-11-29.rds"
+  #   ),
+  #   format = "file"
+  # ),
+  # # - load c14 data
+  # targets::tar_target(
+  #   name = data_c14,
+  #   command = get_file_from_path(data_c14_path)
+  # ),
+  # # - subset C14 data for each dataset_id and calculate distance to it
+  # targets::tar_target(
+  #   name = data_c14_subset,
+  #   command = subset_c14_data(
+  #     data_source_c14 = data_c14,
+  #     data_source_polygons = data_polygons,
   #     data_source_meta = data_meta
   #   )
   # ),
-  # # - subset event types relevant for each region 
-  targets::tar_target(
-    name = events_temporal_subset,
-    command = subset_event_types(
-      data_source_events = events_interpolated,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time
-    )
-  ),
-  # 4. C14 and SPD -----
-  # - create a circle polygons within a certain distance from each site
-  targets::tar_target(
-    name = data_polygons,
-    command = get_polygons(
-      data_source = data_meta,
-      distance_buffer = 10 # 10° away from site
-    )
-  ),
-  # - a path for c14 data
-  targets::tar_target(
-    name = data_c14_path,
-    command = paste0(
-      data_storage_path,
-      "HOPE_Hypothesis1/Data/c14/data_rc_2022-11-29.rds"
-    ),
-    format = "file"
-  ),
-  # - load c14 data
-  targets::tar_target(
-    name = data_c14,
-    command = get_file_from_path(data_c14_path)
-  ),
-  # - subset C14 data for each dataset_id and calculate distance to it
-  targets::tar_target(
-    name = data_c14_subset,
-    command = subset_c14_data(
-      data_source_c14 = data_c14,
-      data_source_polygons = data_polygons,
-      data_source_meta = data_meta
-    )
-  ),
-  # - estimaet spd for each distance
-  targets::tar_target(
-    name = data_spd,
-    command = get_spd(
-      data_source_c14 = data_c14_subset,
-      data_source_dist_vec = spd_distance_vec,
-      data_meta = data_meta,
-      age_cutoff_region = age_cutoff_region,
-      age_to = max_age,
-      age_timestep = timestep,
-      min_n_dates = 50
-    )
-  ),
-  # - prepare spd for modelling
-  targets::tar_target(
-    name = data_spd_to_fit,
-    command = get_spd_for_modelling(data_spd)
-  ),
-  # - get interpolated spd values for each time slice
-  targets::tar_target(
-    name = data_sdp_interpolated,
-    command = get_interpolated_data(
-      data_source = data_spd_to_fit,
-      variable = "var_name",
-      vars_interpolate = c("age", "value"),
-      group_var = "dataset_id",
-      method = "linear",
-      rule = 1:2,
-      ties = mean,
-      age_min = 0,
-      age_max = 12e03,
-      timestep = 500,
-      verbose = TRUE
-    )
-  ),
-  # # get spd values for each time slice
-  # # targets::tar_target(
-  # #   name = data_sdp_temporal_spacing,
-  # #   command = get_per_timeslice(
-  # #     data_source = data_spd_to_fit,
-  # #     data_error_family = "stats::binomial(link = 'logit')",
-  # #     data_source_dummy_time = data_dummy_time,
-  # #     smooth_basis = "cr",
-  # #     max_k = round(max(data_dummy_time$age) / 500),
-  # #     weights_var = NULL,
-  # #     limit_length = FALSE
-  # #   )
-  # # ),
-  targets::tar_target(
-    name = data_spd_best_dist,
-    command = select_best_spd(
-      data_source_events = events_temporal_subset,
-      data_source_spd = data_sdp_interpolated,
-      data_source_meta = data_meta,
-      data_source_dist_vec = spd_distance_vec
-    )
-  ),
-  # - add SPD value for records without humans
-  targets::tar_target(
-    name = data_spd_full,
-    command = add_missing_spd_values(
-      data_source_spd = data_spd_best_dist,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time
-    )
-  ),
-  # 5. Get CHELSA palaeoclimate -----
-  # - a path to time reference table (from code)
-  targets::tar_target(
-    name = time_ref_path,
-    command = paste0(
-      data_storage_path,
-      "HOPE_Hypothesis1/Data/climate/time_reference_table.rds"
-    ),
-    format = "file"
-  ),
-  # - load table
-  targets::tar_target(
-    name = time_ref_table,
-    command = get_file_from_path(time_ref_path)
-  ),
-  targets::tar_target(
-    name = data_climate_chelsa,
-    command = get_climate_data(
-      variables_selected = c("bio", "tasmin"),
-      bio_var_selected = c(1, 6, 12, 15, 18, 19),
-      time_var_selected = c(20:-200),
-      month_var_selected = c(1:12),
-      xy = data_meta
-    )
-  ), 
-  targets::tar_target(
-    name = data_climate,
-    command = get_climate_indices(
-      data_source = data_climate_chelsa,
-      time_ref = time_ref_table
-    )
-  ),
-  targets::tar_target(
-    name = data_climate_for_interpolation,
-    command = get_climate_data_for_interpolation(
-      data_source = data_climate,
-      sel_var = c("temp_annual",
-                  "temp_cold",
-                  "prec_annual", 
-                  "prec_summer", 
-                  "prec_win")
-      )
-  ),
-  targets::tar_target(
-    name = data_climate_interpolated,
-    command = get_interpolated_data(
-      data_source = data_climate_for_interpolation,   
-      variable = "var_name",
-      vars_interpolate = c("age", "value"),
-      group_var = "dataset_id",
-      method = "linear", 
-      rule = 1:2,
-      ties = mean,
-      age_min = 0,
-      age_max = 12e03,
-      timestep = 500,
-      verbose = TRUE
-    )
-  ),
+  # # - estimaet spd for each distance
+  # targets::tar_target(
+  #   name = data_spd,
+  #   command = get_spd(
+  #     data_source_c14 = data_c14_subset,
+  #     data_source_dist_vec = spd_distance_vec,
+  #     data_meta = data_meta,
+  #     age_cutoff_region = age_cutoff_region,
+  #     age_to = max_age,
+  #     age_timestep = timestep,
+  #     min_n_dates = 50
+  #   )
+  # ),
+  # # - prepare spd for modelling
+  # targets::tar_target(
+  #   name = data_spd_to_fit,
+  #   command = get_spd_for_modelling(data_spd)
+  # ),
+  # # - get interpolated spd values for each time slice
+  # targets::tar_target(
+  #   name = data_spd_interpolated,
+  #   command = get_interpolated_data(
+  #     data_source = data_spd_to_fit,
+  #     variable = "var_name",
+  #     vars_interpolate = c("age", "value"),
+  #     group_var = "dataset_id",
+  #     method = "linear",
+  #     rule = 1:2,
+  #     ties = mean,
+  #     age_min = 0,
+  #     age_max = 12e03,
+  #     timestep = 500,
+  #     verbose = TRUE
+  #   )
+  # ),
+  # # # get spd values for each time slice
+  # # # targets::tar_target(
+  # # #   name = data_sdp_temporal_spacing,
+  # # #   command = get_per_timeslice(
+  # # #     data_source = data_spd_to_fit,
+  # # #     data_error_family = "stats::binomial(link = 'logit')",
+  # # #     data_source_dummy_time = data_dummy_time,
+  # # #     smooth_basis = "cr",
+  # # #     max_k = round(max(data_dummy_time$age) / 500),
+  # # #     weights_var = NULL,
+  # # #     limit_length = FALSE
+  # # #   )
+  # # # ),
+  # targets::tar_target(
+  #   name = data_spd_best_dist,
+  #   command = select_best_spd(
+  #     data_source_events = events_temporal_subset,
+  #     data_source_spd = data_spd_interpolated,
+  #     data_source_meta = data_meta,
+  #     data_source_dist_vec = spd_distance_vec
+  #   )
+  # ),
+  # # - add SPD value for records without humans
+  # targets::tar_target(
+  #   name = data_spd_full,
+  #   command = add_missing_spd_values(
+  #     data_source_spd = data_spd_best_dist,
+  #     data_source_meta = data_meta,
+  #     data_source_dummy_time = data_dummy_time
+  #   )
+  # ),
+  # # 5. Get CHELSA palaeoclimate -----
+  # # - a path to time reference table (from code)
+  # targets::tar_target(
+  #   name = time_ref_path,
+  #   command = paste0(
+  #     data_storage_path,
+  #     "HOPE_Hypothesis1/Data/climate/time_reference_table.rds"
+  #   ),
+  #   format = "file"
+  # ),
+  # # - load table
+  # targets::tar_target(
+  #   name = time_ref_table,
+  #   command = get_file_from_path(time_ref_path)
+  # ),
+  # targets::tar_target(
+  #   name = data_climate_chelsa,
+  #   command = get_climate_data(
+  #     variables_selected = c("bio", "tasmin"),
+  #     bio_var_selected = c(1, 6, 12, 15, 18, 19),
+  #     time_var_selected = c(20:-200),
+  #     month_var_selected = c(1:12),
+  #     xy = data_meta
+  #   )
+  # ), 
+  # targets::tar_target(
+  #   name = data_climate,
+  #   command = get_climate_indices(
+  #     data_source = data_climate_chelsa,
+  #     time_ref = time_ref_table
+  #   )
+  # ),
+  # targets::tar_target(
+  #   name = data_climate_for_interpolation,
+  #   command = get_climate_data_for_interpolation(
+  #     data_source = data_climate,
+  #     sel_var = c("temp_annual",
+  #                 "temp_cold",
+  #                 "prec_annual", 
+  #                 "prec_summer", 
+  #                 "prec_win")
+  #     )
+  # ),
+  # targets::tar_target(
+  #   name = data_climate_interpolated,
+  #   command = get_interpolated_data(
+  #     data_source = data_climate_for_interpolation,   
+  #     variable = "var_name",
+  #     vars_interpolate = c("age", "value"),
+  #     group_var = "dataset_id",
+  #     method = "linear", 
+  #     rule = 1:2,
+  #     ties = mean,
+  #     age_min = 0,
+  #     age_max = 12e03,
+  #     timestep = 500,
+  #     verbose = TRUE
+  #   )
+  # ),
   # 6. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
@@ -565,26 +565,26 @@ list(
   ),
   # - run hgam model to create a common variable for density diversity and
   #     turnover
-  # targets::tar_target(
-  #   name = data_density_variables,
-  #   command = get_hgam_density_vars(
-  #     data_source_density = data_density,
-  #     data_source_meta = data_meta,
-  #     data_source_dummy_time = data_dummy_time,
-  #     diversity_vars = c(
-  #       "n0", "n1", "n2",
-  #       "n2_divided_by_n1", "n1_divided_by_n0"
-  #     ),
-  #     turnover_vars = c(
-  #       "mvrt", "roc", "dcca"
-  #     ),
-  #     used_rescales = TRUE,
-  #     error_family = "mgcv::betar(link = 'logit')",
-  #     smooth_basis = "tp",
-  #     sel_k = round(max(data_dummy_time$age) / 2000),
-  #     limit_length = TRUE
-  #   )
-  # ),
+  targets::tar_target(
+    name = data_density_variables,
+    command = get_hgam_density_vars(
+      data_source_density = data_density,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      diversity_vars = c(
+        "n0", "n1", "n2",
+        "n2_divided_by_n1", "n1_divided_by_n0"
+      ),
+      turnover_vars = c(
+        "mvrt", "roc", "dcca"
+      ),
+      used_rescales = TRUE,
+      error_family = "mgcv::betar(link = 'logit')",
+      smooth_basis = "tp",
+      sel_k = round(max(data_dummy_time$age) / 2500),
+      limit_length = TRUE
+    )
+  ),
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
@@ -679,75 +679,75 @@ list(
     command = get_data_for_hvarpar(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
-     # data_source_density = data_density_variables,
+      data_source_density = data_density_variables,
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
   )
-, # # - run hVARPAR (hypothesis I)
-  targets::tar_target(
-    name = result_hvarpar_timeserie,
-    command = run_hvarpart(
-      data_source = data_for_hvarpar,
-      response_vars = c(
-        "n0", "n1", "n2",
-        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
-        "roc",
-        "dcca_axis_1"
-        #,
-        #"density_diversity", "density_turnover"
-      ),
-      predictor_vars = list(
-        human = c("spd"),
-        climate = c(
-          "temp_annual",
-          "temp_cold",
-          "prec_summer",
-          "prec_win"
-
-        ),
-        time = c("age")
-      ),
-      run_all_predictors = FALSE,
-      time_series = TRUE,
-      get_significance = TRUE,
-      permutations = 999
-    )
-  ),
- targets::tar_target(
-   name = data_hvar_timebin,
-   command = get_data_hvar_timebin(
-     data_source = data_for_hvarpar,
-     data_meta = data_meta
-   )
- ),
- targets::tar_target(
-   name = result_hvarpar_timebin,
-   command = run_hvarpart(
-     data_source = data_hvar_timebin,
-     response_vars = c(
-       "n0", "n1", "n2",
-       "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
-       "roc",
-       "dcca_axis_1"
-       #,
-       #"density_diversity", "density_turnover"
-     ),
-     predictor_vars = list(
-       human = c("spd"),
-       climate = c(
-         "temp_annual",
-         "temp_cold",
-         "prec_summer",
-         "prec_win"
-
-       )),
-     run_all_predictors = FALSE,
-     time_series = FALSE,
-     get_significance = FALSE,
-     permutations = 19
-   )
- )
+# , # # - run hVARPAR (hypothesis I)
+#   targets::tar_target(
+#     name = result_hvarpar_timeserie,
+#     command = run_hvarpart(
+#       data_source = data_for_hvarpar,
+#       response_vars = c(
+#         "n0", "n1", "n2",
+#         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+#         "roc",
+#         "dcca_axis_1"
+#         #,
+#         #"density_diversity", "density_turnover"
+#       ),
+#       predictor_vars = list(
+#         human = c("spd"),
+#         climate = c(
+#           "temp_annual",
+#           "temp_cold",
+#           "prec_summer",
+#           "prec_win"
+# 
+#         ),
+#         time = c("age")
+#       ),
+#       run_all_predictors = FALSE,
+#       time_series = TRUE,
+#       get_significance = TRUE,
+#       permutations = 999
+#     )
+#   ),
+#  targets::tar_target(
+#    name = data_hvar_timebin,
+#    command = get_data_hvar_timebin(
+#      data_source = data_for_hvarpar,
+#      data_meta = data_meta
+#    )
+#  ),
+#  targets::tar_target(
+#    name = result_hvarpar_timebin,
+#    command = run_hvarpart(
+#      data_source = data_hvar_timebin,
+#      response_vars = c(
+#        "n0", "n1", "n2",
+#        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+#        "roc",
+#        "dcca_axis_1"
+#        #,
+#        #"density_diversity", "density_turnover"
+#      ),
+#      predictor_vars = list(
+#        human = c("spd"),
+#        climate = c(
+#          "temp_annual",
+#          "temp_cold",
+#          "prec_summer",
+#          "prec_win"
+# 
+#        )),
+#      run_all_predictors = FALSE,
+#      time_series = FALSE,
+#      get_significance = FALSE,
+#      permutations = 19
+#    )
+#  )
 
 )
 
