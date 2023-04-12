@@ -581,7 +581,7 @@ list(
       used_rescales = TRUE,
       error_family = "mgcv::betar(link = 'logit')",
       smooth_basis = "tp",
-      sel_k = round(max(data_dummy_time$age) / 2500),
+      sel_k = round(max(data_dummy_time$age) / 1000),
       limit_length = TRUE
     )
   ),
@@ -674,16 +674,16 @@ list(
   #   )
   # ),
  # - merge all data together, [remember to add density vars when done!!]
-  targets::tar_target(
-    name = data_for_hvarpar,
-    command = get_data_for_hvarpar(
-      data_source_diversity = data_div_dcca_interpolated,
-      data_source_roc = data_roc_interpolated,
-      data_source_density = data_density_variables,
-      data_source_spd = data_spd_full,
-      data_source_climate = data_climate_interpolated
-    )
-  )
+  # targets::tar_target(
+  #   name = data_for_hvarpar,
+  #   command = get_data_for_hvarpar(
+  #     data_source_diversity = data_div_dcca_interpolated,
+  #     data_source_roc = data_roc_interpolated,
+  #     data_source_density = data_density_variables,
+  #     data_source_spd = data_spd_full,
+  #     data_source_climate = data_climate_interpolated
+  #   )
+  # )
 # , # # - run hVARPAR (hypothesis I)
 #   targets::tar_target(
 #     name = result_hvarpar_timeserie,
