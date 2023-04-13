@@ -1,0 +1,30 @@
+---
+title: "Report HOPE Hypothesis 1 methodology"
+output: html_notebook
+---
+
+### Preface
+
+The main scope of this report is to give you a detailed overview of the data input, data process, and analyses that has been done to find out if human activity have changed fundamental ecological processes over time (Hypothesis 1 in the HOPE project).
+
+The report contain the full workflow of methodological steps, description, and results. The complexity of the data processing prior to the main analyses makes it difficult to present orally without authors having in-depth understanding of the workflow. It will make the basis of the methodology part of a manuscript.
+
+The next step is to write a manuscript, but before we start it would be good to know what kind of involvement and/or role you would like to have. It is open for suggestions and feedback in which direction it should take. A meeting will be schedule to discuss these matters.
+
+Things that would be good to make clear for everyone involved:
+
+1.  Authorship:
+
+    -   Leading author
+    -   Co-author
+    -   Data contributor
+
+2.  Target journal
+
+3.  Interesting highlights of our results - story
+
+4.  Feedback and comments to the methodology? Major changes needed?
+
+4.  Progress plan
+
+
