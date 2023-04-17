@@ -167,68 +167,83 @@ An important step in FOSSILPOL to get the standardisation of pollen records with
 
 We use the [targets](https://books.ropensci.org/targets/) package in R to produce a reproducible workflow for all data processing, analyses, and visulisation of the results from this project. For this we created a data analysis project called [*HOPE_hypothesis1* in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1). This contain all data, metadata, and R functions needed to run this project, and it provides full transparency in all steps from data input, data processing, statistical analysis, and the derived results.
 
-An overview of the targets: Set in figure of our project
+Our output of targets is set up with in an external storage at OneDrive where we save the main targets folder with data and meta data, while the target script and functions are saved in our Github project. Note that first time running targets without access to our main data folder will take time. The targets are split up in many steps with several specialised functions that is made to loading necessary data, to get estimates of various variables or structuring various subsets of data step wise. This is to avoid the need for re-running major parts that take too long when the data is already processed. There is a dependency in the list of targets that the in the end to run the final analyses, all other targets need to be up-to-date. Targets will detect any changes made in the functions, if this happens the targets will automatically rerun the parts that are dependent on this change, but at the same time skip all the parts that are up-to-date.
 
-General description of the targets
+An overview of the targets: Set in figure of our project workflow
+
+The targets are arranged in a order to prepare all the data needed for the main analysis. First, it is setting the options for data interpolation to get all samples on equal time spacing, loading the FOSSILPOL dataset, creating dummy tables and variables needed for input in the specialised functions to process data. This is followed by the data processing steps for each of the explanatory and response variables that is included in this project. The largest pre-processing of data starts with preparation of the explanatory variable detecting past human presence and impact. This is a major analyses in itself. This follows by data extraction of palaeo-climate. This is modeled data downloaded from CHELSA Palaeo-climate for each of the geographical location of our collection of pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. It is followed by different targets that process all estimates of the response variables selected to get measures of pollen assemblage properties. In general, all data such as raw estimates and interpolated data are kept to allow careful checking and validation of output. In the end, data is structure to fit the main analysis. This analysis is divided into two parts which we call the 1) the spatial (within core) analysis, and 2) the temporal analysis (a *spatial* or between core/sample analysis per timestep ca. every 500 years). Several choices are made, which are described in the detail in the text below. 
 
 ### Data processing
 
 ### Detection of past human presence
 
-In order to quantify the presence of humans in each pollen record, we used Summed Probability Densities (SPD) gathered from archaeological artefacts that has been radiocarbon dated (Bird et al. 2022). The estimation of SPD require a distance to be selected around each site location to collect the relevant dates of archeological artefacts around it. This will limit the area of human presence and indirectly the amount of human activity relevant to pollen records from each site. To select the best distance we used an expert-based detection of human events from pollen records at each site to inform the estimation of SPD to detect the *best* distance within the main threshold distance of 10 degree for all sites. See demonstration of this method [Detection of past humans](link%20to%20Ondrej´s%20presentation).
+In order to detect the impact of past humans on fundamental ecosystem properties we needed to develop indicators of past human presence and activity. This led to the development of a new approach where we use detection of human events identified from pollen records based on expert knowledge, in combination with the methodology of quantifying presence of humans based on radiocarbon dates from archaeological artefacts and Summed Probability Densities (SPD) (Bird et al. 2022). In our view this solved some issues where we can use one standardised variable as an indicator of past human impact, and partly avoid the difficulties of creating standardised variables for detecting human disturbance events in different regions and across continent, and reduce the circularity of detecting human events on the same pollen records as the estimates of ecosystem properties. 
 
-#### Detection of human events
 
-For each pollen record, we have detected periods of human events from the pollen data. Two methods have been used: i) detection from pollen diagrams (North America, Europe, Asia, Indopacific; ii) detection using indicator taxa (Latin America)
+#### *Detection of human events*
 
-For each continent, human activity has been categorised into 'event types', specifically:\
-North America - "no impact", "cultivation", "European settlement" Europe - "no impact", "first impact", "cultivation", "extensive clearing", "complete clearing" Asia - "no impact", "first impact", "cultivation", "extensive impact" Latin America - "no impact", "weak impact", "strong impact" Indopacific - "no impact", "weak impact", "strong impact"
+For each pollen record, we have detected periods of human events from the pollen data. Two methods have been used: i) detection from pollen diagrams (North America, Europe, Asia, Indopacific; ii) detection using indicator taxa (Latin America). The event types are uniquely defined within continents and event types with the same name have different meanings between continents.
 
-Note that the event types are uniquely defined within continents and event types with the same name have different meanings between continents.
+#### *Detection from pollen diagrams*
 
-##### Detection from pollen diagrams
+First, a pollen diagram of each pollen record has been examined by a regional expert and the age of each event type has been recorded. Second, for each pollen record a new vector with values of average ages in between levels was created. Next, a matrix of 'age vector x event types' were created with binary value (0/1) assing to each value depending on the age of the event type (the event type is present (1) if age > detected age). Finally, logical rules were applied (see below) and binary values were adjusted for each continent. The methodology to detect individual event types and their logical rules were as follows:
 
-First, a pollen diagram of each pollen record has been examined by a regional expert and the age of each event type has been recorded. Second, for each pollen record a new vector with values of average ages in between levels was created. Next, a matrix of 'age vector x event types' were created with binary value (0/1) assing to each value depending on the age of the event type (the event type is present (1) if age \> detected age). Finally, logical rules were applied (see below) and binary values were adjusted for each continent. The methodology to detect individual event types and their logical rules were as follows:
+North America 
+Type of events identified in North America (Recurrent events regarding first cultivation) 
+BI = before impact 
+FC = first cultivation (FC_start, FC_end, 2FC_start, 2FC_end, 3FC_start, 3FC_end, 4FC_start, 4FC_end) 
+ES = European settlement
 
-North America Type of events identified in North America (Recurrent events regarding first cultivation) BI = before impact FC = first cultivation FC_start FC_end 2FC_start 2FC_end 3FC_start 3FC_end 4FC_start 4FC_end ES = European settlement
+Europe 
+Type of events identified in Europe: 
+BI = before impact 
+FI = first indication 
+FCu = first cultivation 
+EC = extensive clearance 
+CC = complete clearance
 
-Europe Type of events identified in Europe: BI = before impact FI = first indication FCu = first cultivation EC = extensive clearance CC = complete clearance
+Asia 
+Type of events identified in Asia 
+BI = before impact 
+FI = first indication 
+FCu = first cultivation 
+EI = Extensive impact
 
-Asia Type of events identified in Asia BI = before impact FI = first indication FCu = first cultivation EI = Extensive impact
+Indopacific 
+Type of events identified: 
+no_impact 
+weak 
+medium 
+strong
 
-Indopacific Type of events identified: no_impact weak medium strong
 
-##### Detection using indicator taxa
+
+#### *Detection using indicator taxa*
 
 An extensive literature review (...) has been done to detect fossil pollen taxa that can be associated with human activity. The aggregation of indicator groups vary across the continent, both between regions and countries, and the combination of indicator groups for pollen records within the area of expertise. An algorithm has been made to assess each pollen records, which goes through the presence of taxa in combinations of the recorded indicator groups, and detect if the signal of pollen indicator is based on a defined threshold.
 
-Original names of indicator groups: Agricultural activity Agricultural expansion Coastal human presence Agricultural/Disturbance group Agriculture and human activity Amazonian disturbance Combined cultigens indicator Crop cultivation Cultivating homegardens Disturbance group Disturbed vegetation Early human intervention Human activity Human disturbance indicator taxa Human impact Human impact indicators Indicators of human disturbance Introduction Agriculture Maize agriculture Mangrove disturbance Secondary forest taxa Single exotic indicator Single cultigen indicator Introduced European weeds Human influence Exotic arboreal vegetation
+set in table..
+The list of indicator groups from literature is as follow: Agricultural activity, Agricultural expansion, Coastal human presence, Agricultural/Disturbance group, Agriculture and human activity, Amazonian disturbance, Combined cultigens indicator, Crop cultivation, Cultivating homegardens, Disturbance group, Disturbed vegetation, Early human intervention, Human activity, Human disturbance indicator taxa, Human impact, Human impact indicators, Indicators of human disturbance, Introduction Agriculture, Maize agriculture, Mangrove disturbance, Secondary forest taxa, Single exotic indicator, Single cultigen indicator, Introduced European weeds, Human influence, Exotic arboreal vegetation. 
 
-Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxat is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact" (disregard of the source of the classification). Specifically, at least 1 pollen grain of indicators have to present as 'weak' and more than 1 has to present as 'strong'. In addition, the pollen-type 'pinus' was only considered as a human indicator outside of its native distribution (see XXX). For indices, any number of pollen grain needs to present for that specific combination.
+Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxon is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact" (disregard of the source of the classification). Specifically, at least 1 pollen grain of indicators have to present as 'weak' and more than 1 has to present as 'strong'. In addition, the pollen-type *Pinus* was only considered as a human indicator outside of its native distribution (see XXX). For indices, any number of pollen grain needs to present for that specific combination.
 
-#### Arcehological artefacts and radiocarbon dates
+#### *Arcehological artefacts and Summed Probability Densities*
 
-We used the global dataset of radicarbon dates (RC dates) of archeological artefacts from Bird et al 2022. RC dates with valid geographical location (longitude and latitude), and 'LocAccuracy' \> 0 were filtered out as the first step. For each pollen record, RC dates were classified by the geographical distance to the pollen record. The chosen distance classes were: 5, 25, 50, 100, 250, 500 km. This approach is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the sites.
+We used the global dataset of radicarbon dates (RC dates) of archeological artefacts from Bird et al 2022. The quantification of SPD require a distance to be selected around each site location to collect the relevant dates of archaeological artefacts around it. This will limit the area of human presence and indirectly the amount of human activity relevant to pollen records from each site. 
 
-##### Summed Probability Densities
-
-...details about SPD method and its uses ...
+Only RC dates with valid geographical location (longitude and latitude), and 'LocAccuracy' > 0 were filtered out as the first step. For each pollen record, RC dates were classified by the geographical distance to the pollen record. The chosen distance classes were: 5, 25, 50, 100, 250, 500 km. 
 
 For each pollen record, one variable of SPD´s in time was calculated for each distance class (see above). Radiocarbon dates were calibrated using `calibrate` function from `rcarbon` package with apropriate calibration curves ("IntCal20", "ShCal20", "mixed"). Calibration curves were obtained `rcarbon` package and "mixed" was created using `rcarbon::mixCurves` function with 'p' = 0.5. Calibration curves were assigned by their geographical location following Hua et al., 2013.
 
-SPD is estimated using `spd` function from `rcarbon` package for each distance class for each year between 0 and 12 ka. However, distance class with less than 50 RC dates is filtered out in order to maintain robust SPD estimation.
-
-##### Defining "best" SPD for each pollen record
+SPD is estimated using `spd` function from `rcarbon` package for each distance class for each year between 0 and 12 ka. However, distance class with less than 50 RC dates is filtered out in order to maintain robust SPD estimation. In addition, minimum threshold ages for different regions are chosen as the radiocarbon dating is rather limited on younger material.
 
 In order to select distance from each pollen record, which will limit the area of human activity relevant to that pollen record, we used an expert-based detection of human events from pollen records to inform the estimation of SPD.
 
-For each distance class of SPD of each pollen record, one redundancy analysis (RDA) is estimated using `vegan::rda` function for with event types as responses (binary) and SPD values as predictors. Next, R2 is estimated using `vegan::RsquareAdj` function for each distance class. Finally, the distance class with the highest R2 is selected as the representation of human activity for that pollen record
+For each distance class of SPD of each pollen record, one redundancy analysis (RDA) is estimated using `vegan::rda` function for with event types as responses (binary) and SPD values as predictors. Next, R2 is estimated using `vegan::RsquareAdj` function for each distance class. Finally, the distance class with the highest R2 is selected as the representation of human presence, and indirectly human activity, for that pollen record.
 
-##### Temporal patterns of human events
+This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the sites. See demonstration of this method 
+[Detection of past humans](link%20to%20Ondrej´s%20presentation). 
 
-In order to have the information about human events on same temporal spacing, we used a generalized additive model (GAM) regression using 'mgcv::gam\` function. Specifically, we have fitted one model per each event type per each fossil record with cubic regression spline and binomial error distribution. The 'k' was selected as 24 (cca 1 basic function per each 500 yr). Data was then predicted for each 100 yr slices between 0 and 12 ka, but limited to only use period, where data is present (i.e., interpolation not forecasting).
-
-In order to have the information about SPD on same temporal spacing, we used a generalized additive model (GAM) regression using 'mgcv::gam\` function. Specifically, we have fitted one model per each distance class per each fossil record with cubic regression spline and beta error distribution. The 'k' was selected as 24 (cca 1 basic function per each 500 yr). Data was then predicted for each 100 yr slices between 0 and 12 ka, but limited to only use period, where data is present (i.e., interpolation not forecasting).
 
 ### Paleo Climate
 
@@ -240,7 +255,7 @@ To prepare the response variables of our datasets and to be able to analyse vege
 
 All response variables are calculated through our newly developed R-Ecopol package that is an assemblage of functions to estimate PAP for our data assembly. The base functions used in this package are derived from other dependency packages such as mvpart package () to estimate MRT, vegan (), R-Ratepol (), functions from iNext that have been modified to extract interpolated diversity estimates based on a minimum sample size, and newly developed R functions to run DCCA using Canoco 4.5, among other dependency packages.
 
-##### Pollen richness and diversity
+#### *Pollen richness, diversity, and evenness*
 
 The different aspects of palynological diversity are estimated using Hill´s effective species numbers N0, N1, N2, and the associated evenness ratios of N2/N1 and N1/N0. These are combined through one equation where the effective species numbers differ mainly in how the rare taxa are weighted in the parameter q:
 
@@ -248,25 +263,25 @@ set in equation
 
 When q is 0, rare and abundant taxa have equal weight and the number is simply the number of taxa in the sample. The equation is not possible to define for q = 1, but as it approaches 1, it is equal to the exponential of the well-known Shannon index and reports the number of equally common taxa. When q = 2, it is the same as the inverse Simpson diversity index and provides the number of equally abundant taxa with a low weight on rare taxa. The advantage of using effective species numbers is that they provide easily interpretable units and contain the doubling effect. To standardize the sample sizes, we use the rarefaction approach developed by Chao et al. These estimates are rarefied to the number of n = 150 grains, or in some cases to a lower sum (minimum n = 25). Some pollen records were only available as pollen percentages, and as the sample size is unknown, these are then rarefied to the minimum sum of percentages. The evenness ratios will be 1 if all taxa are equally abundant, and the ratios hence indicate changes in abundances between the numbers of rare, equally common, and abundant taxa.
 
-##### Compositional change
+#### *Compositional change*
 
 Compositional change is calculated using multivariate regression trees (MRT) with age as the constraining variable. MRT is a robust tool to explore and predict changes between assemblages of taxa and environmental predictor variables (De´ath, Simpson and Birks 2012), and the technique has been adopted in palaeoecology to detect major zones or shifts between periods of stable vegetation as it can take the chronology into account (Simpson and Birks 2012). The input data is pollen percentages, and the sum-of-square statistics of the recursive partitioning of the data are based on chi-square distances between samples. The number of cross-validation is set to 1000, and the optimal sized tree is chosen based on the 1SD rule (Simpson and Birks 2012).
 
-##### Compositional turnover
+#### *Compositional turnover*
 
 Compositional turnover is estimated using detrended correspondence analysis (DCCA) with age as the explanatory variable. Changes in weighted average (WA) sample scores (CaseR scores sensu ter Braak and Smilauer 2012) are measures of compositional turnover in standard deviation (SD) units (Birks 2007). The WA scores are regressed with time including a second-order polynomial (age+age\^2) to allow potentially more flexibility in the turnover pattern within a pollen record. Overall compositional turnover is a measure of the total length of CaseR scores along the time axis 1, whereas the pattern in turnover is the CaseR scores for the individual samples along the time axis 1. Pollen percentages are used as input without any transformation to maintain the chi-square distances between samples.
 
-##### Rate-of-change
+#### *Rate-of-change*
 
 RoC estimated using the binning with moving windows of 500 years' time bins over 5 number of window shifts Samples are randomly selected for each bin RoC are reported as dissimilarity per 500 years Data are standardized in each working unit to 150 grains or the lowest number detected in each dataset.
 
-##### Change-points detection and density estimates
+#### *Change-points detection and density estimates*
 
 Change-points detection of PAP variables are calculated using regular regression trees (RT) for single variables. The transitions are then coded as 0/1 variables where 1 is defining the change point as the mean ages between the two samples where there is a change between zones. This is done individually for each PAP variable.
 
 Density estimation of change-points are estimated as two new variables where we aggregate the change points based on diversity numbers (N0, N1, N2, and N2/N1) as one density variable, and the change-points based on the compositional changes (MRT, RoC, and DCCA) as one density variable.. (Density calculated for each of these using.. fixing boundary issues by .. ) Generalised additive models (GAMs)
 
-#### Main analysis
+### Main analysis
 
 To test if ecological processes change through time due to human activity, we used multivariate statistical techniques as we are dealing with many response variables. The derived PAP estimates .... are used as response variables and the explanatory variables are the estimated spd as indice of human activity, the paleoclimatic variables, and time.
 
