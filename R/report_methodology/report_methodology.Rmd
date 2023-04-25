@@ -29,6 +29,8 @@ Things that would be good to make clear for everyone involved:
 
 5.  Progress plan
 
+(Disclaimer: Many of the images and figures are "thrown" in - quickly made and need to be improved).
+
 # Part I: Methodology
 
 ## Main data aquisition
@@ -47,6 +49,7 @@ library(targets)
 library(here)
 library(colorspace)
 library(colorBlindness)
+library(data.tree)
 
 # list R functions and source them
 lapply(
@@ -169,7 +172,7 @@ overview_table %>%
 
 ### Harmonisation tables
 
-An important step in FOSSILPOL to get the standardisation of pollen records within and across regions is harmonisation of pollen types. There are different analyst with different schools and background, and the nomenclature can vary widely. To be able to make comparisons with different pollen records, the level of pollen taxonomy should be similar. As a result, pollen harmonisation tables are produced for different regions, attempting to minimise biases related to this. The regional harmonisation tables used in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, Africa, and the Indo-Pacific region (Birks et al. harmonisation paper). These tables can be downloaded from (xxx), and are used as additional input in the Fossilpol workflow above (Fossilpol guidelines).
+An important step in FOSSILPOL to get the standardisation of pollen records within and across regions is harmonisation of pollen types. There are different analyst with different schools and background, and the nomenclature can vary widely. To be able to make numerical comparisons across different pollen records, the level of pollen taxonomy should be similar. As a result, pollen harmonisation tables are produced for different regions, attempting to minimise biases related to this. The regional harmonisation tables used in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, Africa, and the Indo-Pacific region (Birks et al. harmonisation paper). These tables can be downloaded from (xxx), and are used as additional input in the Fossilpol workflow above ([see Fossilpol step_by_step guide](https://hope-uib-bio.github.io/FOSSILPOL-website/step_by_step_guide.html)).
 
 ## Workflow for HOPE Hypothesis 1
 
@@ -177,9 +180,39 @@ We use the [targets](https://books.ropensci.org/targets/) package in R to produc
 
 Our output of targets is set up with in an external storage at OneDrive where we save the main targets folder with data and meta data, while the target script and functions are saved in our Github project. Note that first time running targets without access to our main data folder will take time. The targets are split up in many steps with several specialised functions that is made to loading necessary data, to get estimates of various variables or structuring various subsets of data step wise. This is to avoid the need for re-running major parts that take too long when the data is already processed. There is a dependency in the list of targets that the in the end to run the final analyses, all other targets need to be up-to-date. Targets will detect any changes made in the functions, if this happens the targets will automatically rerun the parts that are dependent on this change, but at the same time skip all the parts that are up-to-date.
 
-An overview of the targets: Set in figure of our project workflow
+The file structure in Github is
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+# create paths
+path <- c(
+  "HOPE_Hypothesis1/",
+  "HOPE_Hypothesis1/___Init_project___.R",
+  "HOPE_Hypothesis1/_targets.R",
+  "HOPE_Hypothesis1/_targets_packages.R",
+  "HOPE_Hypothesis1/HOPE_Hypothesis1.Rproj",
+  "HOPE_Hypothesis1/R/",
+  "HOPE_Hypothesis1/renv/",
+  "HOPE_Hypothesis1/R/functions/",
+  "HOPE_Hypothesis1/R/functions/climate/",
+  "HOPE_Hypothesis1/R/functions/data_wrangling/",
+  "HOPE_Hypothesis1/R/functions/events/",
+  "HOPE_Hypothesis1/R/functions/hvarpart/",
+  "HOPE_Hypothesis1/R/functions/modelling/",
+  "HOPE_Hypothesis1/R/functions/PAPs/",
+  "HOPE_Hypothesis1/R/functions/spd/",
+  "HOPE_Hypothesis1/R/functions/visualisation/"
+  )
+  
 
-The targets are arranged in a order to prepare all the data needed for the main analysis. First, it is setting the options for data interpolation to get all samples on equal time spacing, loading the FOSSILPOL dataset, creating dummy tables and variables needed for input in the specialised functions to process data. This is followed by the data processing steps for each of the explanatory and response variables that is included in this project. The largest pre-processing of data starts with preparation of the explanatory variable detecting past human presence and impact. This is a major analyses in itself. This follows by data extraction of palaeo-climate. This is modeled data downloaded from CHELSA Palaeo-climate for each of the geographical location of our collection of pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. It is followed by different targets that process all estimates of the response variables selected to get measures of pollen assemblage properties. In general, all data such as raw estimates and interpolated data are kept to allow careful checking and validation of output. In the end, data is structure to fit the main analysis. This analysis is divided into two parts which we call the 1) the spatial (within core) analysis, and 2) the temporal analysis (a *spatial* or between core/sample analysis per timestep ca. every 500 years). Several choices are made, which are described in the detail in the text below.
+(filetree <- data.tree::as.Node(data.frame(pathString = path)))
+
+```
+
+All that is needed when the project is set up, is to run the scripts `___init_project.R___` and `_targets.R`. This install and load all the packages that is needed and functions that have been created to run the targets or tasks for this project. The functions are divided into different folders to make it easier to find the functions for subtasks instead of collecting them in one script. The functions are specialised wrapper functions for our data structure, but they depend on costume made functions that are gathered in the `R-Ecopol` package. The figure below show the network of targets. 
+
+![](figures/glimpse_network.png)
+
+
+The targets are arranged in a order to prepare all the data needed for the main analysis in the end. First, it is setting the options for data interpolation to get all samples on equal time spacing, loading the FOSSILPOL dataset, creating dummy tables and variables needed for input in the specialised functions to process data. This is followed by the data processing steps for each of the explanatory and response variables that is needed in this project. The largest pre-processing of data starts with preparation of the explanatory variable detecting past human presence and impact. This is a major analyses in itself. This follows by data extraction of palaeo-climate from the CHELSA paleoclimate database. This is modeled palaeo-climate data for each of the geographical location of the pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. It is followed by different targets that process all estimates of the response variables selected to get measures of pollen assemblage properties. In general, all data such as raw estimates and interpolated data are kept to allow careful checking and validation of output. In the end, data is structure to fit the main analysis. This analysis is divided into two parts which we call the 1) the spatial (within core) analysis, and 2) the temporal analysis (a *spatial* or between core/sample analysis per timestep ca. every 500 years). Several choices are made, which are described in the detail in the text below.
 
 ### Data filtering
 
@@ -224,22 +257,70 @@ Note that the event types are uniquely defined within continents, and event type
 
 Second, an algorithm is made to get the binary variables (0/1) per event type identified in each pollen record. A new vector with values of average ages in between levels (samples) of the identified event type was created, then a matrix of 'age vector x event types' were made with binary value (0/1) assign to each value depending on the age of the event type (the event type is present (1) if age \> detected age). Finally, logical rules were applied and the binary values were adjusted for each region to get the event data for each pollen record. If there is no human event identified, it does not mean humans were absent, but that is was not possible to identify human activity from the pollen records. 
 
-Set in summary figures here of the events type in different regions within ecozones: 
-```{r}
+Below is a summary figure for the events aggregated within different regions and ecozones using the raw event data. The different colouring display the event types with each region. The lines represent a simple binomial GAM model only for visualising the main trends of changes in different human events identified in the pollen diagrams over time in each region. The raw data is the 0/1 dots.   
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+
+data_events <- targets::tar_read(data_events_to_fit)
+
+
+plot_data_events(
+  data_source_events = data_events,
+  select_region = "Europe"
+)
+
+plot_data_events(
+  data_source_events = data_events, 
+  select_region = "North America"
+  )
+
+plot_data_events(
+  data_source_events = data_events,
+  select_region = "Asia"
+)
+
+plot_data_events(
+  data_source_events = data_events,
+  select_region = "Oceania"
+)
+
+
 
 ```
+
+In North America, Asia, and Oceania there is an extra panel entitled `NA`. It contains a few datasets in these regions, most likely because they have not the geographical location within a defined ecozone in the shapefile in FOSSILPOL. In addition, Oceania contains also the var_name of the events type identified for Asia. This might be because some of the sites in Asia have been reassigned to the region Oceania.  
 
 
 #### *Detection using indicator taxa*
 
-An extensive literature review (...) has been done to detect fossil pollen taxa that can be associated with human activity. The aggregation of indicator groups vary across the continent, both between regions and countries, and the combination of indicator groups for pollen records within the area of expertise. An algorithm has been made to assess each pollen records, which goes through the presence of taxa in combinations of the recorded indicator groups, and detect if the signal of pollen indicator is based on a defined threshold.
+An extensive literature review has been done to detect fossil pollen taxa that can be associated with human activity (Add overview table ?). The aggregation of indicator groups vary across the continent, both between regions and countries, and the combination of indicator groups for pollen records within the area of expertise. An algorithm has been made to assess each pollen records, which goes through the presence of taxa in combinations of the recorded indicator groups, and detect if the signal of pollen indicator is based on a defined threshold.
 
-set in table.. The list of indicator groups from literature is as follow: Agricultural activity, Agricultural expansion, Coastal human presence, Agricultural/Disturbance group, Agriculture and human activity, Amazonian disturbance, Combined cultigens indicator, Crop cultivation, Cultivating homegardens, Disturbance group, Disturbed vegetation, Early human intervention, Human activity, Human disturbance indicator taxa, Human impact, Human impact indicators, Indicators of human disturbance, Introduction Agriculture, Maize agriculture, Mangrove disturbance, Secondary forest taxa, Single exotic indicator, Single cultigen indicator, Introduced European weeds, Human influence, Exotic arboreal vegetation.
+The table below list the indicator groups from the literature in the region. 
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+
+indicator_table <- data.frame(
+  Indicator_groups = c(
+    "Agricultural activity", "Agricultural expansion", "Coastal human presence", "Agricultural/Disturbance group", "Agriculture and human activity", "Amazonian disturbance", "Combined cultigens indicator", "Crop cultivation", "Cultivating homegardens", "Disturbance group", "Disturbed vegetation", "Early human intervention", "Human activity", "Human disturbance indicator taxa", "Human impact", "Human impact indicators", "Indicators of human disturbance", "Introduction Agriculture", "Maize agriculture", "Mangrove disturbance", "Secondary forest taxa", "Single exotic indicator", "Single cultigen indicator", "Introduced European weeds", "Human influence", "Exotic arboreal vegetation")
+)
+
+
+```
+
 
 Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxon is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact" (disregard of the source of the classification). Specifically, at least 1 pollen grain of indicators have to present as 'weak' and more than 1 has to present as 'strong'. In addition, the pollen-type *Pinus* was only considered as a human indicator outside of its native distribution (see XXX?). For indices, any number of pollen grain needs to present for that specific combination.
 
-Set in figure of the events indicators in different ecozone
-```{r}
+Summary figure of the events using indicator taxa in different ecozones in Latin America:
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+
+data_events <- targets::tar_read(data_events_to_fit)
+
+
+plot_data_events(
+  data_source_events = data_events,
+  select_region = "Latin America"
+)
 
 ```
 
@@ -252,7 +333,18 @@ Only RC dates with valid geographical location (longitude and latitude), and 'Lo
 
 For each pollen record, one variable of SPD´s in time was calculated for each distance class (see above). Radiocarbon dates were calibrated using `calibrate` function from `rcarbon` package with apropriate calibration curves ("IntCal20", "ShCal20", "mixed"). Calibration curves were obtained `rcarbon` package and "mixed" was created using `rcarbon::mixCurves` function with 'p' = 0.5. Calibration curves were assigned by their geographical location following Hua et al., 2013.
 
-SPD is estimated using `spd` function from `rcarbon` package for each distance class for each year between 0 and 12 ka. However, distance class with less than 50 RC dates is filtered out in order to maintain robust SPD estimation. In addition, minimum threshold ages for different regions are chosen as the radiocarbon dating is rather limited on younger material.
+SPD is estimated using `spd` function from `rcarbon` package for each distance class for each year between a minimum threshold age and 12 ka. However, distance class with less than 50 RC dates is filtered out in order to maintain robust SPD estimation. The minimum threshold ages are different for different regions and are decided based on the availability of radiocarbon dating for different regions. In general there is a bias that radiocarbon dating is rather limited on younger material.
+
+```{r}
+
+age_cutoff_rc <- tibble::tibble(
+    region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
+    age_from = c(2000, 2000, 2000, 2000, 500, 500)
+  )
+
+
+```
+
 
 In order to select distance from each pollen record, which will limit the area of human activity relevant to that pollen record, we used an expert-based detection of human events from pollen records to inform the estimation of SPD.
 
@@ -260,8 +352,10 @@ For each distance class of SPD of each pollen record, one Redundancy Analysis (R
 
 This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the sites. See demonstration of this method [Detection of past humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).
 
-set in figure summary figure of spds in time for different regions and ecozones:
-```{r}
+Summary figure of SPDs in time for across different regions and within ecozones:
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+
 
 ```
 
@@ -304,13 +398,16 @@ Change-points detection of all the PAP variables are calculated using convention
 
 The density is calculated for each of these variables using a Gaussian kernel, re-scaling them to each of the records specific age ranges (i.e. minimum and maximum ages). To solve the boundary issue in density estimation the data is reflected to 0. Hierarchical generalised additive models (HGAM) are then used to produce two different fitted variables where the first density get the common pattern of the density estimates of all the variables reflecting significant changes in richness, diversity, and evenness, and the second variable get the common pattern of the densities of the variables reflecting significant change in pollen assemblages (MRT, RoC, DCCA1).
 
-set in an example figure of PAP and density variables
+Example of ten sites and PAP estimations
+
+
+
 
 ### Hierarchical variation partitioning
 
 All explanatory and response variables, except the two fitted diversity and compositional density variables, have been estimated on the raw datasets using the harmonised pollen counts, and thereafter been linearly interpolated to get the data points on equal time spacing of 500 years. Equal time spacing is necessary for the second temporal analysis (below). Comparison of interpolation methods using either linear or generalised additive models (GAMs) showed that linear interpolations resulted in correlations between response variables closest to the raw estimates of data, whereas the univariate GAM models could provide unexpected results of the smoothing of the main pattern in single variables that changed these relationships. Since we cannot individually assess single GAM models for each variable for all the sites, we choose the simplest interpolation method.
 
-To test if ecological processes change through time due to human activity, we used the assemblage of PAPs as response variables, and SPD, palaeoclimate and time as explantory variables with reduced rank multivariate regression. Statistical testing is done with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX). We then used the new R package `rdacca.hp` developed to run hierarchial variation partitioning with several predictors. This estimate the averaging variation per variables in different combinations to get the variable importance independent of the order of predictors. To run the variation partitioning we use distance-based Redundancy Analysis with Gower distances adding a contant as we are dealing with mixed responses variables. The analysis can be run with each predictors independently or as matrices of predictors. In our case, human activity is represented by the one SPD variable, whereas the palaeoclimate is a combination of summer precipitation, winter precipitation, annual temperatures and winter temperatures. These climatic variables are selected as they are considered important climatic variables to represent differences in climate due to seasonality and aridity. Time is represented by the ages of each pollen record, however, it is more difficult to interpret. We assume this variable may represent time dependent vegetation changes such as natural successions. We used the adjusted R2 to get the variation of each main predictor group humans, climate, and time.
+To test if ecological processes change through time due to human activity, we used the assemblage of PAPs as response variables, and SPD, palaeoclimate and time as explantory variables with reduced rank multivariate regression. Statistical testing is done with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX). We then used the new R package `rdacca.hp` developed to run hierarchial variation partitioning with several predictors. This estimate the averaging variation per variables in different combinations to get the variable importance independent of the order of predictors. To run the variation partitioning we use distance-based Redundancy Analysis with Gower distances adding a contant as we are dealing with mixed responses variables. The analysis can be run with each predictors independently or as matrices of predictors. In our case, human activity is represented by the one SPD variable, whereas the palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures and winter temperatures. These climatic variables are selected as they are considered important climatic variables to represent differences in climate between cold and warm regions, and seasonality and aridity. Time is represented by the ages of each pollen record, however, it is more difficult to interpret. We assume this variable may represent time dependent vegetation changes such as natural successions. We used the adjusted R2 to get the variation of each main predictor group humans, climate, and time.
 
 The analysis is run in two different ways to analyse: - 1) to analyse *spatial changes* which run the hierarchical variation partitioning within single cores or site, and - 2) to analyse the *temporal patterns* of variable partitioning in space for each 500 year time step. In this latter analysis, we restructure the data as samples across space within selected Koppen-Geiger division of five major ecozones on each continent, and rerun the same hierarchical variation partitioning.
 
