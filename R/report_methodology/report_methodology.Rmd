@@ -293,29 +293,17 @@ In North America, Asia, and Oceania there is an extra panel entitled `NA`. It co
 
 #### *Detection using indicator taxa*
 
-An extensive literature review has been done to detect fossil pollen taxa that can be associated with human activity (Add overview table ?). The aggregation of indicator groups vary across the continent, both between regions and countries, and the combination of indicator groups for pollen records within the area of expertise. An algorithm has been made to assess each pollen records, which goes through the presence of taxa in combinations of the recorded indicator groups, and detect if the signal of pollen indicator is based on a defined threshold.
+An extensive literature review has been done to detect fossil pollen taxa that can be associated with human activity (Add the two tables of groups of indictors and single indictors?). The aggregation of indicator groups vary across the continent, both between regions and countries, and the combination of indicator groups for pollen records within the area of expertise. An algorithm has been made to assess each pollen records, which goes through the presence of taxa in combinations of the recorded indicator groups, and detect if the signal of pollen indicator is based on a defined threshold.
 
-The table below list the indicator groups from the literature in the region. 
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-indicator_table <- data.frame(
-  Indicator_groups = c(
-    "Agricultural activity", "Agricultural expansion", "Coastal human presence", "Agricultural/Disturbance group", "Agriculture and human activity", "Amazonian disturbance", "Combined cultigens indicator", "Crop cultivation", "Cultivating homegardens", "Disturbance group", "Disturbed vegetation", "Early human intervention", "Human activity", "Human disturbance indicator taxa", "Human impact", "Human impact indicators", "Indicators of human disturbance", "Introduction Agriculture", "Maize agriculture", "Mangrove disturbance", "Secondary forest taxa", "Single exotic indicator", "Single cultigen indicator", "Introduced European weeds", "Human influence", "Exotic arboreal vegetation")
-)
-
-
-```
+(Add tables with scrollbars here?)
 
 
 Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxon is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact" (disregard of the source of the classification). Specifically, at least 1 pollen grain of indicators have to present as 'weak' and more than 1 has to present as 'strong'. In addition, the pollen-type *Pinus* was only considered as a human indicator outside of its native distribution (see XXX?). For indices, any number of pollen grain needs to present for that specific combination.
 
 Summary figure of the events using indicator taxa in different ecozones in Latin America:
-
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
 data_events <- targets::tar_read(data_events_to_fit)
-
 
 plot_data_events(
   data_source_events = data_events,
@@ -335,13 +323,16 @@ For each pollen record, one variable of SPD´s in time was calculated for each d
 
 SPD is estimated using `spd` function from `rcarbon` package for each distance class for each year between a minimum threshold age and 12 ka. However, distance class with less than 50 RC dates is filtered out in order to maintain robust SPD estimation. The minimum threshold ages are different for different regions and are decided based on the availability of radiocarbon dating for different regions. In general there is a bias that radiocarbon dating is rather limited on younger material.
 
-```{r}
+```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-age_cutoff_rc <- tibble::tibble(
+age_cutoff_rc <- data.frame(
     region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
     age_from = c(2000, 2000, 2000, 2000, 500, 500)
   )
 
+age_cutoff_rc %>%
+  kbl(booktabs = TRUE, caption = "Table 3: Minimum threshold age for different regions") %>%
+  kable_paper(full_width = FALSE) 
 
 ```
 
@@ -352,10 +343,28 @@ For each distance class of SPD of each pollen record, one Redundancy Analysis (R
 
 This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the sites. See demonstration of this method [Detection of past humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).
 
-Summary figure of SPDs in time for across different regions and within ecozones:
+Summary figure of SPDs in time for different regions and ecozones:
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
+data_to_spd_plot <- tar_read(data_spd_full) %>%
+  inner_join(targets::tar_read(data_meta) %>%
+                           dplyr::select(dataset_id, 
+                                         region, 
+                                         ecozone_koppen_5), 
+                       by = "dataset_id") %>%
+  dplyr::select(dataset_id, spd, region, ecozone_koppen_5) %>%
+  unnest(spd) %>%
+  filter(!is.na(spd))
+
+data_to_spd_plot %>%
+  ggplot(aes(x = age, y = spd, col = ecozone_koppen_5)) +
+  geom_point() +
+  scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +  
+  geom_smooth() +
+  facet_wrap(~region, scales = "free") +
+  theme_classic() +
+  theme(legend.position = "bottom") 
 
 ```
 
@@ -374,7 +383,7 @@ These response variables are calculated using the newly developed [R-Ecopol pack
 
 The different aspects of palynological diversity are estimated using Hill´s effective species numbers N0, N1, N2, and the associated evenness ratios of N2/N1 and N1/N0. These are combined through one equation where the effective species numbers differ mainly in how the rare taxa are weighted in the parameter q:
 
-set in equation
+$$^q{D} = (\sum_{i=1}^{S} p_{i}^{q})^{1/(1-q)}$$
 
 When q is 0, rare and abundant taxa have equal weight and the number is simply the number of taxa in the sample. The equation is not possible to define for q = 1, but as it approaches 1, it is equal to the exponential of the well-known Shannon index and reports the number of equally common taxa. When q = 2, it is the same as the inverse Simpson diversity index and provides the number of equally abundant taxa with a low weight on rare taxa. The advantage of using effective species numbers is that they provide easily interpretable units and contain the doubling effect. To standardize the sample sizes, we use the rarefaction approach developed by Chao et al. These estimates are rarefied to the number of n = 150 grains, or in some cases to a lower sum (minimum n = 25). Some pollen records were only available as pollen percentages, and as the sample size is unknown, these are then rarefied to the minimum sum of percentages. The evenness ratios will be 1 if all taxa are equally abundant, and the ratios hence indicate changes in abundances between the numbers of rare, equally common, and abundant taxa.
 
@@ -398,9 +407,8 @@ Change-points detection of all the PAP variables are calculated using convention
 
 The density is calculated for each of these variables using a Gaussian kernel, re-scaling them to each of the records specific age ranges (i.e. minimum and maximum ages). To solve the boundary issue in density estimation the data is reflected to 0. Hierarchical generalised additive models (HGAM) are then used to produce two different fitted variables where the first density get the common pattern of the density estimates of all the variables reflecting significant changes in richness, diversity, and evenness, and the second variable get the common pattern of the densities of the variables reflecting significant change in pollen assemblages (MRT, RoC, DCCA1).
 
-Example of ten sites and PAP estimations
-
-
+Example of ten sites and PAP estimations:
+![](figures/PAP_estimation.png)
 
 
 ### Hierarchical variation partitioning
