@@ -180,6 +180,7 @@ list(
         "ecozone_koppen_15",
         "ecozone_koppen_30",
         "data_publicity",
+        "end_of_interest_period",
         "doi"
       )
     )
@@ -689,7 +690,7 @@ list(
    command = filter_data_hvar(
      data_source = data_hvar,
      data_meta = data_meta,
-     starting_age = age_cutoff_region
+     age_table = age_cutoff_region
    )
  ), # restructure data for temporal analysis
  targets::tar_target(
