@@ -9,27 +9,26 @@ output:
 
 The main scope of this report is to give you a detailed overview of the data input, data process, and analyses that has been done to find out if human activity have changed fundamental ecological processes over time (Hypothesis 1 in the HOPE project).
 
-The report contain the full workflow of methodological steps, description, and results. The complexity of the data processing prior to the main analyses makes it difficult to present orally without authors having in-depth understanding of the workflow. It will make the basis of the methodology part of a manuscript.
+The report contain the workflow of methodological steps, description, and results. The complexity of the data processing prior to the main analyses makes it difficult to present orally without authors having relatively good understanding of the workflow, to be able to give (critical) comments (as to if major changes are needed). The hope is that this then will make the foundation of the methodology and result part of a manuscript.
 
-The next step is to write a manuscript, but before we start it would be good to know what kind of involvement and/or role you would like to have. It is open for suggestions and feedback in which direction it should take. A meeting will be schedule to discuss these matters.
+The next step is to write a manuscript, but before we start it would be good to know what kind of involvement you would like to have, if you prefer to write certain sections etc. It is all open for suggestions and feedback. A meeting will be schedule to discuss these matters.
 
 Things that would be good to make clear for everyone involved:
 
 1.  Authorship:
 
-    -   Leading author
-    -   Co-author
-    -   Data contributor
+    -   Authorships
+    -   Data contributors
 
-2.  Target journal
+2.  Target journal -> important to decide now as to how to structure a manuscript 
 
-3.  Interesting highlights of our results - story
+3.  Interesting highlights of our results - the main story
 
 4.  Feedback and comments to the methodology? Major changes needed?
 
 5.  Progress plan
 
-(Disclaimer: Many of the images and figures are "thrown" in - quickly made and need to be improved).
+(Disclaimer: Many of the images and figures are quickly made, or older figures/images are included for help in visualising variables for the sake of completeness of the report (for HOPE members), I did not focus on good scientific writing either because that takes too much time for me at this stage, so please do not share this beyond the group).
 
 # Part I: Methodology
 
@@ -368,6 +367,8 @@ data_to_spd_plot %>%
 
 ```
 
+As you can see from the figure of the different regions, we have no data for past human influence in Africa, so for the main analyses, this region has been filtered out. 
+
 
 ### Paleo Climate
 
@@ -413,10 +414,27 @@ Example of ten sites and PAP estimations:
 
 ### Hierarchical variation partitioning
 
-All explanatory and response variables, except the two fitted diversity and compositional density variables, have been estimated on the raw datasets using the harmonised pollen counts, and thereafter been linearly interpolated to get the data points on equal time spacing of 500 years. Equal time spacing is necessary for the second temporal analysis (below). Comparison of interpolation methods using either linear or generalised additive models (GAMs) showed that linear interpolations resulted in correlations between response variables closest to the raw estimates of data, whereas the univariate GAM models could provide unexpected results of the smoothing of the main pattern in single variables that changed these relationships. Since we cannot individually assess single GAM models for each variable for all the sites, we choose the simplest interpolation method.
+All response variables, except the two fitted diversity and compositional density variables, have been estimated using the harmonised pollen counts, and then the raw estimates have been linearly interpolated to get the data points on equal time spacing of 500 years. Equal time spacing is necessary for the second temporal-spatial analysis (below). Comparison of interpolation methods using either linear or generalised additive models (GAMs) showed that linear interpolations resulted in correlations between the response variables that are more similar to the correlations between the variables of the raw estimates of data. The univariate GAM models could show unexpected patterns in single variables that changed these multivariate correlations. Since we cannot individually assess single GAM models for each variable for all the sites, we choose the simplest interpolation method to keep the data as close as possible to the raw estimates before using them in the multivariate models.  In addition, we remove Africa as a region, because as you can see from section about *past human detection* above, we do not have any data of *past human presence*.
 
-To test if ecological processes change through time due to human activity, we used the assemblage of PAPs as response variables, and SPD, palaeoclimate and time as explantory variables with reduced rank multivariate regression. Statistical testing is done with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX). We then used the new R package `rdacca.hp` developed to run hierarchial variation partitioning with several predictors. This estimate the averaging variation per variables in different combinations to get the variable importance independent of the order of predictors. To run the variation partitioning we use distance-based Redundancy Analysis with Gower distances adding a contant as we are dealing with mixed responses variables. The analysis can be run with each predictors independently or as matrices of predictors. In our case, human activity is represented by the one SPD variable, whereas the palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures and winter temperatures. These climatic variables are selected as they are considered important climatic variables to represent differences in climate between cold and warm regions, and seasonality and aridity. Time is represented by the ages of each pollen record, however, it is more difficult to interpret. We assume this variable may represent time dependent vegetation changes such as natural successions. We used the adjusted R2 to get the variation of each main predictor group humans, climate, and time.
+To test if ecological processes have changed due to past human activity within cores, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimate the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because we are dealing with a mix of numerical responses variables. These are the different PAPs with varying units. Depending on the type of analyses (see below), the explanatory variables are SPDs and palaeoclimatic variables. For within core analysis (see below) we also include time as an explanatory variable. SPD is then the important variable of main interest as it represent past human presence. The palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures and winter temperatures. These are selected as we considered them most relevant to represent differences in climatic conditions within all the regions (regarding temperatures, seasonality and aridity). Time is represented by the ages of each pollen record, however, this is more difficult to interpret. We assume age may represent time dependent vegetation changes such as natural successions and/or ecological changes due to interaction between taxa. 
 
-The analysis is run in two different ways to analyse: - 1) to analyse *spatial changes* which run the hierarchical variation partitioning within single cores or site, and - 2) to analyse the *temporal patterns* of variable partitioning in space for each 500 year time step. In this latter analysis, we restructure the data as samples across space within selected Koppen-Geiger division of five major ecozones on each continent, and rerun the same hierarchical variation partitioning.
+
+To do this, we have coded two functions one generalised called `get_varhp` and a specialised function that perform the analysis on our dataset called `run_hvar`. The parameters `data_source` is a combined pre-structure `tibble` that take the data stored in the `data_merge` column. This contain all preprepared variables for each dataset that will be input into the analysis. Because this contain all variables, there are two parameters  `response_vars` and `predictor_vars` where you can select the variables you want to include as responses and predictors in the hierarchical variation partitioning analysis. The predictor variables can be applied either as individual predictors or as groups as predictors. In our case, we run the analysis with *groups of predictors*. This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors. (Though the overall results does not change much). The advantage using palaeoclimate as single predictors is that it is possible to get which of climatic variables are important (high adj R2) or statistically significant, if significant testing is turned on. Statistical testing can be applied in two ways, both which shuffle the predictor variables. Using `time_series` set as TRUE, statistical testing is run with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX) which has a cyclic behavior of samples to keep the stratigraphical order intact. If `time_series` is set as FALSE, predictor variables will be randomly shuffled as many times set in the parameter `permutations` (hence it use the default permutation in the `rdcca.hp` package). 
+
+The analysis is run in two different ways to analyse: - 1) to analyse *spatial changes* which run the hierarchical variation partitioning within single cores or site, and - 2) to analyse the *temporal patterns* in space for each of the 500 year time steps. In this latter analysis, we restructure the data as samples across space within selected Koppen-Geiger division of five major ecozones on each continent, whereas the analysis is run per time bin. The predictor groups are past human presence and the matrix of palaeoclimatic variables. For this, we filter out time bins which have less than 5 samples. For some bins, if all the spds equal zero, the analysis will fail. These cases indicate insufficient numbers of predictors and will return NA for these specific time bins.
 
 # Part II: Results
+
+Figure 1 - the general distribution of sites and summary of number of sites per region and ecozones
+
+
+### Summary results for the spatial changes (within core analysis)
+
+
+Figure 2 - violin plots of total explained variation per region across ecozones
+Figure 3 - pie charts of uniely percentage explained variation of total constrained  
+Figure 3 - uniquely explained variation of past human impact across the world - maps
+Figure 4 -
+
+
+
