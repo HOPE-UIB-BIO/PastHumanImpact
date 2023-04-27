@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
+  data_storage_path <- data_storage_path[1]
 }
 
 external_storage_targets <-
@@ -180,6 +180,7 @@ list(
         "ecozone_koppen_15",
         "ecozone_koppen_30",
         "data_publicity",
+        "end_of_interest_period",
         "doi"
       )
     )
@@ -675,7 +676,7 @@ list(
   # ),
  # - merge all data together, [remember to add density vars when done!!]
   targets::tar_target(
-    name = data_for_hvarpar,
+    name = data_hvar,
     command = get_data_for_hvarpar(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
@@ -683,19 +684,35 @@ list(
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
-  )
-, # # - run hVARPAR (hypothesis I)
+  ), - # filter data by age of interests in regions; filter out Africa 
+ targets::tar_target(
+   name = data_hvar_filtered,
+   command = filter_data_hvar(
+     data_source = data_hvar,
+     data_meta = data_meta,
+     age_table = age_cutoff_region
+   )
+ ), # restructure data for temporal analysis
+ targets::tar_target(
+   name = data_hvar_temporal,
+   command = get_data_hvar_timebin(
+     data_source = data_hvar_filtered,
+     data_meta = data_meta
+   )
+ ), 
+ 
+ # # Main analyses: hierarchical variation partitioning
+  # - run first spatial (within core) analysis
   targets::tar_target(
-    name = result_hvarpar_timeserie,
+    name = output_hvar_spatial,
     command = run_hvarpart(
-      data_source = data_for_hvarpar,
+      data_source = data_hvar_filtered,
       response_vars = c(
         "n0", "n1", "n2",
         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
         "roc",
         "dcca_axis_1"
-        #,
-        #"density_diversity", "density_turnover"
+        #, "density_diversity", "density_turnover"
       ),
       predictor_vars = list(
         human = c("spd"),
@@ -703,9 +720,7 @@ list(
           "temp_annual",
           "temp_cold",
           "prec_summer",
-          "prec_win"
-
-        ),
+          "prec_win"),
         time = c("age")
       ),
       run_all_predictors = FALSE,
@@ -713,25 +728,17 @@ list(
       get_significance = TRUE,
       permutations = 999
     )
-  ),
+  ), # - run second temporal analysis (by age bins in spatial context)
  targets::tar_target(
-   name = data_hvar_timebin,
-   command = get_data_hvar_timebin(
-     data_source = data_for_hvarpar,
-     data_meta = data_meta
-   )
- ),
- targets::tar_target(
-   name = result_hvarpar_timebin,
+   name = output_hvar_temporal,
    command = run_hvarpart(
-     data_source = data_hvar_timebin,
+     data_source = data_hvar_temporal,
      response_vars = c(
        "n0", "n1", "n2",
        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
        "roc",
        "dcca_axis_1"
-       #,
-       #"density_diversity", "density_turnover"
+       #, "density_diversity", "density_turnover"
      ),
      predictor_vars = list(
        human = c("spd"),
@@ -739,13 +746,12 @@ list(
          "temp_annual",
          "temp_cold",
          "prec_summer",
-         "prec_win"
-
-       )),
+         "prec_win")
+       ),
      run_all_predictors = FALSE,
      time_series = FALSE,
-     get_significance = FALSE,
-     permutations = 19
+     get_significance = TRUE,
+     permutations = 999
    )
  )
 

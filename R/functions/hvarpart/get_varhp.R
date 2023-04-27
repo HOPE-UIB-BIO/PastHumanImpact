@@ -36,6 +36,9 @@ get_varhp <- function(data_source,
                       get_significance = TRUE,
                       permutations = 99,
                       ...) {
+  
+  tryCatch({
+  
   # prepare responses
   data_resp <-
     data_source %>%
@@ -55,7 +58,7 @@ get_varhp <- function(data_source,
       data_source %>%
       dplyr::select(all_of(predictor_vars)) %>%
       dplyr::select(tidyselect:::where(~ any(. != 0))) %>%
-      tidyr::select(tidyselect:::where(~ any(!is.na(.))))
+      dplyr::select(tidyselect:::where(~ any(!is.na(.))))
 
     output_table_dummy <-
       tibble::tibble(
@@ -190,4 +193,10 @@ get_varhp <- function(data_source,
     )
 
   return(results)
+  
+  },
+  error = function(err) NA
+  
+  )
+  
 }
