@@ -195,12 +195,7 @@ get_varhp <- function(data_source,
   return(results)
   
   },
-  error = function(error_message) {
-    message("Analysis failed")
-    message("Error message from R:")
-    message(error_message)
-    return(NA)
-  }
+  error = function(err) NA
   
   )
   
