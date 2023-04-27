@@ -683,13 +683,13 @@ list(
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
-  ), - # filter data by age of interests in regions
+  ), - # filter data by age of interests in regions; filter out Africa 
  targets::tar_target(
    name = data_hvar_filtered,
    command = filter_data_hvar(
      data_source = data_hvar,
-     age_start = age_cutoff_region,
-     age_end = data_meta
+     data_meta = data_meta,
+     starting_age = age_cutoff_region
    )
  ), # restructure data for temporal analysis
  targets::tar_target(
