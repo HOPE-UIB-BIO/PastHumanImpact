@@ -1,8 +1,11 @@
 ---
 title: "Report HOPE Hypothesis 1 methodology & results"
 output:
-  html_document:
-    df_print: paged
+  pdf_document:
+    toc: yes
+  always_allow_html: yes
+  word_document:
+    toc: yes
 ---
 
 ### Preface
@@ -39,7 +42,6 @@ Things that would be good to make clear for everyone involved:
 Aquiring the main pollen data for our analyses is done a priori. Raw pollen datasets are carefully selected using the *R-Fossilpol* package and the guidelines to the workflow are well described in Flantua et al. 2023 and our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most of the compilation of datasets are available through the [Neotoma Paleoecology Database](https://www.neotomadb.org). Though some additional datasets are from private owners in regions with lacking data, and these have restricted access for use. We do not have the intellectual property rights to make them public available. Only the derivative of the analyses will be possible to share openly. Table 1 provide the overview of the the settings used in the FOSSILPOL workflow to get the standardised datasets for this project.
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
-
 
 library(kableExtra)
 library(tidyverse)
@@ -246,7 +248,7 @@ event_table <- data.frame(Region = c("North America", "Europe", "Asia", "Indopas
                             paste("no_impact = No Impact; weak = Weak Impact; medium = Medium Impact; strong = Strong Impact")))
 
 event_table %>%
-  kbl(booktabs = TRUE, caption = "Table 2: Type of human events identified in pollen diagrams") %>%
+  kbl(booktabs = TRUE, caption = "Table 2: Type of human events identified in pollen diagrams", align = "l") %>%
   kable_paper(full_width = FALSE)
 
 
@@ -300,9 +302,10 @@ An extensive literature review has been done to detect fossil pollen taxa that c
 Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxon is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact" (disregard of the source of the classification). Specifically, at least 1 pollen grain of indicators have to present as 'weak' and more than 1 has to present as 'strong'. In addition, the pollen-type *Pinus* was only considered as a human indicator outside of its native distribution (see XXX?). For indices, any number of pollen grain needs to present for that specific combination.
 
 Summary figure of the events using indicator taxa in different ecozones in Latin America:
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, fig.align='left'}
 
 data_events <- targets::tar_read(data_events_to_fit)
+
 
 plot_data_events(
   data_source_events = data_events,
@@ -330,7 +333,7 @@ age_cutoff_rc <- data.frame(
   )
 
 age_cutoff_rc %>%
-  kbl(booktabs = TRUE, caption = "Table 3: Minimum threshold age for different regions") %>%
+  kbl(booktabs = TRUE, caption = "Table 3: Minimum threshold age for different regions", align = "l") %>%
   kable_paper(full_width = FALSE) 
 
 ```
@@ -409,6 +412,7 @@ Change-points detection of all the PAP variables are calculated using convention
 The density is calculated for each of these variables using a Gaussian kernel, re-scaling them to each of the records specific age ranges (i.e. minimum and maximum ages). To solve the boundary issue in density estimation the data is reflected to 0. Hierarchical generalised additive models (HGAM) are then used to produce two different fitted variables where the first density get the common pattern of the density estimates of all the variables reflecting significant changes in richness, diversity, and evenness, and the second variable get the common pattern of the densities of the variables reflecting significant change in pollen assemblages (MRT, RoC, DCCA1).
 
 Example of ten sites and PAP estimations:
+
 ![](figures/PAP_estimation.png)
 
 
