@@ -379,7 +379,7 @@ list(
   ),
   # - get interpolated spd values for each time slice
   targets::tar_target(
-    name = data_sdp_interpolated,
+    name = data_spd_interpolated,
     command = get_interpolated_data(
       data_source = data_spd_to_fit,
       variable = "var_name",
@@ -411,7 +411,7 @@ list(
     name = data_spd_best_dist,
     command = select_best_spd(
       data_source_events = events_temporal_subset,
-      data_source_spd = data_sdp_interpolated,
+      data_source_spd = data_spd_interpolated,
       data_source_meta = data_meta,
       data_source_dist_vec = spd_distance_vec
     )
