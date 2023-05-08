@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[1]
+  data_storage_path <- data_storage_path[2]
 }
 
 external_storage_targets <-
