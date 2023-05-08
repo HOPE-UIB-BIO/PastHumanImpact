@@ -103,6 +103,7 @@ library(here)
 library(colorspace)
 library(colorBlindness)
 library(data.tree)
+library(kableExtra)
 
 # list R functions and source them
 lapply(
@@ -140,7 +141,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[1]
+  data_storage_path <- data_storage_path[2]
 }
 
 external_storage_targets <-
@@ -214,8 +215,8 @@ overview_table <- tab_gen %>%
   mutate(Selection = ifelse(Selection == 1, TRUE, Selection))
 
 overview_table %>%
-  kbl(booktabs = TRUE, caption = "Table 1: Selection of settings applied in FOSSILPOL") %>%
-  kable_paper(full_width = FALSE)  %>%
+  kableExtra::kbl(booktabs = TRUE, caption = "Table 1: Selection of settings applied in FOSSILPOL") %>%
+  kableExtra::kable_paper(full_width = FALSE)  %>%
   kableExtra::pack_rows("General", 1, 7) %>%
   kableExtra::pack_rows("Neotoma", 8, 15) %>%
   kableExtra::pack_rows("Age-depth\n models", 16, 24) %>%
@@ -310,6 +311,7 @@ the spatial (within core) analysis, and --b) the temporal analysis (a
 years). Several choices are made, which are described in the detail in
 the text below.
 
+
 ### Data filtering
 
 The main data are divided into what is named `data_assembly`in targets
@@ -342,6 +344,7 @@ Also all pollen records with less than 5 samples are removed for further
 analyses. The final HOPE dataset compilation used further in our project
 is called the `data_assembly_filtered`.
 
+
 ### Detection of past human presence
 
 In order to detect the impact of past humans on fundamental ecosystem
@@ -361,6 +364,7 @@ ecosystem properties.
 
 ![Human detection process](figures/Human_detection.png).
 
+
 #### *Detection of human events*
 
 For each pollen record, we have detected periods of human presence from
@@ -368,7 +372,9 @@ the pollen data. Two methods have been used: i) detection from pollen
 diagrams (North America, Europe, Asia, Indopacific; ii) detection using
 indicator taxa (Latin America).
 
+
 #### *Detection of human events in pollen diagrams*
+
 
 First, a pollen diagram of each pollen record has been examined by a
 regional expert and the age of each event type has been recorded.
@@ -466,6 +472,7 @@ the var_name of the events type identified in Asian datasets. This
 indicate that there must be a dataset or two that originally was
 compiled for Asia that is now in Oceania (PENDING: to be identified).
 
+
 #### *Detection using indicator taxa*
 
 An extensive literature review has been done to detect fossil pollen
@@ -507,6 +514,7 @@ plot_data_events(
 
 ```
 
+
 #### *Arcehological artefacts and Summed Probability Densities*
 
 We used the global dataset of radicarbon dates (RC dates) of
@@ -539,6 +547,7 @@ there is a bias that radiocarbon dating is rather limited on younger
 material where in many regions there are a lack of C14 data during the
 last 2000 years. Table 3 show the ages where data younger than age_from
 where removed.
+
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
@@ -573,6 +582,7 @@ increase of complexity in choosing the distance from the records. See
 demonstration of this method [Detection of past
 humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).
 
+
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 # data_to_spd_plot <- tar_read(data_spd_full) %>%
 #   inner_join(targets::tar_read(data_meta) %>%
@@ -595,6 +605,7 @@ humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Method
 
 ```
 
+
 ### Paleo Climate
 
 Paleoclimate from the CHELSA-TraCE21k downscaling algorithm is
@@ -608,6 +619,7 @@ extracted climate values for the coordinates for each dataset_id
 retrieving the full time series of every 100 years. In addition, we
 downloaded the monthly climatology for daily maximum near-surface
 temperature K/10 (tasmin).
+
 
 ### Pollen assemblage properties (PAP) estimation
 
@@ -631,6 +643,7 @@ RoC, functions from `iNext` (Chao et al. 2014) that have been modified
 to extract interpolated Hill numbers based on a minimum sample size, and
 newly developed R functions to run DCCA using `Canoco 4.5` (ter Braak
 xxxx) to list a few, among other, dependency packages.
+
 
 #### *Pollen richness, diversity, and evenness*
 
@@ -668,6 +681,7 @@ low to be considered a robust estimate, but it was a choice made on
 balancing loosing too much information from geographical areas with less
 data coverage (see data filtering above).
 
+
 #### *Compositional change*
 
 Compositional change is calculated using multivariate regression trees
@@ -683,6 +697,7 @@ recursive partitioning are based on chi-square distances between pollen
 samples constrained by time. The number of cross-validation is set to
 1000, and the optimal sized tree is chosen based on the 1SD rule
 (Simpson and Birks 2012).
+
 
 #### *Compositional turnover*
 
@@ -701,6 +716,7 @@ transformation to maintain the chi-square distances between samples,
 whereas the ages are the median ages derived from the age-depth model
 for each site.
 
+
 #### *Rate-of-change*
 
 Rate-of-change for the pollen assemblages in the pollen records are
@@ -714,6 +730,7 @@ RoC peak-points than the more traditional approaches (Mottle et al.
 dissimilarity coefficient. Sample size is standardized in each working
 unit to 150 grains or the lowest number detected in each dataset. We use
 only the RoC scores further in the analyses.
+
 
 #### *Change-points detection and density estimates*
 
