@@ -611,17 +611,17 @@ results_hvar_temporal %>%
 
 #### PENDING TASKS:
 
--   The delay has been due to tackling technical issues (code breaking, finding "bugs", package updates, etc).
--   The HGAM models of the density variables - keep breaking - running for most sites but there are issues due to some error in the smoother. I have not at this stage have the time to break this up and manage to find a global k to run it all at once.
--   include the uncertainty matrix of ages and random select ages for each run (as discussed and agree). I need some help to find a good way to structure this in the workflow.
--   Need to fix adjust and fix pending issues e.g. age limits for region needs to be adjusted (now end of interest is 12000 for all)
+-   The delay has been due to tackling technical issues (code breaking, finding "bugs", package updates and conflicts between versions, etc).
+-   The HGAM models of the density variables - keep breaking - running for most sites but there are issues due to error in the smoother for some records. We have not at this stage had the time to break this up and manage to find a global k to run it all at once.
+-   include the uncertainty matrix of ages and random select ages for each run (as discussed and agree). We need to find a good way to structure this in the workflow.
+-   We need to fix adjust and fix pending issues e.g. age limits for region needs to be adjusted (now end of interest is 12000 for all)
 
 Some results do not make sense:
 
-\- We get negative variations, what do we do with this? One extreme outlier in North America also indicated that the individual percentage explained for humans was 2000 (therefore I did not use the individual percentage to report the results for the predictors)
+\- We get negative variations, what do we do with this? One extreme outlier in North America also indicated that the individual percentage explained for humans was 2000 (therefore we did not use the individual percentage to report the results for the predictors)
 
 \- Since we aggregate and summaries the results per ecozone, how to recalculate this into percentages contribution for the humans? Can we use sum(unique/total explained)/number of datasets per ecozone as the total constraining variation vary per dataset. Other suggestions?
 
 Remember the unique variation is when time and climate is removed and individual variation per predictor is the same as a single model with the one predictor.
 
-I hope this report helps everyone to get the overview of the work behind HOPE Hypothesis 1. I am very unhappy about the presented figures at this stage so all thoughts, ideas, and (critical) comments about the methodology and display of (what is important) results are most welcome.
+We hope this report helps everyone to get the overview of the work behind HOPE Hypothesis 1. These are just preliminary results so all thoughts, ideas, and (critical) comments about the methodology and display of (what is important) results are most welcome.
