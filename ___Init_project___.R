@@ -36,7 +36,11 @@ package_list <-
     "terra",
     "tidyverse",
     "usethis",
-    "vegan"
+    "vegan",
+    "kableExtra",
+    "colorspace",
+    "data.tree",
+    
   )
 
 # define helper function

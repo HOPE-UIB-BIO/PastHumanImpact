@@ -5,7 +5,7 @@ filter_data_hvar <- function(data_source,
     unnest(data_merge) %>%
     drop_na() %>%
     left_join(data_meta %>% 
-                dplyr::select(dataset_id, end_of_interest_period),
+                dplyr::select(dataset_id, end_of_interest_period, region),
               by = "dataset_id") %>%
     left_join(age_table, by = "region") %>%
     filter(age >= age_from & age <= end_of_interest_period) %>%

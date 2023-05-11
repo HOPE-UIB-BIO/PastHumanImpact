@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[1]
+  data_storage_path <- data_storage_path[2]
 }
 
 external_storage_targets <-
@@ -684,7 +684,7 @@ list(
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
-  ), - # filter data by age of interests in regions; filter out Africa 
+  ), # filter data by age of interests in regions; filter out Africa 
  targets::tar_target(
    name = data_hvar_filtered,
    command = filter_data_hvar(
