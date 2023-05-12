@@ -130,7 +130,7 @@ list(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
+      "HOPE_Hypothesis1/Data/assembly/data_assembly_V2-2022-05-23.rds"
     ),
     format = "file"
   ),
