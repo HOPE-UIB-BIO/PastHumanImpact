@@ -27,7 +27,7 @@ data_storage_path <-
   purrr::pluck("paths")
 
 if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[1]
+  data_storage_path <- data_storage_path[2]
 }
 
 external_storage_targets <-
@@ -67,7 +67,7 @@ tar_option_set(
     "ggforce",
     "venneuler"
   ),
-  error = "null",
+ # error = "null",
   memory = "transient",
   garbage_collection = TRUE,
   storage = "worker",
@@ -97,6 +97,8 @@ invisible(lapply(
 min_age <- 0
 max_age <- 12e3
 timestep <- 500
+
+age_end_cutoff <- 85e2 
 
 
 # the targets list:
@@ -156,8 +158,7 @@ list(
         "counts_harmonised",
         "levels",
         "age_uncertainty",
-        "pollen_percentage",
-        "end_of_interest_period"
+        "pollen_percentage"
       )
     )
   ),
@@ -180,7 +181,6 @@ list(
         "ecozone_koppen_15",
         "ecozone_koppen_30",
         "data_publicity",
-        "end_of_interest_period",
         "doi"
       )
     )
@@ -564,28 +564,28 @@ list(
       limit_length = TRUE
     )
   ),
-  # - run hgam model to create a common variable for density diversity and
-  #     turnover
-  # targets::tar_target(
-  #   name = data_density_variables,
-  #   command = get_hgam_density_vars(
-  #     data_source_density = data_density,
-  #     data_source_meta = data_meta,
-  #     data_source_dummy_time = data_dummy_time,
-  #     diversity_vars = c(
-  #       "n0", "n1", "n2",
-  #       "n2_divided_by_n1", "n1_divided_by_n0"
-  #     ),
-  #     turnover_vars = c(
-  #       "mvrt", "roc", "dcca"
-  #     ),
-  #     used_rescales = TRUE,
-  #     error_family = "mgcv::betar(link = 'logit')",
-  #     smooth_basis = "tp",
-  #     sel_k = round(max(data_dummy_time$age) / 2000),
-  #     limit_length = TRUE
-  #   )
-  # ),
+ # - run hgam model to create a common variable for density diversity and 
+ # turnover
+  targets::tar_target(
+    name = data_density_variables,
+    command = get_hgam_density_vars(
+      data_source_density = data_density,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      diversity_vars = c(
+        "n0", "n1", "n2",
+        "n2_divided_by_n1", "n1_divided_by_n0"
+      ),
+      turnover_vars = c(
+        "mvrt", "roc", "dcca"
+      ),
+      used_rescales = TRUE,
+      error_family = "mgcv::betar(link = 'logit')",
+      smooth_basis = "tp",
+      sel_k = round(max(data_dummy_time$age) / 1000),
+      limit_length = TRUE
+    )
+  ),
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
@@ -596,7 +596,7 @@ list(
       data_source_pollen = data_pollen
     )
   ),
-  # - estimate Diveristy and DCCA on equal time slices with linear interpolation
+  # - estimate Diversity and DCCA on equal time slices with linear interpolation
   targets::tar_target(
     name = data_div_dcca_interpolated,
     command = get_interpolated_data(
