@@ -98,7 +98,9 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 500
 
+
 age_end_cutoff <- 85e2 
+
 
 
 # the targets list:
@@ -132,7 +134,7 @@ list(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
+      "HOPE_Hypothesis1/Data/assembly/data_assembly_V2-2022-05-23.rds"
     ),
     format = "file"
   ),
@@ -564,8 +566,13 @@ list(
       limit_length = TRUE
     )
   ),
+<<<<<<< HEAD
  # - run hgam model to create a common variable for density diversity and 
  # turnover
+=======
+  # - run hgam model to create a common variable for density diversity and
+  #     turnover
+>>>>>>> 593e9173b573203121fcb09bb646f5bca4ce0aaf
   targets::tar_target(
     name = data_density_variables,
     command = get_hgam_density_vars(
