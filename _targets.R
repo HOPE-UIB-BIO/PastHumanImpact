@@ -566,13 +566,9 @@ list(
       limit_length = TRUE
     )
   ),
-<<<<<<< HEAD
- # - run hgam model to create a common variable for density diversity and 
- # turnover
-=======
-  # - run hgam model to create a common variable for density diversity and
-  #     turnover
->>>>>>> 593e9173b573203121fcb09bb646f5bca4ce0aaf
+
+# - run hgam model to create a common variable for density diversity and 
+# turnover
   targets::tar_target(
     name = data_density_variables,
     command = get_hgam_density_vars(
