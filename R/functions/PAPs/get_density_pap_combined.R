@@ -101,7 +101,7 @@ get_density_pap_combined <- function(data_source_change_points,
         )
     ) %>%
     dplyr::mutate(
-      turnover_density = purrr::pmap(
+      density_turnover = purrr::pmap(
         .l = list(
           turnover_cp,
           dummy_table,
@@ -115,7 +115,7 @@ get_density_pap_combined <- function(data_source_change_points,
           age_max = ..4
         )
       ),
-      diversity_density = purrr::pmap(
+      density_diversity = purrr::pmap(
         .l = list(
           diversity_cp,
           dummy_table,
@@ -137,8 +137,8 @@ get_density_pap_combined <- function(data_source_change_points,
     dplyr::mutate(
       pap_density = purrr::pmap(
         .l = list(
-          turnover_density, # ..1
-          diversity_density, # ..2
+          density_turnover, # ..1
+          density_diversity, # ..2
           dummy_table # ..3
         ),
         .f = ~ ..3 %>%
@@ -146,7 +146,7 @@ get_density_pap_combined <- function(data_source_change_points,
             ..1 %>%
               dplyr::select(
                 age,
-                turnover_density = density
+                density_turnover = density
               ),
             by = "age"
           ) %>%
@@ -154,7 +154,7 @@ get_density_pap_combined <- function(data_source_change_points,
             ..2 %>%
               dplyr::select(
                 age,
-                diversity_density = density
+                density_diversity = density
               ),
             by = "age"
           ) 
