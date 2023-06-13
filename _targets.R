@@ -1,6 +1,8 @@
 # Load packages:
 library(targets)
 library(tidyverse)
+library(future)
+library(future.callr)
 
 # Define directory for external storage for users
 auth_tibble <-
@@ -10,7 +12,7 @@ auth_tibble <-
       "C:/Users/ondre/OneDrive - University of Bergen/HOPE_data/",
       "C:/Users/omo084/OneDrive - University of Bergen/HOPE_data/",
       "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/",
-      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data/",
+      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/",
       "C:/Users/sfl046/University of Bergen/Ondrej Mottl - HOPE_data/",
       "C:/Users/kbh022/University of Bergen/Ondrej Mottl - HOPE_data/"
     )
@@ -33,7 +35,7 @@ if (length(data_storage_path) > 1) {
 external_storage_targets <-
   paste0(
     data_storage_path,
-    "HOPE_Hypothesis1/_targets"
+    "HOPE_Hypothesis1/_targets1"
   )
 
 # set configuration for _target storage
@@ -67,7 +69,6 @@ tar_option_set(
     "ggforce",
     "venneuler"
   ),
-  error = "null",
   memory = "transient",
   garbage_collection = TRUE,
   storage = "worker",
@@ -75,11 +76,12 @@ tar_option_set(
   repository = "local"
 )
 
-# tar_make_clustermq() configuration (okay to leave alone):
-options(clustermq.scheduler = "multicore")
+# multicore plan
+#tar_make_clustermq() 
+#options(clustermq.scheduler = "multicore")
 
-# tar_make_future() configuration (okay to leave alone):
-# Install packages {{future}}, {{future.callr}}, and {{future.batchtools}} to allow use_targets() to configure tar_make_future() options.
+
+
 
 # list R functions and source them
 invisible(lapply(
@@ -97,6 +99,10 @@ invisible(lapply(
 min_age <- 0
 max_age <- 12e3
 timestep <- 500
+
+
+age_end_cutoff <- 85e2 
+
 
 
 # the targets list:
@@ -130,7 +136,7 @@ list(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds"
+      "HOPE_Hypothesis1/Data/assembly/data_assembly_V2-2022-05-23.rds"
     ),
     format = "file"
   ),
@@ -156,8 +162,8 @@ list(
         "counts_harmonised",
         "levels",
         "age_uncertainty",
-        "pollen_percentage",
-        "end_of_interest_period"
+        "end_of_interest_period",
+        "pollen_percentage"
       )
     )
   ),
@@ -564,28 +570,29 @@ list(
       limit_length = TRUE
     )
   ),
-  # - run hgam model to create a common variable for density diversity and
-  #     turnover
-  # targets::tar_target(
-  #   name = data_density_variables,
-  #   command = get_hgam_density_vars(
-  #     data_source_density = data_density,
-  #     data_source_meta = data_meta,
-  #     data_source_dummy_time = data_dummy_time,
-  #     diversity_vars = c(
-  #       "n0", "n1", "n2",
-  #       "n2_divided_by_n1", "n1_divided_by_n0"
-  #     ),
-  #     turnover_vars = c(
-  #       "mvrt", "roc", "dcca"
-  #     ),
-  #     used_rescales = TRUE,
-  #     error_family = "mgcv::betar(link = 'logit')",
-  #     smooth_basis = "tp",
-  #     sel_k = round(max(data_dummy_time$age) / 2000),
-  #     limit_length = TRUE
-  #   )
-  # ),
+
+# - run hgam model to create a common variable for density diversity and 
+# turnover
+  targets::tar_target(
+    name = data_density_variables,
+    command = get_hgam_density_vars(
+      data_source_density = data_density,
+      data_source_meta = data_meta,
+      data_source_dummy_time = data_dummy_time,
+      diversity_vars = c(
+        "n0", "n1", "n2",
+        "n2_divided_by_n1", "n1_divided_by_n0"
+      ),
+      turnover_vars = c(
+        "mvrt", "roc", "dcca"
+      ),
+      used_rescales = TRUE,
+      error_family = "mgcv::betar(link = 'logit')",
+      smooth_basis = "tp",
+      sel_k = round(max(data_dummy_time$age) / 1000),
+      limit_length = TRUE
+    )
+  ),
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
@@ -596,7 +603,7 @@ list(
       data_source_pollen = data_pollen
     )
   ),
-  # - estimate Diveristy and DCCA on equal time slices with linear interpolation
+  # - estimate Diversity and DCCA on equal time slices with linear interpolation
   targets::tar_target(
     name = data_div_dcca_interpolated,
     command = get_interpolated_data(
