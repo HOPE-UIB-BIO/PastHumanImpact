@@ -101,9 +101,6 @@ max_age <- 12e3
 timestep <- 500
 
 
-age_end_cutoff <- 85e2 
-
-
 
 # the targets list:
 list(
@@ -122,7 +119,8 @@ list(
     name = age_cutoff_region,
     command = tibble::tibble(
       region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
-      age_from = c(2000, 2000, 2000, 2000, 500, 500)
+      age_from = c(2000, 2000, 2000, 2000, 500, 500),
+      age_end = rep(8500, 6)
       )
     ),
   targets::tar_target(
@@ -561,8 +559,8 @@ list(
   ),
   # - calculate density of change points
   targets::tar_target(
-    name = data_density,
-    command = get_density_pap(
+    name = data_density_estimate,
+    command = get_density_pap_combined(
       data_source_change_points = data_change_points,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time,
@@ -572,26 +570,26 @@ list(
 
 # - run hgam model to create a common variable for density diversity and 
 # turnover
-  targets::tar_target(
-    name = data_density_variables,
-    command = get_hgam_density_vars(
-      data_source_density = data_density,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time,
-      diversity_vars = c(
-        "n0", "n1", "n2",
-        "n2_divided_by_n1", "n1_divided_by_n0"
-      ),
-      turnover_vars = c(
-        "mvrt", "roc", "dcca"
-      ),
-      used_rescales = TRUE,
-      error_family = "mgcv::betar(link = 'logit')",
-      smooth_basis = "tp",
-      sel_k = round(max(data_dummy_time$age) / 1000),
-      limit_length = TRUE
-    )
-  ),
+  # targets::tar_target(
+  #   name = data_density_variables,
+  #   command = get_hgam_density_vars(
+  #     data_source_density = data_density,
+  #     data_source_meta = data_meta,
+  #     data_source_dummy_time = data_dummy_time,
+  #     diversity_vars = c(
+  #       "n0", "n1", "n2",
+  #       "n2_divided_by_n1", "n1_divided_by_n0"
+  #     ),
+  #     turnover_vars = c(
+  #       "mvrt", "roc", "dcca"
+  #     ),
+  #     used_rescales = TRUE,
+  #     error_family = "mgcv::betar(link = 'logit')",
+  #     smooth_basis = "tp",
+  #     sel_k = round(max(data_dummy_time$age) / 1000),
+  #     limit_length = TRUE
+  #   )
+  # ),
   # 7. Hypothesis I -----
   # - merge Diveristy and DCCA and prepare for modelling
   targets::tar_target(
@@ -680,13 +678,13 @@ list(
   #     data_source_meta = data_meta
   #   )
   # ),
- # - merge all data together, [remember to add density vars when done!!]
+ # - merge all data together
   targets::tar_target(
-    name = data_hvar,
+    name = data_for_hvar,
     command = get_data_for_hvarpar(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
-     # data_source_density = data_density_variables,
+      data_source_density = data_density_estimate,
       data_source_spd = data_spd_full,
       data_source_climate = data_climate_interpolated
     )
@@ -694,7 +692,7 @@ list(
  targets::tar_target(
    name = data_hvar_filtered,
    command = filter_data_hvar(
-     data_source = data_hvar,
+     data_source = data_for_hvar,
      data_meta = data_meta,
      age_table = age_cutoff_region
    )
@@ -717,8 +715,8 @@ list(
         "n0", "n1", "n2",
         "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
         "roc",
-        "dcca_axis_1"
-        #, "density_diversity", "density_turnover"
+        "dcca_axis_1",
+        "density_diversity", "density_turnover"
       ),
       predictor_vars = list(
         human = c("spd"),
@@ -743,8 +741,8 @@ list(
        "n0", "n1", "n2",
        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
        "roc",
-       "dcca_axis_1"
-       #, "density_diversity", "density_turnover"
+       "dcca_axis_1",
+       "density_diversity", "density_turnover"
      ),
      predictor_vars = list(
        human = c("spd"),
