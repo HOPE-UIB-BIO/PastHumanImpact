@@ -43,7 +43,7 @@ get_density_pap <- function(data_source_change_points,
             ...
           ) %>%
           dplyr::mutate(
-            age = round(var)
+            age = ceiling(var)
           ) %>%
           dplyr::filter(
             age %in% dummy_table$age

@@ -13,6 +13,8 @@ get_hgam_density_vars <- function(data_source_density,
                                   smooth_basis = c("tp", "cr"),
                                   sel_k = 10,
                                   limit_length = TRUE) {
+  
+ 
   # helper functions
   get_vars_for_modelling <- function(data_source,
                                      select_vars) {
@@ -35,6 +37,7 @@ get_hgam_density_vars <- function(data_source_density,
                                    error_family = "mgcv::betar(link = 'logit')",
                                    smooth_basis = c("tp", "cr"),
                                    sel_k = 10) {
+ 
     data_mod_hgam <-
       REcopol:::fit_hgam(
         data_source = data_source_to_fit,
@@ -47,7 +50,7 @@ get_hgam_density_vars <- function(data_source_density,
         common_trend = TRUE,
         use_parallel = FALSE,
         use_discrete = FALSE,
-        max_iterations = 1e3,
+        max_iterations = 2e3,
         verbose = TRUE
       )
 
@@ -62,7 +65,11 @@ get_hgam_density_vars <- function(data_source_density,
       dplyr::select(-var_name)
 
     return(data_predicted)
-  }
+    
+ 
+  
+   }  
+  
 
   # select which data to use
   if (
@@ -134,6 +141,8 @@ get_hgam_density_vars <- function(data_source_density,
       ) %>%
       dplyr::select(-c(age_min, age_max))
   }
+  
+ 
 
   # fit GAM for each dataset of reach type
   data_density_res <-
@@ -173,4 +182,10 @@ get_hgam_density_vars <- function(data_source_density,
     dplyr::select(dataset_id, density_diversity, density_turnover)
 
   return(data_density_res)
-}
+ 
+ }
+
+  
+
+    
+
