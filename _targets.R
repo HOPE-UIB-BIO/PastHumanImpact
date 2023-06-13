@@ -1,6 +1,8 @@
 # Load packages:
 library(targets)
 library(tidyverse)
+library(future)
+library(future.callr)
 
 # Define directory for external storage for users
 auth_tibble <-
@@ -10,7 +12,7 @@ auth_tibble <-
       "C:/Users/ondre/OneDrive - University of Bergen/HOPE_data/",
       "C:/Users/omo084/OneDrive - University of Bergen/HOPE_data/",
       "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/",
-      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data/",
+      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/",
       "C:/Users/sfl046/University of Bergen/Ondrej Mottl - HOPE_data/",
       "C:/Users/kbh022/University of Bergen/Ondrej Mottl - HOPE_data/"
     )
@@ -33,7 +35,7 @@ if (length(data_storage_path) > 1) {
 external_storage_targets <-
   paste0(
     data_storage_path,
-    "HOPE_Hypothesis1/_targets"
+    "HOPE_Hypothesis1/_targets1"
   )
 
 # set configuration for _target storage
@@ -67,7 +69,6 @@ tar_option_set(
     "ggforce",
     "venneuler"
   ),
- # error = "null",
   memory = "transient",
   garbage_collection = TRUE,
   storage = "worker",
@@ -75,11 +76,12 @@ tar_option_set(
   repository = "local"
 )
 
-# tar_make_clustermq() configuration (okay to leave alone):
-options(clustermq.scheduler = "multicore")
+# multicore plan
+#tar_make_clustermq() 
+#options(clustermq.scheduler = "multicore")
 
-# tar_make_future() configuration (okay to leave alone):
-# Install packages {{future}}, {{future.callr}}, and {{future.batchtools}} to allow use_targets() to configure tar_make_future() options.
+
+
 
 # list R functions and source them
 invisible(lapply(
@@ -160,6 +162,7 @@ list(
         "counts_harmonised",
         "levels",
         "age_uncertainty",
+        "end_of_interest_period",
         "pollen_percentage"
       )
     )
