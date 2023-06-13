@@ -186,7 +186,6 @@ list(
         "ecozone_koppen_15",
         "ecozone_koppen_30",
         "data_publicity",
-        "end_of_interest_period",
         "doi"
       )
     )
