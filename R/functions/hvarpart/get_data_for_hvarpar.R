@@ -2,7 +2,24 @@ get_data_for_hvarpar <- function(data_source_diversity,
                                  data_source_roc,
                                  data_source_density,
                                  data_source_spd,
-                                 data_source_climate) {
+                                 data_source_climate,
+                                 used_rescale = TRUE) {
+
+
+  
+if(
+  isTRUE(used_rescale)
+  ) {
+  data_source_density <- data_source_density %>%
+    dplyr::select(dataset_id, pap_density_rescale) %>%
+    dplyr::rename(density = pap_density_rescale)
+} else {
+  data_source_density <- data_source_density %>%
+    dplyr::select(dataset_id, pap_density) %>%
+    dplyr::rename(density = pap_density)
+  
+}
+  
   dplyr::inner_join(
     data_source_diversity %>%
       dplyr::rename(
@@ -34,10 +51,9 @@ get_data_for_hvarpar <- function(data_source_diversity,
         .l = list(
           diversity, # ..1
           roc, # ..2
-          density_diversity, # ..3
-          density_turnover, # ..4
-          climate_data, # ..5
-          spd #..6
+          density, #..3
+          climate_data, # ..4
+          spd #..5
         ),
         .f = ~ dplyr::inner_join(
           ..1,
@@ -55,12 +71,7 @@ get_data_for_hvarpar <- function(data_source_diversity,
           dplyr::inner_join(
             ..5,
             by = "age"
-          ) %>%
-          dplyr::inner_join(
-            ..6,
-            by = "age"
-          )
-        %>%
+          )  %>%
           drop_na()
       ) 
     ) %>%
