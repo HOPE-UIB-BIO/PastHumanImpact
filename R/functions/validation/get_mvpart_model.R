@@ -12,6 +12,7 @@ get_mvpart_model <- function(data, trans = TRUE, method = "gower", ...){
                           data = data.frame(data))
      } else{
        
+
        res <- mvpart::mvpart(data.matrix(data %>% dplyr::select(n0:density_diversity)) ~ age + spd,
                              xv = "1se", 
                              data = data.frame(data))  
