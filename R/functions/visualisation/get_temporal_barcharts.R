@@ -23,13 +23,11 @@ get_temporal_barcharts <- function(data) {
              width = 1,   
              alpha = 0.4, 
              show.legend = FALSE) +
-    scale_size(range =c(min(data$age), max(data$age), guide = "none")) +
     scale_fill_manual(values = palette_pred) +
     scale_y_continuous(name = NULL, 
-                       limits = c(0, 100),
-                       breaks = seq(0,100, by = 20),
-                       expand = c(0,0),
-                       labels = paste0(seq(0, 100, by  = 20), " %")) +
+                      limits = c(0, 105),
+                      breaks = seq(0, 105, by = 20),
+                      expand = c(0,0)) +
     facet_wrap(~ predictor, strip.position = "bottom", scales = "free_x") +
     theme_minimal() +
     theme(
