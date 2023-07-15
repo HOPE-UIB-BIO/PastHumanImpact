@@ -38,6 +38,10 @@ get_r2_summary_varpar <- function(data_source,
       dplyr::across(
         dplyr::all_of(sel_var),
         list(
+<<<<<<< HEAD
+          median = ~ median(.x, na.rm = TRUE),
+=======
+>>>>>>> 5a5a43f97545c0106e9de04d6013c72023d1f3e3
           mean = ~ mean(.x, na.rm = TRUE),
           sd = ~ sd(.x, na.rm = TRUE),
           upr = ~ stats::quantile(.x, 0.975, na.rm = TRUE),
