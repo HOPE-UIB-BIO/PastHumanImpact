@@ -750,7 +750,7 @@ Figure 4: The summary results for Latin America.
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-get_regional_combined_fig(select_region = "Latin America")
+get_regional_combined_fig(select_region = "Oceania")
 
 ```
 
