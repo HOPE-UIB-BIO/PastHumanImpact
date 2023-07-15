@@ -686,7 +686,8 @@ list(
       data_source_roc = data_roc_interpolated,
       data_source_density = data_density_estimate,
       data_source_spd = data_spd_full,
-      data_source_climate = data_climate_interpolated
+      data_source_climate = data_climate_interpolated,
+      used_rescale = TRUE
     )
   ), # filter data by age of interests in regions; filter out Africa 
  targets::tar_target(
