@@ -682,10 +682,7 @@ list(
   #     data_source_meta = data_meta
   #   )
   # ),
-<<<<<<< HEAD
 
-=======
->>>>>>> 69a64a03a8b9eea76f2eee429806c7bb1e3d9a71
  # - merge all data together
   targets::tar_target(
     name = data_for_hvar,
