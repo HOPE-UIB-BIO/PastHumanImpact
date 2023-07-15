@@ -38,7 +38,10 @@ data_geo_koppen <-
     ecozone_koppen_15 = genzone_cluster,
     ecozone_koppen_5 = broadbiome) 
 
+
+
 #save
+write_rds(data_geo_koppen, "data_geo_koppen.rds")
 #data_geo_koppen <- read_rds("data_geo_koppen.rds")
 
 # define color palettes
@@ -331,11 +334,6 @@ summary_temporal_median <-
   ungroup()
 
 
-colours <- colorblindr::protan(rainbow_hcl(5, start = 30, end = 300))
-scale_fill_manual(values=colours) 
-
-#scale_fill_hue(c = 50, l = 70, h=c(30, 300)) # light
-#scale_fill_hue(c = 50, l = 50, h=c(30, 200)) # dark
 
 
 
