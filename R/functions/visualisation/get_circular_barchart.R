@@ -24,7 +24,8 @@ p <- data %>%
                  y = percentage_median,
                  fill = ecozone_koppen_5),
              position = position_dodge(width = 0.9), alpha = 0.4) +
-    scale_fill_manual(values = fill_eco, drop = FALSE) +
+    scale_fill_manual(values = fill_eco, 
+                      drop = FALSE) +
     geom_segment(
       aes(x = predictor,
           y = 0,
@@ -47,7 +48,6 @@ p <- data %>%
              label = rep(paste0(seq(10,40, by = 10), " %"),3), 
              vjust = 0,
              size = 3) +
-    scale_x_discrete(label = x_name, drop = FALSE) +
     coord_polar() +
     theme_minimal()+
     theme(
@@ -62,6 +62,8 @@ p <- data %>%
       plot.title = element_text(family = "sans",size = 12, hjust = 0.5, margin = margin(0,0,0,0)),
       plot.margin = unit(c(0.3, 0, 0, 0), "cm")
     ) +
+    scale_x_discrete(label = x_name, 
+                     drop = FALSE) +
     labs( 
       # title = paste0(select_region),
       x = "", 
