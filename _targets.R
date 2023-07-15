@@ -570,7 +570,10 @@ list(
 
 # - run hgam model to create a common variable for density diversity and 
 # turnover
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69a64a03a8b9eea76f2eee429806c7bb1e3d9a71
   # targets::tar_target(
   #   name = data_density_variables,
   #   command = get_hgam_density_vars(
@@ -679,7 +682,10 @@ list(
   #     data_source_meta = data_meta
   #   )
   # ),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 69a64a03a8b9eea76f2eee429806c7bb1e3d9a71
  # - merge all data together
   targets::tar_target(
     name = data_for_hvar,

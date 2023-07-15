@@ -20,7 +20,6 @@ if(
   
 }
   
-
   dplyr::inner_join(
     data_source_diversity %>%
       dplyr::rename(

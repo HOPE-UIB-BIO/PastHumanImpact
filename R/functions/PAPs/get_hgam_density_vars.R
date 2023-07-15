@@ -69,7 +69,6 @@ get_hgam_density_vars <- function(data_source_density,
 
   }
 
-
   # select which data to use
   if (
     isTRUE(used_rescales)
