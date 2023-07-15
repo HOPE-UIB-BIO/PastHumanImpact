@@ -365,6 +365,8 @@ input_spatial <- summary_spatial_median %>%
   dplyr::filter(region %in% select_region) %>%
   filter(n_records > 5)
 
+input_spatial$ecozone_koppen_5 %>% levels()
+
 circular_bar_fig <- get_circular_barchart(input_spatial)
 circular_bar_fig
 
@@ -388,6 +390,7 @@ input_temporal <-
 
 bars_temporal_fig <- get_temporal_barcharts(input_temporal)
 bars_temporal_fig
+
 
 
 # ggsave(
