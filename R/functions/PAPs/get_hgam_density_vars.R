@@ -66,7 +66,9 @@ get_hgam_density_vars <- function(data_source_density,
 
     return(data_predicted)
 
-  
+
+  }
+
 
   # select which data to use
   if (
@@ -181,7 +183,9 @@ get_hgam_density_vars <- function(data_source_density,
   return(data_density_res)
 
  
- }
+  }
+
+
 
   
 
