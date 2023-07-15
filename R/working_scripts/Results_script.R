@@ -9,9 +9,7 @@ output_temporal <- tar_read(output_hvar_temporal)
 
 output_spatial <- tar_read(output_hvar_spatial)
 
-#Import raster data ecozones for visualisation 
-
-#if maps should display ecozones
+# Import raster data ecozones for visualisation (if maps should display ecozones)
 
 library(sf)
 library(terra)
@@ -43,6 +41,11 @@ data_geo_koppen <-
 #save
 #data_geo_koppen <- read_rds("data_geo_koppen.rds")
 
+# define color palettes
+# five main ecozones
+palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
+#human vs climate
+palette_pred <- c("#663333", "#BBBBBB") 
 
 ###############################################################################
 # 1. PREPARE RESULTS
@@ -402,10 +405,9 @@ bars_temporal_fig
 
 map_region <- get_map_region(select_region = select_region)
 
-
-
 # Combine figures 
-ggpubr::ggarrange(
+final <- 
+  ggpubr::ggarrange(
   ggpubr::ggarrange(
     circular_bar_fig,
     ggpubr::ggarrange(map_region, 
@@ -420,39 +422,13 @@ ggpubr::ggarrange(
   heights = c(2,1)
   )
 
+final
+
+# Function for report summary
+get_regional_combined_fig(select_region = "North America")
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-# old...
-# # plot variables
-# results_hvar_spatial %>%
-#   left_join(data_meta %>% 
-#               dplyr::select(dataset_id, 
-#                             ecozone_koppen_5, 
-#                             region), by = "dataset_id") %>%
-#   #  filter(region == "Europe" & ecozone_koppen_5  == "Temperate") %>%
-#   unnest(data_merge) %>%
-#   pivot_longer(n0:spd, names_to = "variables", values_to = "value") %>%
-#   group_split(region, ecozone_koppen_5) %>%
-#   purrr::map(~ggplot(., aes(x = age, y = value, group = dataset_id, col = value)) +
-#                geom_line() +
-#                coord_flip() +
-#                #scale_colour_hue(c = 50, l = 60, h = c(30, 300)) +
-#                scale_x_reverse() +
-#                facet_wrap(~variables, scales = "free_x") +
-#                theme_bw() 
-#   ) %>% 
-#   cowplot::plot_grid(plotlist = ., align = 'h', nrow = 1)
 
 
