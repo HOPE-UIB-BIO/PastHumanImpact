@@ -1,6 +1,6 @@
 fit_and_save_hgam <- function(data_raw,
                               sel_group,
-                              dir,
+                              dir = here::here(),
                               x_var = "age",
                               y_var,
                               group_var = "dataset_id",
@@ -9,7 +9,8 @@ fit_and_save_hgam <- function(data_raw,
                               error_family,
                               sel_k,
                               use_parallel = FALSE,
-                              verbose = FALSE) {
+                              verbose = FALSE,
+                              save = TRUE) {
   message(y_var)
 
   sel_data <-
@@ -46,16 +47,22 @@ fit_and_save_hgam <- function(data_raw,
         verbose = verbose
       )
 
-    RUtilpol::save_latest_file(
-      object_to_save = data_mod,
-      file_name = paste0(
-        y_var,
-        "_",
-        sel_group
-      ),
-      dir = dir,
-      prefered_format = "rds",
-      use_sha = TRUE
-    )
+    if (
+      isTRUE(save)
+    ) {
+      RUtilpol::save_latest_file(
+        object_to_save = data_mod,
+        file_name = paste0(
+          y_var,
+          "_",
+          sel_group
+        ),
+        dir = dir,
+        prefered_format = "rds",
+        use_sha = TRUE
+      )
+    } else {
+      return(data_mod)
+    }
   }
 }
