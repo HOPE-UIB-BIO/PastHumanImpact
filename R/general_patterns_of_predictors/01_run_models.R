@@ -152,14 +152,52 @@ data_work_subset <-
   data_work %>%
   dplyr::filter(
     dataset_id %in% vec_subset_dataset_id
-  )  %>% 
+  ) %>%
   dplyr::mutate(
     group = ecozone_koppen_15
   )
 
+
 #----------------------------------------------------------#
 # 3. Fit and save hGAMS -----
 #----------------------------------------------------------#
+
+# do a small test to get the best family for spd (on small subset of data)
+data_family_test <-
+  c(
+    "mgcv::tw(link = 'log')",
+    "mgcv::tw(link = 'sqrt')",
+    "mgcv::Tweedie(p = 1.1, link = 'log')",
+    "mgcv::Tweedie(p = 1.1, link = 'sqrt')",
+    "mgcv::Tweedie(p = 1.5, link = 'log')",
+    "mgcv::Tweedie(p = 1.5, link = 'sqrt')",
+    "mgcv::Tweedie(p = 1.9, link = 'log')",
+    "mgcv::Tweedie(p = 1.9, link = 'sqrt')"
+  ) %>%
+  rlang::set_names() %>%
+  purrr::map(
+    .f = ~ fit_and_save_hgam(
+      data_raw = data_work_subset,
+      sel_group = "Arid_Steppe",
+      y_var = "spd",
+      group_var = "dataset_id",
+      smooth_basis = "tp",
+      error_family = .x,
+      sel_k = max_temporal_k,
+      use_parallel = FALSE,
+      verbose = TRUE,
+      save = FALSE
+    )
+  )
+
+purrr::map_dbl(
+  .x = data_family_test,
+  .f = ~ AIC(.x)
+) %>%
+  which.min() %>%
+  names()
+
+# "mgcv::tw(link = 'log')" seems to be the best
 
 data_pred_errors <-
   tibble::tibble(
