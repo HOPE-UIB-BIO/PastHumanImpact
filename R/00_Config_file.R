@@ -146,29 +146,7 @@ external_storage_targets <-
   )
 
 #----------------------------------------------------------#
-# 5. Set up targets -----
-#----------------------------------------------------------#
-
-targets::tar_config_set(
-  script = here::here("R/hypothesis_1/h1_target_pipeline.R"),
-  store = paste0(
-    data_storage_path,
-    "_targets_h1"
-  ),
-  project = "project_h1"
-)
-
-targets::tar_config_set(
-  script = here::here("R/hypothesis_2/h2_target_pipeline.R"),
-  store = paste0(
-    data_storage_path,
-    "_targets_h2"
-  ),
-  project = "project_h2"
-)
-
-#----------------------------------------------------------#
-# 6. Define variables -----
+# 5. Define variables -----
 #----------------------------------------------------------#
 
 min_age <- 0
@@ -176,7 +154,7 @@ max_age <- 12e3
 timestep <- 500
 
 #----------------------------------------------------------#
-# 7. Graphical options -----
+# 6. Graphical options -----
 #----------------------------------------------------------#
 
 ## examples
