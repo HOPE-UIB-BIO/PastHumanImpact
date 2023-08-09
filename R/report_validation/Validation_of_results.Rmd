@@ -58,28 +58,17 @@ lapply(
 ) %>%
   invisible()
 
+# Define directory for external storage for users
 auth_tibble <-
-  tibble::tibble(
-    name = c("ondre", "omo084", "vfe032", "vfe032", "sfl046", "kbh022"),
-    paths = c(
-      "C:/Users/ondre/OneDrive - University of Bergen/HOPE_data/",
-      "C:/Users/omo084/OneDrive - University of Bergen/HOPE_data/",
-      "/Users/vfe032/Library/CloudStorage/OneDrive-SharedLibraries-UniversityofBergen/Ondrej Mottl - HOPE_data/",
-      "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/",
-      "C:/Users/sfl046/University of Bergen/Ondrej Mottl - HOPE_data/",
-      "C:/Users/kbh022/University of Bergen/Ondrej Mottl - HOPE_data/"
-    )
+  tibble::tribble(
+    ~name, ~path,
+    "ondrej", "C:/Users/ondre/My Drive/"
   )
-
-sys_info <- Sys.info()
-
-username <-
-  sys_info["user"]
 
 data_storage_path <-
   auth_tibble %>%
-  dplyr::filter(name == username) %>%
-  purrr::pluck("paths")
+  dplyr::filter(name == Sys.info()["user"]) %>%
+  purrr::pluck("path")
 
 if (length(data_storage_path) > 1) {
   data_storage_path <- data_storage_path[2]
@@ -88,7 +77,7 @@ if (length(data_storage_path) > 1) {
 external_storage_targets <-
   paste0(
     data_storage_path,
-    "HOPE_Hypothesis1/_targets1"
+    "_targets_h1"
   )
 
 # set configuration for _target storage
