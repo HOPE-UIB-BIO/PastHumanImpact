@@ -1,94 +1,45 @@
-# Load packages:
-library(targets)
-library(tidyverse)
-library(future)
-library(future.callr)
+#----------------------------------------------------------#
+#
+#
+#                     GlobalHumanImpact
+#
+#                      Hypothesis I
+#
+#
+#                   O. Mottl, V. Felde
+#                         2023
+#
+#----------------------------------------------------------#
 
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
+
+
+#----------------------------------------------------------#
+# 0. Setup -----
+#----------------------------------------------------------#
+
+library(here)
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
   )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
 )
 
-# Set target options:
-tar_option_set(
-  packages = c(
-    "arrow",
-    "assertthat",
-    "devtools",
-    "geosphere",
-    "ggpubr",
-    "here",
-    "mgcv",
-    "rcarbon",
-    "readr",
-    "REcopol",
-    "renv",
-    "roxygen2",
-    "RRatepol",
-    "RUtilpol",
-    "terra",
-    "tidyverse",
-    "usethis",
-    "vegan",
-    "rdacca.hp",
-    "ggimage",
-    "ggforce",
-    "venneuler"
-  ),
+Sys.setenv(TAR_PROJECT = "project_h1")
+
+targets::tar_option_set(
+  packages = package_list, # [config]
   memory = "transient",
   garbage_collection = TRUE,
-  storage = "worker",
-  retrieval = "worker",
-  repository = "local"
+  repository = "local",
+  seed = set_seed, # [config]
+  storage = "worker"
 )
 
-# multicore plan
-#tar_make_clustermq() 
-#options(clustermq.scheduler = "multicore")
-
-
-
-
-# list R functions and source them
-invisible(lapply(
-  list.files(
-    path = "R/functions",
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-))
-
-
-
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
-
-
+#----------------------------------------------------------#
+# 1. Targets -----
+#----------------------------------------------------------#
 
 # the targets list:
 list(
@@ -97,20 +48,27 @@ list(
     name = data_dummy_time,
     command = tibble::tibble(
       age = seq(
-        from = min_age,
-        to = max_age,
-        by = timestep
+        from = min_age, # [config]
+        to = max_age, # [config]
+        by = timestep # [config]
       )
     )
   ),
-  targets::tar_target(  
+  targets::tar_target(
     name = age_cutoff_region,
     command = tibble::tibble(
-      region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
+      region = c(
+        "Europe",
+        "Latin America",
+        "Asia",
+        "Africa",
+        "North America",
+        "Oceania"
+      ),
       age_from = c(2000, 2000, 2000, 2000, 500, 500),
       age_end = rep(8500, 6)
-      )
-    ),
+    )
+  ),
   targets::tar_target(
     name = spd_distance_vec,
     command = c(5, 25, 50, 100, 250, 500) %>%
@@ -286,7 +244,7 @@ list(
       variable = "var_name",
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
-      method = "constant",  
+      method = "constant",
       rule = 1:2,
       ties = "ordered",
       age_min = 0,
@@ -309,7 +267,7 @@ list(
   #     data_source_meta = data_meta
   #   )
   # ),
-  # # - subset event types relevant for each region 
+  # # - subset event types relevant for each region
   targets::tar_target(
     name = events_temporal_subset,
     command = subset_event_types(
@@ -440,7 +398,7 @@ list(
       month_var_selected = c(1:12),
       xy = data_meta
     )
-  ), 
+  ),
   targets::tar_target(
     name = data_climate,
     command = get_climate_indices(
@@ -452,21 +410,23 @@ list(
     name = data_climate_for_interpolation,
     command = get_climate_data_for_interpolation(
       data_source = data_climate,
-      sel_var = c("temp_annual",
-                  "temp_cold",
-                  "prec_annual", 
-                  "prec_summer", 
-                  "prec_win")
+      sel_var = c(
+        "temp_annual",
+        "temp_cold",
+        "prec_annual",
+        "prec_summer",
+        "prec_win"
       )
+    )
   ),
   targets::tar_target(
     name = data_climate_interpolated,
     command = get_interpolated_data(
-      data_source = data_climate_for_interpolation,   
+      data_source = data_climate_for_interpolation,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
-      method = "linear", 
+      method = "linear",
       rule = 1:2,
       ties = mean,
       age_min = 0,
@@ -556,8 +516,8 @@ list(
     )
   ),
 
-# - run hgam model to create a common variable for density diversity and 
-# turnover
+  # - run hgam model to create a common variable for density diversity and
+  # turnover
   # targets::tar_target(
   #   name = data_density_variables,
   #   command = get_hgam_density_vars(
@@ -596,7 +556,7 @@ list(
       variable = "var_name",
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
-      method = "linear", 
+      method = "linear",
       rule = 1:2,
       ties = mean,
       age_min = 0,
@@ -642,14 +602,14 @@ list(
       variable = "var_name",
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
-      method = "linear", 
+      method = "linear",
       rule = 1:2,
       ties = mean,
       age_min = 0,
       age_max = 12e03,
       timestep = 500,
       verbose = TRUE
-      )
+    )
   ),
   # targets::tar_target(
   #   name = data_roc_temporal_spacing,
@@ -667,7 +627,7 @@ list(
   #   )
   # ),
 
- # - merge all data together
+  # - merge all data together
   targets::tar_target(
     name = data_for_hvar,
     command = get_data_for_hvarpar(
@@ -678,24 +638,24 @@ list(
       data_source_climate = data_climate_interpolated,
       used_rescale = TRUE
     )
-  ), # filter data by age of interests in regions; filter out Africa 
- targets::tar_target(
-   name = data_hvar_filtered,
-   command = filter_data_hvar(
-     data_source = data_for_hvar,
-     data_meta = data_meta,
-     age_table = age_cutoff_region
-   )
- ), # restructure data for temporal analysis
- targets::tar_target(
-   name = data_hvar_temporal,
-   command = get_data_hvar_timebin(
-     data_source = data_hvar_filtered,
-     data_meta = data_meta
-   )
- ), 
- 
- # # Main analyses: hierarchical variation partitioning
+  ), # filter data by age of interests in regions; filter out Africa
+  targets::tar_target(
+    name = data_hvar_filtered,
+    command = filter_data_hvar(
+      data_source = data_for_hvar,
+      data_meta = data_meta,
+      age_table = age_cutoff_region
+    )
+  ), # restructure data for temporal analysis
+  targets::tar_target(
+    name = data_hvar_temporal,
+    command = get_data_hvar_timebin(
+      data_source = data_hvar_filtered,
+      data_meta = data_meta
+    )
+  ),
+
+  # # Main analyses: hierarchical variation partitioning
   # - run first spatial (within core) analysis
   targets::tar_target(
     name = output_hvar_spatial,
@@ -714,7 +674,8 @@ list(
           "temp_annual",
           "temp_cold",
           "prec_summer",
-          "prec_win"),
+          "prec_win"
+        ),
         time = c("age")
       ),
       run_all_predictors = FALSE,
@@ -723,31 +684,30 @@ list(
       permutations = 999
     )
   ), # - run second temporal analysis (by age bins in spatial context)
- targets::tar_target(
-   name = output_hvar_temporal,
-   command = run_hvarpart(
-     data_source = data_hvar_temporal,
-     response_vars = c(
-       "n0", "n1", "n2",
-       "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
-       "roc",
-       "dcca_axis_1",
-       "density_diversity", "density_turnover"
-     ),
-     predictor_vars = list(
-       human = c("spd"),
-       climate = c(
-         "temp_annual",
-         "temp_cold",
-         "prec_summer",
-         "prec_win")
-       ),
-     run_all_predictors = FALSE,
-     time_series = FALSE,
-     get_significance = TRUE,
-     permutations = 999
-   )
- )
-
+  targets::tar_target(
+    name = output_hvar_temporal,
+    command = run_hvarpart(
+      data_source = data_hvar_temporal,
+      response_vars = c(
+        "n0", "n1", "n2",
+        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+        "roc",
+        "dcca_axis_1",
+        "density_diversity", "density_turnover"
+      ),
+      predictor_vars = list(
+        human = c("spd"),
+        climate = c(
+          "temp_annual",
+          "temp_cold",
+          "prec_summer",
+          "prec_win"
+        )
+      ),
+      run_all_predictors = FALSE,
+      time_series = FALSE,
+      get_significance = TRUE,
+      permutations = 999
+    )
+  )
 )
-
