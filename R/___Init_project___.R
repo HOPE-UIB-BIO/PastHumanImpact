@@ -1,13 +1,13 @@
 #----------------------------------------------------------#
 #
 #
-#                       Hypothesis I
+#                   GlobalHumanImpact
 #
 #                     Project setup
 #
 #
 #                   V. Felde, O. Mottl
-#                         2022
+#                         2023
 #
 #----------------------------------------------------------#
 
@@ -16,105 +16,141 @@
 
 
 #----------------------------------------------------------#
-# Step 0: Define package list and custom function -----
+# Step 0: Install {renv} for package management -----
 #----------------------------------------------------------#
 
-# list of all CRAN packages
-package_list <-
-  c(
-    "arrow",
-    "assertthat",
-    "devtools",
-    "geosphere",
-    "ggpubr",
-    "here",
-    "mgcv",
-    "rcarbon",
-    "readr",
-    "renv",
-    "roxygen2",
-    "terra",
-    "tidyverse",
-    "usethis",
-    "vegan",
-    "kableExtra",
-    "colorspace",
-    "data.tree",
-    
-  )
+if (
+  "renv" %in% utils::installed.packages()
+) {
+  library(renv)
+} else {
+  # install package
+  utils::install.packages("renv")
 
-# define helper function
-install_packages <-
-  function(pkgs_list) {
-    # install all packages in the lst from CRAN
-    sapply(pkgs_list, utils::install.packages, character.only = TRUE)
-
-    # install RUtilpol from GitHub
-    devtools::install_github("HOPE-UIB-BIO/R-Utilpol-package",
-      quiet = FALSE,
-      upgrade = FALSE
-    )
-
-    # install RRatepol from GitHub
-    devtools::install_github(
-      "HOPE-UIB-BIO/R-Ratepol-package",
-      quiet = FALSE,
-      upgrade = FALSE
-    )
-
-    # install REcolpol from GitHub
-    devtools::install_github(
-      "HOPE-UIB-BIO/R-Ecopol-package",
-      quiet = FALSE,
-      upgrade = FALSE
-    )
-  }
-
+  # load the package
+  library(renv)
+}
 
 #----------------------------------------------------------#
-# Step 1: Install 'renv' package -----
+# Step 1: Activate 'renv' project -----
 #----------------------------------------------------------#
 
-utils::install.packages("renv")
-
-
-#----------------------------------------------------------#
-# Step 2: Deactivate 'renv' package -----
-#----------------------------------------------------------#
-
-# deactivate to make sure that packages are updated on the machine
-renv::deactivate()
-
-
-#----------------------------------------------------------#
-# Step 3: Install packages to the machine
-#----------------------------------------------------------#
-
-install_packages(package_list)
-
-
-#----------------------------------------------------------#
-# Step 4: Activate 'renv' project
-#----------------------------------------------------------#
+# NOTE: The R may ask the User to restart the session (R).
+#   After that, continue with the next step
 
 renv::activate()
 
-
 #----------------------------------------------------------#
-# Step 5: Install packages to the project
-#----------------------------------------------------------#
-
-install_packages(package_list)
-
-
-#----------------------------------------------------------#
-# Step 6: Synchronize package versions with the project
+# Step 1: Install {here} for file navigation -----
 #----------------------------------------------------------#
 
-library(here)
-renv::restore()
+if (
+  "here" %in% utils::installed.packages()
+) {
+  library(here)
+} else {
+  # install package
+  utils::install.packages("here")
 
+  # load the package
+  library(here)
+}
 
 #----------------------------------------------------------#
-# Step 7: Run the project
+# Step 2: Synchronize package versions with the project -----
 #----------------------------------------------------------#
+
+# If there is no lock file present make a new snapshot
+if (
+  isTRUE("library_list.lock" %in% list.files(here::here("renv")))
+) {
+  cat("The project already has a lockfile. Restoring packages", "\n")
+
+  renv::restore(
+    lockfile = here::here("renv/library_list.lock")
+  )
+
+  cat("Set up completed. You can continute to run the project", "\n")
+
+  cat("Do NOT run the rest of this script", "\n")
+} else {
+  cat("The project seems to be new (no lockfile)", "\n")
+
+  cat("Continue with this script", "\n")
+}
+
+#----------------------------------------------------------#
+# Step 3: Install packages to the project -----
+#----------------------------------------------------------#
+
+
+# install all packages in the lst from CRAN
+sapply(
+  c(
+    "arrow",
+    "assertthat",
+    "colorspace",
+    "data.tree",
+    "geosphere",
+    "ggforce",
+    "ggimage",
+    "ggpubr",
+    "here",
+    "httpgd",
+    "janitor",
+    "jsonlite",
+    "kableExtra", ,
+    "knitr",
+    "languageserver",
+    "lifecycle",
+    "mgcv",
+    "rcarbon",
+    "rdacca.hp",
+    "renv",
+    "remotes",
+    "rlang",
+    "roxygen2",
+    "targets",
+    "terra",
+    "tidyverse",
+    "usethis",
+    "utils",
+    "vegan",
+    "venneuler"
+  ),
+  utils::install.packages,
+  character.only = TRUE
+)
+
+# install RUtilpol from GitHub
+remotes::install_github(
+  repo = "HOPE-UIB-BIO/R-Utilpol-package",
+  ref = "HEAD",
+  quiet = FALSE,
+  upgrade = "ask"
+)
+
+
+# install RRatepol from GitHub
+devtools::install_github(
+  "HOPE-UIB-BIO/R-Ratepol-package",
+  quiet = FALSE,
+  upgrade = FALSE
+)
+
+# install REcolpol from GitHub
+devtools::install_github(
+  "HOPE-UIB-BIO/R-Ecopol-package",
+  quiet = FALSE,
+  upgrade = FALSE
+)
+
+#----------------------------------------------------------#
+# Step 4: Save versions of packages -----
+#----------------------------------------------------------#
+
+renv::snapshot(
+  lockfile = here::here("renv/library_list.lock")
+)
+
+cat("Set up completed. You can continute to run the project", "\n")
