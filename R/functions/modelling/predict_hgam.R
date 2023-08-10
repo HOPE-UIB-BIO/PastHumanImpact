@@ -1,5 +1,5 @@
 predict_hgam <- function(data_model,
-                         var_name,
+                         var_name = "fit",
                          data_dummy,
                          time_step = 500) {
   sel_data <-
