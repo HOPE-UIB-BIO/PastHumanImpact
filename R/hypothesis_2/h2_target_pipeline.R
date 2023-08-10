@@ -79,8 +79,49 @@ data_valid_ecozones <-
     n_datasets = n_distinct(dataset_id)
   ) %>%
   dplyr::filter(n_datasets > 5) %>%
-  dplyr::arrange(n_datasets) %>%
-  dplyr::select(-n_datasets)
+  # //TODO remove this for full analysis. This is only temporary
+  #   to make workable results
+  dplyr::filter(n_datasets < 50) %>%
+  dplyr::arrange(n_datasets)
+
+vec_predictors <- c(
+  "temp_annual",
+  "temp_cold",
+  "prec_annual",
+  "prec_summer",
+  "prec_win",
+  "spd"
+)
+
+data_dummy_ecozone_predictor <-
+  tidyr::expand_grid(
+    predictor = vec_predictors,
+    data_valid_ecozones
+  ) %>%
+  dplyr::mutate(
+    region_zone = paste(region, ecozone_koppen_15, sep = "_"),
+    full_name = paste(predictor, region_zone, sep = "_"),
+  )
+
+tar_mapped_models <-
+  tarchetypes::tar_map(
+    unlist = FALSE,
+    values = data_dummy_ecozone_predictor,
+    names = full_name,
+    targets::tar_target(
+      name = mod,
+      command = fit_hgam_per_region_and_group(
+        data_raw = data_merge_unnest,
+        data_error = data_pred_errors,
+        sel_region = region,
+        sel_group = ecozone_koppen_15,
+        y_var = predictor,
+        sel_k = max_temporal_k,
+        use_parallel = TRUE,
+        verbose = TRUE
+      ),
+    )
+  )
 
 #----------------------------------------------------------#
 # 1. Targets -----
@@ -94,14 +135,7 @@ list(
   ),
   targets::tar_target(
     name = vec_predictors,
-    command = c(
-      "temp_annual",
-      "temp_cold",
-      "prec_annual",
-      "prec_summer",
-      "prec_win",
-      "spd"
-    )
+    command = vec_predictors
   ),
   targets::tar_target(
     name = data_pred_errors,
@@ -120,16 +154,25 @@ list(
     )
   ),
   targets::tar_target(
-    name = "data_merge",
+    name = data_merge,
     command = dplyr::inner_join(
       data_ecozone,
       data_for_hvar
-    )
+    ) %>%
+      dplyr::rename(
+        group = ecozone_koppen_15
+      )
   ),
   targets::tar_target(
-    name = "data_merge_unnest",
+    name = data_merge_unnest,
     command = tidyr::unnest(
       data_merge, data_merge
     )
+  ),
+  tar_mapped_models,
+  tarchetypes::tar_combine(
+    name = mod_list,
+    tar_mapped_models[["mod"]],
+    command = list(!!!.x)
   )
 )
