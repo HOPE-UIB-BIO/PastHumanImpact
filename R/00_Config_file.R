@@ -76,6 +76,7 @@ package_list <-
     "roxygen2",
     "RRatepol",
     "RUtilpol",
+    "tarchetypes",
     "targets",
     "terra",
     "tidyverse",
