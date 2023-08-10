@@ -173,6 +173,7 @@ list(
   tarchetypes::tar_combine(
     name = mod_list,
     tar_mapped_models[["mod"]],
-    command = list(!!!.x)
+    command = list(!!!.x),
+    iteration = "list"
   )
 )
