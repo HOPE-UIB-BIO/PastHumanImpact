@@ -110,6 +110,7 @@ sapply(
     "remotes",
     "rlang",
     "roxygen2",
+    "tarchetypes",
     "targets",
     "terra",
     "tidyverse",
