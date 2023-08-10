@@ -199,5 +199,13 @@ list(
     tar_mapped_models[["mod"]],
     command = list(!!!.x),
     iteration = "list"
+  ),
+  # predict all models
+  targets::tar_target(
+    name = mod_predicted,
+    command = get_predition_from_model_list(
+      data_source_list = mod_list,
+      dummy_table = data_dummy_time
+    )
   )
 )
