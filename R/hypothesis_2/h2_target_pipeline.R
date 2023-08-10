@@ -35,12 +35,21 @@ targets::tar_option_set(
   storage = "worker"
 )
 
+vec_predictors <-
+  c(
+    "temp_annual",
+    "temp_cold",
+    "prec_annual",
+    "prec_summer",
+    "prec_win",
+    "spd"
+  )
+
 #----------------------------------------------------------#
-# 1. Load and prepare ecozone data -----
+# 1. Load and data -----
 #----------------------------------------------------------#
 
-# This step is important for cretaing a static branching pipeline
-#   AKA making many targets at the same time withoud specifically declering them
+# These are targets from H1
 
 data_for_hvar <-
   targets::tar_read(
@@ -59,6 +68,23 @@ data_meta <-
       "_targets_h1"
     )
   )
+
+data_dummy_time <-
+  targets::tar_read(
+    name = "data_dummy_time",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+#----------------------------------------------------------#
+# 2. Pprepare ecozone data -----
+#----------------------------------------------------------#
+
+# This step is important for cretaing a static branching pipeline
+#   AKA making many targets at the same time withoud specifically declering them
+
 
 data_ecozone <-
   data_meta %>%
@@ -84,15 +110,6 @@ data_valid_ecozones <-
   dplyr::filter(n_datasets < 50) %>%
   dplyr::arrange(n_datasets)
 
-vec_predictors <- c(
-  "temp_annual",
-  "temp_cold",
-  "prec_annual",
-  "prec_summer",
-  "prec_win",
-  "spd"
-)
-
 data_dummy_ecozone_predictor <-
   tidyr::expand_grid(
     predictor = vec_predictors,
@@ -102,6 +119,11 @@ data_dummy_ecozone_predictor <-
     region_zone = paste(region, ecozone_koppen_15, sep = "_"),
     full_name = paste(predictor, region_zone, sep = "_"),
   )
+
+
+#----------------------------------------------------------#
+# 3. Prepare target factory for hGAM fitting -----
+#----------------------------------------------------------#
 
 tar_mapped_models <-
   tarchetypes::tar_map(
@@ -124,7 +146,7 @@ tar_mapped_models <-
   )
 
 #----------------------------------------------------------#
-# 1. Targets -----
+# 4. Target pipeline -----
 #----------------------------------------------------------#
 
 # the targets list:
@@ -169,7 +191,9 @@ list(
       data_merge, data_merge
     )
   ),
+  # fit hGAMs
   tar_mapped_models,
+  # combine models
   tarchetypes::tar_combine(
     name = mod_list,
     tar_mapped_models[["mod"]],
