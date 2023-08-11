@@ -234,8 +234,40 @@ list(
       dummy_table = data_dummy_time
     )
   ),
+  # add names to predicted models
   targets::tar_target(
     name = mod_predicted_with_names,
     command = get_names_from_full_model_name(mod_predicted)
+  ),
+  # merge datasets
+  targets::tar_target(
+    name = data_for_hvar_h2,
+    command = get_data_for_h2_hvar(
+      data_m2 = data_m2,
+      data_predictors = mod_predicted_with_names
+    )
+  ),
+  # hierarchical variation partitioning
+  targets::tar_target(
+    name = output_hvar_h2,
+    command = run_hvarpart(
+      data_source = data_for_hvar_h2,
+      response_vars = NULL,
+      responce_dist = "m2",
+      predictor_vars = list(
+        human = c("spd"),
+        climate = c(
+          "temp_annual",
+          "temp_cold",
+          "prec_summer",
+          "prec_win"
+        ),
+        time = c("age")
+      ),
+      run_all_predictors = FALSE,
+      time_series = TRUE,
+      get_significance = FALSE,
+      permutations = 999
+    )
   )
 )
