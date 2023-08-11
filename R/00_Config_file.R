@@ -126,7 +126,8 @@ invisible(
 auth_tibble <-
   tibble::tribble(
     ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
+    "ondrej", "C:/Users/ondre/My Drive/",
+    "vfe032", "G:/My Drive/"
   )
 
 data_storage_path <-
@@ -134,11 +135,6 @@ data_storage_path <-
   dplyr::filter(name == Sys.info()["user"]) %>%
   purrr::pluck("path")
 
-if (
-  length(data_storage_path) > 1
-) {
-  data_storage_path <- data_storage_path[2]
-}
 
 external_storage_targets <-
   paste0(
