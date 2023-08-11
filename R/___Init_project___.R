@@ -99,7 +99,7 @@ sapply(
     "httpgd",
     "janitor",
     "jsonlite",
-    "kableExtra", ,
+    "kableExtra", 
     "knitr",
     "languageserver",
     "lifecycle",
