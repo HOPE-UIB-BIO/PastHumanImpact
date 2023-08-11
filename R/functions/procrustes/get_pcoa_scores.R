@@ -7,6 +7,6 @@ get_pcoa_scores <- function(pcoa, region, ecozone) {
   scores_df <- data.frame(pcoa$points) %>%
     rownames_to_column("label") %>% 
     mutate(region = region) %>%
-    mutate(ecozone_koppen_5 = ecozone)
+    mutate(ecozone = ecozone)
   scores_df
 }
