@@ -45,6 +45,20 @@ vec_predictors <-
     "spd"
   )
 
+vec_responses <- 
+  c("dataset_id",
+    "age", 
+    "n0", 
+    "n1", 
+    "n2", 
+    "n1_minus_n2", 
+    "n2_divided_by_n1" , 
+    "n1_divided_by_n0",  
+    "dcca_axis_1", "roc", 
+    "density_turnover",  
+    "density_diversity")
+  
+
 #----------------------------------------------------------#
 # 1. Load and data -----
 #----------------------------------------------------------#
@@ -79,7 +93,7 @@ data_dummy_time <-
   )
 
 #----------------------------------------------------------#
-# 2. Pprepare ecozone data -----
+# 2. Prepare ecozone data -----
 #----------------------------------------------------------#
 
 # This step is important for cretaing a static branching pipeline
@@ -165,7 +179,7 @@ list(
       predictor = vec_predictors,
       error_family = c(
         rep(
-          "stats::gaussian(link = 'identity')", ,
+          "stats::gaussian(link = 'identity')", 
           2
         ),
         rep(
@@ -190,6 +204,16 @@ list(
     command = tidyr::unnest(
       data_merge, data_merge
     )
+  ),
+  # add get data for procrustes sum-of-squares (m2) analysis
+  targets::tar_target(
+   name = data_m2,
+   command = get_m2_data(
+     data_source = data_for_hvar,
+     data_meta = data_meta,
+     min_samples = 5,
+     select_vars = vec_responses
+   )
   ),
   # fit hGAMs
   tar_mapped_models,

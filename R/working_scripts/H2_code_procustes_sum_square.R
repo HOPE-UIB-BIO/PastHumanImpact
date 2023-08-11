@@ -31,7 +31,7 @@ data_for_h2 <-
 
 
 # Run PCA analyses for each time bin in regional ecozones; get procrustes sum of square, extract difference with time
-pap_procrustes_ecozones <- data_for_h2 %>% 
+pap_procrustes <- data_for_h2 %>% 
   mutate(pca_analysis = purrr::map(data,
                                    .f = run_pca)) %>%
   mutate(pca_analysis = pca_analysis %>% 
@@ -40,27 +40,20 @@ pap_procrustes_ecozones <- data_for_h2 %>%
   summarise(pca_analysis = list(pca_analysis)) %>% 
   mutate(m2 = purrr::map(pca_analysis, get_procrustes_m2))%>%
   ungroup() %>%
-  mutate(m2_time = purrr::map(m2, .f = extract_m2_time))
-
-
-
-
-# Add principal coordinate analysis of similarities and differences with time
-pcoa_ecozones <- 
-  pap_procrustes_ecozones %>%
-  mutate(PCoA = purrr::map(m2, .f = run_pcoa)) %>%
-  mutate(site_scores = purrr::pmap(list(PCoA,
-                                        region,
-                                        ecozone_koppen_15),
-                                   .f = ~get_pcoa_scores(pcoa = ..1,
-                                                    region = ..2,
-                                                    ecozone = ..3))) %>%
+  mutate(m2_time = purrr::map(m2, .f = extract_m2_time)) %>%
+  mutate(PCoA = purrr::map(m2, .f = run_pcoa))
   mutate(m2_time_df = purrr::map(m2_time, 
                                  .f = get_m2_time_df))
 
 
 # plot pcoa diagrams 
-pcoa_ecozones %>% 
+pap_procrustes %>% 
+  mutate(site_scores = purrr::pmap(list(PCoA,
+                                        region,
+                                        ecozone_koppen_15),
+                                   .f = ~get_pcoa_scores(pcoa = ..1,
+                                                         region = ..2,
+                                                         ecozone = ..3))) %>%
   dplyr::select(site_scores) %>% 
   unnest(cols = c(site_scores)) %>%
   ggplot(aes(x = X1, y = X2, label = label, col = ecozone)) +
