@@ -53,7 +53,7 @@ vec_predictors <-
 
 data_for_hvar <-
   targets::tar_read(
-    name = "data_for_hvar",
+    name = "data_hvar_filtered",
     store = paste0(
       data_storage_path,
       "_targets_h1"
@@ -107,7 +107,7 @@ data_valid_ecozones <-
   dplyr::filter(n_datasets > 5) %>%
   # //TODO remove this for full analysis. This is only temporary
   #   to make workable results
-  dplyr::filter(n_datasets < 50) %>%
+  dplyr::filter(n_datasets <= 32) %>%
   dplyr::arrange(n_datasets)
 
 data_dummy_ecozone_predictor <-
