@@ -47,7 +47,8 @@ targets::tar_visnetwork(
     data_storage_path,
     "_targets_test"
   ),
-  targets_only = TRUE
+  targets_only = TRUE,
+  label = "branches"
 )
 
 # Run the targest
@@ -79,7 +80,23 @@ targets::tar_read(
 
 # Check the combined data
 targets::tar_read(
-  name = "data_combined",
+  name = "data_combined_static",
+  store = paste0(
+    data_storage_path,
+    "_targets_test"
+  )
+)
+
+targets::tar_read(
+  name = "data_combined_dynamic",
+  store = paste0(
+    data_storage_path,
+    "_targets_test"
+  )
+)
+
+targets::tar_read(
+  name = "data_compare",
   store = paste0(
     data_storage_path,
     "_targets_test"

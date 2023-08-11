@@ -105,12 +105,29 @@ list(
       age = data_dummy_time
     )
   ),
+  # Static branching -----
   # here is inserted the list of all targets defined previously
   tar_mapped,
   # Combine all targets
   tarchetypes::tar_combine(
-    data_combined,
+    data_combined_static,
     tar_mapped[["data_subset"]],
     command = dplyr::bind_rows(!!!.x, .id = "region")
+  ),
+  # dynamic branching -----
+  targets::tar_target(
+    name = data_combined_dynamic,
+    command = get_data_subset(data_dummy_merge, region_vec),
+    pattern = map(region_vec)
+  ),
+  # compare results
+  targets::tar_target(
+    name = data_compare,
+    command = waldo::compare(
+      x = data_combined_dynamic,
+      x_arg = "dynamic",
+      y = data_combined_static,
+      y_arg = "static"
+    )
   )
 )
