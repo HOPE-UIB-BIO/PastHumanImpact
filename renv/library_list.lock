@@ -159,7 +159,7 @@
     },
     "REcopol": {
       "Package": "REcopol",
-      "Version": "0.0.1",
+      "Version": "0.0.2",
       "Source": "GitHub",
       "Remotes": "cran/mvpart, HOPE-UIB-BIO/R-Utilpol-package",
       "RemoteType": "github",
@@ -167,15 +167,13 @@
       "RemoteRepo": "R-Ecopol-package",
       "RemoteUsername": "HOPE-UIB-BIO",
       "RemoteRef": "HEAD",
-      "RemoteSha": "10ac65d85c6e296e2027ca9e446002355ed6e073",
+      "RemoteSha": "38310cd77da1629d7ff3fc7fe7eca41578e92234",
       "Requirements": [
-        "RColorBrewer",
         "RUtilpol",
         "ape",
         "assertthat",
         "dplyr",
         "ggplot2",
-        "knitr",
         "lifecycle",
         "magrittr",
         "marginaleffects",
@@ -185,13 +183,14 @@
         "purrr",
         "rlang",
         "scales",
+        "stats",
         "stringr",
         "tibble",
         "tidyr",
-        "usethis",
+        "utils",
         "vegan"
       ],
-      "Hash": "8f032ed62a6474a80b56292a755a3c07"
+      "Hash": "91f7c1bd44fd96339bfe6e561e9101ee"
     },
     "RRatepol": {
       "Package": "RRatepol",
@@ -228,29 +227,36 @@
     },
     "RUtilpol": {
       "Package": "RUtilpol",
-      "Version": "0.0.0.9000",
+      "Version": "0.0.0.9001",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "R-Utilpol-package",
       "RemoteUsername": "HOPE-UIB-BIO",
       "RemoteRef": "HEAD",
-      "RemoteSha": "98882947e03187acca11f0ca689f2b1b632f343f",
+      "RemoteSha": "5153366346ef3779aa7f771585eb515ce27284b8",
       "Requirements": [
         "assertthat",
+        "dplyr",
         "ggpubr",
         "grDevices",
+        "here",
         "knitr",
         "magrittr",
+        "purrr",
         "qs",
+        "raster",
         "readr",
         "rlang",
+        "sf",
+        "sp",
         "stringr",
+        "tibble",
         "usethis",
         "waldo",
         "zip"
       ],
-      "Hash": "d29f9427975c34b79b05a259b31d034d"
+      "Hash": "4a8606da0668388b89636a644111143f"
     },
     "Rcpp": {
       "Package": "Rcpp",
@@ -2609,6 +2615,20 @@
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
+    "raster": {
+      "Package": "raster",
+      "Version": "3.6-23",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "methods",
+        "sp",
+        "terra"
+      ],
+      "Hash": "337d6d70f7d6bf78df236a5a53f09db0"
+    },
     "rcarbon": {
       "Package": "rcarbon",
       "Version": "1.5.0",
@@ -2740,12 +2760,7 @@
     "renv": {
       "Package": "renv",
       "Version": "1.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "utils"
-      ],
-      "Hash": "6523639dd021b32c3199a41cbe6db340"
+      "Source": "Repository"
     },
     "reprex": {
       "Package": "reprex",
