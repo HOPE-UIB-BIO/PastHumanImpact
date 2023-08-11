@@ -6,7 +6,7 @@ get_data_m2 <- function(data_source = data_for_hvar,
   
   # prepare data
   data_for_h2 <- 
-    data_to_run %>% 
+    data_source %>% 
     unnest(data_merge) %>% 
     dplyr::select(all_of(select_vars)) %>%
     left_join(data_meta %>% 
