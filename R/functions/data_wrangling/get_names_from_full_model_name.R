@@ -1,0 +1,40 @@
+get_names_from_full_model_name <- function(data_source) {
+  data_source %>%
+    dplyr:::mutate(
+      name_no_mod = stringr::str_sub(full_name, 5, 1e3),
+      predictor = purrr::map_chr(
+        .x = name_no_mod,
+        .f = ~ dplyr::case_when(
+          stringr::str_detect(.x, "temp_annual") ~ "temp_annual",
+          stringr::str_detect(.x, "temp_cold") ~ "temp_cold",
+          stringr::str_detect(.x, "prec_annual") ~ "prec_annual",
+          stringr::str_detect(.x, "prec_summer") ~ "prec_summer",
+          stringr::str_detect(.x, "prec_win") ~ "prec_win",
+          stringr::str_detect(.x, "spd") ~ "spd",
+          TRUE ~ NA_character_
+        )
+      ),
+      region_raw = purrr::map_chr(
+        .x = name_no_mod,
+        .f = ~ dplyr::case_when(
+          stringr::str_detect(.x, "Africa") ~ "Africa",
+          stringr::str_detect(.x, "Asia") ~ "Asia",
+          stringr::str_detect(.x, "Europe") ~ "Europe",
+          stringr::str_detect(.x, "North.America") ~ "North.America",
+          stringr::str_detect(.x, "Latin.America") ~ "Latin.America",
+          TRUE ~ NA_character_
+        )
+      ),
+      region = stringr::str_replace(region_raw, "\\.", " "),
+      group = stringr::str_replace(
+        name_no_mod,
+        pattern = paste0(
+          paste(predictor, region_raw, sep = "_"),
+          "_"
+        ),
+        replacement = ""
+      )
+    ) %>%
+    dplyr::select(-c(name_no_mod, region_raw)) %>%
+    return()
+}
