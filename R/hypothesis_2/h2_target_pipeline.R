@@ -105,9 +105,6 @@ data_valid_ecozones <-
     n_datasets = n_distinct(dataset_id)
   ) %>%
   dplyr::filter(n_datasets > 5) %>%
-  # //TODO remove this for full analysis. This is only temporary
-  #   to make workable results
-  dplyr::filter(n_datasets < 50) %>%
   dplyr::arrange(n_datasets)
 
 data_dummy_ecozone_predictor <-
