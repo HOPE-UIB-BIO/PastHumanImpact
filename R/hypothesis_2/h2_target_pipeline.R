@@ -207,5 +207,9 @@ list(
       data_source_list = mod_list,
       dummy_table = data_dummy_time
     )
+  ),
+  targets::tar_target(
+    name = mod_predicted_with_names,
+    command = get_names_from_full_model_name(mod_predicted)
   )
 )
