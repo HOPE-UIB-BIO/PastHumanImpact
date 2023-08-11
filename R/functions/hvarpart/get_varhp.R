@@ -1,8 +1,12 @@
 #' @title Hierarchial variation partitioning
 #' @description Function to select response and predictor variables and run
-#' hierarchical variation partitioning and permutation
+#' hierarchical variation partitioning and permutation.
+#' There is an oprion to use already calculated distance matrix by selecting
+#' `reponse_vars` == NULL, and `responce_dist` == [name of a column]
 #' @param data_source full dataset with response and predictor variables
 #' @param reponse_vars vector of names of response variables
+#' @param responce_dist
+#' A name of column with already pre-calcuated distance
 #' @param predictor_vars
 #' vector of names of predictor variables or list with names
 #' @param run_all_predictors logical; if predictor variables should be assessed
@@ -21,6 +25,7 @@ get_varhp <- function(data_source,
                         "roc",
                         "dcca_axis_1"
                       ),
+                      responce_dist = NULL,
                       predictor_vars = list(
                         human = c("spd"),
                         climate = c(
@@ -38,11 +43,24 @@ get_varhp <- function(data_source,
                       ...) {
   tryCatch(
     {
-      # prepare responses
-      data_resp <-
-        data_source %>%
-        dplyr::select(all_of(response_vars)) %>%
-        dplyr::select(tidyselect:::where(~ any(!is.na(.))))
+      if (
+        isTRUE(is.null(responce_dist))
+      ) {
+        # prepare responses
+        data_resp <-
+          data_source %>%
+          dplyr::select(
+            dplyr::all_of(response_vars)
+          ) %>%
+          dplyr::select(
+            tidyselect:::where(~ any(!is.na(.)))
+          )
+
+        responce_dist <-
+          vegan::vegdist(data_resp, method = "gower")
+      } else {
+        responce_dist <- as.dist(responce_dist)
+      }
 
       # prepare predictors
       # if `run_all_predictors` is true then use all variables individually
@@ -92,7 +110,7 @@ get_varhp <- function(data_source,
       # should work for both list and just data.frame
       varhp <-
         rdacca.hp::rdacca.hp(
-          dv = vegan::vegdist(data_resp, method = "gower"),
+          dv = responce_dist,
           iv = data_preds,
           add = TRUE,
           method = "dbRDA",
@@ -138,10 +156,10 @@ get_varhp <- function(data_source,
       # run model to get variation inflation factors of the predictors,
       #   and total unexplained and explained variation
       mod <-
-        vegan::capscale(data_resp ~ as.matrix(as.data.frame(data_preds)),
+        vegan::capscale(responce_dist ~ as.matrix(as.data.frame(data_preds)),
           dist = "gower",
           add = TRUE,
-          data_source = data_resp
+          data_source = data_preds
         )
 
       data_variation <-
