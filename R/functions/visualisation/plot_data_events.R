@@ -4,7 +4,8 @@ plot_data_events <- function(data_source_events,
   if(data_raw == TRUE) {
     data <- data_source_events %>%
       unnest(data_to_fit) %>%
-      inner_join(targets::tar_read(data_meta) %>%
+      inner_join(targets::tar_read(name = "data_meta",
+                                   store = paste0(data_storage_path,"_targets_h1")) %>%
                    dplyr::select(dataset_id, 
                                  long, 
                                  lat, 
@@ -16,7 +17,8 @@ plot_data_events <- function(data_source_events,
     data <- 
       data_source_events %>%
       unnest(data) %>%
-      inner_join(targets::tar_read(data_meta) %>%
+      inner_join(targets::tar_read(name = "data_meta",
+                                   store = paste0(data_storage_path,"_targets_h1"))  %>%
                    dplyr::select(dataset_id, 
                                  long, 
                                  lat, 
