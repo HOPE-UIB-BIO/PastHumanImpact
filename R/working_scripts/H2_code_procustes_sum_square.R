@@ -83,6 +83,11 @@ data_meta <- targets::tar_read(data_meta,
 #
 #######################################################################
 
+# set colours 
+# five main ecozones
+palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
+#human vs climate
+palette_pred <- c("#663333", "#BBBBBB") 
 
 output_hvar_h2 <-
   targets::tar_read(
@@ -98,7 +103,7 @@ output_hvar_h2 <-
 output_hvar_h2$data_merge[[1]]
 
 # 1. prepare output for plotting:
-data_h2_vis <- output_hvar_h2 %>%
+data_h2_summary <- output_hvar_h2 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
   unnest(summary_table) %>%
@@ -112,114 +117,16 @@ data_h2_vis <- output_hvar_h2 %>%
   ungroup()
 
 # filter spatial input data
-select_region <- "Latin America"
 
-data_to_plot <- data_h2_vis %>%
-  pivot_longer(c(Unique_percent,Average.share_percent), 
+
+data_h2_vis <- data_h2_summary %>%
+  pivot_longer(c(Unique_percent, Average.share_percent), 
                names_to = "variance_partition", 
-               values_to = "percentage") %>%
-  filter(region == select_region) 
+               values_to = "percentage")
 
 
+get_regional_combined_fig(select_region = "North America")
+get_regional_combined_fig(select_region = "Latin America")
 
 
-
-
-data_to_plot %>%
-  ggplot() + 
-  #add lines for every 10 percent
-  geom_hline(
-    aes(yintercept = y), 
-    data.frame(y = seq(0, 50, by = 10)),
-    color = "lightgrey"
-  ) +
-  geom_col(data = data_to_plot %>% 
-             dplyr::filter(variance_partition == "Unique_percent"), 
-           aes(x = predictor,
-               y = percentage,
-               fill = group),
-           position_dodge(width = 0.9), alpha = 1) +
-  geom_col(data = data_to_plot %>% 
-             dplyr::filter(variance_partition == "Average.share_percent"),
-           aes(x = predictor,
-               y = percentage,
-               fill = group),
-           position = position_dodge(width = 0.9), alpha = 0.4) +
- # scale_fill_manual(values = fill_eco, 
- #                    drop = FALSE) +
-  geom_segment(
-    aes(x = predictor,
-        y = 0,
-        xend = predictor,
-        yend = 50
-    ),
-    linetype = "dashed",
-    linewidth = 0.3,
-    color = "grey50"
-    
-  ) +
-  scale_y_continuous(
-    limits = c(-10, 50),
-    expand = c(0, 0),
-    breaks = c(0, 10,20, 30, 40, 50)
-  ) +
-  annotate("text",
-           x = rep(seq(1,3, by = 1),4),
-           y = rep(seq(10,40, by = 10),3),
-           label = rep(paste0(seq(10,40, by = 10), " %"),3), 
-           vjust = 0,
-           size = 3) +
-  coord_polar() +
-  theme_minimal()+
-  theme(
-    legend.position = "bottom",
-    panel.grid = element_blank(),
-    panel.grid.major.x = element_blank(),
-    axis.ticks = element_blank(),
-    axis.text.y = element_blank(),
-    axis.text.x = element_text(colour = "grey30", size = 10, family = "sans", vjust = -3),
-    #axis.title.x = element_text(margin = margin(0, 0, -2, 0)),
-    text = element_text(color = "grey30"),
-    plot.title = element_text(family = "sans",size = 12, hjust = 0.5, margin = margin(0,0,0,0)),
-    plot.margin = unit(c(0.3, 0, 0, 0), "cm")
-  ) +
- # scale_x_discrete(label = x_name, 
- #                   drop = FALSE) +
-  labs( 
-    # title = paste0(select_region),
-    x = "", 
-    y = ""
-  ) 
-
-# temporal bar 
-# filter temporal input data
-input_temporal <- 
-  data_temporal %>%
-  filter(region %in% select_region) %>%
-  mutate(predictor =  factor(predictor, 
-                             levels = c("human", "climate"))) 
-
-bars_temporal_fig <- get_temporal_barcharts(input_temporal)
-
-# Regional maps
-map_region <- get_map_region(select_region = select_region)
-
-# Combine figures 
-final <- 
-  ggpubr::ggarrange(
-    ggpubr::ggarrange(
-      circular_bar_fig,
-      ggpubr::ggarrange(map_region, 
-                        NULL, 
-                        ncol = 1,
-                        heights = c(2,1)
-      ), 
-      ncol = 2,
-      widths = c(2,1)),
-    bars_temporal_fig,
-    nrow = 2,
-    heights = c(2,1)
-  )
-
-final
 
