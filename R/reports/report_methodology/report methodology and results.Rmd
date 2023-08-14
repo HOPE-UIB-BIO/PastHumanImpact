@@ -1,18 +1,14 @@
 ---
-title: "Updated report HOPE Hypothesis 1 methodology & results"
+title: "Report HOPE methodology & results"
 output:
   html_document:
     toc: true
     toc_float: true
 ---
 
-### Updates
+### Report
 
-The objective of this report is to give an overview of data inputs, data processing steps, data analysis, and results to determine whether human activity has changed the fundamental ecological processes over the last 8500 years (Hypothesis 1 in the HOPE project). 
-
-From the first time the report was sent out, the methodological updates are not extensive, but there are some changes that might affect the overall results. The maximum age limit has been set to 8500 years. All record have been assigned ecozones. The density diversity and turnover variables have been included in the response data, and other pending and technical issues have been fixed. The data and results have been checked, and a new summary of the results is provided in the end. 
-
-This report contain more or less the final results that will form the basis for a proper manuscript draft.
+The objective of this report is to give an overview of data inputs, data processing steps, data analysis, and results to determine whether human activity has changed the fundamental ecological processes over the last 8500 years (Hypothesis 1), and to further assess if interrelationship between fundamental ecosystem properties have significantly changed during this time (Hypothesis 2). 
 
 
 <br>
@@ -24,8 +20,8 @@ This report contain more or less the final results that will form the basis for 
 
 ### FOSSILPOL
 
-The compilation of the main pollen dataset for our analysis is performed a priori.
-Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org). Some additional data are from private owners in areas with data gaps, which we have limited access to use. We do not have the intellectual property rights to make these data public available. Therefore, only the derivatives of the analysis can be publicly shared. Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset.  
+The compilation of a pollen dataset for our analysis is performed a priori.
+Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org). Some additional data are from private owners in areas with data gaps, which we have limited access to use. We do not have the intellectual property rights to make these data public available. Therefore, only the derivatives of the analysis can be publicly shared. Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset. This input data are further filter during the data processing steps in HOPE to get the final collection of a standardized dataset of high data quality we can use further in our data analyses.  
 
 ### Harmonisation tables
 
@@ -34,59 +30,15 @@ An important step in FOSSILPOL to obtain a standardised pollen data set within a
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-library(tidyverse)
-library(usethis)
-library(targets)
+
 library(here)
-library(colorspace)
-library(colorBlindness)
-library(data.tree)
-library(kableExtra)
-library(htmltools)
 
-# list R functions and source them
-lapply(
-  list.files(
-    path = here::here("R/functions"),
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-) %>%
-  invisible()
-
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
   )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
 )
-
-
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
 
 # set colours 
 # five main ecozones
@@ -98,15 +50,17 @@ palette_pred <- c("#663333", "#BBBBBB")
 
 ```{r echo = FALSE}
 
-data_geo_koppen <- get_file_from_path(paste0(data_storage_path, "HOPE_Hypothesis1/Data/ecoregions2017/data_geo_koppen.rds"))
+data_geo_koppen <- get_file_from_path(paste0(data_storage_path, "Data/ecoregions2017/data_geo_koppen.rds"))
 ```
 
 
 ```{r echo = FALSE}
-file_path <- paste0(data_storage_path, "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds")
+file_path <- paste0(data_storage_path, 
+                    "Data/assembly/data_assembly_V2-2022-05-23.rds")
 
 data_settings <- get_file_from_path(file_path) %>% 
   pluck("setting")
+
 ```
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
@@ -161,24 +115,31 @@ overview_table %>%
 
 ## Workflow for HOPE Hypothesis 1
 
-We use the [targets](https://books.ropensci.org/targets/) R-package to generate a reproducible workflow for all data processing, analysis, and visualisation of results in the project. For this purpose, we created a Github repository of the data analysis R-project called [HOPE_hypothesis1 in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1), which contains all the data, metadata, and R functions required to run this R-project.
+We use the [targets](https://books.ropensci.org/targets/) R-package to generate a reproducible workflow for all data processing steps, analysis of hypothesis 1 and 2, and visualisation of results in the project. We have created a Github repository of the data analysis R-project called [HOPE_hypothesis1 in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1), which contains all the data, metadata, and R functions required to run this R-project.
 
-We configured the output of targets to be stored in a shared folder in UiB Onedrive, while the scripts and functions for targets are stored in our Github repository. The targets are divided in many small steps with specialized functions to load necessary data, estimate the different variables or to structure the different subsets of the data. This will avoid the need to rerun major parts between us that take too long and has already been processed. If any changes are made in the functions, targets will automatically detect it and rerun the parts that depends on this change, and skip the up-to-date analysis. 
+We configured the targets folders with data to be saved in a shared folder on Google drive, while all the scripts and functions for running the targets are stored in our Github repository. The targets are divided in small steps with specialized functions to load necessary data, estimate the different variables, or to structure the different subsets of the data. This will avoid the need to rerun major parts between us that take too long and has already been processed. If any changes are made in the functions, targets will automatically detect it and rerun the parts that depends on this change, and skip the up-to-date analysis. 
 
 <br>
 
-The file structure in Github is
+The file structure in Github is set up for the two main hypotheses in HOPE:
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 # create paths
 path <- c(
-  "HOPE_Hypothesis1/",
-  "HOPE_Hypothesis1/___Init_project___.R",
-  "HOPE_Hypothesis1/_targets.R",
-  "HOPE_Hypothesis1/_targets_packages.R",
   "HOPE_Hypothesis1/HOPE_Hypothesis1.Rproj",
+  "HOPE_Hypothesis1/_targets.yaml",
+  "HOPE_Hypothesis1/README.md",
   "HOPE_Hypothesis1/R/",
-  "HOPE_Hypothesis1/renv/",
+  "HOPE_Hypothesis1/R/branching_pipeline/",
+  "HOPE_Hypothesis1/R/general_patterns_of_predictors/",
+  "HOPE_Hypothesis1/R/hypothesis_1/",
+  "HOPE_Hypothesis1/R/hypothesis_2/",
+  "HOPE_Hypothesis1/R/report_methodology",
+  "HOPE_Hypothesis1/R/report_validation/",
+  "HOPE_Hypothesis1/R/reports/",
+  "HOPE_Hypothesis1/R/working_scripts/",
+  "HOPE_Hypothesis1/R/___Init_project___.R",
+  "HOPE_Hypothesis1/R/00_Config_file.R",
   "HOPE_Hypothesis1/R/functions/",
   "HOPE_Hypothesis1/R/functions/climate/",
   "HOPE_Hypothesis1/R/functions/data_wrangling/",
@@ -186,8 +147,11 @@ path <- c(
   "HOPE_Hypothesis1/R/functions/hvarpart/",
   "HOPE_Hypothesis1/R/functions/modelling/",
   "HOPE_Hypothesis1/R/functions/PAPs/",
+  "HOPE_Hypothesis1/R/functions/procrustes/",
   "HOPE_Hypothesis1/R/functions/spd/",
-  "HOPE_Hypothesis1/R/functions/visualisation/"
+  "HOPE_Hypothesis1/R/functions/validation/",
+  "HOPE_Hypothesis1/R/functions/visualisation/",
+  "HOPE_Hypothesis1/renv/"
   )
   
 
@@ -195,24 +159,29 @@ path <- c(
 
 ```
 
-All that is needed when the R-project is set up, is to run the scripts `___init_project.R___` and `_targets.R`. This will install and load all the packages that are needed.
+When the R-project is set up, you need to run the scripts `___init_project.R___` and `00_Config_file.R`. This will install and load the R packages for used in this project, and provide the paths needed.
 <br>
 
 
-The targets are arranged in a order to prepare all the data needed for the main analysis in the end. 
+Two main targets pipelines are created to run hypothesis 1 and hypothesis 2, and output and meta data are saved in two separate targets folders. The pipelines are arranged in a order to prepare the input data needed for the main analysis in the end. The pipeline in hypothesis 1 contain the data processing steps. The final data input in hypothesis 1 is then used in hypothesis 2 pipeline.  
 
-1. The first steps of the workflow imports and load all data needed for the pre-processing data steps and analyses such as the final HOPE dataset compilation and other input tables e.g human event-types for different regions. 
+1. The first steps of the workflow imports and load all data, vectors, and settings needed for the following pre-processing data steps. The first filtering of datasets depend for example on number of sample numbers, number of pollen grains, chronology quality, and duration of sequences. 
 
-2. This is followed by data processing for each of the explanatory and response variables in H1: 
-- a) The largest pre-processing of data starts with preparation of the explanatory variable detecting past human presence and impact. This is a major analyses in itself. 
-- b) This follows by data extraction of palaeo-climate from the CHELSA paleoclimate database. This is modeled palaeo-climate data for each of the geographical location of the pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. 
-- c) It is followed by different targets that process all estimates of the response variables selected to get measures of ecosystem properties. In general, all data such as raw estimates and interpolated data are kept to allow careful checking and validation of output. 
+2. This is followed by data processing for each of the explanatory and response variables for the hypotheses 1 and 2 to be explored:
+- a) Preparation of the variable needed to detect past human presence and impact. This is a major analyses in itself. 
+- b) Data extraction of palaeo-climate from the CHELSA paleoclimate database. This is modeled palaeo-climate data for each of the geographical location of the pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. 
+- c) Different targets that process all the estimates of pollen assemblage properties. 
 
-3. In the end, data is structure to fit the main analysis. This analysis is divided into two parts which we call the 
+3. In the end, we have a standardized and filter dataset to explore the two hypothesis in HOPE:
+
+Hypothesis 1 exists of two analysis called 
 - a) the spatial (within core) analysis, and 
 - b) the temporal analysis (a *spatial* or between core/sample analysis per timestep ca. every 500 years). 
 
+Hypothesis 2 exists on one major analysis.
+
 Several choices are made, which are described in the detail in the text below.
+
 <br>
 
 
@@ -274,7 +243,11 @@ Below is a figure that intends to represent the underlying raw data associated w
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-data_events <- targets::tar_read(data_events_to_fit)
+data_events <-
+  targets::tar_read(
+    name = "data_events_to_fit",
+    store = external_storage_targets
+  )
 
 
 plot_data_events(
