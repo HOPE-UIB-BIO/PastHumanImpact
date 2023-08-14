@@ -287,7 +287,11 @@ Table 3 for human event indicators:
 
 
 ```{r echo = FALSE, warning = FALSE}
-human_indicator_table <- read.csv(paste0(data_storage_path,"Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"), encoding = 'latin1')
+#need to change this/ copy relevant tables into Google drive
+
+data_storage_LADP_human_indicators <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"
+
+human_indicator_table <- read.csv(data_storage_LADP_human_indicators, encoding = 'latin1')
 
 human_indicator_table %>% 
   dplyr::select(pollen.type:Evidence) %>%
@@ -303,8 +307,9 @@ Table 4 for human event indices:
 
 
 ```{r echo = FALSE, warning = FALSE}
+data_storage_LADP_human_impact <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"
 
-human_impact_table <- read.csv(paste0(data_storage_path,"Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"), encoding='latin1')
+human_impact_table <- read.csv(data_storage_LADP_human_impact, encoding='latin1')
 
 human_impact_table %>% 
   dplyr::select(HOPE.USE:REFERENCES, EVIDENCE) %>%
@@ -321,8 +326,6 @@ Two categories were created: i) 'human event indicators': a single taxa associat
 Summary figure of the events using indicator taxa in different ecozones in Latin America:  
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE, fig.align='left'}
-
-data_events <- targets::tar_read(data_events_to_fit)
 
 
 plot_data_events(
@@ -367,29 +370,6 @@ For each distance class of SPD of each pollen record, one Redundancy Analysis (R
 
 This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the records. See demonstration of this method [Detection of past humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).  
 <br>
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-# data_to_spd_plot <- tar_read(data_spd_full) %>%
-#   inner_join(targets::tar_read(data_meta) %>%
-#                            dplyr::select(dataset_id, 
-#                                          region, 
-#                                          ecozone_koppen_5), 
-#                        by = "dataset_id") %>%
-#   dplyr::select(dataset_id, spd, region, ecozone_koppen_5) %>%
-#   unnest(spd) %>%
-#   filter(!is.na(spd))
-
-# data_to_spd_plot %>%
-#   ggplot(aes(x = age, y = spd, col = ecozone_koppen_5)) +
-#   geom_point() +
-#   scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +  
-#   geom_smooth() +
-#   facet_wrap(~region, scales = "free") +
-#   theme_classic() +
-#   theme(legend.position = "bottom") 
-
-```
-
 <br>
 
 ### Paleo Climate
