@@ -793,6 +793,35 @@ Figure 5: The summary results for Oceania.
 <br>
 <br>
 
+Explorative figures of temporal changes in procrustes sum-of-square (m2):
+
+<br>
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+
+data_m2 <-  targets::tar_read(
+    name = "data_m2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+
+data_m2 %>%
+  dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
+  unnest(cols = c(m2_time_df)) %>%
+  ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15 )) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_reverse() +
+  coord_flip() +
+  facet_wrap(~region)
+
+```
+
+<br>
+<br>
+
 The summary for individual records in the spatial analysis (within each record):  
 
 ```{r echo = FALSE, warning = FALSE}
