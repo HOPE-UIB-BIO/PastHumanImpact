@@ -22,6 +22,7 @@ get_names_from_full_model_name <- function(data_source) {
           stringr::str_detect(.x, "Europe") ~ "Europe",
           stringr::str_detect(.x, "North.America") ~ "North.America",
           stringr::str_detect(.x, "Latin.America") ~ "Latin.America",
+          stringr::str_detect(.x, "Oceania") ~ "Oceania",
           TRUE ~ NA_character_
         )
       ),
