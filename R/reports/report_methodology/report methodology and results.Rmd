@@ -2,8 +2,10 @@
 title: "Report HOPE methodology & results"
 output:
   html_document:
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
+  word_document:
+    toc: yes
 ---
 
 ### Report
@@ -30,15 +32,58 @@ An important step in FOSSILPOL to obtain a standardised pollen data set within a
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-
+library(tidyverse)
+library(usethis)
+library(targets)
 library(here)
+library(colorspace)
+library(colorBlindness)
+library(data.tree)
+library(kableExtra)
+library(htmltools)
 
-# Load configuration
-source(
-  here::here(
-    "R/00_Config_file.R"
+
+#----------------------------------------------------------#
+#  Load functions -----
+#----------------------------------------------------------#
+
+# list R functions and source them
+lapply(
+  list.files(
+    path = here::here("R/functions"), #have to use here::here(); does not work without it
+    pattern = "*.R",
+    recursive = TRUE,
+    full.names = TRUE
+  ),
+  source
+) %>%
+  invisible()
+
+
+#----------------------------------------------------------#
+#  Authorise the user -----
+#----------------------------------------------------------#
+
+# Define directory for external storage for users
+auth_tibble <-
+  tibble::tribble(
+    ~name, ~path,
+    "ondrej", "C:/Users/ondre/My Drive/",
+    "vfe032", "G:/My Drive/"
   )
-)
+
+data_storage_path <-
+  auth_tibble %>%
+  dplyr::filter(name == Sys.info()["user"]) %>%
+  purrr::pluck("path")
+
+
+external_storage_targets <-
+  paste0(
+    data_storage_path,
+    "_targets_h1"
+  )
+
 
 # set colours 
 # five main ecozones
