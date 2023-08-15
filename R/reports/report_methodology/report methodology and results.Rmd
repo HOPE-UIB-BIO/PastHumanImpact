@@ -835,87 +835,14 @@ For the analysis within ecozones in regions, we extract the significant partitio
 
 ## Results
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-library(tidyverse)
-library(usethis)
-library(targets)
-library(here)
-library(colorspace)
-library(colorBlindness)
-library(data.tree)
-library(kableExtra)
-library(htmltools)
-
-# list R functions and source them
-lapply(
-  list.files(
-    path = here::here("R/functions"),
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-) %>%
-  invisible()
-
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
-  )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
-)
-
-
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
-
-# set colours 
-#colours <- protan(rainbow_hcl(5, start = 30, end = 300))
-#scale_fill_manual(values=colours) 
-
-#scale_fill_hue(c = 50, l = 70, h=c(30, 300)) # light
-#scale_fill_hue(c = 50, l = 50, h=c(30, 200)) # dark
-
-```
-
-
-
 ```{r echo = FALSE}
-#load saved data
-results_hvar_temporal <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_temporal.rds")
-results_hvar_spatial <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_spatial.rds")
 
 # filter subset Europe and relevant time period
-subset_europe <- results_hvar_spatial %>%
-  inner_join(tar_read(data_meta) %>% 
+subset_europe <- output_spatial_h1 %>%
+  inner_join(data_meta %>% 
                dplyr::select(dataset_id, ecozone_koppen_5, region), 
              by = "dataset_id") %>%
-  dplyr::filter(region == "Europe") %>%
-  unnest(data_merge) %>%
-  filter(age >= 2000 & age <= 8500) %>%
-  nest(data_merge = c(age:spd))
+  dplyr::filter(region == "Europe") 
 
 
 ```
@@ -1321,11 +1248,11 @@ For the summary of the individual records, past humans (spd) is important explai
 
 When analysing the data on larger spatial scale as records nested within the ecozones, the results show that past humans have affected the fundamental ecosystem properties in the Cold and Polar ecozones. Changes in the Polar region is more complex, and time dependent factors are also important in the partitioning, whereas in the Temperate and Arid ecozones, time is the most important variable for the variation of the data.  
 
-When putting all the records together, it becomes visible that overall differences in composition of ecosystem properties in Europe are better explained by past humans compared to time in Europe. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
+When putting all the records together, it is still possible to distinguish differences in composition of ecosystem properties in Europe explained by past humans. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
 
-This is interesting, because local changes explained by humans in smaller percent of the records, have had an effect on ecosystem properties that overrides the variation in ecosystem properties explained by time.
+This is interesting, because changes explained by humans in smaller percent of the records (local), have had an effect on ecosystem properties that seems to be possible to be scaled up to a larger scale.
 
-Though past humans seems to have effected the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. The results does not indicate that we will find that they statistically significantly alter fundamental ecosystem properties of the past, but past human activity did have an impact. 
+Though past humans have an observed impact on the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. Hence the results indicate that past human have not statistically significantly alter the fundamental ecosystem properties of the past. 
 
 
 Summary:
