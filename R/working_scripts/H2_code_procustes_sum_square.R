@@ -85,7 +85,14 @@ data_meta <- targets::tar_read(data_meta,
 
 # set colours 
 # five main ecozones
-palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
+
+order_ecozones <- c("Polar_Frost", "Polar_Tundra" ,"Cold_Without_dry_season" ,"Cold_Dry_Summer" , "Cold_Dry_Winter","Temperate_Without_dry_season", "Temperate_Dry_Summer", "Temperate_Dry_Winter" ,  "Arid_Desert" ,"Arid_Steppe" ,      "Tropical_Rainforest" ,"Tropical_Monsoon", "Tropical_Savannah")  
+
+palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
+                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                 "#920000","#924900","#999933","#ffff6d")
+
+#palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
 #human vs climate
 palette_pred <- c("#663333", "#BBBBBB") 
 
