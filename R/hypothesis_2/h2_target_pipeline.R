@@ -134,12 +134,31 @@ data_dummy_ecozone_predictor <-
   dplyr::mutate(
     region_zone = paste(region, ecozone_koppen_15, sep = "_"),
     full_name = paste(predictor, region_zone, sep = "_"),
+    data_name = paste0("data_to_fit_mod_", full_name)
   )
 
 
 #----------------------------------------------------------#
 # 3. Prepare target factory for hGAM fitting -----
 #----------------------------------------------------------#
+
+tar_mapped_data <-
+  tarchetypes::tar_map(
+    unlist = FALSE,
+    values = data_dummy_ecozone_predictor,
+    names = full_name,
+    targets::tar_target(
+      name = data_to_fit_mod,
+      command = get_data_for_indiv_hgams(
+        data_raw = data_merge_unnest,
+        data_error = data_pred_errors,
+        sel_region = region,
+        sel_group = ecozone_koppen_15,
+        y_var = predictor,
+        sel_k = max_temporal_k
+      ),
+    )
+  )
 
 tar_mapped_models <-
   tarchetypes::tar_map(
@@ -148,13 +167,8 @@ tar_mapped_models <-
     names = full_name,
     targets::tar_target(
       name = mod,
-      command = fit_hgam_per_region_and_group(
-        data_raw = data_merge_unnest,
-        data_error = data_pred_errors,
-        sel_region = region,
-        sel_group = ecozone_koppen_15,
-        y_var = predictor,
-        sel_k = max_temporal_k,
+      command = fit_hgam(
+        data_list = data_name,
         use_parallel = TRUE,
         verbose = TRUE
       ),
@@ -185,8 +199,9 @@ list(
           2
         ),
         rep(
-          "mgcv::tw(link = 'log')", 4
-        )
+          "mgcv::tw(link = 'log')", 3
+        ),
+        "mgcv::Tweedie(p = 1.1, link = 'log')"
       )
     )
   ),
@@ -216,6 +231,8 @@ list(
       select_vars = vec_responses
     )
   ),
+  # prepare data for hGAM
+  tar_mapped_data,
   # fit hGAMs
   tar_mapped_models,
   # combine models
