@@ -185,8 +185,9 @@ list(
           2
         ),
         rep(
-          "mgcv::tw(link = 'log')", 4
-        )
+          "mgcv::tw(link = 'log')", 3
+        ),
+        "mgcv::Tweedie(p = 1.1, link = 'log')"
       )
     )
   ),
