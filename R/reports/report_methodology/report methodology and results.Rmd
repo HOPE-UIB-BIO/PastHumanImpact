@@ -41,6 +41,8 @@ library(colorBlindness)
 library(data.tree)
 library(kableExtra)
 library(htmltools)
+library(flextable)
+library(webshot)
 
 
 #----------------------------------------------------------#
@@ -86,8 +88,13 @@ external_storage_targets <-
 
 
 # set colours 
-# five main ecozones
-palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
+# 13 colours for ecozones
+
+palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
+                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                 "#920000","#924900","#999933","#ffff6d")
+
+#palette_eco <- c("#88CCEE", "#332288", "#117733", "#DDCC77", "#CC6677", "#44AA99", "#999933") 
 #human vs climate
 palette_pred <- c("#663333", "#BBBBBB") 
 
@@ -158,7 +165,7 @@ overview_table %>%
 <br>
 <br>
 
-## Workflow for HOPE Hypothesis 1
+## Workflow for HOPE Hypothesis
 
 We use the [targets](https://books.ropensci.org/targets/) R-package to generate a reproducible workflow for all data processing steps, analysis of hypothesis 1 and 2, and visualisation of results in the project. We have created a Github repository of the data analysis R-project called [HOPE_hypothesis1 in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1), which contains all the data, metadata, and R functions required to run this R-project.
 
@@ -810,11 +817,12 @@ data_m2 <-  targets::tar_read(
 data_m2 %>%
   dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
   unnest(cols = c(m2_time_df)) %>%
-  ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15 )) +
+  ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15)) +
   geom_point() +
   geom_smooth() +
   scale_x_reverse() +
   coord_flip() +
+  scale_fill_manual(values = palette_eco, drop = FALSE) +
   facet_wrap(~region)
 
 ```
