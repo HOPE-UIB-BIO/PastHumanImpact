@@ -185,9 +185,8 @@ list(
           2
         ),
         rep(
-          "stats::Gamma(link = 'log')", 3
-        ),
-        "mgcv::tw(link = 'log')"
+          "mgcv::tw(link = 'log')", 4
+        )
       )
     )
   ),
