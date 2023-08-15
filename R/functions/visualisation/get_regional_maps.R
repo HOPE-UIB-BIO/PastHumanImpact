@@ -6,12 +6,12 @@ get_map_region <- function(rasterdata = data_geo_koppen,
   
   
   # order ecozone to get the same colours for the different regions
-  order_ecozones <- c("Polar", "Cold", "Temperate", "Arid", "Tropical")
+  order_ecozones <- c("Polar_Frost", "Polar_Tundra" ,"Cold_Without_dry_season" ,"Cold_Dry_Summer" , "Cold_Dry_Winter","Temperate_Without_dry_season", "Temperate_Dry_Summer", "Temperate_Dry_Winter" ,  "Arid_Desert" ,"Arid_Steppe" ,      "Tropical_Rainforest" ,"Tropical_Monsoon", "Tropical_Savannah")  
   
   # data for ecozones; order ecozones
   data_geo_koppen <- 
     data_geo_koppen %>%
-    mutate(ecozone_koppen_5 = factor(ecozone_koppen_5, 
+    mutate(ecozone_koppen_15 = factor(ecozone_koppen_15, 
                                      levels = order_ecozones))
   
   #regional limits
@@ -31,7 +31,7 @@ get_map_region <- function(rasterdata = data_geo_koppen,
     ggplot() +
     geom_raster(aes(x = x,
                     y = y,
-                    fill = ecozone_koppen_5)) +
+                    fill = ecozone_koppen_15)) +
     scale_fill_manual(values = palette_eco, drop = FALSE) +
     coord_sf(expand = TRUE,
              ylim = c(boundary$ymin[1], boundary$ymax[1]),
