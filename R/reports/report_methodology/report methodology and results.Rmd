@@ -352,8 +352,8 @@ SPD is estimated using `spd` function from `rcarbon` package for each distance c
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
 age_cutoff_rc <- data.frame(
-    region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
-    age_from = c(2000, 2000, 2000, 2000, 500, 500)
+    region = c("Europe", "Latin America", "Asia",  "North America", "Oceania"),
+    age_from = c(2000, 2000, 2000,  500, 500)
   )
 
 age_cutoff_rc %>%
@@ -369,6 +369,9 @@ In order to select distance from each pollen record, which will limit the area o
 For each distance class of SPD of each pollen record, one Redundancy Analysis (RDA) is estimated using `vegan::rda` function with event types as responses (binary) and SPD values as predictors. Next, R2 is estimated using `vegan::RsquareAdj` function for each distance class. Finally, the distance class with the highest R2 is selected as the representation of human presence, and indirectly human activity, for that pollen record.
 
 This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the records. See demonstration of this method [Detection of past humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).  
+
+We had to remove Africa as a region, because we do not have data of human events to estimate *past human presence*.
+
 <br>
 <br>
 
@@ -424,37 +427,44 @@ The significant change points of the richness, diversity, and evenness variables
 Conceptual figure to show the process:  
 
 ![](figures/PAP_estimation.png)  
+#### Equal spacing of variables
+
+All response variables have been estimated using the harmonised pollen records for each location. To obtain estimates of equal spacing of 500 years, we used linear interpolation. In the context of the temporal analysis of hypothesis 1 and hypothesis 2 we analyse samples distributed in space across time, and equal time steps are necessary.
+
+In order to choose a method of interpolation to obtain data on equal time steps, we compared generalise additive models (GAM), hierarchical generalised additive models (HGAM), and simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM or HGAM. The GAM or HGAM models sometime showed unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single models for each of the variable in all of the records (>1000), we choose the simplest linear interpolation method. Similar issues were detected when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). As some of the models did not converge and showed inconsistent patterns we use the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
 
 <br>
 <br>
 
-### Hierarchical variation partitioning
+### Numerical analysis of hypothesis 1 
 
-All response variables have been estimated using the harmonised pollen records for each location. To obtain estimates of equal spacing of 500 years, we used linear interpolation. In the context of the temporal analysis, where we analyse samples distributed in space across time, and equal time steps are necessary.
+#### Hierarchical variation partitioning
 
-In order to choose a method of interpolation to obtain data on equal time steps, we compared the results of GAM to simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM. The GAM model was able to show unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single GAM models for each of the variable in all of the records, we choose the simplest interpolation method. Similar issues were found when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). Some of the models did not converge and showed inconsistent results. As we cannot individually adjust all the models, we used the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
 
-Before the analysis We remove Africa as a region, because we do not have data of *past human presence*.
+To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of  different units. 
 
-To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of numerical variables in different units. 
-
-Depending on the type of analysis, the explanatory variables are either SPDs, time, and/or palaeoclimatic variables (see below). 
+Depending on the type of spatial or temporal analysis for hypothesis 1, the explanatory variables are either past human impact (SPDs), palaeoclimatic variables, and/or time (see below). 
 
 SPD is the variable of main interest as it represent past human presence. The palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures, and winter temperatures. These are selected as we considered them most relevant to represent major differences in climatic conditions in all the regions (in respect to differences in warm, cold, dry, wet, or regions with high seasonality). Time is represented by the ages of each pollen record, however, this is more difficult to interpret. We assume age may represent time dependent changes such as natural successions and/or ecological changes due to interaction between taxa.
 
 In the hierarchichal variation partitioning analysis, the predictor variables can be applied either as individual predictors or as groups of predictors. In our case, we run the analysis with *groups of predictors*. This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors. (The overall results is not very different from using individual predictors). 
 
-Statistical testing can be applied in two ways, both which shuffle the predictor variables. Using `time_series` set as TRUE, statistical testing is performed with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX) which has a cyclic behavior of samples to keep the stratigraphical order intact. If `time_series` is set as FALSE, the predictor variables will be randomly shuffled as many times set in the parameter `permutations` (hence it use the default permutation in the `rdcca.hp` package).
+Statistical testing can be applied in two ways, both which shuffle the predictor variables. Using `time_series` set as TRUE, statistical testing is performed with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX) which has a cyclic behavior of samples to keep the stratigraphical order intact. If `time_series` is set as FALSE, the predictor variables will be randomly shuffled as many times set in the parameter `permutations` (= the default permutation in the `rdcca.hp` package).
 
 The analysis is run in two different ways: 
 
 1) to analyse *spatial changes* which run the hierarchical variation partitioning within single record. 
-2) to analyse the *temporal patterns* in space for each of the 500 year time steps.
+2) to analyse the *temporal patterns* in space for each region of the 500 year time steps.
 
-In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analaysus will return NA for these specific time bins.
+In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analysis will return NA for these specific time bins.
 
 We use the adjusted R2 to assess the goodness of fit of models. Adjusted R2 is the modified version of R2 that correct for number of samples and predictors in the model. It is calculated using the Ezekiel formula adjR2 = 1 - (1-R2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan these are so called semipartial R2 (Legendre et al. 2011). Adjusted R2 can be negative,in case the adjR2 for predictors are negative we replace the values with 0 as these can be ignore. 
 
+### Numerical analysis of hypothesis 2
+
+To test if the interrelationship between the pollen assemblage properties have changed through time, we performed a principal component analysis (PCA) with scaling between variables for samples within each time step in different ecozones. We use the global Koppen-Geiger Ecozones division of 15 groups. Within each ecozone we perform procrustes analysis to compare the changes in PCA between all time steps. We create a distance matrix based on the sum-of-squares with symmetric scaling (m2). The focus is on scores from the pollen assemblage properties (= species scores). The m2 will represent a matrix of dissimilarity distances between the different time steps which we use further as response matrix in the hierarchical variation partitioning. 
+
+Hierarchical generalised additive models (HGAM) are used to create the general patterns of past human presence (SPDs) and palaeoclimate based on the individual sequences we have from the different ecozones. The predictions represent the general pattern of these variables in each ecozone which we then use further as explanatory variables in the hierachical variation partitioning to assess how much past humans, climate or time dependent processes explains the variation of changes among the correlations between ecosystem properties in the past (hence pollen assemblage properties). 
 
 <br>
 <br>
@@ -464,12 +474,13 @@ We use the adjusted R2 to assess the goodness of fit of models. Adjusted R2 is t
 
 In total, we have 1263 pollen records in the HOPE standardised dataset distributed across the different regions of North America, Europe, Asia, Latin America, and Oceania included in the analysis.
 
-Inspection of the models show there are models with a very poor fit (= 13 models/records) with negative total adjR2. These models are removed. There are still some models that have an adjR2 close to zero, which may give very high unique percentages above 100 (range of adjR2 is 0.005 to 1). To remove the uncertain data points, we defined a minimum threshold of the adjR2 using the lower 5 % quantile of all adjR2. This removes models with an adjR2 < 0.121 from the summary (= 63 models/records). This leaves us with 1184 models (locations) that are considered good enough to be included in the the overall summary. 
+Inspection of the models from spatial models of hypothesis 1 show there are models with a very poor fit with negative total adjR2 (= 13 models). These models are removed. There are still some models that have an adjR2 close to zero, which may give very high unique percentages above 100 (range of adjR2 is 0.005 to 1). To remove the uncertain data points, we defined a minimum threshold of the adjR2 using the lower 5 % quantile of all adjR2. This removes models with an adjR2 < 0.121 from the summary (= 63 models). This leaves us with 1184 models that are considered good enough to be included in the the overall summary. 
 
 The unique and average shared variances are recalculated as percentages of the total, and we summarise the results using the median unique and average shared percentages for the predictors in each ecozone in each region. If an ecozone have less than 5 records, it is not included in the summary. 
 
 The temporal analysis is conducted on the regional level, showing the unique and average shared percentages for the predictors of total variance over each 500 years time steps up to 8500 years.
 
+In the hypothesis 2 we have one model per ecozone, therefore we use directly the unique and avereage shared percentages of the total. 
 
 <br>
 <br>
@@ -477,15 +488,34 @@ The temporal analysis is conducted on the regional level, showing the unique and
 
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 
-# Import results
-output_temporal <- tar_read(output_hvar_temporal)
-output_spatial <- tar_read(output_hvar_spatial)
+# import results h1
+output_temporal_h1 <- targets::tar_read(
+  name ="output_hvar_temporal",
+  store = paste0(data_storage_path, "_targets_h1")
+  )
+output_spatial_h1 <- targets::tar_read(
+  name ="output_hvar_spatial",
+  store = paste0(data_storage_path, "_targets_h1"))
+  
+# import results h2
+output_hvar_h2 <-
+  targets::tar_read(
+    name = "output_hvar_h2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+# import meta data
+data_meta <- targets::tar_read(
+  name = "data_meta",
+  store = paste0(data_storage_path, "_targets_h1")
+)
 
-
-# Prepare  resulting tables 
+# Prepare output tables for visualisation and summary 
 # spatial
-data_spatial_vis <- output_spatial %>% 
-  left_join(tar_read(data_meta), 
+data_spatial_vis <- output_spatial_h1 %>% 
+  left_join(data_meta, 
             by = "dataset_id") %>%
   dplyr::select(dataset_id, 
                 lat, 
@@ -524,7 +554,7 @@ data_spatial_vis <- output_spatial %>%
                 n_records)
 
 # temporal
-data_temporal_vis <- output_temporal %>%
+data_temporal_vis <- output_temporal_h1 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
   unnest(summary_table) %>%
@@ -569,6 +599,19 @@ data_spatial_vis <- data_spatial_vis %>%
 lower_5_percent <- data_spatial_vis$total_variance %>% 
   quantile(., probs = 0.050, na.rm = TRUE) 
 
+# h2 output
+data_h2_summary <- output_hvar_h2 %>%
+  dplyr::mutate(summary_table = 
+                  purrr::map(varhp, pluck("summary_table"))) %>%
+  unnest(summary_table) %>%
+  dplyr::mutate(total_variance =
+                  purrr::map_dbl(varhp, .f = . %>% pluck("varhp_output") %>% 
+                                   pluck("Total_explained_variation"))) %>%
+  mutate(across(Unique:`I.perc(%)`, ~replace(., .x < 0, 0))) %>% # negative variances can be ignored 
+  mutate(Unique_percent = Unique/total_variance *100,
+         Average.share_percent = Average.share/total_variance *100) %>%
+  dplyr::select(-c(data_merge, varhp)) %>%
+  ungroup()
 
 
 ```
@@ -638,11 +681,15 @@ summary_temporal_median <-
             by = c("age", "region")) %>%
   ungroup()
 
-
+# filter spatial input data
+data_h2_vis <- data_h2_summary %>%
+  pivot_longer(c(Unique_percent, Average.share_percent), 
+               names_to = "variance_partition", 
+               values_to = "percentage")
 
 ```
 
-Figure 1-5 provide the regional summary of the results in the order North America, Europe, Asia (northern hemisphere), Latin America, and Oceania (southern hemisphere). The colors of the circular bar chart correspond to the ecozones displayed on the regional map. The clear (darker) color represent the unique median percentage, and the shaded (lighter) color represent the average shared variability between the predictors.Together, each bar represent the median percentage individual contribution for each ecozone. When the shaded color is large(r) than the clear color it indicate that most of the variability explained by this predictor is shared among all the predictors. The second figure show the unique and average shared contribution for humans and climate over the time steps in each region. If there is no shaded color it means the average shared contribution is low. Ecozones with less than 5 samples are not included as the summary statistics results will be based on very local signals (only 2-4 models/records).   
+Figure 1-5 provide the regional summary of the results in the order North America, Europe, Asia (northern hemisphere), Latin America, and Oceania (southern hemisphere). The colors of the circular bar chart correspond to the ecozones displayed on the regional map (for h1 at the moment). The clear (darker) color represent the unique median percentage, and the shaded (lighter) color represent the average shared variability between the predictors.Together, each bar represent the median percentage individual contribution for each ecozone. When the shaded color is large(r) than the clear color it indicate that most of the variability explained by this predictor is shared among all the predictors. The second figure show the unique and average shared contribution for humans and climate over the time steps in each region. If there is no shaded color it means the average shared contribution is low. Ecozones with less than 5 samples are not included as the summary statistics results will be based on very local signals (only 2-4 models/records).   
 
 <br>
 <br>
