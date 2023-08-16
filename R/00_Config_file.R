@@ -127,7 +127,8 @@ auth_tibble <-
   tibble::tribble(
     ~name, ~path,
     "ondrej", "C:/Users/ondre/My Drive/",
-    "vfe032", "G:/My Drive/"
+    "vfe032", "G:/My Drive/",
+    "kbh022", "G:/My Drive/"
   )
 
 data_storage_path <-
