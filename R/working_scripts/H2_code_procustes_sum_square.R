@@ -1,17 +1,18 @@
 # test hypothesis 2 interrelationship in time
 
 
-# data_to_run <- targets::tar_read(data_hvar_filtered,
-#                                  store = paste0(
-#                                    data_storage_path,
-#                                    "_targets_h1"
-#                                  ))
+data_to_run <- targets::tar_read(data_hvar_filtered,
+                                 store = paste0(
+                                   data_storage_path,
+                                   "_targets_h1"
+                                 ))
 data_meta <- targets::tar_read(data_meta,
                                store = paste0(
                                  data_storage_path,
                                  "_targets_h1"
                                ))
-# 
+
+
 # 
 # select_vars <- c("dataset_id","age", "n0", "n1", "n2", "n1_minus_n2", "n2_divided_by_n1" , "n1_divided_by_n0",  "dcca_axis_1", "roc", "density_turnover",  "density_diversity")
 # 
@@ -132,7 +133,7 @@ data_h2_vis <- data_h2_summary %>%
                values_to = "percentage")
 
 
-get_regional_combined_fig(select_region = "North America")
+get_regional_combined_fig(select_region = "Europe")
 get_regional_combined_fig(select_region = "Latin America")
 
 

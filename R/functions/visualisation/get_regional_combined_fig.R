@@ -4,8 +4,10 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
                                       data_temporal_h1 = summary_temporal_median,
                                       data_hvar_h2 = data_h2_vis,
                                       select_region = "Europe",
-                                      order_predictors_spatial = c("human", "climate", "time"),
-                                      order_ecozones = c("Polar", "Cold", "Temperate", "Arid", "Tropical"),
+                                      order_predictors_spatial = c("human", 
+                                                                   "climate", 
+                                                                   "time"),
+                                      palette_ecozones = palette_ecozones,
                                       x_label = c("Human", "Climate", "Time")
                                       ) {
   
@@ -17,8 +19,6 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
   input_spatial <- data_spatial_h1 %>% 
     mutate(predictor = factor(predictor, 
                               levels = order_predictors_spatial)) %>%
-    mutate(ecozone_koppen_5 = factor(ecozone_koppen_5, 
-                                     levels = order_ecozones)) %>%
     dplyr::filter(region %in% select_region) %>%
     filter(n_records > 5)
   
@@ -41,7 +41,8 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
     data_temporal_h1 %>%
     filter(region %in% select_region) %>%
     mutate(predictor =  factor(predictor, 
-                               levels = c("human", "climate"))) 
+                               levels = c("human", 
+                                          "climate"))) 
   
   bars_temporal_h1 <- get_temporal_barcharts(input_temporal)
   
