@@ -4,7 +4,7 @@ get_circular_barchart <- function(data,
                                   y_var = "percentage", 
                                   x_var = "predictor",
                                   fill_var = "ecozone_koppen_15",
-                                  col_vec = palette_eco,
+                                  col_vec = palette_ecozones,
                                   x_name = x_label,
                                   title = "h1") {
   
