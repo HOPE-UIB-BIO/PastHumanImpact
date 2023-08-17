@@ -89,13 +89,23 @@ external_storage_targets <-
 # set colours 
 # 13 colours for ecozones
 
-palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
-                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
-                 "#920000","#924900","#999933","#ffff6d")
+palette_ecozones <- c(Polar_Frost = "#004949",
+                      Polar_Tundra = "#009292",
+                      Cold_Without_dry_season = "#006ddb", 
+                      Cold_Dry_Summer = "#6db6ff",
+                      Cold_Dry_Winter = "#b6dbff",
+                      Temperate_Without_dry_season = "#117733",
+                      Temperate_Dry_Summer = "#999933" ,
+                      Temperate_Dry_Winter =  "#DDCC77",
+                      Arid_Desert = "#924900",
+                      Arid_Steppe = "#ffff6d",
+                      Tropical_Rainforest =  "#920000",
+                      Tropical_Monsoon = "#490092",
+                      Tropical_Savannah = "#b66dff")
 
-#palette_eco <- c("#88CCEE", "#332288", "#117733", "#DDCC77", "#CC6677", "#44AA99", "#999933") 
 #human vs climate
-palette_pred <- c("#663333", "#BBBBBB") 
+palette_pred <- c(human = "#663333", 
+                  climate = "#BBBBBB") 
 
 ```
 
