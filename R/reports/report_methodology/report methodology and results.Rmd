@@ -859,12 +859,16 @@ data_m2 <-  targets::tar_read(
 data_m2 %>%
   dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
   unnest(cols = c(m2_time_df)) %>%
-  ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15)) +
+  ggplot(aes(x = as.numeric(time), 
+             y = delta_m2, 
+             col = ecozone_koppen_15, 
+             fill = ecozone_koppen_15)) +
   geom_point() +
   geom_smooth() +
   scale_x_reverse() +
   coord_flip() +
-  scale_fill_manual(values = palette_eco, drop = FALSE) +
+  scale_color_manual(values = palette_ecozones, drop = FALSE) +
+  scale_fill_manual(values = palette_ecozones, drop = FALSE) +
   facet_wrap(~region)
 
 ```
@@ -1139,6 +1143,7 @@ The results of the MRT are summaried in one figure and two tables below. Overall
 summary_mrt_table %>% 
  # filter(spd_var == TRUE) %>%
   ggplot(aes(x = tot_divisions, fill = ecozone_koppen_15)) +
+  scale_fill_manual(values = palette_ecozones) +
   geom_bar() +
   theme_bw()
 
@@ -1281,41 +1286,13 @@ subset_europe3 <- subset_europe3 %>%
 ```
 
 
-Figures 4-7 display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
+Below figures display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
 
 
 ```{r PCOA diagram ecozones}
-subset_europe3$pcoa_fig[[1]]
+subset_europe3$pcoa_fig
 
 ```
-
-
-Figure 4. PCOA diagram for records in the Cold ecozone with significant MRT division display by the colours and ellipses. The MRT show the data is partition into 2 major groups, where humans (spd) is the most important predictor for this division (spd>= 0.2645 and spd < 0.2645).
-
-
-```{r }
-subset_europe3$pcoa_fig[[2]]
-
-```
-
-
-Figure 5. PCOA diagram for records in the Temperate ecozone with significant MRT division display by the colours and ellipses. The MRT shows 2 major partitions determined by age (age >= 5250 and age < 5250).
-
-
-```{r }
-
-subset_europe3$pcoa_fig[[3]]
-
-```
-
-Figure 6. PCOA diagram for records in the Polar ecozone with significant MRT division display by the colours and ellipses. The MRT indicates 4 significant partitions. The first is determined by spd >= 0.228 and spd < 0.228, second one is determined by spd< 0.07 & spd >0.07, the final split is determined by age < 7750 and >= 7750. 
-
-```{r }
-subset_europe3$pcoa_fig[[4]]
-
-```
-
-Figure 7. PCOA diagram for records in the Arid ecozone with significant MRT division display by the colours and ellipses. 
 
 
 The following list show the results of the envfit with the PCOA model and age and time. 
@@ -1351,7 +1328,7 @@ full_dataset_europe$pcoa_fig[[1]]
 
 ```
 
-Figure 8. PCOA ordination diagram with all records and samples within Europe.
+
 
 
 The results of the envfit of the PCOA model with time and humans.
