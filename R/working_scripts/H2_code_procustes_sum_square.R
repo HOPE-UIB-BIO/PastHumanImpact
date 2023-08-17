@@ -133,7 +133,7 @@ data_h2_vis <- data_h2_summary %>%
                values_to = "percentage")
 
 
-get_regional_combined_fig(select_region = "North America")
+get_regional_combined_fig(select_region = "Europe")
 get_regional_combined_fig(select_region = "Latin America")
 
 
