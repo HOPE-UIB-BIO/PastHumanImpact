@@ -7,19 +7,7 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
                                       order_predictors_spatial = c("human", 
                                                                    "climate", 
                                                                    "time"),
-                                      order_ecozones = c("Polar_Frost", 
-                                                         "Polar_Tundra",
-                                                         "Cold_Without_dry_season",
-                                                         "Cold_Dry_Summer",
-                                                         "Cold_Dry_Winter",
-                                                         "Temperate_Without_dry_season",
-                                                         "Temperate_Dry_Summer",
-                                                         "Temperate_Dry_Winter",
-                                                         "Arid_Desert",
-                                                         "Arid_Steppe",
-                                                         "Tropical_Rainforest",
-                                                         "Tropical_Monsoon",
-                                                         "Tropical_Savannah"),
+                                      palette_ecozones = palette_ecozones,
                                       x_label = c("Human", "Climate", "Time")
                                       ) {
   
@@ -31,8 +19,6 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
   input_spatial <- data_spatial_h1 %>% 
     mutate(predictor = factor(predictor, 
                               levels = order_predictors_spatial)) %>%
-    mutate(ecozone_koppen_15 = factor(ecozone_koppen_15, 
-                                     levels = order_ecozones)) %>%
     dplyr::filter(region %in% select_region) %>%
     filter(n_records > 5)
   
