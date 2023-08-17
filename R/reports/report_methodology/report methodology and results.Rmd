@@ -381,33 +381,33 @@ Two categories were created: i) 'human event indicators': a single taxa associat
 <br>
 
 
-```{r human indicator table for LA}
+```{r human indicator table for LA, eval=FALSE, include=FALSE}
 #need to change this/ copy relevant tables into Google drive
 
-# data_storage_LADP_human_indicators <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"
-# 
-# human_indicator_table <- read.csv(data_storage_LADP_human_indicators, encoding = 'latin1')
-# 
-# 
-# human_indicator_table %>% 
-#   dplyr::select(pollen.type:Evidence) %>%
-#   flextable::flextable() %>%
-#   flextable::set_caption("Table 3: Human event indicators for Latin America") %>%
-#   flextable::autofit()
+data_storage_LADP_human_indicators <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"
+
+human_indicator_table <- read.csv(data_storage_LADP_human_indicators, encoding = 'latin1')
+
+
+human_indicator_table %>%
+  dplyr::select(pollen.type:Evidence) %>%
+  flextable::flextable() %>%
+  flextable::set_caption("Table 3: Human event indicators for Latin America") %>%
+  flextable::autofit()
 
 ```
   
 
-```{r human impact table for LA}
-# data_storage_LADP_human_impact <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"
-# 
-# human_impact_table <- read.csv(data_storage_LADP_human_impact, encoding='latin1')
-# 
-# human_impact_table %>% 
-#   dplyr::select(HOPE.USE:REFERENCES, EVIDENCE) %>%
-#   flextable::flextable() %>%
-#   flextable::set_caption("Table 4: Human event indices for Latin America") %>%
-#   flextable::autofit()
+```{r human impact table for LA, eval=FALSE, include=FALSE}
+data_storage_LADP_human_impact <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"
+
+human_impact_table <- read.csv(data_storage_LADP_human_impact, encoding='latin1')
+
+human_impact_table %>%
+  dplyr::select(HOPE.USE:REFERENCES, EVIDENCE) %>%
+  flextable::flextable() %>%
+  flextable::set_caption("Table 4: Human event indices for Latin America") %>%
+  flextable::autofit()
 
 ```
 
@@ -873,7 +873,7 @@ data_m2 %>%
 <br>
 
 
-```{r summary table for individual records}
+```{r summary table for individual records, eval=FALSE, include=FALSE}
 
 data_spatial_vis %>%
   dplyr::filter(total_variance > lower_5_percent) %>%
@@ -886,11 +886,11 @@ data_spatial_vis %>%
 <br>
 
 
-```{r summary table of the median results}
+```{r summary table of the median results, eval=FALSE, include=FALSE}
 
   r2_summary_spatial %>%
-  dplyr::select(predictor, 
-                ecozone_koppen_15, 
+  dplyr::select(predictor,
+                ecozone_koppen_15,
                 region,
                 ends_with("median")) %>%
   flextable::flextable() %>%
@@ -903,7 +903,7 @@ data_spatial_vis %>%
 
  
 
-```{r summary table for the temporal analysis}
+```{r summary table for the temporal analysis, eval=FALSE, include=FALSE}
 
  data_temporal_vis %>%
  flextable::flextable() %>%
@@ -915,17 +915,16 @@ data_spatial_vis %>%
 <br>
 
 
-```{r summary table for the median results}
+```{r summary table for the median results, eval=FALSE, include=FALSE}
 
   r2_summary_temporal %>%
-  dplyr::select(predictor, 
-                age, 
+  dplyr::select(predictor,
+                age,
                 region,
                 ends_with("median")) %>%
   flextable::flextable() %>%
   flextable::set_caption("Table 9: The median adjusted r2 summary for the median analysis") %>%
   flextable::autofit()
-
 
 ```
 <br>
@@ -958,7 +957,7 @@ For the analysis within ecozones in regions, we extract the significant partitio
 
 ## Results
 
-```{r echo = FALSE}
+```{r subset data}
 
 # filter subset Europe and relevant time period
 subset_europe <- output_spatial_h1 %>%
@@ -973,7 +972,7 @@ subset_europe <- output_spatial_h1 %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis for individual records in Europe, fig.show='hide'}
 
 subset_europe2 <- subset_europe %>%
   dplyr::mutate(mvpart = 
@@ -989,7 +988,7 @@ subset_europe2 <- subset_europe %>%
 
 
 
-```{r echo = FALSE , warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis grouped by ecozones in Europe, fig.show='hide'}
 
 subset_europe3  <- subset_europe2 %>%
   dplyr::select(dataset_id, ecozone_koppen_15, data_merge) %>%
@@ -1002,7 +1001,7 @@ subset_europe3  <- subset_europe2 %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r explorative analysis all record grouped as region, fig.show='hide'}
 
 full_dataset_europe <- subset_europe %>% 
   dplyr::select(-c(varhp)) %>%
@@ -1016,7 +1015,7 @@ full_dataset_europe <- subset_europe %>%
 
 ### 1. Results from the analyses of individual records
 
-```{r echo = FALSE, , warning = FALSE, message = FALSE}
+```{r results individual records}
 #functions to extract summaries
 get_pcoa_score <- function(mod) {
   sc <- vegan::scores(mod, choices = 1, display = "sites") 
@@ -1073,7 +1072,7 @@ summarise_by_ecozone <- summary_mrt_table %>%
 The summary results of the first PCOA axis against time show there are changes in the composition of ecosystem properties over time for individual sites (Figure 1). To see how spds represented as past human population vary across records, the individual curves are plotted against time between 2000 and 8500 years BP (Figure 2). First inspections looks reasonable.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA axis 1 plotted with time}
 # figure 1, MDS1 vs time
 mds_fig <- subset_europe2 %>%
   dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
@@ -1101,7 +1100,7 @@ Figure 1: Plot of the individual PCOA axis 1 for all records against time.
 
 
 
-```{r echo = FALSE}
+```{r SPD curves plotted with time}
 # figure 1, MDS1 vs time
 spd_fig <- subset_europe2 %>%
   dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
@@ -1135,7 +1134,7 @@ The results of the MRT are summaried in one figure and two tables below. Overall
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r resulting partitions by MRT}
 
 summary_mrt_table %>% 
  # filter(spd_var == TRUE) %>%
@@ -1159,9 +1158,8 @@ The total number of records are counted for:
 - where both age and humans explains the significant partitions (spd_age_true)
 
 
-Table 1: Summarises the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+```{r summary table all}
 # summarise number of records with division based on spd and age 
 # numbers based on individual records for total European subset
 summarise_by_all <- summary_mrt_table %>%
@@ -1177,15 +1175,15 @@ summarise_by_all <- summary_mrt_table %>%
 
 summarise_by_all %>%
   flextable::flextable() %>%
-  flextable::set_caption("Table 10: Summary of MRT results") %>%
+  flextable::set_caption("Table 1: Summary of the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
   flextable::autofit()
 
 ```
 
 
-Table 2: Summarises the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+
+```{r summary table ecozones}
 # numbers based on individual records by ecozones
 summarise_by_ecozone <- summary_mrt_table %>%
   group_by(ecozone_koppen_15) %>%
@@ -1201,7 +1199,7 @@ summarise_by_ecozone <- summary_mrt_table %>%
 
 summarise_by_ecozone %>%
   flextable::flextable() %>%
-  flextable::set_caption("Table 11: Summary of individual MRT results nested by ecozones") %>%
+  flextable::set_caption("Table 2: Summary of the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
   flextable::autofit()
 
 ```
@@ -1213,7 +1211,7 @@ summarise_by_ecozone %>%
 
  
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r plot results in PCOA diagrams}
 plot_results <- function(mrt_mod, pcoa_mod, data_merge, ecozone) {
   
   splits <- mrt_mod$where
@@ -1286,7 +1284,7 @@ subset_europe3 <- subset_europe3 %>%
 Figures 4-7 display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA diagram ecozones}
 subset_europe3$pcoa_fig[[1]]
 
 ```
@@ -1295,7 +1293,7 @@ subset_europe3$pcoa_fig[[1]]
 Figure 4. PCOA diagram for records in the Cold ecozone with significant MRT division display by the colours and ellipses. The MRT show the data is partition into 2 major groups, where humans (spd) is the most important predictor for this division (spd>= 0.2645 and spd < 0.2645).
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r }
 subset_europe3$pcoa_fig[[2]]
 
 ```
@@ -1304,7 +1302,7 @@ subset_europe3$pcoa_fig[[2]]
 Figure 5. PCOA diagram for records in the Temperate ecozone with significant MRT division display by the colours and ellipses. The MRT shows 2 major partitions determined by age (age >= 5250 and age < 5250).
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r }
 
 subset_europe3$pcoa_fig[[3]]
 
@@ -1312,7 +1310,7 @@ subset_europe3$pcoa_fig[[3]]
 
 Figure 6. PCOA diagram for records in the Polar ecozone with significant MRT division display by the colours and ellipses. The MRT indicates 4 significant partitions. The first is determined by spd >= 0.228 and spd < 0.228, second one is determined by spd< 0.07 & spd >0.07, the final split is determined by age < 7750 and >= 7750. 
 
-```{r echo = FALSE}
+```{r }
 subset_europe3$pcoa_fig[[4]]
 
 ```
@@ -1320,9 +1318,9 @@ subset_europe3$pcoa_fig[[4]]
 Figure 7. PCOA diagram for records in the Arid ecozone with significant MRT division display by the colours and ellipses. 
 
 
-The following list show the results of the envfit with the PCOA model and age and time. The numbers are: 1 = Cold ecozone, 2 = Temperate ecozone, 3 = Polar ecozone, 4 = Arid ecozone. 
+The following list show the results of the envfit with the PCOA model and age and time. 
 
-```{r echo = FALSE}
+```{r results envfit for ecozones}
 subset_europe3$envfit
 
 ```
@@ -1333,7 +1331,7 @@ subset_europe3$envfit
 The next figure show the results for all records in one analyses for Europe. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA diagram for Europe}
 
 
 
@@ -1359,7 +1357,7 @@ Figure 8. PCOA ordination diagram with all records and samples within Europe.
 The results of the envfit of the PCOA model with time and humans.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r results for envfit}
 full_dataset_europe$envfit[[1]]
 
 ```
