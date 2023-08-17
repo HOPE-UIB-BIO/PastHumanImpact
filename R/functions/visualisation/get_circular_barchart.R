@@ -3,7 +3,7 @@
 get_circular_barchart <- function(data,
                                   y_var = "percentage", 
                                   x_var = "predictor",
-                                  fill_var = "ecozone_koppen_5",
+                                  fill_var = "ecozone_koppen_15",
                                   col_vec = palette_eco,
                                   x_name = x_label,
                                   title = "h1") {
@@ -56,7 +56,7 @@ p <- data %>%
     coord_polar() +
     theme_minimal()+
     theme(
-      legend.position = "bottom",
+      legend.position = "none",
       legend.title = element_text(size = 8),
       legend.text = element_text(size = 7),
       legend.key.size = unit(0.2, "cm"),
