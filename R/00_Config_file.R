@@ -171,5 +171,21 @@ image_height <- 12
 image_units <- "cm"
 
 # define pallets
+palette_ecozone <-
+  c(
+    "#009933",
+    "#00D1B2",
+    "#0072B2",
+    "#524439",
+    "#FF9715"
+  )
+
+names(palette_ecozone) <-
+  c("Tropical",
+    "Temperate",
+    "Polar",
+    "Cold",
+    "Arid")
 
 # define common color
+
