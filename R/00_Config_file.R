@@ -128,7 +128,7 @@ auth_tibble <-
     ~name, ~path,
     "ondrej", "C:/Users/ondre/My Drive/",
     "vfe032", "G:/My Drive/",
-    "kuber", "H:/HOPE_gdrive/"
+    "kuber", "H:/My Drive/"
   )
 
 data_storage_path <-
