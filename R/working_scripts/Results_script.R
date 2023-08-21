@@ -1,18 +1,20 @@
 ####### SUMMARY OF RESULTS - WORKING SCRIPT
 # purpose: wrapper function(s) to be made and included in targets when done 
 
+library(sf)
+library(terra)
+library(maps)
 
 
-
-# Read targets
-
-output_temporal <- targets::tar_read(output_hvar_temporal,
+# Load output/results from targets
+# h1
+output_h1_temporal <- targets::tar_read(output_hvar_temporal,
                   store = paste0(
                     data_storage_path,
                     "_targets_h1"
                   ))
 
-output_spatial <-  targets::tar_read(output_hvar_spatial,
+output_h1_spatial <-  targets::tar_read(output_hvar_spatial,
                                      store = paste0(
                                        data_storage_path,
                                        "_targets_h1"
@@ -24,49 +26,47 @@ data_meta <- targets::tar_read(data_meta,
                                  "_targets_h1"
                                ))
 
-# Import raster data ecozones for visualisation (if maps should display ecozones)
+# h2
+output_hvar_h2 <-
+  targets::tar_read(
+    name = "output_hvar_h2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
 
-library(sf)
-library(terra)
-library(maps)
-
-#import data for ecoregions
-ecozones_link <- read_csv(paste0(data_storage_path,
-                                 "HOPE_Hypothesis1/Data/ecoregions2017/koppen_link.csv"))
-ecozone_raster <- terra::rast(paste0(data_storage_path,
-                                     "HOPE_Hypothesis1/Data/ecoregions2017/Beck_KG_V1_present_0p083.tif"))
-
-
-
-# get data frame of raster data
-ecozone_df <- get_rasterdf(ecozone_raster)
-
-# revalue raster & get data for plotting
-data_geo_koppen <-
-  ecozone_df %>% 
-  filter(value > 0) %>%
-  dplyr::left_join(ecozones_link,
-                   by = c("value" = "raster_values")) %>% 
-  dplyr::select(-value) %>% 
-  dplyr::rename(
-    ecozone_koppen_30 = genzone,
-    ecozone_koppen_15 = genzone_cluster,
-    ecozone_koppen_5 = broadbiome) 
+# import data for ecoregions (for mapping)
+data_geo_koppen <- read_rds(paste0(data_storage_path, 
+                                   "Data/ecoregions2017/data_geo_koppen.rds"))
 
 
 
-#save
-write_rds(data_geo_koppen, "data_geo_koppen.rds")
-#data_geo_koppen <- read_rds("data_geo_koppen.rds")
 
 # define color palettes
-# five main ecozones
-palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
+# 13 colours for ecozones
+
+palette_ecozones <- c(Polar_Frost = "#004949",
+                      Polar_Tundra = "#009292",
+                      Cold_Without_dry_season = "#006ddb", 
+                      Cold_Dry_Summer = "#6db6ff",
+                      Cold_Dry_Winter = "#b6dbff",
+                      Temperate_Without_dry_season = "#117733",
+                      Temperate_Dry_Summer = "#999933" ,
+                      Temperate_Dry_Winter =  "#DDCC77",
+                      Arid_Desert = "#924900",
+                      Arid_Steppe = "#ffff6d",
+                      Tropical_Rainforest =  "#920000",
+                      Tropical_Monsoon = "#490092",
+                      Tropical_Savannah = "#b66dff")
+
 #human vs climate
-palette_pred <- c("#663333", "#BBBBBB") 
+palette_pred <- c(human = "#663333", 
+                  climate = "#BBBBBB") 
+
 
 ###############################################################################
-# 1. PREPARE RESULTS
+# 1. Prepare results h1
 ###############################################################################
 # 1.1 Extract results spatial analysis
 data_spatial_vis <- output_spatial %>% 
@@ -135,7 +135,7 @@ data_temporal_vis <- output_temporal %>%
                 n_samples)
 
 ################################################################################
-# 2. INSPECT RESULTS
+# 2. Inspect results h1
 ###############################################################################
 
 # High percentage of individual predictors comes from negative adjusted R2 of the full model;
@@ -157,7 +157,7 @@ data_spatial_vis <- data_spatial_vis %>%
 
 
 ############################################################################
-# 2.2 Filter models
+# 2.2 Filter out poor models
 ###########################################################################
 
 data_spatial_vis$total_variance %>% boxplot()
@@ -189,11 +189,23 @@ data_spatial_vis$p_value %>% summary(., na.rm = TRUE)
 
 #minimum p-value is 0.04 
  
-
-## 2.3 Check unique variances for humans; bobble maps
-
+##########################################################
+## 2.3 Display unique variances for humans; bobble maps
+#########################################################
 # Get the world polygon
 world <- map_data("world")
+
+# grey basemap
+worldmap_grey <- world %>%
+  ggplot() +
+  geom_polygon(
+    aes(x=long, 
+        y = lat, 
+        group = group), 
+    fill="grey", 
+    alpha = 0.4) +
+  coord_equal() +
+  theme_void()
 
 # plot all data
 bobble_fig_all <- data_spatial_vis %>%
@@ -226,7 +238,11 @@ bobble_filter_fig <-
   dplyr::filter(total_variance > lower_5_percent) %>%
   mutate(Unique_percent = round(Unique_percent)) %>%
   ggplot() +
-  geom_polygon(data = world, aes(x=long, y = lat, group = group), fill="grey", alpha=0.2) +
+  geom_polygon(data = world, 
+               aes(x=long, 
+                   y = lat, 
+                   group = group), 
+               fill="grey", alpha=0.2) +
   geom_point(aes(x = long, 
                  y = lat, 
                  color = ecozone_koppen_15, 
@@ -239,9 +255,10 @@ bobble_filter_fig <-
   coord_equal() +
   theme_void() +
   theme(
+    legend.title = element_text(size = 8),
     panel.spacing=unit(c(0,0,0,0), "null"),
     plot.margin=grid::unit(c(0,0,0,0), "cm"),
-    legend.position=c(0.3, 0.1),
+    legend.position=c(0.5, 0.1),
     legend.direction="horizontal"
   ) 
 
@@ -268,6 +285,7 @@ bobble_filter2_fig <-
   coord_equal() +
   theme_void() +
   theme(
+    legend.title = element_text(size = 8),
     panel.spacing=unit(c(0,0,0,0), "null"),
     plot.margin=grid::unit(c(0,0,0,0), "cm"),
     legend.position=c(0.3, 0.1),
@@ -282,7 +300,7 @@ data_temporal_vis$total_variance %>% plot()
 data_temporal_vis$total_variance %>% summary(., na.rm = TRUE)
 
 #############################################################################
-# 3. CREATE TABELS FOR SUMMARY FOR ADJUSTED R2
+# 3. Prepare summary tables h1
 #############################################################################
 
 
@@ -353,220 +371,7 @@ summary_temporal_median <-
 
 
 
-
-##########################################################################
-# 4. VISUALISATION OF THE RESULTS
-##########################################################################
-
-# 4.1 CIRCULAR BARCHARTS SPATIAL
-
-
-# check colors for colorblindness
-colorblindr::cvd_grid()
-
-
-# set variables
-select_region = "Europe"
-
-
-order_ecozones <- c("Polar_Frost", "Polar_Tundra" ,"Cold_Without_dry_season" ,"Cold_Dry_Summer" , "Cold_Dry_Winter","Temperate_Without_dry_season", "Temperate_Dry_Summer", "Temperate_Dry_Winter" ,  "Arid_Desert" ,"Arid_Steppe" ,      "Tropical_Rainforest" ,"Tropical_Monsoon", "Tropical_Savannah")  
-
-palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
-                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
-                 "#920000","#924900","#999933","#ffff6d")
-
-order_predictors_spatial <- c("human", "climate", "time")
-
-x_label <- c("Human", "Climate", "Time")
-
-# filter spatial input data
-input_spatial <- summary_spatial_median %>% 
-  mutate(predictor = factor(predictor, 
-                            levels = order_predictors_spatial)) %>%
-  mutate(ecozone_koppen_15 = factor(ecozone_koppen_15, 
-                                   levels = order_ecozones)) %>%
-  dplyr::filter(region %in% select_region) %>%
-  filter(n_records > 5)
-
-input_spatial$ecozone_koppen_15 %>% levels()
-
-circular_bar_fig <- get_circular_barchart(input_spatial, 
-                                          y_var = "percentage_median",
-                                          fill_var = "ecozone_koppen_15")
-circular_bar_fig
-
-## Save figure
-# ggsave(
-#  paste0("circular_bar_", select_region, ".png"),
-#  circular_bar_fig,
-#  width = 3, height = 3, units = "cm",
-#  scaling = 0.5,
-#  bg = "transparent"
-# )
-
-# 4.2 BARCHART TEMPORAL 
-
-# filter temporal input data
-input_temporal <- 
-  summary_temporal_median %>%
-  filter(region %in% select_region) %>%
-  mutate(predictor =  factor(predictor, 
-                          levels = c("human", "climate"))) 
-
-bars_temporal_fig <- get_temporal_barcharts(input_temporal)
-bars_temporal_fig
-
-
-
-# ggsave(
-#   paste0("temporal_bar_", select_region, ".png"),
-#   bars_temporal_fig,
-#   width = 6, height = 2, units = "cm", 
-#   scaling = 0.5,
-#   bg = "transparent"
-# )
-
-
-# Regional maps
-
-map_region <- get_map_region(select_region = select_region)
-
-# Combine figures 
-final <- 
-  ggpubr::ggarrange(
-  ggpubr::ggarrange(
-    circular_bar_fig,
-    ggpubr::ggarrange(map_region, 
-                      NULL, 
-                      ncol = 1,
-                      heights = c(2,1)
-                      ), 
-    ncol = 2,
-    widths = c(2,1)),
-  bars_temporal_fig,
-  nrow = 2,
-  heights = c(2,1)
-  )
-
-final
-
-# Function for report summary
-get_regional_combined_fig(select_region = "North America")
-
-
-# test hypothesis 2 interrelationship in time
-
-
-data_to_run <- targets::tar_read(data_hvar_filtered,
-                                 store = paste0(
-                                   data_storage_path,
-                                   "_targets_h1"
-                                 ))
-data_meta <- targets::tar_read(data_meta,
-                               store = paste0(
-                                 data_storage_path,
-                                 "_targets_h1"
-                               ))
-
-
-# 
-# select_vars <- c("dataset_id","age", "n0", "n1", "n2", "n1_minus_n2", "n2_divided_by_n1" , "n1_divided_by_n0",  "dcca_axis_1", "roc", "density_turnover",  "density_diversity")
-# 
-# 
-# # Prepare data - filter out timesteps with less than 3 samples
-# data_for_h2 <- 
-#   data_to_run %>% 
-#   unnest(data_merge) %>% 
-#   dplyr::select(all_of(select_vars)) %>%
-#   left_join(data_meta %>% 
-#               dplyr::select(dataset_id, lat, long, region, ecozone_koppen_15),
-#             by = "dataset_id") %>%
-#   drop_na() %>%
-#   nest(data = -c("age", "ecozone_koppen_15", "region")) %>%
-#   dplyr::mutate(n_samples = purrr::map_dbl(data, ~nrow(.x))) %>%
-#   dplyr::filter(n_samples > 4)
-# 
-# 
-# # Run PCA analyses for each time bin in regional ecozones; get procrustes sum of square, extract difference with time
-# pap_procrustes <- data_for_h2 %>% 
-#   mutate(pca_analysis = purrr::map(data,
-#                                    .f = run_pca)) %>%
-#   mutate(pca_analysis = pca_analysis %>% 
-#            rlang::set_names(nm = data_for_h2$age))  %>% 
-#   group_by(region, ecozone_koppen_15) %>%
-#   summarise(pca_analysis = list(pca_analysis)) %>% 
-#   mutate(m2 = purrr::map(pca_analysis, get_procrustes_m2))%>%
-#   ungroup() %>%
-#   mutate(m2_time = purrr::map(m2, .f = extract_m2_time)) %>%
-#   mutate(PCoA = purrr::map(m2, .f = run_pcoa))
-#   mutate(m2_time_df = purrr::map(m2_time, 
-#                                  .f = get_m2_time_df))
-# 
-# 
-# # plot pcoa diagrams 
-# pap_procrustes %>% 
-#   mutate(site_scores = purrr::pmap(list(PCoA,
-#                                         region,
-#                                         ecozone_koppen_15),
-#                                    .f = ~get_pcoa_scores(pcoa = ..1,
-#                                                          region = ..2,
-#                                                          ecozone = ..3))) %>%
-#   dplyr::select(site_scores) %>% 
-#   unnest(cols = c(site_scores)) %>%
-#   ggplot(aes(x = X1, y = X2, label = label, col = ecozone)) +
-#   coord_fixed() +
-#   geom_hline(yintercept = 0, linetype = "dashed", col = "grey", linewidth = 1) +
-#   geom_vline(xintercept = 0, linetype = "dashed", col = "grey", linewidth = 1) +
-#   geom_point() + 
-#   geom_text(hjust = 0, nudge_x = 0.005) +
-#   labs(x = "PCoA1", y = "PCoA2") +
-#   facet_wrap(~region)+
-#   theme_bw() 
-# 
-# 
-# # PLOT change in m2 in consecutive time steps
-# pcoa_ecozones %>%
-#   dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
-#   unnest(cols = c(m2_time_df)) %>%
-#   ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15 )) +
-#   geom_point() +
-#   geom_smooth() +
-#   scale_x_reverse() +
-#   coord_flip() +
-#   facet_wrap(~region)
-
-########################################################################
-# Data checking output of Hypothsis 2
-#
-#######################################################################
-
-# set colours 
-# five main ecozones
-
-order_ecozones <- c("Polar_Frost", "Polar_Tundra" ,"Cold_Without_dry_season" ,"Cold_Dry_Summer" , "Cold_Dry_Winter","Temperate_Without_dry_season", "Temperate_Dry_Summer", "Temperate_Dry_Winter" ,  "Arid_Desert" ,"Arid_Steppe" ,      "Tropical_Rainforest" ,"Tropical_Monsoon", "Tropical_Savannah")  
-
-palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
-                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
-                 "#920000","#924900","#999933","#ffff6d")
-
-#palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
-#human vs climate
-palette_pred <- c("#663333", "#BBBBBB") 
-
-output_hvar_h2 <-
-  targets::tar_read(
-    name = "output_hvar_h2",
-    store = paste0(
-      data_storage_path,
-      "_targets_h2"
-    )
-  )
-
-
-###
-output_hvar_h2$data_merge[[1]]
-
-# 1. prepare output for plotting:
+# prepare tables h2:
 data_h2_summary <- output_hvar_h2 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
@@ -580,13 +385,127 @@ data_h2_summary <- output_hvar_h2 %>%
   dplyr::select(-c(data_merge, varhp)) %>%
   ungroup()
 
-# filter spatial input data
-
-
+# data for visualisation
 data_h2_vis <- data_h2_summary %>%
   pivot_longer(c(Unique_percent, Average.share_percent), 
                names_to = "variance_partition", 
                values_to = "percentage")
+
+
+
+##########################################################################
+# 5. Visualisation h1 & h2
+##########################################################################
+# set variables
+
+order_predictors_spatial <- c("human", "climate", "time")
+x_label <- c("Human", "Climate", "Time")
+
+# 5.1 OVERVIEW FIG
+
+
+
+
+# 5.2 CIRCULAR BARCHARTS H1 SPATIAL
+# spatial input data for h1
+select_region = "Latin America"
+
+input_spatial <- summary_spatial_median %>% 
+  mutate(ecozone_koppen_15 = factor(ecozone_koppen_15)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(ecozone_koppen_15, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- get_circular_barchart(input_spatial,
+                                         y_var = "percentage_median",
+                                         title = "h1")
+
+
+
+input_spatial %>% 
+  ggplot() +
+  #add lines for every 10 percent
+  geom_hline(
+    aes(yintercept = y), 
+    data.frame(y = seq(0, 50, by = 10)),
+    color = "lightgrey"
+  ) +
+  geom_col(data = input_spatial %>% 
+             dplyr::filter(grepl("Unique_percent", variance_partition)) , 
+           aes(x = get(x_var),
+               y = get(y_var),
+               fill = get(fill_var)),
+           position_dodge(width = 0.9) , 
+           alpha = 1) +
+  geom_col(data = input_spatial %>% 
+             dplyr::filter(grepl("Average.share_percent", variance_partition)),
+           aes(x = get(x_var),
+               y = get(y_var),
+               fill = get(fill_var)),
+           position = position_dodge(width = 0.9), 
+           alpha = 0.4) +
+  scale_fill_manual("",
+                    values = col_vec, 
+                    drop = FALSE) 
+
+
+
+# 5.3 BARCHARTS H1 TEMPORAL
+
+# 5.4 CIRCULAR BARCHART H2
+
+# 5.5 VARIOUS MAPS; GLOBAL; REGIONS
+
+
+# 5.6 COMBINED FIGURE H1 & H2
+# check colors for colorblindness
+#colorblindr::cvd_grid()
+
+
+
+
+
+circular_bar_fig
+
+## Save figure
+# ggsave(
+#  paste0("circular_bar_", select_region, ".png"),
+#  circular_bar_fig,
+#  width = 3, height = 3, units = "cm",
+#  scaling = 0.5,
+#  bg = "transparent"
+# )
+
+
+
+
+# ggsave(
+#   paste0("temporal_bar_", select_region, ".png"),
+#   bars_temporal_fig,
+#   width = 6, height = 2, units = "cm", 
+#   scaling = 0.5,
+#   bg = "transparent"
+# )
+
+
+# # PLOT change in m2 in consecutive time steps
+# pcoa_ecozones %>%
+#   dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
+#   unnest(cols = c(m2_time_df)) %>%
+#   ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15 )) +
+#   geom_point() +
+#   geom_smooth() +
+#   scale_x_reverse() +
+#   coord_flip() +
+#   facet_wrap(~region)
+
+
+
 
 
 get_regional_combined_fig(select_region = "Europe")
