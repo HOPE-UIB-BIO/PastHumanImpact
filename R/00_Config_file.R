@@ -187,5 +187,14 @@ names(palette_ecozone) <-
     "Cold",
     "Arid")
 
+palette_matching <-
+  c(
+    "#00987E",
+    "#00D1B2",
+    "#B9A89B",
+    "#524439",
+    "#FF9715"
+  )
+
 # define common color
 
