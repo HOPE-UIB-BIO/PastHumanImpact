@@ -52,7 +52,7 @@ p <- data %>%
              y = rep(seq(10,40, by = 10),3),
              label = rep(paste0(seq(10,40, by = 10), " %"),3), 
              vjust = 0,
-             size = 3) +
+             size = 2) +
     coord_polar() +
     theme_minimal()+
     theme(
@@ -64,7 +64,7 @@ p <- data %>%
       panel.grid.major.x = element_blank(),
       axis.ticks = element_blank(),
       axis.text.y = element_blank(),
-      axis.text.x = element_text(colour = "grey30", size = 10, family = "sans", vjust = -3),
+      axis.text.x = element_text(colour = "grey30", size = 8, family = "sans", vjust = -3),
       #axis.title.x = element_text(margin = margin(0, 0, -2, 0)),
       text = element_text(color = "grey30"),
       plot.title = element_text(family = "sans",size = 12, hjust = 0.5, margin = margin(0,0,0,0)),
