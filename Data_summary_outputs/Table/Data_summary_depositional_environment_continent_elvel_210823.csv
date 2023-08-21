@@ -1,0 +1,156 @@
+region,depositionalenvironment
+Asia,Bog
+Asia,Bog sediment
+Asia,Coastal
+Asia,Drained Lake
+Asia,Eolian deposit
+Asia,Fen
+Asia,Glacial Origin Lake
+Asia,Lacustrine
+Asia,Lake
+Asia,Lake sediment
+Asia,Marsh
+Asia,Mire
+Asia,Moraine Dammed Lake
+Asia,Natural Lake
+Asia,Palustrine
+Asia,Peat bog
+Asia,Peat sediment
+Asia,Peatland
+Asia,Playa
+Asia,Raised Bog
+Asia,River basin
+Asia,Swamp
+Asia,Tectonic Origin Lake
+Asia,Terrestrial
+Asia,Thermokarst Lake
+Asia,Wetland
+Asia,coastal sediment
+Asia,lake
+Asia,peat
+Europe,Blanket Bog
+Europe,Bog
+Europe,Cirque Lake
+Europe,Coastal lagoon
+Europe,Drained Lake
+Europe,Explosion Crater Lake
+Europe,Fen
+Europe,Floodplain Mire
+Europe,Glacial Meltwater Channel Lake
+Europe,Glacial Origin Lake
+Europe,Glacial Scour Lake
+Europe,Kettle Lake
+Europe,Lacustrine
+Europe,Landslide Origin Lake
+Europe,Marsh
+Europe,Mire
+Europe,Moraine Dammed Lake
+Europe,Natural Lake
+Europe,Natural Lake (Origin Unknown)
+Europe,Open-water Transition Mire
+Europe,Palustrine
+Europe,Periglacial Origin Lake
+Europe,Raised Bog
+Europe,Soligenous Mire
+Europe,Swamp
+Europe,Tectonic Origin Lake
+Europe,Valley Glacier Lake
+Europe,Valley Mire
+Europe,Volcanic Origin Lake
+Latin America,Blanket Bog
+Latin America,Bog
+Latin America,Cienega
+Latin America,Coastal swamp
+Latin America,Ephemeral Lake
+Latin America,Explosion Crater Lake
+Latin America,Fen
+Latin America,Floodplain Mire
+Latin America,Glacial Origin Lake
+Latin America,Glacial Scour Lake
+Latin America,Lacustrine
+Latin America,Lake
+Latin America,Lake Dammed by Alluvial Fans
+Latin America,Lake Marginal Fen
+Latin America,Mangrove peat
+Latin America,Marsh
+Latin America,Mire
+Latin America,Moraine Dammed Lake
+Latin America,Natural Lake
+Latin America,Natural Lake (Origin Unknown)
+Latin America,Ombrotrophic lake
+Latin America,Oxbow Lake
+Latin America,Palm swamp
+Latin America,Peat
+Latin America,Peat bog
+Latin America,Peatbog
+Latin America,Playa
+Latin America,Raised Bog
+Latin America,Sedge wetland
+Latin America,Solution Origin Lake
+Latin America,Swamp
+Latin America,Tectonic Origin Lake
+Latin America,Volcanic Origin Lake
+Latin America,Volcanic basin
+Latin America,Wetland
+Latin America,lacustrine
+Latin America,peatbog
+Latin America,peatland
+Latin America,shallow lake
+Latin America,wetland
+North America,Bog
+North America,Caldera Lake
+North America,Cirque Lake
+North America,Drained Lake
+North America,Drift Filled Valley Lake
+North America,Dune Dammed Lake
+North America,Explosion Crater Lake
+North America,Fen
+North America,Floating Mire
+North America,Glacial Meltwater Channel Lake
+North America,Glacial Origin Lake
+North America,Glacial Outburst Flood Lake
+North America,Glacial Scour Lake
+North America,Ice Thrust Lake
+North America,Interdunal Lake
+North America,Kettle Lake
+North America,Lacustrine
+North America,Lake Marginal Fen
+North America,Landslide Origin Lake
+North America,Marsh
+North America,Mire
+North America,Moraine Dammed Lake
+North America,Natural Lake
+North America,Natural Lake (Origin Unknown)
+North America,Palustrine
+North America,Periglacial Origin Lake
+North America,Playa
+North America,Poor Fen
+North America,Raised Bog
+North America,Soligenous Mire
+North America,Solution Origin Lake
+North America,Swamp
+North America,Tectonic Origin Lake
+North America,Thermokarst Lake
+North America,Volcanic Origin Lake
+North America,Wind Origin Lake
+Oceania,Caldera Lake
+Oceania,Cirque Lake
+Oceania,Glacial Origin Lake
+Oceania,Mire
+Oceania,Natural Lake
+Oceania,Peat sediment
+Oceania,Solution Origin Lake
+Oceania,Valley Mire
+Oceania,Wind Origin Lake
+Oceania,coastal
+Oceania,lacustrine
+Oceania,"lacustrine, drained lake"
+Oceania,"lacustrine, natural open-water"
+Oceania,"lacustrine, playa"
+Oceania,"lacustrine, volcanic lake"
+Oceania,terrestrial
+Oceania,"terrestrial, mire (i.e. peatland, >30cm peat)"
+Oceania,"terrestrial, mire, bog"
+Oceania,"terrestrial, mire, bog,	blanket bog"
+Oceania,"terrestrial, mire, fen"
+Oceania,"terrestrial, mire,swamp (forested wetland or peatland)"

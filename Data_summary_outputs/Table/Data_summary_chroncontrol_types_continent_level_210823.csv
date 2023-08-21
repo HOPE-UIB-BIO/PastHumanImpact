@@ -1,0 +1,63 @@
+region,chroncontroltype
+Asia,AMS 14C
+Asia,AMS14C
+Asia,Calendar_age_BP
+Asia,Core top
+Asia,Core_top
+Asia,Guess
+Asia,Lead-210
+Asia,OSL
+Asia,Radiocarbon
+Asia,"Radiocarbon, average of two or more dates"
+Asia,"Radiocarbon, calibrated"
+Asia,Tephra
+Asia,c14
+Asia,cal_age
+Asia,calibrated
+Asia,core_top
+Asia,radiocarbon
+Asia,varve_age
+Europe,Annual laminations (varves)
+Europe,Annual laminations (varves)/Sedimentation rate
+Europe,Core top
+Europe,"Core top, estimated"
+Europe,Guess
+Europe,Historical documentation
+Europe,Lead-210
+Europe,Radiocarbon
+Europe,"Radiocarbon, average of two or more dates"
+Europe,"Radiocarbon, calibrated"
+Europe,"Radiocarbon, reservoir correction"
+Europe,Section top
+Europe,Tephra
+Latin America,Collection data
+Latin America,Collection date
+Latin America,Core top
+Latin America,"Core top, estimated"
+Latin America,Guess
+Latin America,Radiocabon
+Latin America,Radiocarbon
+Latin America,"Radiocarbon, calibrated"
+Latin America,"Radiocarbon, reservoir correction"
+Latin America,Tephra
+Latin America,tephra/Radiocarbon
+North America,Annual laminations (varves)
+North America,Core top
+North America,"Core top, estimated"
+North America,Guess
+North America,Historical fire
+North America,Lead-210
+North America,Radiocarbon
+North America,"Radiocarbon, average of two or more dates"
+North America,"Radiocarbon, calibrated"
+North America,"Radiocarbon, infinite"
+North America,"Radiocarbon, reservoir correction"
+North America,Tephra
+Oceania,AMS
+Oceania,C14 date (corrected)
+Oceania,C14 date (uncorrected)
+Oceania,Core top
+Oceania,Radiocarbon
+Oceania,"Radiocarbon, calibrated"
+Oceania,Tephra
+Oceania,c14
