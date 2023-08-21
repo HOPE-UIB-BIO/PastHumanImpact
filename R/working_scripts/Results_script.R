@@ -421,76 +421,110 @@ input_spatial <- summary_spatial_median %>%
                   fill = list(percentage_median = 0))
 
 
+
 circular_bar_h1 <- get_circular_barchart(input_spatial,
                                          y_var = "percentage_median",
-                                         title = "h1")
+                                         title = "")
 
 
-
-input_spatial %>% 
-  ggplot() +
-  #add lines for every 10 percent
-  geom_hline(
-    aes(yintercept = y), 
-    data.frame(y = seq(0, 50, by = 10)),
-    color = "lightgrey"
-  ) +
-  geom_col(data = input_spatial %>% 
-             dplyr::filter(grepl("Unique_percent", variance_partition)) , 
-           aes(x = get(x_var),
-               y = get(y_var),
-               fill = get(fill_var)),
-           position_dodge(width = 0.9) , 
-           alpha = 1) +
-  geom_col(data = input_spatial %>% 
-             dplyr::filter(grepl("Average.share_percent", variance_partition)),
-           aes(x = get(x_var),
-               y = get(y_var),
-               fill = get(fill_var)),
-           position = position_dodge(width = 0.9), 
-           alpha = 0.4) +
-  scale_fill_manual("",
-                    values = col_vec, 
-                    drop = FALSE) 
+# Save figure
+ggsave(
+ paste0("circular_bar_h1_", select_region, ".png"),
+ circular_bar_h1,
+ width = 3, height = 3, units = "cm",
+ scaling = 0.5,
+ bg = "white"
+)
 
 
 
 # 5.3 BARCHARTS H1 TEMPORAL
+input_temporal <- 
+  summary_temporal_median %>%
+  filter(region %in% select_region) %>%
+  mutate(predictor =  factor(predictor, 
+                             levels = c("human", 
+                                        "climate"))) 
+
+bars_temporal_h1 <- get_temporal_barcharts(input_temporal)
+
+ggsave(
+  paste0("temporal_bar_", select_region, ".png"),
+  bars_temporal_h1,
+  width = 6, height = 2, units = "cm",
+  scaling = 0.5,
+  bg = "transparent"
+)
 
 # 5.4 CIRCULAR BARCHART H2
+
+input_h2 <- data_h2_vis %>%
+  mutate(group = factor(group)) %>%
+  filter(region %in% select_region) %>%
+  tidyr::complete(group, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage = 0))
+
+circular_bar_h2 <- get_circular_barchart(input_h2,
+                                         y_var = "percentage",
+                                         fill_var = "group",
+                                         title = "h2")
+
+
+
+# Save figure
+ggsave(
+  paste0("circular_bar_h2_", select_region, ".png"),
+  circular_bar_h2,
+  width = 3, height = 3, units = "cm",
+  scaling = 0.5,
+  bg = "white"
+)
+
 
 # 5.5 VARIOUS MAPS; GLOBAL; REGIONS
 
 
-# 5.6 COMBINED FIGURE H1 & H2
-# check colors for colorblindness
-#colorblindr::cvd_grid()
+map_world_ecozones <- 
+  data_geo_koppen %>%
+  ggplot() +
+  geom_raster(aes(x = x,
+                  y = y,
+                  fill = ecozone_koppen_15)) +
+  scale_fill_manual(values = col_vec, drop = FALSE) +
+  coord_sf(expand = TRUE) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    panel.background = element_blank(),
+    plot.background = element_blank(),
+    panel.spacing=unit(c(0,0,0,0), "null"),
+    plot.margin=grid::unit(c(0,1,0,0), "cm"),
+    legend.title = element_blank(),
+    legend.text = element_text(size=8),
+    legend.key.size = unit(0.5, "cm"),
+    legend.margin = margin(0,0,0,0)
+    ) + 
+  guides(fill = guide_legend(ncol = 3),
+             override.aes = list(size = 1)) 
+
+#map_world_ecozones
+
+ecozone_legend <- ggpubr::get_legend(map_world_ecozones)
+
+ggpubr::as_ggplot(ecozone_legend)
 
 
 
 
 
-circular_bar_fig
-
-## Save figure
-# ggsave(
-#  paste0("circular_bar_", select_region, ".png"),
-#  circular_bar_fig,
-#  width = 3, height = 3, units = "cm",
-#  scaling = 0.5,
-#  bg = "transparent"
-# )
 
 
 
 
-# ggsave(
-#   paste0("temporal_bar_", select_region, ".png"),
-#   bars_temporal_fig,
-#   width = 6, height = 2, units = "cm", 
-#   scaling = 0.5,
-#   bg = "transparent"
-# )
+
+
+
 
 
 # # PLOT change in m2 in consecutive time steps
