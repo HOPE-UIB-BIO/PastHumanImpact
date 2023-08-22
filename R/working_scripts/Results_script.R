@@ -516,33 +516,62 @@ ggpubr::as_ggplot(ecozone_legend)
 
 
 
+# combined fig
+combined_fig <- get_regional_combined_fig(select_region = select_region)
 
-
-
-
-
-
-
-
+ggsave(
+  paste0("combined_fig_", select_region, ".png"),
+  combined_fig,
+  width = 8, height = 5, units = "cm",
+  scaling = 0.5,
+  bg = "white"
+)
 
 
 
 # # PLOT change in m2 in consecutive time steps
-# pcoa_ecozones %>%
-#   dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
-#   unnest(cols = c(m2_time_df)) %>%
-#   ggplot(aes(x = as.numeric(time), y = delta_m2, col = ecozone_koppen_15, fill = ecozone_koppen_15 )) +
-#   geom_point() +
-#   geom_smooth() +
-#   scale_x_reverse() +
-#   coord_flip() +
-#   facet_wrap(~region)
+data_m2 <-  targets::tar_read(
+  name = "data_m2",
+  store = paste0(
+    data_storage_path,
+    "_targets_h2"
+  )
+)
 
+m2_change_region <- 
+  data_m2 %>%
+  dplyr::select(m2_time_df, 
+                region, 
+                ecozone_koppen_15) %>%
+  mutate(region = factor(region, levels = c("North America", 
+                                            "Europe", 
+                                            "Asia", 
+                                            "Latin America", 
+                                            "Oceania"))) %>%
+  unnest(cols = c(m2_time_df)) %>%
+  ggplot(aes(x = as.numeric(time), 
+             y = delta_m2, 
+             col = ecozone_koppen_15, 
+             fill = ecozone_koppen_15)) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_reverse() +
+  scale_x_continuous(breaks = c(seq(500, 9000, by = 500))) +
 
+  theme_classic() +
+  scale_color_manual(values = palette_ecozones, drop = FALSE) +
+  scale_fill_manual(values = palette_ecozones, drop = FALSE) +
+  theme(
+    strip.background = element_blank(),
+    legend.position = "none",
+    axis.text = element_text(size = 10)) +
+  facet_wrap(~region, nrow = 5, scales = "free") +
+  labs(x = "Time years BP", y = "change in m2")
 
-
-
-get_regional_combined_fig(select_region = "Europe")
-
-
-
+ggsave(
+  paste0("m2_change_time_regions.png"),
+  m2_change_region,
+  width = 8, height = 12, units = "cm",
+  scaling = 0.5,
+  bg = "white"
+)
