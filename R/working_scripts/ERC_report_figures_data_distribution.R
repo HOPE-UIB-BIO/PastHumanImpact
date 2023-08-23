@@ -14,6 +14,10 @@ data_filtered <-
     ) #1377
 
 options(max.print = 9999)
+data_parameters <- 
+  tibble(data_parameters = names(data_filtered))
+#write_csv(data_parameters,
+#          file = "Data_summary_outputs/Table/Data_parameters_210823.csv")
 
 for_analysis <-
   data_filtered %>% 

@@ -6,7 +6,8 @@ data_filtered <-
   targets::tar_read(
     name = data_assembly_filtered,
     store = external_storage_targets
-  ) #1377
+    ) %>% 
+  dplyr::filter(!region == "Africa") #1357
 
 options(max.print = 9999)
 
