@@ -401,14 +401,59 @@ data_h2_vis <- data_h2_summary %>%
 order_predictors_spatial <- c("human", "climate", "time")
 x_label <- c("Human", "Climate", "Time")
 
-# 5.1 OVERVIEW FIG
+
+
+select_region = "North America"
+
+# 5.1 DATA DISTRIBUTION FIG
+
+data_h1 <- output_h1_spatial %>%
+#  dplyr::filter(!dataset_id %in% poor_models_spatial_ids) %>%
+  left_join(data_meta %>% 
+              dplyr::select(dataset_id, lat, long, region, ecozone_koppen_15),
+            by = "dataset_id") %>%
+  dplyr::select(-varhp) %>%
+  unnest(data_merge)
+
+# histogram samples
+data_h1 %>%
+  dplyr::select(dataset_id, age, region, ecozone_koppen_15, lat, long) %>%
+  group_by(region, ecozone_koppen_15, age) %>%
+  summarise(
+    n_samples = n()
+  ) %>%
+  ggplot(aes(x = age, y = n_samples, fill = ecozone_koppen_15)) +
+  geom_histogram(stat = "identity", 
+                 position = position_dodge()) +
+  scale_x_reverse() +
+  coord_flip() +
+  scale_fill_manual(values = palette_ecozones) +
+  facet_wrap(~region, scales = "free")
+
+
+# data spd
+
+data_h1 %>%
+  ggplot(aes(
+    x = age, 
+    y = spd, 
+    fill = ecozone_koppen_15
+  )) + 
+  geom_histogram(stat = "identity", 
+                 position = position_dodge()) +
+  scale_x_reverse() +
+  coord_flip() +
+  scale_fill_manual(values = palette_ecozones) +
+  facet_wrap(~region, scales = "free")
+
+
 
 
 
 
 # 5.2 CIRCULAR BARCHARTS H1 SPATIAL
 # spatial input data for h1
-select_region = "Latin America"
+
 
 input_spatial <- summary_spatial_median %>% 
   mutate(ecozone_koppen_15 = factor(ecozone_koppen_15)) %>%
@@ -419,7 +464,6 @@ input_spatial <- summary_spatial_median %>%
   tidyr::complete(ecozone_koppen_15, 
                   nesting(predictor, variance_partition), 
                   fill = list(percentage_median = 0))
-
 
 
 circular_bar_h1 <- get_circular_barchart(input_spatial,
@@ -435,6 +479,174 @@ ggsave(
  scaling = 0.5,
  bg = "white"
 )
+
+
+# distribution plots using full dataset
+
+data_dist <- 
+  data_spatial_vis %>%
+  dplyr::filter(total_variance > lower_5_percent)  %>%
+ # dplyr::filter(region %in% select_region) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = c("time", "climate", "human"))) %>%
+  mutate(ecozone_koppen_15 = factor(ecozone_koppen_15))  %>%
+  rename(Individual_percent = `I.perc(%)`) %>%
+  pivot_longer(c(Unique_percent, Average.share_percent, Individual_percent), 
+               names_to = "var_part", 
+               values_to = "percentage") %>%
+  mutate(var_part = factor(var_part, 
+                           levels = c("Unique_percent", "Average.share_percent","Individual_percent")))
+
+# density of unique, average.share and individual percentage variation for predictors in different regions
+data_dist %>%
+  ggplot(aes(x = percentage)) +
+  geom_density(aes(y = after_stat(count),
+                    col = var_part,
+                    fill = after_scale(alpha(colour, 0.4)) )
+                    ) +
+  facet_wrap(~region+ predictor, ncol = 3, scales = "free")
+
+
+# density of individual, average.share, unique + histogram and data points per ecozone
+
+data_dist %>%
+ filter(region %in% select_region) %>%
+  ggplot(aes(x = predictor, y  = percentage)) + 
+  ggdist::stat_halfeye(
+    aes(color = predictor,
+        fill = after_scale(lighten(color, .1))),
+   # adjust = .5,
+    width = .5,
+    .width = 0,
+    justification = -.7,
+    point_colour = NA) +
+  geom_boxplot(
+    aes(color = ecozone_koppen_15,
+        color = after_scale(darken(color, .1)),
+        fill = after_scale(desaturate(lighten(color, .8), .4))
+        ),
+    width = .6,
+    outlier.shape = NA
+  ) +
+  
+  geom_point(
+    aes(color = ecozone_koppen_15,
+        color = after_scale(darken(color, .1))),
+    fill = "white",
+    shape = 21,
+    stroke = .4,
+    size = 2,
+    position = position_dodge(width = .6)
+  ) + 
+  geom_point(
+    aes(fill = ecozone_koppen_15),
+    color = "transparent",
+    shape = 21,
+    stroke = .4,
+    size = 2,
+    alpha = .3,
+    position = position_dodge(width = .6)
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+  scale_y_continuous(
+    limits = c(-10, 160),
+    expand = c(0, 0),
+    breaks = seq(0,160, by = 10)
+  ) +
+  scale_fill_manual(values = palette_ecozones) +
+  scale_color_manual(values = palette_ecozones) +
+  coord_flip() +
+  labs(x ="", y = "%") +
+  facet_wrap(~var_part) 
+
+
+# barchart of boxplot and datapoints
+
+data_dist <- data_spatial_vis %>%
+  dplyr::filter(total_variance > lower_5_percent)  %>%
+  dplyr::filter(region %in% select_region) %>%
+  mutate(predictor = factor(predictor, levels = c("time", "climate", "human"))) %>%
+  mutate(ecozone_koppen_15 = factor(ecozone_koppen_15))  %>%
+  rename(Individual_percent = `I.perc(%)`) 
+
+data_dist  %>%
+  ggplot(aes(x = predictor, y  = Unique_percent)) + 
+  #add lines for every 10 percent
+  geom_hline(
+    aes(yintercept = y), 
+    data.frame(y = seq(0, 100, by = 20)),
+    color = "lightgrey"
+  ) + 
+  geom_boxplot(
+    aes(color = ecozone_koppen_15,
+        fill = ecozone_koppen_15
+        ),
+    width = .6,
+    outlier.shape = NA,
+    alpha = .5
+  ) +
+  
+  geom_point(
+    aes(color = ecozone_koppen_15,
+        fill = ecozone_koppen_15),
+    shape = 21,
+    stroke = .4,
+    size = 2,
+    alpha = 0.5,
+    position = position_dodge(
+      width = .6)
+  ) + 
+ 
+  scale_y_continuous(
+    limits = c(-10, 100),
+    expand = c(0, 0),
+    breaks = seq(0,100, by = 10)
+  ) +
+  scale_fill_manual(values = palette_ecozones) +
+  scale_color_manual(values = palette_ecozones) +
+  coord_flip()+
+  coord_polar() +
+  theme_minimal() +
+  geom_segment(
+    aes(x = predictor,
+        y = 0,
+        xend = predictor,
+        yend = 100
+    ),
+    linetype = "dashed",
+    linewidth = 0.3,
+    color = "grey50"
+    
+  ) +
+
+  annotate("text",
+           x = rep(seq(1,3, by = 1),6),
+           y = rep(seq(0,100, by = 20),3),
+           label = rep(paste0(seq(0,100, by = 20), " %"),3), 
+           vjust = 0,
+           size = 2) +
+  theme(
+    legend.position = "none",
+    legend.title = element_text(size = 8),
+    legend.text = element_text(size = 7),
+    legend.key.size = unit(0.2, "cm"),
+    panel.grid = element_blank(),
+    panel.grid.major.x = element_blank(),
+    axis.ticks = element_blank(),
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(colour = "grey30", size = 8, family = "sans", vjust = -3),
+    #axis.title.x = element_text(margin = margin(0, 0, -2, 0)),
+    text = element_text(color = "grey30"),
+    plot.title = element_text(family = "sans",size = 12, hjust = 0.5, margin = margin(0,0,0,0)),
+    plot.margin = unit(c(0.3, 0, 0, 0), "cm")
+  ) +
+  labs(x = "",
+       y = "")
+
+
+
 
 
 
@@ -575,3 +787,41 @@ ggsave(
   scaling = 0.5,
   bg = "white"
 )
+
+
+
+# post hoc procrustes analysis
+
+
+
+get_time_protest <- function(data_list){
+  
+  list_len <- seq_along(data_list) 
+  
+  vec1 <- (list_len + 1)[-length(list_len)]
+  vec2 <- (list_len-1)[-1]
+  age <- names(data_list)
+  name_list <- paste0(age[vec1],"-",age[vec2])
+  
+  time_protest <- list()
+  
+  for(i in seq_along(vec1)) {
+    
+    time_protest[[i]] <- vegan::protest(X = data_list[[vec1[i]]], 
+                                        Y = data_list[[vec2[i]]],
+                                        scores = "species",
+                                        symmetric = FALSE)  
+    
+    
+  }
+  names(time_protest) <- name_list
+  
+  return(time_protest)
+  
+}
+   
+data_m2 <- data_m2 %>%
+  mutate(protest_time = purrr::map(pca_analysis, .f = get_time_protest))
+
+data_m2$protest_time[[1]]
+         
