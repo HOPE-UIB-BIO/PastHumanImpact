@@ -19,6 +19,7 @@ options(max.print = 9999)
 # Sequence level ----
 estimates_detailed <-
   data_filtered %>%
+  dplyr::filter(!region == "Africa") %>% 
   dplyr::select(
     dataset_id,
     long,
@@ -200,13 +201,13 @@ estimates_to_be_saved <-
       calibrated_age_uncertainty_per_sample
       )
     )
-#write_csv(estimates_to_be_saved,
-#          file = paste(
-#            "Data_summary_outputs/Table/",
-#            "Data_summary_sequence_level_210823.csv",
-#            sep = ""
-#            )
-#          )
+write_csv(estimates_to_be_saved,
+          file = paste(
+            "Data_summary_outputs/Table/",
+            "Data_summary_sequence_level_210823.csv",
+            sep = ""
+            )
+          )
 
 # Continent level ----
 estimates_continent_level <-
@@ -293,18 +294,18 @@ estimates_continent_level <-
     ) %>%
   distinct()
 
-#write_csv(estimates_continent_level,
-#          file  = paste(
-#            "Data_summary_outputs/Table/",
-#            "Data_summary_continent_level_210823.csv",
-#            sep = ""
-#            )
-#          )
+write_csv(
+  estimates_continent_level,
+  file  = paste(
+    "Data_summary_outputs/Table/",
+    "Data_summary_continent_level_210823.csv",
+    sep = ""
+  )
+)
 
 # Chroncontrol type ----
 chron_type <-
   estimates_detailed %>%
-  dplyr::filter(!region == "Africa") %>% 
   dplyr::select(region, chron_control_format) %>%
   dplyr::mutate(chroncontroltype = 
                   purrr::map(
@@ -320,25 +321,24 @@ chron_type <-
   dplyr::arrange(region, chroncontroltype) %>%
   dplyr::ungroup()
 
-#write_csv(chron_type,
-#          file = paste(
-#            "Data_summary_outputs/Table/",
-#            "Data_summary_chroncontrol_types_continent_level_210823.csv",
-#            sep = "")
-#          )
+write_csv(chron_type,
+          file = paste(
+            "Data_summary_outputs/Table/",
+            "Data_summary_chroncontrol_types_continent_level_210823.csv",
+            sep = "")
+          )
 
 dep_env <-
   estimates_detailed %>%
-  dplyr::filter(!region == "Africa") %>% 
   dplyr::select(region, depositionalenvironment) %>%
   dplyr::group_by(region) %>%
   dplyr::distinct() %>%
   dplyr::arrange(region, depositionalenvironment) %>%
   dplyr::ungroup()
-#write_csv(dep_env,
-#          file = paste(
-#            "Data_summary_outputs/Table/",
-#            "Data_summary_depositional_environment_continent_elvel_210823.csv",
-#            sep = ""
-#            )
-#          )
+write_csv(dep_env,
+          file = paste(
+            "Data_summary_outputs/Table/",
+            "Data_summary_depositional_environment_continent_elvel_210823.csv",
+            sep = ""
+            )
+          )
