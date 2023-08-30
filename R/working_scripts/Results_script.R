@@ -564,14 +564,15 @@ data_dist %>%
 
 # barchart of boxplot and datapoints
 
-data_dist <- data_spatial_vis %>%
+data_dist2 <- 
+  data_spatial_vis %>%
   dplyr::filter(total_variance > lower_5_percent)  %>%
   dplyr::filter(region %in% select_region) %>%
   mutate(predictor = factor(predictor, levels = c("time", "climate", "human"))) %>%
   mutate(ecozone_koppen_15 = factor(ecozone_koppen_15))  %>%
   rename(Individual_percent = `I.perc(%)`) 
 
-data_dist  %>%
+data_dist2  %>%
   ggplot(aes(x = predictor, y  = Unique_percent)) + 
   #add lines for every 10 percent
   geom_hline(
@@ -621,12 +622,6 @@ data_dist  %>%
     
   ) +
 
-  annotate("text",
-           x = rep(seq(1,3, by = 1),6),
-           y = rep(seq(0,100, by = 20),3),
-           label = rep(paste0(seq(0,100, by = 20), " %"),3), 
-           vjust = 0,
-           size = 2) +
   theme(
     legend.position = "none",
     legend.title = element_text(size = 8),
