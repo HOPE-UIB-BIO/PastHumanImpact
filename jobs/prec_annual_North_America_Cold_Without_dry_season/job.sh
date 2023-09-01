@@ -53,11 +53,14 @@ fit_hgam <- function(
   data_source <-
     data_source %>%
     dplyr::mutate(
-      `:=`(
-        !!group_var,
-        as.factor(get(group_var))
+      dplyr::across(
+        tidyselect::where(
+          is.character
+        ),
+        as.factor
       )
     )
+
   n_groups <-
     data_source %>%
     dplyr::distinct(get(group_var)) %>%
@@ -175,7 +178,7 @@ fit_hgam <- function(
 data_list <-
   readr::read_rds(
     here::here(
-      "LA/prec_annual_Asia_Arid_Desert/data_to_fit.rds"
+      "LA/prec_annual_North_America_Cold_Without_dry_season/data_to_fit.rds"
     )
   )
 
@@ -203,17 +206,17 @@ if (
       data_source = sel_data,
       x_var = data_list %>%
         purrr::chuck("x_var"),
-      y_var = y_var %>%
+      y_var = data_list %>%
         purrr::chuck("y_var"),
-      group_var = group_var %>%
+      group_var = data_list %>%
         purrr::chuck("group_var"),
-      weights_var = weights_var %>%
+      weights_var = data_list %>%
         purrr::chuck("weights_var"),
-      smooth_basis = smooth_basis %>%
+      smooth_basis = data_list %>%
         purrr::chuck("smooth_basis"),
-      error_family = error_family %>%
+      error_family = data_list %>%
         purrr::chuck("error_family"),
-      sel_k = sel_k %>%
+      sel_k = data_list %>%
         purrr::chuck("sel_k"),
       common_trend = TRUE,
       use_parallel = use_parallel,
@@ -223,7 +226,7 @@ if (
 
   readr::write_rds(
     data_mod,
-    file = here::here("LA/prec_annual_Asia_Arid_Desert/mod.rds")
+    file = here::here("LA/prec_annual_North_America_Cold_Without_dry_season/mod.rds")
   )
 }
 # ----------------------------------------------------------#
