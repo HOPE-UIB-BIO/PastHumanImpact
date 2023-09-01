@@ -234,13 +234,12 @@ data_ecozone_predicted <-
     )
 
 
-plot_temporal <-
+plot_temporal_dcca <-
   data_ecozone_predicted %>%
   ggplot2::ggplot(
     ggplot2::aes(
       x = age,
-      y = DCCA_axis_1,
-      group = climate_zone
+      y = DCCA_axis_1
       )
     ) +
   ggplot2::geom_ribbon(
@@ -249,6 +248,7 @@ plot_temporal <-
       ymin = lwr,
       ymax = upr,
       fill = climate_zone,
+      group = climate_zone
       ),
     colour = NA,
     alpha = 0.2
@@ -256,10 +256,15 @@ plot_temporal <-
   ggplot2::geom_line(
     data = data_ecozone_predicted,
     ggplot2::aes(
+      group = climate_zone,
       colour = climate_zone
       ),
-    size = 1
+    linewidth = 1
     ) + 
+  ggplot2::geom_smooth(
+    linewidth = 1.5,
+    colour = "red"
+  ) +
   ggplot2::theme_classic() +
   ggplot2::scale_fill_manual(
     values = palette_ecozone 
@@ -297,11 +302,217 @@ plot_temporal <-
     legend.position = "bottom"
   )
 
+#ggsave(
+#  plot_temporal_dcca,
+#  file = paste(
+#    "Data_summary_outputs/Figure/",
+#    "Europe_data_filtered_turnover_temporal_250823.tiff",
+#    sep = ""
+#    ),
+#  dpi = 400,
+#  compress = "lzw",
+#  width = 15,
+#  height = 15,
+#  unit = "cm"
+#  )
+
+
+# Rate of change (RoC)
+data_roc <-
+  targets::tar_read(
+    name = data_roc,
+    store = external_storage_targets
+    ) %>%
+  inner_join(
+    data_filtered %>%
+      dplyr::select(
+        dataset_id,
+        lat,
+        long,
+        region,
+        climate_zone = ecozone_koppen_5
+        ), 
+    by = "dataset_id"
+    ) %>% 
+  tidyr::unnest(PAP_roc) %>% 
+  dplyr::mutate_at("dataset_id", as_factor)
+
+
+climate_zone_vec <- 
+  c("Cold", "Temperate", "Polar", "Arid") %>% 
+  rlang::set_names()
+
+
+data_mod <-
+  purrr::walk(
+    .x = climate_zone_vec, 
+    .f = ~ {
+      sel_ecozone <- .x
+      
+      sel_data <-
+        data_roc %>%
+        dplyr::filter(climate_zone == sel_ecozone) 
+      
+      message(sel_ecozone)
+      
+      sel_data$dataset_id %>%
+        unique() %>%
+        length() %>%
+        message()
+      
+      if (
+        nrow(sel_data) > 0
+      ) {
+        # Fit GAM model
+        data_mod <-
+          REcopol::fit_hgam(
+            x_var = "Age",
+            y_var = "ROC",
+            group_var = "dataset_id",
+            smooth_basis = "tp",
+            data_source = sel_data,
+            error_family = "mgcv::Tweedie(p = 1.1)",
+            sel_k = 10, 
+            common_trend = TRUE,
+            use_parallel = FALSE
+          )
+        readr::write_rds(
+          x = data_mod,
+          file = paste0(
+            here::here(
+              "Data_summary_outputs/Data/Models_per_ecozone"
+            ),
+            "/",
+            sel_ecozone,
+            "_roc",
+            ".rds"
+          ),
+          compress = "gz"
+        )
+        
+        return(data_mod)
+      }
+    }
+  )
+
+# Predict the models
+data_mod_roc <-
+  purrr::map(
+    .x = climate_zone_vec,
+    .f = ~ readr::read_rds(
+      file = paste0(
+        here::here("Data_summary_outputs/Data/Models_per_ecozone"),
+        "/",
+        .x,
+        "_roc",
+        ".rds"
+      )
+    )
+  )
+
+data_ecozone_roc_predicted <-
+  purrr::map_dfr(
+    .x = climate_zone_vec,
+    .id = "climate_zone",
+    .f = ~ {
+      sel_ecozone <- paste(.x)
+      
+      message(sel_ecozone)
+      
+      sel_data <-
+        data_roc %>%
+        dplyr::filter(climate_zone == sel_ecozone) 
+      
+      # New data for predicting
+      new_data_general <-
+        tibble::tibble(Age = seq(0, 12000, by = 100))
+      data_pred <-
+        REcopol::predic_model(
+          model_source = data_mod_roc[[sel_ecozone]],
+          data_source = new_data_general %>%
+            dplyr::mutate(dataset_id = sel_data$dataset_id[1]),
+          exclude_var = data_mod_roc[[sel_ecozone]] %>%
+            gratia::smooths() %>%
+            stringr::str_subset(., "dataset_id")
+        ) %>%
+        dplyr::rename(RoC = fit)
+      return(data_pred)
+    }
+  )
+
+plot_temporal_roc <-
+  data_ecozone_roc_predicted %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = Age,
+      y = RoC
+    )
+  ) +
+  ggplot2::geom_ribbon(
+    data = data_ecozone_roc_predicted,
+    ggplot2::aes(
+      ymin = lwr,
+      ymax = upr,
+      fill = climate_zone,
+      group = climate_zone
+    ),
+    colour = NA,
+    alpha = 0.2
+  ) + 
+  ggplot2::geom_line(
+    data = data_ecozone_roc_predicted,
+    ggplot2::aes(
+      group = climate_zone,
+      colour = climate_zone
+    ),
+    linewidth = 1
+  ) + 
+  ggplot2::geom_smooth(
+    linewidth = 1.5,
+    colour = "red"
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozone 
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozone 
+  ) + 
+  ggplot2::labs(
+    x = "Time (cal yr BP)",
+    y = "Rate of Change (RoC)"
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq(0, 12000, 2000),
+    labels = seq(0, 12000, 2000)
+  ) +
+  
+  labs(fill = "Climate zone",
+       colour = "Climate zone") + 
+  
+  ggplot2::theme(
+    axis.text.x = ggplot2::element_text(
+      color = "black",
+      size = 12,
+      angle = 45,
+      hjust = 1
+    ),
+    axis.text.y = ggplot2::element_text(
+      color = "black",
+      size = 12
+    ),
+    axis.title = ggplot2::element_text(
+      color = "black",
+      size = 14
+    ),
+    legend.position = "bottom"
+  )
+
 ggsave(
-  plot_temporal,
+  plot_temporal_roc,
   file = paste(
     "Data_summary_outputs/Figure/",
-    "Europe_data_filtered_turnover_temporal_250823.tiff",
+    "Europe_data_filtered_roc_temporal_250823.tiff",
     sep = ""
     ),
   dpi = 400,
@@ -310,3 +521,5 @@ ggsave(
   height = 15,
   unit = "cm"
   )
+
+
