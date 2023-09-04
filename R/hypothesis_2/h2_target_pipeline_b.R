@@ -87,7 +87,7 @@ data_dummy_time <-
 # Load all results from SuperComputer
 vec_mods <-
   list.files(
-    here::here("jobs"),
+    here::here(data_storage_path, "h2_predictor_jobs"),
     pattern = "mod.rds",
     recursive = TRUE
   )
@@ -98,7 +98,7 @@ mod_list <-
     .x = vec_mods,
     .f = ~ readr::read_rds(
       here::here(
-        "jobs", .x
+        data_storage_path, "h2_predictor_jobs", .x
       )
     )
   ) %>%

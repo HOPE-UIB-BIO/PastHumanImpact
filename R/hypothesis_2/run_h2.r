@@ -84,6 +84,10 @@ data_targest_h2a_names <-
     name_simple = stringr::str_replace(name_data_fixed, "data_to_fit_mod_", ""),
   )
 
+
+.x <- data_targest_h2a_names$name[[1]]
+.y <- data_targest_h2a_names$name_simple[[1]]
+
 # Prepare jobs for each target
 purrr::walk2(
   .progress = TRUE,
@@ -95,7 +99,7 @@ purrr::walk2(
       try(
         dir.create(
           here::here(
-            "jobs", .y
+            data_storage_path, "h2_predictor_jobs", .y
           ),
           recursive = TRUE
         ),
@@ -118,7 +122,7 @@ purrr::walk2(
     readr::write_rds(
       data_target,
       here::here(
-        "jobs", .y, "/data_to_fit.rds"
+        data_storage_path, "h2_predictor_jobs", .y, "/data_to_fit.rds"
       )
     )
 
@@ -144,7 +148,7 @@ purrr::walk2(
     writeLines(
       job_slurm_custom,
       here::here(
-        "jobs", .y, "/job_slurm.sh"
+        data_storage_path, "h2_predictor_jobs", .y, "/job_slurm.sh"
       )
     )
 
@@ -169,7 +173,7 @@ purrr::walk2(
     writeLines(
       job_torque_custom,
       here::here(
-        "jobs", .y, "/job_torque.sh"
+        data_storage_path, "h2_predictor_jobs", .y, "/job_torque.sh"
       )
     )
   }

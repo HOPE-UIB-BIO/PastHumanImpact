@@ -58,9 +58,6 @@ data_targest_h2a_names <-
     name_simple = stringr::str_replace(name_data_fixed, "data_to_fit_mod_", ""),
   )
 
-.x <- data_targest_h2a_names$name[[1]]
-.y <- data_targest_h2a_names$name_simple[[1]]
-
 #----------------------------------------------------------#
 # 2. Run models locally -----
 #----------------------------------------------------------#
@@ -75,7 +72,7 @@ purrr::walk2(
     if (
       file.exists(
         here::here(
-          "jobs", .y, "mod.rds"
+          data_storage_path, "h2_predictor_jobs", .y, "mod.rds"
         )
       )
     ) {
@@ -139,7 +136,7 @@ purrr::walk2(
       readr::write_rds(
         data_mod,
         file = here::here(
-          "jobs", .y, "mod.rds"
+          data_storage_path, "h2_predictor_jobs", .y, "mod.rds"
         )
       )
 
