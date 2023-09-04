@@ -123,24 +123,53 @@ purrr::walk2(
     )
 
     # make job
-    job_template <-
+    job_slurm_template <-
       readLines(
         here::here(
-          "jobs/job_template.sh"
+          "jobs/job_template_slurm.sh"
         )
       )
 
-    job_custom <-
+    job_slurm_custom <-
       stringr::str_replace_all(
-        job_template,
+        job_slurm_template,
         "--NAME--",
         .y
+      ) %>%
+      stringr::str_replace_all(
+        "--TIME--",
+        "24"
       )
 
     writeLines(
-      job_custom,
+      job_slurm_custom,
       here::here(
-        "jobs", .y, "/job.sh"
+        "jobs", .y, "/job_slurm.sh"
+      )
+    )
+
+    job_torque_template <-
+      readLines(
+        here::here(
+          "jobs/job_template_torque.sh"
+        )
+      )
+
+    job_torque_custom <-
+      stringr::str_replace_all(
+        job_torque_template,
+        "--NAME--",
+        .y
+      ) %>%
+      stringr::str_replace_all(
+        "--TIME--",
+        "100"
+      )
+
+    writeLines(
+      job_torque_custom,
+      here::here(
+        "jobs", .y, "/job_torque.sh"
       )
     )
   }
@@ -149,13 +178,26 @@ purrr::walk2(
 paste0(
   "sbatch LA/",
   data_targest_h2a_names$name_simple,
-  "/job.sh"
+  "/job_slurm.sh"
 ) %>%
   paste(., collapse = ";") %>%
   writeLines(
     .,
     here::here(
       "jobs/sbatch_all.txt"
+    )
+  )
+
+paste0(
+  "qsub LA/",
+  data_targest_h2a_names$name_simple,
+  "/job_torque.sh"
+) %>%
+  paste(., collapse = ";") %>%
+  writeLines(
+    .,
+    here::here(
+      "jobs/qsub_all.txt"
     )
   )
 
@@ -168,7 +210,7 @@ paste0(
 targets::tar_manifest(
   script = here::here("R/hypothesis_2/h2_target_pipeline_b.R")
 ) %>%
-  View(data_targest_h2b_manifest)
+  View()
 
 targets::tar_visnetwork(
   script = here::here("R/hypothesis_2/h2_target_pipeline_b.R"),

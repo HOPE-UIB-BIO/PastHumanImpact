@@ -1,11 +1,12 @@
 #!/bin/tcsh
-#SBATCH -J --NAME-- # (job name)
-#SBATCH -o job.%j.out # (name of the job output file, %j expands to the job name)
-#SBATCH -N 1 # (Number of requested nodes)
-#SBATCH --ntasks-per-node 32 # (Number of requested cores per node)
-#SBATCH -t 24:00:00 # (Requested wall time)
+#PBS -k o
+#PBS -l nodes=1:ppn=20:compute20,walltime=100:00:00
+#PBS -q default
+#PBS -j oe
+#PBS -M bt715577@uni-bayreuth.de
+#PBS -N temp_cold_Latin_America_Polar_Tundra
 
-module load gnu10 R
+module load apps/R
 
 R --no-save <<EOF
 # ----------------------------------------------------------#
@@ -178,7 +179,7 @@ fit_hgam <- function(
 data_list <-
   readr::read_rds(
     here::here(
-      "LA/--NAME--/data_to_fit.rds"
+      "LA/temp_cold_Latin_America_Polar_Tundra/data_to_fit.rds"
     )
   )
 
@@ -226,7 +227,7 @@ if (
 
   readr::write_rds(
     data_mod,
-    file = here::here("LA/--NAME--/mod.rds")
+    file = here::here("LA/temp_cold_Latin_America_Polar_Tundra/mod.rds")
   )
 }
 # ----------------------------------------------------------#

@@ -127,7 +127,8 @@ auth_tibble <-
   tibble::tribble(
     ~name, ~path,
     "ondrej", "C:/Users/ondre/My Drive/",
-    "vfe032", "G:/My Drive/"
+    "vfe032", "G:/My Drive/",
+    "ondre", "H:/My Drive/"
   )
 
 data_storage_path <-
@@ -172,3 +173,7 @@ image_units <- "cm"
 # define pallets
 
 # define common color
+
+
+
+
