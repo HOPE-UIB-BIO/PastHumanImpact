@@ -85,8 +85,27 @@ data_dummy_time <-
 
 
 # Load all results from SuperComputer
-# //TODO write the code after models are done
-mod_list <- NULL
+vec_mods <-
+  list.files(
+    here::here("jobs"),
+    pattern = "mod.rds",
+    recursive = TRUE
+  )
+
+mod_list <-
+  purrr::map(
+    .progress = TRUE, ,
+    .x = vec_mods,
+    .f = ~ readr::read_rds(
+      here::here(
+        "jobs", .x
+      )
+    )
+  ) %>%
+  purrr::set_names(
+    nm = stringr::str_replace(vec_mods, "/mod.rds", "")
+  )
+
 
 #----------------------------------------------------------#
 # 4. Target pipeline -----
