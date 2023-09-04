@@ -45,22 +45,6 @@ vec_predictors <-
     "spd"
   )
 
-vec_responses <-
-  c(
-    "dataset_id",
-    "age",
-    "n0",
-    "n1",
-    "n2",
-    "n1_minus_n2",
-    "n2_divided_by_n1",
-    "n1_divided_by_n0",
-    "dcca_axis_1", "roc",
-    "density_turnover",
-    "density_diversity"
-  )
-
-
 #----------------------------------------------------------#
 # 1. Load and data -----
 #----------------------------------------------------------#
@@ -85,14 +69,6 @@ data_meta <-
     )
   )
 
-data_dummy_time <-
-  targets::tar_read(
-    name = "data_dummy_time",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  )
 
 #----------------------------------------------------------#
 # 2. Prepare ecozone data -----
@@ -121,9 +97,6 @@ data_valid_ecozones <-
     n_datasets = n_distinct(dataset_id)
   ) %>%
   dplyr::filter(n_datasets > 5) %>%
-  # //TODO remove this for full analysis. This is only temporary
-  #   to make workable results
-  dplyr::filter(n_datasets <= 32) %>%
   dplyr::arrange(n_datasets)
 
 data_dummy_ecozone_predictor <-
@@ -134,6 +107,7 @@ data_dummy_ecozone_predictor <-
   dplyr::mutate(
     region_zone = paste(region, ecozone_koppen_15, sep = "_"),
     full_name = paste(predictor, region_zone, sep = "_"),
+    data_name = paste0("data_to_fit_mod_", full_name)
   )
 
 
@@ -141,22 +115,20 @@ data_dummy_ecozone_predictor <-
 # 3. Prepare target factory for hGAM fitting -----
 #----------------------------------------------------------#
 
-tar_mapped_models <-
+tar_mapped_data <-
   tarchetypes::tar_map(
     unlist = FALSE,
     values = data_dummy_ecozone_predictor,
     names = full_name,
     targets::tar_target(
-      name = mod,
-      command = fit_hgam_per_region_and_group(
+      name = data_to_fit_mod,
+      command = get_data_for_indiv_hgams(
         data_raw = data_merge_unnest,
         data_error = data_pred_errors,
         sel_region = region,
         sel_group = ecozone_koppen_15,
         y_var = predictor,
-        sel_k = max_temporal_k,
-        use_parallel = TRUE,
-        verbose = TRUE
+        sel_k = max_temporal_k
       ),
     )
   )
@@ -207,67 +179,6 @@ list(
       data_merge, data_merge
     )
   ),
-  # add get data for procrustes sum-of-squares (m2) analysis
-  targets::tar_target(
-    name = data_m2,
-    command = get_data_m2(
-      data_source = data_for_hvar,
-      data_meta = data_meta,
-      min_samples = 5,
-      select_vars = vec_responses
-    )
-  ),
-  # fit hGAMs
-  tar_mapped_models,
-  # combine models
-  tarchetypes::tar_combine(
-    name = mod_list,
-    tar_mapped_models[["mod"]],
-    command = list(!!!.x),
-    iteration = "list"
-  ),
-  # predict all models
-  targets::tar_target(
-    name = mod_predicted,
-    command = get_predition_from_model_list(
-      data_source_list = mod_list,
-      dummy_table = data_dummy_time
-    )
-  ),
-  # add names to predicted models
-  targets::tar_target(
-    name = mod_predicted_with_names,
-    command = get_names_from_full_model_name(mod_predicted)
-  ),
-  # merge datasets
-  targets::tar_target(
-    name = data_for_hvar_h2,
-    command = get_data_for_h2_hvar(
-      data_m2 = data_m2,
-      data_predictors = mod_predicted_with_names
-    )
-  ),
-  # hierarchical variation partitioning
-  targets::tar_target(
-    name = output_hvar_h2,
-    command = run_hvarpart(
-      data_source = data_for_hvar_h2,
-      response_vars = NULL,
-      responce_dist = "m2",
-      predictor_vars = list(
-        human = c("spd"),
-        climate = c(
-          "temp_annual",
-          "temp_cold",
-          "prec_summer",
-          "prec_win"
-        ),
-        time = c("age")
-      ),
-      run_all_predictors = FALSE,
-      time_series = TRUE,
-      get_significance = FALSE,
-      permutations = 999
-    )
-  )
+  # prepare data for hGAM
+  tar_mapped_data
 )

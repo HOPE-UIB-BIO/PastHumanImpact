@@ -1,9 +1,8 @@
 get_names_from_full_model_name <- function(data_source) {
   data_source %>%
     dplyr:::mutate(
-      name_no_mod = stringr::str_sub(full_name, 5, 1e3),
       predictor = purrr::map_chr(
-        .x = name_no_mod,
+        .x = full_name,
         .f = ~ dplyr::case_when(
           stringr::str_detect(.x, "temp_annual") ~ "temp_annual",
           stringr::str_detect(.x, "temp_cold") ~ "temp_cold",
@@ -15,7 +14,7 @@ get_names_from_full_model_name <- function(data_source) {
         )
       ),
       region_raw = purrr::map_chr(
-        .x = name_no_mod,
+        .x = full_name,
         .f = ~ dplyr::case_when(
           stringr::str_detect(.x, "Africa") ~ "Africa",
           stringr::str_detect(.x, "Asia") ~ "Asia",
@@ -28,7 +27,7 @@ get_names_from_full_model_name <- function(data_source) {
       ),
       region = stringr::str_replace(region_raw, "\\.", " "),
       group = stringr::str_replace(
-        name_no_mod,
+        full_name,
         pattern = paste0(
           paste(predictor, region_raw, sep = "_"),
           "_"
@@ -36,6 +35,6 @@ get_names_from_full_model_name <- function(data_source) {
         replacement = ""
       )
     ) %>%
-    dplyr::select(-c(name_no_mod, region_raw)) %>%
+    dplyr::select(-c( region_raw)) %>%
     return()
 }
