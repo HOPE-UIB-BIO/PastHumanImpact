@@ -2,7 +2,7 @@ get_r2_summary_varpar <- function(data_source,
                                   sel_var,
                                   group_vars = c(
                                     "region",
-                                    "ecozone_koppen_5"
+                                    "ecozone_koppen_15"
                                   )) {
   assertthat::assert_that(
     sel_var %in% names(data_source),

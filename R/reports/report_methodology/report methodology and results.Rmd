@@ -1,18 +1,133 @@
 ---
-title: "Updated report HOPE Hypothesis 1 methodology & results"
+title: "Report HOPE methodology & results"
 output:
+  word_document:
+    toc: yes
   html_document:
-    toc: true
-    toc_float: true
+    toc: yes
+    toc_float: yes
 ---
 
-### Updates
 
-The objective of this report is to give an overview of data inputs, data processing steps, data analysis, and results to determine whether human activity has changed the fundamental ecological processes over the last 8500 years (Hypothesis 1 in the HOPE project). 
+```{r load-package, include = FALSE }
 
-From the first time the report was sent out, the methodological updates are not extensive, but there are some changes that might affect the overall results. The maximum age limit has been set to 8500 years. All record have been assigned ecozones. The density diversity and turnover variables have been included in the response data, and other pending and technical issues have been fixed. The data and results have been checked, and a new summary of the results is provided in the end. 
+library(tidyverse)
+library(usethis)
+library(targets)
+library(here)
+library(data.tree)
+library(flextable)
+library(webshot)
+library(officer)
+library(officedown) 
 
-This report contain more or less the final results that will form the basis for a proper manuscript draft.
+```
+
+```{r global-options, include = FALSE }
+
+# chuncks defaults
+knitr::opts_chunk$set(
+  echo       = FALSE,
+  message    = FALSE,
+  warning    = FALSE,
+  fig.align = "center",
+  flextable::set_flextable_defaults(
+  font.family = "Arial", font.size = 9, 
+  theme_fun = "theme_vanilla",
+  big.mark=""),
+  fig.path="figures/"
+)
+
+```
+
+
+```{r setup, include = FALSE}
+
+
+#----------------------------------------------------------#
+#  Load functions -----
+#----------------------------------------------------------#
+
+# list R functions and source them
+lapply(
+  list.files(
+    path = here::here("R/functions"), #have to use here::here(); does not work without it
+    pattern = "*.R",
+    recursive = TRUE,
+    full.names = TRUE
+  ),
+  source
+) %>%
+  invisible()
+
+
+#----------------------------------------------------------#
+#  Authorise the user -----
+#----------------------------------------------------------#
+
+# Define directory for external storage for users
+auth_tibble <-
+  tibble::tribble(
+    ~name, ~path,
+    "ondrej", "C:/Users/ondre/My Drive/",
+    "vfe032", "G:/My Drive/"
+  )
+
+data_storage_path <-
+  auth_tibble %>%
+  dplyr::filter(name == Sys.info()["user"]) %>%
+  purrr::pluck("path")
+
+
+external_storage_targets <-
+  paste0(
+    data_storage_path,
+    "_targets_h1"
+  )
+
+
+# set colours 
+# 13 colours for ecozones
+
+palette_ecozones <- c(Polar_Frost = "#004949",
+                      Polar_Tundra = "#009292",
+                      Cold_Without_dry_season = "#006ddb", 
+                      Cold_Dry_Summer = "#6db6ff",
+                      Cold_Dry_Winter = "#b6dbff",
+                      Temperate_Without_dry_season = "#117733",
+                      Temperate_Dry_Summer = "#999933" ,
+                      Temperate_Dry_Winter =  "#DDCC77",
+                      Arid_Desert = "#924900",
+                      Arid_Steppe = "#ffff6d",
+                      Tropical_Rainforest =  "#920000",
+                      Tropical_Monsoon = "#490092",
+                      Tropical_Savannah = "#b66dff")
+
+#human vs climate
+palette_pred <- c(human = "#663333", 
+                  climate = "#BBBBBB") 
+
+```
+
+```{r data ecozones}
+
+data_geo_koppen <- get_file_from_path(paste0(data_storage_path, "Data/ecoregions2017/data_geo_koppen.rds"))
+```
+
+
+```{r data settings}
+file_path <- paste0(data_storage_path, 
+                    "Data/assembly/data_assembly_V2-2022-05-23.rds")
+
+data_settings <- get_file_from_path(file_path) %>% 
+  pluck("setting")
+
+```
+
+
+
+
+The objective of this report is to give an overview of data inputs, data processing steps, data analysis, and results to determine whether human activity has changed the fundamental ecological processes over the last 8500 years (Hypothesis 1), and to further assess if interrelationship between fundamental ecosystem properties have significantly changed during this time (Hypothesis 2). 
 
 
 <br>
@@ -24,94 +139,13 @@ This report contain more or less the final results that will form the basis for 
 
 ### FOSSILPOL
 
-The compilation of the main pollen dataset for our analysis is performed a priori.
-Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org). Some additional data are from private owners in areas with data gaps, which we have limited access to use. We do not have the intellectual property rights to make these data public available. Therefore, only the derivatives of the analysis can be publicly shared. Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset.  
-
-### Harmonisation tables
-
-An important step in FOSSILPOL to obtain a standardised pollen data set within and across regions is the harmonisation of pollen types. Different analysts have different backgrounds and schools using different nomenclature, and the level of pollen taxonomic identifications and names can vary widely. To be able to make numerical comparisons of different pollen records, the level of pollen taxonomy should be similar. Consequently, pollen harmonisation tables have been produced for different regions to try to minimise biases related to this. The regional harmonisation tables created in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, and the Indo-Pacific region (Birks et al. harmonisation paper). These tables are used as input in the Fossilpol workflow above ([see Fossilpol step_by_step guide](https://hope-uib-bio.github.io/FOSSILPOL-website/step_by_step_guide.html)).
-<br>
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-library(tidyverse)
-library(usethis)
-library(targets)
-library(here)
-library(colorspace)
-library(colorBlindness)
-library(data.tree)
-library(kableExtra)
-library(htmltools)
-
-# list R functions and source them
-lapply(
-  list.files(
-    path = here::here("R/functions"),
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-) %>%
-  invisible()
-
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
-  )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
-)
+The compilation of a pollen dataset for our analysis is performed a priori.
+Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org). Some additional data are from private owners in areas with data gaps, which we have limited access to use. We do not have the intellectual property rights to make these data public available. Therefore, only the derivatives of the analysis can be publicly shared. Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset. This input data are further filter during the data processing steps in HOPE to get the final collection of a standardized dataset of high data quality we can use further in our data analyses.  
 
 
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
-
-# set colours 
-# five main ecozones
-palette_eco <- c("#222255", "#009988", "#117733", "#DDCC77", "#CC6677") 
-#human vs climate
-palette_pred <- c("#663333", "#BBBBBB") 
-
-```
-
-```{r echo = FALSE}
-
-data_geo_koppen <- get_file_from_path(paste0(data_storage_path, "HOPE_Hypothesis1/Data/ecoregions2017/data_geo_koppen.rds"))
-```
+```{r table settings}
 
 
-```{r echo = FALSE}
-file_path <- paste0(data_storage_path, "HOPE_Hypothesis1/Data/assembly/data_assembly-2022-05-23.rds")
-
-data_settings <- get_file_from_path(file_path) %>% 
-  pluck("setting")
-```
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-options(knitr.table.format = "html") 
 
 tab_gen <- data_settings$general %>% 
   unlist %>% 
@@ -145,40 +179,59 @@ overview_table <- tab_gen %>%
               mutate(Selection = as.character(Selection))) %>%
   full_join(tab_site %>% 
               mutate(Selection = as.character(Selection))) %>%
-  mutate(Selection = ifelse(Selection == 1, TRUE, Selection))
+  mutate(Selection = ifelse(Selection == 1, TRUE, Selection)) %>%
+  mutate(Settings = c(rep("General",7), 
+                       rep("Neotoma", 8), 
+                       rep("Age-depth\n models", 9), 
+                       rep("Site filtering", 12)))
 
-overview_table %>%
-  kableExtra::kbl(booktabs = TRUE, caption = "Table 1: Selection of settings applied in FOSSILPOL") %>%
-  kableExtra::kable_paper(full_width = FALSE)  %>%
-  kableExtra::pack_rows("General", 1, 7) %>%
-  kableExtra::pack_rows("Neotoma", 8, 15) %>%
-  kableExtra::pack_rows("Age-depth\n models", 16, 24) %>%
-  kableExtra::pack_rows("Site filtering", 25, 36)
+overview_table %>% 
+  flextable::as_grouped_data(groups = c("Settings"), 
+                             columns = NULL) %>%
+  flextable::flextable() %>%
+  flextable::set_caption("Table 1: Selection of settings applied in FOSSILPOL") %>%
+  flextable::add_footer_lines("Data download: 23-05-22") %>%
+  flextable::autofit()
+ 
 
 ```
+
+### Harmonisation tables
+
+An important step in FOSSILPOL to obtain a standardised pollen data set within and across regions is the harmonisation of pollen types. Different analysts have different backgrounds and schools using different nomenclature, and the level of pollen taxonomic identifications and names can vary widely. To be able to make numerical comparisons of different pollen records, the level of pollen taxonomy should be similar. Consequently, pollen harmonisation tables have been produced for different regions to try to minimise biases related to this. The regional harmonisation tables created in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, and the Indo-Pacific region (Birks et al. harmonisation paper). These tables are used as input in the Fossilpol workflow above ([see Fossilpol step_by_step guide](https://hope-uib-bio.github.io/FOSSILPOL-website/step_by_step_guide.html)).
+<br>
+
+
 <br>
 <br>
 
-## Workflow for HOPE Hypothesis 1
+## Workflow for HOPE Hypothesis
 
-We use the [targets](https://books.ropensci.org/targets/) R-package to generate a reproducible workflow for all data processing, analysis, and visualisation of results in the project. For this purpose, we created a Github repository of the data analysis R-project called [HOPE_hypothesis1 in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1), which contains all the data, metadata, and R functions required to run this R-project.
+We use the [targets](https://books.ropensci.org/targets/) R-package to generate a reproducible workflow for all data processing steps, analysis of hypothesis 1 and 2, and visualisation of results in the project. We have created a Github repository of the data analysis R-project called [HOPE_hypothesis1 in Github](https://github.com/HOPE-UIB-BIO/HOPE_Hypothesis1), which contains all the data, metadata, and R functions required to run this R-project.
 
-We configured the output of targets to be stored in a shared folder in UiB Onedrive, while the scripts and functions for targets are stored in our Github repository. The targets are divided in many small steps with specialized functions to load necessary data, estimate the different variables or to structure the different subsets of the data. This will avoid the need to rerun major parts between us that take too long and has already been processed. If any changes are made in the functions, targets will automatically detect it and rerun the parts that depends on this change, and skip the up-to-date analysis. 
+We configured the targets folders with data to be saved in a shared folder on Google drive, while all the scripts and functions for running the targets are stored in our Github repository. The targets are divided in small steps with specialized functions to load necessary data, estimate the different variables, or to structure the different subsets of the data. This will avoid the need to rerun major parts between us that take too long and has already been processed. If any changes are made in the functions, targets will automatically detect it and rerun the parts that depends on this change, and skip the up-to-date analysis. 
 
 <br>
 
-The file structure in Github is
+The file structure in Github is set up for the two main hypotheses in HOPE:
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r project folder}
 # create paths
 path <- c(
-  "HOPE_Hypothesis1/",
-  "HOPE_Hypothesis1/___Init_project___.R",
-  "HOPE_Hypothesis1/_targets.R",
-  "HOPE_Hypothesis1/_targets_packages.R",
   "HOPE_Hypothesis1/HOPE_Hypothesis1.Rproj",
+  "HOPE_Hypothesis1/_targets.yaml",
+  "HOPE_Hypothesis1/README.md",
   "HOPE_Hypothesis1/R/",
-  "HOPE_Hypothesis1/renv/",
+  "HOPE_Hypothesis1/R/branching_pipeline/",
+  "HOPE_Hypothesis1/R/general_patterns_of_predictors/",
+  "HOPE_Hypothesis1/R/hypothesis_1/",
+  "HOPE_Hypothesis1/R/hypothesis_2/",
+  "HOPE_Hypothesis1/R/report_methodology",
+  "HOPE_Hypothesis1/R/report_validation/",
+  "HOPE_Hypothesis1/R/reports/",
+  "HOPE_Hypothesis1/R/working_scripts/",
+  "HOPE_Hypothesis1/R/___Init_project___.R",
+  "HOPE_Hypothesis1/R/00_Config_file.R",
   "HOPE_Hypothesis1/R/functions/",
   "HOPE_Hypothesis1/R/functions/climate/",
   "HOPE_Hypothesis1/R/functions/data_wrangling/",
@@ -186,8 +239,11 @@ path <- c(
   "HOPE_Hypothesis1/R/functions/hvarpart/",
   "HOPE_Hypothesis1/R/functions/modelling/",
   "HOPE_Hypothesis1/R/functions/PAPs/",
+  "HOPE_Hypothesis1/R/functions/procrustes/",
   "HOPE_Hypothesis1/R/functions/spd/",
-  "HOPE_Hypothesis1/R/functions/visualisation/"
+  "HOPE_Hypothesis1/R/functions/validation/",
+  "HOPE_Hypothesis1/R/functions/visualisation/",
+  "HOPE_Hypothesis1/renv/"
   )
   
 
@@ -195,24 +251,29 @@ path <- c(
 
 ```
 
-All that is needed when the R-project is set up, is to run the scripts `___init_project.R___` and `_targets.R`. This will install and load all the packages that are needed.
+When the R-project is set up, you need to run the scripts `___init_project.R___` and `00_Config_file.R`. This will install and load the R packages for used in this project, and provide the paths needed.
 <br>
 
 
-The targets are arranged in a order to prepare all the data needed for the main analysis in the end. 
+Two main targets pipelines are created to run hypothesis 1 and hypothesis 2, and output and meta data are saved in two separate targets folders. The pipelines are arranged in a order to prepare the input data needed for the main analysis in the end. The pipeline in hypothesis 1 contain the data processing steps. The final data input in hypothesis 1 is then used in hypothesis 2 pipeline.  
 
-1. The first steps of the workflow imports and load all data needed for the pre-processing data steps and analyses such as the final HOPE dataset compilation and other input tables e.g human event-types for different regions. 
+1. The first steps of the workflow imports and load all data, vectors, and settings needed for the following pre-processing data steps. The first filtering of datasets depend for example on number of sample numbers, number of pollen grains, chronology quality, and duration of sequences. 
 
-2. This is followed by data processing for each of the explanatory and response variables in H1: 
-- a) The largest pre-processing of data starts with preparation of the explanatory variable detecting past human presence and impact. This is a major analyses in itself. 
-- b) This follows by data extraction of palaeo-climate from the CHELSA paleoclimate database. This is modeled palaeo-climate data for each of the geographical location of the pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. 
-- c) It is followed by different targets that process all estimates of the response variables selected to get measures of ecosystem properties. In general, all data such as raw estimates and interpolated data are kept to allow careful checking and validation of output. 
+2. This is followed by data processing for each of the explanatory and response variables for the hypotheses 1 and 2 to be explored:
+- a) Preparation of the variable needed to detect past human presence and impact. This is a major analyses in itself. 
+- b) Data extraction of palaeo-climate from the CHELSA paleoclimate database. This is modeled palaeo-climate data for each of the geographical location of the pollen records. First time the function is run, it will download the data from a URL connection, and extract data for the climatic variables selected, and deleted the data that is not needed to save storage in local computer. 
+- c) Different targets that process all the estimates of pollen assemblage properties. 
 
-3. In the end, data is structure to fit the main analysis. This analysis is divided into two parts which we call the 
+3. In the end, we have a standardized and filter dataset to explore the two hypothesis in HOPE:
+
+Hypothesis 1 exists of two analysis called 
 - a) the spatial (within core) analysis, and 
 - b) the temporal analysis (a *spatial* or between core/sample analysis per timestep ca. every 500 years). 
 
+Hypothesis 2 exists on one major analysis.
+
 Several choices are made, which are described in the detail in the text below.
+
 <br>
 
 
@@ -244,7 +305,7 @@ First, a pollen diagram of each pollen record has been examined by a regional ex
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r human events table}
 
 event_table <- data.frame(Region = c("North America", "Europe", "Asia", "Indopasific"), 
                           `Event-type` = c(
@@ -253,9 +314,12 @@ event_table <- data.frame(Region = c("North America", "Europe", "Asia", "Indopas
                             paste("BI = Before Impact; FI = First Indication; FCu = First Cultivation; EI = Extensive Impact"),
                             paste("no_impact = No Impact; weak = Weak Impact; medium = Medium Impact; strong = Strong Impact")))
 
+
 event_table %>%
-  kbl(booktabs = TRUE, caption = "Table 2: Type of human events identified in pollen diagrams", align = "l") %>%
-  kable_paper(full_width = FALSE)
+  flextable::flextable() %>%
+  flextable::set_caption("Table 2: Type of human events identified in pollen diagrams") %>%
+  flextable::autofit()
+ 
 
 
 ```
@@ -272,9 +336,13 @@ Below is a figure that intends to represent the underlying raw data associated w
 <br>
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r figure of human events}
 
-data_events <- targets::tar_read(data_events_to_fit)
+data_events <-
+  targets::tar_read(
+    name = "data_events_to_fit",
+    store = external_storage_targets
+  )
 
 
 plot_data_events(
@@ -306,51 +374,47 @@ plot_data_events(
 
 #### *Detection using indicator taxa*
 
-The methodology for identifying past human activity in Latin America is slightly different. An extensive literature review has been devoted to the detection of pollen types that are associated with human activity. The composition of indicator groups varies across the continent, regions, and countries. Two tables are created from the literature review (see Table 3 and Table 4). A computer algorithm has been created to assess each pollen record, this algorithm traverses the combinations of taxa that are recorded along with the specific indicator groups, and determined if the signal of a pollen indicator for human activity is weak or strong based on a defined threshold.  
+The methodology for identifying past human activity in Latin America apply a different automated process to get past human events. An extensive literature review has been devoted to the detection of pollen types that are associated with human activity. The composition of indicator groups varies across the continent, regions, and countries. A computer algorithm has been created to assess each pollen record, this algorithm traverses the combinations of taxa that are recorded along with the specific indicator groups, and determined if the signal of a pollen indicator for human activity is weak or strong based on a defined threshold.  
 
-<br>
-
-Table 3 for human event indicators:  
-
-
-```{r echo = FALSE, warning = FALSE}
-human_indicator_table <- read.csv(paste0(data_storage_path,"Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"), encoding = 'latin1')
-
-human_indicator_table %>% 
-  dplyr::select(pollen.type:Evidence) %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "700px", height = "400px")
-```
-  
-<br>
-<br>
-
-Table 4 for human event indices:  
-
-
-```{r echo = FALSE, warning = FALSE}
-
-human_impact_table <- read.csv(paste0(data_storage_path,"Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"), encoding='latin1')
-
-human_impact_table %>% 
-  dplyr::select(HOPE.USE:REFERENCES, EVIDENCE) %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "700px", height = "400px")
-```
-
-<br>
 Two categories were created: i) 'human event indicators': a single taxa associated with human activity classified as 'weak' or 'strong' impact; ii) 'human event indices': a combination of particular taxon is classified as 'weak' or 'strong' impact. For each level of each pollen record, all indicators and indices were tested for its presence in the level and whole level we classified as "no impact", "weak impact" or "strong impact". Specifically, when one pollen grain of a human indicator is present, it is assigned as 'weak' and when more than 1 pollen grain of a strong impact indicator is present we assign it as 'strong'. In addition, the pollen-type *Pinus* was only considered as a human indicator outside of its native distribution. For indices, any number of pollen grain needs to present for that specific combination.
 
 <br>
 
+
+```{r human indicator table for LA, eval=FALSE, include=FALSE}
+#need to change this/ copy relevant tables into Google drive
+
+data_storage_LADP_human_indicators <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD_Human indicators_V9.csv"
+
+human_indicator_table <- read.csv(data_storage_LADP_human_indicators, encoding = 'latin1')
+
+
+human_indicator_table %>%
+  dplyr::select(pollen.type:Evidence) %>%
+  flextable::flextable() %>%
+  flextable::set_caption("Table 3: Human event indicators for Latin America") %>%
+  flextable::autofit()
+
+```
+  
+
+```{r human impact table for LA, eval=FALSE, include=FALSE}
+data_storage_LADP_human_impact <- "C:/Users/vfe032/OneDrive - University of Bergen/HOPE_data_copy/Hope_human_events_external_storage/LAPD-Human impact indices_V8.csv"
+
+human_impact_table <- read.csv(data_storage_LADP_human_impact, encoding='latin1')
+
+human_impact_table %>%
+  dplyr::select(HOPE.USE:REFERENCES, EVIDENCE) %>%
+  flextable::flextable() %>%
+  flextable::set_caption("Table 4: Human event indices for Latin America") %>%
+  flextable::autofit()
+
+```
+
+
 Summary figure of the events using indicator taxa in different ecozones in Latin America:  
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.align='left'}
-
-data_events <- targets::tar_read(data_events_to_fit)
-
+```{r figure of human events in LA}
 
 plot_data_events(
   data_source_events = data_events,
@@ -358,6 +422,7 @@ plot_data_events(
 )
 
 ```
+
 <br>
 <br>
 
@@ -373,18 +438,20 @@ SPD is estimated using `spd` function from `rcarbon` package for each distance c
 <br>
 <br>
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r table of regional age cutoff}
 
 age_cutoff_rc <- data.frame(
-    region = c("Europe", "Latin America", "Asia", "Africa", "North America", "Oceania"),
-    age_from = c(2000, 2000, 2000, 2000, 500, 500)
+    region = c("Europe", "Latin America", "Asia",  "North America", "Oceania"),
+    age_from = c(2000, 2000, 2000,  500, 500)
   )
 
 age_cutoff_rc %>%
-  kbl(booktabs = TRUE, caption = "Table 5: Minimum ages above which C14 data was removed (age_from) for different regions", align = "l") %>%
-  kable_paper(full_width = FALSE) 
+  flextable::flextable() %>%
+  flextable::set_caption("Table 5: Minimum ages above which C14 data was removed (age_from) for different regions") %>%
+  flextable::autofit()
 
 ```
+
 <br>
 <br>
 
@@ -393,30 +460,10 @@ In order to select distance from each pollen record, which will limit the area o
 For each distance class of SPD of each pollen record, one Redundancy Analysis (RDA) is estimated using `vegan::rda` function with event types as responses (binary) and SPD values as predictors. Next, R2 is estimated using `vegan::RsquareAdj` function for each distance class. Finally, the distance class with the highest R2 is selected as the representation of human presence, and indirectly human activity, for that pollen record.
 
 This approach is not perfect and it is neglecting topographic differences and presence of water bodies. However, this was selected as a balance between simplicity and generality, and to avoid unnecessary increase of complexity in choosing the distance from the records. See demonstration of this method [Detection of past humans](https://github.com/HOPE-UIB-BIO/HOPE_Archaeo_C14/blob/master/R/07_Methodology%20example.md).  
+
+We had to remove Africa as a region, because we do not have data of human events to estimate *past human presence*.
+
 <br>
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-# data_to_spd_plot <- tar_read(data_spd_full) %>%
-#   inner_join(targets::tar_read(data_meta) %>%
-#                            dplyr::select(dataset_id, 
-#                                          region, 
-#                                          ecozone_koppen_5), 
-#                        by = "dataset_id") %>%
-#   dplyr::select(dataset_id, spd, region, ecozone_koppen_5) %>%
-#   unnest(spd) %>%
-#   filter(!is.na(spd))
-
-# data_to_spd_plot %>%
-#   ggplot(aes(x = age, y = spd, col = ecozone_koppen_5)) +
-#   geom_point() +
-#   scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +  
-#   geom_smooth() +
-#   facet_wrap(~region, scales = "free") +
-#   theme_classic() +
-#   theme(legend.position = "bottom") 
-
-```
-
 <br>
 
 ### Paleo Climate
@@ -473,35 +520,45 @@ Conceptual figure to show the process:
 ![](figures/PAP_estimation.png)  
 
 <br>
+
+#### Equal spacing of variables
+
+All response variables have been estimated using the harmonised pollen records for each location. To obtain estimates of equal spacing of 500 years, we used linear interpolation. In the context of the temporal analysis of hypothesis 1 and hypothesis 2 we analyse samples distributed in space across time, and equal time steps are necessary.
+
+In order to choose a method of interpolation to obtain data on equal time steps, we compared generalise additive models (GAM), hierarchical generalised additive models (HGAM), and simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM or HGAM. The GAM or HGAM models sometime showed unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single models for each of the variable in all of the records (>1000), we choose the simplest linear interpolation method. Similar issues were detected when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). As some of the models did not converge and showed inconsistent patterns we use the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
+
+<br>
 <br>
 
-### Hierarchical variation partitioning
+### Numerical analysis of hypothesis 1 
 
-All response variables have been estimated using the harmonised pollen records for each location. To obtain estimates of equal spacing of 500 years, we used linear interpolation. In the context of the temporal analysis, where we analyse samples distributed in space across time, and equal time steps are necessary.
+#### Hierarchical variation partitioning
 
-In order to choose a method of interpolation to obtain data on equal time steps, we compared the results of GAM to simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM. The GAM model was able to show unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single GAM models for each of the variable in all of the records, we choose the simplest interpolation method. Similar issues were found when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). Some of the models did not converge and showed inconsistent results. As we cannot individually adjust all the models, we used the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
 
-Before the analysis We remove Africa as a region, because we do not have data of *past human presence*.
+To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of  different units. 
 
-To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of numerical variables in different units. 
-
-Depending on the type of analysis, the explanatory variables are either SPDs, time, and/or palaeoclimatic variables (see below). 
+Depending on the type of spatial or temporal analysis for hypothesis 1, the explanatory variables are either past human impact (SPDs), palaeoclimatic variables, and/or time (see below). 
 
 SPD is the variable of main interest as it represent past human presence. The palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures, and winter temperatures. These are selected as we considered them most relevant to represent major differences in climatic conditions in all the regions (in respect to differences in warm, cold, dry, wet, or regions with high seasonality). Time is represented by the ages of each pollen record, however, this is more difficult to interpret. We assume age may represent time dependent changes such as natural successions and/or ecological changes due to interaction between taxa.
 
 In the hierarchichal variation partitioning analysis, the predictor variables can be applied either as individual predictors or as groups of predictors. In our case, we run the analysis with *groups of predictors*. This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors. (The overall results is not very different from using individual predictors). 
 
-Statistical testing can be applied in two ways, both which shuffle the predictor variables. Using `time_series` set as TRUE, statistical testing is performed with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX) which has a cyclic behavior of samples to keep the stratigraphical order intact. If `time_series` is set as FALSE, the predictor variables will be randomly shuffled as many times set in the parameter `permutations` (hence it use the default permutation in the `rdcca.hp` package).
+Statistical testing can be applied in two ways, both which shuffle the predictor variables. Using `time_series` set as TRUE, statistical testing is performed with restricted Monte Carlo permutation for time series analysis (sensu ter Braak XXXX) which has a cyclic behavior of samples to keep the stratigraphical order intact. If `time_series` is set as FALSE, the predictor variables will be randomly shuffled as many times set in the parameter `permutations` (= the default permutation in the `rdcca.hp` package).
 
 The analysis is run in two different ways: 
 
 1) to analyse *spatial changes* which run the hierarchical variation partitioning within single record. 
-2) to analyse the *temporal patterns* in space for each of the 500 year time steps.
+2) to analyse the *temporal patterns* in space for each region of the 500 year time steps.
 
-In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analaysus will return NA for these specific time bins.
+In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analysis will return NA for these specific time bins.
 
 We use the adjusted R2 to assess the goodness of fit of models. Adjusted R2 is the modified version of R2 that correct for number of samples and predictors in the model. It is calculated using the Ezekiel formula adjR2 = 1 - (1-R2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan these are so called semipartial R2 (Legendre et al. 2011). Adjusted R2 can be negative,in case the adjR2 for predictors are negative we replace the values with 0 as these can be ignore. 
 
+### Numerical analysis of hypothesis 2
+
+To test if the interrelationship between the pollen assemblage properties have changed through time, we performed a principal component analysis (PCA) with scaling between variables for samples within each time step in different ecozones. We use the global Koppen-Geiger Ecozones division of 15 groups. Within each ecozone we perform procrustes analysis to compare the changes in PCA between all time steps. We create a distance matrix based on the sum-of-squares with symmetric scaling (m2). The focus is on scores from the pollen assemblage properties (= species scores). The m2 will represent a matrix of dissimilarity distances between the different time steps which we use further as response matrix in the hierarchical variation partitioning. 
+
+Hierarchical generalised additive models (HGAM) are used to create the general patterns of past human presence (SPDs) and palaeoclimate based on the individual sequences we have from the different ecozones. The predictions represent the general pattern of these variables in each ecozone which we then use further as explanatory variables in the hierachical variation partitioning to assess how much past humans, climate or time dependent processes explains the variation of changes among the correlations between ecosystem properties in the past (hence pollen assemblage properties). 
 
 <br>
 <br>
@@ -511,34 +568,54 @@ We use the adjusted R2 to assess the goodness of fit of models. Adjusted R2 is t
 
 In total, we have 1263 pollen records in the HOPE standardised dataset distributed across the different regions of North America, Europe, Asia, Latin America, and Oceania included in the analysis.
 
-Inspection of the models show there are models with a very poor fit (= 13 models/records) with negative total adjR2. These models are removed. There are still some models that have an adjR2 close to zero, which may give very high unique percentages above 100 (range of adjR2 is 0.005 to 1). To remove the uncertain data points, we defined a minimum threshold of the adjR2 using the lower 5 % quantile of all adjR2. This removes models with an adjR2 < 0.121 from the summary (= 63 models/records). This leaves us with 1184 models (locations) that are considered good enough to be included in the the overall summary. 
+Inspection of the models from spatial models of hypothesis 1 show there are models with a very poor fit with negative total adjR2 (= 13 models). These models are removed. There are still some models that have an adjR2 close to zero, which may give very high unique percentages above 100 (range of adjR2 is 0.005 to 1). To remove the uncertain data points, we defined a minimum threshold of the adjR2 using the lower 5 % quantile of all adjR2. This removes models with an adjR2 < 0.121 from the summary (= 63 models). This leaves us with 1184 models that are considered good enough to be included in the the overall summary. 
 
 The unique and average shared variances are recalculated as percentages of the total, and we summarise the results using the median unique and average shared percentages for the predictors in each ecozone in each region. If an ecozone have less than 5 records, it is not included in the summary. 
 
 The temporal analysis is conducted on the regional level, showing the unique and average shared percentages for the predictors of total variance over each 500 years time steps up to 8500 years.
 
+In the hypothesis 2 we have one model per ecozone, therefore we use directly the unique and avereage shared percentages of the total. 
 
 <br>
 <br>
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r data preparation of the results}
 
-# Import results
-output_temporal <- tar_read(output_hvar_temporal)
-output_spatial <- tar_read(output_hvar_spatial)
+# import results h1
+output_temporal_h1 <- targets::tar_read(
+  name ="output_hvar_temporal",
+  store = paste0(data_storage_path, "_targets_h1")
+  )
+output_spatial_h1 <- targets::tar_read(
+  name ="output_hvar_spatial",
+  store = paste0(data_storage_path, "_targets_h1"))
+  
+# import results h2
+output_hvar_h2 <-
+  targets::tar_read(
+    name = "output_hvar_h2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+# import meta data
+data_meta <- targets::tar_read(
+  name = "data_meta",
+  store = paste0(data_storage_path, "_targets_h1")
+)
 
-
-# Prepare  resulting tables 
+# Prepare output tables for visualisation and summary 
 # spatial
-data_spatial_vis <- output_spatial %>% 
-  left_join(tar_read(data_meta), 
+data_spatial_vis <- output_spatial_h1 %>% 
+  left_join(data_meta, 
             by = "dataset_id") %>%
   dplyr::select(dataset_id, 
                 lat, 
                 long, 
                 region, 
-                ecozone_koppen_5, 
+                ecozone_koppen_15, 
                 data_merge, 
                 varhp) %>%
   dplyr::mutate(summary_table = 
@@ -553,7 +630,7 @@ data_spatial_vis <- output_spatial %>%
                 ~replace(., .x < 0, 0))) %>%# negative variances can be ignored
   dplyr::select(-c(data_merge, varhp)) %>%
   mutate(p_value = readr::parse_number(`Pr(>I)`)) %>%
-  group_by(region, ecozone_koppen_5) %>%
+  group_by(region, ecozone_koppen_15) %>%
   mutate(n_records = length(unique(dataset_id))) %>%
   ungroup() %>%
   mutate(Unique_percent = Unique/total_variance *100,
@@ -571,7 +648,7 @@ data_spatial_vis <- output_spatial %>%
                 n_records)
 
 # temporal
-data_temporal_vis <- output_temporal %>%
+data_temporal_vis <- output_temporal_h1 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
   unnest(summary_table) %>%
@@ -616,16 +693,29 @@ data_spatial_vis <- data_spatial_vis %>%
 lower_5_percent <- data_spatial_vis$total_variance %>% 
   quantile(., probs = 0.050, na.rm = TRUE) 
 
+# h2 output
+data_h2_summary <- output_hvar_h2 %>%
+  dplyr::mutate(summary_table = 
+                  purrr::map(varhp, pluck("summary_table"))) %>%
+  unnest(summary_table) %>%
+  dplyr::mutate(total_variance =
+                  purrr::map_dbl(varhp, .f = . %>% pluck("varhp_output") %>% 
+                                   pluck("Total_explained_variation"))) %>%
+  mutate(across(Unique:`I.perc(%)`, ~replace(., .x < 0, 0))) %>% # negative variances can be ignored 
+  mutate(Unique_percent = Unique/total_variance *100,
+         Average.share_percent = Average.share/total_variance *100) %>%
+  dplyr::select(-c(data_merge, varhp)) %>%
+  ungroup()
 
 
 ```
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r extract median values for the results}
 
 # get summary tables for adjusted r2
 # define variable selection 
-group_vars_spatial <- c("predictor", "ecozone_koppen_5", "region")
+group_vars_spatial <- c("predictor", "ecozone_koppen_15", "region")
 group_vars_temporal <- c("predictor", "region", "age")
 
 sel_var <- c("total_variance",
@@ -656,16 +746,16 @@ r2_summary_temporal <- data_temporal_vis %>%
 summary_spatial_median <- 
   r2_summary_spatial %>%
   dplyr::select(predictor, 
-                ecozone_koppen_5, 
+                ecozone_koppen_15, 
                 region,
                 ends_with("median")) %>%
   pivot_longer(Unique_percent_median:Average.share_percent_median, 
                names_to = "variance_partition", 
                values_to = "percentage_median" ) %>%
   left_join(data_spatial_vis %>% 
-              dplyr::select(region, ecozone_koppen_5, n_records) %>% 
+              dplyr::select(region, ecozone_koppen_15, n_records) %>% 
               distinct(), 
-            by = c("ecozone_koppen_5", "region")) %>%
+            by = c("ecozone_koppen_15", "region")) %>%
   ungroup()
 
 
@@ -685,16 +775,20 @@ summary_temporal_median <-
             by = c("age", "region")) %>%
   ungroup()
 
-
+# filter spatial input data
+data_h2_vis <- data_h2_summary %>%
+  pivot_longer(c(Unique_percent, Average.share_percent), 
+               names_to = "variance_partition", 
+               values_to = "percentage")
 
 ```
 
-Figure 1-5 provide the regional summary of the results in the order North America, Europe, Asia (northern hemisphere), Latin America, and Oceania (southern hemisphere). The colors of the circular bar chart correspond to the ecozones displayed on the regional map. The clear (darker) color represent the unique median percentage, and the shaded (lighter) color represent the average shared variability between the predictors.Together, each bar represent the median percentage individual contribution for each ecozone. When the shaded color is large(r) than the clear color it indicate that most of the variability explained by this predictor is shared among all the predictors. The second figure show the unique and average shared contribution for humans and climate over the time steps in each region. If there is no shaded color it means the average shared contribution is low. Ecozones with less than 5 samples are not included as the summary statistics results will be based on very local signals (only 2-4 models/records).   
+Figure 1-5 provide the regional summary of the results in the order North America, Europe, Asia (northern hemisphere), Latin America, and Oceania (southern hemisphere). The colors of the circular bar chart correspond to the ecozones displayed on the regional map (for h1 at the moment). The clear (darker) color represent the unique median percentage, and the shaded (lighter) color represent the average shared variability between the predictors.Together, each bar represent the median percentage individual contribution for each ecozone. When the shaded color is large(r) than the clear color it indicate that most of the variability explained by this predictor is shared among all the predictors. The second figure show the unique and average shared contribution for humans and climate over the time steps in each region. If there is no shaded color it means the average shared contribution is low. Ecozones with less than 5 samples are not included as the summary statistics results will be based on very local signals (only 2-4 models/records).   
 
 <br>
 <br>
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r regional figure for North America}
 
 x_label <- c("Human", "Climate", "Time")
 
@@ -706,7 +800,7 @@ Figure 1: The summary results for North America.
 <br>
 <br>
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r regional figure for Europe}
 
 get_regional_combined_fig(select_region = "Europe")
 
@@ -716,7 +810,7 @@ Figure 2. The summary results for Europe.
 <br>
 <br>
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r regional figure for Asia}
 
 get_regional_combined_fig(select_region = "Asia")
 
@@ -726,7 +820,7 @@ Figure 3: The summary results for Asia
 <br>
 <br>
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r regional figure for Latin America}
 
 get_regional_combined_fig(select_region = "Latin America")
 
@@ -737,7 +831,7 @@ Figure 4: The summary results for Latin America.
 <br>
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r regional figure for Oceania}
 
 get_regional_combined_fig(select_region = "Oceania")
 
@@ -748,61 +842,93 @@ Figure 5: The summary results for Oceania.
 <br>
 <br>
 
-The summary for individual records in the spatial analysis (within each record):  
+Explorative figures of temporal changes in procrustes sum-of-square (m2):
 
-```{r echo = FALSE, warning = FALSE}
+<br>
+
+```{r figure of changes in procrustes sum-of-squares}
+
+data_m2 <-  targets::tar_read(
+    name = "data_m2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+
+data_m2 %>%
+  dplyr::select(m2_time_df, region, ecozone_koppen_15) %>%
+  unnest(cols = c(m2_time_df)) %>%
+  ggplot(aes(x = as.numeric(time), 
+             y = delta_m2, 
+             col = ecozone_koppen_15, 
+             fill = ecozone_koppen_15)) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_reverse() +
+  coord_flip() +
+  scale_color_manual(values = palette_ecozones, drop = FALSE) +
+  scale_fill_manual(values = palette_ecozones, drop = FALSE) +
+  facet_wrap(~region)
+
+```
+
+<br>
+<br>
+
+
+```{r summary table for individual records, eval=FALSE, include=FALSE}
 
 data_spatial_vis %>%
   dplyr::filter(total_variance > lower_5_percent) %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "800px", height = "400px")
+ flextable::flextable() %>%
+ flextable::set_caption("Table 6: Summary results for individual records in the spatial analysis (within each record)") %>%
+  flextable::autofit()
 
 ```
+
 <br>
 
-The median adjusted r2 summary for the spatial analysis calculated by grouping ecozones & regions:   
 
-```{r echo = FALSE, warning = FALSE}
+```{r summary table of the median results, eval=FALSE, include=FALSE}
 
   r2_summary_spatial %>%
-  dplyr::select(predictor, 
-                ecozone_koppen_5, 
+  dplyr::select(predictor,
+                ecozone_koppen_15,
                 region,
                 ends_with("median")) %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "800px", height = "400px")
+  flextable::flextable() %>%
+ flextable::set_caption("Table 7: The median adjusted r2 summary for the spatial analysis calculated by grouping ecozones & regions") %>%
+  flextable::autofit()
 
 ```
+
 <br>
 
-The summary for individual records in the temporal analysis (within each time step in different regions):  
+ 
 
-```{r echo = FALSE, warning = FALSE}
-
+```{r summary table for the temporal analysis, eval=FALSE, include=FALSE}
 
  data_temporal_vis %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "800px", height = "400px")
+ flextable::flextable() %>%
+ flextable::set_caption("Table 8: The summary for individual records in the temporal analysis (within each time step in different regions)") %>%
+  flextable::autofit()
 
 ```
+
 <br>
 
 
-The median adjusted r2 summary for the median analysis:
-
-```{r echo = FALSE, warning = FALSE}
+```{r summary table for the median results, eval=FALSE, include=FALSE}
 
   r2_summary_temporal %>%
-  dplyr::select(predictor, 
-                age, 
+  dplyr::select(predictor,
+                age,
                 region,
                 ends_with("median")) %>%
-  kable %>%
-  kable_styling("striped", full_width = F) %>% 
- scroll_box(width = "800px", height = "400px")
+  flextable::flextable() %>%
+  flextable::set_caption("Table 9: The median adjusted r2 summary for the median analysis") %>%
+  flextable::autofit()
 
 ```
 <br>
@@ -835,87 +961,14 @@ For the analysis within ecozones in regions, we extract the significant partitio
 
 ## Results
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-library(tidyverse)
-library(usethis)
-library(targets)
-library(here)
-library(colorspace)
-library(colorBlindness)
-library(data.tree)
-library(kableExtra)
-library(htmltools)
-
-# list R functions and source them
-lapply(
-  list.files(
-    path = here::here("R/functions"),
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-) %>%
-  invisible()
-
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
-  )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
-)
-
-
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
-
-# set colours 
-#colours <- protan(rainbow_hcl(5, start = 30, end = 300))
-#scale_fill_manual(values=colours) 
-
-#scale_fill_hue(c = 50, l = 70, h=c(30, 300)) # light
-#scale_fill_hue(c = 50, l = 50, h=c(30, 200)) # dark
-
-```
-
-
-
-```{r echo = FALSE}
-#load saved data
-results_hvar_temporal <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_temporal.rds")
-results_hvar_spatial <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_spatial.rds")
+```{r subset data}
 
 # filter subset Europe and relevant time period
-subset_europe <- results_hvar_spatial %>%
-  inner_join(tar_read(data_meta) %>% 
-               dplyr::select(dataset_id, ecozone_koppen_5, region), 
+subset_europe <- output_spatial_h1 %>%
+  inner_join(data_meta %>% 
+               dplyr::select(dataset_id, ecozone_koppen_15, region), 
              by = "dataset_id") %>%
-  dplyr::filter(region == "Europe") %>%
-  unnest(data_merge) %>%
-  filter(age >= 2000 & age <= 8500) %>%
-  nest(data_merge = c(age:spd))
+  dplyr::filter(region == "Europe") 
 
 
 ```
@@ -923,7 +976,7 @@ subset_europe <- results_hvar_spatial %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis for individual records in Europe, fig.show='hide'}
 
 subset_europe2 <- subset_europe %>%
   dplyr::mutate(mvpart = 
@@ -939,10 +992,10 @@ subset_europe2 <- subset_europe %>%
 
 
 
-```{r echo = FALSE , warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis grouped by ecozones in Europe, fig.show='hide'}
 
 subset_europe3  <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_merge) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_merge) %>%
   unnest(data_merge) %>%
   nest(data_merge = c(dataset_id, age:spd)) %>%
   mutate(mvpart = purrr::map(data_merge, .f = get_mvpart_model)) %>%
@@ -952,7 +1005,7 @@ subset_europe3  <- subset_europe2 %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r explorative analysis all record grouped as region, fig.show='hide'}
 
 full_dataset_europe <- subset_europe %>% 
   dplyr::select(-c(varhp)) %>%
@@ -966,7 +1019,7 @@ full_dataset_europe <- subset_europe %>%
 
 ### 1. Results from the analyses of individual records
 
-```{r echo = FALSE, , warning = FALSE, message = FALSE}
+```{r results individual records}
 #functions to extract summaries
 get_pcoa_score <- function(mod) {
   sc <- vegan::scores(mod, choices = 1, display = "sites") 
@@ -1000,12 +1053,12 @@ subset_europe2  <- subset_europe2 %>%
 
 # extract summary table
 summary_mrt_table <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, mrt_summary) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, mrt_summary) %>%
   unnest(mrt_summary)
 
 # numbers based on individual records by ecozones
 summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_5) %>%
+  group_by(ecozone_koppen_15) %>%
   summarise(tot_records = n(),
             spd_true =  sum(spd_var == TRUE),
             age_true = sum(age_var == TRUE),
@@ -1023,17 +1076,17 @@ summarise_by_ecozone <- summary_mrt_table %>%
 The summary results of the first PCOA axis against time show there are changes in the composition of ecosystem properties over time for individual sites (Figure 1). To see how spds represented as past human population vary across records, the individual curves are plotted against time between 2000 and 8500 years BP (Figure 2). First inspections looks reasonable.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA axis 1 plotted with time}
 # figure 1, MDS1 vs time
 mds_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_explore) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
   unnest(data_explore) %>%
   ggplot(aes(x = age, y = MDS1, group = dataset_id)) +
   scale_x_reverse() +
   coord_flip() +
   geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
   scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
-  facet_wrap(~ecozone_koppen_5, nrow = 1) +
+  facet_wrap(~ecozone_koppen_15, nrow = 1) +
   theme_bw()+
   theme(
     legend.position = "none"
@@ -1051,17 +1104,17 @@ Figure 1: Plot of the individual PCOA axis 1 for all records against time.
 
 
 
-```{r echo = FALSE}
+```{r SPD curves plotted with time}
 # figure 1, MDS1 vs time
 spd_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_explore) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
   unnest(data_explore) %>%
   ggplot(aes(x = age, y = spd, group = dataset_id )) +
   geom_line(aes(col = as.numeric(dataset_id))) +
   scale_x_reverse() +
   coord_flip() +
   #scale_colour_gradient2()+
-  facet_wrap(~ecozone_koppen_5, nrow = 1) +
+  facet_wrap(~ecozone_koppen_15, nrow = 1) +
   theme_bw() +
   theme(
     legend.position = "none"
@@ -1085,11 +1138,12 @@ The results of the MRT are summaried in one figure and two tables below. Overall
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r resulting partitions by MRT}
 
 summary_mrt_table %>% 
  # filter(spd_var == TRUE) %>%
-  ggplot(aes(x = tot_divisions, fill = ecozone_koppen_5)) +
+  ggplot(aes(x = tot_divisions, fill = ecozone_koppen_15)) +
+  scale_fill_manual(values = palette_ecozones) +
   geom_bar() +
   theme_bw()
 
@@ -1109,9 +1163,8 @@ The total number of records are counted for:
 - where both age and humans explains the significant partitions (spd_age_true)
 
 
-Table 1: Summarises the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+```{r summary table all}
 # summarise number of records with division based on spd and age 
 # numbers based on individual records for total European subset
 summarise_by_all <- summary_mrt_table %>%
@@ -1126,18 +1179,19 @@ summarise_by_all <- summary_mrt_table %>%
   mutate(percent = counts/tot_records*100)
 
 summarise_by_all %>%
-  kbl(booktabs = TRUE, caption = "Table 1: Summary of MRT results", align = "l") %>%
-  kable_paper(full_width = FALSE)
+  flextable::flextable() %>%
+  flextable::set_caption("Table 1: Summary of the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
+  flextable::autofit()
 
 ```
 
 
-Table 2: Summarises the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+
+```{r summary table ecozones}
 # numbers based on individual records by ecozones
 summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_5) %>%
+  group_by(ecozone_koppen_15) %>%
   summarise(tot_records = n(),
             spd_true =  sum(spd_var == TRUE),
             age_true = sum(age_var == TRUE),
@@ -1149,8 +1203,9 @@ summarise_by_ecozone <- summary_mrt_table %>%
   mutate(percent = counts/tot_records*100)
 
 summarise_by_ecozone %>%
-  kbl(booktabs = TRUE, caption = "Table 2: Summary of individual MRT results nested by ecozones", align = "l") %>%
-  kable_paper(full_width = FALSE)
+  flextable::flextable() %>%
+  flextable::set_caption("Table 2: Summary of the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
+  flextable::autofit()
 
 ```
 
@@ -1161,7 +1216,7 @@ summarise_by_ecozone %>%
 
  
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r plot results in PCOA diagrams}
 plot_results <- function(mrt_mod, pcoa_mod, data_merge, ecozone) {
   
   splits <- mrt_mod$where
@@ -1221,7 +1276,7 @@ subset_europe3 <- subset_europe3 %>%
   mutate(pcoa_fig = purrr::pmap(list(mvpart, 
                                 pcoa_mod,
                                 data_merge,
-                                ecozone_koppen_5),
+                                ecozone_koppen_15),
                                 .f = ~ plot_results(mrt_mod = ..1,
                                                   pcoa_mod = ..2, 
                                                   data_merge = ..3,
@@ -1231,46 +1286,18 @@ subset_europe3 <- subset_europe3 %>%
 ```
 
 
-Figures 4-7 display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
+Below figures display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-subset_europe3$pcoa_fig[[1]]
-
-```
-
-
-Figure 4. PCOA diagram for records in the Cold ecozone with significant MRT division display by the colours and ellipses. The MRT show the data is partition into 2 major groups, where humans (spd) is the most important predictor for this division (spd>= 0.2645 and spd < 0.2645).
-
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-subset_europe3$pcoa_fig[[2]]
+```{r PCOA diagram ecozones}
+subset_europe3$pcoa_fig
 
 ```
 
 
-Figure 5. PCOA diagram for records in the Temperate ecozone with significant MRT division display by the colours and ellipses. The MRT shows 2 major partitions determined by age (age >= 5250 and age < 5250).
+The following list show the results of the envfit with the PCOA model and age and time. 
 
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-subset_europe3$pcoa_fig[[3]]
-
-```
-
-Figure 6. PCOA diagram for records in the Polar ecozone with significant MRT division display by the colours and ellipses. The MRT indicates 4 significant partitions. The first is determined by spd >= 0.228 and spd < 0.228, second one is determined by spd< 0.07 & spd >0.07, the final split is determined by age < 7750 and >= 7750. 
-
-```{r echo = FALSE}
-subset_europe3$pcoa_fig[[4]]
-
-```
-
-Figure 7. PCOA diagram for records in the Arid ecozone with significant MRT division display by the colours and ellipses. 
-
-
-The following list show the results of the envfit with the PCOA model and age and time. The numbers are: 1 = Cold ecozone, 2 = Temperate ecozone, 3 = Polar ecozone, 4 = Arid ecozone. 
-
-```{r echo = FALSE}
+```{r results envfit for ecozones}
 subset_europe3$envfit
 
 ```
@@ -1281,7 +1308,7 @@ subset_europe3$envfit
 The next figure show the results for all records in one analyses for Europe. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA diagram for Europe}
 
 
 
@@ -1301,13 +1328,13 @@ full_dataset_europe$pcoa_fig[[1]]
 
 ```
 
-Figure 8. PCOA ordination diagram with all records and samples within Europe.
+
 
 
 The results of the envfit of the PCOA model with time and humans.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r results for envfit}
 full_dataset_europe$envfit[[1]]
 
 ```
@@ -1321,11 +1348,11 @@ For the summary of the individual records, past humans (spd) is important explai
 
 When analysing the data on larger spatial scale as records nested within the ecozones, the results show that past humans have affected the fundamental ecosystem properties in the Cold and Polar ecozones. Changes in the Polar region is more complex, and time dependent factors are also important in the partitioning, whereas in the Temperate and Arid ecozones, time is the most important variable for the variation of the data.  
 
-When putting all the records together, it becomes visible that overall differences in composition of ecosystem properties in Europe are better explained by past humans compared to time in Europe. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
+When putting all the records together, it is still possible to distinguish differences in composition of ecosystem properties in Europe explained by past humans. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
 
-This is interesting, because local changes explained by humans in smaller percent of the records, have had an effect on ecosystem properties that overrides the variation in ecosystem properties explained by time.
+This is interesting, because changes explained by humans in smaller percent of the records (local), have had an effect on ecosystem properties that seems to be possible to be scaled up to a larger scale.
 
-Though past humans seems to have effected the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. The results does not indicate that we will find that they statistically significantly alter fundamental ecosystem properties of the past, but past human activity did have an impact. 
+Though past humans have an observed impact on the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. Hence the results indicate that past human have not statistically significantly alter the fundamental ecosystem properties of the past. 
 
 
 Summary:

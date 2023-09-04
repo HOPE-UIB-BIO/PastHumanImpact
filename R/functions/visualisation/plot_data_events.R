@@ -4,24 +4,26 @@ plot_data_events <- function(data_source_events,
   if(data_raw == TRUE) {
     data <- data_source_events %>%
       unnest(data_to_fit) %>%
-      inner_join(targets::tar_read(data_meta) %>%
+      inner_join(targets::tar_read(name = "data_meta",
+                                   store = paste0(data_storage_path,"_targets_h1")) %>%
                    dplyr::select(dataset_id, 
                                  long, 
                                  lat, 
                                  region, 
-                                 ecozone_koppen_5), 
+                                 ecozone_koppen_15), 
                  by = "dataset_id") %>%
       filter(region == select_region) 
   } else {
     data <- 
       data_source_events %>%
       unnest(data) %>%
-      inner_join(targets::tar_read(data_meta) %>%
+      inner_join(targets::tar_read(name = "data_meta",
+                                   store = paste0(data_storage_path,"_targets_h1"))  %>%
                    dplyr::select(dataset_id, 
                                  long, 
                                  lat, 
                                  region, 
-                                 ecozone_koppen_5), 
+                                 ecozone_koppen_15), 
                  by = "dataset_id") %>%
       pivot_longer(bi:ei, names_to = "var_name", values_to = "value") %>%
       filter(region == select_region) %>%
@@ -37,7 +39,7 @@ plot_data_events <- function(data_source_events,
                 formula = y ~ s(x, bs = "cs"), 
                 method.args = list(family = 
                                      stats::binomial(link = "logit"))) +
-    facet_wrap(~ecozone_koppen_5) +
+    facet_wrap(~ecozone_koppen_15) +
     theme_classic() +
     theme(legend.position = "bottom") +
     labs(title = select_region, x = "")

@@ -2,17 +2,11 @@
 # input is raster data for ecozones
 
 get_map_region <- function(rasterdata = data_geo_koppen,
-                           select_region = "Europe") {
+                           select_region = "Europe",
+                           col_vec = palette_ecozones) {
   
   
-  # order ecozone to get the same colours for the different regions
-  order_ecozones <- c("Polar", "Cold", "Temperate", "Arid", "Tropical")
   
-  # data for ecozones; order ecozones
-  data_geo_koppen <- 
-    data_geo_koppen %>%
-    mutate(ecozone_koppen_5 = factor(ecozone_koppen_5, 
-                                     levels = order_ecozones))
   
   #regional limits
   region_limits <- tibble(
@@ -31,8 +25,8 @@ get_map_region <- function(rasterdata = data_geo_koppen,
     ggplot() +
     geom_raster(aes(x = x,
                     y = y,
-                    fill = ecozone_koppen_5)) +
-    scale_fill_manual(values = palette_eco, drop = FALSE) +
+                    fill = ecozone_koppen_15)) +
+    scale_fill_manual(values = col_vec, drop = FALSE) +
     coord_sf(expand = TRUE,
              ylim = c(boundary$ymin[1], boundary$ymax[1]),
              xlim = c(boundary$xmin[1], boundary$xmax[1])) +

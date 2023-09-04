@@ -1,8 +1,12 @@
 # circular barplot
 
 get_circular_barchart <- function(data,
-                                  fill_eco = palette_eco,
-                                  x_name = x_label){
+                                  y_var = "percentage", 
+                                  x_var = "predictor",
+                                  fill_var = "ecozone_koppen_15",
+                                  col_vec = palette_ecozones,
+                                  x_name = x_label,
+                                  title = "h1") {
   
 p <- data %>%
     ggplot() + 
@@ -13,23 +17,24 @@ p <- data %>%
       color = "lightgrey"
     ) +
     geom_col(data = data %>% 
-               dplyr::filter(variance_partition == "Unique_percent_median"), 
-             aes(x = predictor,
-                 y = percentage_median,
-                 fill = ecozone_koppen_5),
+               dplyr::filter(grepl("Unique_percent", variance_partition)), 
+             aes(x = get(x_var),
+                 y = get(y_var),
+                 fill = get(fill_var)),
              position_dodge(width = 0.9), alpha = 1) +
     geom_col(data = data %>% 
-               dplyr::filter(variance_partition == "Average.share_percent_median"),
-             aes(x = predictor,
-                 y = percentage_median,
-                 fill = ecozone_koppen_5),
+               dplyr::filter(grepl("Average.share_percent", variance_partition)),
+             aes(x = get(x_var),
+                 y = get(y_var),
+                 fill = get(fill_var)),
              position = position_dodge(width = 0.9), alpha = 0.4) +
-    scale_fill_manual(values = fill_eco, 
+    scale_fill_manual("",
+                      values = col_vec, 
                       drop = FALSE) +
     geom_segment(
-      aes(x = predictor,
+      aes(x = get(x_var),
           y = 0,
-          xend = predictor,
+          xend = get(x_var),
           yend = 50
       ),
       linetype = "dashed",
@@ -52,6 +57,9 @@ p <- data %>%
     theme_minimal()+
     theme(
       legend.position = "none",
+      legend.title = element_text(size = 8),
+      legend.text = element_text(size = 7),
+      legend.key.size = unit(0.2, "cm"),
       panel.grid = element_blank(),
       panel.grid.major.x = element_blank(),
       axis.ticks = element_blank(),
@@ -62,13 +70,14 @@ p <- data %>%
       plot.title = element_text(family = "sans",size = 12, hjust = 0.5, margin = margin(0,0,0,0)),
       plot.margin = unit(c(0.3, 0, 0, 0), "cm")
     ) +
+ 
     scale_x_discrete(label = x_name, 
                      drop = FALSE) +
     labs( 
-      # title = paste0(select_region),
+      title = title,
       x = "", 
       y = ""
-    )
+    ) 
   p
 
   }

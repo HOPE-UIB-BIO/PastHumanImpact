@@ -4,10 +4,25 @@
 
 
 
-# Import results
-output_temporal <- tar_read(output_hvar_temporal)
+# Read targets
 
-output_spatial <- tar_read(output_hvar_spatial)
+output_temporal <- targets::tar_read(output_hvar_temporal,
+                  store = paste0(
+                    data_storage_path,
+                    "_targets_h1"
+                  ))
+
+output_spatial <-  targets::tar_read(output_hvar_spatial,
+                                     store = paste0(
+                                       data_storage_path,
+                                       "_targets_h1"
+                                     ))
+
+data_meta <- targets::tar_read(data_meta,
+                               store = paste0(
+                                 data_storage_path,
+                                 "_targets_h1"
+                               ))
 
 # Import raster data ecozones for visualisation (if maps should display ecozones)
 
@@ -55,13 +70,13 @@ palette_pred <- c("#663333", "#BBBBBB")
 ###############################################################################
 # 1.1 Extract results spatial analysis
 data_spatial_vis <- output_spatial %>% 
-  left_join(tar_read(data_meta), 
+  left_join(data_meta, 
             by = "dataset_id") %>%
   dplyr::select(dataset_id, 
                 lat, 
                 long, 
                 region, 
-                ecozone_koppen_5, 
+                ecozone_koppen_15, 
                 data_merge, 
                 varhp) %>%
   dplyr::mutate(summary_table = 
@@ -76,7 +91,7 @@ data_spatial_vis <- output_spatial %>%
                 ~replace(., .x < 0, 0))) %>%# negative variances can be ignored
   dplyr::select(-c(data_merge, varhp)) %>%
   mutate(p_value = readr::parse_number(`Pr(>I)`)) %>%
-  group_by(region, ecozone_koppen_5) %>%
+  group_by(region, ecozone_koppen_15) %>%
   mutate(n_records = length(unique(dataset_id))) %>%
   ungroup() %>%
   mutate(Unique_percent = Unique/total_variance *100,
@@ -188,7 +203,7 @@ bobble_fig_all <- data_spatial_vis %>%
   geom_polygon(data = world, aes(x=long, y = lat, group = group), fill="grey", alpha=0.2) +
   geom_point(aes(x = long, 
                  y = lat, 
-                 color = ecozone_koppen_5, 
+                 color = ecozone_koppen_15, 
                  size = Unique_percent), 
              alpha=0.5) +
   scale_color_hue(c = 50, l = 60, h = c(30, 300))  +
@@ -214,7 +229,7 @@ bobble_filter_fig <-
   geom_polygon(data = world, aes(x=long, y = lat, group = group), fill="grey", alpha=0.2) +
   geom_point(aes(x = long, 
                  y = lat, 
-                 color = ecozone_koppen_5, 
+                 color = ecozone_koppen_15, 
                  size = Unique_percent), 
              alpha=0.5) +
   scale_color_hue(c = 50, l = 60, h = c(30, 300))  +
@@ -236,14 +251,14 @@ bobble_filter_fig
 bobble_filter2_fig <-
   data_spatial_vis %>%
   dplyr::filter(predictor == "human") %>%
-  dplyr::filter(total_variance > bobble_fig_all) %>%
+  dplyr::filter(total_variance > lower_5_percent) %>%
   dplyr::filter(p_value < 0.11) %>%
   mutate(Unique_percent = round(Unique_percent)) %>%
   ggplot() +
   geom_polygon(data = world, aes(x=long, y = lat, group = group), fill="grey", alpha=0.2) +
   geom_point(aes(x = long, 
                  y = lat, 
-                 color = ecozone_koppen_5, 
+                 color = ecozone_koppen_15, 
                  size = Unique_percent), 
              alpha=0.5) +
   scale_color_hue(c = 50, l = 60, h = c(30, 300))  +
@@ -259,6 +274,8 @@ bobble_filter2_fig <-
     legend.direction="horizontal"
   ) 
 
+bobble_filter2_fig
+
 ## Check temporal
 
 data_temporal_vis$total_variance %>% plot()
@@ -270,7 +287,7 @@ data_temporal_vis$total_variance %>% summary(., na.rm = TRUE)
 
 
 # define variable selection 
-group_vars_spatial <- c("predictor", "ecozone_koppen_5", "region")
+group_vars_spatial <- c("predictor", "ecozone_koppen_15", "region")
 
 group_vars_temporal <- c("predictor", "region", "age")
 
@@ -304,16 +321,16 @@ r2_summary_temporal <- data_temporal_vis %>%
 summary_spatial_median <- 
   r2_summary_spatial %>%
   dplyr::select(predictor, 
-                ecozone_koppen_5, 
+                ecozone_koppen_15, 
                 region,
                 ends_with("median")) %>%
   pivot_longer(Unique_percent_median:Average.share_percent_median, 
                names_to = "variance_partition", 
                values_to = "percentage_median" ) %>%
   left_join(data_spatial_vis %>% 
-              dplyr::select(region, ecozone_koppen_5, n_records) %>% 
+              dplyr::select(region, ecozone_koppen_15, n_records) %>% 
               distinct(), 
-            by = c("ecozone_koppen_5", "region")) %>%
+            by = c("ecozone_koppen_15", "region")) %>%
   ungroup()
 
 
@@ -352,22 +369,30 @@ colorblindr::cvd_grid()
 select_region = "Europe"
 
 
+order_ecozones <- c("Polar_Frost", "Polar_Tundra" ,"Cold_Without_dry_season" ,"Cold_Dry_Summer" , "Cold_Dry_Winter","Temperate_Without_dry_season", "Temperate_Dry_Summer", "Temperate_Dry_Winter" ,  "Arid_Desert" ,"Arid_Steppe" ,      "Tropical_Rainforest" ,"Tropical_Monsoon", "Tropical_Savannah")  
+
+palette_eco <- c("#004949","#009292","#117733", "#DDCC77",
+                 "#490092","#006ddb","#b66dff","#6db6ff","#b6dbff",
+                 "#920000","#924900","#999933","#ffff6d")
+
 order_predictors_spatial <- c("human", "climate", "time")
-order_ecozones <- c("Polar", "Cold", "Temperate", "Arid", "Tropical")
+
 x_label <- c("Human", "Climate", "Time")
 
 # filter spatial input data
 input_spatial <- summary_spatial_median %>% 
   mutate(predictor = factor(predictor, 
                             levels = order_predictors_spatial)) %>%
-  mutate(ecozone_koppen_5 = factor(ecozone_koppen_5, 
+  mutate(ecozone_koppen_15 = factor(ecozone_koppen_15, 
                                    levels = order_ecozones)) %>%
   dplyr::filter(region %in% select_region) %>%
   filter(n_records > 5)
 
-input_spatial$ecozone_koppen_5 %>% levels()
+input_spatial$ecozone_koppen_15 %>% levels()
 
-circular_bar_fig <- get_circular_barchart(input_spatial)
+circular_bar_fig <- get_circular_barchart(input_spatial, 
+                                          y_var = "percentage_median",
+                                          fill_var = "ecozone_koppen_15")
 circular_bar_fig
 
 ## Save figure
