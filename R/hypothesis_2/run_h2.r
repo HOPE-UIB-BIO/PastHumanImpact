@@ -210,7 +210,7 @@ paste0(
 targets::tar_manifest(
   script = here::here("R/hypothesis_2/h2_target_pipeline_b.R")
 ) %>%
-  View(data_targest_h2b_manifest)
+  View()
 
 targets::tar_visnetwork(
   script = here::here("R/hypothesis_2/h2_target_pipeline_b.R"),
