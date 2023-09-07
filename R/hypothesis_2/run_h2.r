@@ -84,10 +84,6 @@ data_targest_h2a_names <-
     name_simple = stringr::str_replace(name_data_fixed, "data_to_fit_mod_", ""),
   )
 
-
-.x <- data_targest_h2a_names$name[[1]]
-.y <- data_targest_h2a_names$name_simple[[1]]
-
 # Prepare jobs for each target
 purrr::walk2(
   .progress = TRUE,
@@ -130,7 +126,8 @@ purrr::walk2(
     job_slurm_template <-
       readLines(
         here::here(
-          "jobs/job_template_slurm.sh"
+          data_storage_path,
+          "h2_predictor_jobs/job_template_slurm.sh"
         )
       )
 
@@ -155,7 +152,8 @@ purrr::walk2(
     job_torque_template <-
       readLines(
         here::here(
-          "jobs/job_template_torque.sh"
+          data_storage_path,
+          "h2_predictor_jobs/job_template_torque.sh"
         )
       )
 
@@ -188,7 +186,8 @@ paste0(
   writeLines(
     .,
     here::here(
-      "jobs/sbatch_all.txt"
+      data_storage_path,
+      "h2_predictor_jobs/sbatch_all.txt"
     )
   )
 
@@ -201,7 +200,8 @@ paste0(
   writeLines(
     .,
     here::here(
-      "jobs/qsub_all.txt"
+      data_storage_path,
+      "h2_predictor_jobs/qsub_all.txt"
     )
   )
 
