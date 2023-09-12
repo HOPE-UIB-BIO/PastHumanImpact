@@ -74,6 +74,19 @@ data_meta <-
     )
   )
 
+# reclassify
+
+data_meta <- 
+  data_meta %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  ) 
+
 data_dummy_time <-
   targets::tar_read(
     name = "data_dummy_time",
@@ -118,6 +131,26 @@ list(
     name = data_m2,
     command = get_data_m2(
       data_source = data_for_hvar,
+      data_meta = data_meta,
+      min_samples = 5,
+      select_vars = vec_responses
+    )
+  ),
+  # get full chronology data for properties at even time steps 
+  targets::tar_target(
+    name = data_properties,
+    command = get_data_properties(
+      data_source_diversity = data_div_dcca_interpolated,
+      data_source_roc = data_roc_interpolated,
+      data_source_density = data_density_estimate,
+      used_rescale = TRUE
+      )
+  ),
+  # get m2 for full data properties
+  targets::tar_target(
+    name = data_full_m2,
+    command = get_data_m2(
+      data_source = data_properties,
       data_meta = data_meta,
       min_samples = 5,
       select_vars = vec_responses
