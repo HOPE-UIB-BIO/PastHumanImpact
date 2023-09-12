@@ -11,12 +11,12 @@ get_data_m2 <- function(data_source = data_for_hvar,
     ) %>%
     dplyr::left_join(
       data_meta %>%
-        dplyr::select(dataset_id, lat, long, region, ecozone_koppen_15),
+        dplyr::select(dataset_id, lat, long, region, sel_classification),
       by = "dataset_id"
     ) %>%
     tidyr::drop_na() %>%
     tidyr::nest(
-      data = -c("age", "ecozone_koppen_15", "region")
+      data = -c("age", "sel_classification", "region")
     ) %>%
     dplyr::mutate(
       n_samples = purrr::map_dbl(
@@ -39,7 +39,7 @@ get_data_m2 <- function(data_source = data_for_hvar,
       pca_analysis = pca_analysis %>%
         rlang::set_names(nm = data_for_h2$age)
     ) %>%
-    dplyr::group_by(region, ecozone_koppen_15) %>%
+    dplyr::group_by(region, sel_classification) %>%
     dplyr::summarise(
       pca_analysis = list(pca_analysis)
     ) %>%
