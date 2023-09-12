@@ -17,7 +17,6 @@ run_mvpart <- function(data,
                           xv = "1se", 
                           xval = nrow(data),
                           xvmult = 100,
-                       #   xv =  "1se",
                           all.leaves = TRUE,
                           data = data.frame(data))
   } else{
@@ -27,7 +26,6 @@ run_mvpart <- function(data,
                           xv = "1se", 
                           xval = nrow(data),
                           xvmult = 100,
-                       #   xv =  "1se",
                           all.leaves = TRUE,
                           data = data.frame(data))  
   }
