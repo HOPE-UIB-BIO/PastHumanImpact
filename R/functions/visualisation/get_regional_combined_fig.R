@@ -17,10 +17,15 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
   
   # spatial input data for h1
   input_spatial <- data_spatial_h1 %>% 
+    mutate(ecozone_koppen_15 = factor(ecozone_koppen_15)) %>%
     mutate(predictor = factor(predictor, 
                               levels = order_predictors_spatial)) %>%
+    filter(n_records > 5) %>%
     dplyr::filter(region %in% select_region) %>%
-    filter(n_records > 5)
+    tidyr::complete(ecozone_koppen_15, 
+                    nesting(predictor, variance_partition), 
+                    fill = list(percentage_median = 0))
+  
   
   circular_bar_h1 <- get_circular_barchart(input_spatial,
                                            y_var = "percentage_median",
@@ -28,7 +33,11 @@ get_regional_combined_fig <- function(data_spatial_h1 = summary_spatial_median,
   
   # input data for h2
   input_h2 <- data_hvar_h2 %>%
-    filter(region %in% select_region)
+    mutate(group = factor(group)) %>%
+    filter(region %in% select_region) %>%
+    tidyr::complete(group, 
+                    nesting(predictor, variance_partition), 
+                    fill = list(percentage = 0))
   
   circular_bar_h2 <- get_circular_barchart(input_h2,
                                            y_var = "percentage",

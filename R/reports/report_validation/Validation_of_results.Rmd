@@ -8,16 +8,16 @@ output:
 
 ## Validation of results
 
-Our results showed that humans have little effect on composition of ecosystem properties over time and the conclusion based on the our results are that past humans have not significantly changed ecosystem properties in the past. 
+Our results show that humans have little effect on composition of ecosystem properties over time and the conclusion based on the our results are that past humans have not significantly changed ecosystem properties in the past. 
 
-However, this raise some questions and these are:
-1. How does the composition of ecosystem properties look like, and are there any changes in the composition of ecosystem properties over time?
+We like to find out:
+1. How does the composition of ecosystem properties look like, and are there any visual changes in the composition of ecosystem properties over time?
 2. How do the spd look like, and are they useful indices of past humans?
-3. Are our analyses robust and can we have good confidence in the results?
+3. Are our results robust?
 
-## Methods
+## Explorative data analysis
 
-To answer these questions, we have added some explorative analyses of the ecosystem properties to try to get a better visual understanding of the data. 
+To answer these questions, we did some explorative analyses of the ecosystem properties to try to get a better visual understanding of the data. 
 
 To address the first question how the composition of ecosystem properties look like and to find out if there are any changes in composition of ecosystem properties, we have performed unconstrained PCOA (or db-PCA) using Gower distances, and plotted the first PCOA axis with time for the individual records (but aggregated within Ecozones to avoid too many figures). We also explore the spds by plotting them with time to see how they look like.
 
@@ -25,96 +25,21 @@ To find out if spds are able to explain any changes in the data, we use multivar
 
 We use only the subset of Europe for exploration. The analyses are run three times on different scales: 1) for all records individually (396 individual records), 2) for records nested within ecozones (4 subsets), and 3) whole region (the full subset).
 
-The results of the individual PCOA analysis of each record is not shown. Instead the first PCOA axis is plotted against time to see if there are changes in the composition of ecosystem properties over time. 
+The results of the individual PCOA analysis of each record is not shown. Instead, the first PCOA axis is plotted against time to see if there are changes in the composition of ecosystem properties over time. The overall results of the MRTs for individual records are summaried in tables. 
 
-The overall results of the MRTs for individual records are summaried in tables. 
-
-For the analysis of the records nested within ecozones and for the whole region, we extract the significant partitions from the MRT analyses, and explore the results using ordination diagrams. In addition, we passively fit the explanatory variables, time and spds, to the ordination models to help explore the results. 
+For the analysis within ecozones in regions, we extract the significant partitions from the MRT analyses, and explore the results using ordination diagrams. In addition, we passively fit the explanatory variables, time and spds, to the ordination models to help explore the results. 
 
 
 ## Results
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-library(tidyverse)
-library(usethis)
-library(targets)
-library(here)
-library(colorspace)
-library(colorBlindness)
-library(data.tree)
-library(kableExtra)
-library(htmltools)
-
-# list R functions and source them
-lapply(
-  list.files(
-    path = here::here("R/functions"),
-    pattern = "*.R",
-    recursive = TRUE,
-    full.names = TRUE
-  ),
-  source
-) %>%
-  invisible()
-
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/"
-  )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-if (length(data_storage_path) > 1) {
-  data_storage_path <- data_storage_path[2]
-}
-
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-
-# set configuration for _target storage
-tar_config_set(
-  store = external_storage_targets
-)
-
-
-min_age <- 0
-max_age <- 12e3
-timestep <- 500
-
-# set colours 
-#colours <- protan(rainbow_hcl(5, start = 30, end = 300))
-#scale_fill_manual(values=colours) 
-
-#scale_fill_hue(c = 50, l = 70, h=c(30, 300)) # light
-#scale_fill_hue(c = 50, l = 50, h=c(30, 200)) # dark
-
-```
-
-
-
-```{r echo = FALSE}
-#load saved data
-results_hvar_temporal <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_temporal.rds")
-results_hvar_spatial <- read_rds("C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/results_hvar_spatial.rds")
+```{r subset data}
 
 # filter subset Europe and relevant time period
-subset_europe <- results_hvar_spatial %>%
-  inner_join(tar_read(data_meta) %>% 
-               dplyr::select(dataset_id, ecozone_koppen_5, region), 
+subset_europe <- output_spatial_h1 %>%
+  inner_join(data_meta %>% 
+               dplyr::select(dataset_id, ecozone_koppen_15, region), 
              by = "dataset_id") %>%
-  dplyr::filter(region == "Europe") %>%
-  unnest(data_merge) %>%
-  filter(age >= 2000 & age <= 8500) %>%
-  nest(data_merge = c(age:spd))
+  dplyr::filter(region == "Europe") 
 
 
 ```
@@ -122,7 +47,7 @@ subset_europe <- results_hvar_spatial %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis for individual records in Europe, fig.show='hide'}
 
 subset_europe2 <- subset_europe %>%
   dplyr::mutate(mvpart = 
@@ -138,10 +63,10 @@ subset_europe2 <- subset_europe %>%
 
 
 
-```{r echo = FALSE , warning = FALSE, message = FALSE, fig.show='hide'}
+```{r run explorative analysis grouped by ecozones in Europe, fig.show='hide'}
 
 subset_europe3  <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_merge) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_merge) %>%
   unnest(data_merge) %>%
   nest(data_merge = c(dataset_id, age:spd)) %>%
   mutate(mvpart = purrr::map(data_merge, .f = get_mvpart_model)) %>%
@@ -151,7 +76,7 @@ subset_europe3  <- subset_europe2 %>%
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE, fig.show='hide'}
+```{r explorative analysis all record grouped as region, fig.show='hide'}
 
 full_dataset_europe <- subset_europe %>% 
   dplyr::select(-c(varhp)) %>%
@@ -165,7 +90,7 @@ full_dataset_europe <- subset_europe %>%
 
 ### 1. Results from the analyses of individual records
 
-```{r echo = FALSE, , warning = FALSE, message = FALSE}
+```{r results individual records}
 #functions to extract summaries
 get_pcoa_score <- function(mod) {
   sc <- vegan::scores(mod, choices = 1, display = "sites") 
@@ -199,12 +124,12 @@ subset_europe2  <- subset_europe2 %>%
 
 # extract summary table
 summary_mrt_table <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, mrt_summary) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, mrt_summary) %>%
   unnest(mrt_summary)
 
 # numbers based on individual records by ecozones
 summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_5) %>%
+  group_by(ecozone_koppen_15) %>%
   summarise(tot_records = n(),
             spd_true =  sum(spd_var == TRUE),
             age_true = sum(age_var == TRUE),
@@ -222,17 +147,17 @@ summarise_by_ecozone <- summary_mrt_table %>%
 The summary results of the first PCOA axis against time show there are changes in the composition of ecosystem properties over time for individual sites (Figure 1). To see how spds represented as past human population vary across records, the individual curves are plotted against time between 2000 and 8500 years BP (Figure 2). First inspections looks reasonable.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA axis 1 plotted with time}
 # figure 1, MDS1 vs time
 mds_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_explore) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
   unnest(data_explore) %>%
   ggplot(aes(x = age, y = MDS1, group = dataset_id)) +
   scale_x_reverse() +
   coord_flip() +
   geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
   scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
-  facet_wrap(~ecozone_koppen_5, nrow = 1) +
+  facet_wrap(~ecozone_koppen_15, nrow = 1) +
   theme_bw()+
   theme(
     legend.position = "none"
@@ -250,17 +175,17 @@ Figure 1: Plot of the individual PCOA axis 1 for all records against time.
 
 
 
-```{r echo = FALSE}
+```{r SPD curves plotted with time}
 # figure 1, MDS1 vs time
 spd_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_5, data_explore) %>%
+  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
   unnest(data_explore) %>%
   ggplot(aes(x = age, y = spd, group = dataset_id )) +
   geom_line(aes(col = as.numeric(dataset_id))) +
   scale_x_reverse() +
   coord_flip() +
   #scale_colour_gradient2()+
-  facet_wrap(~ecozone_koppen_5, nrow = 1) +
+  facet_wrap(~ecozone_koppen_15, nrow = 1) +
   theme_bw() +
   theme(
     legend.position = "none"
@@ -284,11 +209,12 @@ The results of the MRT are summaried in one figure and two tables below. Overall
 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r resulting partitions by MRT}
 
 summary_mrt_table %>% 
  # filter(spd_var == TRUE) %>%
-  ggplot(aes(x = tot_divisions, fill = ecozone_koppen_5)) +
+  ggplot(aes(x = tot_divisions, fill = ecozone_koppen_15)) +
+  scale_fill_manual(values = palette_ecozones) +
   geom_bar() +
   theme_bw()
 
@@ -308,9 +234,8 @@ The total number of records are counted for:
 - where both age and humans explains the significant partitions (spd_age_true)
 
 
-Table 1: Summarises the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+```{r summary table all}
 # summarise number of records with division based on spd and age 
 # numbers based on individual records for total European subset
 summarise_by_all <- summary_mrt_table %>%
@@ -325,18 +250,19 @@ summarise_by_all <- summary_mrt_table %>%
   mutate(percent = counts/tot_records*100)
 
 summarise_by_all %>%
-  kbl(booktabs = TRUE, caption = "Table 1: Summary of MRT results", align = "l") %>%
-  kable_paper(full_width = FALSE)
+  flextable::flextable() %>%
+  flextable::set_caption("Table 1: Summary of the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
+  flextable::autofit()
 
 ```
 
 
-Table 2: Summarises the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.
 
-```{r echo = FALSE}
+
+```{r summary table ecozones}
 # numbers based on individual records by ecozones
 summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_5) %>%
+  group_by(ecozone_koppen_15) %>%
   summarise(tot_records = n(),
             spd_true =  sum(spd_var == TRUE),
             age_true = sum(age_var == TRUE),
@@ -348,8 +274,9 @@ summarise_by_ecozone <- summary_mrt_table %>%
   mutate(percent = counts/tot_records*100)
 
 summarise_by_ecozone %>%
-  kbl(booktabs = TRUE, caption = "Table 2: Summary of individual MRT results nested by ecozones", align = "l") %>%
-  kable_paper(full_width = FALSE)
+  flextable::flextable() %>%
+  flextable::set_caption("Table 2: Summary of the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
+  flextable::autofit()
 
 ```
 
@@ -360,7 +287,7 @@ summarise_by_ecozone %>%
 
  
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r plot results in PCOA diagrams}
 plot_results <- function(mrt_mod, pcoa_mod, data_merge, ecozone) {
   
   splits <- mrt_mod$where
@@ -420,7 +347,7 @@ subset_europe3 <- subset_europe3 %>%
   mutate(pcoa_fig = purrr::pmap(list(mvpart, 
                                 pcoa_mod,
                                 data_merge,
-                                ecozone_koppen_5),
+                                ecozone_koppen_15),
                                 .f = ~ plot_results(mrt_mod = ..1,
                                                   pcoa_mod = ..2, 
                                                   data_merge = ..3,
@@ -430,46 +357,18 @@ subset_europe3 <- subset_europe3 %>%
 ```
 
 
-Figures 4-7 display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
+Below figures display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-subset_europe3$pcoa_fig[[1]]
-
-```
-
-
-Figure 4. PCOA diagram for records in the Cold ecozone with significant MRT division display by the colours and ellipses. The MRT show the data is partition into 2 major groups, where humans (spd) is the most important predictor for this division (spd>= 0.2645 and spd < 0.2645).
-
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-subset_europe3$pcoa_fig[[2]]
+```{r PCOA diagram ecozones}
+subset_europe3$pcoa_fig
 
 ```
 
 
-Figure 5. PCOA diagram for records in the Temperate ecozone with significant MRT division display by the colours and ellipses. The MRT shows 2 major partitions determined by age (age >= 5250 and age < 5250).
+The following list show the results of the envfit with the PCOA model and age and time. 
 
-
-```{r echo = FALSE, warning = FALSE, message = FALSE}
-
-subset_europe3$pcoa_fig[[3]]
-
-```
-
-Figure 6. PCOA diagram for records in the Polar ecozone with significant MRT division display by the colours and ellipses. The MRT indicates 4 significant partitions. The first is determined by spd >= 0.228 and spd < 0.228, second one is determined by spd< 0.07 & spd >0.07, the final split is determined by age < 7750 and >= 7750. 
-
-```{r echo = FALSE}
-subset_europe3$pcoa_fig[[4]]
-
-```
-
-Figure 7. PCOA diagram for records in the Arid ecozone with significant MRT division display by the colours and ellipses. 
-
-
-The following list show the results of the envfit with the PCOA model and age and time. The numbers are: 1 = Cold ecozone, 2 = Temperate ecozone, 3 = Polar ecozone, 4 = Arid ecozone. 
-
-```{r echo = FALSE}
+```{r results envfit for ecozones}
 subset_europe3$envfit
 
 ```
@@ -480,7 +379,7 @@ subset_europe3$envfit
 The next figure show the results for all records in one analyses for Europe. 
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r PCOA diagram for Europe}
 
 
 
@@ -500,19 +399,19 @@ full_dataset_europe$pcoa_fig[[1]]
 
 ```
 
-Figure 8. PCOA ordination diagram with all records and samples within Europe.
+
 
 
 The results of the envfit of the PCOA model with time and humans.
 
 
-```{r echo = FALSE, warning = FALSE, message = FALSE}
+```{r results for envfit}
 full_dataset_europe$envfit[[1]]
 
 ```
  
  
-### Interpretations
+### Summary
 
 
 For the summary of the individual records, past humans (spd) is important explaining MRT partitions in 17.2 % of the records, whereas in 9.85 % of the record, it is uniquely explaining the partitions. Time is explaining most of the MRT partitions in the individual records, and it is uniquely explaining the variation in 82.6 % of the individual records (for comparison with numbers in the different ecozones, see Table 2). 
@@ -520,11 +419,11 @@ For the summary of the individual records, past humans (spd) is important explai
 
 When analysing the data on larger spatial scale as records nested within the ecozones, the results show that past humans have affected the fundamental ecosystem properties in the Cold and Polar ecozones. Changes in the Polar region is more complex, and time dependent factors are also important in the partitioning, whereas in the Temperate and Arid ecozones, time is the most important variable for the variation of the data.  
 
-When putting all the records together, it becomes visible that overall differences in composition of ecosystem properties in Europe are better explained by past humans compared to time in Europe. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
+When putting all the records together, it is still possible to distinguish differences in composition of ecosystem properties in Europe explained by past humans. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
 
-This is interesting, because local changes explained by humans in smaller percent of the records, have had an effect on ecosystem properties that overrides the variation in ecosystem properties explained by time.
+This is interesting, because changes explained by humans in smaller percent of the records (local), have had an effect on ecosystem properties that seems to be possible to be scaled up to a larger scale.
 
-Though past humans seems to have effected the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. The results does not indicate that we will find that they statistically significantly alter fundamental ecosystem properties of the past, but past human activity did have an impact. 
+Though past humans have an observed impact on the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. Hence the results indicate that past human have not statistically significantly alter the fundamental ecosystem properties of the past. 
 
 
 Summary:
@@ -532,32 +431,4 @@ Summary:
 1. The results show that there are changes in the composition of ecosystem properties over the time period of interest
 2. The index of past humans looks reasonably - there are changes in spd and this vary with different records
 3. Past human (spds) are able to explain changes in the composition of ecosystem properties using MRTs
-4. The MRTs indicate that past humans have had an effect on ecosystem properties, but the results have a bad prediction power   
-5. It seems that MRTs are useful tools for summarising results on different spatial scales. 
-
-
-
-### For discussion
-
-Personally, I do not think these results disvalidate the other results that past humans did not have a significant effect on the variation of past ecosystem properties, but I think these results shows that past humans have had an effect that is not negligible. The variation explained in the MRTs are low, but I think this change the story a bit. 
-
-Potential message: 
-Past humans have not significantly transformed the fundamental ecosystem properties within the time period of 2000 and 8500 years, but they have had an observed impact that indicate that past humans started to a shift of the ecosystem properties in a new direction. 
-
-Question is if I should explore this further?
-How to deal with the time order dependency of the data? 
-
-I have a suggestion for a new experimental alternative analysis:
-
-1. Do db-RDA of individual records using time as constraint
-2. Take the residuals of these models
-- This would then "remove" variation explained by time for individual records
-3. Use the residuals as input in the MRT constrained by spds (and possible climate) nested within ecozones
-4. This will be the same as the spatial within core analyses (but averaged with ecozones)
-5. To do this over time, one suggestion is to first create the MRTs with time, and then use the partitions as subset and constrain the data with spds.  
-
-
-I will rerun the preliminary analyses to cross check the results again, one major difference here is that I use data 2000-8500 years, and not up to 12000 years.
-
-
-
+4. The MRTs indicate that past humans have had an effect on ecosystem properties, but the results have a low prediction power   

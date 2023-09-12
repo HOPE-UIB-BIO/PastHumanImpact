@@ -1,11 +1,11 @@
 ---
 title: "Report HOPE methodology & results"
 output:
-  word_document:
-    toc: yes
   html_document:
     toc: yes
     toc_float: yes
+  word_document:
+    toc: yes
 ---
 
 
@@ -86,22 +86,23 @@ external_storage_targets <-
   )
 
 
-# set colours 
-# 13 colours for ecozones
 
-palette_ecozones <- c(Polar_Frost = "#004949",
-                      Polar_Tundra = "#009292",
-                      Cold_Without_dry_season = "#006ddb", 
-                      Cold_Dry_Summer = "#6db6ff",
-                      Cold_Dry_Winter = "#b6dbff",
-                      Temperate_Without_dry_season = "#117733",
-                      Temperate_Dry_Summer = "#999933" ,
-                      Temperate_Dry_Winter =  "#DDCC77",
-                      Arid_Desert = "#924900",
-                      Arid_Steppe = "#ffff6d",
-                      Tropical_Rainforest =  "#920000",
-                      Tropical_Monsoon = "#490092",
-                      Tropical_Savannah = "#b66dff")
+# set colours 
+palette_ecozones <- 
+  c( Polar = "#009292", 
+     Cold_Without_dry_season_Very_Cold_Summer = "#004949", 
+     Cold_Without_dry_season_Cold_Summer = "#006ddb", 
+     Cold_Dry_Winter = "#6db6ff",
+     Cold_Dry_Summer = "#b6dbff",
+     Cold_Without_dry_season_Warm_Summer = "#117733",
+     Cold_Without_dry_season_Hot_Summer = "#999933", 
+     Temperate_Without_dry_season = "#DDCC77",
+     Temperate_Dry_Winter = "#b66dff",
+     Temperate_Dry_Summer = "#ffff6d",
+     Arid = "#924900",  
+     Tropical =  "#920000"
+     )
+
 
 #human vs climate
 palette_pred <- c(human = "#663333", 
@@ -112,6 +113,18 @@ palette_pred <- c(human = "#663333",
 ```{r data ecozones}
 
 data_geo_koppen <- get_file_from_path(paste0(data_storage_path, "Data/ecoregions2017/data_geo_koppen.rds"))
+
+# split ecozones
+data_geo_koppen <- data_geo_koppen %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  )
+
 ```
 
 
@@ -583,13 +596,23 @@ In the hypothesis 2 we have one model per ecozone, therefore we use directly the
 ```{r data preparation of the results}
 
 # import results h1
-output_temporal_h1 <- targets::tar_read(
+output_temporal_h1 <- 
+  targets::tar_read(
   name ="output_hvar_temporal",
-  store = paste0(data_storage_path, "_targets_h1")
+  store = paste0(
+    data_storage_path, 
+    "_targets_h1"
+    )
   )
-output_spatial_h1 <- targets::tar_read(
+
+output_spatial_h1 <- 
+  targets::tar_read(
   name ="output_hvar_spatial",
-  store = paste0(data_storage_path, "_targets_h1"))
+  store = paste0(
+    data_storage_path,
+    "_targets_h1"
+    )
+  )
   
 # import results h2
 output_hvar_h2 <-
@@ -601,21 +624,39 @@ output_hvar_h2 <-
     )
   )
 # import meta data
-data_meta <- targets::tar_read(
+data_meta <- 
+  targets::tar_read(
   name = "data_meta",
-  store = paste0(data_storage_path, "_targets_h1")
+  store = paste0(
+    data_storage_path, 
+    "_targets_h1"
+    )
 )
+
+# split ecozones
+data_meta <- 
+  data_meta %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  ) 
 
 # Prepare output tables for visualisation and summary 
 # spatial
-data_spatial_vis <- output_spatial_h1 %>% 
+
+data_spatial_vis <- 
+  output_spatial_h1 %>% 
   left_join(data_meta, 
             by = "dataset_id") %>%
   dplyr::select(dataset_id, 
                 lat, 
                 long, 
                 region, 
-                ecozone_koppen_15, 
+                sel_classification, 
                 data_merge, 
                 varhp) %>%
   dplyr::mutate(summary_table = 
@@ -626,15 +667,16 @@ data_spatial_vis <- output_spatial_h1 %>%
                   purrr::map_dbl(varhp, 
                                  .f = . %>% pluck("varhp_output") %>% 
                                pluck("Total_explained_variation"))) %>%
-  mutate(across(Unique:`I.perc(%)`, 
-                ~replace(., .x < 0, 0))) %>%# negative variances can be ignored
-  dplyr::select(-c(data_merge, varhp)) %>%
-  mutate(p_value = readr::parse_number(`Pr(>I)`)) %>%
-  group_by(region, ecozone_koppen_15) %>%
+  dplyr::select( -c(data_merge, varhp)) %>%
+  rename(p_value = `Pr(>I)`,
+         Individual_percent = `I.perc(%)`) %>%
+  mutate(across(Unique:Individual_percent, ~replace(., .x < 0, 0))) %>% # negative variances can be ignored 
+#  mutate(Individual_percent = Individual/total_variance *100) %>% #recalculate individual percent
+  group_by(region, sel_classification) %>%
   mutate(n_records = length(unique(dataset_id))) %>%
   ungroup() %>%
   mutate(Unique_percent = Unique/total_variance *100,
-         Average.share_percent = Average.share/total_variance *100)  %>%
+        Average.share_percent = Average.share/total_variance *100) %>%
   dplyr::select(dataset_id:predictor, 
                 total_variance, 
                 Unique,
@@ -642,13 +684,13 @@ data_spatial_vis <- output_spatial_h1 %>%
                 Individual,
                 Unique_percent,
                 Average.share_percent,
-                `I.perc(%)`,
+                Individual_percent,
                 p_value, 
-                `Pr(>I)`, 
                 n_records)
 
 # temporal
-data_temporal_vis <- output_temporal_h1 %>%
+data_temporal_vis <- 
+  output_temporal_h1 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
   unnest(summary_table) %>%
@@ -660,6 +702,8 @@ data_temporal_vis <- output_temporal_h1 %>%
          Average.share_percent = Average.share/total_variance *100) %>%
   dplyr::select(-c(data_merge, varhp)) %>%
   mutate(p_value = readr::parse_number(`Pr(>I)`)) %>%
+
+  rename(Individual_percent = `I.perc(%)`) %>%
   ungroup() %>%
   dplyr::select(age:predictor, 
                 total_variance, 
@@ -668,33 +712,55 @@ data_temporal_vis <- output_temporal_h1 %>%
                 Individual,
                 Unique_percent,
                 Average.share_percent,
-                `I.perc(%)`,
+                Individual_percent,
                 p_value, 
-                `Pr(>I)`, 
                 n_samples)
 
 
-# Filter out poor models
 
-poor_models_spatial <- data_spatial_vis %>% 
+# High percentage of individual predictors comes from negative adjusted R2 of the full model;
+# 13 datasets
+poor_models_spatial <- 
+  data_spatial_vis %>% 
   dplyr::filter(total_variance < 0) 
 
-poor_models_spatial_ids <- data_spatial_vis %>% 
+#poor_models_spatial %>% View()
+
+
+poor_models_spatial_ids <- 
+  data_spatial_vis %>% 
   dplyr::filter(total_variance < 0) %>%
   pluck("dataset_id") %>%
   unique()
 
-# remove models with negative variance
+# remove poor models with negative variance
 data_spatial_vis <- data_spatial_vis %>%
   dplyr::filter(!dataset_id %in% poor_models_spatial_ids)
+
 
 
 # get 5 % threshold:
 lower_5_percent <- data_spatial_vis$total_variance %>% 
   quantile(., probs = 0.050, na.rm = TRUE) 
 
+# remove
+dataset_spatial_vis <- data_spatial_vis %>%
+  dplyr::filter(total_variance > lower_5_percent) 
+
+# check datasets which variation does not add up
+dataset_id_check <- data_spatial_vis %>% 
+  filter(Individual_percent > 100 | Unique_percent > 100| Average.share_percent > 100) %>% 
+  pluck("dataset_id") %>% 
+  unique()
+
+data_spatial_vis <- data_spatial_vis %>%
+  dplyr::filter(!dataset_id %in% dataset_id_check)
+
+
+
 # h2 output
-data_h2_summary <- output_hvar_h2 %>%
+data_h2_summary <- 
+  output_hvar_h2 %>%
   dplyr::mutate(summary_table = 
                   purrr::map(varhp, pluck("summary_table"))) %>%
   unnest(summary_table) %>%
@@ -704,6 +770,7 @@ data_h2_summary <- output_hvar_h2 %>%
   mutate(across(Unique:`I.perc(%)`, ~replace(., .x < 0, 0))) %>% # negative variances can be ignored 
   mutate(Unique_percent = Unique/total_variance *100,
          Average.share_percent = Average.share/total_variance *100) %>%
+   rename(Individual_percent = `I.perc(%)`) %>%
   dplyr::select(-c(data_merge, varhp)) %>%
   ungroup()
 
@@ -715,14 +782,14 @@ data_h2_summary <- output_hvar_h2 %>%
 
 # get summary tables for adjusted r2
 # define variable selection 
-group_vars_spatial <- c("predictor", "ecozone_koppen_15", "region")
+group_vars_spatial <- c("predictor", "sel_classification", "region")
 group_vars_temporal <- c("predictor", "region", "age")
 
 sel_var <- c("total_variance",
              "Individual", 
              "Unique",
              "Average.share", 
-             "I.perc(%)", 
+             "Individual_percent", 
              "Unique_percent",
               "Average.share_percent")
 
@@ -746,16 +813,16 @@ r2_summary_temporal <- data_temporal_vis %>%
 summary_spatial_median <- 
   r2_summary_spatial %>%
   dplyr::select(predictor, 
-                ecozone_koppen_15, 
+                sel_classification, 
                 region,
                 ends_with("median")) %>%
   pivot_longer(Unique_percent_median:Average.share_percent_median, 
                names_to = "variance_partition", 
                values_to = "percentage_median" ) %>%
   left_join(data_spatial_vis %>% 
-              dplyr::select(region, ecozone_koppen_15, n_records) %>% 
+              dplyr::select(region, sel_classification, n_records) %>% 
               distinct(), 
-            by = c("ecozone_koppen_15", "region")) %>%
+            by = c("sel_classification", "region")) %>%
   ungroup()
 
 
@@ -791,8 +858,30 @@ Figure 1-5 provide the regional summary of the results in the order North Americ
 ```{r regional figure for North America}
 
 x_label <- c("Human", "Climate", "Time")
+order_predictors_spatial <- c("human", "climate", "time")
 
-get_regional_combined_fig(select_region = "North America")
+select_region = "North America"
+
+input_spatial <- 
+  summary_spatial_median %>% 
+  mutate(sel_classification = factor(sel_classification)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(sel_classification, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- 
+  get_circular_barchart(input_spatial,
+                        fill_var = "sel_classification",
+                        y_var = "percentage_median",
+                        title = paste(select_region))
+
+circular_bar_h1
+
 
 ```
 
@@ -800,40 +889,132 @@ Figure 1: The summary results for North America.
 <br>
 <br>
 
-```{r regional figure for Europe}
+```{r regional figure for Latin America}
 
-get_regional_combined_fig(select_region = "Europe")
+x_label <- c("Human", "Climate", "Time")
+order_predictors_spatial <- c("human", "climate", "time")
+
+select_region = "Latin America"
+
+input_spatial <- 
+  summary_spatial_median %>% 
+  mutate(sel_classification = factor(sel_classification)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(sel_classification, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- 
+  get_circular_barchart(input_spatial,
+                        fill_var = "sel_classification",
+                        y_var = "percentage_median",
+                        title = paste(select_region))
+
+circular_bar_h1
 
 ```
 
-Figure 2. The summary results for Europe.   
+Figure 2. The summary results for Latin America.   
+<br>
+<br>
+
+```{r regional figure for Europe}
+
+x_label <- c("Human", "Climate", "Time")
+order_predictors_spatial <- c("human", "climate", "time")
+
+select_region = "Europe"
+
+input_spatial <- 
+  summary_spatial_median %>% 
+  mutate(sel_classification = factor(sel_classification)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(sel_classification, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- 
+  get_circular_barchart(input_spatial,
+                        fill_var = "sel_classification",
+                        y_var = "percentage_median",
+                        title = paste(select_region))
+
+circular_bar_h1
+
+```
+
+Figure 3: The summary results for Europe 
 <br>
 <br>
 
 ```{r regional figure for Asia}
 
-get_regional_combined_fig(select_region = "Asia")
+x_label <- c("Human", "Climate", "Time")
+order_predictors_spatial <- c("human", "climate", "time")
+
+select_region = "Asia"
+
+input_spatial <- 
+  summary_spatial_median %>% 
+  mutate(sel_classification = factor(sel_classification)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(sel_classification, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- 
+  get_circular_barchart(input_spatial,
+                        fill_var = "sel_classification",
+                        y_var = "percentage_median",
+                        title = paste(select_region))
+
+circular_bar_h1
 
 ```
 
-Figure 3: The summary results for Asia 
-<br>
-<br>
-
-```{r regional figure for Latin America}
-
-get_regional_combined_fig(select_region = "Latin America")
-
-```
-
-Figure 4: The summary results for Latin America.  
+Figure 4: The summary results for Asia.  
 <br>
 <br>
 
 
 ```{r regional figure for Oceania}
 
-get_regional_combined_fig(select_region = "Oceania")
+x_label <- c("Human", "Climate", "Time")
+order_predictors_spatial <- c("human", "climate", "time")
+
+select_region = "Oceania"
+
+input_spatial <- 
+  summary_spatial_median %>% 
+  mutate(sel_classification = factor(sel_classification)) %>%
+  mutate(predictor = factor(predictor, 
+                            levels = order_predictors_spatial)) %>%
+  filter(n_records > 5) %>%
+  dplyr::filter(region %in% select_region) %>%
+  tidyr::complete(sel_classification, 
+                  nesting(predictor, variance_partition), 
+                  fill = list(percentage_median = 0))
+
+
+circular_bar_h1 <- 
+  get_circular_barchart(input_spatial,
+                        fill_var = "sel_classification",
+                        y_var = "percentage_median",
+                        title = paste(select_region))
+
+circular_bar_h1
 
 ```
 
@@ -848,7 +1029,8 @@ Explorative figures of temporal changes in procrustes sum-of-square (m2):
 
 ```{r figure of changes in procrustes sum-of-squares}
 
-data_m2 <-  targets::tar_read(
+data_m2 <-  
+  targets::tar_read(
     name = "data_m2",
     store = paste0(
       data_storage_path,
@@ -877,493 +1059,853 @@ data_m2 %>%
 <br>
 
 
-```{r summary table for individual records, eval=FALSE, include=FALSE}
+<!-- ```{r summary table for individual records, eval=FALSE, include=FALSE} -->
 
-data_spatial_vis %>%
-  dplyr::filter(total_variance > lower_5_percent) %>%
- flextable::flextable() %>%
- flextable::set_caption("Table 6: Summary results for individual records in the spatial analysis (within each record)") %>%
-  flextable::autofit()
+<!-- data_spatial_vis %>% -->
+<!--  flextable::flextable() %>% -->
+<!--  flextable::set_caption("Table 6: Summary results for individual records in the spatial analysis (within each record)") %>% -->
+<!--   flextable::autofit() -->
 
-```
+<!-- ``` -->
 
-<br>
-
-
-```{r summary table of the median results, eval=FALSE, include=FALSE}
-
-  r2_summary_spatial %>%
-  dplyr::select(predictor,
-                ecozone_koppen_15,
-                region,
-                ends_with("median")) %>%
-  flextable::flextable() %>%
- flextable::set_caption("Table 7: The median adjusted r2 summary for the spatial analysis calculated by grouping ecozones & regions") %>%
-  flextable::autofit()
-
-```
-
-<br>
-
- 
-
-```{r summary table for the temporal analysis, eval=FALSE, include=FALSE}
-
- data_temporal_vis %>%
- flextable::flextable() %>%
- flextable::set_caption("Table 8: The summary for individual records in the temporal analysis (within each time step in different regions)") %>%
-  flextable::autofit()
-
-```
-
-<br>
+<!-- <br> -->
 
 
-```{r summary table for the median results, eval=FALSE, include=FALSE}
+<!-- ```{r summary table of the median results, eval=FALSE, include=FALSE} -->
 
-  r2_summary_temporal %>%
-  dplyr::select(predictor,
-                age,
-                region,
-                ends_with("median")) %>%
-  flextable::flextable() %>%
-  flextable::set_caption("Table 9: The median adjusted r2 summary for the median analysis") %>%
-  flextable::autofit()
+<!--   r2_summary_spatial %>% -->
+<!--   dplyr::select(predictor, -->
+<!--                 sel_classification, -->
+<!--                 region, -->
+<!--                 ends_with("median")) %>% -->
+<!--   flextable::flextable() %>% -->
+<!--  flextable::set_caption("Table 7: The median adjusted r2 summary for the spatial analysis calculated by grouping ecozones & regions") %>% -->
+<!--   flextable::autofit() -->
 
-```
-<br>
-<br>
+<!-- ``` -->
+
+<!-- <br> -->
+
+
+
+<!-- ```{r summary table for the temporal analysis, eval=FALSE, include=FALSE} -->
+
+<!--  data_temporal_vis %>% -->
+<!--  flextable::flextable() %>% -->
+<!--  flextable::set_caption("Table 8: The summary for individual records in the temporal analysis (within each time step in different regions)") %>% -->
+<!--   flextable::autofit() -->
+
+<!-- ``` -->
+
+<!-- <br> -->
+
+
+<!-- ```{r summary table for the median results, eval=FALSE, include=FALSE} -->
+
+<!--   r2_summary_temporal %>% -->
+<!--   dplyr::select(predictor, -->
+<!--                 age, -->
+<!--                 region, -->
+<!--                 ends_with("median")) %>% -->
+<!--   flextable::flextable() %>% -->
+<!--   flextable::set_caption("Table 9: The median adjusted r2 summary for the median analysis") %>% -->
+<!--   flextable::autofit() -->
+
+<!-- ``` -->
+<!-- <br> -->
+<!-- <br> -->
 
 
 # Part III: Validation of methodology
 
-Our results show that humans have little effect on composition of ecosystem properties over time and the conclusion based on the our results are that past humans have not significantly changed ecosystem properties in the past. 
+Update:
 
-We like to find out:
-1. How does the composition of ecosystem properties look like, and are there any visual changes in the composition of ecosystem properties over time?
-2. How do the spd look like, and are they useful indices of past humans?
-3. Are our results robust?
+Our overall results showed that humans have minor effect on changes in ecosystem properties over time and the conclusion is that that past humans have not significantly alter fundamental ecosystem properties across regions. 
 
-## Explorative data analysis
+To explore our results we did several explorative analysis without constraining the data. This complied a lot of results not shown here. Basically that there is variation in ecosystem properties, and that there is weak correlation with time and past human presence, but this vary in different records, ecozones, and regions. 
 
-To answer these questions, we did some explorative analyses of the ecosystem properties to try to get a better visual understanding of the data. 
+We also explore how well age and/ or past humans are to separate variation in the data using MRTs. The idea wasto use cascading MRTs to disentagle interactions with age, if we first make a model with age, and then make new models with subsequent MRTs of resulting leafs using climate and spd as predictors. This approach (not shown here) did not work well. 
 
-To address the first question how the composition of ecosystem properties look like and to find out if there are any changes in composition of ecosystem properties, we have performed unconstrained PCOA (or db-PCA) using Gower distances, and plotted the first PCOA axis with time for the individual records (but aggregated within Ecozones to avoid too many figures). We also explore the spds by plotting them with time to see how they look like.
+In summary, age explains very little of the variation of ecosystem properties on ecozones and/or continent levels. Comparing it with spd, spd actually explained the partitions slightly better, but prediction power was very bad. Adding the climatic variables, the models improved very much indicating the different climate variables are better predictors. However, the problem with this analysis is the time dependency between assemblage in the individual records. We need to "remove" the this variation on the local scale to compare it on a larger scale. 
 
-To find out if spds are able to explain any changes in the data, we use multivariate regression trees (MRT). The response data is the composition of ecosystem properties transformed with Gower- distances and the constraining variables are time and spd. We used MRTs as these are easy tools that can handles non-linear patterns and missing data. We combine the results of the MRT partition with the PCOA (unconstrained data) to explore the unconstrained data and get a better understanding of the differences in the ecosystem properties. 
+The only solution to this I could think of is to make a new model using partial distance-based RDA. For each records, we run a model that capture the variation in each local record only constrained by spd, and at the same time remove the variation explained by time and climate. 
 
-We use only the subset of Europe for exploration. The analyses are run three times on different scales: 1) for all records individually (396 individual records), 2) for records nested within ecozones (4 subsets), and 3) whole region (the full subset).
+Extracting the adjusted r2 will say indicate if this is a good fit. Since the main focus is on humans and not climate, I did this only for the spds as the hierarchical variation partitioning already show that climate is a better predictor. This analysis can then be used as zooming in on the humans and provide some addition "proof" to back up the conclusion that past human presence did not lead to widespread changes in fundamental ecosystem properties. 
 
-The results of the individual PCOA analysis of each record is not shown. Instead, the first PCOA axis is plotted against time to see if there are changes in the composition of ecosystem properties over time. The overall results of the MRTs for individual records are summaried in tables. 
+For each record we extract the constrained scores (CAP1), and the adjusted r2 (also age and spd variable), and make a dataframe of the constrained scores that can be plotted against time. CAP1 represent only the variations in ecosystem properties determined by the presence of past humans in each record. The adjusted r2 is often negative ~ 0, indicating that human presence explains nothing of the variation in the ecosystem properties. I therefore make a classification of the adjusted r2 to say something about amount of human impact, and to add this to the summary of H1.  
 
-For the analysis within ecozones in regions, we extract the significant partitions from the MRT analyses, and explore the results using ordination diagrams. In addition, we passively fit the explanatory variables, time and spds, to the ordination models to help explore the results. 
+This analysis is not a validation per se, it is complementary to the hierarchical variation partitioning where we use the same model, but with all predictors included. I checked the adjusted r2 from the unique constribution in hierachical variation partitioning, and the partial models show different results between the records, but the overall results is the same. 
+
+In the end, the MRTs are then used to detect if there is a consistent pattern in CAP1 in records within the different regions, but only for those records where the adjusted r2 is above 0.1 (where past humans explains more than 10 % of the variation of ecosystsem properties).
+
+This is done on all regions. 
 
 
-## Results
+```{r add constraining scores}
 
-```{r subset data}
+# add constrained ecoystem scores with spds; NAs when empty
+output_spatial_h1 <- 
+  output_spatial_h1 %>%
+  mutate(constrained_scores = purrr::map(data_merge,
+                                         .f =  possibly(get_scores_constrained_spd,
+                                                        otherwise = NA_real_)))
+  
 
-# filter subset Europe and relevant time period
-subset_europe <- output_spatial_h1 %>%
+```
+
+
+```{r prepare data and run analysis}
+
+# combine with data_meta
+data_input <- 
+  output_spatial_h1 %>%
   inner_join(data_meta %>% 
-               dplyr::select(dataset_id, ecozone_koppen_15, region), 
-             by = "dataset_id") %>%
-  dplyr::filter(region == "Europe") 
+               dplyr::select(dataset_id, 
+                             sel_classification, 
+                             region), 
+             by = "dataset_id")
+             
+data_input2 <- data_input %>%
+  dplyr::select(dataset_id, 
+                region, 
+                sel_classification, 
+                constrained_scores) 
 
+group_human_impact <- 
+  data_input2 %>% 
+  dplyr::mutate(scores = 
+                  purrr::map(constrained_scores, 
+                             pluck("scores"))) %>%
+  unnest(scores) %>%
+  dplyr::mutate(adjr2 = purrr::map(constrained_scores,
+                                       .f = . %>% pluck("adjr2"))) %>%
+  unnest(adjr2) %>%
+  group_by(sel_classification) %>%
+  mutate(human_impact = case_when(
+    adjr2 <= 0 ~ "no",
+    adjr2 > 0 & adjr2 <= 0.1 ~ "low",
+    adjr2 > 0.1 & adjr2 <= 0.3 ~ "moderate",
+    adjr2 > 0.3 & adjr2 <= 0.5 ~ "high",
+    adjr2 > 0.5 ~ "very_high"
+  )) %>%
+  ungroup()
+  
+  # summarise human impact in ecozones and region
+summarise_human_impact <- 
+  group_human_impact %>%
+  group_by(sel_classification, region, human_impact) %>%
+  mutate(n_impacts = length(unique(dataset_id))) %>%
+  ungroup() %>%
+  group_by(sel_classification, region) %>%
+  mutate(n_records = length(unique(dataset_id))) %>%
+  ungroup() %>%
+  mutate(proportions_records_impact = n_impacts/n_records)
 
-```
-
-
-
-
-```{r run explorative analysis for individual records in Europe, fig.show='hide'}
-
-subset_europe2 <- subset_europe %>%
-  dplyr::mutate(mvpart = 
-                  purrr::map(data_merge,  
-                             .f = ~get_mvpart_model(., plot.add = FALSE))) %>%
-  dplyr::mutate(pcoa_mod = 
-                  purrr::map(data_merge,
-                                      .f = get_pcoa_model))
-
-```
-
-
-
-
-
-```{r run explorative analysis grouped by ecozones in Europe, fig.show='hide'}
-
-subset_europe3  <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_15, data_merge) %>%
-  unnest(data_merge) %>%
-  nest(data_merge = c(dataset_id, age:spd)) %>%
-  mutate(mvpart = purrr::map(data_merge, .f = get_mvpart_model)) %>%
-  mutate(pcoa_mod = purrr::map(data_merge, .f = get_pcoa_model))
-
-```
-
-
-
-```{r explorative analysis all record grouped as region, fig.show='hide'}
-
-full_dataset_europe <- subset_europe %>% 
-  dplyr::select(-c(varhp)) %>%
-  unnest(data_merge) %>%
-  nest(data = -region) %>%
-  mutate(mvpart = purrr::map(data, .f = ~ get_mvpart_model(., plot.add = FALSE))) %>%
-  mutate(pcoa_mod = purrr::map(data, .f = get_pcoa_model))
+  
 
 ```
 
 
-### 1. Results from the analyses of individual records
+# Variation in Ecosystem properties constrained by humans 
+Constraining the scores of ecosystem properties will show ecosystem patterns corresponding with the patterns of spds (not shown here). The adjusted r2 indicate how well this variation explains the data. Here (TO BE DISCUSSED IF RELEVANT) the adjusted r2 is grouped into human impact of "no" ~ <= 0, "low" ~ > 0 & <= 0.1, "moderate" ~ > 0.1 & <= 0.3, "high" ~ >0.3 & <= 0.5 > and "very high" ~ > 0.5.  
 
-```{r results individual records}
-#functions to extract summaries
-get_pcoa_score <- function(mod) {
-  sc <- vegan::scores(mod, choices = 1, display = "sites") 
-  sc_const <- sc + attr(sc,"const")
-  return(sc_const) 
-}
-
-get_data_for_exploration <- function(data, pcoa1) {
-  new <- data.frame(age = data$age,
-                    spd = data$spd,
-                    pcoa1 = pcoa1)
-  return(new)
-}
-
-get_sum_table_mrt <- function(mod, data){
- table <-  data.frame(
-   tot_divisions = mod$where %>% unique %>% length(),
-   age_var = any((mod$frame$var == "age") == TRUE),
-   spd_var = any((mod$frame$var == "spd") == TRUE),
-   spd_in = is.null(data$spd) == FALSE
- )
- return(table)
-}
-
-# create dataset for exploration 
-subset_europe2  <- subset_europe2 %>%
-  mutate(pcoa1 = purrr::map(pcoa_mod, .f = possibly(get_pcoa_score, 
-                                                    otherwise = NA_real_))) %>% 
-  mutate(data_explore = purrr::map2(data_merge, pcoa1, .f = get_data_for_exploration)) %>%
-  mutate(mrt_summary = purrr::map2(mvpart, data_merge, .f = get_sum_table_mrt))
-
-# extract summary table
-summary_mrt_table <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_15, mrt_summary) %>%
-  unnest(mrt_summary)
-
-# numbers based on individual records by ecozones
-summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_15) %>%
-  summarise(tot_records = n(),
-            spd_true =  sum(spd_var == TRUE),
-            age_true = sum(age_var == TRUE),
-            spd_unique = sum(spd_var == TRUE & age_var == FALSE),
-            age_unique = sum(age_var == TRUE & spd_var == FALSE),
-            spd_age_true = sum(spd_var == TRUE & age_var == TRUE)
-            ) %>%
-  pivot_longer(spd_true:spd_age_true, names_to = "variable", values_to = "counts") %>%
-  mutate(percent = counts/tot_records*100)
-
-```
+The following figures show scores of changes in ecosystem properties for individual records that indicate past presence of human corresponded to more than 10% of variation in ecosystem properties.
 
 
-
-The summary results of the first PCOA axis against time show there are changes in the composition of ecosystem properties over time for individual sites (Figure 1). To see how spds represented as past human population vary across records, the individual curves are plotted against time between 2000 and 8500 years BP (Figure 2). First inspections looks reasonable.
-
-
-```{r PCOA axis 1 plotted with time}
-# figure 1, MDS1 vs time
-mds_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
-  unnest(data_explore) %>%
-  ggplot(aes(x = age, y = MDS1, group = dataset_id)) +
-  scale_x_reverse() +
-  coord_flip() +
+```{r figure North America}
+select_region <- "North America"
+ 
+ fig_1 <- 
+  summarise_human_impact %>%
+   filter(adjr2 > 0.1) %>%
+   dplyr::filter(region == select_region) %>%
+   dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
+  ggplot(aes(x = age, y = CAP1, group = dataset_id)) +
   geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
   scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
-  facet_wrap(~ecozone_koppen_15, nrow = 1) +
   theme_bw()+
   theme(
     legend.position = "none"
   ) +
-  labs(title = "PCOA axes 1 for individual records",
-       y = "Values",
+  labs(
+       y = "Scores of ecosystem properties\n (constrained by spd)",
        x = "Age ca. BP")
 
-mds_fig 
+fig_1
 
 ```
 
 
-Figure 1: Plot of the individual PCOA axis 1 for all records against time. 
+```{r figure Latin America}
 
+select_region <- "Latin America"
 
-
-```{r SPD curves plotted with time}
-# figure 1, MDS1 vs time
-spd_fig <- subset_europe2 %>%
-  dplyr::select(dataset_id, ecozone_koppen_15, data_explore) %>%
-  unnest(data_explore) %>%
-  ggplot(aes(x = age, y = spd, group = dataset_id )) +
-  geom_line(aes(col = as.numeric(dataset_id))) +
-  scale_x_reverse() +
-  coord_flip() +
-  #scale_colour_gradient2()+
-  facet_wrap(~ecozone_koppen_15, nrow = 1) +
-  theme_bw() +
+fig_2 <- summarise_human_impact %>%
+  summarise_human_impact %>%
+   filter(adjr2 > 0.1) %>%
+   dplyr::filter(region == select_region) %>%
+   dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
+  ggplot(aes(x = age, y = CAP1, group = dataset_id)) +
+  geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
+  scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
+  theme_bw()+
   theme(
     legend.position = "none"
   ) +
-  labs(title = "SPD curves for individual records",
-       y = "Values",
+  labs(
+       y = "Scores of ecosystem properties\n (constrained by spd)",
        x = "Age ca. BP")
 
-spd_fig
-
-
-```
-
-
-Figure 2: Plot of the individual spd curves representing changes in past human population for all records over time. 
-
-
-
-
-The results of the MRT are summaried in one figure and two tables below. Overall the results of the MRT analyses show that it is possible to detect major changes in the composition of ecosystem properties explained by time and humans. Only one record show no change, most records have either two or three major significant divisions, whereas a few records show 4 significant divisions (Figure 3). 
-
-
-
-```{r resulting partitions by MRT}
-
-summary_mrt_table %>% 
- # filter(spd_var == TRUE) %>%
-  ggplot(aes(x = tot_divisions, fill = ecozone_koppen_15)) +
-  scale_fill_manual(values = palette_ecozones) +
-  geom_bar() +
-  theme_bw()
+fig_2
 
 ```
 
 
-Figure 3: Number of records with different divisions representing signifcant changes in ecosystem properties explained either by time, humans or both. The records are coloured by ecozones. 
+```{r figure Europe}
+select_region <- "Europe"
 
-Two tables below are created to give a simple summary of the MRT results, first table summarise the counts in total whereas the second table show the numbers within ecozones. 
+fig_3 <- summarise_human_impact %>%
+   summarise_human_impact %>%
+   filter(adjr2 > 0.1) %>%
+   dplyr::filter(region == select_region) %>%
+   dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
+  ggplot(aes(x = age, y = CAP1, group = dataset_id)) +
+  geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
+  scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
+  theme_bw()+
+  theme(
+    legend.position = "none"
+  ) +
+  labs(
+       y = "Scores of ecosystem properties\n (constrained by spd)",
+       x = "Age ca. BP")
 
-The total number of records are counted for: 
-
-- spd explains the significant partitions (spd_true) 
-- age explains the significant partitions (age_true)
-- only spd explains the significant partition (spd_unique)
-- only age explains the significant partition (age_unique)
-- where both age and humans explains the significant partitions (spd_age_true)
-
-
-
-```{r summary table all}
-# summarise number of records with division based on spd and age 
-# numbers based on individual records for total European subset
-summarise_by_all <- summary_mrt_table %>%
-  summarise(tot_records = n(),
-            spd_true =  sum(spd_var == TRUE),
-            age_true = sum(age_var == TRUE),
-            spd_unique = sum(spd_var == TRUE & age_var == FALSE),
-            age_unique = sum(age_var == TRUE & spd_var == FALSE),
-            spd_age_true = sum(spd_var == TRUE & age_var == TRUE)
-  ) %>%
-  pivot_longer(spd_true:spd_age_true, names_to = "variable", values_to = "counts") %>%
-  mutate(percent = counts/tot_records*100)
-
-summarise_by_all %>%
-  flextable::flextable() %>%
-  flextable::set_caption("Table 1: Summary of the total number and percentage for the whole region Europe of records analyses where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
-  flextable::autofit()
+fig_3
 
 ```
 
 
+```{r figure Asia}
+select_region <- "Asia"
 
+fig_4 <-
+ summarise_human_impact %>%
+   filter(adjr2 > 0.1) %>%
+   dplyr::filter(region == "Asia") %>%
+   dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
+  ggplot(aes(x = age, y = CAP1, group = dataset_id)) +
+  scale_x_reverse() +
+  coord_flip() +
+  geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
+  scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
+  facet_wrap(~sel_classification, ncol = 2) +
+  theme_bw()+
+  theme(
+    legend.position = "none"
+  ) +
+  labs(title = "Asia",
+       y = "Scores of ecosystem properties constrained by spd",
+       x = "Age ca. BP")
 
-```{r summary table ecozones}
-# numbers based on individual records by ecozones
-summarise_by_ecozone <- summary_mrt_table %>%
-  group_by(ecozone_koppen_15) %>%
-  summarise(tot_records = n(),
-            spd_true =  sum(spd_var == TRUE),
-            age_true = sum(age_var == TRUE),
-            spd_unique = sum(spd_var == TRUE & age_var == FALSE),
-            age_unique = sum(age_var == TRUE & spd_var == FALSE),
-            spd_age_true = sum(spd_var == TRUE & age_var == TRUE)
-            ) %>%
-  pivot_longer(spd_true:spd_age_true, names_to = "variable", values_to = "counts") %>%
-  mutate(percent = counts/tot_records*100)
-
-summarise_by_ecozone %>%
-  flextable::flextable() %>%
-  flextable::set_caption("Table 2: Summary of the total number and percentages for records in the different ecozones where age, humans, or both variables explains most of the changes as observed the MRTs.") %>%
-  flextable::autofit()
-
-```
-
-
-
-
-### 2. Results for the analyses with records nested in ecozones
-
- 
-
-```{r plot results in PCOA diagrams}
-plot_results <- function(mrt_mod, pcoa_mod, data_merge, ecozone) {
-  
-  splits <- mrt_mod$where
-  
-  splits <- data.frame(splits) %>% 
-    rownames_to_column("label") 
-  
-  scors <- vegan::scores(pcoa_mod, tidy = TRUE)
-  
-  fit_exp <- vegan::envfit(pcoa_mod, data_merge %>% 
-                             dplyr::select(age, spd), perm = 999)
-  
-  fit_exp_scors <- vegan::scores(fit_exp, "vectors") * vegan::ordiArrowMul(fit_exp) 
-  
-  fit_exp_scors <- fit_exp_scors %>% 
-    as.data.frame() %>%
-    rownames_to_column("names")
-  
-  site_scors <- scors %>%
-    filter(score == "sites") %>%
-    inner_join(splits, by = "label") %>%
-    mutate(splits = as.factor(splits))
-  
-  pcoa_plot <- 
-    ggplot(data = site_scors, 
-           aes(x = MDS1, 
-               y = MDS2, 
-               col = splits, 
-               fill = splits, 
-               shape = splits)) +
-    coord_fixed() +
-    stat_ellipse(type = "norm", linetype = 2) + 
-    stat_ellipse(geom = "polygon", type = "t", alpha= 0.3) +
-    geom_point(size = 2) +
-    ggplot2::geom_segment(data = fit_exp_scors, 
-                          aes(x = 0, xend = MDS1, y = 0, yend = MDS2), 
-                          inherit.aes = FALSE, arrow = arrow(length = unit(0.25, "cm")), colour = "black") +
-    ggplot2::geom_text(data = fit_exp_scors, 
-                       aes(x = MDS1, y = MDS2, label = names), 
-                       inherit.aes = FALSE, colour = "navy", fontface = "bold") +
-    theme_bw() +
-    labs(title = paste("Ecozone", ecozone))
-  
-  pcoa_plot 
- 
-}
-
-get_envfit <- function(mod, data, ...) {
-  fit_exp <- vegan::envfit(mod, data %>% 
-                             dplyr::select(age, spd))
-  fit_exp
-  
-}
-
-subset_europe3 <- subset_europe3 %>%
-  mutate(envfit = purrr::map2(pcoa_mod, data_merge, .f = get_envfit)) %>%
-  mutate(pcoa_fig = purrr::pmap(list(mvpart, 
-                                pcoa_mod,
-                                data_merge,
-                                ecozone_koppen_15),
-                                .f = ~ plot_results(mrt_mod = ..1,
-                                                  pcoa_mod = ..2, 
-                                                  data_merge = ..3,
-                                                  ecozone = ..4)
-              ))
+fig_4
 
 ```
 
 
-Below figures display the ordination diagrams of the unconstrained PCOA using Gower-distances for each of the ecozones in Europe. The samples are coloured by the significant MRT partitions for the same dataset. The constraining variables age and humans are then passively fitted to the PCOA model using envfit. This means it has no direct effect on the sample scores, but shows how well correlated these variables are with PCOA axis 1 and 2. The length and direction of the arrow indicate which axes it has best correlation with. 
-
-
-```{r PCOA diagram ecozones}
-subset_europe3$pcoa_fig
+```{r figure Oceania}
+select_region <- "Oceania"
+fig_5 <- summarise_human_impact %>%
+  summarise_human_impact %>%
+   filter(adjr2 > 0.1) %>%
+   dplyr::filter(region == select_region) %>%
+   dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
+  ggplot(aes(x = age, y = CAP1, group = dataset_id)) +
+  geom_line(aes(col = as.numeric(dataset_id)),alpha = 0.3, linewidth = 1) +
+  scale_colour_gradient2(low = "yellow2", mid = "orange3", high = "darkgreen")+
+  theme_bw()+
+  theme(
+    legend.position = "none"
+  ) +
+  labs(
+       y = "Scores of ecosystem properties\n (constrained by spd)",
+       x = "Age ca. BP")
+fig_5
 
 ```
 
 
-The following list show the results of the envfit with the PCOA model and age and time. 
+# Number of records showing different degree of human impact
 
-```{r results envfit for ecozones}
-subset_europe3$envfit
-
-```
+The following figures show number of records and the proportion of records with the classification of human impact for the different regions and selected classification
 
 
-### 3. Results for the analyses with records nested in Europe
+```{r figure counts human impact North America}
 
-The next figure show the results for all records in one analyses for Europe. 
+fig_6 <- summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "North America") %>%
+  ggplot(aes(x = human_impact,
+             y = n_impacts,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(title = "North America", 
+  y = "n_records")
 
-
-```{r PCOA diagram for Europe}
-
-
-
-full_dataset_europe <- full_dataset_europe %>%
-  mutate(envfit = purrr::map2(pcoa_mod, data, .f = get_envfit)) %>%
-  mutate(pcoa_fig = purrr::pmap(list(mvpart, 
-                                     pcoa_mod,
-                                     data,
-                                     region),
-                                .f = ~ plot_results(mrt_mod = ..1,
-                                                    pcoa_mod = ..2, 
-                                                    data_merge = ..3,
-                                                    ecozone = ..4)
-  ))
-
-full_dataset_europe$pcoa_fig[[1]]
+fig_6
+  
 
 ```
 
 
 
+```{r figure proportions human impact North America}
 
-The results of the envfit of the PCOA model with time and humans.
 
+fig_7 <-  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "North America") %>%
+  ggplot(aes(x = human_impact,
+             y = proportions_records_impact,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+  theme(legend.position = "none") +
+  labs(y = "proportion number of records", title = "North America")
 
-```{r results for envfit}
-full_dataset_europe$envfit[[1]]
+fig_7
 
 ```
- 
- 
-### Summary
 
 
-For the summary of the individual records, past humans (spd) is important explaining MRT partitions in 17.2 % of the records, whereas in 9.85 % of the record, it is uniquely explaining the partitions. Time is explaining most of the MRT partitions in the individual records, and it is uniquely explaining the variation in 82.6 % of the individual records (for comparison with numbers in the different ecozones, see Table 2). 
+```{r figure counts human impact Latin America}
+
+fig_8 <-
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Latin America") %>%
+  ggplot(aes(x = human_impact,
+             y = n_impacts,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(title = "Latin America", 
+  y = "n_records")
+
+fig_8
+  
+
+```
 
 
-When analysing the data on larger spatial scale as records nested within the ecozones, the results show that past humans have affected the fundamental ecosystem properties in the Cold and Polar ecozones. Changes in the Polar region is more complex, and time dependent factors are also important in the partitioning, whereas in the Temperate and Arid ecozones, time is the most important variable for the variation of the data.  
 
-When putting all the records together, it is still possible to distinguish differences in composition of ecosystem properties in Europe explained by past humans. Past human activity seems to have started a shift in the composition of ecosystem properties in the another direction, and this is determined by the average threshold spd>= 0.2555 & spd < 0.2555.  
+```{r figure proportions human impact Latin America}
 
-This is interesting, because changes explained by humans in smaller percent of the records (local), have had an effect on ecosystem properties that seems to be possible to be scaled up to a larger scale.
+fig_9  <- 
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Latin America") %>%
+  ggplot(aes(x = human_impact,
+             y = proportions_records_impact,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(y = "proportion number of records", title = "Latin America")
 
-Though past humans have an observed impact on the composition of past ecosystem properties, the MRTs have a high prediction error (CV error ~ 0.9). You can see this in the PCOA diagram where most of the samples overlap. Hence the results indicate that past human have not statistically significantly alter the fundamental ecosystem properties of the past. 
+fig_9
 
+```
+
+
+
+```{r figure counts human impact Europe}
+
+fig_10 <-
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Europe") %>%
+  ggplot(aes(x = human_impact,
+             y = n_impacts,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(title = "Europe", 
+  y = "n_records")
+
+fig_10
+  
+
+```
+
+
+
+```{r figure proportions human impact Europe}
+
+
+ fig_11 <- summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Europe") %>%
+  ggplot(aes(x = human_impact,
+             y = proportions_records_impact,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(y = "proportion number of records",
+  title = "Europe")
+
+fig_11
+
+```
+
+
+```{r figure counts human impact Asia}
+
+fig_12 <- 
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Asia") %>%
+  ggplot(aes(x = human_impact,
+             y = n_impacts,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(title = "Asia", 
+  y = "n_records")
+
+fig_12
+  
+
+```
+
+
+
+```{r figure proportions human impact Asia}
+
+
+fig_13 <-  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Asia") %>%
+  ggplot(aes(x = human_impact,
+             y = proportions_records_impact,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(y = "proportion number of records",
+  title = "Asia")
+
+fig_13
+
+```
+
+```{r figure counts human impact Oceania}
+
+fig_14 <- 
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Oceania") %>%
+  ggplot(aes(x = human_impact,
+             y = n_impacts,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(title = "Oceania", 
+  y = "n_records")
+
+fig_14
+  
+
+```
+
+
+
+```{r figure proportions human impact Oceania}
+
+
+ fig_15 <-
+  summarise_human_impact %>% 
+  dplyr::select(region, 
+                sel_classification, 
+                human_impact, 
+                n_impacts, 
+                proportions_records_impact) %>%
+  mutate(human_impact = factor(human_impact,
+                               levels = c("no",
+                                          "low",
+                                          "moderate",
+                                          "high",
+                                          "very_high"))) %>%
+  distinct() %>%
+  filter(region == "Oceania") %>%
+  ggplot(aes(x = human_impact,
+             y = proportions_records_impact,
+             fill = human_impact)) +
+  geom_bar(stat = "identity",
+           position =  position_dodge(),
+           width = 1,
+           alpha = .5) +
+  facet_wrap(~sel_classification) +
+   theme(legend.position = "none") +
+  labs(y = "proportion number of records",
+  title = "Oceania")
+
+fig_15
+
+```
+
+
+# Changes in ecosystem properties constrained by humans 
+
+Considering records where human has had some impact, is there a consistent widespread change in this variation in regions?
+
+
+Partition for North America
+
+```{r mvpart North America}
+
+
+ mvpart_NA <- 
+  summarise_human_impact %>%
+  filter(adjr2 > 0.1) %>%
+  distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(dataset_id:region, CAP1, age) %>% 
+
+
+  nest(data = -c(region)) %>%
+  filter(region == "North America") %>%
+  mutate(data_for_mvpart = purrr::map(data,
+                                         .f = function(x) {
+                                           x %>%
+                                             pivot_wider(
+                                               names_from = dataset_id, 
+                                               values_from = CAP1) %>%
+                                             return()
+                                         } )) %>%
+  mutate(mvpart_human_impact = purrr::map(data_for_mvpart,
+                                  .f = function(x){
+                                    
+                                    input <- data.matrix(x %>% dplyr::select(-age))
+                                    data <- data.frame(x)
+                                    
+                                    res <- mvpart::mvpart(input ~ age,
+                                                          xv = "1se", 
+                                                          xval = nrow(data),
+                                                          xvmult = 100,
+                                                          data = data
+                                                          )
+                                    return(res)
+                                    
+                                  })
+         )
+
+```
+
+
+Partition for Latin America
+
+```{r mvpart Latin America}
+
+ mvpart_LA <-
+  summarise_human_impact %>%
+  filter(adjr2 > 0.1) %>%
+  distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(dataset_id:region, CAP1, age) %>% 
+
+
+  nest(data = -c(region)) %>%
+  filter(region == "Latin America") %>%
+  mutate(data_for_mvpart = purrr::map(data,
+                                         .f = function(x) {
+                                           x %>%
+                                             pivot_wider(
+                                               names_from = dataset_id, 
+                                               values_from = CAP1) %>%
+                                             return()
+                                         } )) %>%
+  mutate(mvpart_human_impact = purrr::map(data_for_mvpart,
+                                  .f = function(x){
+                                    
+                                    input <- data.matrix(x %>% dplyr::select(-age))
+                                    data <- data.frame(x)
+                                    
+                                    res <- mvpart::mvpart(input ~ age,
+                                                          xv = "1se", 
+                                                          xval = nrow(data),
+                                                          xvmult = 100,
+                                                          data = data
+                                                          )
+                                    return(res)
+                                    
+                                  })
+         )
+
+```
+
+Partition for Europe
+
+```{r mvpart Europe}
+
+
+ mvpart_EU <- 
+  summarise_human_impact %>%
+  filter(adjr2 > 0.1) %>%
+  distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(dataset_id:region, CAP1, age) %>% 
+  nest(data = -c(region)) %>%
+  filter(region == "Europe") %>%
+  mutate(data_for_mvpart = purrr::map(data,
+                                         .f = function(x) {
+                                           x %>%
+                                             pivot_wider(
+                                               names_from = dataset_id, 
+                                               values_from = CAP1) %>%
+                                             return()
+                                         } )) %>%
+  mutate(mvpart_human_impact = purrr::map(data_for_mvpart,
+                                  .f = function(x){
+                                    
+                                    input <- data.matrix(x %>% dplyr::select(-age))
+                                    data <- data.frame(x)
+                                    
+                                    res <- mvpart::mvpart(input ~ age,
+                                                          xv = "1se", 
+                                                          xval = nrow(data),
+                                                          xvmult = 100,
+                                                          data = data
+                                                          )
+                                    return(res)
+                                    
+                                  })
+         )
+
+```  
+
+Partition for Asia
+
+```{r mvpart Asia}
+
+
+ mvpartA <- 
+  summarise_human_impact %>%
+  filter(adjr2 > 0.1) %>%
+  distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(dataset_id:region, CAP1, age) %>% 
+  nest(data = -c(region)) %>%
+  filter(region == "Asia") %>%
+  mutate(data_for_mvpart = purrr::map(data,
+                                         .f = function(x) {
+                                           x %>%
+                                             pivot_wider(
+                                               names_from = dataset_id, 
+                                               values_from = CAP1) %>%
+                                             return()
+                                         } )) %>%
+  mutate(mvpart_human_impact = purrr::map(data_for_mvpart,
+                                  .f = function(x){
+                                    
+                                    input <- data.matrix(x %>% dplyr::select(-age))
+                                    data <- data.frame(x)
+                                    
+                                    res <- mvpart::mvpart(input ~ age,
+                                                          xv = "1se", 
+                                                          xval = nrow(data),
+                                                          xvmult = 100,
+                                                          data = data
+                                                          )
+                                    return(res)
+                                    
+                                  })
+         )
+
+```  
+
+Partition for Oceania
+
+```{r mvpart Oceania}
+
+
+  mvpartO <-
+  summarise_human_impact %>%
+  filter(adjr2 > 0.1) %>%
+  distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(dataset_id:region, CAP1, age) %>% 
+  nest(data = -c(region)) %>%
+  filter(region == "Asia") %>%
+  mutate(data_for_mvpart = purrr::map(data,
+                                         .f = function(x) {
+                                           x %>%
+                                             pivot_wider(
+                                               names_from = dataset_id, 
+                                               values_from = CAP1) %>%
+                                             return()
+                                         } )) %>%
+  mutate(mvpart_human_impact = purrr::map(data_for_mvpart,
+                                  .f = function(x){
+                                    
+                                    input <- data.matrix(x %>% dplyr::select(-age))
+                                    data <- data.frame(x)
+                                    
+                                    res <- mvpart::mvpart(input ~ age,
+                                                          xv = "1se", 
+                                                          xval = nrow(data),
+                                                          xvmult = 100,
+                                                          data = data
+                                                          )
+                                    return(res)
+                                    
+                                  })
+         )
+
+```  
+
+
+# Question
 
 Summary:
 
-1. The results show that there are changes in the composition of ecosystem properties over the time period of interest
-2. The index of past humans looks reasonably - there are changes in spd and this vary with different records
-3. Past human (spds) are able to explain changes in the composition of ecosystem properties using MRTs
-4. The MRTs indicate that past humans have had an effect on ecosystem properties, but the results have a low prediction power   
-5. It seems that MRTs are useful tools for summarising results on different spatial scales. 
+The ecosystem properties are constrained by spd (and variation by climate and time is removed), hence the variation in CAP1 will mimick the spd predictor. The adj r2 indicate how good the fit is. The ajusted r2 is classified into human impact, which are summaried in the barplots of number counts and proportions of records with different groups of human impact per ecozone and regions. This can be compared with the hvar. However, the classes was arbitrary set by me, though, thinking if human explain more than for example 10 % of the variation in the data, that is moderate impact, and very high if changes explain more than 50% (but no such cases). 
+
+To look at changes over time related to humans, only records where model fit is above 0.1 is included. Then a matrix of age and records are created per region where values are the CAP1 scores. The goal was to find out if there are consistent change in the patterns caused by humans in the ecosystem properties with time. 
+
+The results show that is not the case, or it is not possible to predict any consistent change that are correlated with human presence (CV Error is high = the model has low prediction power). You get R2 by 1-Error, which indicate the model fit the data, which can sometimes be reasonable.  
+
+The classification trees are automatically produced by the mvpart function and shows which splits are signficant in the each region. North America has no splits. 
 
 
+The conclusion is the same that humans have had some impact on ecosystem properties, but the impact is not widespread, it is localised and not possible to predict. Therefore  based on our results, the hypothesis that past human presence already led to widespread alteration of fundamental ecosystem properties is not the case. Past climate and time is more important all over. Support generally observations that human impact in the past was very localised, as already documented across individual studies of past vegetation changes. 
 
 
-
+Question is whether we want to add build some of this in the H1? Is this more informative in terms of the temporal analysis with changes in time?    
