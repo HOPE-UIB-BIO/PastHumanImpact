@@ -45,29 +45,30 @@ regional_data  <- data_input %>%
   unnest(data_merge) %>%
   nest(data_merge = -c(region, sel_classification))
 
-## RUN MVPART ON RECORDS WITHIN ECOZONES IN REGIONS 
-# set.seed(1221)
-## AGE as predictor
-# region_run1 <- regional_data %>%
-#   mutate(mvpart_run1 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "age")))
-## SPD as predictor
-# set.seed(1222)
-# region_run2 <- regional_data %>%
-#   mutate(mvpart_run2 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd")))
-## AGE & SPD as predictor
-# set.seed(1223)
-# region_run3 <- regional_data %>%
-#   mutate(mvpart_run3 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd + age")))
-## AGE & SPD & CLIMATE VARS AS PREDICTOR
-# set.seed(1224)
-# region_run4 <- regional_data %>%
-#   mutate(mvpart_run4 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd + age + temp_annual + temp_cold + prec_summer + prec_win")))
+# RUN MVPART ON RECORDS WITHIN ECOZONES IN REGIONS
+
+# AGE as predictor
+set.seed(1221)
+region_run1 <- regional_data %>%
+  mutate(mvpart_run1 = purrr::map(data_merge,
+                                  .f = ~run_mvpart(.,
+                                                   preds = "age")))
+# SPD as predictor
+set.seed(1222)
+region_run2 <- regional_data %>%
+  mutate(mvpart_run2 = purrr::map(data_merge,
+                                  .f = ~run_mvpart(.,
+                                                   preds = "spd")))
+# AGE & SPD as predictor
+set.seed(1223)
+region_run3 <- regional_data %>%
+  mutate(mvpart_run3 = purrr::map(data_merge,
+                                  .f = ~run_mvpart(.,
+                                                   preds = "spd + age")))
+# AGE & SPD & CLIMATE VARS AS PREDICTOR
+set.seed(1224)
+region_run4 <- regional_data %>%
+  mutate(mvpart_run4 = purrr::map(data_merge,
+                                  .f = ~run_mvpart(.,
+                                                   preds = "spd + age + temp_annual + temp_cold + prec_summer + prec_win")))
 
