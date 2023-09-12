@@ -54,43 +54,6 @@ data_input <-
 
 
 
-# 1.2 data nested by region + ecozones
-regional_data  <- data_input %>%
-  dplyr::select(dataset_id, 
-                region, 
-                sel_classification, 
-                data_merge) %>%
-  unnest(data_merge) %>%
-  nest(data_merge = -c(region, sel_classification))
-
-
-
-# 
-# # mvpart validation analysis
-# set.seed(1221)
-# region_run1 <- regional_data %>%
-#   mutate(mvpart_run1 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "age")))
-# 
-# set.seed(1222)
-# region_run2 <- regional_data %>%
-#   mutate(mvpart_run2 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd")))
-# set.seed(1223)
-# region_run3 <- regional_data %>%
-#   mutate(mvpart_run3 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd + age")))
-# set.seed(1224)
-# region_run4 <- regional_data %>%
-#   mutate(mvpart_run4 = purrr::map(data_merge,
-#                                   .f = ~run_mvpart(.,
-#                                                    preds = "spd + age + temp_annual + temp_cold + prec_summer + prec_win")))
-
-
-
 # mvpart on constrained scores
 
 data_input2 <- data_input %>%
@@ -110,15 +73,15 @@ group_human_impact <-
   unnest(adjr2) %>%
   group_by(sel_classification) %>%
   mutate(human_impact = case_when(
-    adjr2 < 0 ~ "no",
+    adjr2 <= 0 ~ "no",
     adjr2 > 0 & adjr2 <= 0.1 ~ "low",
-    adjr2 > 0.1 & adjr2 <= 0.3 ~ "moderate",
+    adjr2 > 0.2 & adjr2 <= 0.3 ~ "moderate",
     adjr2 > 0.3 & adjr2 <= 0.5 ~ "high",
     adjr2 > 0.5 ~ "very_high"
   )) 
 
 
-
+# check adjusted r2 from partial model with hvarpart
 
 check_adjr2 <- 
   output_h1_spatial %>% 
@@ -142,13 +105,7 @@ check_adjr2 <-
   dplyr::select(-c(data_merge, varhp)) %>%
   rename(p_value = `Pr(>I)`,
          Individual_percent = `I.perc(%)`) 
- # mutate(across(Unique:Individual_percent, ~replace(., .x < 0, 0))) %>% # negative variances can be ignored 
- # mutate(Individual_percent = Individual/total_variance *100) %>% #recalculate individual percent
-  # group_by(region, sel_classification) %>%
-  # mutate(n_records = length(unique(dataset_id))) %>%
-  # ungroup() %>%
-  # mutate(Unique_percent = Unique/total_variance *100,
-  #        Average.share_percent = Average.share/total_variance *100)  
+
 
 #check adjr2 between unique partition and output of the individual output
 group_human_impact %>%
@@ -291,5 +248,68 @@ dataset_human_impact <-
                                           })
   )
 
+
+#### check pRDA within ecozones and regions
+
+
+get_mod_constrained_spd <- function(data){
+  
+  properties <- data %>% 
+    dplyr::select(n0:density_diversity)
+  
+  formula <- properties ~ spd + Condition(age + temp_annual + prec_annual + prec_summer + prec_win)
+  mod <- vegan::capscale(formula,
+                         dist = "gower",
+                         add = TRUE,
+                         data = data)
+  return(mod) 
+}
+
+get_mod_constrained_climate <- function(data){
+  
+  properties <- data %>% 
+    dplyr::select(n0:density_diversity)
+  
+  formula <- properties ~ temp_annual + prec_annual + prec_summer + prec_win + Condition(age + spd)
+  mod <- vegan::capscale(formula,
+                         dist = "gower",
+                         add = TRUE,
+                         data = data)
+  return(mod) 
+}
+
+# RUN pRDA for records within ecozones in regions
+
+check_ecozone_region <- 
+  data_input %>%
+  dplyr::select(dataset_id, 
+                data_merge, 
+                sel_classification, 
+                region) %>%
+  unnest(data_merge) %>%
+  nest(data_merge = -c(region, 
+                       sel_classification)) %>%
+  mutate(pRDA = purrr::map(data_merge,
+                           .f= get_mod_constrained_spd) )
+
+# RUN pRDA for records within regions
+check_region <- 
+  data_input %>%
+  dplyr::select(dataset_id, 
+                data_merge, 
+                region) %>%
+  unnest(data_merge) %>%
+  nest(data_merge = -c(region)) %>%
+  mutate(pRDA = purrr::map(data_merge,
+                           .f= get_mod_constrained_spd) )
+
+# Aim is to get one plot per region that show changes in SPD is highest correlated with changes in N0, N1, N2, and N2-N1. 
+
+#vegan::RsquareAdj()
+#vegan::goodness
+# create triplots
+# Partial RDA triplots (with fitted site scores) 
+# Scaling 1 = sites
+# Scaline 2 = focus in ecosystem properties
 
 
