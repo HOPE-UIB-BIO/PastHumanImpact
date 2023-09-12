@@ -69,22 +69,7 @@ data_dcca <-
                 )
 
 # Base map with Köppen-Geiger 5 climate zones (in Beck et al. 2018)
-base_map <-
-  data_dcca %>%
-  ggplot2::ggplot(ggplot2::aes(x = long,
-                               y = lat)) +
-  ggplot2::coord_fixed(ylim = c(32.00, 75.00),
-                       xlim = c(2, 35.00)) +
-  
-  ggplot2::labs(x = "Longitude",
-                y = "Latitude",
-                colour = "Climate zones") +
-  ggplot2::theme_classic() +
-  ggplot2::borders(colour = "black",
-                   size = 0.2) +
-  theme(legend.position = "none")
-
-
+# Latitudinal and longitudinal trend in DCCA gradient length
 plot_dcca <-
   plot_spatial_dist(
     data_source = data_dcca,
@@ -94,19 +79,19 @@ plot_dcca <-
     error_family = "mgcv::Tweedie(p = 1.1, link = 'log')"
     )
 
-#ggsave(
-#  plot_dcca,
-#  file = paste(
-#    "Data_summary_outputs/Figure/",
-#    "Europe_data_filtered_gradient_length_250823.tiff",
-#    sep = ""
-#    ),
-#  dpi = 400,
-#  compress = "lzw",
-#  width = 15,
-#  height = 15,
-#  unit = "cm"
-#  )
+ggsave(
+  plot_dcca,
+  file = paste(
+    "Data_summary_outputs/Figure/",
+    "Europe_data_filtered_gradient_length_250823.tiff",
+    sep = ""
+    ),
+  dpi = 400,
+  compress = "lzw",
+  width = 18,
+  height = 12,
+  unit = "cm"
+  )
 
 
 data_axis1 <-

@@ -5,8 +5,40 @@ plot_spatial_dist <-
              lab_name,
              error_family) {
 
-        # Scatterplot
-        plot_main <-
+      # Scatterplot
+       base_map <-
+        data_source %>%
+        ggplot2::ggplot(
+          ggplot2::aes(
+            x = long,
+            y = lat
+            )
+          ) +
+        ggplot2::coord_fixed(
+          ylim = c(
+            min(data_source$lat), 
+            max(data_source$lat)
+            ),
+          xlim = c(
+            min(data_source$long), 
+            max(data_source$long)
+            )
+          ) +
+        ggplot2::labs(
+          x = "Longitude",
+          y = "Latitude",
+          colour = "Climate zones"
+          ) +
+        ggplot2::theme_classic() +
+        ggplot2::borders(
+          colour = "black",
+          size = 0.2
+          ) +
+        theme(
+              legend.position = "none"
+              )
+       
+       plot_main <-
             base_map +
             ggplot2::geom_point(
                 data = data_source,
@@ -39,13 +71,9 @@ plot_spatial_dist <-
               )
             ) +
           ggplot2::theme(
-            plot.margin = ggplot2::unit(
-              c(0, -1, 0, 0), # t, r, b, l
-              "cm"
-              ),
-            plot.title = element_text(
+           plot.title = element_text(
               colour = "black", 
-              size = 14,
+              size = 16,
               face = "bold",
               hjust = 0),
           legend.position = "bottom",
@@ -62,7 +90,7 @@ plot_spatial_dist <-
             
           axis.title = ggplot2::element_text(
             color = "black",
-            size = 14
+            size = 16
             ),
           axis.text = ggplot2::element_text(
             colour = "black",
@@ -75,10 +103,10 @@ plot_spatial_dist <-
         
         plot_main_no_legend <-
           plot_main +
-          ggpubr::rremove("legend") +
+          ggpubr::rremove("legend") #+
           theme(
-            plot.margin = ggplot2::unit(
-              c(0, -0.5, 0.2, 0), # t, r, b, l
+           plot.margin = ggplot2::unit(
+              c(0, -1, 0, 0), # t, r, b, l
               "cm"
             )
           )
@@ -135,12 +163,12 @@ plot_spatial_dist <-
             ggplot2::theme(
               plot.title = element_text(
                 colour = "black", 
-                size = 14,
+                size = 16,
                 face = "bold",
                 hjust = 0),
                 axis.title = ggplot2::element_text(
                     color = "black",
-                    size = 14
+                    size = 16
                     ),
                 axis.text = ggplot2::element_text(
                     color = "black",
@@ -182,12 +210,12 @@ plot_spatial_dist <-
             ggplot2::theme(
               plot.title = element_text(
                 colour = "black", 
-                size = 14,
+                size = 16,
                 face = "bold",
                 hjust = 0),
                 axis.title = ggplot2::element_text(
                     color = "black",
-                    size = 14
+                    size = 16
                     ),
                 axis.text = ggplot2::element_text(
                     color = "black",
@@ -208,10 +236,10 @@ plot_spatial_dist <-
                           left = text_grob(
                             "DCCA gradient length",
                             color = "black", 
-                            size = 14,
+                            size = 16,
                             rot = 90,
                             x = 1.5,
-                            y = 0.52)
+                            y = 0.53)
                           ) +
           theme(
             plot.margin = ggplot2::unit(
@@ -226,7 +254,7 @@ plot_spatial_dist <-
               trends_merged_1,
               nrow = 1,
               ncol = 2,
-              widths = c(0.75, 0.25)
+              widths = c(0.7, 0.3)
               )
         
         final_plot_legend <-
