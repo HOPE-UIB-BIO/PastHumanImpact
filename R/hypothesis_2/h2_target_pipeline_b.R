@@ -94,7 +94,7 @@ vec_mods <-
 
 mod_list <-
   purrr::map(
-    .progress = TRUE, ,
+    .progress = TRUE, 
     .x = vec_mods,
     .f = ~ readr::read_rds(
       here::here(
