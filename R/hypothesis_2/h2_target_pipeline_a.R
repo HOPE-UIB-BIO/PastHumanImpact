@@ -85,13 +85,21 @@ data_ecozone <-
       dplyr::distinct(dataset_id),
     by = "dataset_id"
   ) %>%
+  dplyr::mutate(
+    climate_ecozone = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  ) %>%
   dplyr::distinct(
-    region, ecozone_koppen_15, dataset_id
+    region, climate_ecozone, dataset_id
   )
 
 data_valid_ecozones <-
   data_ecozone %>%
-  dplyr::group_by(region, ecozone_koppen_15) %>%
+  dplyr::group_by(region, climate_ecozone) %>%
   dplyr::summarise(
     .groups = "drop",
     n_datasets = n_distinct(dataset_id)
@@ -105,7 +113,7 @@ data_dummy_ecozone_predictor <-
     data_valid_ecozones
   ) %>%
   dplyr::mutate(
-    region_zone = paste(region, ecozone_koppen_15, sep = "_"),
+    region_zone = paste(region, climate_ecozone, sep = "_"),
     full_name = paste(predictor, region_zone, sep = "_"),
     data_name = paste0("data_to_fit_mod_", full_name)
   )
@@ -126,7 +134,7 @@ tar_mapped_data <-
         data_raw = data_merge_unnest,
         data_error = data_pred_errors,
         sel_region = region,
-        sel_group = ecozone_koppen_15,
+        sel_group = climate_ecozone,
         y_var = predictor,
         sel_k = max_temporal_k
       ),
@@ -167,10 +175,11 @@ list(
     name = data_merge,
     command = dplyr::inner_join(
       data_ecozone,
-      data_for_hvar
+      data_for_hvar,
+      by = "dataset_id"
     ) %>%
       dplyr::rename(
-        group = ecozone_koppen_15
+        group = climate_ecozone
       )
   ),
   targets::tar_target(
