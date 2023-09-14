@@ -36,6 +36,8 @@ targets::tar_config_set(
 
 Sys.setenv(TAR_PROJECT = "project_h2")
 
+rerun_only_missing_models <- TRUE
+
 
 #----------------------------------------------------------#
 # 1. Prepare data -----
@@ -47,7 +49,7 @@ data_targest_h2a_manifest <-
     script = here::here("R/hypothesis_2/h2_target_pipeline_a.R")
   )
 
-data_targest_h2a_names <-
+data_targest_h2a_to_run <-
   data_targest_h2a_manifest %>%
   dplyr::filter(
     stringr::str_detect(name, "data_to_fit")
@@ -58,14 +60,37 @@ data_targest_h2a_names <-
     name_simple = stringr::str_replace(name_data_fixed, "data_to_fit_mod_", ""),
   )
 
+
+if (
+  isTRUE(rerun_only_missing_models)
+) {
+  vec_mods_done <-
+    list.files(
+      here::here(
+        data_storage_path, "h2_predictor_jobs"
+      ),
+      pattern = "mod.rds",
+      recursive = TRUE
+    ) %>%
+    stringr::str_replace(., "/mod.rds", "")
+
+
+  data_targest_h2a_to_run <-
+    data_targest_h2a_to_run %>%
+    dplyr::filter(
+      !name_simple %in% vec_mods_done
+    )
+}
+
+
 #----------------------------------------------------------#
 # 2. Run models locally -----
 #----------------------------------------------------------#
 
 purrr::walk2(
   .progress = TRUE,
-  .x = data_targest_h2a_names$name,
-  .y = data_targest_h2a_names$name_simple,
+  .x = data_targest_h2a_to_run$name,
+  .y = data_targest_h2a_to_run$name_simple,
   .f = ~ {
     message(.y)
 
@@ -144,3 +169,4 @@ purrr::walk2(
     }
   }
 )
+
