@@ -47,6 +47,9 @@ theme_aspect <-
 
 
 #figs
+order_predictors_spatial <- c("human", "time",  "climate")
+x_label <- c("Human",  "Time", "Climate")
+
 bars_climate <- 
   get_predictor_barplot(
     data = data_for_plotting$data_temporal[[1]],
