@@ -43,8 +43,8 @@ get_predictor_barplot <- function(data,
       values = palette_pred
     ) +
     scale_x_continuous(name = NULL,
+                       limits = c(0, 100),
                        breaks = seq(0, 100, by = 20),
-                       labels = seq(0, 100, by = 20),
                        expand = c(0,0)) +
     scale_y_discrete(limits = rev) +
     labs(y = "",
@@ -55,7 +55,10 @@ get_predictor_barplot <- function(data,
     
     p_predictor <- 
       p_predictor  +
-      scale_x_reverse() +
+      scale_x_reverse(name = NULL,
+                      limits = c(100, 0),
+                      breaks = seq(0, 100, by = 20),
+                      expand = c(0,0)) +
       scale_y_discrete(limits = rev, position = "right" )
     
   } else {
