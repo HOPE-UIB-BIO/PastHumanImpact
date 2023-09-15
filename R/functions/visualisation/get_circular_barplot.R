@@ -1,8 +1,9 @@
 # circular barplot
 
-get_cirular_barplot <- function(data,
+get_circular_barplot <- function(data,
                                 y_var = "percentage_median", 
                                 x_var = "predictor",
+                                fill_var = "sel_classification",
                                 col_vec = palette_ecozones,
                                 x_name = x_label) {
   circular_p <- 
@@ -25,7 +26,7 @@ get_cirular_barplot <- function(data,
         dplyr::filter(grepl("Unique_percent", variance_partition)),
       aes(x = get(x_var),
           y = get(y_var),
-          fill = sel_classification),
+          fill = get(fill_var)),
       width = 0.6,
       position = position_dodge(width = 0.8), 
       alpha = 1) +
@@ -34,7 +35,7 @@ get_cirular_barplot <- function(data,
         dplyr::filter(grepl("Average.share_percent", variance_partition)), 
       aes(x = get(x_var),
           y = get(y_var),
-          fill = sel_classification),
+          fill = get(fill_var)),
       width = .6,
       position = position_dodge(width = 0.8), 
       alpha = 0.4
@@ -83,7 +84,7 @@ get_cirular_barplot <- function(data,
   
   
   
-  circular_p
+  return(circular_p)
   
 }
 
