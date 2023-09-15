@@ -22,7 +22,9 @@ input_temporal <-
                                         "climate"))) %>%
   nest(data_temporal = -c(region))
 
-data_for_plotting <- input_spatial %>%
+
+data_for_plotting <- 
+  input_spatial %>%
   inner_join(input_temporal, by = "region")
 
 
@@ -42,66 +44,115 @@ theme_aspect <-
     aspect.ratio = 5
   )
 
-get_combine_figure <- function(input_temporal, 
-                               input_spatial) {
-  
-  
-   bars_climate <- 
-    get_predictor_barplot(
-      data = input_temporal,
-      sel_predictor = "climate",
-      x_var = "percentage_median",
-      axis_to_right = TRUE) 
-   
-   
-   bars_human <- 
-     get_predictor_barplot(
-       data = input_temporal,
-       sel_predictor = "human",
-       x_var = "percentage_median",
-       axis_to_right = FALSE) 
-   
-   bars_circ <- 
-     get_circular_barplot(
-       data = input_spatial,
-       y_var = "percentage_median", 
-       x_var = "predictor",
-       fill_var = "sel_classification",
-       col_vec = palette_ecozones,
-       x_name = x_label)
-   
-   combine <- 
-     cowplot::ggdraw(bars_circ) +
-     cowplot::draw_plot(bars_climate, x = 0.01, y = 0.1, width = .2, height = .7) +
-     cowplot::draw_plot(bars_human, x = 0.8, y = 0.1, width = .2, height = .7) + 
-     theme_transparant 
-   
-   return(combine)
-   
-   
-}
 
-plotting <- 
-  data_for_plotting %>%
-  mutate(figs = purrr::map2(
-    .x = data_spatial,
-    .y = data_temporal, 
-    .f = ~get_combine_figure(
-      input_temporal = .y,
-      input_spatial = .x
-    )
-  )
-  )
+
+#figs
+bars_climate <- 
+  get_predictor_barplot(
+    data = data_for_plotting$data_temporal[[1]],
+    sel_predictor = "climate",
+    x_var = "percentage_median",
+    axis_to_right = TRUE) +
+  theme_aspect +
+  theme_transparant
+
+
+bars_human <- 
+  get_predictor_barplot(
+    data = data_for_plotting$data_temporal[[1]],
+    sel_predictor = "human",
+    x_var = "percentage_median",
+    axis_to_right = FALSE) +
+  theme_aspect +
+  theme_transparant
 
 
 
-theme_aspect <- 
-  ggplot2::theme(
-    aspect.ratio = 1
-  ) 
+bars_circ <- 
+  get_circular_barplot(
+    data = data_for_plotting$data_spatial[[1]],
+    y_var = "percentage_median", 
+    x_var = "predictor",
+    col_vec = palette_ecozones,
+    x_name = x_label)
+
+
+# layout
+layout <- c(
+  area(t = 2, l = 1, b = 2, r = 1),
+  area(t = 1, l = 2, b = 3, r = 4),
+  area(t = 2, l = 5, b = 2, r = 5)
+)
+
+# combine test 1 patchwork and layout
+combined_fig <- 
+  bars_climate + cir_plot + bars_human +
+  plot_layout(design = layout)
+combined_fig
+
+# combine test 2 plot inset
+combined_fig2 <-
+  cowplot::ggdraw(cir_plot) +
+  cowplot::draw_plot(bars_climate, x = 0.01, y = 0.15, width = .2, height = .8) +
+  cowplot::draw_plot(bars_human, x = 0.8, y = 0.15, width = .2, height = .8)
+
+combined_fig2
+
+# get_combine_figure <- function(input_temporal, 
+#                                input_spatial) {
+#   
+#   
+#    bars_climate <- 
+#     get_predictor_barplot(
+#       data = input_temporal,
+#       sel_predictor = "climate",
+#       x_var = "percentage_median",
+#       axis_to_right = TRUE) 
+#    
+#    
+#    bars_human <- 
+#      get_predictor_barplot(
+#        data = input_temporal,
+#        sel_predictor = "human",
+#        x_var = "percentage_median",
+#        axis_to_right = FALSE) 
+#    
+#    bars_circ <- 
+#      get_circular_barplot(
+#        data = input_spatial,
+#        y_var = "percentage_median", 
+#        x_var = "predictor",
+#        fill_var = "sel_classification",
+#        col_vec = palette_ecozones,
+#        x_name = x_label)
+#    
+#    combine <- 
+#      cowplot::ggdraw(bars_circ) +
+#      cowplot::draw_plot(bars_climate, x = 0.01, y = 0.1, width = .2, height = .7) +
+#      cowplot::draw_plot(bars_human, x = 0.8, y = 0.1, width = .2, height = .7) + 
+#      theme_transparant 
+#    
+#    return(combine)
+#    
+#    
+# }
+# 
+# plotting <- 
+#   data_for_plotting %>%
+#   mutate(figs = purrr::map2(
+#     .x = data_spatial,
+#     .y = data_temporal, 
+#     .f = ~get_combine_figure(
+#       input_temporal = .y,
+#       input_spatial = .x
+#     )
+#   )
+#   )
 
 
 
+
+### GET FIGURES TO MAP
 
 #regional limits
 region_plot <- 
