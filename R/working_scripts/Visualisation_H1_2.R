@@ -183,3 +183,14 @@ combined_detail_h1 <-
   ),
 ncol = 1)
 
+
+ggsave(
+  "combined_details_h1.pdf",
+  plot = combined_detail_h1,
+  width = 90,
+  height = 90,
+  units = "mm",
+  bg = "white"
+  
+)
+
