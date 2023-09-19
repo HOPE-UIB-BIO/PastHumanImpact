@@ -13,17 +13,18 @@ get_circular_barplot <- function(data,
     geom_hline(
       aes(yintercept = y), 
       data.frame(y = seq(0, 50, by = 10)),
-      color = "grey"
+      color = "grey90"
     ) +
     geom_vline(
       xintercept = (0:3)+0.5,
       linetype = "dashed",
-      linewidth = 0.1,
-      color = "grey50"
+      linewidth = 0.01,
+      color = "grey90"
     ) +
     geom_col(
       data = data  %>% 
-        dplyr::filter(grepl("Unique_percent", variance_partition)),
+        dplyr::filter(grepl("Unique_percent", 
+                            variance_partition)),
       aes(x = get(x_var),
           y = get(y_var),
           fill = get(fill_var)),
@@ -32,7 +33,8 @@ get_circular_barplot <- function(data,
       alpha = 1) +
     geom_col(
       data = data %>% 
-        dplyr::filter(grepl("Average.share_percent", variance_partition)), 
+        dplyr::filter(grepl("Average.share_percent", 
+                            variance_partition)), 
       aes(x = get(x_var),
           y = get(y_var),
           fill = get(fill_var)),
@@ -56,8 +58,11 @@ get_circular_barplot <- function(data,
       y = rep(seq(20,40, by = 10),3),
       label = rep(paste0(seq(20,40, by = 10), " %"),3), 
       vjust = 0,
-      size = 2) +
-    coord_polar() +
+      size = 2
+      ) +
+    coord_polar(
+      
+    ) +
     scale_x_discrete(
       label = x_name,
       drop = FALSE
@@ -67,19 +72,33 @@ get_circular_barplot <- function(data,
       x = "", 
       y = ""
     ) +
-    theme_minimal() +
     theme(
       legend.position = "none",
-      legend.title = element_text(size = 8),
-      legend.text = element_text(size = 7),
-      legend.key.size = unit(0.2, "cm"),
+      panel.background  = element_blank(),
+      plot.background = element_rect(
+        fill = "transparent", 
+        color = NA), 
+      legend.background = element_rect(
+        fill = "transparent", 
+        color = NA),
       panel.grid = element_blank(),
       panel.grid.major.x = element_blank(),
+      line = element_line(
+        linewidth = 0.01
+      ),
       axis.ticks = element_blank(),
       axis.text.y = element_blank(),
-      axis.text.x = element_text(colour = "grey30", size = 9, family = "sans", vjust = -3),
-      text = element_text(color = "grey30"),
-      plot.margin = unit(c(0.3, 0, 0, 0), "cm")
+      axis.text.x = element_text(
+        size = 6, 
+        vjust = -3
+        ),
+      text = element_text(
+        size = 6,
+        color = "grey80"
+        ),
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      panel.spacing=unit(c(0,0,0,0), "null")
+      
     ) 
   
   
