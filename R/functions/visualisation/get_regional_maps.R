@@ -25,18 +25,26 @@ get_map_region <- function(rasterdata = data_geo_koppen,
     ggplot() +
     geom_raster(aes(x = x,
                     y = y,
-                    fill = ecozone_koppen_15)) +
-    scale_fill_manual(values = col_vec, drop = FALSE) +
-    coord_sf(expand = TRUE,
-             ylim = c(boundary$ymin[1], boundary$ymax[1]),
-             xlim = c(boundary$xmin[1], boundary$xmax[1])) +
+                    fill = sel_classification
+                    )
+                ) +
+    scale_fill_manual(
+      values = col_vec, 
+      drop = FALSE
+      ) +
+    coord_sf(
+      expand = TRUE,
+      ylim = c(boundary$ymin[1], boundary$ymax[1]),
+      xlim = c(boundary$xmin[1], boundary$xmax[1])
+      ) +
     theme_void() +
     theme(
       legend.position = "none",
       panel.background = element_blank(),
       plot.background = element_blank(),
       panel.spacing=unit(c(0,0,0,0), "null"),
-      plot.margin=grid::unit(c(0,1,0,0), "cm"),
+      plot.margin=grid::unit(c(0,0,0,0), "cm"),
     )
-  map_region
+  
+  return(map_region)
 }
