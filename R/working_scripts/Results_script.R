@@ -1,4 +1,4 @@
-####### SUMMARY OF RESULTS - WORKING SCRIPT
+####### IMPORT RESULTS & RESHAPE TABLES FOR PLOTTING
 
 
 ################################################################
@@ -42,9 +42,7 @@ data_meta <-
                       "_targets_h1"
                       )
                     )
-###########################################################
-# 2. Define variables
-###########################################################
+
 
 # Redefine major ecozones
 data_meta <- 
@@ -59,36 +57,10 @@ data_meta <-
   ) 
 
 
-# Color palettes
-# Ecozones                              
-palette_ecozones <- 
-  c( Polar = "#009292", 
-     Cold_Without_dry_season_Very_Cold_Summer = "#004949", 
-     Cold_Without_dry_season_Cold_Summer = "#006ddb", 
-     Cold_Dry_Winter = "#6db6ff",
-     Cold_Dry_Summer = "#b6dbff",
-     Cold_Without_dry_season_Warm_Summer = "#117733",
-     Cold_Without_dry_season_Hot_Summer = "#999933", 
-     Temperate_Without_dry_season = "#DDCC77",
-     Temperate_Dry_Winter = "#b66dff",
-     Temperate_Dry_Summer = "#ffff6d",
-     Arid = "#924900",  
-     Tropical =  "#920000"
-     )
-
-
-
-# Predictors
-palette_pred <- c(human = "#663333", 
-                  climate = "#BBBBBB") 
-
-
 # Define variables for selection 
 group_vars_spatial <- c("predictor", "sel_classification", "region")
 
 group_vars_temporal <- c("predictor", "region", "age")
-
-
 
 sel_var <- c("total_variance",
              "Individual", 
