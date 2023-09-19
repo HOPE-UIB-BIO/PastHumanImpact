@@ -15,9 +15,9 @@ get_scores_constrained_spd <- function(data) {
                            add = TRUE,
                            data = data)
     
-    adjr2 <- RsquareAdj(mod)$adj.r.squared
-    cap1 <- scores(mod, choice = 1, display = "sites")
-    constant <- attributes(cap1)$const
+    adjr2 <- vegan::RsquareAdj(mod)$adj.r.squared
+    cap1 <- vegan::scores(mod, choice = 1, display = "sites")
+    constant <- base::attributes(cap1)$const
     
     # dataframe of cap1 = scores of partial dpRDA constrained by spd, age, and spd values
     df <- data.frame(cap1 + constant, age = data$age, spd = data$spd)
