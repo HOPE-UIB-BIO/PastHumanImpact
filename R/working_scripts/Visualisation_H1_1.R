@@ -291,8 +291,8 @@ combined_map_h1
 ggsave(
 "combined_map_h1.png",
  plot = combined_map_h1,
-width = 700,
-height = 600,
+width = 70,
+height = 60,
 units = "mm",
 bg = "white"
 
