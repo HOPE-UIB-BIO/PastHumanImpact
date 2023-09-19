@@ -119,7 +119,7 @@ ecosystem_prop_scores <-
   geom_line(aes(
     col = sel_classification),
     alpha = 0.3, 
-    linewidth = 1) +
+    linewidth = 0.1) +
   scale_colour_manual(
     values = palette_ecozones
     ) +
@@ -146,10 +146,6 @@ names(ecosystem_prop_scores) <- constrained_scores$region %>% unique()
 
 
 
-theme_remove_labels <- theme(
-  
-  axis.text.x = element_blank()
-)
 #combine figures
 combined_detail_h1 <- 
   cowplot::plot_grid(
@@ -190,7 +186,8 @@ ggsave(
   width = 90,
   height = 90,
   units = "mm",
-  bg = "white"
+  bg = "white",
+  scale = 2
   
 )
 
