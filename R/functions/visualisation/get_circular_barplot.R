@@ -29,7 +29,8 @@ get_circular_barplot <- function(data,
           y = get(y_var),
           fill = get(fill_var)),
       width = 0.6,
-      position = position_dodge(width = 0.8), 
+      position = position_dodge2(width = 0.8, 
+                                 preserve = "single"), 
       alpha = 1) +
     geom_col(
       data = data %>% 
@@ -39,7 +40,8 @@ get_circular_barplot <- function(data,
           y = get(y_var),
           fill = get(fill_var)),
       width = .6,
-      position = position_dodge(width = 0.8), 
+      position = position_dodge2(width = 0.8, 
+                                 preserve = "single"), 
       alpha = 0.4
     ) +
     scale_fill_manual(
@@ -54,11 +56,11 @@ get_circular_barplot <- function(data,
     ) +
     annotate(
       "text",
-      x = c(rep(1.5,3), rep(2.5,3), rep(3.5,3)),
-      y = rep(seq(20,40, by = 10),3),
-      label = rep(paste0(seq(20,40, by = 10), " %"),3), 
+      x = c(3.5, 3.5, 3.5),
+      y = seq(20,40, by = 10),
+      label = paste0(seq(20,40, by = 10), " %"), 
       vjust = 0,
-      size = 2
+      size = 1.5
       ) +
     coord_polar(
       
@@ -75,27 +77,15 @@ get_circular_barplot <- function(data,
     theme(
       legend.position = "none",
       panel.background  = element_blank(),
-      plot.background = element_rect(
-        fill = "transparent", 
-        color = NA), 
-      legend.background = element_rect(
-        fill = "transparent", 
-        color = NA),
-      panel.grid = element_blank(),
-      panel.grid.major.x = element_blank(),
-      line = element_line(
-        linewidth = 0.01
-      ),
+      panel.border = element_blank(),
+      plot.background = element_blank(), 
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.line = element_blank(),
       axis.ticks = element_blank(),
       axis.text.y = element_blank(),
-      axis.text.x = element_text(
-        size = 6, 
-        vjust = -3
-        ),
-      text = element_text(
-        size = 6,
-        color = "grey80"
-        ),
+      axis.text.x = element_text(size = 6, 
+                                 vjust = -3),
       plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
       panel.spacing=unit(c(0,0,0,0), "null")
       
