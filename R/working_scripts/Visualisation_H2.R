@@ -324,20 +324,27 @@ remove_axis_labels_x <- theme(axis.title.x = element_blank(),
 remove_axis_labels_y <- theme(axis.title.y = element_blank(),
                              axis.text.y = element_blank())
 
-remove_space <- theme(plot.margin = unit(c(0,-2,0,-2), "mm"))
+remove_space <- theme(plot.margin = unit(c(0,0,0,0), "mm"))
 
 # PUT TOGETHER FIGURES PER REGION
 
 
 dev.new(width = 180, height = 70, units = "mm") 
 
-
+design <- c(
+  area(t = 1, l = 1, b = 1, r = 1),
+  area(t = 1, l = 2, b = 1, r = 2),
+  area(t = 1, l = 3, b = 1, r = 3),
+  area(t = 1, l = 4, b = 1, r = 4),
+  area(t = 1, l = 5, b = 1, r = 5)
+)
 
 
 NA_p1 <-
   circular_bar_h2$`North America` +
   m2_change_region$`North America_Arid` + 
   remove_axis_labels_x +
+  remove_space +
   inset_element(NA_map_list$arid, left = 0.365, bottom = 0.7, right = 1, top = 1) +
   m2_change_region$`North America_Polar` +
   remove_axis_labels +
@@ -351,7 +358,7 @@ NA_p1 <-
   remove_axis_labels +
   remove_space +
   inset_element(NA_map_list$temp, left = 0.365, bottom = 0.7, right = 1, top = 1) +
-  plot_layout(nrow = 1)
+  plot_layout(design = design)
 
 
 
@@ -359,6 +366,7 @@ LA_p1 <-
   circular_bar_h2$`Latin America` +
   m2_change_region$`Latin America_Arid` + 
   remove_axis_labels_x +
+  remove_space +
   inset_element(LA_map_list$arid, left = 0.365, bottom = 0.7, right = 1, top = 0.9) +
   m2_change_region$`Latin America_Polar` +
   remove_axis_labels +
@@ -372,13 +380,14 @@ LA_p1 <-
   remove_axis_labels +
   remove_space +
   inset_element(LA_map_list$tropical, left = 0.365, bottom = 0.7, right = 1, top = 0.9) +
-  plot_layout(nrow = 1)
+  plot_layout(design = design)
  
 
 europe_p1 <- 
   circular_bar_h2$`Europe` +
   m2_change_region$`Europe_Arid` + 
   remove_axis_labels_x +
+  remove_space +
   inset_element(Europe_map_list$arid, left = 0.365, bottom = 0.7, right = 1, top = 1) +
   m2_change_region$`Europe_Polar` +
   remove_axis_labels +
@@ -392,7 +401,8 @@ europe_p1 <-
   remove_axis_labels +
   remove_space +
   inset_element(Europe_map_list$cold, left = 0.365, bottom = 0.7, right = 1, top = 1) +
-  plot_layout(nrow = 1)
+  plot_layout(design = design)
+
 
 
 
@@ -400,34 +410,37 @@ asia_p1 <-
   circular_bar_h2$`Asia` +
   m2_change_region$`Asia_Arid` + 
   inset_element(Asia_map_list$arid, left = 0.365, bottom = 0.7, right = 1, top = 1) +
+  remove_space +
   m2_change_region$`Asia_Polar` +
   remove_axis_labels_y +
   remove_space +
   inset_element(Asia_map_list$polar, left = 0.365, bottom = 0.7, right = 1, top = 1) +
   m2_change_region$`Asia_Temperate` +
-  remove_axis_labels +
+  remove_axis_labels_y +
   remove_space +
   inset_element(Asia_map_list$temp, left = 0.365, bottom = 0.7, right = 1, top = 1) +
   m2_change_region$`Asia_Cold` +
   remove_axis_labels +
   remove_space +
   inset_element(Asia_map_list$cold, left = 0.365, bottom = 0.7, right = 1, top = 1) +
-  plot_layout(nrow = 1)
+  plot_layout(design = design)
 
- 
+o_design <- c(
+  area(t = 1, l = 1, b = 1, r = 1),
+  area(t = 1, l = 5, b = 1, r = 5)
+)
 
 oceania_p1 <- 
   circular_bar_h2$`Oceania` +
-  plot_spacer() +
-  plot_spacer() +
   m2_change_region$`Oceania_Temperate` +
   remove_axis_labels_y +
+  remove_space +
   inset_element(oceania_map_list$temp, left = 0.365, bottom = 0.7, right = 1, top = 0.99) +
-  plot_spacer() +
-  plot_layout(nrow = 1)
+  plot_layout(design = o_design)
+
 
 # FINAL COMBINED
-layout <- c(
+design2 <- c(
   area(t = 1, l = 1, b = 1, r = 5),
   area(t = 2, l = 1, b = 2, r = 5),
   area(t = 3, l = 1, b = 3, r = 5),
@@ -435,28 +448,34 @@ layout <- c(
   area(t = 5, l = 1, b = 5, r = 5)
 )
 
-plot(layout)
 
+# try design to keep each figure row at same plot level 
+combine_h2 <-
+  NA_p1 / 
+  LA_p1 / 
+ europe_p1 /
+  asia_p1 / 
+  oceania_p1  +
+  plot_layout(design = design2)
 
-combine_plots <- 
- (NA_p1 / 
+# try layout with ncol 
+combine_h2 <- 
+  NA_p1 / 
   LA_p1 / 
   europe_p1 /
   asia_p1 / 
-  oceania_p1) + 
-  plot_layout(design = layout)
+  oceania_p1  +
+  plot_layout(ncol = 1)
 
 
-# FINAL COMBINE ALL REGIONS
+# try plot_grid from 
 combine_h2 <-
   cowplot::plot_grid(NA_p1, 
                      LA_p1, 
                      europe_p1, 
                      asia_p1, 
                      oceania_p1, 
-                     ncol = 1, 
-                     align = "hv",
-                     axis = 1) 
+                     ncol = 1) 
   
 combine_h2
 
@@ -464,14 +483,14 @@ dev.off()
 
 # SAVE
 
-pdf("combined_h2_version3.pdf", width = 9, height = 9, unit = "cm")  
-print(combine_h2)  
-dev.off()
+# pdf("combined_h2_version3.pdf", width = 9, height = 9, unit = "cm")  
+# print(combine_h2)  
+# dev.off()
+# 
+# system2('open', args = 'combined_h2_version3.pdf')
 
-system2('open', args = 'combined_h2_version3.pdf')
-
-png("combined_plot_h2.png", width = 9, height = 9, unit = "cm", dpi = 300)
-print(combined)
+png("combined_plot_h2.png", width = 18, height = 9, unit = "cm", res = 300)
+print(combine_h2)
 
 dev.off()
 
