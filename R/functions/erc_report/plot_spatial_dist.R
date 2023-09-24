@@ -44,7 +44,7 @@ plot_spatial_dist <-
                 data = data_source,
                 ggplot2::aes(
                   size = get(var_name),
-                  colour = ecozone_koppen_5,
+                  colour = climate_zone,
                   ),
                 alpha = 0.5
               ) +
@@ -103,18 +103,12 @@ plot_spatial_dist <-
         
         plot_main_no_legend <-
           plot_main +
-          ggpubr::rremove("legend") #+
-          theme(
-           plot.margin = ggplot2::unit(
-              c(0, -1, 0, 0), # t, r, b, l
-              "cm"
-            )
-          )
+          ggpubr::rremove("legend") 
 
         # Latitudinal and longitudinal trends
         data_pred_long <-
             make_figure_spatial_trend(
-                data_source = data_dcca,
+                data_source = data_source,
                 side = "long",
                 var_name = var_name,
                 error_family = error_family
@@ -122,7 +116,7 @@ plot_spatial_dist <-
 
         data_pred_lat <-
             make_figure_spatial_trend(
-                data_source = data_dcca,
+                data_source = data_source,
                 side = "lat",
                 var_name = var_name,
                 error_family = error_family
@@ -139,7 +133,7 @@ plot_spatial_dist <-
               ggplot2::geom_point(
                 col = "#2CA388",
                 size = 1.5,
-                alpha = 0.4
+                alpha = 0.3
                 ) +
             ggplot2::geom_ribbon(
                 data = data_pred_lat,
@@ -187,7 +181,7 @@ plot_spatial_dist <-
               ggplot2::geom_point(
                 col = "#2CA388",
                 size = 1.5,
-                alpha = 0.4
+                alpha = 0.3
                 ) +
             ggplot2::geom_ribbon(
                 data = data_pred_long,
@@ -243,7 +237,7 @@ plot_spatial_dist <-
                           ) +
           theme(
             plot.margin = ggplot2::unit(
-            c(0, -0.25, 0, -1), # t, r, b, l
+            c(0, -0.2, 0, -0.5), # t, r, b, l
             "cm"
             )
           )
