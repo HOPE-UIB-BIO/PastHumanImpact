@@ -175,8 +175,10 @@ order_predictors_spatial <- c("human", "time",  "climate")
 
 x_label <- c("Human",  "Time", "Climate")
 
+#
+get_map_region(select_region = "Oceania", col_vec = rep("grey90", 12))
 
-# GET LISTS OF REGIONAL MAPS FOR DIFFERENT PALETTE
+# GET LISTS OF REGIONAL MAPS FOR DIFFERENT PALETTE ECOZONES
 
 
 list_maps <- function(select_region = "Europe") {
