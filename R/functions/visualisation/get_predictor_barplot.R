@@ -8,14 +8,14 @@ get_predictor_barplot <-
            sel_palette) {
     p_predictor <-
       data %>%
-      ggplot() +
-      geom_bar(
+      ggplot2::ggplot() +
+      ggplot2::geom_bar(
         data = data %>%
           dplyr::filter(
             variance_partition == "Unique_percent_median",
             predictor %in% sel_predictor
           ),
-        aes(
+        ggplot2::aes(
           y = as.factor(age / 1000),
           x = get(x_var),
           fill = predictor
@@ -25,13 +25,13 @@ get_predictor_barplot <-
         alpha = 1,
         show.legend = FALSE
       ) +
-      geom_bar(
+      ggplot2::geom_bar(
         data = data %>%
           dplyr::filter(
             variance_partition == "Average.share_percent_median",
             predictor %in% sel_predictor
           ),
-        aes(
+        ggplot2::aes(
           y = as.factor(age / 1000),
           x = get(x_var),
           fill = predictor
@@ -41,29 +41,33 @@ get_predictor_barplot <-
         alpha = 0.4,
         show.legend = FALSE
       ) +
-      scale_fill_manual(
+      ggplot2::scale_fill_manual(
         values = sel_palette,
         drop = FALSE
       ) +
-      scale_x_continuous(
+      ggplot2::scale_x_continuous(
         name = NULL,
         limits = c(0, 100),
         breaks = seq(0, 100, by = 25),
         expand = c(0, 0)
       ) +
-      scale_y_discrete(
+      ggplot2::scale_y_discrete(
         limits = rev,
         drop = FALSE
       ) +
-      theme(
-        panel.background = element_rect(fill = "transparent", color = NA),
-        plot.background = element_rect(fill = "transparent", color = NA),
-        line = element_line(linewidth = 0.01),
-        text = element_text(size = 8, color = "grey30"),
-        axis.text.x = element_text(size = 8, angle = 60),
+      ggplot2::theme(
+        panel.background = ggplot2::element_rect(
+          fill = "transparent", color = NA
+        ),
+        plot.background = ggplot2::element_rect(
+          fill = "transparent", color = NA
+        ),
+        line = ggplot2::element_line(linewidth = 0.01),
+        text = ggplot2::element_text(size = 8, color = "grey30"),
+        axis.text.x = ggplot2::element_text(size = 8, angle = 60),
         plot.margin = grid::unit(c(0, 0, 0, 0), "mm")
       ) +
-      labs(
+      ggplot2::labs(
         y = "",
         x = ""
       )
@@ -72,13 +76,13 @@ get_predictor_barplot <-
     if (isTRUE(axis_to_right)) {
       p_predictor <-
         p_predictor +
-        scale_x_reverse(
+        ggplot2::scale_x_reverse(
           name = NULL,
           limits = c(100, 0),
           breaks = seq(0, 100, by = 20),
           expand = c(0, 0)
         ) +
-        scale_y_discrete(
+        ggplot2::scale_y_discrete(
           limits = rev,
           position = "right",
           drop = FALSE
