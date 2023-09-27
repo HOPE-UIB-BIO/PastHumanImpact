@@ -258,9 +258,9 @@ list_circle_plots <-
 
 # 2.4 INSET FIGURES ON MAP -----
 
-sel_method <- "ggpubr"
-sel_figure_width <- 0.2
-sel_figure_height <- 0.3
+sel_method <- "cowplot"
+sel_figure_width <- 0.35
+sel_figure_height <- 0.4
 
 combined_map_h1 <-
   cowplot::ggdraw(worldmap_grey) +
@@ -268,7 +268,7 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "North America", sel_method = sel_method
     ),
-    x = 0.15,
+    x = 0.05,
     y = 0.5,
     width = sel_figure_width,
     height = sel_figure_height
@@ -277,8 +277,8 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Latin America", sel_method = sel_method
     ),
-    x = 0.23,
-    y = 0.18,
+    x = 0.15,
+    y = 0.13,
     width = sel_figure_width,
     height = sel_figure_height
   ) +
@@ -286,8 +286,8 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Europe", sel_method = sel_method
     ),
-    x = 0.41,
-    y = 0.58,
+    x = 0.32,
+    y = 0.5,
     width = sel_figure_width,
     height = sel_figure_height
   ) +
@@ -295,8 +295,8 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Asia", sel_method = sel_method
     ),
-    x = 0.63,
-    y = 0.55,
+    x = 0.58,
+    y = 0.52,
     width = sel_figure_width,
     height = sel_figure_height
   ) +
@@ -304,20 +304,27 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Oceania", sel_method = sel_method
     ),
-    x = 0.70,
+    x = 0.62,
     y = 0.10,
     width = sel_figure_width,
     height = sel_figure_height
   )
 
 # 2.5 save -----
-ggsave(
-  "combined_map_h1.pdf",
-  plot = combined_map_h1,
-  width = 170,
-  height = 85,
-  units = "mm",
-  bg = "white"
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/combined_map_h1"),
+      .x,
+      sep = "."
+    ),
+    plot = combined_map_h1,
+    width = 170,
+    height = 85,
+    units = "mm",
+    bg = "white"
+  )
 )
 
 #----------------------------------------------------------#
