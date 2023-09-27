@@ -3,9 +3,26 @@
 ## FIGURE 1: RESULTS H1
 ########################################################
 
+#----------------------------------------------------------#
+# 0. Setup -----
+#----------------------------------------------------------#
+
+library(here)
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
+  )
+)
+
 # Import tables for plotting
 
-source("R/working_scripts/Results_script.R")
+source(
+  here::here(
+    "R/working_scripts/Results_script.R"
+  )
+)
 
 
 
@@ -75,17 +92,20 @@ data_for_plotting <-
 bars_climate <-
   data_for_plotting %>%
   unnest(data_temporal) %>%
-  tidyr::complete(age,
+  tidyr::complete(
+    age,
     nesting(predictor, region),
     fill = list(percentage_median = 0)
   ) %>%
   group_by(region) %>%
-  group_map(~ get_predictor_barplot(
-    data = .x,
-    sel_predictor = "climate",
-    x_var = "percentage_median",
-    axis_to_right = TRUE
-  ))
+  group_map(
+    .f = ~ get_predictor_barplot(
+      data = .x,
+      sel_predictor = "climate",
+      x_var = "percentage_median",
+      axis_to_right = TRUE
+    )
+  )
 
 names(bars_climate) <- data_for_plotting$region %>% unique()
 
