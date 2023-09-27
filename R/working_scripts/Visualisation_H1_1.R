@@ -98,7 +98,7 @@ get_predictor_barplot_for_all_regions <- function(
 }
 
 # barplot climate
-list_bars_climate <-
+list_bars_plot_climate <-
   get_predictor_barplot_for_all_regions(
     data_source = data_for_plotting,
     sel_predictor = "climate",
@@ -106,7 +106,7 @@ list_bars_climate <-
     axis_to_right = TRUE
   )
 # barplot human
-list_bars_human <-
+list_bars_plot_human <-
   get_predictor_barplot_for_all_regions(
     data_source = data_for_plotting,
     sel_predictor = "human",
@@ -115,7 +115,7 @@ list_bars_human <-
   )
 
 # circular bars
-bars_circ <-
+list_circle_plots <-
   data_for_plotting %>%
   tidyr::unnest(data_spatial) %>%
   dplyr::group_by(region) %>%
@@ -127,13 +127,15 @@ bars_circ <-
       col_vec = palette_ecozones, # [config criteria]
       x_name = predictors_label # [config criteria]
     )
+  ) %>%
+  rlang::set_names(
+    nm = unique(data_for_plotting$region)
   )
 
-names(bars_circ) <- data_for_plotting$region %>% unique()
 
 # ggsave(
 #   "C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/cir.png",
-#   plot = bars_circ,
+#   plot = list_circle_plots,
 #   width = 20,
 #   units = "mm",
 #   dpi = 700,
@@ -150,7 +152,7 @@ layout <- c(
 
 # combine test 1 patchwork and layout
 combined_fig <-
-  list_bars_climate$Europe + bars_circ$Europe + list_bars_human$Europe +
+  list_bars_plot_climate$Europe + list_circle_plots$Europe + list_bars_plot_human$Europe +
   patchwork::plot_layout(design = layout) +
   ggpubr::theme_transparent() +
   ggplot2::theme(
@@ -163,9 +165,9 @@ combined_fig
 # combine plots per region
 
 fig1 <-
-  cowplot::ggdraw(bars_circ$`North America`) +
+  cowplot::ggdraw(list_circle_plots$`North America`) +
   cowplot::draw_plot(
-    list_bars_climate$`North America` +
+    list_bars_plot_climate$`North America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -173,7 +175,7 @@ fig1 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    list_bars_human$`North America` +
+    list_bars_plot_human$`North America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -185,9 +187,9 @@ fig1 <-
 
 
 fig2 <-
-  cowplot::ggdraw(bars_circ$`Latin America`) +
+  cowplot::ggdraw(list_circle_plots$`Latin America`) +
   cowplot::draw_plot(
-    list_bars_climate$`Latin America` +
+    list_bars_plot_climate$`Latin America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -195,7 +197,7 @@ fig2 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    list_bars_human$`Latin America` +
+    list_bars_plot_human$`Latin America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -206,9 +208,9 @@ fig2 <-
 
 
 fig3 <-
-  cowplot::ggdraw(bars_circ$Europe) +
+  cowplot::ggdraw(list_circle_plots$Europe) +
   cowplot::draw_plot(
-    list_bars_climate$Europe +
+    list_bars_plot_climate$Europe +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -216,7 +218,7 @@ fig3 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    list_bars_human$Europe +
+    list_bars_plot_human$Europe +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -227,9 +229,9 @@ fig3 <-
 
 
 fig4 <-
-  cowplot::ggdraw(bars_circ$Asia) +
+  cowplot::ggdraw(list_circle_plots$Asia) +
   cowplot::draw_plot(
-    list_bars_climate$Asia +
+    list_bars_plot_climate$Asia +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -237,7 +239,7 @@ fig4 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    list_bars_human$Asia +
+    list_bars_plot_human$Asia +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -247,9 +249,9 @@ fig4 <-
   ggplot2::theme(aspect.ratio = 0.85)
 
 fig5 <-
-  cowplot::ggdraw(bars_circ$Oceania) +
+  cowplot::ggdraw(list_circle_plots$Oceania) +
   cowplot::draw_plot(
-    list_bars_climate$Oceania +
+    list_bars_plot_climate$Oceania +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.0,
     y = 0.15,
@@ -257,7 +259,7 @@ fig5 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    list_bars_human$Oceania +
+    list_bars_plot_human$Oceania +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.9,
     y = 0.15,
@@ -351,7 +353,7 @@ ggsave(
 #                                input_spatial) {
 #
 #
-#    list_bars_climate <-
+#    list_bars_plot_climate <-
 #     get_predictor_barplot(
 #       data = input_temporal,
 #       sel_predictor = "climate",
@@ -359,14 +361,14 @@ ggsave(
 #       axis_to_right = TRUE)
 #
 #
-#    list_bars_human <-
+#    list_bars_plot_human <-
 #      get_predictor_barplot(
 #        data = input_temporal,
 #        sel_predictor = "human",
 #        x_var = "percentage_median",
 #        axis_to_right = FALSE)
 #
-#    bars_circ <-
+#    list_circle_plots <-
 #      get_circular_barplot(
 #        data = input_spatial,
 #        y_var = "percentage_median",
@@ -376,9 +378,9 @@ ggsave(
 #        x_name = x_label)
 #
 #    combine <-
-#      cowplot::ggdraw(bars_circ) +
+#      cowplot::ggdraw(list_circle_plots) +
 #
-#      cowplot::draw_plot(list_bars_climate,
+#      cowplot::draw_plot(list_bars_plot_climate,
 #                         x = 0.01,
 #                         y = 0.15,
 #                         width = .2,
