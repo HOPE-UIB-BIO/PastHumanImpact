@@ -4,7 +4,8 @@ get_predictor_barplot <-
   function(data, 
            sel_predictor = "human",
            x_var = "percentage_median",
-           axis_to_right = TRUE) {
+           axis_to_right = TRUE,
+           sel_palette) {
   
   
   p_predictor <-  
@@ -42,7 +43,7 @@ get_predictor_barplot <-
       show.legend = FALSE
     ) +
     scale_fill_manual(
-      values = palette_pred,
+      values = sel_palette,
       drop = FALSE
     ) +
     scale_x_continuous(name = NULL,
