@@ -62,50 +62,52 @@ data_for_plotting <-
 
 # need to fix issue with dropping unused levels all should be from 500 - 8500
 
-# barplot climate
-bars_climate <-
-  data_for_plotting %>%
-  tidyr::unnest(data_temporal) %>%
-  tidyr::complete(
-    age,
-    tidyr::nesting(predictor, region),
-    fill = list(percentage_median = 0)
-  ) %>%
-  dplyr::group_by(region) %>%
-  dplyr::group_map(
-    .f = ~ get_predictor_barplot(
-      data = .x,
-      sel_predictor = "climate",
-      x_var = "percentage_median",
-      axis_to_right = TRUE,
-      sel_palette = palette_predicotrs # [config criteria]
+get_predictor_barplot_for_all_regions <- function(
+    data_source,
+    sel_predictor, sel_palette) {
+  data_bars <-
+    data_source %>%
+    tidyr::unnest(data_temporal) %>%
+    tidyr::complete(
+      age,
+      tidyr::nesting(predictor, region),
+      fill = list(percentage_median = 0)
+    ) %>%
+    dplyr::group_by(region) %>%
+    tidyr::nest(data_to_plot = -c(region)) %>%
+    dplyr::mutate(
+      plot = purrr::map(
+        .x = data_to_plot,
+        .f = ~ get_predictor_barplot(
+          data = .x,
+          sel_predictor = sel_predictor,
+          x_var = "percentage_median",
+          axis_to_right = TRUE,
+          sel_palette = sel_palette # [config criteria]
+        )
+      )
     )
-  )
 
-names(bars_climate) <- data_for_plotting$region %>% unique()
+  data_bars %>%
+    purrr::chuck("plot") %>%
+    rlang::set_names(
+      nm = data_bars_climate$region
+    ) %>%
+    return()
+}
+
+# barplot climate
+list_bars_cliomate <-
+  get_predictor_barplot_for_all_regions(
+    data_for_plotting, "climate", palette_predicotrs
+  )
 
 
 # barplot human
-bars_human <-
-  data_for_plotting %>%
-  tidyr::unnest(data_temporal) %>%
-  tidyr::complete(age,
-    tidyr::nesting(predictor, region),
-    fill = list(percentage_median = 0)
-  ) %>%
-  dplyr::group_by(region) %>%
-  dplyr::group_map(
-    .f = ~ get_predictor_barplot(
-      data = .x,
-      sel_predictor = "human",
-      x_var = "percentage_median",
-      axis_to_right = FALSE,
-      sel_palette = palette_predicotrs # [config criteria]
-    )
+list_bars_human <-
+  get_predictor_barplot_for_all_regions(
+    data_for_plotting, "human", palette_predicotrs
   )
-
-
-names(bars_human) <- data_for_plotting$region %>% unique()
 
 # circular bars
 bars_circ <-
@@ -143,7 +145,7 @@ layout <- c(
 
 # combine test 1 patchwork and layout
 combined_fig <-
-  bars_climate$Europe + bars_circ$Europe + bars_human$Europe +
+  bars_climate$Europe + bars_circ$Europe + list_bars_human$Europe +
   patchwork::plot_layout(design = layout) +
   ggpubr::theme_transparent() +
   ggplot2::theme(
@@ -166,7 +168,7 @@ fig1 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    bars_human$`North America` +
+    list_bars_human$`North America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -188,7 +190,7 @@ fig2 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    bars_human$`Latin America` +
+    list_bars_human$`Latin America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -209,7 +211,7 @@ fig3 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    bars_human$Europe +
+    list_bars_human$Europe +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -230,7 +232,7 @@ fig4 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    bars_human$Asia +
+    list_bars_human$Asia +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
@@ -250,7 +252,7 @@ fig5 <-
     height = .6
   ) +
   cowplot::draw_plot(
-    bars_human$Oceania +
+    list_bars_human$Oceania +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.9,
     y = 0.15,
@@ -352,7 +354,7 @@ ggsave(
 #       axis_to_right = TRUE)
 #
 #
-#    bars_human <-
+#    list_bars_human <-
 #      get_predictor_barplot(
 #        data = input_temporal,
 #        sel_predictor = "human",
