@@ -189,9 +189,9 @@ palette_ecozones <-
   )
 
 # Predictors
-palette_predicotrs <- c(
+palette_predictors <- c(
   human = "#663333",
-  climate = "#BBBBBB"
+  climate = "#4a2577"
 )
 
 # Parameters
