@@ -1,7 +1,16 @@
-########################################################
-## VISUALISATION
-## FIGURE 1: RESULTS H1
-########################################################
+#----------------------------------------------------------#
+#
+#
+#                   GlobalHumanImpact
+#
+#                    VISUALISATION
+#                 FIGURE 1: RESULTS H1
+#
+#                   V. Felde, O. Mottl
+#                         2023
+#
+#----------------------------------------------------------#
+
 
 #----------------------------------------------------------#
 # 0. Setup -----
@@ -24,44 +33,7 @@ source(
   )
 )
 
-# Combine output tables of spatial and temporal data
-input_spatial <-
-  summary_spatial_median %>%
-  dplyr::mutate(
-    sel_classification = factor(sel_classification)
-  ) %>%
-  dplyr::mutate(
-    predictor = factor(
-      predictor,
-      levels = predictors_spatial_order # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(n_records > 5) %>%
-  tidyr::nest(data_spatial = -c(region))
-
-input_temporal <-
-  summary_temporal_median %>%
-  dplyr::mutate(
-    predictor = factor(predictor,
-      levels = c(
-        "human",
-        "climate"
-      )
-    )
-  ) %>%
-  tidyr::nest(data_temporal = -c(region))
-
-data_for_plotting <-
-  input_spatial %>%
-  dplyr::inner_join(
-    input_temporal,
-    by = "region"
-  )
-
-## CREATE FIGURES
-
-# need to fix issue with dropping unused levels all should be from 500 - 8500
-
+# helper functions
 get_predictor_barplot_for_all_regions <- function(
     data_source,
     sel_predictor, sel_palette,
@@ -96,52 +68,6 @@ get_predictor_barplot_for_all_regions <- function(
     ) %>%
     return()
 }
-
-# barplot climate
-list_bars_plot_climate <-
-  get_predictor_barplot_for_all_regions(
-    data_source = data_for_plotting,
-    sel_predictor = "climate",
-    sel_palette = palette_predictors,
-    axis_to_right = TRUE
-  )
-# barplot human
-list_bars_plot_human <-
-  get_predictor_barplot_for_all_regions(
-    data_source = data_for_plotting,
-    sel_predictor = "human",
-    sel_palette = palette_predictors,
-    axis_to_right = FALSE
-  )
-
-# circular bars
-list_circle_plots <-
-  data_for_plotting %>%
-  tidyr::unnest(data_spatial) %>%
-  dplyr::group_by(region) %>%
-  dplyr::group_map(
-    .f = ~ get_circular_barplot(
-      data = .x,
-      y_var = "percentage_median",
-      x_var = "predictor",
-      col_vec = palette_ecozones, # [config criteria]
-      x_name = predictors_label # [config criteria]
-    )
-  ) %>%
-  rlang::set_names(
-    nm = unique(data_for_plotting$region)
-  )
-
-
-# ggsave(
-#   "C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/cir.png",
-#   plot = list_circle_plots,
-#   width = 20,
-#   units = "mm",
-#   dpi = 700,
-#   bg = "transparent"
-#
-# )
 
 combine_circle_and_bars <- function(
     data_source_plot_circe = list_circle_plots,
@@ -212,16 +138,55 @@ combine_circle_and_bars <- function(
         data_source_plot_human[[sel_region]],
         nrow = 1,
         ncol = 3,
-        widths = c(0.2, 1, 0.2),
+        widths = c(0.2, 1, 0.2)
       )
     return(combined_fig)
   }
 }
 
-combine_circle_and_bars(sel_region = "North America")
 
+#----------------------------------------------------------#
+# 1. Data Wrangling -----
+#----------------------------------------------------------#
+# Combine output tables of spatial and temporal data
+input_spatial <-
+  summary_spatial_median %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = predictors_spatial_order # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(n_records > 5) %>%
+  tidyr::nest(data_spatial = -c(region))
 
+input_temporal <-
+  summary_temporal_median %>%
+  dplyr::mutate(
+    predictor = factor(predictor,
+      levels = c(
+        "human",
+        "climate"
+      )
+    )
+  ) %>%
+  tidyr::nest(data_temporal = -c(region))
 
+data_for_plotting <-
+  input_spatial %>%
+  dplyr::inner_join(
+    input_temporal,
+    by = "region"
+  )
+
+#----------------------------------------------------------#
+# 2. Figuress -----
+#----------------------------------------------------------#
+
+# 2.1 map -----
 
 # get basemap
 world <- map_data("world")
@@ -244,62 +209,118 @@ worldmap_grey <-
   ggplot2::theme_void()
 
 
-# INSET FIGURES ON MAP
-combined_map_h1 <-
-  cowplot::ggdraw(worldmap_grey) +
-  cowplot::draw_plot(fig1,
-    x = 0.05,
-    y = 0.4,
-    width = .3,
-    height = .45
-  ) +
-  cowplot::draw_plot(fig2,
-    x = 0.18,
-    y = 0.18,
-    width = .3,
-    height = .45
-  ) +
-  cowplot::draw_plot(fig3,
-    x = 0.36,
-    y = 0.43,
-    width = .3,
-    height = .45
-  ) +
-  cowplot::draw_plot(fig4,
-    x = 0.68,
-    y = 0.4,
-    width = .3,
-    height = .45
-  ) +
-  cowplot::draw_plot(fig5,
-    x = 0.65,
-    y = 0.15,
-    width = .3,
-    height = .45
+# 2.2 barplots -----
+# need to fix issue with dropping unused levels all should be from 500 - 8500
+
+# barplot climate
+list_bars_plot_climate <-
+  get_predictor_barplot_for_all_regions(
+    data_source = data_for_plotting,
+    sel_predictor = "climate",
+    sel_palette = palette_predictors,
+    axis_to_right = TRUE
+  )
+# barplot human
+list_bars_plot_human <-
+  get_predictor_barplot_for_all_regions(
+    data_source = data_for_plotting,
+    sel_predictor = "human",
+    sel_palette = palette_predictors,
+    axis_to_right = FALSE
   )
 
+# 2.3 circular plot -----
 
-combined_map_h1
-# For guidance, Nature’s standard figure sizes are 90 mm (single column) and 180 mm (double column) and the full depth of the page is 170 mm.
+data_circle_plots <-
+  data_for_plotting %>%
+  tidyr::unnest(data_spatial) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_to_plot = -c(region)) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ get_circular_barplot(
+        data = .x,
+        y_var = "percentage_median",
+        x_var = "predictor",
+        col_vec = palette_ecozones, # [config criteria]
+        x_name = predictors_label # [config criteria]
+      )
+    )
+  )
 
+list_circle_plots <-
+  data_circle_plots %>%
+  purrr::chuck("plot") %>%
+  rlang::set_names(
+    nm = unique(data_circle_plots$region)
+  )
 
+# 2.4 INSET FIGURES ON MAP -----
+
+sel_method <- "ggpubr"
+sel_figure_width <- 0.2
+sel_figure_height <- 0.3
+
+combined_map_h1 <-
+  cowplot::ggdraw(worldmap_grey) +
+  cowplot::draw_plot(
+    combine_circle_and_bars(
+      sel_region = "North America", sel_method = sel_method
+    ),
+    x = 0.15,
+    y = 0.5,
+    width = sel_figure_width,
+    height = sel_figure_height
+  ) +
+  cowplot::draw_plot(
+    combine_circle_and_bars(
+      sel_region = "Latin America", sel_method = sel_method
+    ),
+    x = 0.23,
+    y = 0.18,
+    width = sel_figure_width,
+    height = sel_figure_height
+  ) +
+  cowplot::draw_plot(
+    combine_circle_and_bars(
+      sel_region = "Europe", sel_method = sel_method
+    ),
+    x = 0.41,
+    y = 0.58,
+    width = sel_figure_width,
+    height = sel_figure_height
+  ) +
+  cowplot::draw_plot(
+    combine_circle_and_bars(
+      sel_region = "Asia", sel_method = sel_method
+    ),
+    x = 0.63,
+    y = 0.55,
+    width = sel_figure_width,
+    height = sel_figure_height
+  ) +
+  cowplot::draw_plot(
+    combine_circle_and_bars(
+      sel_region = "Oceania", sel_method = sel_method
+    ),
+    x = 0.70,
+    y = 0.10,
+    width = sel_figure_width,
+    height = sel_figure_height
+  )
+
+# 2.5 save -----
 ggsave(
-  "combined_map_h1.png",
+  "combined_map_h1.pdf",
   plot = combined_map_h1,
-  width = 70,
-  height = 60,
+  width = 170,
+  height = 85,
   units = "mm",
   bg = "white"
 )
 
-
-
-
-
-
-
-#
-#
+#----------------------------------------------------------#
 # ## function
 # get_combine_figure <- function(input_temporal,
 #                                input_spatial) {
