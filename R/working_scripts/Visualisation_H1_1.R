@@ -143,130 +143,82 @@ list_circle_plots <-
 #
 # )
 
-# # layout
-layout <- c(
-  patchwork::area(t = 2, l = 1, b = 2, r = 1),
-  patchwork::area(t = 1, l = 2, b = 3, r = 4),
-  patchwork::area(t = 2, l = 5, b = 2, r = 5)
-)
+combine_circle_and_bars <- function(
+    data_source_plot_circe = list_circle_plots,
+    data_source_plot_climate = list_bars_plot_climate,
+    data_source_plot_human = list_bars_plot_human,
+    sel_region,
+    sel_method = c("patchwork", "cowplot", "ggpubr")) {
+  sel_method <- match.arg(sel_method)
 
-# combine test 1 patchwork and layout
-combined_fig <-
-  list_bars_plot_climate$Europe + list_circle_plots$Europe + list_bars_plot_human$Europe +
-  patchwork::plot_layout(design = layout) +
-  ggpubr::theme_transparent() +
-  ggplot2::theme(
-    aspect.ratio = 2,
-    plot.margin = grid::unit(c(0, 0, 0, 0), "mm")
-  )
+  if (
+    sel_method == "patchwork"
+  ) {
+    # # layout
+    layout <- c(
+      patchwork::area(t = 2, l = 1, b = 2, r = 1),
+      patchwork::area(t = 1, l = 2, b = 3, r = 4),
+      patchwork::area(t = 2, l = 5, b = 2, r = 5)
+    )
 
-combined_fig
+    # combine test 1 patchwork and layout
+    combined_fig <-
+      data_source_plot_climate[[sel_region]] +
+      data_source_plot_circe[[sel_region]] +
+      data_source_plot_human[[sel_region]] +
+      patchwork::plot_layout(design = layout) +
+      ggpubr::theme_transparent() +
+      ggplot2::theme(
+        aspect.ratio = 2,
+        plot.margin = grid::unit(c(0, 0, 0, 0), "mm")
+      )
 
-# combine plots per region
+    return(combined_fig)
+  }
 
-fig1 <-
-  cowplot::ggdraw(list_circle_plots$`North America`) +
-  cowplot::draw_plot(
-    list_bars_plot_climate$`North America` +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.01,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  cowplot::draw_plot(
-    list_bars_plot_human$`North America` +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.8,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  ggplot2::theme(aspect.ratio = 0.85)
+  if (
+    sel_method == "cowplot"
+  ) {
+    combined_fig <-
+      cowplot::ggdraw(data_source_plot_circe[[sel_region]]) +
+      cowplot::draw_plot(
+        data_source_plot_climate[[sel_region]] +
+          ggplot2::theme(aspect.ratio = 5),
+        x = 0.01,
+        y = 0.15,
+        width = .2,
+        height = .6
+      ) +
+      cowplot::draw_plot(
+        data_source_plot_human[[sel_region]] +
+          ggplot2::theme(aspect.ratio = 5),
+        x = 0.8,
+        y = 0.15,
+        width = .2,
+        height = .6
+      ) +
+      ggplot2::theme(aspect.ratio = 0.85)
 
+    return(combined_fig)
+  }
 
+  if (
+    sel_method == "ggpubr"
+  ) {
+    combined_fig <-
+      ggpubr::ggarrange(
+        data_source_plot_climate[[sel_region]],
+        data_source_plot_circe[[sel_region]],
+        data_source_plot_human[[sel_region]],
+        nrow = 1,
+        ncol = 3,
+        widths = c(0.2, 1, 0.2),
+      )
+    return(combined_fig)
+  }
+}
 
-fig2 <-
-  cowplot::ggdraw(list_circle_plots$`Latin America`) +
-  cowplot::draw_plot(
-    list_bars_plot_climate$`Latin America` +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.01,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  cowplot::draw_plot(
-    list_bars_plot_human$`Latin America` +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.8,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  ggplot2::theme(aspect.ratio = 0.85)
-
-
-fig3 <-
-  cowplot::ggdraw(list_circle_plots$Europe) +
-  cowplot::draw_plot(
-    list_bars_plot_climate$Europe +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.01,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  cowplot::draw_plot(
-    list_bars_plot_human$Europe +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.8,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  ggplot2::theme(aspect.ratio = 0.85)
-
-
-fig4 <-
-  cowplot::ggdraw(list_circle_plots$Asia) +
-  cowplot::draw_plot(
-    list_bars_plot_climate$Asia +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.01,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  cowplot::draw_plot(
-    list_bars_plot_human$Asia +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.8,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  ggplot2::theme(aspect.ratio = 0.85)
-
-fig5 <-
-  cowplot::ggdraw(list_circle_plots$Oceania) +
-  cowplot::draw_plot(
-    list_bars_plot_climate$Oceania +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.0,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  cowplot::draw_plot(
-    list_bars_plot_human$Oceania +
-      ggplot2::theme(aspect.ratio = 5),
-    x = 0.9,
-    y = 0.15,
-    width = .2,
-    height = .6
-  ) +
-  ggplot2::theme(aspect.ratio = 0.85)
+combine_circle_and_bars(sel_region = "North America")
 
 
 
