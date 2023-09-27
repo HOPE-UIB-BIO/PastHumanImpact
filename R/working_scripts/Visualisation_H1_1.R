@@ -64,7 +64,8 @@ data_for_plotting <-
 
 get_predictor_barplot_for_all_regions <- function(
     data_source,
-    sel_predictor, sel_palette) {
+    sel_predictor, sel_palette,
+    axis_to_right = TRUE) {
   data_bars <-
     data_source %>%
     tidyr::unnest(data_temporal) %>%
@@ -82,8 +83,8 @@ get_predictor_barplot_for_all_regions <- function(
           data = .x,
           sel_predictor = sel_predictor,
           x_var = "percentage_median",
-          axis_to_right = TRUE,
-          sel_palette = sel_palette # [config criteria]
+          axis_to_right = axis_to_right,
+          sel_palette = sel_palette
         )
       )
     )
@@ -91,22 +92,26 @@ get_predictor_barplot_for_all_regions <- function(
   data_bars %>%
     purrr::chuck("plot") %>%
     rlang::set_names(
-      nm = data_bars_climate$region
+      nm = data_bars$region
     ) %>%
     return()
 }
 
 # barplot climate
-list_bars_cliomate <-
+list_bars_climate <-
   get_predictor_barplot_for_all_regions(
-    data_for_plotting, "climate", palette_predicotrs
+    data_source = data_for_plotting,
+    sel_predictor = "climate",
+    sel_palette = palette_predictors,
+    axis_to_right = TRUE
   )
-
-
 # barplot human
 list_bars_human <-
   get_predictor_barplot_for_all_regions(
-    data_for_plotting, "human", palette_predicotrs
+    data_source = data_for_plotting,
+    sel_predictor = "human",
+    sel_palette = palette_predictors,
+    axis_to_right = FALSE
   )
 
 # circular bars
@@ -145,7 +150,7 @@ layout <- c(
 
 # combine test 1 patchwork and layout
 combined_fig <-
-  bars_climate$Europe + bars_circ$Europe + list_bars_human$Europe +
+  list_bars_climate$Europe + bars_circ$Europe + list_bars_human$Europe +
   patchwork::plot_layout(design = layout) +
   ggpubr::theme_transparent() +
   ggplot2::theme(
@@ -160,7 +165,7 @@ combined_fig
 fig1 <-
   cowplot::ggdraw(bars_circ$`North America`) +
   cowplot::draw_plot(
-    bars_climate$`North America` +
+    list_bars_climate$`North America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -182,7 +187,7 @@ fig1 <-
 fig2 <-
   cowplot::ggdraw(bars_circ$`Latin America`) +
   cowplot::draw_plot(
-    bars_climate$`Latin America` +
+    list_bars_climate$`Latin America` +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -203,7 +208,7 @@ fig2 <-
 fig3 <-
   cowplot::ggdraw(bars_circ$Europe) +
   cowplot::draw_plot(
-    bars_climate$Europe +
+    list_bars_climate$Europe +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -224,7 +229,7 @@ fig3 <-
 fig4 <-
   cowplot::ggdraw(bars_circ$Asia) +
   cowplot::draw_plot(
-    bars_climate$Asia +
+    list_bars_climate$Asia +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
@@ -244,7 +249,7 @@ fig4 <-
 fig5 <-
   cowplot::ggdraw(bars_circ$Oceania) +
   cowplot::draw_plot(
-    bars_climate$Oceania +
+    list_bars_climate$Oceania +
       ggplot2::theme(aspect.ratio = 5),
     x = 0.0,
     y = 0.15,
@@ -346,7 +351,7 @@ ggsave(
 #                                input_spatial) {
 #
 #
-#    bars_climate <-
+#    list_bars_climate <-
 #     get_predictor_barplot(
 #       data = input_temporal,
 #       sel_predictor = "climate",
@@ -373,7 +378,7 @@ ggsave(
 #    combine <-
 #      cowplot::ggdraw(bars_circ) +
 #
-#      cowplot::draw_plot(bars_climate,
+#      cowplot::draw_plot(list_bars_climate,
 #                         x = 0.01,
 #                         y = 0.15,
 #                         width = .2,
