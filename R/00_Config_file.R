@@ -155,7 +155,6 @@ timestep <- 500
 # 6. Graphical options -----
 #----------------------------------------------------------#
 
-## examples
 # set ggplot output
 ggplot2::theme_set(
   ggplot2::theme_classic()
@@ -170,10 +169,33 @@ image_width <- 16
 image_height <- 12
 image_units <- "cm"
 
-# define pallets
+# Define colour palette
+
+# Ecozones
+palette_ecozones <-
+  c(
+    Polar = "#009292",
+    Cold_Without_dry_season_Very_Cold_Summer = "#004949",
+    Cold_Without_dry_season_Cold_Summer = "#006ddb",
+    Cold_Dry_Winter = "#6db6ff",
+    Cold_Dry_Summer = "#b6dbff",
+    Cold_Without_dry_season_Warm_Summer = "#117733",
+    Cold_Without_dry_season_Hot_Summer = "#999933",
+    Temperate_Without_dry_season = "#DDCC77",
+    Temperate_Dry_Winter = "#b66dff",
+    Temperate_Dry_Summer = "#ffff6d",
+    Arid = "#924900",
+    Tropical = "#920000"
+  )
+
+# Predictors
+palette_predicotrs <- c(
+  human = "#663333",
+  climate = "#BBBBBB"
+)
+
+# Parameters
+predictors_spatial_order <- c("human", "time", "climate")
+predictors_label <- c("Human", "Time", "Climate")
 
 # define common color
-
-
-
-

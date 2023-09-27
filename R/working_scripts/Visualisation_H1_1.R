@@ -24,65 +24,39 @@ source(
   )
 )
 
-
-
-# Define colour palette
-# Ecozones
-palette_ecozones <-
-  c(
-    Polar = "#009292",
-    Cold_Without_dry_season_Very_Cold_Summer = "#004949",
-    Cold_Without_dry_season_Cold_Summer = "#006ddb",
-    Cold_Dry_Winter = "#6db6ff",
-    Cold_Dry_Summer = "#b6dbff",
-    Cold_Without_dry_season_Warm_Summer = "#117733",
-    Cold_Without_dry_season_Hot_Summer = "#999933",
-    Temperate_Without_dry_season = "#DDCC77",
-    Temperate_Dry_Winter = "#b66dff",
-    Temperate_Dry_Summer = "#ffff6d",
-    Arid = "#924900",
-    Tropical = "#920000"
-  )
-
-# Predictors
-palette_pred <- c(
-  human = "#663333",
-  climate = "#BBBBBB"
-)
-
-# Parameters
-order_predictors_spatial <- c("human", "time", "climate")
-x_label <- c("Human", "Time", "Climate")
-
 # Combine output tables of spatial and temporal data
 input_spatial <-
   summary_spatial_median %>%
-  mutate(sel_classification = factor(sel_classification)) %>%
-  mutate(predictor = factor(predictor,
-    levels = order_predictors_spatial
-  )) %>%
-  filter(n_records > 5) %>%
-  nest(data_spatial = -c(region))
-
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = predictors_spatial_order # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(n_records > 5) %>%
+  tidyr::nest(data_spatial = -c(region))
 
 input_temporal <-
   summary_temporal_median %>%
-  mutate(predictor = factor(predictor,
-    levels = c(
-      "human",
-      "climate"
+  dplyr::mutate(
+    predictor = factor(predictor,
+      levels = c(
+        "human",
+        "climate"
+      )
     )
-  )) %>%
-  nest(data_temporal = -c(region))
-
+  ) %>%
+  tidyr::nest(data_temporal = -c(region))
 
 data_for_plotting <-
   input_spatial %>%
-  inner_join(input_temporal,
+  dplyr::inner_join(
+    input_temporal,
     by = "region"
   )
-
-
 
 ## CREATE FIGURES
 
@@ -91,19 +65,20 @@ data_for_plotting <-
 # barplot climate
 bars_climate <-
   data_for_plotting %>%
-  unnest(data_temporal) %>%
+  tidyr::unnest(data_temporal) %>%
   tidyr::complete(
     age,
-    nesting(predictor, region),
+    tidyr::nesting(predictor, region),
     fill = list(percentage_median = 0)
   ) %>%
-  group_by(region) %>%
-  group_map(
+  dplyr::group_by(region) %>%
+  dplyr::group_map(
     .f = ~ get_predictor_barplot(
       data = .x,
       sel_predictor = "climate",
       x_var = "percentage_median",
-      axis_to_right = TRUE
+      axis_to_right = TRUE,
+      sel_palette = palette_predicotrs # [config criteria]
     )
   )
 
@@ -113,18 +88,21 @@ names(bars_climate) <- data_for_plotting$region %>% unique()
 # barplot human
 bars_human <-
   data_for_plotting %>%
-  unnest(data_temporal) %>%
+  tidyr::unnest(data_temporal) %>%
   tidyr::complete(age,
-    nesting(predictor, region),
+    tidyr::nesting(predictor, region),
     fill = list(percentage_median = 0)
   ) %>%
-  group_by(region) %>%
-  group_map(~ get_predictor_barplot(
-    data = .x,
-    sel_predictor = "human",
-    x_var = "percentage_median",
-    axis_to_right = FALSE
-  ))
+  dplyr::group_by(region) %>%
+  dplyr::group_map(
+    .f = ~ get_predictor_barplot(
+      data = .x,
+      sel_predictor = "human",
+      x_var = "percentage_median",
+      axis_to_right = FALSE,
+      sel_palette = palette_predicotrs # [config criteria]
+    )
+  )
 
 
 names(bars_human) <- data_for_plotting$region %>% unique()
@@ -132,22 +110,19 @@ names(bars_human) <- data_for_plotting$region %>% unique()
 # circular bars
 bars_circ <-
   data_for_plotting %>%
-  unnest(data_spatial) %>%
-  group_by(region) %>%
-  group_map(~ get_circular_barplot(
-    data = .x,
-    y_var = "percentage_median",
-    x_var = "predictor",
-    col_vec = palette_ecozones,
-    x_name = x_label
-  ))
-
+  tidyr::unnest(data_spatial) %>%
+  dplyr::group_by(region) %>%
+  dplyr::group_map(
+    .f = ~ get_circular_barplot(
+      data = .x,
+      y_var = "percentage_median",
+      x_var = "predictor",
+      col_vec = palette_ecozones, # [config criteria]
+      x_name = predictors_label # [config criteria]
+    )
+  )
 
 names(bars_circ) <- data_for_plotting$region %>% unique()
-
-
-
-
 
 # ggsave(
 #   "C:/Users/vfe032/Documents/Github/HOPE_Hypothesis1/cir.png",
@@ -159,20 +134,19 @@ names(bars_circ) <- data_for_plotting$region %>% unique()
 #
 # )
 
-
 # # layout
 layout <- c(
-  area(t = 2, l = 1, b = 2, r = 1),
-  area(t = 1, l = 2, b = 3, r = 4),
-  area(t = 2, l = 5, b = 2, r = 5)
+  patchwork::area(t = 2, l = 1, b = 2, r = 1),
+  patchwork::area(t = 1, l = 2, b = 3, r = 4),
+  patchwork::area(t = 2, l = 5, b = 2, r = 5)
 )
 
 # combine test 1 patchwork and layout
 combined_fig <-
   bars_climate$Europe + bars_circ$Europe + bars_human$Europe +
-  plot_layout(design = layout) +
-  theme_transparent +
-  theme(
+  patchwork::plot_layout(design = layout) +
+  ggpubr::theme_transparent() +
+  ggplot2::theme(
     aspect.ratio = 2,
     plot.margin = grid::unit(c(0, 0, 0, 0), "mm")
   )
@@ -185,7 +159,7 @@ fig1 <-
   cowplot::ggdraw(bars_circ$`North America`) +
   cowplot::draw_plot(
     bars_climate$`North America` +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
     width = .2,
@@ -193,13 +167,13 @@ fig1 <-
   ) +
   cowplot::draw_plot(
     bars_human$`North America` +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
     width = .2,
     height = .6
   ) +
-  theme(aspect.ratio = 0.85)
+  ggplot2::theme(aspect.ratio = 0.85)
 
 
 
@@ -207,7 +181,7 @@ fig2 <-
   cowplot::ggdraw(bars_circ$`Latin America`) +
   cowplot::draw_plot(
     bars_climate$`Latin America` +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
     width = .2,
@@ -215,20 +189,20 @@ fig2 <-
   ) +
   cowplot::draw_plot(
     bars_human$`Latin America` +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
     width = .2,
     height = .6
   ) +
-  theme(aspect.ratio = 0.85)
+  ggplot2::theme(aspect.ratio = 0.85)
 
 
 fig3 <-
   cowplot::ggdraw(bars_circ$Europe) +
   cowplot::draw_plot(
     bars_climate$Europe +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
     width = .2,
@@ -236,20 +210,20 @@ fig3 <-
   ) +
   cowplot::draw_plot(
     bars_human$Europe +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
     width = .2,
     height = .6
   ) +
-  theme(aspect.ratio = 0.85)
+  ggplot2::theme(aspect.ratio = 0.85)
 
 
 fig4 <-
   cowplot::ggdraw(bars_circ$Asia) +
   cowplot::draw_plot(
     bars_climate$Asia +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.01,
     y = 0.15,
     width = .2,
@@ -257,19 +231,19 @@ fig4 <-
   ) +
   cowplot::draw_plot(
     bars_human$Asia +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.8,
     y = 0.15,
     width = .2,
     height = .6
   ) +
-  theme(aspect.ratio = 0.85)
+  ggplot2::theme(aspect.ratio = 0.85)
 
 fig5 <-
   cowplot::ggdraw(bars_circ$Oceania) +
   cowplot::draw_plot(
     bars_climate$Oceania +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.0,
     y = 0.15,
     width = .2,
@@ -277,13 +251,13 @@ fig5 <-
   ) +
   cowplot::draw_plot(
     bars_human$Oceania +
-      theme(aspect.ratio = 5),
+      ggplot2::theme(aspect.ratio = 5),
     x = 0.9,
     y = 0.15,
     width = .2,
     height = .6
   ) +
-  theme(aspect.ratio = 0.85)
+  ggplot2::theme(aspect.ratio = 0.85)
 
 
 
@@ -306,7 +280,7 @@ worldmap_grey <-
     alpha = 0.4
   ) +
   coord_equal(ratio = 1.3) +
-  theme_void()
+  ggplot2::theme_void()
 
 
 # INSET FIGURES ON MAP
