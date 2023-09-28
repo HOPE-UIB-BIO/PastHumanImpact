@@ -161,6 +161,41 @@ data_regional_limits <-
     ymax = c(89, 80, 80, 34, -3)
   )
 
+data_climate_zones <-
+  tibble::tibble(
+    sel_classification = factor(
+      c(
+        "Arid",
+        "Cold_Dry_Summer",
+        "Cold_Dry_Winter",
+        "Cold_Without_dry_season_Cold_Summer",
+        "Cold_Without_dry_season_Hot_Summer",
+        "Cold_Without_dry_season_Very_Cold_Summer",
+        "Cold_Without_dry_season_Warm_Summer",
+        "Polar",
+        "Temperate_Dry_Summer",
+        "Temperate_Dry_Winter",
+        "Temperate_Without_dry_season",
+        "Tropical"
+      ),
+      levels = c(
+        "Polar",
+        "Cold_Dry_Winter",
+        "Cold_Dry_Summer",
+        "Cold_Without_dry_season_Very_Cold_Summer",
+        "Cold_Without_dry_season_Cold_Summer",
+        "Cold_Without_dry_season_Warm_Summer",
+        "Cold_Without_dry_season_Hot_Summer",
+        "Temperate_Dry_Winter",
+        "Temperate_Dry_Summer",
+        "Temperate_Without_dry_season",
+        "Tropical",
+        "Arid"
+      )
+    )
+  )
+
+
 #----------------------------------------------------------#
 # 6. Graphical options -----
 #----------------------------------------------------------#

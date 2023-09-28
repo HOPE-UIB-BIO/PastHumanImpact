@@ -83,6 +83,82 @@ get_human_unique_on_map <- function(
     )
 }
 
+get_variability_prop_per_region <- function(data_source, sel_region) {
+  data_sel <-
+    data_source %>%
+    dplyr::filter(predictor == "human") %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    )
+
+  fig_basic <-
+    data_sel %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = 1,
+        y = (Individual / total_variance) * 100
+      )
+    ) +
+    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 100)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      legend.position = "none",
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title.x = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+    ) +
+    ggplot2::labs(
+      y = "explained variance (%)"
+    )
+
+  fig_basic +
+    ggplot2::geom_violin(
+      mapping = ggplot2::aes(
+        fill = sel_classification
+      ),
+      col = NA
+    ) +
+    ggplot2::geom_boxplot(
+      fill = "white",
+      col = "grey30",
+      width = 0.1,
+      outlier.shape = NA
+    ) +
+    ggplot2::geom_point(
+      data = data_sel %>%
+        dplyr::group_by(sel_classification) %>%
+        dplyr::summarise(
+          median = median((Individual / total_variance) * 100)
+        ),
+      mapping = ggplot2::aes(
+        x = 1,
+        y = median,
+        fill = sel_classification
+      ),
+      shape = 22,
+      col = "gray30",
+    )
+}
+
 get_plot_by_region <- function(data_source, sel_region) {
   data_source %>%
     dplyr::filter(region == sel_region) %>%
@@ -226,6 +302,29 @@ data_fig_map <-
     )
   )
 
+#----------------------------------------------------------#
+# 3. Figure total variability -----
+#----------------------------------------------------------#
+
+data_fig_variance <-
+  tibble::tibble(
+    region = c(
+      "North America",
+      "Latin America",
+      "Europe",
+      "Asia",
+      "Oceania"
+    )
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = region,
+      .f = ~ get_variability_prop_per_region(
+        data_source = data_spatial_vis,
+        sel_region = .x
+      )
+    )
+  )
 
 #----------------------------------------------------------#
 # 2. Figure density -----
@@ -337,30 +436,35 @@ combined_detail_h1 <-
   cowplot::plot_grid(
     cowplot::plot_grid(
       get_plot_by_region(data_fig_map, "North America"),
+      get_plot_by_region(data_fig_variance, "North America"),
       get_plot_by_region(data_fig_density, "North America"),
       get_plot_by_region(data_fig_scores, "North America"),
       nrow = 1
     ),
     cowplot::plot_grid(
       get_plot_by_region(data_fig_map, "Latin America"),
+      get_plot_by_region(data_fig_variance, "Latin America"),
       get_plot_by_region(data_fig_density, "Latin America"),
       get_plot_by_region(data_fig_scores, "Latin America"),
       nrow = 1
     ),
     cowplot::plot_grid(
       get_plot_by_region(data_fig_map, "Europe"),
+      get_plot_by_region(data_fig_variance, "Europe"),
       get_plot_by_region(data_fig_density, "Europe"),
       get_plot_by_region(data_fig_scores, "Europe"),
       nrow = 1
     ),
     cowplot::plot_grid(
       get_plot_by_region(data_fig_map, "Asia"),
+      get_plot_by_region(data_fig_variance, "Asia"),
       get_plot_by_region(data_fig_density, "Asia"),
       get_plot_by_region(data_fig_scores, "Asia"),
       nrow = 1
     ),
     cowplot::plot_grid(
       get_plot_by_region(data_fig_map, "Oceania"),
+      get_plot_by_region(data_fig_variance, "Oceania"),
       get_plot_by_region(data_fig_density, "Oceania"),
       get_plot_by_region(data_fig_scores, "Oceania"),
       nrow = 1
