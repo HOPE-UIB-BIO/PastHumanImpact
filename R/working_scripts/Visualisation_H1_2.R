@@ -1,183 +1,372 @@
-########################################################
-## VISUALISATION
-## FIGURE 2: RESULTS H1 DETAILS ON HUMANS
-########################################################
+#----------------------------------------------------------#
+#
+#
+#                   GlobalHumanImpact
+#
+#                    VISUALISATION
+#           FIGURE 2: RESULTS H1 DETAILS ON HUMANS
+#
+#                   V. Felde, O. Mottl
+#                         2023
+#
+#----------------------------------------------------------#
+
+
+#----------------------------------------------------------#
+# 0. Setup -----
+#----------------------------------------------------------#
+
+library(here)
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
+  )
+)
 
 # Import tables for plotting
+source(
+  here::here(
+    "R/working_scripts/Results_script.R"
+  )
+)
 
-source("R/working_scripts/Results_script.R")
+# helper functions
+get_human_unique_on_map <- function(
+    data_source_varpar,
+    data_source_geo,
+    sel_region,
+    sel_alpha = 0.3) {
+  sel_data <-
+    data_source_varpar %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::filter(predictor == "human") %>%
+    janitor::clean_names()
 
+  sel_map <-
+    get_map_region(
+      rasterdata = data_source_geo,
+      select_region = sel_region,
+      sel_palette = palette_ecozones, # [config criteria]
+      sel_alpha = sel_alpha
+    )
 
-# Define colour palette
-# Ecozones
-palette_ecozones <- 
-  c( Polar = "#009292", 
-     Cold_Without_dry_season_Very_Cold_Summer = "#004949", 
-     Cold_Without_dry_season_Cold_Summer = "#006ddb", 
-     Cold_Dry_Winter = "#6db6ff",
-     Cold_Dry_Summer = "#b6dbff",
-     Cold_Without_dry_season_Warm_Summer = "#117733",
-     Cold_Without_dry_season_Hot_Summer = "#999933", 
-     Temperate_Without_dry_season = "#DDCC77",
-     Temperate_Dry_Winter = "#b66dff",
-     Temperate_Dry_Summer = "#ffff6d",
-     Arid = "#924900",  
-     Tropical =  "#920000"
+  sel_map +
+    ggplot2::geom_point(
+      data = sel_data,
+      mapping = ggplot2::aes(
+        x = long,
+        y = lat,
+      ),
+      size = 0.1,
+      col = "gray30",
+      shape = 20,
+    ) +
+    ggplot2::geom_point(
+      data = sel_data,
+      mapping = ggplot2::aes(
+        x = long,
+        y = lat,
+        size = unique_percent,
+        col = sel_classification
+      ),
+      shape = 21,
+      fill = NA,
+      show.legend = TRUE
+    ) +
+    ggplot2::scale_colour_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_size_continuous(
+      limits = c(0, 100)
+    )
+}
+
+get_plot_by_region <- function(data_source, sel_region) {
+  data_source %>%
+    dplyr::filter(region == sel_region) %>%
+    purrr::chuck("plot", 1) %>%
+    return()
+}
+
+#----------------------------------------------------------#
+# 1. Load data -----
+#----------------------------------------------------------#
+data_geo_koppen <-
+  readr::read_rds(
+    paste0(
+      data_storage_path,
+      "Data/ecoregions2017/data_geo_koppen.rds"
+    )
+  ) %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
   )
 
-# Predictors
-palette_pred <- c(human = "#663333", 
-                  climate = "#BBBBBB") 
+#----------------------------------------------------------#
+# 2. Data Wrangling -----
+#----------------------------------------------------------#
 
+data_dist <-
+  data_spatial_vis %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = c("human", "climate", "time")
+    )
+  ) %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  tidyr::pivot_longer(
+    c(Unique_percent, Average.share_percent, Individual_percent),
+    names_to = "var_part",
+    values_to = "percentage"
+  ) %>%
+  dplyr::mutate(
+    var_part = factor(var_part,
+      levels = c(
+        "Unique_percent",
+        "Average.share_percent",
+        "Individual_percent"
+      )
+    )
+  )
+
+# get constrained spd scores
+data_scores_nested <-
+  output_h1_spatial %>%
+  dplyr::mutate(
+    constrained_scores = purrr::map(
+      .x = data_merge,
+      .f = purrr::possibly(
+        get_scores_constrained_spd,
+        otherwise = NA_real_
+      )
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id,
+        sel_classification,
+        region
+      ),
+    by = "dataset_id"
+  ) %>%
+  dplyr::select(
+    dataset_id,
+    region,
+    sel_classification,
+    constrained_scores
+  )
+
+data_constrained_scores <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    scores = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("scores")
+    )
+  ) %>%
+  tidyr::unnest(scores) %>%
+  dplyr::select(-constrained_scores)
+
+data_adjr2 <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    adjr2 = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("adjr2")
+    )
+  ) %>%
+  tidyr::unnest(adjr2) %>%
+  dplyr::select(-constrained_scores)
+
+data_scores_merged <-
+  dplyr::left_join(
+    data_constrained_scores,
+    data_adjr2,
+    by = dplyr::join_by(
+      dataset_id, region, sel_classification
+    )
+  )
+
+#----------------------------------------------------------#
+# 2. Figure maps -----
+#----------------------------------------------------------#
+
+data_fig_map <-
+  tibble::tibble(
+    region = c(
+      "North America",
+      "Latin America",
+      "Europe",
+      "Asia",
+      "Oceania"
+    )
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = region,
+      .f = ~ get_human_unique_on_map(
+        data_source_varpar = data_spatial_vis,
+        data_source_geo = data_geo_koppen,
+        sel_region = .x
+      )
+    )
+  )
+
+
+#----------------------------------------------------------#
+# 2. Figure density -----
+#----------------------------------------------------------#
 
 # Density figures for full distribution of variance
-data_dist <- 
-  data_spatial_vis %>%
-  mutate(predictor = factor(predictor, 
-                            levels = c("human", "climate", "time"))) %>%
-  mutate(sel_classification = factor(sel_classification))  %>%
-  pivot_longer(c(Unique_percent, Average.share_percent, Individual_percent), 
-               names_to = "var_part", 
-               values_to = "percentage") %>%
-  mutate(var_part = factor(var_part, 
-                           levels = c("Unique_percent", 
-                                      "Average.share_percent",
-                                      "Individual_percent")))
-
-
-density_fig <-
+data_fig_density <-
   data_dist %>%
-  group_by(region) %>%
-  group_map(~ ggplot(
-    data = .x, 
-    aes(x = percentage)
-    ) +
-  geom_density(aes(
-    y = after_stat(count),
-    col = var_part,
-    fill = var_part
-    ),
-    alpha = 0.4
-  ) +
-    scale_colour_manual(
-      values = c("Unique_percent" = "maroon4",
-                 "Average.share_percent" = "grey70",
-                 "Individual_percent" = "grey30")
-    ) +
-    scale_fill_manual(
-      values = c("Unique_percent" = "maroon4",
-                 "Average.share_percent" = "grey70",
-                 "Individual_percent" = "grey30")
-    ) +
-  facet_wrap(~predictor, 
-             ncol = 3, 
-             scales = "free") +
-  labs(x = NULL,
-       y = NULL)
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_dist = -c(region)) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_dist,
+      .f = ~ ggplot2::ggplot(
+        data = .x,
+        mapping = ggplot2::aes(
+          x = percentage
+        )
+      ) +
+        ggplot2::facet_wrap(
+          ~predictor,
+          ncol = 3,
+          scales = "free_y"
+        ) +
+        ggplot2::scale_colour_manual(
+          values = palette_predictors_parts # [config criteria]
+        ) +
+        ggplot2::scale_fill_manual(
+          values = palette_predictors_parts # [config criteria]
+        ) +
+        ggplot2::scale_x_continuous(
+          limits = c(0, 100),
+          breaks = c(seq(0, 100, by = 25))
+        ) +
+        ggplot2::scale_y_continuous(
+          limits = c(0, NA)
+        ) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
+          legend.position = "none",
+          plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0), "mm"),
+          strip.background = ggplot2::element_blank(),
+          strip.text = ggplot2::element_blank(),
+          axis.title = ggplot2::element_blank()
+        ) +
+        ggplot2::geom_density(
+          mapping = ggplot2::aes(
+            y = after_stat(count),
+            col = var_part,
+            fill = var_part
+          ),
+          alpha = 0.4
+        )
+    )
   )
 
-names(density_fig) <- data_dist$region %>% unique() 
+#----------------------------------------------------------#
+# 4. Figure ecosystem case scores -----
+#----------------------------------------------------------#
 
-
-### get constrained spd scores
-
-constrained_scores <- 
-  output_h1_spatial %>%
-  mutate(constrained_scores = 
-           purrr::map(data_merge,
-                      .f = possibly(get_scores_constrained_spd,
-                                    otherwise = NA_real_))) %>%
-  inner_join(data_meta %>% 
-               dplyr::select(dataset_id, 
-                             sel_classification, 
-                             region), 
-             by = "dataset_id") %>%
-  dplyr::select(dataset_id, 
-                region, 
-                sel_classification, 
-                constrained_scores) %>%
-  dplyr::mutate(scores = 
-                  purrr::map(constrained_scores, 
-                             pluck("scores"))) %>%
-  unnest(scores) %>%
-  dplyr::mutate(adjr2 = purrr::map(
-    constrained_scores,
-    .f = . %>% pluck("adjr2"))) %>%
-  unnest(adjr2)
-
-
-ecosystem_prop_scores <- 
-  constrained_scores  %>%
-  filter(adjr2 > 0.1) %>%
-  dplyr::select(dataset_id:sel_classification, CAP1, age) %>%
-  group_by(region) %>%
-  group_map(~ ggplot(data = .x, aes(
-    x = age, 
-    y = CAP1, 
-    group = dataset_id)
-    ) +
-  geom_line(aes(
-    col = sel_classification),
-    alpha = 0.3, 
-    linewidth = 0.1) +
-  scale_colour_manual(
-    values = palette_ecozones
-    ) +
-    scale_y_continuous(limits = c(0, 5)) +
-  theme_bw()+
-  theme(
-    strip.text = element_text(size = 10),
-    legend.position = "none",
-    panel.grid.major = element_blank(), 
-    #panel.grid.minor = element_blank(),
-    plot.background = element_blank(), 
-    plot.margin = grid::unit(c(0.2,  0.2, 0.2, 0), "mm"),
-    axis.text.y = element_text(size = 6),
-    axis.text.x = element_text(size = 6),
-    axis.title = element_text(size = 8)
-    
-  ) +
-  labs(
-    y = "Scores",
-    x = "Age BP")
+data_fig_scores <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_scores_merged = -c(region)) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_scores_merged,
+      .f = ~ ggplot2::ggplot(data = .x, ggplot2::aes(
+        x = age,
+        y = CAP1,
+        group = dataset_id
+      )) +
+        ggplot2::geom_line(
+          ggplot2::aes(
+            col = sel_classification
+          ),
+          alpha = 0.4,
+          linewidth = 0.2
+        ) +
+        ggplot2::scale_colour_manual(
+          values = palette_ecozones # [config criteria]
+        ) +
+        ggplot2::scale_y_continuous(limits = c(0, 5)) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
+          strip.text = ggplot2::element_text(size = 10),
+          legend.position = "none",
+          panel.grid.major = ggplot2::element_blank(),
+          # panel.grid.minor = element_blank(),
+          plot.background = ggplot2::element_blank(),
+          plot.margin = grid::unit(c(0.2, 0.2, 0.2, 0), "mm"),
+          axis.text.y = ggplot2::element_text(size = 6),
+          axis.text.x = ggplot2::element_text(size = 6),
+          axis.title = ggplot2::element_text(size = 8)
+        ) +
+        ggplot2::labs(
+          y = "Scores",
+          x = "Age BP"
+        )
+    )
   )
 
-names(ecosystem_prop_scores) <- constrained_scores$region %>% unique()
+#----------------------------------------------------------#
+# 5. Combine figures -----
+#----------------------------------------------------------#
 
-
-
-#combine figures
-combined_detail_h1 <- 
+combined_detail_h1 <-
   cowplot::plot_grid(
-  cowplot::plot_grid(density_fig$`North America`,
-                  ecosystem_prop_scores$`North America`+
-                    theme(axis.title.x = element_blank(),
-                          axis.text.x = element_blank()),
-                   nrow = 1
-                   ),
-  cowplot::plot_grid(density_fig$`Latin America`,
-                     ecosystem_prop_scores$`Latin America` +
-                       theme(axis.title.x = element_blank(),
-                             axis.text.x = element_blank()),
-                     nrow = 1
-  ),
-  cowplot::plot_grid(density_fig$`Europe`,
-                     ecosystem_prop_scores$`Europe`+
-                       theme(axis.title.x = element_blank(),
-                             axis.text.x = element_blank()),
-                     nrow = 1
-  ),
-  cowplot::plot_grid(density_fig$`Asia`,
-                     ecosystem_prop_scores$`Asia` +
-                       theme(axis.title.x = element_blank(),
-                             axis.text.x = element_blank()),
-                     nrow = 1
-  ),
-  cowplot::plot_grid(density_fig$`Oceania`,
-                     ecosystem_prop_scores$`Oceania`,
-                     nrow = 1
-  ),
-ncol = 1)
+    cowplot::plot_grid(
+      get_plot_by_region(data_fig_map, "North America"),
+      get_plot_by_region(data_fig_density, "North America"),
+      get_plot_by_region(data_fig_scores, "North America"),
+      nrow = 1
+    ),
+    cowplot::plot_grid(
+      get_plot_by_region(data_fig_map, "Latin America"),
+      get_plot_by_region(data_fig_density, "Latin America"),
+      get_plot_by_region(data_fig_scores, "Latin America"),
+      nrow = 1
+    ),
+    cowplot::plot_grid(
+      get_plot_by_region(data_fig_map, "Europe"),
+      get_plot_by_region(data_fig_density, "Europe"),
+      get_plot_by_region(data_fig_scores, "Europe"),
+      nrow = 1
+    ),
+    cowplot::plot_grid(
+      get_plot_by_region(data_fig_map, "Asia"),
+      get_plot_by_region(data_fig_density, "Asia"),
+      get_plot_by_region(data_fig_scores, "Asia"),
+      nrow = 1
+    ),
+    cowplot::plot_grid(
+      get_plot_by_region(data_fig_map, "Oceania"),
+      get_plot_by_region(data_fig_density, "Oceania"),
+      get_plot_by_region(data_fig_scores, "Oceania"),
+      nrow = 1
+    ),
+    ncol = 1
+  )
 
 
 ggsave(
@@ -188,6 +377,4 @@ ggsave(
   units = "mm",
   bg = "white",
   scale = 2
-  
 )
-
