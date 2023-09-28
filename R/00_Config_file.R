@@ -151,6 +151,16 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 500
 
+# regional limits
+data_regional_limits <-
+  tibble::tibble(
+    region = c("North America", "Europe", "Asia", "Latin America", "Oceania"),
+    xmin = c(-170, -10, 30, -103, 110),
+    xmax = c(-50, 50, 180, -23, 154),
+    ymin = c(10, 30, 0, -56, -50),
+    ymax = c(89, 80, 80, 34, -3)
+  )
+
 #----------------------------------------------------------#
 # 6. Graphical options -----
 #----------------------------------------------------------#
@@ -193,6 +203,21 @@ palette_predictors <- c(
   human = "#663333",
   climate = "#4a2577"
 )
+
+# predictor parts
+palette_predictors_parts <-
+  c(
+    "maroon4",
+    "grey70",
+    "grey30"
+  ) %>%
+  rlang::set_names(
+    nm = c(
+      "Unique_percent",
+      "Average.share_percent",
+      "Individual_percent"
+    )
+  )
 
 # Parameters
 predictors_spatial_order <- c("human", "time", "climate")
