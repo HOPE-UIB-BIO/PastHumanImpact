@@ -32,7 +32,10 @@ source(
   )
 )
 
-# temporarily quick fix: rerun m2 with sel_classification
+#----------------------------------------------------------#
+# 1. Load data -----
+#----------------------------------------------------------#
+
 data_for_hvar <-
   targets::tar_read(
     name = "data_for_hvar",
@@ -54,33 +57,6 @@ data_for_m2 <-
     by = "dataset_id"
   )
 
-
-vec_responses <-
-  c(
-    "dataset_id",
-    "age",
-    "region",
-    "sel_classification",
-    "n0",
-    "n1",
-    "n2",
-    "n1_minus_n2",
-    "n2_divided_by_n1",
-    "n1_divided_by_n0",
-    "dcca_axis_1", "roc",
-    "density_turnover",
-    "density_diversity"
-  )
-
-data_m2 <-
-  get_data_m2(
-    data_source = data_for_hvar,
-    data_meta = data_meta,
-    min_samples = 5,
-    select_vars = vec_responses
-  )
-
-
 # Import data for mapping
 data_geo_koppen <-
   readr::read_rds(
@@ -88,11 +64,9 @@ data_geo_koppen <-
       data_storage_path,
       "Data/ecoregions2017/data_geo_koppen.rds"
     )
-  )
-
-# add new classification
-data_geo_koppen <-
-  data_geo_koppen %>%
+  ) %>%
+  tibble::as_tibble() %>%
+  # add new classification
   dplyr::mutate(
     sel_classification = dplyr::case_when(
       ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
@@ -102,197 +76,122 @@ data_geo_koppen <-
     )
   )
 
-# Define color palettes for ecozones
-palette_ecozones <-
-  c(
-    Polar = "#009292",
-    Cold_Without_dry_season_Very_Cold_Summer = "#004949",
-    Cold_Without_dry_season_Cold_Summer = "#006ddb",
-    Cold_Dry_Winter = "#6db6ff",
-    Cold_Dry_Summer = "#b6dbff",
-    Cold_Without_dry_season_Warm_Summer = "#117733",
-    Cold_Without_dry_season_Hot_Summer = "#999933",
-    Temperate_Without_dry_season = "#DDCC77",
-    Temperate_Dry_Winter = "#b66dff",
-    Temperate_Dry_Summer = "#ffff6d",
-    Arid = "#924900",
-    Tropical = "#920000"
-  )
 
-
-
-palette_polar <-
-  c(
-    Polar = "#009292",
-    Cold_Without_dry_season_Very_Cold_Summer = "grey80",
-    Cold_Without_dry_season_Cold_Summer = "grey80",
-    Cold_Dry_Winter = "grey80",
-    Cold_Dry_Summer = "grey80",
-    Cold_Without_dry_season_Warm_Summer = "grey80",
-    Cold_Without_dry_season_Hot_Summer = "grey80",
-    Temperate_Without_dry_season = "grey80",
-    Temperate_Dry_Winter = "grey80",
-    Temperate_Dry_Summer = "grey80",
-    Arid = "grey80",
-    Tropical = "grey80"
-  )
-
-
-palette_cold <-
-  c(
-    Polar = "grey80",
-    Cold_Without_dry_season_Very_Cold_Summer = "#004949",
-    Cold_Without_dry_season_Cold_Summer = "#006ddb",
-    Cold_Dry_Winter = "#6db6ff",
-    Cold_Dry_Summer = "#b6dbff",
-    Cold_Without_dry_season_Warm_Summer = "#117733",
-    Cold_Without_dry_season_Hot_Summer = "#999933",
-    Temperate_Without_dry_season = "grey80",
-    Temperate_Dry_Winter = "grey80",
-    Temperate_Dry_Summer = "grey80",
-    Arid = "grey80",
-    Tropical = "grey80"
-  )
-
-
-palette_temperate <-
-  c(
-    Polar = "grey80",
-    Cold_Without_dry_season_Very_Cold_Summer = "grey80",
-    Cold_Without_dry_season_Cold_Summer = "grey80",
-    Cold_Dry_Winter = "grey80",
-    Cold_Dry_Summer = "grey80",
-    Cold_Without_dry_season_Warm_Summer = "grey80",
-    Cold_Without_dry_season_Hot_Summer = "grey80",
-    Temperate_Without_dry_season = "#DDCC77",
-    Temperate_Dry_Winter = "#b66dff",
-    Temperate_Dry_Summer = "#ffff6d",
-    Arid = "grey80",
-    Tropical = "grey80"
-  )
-
-palette_arid <-
-  c(
-    Polar = "grey80",
-    Cold_Without_dry_season_Very_Cold_Summer = "grey80",
-    Cold_Without_dry_season_Cold_Summer = "grey80",
-    Cold_Dry_Winter = "grey80",
-    Cold_Dry_Summer = "grey80",
-    Cold_Without_dry_season_Warm_Summer = "grey80",
-    Cold_Without_dry_season_Hot_Summer = "grey80",
-    Temperate_Without_dry_season = "grey80",
-    Temperate_Dry_Winter = "grey80",
-    Temperate_Dry_Summer = "grey80",
-    Arid = "#924900",
-    Tropical = "grey80"
-  )
-
-palette_tropical <-
-  c(
-    Polar = "grey80",
-    Cold_Without_dry_season_Very_Cold_Summer = "grey80",
-    Cold_Without_dry_season_Cold_Summer = "grey80",
-    Cold_Dry_Winter = "grey80",
-    Cold_Dry_Summer = "grey80",
-    Cold_Without_dry_season_Warm_Summer = "grey80",
-    Cold_Without_dry_season_Hot_Summer = "grey80",
-    Temperate_Without_dry_season = "grey80",
-    Temperate_Dry_Winter = "grey80",
-    Temperate_Dry_Summer = "grey80",
-    Arid = "grey80",
-    Tropical = "#920000"
-  )
-
-# Predictors
-palette_pred <- c(
-  human = "#663333",
-  climate = "#BBBBBB"
-)
-
-# Set parameters
-
-order_predictors_spatial <- c("human", "time", "climate")
-
-x_label <- c("Human", "Time", "Climate")
-
-#
-get_map_region(select_region = "Oceania", col_vec = rep("grey90", 12))
-
-# GET LISTS OF REGIONAL MAPS FOR DIFFERENT PALETTE ECOZONES
-
-list_maps <- function(select_region = "Europe") {
-  map_region_polar <-
-    get_map_region(
-      select_region = select_region,
-      col_vec = palette_polar
+#----------------------------------------------------------#
+# 2. rerun m2 with sel_classification -----
+#----------------------------------------------------------#
+# temporarily quick fix
+data_m2 <-
+  get_data_m2(
+    data_source = data_for_hvar,
+    data_meta = data_meta,
+    min_samples = 5,
+    select_vars = c(
+      "dataset_id",
+      "age",
+      "region",
+      "sel_classification",
+      "n0",
+      "n1",
+      "n2",
+      "n1_minus_n2",
+      "n2_divided_by_n1",
+      "n1_divided_by_n0",
+      "dcca_axis_1", "roc",
+      "density_turnover",
+      "density_diversity"
     )
-  map_region_cold <-
-    get_map_region(
-      select_region = select_region,
-      col_vec = palette_cold
-    )
-  map_region_temp <-
-    get_map_region(
-      select_region = select_region,
-      col_vec = palette_temperate
-    )
-  map_region_arid <-
-    get_map_region(
-      select_region = select_region,
-      col_vec = palette_arid
-    )
-  map_region_tropical <-
-    get_map_region(
-      select_region = select_region,
-      col_vec = palette_tropical
-    )
-
-  map_list <- list(
-    polar = map_region_polar,
-    cold = map_region_cold,
-    temp = map_region_temp,
-    arid = map_region_arid,
-    tropical = map_region_tropical
   )
 
-  return(map_list)
+#----------------------------------------------------------#
+# 3. make maps -----
+#----------------------------------------------------------#
+list_maps <- function(select_region) {
+  # helper function
+  get_greyout_palette <- function(
+      sel_climate_zone,
+      default_palette = palette_ecozones # [config criteria]
+      ) {
+    default_palette[
+      stringr::str_detect(
+        names(default_palette), sel_climate_zone,
+        negate = TRUE
+      )
+    ] <- "grey80"
+
+    return(default_palette)
+  }
+
+  c(
+    "Polar",
+    "Cold",
+    "Temperate",
+    "Arid",
+    "Tropical"
+  ) %>%
+    rlang::set_names() %>%
+    purrr::map(
+      .f = ~ get_map_region(
+        rasterdata = data_geo_koppen,
+        select_region = select_region,
+        sel_palette = get_greyout_palette(.x)
+      )
+    ) %>%
+    return()
 }
 
-
-NA_map_list <-
-  list_maps(select_region = "North America")
-
-
-LA_map_list <-
-  list_maps(select_region = "Latin America")
-
-Europe_map_list <-
-  list_maps(select_region = "Europe")
-
-Asia_map_list <-
-  list_maps(select_region = "Asia")
-
-oceania_map_list <-
-  list_maps(select_region = "Oceania")
+vec_regions <- c(
+  "North America",
+  "Latin America",
+  "Europe",
+  "Asia",
+  "Oceania"
+) %>%
+  rlang::set_names()
 
 
+list_region_maps_grey <-
+  vec_regions %>%
+  purrr::map(
+    .f = ~ get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = .x,
+      sel_palette = palette_ecozones, # [config criteria]
+      sel_alpha = 0
+    )
+  )
+
+list_region_maps_climate <-
+  vec_regions %>%
+  purrr::map(
+    .f = ~ list_maps(
+      select_region = .x
+    )
+  )
+
+
+#----------------------------------------------------------#
+# 4. circular plot -----
+#----------------------------------------------------------#
 # GET FIGURES CIRCULAR BARS
-circular_bar_h2 <-
+data_circular_bar_h2 <-
   data_h2_vis %>%
   dplyr::mutate(group = factor(group)) %>%
   dplyr::group_by(region) %>%
-  dplyr::group_map(
-    ~ get_circular_barplot(
-      .x,
-      y_var = "percentage",
-      fill_var = "group"
+  tidyr::nest(data_to_plot = -c(region)) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ get_circular_barplot(
+        data = .x,
+        y_var = "percentage",
+        fill_var = "group",
+        x_var = "predictor",
+        col_vec = palette_ecozones, # [config criteria]
+        x_name = predictors_label # [config criteria]
+      )
     )
   )
-
-# name list
-names(circular_bar_h2) <-
-  data_h2_vis$region %>%
-  unique()
 
 # GET FIGURES CONSECUTIVE PROCRUSTES CHANGE WITH TIME
 
