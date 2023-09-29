@@ -37,7 +37,7 @@ get_circular_barplot <- function(data_source,
       ),
       panel.border = ggplot2::element_blank(),
       panel.grid.major.y = ggplot2::element_line(
-        color = ,
+        color = line_col,
         linewidth = line_width
       ),
       panel.grid.major.x = ggplot2::element_line(
