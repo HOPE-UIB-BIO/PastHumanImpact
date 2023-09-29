@@ -117,6 +117,12 @@ get_variability_prop_per_region <- function(
     ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
       legend.position = "none",
       panel.spacing.x = grid::unit(0, "mm"),
       panel.border = ggplot2::element_blank(),
@@ -170,8 +176,21 @@ get_plot_by_region <- function(data_source, sel_region) {
 get_combined_row <- function(
     sel_region,
     sel_method = c("cowplot", "ggpubr"),
-    sel_widths = c(0.2, 0.2, 0.2, 0.1)) {
+    sel_widths = c(0.2, 0.2, 0.2, 0.1),
+    remove = "x") {
   sel_method <- match.arg(sel_method)
+
+  if (
+    "x" %in% remove
+  ) {
+    fig_scores <-
+      get_plot_by_region(data_fig_scores, sel_region) +
+      ggpubr::rremove("x.text") +
+      ggpubr::rremove("x.ticks") +
+      ggpubr::rremove("x.title")
+  } else {
+    fig_scores <- get_plot_by_region(data_fig_scores, sel_region)
+  }
 
   if (
     sel_method == "cowplot"
@@ -179,9 +198,12 @@ get_combined_row <- function(
     res <-
       cowplot::plot_grid(
         get_plot_by_region(data_fig_map, sel_region),
-        get_plot_by_region(data_fig_scores, sel_region),
-        get_plot_by_region(data_fig_density, sel_region),
-        get_plot_by_region(data_fig_variance, sel_region),
+        fig_scores,
+        get_plot_by_region(data_fig_density, sel_region) +
+          ggpubr::rremove("xy.title"),
+        get_plot_by_region(data_fig_variance, sel_region) +
+          ggpubr::rremove("y.text") +
+          ggpubr::rremove("y.ticks"),
         nrow = 1,
         rel_widths = sel_widths
       )
@@ -193,9 +215,12 @@ get_combined_row <- function(
     res <-
       ggpubr::ggarrange(
         get_plot_by_region(data_fig_map, sel_region),
-        get_plot_by_region(data_fig_scores, sel_region),
-        get_plot_by_region(data_fig_density, sel_region),
-        get_plot_by_region(data_fig_variance, sel_region),
+        fig_scores,
+        get_plot_by_region(data_fig_density, sel_region) +
+          ggpubr::rremove("xy.title"),
+        get_plot_by_region(data_fig_variance, sel_region) +
+          ggpubr::rremove("y.text") +
+          ggpubr::rremove("y.ticks"),
         nrow = 1,
         widths = sel_widths
       )
@@ -392,6 +417,8 @@ data_fig_variance <-
     )
   )
 
+data_fig_variance$plot[[1]]
+
 #----------------------------------------------------------#
 # 2. Figure density -----
 #----------------------------------------------------------#
@@ -413,8 +440,9 @@ data_fig_density <-
         ggplot2::facet_wrap(
           ~predictor,
           ncol = 3,
-          scales = "free_y"
+          scales = "free_x"
         ) +
+        ggplot2::coord_flip() +
         ggplot2::scale_colour_manual(
           values = palette_predictors_parts # [config criteria]
         ) +
@@ -430,11 +458,24 @@ data_fig_density <-
         ) +
         ggplot2::theme_bw() +
         ggplot2::theme(
+          text = ggplot2::element_text(
+            size = text_size # [config criteria]
+          ),
+          line = ggplot2::element_line(
+            linewidth = line_size # [config criteria]
+          ),
           legend.position = "none",
           plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0), "mm"),
+          panel.grid.minor = ggplot2::element_blank(),
+          panel.grid.major.x = ggplot2::element_blank(),
           strip.background = ggplot2::element_blank(),
           strip.text = ggplot2::element_blank(),
-          axis.title = ggplot2::element_blank()
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank()
+        ) +
+        ggplot2::labs(
+          x = "Explained variability (%)",
+          y = "Number of records"
         ) +
         ggplot2::geom_density(
           mapping = ggplot2::aes(
@@ -446,6 +487,8 @@ data_fig_density <-
         )
     )
   )
+
+data_fig_density$plot[[1]]
 
 #----------------------------------------------------------#
 # 4. Figure ecosystem case scores -----
@@ -475,17 +518,23 @@ data_fig_scores <-
           values = palette_ecozones # [config criteria]
         ) +
         ggplot2::scale_y_continuous(limits = c(0, 5)) +
+        ggplot2::scale_x_continuous(
+          limits = c(0, 8.5e3),
+          breaks = seq(0, 8.5e3, by = 2e3)
+        ) +
         ggplot2::theme_bw() +
         ggplot2::theme(
-          strip.text = ggplot2::element_text(size = 10),
+          text = ggplot2::element_text(
+            size = text_size # [config criteria]
+          ),
+          line = ggplot2::element_line(
+            linewidth = line_size # [config criteria]
+          ),
           legend.position = "none",
-          panel.grid.major = ggplot2::element_blank(),
-          # panel.grid.minor = element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
           plot.background = ggplot2::element_blank(),
           plot.margin = grid::unit(c(0.2, 0.2, 0.2, 0), "mm"),
-          axis.text.y = ggplot2::element_text(size = 6),
-          axis.text.x = ggplot2::element_text(size = 6),
-          axis.title = ggplot2::element_text(size = 8)
+          axis.title.y = ggplot2::element_blank()
         ) +
         ggplot2::labs(
           y = "Scores",
@@ -506,7 +555,7 @@ combined_detail_h1 <-
     get_combined_row("Latin America", sel_teselation_method),
     get_combined_row("Europe", sel_teselation_method),
     get_combined_row("Asia", sel_teselation_method),
-    get_combined_row("Oceania", sel_teselation_method),
+    get_combined_row("Oceania", sel_teselation_method, remove = NULL),
     ncol = 1
   )
 
