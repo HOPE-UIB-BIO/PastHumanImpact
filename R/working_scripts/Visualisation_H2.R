@@ -188,6 +188,7 @@ data_circular_bar_h2 <-
         fill_var = "group",
         x_var = "predictor",
         line_width = 0.2,
+        line_col = "grey75",
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label # [config criteria]
       )
@@ -208,9 +209,11 @@ list_circulal_plots_on_maps <-
       )
   )
 
-# GET FIGURES CONSECUTIVE PROCRUSTES CHANGE WITH TIME
+#----------------------------------------------------------#
+# 5. temporal m2 -----
+#----------------------------------------------------------#
 
-m2_change_region <-
+data_m2_change_region <-
   data_m2 %>%
   dplyr::select(
     m2_time_df,
@@ -224,334 +227,333 @@ m2_change_region <-
       dplyr::distinct(),
     by = c("region", "sel_classification")
   ) %>%
-  tidzr::unnest(cols = c(m2_time_df)) %>%
-  dplyr::group_by(region, ecozone_koppen_5) %>%
-  dplyr::group_map(
-    ~ ggplot2::ggplot(
-      data = .x,
-      ggplot2::aes(
-        x = as.numeric(time),
-        y = delta_m2,
-        col = sel_classification,
-        fill = sel_classification
-      )
-    ) +
-      ggplot2::geom_point(size = 0.5) +
-      ggplot2::geom_smooth(linewidth = 0.1, se = FALSE) +
-      ggplot2::scale_x_reverse() +
-      ggplot2::scale_x_continuous(
-        limits = c(500, 8500),
-        breaks = c(seq(500, 8500, by = 2000))
-      ) +
-      ggplot2::scale_y_continuous(limits = c(0, 1)) +
-      ggplot2::theme_minimal() +
-      ggplot2::scale_color_manual(
-        values = palette_ecozones,
-        drop = FALSE
-      ) +
-      ggplot2::scale_fill_manual(
-        values = palette_ecozones,
-        drop = FALSE
-      ) +
-      ggplot2::theme(
-        aspect.ratio = 1,
-        legend.position = "none",
-        panel.background = ggplot2::element_blank(),
-        strip.background = ggplot2::element_blank(),
-        panel.grid.minor = ggplot2::element_blank(),
-        plot.background = ggplot2::element_rect(
-          fill = "transparent",
-          color = NA
-        ),
-        panel.grid.major = ggplot2::element_line(
-          color = "grey90",
-          linewidth = 0.1
-        ),
-        axis.title.y = ggplot2::element_text(size = 6),
-        axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-        axis.text.y = ggplot2::element_text(size = 6),
-        plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-      ) +
-      ggplot2::labs(
-        x = "",
-        y = "change in m2"
-      )
-  )
-
-# name list correct
-groups <-
-  data_m2 %>%
-  dplyr::select(
-    m2_time_df,
-    region,
-    sel_classification
-  ) %>%
-  dplyr::filter(!region %in% "Africa") %>%
-  inner_join(
-    data_meta %>%
-      dplyr::select(region, sel_classification, ecozone_koppen_5) %>%
-      dplyr::distinct(),
-    by = c("region", "sel_classification")
-  ) %>%
   tidyr::unnest(cols = c(m2_time_df)) %>%
   dplyr::group_by(region, ecozone_koppen_5) %>%
-  attr("groups")
+  tidyr::nest(data_to_plot = -c(region, ecozone_koppen_5)) %>%
+  dplyr::mutate(
+    name = paste0(region, "_", ecozone_koppen_5)
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ ggplot2::ggplot(
+        data = .x,
+        ggplot2::aes(
+          x = as.numeric(time),
+          y = delta_m2,
+          col = sel_classification,
+          fill = sel_classification
+        )
+      ) +
+        ggplot2::geom_point(size = 0.5) +
+        ggplot2::geom_smooth(linewidth = 0.1, se = FALSE) +
+        ggplot2::scale_x_continuous(
+          limits = c(500, 8500),
+          breaks = c(seq(500, 8500, by = 2000))
+        ) +
+        ggplot2::scale_y_continuous(limits = c(0, 1)) +
+        ggplot2::theme_minimal() +
+        ggplot2::scale_color_manual(
+          values = palette_ecozones,
+          drop = FALSE
+        ) +
+        ggplot2::scale_fill_manual(
+          values = palette_ecozones,
+          drop = FALSE
+        ) +
+        ggplot2::theme(
+          aspect.ratio = 1,
+          legend.position = "none",
+          panel.background = ggplot2::element_blank(),
+          strip.background = ggplot2::element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
+          plot.background = ggplot2::element_rect(
+            fill = "transparent",
+            color = NA
+          ),
+          panel.grid.major = ggplot2::element_line(
+            color = "grey90",
+            linewidth = 0.1
+          ),
+          axis.title.y = ggplot2::element_text(size = 6),
+          axis.text.x = ggplot2::element_text(size = 6, angle = 60),
+          axis.text.y = ggplot2::element_text(size = 6),
+          plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+        ) +
+        ggplot2::labs(
+          x = "",
+          y = "change in m2"
+        )
+    )
+  ) %>%
+  dplyr::ungroup()
 
-name_list <- paste0(groups$region, "_", groups$ecozone_koppen_5)
-
-names(m2_change_region) <- name_list
-
-# COMBINE FIGURES
-# to shift themes
-remove_axis_labels <-
-  ggplot2::theme(
-    axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    axis.title.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_blank()
+data_m2_change_region_wider <-
+  data_m2_change_region %>%
+  dplyr::select(region, ecozone_koppen_5, plot) %>%
+  tidyr::pivot_wider(
+    names_from = ecozone_koppen_5,
+    values_from = plot
   )
 
-remove_axis_labels_x <-
-  ggplot2::theme(
-    axis.title.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank()
+#----------------------------------------------------------#
+# 6. Combine plots -----
+#----------------------------------------------------------#
+
+get_curve_with_insert <- function(
+    data_source = data_m2_change_region_wider,
+    sel_region,
+    sel_climate,
+    remove = "NULL") {
+  sel_curve <-
+    data_source %>%
+    dplyr::filter(region == sel_region) %>%
+    purrr::chuck(sel_climate, 1)
+
+  switch(remove,
+    "x" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.x = ggplot2::element_blank(),
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank()
+        )
+    },
+    "y" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.y = ggplot2::element_blank(),
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()
+        )
+    },
+    "both" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.x = ggplot2::element_blank(),
+          axis.title.y = ggplot2::element_blank(),
+          axis.text.x = ggplot2::element_blank(),
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()
+        )
+    }
   )
 
-remove_axis_labels_y <-
-  ggplot2::theme(
-    axis.title.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_blank()
+  res <-
+    sel_curve +
+    patchwork::inset_element(
+      list_region_maps_climate %>%
+        purrr::chuck(sel_region, sel_climate),
+      left = 0.365, bottom = 0.7, right = 1, top = 1
+    )
+
+  return(res)
+}
+
+fig_row_north_america <-
+  cowplot::plot_grid(
+    list_circulal_plots_on_maps[["North America"]],
+    cowplot::plot_grid(
+      get_curve_with_insert(
+        sel_region = "North America",
+        sel_climate = "Polar",
+        remove = "x"
+      ),
+      get_curve_with_insert(
+        sel_region = "North America", sel_climate = "Cold",
+        remove = "both"
+      ),
+      get_curve_with_insert(
+        sel_region = "North America", sel_climate = "Temperate",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "North America", sel_climate = "Arid",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "North America", sel_climate = "Tropical",
+        remove = "NULL"
+      ),
+      nrow = 1,
+      ncol = 5,
+      align = "h"
+    ),
+    nrow = 1,
+    ncol = 2,
+    rel_widths = c(1, 5)
   )
 
-remove_space <-
-  ggplot2::theme(plot.margin = unit(c(0, 0, 0, 0), "mm"))
+fig_row_latin_america <-
+  cowplot::plot_grid(
+    list_circulal_plots_on_maps[["Latin America"]],
+    cowplot::plot_grid(
+      get_curve_with_insert(
+        sel_region = "Latin America",
+        sel_climate = "Polar",
+        remove = "x"
+      ),
+      get_curve_with_insert(
+        sel_region = "Latin America", sel_climate = "Cold",
+        remove = "NULL"
+      ),
+      get_curve_with_insert(
+        sel_region = "Latin America", sel_climate = "Temperate",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Latin America", sel_climate = "Arid",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Latin America", sel_climate = "Tropical",
+        remove = "both"
+      ),
+      nrow = 1,
+      ncol = 5,
+      align = "h"
+    ),
+    nrow = 1,
+    ncol = 2,
+    rel_widths = c(1, 5)
+  )
 
-# PUT TOGETHER FIGURES PER REGION
+fig_row_europe <-
+  cowplot::plot_grid(
+    list_circulal_plots_on_maps[["Europe"]],
+    cowplot::plot_grid(
+      get_curve_with_insert(
+        sel_region = "Europe",
+        sel_climate = "Polar",
+        remove = "x"
+      ),
+      get_curve_with_insert(
+        sel_region = "Europe", sel_climate = "Cold",
+        remove = "both"
+      ),
+      get_curve_with_insert(
+        sel_region = "Europe", sel_climate = "Temperate",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Europe", sel_climate = "Arid",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Europe", sel_climate = "Tropical",
+        remove = "NULL"
+      ),
+      nrow = 1,
+      ncol = 5,
+      align = "h"
+    ),
+    nrow = 1,
+    ncol = 2,
+    rel_widths = c(1, 5)
+  )
 
+fig_row_asia <-
+  cowplot::plot_grid(
+    list_circulal_plots_on_maps[["Asia"]],
+    cowplot::plot_grid(
+      get_curve_with_insert(
+        sel_region = "Asia",
+        sel_climate = "Polar"
+      ),
+      get_curve_with_insert(
+        sel_region = "Asia", sel_climate = "Cold",
+        remove = "y"
+      ),
+      get_curve_with_insert(
+        sel_region = "Asia", sel_climate = "Temperate",
+        remove = "both"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Asia", sel_climate = "Arid",
+        remove = "y"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Asia", sel_climate = "Tropical",
+        remove = "NULL"
+      ),
+      nrow = 1,
+      ncol = 5,
+      align = "h"
+    ),
+    nrow = 1,
+    ncol = 2,
+    rel_widths = c(1, 5)
+  )
 
-dev.new(width = 180, height = 70, units = "mm")
+fig_row_oceania <-
+  cowplot::plot_grid(
+    list_circulal_plots_on_maps[["Oceania"]],
+    cowplot::plot_grid(
+      get_curve_with_insert(
+        sel_region = "Oceania",
+        sel_climate = "Polar"
+      ),
+      get_curve_with_insert(
+        sel_region = "Oceania", sel_climate = "Cold",
+        remove = ""
+      ),
+      get_curve_with_insert(
+        sel_region = "Oceania", sel_climate = "Temperate"
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Oceania", sel_climate = "Arid",
+        remove = ""
+      ) +
+        remove_axis_labels,
+      get_curve_with_insert(
+        sel_region = "Oceania", sel_climate = "Tropical",
+        remove = "y"
+      ),
+      nrow = 1,
+      ncol = 5,
+      align = "h"
+    ),
+    nrow = 1,
+    ncol = 2,
+    rel_widths = c(1, 5)
+  )
 
-design <- c(
-  patchwork::area(t = 1, l = 1, b = 1, r = 1),
-  patchwork::area(t = 1, l = 2, b = 1, r = 2),
-  patchwork::area(t = 1, l = 3, b = 1, r = 3),
-  patchwork::area(t = 1, l = 4, b = 1, r = 4),
-  patchwork::area(t = 1, l = 5, b = 1, r = 5)
-)
-
-
-NA_p1 <-
-  circular_bar_h2$`North America` +
-  m2_change_region$`North America_Arid` +
-  remove_axis_labels_x +
-  remove_space +
-  patchwork::inset_element(
-    NA_map_list$arid,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`North America_Polar` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    NA_map_list$polar,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`North America_Cold` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    NA_map_list$cold,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`North America_Temperate` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    NA_map_list$temp,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  patchwork::plot_layout(design = design)
-
-
-
-LA_p1 <-
-  circular_bar_h2$`Latin America` +
-  m2_change_region$`Latin America_Arid` +
-  remove_axis_labels_x +
-  remove_space +
-  patchwork::inset_element(
-    LA_map_list$arid,
-    left = 0.365, bottom = 0.7, right = 1, top = 0.9
-  ) +
-  m2_change_region$`Latin America_Polar` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    LA_map_list$polar,
-    left = 0.365, bottom = 0.7, right = 1, top = 0.9
-  ) +
-  m2_change_region$`Latin America_Temperate` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    LA_map_list$temp,
-    left = 0.365, bottom = 0.7, right = 1, top = 0.9
-  ) +
-  m2_change_region$`Latin America_Tropical` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    LA_map_list$tropical,
-    left = 0.365, bottom = 0.7, right = 1, top = 0.9
-  ) +
-  patchwork::plot_layout(design = design)
-
-
-europe_p1 <-
-  circular_bar_h2$`Europe` +
-  m2_change_region$`Europe_Arid` +
-  remove_axis_labels_x +
-  remove_space +
-  patchwork::inset_element(
-    Europe_map_list$arid,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`Europe_Polar` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    Europe_map_list$polar,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`Europe_Temperate` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    Europe_map_list$temp,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`Europe_Cold` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    Europe_map_list$cold,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  patchwork::plot_layout(design = design)
-
-
-
-
-asia_p1 <-
-  circular_bar_h2$`Asia` +
-  m2_change_region$`Asia_Arid` +
-  patchwork::inset_element(
-    Asia_map_list$arid,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  remove_space +
-  m2_change_region$`Asia_Polar` +
-  remove_axis_labels_y +
-  remove_space +
-  patchwork::inset_element(
-    Asia_map_list$polar,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`Asia_Temperate` +
-  remove_axis_labels_y +
-  remove_space +
-  patchwork::inset_element(
-    Asia_map_list$temp,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  m2_change_region$`Asia_Cold` +
-  remove_axis_labels +
-  remove_space +
-  patchwork::inset_element(
-    Asia_map_list$cold,
-    left = 0.365, bottom = 0.7, right = 1, top = 1
-  ) +
-  patchwork::plot_layout(design = design)
-
-o_design <- c(
-  patchwork::area(t = 1, l = 1, b = 1, r = 1),
-  patchwork::area(t = 1, l = 5, b = 1, r = 5)
-)
-
-oceania_p1 <-
-  circular_bar_h2$`Oceania` +
-  m2_change_region$`Oceania_Temperate` +
-  remove_axis_labels_y +
-  remove_space +
-  patchwork::inset_element(
-    oceania_map_list$temp,
-    left = 0.365, bottom = 0.7, right = 1, top = 0.99
-  ) +
-  patchwork::plot_layout(design = o_design)
-
-
-# FINAL COMBINED
-design2 <- c(
-  area(t = 1, l = 1, b = 1, r = 5),
-  area(t = 2, l = 1, b = 2, r = 5),
-  area(t = 3, l = 1, b = 3, r = 5),
-  area(t = 4, l = 1, b = 4, r = 5),
-  area(t = 5, l = 1, b = 5, r = 5)
-)
-
-
-# try design to keep each figure row at same plot level
 combine_h2 <-
-  NA_p1 /
-  LA_p1 /
-  europe_p1 /
-  asia_p1 /
-  oceania_p1 +
-  patchwork::plot_layout(design = design2)
-
-# try layout with ncol
-combine_h2 <-
-  NA_p1 /
-  LA_p1 /
-  europe_p1 /
-  asia_p1 /
-  oceania_p1 +
-  patchwork::plot_layout(ncol = 1)
-
-
-# try plot_grid from
-combine_h2 <-
-  cowplot::plot_grid(NA_p1,
-    LA_p1,
-    europe_p1,
-    asia_p1,
-    oceania_p1,
+  ggpubr::ggarrange(
+    fig_row_north_america,
+    fig_row_latin_america,
+    fig_row_europe,
+    fig_row_asia,
+    fig_row_oceania,
+    nrow = 5,
     ncol = 1
   )
 
-combine_h2
-
-dev.off()
-
-# SAVE
-
-# pdf("combined_h2_version3.pdf", width = 9, height = 9, unit = "cm")
-# print(combine_h2)
-# dev.off()
-#
-# system2('open', args = 'combined_h2_version3.pdf')
-
-png("combined_plot_h2.png", width = 18, height = 9, unit = "cm", res = 300)
-print(combine_h2)
-
-dev.off()
-
-system2("open", args = "combined_h2_version3.pdf")
-
-ggplot2::ggsave(
-  "combined_figure_h2.png",
-  combine_h2,
-  width = 18, height = 7.5, units = "cm",
-  dpi = 500,
-  bg = "white"
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/combine_h2"),
+      .x,
+      sep = "."
+    ),
+    plot = combine_h2,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 120,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
 )
