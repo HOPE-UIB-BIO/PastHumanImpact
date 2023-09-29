@@ -65,15 +65,16 @@ group_vars_spatial <- c("predictor", "sel_classification", "region")
 
 group_vars_temporal <- c("predictor", "region", "age")
 
-sel_var <- c(
-  "total_variance",
-  "Individual",
-  "Unique",
-  "Average.share",
-  "Individual_percent",
-  "Unique_percent",
-  "Average.share_percent"
-)
+sel_var <-
+  c(
+    "total_variance",
+    "individual",
+    "unique",
+    "average_share",
+    "individual_percent",
+    "unique_percent",
+    "average_share_percent"
+  )
 
 
 ###############################################################################
@@ -135,7 +136,8 @@ data_spatial_vis <-
   dplyr::mutate(
     Unique_percent = Unique / total_variance * 100,
     Average.share_percent = Average.share / total_variance * 100
-  )
+  ) %>%
+  janitor::clean_names()
 
 # 3.2 temporal analysis
 data_temporal_vis <-
@@ -173,7 +175,8 @@ data_temporal_vis <-
   dplyr::mutate(
     p_value = readr::parse_number(`Pr(>I)`)
   ) %>%
-  dplyr::ungroup()
+  dplyr::ungroup() %>%
+  janitor::clean_names()
 
 
 ################################################################################
@@ -240,11 +243,12 @@ dataset_spatial_vis <-
   dplyr::filter(total_variance > lower_5_percent)
 
 # check datasets which variation does not add up
-dataset_id_check <- data_spatial_vis %>%
-  filter(
-    Individual_percent > 100 |
-      Unique_percent > 100 |
-      Average.share_percent > 100
+dataset_id_check <-
+  data_spatial_vis %>%
+  dplyr::filter(
+    individual_percent > 100 |
+      unique_percent > 100 |
+      average_share_percent > 100
   ) %>%
   purrr::pluck("dataset_id") %>%
   unique()
@@ -283,10 +287,10 @@ summary_spatial_median <-
     predictor,
     sel_classification,
     region,
-    ends_with("median")
+    dplyr::ends_with("median")
   ) %>%
   tidyr::pivot_longer(
-    Unique_percent_median:Average.share_percent_median,
+    dplyr::ends_with("median"),
     names_to = "variance_partition",
     values_to = "percentage_median"
   ) %>%
@@ -313,7 +317,7 @@ summary_temporal_median <-
     dplyr::ends_with("median")
   ) %>%
   tidyr::pivot_longer(
-    Unique_percent_median:Average.share_percent_median,
+    dplyr::ends_with("median"),
     names_to = "variance_partition",
     values_to = "percentage_median"
   ) %>%
@@ -348,7 +352,7 @@ data_h2_summary <-
   dplyr::mutate(
     dplyr::across(
       .cols = Unique:`I.perc(%)`,
-      .fns =  ~ replace(., .x < 0, 0)
+      .fns = ~ replace(., .x < 0, 0)
     )
   ) %>% # negative variances can be ignored
   dplyr::mutate(
@@ -356,13 +360,14 @@ data_h2_summary <-
     Average.share_percent = Average.share / total_variance * 100
   ) %>%
   dplyr::select(-c(data_merge, varhp, responce_dist)) %>%
-  dplyr::ungroup()
+  dplyr::ungroup() %>%
+  janitor::clean_names()
 
 # Reshape H2 table for plotting
 data_h2_vis <-
   data_h2_summary %>%
   tidyr::pivot_longer(
-    c(Unique_percent, Average.share_percent),
+    c(unique_percent, average_share_percent),
     names_to = "variance_partition",
     values_to = "percentage"
   )

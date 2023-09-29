@@ -248,9 +248,9 @@ palette_predictors_parts <-
   ) %>%
   rlang::set_names(
     nm = c(
-      "Unique_percent",
-      "Average.share_percent",
-      "Individual_percent"
+      "unique_percent",
+      "average_share_percent",
+      "individual_percent"
     )
   )
 

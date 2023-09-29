@@ -31,7 +31,7 @@ get_predictor_barplot <-
       ggplot2::geom_bar(
         data = data_source %>%
           dplyr::filter(
-            variance_partition == "Unique_percent_median",
+            variance_partition == "unique_percent_median",
             predictor %in% sel_predictor
           ),
         mapping = ggplot2::aes(
@@ -47,7 +47,7 @@ get_predictor_barplot <-
       ggplot2::geom_bar(
         data = data_source %>%
           dplyr::filter(
-            variance_partition == "Average.share_percent_median",
+            variance_partition == "average_share_percent_median",
             predictor %in% sel_predictor
           ),
         ggplot2::aes(
