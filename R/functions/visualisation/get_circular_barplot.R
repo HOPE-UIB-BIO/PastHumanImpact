@@ -84,7 +84,7 @@ get_circular_barplot <- function(data_source,
       data = data_source %>%
         dplyr::filter(
           grepl(
-            "Unique_percent",
+            "unique_percent",
             variance_partition
           )
         ),
@@ -98,7 +98,7 @@ get_circular_barplot <- function(data_source,
     ggplot2::geom_col(
       data = data_source %>%
         dplyr::filter(grepl(
-          "Average.share_percent",
+          "average_share_percent",
           variance_partition
         )),
       width = .6,

@@ -151,9 +151,55 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 500
 
+# regional limits
+data_regional_limits <-
+  tibble::tibble(
+    region = c("North America", "Europe", "Asia", "Latin America", "Oceania"),
+    xmin = c(-170, -10, 30, -103, 110),
+    xmax = c(-50, 50, 180, -23, 154),
+    ymin = c(10, 30, 0, -56, -50),
+    ymax = c(89, 80, 80, 34, -3)
+  )
+
+data_climate_zones <-
+  tibble::tibble(
+    sel_classification = factor(
+      c(
+        "Arid",
+        "Cold_Dry_Summer",
+        "Cold_Dry_Winter",
+        "Cold_Without_dry_season_Cold_Summer",
+        "Cold_Without_dry_season_Hot_Summer",
+        "Cold_Without_dry_season_Very_Cold_Summer",
+        "Cold_Without_dry_season_Warm_Summer",
+        "Polar",
+        "Temperate_Dry_Summer",
+        "Temperate_Dry_Winter",
+        "Temperate_Without_dry_season",
+        "Tropical"
+      ),
+      levels = c(
+        "Polar",
+        "Cold_Dry_Winter",
+        "Cold_Dry_Summer",
+        "Cold_Without_dry_season_Very_Cold_Summer",
+        "Cold_Without_dry_season_Cold_Summer",
+        "Cold_Without_dry_season_Warm_Summer",
+        "Cold_Without_dry_season_Hot_Summer",
+        "Temperate_Dry_Winter",
+        "Temperate_Dry_Summer",
+        "Temperate_Without_dry_season",
+        "Tropical",
+        "Arid"
+      )
+    )
+  )
+
+
 #----------------------------------------------------------#
 # 6. Graphical options -----
 #----------------------------------------------------------#
+
 
 # set ggplot output
 ggplot2::theme_set(
@@ -165,9 +211,16 @@ text_size <- 10
 line_size <- 0.1
 
 # define output sizes
-image_width <- 16
-image_height <- 12
-image_units <- "cm"
+image_width_vec <-
+  c(
+    90,
+    180,
+    270
+  ) %>%
+  rlang::set_names(
+    c("1col", "2col", "3col")
+  )
+image_units <- "mm"
 
 # Define colour palette
 
@@ -193,6 +246,21 @@ palette_predictors <- c(
   human = "#663333",
   climate = "#4a2577"
 )
+
+# predictor parts
+palette_predictors_parts <-
+  c(
+    "maroon4",
+    "grey70",
+    "grey30"
+  ) %>%
+  rlang::set_names(
+    nm = c(
+      "unique_percent",
+      "average_share_percent",
+      "individual_percent"
+    )
+  )
 
 # Parameters
 predictors_spatial_order <- c("human", "time", "climate")
