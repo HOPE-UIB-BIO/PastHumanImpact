@@ -83,10 +83,12 @@ get_human_unique_on_map <- function(
     )
 }
 
-get_variability_prop_per_region <- function(data_source, sel_region) {
+get_variability_prop_per_region <- function(
+    data_source,
+    sel_region,
+    point_size = 2) {
   data_sel <-
     data_source %>%
-    dplyr::filter(predictor == "human") %>%
     dplyr::filter(region == sel_region) %>%
     dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
     dplyr::full_join(
@@ -100,7 +102,7 @@ get_variability_prop_per_region <- function(data_source, sel_region) {
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = 1,
-        y = (Individual / total_variance) * 100
+        y = (constrained_eig / total_eig) * 100
       )
     ) +
     ggplot2::facet_wrap(~sel_classification, nrow = 1) +
@@ -108,26 +110,24 @@ get_variability_prop_per_region <- function(data_source, sel_region) {
       limits = c(0, 100)
     ) +
     ggplot2::scale_fill_manual(
-      values = palette_ecozones
+      values = palette_ecozones # [config criteria]
     ) +
     ggplot2::scale_color_manual(
-      values = palette_ecozones
+      values = palette_ecozones # [config criteria]
     ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
       legend.position = "none",
+      panel.spacing.x = grid::unit(0, "mm"),
       panel.border = ggplot2::element_blank(),
       strip.background = ggplot2::element_blank(),
       strip.text = ggplot2::element_blank(),
       axis.text.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank(),
-      axis.title.x = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
       plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-    ) +
-    ggplot2::labs(
-      y = "explained variance (%)"
     )
 
   fig_basic +
@@ -147,7 +147,7 @@ get_variability_prop_per_region <- function(data_source, sel_region) {
       data = data_sel %>%
         dplyr::group_by(sel_classification) %>%
         dplyr::summarise(
-          median = median((Individual / total_variance) * 100)
+          median = median((constrained_eig / total_eig) * 100)
         ),
       mapping = ggplot2::aes(
         x = 1,
@@ -156,6 +156,7 @@ get_variability_prop_per_region <- function(data_source, sel_region) {
       ),
       shape = 22,
       col = "gray30",
+      size = point_size
     )
 }
 
@@ -202,19 +203,47 @@ data_dist <-
     sel_classification = factor(sel_classification)
   ) %>%
   tidyr::pivot_longer(
-    c(Unique_percent, Average.share_percent, Individual_percent),
+    c(unique_percent, average_share_percent, individual_percent),
     names_to = "var_part",
     values_to = "percentage"
   ) %>%
   dplyr::mutate(
     var_part = factor(var_part,
       levels = c(
-        "Unique_percent",
-        "Average.share_percent",
-        "Individual_percent"
+        "unique_percent",
+        "average_share_percent",
+        "individual_percent"
       )
     )
   )
+
+data_proportion_variance <-
+  output_h1_spatial %>%
+  dplyr::mutate(
+    summary_variation = purrr::map(
+      .x = varhp,
+      .f = ~ .x %>%
+        purrr::pluck("summary_variation")
+    )
+  ) %>%
+  dplyr::select(-c(data_merge, varhp)) %>%
+  tidyr::unnest(summary_variation) %>%
+  dplyr::left_join(
+    data_meta %>%
+      dplyr::mutate(
+        sel_classification = dplyr::case_when(
+          ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+          ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+          ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+          .default = ecozone_koppen_5
+        )
+      ) %>%
+      dplyr::select(dataset_id, region, sel_classification),
+    by = "dataset_id"
+  ) %>%
+  janitor::clean_names()
+
+
 
 # get constrained spd scores
 data_scores_nested <-
@@ -320,7 +349,7 @@ data_fig_variance <-
     plot = purrr::map(
       .x = region,
       .f = ~ get_variability_prop_per_region(
-        data_source = data_spatial_vis,
+        data_source = data_proportion_variance,
         sel_region = .x
       )
     )
@@ -332,7 +361,6 @@ data_fig_variance <-
 
 # Density figures for full distribution of variance
 data_fig_density <-
-  data_dist %>%
   dplyr::group_by(region) %>%
   tidyr::nest(data_dist = -c(region)) %>%
   dplyr::mutate(
