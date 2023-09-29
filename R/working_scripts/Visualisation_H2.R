@@ -187,10 +187,25 @@ data_circular_bar_h2 <-
         y_var = "percentage",
         fill_var = "group",
         x_var = "predictor",
+        line_width = 0.2,
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label # [config criteria]
       )
     )
+  )
+
+list_circulal_plots_on_maps <-
+  vec_regions %>%
+  purrr::map(
+    .f = ~ cowplot::ggdraw(
+      list_region_maps_grey[[.x]]
+    ) +
+      cowplot::draw_plot(
+        get_plot_by_region(
+          data_circular_bar_h2,
+          sel_region = .x
+        )
+      )
   )
 
 # GET FIGURES CONSECUTIVE PROCRUSTES CHANGE WITH TIME
