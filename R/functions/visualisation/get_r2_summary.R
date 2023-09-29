@@ -1,8 +1,5 @@
 # get summary tables
-
-
-get_r2_summary <- function(data_table, sel_var, group_vars){
-  
+get_r2_summary <- function(data_table, sel_var, group_vars) {
   data_table %>%
     dplyr::group_by(
       dplyr::across(
@@ -10,6 +7,7 @@ get_r2_summary <- function(data_table, sel_var, group_vars){
       )
     ) %>%
     dplyr::summarise(
+      .groups = "drop",
       dplyr::across(
         dplyr::all_of(sel_var),
         list(
@@ -22,5 +20,4 @@ get_r2_summary <- function(data_table, sel_var, group_vars){
       )
     ) %>%
     return()
-  
 }
