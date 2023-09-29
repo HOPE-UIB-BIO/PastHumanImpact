@@ -167,6 +167,43 @@ get_plot_by_region <- function(data_source, sel_region) {
     return()
 }
 
+get_combined_row <- function(
+    sel_region,
+    sel_method = c("cowplot", "ggpubr"),
+    sel_widths = c(0.2, 0.2, 0.2, 0.1)) {
+  sel_method <- match.arg(sel_method)
+
+  if (
+    sel_method == "cowplot"
+  ) {
+    res <-
+      cowplot::plot_grid(
+        get_plot_by_region(data_fig_map, sel_region),
+        get_plot_by_region(data_fig_scores, sel_region),
+        get_plot_by_region(data_fig_density, sel_region),
+        get_plot_by_region(data_fig_variance, sel_region),
+        nrow = 1,
+        rel_widths = sel_widths
+      )
+  }
+
+  if (
+    sel_method == "ggpubr"
+  ) {
+    res <-
+      ggpubr::ggarrange(
+        get_plot_by_region(data_fig_map, sel_region),
+        get_plot_by_region(data_fig_scores, sel_region),
+        get_plot_by_region(data_fig_density, sel_region),
+        get_plot_by_region(data_fig_variance, sel_region),
+        nrow = 1,
+        widths = sel_widths
+      )
+  }
+  return(res)
+}
+
+
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
@@ -361,6 +398,7 @@ data_fig_variance <-
 
 # Density figures for full distribution of variance
 data_fig_density <-
+  data_dist %>%
   dplyr::group_by(region) %>%
   tidyr::nest(data_dist = -c(region)) %>%
   dplyr::mutate(
@@ -460,53 +498,30 @@ data_fig_scores <-
 # 5. Combine figures -----
 #----------------------------------------------------------#
 
+sel_teselation_method <- "cowplot"
+
 combined_detail_h1 <-
   cowplot::plot_grid(
-    cowplot::plot_grid(
-      get_plot_by_region(data_fig_map, "North America"),
-      get_plot_by_region(data_fig_variance, "North America"),
-      get_plot_by_region(data_fig_density, "North America"),
-      get_plot_by_region(data_fig_scores, "North America"),
-      nrow = 1
-    ),
-    cowplot::plot_grid(
-      get_plot_by_region(data_fig_map, "Latin America"),
-      get_plot_by_region(data_fig_variance, "Latin America"),
-      get_plot_by_region(data_fig_density, "Latin America"),
-      get_plot_by_region(data_fig_scores, "Latin America"),
-      nrow = 1
-    ),
-    cowplot::plot_grid(
-      get_plot_by_region(data_fig_map, "Europe"),
-      get_plot_by_region(data_fig_variance, "Europe"),
-      get_plot_by_region(data_fig_density, "Europe"),
-      get_plot_by_region(data_fig_scores, "Europe"),
-      nrow = 1
-    ),
-    cowplot::plot_grid(
-      get_plot_by_region(data_fig_map, "Asia"),
-      get_plot_by_region(data_fig_variance, "Asia"),
-      get_plot_by_region(data_fig_density, "Asia"),
-      get_plot_by_region(data_fig_scores, "Asia"),
-      nrow = 1
-    ),
-    cowplot::plot_grid(
-      get_plot_by_region(data_fig_map, "Oceania"),
-      get_plot_by_region(data_fig_variance, "Oceania"),
-      get_plot_by_region(data_fig_density, "Oceania"),
-      get_plot_by_region(data_fig_scores, "Oceania"),
-      nrow = 1
-    ),
+    get_combined_row("North America", sel_teselation_method),
+    get_combined_row("Latin America", sel_teselation_method),
+    get_combined_row("Europe", sel_teselation_method),
+    get_combined_row("Asia", sel_teselation_method),
+    get_combined_row("Oceania", sel_teselation_method),
     ncol = 1
   )
 
-
-ggsave(
-  "combined_details_h1.pdf",
-  plot = combined_detail_h1,
-  width = 90,
-  height = 90,
-  units = "mm",
-  bg = "white",
-  scale = 2
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/combined_detail_h1"),
+      .x,
+      sep = "."
+    ),
+    plot = combined_detail_h1,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 150,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
 )

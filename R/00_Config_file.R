@@ -200,6 +200,7 @@ data_climate_zones <-
 # 6. Graphical options -----
 #----------------------------------------------------------#
 
+
 # set ggplot output
 ggplot2::theme_set(
   ggplot2::theme_classic()
@@ -210,9 +211,16 @@ text_size <- 10
 line_size <- 0.1
 
 # define output sizes
-image_width <- 16
-image_height <- 12
-image_units <- "cm"
+image_width_vec <-
+  c(
+    90,
+    180,
+    270
+  ) %>%
+  rlang::set_names(
+    c("1col", "2col", "3col")
+  )
+image_units <- "mm"
 
 # Define colour palette
 
