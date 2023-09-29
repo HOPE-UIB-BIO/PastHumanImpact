@@ -569,7 +569,7 @@ purrr::walk(
     ),
     plot = combined_detail_h1,
     width = image_width_vec["2col"], # [config criteria]
-    height = 150,
+    height = 120,
     units = image_units, # [config criteria]
     bg = "white"
   )
