@@ -166,13 +166,6 @@ get_variability_prop_per_region <- function(
     )
 }
 
-get_plot_by_region <- function(data_source, sel_region) {
-  data_source %>%
-    dplyr::filter(region == sel_region) %>%
-    purrr::chuck("plot", 1) %>%
-    return()
-}
-
 get_combined_row <- function(
     sel_region,
     sel_method = c("cowplot", "ggpubr"),
