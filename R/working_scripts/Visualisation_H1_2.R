@@ -368,6 +368,54 @@ data_scores_merged <-
     )
   )
 
+data_score_change_points <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(region, dataset_id, CAP1, age) %>%
+  tidyr::nest(data_nested = -c(region)) %>%
+  dplyr::mutate(
+    data_for_mvpart = purrr::map(
+      .x = data_nested,
+      .f = ~ .x %>%
+        tidyr::pivot_wider(
+          names_from = dataset_id,
+          values_from = CAP1
+        )
+    )
+  ) %>%
+  dplyr::mutate(
+    change_points_age = purrr::map(
+      .progress = TRUE,
+      .x = data_for_mvpart,
+      .f = ~ {
+        data_mv <- .x %>%
+          dplyr::select(-age)
+
+        data_age <- .x %>%
+          purrr::chuck("age")
+
+        mvpart_result <-
+          mvpart::mvpart(
+            data.matrix(data_mv) ~
+              data_age,
+            xv = "1se",
+            xvmult = 1000, plot.add = FALSE, data = data_mv
+          )
+
+        utils::capture.output(
+          change_points_age <-
+            as.data.frame(summary(mvpart_result)$splits) %>%
+            purrr::pluck("index"),
+          file = "NUL"
+        )
+
+        return(change_points_age)
+      }
+    )
+  ) %>%
+  dplyr::select(region, change_points_age)
+
 #----------------------------------------------------------#
 # 2. Figure maps -----
 #----------------------------------------------------------#
@@ -488,8 +536,6 @@ data_fig_density <-
     )
   )
 
-data_fig_density$plot[[1]]
-
 #----------------------------------------------------------#
 # 4. Figure ecosystem case scores -----
 #----------------------------------------------------------#
@@ -499,20 +545,34 @@ data_fig_scores <-
   dplyr::filter(adjr2 > 0.1) %>%
   dplyr::group_by(region) %>%
   tidyr::nest(data_scores_merged = -c(region)) %>%
+  dplyr::left_join(
+    data_score_change_points,
+    by = dplyr::join_by(region)
+  ) %>%
   dplyr::mutate(
-    plot = purrr::map(
+    plot = purrr::map2(
       .x = data_scores_merged,
-      .f = ~ ggplot2::ggplot(data = .x, ggplot2::aes(
-        x = age,
-        y = CAP1,
-        group = dataset_id
-      )) +
+      .y = change_points_age,
+      .f = ~ ggplot2::ggplot(
+        data = .x,
+        mapping = ggplot2::aes(
+          x = age,
+          y = CAP1,
+          group = dataset_id
+        )
+      ) +
         ggplot2::geom_line(
           ggplot2::aes(
             col = sel_classification
           ),
           alpha = 0.4,
           linewidth = 0.2
+        ) +
+        ggplot2::geom_vline(
+          xintercept = .y,
+          lty = 2,
+          col = "grey30",
+          linewidth = line_size * 2
         ) +
         ggplot2::scale_colour_manual(
           values = palette_ecozones # [config criteria]
