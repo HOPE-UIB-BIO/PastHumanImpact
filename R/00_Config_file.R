@@ -151,14 +151,34 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 500
 
+vec_regions <-
+  c(
+    "North America",
+    "Latin America",
+    "Europe",
+    "Asia",
+    "Oceania"
+  ) %>%
+  rlang::set_names()
+
+
 # regional limits
 data_regional_limits <-
   tibble::tibble(
-    region = c("North America", "Europe", "Asia", "Latin America", "Oceania"),
-    xmin = c(-170, -10, 30, -103, 110),
-    xmax = c(-50, 50, 180, -23, 154),
-    ymin = c(10, 30, 0, -56, -50),
-    ymax = c(89, 80, 80, 34, -3)
+    region = vec_regions,
+    xmin = c(-170, -103, -10, 30, 110),
+    xmax = c(-50, -23, 50, 180, 154),
+    ymin = c(10, -56, 30, 0, -50),
+    ymax = c(89, 34, 80, 80, -3)
+  )
+
+vec_climate_5 <-
+  c(
+    "Polar",
+    "Cold",
+    "Temperate",
+    "Arid",
+    "Tropical"
   )
 
 data_climate_zones <-

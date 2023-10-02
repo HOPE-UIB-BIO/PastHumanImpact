@@ -4,6 +4,7 @@
 get_map_region <- function(rasterdata,
                            select_region = "Europe",
                            sel_alpha = 1,
+                           base_col = "grey90",
                            sel_palette = palette_ecozones # [config criteria]
 ) {
   boundary <-
@@ -14,8 +15,8 @@ get_map_region <- function(rasterdata,
     rasterdata %>%
     ggplot2::ggplot() +
     ggplot2::borders(
-      fill = "grey90",
-      colour = "grey90",
+      fill = base_col,
+      colour = base_col,
     ) +
     ggplot2::geom_raster(
       mapping = ggplot2::aes(
