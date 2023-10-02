@@ -109,12 +109,11 @@ get_data_for_h2_hvar <- function(
       )
     )
 
-
   dplyr::inner_join(
     data_pred_work,
     data_m2,
     by = dplyr::join_by(
-      "region", "group" == "ecozone_koppen_15"
+      "region", "group" == "sel_classification"
     )
   ) %>%
     # subset the data so that the yshare same time period

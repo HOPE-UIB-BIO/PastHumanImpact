@@ -2,17 +2,20 @@ get_data_m2 <- function(data_source = data_for_hvar,
                         data_meta = data_meta,
                         min_samples = 5,
                         select_vars = NULL) {
-  
   # prepare data
   data_for_h2 <-
     data_source %>%
     dplyr::inner_join(
-      data_meta %>% 
+      data_meta %>%
         dplyr::select(dataset_id, region, sel_classification),
-      by ="dataset_id") %>%
+      by = "dataset_id"
+    ) %>%
     tidyr::unnest(data_merge) %>%
     dplyr::select(
-      dplyr::all_of(select_vars)
+      c(
+         "region", "sel_classification",
+        dplyr::all_of(select_vars)
+      )
     ) %>%
     tidyr::nest(
       data = -c("age", "sel_classification", "region")
