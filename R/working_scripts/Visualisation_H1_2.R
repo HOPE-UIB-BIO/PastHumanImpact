@@ -415,13 +415,7 @@ data_score_change_points <-
 
 data_fig_map <-
   tibble::tibble(
-    region = c(
-      "North America",
-      "Latin America",
-      "Europe",
-      "Asia",
-      "Oceania"
-    )
+    region = vec_regions # [config criteria]
   ) %>%
   dplyr::mutate(
     plot = purrr::map(
@@ -440,13 +434,7 @@ data_fig_map <-
 
 data_fig_variance <-
   tibble::tibble(
-    region = c(
-      "North America",
-      "Latin America",
-      "Europe",
-      "Asia",
-      "Oceania"
-    )
+    region = vec_regions # [config criteria]
   ) %>%
   dplyr::mutate(
     plot = purrr::map(

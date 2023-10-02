@@ -47,13 +47,8 @@ list_maps <- function(select_region) {
 
     return(default_palette)
   }
-  c(
-    "Polar",
-    "Cold",
-    "Temperate",
-    "Arid",
-    "Tropical"
-  ) %>%
+
+  vec_climate_5 %>% # [config criteria]
     rlang::set_names() %>%
     purrr::map(
       .f = ~ get_map_region(
@@ -193,18 +188,8 @@ data_m2 <-
 # 3. make maps -----
 #----------------------------------------------------------#
 
-vec_regions <- c(
-  "North America",
-  "Latin America",
-  "Europe",
-  "Asia",
-  "Oceania"
-) %>%
-  rlang::set_names()
-
-
 list_region_maps_grey <-
-  vec_regions %>%
+  vec_regions %>% # [config criteria]
   purrr::map(
     .f = ~ get_map_region(
       rasterdata = data_geo_koppen,
@@ -215,7 +200,7 @@ list_region_maps_grey <-
   )
 
 list_region_maps_climate <-
-  vec_regions %>%
+  vec_regions %>% # [config criteria]
   purrr::map(
     .f = ~ list_maps(
       select_region = .x
@@ -245,7 +230,7 @@ data_proportion_variance <-
 
 data_fig_variance <-
   tibble::tibble(
-    region = vec_regions
+    region = vec_regions # [config criteria]
   ) %>%
   dplyr::mutate(
     plot = purrr::map(
@@ -348,7 +333,7 @@ data_circular_bar_h2 <-
   )
 
 list_circulal_plots_on_maps <-
-  vec_regions %>%
+  vec_regions %>% # [config criteria]
   purrr::map(
     .progress = TRUE,
     .f = ~ cowplot::ggdraw(
