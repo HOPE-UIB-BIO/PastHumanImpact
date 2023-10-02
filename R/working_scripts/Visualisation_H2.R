@@ -355,172 +355,118 @@ get_curve_with_insert <- function(
   return(res)
 }
 
-fig_row_north_america <-
+# //TODO find a way to do this programatically
+fig_grid_curve <-
   cowplot::plot_grid(
-    list_circulal_plots_on_maps[["North America"]],
-    cowplot::plot_grid(
-      get_curve_with_insert(
-        sel_region = "North America",
-        sel_climate = "Polar",
-        remove = "x"
-      ),
-      get_curve_with_insert(
-        sel_region = "North America", sel_climate = "Cold",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "North America", sel_climate = "Temperate",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "North America", sel_climate = "Arid",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "North America", sel_climate = "Tropical",
-        remove = "NULL"
-      ),
-      nrow = 1,
-      ncol = 5,
-      align = "h"
+    get_curve_with_insert(
+      sel_region = "North America", sel_climate = "Polar",
+      remove = "x"
     ),
-    nrow = 1,
-    ncol = 2,
-    rel_widths = c(1, 5)
+    get_curve_with_insert(
+      sel_region = "North America", sel_climate = "Cold",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "North America", sel_climate = "Temperate",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "North America", sel_climate = "Arid",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "North America", sel_climate = "Tropical",
+      remove = "NULL"
+    ),
+    get_curve_with_insert(
+      sel_region = "Latin America", sel_climate = "Polar",
+      remove = "x"
+    ),
+    get_curve_with_insert(
+      sel_region = "Latin America", sel_climate = "Cold",
+      remove = "NULL"
+    ),
+    get_curve_with_insert(
+      sel_region = "Latin America", sel_climate = "Temperate",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Latin America", sel_climate = "Arid",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Latin America", sel_climate = "Tropical",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Europe", sel_climate = "Polar",
+      remove = "x"
+    ),
+    get_curve_with_insert(
+      sel_region = "Europe", sel_climate = "Cold",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Europe", sel_climate = "Temperate",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Europe", sel_climate = "Arid",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Europe", sel_climate = "Tropical",
+      remove = "NULL"
+    ),
+    get_curve_with_insert(
+      sel_region = "Asia", sel_climate = "Polar"
+    ),
+    get_curve_with_insert(
+      sel_region = "Asia", sel_climate = "Cold",
+      remove = "y"
+    ),
+    get_curve_with_insert(
+      sel_region = "Asia", sel_climate = "Temperate",
+      remove = "both"
+    ),
+    get_curve_with_insert(
+      sel_region = "Asia", sel_climate = "Arid",
+      remove = "y"
+    ),
+    get_curve_with_insert(
+      sel_region = "Asia", sel_climate = "Tropical",
+      remove = "NULL"
+    ),
+    get_curve_with_insert(
+      sel_region = "Oceania", sel_climate = "Polar"
+    ),
+    get_curve_with_insert(
+      sel_region = "Oceania", sel_climate = "Cold",
+      remove = ""
+    ),
+    get_curve_with_insert(
+      sel_region = "Oceania", sel_climate = "Temperate"
+    ),
+    get_curve_with_insert(
+      sel_region = "Oceania", sel_climate = "Arid",
+      remove = ""
+    ),
+    get_curve_with_insert(
+      sel_region = "Oceania", sel_climate = "Tropical",
+      remove = "y"
+    ),
+    nrow = 5,
+    ncol = 5,
+    align = "hv"
   )
 
-fig_row_latin_america <-
-  cowplot::plot_grid(
-    list_circulal_plots_on_maps[["Latin America"]],
-    cowplot::plot_grid(
-      get_curve_with_insert(
-        sel_region = "Latin America",
-        sel_climate = "Polar",
-        remove = "x"
-      ),
-      get_curve_with_insert(
-        sel_region = "Latin America", sel_climate = "Cold",
-        remove = "NULL"
-      ),
-      get_curve_with_insert(
-        sel_region = "Latin America", sel_climate = "Temperate",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Latin America", sel_climate = "Arid",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Latin America", sel_climate = "Tropical",
-        remove = "both"
-      ),
-      nrow = 1,
-      ncol = 5,
-      align = "h"
-    ),
-    nrow = 1,
-    ncol = 2,
-    rel_widths = c(1, 5)
-  )
 
-fig_row_europe <-
-  cowplot::plot_grid(
-    list_circulal_plots_on_maps[["Europe"]],
-    cowplot::plot_grid(
-      get_curve_with_insert(
-        sel_region = "Europe",
-        sel_climate = "Polar",
-        remove = "x"
-      ),
-      get_curve_with_insert(
-        sel_region = "Europe", sel_climate = "Cold",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Europe", sel_climate = "Temperate",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Europe", sel_climate = "Arid",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Europe", sel_climate = "Tropical",
-        remove = "NULL"
-      ),
-      nrow = 1,
-      ncol = 5,
-      align = "h"
-    ),
-    nrow = 1,
-    ncol = 2,
-    rel_widths = c(1, 5)
-  )
-
-fig_row_asia <-
-  cowplot::plot_grid(
-    list_circulal_plots_on_maps[["Asia"]],
-    cowplot::plot_grid(
-      get_curve_with_insert(
-        sel_region = "Asia",
-        sel_climate = "Polar"
-      ),
-      get_curve_with_insert(
-        sel_region = "Asia", sel_climate = "Cold",
-        remove = "y"
-      ),
-      get_curve_with_insert(
-        sel_region = "Asia", sel_climate = "Temperate",
-        remove = "both"
-      ),
-      get_curve_with_insert(
-        sel_region = "Asia", sel_climate = "Arid",
-        remove = "y"
-      ),
-      get_curve_with_insert(
-        sel_region = "Asia", sel_climate = "Tropical",
-        remove = "NULL"
-      ),
-      nrow = 1,
-      ncol = 5,
-      align = "h"
-    ),
-    nrow = 1,
-    ncol = 2,
-    rel_widths = c(1, 5)
-  )
-
-fig_row_oceania <-
-  cowplot::plot_grid(
-    list_circulal_plots_on_maps[["Oceania"]],
-    cowplot::plot_grid(
-      get_curve_with_insert(
-        sel_region = "Oceania",
-        sel_climate = "Polar"
-      ),
-      get_curve_with_insert(
-        sel_region = "Oceania", sel_climate = "Cold",
-        remove = ""
-      ),
-      get_curve_with_insert(
-        sel_region = "Oceania", sel_climate = "Temperate"
-      ),
-      get_curve_with_insert(
-        sel_region = "Oceania", sel_climate = "Arid",
-        remove = ""
-      ),
-      get_curve_with_insert(
-        sel_region = "Oceania", sel_climate = "Tropical",
-        remove = "y"
-      ),
-      nrow = 1,
-      ncol = 5,
-      align = "h"
-    ),
-    nrow = 1,
-    ncol = 2,
-    rel_widths = c(1, 5)
-  )
+fig_grid_maps <-
+cowplot::plot_grid(
+  plotlist = list_circulal_plots_on_maps,
+  nrow = 5,
+  ncol = 1
+)
 
 combine_h2 <-
   ggpubr::ggarrange(
