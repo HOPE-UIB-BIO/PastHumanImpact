@@ -169,11 +169,110 @@ list_region_maps_climate <-
     )
   )
 
+#----------------------------------------------------------#
+# 4. proportion of explaoned eigenvalues plot -----
+#----------------------------------------------------------#
+
+data_proportion_variance <-
+  output_hvar_h2 %>%
+  dplyr::mutate(
+    summary_variation = purrr::map(
+      .x = varhp,
+      .f = ~ .x %>%
+        purrr::pluck("summary_variation")
+    )
+  ) %>%
+  dplyr::select(-c(data_merge, responce_dist, varhp)) %>%
+  tidyr::unnest(summary_variation) %>%
+  dplyr::rename(
+    sel_classification = group
+  ) %>%
+  janitor::clean_names()
+
+
+data_fig_variance <-
+  tibble::tibble(
+    region = vec_regions
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = region,
+      .f = ~ {
+        data_sel <-
+          data_proportion_variance %>%
+          dplyr::filter(region == .x) %>%
+          dplyr::select(-region) %>%
+          dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+          dplyr::full_join(
+            data_climate_zones, # [config criteria]
+            .,
+            by = "sel_classification"
+          ) 
+
+        fig_basic <-
+          data_sel %>%
+          ggplot2::ggplot(
+            mapping = ggplot2::aes(
+              x = 1,
+              y = (constrained_eig / total_eig) * 100
+            )
+          ) +
+          ggplot2::facet_wrap(~sel_classification, nrow = 1) +
+          ggplot2::scale_y_continuous(
+            limits = c(0, 100)
+          ) +
+          ggplot2::scale_fill_manual(
+            values = palette_ecozones # [config criteria]
+          ) +
+          ggplot2::scale_color_manual(
+            values = palette_ecozones # [config criteria]
+          ) +
+          ggplot2::theme_bw() +
+          ggplot2::theme(
+            text = ggplot2::element_text(
+              size = text_size # [config criteria]
+            ),
+            line = ggplot2::element_line(
+              linewidth = line_size # [config criteria]
+            ),
+            legend.position = "none",
+            panel.spacing.x = grid::unit(0, "mm"),
+            panel.border = ggplot2::element_blank(),
+            strip.background = ggplot2::element_blank(),
+            strip.text = ggplot2::element_blank(),
+            axis.text.x = ggplot2::element_blank(),
+            axis.ticks.x = ggplot2::element_blank(),
+            axis.title = ggplot2::element_blank(),
+            panel.grid.minor = ggplot2::element_blank(),
+            panel.grid.major.x = ggplot2::element_blank(),
+            plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+          )
+
+        fig_basic +
+          ggplot2::geom_segment(
+            mapping = ggplot2::aes(
+              xend = 1,
+              yend = 0
+            ),
+            col = "grey30"
+          ) +
+          ggplot2::geom_point(
+            mapping = ggplot2::aes(
+              fill = sel_classification
+            ),
+            shape = 21,
+            col = "gray30",
+            size = 3
+          )
+      }
+    )
+  )
+
 
 #----------------------------------------------------------#
-# 4. circular plot -----
+# 6. circular plot -----
 #----------------------------------------------------------#
-# GET FIGURES CIRCULAR BARS
+
 data_circular_bar_h2 <-
   data_h2_vis %>%
   dplyr::mutate(group = factor(group)) %>%
@@ -298,7 +397,7 @@ data_m2_change_region_wider <-
   )
 
 #----------------------------------------------------------#
-# 6. Combine plots -----
+# 7. Combine plots -----
 #----------------------------------------------------------#
 
 get_curve_with_insert <- function(
@@ -354,6 +453,22 @@ get_curve_with_insert <- function(
 
   return(res)
 }
+
+fig_grid_maps <-
+  cowplot::plot_grid(
+    plotlist = list_circulal_plots_on_maps,
+    nrow = 5,
+    ncol = 1
+  )
+
+fig_grid_model <-
+  cowplot::plot_grid(
+    plotlist = data_fig_variance$plot,
+    nrow = 5,
+    ncol = 1,
+    align = "v",
+    axis = "t"
+  )
 
 # //TODO find a way to do this programatically
 fig_grid_curve <-
@@ -460,23 +575,14 @@ fig_grid_curve <-
     align = "hv"
   )
 
-
-fig_grid_maps <-
-cowplot::plot_grid(
-  plotlist = list_circulal_plots_on_maps,
-  nrow = 5,
-  ncol = 1
-)
-
 combine_h2 <-
   ggpubr::ggarrange(
-    fig_row_north_america,
-    fig_row_latin_america,
-    fig_row_europe,
-    fig_row_asia,
-    fig_row_oceania,
-    nrow = 5,
-    ncol = 1
+    fig_grid_maps,
+    fig_grid_model,
+    fig_grid_curve,
+    nrow = 1,
+    ncol = 3,
+    widths = c(1, 0.8, 5)
   )
 
 purrr::walk(
