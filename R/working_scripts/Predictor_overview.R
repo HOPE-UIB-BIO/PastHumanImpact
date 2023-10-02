@@ -111,7 +111,11 @@ plot_predictor <- function(
     ) +
     ggplot2::labs(
       x = "Age (ka cal BP years)",
-      y = "Centrelasied and standardised values (sd units)"
+      y = "Centrelasied and standardised values (sd units)",
+      caption = paste(
+        "Thin lines represent the raw data.",
+        "Thick lines represent the predicted model."
+      )
     ) +
     ggplot2::geom_line(
       data = data_raw_mean_sd,
@@ -191,8 +195,6 @@ list_fig_predictors <-
       sel_predictor = .x
     )
   )
-
-list_fig_predictors[[1]]
 
 list_fig_predictors %>%
   purrr::iwalk(
