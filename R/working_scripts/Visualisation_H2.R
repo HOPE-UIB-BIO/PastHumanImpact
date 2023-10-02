@@ -32,6 +32,92 @@ source(
   )
 )
 
+# helper functions
+list_maps <- function(select_region) {
+  # helper function
+  get_greyout_palette <- function(sel_climate_zone,
+                                  default_palette = palette_ecozones # [config criteria]
+  ) {
+    default_palette[
+      stringr::str_detect(
+        names(default_palette), sel_climate_zone,
+        negate = TRUE
+      )
+    ] <- "grey80"
+
+    return(default_palette)
+  }
+  c(
+    "Polar",
+    "Cold",
+    "Temperate",
+    "Arid",
+    "Tropical"
+  ) %>%
+    rlang::set_names() %>%
+    purrr::map(
+      .f = ~ get_map_region(
+        rasterdata = data_geo_koppen,
+        select_region = select_region,
+        sel_palette = get_greyout_palette(.x)
+      )
+    ) %>%
+    return()
+}
+
+get_curve_with_insert <- function(data_source = data_m2_change_region_wider,
+                                  sel_region,
+                                  sel_climate,
+                                  remove = "NULL") {
+  sel_curve <-
+    data_source %>%
+    dplyr::filter(region == sel_region) %>%
+    purrr::chuck(sel_climate, 1)
+
+  switch(remove,
+    "x" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.x = ggplot2::element_blank(),
+          axis.text.x = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank()
+        )
+    },
+    "y" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.y = ggplot2::element_blank(),
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()
+        )
+    },
+    "both" = {
+      sel_curve <-
+        sel_curve +
+        ggplot2::theme(
+          axis.title.x = ggplot2::element_blank(),
+          axis.title.y = ggplot2::element_blank(),
+          axis.text.x = ggplot2::element_blank(),
+          axis.text.y = ggplot2::element_blank(),
+          axis.ticks.x = ggplot2::element_blank(),
+          axis.ticks.y = ggplot2::element_blank()
+        )
+    }
+  )
+
+  res <-
+    sel_curve +
+    patchwork::inset_element(
+      list_region_maps_climate %>%
+        purrr::chuck(sel_region, sel_climate),
+      left = 0.365, bottom = 0.7, right = 1, top = 1
+    )
+
+  return(res)
+}
+
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
@@ -106,39 +192,6 @@ data_m2 <-
 #----------------------------------------------------------#
 # 3. make maps -----
 #----------------------------------------------------------#
-list_maps <- function(select_region) {
-  # helper function
-  get_greyout_palette <- function(
-      sel_climate_zone,
-      default_palette = palette_ecozones # [config criteria]
-      ) {
-    default_palette[
-      stringr::str_detect(
-        names(default_palette), sel_climate_zone,
-        negate = TRUE
-      )
-    ] <- "grey80"
-
-    return(default_palette)
-  }
-
-  c(
-    "Polar",
-    "Cold",
-    "Temperate",
-    "Arid",
-    "Tropical"
-  ) %>%
-    rlang::set_names() %>%
-    purrr::map(
-      .f = ~ get_map_region(
-        rasterdata = data_geo_koppen,
-        select_region = select_region,
-        sel_palette = get_greyout_palette(.x)
-      )
-    ) %>%
-    return()
-}
 
 vec_regions <- c(
   "North America",
@@ -207,7 +260,7 @@ data_fig_variance <-
             data_climate_zones, # [config criteria]
             .,
             by = "sel_classification"
-          ) 
+          )
 
         fig_basic <-
           data_sel %>%
@@ -399,60 +452,6 @@ data_m2_change_region_wider <-
 #----------------------------------------------------------#
 # 7. Combine plots -----
 #----------------------------------------------------------#
-
-get_curve_with_insert <- function(
-    data_source = data_m2_change_region_wider,
-    sel_region,
-    sel_climate,
-    remove = "NULL") {
-  sel_curve <-
-    data_source %>%
-    dplyr::filter(region == sel_region) %>%
-    purrr::chuck(sel_climate, 1)
-
-  switch(remove,
-    "x" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.x = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank()
-        )
-    },
-    "y" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    },
-    "both" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.x = ggplot2::element_blank(),
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    }
-  )
-
-  res <-
-    sel_curve +
-    patchwork::inset_element(
-      list_region_maps_climate %>%
-        purrr::chuck(sel_region, sel_climate),
-      left = 0.365, bottom = 0.7, right = 1, top = 1
-    )
-
-  return(res)
-}
 
 fig_grid_maps <-
   cowplot::plot_grid(
