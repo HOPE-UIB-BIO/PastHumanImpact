@@ -198,6 +198,7 @@ data_circular_bar_h2 <-
 list_circulal_plots_on_maps <-
   vec_regions %>%
   purrr::map(
+    .progress = TRUE,
     .f = ~ cowplot::ggdraw(
       list_region_maps_grey[[.x]]
     ) +
@@ -370,13 +371,11 @@ fig_row_north_america <-
       get_curve_with_insert(
         sel_region = "North America", sel_climate = "Temperate",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "North America", sel_climate = "Arid",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "North America", sel_climate = "Tropical",
         remove = "NULL"
@@ -406,13 +405,11 @@ fig_row_latin_america <-
       get_curve_with_insert(
         sel_region = "Latin America", sel_climate = "Temperate",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Latin America", sel_climate = "Arid",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Latin America", sel_climate = "Tropical",
         remove = "both"
@@ -442,13 +439,11 @@ fig_row_europe <-
       get_curve_with_insert(
         sel_region = "Europe", sel_climate = "Temperate",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Europe", sel_climate = "Arid",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Europe", sel_climate = "Tropical",
         remove = "NULL"
@@ -477,13 +472,11 @@ fig_row_asia <-
       get_curve_with_insert(
         sel_region = "Asia", sel_climate = "Temperate",
         remove = "both"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Asia", sel_climate = "Arid",
         remove = "y"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Asia", sel_climate = "Tropical",
         remove = "NULL"
@@ -511,13 +504,11 @@ fig_row_oceania <-
       ),
       get_curve_with_insert(
         sel_region = "Oceania", sel_climate = "Temperate"
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Oceania", sel_climate = "Arid",
         remove = ""
-      ) +
-        remove_axis_labels,
+      ),
       get_curve_with_insert(
         sel_region = "Oceania", sel_climate = "Tropical",
         remove = "y"
@@ -551,8 +542,8 @@ purrr::walk(
       sep = "."
     ),
     plot = combine_h2,
-    width = image_width_vec["2col"], # [config criteria]
-    height = 120,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 200,
     units = image_units, # [config criteria]
     bg = "white"
   )
