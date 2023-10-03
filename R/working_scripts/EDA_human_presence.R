@@ -50,7 +50,7 @@ data_c14_subset <-
     )
   )
 
-data_events_to_fit <-
+data_events <-
   targets::tar_read(
     name = "data_events_to_fit",
     store = paste0(
@@ -85,7 +85,7 @@ data_meta <-
   ) %>%
   dplyr::mutate(
     region = factor(region,
-      levels = vec_regions
+      levels = vec_regions # [config criteria]
     )
   ) %>%
   dplyr::filter(
@@ -164,7 +164,7 @@ fig_n_c14 <-
   ) %>%
   dplyr::mutate(
     region = factor(region,
-      levels = vec_regions
+      levels = vec_regions # [config criteria]
     )
   ) %>%
   dplyr::filter(
@@ -231,7 +231,7 @@ if (
     tidyr::drop_na(region, sel_classification) %>%
     dplyr::mutate(
       region = factor(region,
-        levels = vec_regions
+        levels = vec_regions # [config criteria]
       )
     ) %>%
     dplyr::filter(
@@ -407,7 +407,7 @@ purrr::walk(
 #----------------------------------------------------------#
 
 data_id_has_human_impact <-
-  data_events_to_fit %>%
+  data_events %>%
   dplyr::filter(
     !var_name %in% c("bi", "no_impact")
   ) %>%
@@ -593,6 +593,36 @@ purrr::walk(
     plot = fig_human_presence_status,
     width = image_width_vec["3col"], # [config criteria]
     height = 180,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+
+#----------------------------------------------------------#
+# 6. Temporal trends of human impact  -----
+#----------------------------------------------------------#
+
+list_fig_event_temporal_trends <-
+  vec_regions %>%
+  purrr::map(
+    .f = ~ plot_data_events(
+      data_source_events = data_events,
+      select_region = .x
+    )
+  )
+
+purrr::iwalk(
+  .progress = TRUE,
+  .x = list_fig_event_temporal_trends,
+  .f = ~ ggplot2::ggsave(
+    paste0(
+      here::here("Outputs/Supp/Events_temporal_"),
+      .y,".png"
+    ),
+    plot = .x,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 120,
     units = image_units, # [config criteria]
     bg = "white"
   )
