@@ -40,7 +40,7 @@ plot_data_events <- function(data_source_events,
       long, lat
     )
 
-  data_work <-
+  data_merge <-
     data_source_events %>%
     tidyr::unnest(data_to_fit) %>%
     dplyr::inner_join(
@@ -51,12 +51,12 @@ plot_data_events <- function(data_source_events,
   if (
     isTRUE(data_raw)
   ) {
-    data_to_plot <-
-      data_work %>%
+    data_sub <-
+      data_merge %>%
       dplyr::filter(region == select_region)
   } else {
-    data_to_plot <-
-      data_work %>%
+    data_sub <-
+      data_merge %>%
       tidyr::pivot_longer(
         bi:ei,
         names_to = "var_name",
@@ -66,28 +66,105 @@ plot_data_events <- function(data_source_events,
       dplyr::mutate(value = round(value))
   }
 
+  data_work <-
+    data_sub %>%
+    dplyr::group_by(
+      region, sel_classification, var_name
+    ) %>%
+    tidyr::nest(data_to_fit = -c(region, sel_classification, var_name)) %>%
+    dplyr::ungroup()
+
+  data_work_mod <-
+    data_work %>%
+    dplyr::mutate(
+      mod = purrr::map(
+        .progress = "fiting general trend",
+        .x = data_to_fit,
+        .f = purrr::possibly(
+          ~ REcopol::fit_custom_gam(
+            data = .x,
+            x_var = "age",
+            y_var = "value",
+            error_family = "stats::binomial(link = 'logit')"
+          )
+        ),
+        otherwise = NA_character_
+      )
+    )
+
+  data_work_pred <-
+    data_work_mod %>%
+    dplyr::filter(
+      purrr::map_lgl(mod, ~ "gam" %in% class(.x))
+    ) %>%
+    dplyr::mutate(
+      data_pred = purrr::map(
+        progress = "predicting models",
+        .x = mod,
+        .f = purrr::possibly(
+          ~ REcopol::predic_model(
+            model_source = .x,
+            data_source = tibble::tibble(
+              age = seq(from = 0, to = 12e3, length.out = 100)
+            )
+          )
+        )
+      )
+    )
+
+
+  data_to_plot <-
+    data_work_pred %>%
+    tidyr::unnest(data_pred) %>%
+    dplyr::select(
+      region,
+      sel_classification,
+      var_name,
+      age,
+      fit
+    )
+
   fig <-
     data_to_plot %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = age,
-        y = value,
+        y = fit,
         col = var_name
       )
     ) +
     ggplot2::facet_wrap(~sel_classification) +
     ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
-    ggplot2::theme_classic() +
-    ggplot2::theme(legend.position = "bottom") +
-    ggplot2::labs(title = select_region, x = "") +
-    ggplot2::geom_smooth(
-      method = "gam",
-      se = FALSE,
-      formula = y ~ s(x, bs = "cs"),
-      method.args = list(
-        family =
-          stats::binomial(link = "logit")
-      )
+    ggplot2::scale_x_continuous(
+      trans = "reverse",
+      limits = c(12e3, 0),
+      breaks = seq(12e3, 0, by = -2e3),
+      labels = seq(12, 0, by = -2)
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      legend.position = "bottom",
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_text(
+        size = text_size,
+        hjust = 0.01
+      ),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.title.y = ggplot2::element_blank()
+    ) +
+    ggplot2::labs(
+      title = select_region,
+      x = "Age (ka cal yr BP)"
+    ) +
+    ggplot2::geom_ribbon(
+      mapping = ggplot2::aes(
+        ymin = 0,
+        ymax = fit,
+        fill = var_name
+      ),
+      alpha = 0.3
     )
 
 
