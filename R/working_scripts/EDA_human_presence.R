@@ -190,9 +190,10 @@ fig_n_c14 <-
     values = palette_ecozones
   ) +
   ggplot2::scale_x_continuous(
-    limits = c(0, 12.5e3),
-    breaks = seq(0, 12.5e3, by = 1e3),
-    labels = seq(0, 12.5, by = 1)
+    trans = "reverse",
+    limits = c(12.5e3, 0),
+    breaks = seq(12.5e3, 0, by = -1e3),
+    labels = seq(12.5, 0, by = -1)
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -249,9 +250,10 @@ if (
       values = palette_ecozones
     ) +
     ggplot2::scale_x_continuous(
-      limits = c(0, 12.5e3),
-      breaks = seq(0, 12.5e3, by = 1e3),
-      labels = seq(0, 12.5, by = 1)
+      trans = "reverse",
+      limits = c(12.5e3, 0),
+      breaks = seq(12.5e3, 0, by = -1e3),
+      labels = seq(12.5, 0, by = -1)
     ) +
     ggplot2::scale_y_continuous(
       limits = c(0, 10),
@@ -618,7 +620,7 @@ purrr::iwalk(
   .f = ~ ggplot2::ggsave(
     paste0(
       here::here("Outputs/Supp/Events_temporal_"),
-      .y,".png"
+      .y, ".png"
     ),
     plot = .x,
     width = image_width_vec["2col"], # [config criteria]
