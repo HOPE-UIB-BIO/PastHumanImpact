@@ -11,18 +11,32 @@ get_predictor_barplot <-
     data_age_dummy <-
       data_source %>%
       dplyr::filter(predictor == sel_predictor) %>%
-      dplyr::distinct(age, predictor)
+      dplyr::distinct(age, predictor, no_data)
 
     p_predictor <-
       tibble::tibble() %>%
       ggplot2::ggplot() +
       ggplot2::geom_bar(
-        data = data_age_dummy,
+        data = data_age_dummy %>%
+          dplyr::filter(no_data == TRUE),
         mapping = ggplot2::aes(
           y = as.factor(age / 1000),
           x = 100
         ),
-        fill = "gray80",
+        fill = "gray90",
+        stat = "identity",
+        width = 0.6,
+        alpha = 1,
+        show.legend = FALSE
+      ) +
+      ggplot2::geom_bar(
+        data = data_age_dummy %>%
+          dplyr::filter(no_data == FALSE),
+        mapping = ggplot2::aes(
+          y = as.factor(age / 1000),
+          x = 100
+        ),
+        fill = "gray70",
         stat = "identity",
         width = 0.6,
         alpha = 1,

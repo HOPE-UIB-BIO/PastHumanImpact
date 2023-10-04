@@ -43,8 +43,13 @@ get_predictor_barplot_for_all_regions <- function(
     tidyr::unnest(data_temporal) %>%
     tidyr::complete(
       age,
-      tidyr::nesting(predictor, region),
-      fill = list(percentage_median = 0)
+      tidyr::nesting(predictor, region)
+    ) %>%
+    dplyr::mutate(
+      no_data = ifelse(is.na(percentage_median), TRUE, FALSE)
+    ) %>%
+    dplyr::mutate(
+      percentage_median = ifelse(no_data, 0, percentage_median)
     ) %>%
     dplyr::group_by(region) %>%
     tidyr::nest(data_to_plot = -c(region)) %>%
@@ -495,7 +500,7 @@ purrr::walk(
     ),
     plot = combined_map_h1_with_space_for_legend,
     width = image_width_vec["2col"],
-    height = 100, #85
+    height = 100, # 85
     units = "mm",
     bg = "white"
   )
