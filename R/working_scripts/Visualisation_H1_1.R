@@ -233,16 +233,31 @@ combine_circle_and_bars <- function(
   if (
     sel_method == "ggpubr"
   ) {
-    combined_fig <-
+    fig_side_climate <-
       ggpubr::ggarrange(
         data_source_plot_climate[[sel_region]],
         data_source_plot_density_climate[[sel_region]],
-        data_source_plot_circe[[sel_region]],
+        nrow = 1,
+        ncol = 2,
+        widths = c(0.8, 1)
+      )
+
+    fig_side_human <-
+      ggpubr::ggarrange(
         data_source_plot_density_human[[sel_region]],
         data_source_plot_human[[sel_region]],
         nrow = 1,
+        ncol = 2,
+        widths = c(1, 0.8)
+      )
+
+    combined_fig <-
+      ggpubr::ggarrange(
+        fig_side_climate,
+        data_source_plot_circe[[sel_region]],
+        fig_side_human,
         ncol = 5,
-        widths = c(0.3, 0.3, 1.5, 0.3, 0.3)
+        widths = c(0.5, 1.5, 0.5)
       )
     return(combined_fig)
   }
@@ -430,7 +445,7 @@ list_density_plots_climate <-
 # 2.5 INSET FIGURES ON MAP -----
 
 sel_method <- "ggpubr"
-sel_figure_width <- 0.3
+sel_figure_width <- 0.5
 sel_figure_height <- 0.35
 
 combined_map_h1 <-
