@@ -83,29 +83,16 @@ get_human_unique_on_map <- function(
     )
 }
 
-get_variability_prop_per_region <- function(
+get_unique_human_dist <- function(
     data_source,
-    sel_region,
-    point_size = 2) {
-  data_sel <-
-    data_source %>%
-    dplyr::filter(region == sel_region) %>%
-    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
-    dplyr::full_join(
-      data_climate_zones, # [config criteria]
-      .,
-      by = "sel_classification"
-    )
-
-  fig_basic <-
-    data_sel %>%
+    point_size = 3) {
+  data_source %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = 1,
-        y = (constrained_eig / total_eig) * 100
+        x = sel_classification,
+        y = unique_percent
       )
     ) +
-    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
     ggplot2::scale_y_continuous(
       limits = c(0, 100)
     ) +
@@ -124,19 +111,24 @@ get_variability_prop_per_region <- function(
         linewidth = line_size # [config criteria]
       ),
       legend.position = "none",
-      panel.spacing.x = grid::unit(0, "mm"),
-      panel.border = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_blank(),
       axis.text.x = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
       axis.title = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      panel.spacing.x = grid::unit(0, "mm"),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
       plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-    )
-
-  fig_basic +
+    ) +
+    ggplot2::labs(
+      x = "Climate zone",
+      y = "Unique variance explained by human impact (%)"
+    ) +
+    ggplot2::geom_jitter(
+      mapping = ggplot2::aes(
+        col = sel_classification
+      ),
+      alpha = 0.3
+    ) +
     ggplot2::geom_violin(
       mapping = ggplot2::aes(
         fill = sel_classification
@@ -150,14 +142,12 @@ get_variability_prop_per_region <- function(
       outlier.shape = NA
     ) +
     ggplot2::geom_point(
-      data = data_sel %>%
+      data = data_source %>%
         dplyr::group_by(sel_classification) %>%
         dplyr::summarise(
-          median = median((constrained_eig / total_eig) * 100)
+          unique_percent = median(unique_percent)
         ),
       mapping = ggplot2::aes(
-        x = 1,
-        y = median,
         fill = sel_classification
       ),
       shape = 22,
@@ -169,7 +159,7 @@ get_variability_prop_per_region <- function(
 get_combined_row <- function(
     sel_region,
     sel_method = c("cowplot", "ggpubr"),
-    sel_widths = c(0.2, 0.2, 0.2, 0.1),
+    sel_widths = c(1.2, 1, 1.5),
     remove = "x") {
   sel_method <- match.arg(sel_method)
 
@@ -190,13 +180,9 @@ get_combined_row <- function(
   ) {
     res <-
       cowplot::plot_grid(
+        get_plot_by_region(data_fig_unique_human_dist, sel_region),
         get_plot_by_region(data_fig_map, sel_region),
         fig_scores,
-        get_plot_by_region(data_fig_density, sel_region) +
-          ggpubr::rremove("xy.title"),
-        get_plot_by_region(data_fig_variance, sel_region) +
-          ggpubr::rremove("y.text") +
-          ggpubr::rremove("y.ticks"),
         nrow = 1,
         rel_widths = sel_widths
       )
@@ -207,20 +193,15 @@ get_combined_row <- function(
   ) {
     res <-
       ggpubr::ggarrange(
+        get_plot_by_region(data_fig_unique_human_dist, sel_region),
         get_plot_by_region(data_fig_map, sel_region),
         fig_scores,
-        get_plot_by_region(data_fig_density, sel_region) +
-          ggpubr::rremove("xy.title"),
-        get_plot_by_region(data_fig_variance, sel_region) +
-          ggpubr::rremove("y.text") +
-          ggpubr::rremove("y.ticks"),
         nrow = 1,
         widths = sel_widths
       )
   }
   return(res)
 }
-
 
 #----------------------------------------------------------#
 # 1. Load data -----
@@ -246,59 +227,28 @@ data_geo_koppen <-
 # 2. Data Wrangling -----
 #----------------------------------------------------------#
 
-data_dist <-
+# data unique human
+data_unique_human <-
   data_spatial_vis %>%
   dplyr::mutate(
-    predictor = factor(
-      predictor,
-      levels = c("human", "climate", "time")
+    sel_classification = as.factor(sel_classification),
+    region = factor(region,
+      levels = vec_regions
     )
   ) %>%
-  dplyr::mutate(
-    sel_classification = factor(sel_classification)
+  dplyr::full_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "sel_classification"
   ) %>%
-  tidyr::pivot_longer(
-    c(unique_percent, average_share_percent, individual_percent),
-    names_to = "var_part",
-    values_to = "percentage"
+  dplyr::filter(
+    predictor == "human"
   ) %>%
-  dplyr::mutate(
-    var_part = factor(var_part,
-      levels = c(
-        "unique_percent",
-        "average_share_percent",
-        "individual_percent"
-      )
-    )
-  )
-
-data_proportion_variance <-
-  output_h1_spatial %>%
-  dplyr::mutate(
-    summary_variation = purrr::map(
-      .x = varhp,
-      .f = ~ .x %>%
-        purrr::pluck("summary_variation")
-    )
+  dplyr::group_by(region) %>%
+  tidyr::nest(
+    data_to_plot = -c(region)
   ) %>%
-  dplyr::select(-c(data_merge, varhp)) %>%
-  tidyr::unnest(summary_variation) %>%
-  dplyr::left_join(
-    data_meta %>%
-      dplyr::mutate(
-        sel_classification = dplyr::case_when(
-          ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
-          ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
-          ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
-          .default = ecozone_koppen_5
-        )
-      ) %>%
-      dplyr::select(dataset_id, region, sel_classification),
-    by = "dataset_id"
-  ) %>%
-  janitor::clean_names()
-
-
+  dplyr::ungroup()
 
 # get constrained spd scores
 data_scores_nested <-
@@ -409,8 +359,25 @@ data_score_change_points <-
   ) %>%
   dplyr::select(region, change_points_age)
 
+
+
 #----------------------------------------------------------#
-# 2. Figure maps -----
+# 3. Unique human -----
+#----------------------------------------------------------#
+
+data_fig_unique_human_dist <-
+  data_unique_human %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ get_unique_human_dist(
+        data_source = .x
+      )
+    )
+  )
+
+#----------------------------------------------------------#
+# 4. Figure maps -----
 #----------------------------------------------------------#
 
 data_fig_map <-
@@ -428,97 +395,9 @@ data_fig_map <-
     )
   )
 
-#----------------------------------------------------------#
-# 3. Figure total variability -----
-#----------------------------------------------------------#
-
-data_fig_variance <-
-  tibble::tibble(
-    region = vec_regions # [config criteria]
-  ) %>%
-  dplyr::mutate(
-    plot = purrr::map(
-      .x = region,
-      .f = ~ get_variability_prop_per_region(
-        data_source = data_proportion_variance,
-        sel_region = .x
-      )
-    )
-  )
-
-data_fig_variance$plot[[1]]
 
 #----------------------------------------------------------#
-# 2. Figure density -----
-#----------------------------------------------------------#
-
-# Density figures for full distribution of variance
-data_fig_density <-
-  data_dist %>%
-  dplyr::group_by(region) %>%
-  tidyr::nest(data_dist = -c(region)) %>%
-  dplyr::mutate(
-    plot = purrr::map(
-      .x = data_dist,
-      .f = ~ ggplot2::ggplot(
-        data = .x,
-        mapping = ggplot2::aes(
-          x = percentage
-        )
-      ) +
-        ggplot2::facet_wrap(
-          ~predictor,
-          ncol = 3,
-          scales = "free_x"
-        ) +
-        ggplot2::coord_flip() +
-        ggplot2::scale_colour_manual(
-          values = palette_predictors_parts # [config criteria]
-        ) +
-        ggplot2::scale_fill_manual(
-          values = palette_predictors_parts # [config criteria]
-        ) +
-        ggplot2::scale_x_continuous(
-          limits = c(0, 100),
-          breaks = c(seq(0, 100, by = 25))
-        ) +
-        ggplot2::scale_y_continuous(
-          limits = c(0, NA)
-        ) +
-        ggplot2::theme_bw() +
-        ggplot2::theme(
-          text = ggplot2::element_text(
-            size = text_size # [config criteria]
-          ),
-          line = ggplot2::element_line(
-            linewidth = line_size # [config criteria]
-          ),
-          legend.position = "none",
-          plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0), "mm"),
-          panel.grid.minor = ggplot2::element_blank(),
-          panel.grid.major.x = ggplot2::element_blank(),
-          strip.background = ggplot2::element_blank(),
-          strip.text = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank()
-        ) +
-        ggplot2::labs(
-          x = "Explained variability (%)",
-          y = "Number of records"
-        ) +
-        ggplot2::geom_density(
-          mapping = ggplot2::aes(
-            y = after_stat(count),
-            col = var_part,
-            fill = var_part
-          ),
-          alpha = 0.4
-        )
-    )
-  )
-
-#----------------------------------------------------------#
-# 4. Figure ecosystem case scores -----
+# 5 Figure ecosystem case scores -----
 #----------------------------------------------------------#
 
 data_fig_scores <-
@@ -560,8 +439,9 @@ data_fig_scores <-
         ) +
         ggplot2::scale_y_continuous(limits = c(0, 5)) +
         ggplot2::scale_x_continuous(
-          limits = c(0, 8.5e3),
-          breaks = seq(0, 8.5e3, by = 2e3)
+          trans = "reverse",
+          limits = c(8.5e3, 0),
+          breaks = seq(8.5e3, 0, by = -2e3)
         ) +
         ggplot2::theme_bw() +
         ggplot2::theme(
@@ -575,7 +455,7 @@ data_fig_scores <-
           panel.grid.minor = ggplot2::element_blank(),
           plot.background = ggplot2::element_blank(),
           plot.margin = grid::unit(c(0.2, 0.2, 0.2, 0), "mm"),
-          axis.title.y = ggplot2::element_blank()
+          axis.title = ggplot2::element_blank()
         ) +
         ggplot2::labs(
           y = "Scores",
@@ -585,7 +465,7 @@ data_fig_scores <-
   )
 
 #----------------------------------------------------------#
-# 5. Combine figures -----
+# 6. Combine figures -----
 #----------------------------------------------------------#
 
 sel_teselation_method <- "cowplot"
@@ -610,7 +490,7 @@ purrr::walk(
     ),
     plot = combined_detail_h1,
     width = image_width_vec["2col"], # [config criteria]
-    height = 120,
+    height = 130,
     units = image_units, # [config criteria]
     bg = "white"
   )
