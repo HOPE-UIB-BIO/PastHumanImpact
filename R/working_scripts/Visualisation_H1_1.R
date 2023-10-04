@@ -43,8 +43,13 @@ get_predictor_barplot_for_all_regions <- function(
     tidyr::unnest(data_temporal) %>%
     tidyr::complete(
       age,
-      tidyr::nesting(predictor, region),
-      fill = list(percentage_median = 0)
+      tidyr::nesting(predictor, region)
+    ) %>%
+    dplyr::mutate(
+      no_data = ifelse(is.na(percentage_median), TRUE, FALSE)
+    ) %>%
+    dplyr::mutate(
+      percentage_median = ifelse(no_data, 0, percentage_median)
     ) %>%
     dplyr::group_by(region) %>%
     tidyr::nest(data_to_plot = -c(region)) %>%
@@ -69,10 +74,107 @@ get_predictor_barplot_for_all_regions <- function(
     return()
 }
 
+plot_dist_density <- function(
+    data_source, sel_predictor,
+    text_size = 6,
+    axis_to_right = TRUE) {
+  data_work <-
+    dplyr::filter(
+      data_source, predictor == sel_predictor
+    )
+
+  fig <-
+    data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = percentage
+      )
+    ) +
+    ggplot2::coord_flip() +
+    ggplot2::scale_colour_manual(
+      values = palette_predictors_parts # [config criteria]
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_predictors_parts # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size
+      ),
+      line = ggplot2::element_line(
+        linewidth = 0.01 # [config criteria]
+      ),
+      legend.position = "none",
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      axis.ticks.length = grid::unit(0, "mm")
+    ) +
+    ggplot2::labs(
+      x = "Explained variability (%)",
+      y = "Number of records"
+    ) +
+    ggplot2::geom_density(
+      mapping = ggplot2::aes(
+        y = after_stat(count),
+        col = var_part,
+        fill = var_part
+      ),
+      alpha = 0.4,
+      linewidth = 0.1
+    )
+
+  if (isTRUE(axis_to_right)) {
+    fig <-
+      fig +
+      ggplot2::scale_x_continuous(
+        name = NULL,
+        limits = c(0, 100),
+        breaks = seq(0, 100, by = 25),
+        expand = c(0, 0),
+        position = "top"
+      ) +
+      ggplot2::scale_y_continuous(
+        limits = c(0, NA)
+      )
+  } else {
+    fig <-
+      fig +
+      ggplot2::scale_x_continuous(
+        name = NULL,
+        limits = c(0, 100),
+        breaks = seq(0, 100, by = 25),
+        expand = c(0, 0),
+        position = "bottom"
+      ) +
+      ggplot2::scale_y_continuous(
+        trans = "reverse",
+        limits = c(NA, 0)
+      )
+  }
+
+  return(fig)
+}
+
 combine_circle_and_bars <- function(
     data_source_plot_circe = list_circle_plots,
     data_source_plot_climate = list_bars_plot_climate,
     data_source_plot_human = list_bars_plot_human,
+    data_source_plot_density_human = list_density_plots_human,
+    data_source_plot_density_climate = list_density_plots_climate,
     sel_region,
     sel_method = c("patchwork", "cowplot", "ggpubr")) {
   sel_method <- match.arg(sel_method)
@@ -131,14 +233,31 @@ combine_circle_and_bars <- function(
   if (
     sel_method == "ggpubr"
   ) {
-    combined_fig <-
+    fig_side_climate <-
       ggpubr::ggarrange(
         data_source_plot_climate[[sel_region]],
-        data_source_plot_circe[[sel_region]],
+        data_source_plot_density_climate[[sel_region]],
+        nrow = 1,
+        ncol = 2,
+        widths = c(0.8, 1)
+      )
+
+    fig_side_human <-
+      ggpubr::ggarrange(
+        data_source_plot_density_human[[sel_region]],
         data_source_plot_human[[sel_region]],
         nrow = 1,
-        ncol = 3,
-        widths = c(0.2, 1, 0.2)
+        ncol = 2,
+        widths = c(1, 0.8)
+      )
+
+    combined_fig <-
+      ggpubr::ggarrange(
+        fig_side_climate,
+        data_source_plot_circe[[sel_region]],
+        fig_side_human,
+        ncol = 5,
+        widths = c(0.5, 1.5, 0.5)
       )
     return(combined_fig)
   }
@@ -175,9 +294,35 @@ input_temporal <-
   ) %>%
   tidyr::nest(data_temporal = -c(region))
 
+data_dist <-
+  data_spatial_vis %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = c("human", "climate", "time")
+    )
+  ) %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  tidyr::pivot_longer(
+    c(unique_percent, average_share_percent, individual_percent),
+    names_to = "var_part",
+    values_to = "percentage"
+  ) %>%
+  dplyr::mutate(
+    var_part = factor(var_part,
+      levels = c(
+        "unique_percent",
+        "average_share_percent",
+        "individual_percent"
+      )
+    )
+  )
+
 data_for_plotting <-
-  input_spatial %>%
   dplyr::inner_join(
+    input_spatial,
     input_temporal,
     by = "region"
   )
@@ -218,15 +363,16 @@ list_bars_plot_climate <-
     data_source = data_for_plotting,
     sel_predictor = "climate",
     sel_palette = palette_predictors,
-    axis_to_right = TRUE
+    axis_to_right = FALSE
   )
+
 # barplot human
 list_bars_plot_human <-
   get_predictor_barplot_for_all_regions(
     data_source = data_for_plotting,
     sel_predictor = "human",
     sel_palette = palette_predictors,
-    axis_to_right = FALSE
+    axis_to_right = TRUE
   )
 
 # 2.3 circular plot -----
@@ -256,11 +402,51 @@ list_circle_plots <-
     nm = unique(data_circle_plots$region)
   )
 
-# 2.4 INSET FIGURES ON MAP -----
+# 2.4 Denisty plots -----
 
-sel_method <- "cowplot"
-sel_figure_width <- 0.35
-sel_figure_height <- 0.4
+# Density figures for full distribution of variance
+data_density_plot <-
+  data_dist %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_dist = -c(region)) %>%
+  dplyr::mutate(
+    plot_human = purrr::map(
+      .x = data_dist,
+      .f = ~ plot_dist_density(
+        data_source = .x,
+        sel_predictor = "human",
+        axis_to_right = FALSE
+      )
+    ),
+    plot_climate = purrr::map(
+      .x = data_dist,
+      .f = ~ plot_dist_density(
+        data_source = .x,
+        sel_predictor = "climate",
+        axis_to_right = TRUE
+      )
+    )
+  )
+
+list_density_plots_human <-
+  data_density_plot %>%
+  purrr::chuck("plot_human") %>%
+  rlang::set_names(
+    nm = unique(data_density_plot$region)
+  )
+
+list_density_plots_climate <-
+  data_density_plot %>%
+  purrr::chuck("plot_climate") %>%
+  rlang::set_names(
+    nm = unique(data_density_plot$region)
+  )
+
+# 2.5 INSET FIGURES ON MAP -----
+
+sel_method <- "ggpubr"
+sel_figure_width <- 0.5
+sel_figure_height <- 0.35
 
 combined_map_h1 <-
   cowplot::ggdraw(worldmap_grey) +
@@ -277,8 +463,8 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Latin America", sel_method = sel_method
     ),
-    x = 0.15,
-    y = 0.13,
+    x = 0.20,
+    y = 0.10,
     width = sel_figure_width,
     height = sel_figure_height
   ) +
@@ -286,7 +472,7 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Europe", sel_method = sel_method
     ),
-    x = 0.32,
+    x = 0.35,
     y = 0.5,
     width = sel_figure_width,
     height = sel_figure_height
@@ -295,8 +481,8 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Asia", sel_method = sel_method
     ),
-    x = 0.58,
-    y = 0.52,
+    x = 0.65,
+    y = 0.5,
     width = sel_figure_width,
     height = sel_figure_height
   ) +
@@ -304,13 +490,21 @@ combined_map_h1 <-
     combine_circle_and_bars(
       sel_region = "Oceania", sel_method = sel_method
     ),
-    x = 0.62,
+    x = 0.55,
     y = 0.10,
     width = sel_figure_width,
     height = sel_figure_height
   )
 
-# 2.5 save -----
+combined_map_h1_with_space_for_legend <-
+  cowplot::plot_grid(
+    combined_map_h1,
+    patchwork::plot_spacer(),
+    nrow = 2,
+    rel_heights = c(3, 1)
+  )
+
+# 2.6 save -----
 purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
@@ -319,9 +513,9 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = combined_map_h1,
-    width = 170,
-    height = 85,
+    plot = combined_map_h1_with_space_for_legend,
+    width = image_width_vec["2col"],
+    height = 100, # 85
     units = "mm",
     bg = "white"
   )

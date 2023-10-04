@@ -11,18 +11,32 @@ get_predictor_barplot <-
     data_age_dummy <-
       data_source %>%
       dplyr::filter(predictor == sel_predictor) %>%
-      dplyr::distinct(age, predictor)
+      dplyr::distinct(age, predictor, no_data)
 
     p_predictor <-
       tibble::tibble() %>%
       ggplot2::ggplot() +
       ggplot2::geom_bar(
-        data = data_age_dummy,
+        data = data_age_dummy %>%
+          dplyr::filter(no_data == TRUE),
         mapping = ggplot2::aes(
           y = as.factor(age / 1000),
           x = 100
         ),
-        fill = "gray80",
+        fill = "gray90",
+        stat = "identity",
+        width = 0.6,
+        alpha = 1,
+        show.legend = FALSE
+      ) +
+      ggplot2::geom_bar(
+        data = data_age_dummy %>%
+          dplyr::filter(no_data == FALSE),
+        mapping = ggplot2::aes(
+          y = as.factor(age / 1000),
+          x = 100
+        ),
+        fill = "gray70",
         stat = "identity",
         width = 0.6,
         alpha = 1,
@@ -64,17 +78,6 @@ get_predictor_barplot <-
         values = sel_palette,
         drop = FALSE
       ) +
-      ggplot2::scale_x_continuous(
-        name = NULL,
-        limits = c(0, 100),
-        breaks = seq(0, 100, by = 25),
-        expand = c(0, 0)
-      ) +
-      ggplot2::scale_y_discrete(
-        limits = rev,
-        drop = FALSE,
-        breaks = as.factor(seq(0, 10, time_step))
-      ) +
       ggplot2::theme(
         panel.background = ggplot2::element_rect(
           fill = "transparent", color = NA
@@ -86,12 +89,29 @@ get_predictor_barplot <-
         text = ggplot2::element_text(size = text_size, color = "grey30"),
         plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
         axis.text.x = ggplot2::element_blank(),
-        axis.ticks = ggplot2::element_blank(),
+        axis.text.y = ggplot2::element_text(hjust = 1),
+        axis.ticks.x = ggplot2::element_blank(),
         axis.title = ggplot2::element_blank(),
         axis.line = ggplot2::element_blank()
       )
 
     if (isTRUE(axis_to_right)) {
+      p_predictor <-
+        p_predictor +
+        ggplot2::scale_x_continuous(
+          name = NULL,
+          limits = c(0, 100),
+          breaks = seq(0, 100, by = 25),
+          expand = c(0, 0)
+        ) +
+
+        ggplot2::scale_y_discrete(
+          limits = rev,
+          position = "right",
+          drop = FALSE,
+          breaks = as.factor(seq(0, 10, time_step))
+        )
+    } else {
       p_predictor <-
         p_predictor +
         ggplot2::scale_x_reverse(
@@ -102,14 +122,10 @@ get_predictor_barplot <-
         ) +
         ggplot2::scale_y_discrete(
           limits = rev,
-          position = "right",
           drop = FALSE,
           breaks = as.factor(seq(0, 10, time_step))
         )
-    } else {
-      p_predictor
     }
-
 
     p_predictor
   }
