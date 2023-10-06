@@ -208,106 +208,6 @@ list_region_maps_climate <-
   )
 
 #----------------------------------------------------------#
-# 4. proportion of explaoned eigenvalues plot -----
-#----------------------------------------------------------#
-
-data_proportion_variance <-
-  output_hvar_h2 %>%
-  dplyr::mutate(
-    summary_variation = purrr::map(
-      .x = varhp,
-      .f = ~ .x %>%
-        purrr::pluck("summary_variation")
-    )
-  ) %>%
-  dplyr::select(-c(data_merge, responce_dist, varhp)) %>%
-  tidyr::unnest(summary_variation) %>%
-  dplyr::rename(
-    sel_classification = group
-  ) %>%
-  janitor::clean_names()
-
-
-data_fig_variance <-
-  tibble::tibble(
-    region = vec_regions # [config criteria]
-  ) %>%
-  dplyr::mutate(
-    plot = purrr::map(
-      .x = region,
-      .f = ~ {
-        data_sel <-
-          data_proportion_variance %>%
-          dplyr::filter(region == .x) %>%
-          dplyr::select(-region) %>%
-          dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
-          dplyr::full_join(
-            data_climate_zones, # [config criteria]
-            .,
-            by = "sel_classification"
-          )
-
-        fig_basic <-
-          data_sel %>%
-          ggplot2::ggplot(
-            mapping = ggplot2::aes(
-              x = 1,
-              y = (constrained_eig / total_eig) * 100
-            )
-          ) +
-          ggplot2::facet_wrap(~sel_classification, nrow = 1) +
-          ggplot2::scale_y_continuous(
-            limits = c(0, 100)
-          ) +
-          ggplot2::scale_fill_manual(
-            values = palette_ecozones # [config criteria]
-          ) +
-          ggplot2::scale_color_manual(
-            values = palette_ecozones # [config criteria]
-          ) +
-          ggplot2::theme_bw() +
-          ggplot2::theme(
-            text = ggplot2::element_text(
-              size = text_size # [config criteria]
-            ),
-            line = ggplot2::element_line(
-              linewidth = line_size # [config criteria]
-            ),
-            legend.position = "none",
-            panel.spacing.x = grid::unit(0, "mm"),
-            panel.border = ggplot2::element_blank(),
-            strip.background = ggplot2::element_blank(),
-            strip.text = ggplot2::element_blank(),
-            axis.text.x = ggplot2::element_blank(),
-            axis.ticks.x = ggplot2::element_blank(),
-            axis.title = ggplot2::element_blank(),
-            panel.grid.minor = ggplot2::element_blank(),
-            panel.grid.major.x = ggplot2::element_blank(),
-            plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-          )
-
-        fig_basic +
-          ggplot2::geom_segment(
-            mapping = ggplot2::aes(
-              xend = 1,
-              yend = 0
-            ),
-            col = "grey30"
-          ) +
-          ggplot2::geom_point(
-            mapping = ggplot2::aes(
-              fill = sel_classification
-            ),
-            shape = 21,
-            col = "gray30",
-            size = 3
-          )
-      }
-    )
-  )
-
-
-#----------------------------------------------------------#
 # 6. circular plot -----
 #----------------------------------------------------------#
 
@@ -347,97 +247,6 @@ list_circulal_plots_on_maps <-
       )
   )
 
-#----------------------------------------------------------#
-# 5. temporal m2 -----
-#----------------------------------------------------------#
-
-data_m2_change_region <-
-  data_m2 %>%
-  dplyr::select(
-    m2_time_df,
-    region,
-    sel_classification
-  ) %>%
-  dplyr::filter(!region == "Africa") %>%
-  dplyr::inner_join(
-    data_meta %>%
-      dplyr::select(region, sel_classification, ecozone_koppen_5) %>%
-      dplyr::distinct(),
-    by = c("region", "sel_classification")
-  ) %>%
-  tidyr::unnest(cols = c(m2_time_df)) %>%
-  dplyr::group_by(region, ecozone_koppen_5) %>%
-  tidyr::nest(data_to_plot = -c(region, ecozone_koppen_5)) %>%
-  dplyr::mutate(
-    name = paste0(region, "_", ecozone_koppen_5)
-  ) %>%
-  dplyr::mutate(
-    plot = purrr::map(
-      .x = data_to_plot,
-      .f = ~ ggplot2::ggplot(
-        data = .x,
-        ggplot2::aes(
-          x = as.numeric(time),
-          y = delta_m2,
-          col = sel_classification,
-          fill = sel_classification
-        )
-      ) +
-        ggplot2::geom_point(size = 0.5) +
-        ggplot2::geom_smooth(linewidth = 0.1, se = FALSE) +
-        ggplot2::scale_x_continuous(
-          limits = c(500, 8500),
-          breaks = c(seq(500, 8500, by = 2000))
-        ) +
-        ggplot2::scale_y_continuous(limits = c(0, 1)) +
-        ggplot2::theme_minimal() +
-        ggplot2::scale_color_manual(
-          values = palette_ecozones,
-          drop = FALSE
-        ) +
-        ggplot2::scale_fill_manual(
-          values = palette_ecozones,
-          drop = FALSE
-        ) +
-        ggplot2::theme(
-          aspect.ratio = 1,
-          legend.position = "none",
-          panel.background = ggplot2::element_blank(),
-          strip.background = ggplot2::element_blank(),
-          panel.grid.minor = ggplot2::element_blank(),
-          plot.background = ggplot2::element_rect(
-            fill = "transparent",
-            color = NA
-          ),
-          panel.grid.major = ggplot2::element_line(
-            color = "grey90",
-            linewidth = 0.1
-          ),
-          axis.title.y = ggplot2::element_text(size = 6),
-          axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-          axis.text.y = ggplot2::element_text(size = 6),
-          plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-        ) +
-        ggplot2::labs(
-          x = "",
-          y = "change in m2"
-        )
-    )
-  ) %>%
-  dplyr::ungroup()
-
-data_m2_change_region_wider <-
-  data_m2_change_region %>%
-  dplyr::select(region, ecozone_koppen_5, plot) %>%
-  tidyr::pivot_wider(
-    names_from = ecozone_koppen_5,
-    values_from = plot
-  )
-
-#----------------------------------------------------------#
-# 7. Combine plots -----
-#----------------------------------------------------------#
-
 fig_grid_maps <-
   cowplot::plot_grid(
     plotlist = list_circulal_plots_on_maps,
@@ -445,14 +254,135 @@ fig_grid_maps <-
     ncol = 1
   )
 
-fig_grid_model <-
-  cowplot::plot_grid(
-    plotlist = data_fig_variance$plot,
-    nrow = 5,
-    ncol = 1,
-    align = "v",
-    axis = "t"
+
+#----------------------------------------------------------#
+# 5. temporal m2 -----
+#----------------------------------------------------------#
+
+fig_m2_change_region <-
+  data_m2 %>%
+  dplyr::select(
+    m2_time_df,
+    region,
+    sel_classification
+  ) %>%
+  dplyr::filter(!region == "Africa") %>%
+  tidyr::unnest(cols = c(m2_time_df)) %>%
+  tidyr::complete(
+    time,
+    tidyr::nesting(sel_classification, region)
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(region, sel_classification, ecozone_koppen_5) %>%
+      dplyr::distinct(),
+    by = c("region", "sel_classification")
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    ),
+    ecozone_koppen_5 = factor(
+      ecozone_koppen_5,
+      levels = vec_climate_5 # [config criteria]
+    )
+  ) %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = as.numeric(time),
+      y = delta_m2,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_grid(
+    region ~ ecozone_koppen_5
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse",
+    limits = c(8.5e3, 500),
+    breaks = c(seq(8.5e3, 500, by = -2e3)),
+    labels = c(seq(8.5, 0.5, by = -2))
+  ) +
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::theme(
+    aspect.ratio = 1,
+    legend.position = "none",
+    panel.background = ggplot2::element_blank(),
+    strip.background = ggplot2::element_blank(),
+    strip.text.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(
+      fill = "transparent",
+      color = NA
+    ),
+    panel.grid.major = ggplot2::element_line(
+      color = "grey90",
+      linewidth = 0.1
+    ),
+    axis.title.x = ggplot2::element_text(size = 6),
+    axis.title.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = 6, angle = 60),
+    axis.text.y = ggplot2::element_text(size = 6),
+    plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+  ) +
+  ggplot2::labs(
+    x = "Age (ka cal yr BP)",
+    y = "change in m2"
+  ) +
+  ggplot2::geom_point(size = 0.5) +
+  ggplot2::geom_smooth(
+    method = "loess",
+    formula = y ~ x,
+    linewidth = 0.1,
+    lty = 2,
+    se = FALSE
+  ) +
+  ggplot2::geom_smooth(
+    method = "gam",
+    se = FALSE,
+    formula = y ~ s(x, bs = "tp", k = 10),
+    method.args = list(
+      family =
+        mgcv::betar(link = "logit")
+    ),
+    linewidth = 0.2
   )
+
+
+
+#----------------------------------------------------------#
+# 7. Combine plots -----
+#----------------------------------------------------------#
+
+fig_m2_change_region +
+  patchwork::inset_element(
+    list_region_maps_climate %>%
+      purrr::chuck("Oceania", "Tropical"),
+    left = 0.72, right = 0.80,
+    bottom = 0.1, top = 0.18
+  ) +
+  patchwork::inset_element(
+    list_region_maps_climate %>%
+      purrr::chuck("Latin America", "Tropical"),
+    left = 0.72, right = 0.80,
+    bottom = 0.7, top = 0.78
+  ) +
+    patchwork::inset_element(
+      list_region_maps_climate %>%
+        purrr::chuck("Latin America", "Arid"),
+      left = 0.47, right = 0.55,
+      bottom = 0.7, top = 0.78
+    )
 
 # //TODO find a way to do this programatically
 fig_grid_curve <-
