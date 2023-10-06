@@ -58,9 +58,9 @@ get_human_unique_on_map <- function(
       mapping = ggplot2::aes(
         x = long,
         y = lat,
+          col = sel_classification
       ),
       size = 0.1,
-      col = "gray30",
       shape = 20,
     ) +
     ggplot2::geom_point(
@@ -71,15 +71,16 @@ get_human_unique_on_map <- function(
         size = unique_percent,
         col = sel_classification
       ),
-      shape = 21,
-      fill = NA,
+      shape = 16,
+      alpha = 0.3,
       show.legend = TRUE
     ) +
     ggplot2::scale_colour_manual(
       values = palette_ecozones # [config criteria]
     ) +
     ggplot2::scale_size_continuous(
-      limits = c(0, 100)
+      limits = c(0, 100),
+      range = c(0.2, 5)
     )
 }
 
