@@ -58,7 +58,7 @@ get_human_unique_on_map <- function(
       mapping = ggplot2::aes(
         x = long,
         y = lat,
-          col = sel_classification
+        col = sel_classification
       ),
       size = 0.1,
       shape = 20,
@@ -86,14 +86,25 @@ get_human_unique_on_map <- function(
 
 get_unique_human_dist <- function(
     data_source,
+    sel_region,
     point_size = 3) {
-  data_source %>%
+  data_work <-
+    data_source %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    )
+
+  data_work %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = sel_classification,
+        x = 1,
         y = unique_percent
       )
     ) +
+    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
     ggplot2::scale_y_continuous(
       limits = c(0, 100)
     ) +
@@ -112,10 +123,13 @@ get_unique_human_dist <- function(
         linewidth = line_size # [config criteria]
       ),
       legend.position = "none",
-      axis.text.x = ggplot2::element_blank(),
-      axis.title = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
       panel.spacing.x = grid::unit(0, "mm"),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
       plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
@@ -134,6 +148,7 @@ get_unique_human_dist <- function(
       mapping = ggplot2::aes(
         fill = sel_classification
       ),
+      alpha = 0.3,
       col = NA
     ) +
     ggplot2::geom_boxplot(
@@ -143,7 +158,7 @@ get_unique_human_dist <- function(
       outlier.shape = NA
     ) +
     ggplot2::geom_point(
-      data = data_source %>%
+      data = data_work %>%
         dplyr::group_by(sel_classification) %>%
         dplyr::summarise(
           unique_percent = median(unique_percent)
