@@ -496,6 +496,15 @@ combined_detail_h1 <-
     ncol = 1
   )
 
+combined_detail_h1_with_space_for_headings <-
+  cowplot::plot_grid(
+    patchwork::plot_spacer(),
+    combined_detail_h1,
+    ncol = 1,
+    nrow = 2,
+    rel_heights = c(1, 7)
+  )
+
 purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
@@ -504,7 +513,7 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = combined_detail_h1,
+    plot = combined_detail_h1_with_space_for_headings,
     width = image_width_vec["2col"], # [config criteria]
     height = 130,
     units = image_units, # [config criteria]
