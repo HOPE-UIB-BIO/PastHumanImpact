@@ -60,57 +60,39 @@ list_maps <- function(select_region) {
     return()
 }
 
-get_curve_with_insert <- function(data_source = data_m2_change_region_wider,
-                                  sel_region,
-                                  sel_climate,
-                                  remove = "NULL") {
-  sel_curve <-
-    data_source %>%
-    dplyr::filter(region == sel_region) %>%
-    purrr::chuck(sel_climate, 1)
-
-  switch(remove,
-    "x" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.x = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank()
-        )
-    },
-    "y" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    },
-    "both" = {
-      sel_curve <-
-        sel_curve +
-        ggplot2::theme(
-          axis.title.x = ggplot2::element_blank(),
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.x = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    }
-  )
-
-  res <-
-    sel_curve +
-    patchwork::inset_element(
-      list_region_maps_climate %>%
-        purrr::chuck(sel_region, sel_climate),
-      left = 0.365, bottom = 0.7, right = 1, top = 1
+add_map_to_facet <- function(
+    data_source, sel_region, sel_climate) {
+  ## This function allows us to specify which facet to annotate
+  annotation_custom2 <- function(grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, data) {
+    ggplot2::layer(
+      data = data,
+      stat = ggplot2::StatIdentity,
+      position = ggplot2::PositionIdentity,
+      geom = ggplot2:::GeomCustomAnn,
+      inherit.aes = TRUE,
+      params = list(
+        grob = grob,
+        xmin = xmin, xmax = xmax,
+        ymin = ymin, ymax = ymax
+      )
     )
+  }
 
-  return(res)
+  annotation_custom2(
+    grob = ggplot2::ggplotGrob(
+      data_source %>%
+        purrr::chuck(sel_region, sel_climate)
+    ),
+    data = data.frame(
+      region = sel_region,
+      ecozone_koppen_5 = sel_climate,
+      sel_classification = sel_climate,
+      time = 0,
+      delta_m2 = 0
+    ),
+    xmin = -4500, xmax = -500,
+    ymin = 0.4, ymax = 1
+  )
 }
 
 #----------------------------------------------------------#
@@ -358,145 +340,55 @@ fig_m2_change_region <-
     linewidth = 0.2
   )
 
+data_region_climate_dummy <-
+  tidyr::expand_grid(
+    region = vec_regions, # [config criteria]
+    ecozone_koppen_5 = vec_climate_5 # [config criteria]
+  ) %>%
+  dplyr::filter(!region == "Africa") %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    ),
+    ecozone_koppen_5 = factor(
+      ecozone_koppen_5,
+      levels = vec_climate_5 # [config criteria]
+    )
+  )
 
+fig_grid_curve <-
+  fig_m2_change_region +
+  purrr::map2(
+    .progress = TRUE,
+    .x = data_region_climate_dummy$region,
+    .y = data_region_climate_dummy$ecozone_koppen_5,
+    .f = ~ add_map_to_facet(
+      list_region_maps_climate,
+      sel_region = .x,
+      sel_climate = .y
+    )
+  )
 
 #----------------------------------------------------------#
 # 7. Combine plots -----
 #----------------------------------------------------------#
 
-fig_m2_change_region +
-  patchwork::inset_element(
-    list_region_maps_climate %>%
-      purrr::chuck("Oceania", "Tropical"),
-    left = 0.72, right = 0.80,
-    bottom = 0.1, top = 0.18
-  ) +
-  patchwork::inset_element(
-    list_region_maps_climate %>%
-      purrr::chuck("Latin America", "Tropical"),
-    left = 0.72, right = 0.80,
-    bottom = 0.7, top = 0.78
-  ) +
-    patchwork::inset_element(
-      list_region_maps_climate %>%
-        purrr::chuck("Latin America", "Arid"),
-      left = 0.47, right = 0.55,
-      bottom = 0.7, top = 0.78
-    )
-
-# //TODO find a way to do this programatically
-fig_grid_curve <-
-  cowplot::plot_grid(
-    get_curve_with_insert(
-      sel_region = "North America", sel_climate = "Polar",
-      remove = "x"
-    ),
-    get_curve_with_insert(
-      sel_region = "North America", sel_climate = "Cold",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "North America", sel_climate = "Temperate",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "North America", sel_climate = "Arid",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "North America", sel_climate = "Tropical",
-      remove = "NULL"
-    ),
-    get_curve_with_insert(
-      sel_region = "Latin America", sel_climate = "Polar",
-      remove = "x"
-    ),
-    get_curve_with_insert(
-      sel_region = "Latin America", sel_climate = "Cold",
-      remove = "NULL"
-    ),
-    get_curve_with_insert(
-      sel_region = "Latin America", sel_climate = "Temperate",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Latin America", sel_climate = "Arid",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Latin America", sel_climate = "Tropical",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Europe", sel_climate = "Polar",
-      remove = "x"
-    ),
-    get_curve_with_insert(
-      sel_region = "Europe", sel_climate = "Cold",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Europe", sel_climate = "Temperate",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Europe", sel_climate = "Arid",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Europe", sel_climate = "Tropical",
-      remove = "NULL"
-    ),
-    get_curve_with_insert(
-      sel_region = "Asia", sel_climate = "Polar"
-    ),
-    get_curve_with_insert(
-      sel_region = "Asia", sel_climate = "Cold",
-      remove = "y"
-    ),
-    get_curve_with_insert(
-      sel_region = "Asia", sel_climate = "Temperate",
-      remove = "both"
-    ),
-    get_curve_with_insert(
-      sel_region = "Asia", sel_climate = "Arid",
-      remove = "y"
-    ),
-    get_curve_with_insert(
-      sel_region = "Asia", sel_climate = "Tropical",
-      remove = "NULL"
-    ),
-    get_curve_with_insert(
-      sel_region = "Oceania", sel_climate = "Polar"
-    ),
-    get_curve_with_insert(
-      sel_region = "Oceania", sel_climate = "Cold",
-      remove = ""
-    ),
-    get_curve_with_insert(
-      sel_region = "Oceania", sel_climate = "Temperate"
-    ),
-    get_curve_with_insert(
-      sel_region = "Oceania", sel_climate = "Arid",
-      remove = ""
-    ),
-    get_curve_with_insert(
-      sel_region = "Oceania", sel_climate = "Tropical",
-      remove = "y"
-    ),
-    nrow = 5,
-    ncol = 5,
-    align = "hv"
-  )
-
 combine_h2 <-
   ggpubr::ggarrange(
-    fig_grid_maps,
-    fig_grid_model,
     fig_grid_curve,
+    fig_grid_maps,
     nrow = 1,
-    ncol = 3,
-    widths = c(1, 0.8, 5)
+    ncol = 2,
+    widths = c(5, 1)
+  )
+
+combine_h2_with_headings <-
+  cowplot::plot_grid(
+    patchwork::plot_spacer(),
+    combine_h2,
+    ncol = 1,
+    nrow = 2,
+    rel_heights = c(1, 10)
   )
 
 purrr::walk(
@@ -507,9 +399,9 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = combine_h2,
-    width = image_width_vec["3col"], # [config criteria]
-    height = 200,
+    plot = combine_h2_with_headings,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 165,
     units = image_units, # [config criteria]
     bg = "white"
   )
