@@ -200,15 +200,15 @@ data_climate_zones <-
       ),
       levels = c(
         "Polar",
-        "Cold_Dry_Winter",
-        "Cold_Dry_Summer",
         "Cold_Without_dry_season_Very_Cold_Summer",
         "Cold_Without_dry_season_Cold_Summer",
         "Cold_Without_dry_season_Warm_Summer",
         "Cold_Without_dry_season_Hot_Summer",
+        "Cold_Dry_Winter",
+        "Cold_Dry_Summer",
+        "Temperate_Without_dry_season",
         "Temperate_Dry_Winter",
         "Temperate_Dry_Summer",
-        "Temperate_Without_dry_season",
         "Tropical",
         "Arid"
       )
@@ -247,32 +247,33 @@ image_units <- "mm"
 # Ecozones
 palette_ecozones <-
   c(
-    Polar = "#009292",
-    Cold_Without_dry_season_Very_Cold_Summer = "#004949",
-    Cold_Without_dry_season_Cold_Summer = "#006ddb",
-    Cold_Dry_Winter = "#6db6ff",
-    Cold_Dry_Summer = "#b6dbff",
-    Cold_Without_dry_season_Warm_Summer = "#117733",
-    Cold_Without_dry_season_Hot_Summer = "#999933",
-    Temperate_Without_dry_season = "#DDCC77",
-    Temperate_Dry_Winter = "#b66dff",
-    Temperate_Dry_Summer = "#ffff6d",
-    Arid = "#924900",
-    Tropical = "#920000"
+    Polar = "#946dff",
+    Cold_Without_dry_season_Very_Cold_Summer = "#C9D9FF",
+    Cold_Without_dry_season_Cold_Summer = "#4CABFF",
+    Cold_Without_dry_season_Warm_Summer = "#3E517A",
+    Cold_Without_dry_season_Hot_Summer = "#012144",
+    Cold_Dry_Winter = "#006138",
+    Cold_Dry_Summer = "#863B28",
+    Temperate_Without_dry_season = "#867718",
+    Temperate_Dry_Winter = "#96E6B3",
+    Temperate_Dry_Summer = "#BEEE62",
+    Arid = "#EFE31E",
+    Tropical = "#D81E5B"
   )
 
 # Predictors
 palette_predictors <- c(
-  human = "#663333",
-  climate = "#4a2577"
+  human = "#ffa600",
+  climate = "#d74e92"
 )
+
 
 # predictor parts
 palette_predictors_parts <-
   c(
-    "maroon4",
-    "grey70",
-    "grey30"
+    "#9C8A6C",
+    "#BEB689",
+    "#DEDEB6"
   ) %>%
   rlang::set_names(
     nm = c(
