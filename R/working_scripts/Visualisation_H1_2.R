@@ -441,7 +441,7 @@ data_fig_scores <-
           ggplot2::aes(
             col = sel_classification
           ),
-          alpha = 0.4,
+          alpha = 0.7,
           linewidth = 0.2
         ) +
         ggplot2::geom_vline(
