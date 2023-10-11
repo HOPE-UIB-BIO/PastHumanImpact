@@ -26,7 +26,6 @@ source(
 )
 
 # Import tables for plotting
-
 source(
   here::here(
     "R/working_scripts/Results_script.R"
@@ -169,98 +168,97 @@ plot_dist_density <- function(
   return(fig)
 }
 
-combine_circle_and_bars <- function(
-    data_source_plot_circe = list_circle_plots,
-    data_source_plot_climate = list_bars_plot_climate,
-    data_source_plot_human = list_bars_plot_human,
-    data_source_plot_density_human = list_density_plots_human,
-    data_source_plot_density_climate = list_density_plots_climate,
+add_circe_to_map <- function(
     sel_region,
-    sel_method = c("patchwork", "cowplot", "ggpubr")) {
-  sel_method <- match.arg(sel_method)
-
-  if (
-    sel_method == "patchwork"
-  ) {
-    # # layout
-    layout <- c(
-      patchwork::area(t = 2, l = 1, b = 2, r = 1),
-      patchwork::area(t = 1, l = 2, b = 3, r = 4),
-      patchwork::area(t = 2, l = 5, b = 2, r = 5)
+    sel_circle_height = 80,
+    sel_circle_width = 100,
+    sel_bar_width = 30,
+    sel_bar_height = 60,
+    bar_offset = 10) {
+  data_region_circle_position <-
+    tibble::tribble(
+      ~region, ~center_x, ~center_y,
+      "North America", -125, 45,
+      "Europe", 0, 45,
+      "Asia", 125, 45,
+      "Latin America", -60, -25,
+      "Oceania", 120, -25
     )
 
-    # combine test 1 patchwork and layout
-    combined_fig <-
-      data_source_plot_climate[[sel_region]] +
-      data_source_plot_circe[[sel_region]] +
-      data_source_plot_human[[sel_region]] +
-      patchwork::plot_layout(design = layout) +
-      ggpubr::theme_transparent() +
-      ggplot2::theme(
-        aspect.ratio = 2,
-        plot.margin = grid::unit(c(0, 0, 0, 0), "mm")
+  circle_width_diam <- sel_circle_width / 2
+  circle_height_diam <- sel_circle_height / 2
+  bar_height_diam <- sel_bar_height / 2
+
+  circle_left <-
+    data_region_circle_position %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::pull(center_x) -
+    circle_width_diam
+
+  circe_right <- circle_left + sel_circle_width
+
+  circle_top <-
+    data_region_circle_position %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::pull(center_y) +
+    circle_height_diam
+
+  circle_bottom <- circle_top - sel_circle_height
+
+  bar_clim_left <- circle_left - bar_offset
+  bar_clim_right <- bar_clim_left + sel_bar_width
+
+  bar_hum_right <- circe_right + bar_offset
+  bar_hum_left <- bar_hum_right - sel_bar_width
+
+  bar_top <-
+    data_region_circle_position %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::pull(center_y) +
+    bar_height_diam
+
+  bar_bottom <- bar_top - sel_bar_height
+
+  res <-
+    list(
+      ggplot2::annotation_custom(
+        grob = ggplot2::ggplotGrob(
+          cowplot::plot_grid(
+            list_bars_plot_climate[[sel_region]],
+            list_density_plots_climate[[sel_region]],
+            rel_widths = c(0.8, 1)
+          )
+        ),
+        xmin = bar_clim_left,
+        xmax = bar_clim_right,
+        ymin = bar_bottom,
+        ymax = bar_top
+      ),
+      ggplot2::annotation_custom(
+        grob = ggplot2::ggplotGrob(
+          cowplot::plot_grid(
+            list_density_plots_human[[sel_region]],
+            list_bars_plot_human[[sel_region]],
+            rel_widths = c(1, 0.8)
+          )
+        ),
+        xmin = bar_hum_left,
+        xmax = bar_hum_right,
+        ymin = bar_bottom,
+        ymax = bar_top
+      ),
+      ggplot2::annotation_custom(
+        grob = ggplot2::ggplotGrob(
+          list_circle_plots[[sel_region]]
+        ),
+        xmin = circle_left,
+        xmax = circe_right,
+        ymin = circle_bottom,
+        ymax = circle_top
       )
+    )
 
-    return(combined_fig)
-  }
-
-  if (
-    sel_method == "cowplot"
-  ) {
-    combined_fig <-
-      cowplot::ggdraw(data_source_plot_circe[[sel_region]]) +
-      cowplot::draw_plot(
-        data_source_plot_climate[[sel_region]] +
-          ggplot2::theme(aspect.ratio = 5),
-        x = 0.01,
-        y = 0.15,
-        width = .2,
-        height = .6
-      ) +
-      cowplot::draw_plot(
-        data_source_plot_human[[sel_region]] +
-          ggplot2::theme(aspect.ratio = 5),
-        x = 0.8,
-        y = 0.15,
-        width = .2,
-        height = .6
-      ) +
-      ggplot2::theme(aspect.ratio = 0.85)
-
-    return(combined_fig)
-  }
-
-  if (
-    sel_method == "ggpubr"
-  ) {
-    fig_side_climate <-
-      ggpubr::ggarrange(
-        data_source_plot_climate[[sel_region]],
-        data_source_plot_density_climate[[sel_region]],
-        nrow = 1,
-        ncol = 2,
-        widths = c(0.8, 1)
-      )
-
-    fig_side_human <-
-      ggpubr::ggarrange(
-        data_source_plot_density_human[[sel_region]],
-        data_source_plot_human[[sel_region]],
-        nrow = 1,
-        ncol = 2,
-        widths = c(1, 0.8)
-      )
-
-    combined_fig <-
-      ggpubr::ggarrange(
-        fig_side_climate,
-        data_source_plot_circe[[sel_region]],
-        fig_side_human,
-        ncol = 5,
-        widths = c(0.5, 1.5, 0.5)
-      )
-    return(combined_fig)
-  }
+  return(res)
 }
 
 
@@ -339,10 +337,10 @@ world <- map_data("world")
 # grey basemap
 worldmap_grey <-
   world %>%
-  filter(lat > -60 & lat < 85) %>%
-  ggplot() +
-  geom_polygon(
-    aes(
+  dplyr::filter(lat > -60 & lat < 85) %>%
+  ggplot2::ggplot() +
+  ggplot2::geom_polygon(
+    ggplot2::aes(
       x = long,
       y = lat,
       group = group
@@ -350,9 +348,8 @@ worldmap_grey <-
     fill = "grey90",
     alpha = 0.4
   ) +
-  coord_equal(ratio = 1.3) +
+  ggplot2::coord_equal(ratio = 1.3) +
   ggplot2::theme_void()
-
 
 # 2.2 barplots -----
 # need to fix issue with dropping unused levels all should be from 500 - 8500
@@ -444,57 +441,13 @@ list_density_plots_climate <-
 
 # 2.5 INSET FIGURES ON MAP -----
 
-sel_method <- "ggpubr"
-sel_figure_width <- 0.5
-sel_figure_height <- 0.35
-
 combined_map_h1 <-
-  cowplot::ggdraw(worldmap_grey) +
-  cowplot::draw_plot(
-    combine_circle_and_bars(
-      sel_region = "North America", sel_method = sel_method
-    ),
-    x = 0.05,
-    y = 0.5,
-    width = sel_figure_width,
-    height = sel_figure_height
-  ) +
-  cowplot::draw_plot(
-    combine_circle_and_bars(
-      sel_region = "Latin America", sel_method = sel_method
-    ),
-    x = 0.20,
-    y = 0.10,
-    width = sel_figure_width,
-    height = sel_figure_height
-  ) +
-  cowplot::draw_plot(
-    combine_circle_and_bars(
-      sel_region = "Europe", sel_method = sel_method
-    ),
-    x = 0.35,
-    y = 0.5,
-    width = sel_figure_width,
-    height = sel_figure_height
-  ) +
-  cowplot::draw_plot(
-    combine_circle_and_bars(
-      sel_region = "Asia", sel_method = sel_method
-    ),
-    x = 0.65,
-    y = 0.5,
-    width = sel_figure_width,
-    height = sel_figure_height
-  ) +
-  cowplot::draw_plot(
-    combine_circle_and_bars(
-      sel_region = "Oceania", sel_method = sel_method
-    ),
-    x = 0.55,
-    y = 0.10,
-    width = sel_figure_width,
-    height = sel_figure_height
-  )
+  worldmap_grey +
+  add_circe_to_map("North America") +
+  add_circe_to_map("Europe") +
+  add_circe_to_map("Asia") +
+  add_circe_to_map("Latin America") +
+  add_circe_to_map("Oceania")
 
 combined_map_h1_with_space_for_legend <-
   cowplot::plot_grid(
@@ -520,134 +473,3 @@ purrr::walk(
     bg = "white"
   )
 )
-
-#----------------------------------------------------------#
-# ## function
-# get_combine_figure <- function(input_temporal,
-#                                input_spatial) {
-#
-#
-#    list_bars_plot_climate <-
-#     get_predictor_barplot(
-#       data = input_temporal,
-#       sel_predictor = "climate",
-#       x_var = "percentage_median",
-#       axis_to_right = TRUE)
-#
-#
-#    list_bars_plot_human <-
-#      get_predictor_barplot(
-#        data = input_temporal,
-#        sel_predictor = "human",
-#        x_var = "percentage_median",
-#        axis_to_right = FALSE)
-#
-#    list_circle_plots <-
-#      get_circular_barplot(
-#        data = input_spatial,
-#        y_var = "percentage_median",
-#        x_var = "predictor",
-#        fill_var = "sel_classification",
-#        col_vec = palette_ecozones,
-#        x_name = x_label)
-#
-#    combine <-
-#      cowplot::ggdraw(list_circle_plots) +
-#
-#      cowplot::draw_plot(list_bars_plot_climate,
-#                         x = 0.01,
-#                         y = 0.15,
-#                         width = .2,
-#                         height = .6) +
-#      cowplot::draw_plot(bars_human,
-#                         x = 0.8,
-#                         y = 0.15,
-#                         width = .2,
-#                         height = .6) +
-#      theme(aspect.ratio = 0.7,
-#            plot.margin = unit(c(0,0,0,0), "mm")
-#      )
-#
-#    return(combine)
-#
-#
-# }
-#
-# plotting <-
-#   data_for_plotting %>%
-#   mutate(figs = purrr::map2(
-#     .x = data_spatial,
-#     .y = data_temporal,
-#     .f = ~get_combine_figure(
-#       input_temporal = .y,
-#       input_spatial = .x
-#     )
-#   )
-#   )
-#
-#
-#
-#
-# ### GET FIGURES TO MAP
-#
-# #regional limits
-# region_plot <-
-#   tibble(
-#   region = c("North America", "Latin America", "Europe", "Asia",  "Oceania"),
-#   x = c(-110, -70, 10, 100, 125),
-#   y = c(50, -20, 50, 65, -25),
-#   width = rep(100, 5)
-# )
-#
-# # add combine figs
-# plotting <-
-#   data_for_plotting %>%
-#   mutate(figs = purrr::map2(
-#     .x = data_spatial,
-#     .y = data_temporal,
-#     .f = ~get_combine_figure(
-#       input_temporal = .y,
-#       input_spatial = .x
-#     )
-#   )
-#   )
-#
-# region_plot <-
-#   region_plot %>%
-#   inner_join(plotting) %>%
-#   dplyr::select(-c(data_spatial, data_temporal))
-#
-# #get basemap
-# world <- map_data("world")
-#
-# # grey basemap
-# worldmap_grey <-
-#   world %>%
-#   filter(lat > -60 & lat < 85) %>%
-#   ggplot() +
-#   geom_polygon(
-#     aes(x = long,
-#         y = lat,
-#         group = group),
-#     fill = "grey90",
-#     alpha = 0.4
-#   ) +
-#   coord_equal(ratio = 1.3) +
-#   theme_void()
-#
-#
-# fig_on_map <-
-#  worldmap_grey +
-#   ggimage::geom_subview(
-#     mapping = ggplot2::aes(
-#     x = x,
-#     y = y,
-#     width = width,
-#     height = width,
-#     subview = figs),
-#     data = region_plot
-#   )
-#
-# fig_on_map
-#
-#
