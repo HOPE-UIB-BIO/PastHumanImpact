@@ -16,7 +16,7 @@ get_map_region <- function(rasterdata,
     ggplot2::ggplot() +
     ggplot2::borders(
       fill = base_col,
-      colour = "transparent",
+      colour = base_col,
     ) +
     ggplot2::geom_raster(
       mapping = ggplot2::aes(
