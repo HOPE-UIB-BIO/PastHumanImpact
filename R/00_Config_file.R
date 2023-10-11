@@ -167,9 +167,9 @@ data_regional_limits <-
   tibble::tibble(
     region = vec_regions,
     xmin = c(-170, -103, -10, 30, 110),
-    xmax = c(-50, -23, 50, 180, 154),
-    ymin = c(10, -56, 30, 0, -50),
-    ymax = c(89, 34, 80, 80, -3)
+    xmax = c(-50, -23, 40,  175.5, 154),
+    ymin = c(15, -56, 35, 0, -45),
+    ymax = c(80, 34, 70, 80, -3)
   )
 
 vec_climate_5 <-
