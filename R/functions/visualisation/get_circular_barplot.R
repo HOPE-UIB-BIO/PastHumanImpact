@@ -5,12 +5,17 @@ get_circular_barplot <- function(data_source,
                                  col_vec = palette_ecozones,
                                  x_name = x_label,
                                  y_step = 10,
+                                 y_max = 50,
                                  line_col = "grey60",
                                  line_width = 0.1,
                                  background_col = "transparent",
-                                 text_size = 6) {
+                                 text_size = 6,
+                                 icon_size = 0.2) {
   circular_p <-
     data_source %>%
+    dplyr::mutate(
+      !!y_var := ifelse(get(y_var) > y_max, y_max, get(y_var)),
+    ) %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = get(x_var),
@@ -19,8 +24,8 @@ get_circular_barplot <- function(data_source,
     ) +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
-      limits = c(-5, NA),
-      breaks = seq(0, 50, by = y_step)
+      limits = c(-5, y_max + 0.1),
+      breaks = seq(0, y_max, by = y_step)
     ) +
     ggplot2::scale_x_discrete(
       label = x_name,
@@ -122,7 +127,7 @@ get_circular_barplot <- function(data_source,
         y = y,
         image = image
       ),
-      size = 0.2,
+      size = icon_size,
       alpha = 1
     ) +
     ggplot2::coord_polar()
