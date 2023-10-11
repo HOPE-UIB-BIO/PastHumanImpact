@@ -46,7 +46,8 @@ get_human_unique_on_map <- function(
 
   sel_map <-
     get_map_region(
-      rasterdata = data_source_geo,
+      rasterdata = data_source_geo %>%
+        dplyr::filter(region == sel_region),
       select_region = sel_region,
       sel_palette = palette_ecozones, # [config criteria]
       sel_alpha = sel_alpha
@@ -237,6 +238,24 @@ data_geo_koppen <-
       ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
       .default = ecozone_koppen_5
     )
+  ) %>%
+  dplyr::distinct(x, y, .keep_all = TRUE) %>%
+  dplyr::filter(
+    x < 175.5 & x > -175 & y < 90 & y > -90
+  ) %>%
+  dplyr::mutate(
+    long = x,
+    lat = y
+  ) %>%
+  RUtilpol::geo_assign_value(
+    data_source = .,
+    dir = paste0(
+      data_storage_path, "Data/Regions_shapefile/"
+    ),
+    sel_method = "shapefile",
+    file_name = "Regions",
+    var = "region",
+    var_name = "region"
   )
 
 #----------------------------------------------------------#
@@ -410,7 +429,6 @@ data_fig_map <-
       )
     )
   )
-
 
 #----------------------------------------------------------#
 # 5 Figure ecosystem case scores -----
