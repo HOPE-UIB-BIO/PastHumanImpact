@@ -172,15 +172,15 @@ add_circe_to_map <- function(
     sel_region,
     sel_circle_height = 80,
     sel_circle_width = 100,
-    sel_bar_width = 30,
-    sel_bar_height = 60,
-    bar_offset = 10) {
+    sel_bar_width = 55,
+    sel_bar_height = 55,
+    bar_offset = 30) {
   data_region_circle_position <-
     tibble::tribble(
       ~region, ~center_x, ~center_y,
-      "North America", -125, 45,
+      "North America", -150, 45,
       "Europe", 0, 45,
-      "Asia", 125, 45,
+      "Asia", 150, 45,
       "Latin America", -60, -25,
       "Oceania", 120, -25
     )
@@ -345,7 +345,7 @@ worldmap_grey <-
       y = lat,
       group = group
     ),
-    fill = "grey90",
+    fill = "grey80",
     alpha = 0.4
   ) +
   ggplot2::coord_equal(ratio = 1.3) +
@@ -387,7 +387,8 @@ data_circle_plots <-
         y_var = "percentage_median",
         x_var = "predictor",
         col_vec = palette_ecozones, # [config criteria]
-        x_name = predictors_label # [config criteria]
+        x_name = predictors_label, # [config criteria]
+        icon_size = 0.15
       )
     )
   )
@@ -473,3 +474,4 @@ purrr::walk(
     bg = "white"
   )
 )
+
