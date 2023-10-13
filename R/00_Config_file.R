@@ -263,8 +263,8 @@ palette_ecozones <-
 
 # Predictors
 palette_predictors <- c(
-  human = "#ffa600",
-  climate = "#d74e92"
+  human = "grey50", #v#ffa600"
+  climate = "grey50" # v#d74e92"
 )
 
 
