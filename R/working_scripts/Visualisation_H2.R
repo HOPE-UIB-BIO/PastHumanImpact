@@ -217,7 +217,8 @@ data_circular_bar_h2 <-
         line_width = 0.2,
         line_col = "grey75",
         icon_size = 0.15,
-        y_max = 45,
+        y_max = 100,
+        y_step = 30,
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label # [config criteria]
       )
