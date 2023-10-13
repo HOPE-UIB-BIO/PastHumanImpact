@@ -1,6 +1,6 @@
 plot_data_events <- function(data_source_events,
                              select_region = NULL,
-                             data_raw = TRUE) {
+                             data_raw = FALSE) {
   data_meta_work <-
     targets::tar_read(
       name = "data_meta",
@@ -51,19 +51,25 @@ plot_data_events <- function(data_source_events,
   if (
     isTRUE(data_raw)
   ) {
-    data_sub <-
-      data_merge %>%
-      dplyr::filter(region == select_region)
-  } else {
-    data_sub <-
+    data_merge <-
       data_merge %>%
       tidyr::pivot_longer(
         bi:ei,
         names_to = "var_name",
         values_to = "value"
       ) %>%
-      dplyr::filter(region == select_region) %>%
       dplyr::mutate(value = round(value))
+  }
+
+  if (
+    !is.null(select_region)
+  ) {
+    data_sub <-
+      data_merge %>%
+      dplyr::filter(region == select_region)
+  } else {
+    data_sub <-
+      data_merge
   }
 
   data_work <-
@@ -112,7 +118,6 @@ plot_data_events <- function(data_source_events,
       )
     )
 
-
   data_to_plot <-
     data_work_pred %>%
     tidyr::unnest(data_pred) %>%
@@ -122,6 +127,53 @@ plot_data_events <- function(data_source_events,
       var_name,
       age,
       fit
+    ) %>%
+    dplyr::mutate(
+      var_name = dplyr::case_when(
+        .default = "no impact",
+        var_name == "bi" ~ "no impact",
+        var_name == "fi" ~ "first impact",
+        var_name == "ei" ~ "emerging impact",
+        var_name == "ec" ~ "extensive clearince",
+        var_name == "cc" ~ "complete clearince",
+        var_name == "fc" ~ "first cultivation",
+        var_name == "es" ~ "europiean settlement",
+        var_name == "weak" ~ "weak impact",
+        var_name == "medium" ~ "medium impact",
+        var_name == "strong" ~ "strong impact"
+      ),
+      var_name = factor(
+        var_name,
+        levels = c(
+          "no impact",
+          "first impact",
+          "emerging impact",
+          "extensive clearince",
+          "complete clearince",
+          "first cultivation",
+          "europiean settlement",
+          "weak impact",
+          "medium impact",
+          "strong impact"
+        )
+      )
+    )
+
+  set_palette <-
+    c(
+      "grey60",
+      "#c99000",
+      "#a17400",
+      "#7b5800",
+      "#573e00",
+      "#00c92b",
+      "#c9009e",
+      "#9b541b",
+      "#5d261a",
+      "#1f0000"
+    ) %>%
+    rlang::set_names(
+      levels(data_to_plot$var_name)
     )
 
   fig <-
@@ -133,13 +185,19 @@ plot_data_events <- function(data_source_events,
         col = var_name
       )
     ) +
-    ggplot2::facet_wrap(~sel_classification) +
-    ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
+    ggplot2::facet_grid(region ~ sel_classification) +
+    # ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
     ggplot2::scale_x_continuous(
       trans = "reverse",
       limits = c(12e3, 0),
       breaks = seq(12e3, 0, by = -2e3),
       labels = seq(12, 0, by = -2)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = set_palette
+    ) +
+    ggplot2::scale_color_manual(
+      values = set_palette
     ) +
     ggplot2::theme_bw() +
     ggplot2::theme(
@@ -155,7 +213,7 @@ plot_data_events <- function(data_source_events,
       axis.title.y = ggplot2::element_blank()
     ) +
     ggplot2::labs(
-      title = select_region,
+      title = ifelse(is.null(select_region), "", select_region),
       x = "Age (ka cal yr BP)"
     ) +
     ggplot2::geom_ribbon(
