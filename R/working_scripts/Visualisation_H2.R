@@ -189,18 +189,6 @@ data_m2 <-
 # 3. make maps -----
 #----------------------------------------------------------#
 
-list_region_maps_grey <-
-  vec_regions %>% # [config criteria]
-  purrr::map(
-    .f = ~ get_map_region(
-      rasterdata = data_geo_koppen %>%
-        dplyr::filter(region == .x),
-      select_region = .x,
-      sel_palette = palette_ecozones, # [config criteria]
-      sel_alpha = 0
-    )
-  )
-
 list_region_maps_climate <-
   vec_regions %>% # [config criteria]
   purrr::map(
@@ -228,31 +216,26 @@ data_circular_bar_h2 <-
         x_var = "predictor",
         line_width = 0.2,
         line_col = "grey75",
-        icon_size = 0.2,
+        icon_size = 0.15,
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label # [config criteria]
       )
     )
   )
 
-list_circulal_plots_on_maps <-
+list_circulal_plots <-
   vec_regions %>% # [config criteria]
   purrr::map(
     .progress = TRUE,
-    .f = ~ cowplot::ggdraw(
-      list_region_maps_grey[[.x]]
-    ) +
-      cowplot::draw_plot(
-        get_plot_by_region(
-          data_circular_bar_h2,
-          sel_region = .x
-        )
-      )
+    .f = ~ get_plot_by_region(
+      data_circular_bar_h2,
+      sel_region = .x
+    )
   )
 
 fig_grid_maps <-
   cowplot::plot_grid(
-    plotlist = list_circulal_plots_on_maps,
+    plotlist = list_circulal_plots,
     nrow = 5,
     ncol = 1
   )
