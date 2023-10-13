@@ -11,11 +11,31 @@ get_circular_barplot <- function(data_source,
                                  background_col = "transparent",
                                  text_size = 6,
                                  icon_size = 0.2) {
-  circular_p <-
+  data_source_trunk <-
     data_source %>%
     dplyr::mutate(
+      y_var_large = ifelse(get(y_var) > y_max, TRUE, FALSE),
       !!y_var := ifelse(get(y_var) > y_max, y_max, get(y_var)),
     ) %>%
+    dplyr::mutate(
+      !!x_var := factor(
+        get(x_var),
+        levels = c(
+          "human",
+          "time",
+          "climate"
+        )
+      ),
+      !!x_var := forcats::fct_recode(
+        get(x_var),
+        "Human" = "human",
+        "Time" = "time",
+        "Climate" = "climate"
+      )
+    )
+
+  circular_p <-
+    data_source_trunk %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = get(x_var),
@@ -28,7 +48,14 @@ get_circular_barplot <- function(data_source,
       breaks = seq(0, y_max, by = y_step)
     ) +
     ggplot2::scale_x_discrete(
-      label = x_name,
+      drop = FALSE
+    ) +
+    ggplot2::scale_fill_manual(
+      values = col_vec,
+      drop = FALSE
+    ) +
+    ggplot2::scale_color_manual(
+      values = col_vec,
       drop = FALSE
     ) +
     ggplot2::theme(
@@ -48,13 +75,9 @@ get_circular_barplot <- function(data_source,
       plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
       panel.spacing = grid::unit(c(0, 0, 0, 0), "mm")
     ) +
-    ggplot2::scale_fill_manual(
-      values = col_vec,
-      drop = FALSE
-    ) +
     # add lines for every 10 percent
     ggplot2::geom_hline(
-      yintercept = seq(0, 40, by = y_step),
+      yintercept = seq(0, y_max, by = y_step),
       color = line_col,
       linewidth = line_width
     ) +
@@ -66,14 +89,14 @@ get_circular_barplot <- function(data_source,
     ) +
     ggplot2::annotate(
       "text",
-      x = c(3.5, 3.5, 3.5),
-      y = seq(20, 40, by = y_step),
-      label = paste0(seq(20, 40, by = y_step), " %"),
+      x = rep(3.5, length(seq(20, y_max, by = y_step))),
+      y = seq(20, y_max, by = y_step),
+      label = paste0(seq(20, y_max, by = y_step), " %"),
       vjust = 0,
       size = 1.5
     ) +
     ggplot2::geom_col(
-      data = data_source %>%
+      data = data_source_trunk %>%
         dplyr::filter(
           grepl(
             "unique_percent",
@@ -91,7 +114,7 @@ get_circular_barplot <- function(data_source,
       alpha = 1
     ) +
     ggplot2::geom_col(
-      data = data_source %>%
+      data = data_source_trunk %>%
         dplyr::filter(grepl(
           "average_share_percent",
           variance_partition
@@ -109,7 +132,7 @@ get_circular_barplot <- function(data_source,
     ggimage::geom_image(
       data = data.frame(
         x = c(0.75, 2, 3.25),
-        y = rep(45, 3),
+        y = rep(y_max, 3),
         image = c(
           here::here(
             "Outputs/icons/human.png"
