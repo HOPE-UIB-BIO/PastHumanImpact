@@ -210,13 +210,14 @@ data_circular_bar_h2 <-
     plot = purrr::map(
       .x = data_to_plot,
       .f = ~ get_circular_barplot(
-        data = .x,
+        data_source = .x,
         y_var = "percentage",
         fill_var = "group",
         x_var = "predictor",
         line_width = 0.2,
         line_col = "grey75",
         icon_size = 0.15,
+        y_max = 45,
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label # [config criteria]
       )
