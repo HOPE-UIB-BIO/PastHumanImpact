@@ -388,7 +388,8 @@ data_circle_plots <-
         x_var = "predictor",
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label, # [config criteria]
-        icon_size = 0.15
+        icon_size = 0.15,
+        y_max = 45
       )
     )
   )
