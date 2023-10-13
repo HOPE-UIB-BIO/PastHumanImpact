@@ -197,7 +197,7 @@ fig_n_c14 <-
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
-    legend.position = "bottom",
+    legend.position = "right",
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
@@ -361,7 +361,7 @@ fig_valid_n_rc <-
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.text = ggplot2::element_blank(),
-    legend.position = "bottom",
+    legend.position = "right",
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
@@ -459,7 +459,7 @@ fig_human_presence_detected <-
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.text = ggplot2::element_blank(),
-    legend.position = "bottom",
+    legend.position = "right",
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
@@ -552,13 +552,13 @@ fig_human_presence_status <-
   ) +
   ggplot2::theme_bw() +
   ggplot2::guides(
-    fill = ggplot2::guide_legend(nrow = 2)
+    fill = ggplot2::guide_legend(ncol = 1)
   ) +
   ggplot2::theme(
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.text = ggplot2::element_blank(),
-    legend.position = "bottom",
+    legend.position = "right",
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
@@ -600,31 +600,49 @@ purrr::walk(
   )
 )
 
+suppl_figure_1 <-
+  cowplot::plot_grid(
+    fig_n_c14,
+    fig_human_presence_status,
+    nrow = 2
+  )
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Supp/Supplementary_figure_1"),
+      .x,
+      sep = "."
+    ),
+    plot = suppl_figure_1,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 250,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
 
 #----------------------------------------------------------#
 # 6. Temporal trends of human impact  -----
 #----------------------------------------------------------#
 
 list_fig_event_temporal_trends <-
-  vec_regions %>%
-  purrr::map(
-    .f = ~ plot_data_events(
-      data_source_events = data_events,
-      select_region = .x
-    )
+  plot_data_events(
+    data_source_events = data_events
   )
 
-purrr::iwalk(
-  .progress = TRUE,
-  .x = list_fig_event_temporal_trends,
+purrr::walk(
+  .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
-    paste0(
-      here::here("Outputs/Supp/Events_temporal_"),
-      .y, ".png"
+    paste(
+      here::here("Outputs/Supp/Supplementary_figure_2"),
+      .x,
+      sep = "."
     ),
-    plot = .x,
-    width = image_width_vec["2col"], # [config criteria]
-    height = 120,
+    plot = list_fig_event_temporal_trends,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 180,
     units = image_units, # [config criteria]
     bg = "white"
   )
