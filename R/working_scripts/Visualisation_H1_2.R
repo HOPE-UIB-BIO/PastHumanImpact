@@ -346,7 +346,7 @@ data_scores_merged <-
     )
   )
 
-data_score_change_points <-
+data_score_mvpart <-
   data_scores_merged %>%
   dplyr::filter(adjr2 > 0.1) %>%
   dplyr::distinct(dataset_id, age, .keep_all = TRUE) %>%
@@ -363,7 +363,7 @@ data_score_change_points <-
     )
   ) %>%
   dplyr::mutate(
-    change_points_age = purrr::map(
+    mvpart = purrr::map(
       .progress = TRUE,
       .x = data_for_mvpart,
       .f = ~ {
@@ -375,26 +375,64 @@ data_score_change_points <-
 
         mvpart_result <-
           mvpart::mvpart(
-            data.matrix(data_mv) ~
-              data_age,
+            data.matrix(data_mv) ~ data_age,
             xv = "1se",
-            xvmult = 1000, plot.add = FALSE, data = data_mv
+            xvmult = 1000,
+            plot.add = FALSE,
+            data = data_mv
           )
 
         utils::capture.output(
           change_points_age <-
-            as.data.frame(summary(mvpart_result)$splits) %>%
+            as.data.frame(
+              summary(mvpart_result)$splits
+            ) %>%
             purrr::pluck("index"),
           file = "NUL"
         )
 
-        return(change_points_age)
+        list(
+          change_points_age = change_points_age,
+          mvpart_result = mvpart_result
+        ) %>%
+          return()
       }
     )
   ) %>%
-  dplyr::select(region, change_points_age)
+  dplyr::select(region, mvpart)
 
-
+data_score_change_points <-
+  data_score_mvpart %>%
+  dplyr::mutate(
+    change_points_age = purrr::map(
+      .x = mvpart,
+      .f = ~ .x %>%
+        purrr::chuck("change_points_age")
+    ),
+    cv_error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("xerror"),
+        otherwise = NA_real_
+      )
+    ),
+    error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("rel error"),
+        otherwise = NA_real_
+      )
+    ),
+    r2 = 1 - error
+  )
 
 #----------------------------------------------------------#
 # 3. Unique human -----
@@ -444,11 +482,15 @@ data_fig_scores <-
     by = dplyr::join_by(region)
   ) %>%
   dplyr::mutate(
-    plot = purrr::map2(
-      .x = data_scores_merged,
-      .y = change_points_age,
+    plot = purrr::pmap(
+      .l = list(
+        data_scores_merged,
+        change_points_age,
+        cv_error,
+        r2
+      ),
       .f = ~ ggplot2::ggplot(
-        data = .x,
+        data = ..1,
         mapping = ggplot2::aes(
           x = age,
           y = CAP1,
@@ -463,10 +505,32 @@ data_fig_scores <-
           linewidth = 0.2
         ) +
         ggplot2::geom_vline(
-          xintercept = .y,
+          xintercept = ..2,
           lty = 2,
           col = "grey30",
           linewidth = line_size * 2
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4.5,
+            x = 8.5e3,
+            label = paste("CV errror =", round(..3, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 5 # [config criteria]
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4,
+            x = 8.5e3,
+            label = paste("R2 =", round(..4, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 5 # [config criteria]
         ) +
         ggplot2::scale_colour_manual(
           values = palette_ecozones # [config criteria]
