@@ -224,17 +224,8 @@ res_models_table_h1 <-
     by = "dataset_id"
   )
 
-RUtilpol::save_latest_file(
-  res_models_table_h1,
-  file_name = "res_models_table_h1",
-  dir = here::here(
-    "Outputs"
-  ),
-  prefered_format = "csv"
-)
-
 #----------------------------------------------------------#
-# 1. H2 results -----
+# 3. H2 results -----
 #----------------------------------------------------------#
 
 data_work_h2 <-
@@ -335,7 +326,6 @@ data_predictor_h2_percentage <-
   ) %>%
   dplyr::distinct()
 
-
 data_truncated_h2 <-
   data_work_h2 %>%
   dplyr::mutate(
@@ -386,6 +376,161 @@ res_models_table_h2 <-
     region, climate_zone, filter_out, truncated
   )
 
+#----------------------------------------------------------#
+# 4. Plot distribution -----
+#----------------------------------------------------------#
+plot_dist_density <- function(data_source) {
+  data_work <-
+    data_source %>%
+    dplyr::filter(
+      filter_out == FALSE
+    ) %>%
+    dplyr::select(
+      c(
+        "region",
+        dplyr::any_of(
+          "truncated"
+        ),
+        dplyr::contains("percent")
+      )
+    ) %>%
+    tidyr::pivot_longer(
+      cols = c(
+        !dplyr::any_of(
+          c(
+            "truncated", "region"
+          )
+        )
+      ),
+      names_to = "predictor_full",
+      values_to = "percentage"
+    ) %>%
+    dplyr::mutate(
+      predictor = dplyr::case_when(
+        stringr::str_detect(predictor_full, "human") ~ "human",
+        stringr::str_detect(predictor_full, "climate") ~ "climate",
+        stringr::str_detect(predictor_full, "time") ~ "time",
+        .default = NA_character_
+      ),
+      var_par = dplyr::case_when(
+        stringr::str_detect(predictor_full, "unique") ~ "unique_percent",
+        stringr::str_detect(predictor_full, "avg_share") ~ "average_share_percent",
+        stringr::str_detect(predictor_full, "total") ~ "individual_percent",
+      )
+    ) %>%
+    dplyr::mutate(
+      predictor = factor(
+        predictor,
+        levels = predictors_spatial_order # [config criteria]
+      ),
+      region = factor
+      (region,
+        levels = vec_regions # [config criteria]
+      )
+    )
+
+  if (
+    "truncated" %in% names(data_work)
+  ) {
+    data_work <-
+      data_work %>%
+      dplyr::mutate(
+        percentage = dplyr::if_else(
+          truncated == TRUE,
+          100,
+          percentage
+        )
+      )
+  }
+
+  fig <-
+    data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = percentage
+      )
+    ) +
+    ggplot2::facet_grid(region ~ predictor) +
+    ggplot2::coord_flip() +
+    ggplot2::scale_colour_manual(
+      values = palette_predictors_parts, # [config criteria]
+      labels = c("average share", "total", "unique")
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_predictors_parts, # [config criteria]
+      labels = c("average share", "total", "unique")
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      legend.position = "bottom",
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      strip.background = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank()
+    ) +
+    ggplot2::labs(
+      col = "",
+      fill = "",
+      x = "Explained variability (%)",
+      y = "N"
+    ) +
+    ggplot2::geom_density(
+      mapping = ggplot2::aes(
+        y = after_stat(count),
+        col = var_par,
+        fill = var_par
+      ),
+      alpha = 0.4,
+      linewidth = 0.1
+    )
+
+  return(fig)
+}
+
+fig_h1_dist <-
+  plot_dist_density(res_models_table_h1)
+
+fig_h2_dist <-
+  plot_dist_density(res_models_table_h2)
+
+fig_dist_merge <-
+  ggpubr::ggarrange(
+    fig_h1_dist,
+    fig_h2_dist,
+    nrow = 1,
+    ncol = 2,
+    common.legend = TRUE,
+    legend = "bottom",
+    labels = c("H1", "H2")
+  )
+
+#----------------------------------------------------------#
+# 5. Save -----
+#----------------------------------------------------------#
+
+RUtilpol::save_latest_file(
+  res_models_table_h1,
+  file_name = "res_models_table_h1",
+  dir = here::here(
+    "Outputs"
+  ),
+  prefered_format = "csv"
+)
+
 RUtilpol::save_latest_file(
   res_models_table_h2,
   file_name = "res_models_table_h2",
@@ -393,4 +538,20 @@ RUtilpol::save_latest_file(
     "Outputs"
   ),
   prefered_format = "csv"
+)
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Model_outputs_distribution"),
+      .x,
+      sep = "."
+    ),
+    plot = fig_dist_merge,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 130,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
 )
