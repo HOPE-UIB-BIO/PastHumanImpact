@@ -519,6 +519,242 @@ fig_dist_merge <-
   )
 
 #----------------------------------------------------------#
+# 4. Model fit -----
+#----------------------------------------------------------#
+
+
+get_model_fit <- function(
+    data_source,
+    point_size = 2,
+    sel_method = c("violin", "lolipop")) {
+  sel_method <- match.arg(sel_method)
+
+  data_sel <-
+    data_source %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::inner_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    ) %>%
+    dplyr::mutate(
+      region = factor(region,
+        levels = vec_regions # [config criteria]
+      )
+    )
+
+
+  data_median <-
+    data_sel %>%
+    dplyr::group_by(region, sel_classification) %>%
+    dplyr::summarise(
+      .groups = "drop",
+      median = median(model_fit)
+    ) %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::inner_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    ) %>%
+    dplyr::mutate(
+      region = factor(region,
+        levels = vec_regions # [config criteria]
+      )
+    )
+
+  fig_basic <-
+    data_sel %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = sel_classification,
+        y = model_fit
+      )
+    ) +
+    ggplot2::facet_wrap(~region, ncol = 1) +
+    ggplot2::coord_cartesian(
+      ylim = c(0, 100)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      legend.position = "none",
+      plot.caption.position = "panel",
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_text(
+        size = text_size,
+        hjust = 0.01
+      ),
+      panel.spacing.x = grid::unit(0, "mm"),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+    )
+
+  if (
+    sel_method == "violin"
+  ) {
+    res <-
+      fig_basic +
+      ggplot2::geom_jitter(
+        mapping = ggplot2::aes(
+          col = sel_classification
+        ),
+        alpha = 0.3
+      ) +
+      ggplot2::geom_violin(
+        mapping = ggplot2::aes(
+          fill = sel_classification
+        ),
+        alpha = 0.3,
+        col = NA
+      ) +
+      ggplot2::geom_boxplot(
+        fill = "white",
+        col = "grey30",
+        width = 0.1,
+        outlier.shape = NA
+      ) +
+      ggplot2::geom_point(
+        data = data_median,
+        mapping = ggplot2::aes(
+          x = sel_classification,
+          y = median,
+          fill = sel_classification
+        ),
+        shape = 22,
+        col = "gray30",
+        size = point_size
+      )
+  }
+
+  if (
+    sel_method == "lolipop"
+  ) {
+    res <-
+      fig_basic +
+      ggplot2::geom_segment(
+        data = data_median,
+        mapping = ggplot2::aes(
+          x = sel_classification,
+          xend = sel_classification,
+          y = median,
+          yend = 0
+        ),
+        col = "grey30",
+      ) +
+      ggplot2::geom_point(
+        data = data_median,
+        mapping = ggplot2::aes(
+          x = sel_classification,
+          y = median,
+          fill = sel_classification
+        ),
+        col = "grey30",
+        shape = 21,
+        size = point_size
+      )
+  }
+
+  return(res)
+}
+
+fig_h1_model_fit <-
+  output_h1_spatial %>%
+  dplyr::mutate(
+    summary_variation = purrr::map(
+      .x = varhp,
+      .f = ~ .x %>%
+        purrr::pluck("summary_variation")
+    )
+  ) %>%
+  tidyr::unnest(
+    summary_variation
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(
+    model_fit = (constrained_eig / total_eig) * 100
+  ) %>%
+  dplyr::left_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  get_model_fit()
+
+fig_h2_model_fit <-
+  output_hvar_h2 %>%
+  dplyr::mutate(
+    summary_variation = purrr::map(
+      .x = varhp,
+      .f = ~ .x %>%
+        purrr::pluck("summary_variation")
+    )
+  ) %>%
+  tidyr::unnest(
+    summary_variation
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(
+    model_fit = (constrained_eig / total_eig) * 100
+  ) %>%
+  dplyr::rename(
+    sel_classification = group
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
+  get_model_fit(
+    data_source = .,
+    sel_method = "lolipop"
+  )
+
+data_source <- output_hvar_h2 %>%
+  dplyr::mutate(
+    summary_variation = purrr::map(
+      .x = varhp,
+      .f = ~ .x %>%
+        purrr::pluck("summary_variation")
+    )
+  ) %>%
+  tidyr::unnest(
+    summary_variation
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(
+    model_fit = (constrained_eig / total_eig) * 100
+  ) %>%
+  dplyr::rename(
+    sel_classification = group
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  )
+
+fig_model_fit_merge <-
+  ggpubr::ggarrange(
+    fig_h1_model_fit,
+    fig_h2_model_fit,
+    nrow = 1,
+    ncol = 2,
+    widths = c(1, 0.3),
+    labels = c("H1", "H2")
+  )
+
+#----------------------------------------------------------#
 # 5. Save -----
 #----------------------------------------------------------#
 
@@ -544,11 +780,27 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Model_outputs_distribution"),
+      here::here("Outputs/Supp/Model_outputs_distribution"),
       .x,
       sep = "."
     ),
     plot = fig_dist_merge,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 130,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Supp/Model_outputs_fit"),
+      .x,
+      sep = "."
+    ),
+    plot = fig_model_fit_merge,
     width = image_width_vec["3col"], # [config criteria]
     height = 130,
     units = image_units, # [config criteria]
