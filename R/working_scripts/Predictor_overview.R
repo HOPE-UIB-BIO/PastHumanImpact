@@ -34,50 +34,76 @@ source(
 
 plot_predictor <- function(
     data_source_raw,
-    data_source_pred, sel_predictor,
+    data_source_pred,
+    sel_predictor,
+    plot_raw = FALSE,
     sel_y_limits = c(-20, 20)) {
-  data_mean_sd <-
-    data_source_pred %>%
-    tidyr::unnest(data_pred) %>%
-    dplyr::filter(predictor == sel_predictor) %>%
-    dplyr::group_by(
-      region,
-      sel_classification
-    ) %>%
-    dplyr::summarise(
-      .groups = "drop",
-      dplyr::across(
-        "fit",
-        list(
-          mean = ~ mean(.x, na.rm = TRUE),
-          sd = ~ sd(.x, na.rm = TRUE)
+  if (
+    isTRUE(plot_raw)
+  ) {
+    data_to_plot_raw <-
+      data_source_raw %>%
+      dplyr::mutate(
+        fit_rescale = get(sel_predictor)
+      )
+
+    data_to_plot_pred <-
+      data_source_pred %>%
+      tidyr::unnest(data_pred) %>%
+      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::mutate(
+        fit_rescale = fit,
+        upr_rescale = upr,
+        lwr_rescale = lwr
+      )
+  } else {
+    data_pred_mean_sd <-
+      data_source_pred %>%
+      tidyr::unnest(data_pred) %>%
+      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::group_by(
+        region,
+        sel_classification
+      ) %>%
+      dplyr::summarise(
+        .groups = "drop",
+        dplyr::across(
+          "fit",
+          list(
+            mean = ~ mean(.x, na.rm = TRUE),
+            sd = ~ sd(.x, na.rm = TRUE)
+          )
         )
       )
-    )
 
-  data_raw_mean_sd <-
-    data_source_raw %>%
-    dplyr::left_join(
-      data_mean_sd,
-      by = c("region", "sel_classification")
-    ) %>%
-    dplyr::mutate(
-      fit_rescale = (get(sel_predictor) - fit_mean) / fit_sd
-    )
+    data_to_plot_raw <-
+      data_source_raw %>%
+      dplyr::left_join(
+        data_pred_mean_sd,
+        by = c("region", "sel_classification")
+      ) %>%
+      dplyr::mutate(
+        fit_rescale = (get(sel_predictor) - fit_mean) / fit_sd
+      )
 
 
-  data_source_pred %>%
-    tidyr::unnest(data_pred) %>%
-    dplyr::filter(predictor == sel_predictor) %>%
-    dplyr::left_join(
-      data_mean_sd,
-      by = c("region", "sel_classification")
-    ) %>%
-    dplyr::mutate(
-      fit_rescale = (fit - fit_mean) / fit_sd,
-      upr_rescale = (upr - fit_mean) / fit_sd,
-      lwr_rescale = (lwr - fit_mean) / fit_sd
-    ) %>%
+    data_to_plot_pred <-
+      data_source_pred %>%
+      tidyr::unnest(data_pred) %>%
+      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::left_join(
+        data_pred_mean_sd,
+        by = c("region", "sel_classification")
+      ) %>%
+      dplyr::mutate(
+        fit_rescale = (fit - fit_mean) / fit_sd,
+        upr_rescale = (upr - fit_mean) / fit_sd,
+        lwr_rescale = (lwr - fit_mean) / fit_sd
+      )
+  }
+
+  fig_res <-
+    data_to_plot_pred %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
         x = age,
@@ -118,7 +144,7 @@ plot_predictor <- function(
       )
     ) +
     ggplot2::geom_line(
-      data = data_raw_mean_sd,
+      data = data_to_plot_raw,
       mapping = ggplot2::aes(
         group = dataset_id
       ),
@@ -136,6 +162,18 @@ plot_predictor <- function(
     ggplot2::geom_line(
       linewidth = 1
     )
+
+  if (
+    isTRUE(plot_raw)
+  ) {
+    fig_res <-
+      fig_res +
+      ggplot2::labs(
+        y = paste("Raw values of", sel_predictor)
+      )
+  }
+
+  return(fig_res)
 }
 
 #----------------------------------------------------------#
@@ -178,21 +216,38 @@ mod_predicted_with_names <-
 # 2. Plot individual figures -----
 #----------------------------------------------------------#
 
+
+mod_predicted_with_names %>%
+  tidyr::unnest(data_pred) %>%
+  summary()
+
 list_fig_predictors <-
-  c(
-    "temp_annual",
-    "temp_cold",
-    "prec_summer",
-    "prec_win",
-    "spd"
-  ) %>%
-  rlang::set_names() %>%
-  purrr::map(
+  purrr::pmap(
     .progress = TRUE,
+    .l = list(
+      var_names = c(
+        "temp_annual",
+        "temp_cold",
+        "prec_summer",
+        "prec_win",
+        "spd"
+      ) %>%
+        rlang::set_names(),
+      plot_raw = c(rep(TRUE, 4), FALSE),
+      y_limits = list(
+        c(-10, 20),
+        c(-30, 25),
+        c(0, 1000),
+        c(0, 2000),
+        c(-5, 10)
+      )
+    ),
     .f = ~ plot_predictor(
       data_source_raw = data_merge_unnest,
       data_source_pred = mod_predicted_with_names,
-      sel_predictor = .x
+      sel_predictor = ..1,
+      plot_raw = ..2,
+      sel_y_limits = ..3
     )
   )
 
@@ -202,7 +257,7 @@ list_fig_predictors %>%
     .f = ~ ggplot2::ggsave(
       paste0(
         here::here("Outputs/Supp"),
-        "/",
+        "/Supplementary_figure_",
         .y,
         ".png"
       ),
