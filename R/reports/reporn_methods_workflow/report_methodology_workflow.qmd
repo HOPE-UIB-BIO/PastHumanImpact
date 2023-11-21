@@ -1,0 +1,733 @@
+---
+title: "Report methodology step-by-step"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+```{r setup, include = FALSE, results='hide', warning=FALSE, message=FALSE}
+
+library(here)
+
+here::i_am("R/reports/reporn_methods_workflow/report_methodology_workflow.qmd")
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
+  )
+)
+```
+```{r chunk-setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  flextable::set_flextable_defaults(
+    font.family = "Arial", font.size = 9,
+    theme_fun = "theme_vanilla",
+    big.mark = ""
+  ),
+  fig.path = "figures/"
+)
+```
+
+```{r theme-setup, include=FALSE}
+ggplot2::theme_set(
+  ggplot2::theme_bw() +
+    ggplot2::theme(
+      axis.title = ggplot2::element_text(size = 25),
+      axis.text = ggplot2::element_text(size = 15),
+      strip.text = ggplot2::element_text(size = 15),
+      panel.grid = ggplot2::element_blank()
+    )
+)
+
+col_main <- "#B338A4"
+
+fig_width_def <- 60 # this is used to wrap text.
+```
+
+The objective of this report is to give an detailed description of individual steps of the data analysis
+
+# Pollen data aquisition
+
+## FOSSILPOL
+
+The compilation of a pollen dataset for our analysis is performed a priori.
+Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html). Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org). Some additional data are from private owners in areas with data gaps, which we have limited access to use. We do not have the intellectual property rights to make these data public available. Therefore, only the derivatives of the analysis can be publicly shared. Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset. This input data are further filter during the data processing steps in HOPE to get the final collection of a standardized dataset of high data quality we can use further in our data analyses.  
+
+### Harmonisation tables
+
+An important step in FOSSILPOL to obtain a standardised pollen data set within and across regions is the harmonisation of pollen types. Different analysts have different backgrounds and schools using different nomenclature, and the level of pollen taxonomic identifications and names can vary widely. To be able to make numerical comparisons of different pollen records, the level of pollen taxonomy should be similar. Consequently, pollen harmonisation tables have been produced for different regions to try to minimise biases related to this. The regional harmonisation tables created in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, and the Indo-Pacific region (Birks et al. harmonisation paper). These tables are used as input in the Fossilpol workflow above ([see Fossilpol step_by_step guide](https://hope-uib-bio.github.io/FOSSILPOL-website/step_by_step_guide.html)).
+<br>
+
+### Data pollen assembly
+
+We have applied a number of filtering criteria to obtain as high a data quality as possible so that we can compare the numerical estimates on standardised data sets. These filtering criteria are: remove potentially duplicated pollen records, sorting levels (samples) by age, remove levels (samples) lower than a threshold of total number pollen grains counted (= pollen sum), remove pollen records based on age (minimum and maximum age ranges), remove levels (samples) depending on the age of the last control point, remove samples beyond the age ranges of interest, and remove pollen records if the total number of samples (N) is too low.
+
+This filtering is done on the chronologies, raw pollen counts, harmonised pollen counts, and the age uncertainties from the age-depth models (Bchron). The preferable number of minimum pollen grains is set to 150, but this led to a great loss of datasets in regions with less data coverage, and we therefore reduced this number to 25 with the condition that less than 50 % of the samples must have a low pollen sum. This allow us to keep more datasets, but in the cases pollen records have a low minimum pollen sum, we acknowledge that the estimates of pollen assemblage properties (PAPs) are less robust. The maximum age beyond extrapolation is set to 3000 years because ages extrapolated beyond this threshold is considered highly uncertain. Finally, pollen records with less than 5 samples are removed for further analyses. 
+
+```{r load-data-pollen}
+data_pollen <-
+  targets::tar_read(
+    name = data_assembly_filtered,
+    store = external_storage_targets
+  ) %>%
+  dplyr::select(
+    dataset_id,
+    levels,
+    counts_harmonised
+  )
+
+data_meta <-
+  targets::tar_read(
+    name = "data_meta",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  ) %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
+  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+  dplyr::inner_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "sel_classification"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  )
+```
+
+```{r plot-data-pollen-spatial-distribution}
+fig_map <-
+  data_pollen %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = long,
+      y = lat
+    )
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::coord_equal(
+    ratio = 1.3,
+    ylim = range(data_meta$lat),
+    xlim = range(data_meta$long)
+  ) +
+  ggplot2::labs(
+    title = "A) Spatial coverage and distribution of records",
+    x = expression(
+      paste(
+        "Longitude ", (degree ~ E)
+      )
+    ),
+    y = expression(
+      paste(
+        "Latitude ", (degree ~ N)
+      )
+    )
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq(-180, 180, by = 50)
+  ) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(-90, 90, by = 15)
+  ) +
+  ggplot2::geom_polygon(
+    data = ggplot2::map_data("world") %>%
+      dplyr::filter(lat > -60 & lat < 85),
+    ggplot2::aes(
+      group = group
+    ),
+    fill = "grey80",
+    alpha = 0.4
+  ) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      col = sel_classification
+    ),
+    size = 3,
+    shape = 19,
+    alpha = 0.1
+  ) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      col = sel_classification
+    ),
+    size = 0.5,
+    shape = 20,
+    alpha = 1
+  ) +
+  ggplot2::geom_point(
+    col = "grey30",
+    size = 0.1,
+    shape = 20,
+    alpha = 1
+  )
+
+fig_recod_count <-
+  data_pollen %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::group_by(region, sel_classification) %>%
+  dplyr::count(
+    name = "n_records"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      y = n_records,
+      x = sel_classification,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    ~region,
+    nrow = 2,
+    dir = "h"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    y = "Number of records",
+    title = "B) Number of records in each climate zone"
+  ) +
+  ggplot2::geom_segment(
+    mapping = ggplot2::aes(
+      xend = sel_classification,
+      yend = 0
+    ),
+    col = "grey30"
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    shape = 21,
+    col = "grey30"
+  ) +
+  ggplot2::geom_text(
+    mapping = ggplot2::aes(
+      label = n_records
+    ),
+    nudge_y = 20,
+    col = "grey30",
+    size = text_size / 3
+  )
+
+fig_color_legend <-
+  data_meta %>%
+  dplyr::distinct(sel_classification) %>%
+  dplyr::mutate(
+    climate_zone_name = dplyr::case_when(
+      .default = sel_classification,
+      sel_classification == "Cold_Without_dry_season_Very_Cold_Summer" ~ "Cold - without dry season - very cold summer",
+      sel_classification == "Cold_Without_dry_season_Cold_Summer" ~ "Cold - without dry season - cold summer",
+      sel_classification == "Cold_Without_dry_season_Warm_Summer" ~ "Cold - without dry season - warm summer",
+      sel_classification == "Cold_Without_dry_season_Hot_Summer" ~ "Cold - without dry season - hot summer",
+      sel_classification == "Cold_Dry_Winter" ~ "Cold - dry winter",
+      sel_classification == "Cold_Dry_Summer" ~ "Cold - dry summer",
+      sel_classification == "Temperate_Without_dry_season" ~ "Temperate - without dry season",
+      sel_classification == "Temperate_Dry_Winter" ~ "Temperate - dry winter",
+      sel_classification == "Temperate_Dry_Summer" ~ "Temperate - dry summer"
+    ),
+    climate_zone_name = factor(
+      climate_zone_name,
+      levels = c(
+        "Arid",
+        "Tropical",
+        "Temperate - dry summer",
+        "Temperate - dry winter",
+        "Temperate - without dry season",
+        "Cold - dry summer",
+        "Cold - dry winter",
+        "Cold - without dry season - hot summer",
+        "Cold - without dry season - warm summer",
+        "Cold - without dry season - cold summer",
+        "Cold - without dry season - very cold summer",
+        "Polar"
+      )
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = 1,
+      y = climate_zone_name,
+      label = climate_zone_name,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::coord_cartesian(
+    xlim = c(0, 20)
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    plot.caption.position = "panel",
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    title = "C) Climate zone color legend"
+  ) +
+  ggplot2::geom_point(
+    shape = 22,
+    col = "gray30",
+    size = 10
+  ) +
+  ggplot2::geom_text(
+    mapping = ggplot2::aes(
+      x = 2
+    ),
+    col = "grey30",
+    size = text_size / 3,
+    hjust = 0
+  )
+
+cowplot::plot_grid(
+  fig_map,
+  fig_color_legend,
+  nrow = 1,
+  rel_widths = c(1, 0.2)
+)
+
+plot(fig_recod_count)
+
+
+```
+
+```{r plot-data-pollen-temporal-distribution}
+fig_temporal <-
+  data_pollen %>%
+  tidyr::unnest(levels) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::group_by(
+    region, sel_classification, dataset_id
+  ) %>%
+  dplyr::summarise(
+    .groups = "drop",
+    age_min = min(age),
+    age_max = max(age),
+    age_mean = mean(age)
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age_min,
+      xend = age_max,
+      y = reorder(dataset_id, age_mean),
+      yend = reorder(dataset_id, age_mean),
+      col = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    scales = "free_y",
+    ~region,
+    ncol = 1
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.y = ggplot2::element_blank(),
+    axis.ticks.y = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.y = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    title = "D) Temporal coverage of records",
+    x = "Age (cal yr BP)"
+  ) +
+  ggplot2::geom_segment(
+    alpha = 0.5,
+    linewidth = 0.5
+  )
+
+plot(fig_temporal)
+```
+```{r plot-data-pollen-taxa}
+data_pollen_taxa <-
+  data_pollen %>%
+  dplyr::mutate(
+    taxa = purrr::map(
+      .progress = TRUE,
+      .x = counts_harmonised,
+      .f = ~ .x %>%
+        dplyr::select(-sample_id) %>%
+        names()
+    )
+  ) %>%
+  dplyr::select(
+    dataset_id, taxa
+  )
+
+data_pollen_taxa_n_per_dataset <-
+  data_pollen_taxa %>%
+  dplyr::mutate(
+    n_taxa = purrr::map_dbl(
+      .progress = TRUE,
+      .x = taxa,
+      .f = ~ length(.x)
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  )
+
+data_pollen_taxa_per_continnt <-
+  data_pollen_taxa %>%
+  tidyr::unnest(taxa) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::distinct(region, sel_classification, taxa) %>%
+  dplyr::group_by(region, sel_classification) %>%
+  dplyr::count(
+    name = "n_taxa"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  )
+
+
+fig_taxa_basic <-
+  tibble::tibble() %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      y = n_taxa,
+      x = sel_classification,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    ~region,
+    nrow = 2,
+    dir = "h"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  )
+
+fig_taxa_continent <-
+  fig_taxa_basic +
+  ggplot2::labs(
+    y = "Number of taxa",
+    title = "E) Total number of taxa in each climate zone"
+  ) +
+  ggplot2::geom_segment(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      xend = sel_classification,
+      yend = 0
+    ),
+    col = "grey30"
+  ) +
+  ggplot2::geom_point(
+    data = data_pollen_taxa_per_continnt,
+    size = 3,
+    shape = 21,
+    col = "grey30"
+  ) +
+  ggplot2::geom_text(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      label = n_taxa
+    ),
+    nudge_y = 70,
+    col = "grey30",
+    size = text_size / 3
+  )
+
+fig_taxa_per_record <-
+  fig_taxa_basic +
+  ggplot2::labs(
+    y = "Number of taxa",
+    title = "F) The number of taxa per record in each climate zone"
+  ) +
+  ggplot2::geom_jitter(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3
+  ) +
+  ggplot2::geom_violin(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3,
+    col = NA
+  ) +
+  ggplot2::geom_boxplot(
+    data = data_pollen_taxa_n_per_dataset,
+    fill = "white",
+    col = "grey30",
+    width = 0.1,
+    outlier.shape = NA
+  ) +
+  ggplot2::geom_point(
+    data = data_pollen_taxa_n_per_dataset %>%
+      dplyr::group_by(region, sel_classification) %>%
+      dplyr::summarise(
+        median = median(n_taxa)
+      ),
+    mapping = ggplot2::aes(
+      y = median
+    ),
+    shape = 22,
+    col = "gray30",
+    size = 3
+  )
+
+cowplot::plot_grid(
+  fig_taxa_continent,
+  fig_taxa_per_record,
+  nrow = 1
+)
+``` 
+
+# Detection of past human presence
+
+To determine the impact of past humans on fundamental ecosystem properties, we need to develop indicators of past human presence and activity. This led to the development of a new method, where we use human event detection and indicators identified from pollen records based on expert knowledge, combined with the method for quantifying human presence based on radiocarbon dates derived from archaeological artifacts and Summed Probability Densities (SPD) (Bird et al. 2022). We believe that this solves the issue that we can use a standardised variable as indicator of past human impact, and partially avoids the difficulty of creating standardised variables to detect human disturbance events across different regions and continents. This may reduce the potential circularity of human detection events derived from the same pollen records as the estimates of ecosystem properties.  
+
+```{r load-evet-data}
+data_events <-
+  targets::tar_read(
+    name = "data_events_to_fit",
+    store = external_storage_targets
+  )
+
+
+```
+
+```{r plot-selected-record, echo = FALSE}
+
+sel_example_record <- "4197"
+
+sel_data <-
+  data_meta  %>% 
+  dplyr::filter(
+    dataset_id == sel_example_record
+  )
+
+sitename <- 
+  sel_data$handle
+
+x_lim <-
+  range(sel_data$long)
+
+y_lim <-
+  range(sel_data$lat)
+
+border_val <- 10
+
+p_position <-
+  sel_data %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = long,
+      y= lat,
+      col = sel_classification)
+  ) +
+  ggplot2::borders(
+    fill = "gray90", colour = "gray75"
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    colour = "black"
+  ) +
+  ggplot2::geom_point(
+    size = 1,
+    colour = "white"
+  ) +
+  ggplot2::coord_quickmap(
+    xlim = c(min(x_lim) - border_val, max(x_lim) + border_val),
+    ylim = c(min(y_lim) - border_val, max(y_lim) + border_val)
+  ) +
+  ggplot2::labs(
+    x = "longitude",
+    y = "latitude"
+  ) +
+  ggplot2::scale_color_manual(
+      values = palette_ecozones,
+  ) +
+  ggplot2::theme(
+    legend.position = "none"
+  )
+
+p_position +
+  ggplot2::geom_text(
+    ggplot2::aes(
+      label = sitename
+    ),
+    vjust = 0.1,
+    nudge_y = 1,
+    size = 7
+  ) +
+  ggplot2::geom_point(
+    size = 10
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    colour = "white"
+  ) +
+  ggplot2::labs(
+    subtitle = stringr::str_wrap("Location of the selected record", fig_width_def)
+  )
+```
