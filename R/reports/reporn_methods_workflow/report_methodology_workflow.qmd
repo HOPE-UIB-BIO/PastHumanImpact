@@ -4,6 +4,7 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+    fig-width: 10
 ---
 ```{r}
 #| label: chunk setup
@@ -1810,4 +1811,298 @@ data_to_plot_best_dist %>%
             fig_width_def * 2
         )
     )
+```
+
+# Pollen assemblage properties (PAP) estimation
+
+To prepare the response variables of our main pollen dataset compilation and to be able to analyse fundamental ecosystem properties, we prepared the standard estimates of pollen assemblage properties (PAP) (Bhatta et al. 2023). The PAP estimations provide different aspects of pollen assemblage diversity which includes palynological richness, diversity and evenness, compositional change and turnover, and Rate-of-Change (RoC). 
+
+These response variables are calculated using the newly developed [R-Ecopol package](https://github.com/HOPE-UIB-BIO/R-Ecopol-package) that contain all the functions needed to estimate PAPs for our pollen data assembly. The base functions used in this package are derived from other dependency packages such as `mvpart` package (Therneau et al. 2014) to estimate pollen zonations with multivariate regression trees, `vegan` (Oksanen et al. 2022) for other mutivariate techniques and dissimilarity indices functions from `iNext` (Chao et al. 2014) that have been modified to extract interpolated Hill numbers based on a minimum sample size, and newly developed R functions to run DCCA using `Canoco 4.5` (ter Braak xxxx) to list a few, among other, dependency packages. Additionally, `R-Ratepol` (Mottl 2021) is used get the estimates of RoC  
+
+```{r}
+#| label: example site - load pap data
+data_prepared_cp <-
+  targets::tar_read(
+    name = "data_prepared_cp",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_pap_example <-
+  data_prepared_cp %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+    dplyr::select(-dataset_id)
+```
+
+## Pollen richness, diversity, and evenness 
+
+The different aspects of palynological diversity are estimated using Hill's effective species numbers N0, N1, N2, and the associated evenness ratios of N2/N1 and N1/N0. These are combined through one equation where the effective species numbers differ mainly in how the rare taxa are weighted in the parameter q:
+
+$$^q{D} = (\sum_{i=1}^{S} p_{i}^{q})^{1/(1-q)}$$
+
+When q is 0, rare and abundant taxa have equal weight and the number is simply the number of taxa in the sample. The equation is not possible to define for q = 1, but as it approaches 1, it is equal to the exponential of the well-known Shannon index and reports the number of equally common taxa. When q = 2, it is the same as the inverse Simpson diversity index and provides the number of equally abundant taxa with a low weight on rare taxa. The advantage of using effective species numbers is that they provide easily interpretable units and contain the doubling effect. To standardize the sample sizes, we use the rarefaction approach developed by Chao et al. These estimates are rarefied to the number of n = 150 grains, or in some cases to a lower sum (minimum n = 25). Some pollen records were only available as pollen percentages, and as the sample size is unknown, these are then rarefied to the minimum sum of percentages. The evenness ratios will be 1 if all taxa are equally abundant, and the ratios hence indicate changes in abundances between the numbers of rare, equally common, and abundant taxa.
+
+We acknowledge that even though attempts are made to standardise richness and diversity estimates based on standard sample size, there are additional biases that are not taken into consideration such as differences in total pollen production and pollen representation (Odgaard 1998, 2001). In some cases, the total pollen sum is also too low to be considered a robust estimate, but it was a choice made on balancing loosing too much information from geographical areas with less data coverage (see data filtering above). 
+
+```{r}
+#| label: plot diversity
+dplyr::inner_join(
+  data_pap_example$PAP_diversity[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, dplyr::any_of(
+    names(data_pap_example$PAP_diversity[[1]])
+  )) %>%
+  tidyr::pivot_longer(
+    cols = -c(age, sample_id),
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Pollen diversity",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Compositional change
+
+Compositional change is calculated using multivariate regression trees (MRT) with age as the constraining variable. MRT is in general a robust tool to explore and predict changes in multivariate data sets using environmental predictor variables (De'ath, Simpson and Birks 2012). This technique has been adopted in palaeoecology to detect major zones in pollen diagrams or shifts between periods of homogeneous vegetation in time (Simpson and Birks 2012). We use the pollen taxa in percentages without any data transformations as the response and the median ages derived from the age-depth model as the constraining variable. The recursive partitioning are based on chi-square distances between pollen samples constrained by time. The number of cross-validation is set to 1000, and the optimal sized tree is chosen based on the 1SD rule (Simpson and Birks 2012).  
+
+```{r}
+#| label: plot MRT
+dplyr::inner_join(
+  data_pap_example$mvrt_partitions[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, MRT_partitions) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = MRT_partitions
+    )
+  ) +
+  ggplot2::facet_wrap(~"MRT_partitions") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "MVR",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+    
+```
+
+## Compositional turnover
+
+Compositional turnover is estimated using detrended canonical correspondence analysis (DCCA) with age as the explanatory variable (ter Braak and Smilauer 2007?). Changes in Weighted average (WA) sample scores (CaseR scores sensu ter Braak and Smilauer 2012) are measures of compositional turnover in standard deviation (SD) units (Birks 2007). The WA scores are regressed with time using a second-order polynomial (age+age\^2) to allow more flexibility in the turnover pattern within a pollen record. Total compositional turnover is a measure of the total length of CaseR scores along the DCCA axis 1, whereas the pattern within a record is the measures between the individual samples along the DCCA axis 1. The response data are pollen percentages without any transformation to maintain the chi-square distances between samples, whereas the ages are the median ages derived from the age-depth model for each site.
+
+```{r}
+#| label: plot DCCA1
+dplyr::inner_join(
+  data_pap_example$dcca_scores[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, axis_1) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = axis_1
+    )
+  ) +
+  ggplot2::facet_wrap(~"axis_1") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "DCCA1",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Rate-of-change
+
+Rate-of-change for the pollen assemblages in the pollen records are quantified using the novel [R-Ratepol package](https://github.com/HOPE-UIB-BIO/R-Ratepol-package) (Mottl et al. 2021). RoC is estimated using moving windows of 500 years' time bins of five number of windows shifts where samples are randomly selected for each bin. This approach is shown to increase the correct detection of RoC peak-points than the more traditional approaches (Mottle et al. 2021). RoC are reported as dissimilarity per 500 years using the Chord dissimilarity coefficient. Sample size is standardized in each working unit to 150 grains or the lowest number detected in each dataset. We use only the RoC scores further in the analyses. 
+
+```{r}
+#| label: plot RoC
+data_pap_example$PAP_roc[[1]] %>%
+  dplyr::select(Age, ROC) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = Age,
+      y = ROC
+    )
+  ) +
+  ggplot2::facet_wrap(~"ROC") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "ROC",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Change-points detection and density estimates
+
+Change-points detection of all the PAP variables are calculated using conventional regression trees (RT) for single variables with Euclidean distances. The transitions between the resulting groups (or zones) per variable is detected and saved as binary (0/1) variables. A change-point is defined as 1, where the mean ages between the two consecutive samples are used as the timing of this significant change. This is done individually for each PAP variable.
+
+The significant change points of the richness, diversity, and evenness variables are combined into one variable, and the significant change points of compositional turnover, compositional change, and rate-of-change is combined in a second variable. The density of these two variables are calculated using a Gaussian kernel,and re-scaled to each of specific age ranges for each individual pollen record (i.e. minimum and maximum ages). To solve the boundary issue in density estimation the data is reflected to 0. We extract the interpolated values at every 500 years time step. 
+
+```{r}
+#| label: plot change-points
+data_density_estimate <-
+  targets::tar_read(
+    name = "data_density_estimate",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_change_points <-
+  targets::tar_read(
+    name = "data_change_points",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_change_points_example <-
+  data_change_points %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  )
+
+
+data_density_estimate %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("pap_density_rescale", 1) %>%
+  tidyr::pivot_longer(
+    cols = c("density_turnover", "density_diversity"),
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Density estimates",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_segment(
+    data = dplyr::bind_rows(
+      tibble::tibble(
+        age = c(
+          data_change_points_example$mvrt_cp[[1]],
+          data_change_points_example$dcca_cp[[1]],
+          data_change_points_example$roc_cp[[1]]
+        ),
+        var_name = "density_turnover"
+      ),
+      tibble::tibble(
+        age = data_change_points_example$diversity_cp[[1]]$age,
+        var_name = "density_diversity"
+      )
+    ),
+    mapping = ggplot2::aes(
+      x = age,
+      xend = age,
+      y = -Inf,
+      yend = Inf
+    ),
+    col = "gray30",
+    alpha = 0.5
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Equal spacing of variables
+
+All response variables have been estimated using the harmonised pollen records for each location. To obtain estimates of equal spacing of 500 years, we used linear interpolation. In the context of the temporal analysis we analyse samples distributed in space across time, and equal time steps are necessary.
+
+In order to choose a method of interpolation to obtain data on equal time steps, we compared generalise additive models (GAM), hierarchical generalised additive models (HGAM), and simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM or HGAM. The GAM or HGAM models sometime showed unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single models for each of the variable in all of the records (>1000), we choose the simplest linear interpolation method. Similar issues were detected when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). As some of the models did not converge and showed inconsistent patterns we use the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
+
+```{r}
+data_for_hvar <-
+  targets::tar_read(
+    name = "data_for_hvar",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_for_hvar %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  dplyr::select(-dataset_id) %>%
+  tidyr::unnest(data_merge) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "evenly spaced PAP estimates",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
 ```
