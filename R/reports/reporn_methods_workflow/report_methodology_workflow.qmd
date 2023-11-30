@@ -2068,6 +2068,7 @@ All response variables have been estimated using the harmonised pollen records f
 In order to choose a method of interpolation to obtain data on equal time steps, we compared generalise additive models (GAM), hierarchical generalised additive models (HGAM), and simple linear interpolation. By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM or HGAM. The GAM or HGAM models sometime showed unexpected patterns in single PAP estimate that changed these correlations. Since we cannot individually assess all single models for each of the variable in all of the records (>1000), we choose the simplest linear interpolation method. Similar issues were detected when estimating the density variables of changes points. The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1). As some of the models did not converge and showed inconsistent patterns we use the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step. 
 
 ```{r}
+#| label: show data for hvar
 data_for_hvar <-
   targets::tar_read(
     name = "data_for_hvar",
@@ -2077,17 +2078,39 @@ data_for_hvar <-
     )
   )
 
+pap_vars <-
+  c(
+    "n0", "n1", "n2",
+    "n1_minus_n2", "n2_divided_by_n1",
+    "dcca_axis_1", "roc",
+    "density_turnover", "density_diversity"
+  )
+
 data_for_hvar %>%
   dplyr::filter(
     dataset_id == sel_example_record
   ) %>%
   dplyr::select(-dataset_id) %>%
   tidyr::unnest(data_merge) %>%
+  dplyr::select(
+    dplyr::all_of(
+      c(
+        "age",
+        pap_vars
+      )
+    )
+  ) %>%
   tidyr::pivot_longer(
     cols = -age,
     names_to = "var_name",
     values_to = "value"
   ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = pap_vars
+    )
+  )  %>% 
   ggplot2::ggplot(
     mapping = ggplot2::aes(
       x = age,
@@ -2106,3 +2129,477 @@ data_for_hvar %>%
   ggplot2::geom_point() +
   ggplot2::geom_line()
 ```
+
+# Paleo Climate
+
+Paleoclimate from the CHELSA-TraCE21k downscaling algorithm is downloaded from the CHELSA database (Karger et al. 2021, Karger et al. 2021). The selected bioclimatic variables are annual mean temperatures ℃ (bio1, `temp_annual`), minimum temperatures of coldest month ℃ (bio6, `temp_cold`), precipitation of warmest quarter kg m-2 quarter-1 (bio18, `prec_summer`) and precipitation of coldest quarter kg m-2 quarter-1 (bio19, `prec_win`), where we extracted climate values for the coordinates for each dataset_id retrieving the full time series of every 100 years. In addition, we downloaded the monthly climatology for daily maximum near-surface temperature K/10 (tasmin).  
+
+```{r}
+#| label: show climate
+data_climate <-
+  targets::tar_read(
+    name = "data_climate",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+climate_vars <-
+  c(
+    "temp_annual",
+    "temp_cold",
+    "prec_summer",
+    "prec_win"
+  )
+
+data_climate %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("climate_data", 1) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  dplyr::filter(
+    var_name %in% climate_vars
+  ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = climate_vars
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Climate variables for the selected record",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+
+```
+
+# Numerical analysis of hypothesis 1 
+
+## Hierarchical variation partitioning
+
+To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of different units. 
+
+Depending on the type of spatial or temporal analysis for hypothesis 1, the explanatory variables are either past human impact (SPDs), palaeoclimatic variables, and/or time (see below). 
+
+SPD is the variable of main interest as it represent past human presence. The palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures, and winter temperatures. These are selected as we considered them most relevant to represent major differences in climatic conditions in all the regions (in respect to differences in warm, cold, dry, wet, or regions with high seasonality). Time is represented by the ages of each pollen record, however, this is more difficult to interpret. We assume age may represent time dependent changes such as natural successions and/or ecological changes due to interaction between taxa.
+
+```{r}
+#| label: plot all variables for selected record
+data_for_hvar %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  dplyr::select(-dataset_id) %>%
+  tidyr::unnest(data_merge) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = c(
+        pap_vars,
+        "spd",
+        climate_vars
+      )
+  ) 
+  ) %>% 
+  tidyr::drop_na(var_name) %>% 
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "All variables for the selected record",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()    
+```
+
+
+In the hierarchichal variation partitioning analysis, the predictor variables can be applied either as individual predictors or as groups of predictors. In our case, we run the analysis with *groups of predictors*. This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors. (The overall results is not very different from using individual predictors). 
+
+The analysis is run in two different ways: 
+
+1. to analyse *spatial changes* which run the hierarchical variation partitioning for single record, then summarise per continent 
+2. to analyse the *temporal patterns* in space for each region of the 500 year time steps.
+
+## Spatial changes
+
+We create a single model per each recrods. We then use the adjusted r2 to assess the goodness-of-fit of models. Adjusted r2 is the modified version of r2 that corrects for the number of samples and predictors in the model. It is calculated using the Ezekiel formula adjr2 = 1 - (1- r2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan, these are so called semipartial r2 (Legendre et al. 2011). Negative adjusted r2 were replaced by 0 in our analysis. The assessment of a satisfactory model fit is contingent upon the underlying data characteristics. Thus, we considered the range of adjusted r2 and removed models with a total fit falling below the 5% lower quantile threshold, specifically those with a total adj r2 below 0.121. 
+
+Then we extracted the total variation of that whole model as well as varience explained by individual predictors. There are three types of variation partition per each predictor: 
+
+- total predictor variation
+- shared predictor variation
+- unique predictor variation
+
+We then use the total model variation to calculate the percentage of shared and unique variation explained by each predictor.
+
+```{r}
+#| label: show example result of hvarpart
+output_h1_spatial <-
+  targets::tar_read(
+    name = "output_hvar_spatial",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_h1_example <-
+  output_h1_spatial %>%
+  dplyr::filter(
+    dataset_id == "26606"
+  ) %>%
+  purrr::chuck("varhp", 1)
+
+data_h1_res_example <-
+  data_h1_example %>%
+  purrr::chuck("summary_table") %>%
+  dplyr::mutate(
+    total_variance = data_h1_example$varhp_output$Total_explained_variation
+  ) %>%
+  dplyr::rename(
+    p_value = `Pr(>I)`,
+    Individual_percent = `I.perc(%)`
+  ) %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = Unique:Individual_percent,
+      .fns = ~ replace(., .x < 0, 0)
+    )
+  ) %>% # negative variances can be ignored
+  dplyr::mutate(
+    Individual_percent = Individual / total_variance * 100
+  ) %>% # recalculate individual percent
+  dplyr::mutate(
+    Unique_percent = Unique / total_variance * 100,
+    Average.share_percent = Average.share / total_variance * 100
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::select(
+    total_variance,
+    predictor,
+    predictor_unique = unique,
+    predictor_shared = average_share,
+    predictor_total = individual,
+    predictor_unique_percent = unique_percent,
+    predictor_shared_percent = average_share_percent,
+    predictor_total_percent = individual_percent
+  )
+
+
+data_h1_res_example %>%
+  pander::pandoc.table(
+    caption = "Table: Result table of a single record for spatial hierarchichal variation partitioning"
+  )
+  
+  ```
+
+```{r}
+#| label: h1 spatial visulalisation
+data_h1_res_example  %>% 
+dplyr::select(
+  predictor, predictor_unique_percent, predictor_shared_percent
+)  %>% 
+tidyr::pivot_longer(
+  cols = -predictor
+)  %>% 
+ggplot2::ggplot(
+  mapping = ggplot2::aes(
+    x = predictor,
+    y = value,
+    fill = predictor,
+    alpha = name
+  )
+) +
+ggplot2::scale_y_continuous(
+  limits = c(0, 100),
+) +
+ggplot2::scale_alpha_discrete(
+  "shared/unique",
+  range = c(0.5, 1),
+  labels = c("shared", "unique")
+) +
+ggplot2::guides(
+  fill = "none",
+) +
+ggplot2::labs(
+  y = "percent of variance explained by predictor",
+)+
+ggplot2::geom_col(
+  position = ggplot2::position_dodge(
+    width = 0.9
+  )
+) 
+
+```
+
+However, for certain records, the shared variance of predictors is much larger than the total variance of the model. This caused percentages to be very high.
+
+```{r}
+#| label: show bad example result of hvarpart
+data_h1_example_bad <-
+  output_h1_spatial %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("varhp", 1)
+
+data_h1_res_example_bad <-
+  data_h1_example_bad %>%
+  purrr::chuck("summary_table") %>%
+  dplyr::mutate(
+    total_variance = data_h1_example_bad$varhp_output$Total_explained_variation
+  ) %>%
+  dplyr::rename(
+    p_value = `Pr(>I)`,
+    Individual_percent = `I.perc(%)`
+  ) %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = Unique:Individual_percent,
+      .fns = ~ replace(., .x < 0, 0)
+    )
+  ) %>% # negative variances can be ignored
+  dplyr::mutate(
+    Individual_percent = Individual / total_variance * 100
+  ) %>% # recalculate individual percent
+  dplyr::mutate(
+    Unique_percent = Unique / total_variance * 100,
+    Average.share_percent = Average.share / total_variance * 100
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::select(
+    total_variance,
+    predictor,
+    predictor_unique = unique,
+    predictor_shared = average_share,
+    predictor_total = individual,
+    predictor_unique_percent = unique_percent,
+    predictor_shared_percent = average_share_percent,
+    predictor_total_percent = individual_percent
+  )
+
+
+data_h1_res_example_bad %>%
+  pander::pandoc.table(
+    caption = "Table: Result table of a single record for spatial hierarchichal variation partitioning"
+  )
+
+```
+
+In these cases, the outliers above 100% were removed. 
+
+### Summary across climate zone per continent
+
+We then summarised the results per each climate zone within continent.
+
+Here is an example of the distribution of uniqu varience explained by humans for Europe (part of Figure 3).
+
+```{r}
+#| label: plot unique human impact in Europe
+
+# Import tables for plotting
+source(
+  here::here(
+    "R/working_scripts/Results_script.R"
+  )
+)
+
+
+data_unique_human <-
+  data_spatial_vis %>%
+  dplyr::mutate(
+    sel_classification = as.factor(sel_classification),
+    region = factor(region,
+      levels = vec_regions
+    )
+  ) %>%
+  dplyr::full_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "sel_classification"
+  ) %>%
+  dplyr::filter(
+    predictor == "human"
+  ) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(
+    data_to_plot = -c(region)
+  ) %>%
+  dplyr::ungroup()
+
+
+get_unique_human_dist <- function(
+    data_source,
+    sel_region,
+    point_size = 3) {
+  data_work <-
+    data_source %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    )
+
+  data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = 1,
+        y = unique_percent
+      )
+    ) +
+    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 100)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      legend.position = "none",
+      panel.spacing.x = grid::unit(0, "mm"),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+    ) +
+    ggplot2::labs(
+      x = "Climate zone",
+      y = "Unique variance explained by human impact (%)"
+    ) +
+    ggplot2::geom_jitter(
+      mapping = ggplot2::aes(
+        col = sel_classification
+      ),
+      alpha = 0.3
+    ) +
+    ggplot2::geom_violin(
+      mapping = ggplot2::aes(
+        fill = sel_classification
+      ),
+      alpha = 0.3,
+      col = NA
+    ) +
+    ggplot2::geom_boxplot(
+      fill = "white",
+      col = "grey30",
+      width = 0.1,
+      outlier.shape = NA
+    ) +
+    ggplot2::geom_point(
+      data = data_work %>%
+        dplyr::group_by(sel_classification) %>%
+        dplyr::summarise(
+          unique_percent = median(unique_percent)
+        ),
+      mapping = ggplot2::aes(
+        fill = sel_classification
+      ),
+      shape = 22,
+      col = "gray30",
+      size = point_size
+    )
+}
+
+data_fig_unique_human_dist <-
+  data_unique_human %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ get_unique_human_dist(
+        data_source = .x
+      )
+    )
+  )
+
+data_fig_unique_human_dist  %>% 
+dplyr::filter(
+  region == "Europe"
+)  %>% 
+purrr::chuck("plot", 1) +
+ggplot2::labs(
+  title = "Europe",
+  x = "Climate zone",
+  y = "Unique variance explained by human impact (%)"
+) 
+
+
+
+```
+
+We then estimate the the median value of variance explained by each predictor (unique and shared).
+
+```{r}
+#| label: h1 summary per continent
+  summary_spatial_median %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = predictors_spatial_order # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(n_records > 5)  %>% 
+dplyr::filter(
+  region == "Europe"
+)   %>% 
+get_circular_barplot() +
+ggplot2::labs(
+  title = "Europe"
+)
+
+```
+
+## Temporal changes
+
+In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analysis will return NA for these specific time bins.
+

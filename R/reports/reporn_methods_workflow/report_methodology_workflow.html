@@ -425,11 +425,174 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="figures/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="figures/show%20data%20for%20hvar-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="paleo-climate" class="level1">
+<h1>Paleo Climate</h1>
+<p>Paleoclimate from the CHELSA-TraCE21k downscaling algorithm is downloaded from the CHELSA database (Karger et al.&nbsp;2021, Karger et al.&nbsp;2021). The selected bioclimatic variables are annual mean temperatures ℃ (bio1, <code>temp_annual</code>), minimum temperatures of coldest month ℃ (bio6, <code>temp_cold</code>), precipitation of warmest quarter kg m-2 quarter-1 (bio18, <code>prec_summer</code>) and precipitation of coldest quarter kg m-2 quarter-1 (bio19, <code>prec_win</code>), where we extracted climate values for the coordinates for each dataset_id retrieving the full time series of every 100 years. In addition, we downloaded the monthly climatology for daily maximum near-surface temperature K/10 (tasmin).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/show%20climate-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="numerical-analysis-of-hypothesis-1" class="level1">
+<h1>Numerical analysis of hypothesis 1</h1>
+<section id="hierarchical-variation-partitioning" class="level2">
+<h2 class="anchored" data-anchor-id="hierarchical-variation-partitioning">Hierarchical variation partitioning</h2>
+<p>To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package <code>rdacca.hp</code> to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using <em>Gower-distances</em> adding a constant because our response data, the PAPS, is a mixture of different units.</p>
+<p>Depending on the type of spatial or temporal analysis for hypothesis 1, the explanatory variables are either past human impact (SPDs), palaeoclimatic variables, and/or time (see below).</p>
+<p>SPD is the variable of main interest as it represent past human presence. The palaeoclimate is a matrix of summer precipitation, winter precipitation, annual temperatures, and winter temperatures. These are selected as we considered them most relevant to represent major differences in climatic conditions in all the regions (in respect to differences in warm, cold, dry, wet, or regions with high seasonality). Time is represented by the ages of each pollen record, however, this is more difficult to interpret. We assume age may represent time dependent changes such as natural successions and/or ecological changes due to interaction between taxa.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/plot%20all%20variables%20for%20selected%20record-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the hierarchichal variation partitioning analysis, the predictor variables can be applied either as individual predictors or as groups of predictors. In our case, we run the analysis with <em>groups of predictors</em>. This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors. (The overall results is not very different from using individual predictors).</p>
+<p>The analysis is run in two different ways:</p>
+<ol type="1">
+<li>to analyse <em>spatial changes</em> which run the hierarchical variation partitioning for single record, then summarise per continent</li>
+<li>to analyse the <em>temporal patterns</em> in space for each region of the 500 year time steps.</li>
+</ol>
+</section>
+<section id="spatial-changes" class="level2">
+<h2 class="anchored" data-anchor-id="spatial-changes">Spatial changes</h2>
+<p>We create a single model per each recrods. We then use the adjusted r2 to assess the goodness-of-fit of models. Adjusted r2 is the modified version of r2 that corrects for the number of samples and predictors in the model. It is calculated using the Ezekiel formula adjr2 = 1 - (1- r2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan, these are so called semipartial r2 (Legendre et al.&nbsp;2011). Negative adjusted r2 were replaced by 0 in our analysis. The assessment of a satisfactory model fit is contingent upon the underlying data characteristics. Thus, we considered the range of adjusted r2 and removed models with a total fit falling below the 5% lower quantile threshold, specifically those with a total adj r2 below 0.121.</p>
+<p>Then we extracted the total variation of that whole model as well as varience explained by individual predictors. There are three types of variation partition per each predictor:</p>
+<ul>
+<li>total predictor variation</li>
+<li>shared predictor variation</li>
+<li>unique predictor variation</li>
+</ul>
+<p>We then use the total model variation to calculate the percentage of shared and unique variation explained by each predictor.</p>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; 
+#&gt; ------------------------------------------------------------------
+#&gt;  total_variance   predictor   predictor_unique   predictor_shared 
+#&gt; ---------------- ----------- ------------------ ------------------
+#&gt;      0.283          human          0.0717               0         
+#&gt; 
+#&gt;      0.283         climate         0.0083             0.1008      
+#&gt; 
+#&gt;      0.283          time           0.0321             0.0897      
+#&gt; ------------------------------------------------------------------
+#&gt; 
+#&gt; Table: Table: Result table of a single record for spatial hierarchichal variation partitioning (continued below)
+#&gt; 
+#&gt;  
+#&gt; -----------------------------------------------------------------------
+#&gt;  predictor_total   predictor_unique_percent   predictor_shared_percent 
+#&gt; ----------------- -------------------------- --------------------------
+#&gt;      0.0521                 25.34                        0             
+#&gt; 
+#&gt;      0.1091                 2.933                      35.62           
+#&gt; 
+#&gt;      0.1218                 11.34                       31.7           
+#&gt; -----------------------------------------------------------------------
+#&gt; 
+#&gt; Table: Table continues below
+#&gt; 
+#&gt;  
+#&gt; -------------------------
+#&gt;  predictor_total_percent 
+#&gt; -------------------------
+#&gt;           18.41          
+#&gt; 
+#&gt;           38.55          
+#&gt; 
+#&gt;           43.04          
+#&gt; -------------------------</code></pre>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/h1%20spatial%20visulalisation-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>However, for certain records, the shared variance of predictors is much larger than the total variance of the model. This caused percentages to be very high.</p>
+<div class="cell" data-layout-align="center">
+<pre><code>#&gt; 
+#&gt; ------------------------------------------------------------------
+#&gt;  total_variance   predictor   predictor_unique   predictor_shared 
+#&gt; ---------------- ----------- ------------------ ------------------
+#&gt;      0.035          human            0                0.0523      
+#&gt; 
+#&gt;      0.035         climate           0                0.0943      
+#&gt; 
+#&gt;      0.035          time           0.0162             0.1104      
+#&gt; ------------------------------------------------------------------
+#&gt; 
+#&gt; Table: Table: Result table of a single record for spatial hierarchichal variation partitioning (continued below)
+#&gt; 
+#&gt;  
+#&gt; -----------------------------------------------------------------------
+#&gt;  predictor_total   predictor_unique_percent   predictor_shared_percent 
+#&gt; ----------------- -------------------------- --------------------------
+#&gt;         0                     0                        149.4           
+#&gt; 
+#&gt;         0                     0                        269.4           
+#&gt; 
+#&gt;      0.1266                 46.29                      315.4           
+#&gt; -----------------------------------------------------------------------
+#&gt; 
+#&gt; Table: Table continues below
+#&gt; 
+#&gt;  
+#&gt; -------------------------
+#&gt;  predictor_total_percent 
+#&gt; -------------------------
+#&gt;             0            
+#&gt; 
+#&gt;             0            
+#&gt; 
+#&gt;           361.7          
+#&gt; -------------------------</code></pre>
+</div>
+<p>In these cases, the outliers above 100% were removed.</p>
+<section id="summary-across-climate-zone-per-continent" class="level3">
+<h3 class="anchored" data-anchor-id="summary-across-climate-zone-per-continent">Summary across climate zone per continent</h3>
+<p>We then summarised the results per each climate zone within continent.</p>
+<p>Here is an example of the distribution of uniqu varience explained by humans for Europe (part of Figure 3).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/plot%20unique%20human%20impact%20in%20Europe-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We then estimate the the median value of variance explained by each predictor (unique and shared).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/h1%20summary%20per%20continent-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="temporal-changes" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-changes">Temporal changes</h2>
+<p>In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analysis will return NA for these specific time bins.</p>
 </section>
 </section>
 
