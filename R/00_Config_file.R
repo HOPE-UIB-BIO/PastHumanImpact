@@ -59,7 +59,7 @@ package_list <-
     "ggforce",
     "ggimage",
     "here",
-    "httpgd",
+    # "httpgd",
     "janitor",
     "jsonlite",
     "kableExtra",

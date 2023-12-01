@@ -5,6 +5,7 @@ output:
     toc: yes
     toc_float: yes
     fig-width: 10
+    self_contained: yes
 ---
 ```{r}
 #| label: chunk setup
@@ -2324,7 +2325,7 @@ data_h1_res_example %>%
     caption = "Table: Result table of a single record for spatial hierarchichal variation partitioning"
   )
   
-  ```
+```
 
 ```{r}
 #| label: h1 spatial visulalisation
