@@ -2256,7 +2256,7 @@ The analysis is run in two different ways:
 
 ## Spatial changes
 
-We create a single model per each recrods. We then use the adjusted r2 to assess the goodness-of-fit of models. Adjusted r2 is the modified version of r2 that corrects for the number of samples and predictors in the model. It is calculated using the Ezekiel formula adjr2 = 1 - (1- r2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan, these are so called semipartial r2 (Legendre et al. 2011). Negative adjusted r2 were replaced by 0 in our analysis. The assessment of a satisfactory model fit is contingent upon the underlying data characteristics. Thus, we considered the range of adjusted r2 and removed models with a total fit falling below the 5% lower quantile threshold, specifically those with a total adj r2 below 0.121. 
+We create a single model per each recods. We then use the adjusted r2 to assess the goodness-of-fit of models. Adjusted r2 is the modified version of r2 that corrects for the number of samples and predictors in the model. It is calculated using the Ezekiel formula adjr2 = 1 - (1- r2)*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables. In vegan, these are so called semipartial r2 (Legendre et al. 2011). Negative adjusted r2 were replaced by 0 in our analysis. The assessment of a satisfactory model fit is contingent upon the underlying data characteristics. Thus, we considered the range of adjusted r2 and removed models with a total fit falling below the 5% lower quantile threshold, specifically those with a total adj r2 below 0.121. 
 
 Then we extracted the total variation of that whole model as well as varience explained by individual predictors. There are three types of variation partition per each predictor: 
 
@@ -2602,5 +2602,63 @@ ggplot2::labs(
 
 ## Temporal changes
 
-In this latter analysis, we restructure the data so that each analysis is run per time bin for each continent. First we did it for each ecozone on a continent, but the results is relatively similar so we use the continental scale. The predictor groups in each time bin are the past human presence and the matrix of palaeoclimatic variables. It was necessary to filter out time bins which have less than 5 samples, and for some bins, if all the spds equal zero, the analysis will fail. In this cases there is an insufficient numbers of predictors and the analysis will return NA for these specific time bins.
+### Continemtal trends
+
+We make a new Hierarchical Variance Partition analysis, however, this time we restructure the data, so that one model is run for each 500-year time slice for each continent. (note that we fist tried it for each ecozone on a continent, but the results is relatively similar so we use the continental scale). This means that data from all records within continent for specific time slice are placed in the same model. The predictor groups in model are the past human presence and the matrix of palaeoclimatic variables (time is not included as all sample have same time). It was necessary to filter out time slices, which have less than 5 samples within continent. Additionaly, there were several models, where all the SDP values equal 0 (no human impact). Such models will fail (unable to compute).
+
+Similar to spatial changes, unique and shared variance explained by each predictor is extracted and plotted. In the figure, each bar (cplumn) is a single model. The light grey bars are period, where we do not have data or model fail. The green color represent unique/shared variance explained by human predictor.  
+
+```{r}
+#| label: show temporal example for humans inEurope 
+
+fig_human_temporal <-
+summary_temporal_median  %>% 
+ tidyr::complete(
+      age,
+      tidyr::nesting(predictor, region)
+    ) %>%
+    dplyr::filter(
+    region == "Europe"
+)  %>%
+    dplyr::mutate(
+      no_data = ifelse(is.na(percentage_median), TRUE, FALSE)
+    ) %>%
+    dplyr::mutate(
+      percentage_median = ifelse(no_data, 0, percentage_median)
+    )  %>% 
+get_predictor_barplot(
+  data_source = .,
+      sel_predictor = "human",
+    sel_palette = c("#00BA38")  %>% 
+    rlang::set_names("human"),
+    axis_to_right = TRUE
+) +
+ggplot2::theme_bw() +
+ggplot2::theme(
+  axis.title = ggplot2::element_text()
+) +
+ggplot2::labs(
+  y = "Age (ka yr BP)"
+)  
+
+
+ggpubr::annotate_figure(
+  fig_human_temporal, 
+  bottom = ggpubr::text_grob(
+    "Variance explined by human predictor (%)"
+  )
+)
+
+```
+
+
+### Temporal variatin of case scores
+
+:::{.callout-note}
+This is the only text about it i can find anywhere. Can @vivian look into thit?
+
+*Records with scores constrained by humans when time and climate is partialled out that explains more than 10% of the variance plotted along time. Dashed vertical lines reflect MRT partitions, whereas no MRT split was detected for North America. These indicate potential change around 3-5 ka, whereas the r2 ranges between 0.3-0.61, and all models have a high prediction error (CV Error > 1) indicating very low prediction power*
+:::
+
+# Numerical analysis of hypothesis 2
 
