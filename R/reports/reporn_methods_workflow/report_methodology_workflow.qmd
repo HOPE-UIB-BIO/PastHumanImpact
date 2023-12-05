@@ -2195,7 +2195,7 @@ data_climate %>%
 
 # Numerical analysis of hypothesis 1 
 
-## Hierarchical variation partitioning
+## Hierarchical variation partitioning (hVarPart)
 
 To test if the ecological processes have changed due to past human activity in single records, we use reduced rank multivariate regression. This is also known as distance-based redundancy analysis (db-RDA). We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors. This estimates the variation per variables in different combinations to get the average variable importance independent of the order of predictors. db-RDA was performed using *Gower-distances* adding a constant because our response data, the PAPS, is a mixture of different units. 
 
@@ -2788,5 +2788,205 @@ This is the only text about it i can find anywhere. Can @vivian look into thit?
 *Records with scores constrained by humans when time and climate is partialled out that explains more than 10% of the variance plotted along time. Dashed vertical lines reflect MRT partitions, whereas no MRT split was detected for North America. These indicate potential change around 3-5 ka, whereas the r2 ranges between 0.3-0.61, and all models have a high prediction error (CV Error > 1) indicating very low prediction power*
 :::
 
+## Figure 2
+
+Finally, all those parts are combined in Figure 2.
+
+![Figure 2](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Manual_edit\Figure2_20231019.png)
+
+
 # Numerical analysis of hypothesis 2
 
+## Multidimentional shift
+
+To test Hypothesis 2, that the interrelationships among pollen assemblage properties in response to humans, we integrated assemblage properties at each 500-year time slice within climate zones across continents. We used a principal component analysis (PCA) with standardisation of all indices. 
+
+Here is an example of PCA for Europe - Temperate Without dry season - 2000 yr slice:
+
+```{r}
+#| label: xample PCA
+data_m2 <-
+  targets::tar_read(
+    name = "data_m2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+
+data_m2 %>%
+  dplyr::filter(
+    region == "Europe" &
+      sel_classification == sel_data$sel_classification[[1]]
+  ) %>%
+  purrr::chuck("pca_analysis", 1, 1) %>%
+  vegan:::plot.cca(.)
+```
+
+
+To quantify the overall changes in the interrelationship among pollen assemblage properties, we employed symmetrical Procrustes sum-of squares (m2) to compare pairwise PCA changes within each time slice. 
+
+Here is a m2 matrix of all time slices to each other for Europe - Temperate Without dry season:
+
+```{r}
+#| label: example m2
+data_m2 %>%
+  dplyr::filter(
+    region == "Europe" &
+      sel_classification == sel_data$sel_classification[[1]]
+  ) %>%
+  purrr::chuck("m2", 1) %>%
+  as.matrix()  %>% 
+  heatmap()
+```
+
+We can then plot the changes between subsequent time slices (diagonal+1 in the matrix) in relationship to the time. Here each point is a m2 value between 2 time slices, the full line represent GAM model and the dahsed line LOESS smoother. Here is an examle for Europe - Temperate Without dry season:
+
+```{r}
+#| label: example m2 temporal
+data_m2 %>%
+  dplyr::select(
+    m2_time_df,
+    region,
+    sel_classification
+  ) %>%
+  dplyr::filter(
+    region == "Europe" &
+      sel_classification == sel_data$sel_classification[[1]]
+  ) %>%
+  tidyr::unnest(cols = c(m2_time_df)) %>%
+  tidyr::complete(
+    time,
+    tidyr::nesting(sel_classification, region)
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(region, sel_classification, ecozone_koppen_5) %>%
+      dplyr::distinct(),
+    by = c("region", "sel_classification")
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    ),
+    ecozone_koppen_5 = factor(
+      ecozone_koppen_5,
+      levels = vec_climate_5 # [config criteria]
+    )
+  ) %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = as.numeric(time),
+      y = delta_m2,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_grid(
+    region ~ ecozone_koppen_5
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse",
+    limits = c(8.5e3, 500),
+    breaks = c(seq(8.5e3, 500, by = -2e3)),
+    labels = c(seq(8.5, 0.5, by = -2))
+  ) +
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::theme(
+    aspect.ratio = 1,
+    legend.position = "none",
+    panel.background = ggplot2::element_blank(),
+    strip.background = ggplot2::element_blank(),
+    # strip.text.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(
+      fill = "transparent",
+      color = NA
+    ),
+    panel.grid.major = ggplot2::element_line(
+      color = "grey90",
+      linewidth = 0.1
+    ),
+    axis.title.x = ggplot2::element_text(size = 10),
+   #  axis.title.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = 10, angle = 60),
+    axis.text.y = ggplot2::element_text(size = 10),
+    plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+  ) +
+  ggplot2::labs(
+    x = "Age (ka cal yr BP)",
+    y = "change in m2"
+  ) +
+  ggplot2::geom_point(size = 2) +
+  ggplot2::geom_smooth(
+    method = "loess",
+    formula = y ~ x,
+    linewidth = 0.1 * 2 ,
+    lty = 2,
+    se = FALSE
+  ) +
+  ggplot2::geom_smooth(
+    method = "gam",
+    se = FALSE,
+    formula = y ~ s(x, bs = "tp", k = 10),
+    method.args = list(
+      family =
+        mgcv::betar(link = "logit")
+    ),
+    linewidth = 0.2 * 2 
+  )
+```
+
+
+## General trends of predictors
+Because m2 matrix is on a level of climate zone within continent, we need to de determine the general patterns of past humans (as represented by SPD) and palaeoclimate within the climate zones in the continents. We used hierarchical Generalised Additive Models (HGAM) to depict their main trend.
+
+:::{.callout-note}
+We are aiming to recreate a general trend of predictor for our data, not for the climate zone itsef. This means we will use hGAM of individual SPD tredns and do not construct new SPD from RC within the climate zone.
+:::
+
+Here is a general trends of SPD (Extended Data Figure 8):
+
+![General tredns of SPDs](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Supp\Supplementary_figure_spd.png)
+
+## hVarPart
+
+Subsequently, for each continent and climate zone, we used the pairwise m2 as distance matrices in hierarchical variation partitioning to quantify the importance of humans, climate, and time in explaining the multidimensional shifts among pollen assemblage properties through time. Subsequently, the explanatory variables derived from HGAMs are integrated into hierarchical variation partitioning to gauge the extent to which human activity and/or climate shifts influenced variations in the interrelationships among pollen assemblage properties. 
+
+The visualisation is the same as H1. Here is an example for Europe:
+
+```{r}
+#| label: example hVarPart H2
+data_h2_vis %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  get_circular_barplot(
+    data_source = .,
+    y_var = "percentage",
+    fill_var = "group",
+    x_var = "predictor",
+    line_width = 0.2,
+    line_col = "grey75",
+    icon_size = 0.15,
+    y_max = 100,
+    y_step = 30,
+    col_vec = palette_ecozones, # [config criteria]
+    x_name = predictors_label # [config criteria]
+  )
+```
+
+## Figure 4
+
+Finally, all those parts are combined in Figure 4.
+
+![Figure 4](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Manual_edit\Figure4_20231019.png)
