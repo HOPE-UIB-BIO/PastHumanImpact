@@ -2193,6 +2193,12 @@ data_climate %>%
 
 ```
 
+# Numerical analysis
+
+The whole project is relative complex, therefore we included a conceptual workflow figure (Figure 1). Note: Figure is work in progress and will be improved with graphic designer. 
+
+![Figure 1](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Mock_ups\Figure1_20231019.png)
+
 # Numerical analysis of hypothesis 1 
 
 ## Hierarchical variation partitioning (hVarPart)
@@ -2730,9 +2736,7 @@ data_spatial_vis %>%
   )
 ```
 
-## Temporal changes
-
-### Continemtal trends
+## Temporal changes - Continemtal trends
 
 We make a new Hierarchical Variance Partition analysis, however, this time we restructure the data, so that one model is run for each 500-year time slice for each continent. (note that we fist tried it for each ecozone on a continent, but the results is relatively similar so we use the continental scale). This means that data from all records within continent for specific time slice are placed in the same model. The predictor groups in model are the past human presence and the matrix of palaeoclimatic variables (time is not included as all sample have same time). It was necessary to filter out time slices, which have less than 5 samples within continent. Additionaly, there were several models, where all the SDP values equal 0 (no human impact). Such models will fail (unable to compute).
 
@@ -2780,7 +2784,14 @@ ggpubr::annotate_figure(
 
 ```
 
-### Temporal variatin of case scores
+## Figure 2
+
+Finally, all those parts are combined in Figure 2.
+
+![Figure 2](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Manual_edit\Figure2_20231019.png)
+
+
+## Temporal variatin of case scores
 
 :::{.callout-note}
 This is the only text about it i can find anywhere. Can @vivian look into thit?
@@ -2788,12 +2799,267 @@ This is the only text about it i can find anywhere. Can @vivian look into thit?
 *Records with scores constrained by humans when time and climate is partialled out that explains more than 10% of the variance plotted along time. Dashed vertical lines reflect MRT partitions, whereas no MRT split was detected for North America. These indicate potential change around 3-5 ka, whereas the r2 ranges between 0.3-0.61, and all models have a high prediction error (CV Error > 1) indicating very low prediction power*
 :::
 
-## Figure 2
+Here is an example for Europe:
 
-Finally, all those parts are combined in Figure 2.
+```{r}
+#| label: temporal trend of case scores
 
-![Figure 2](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Manual_edit\Figure2_20231019.png)
+# get constrained spd scores
+data_scores_nested <-
+  output_h1_spatial %>%
+  dplyr::mutate(
+    constrained_scores = purrr::map(
+      .x = data_merge,
+      .f = purrr::possibly(
+        get_scores_constrained_spd,
+        otherwise = NA_real_
+      )
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id,
+        sel_classification,
+        region
+      ),
+    by = "dataset_id"
+  ) %>%
+  dplyr::select(
+    dataset_id,
+    region,
+    sel_classification,
+    constrained_scores
+  )
 
+data_constrained_scores <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    scores = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("scores")
+    )
+  ) %>%
+  tidyr::unnest(scores) %>%
+  dplyr::select(-constrained_scores)
+
+data_adjr2 <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    adjr2 = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("adjr2")
+    )
+  ) %>%
+  tidyr::unnest(adjr2) %>%
+  dplyr::select(-constrained_scores)
+
+data_scores_merged <-
+  dplyr::left_join(
+    data_constrained_scores,
+    data_adjr2,
+    by = dplyr::join_by(
+      dataset_id, region, sel_classification
+    )
+  )
+
+data_score_mvpart <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(region, dataset_id, CAP1, age) %>%
+  tidyr::nest(data_nested = -c(region)) %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  dplyr::mutate(
+    data_for_mvpart = purrr::map(
+      .x = data_nested,
+      .f = ~ .x %>%
+        tidyr::pivot_wider(
+          names_from = dataset_id,
+          values_from = CAP1
+        )
+    )
+  ) %>%
+  dplyr::mutate(
+    mvpart = purrr::map(
+      .progress = TRUE,
+      .x = data_for_mvpart,
+      .f = ~ {
+        data_mv <- .x %>%
+          dplyr::select(-age)
+
+        data_age <- .x %>%
+          purrr::chuck("age")
+
+        mvpart_result <-
+          mvpart::mvpart(
+            data.matrix(data_mv) ~ data_age,
+            xv = "1se",
+            xvmult = 1000,
+            plot.add = FALSE,
+            data = data_mv
+          )
+
+        utils::capture.output(
+          change_points_age <-
+            as.data.frame(
+              summary(mvpart_result)$splits
+            ) %>%
+            purrr::pluck("index"),
+          file = "NUL"
+        )
+
+        list(
+          change_points_age = change_points_age,
+          mvpart_result = mvpart_result
+        ) %>%
+          return()
+      }
+    )
+  ) %>%
+  dplyr::select(region, mvpart)
+
+data_score_change_points <-
+  data_score_mvpart %>%
+  dplyr::mutate(
+    change_points_age = purrr::map(
+      .x = mvpart,
+      .f = ~ .x %>%
+        purrr::chuck("change_points_age")
+    ),
+    cv_error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("xerror"),
+        otherwise = NA_real_
+      )
+    ),
+    error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("rel error"),
+        otherwise = NA_real_
+      )
+    ),
+    r2 = 1 - error
+  )
+
+
+data_fig_scores <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_scores_merged = -c(region)) %>%
+  dplyr::left_join(
+    data_score_change_points,
+    by = dplyr::join_by(region)
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::pmap(
+      .l = list(
+        data_scores_merged,
+        change_points_age,
+        cv_error,
+        r2
+      ),
+      .f = ~ ggplot2::ggplot(
+        data = ..1,
+        mapping = ggplot2::aes(
+          x = age,
+          y = CAP1,
+          group = dataset_id
+        )
+      ) +
+        ggplot2::geom_line(
+          ggplot2::aes(
+            col = sel_classification
+          ),
+          alpha = 0.7,
+          linewidth = 0.2
+        ) +
+        ggplot2::geom_vline(
+          xintercept = ..2,
+          lty = 2,
+          col = "grey30",
+          linewidth = line_size * 2
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4.5,
+            x = 8.5e3,
+            label = paste("CV errror =", round(..3, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 5 # [config criteria]
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4,
+            x = 8.5e3,
+            label = paste("R2 =", round(..4, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 5 # [config criteria]
+        ) +
+        ggplot2::scale_colour_manual(
+          values = palette_ecozones # [config criteria]
+        ) +
+        ggplot2::scale_y_continuous(limits = c(0, 5)) +
+        ggplot2::scale_x_continuous(
+          trans = "reverse",
+          limits = c(8.5e3, 0),
+          breaks = seq(8.5e3, 0, by = -2e3)
+        ) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
+          text = ggplot2::element_text(
+            size = text_size # [config criteria]
+          ),
+          line = ggplot2::element_line(
+            linewidth = line_size # [config criteria]
+          ),
+          legend.position = "none",
+          panel.grid.minor = ggplot2::element_blank(),
+          plot.background = ggplot2::element_blank(),
+          plot.margin = grid::unit(c(0.2, 0.2, 0.2, 0), "mm"),
+          axis.title = ggplot2::element_blank()
+        ) +
+        ggplot2::labs(
+          y = "Scores",
+          x = "Age BP"
+        )
+    )
+  )
+
+data_fig_scores %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  purrr::chuck("plot", 1)
+
+```
+
+## Figure 3
+
+Those are then combined with the distribution of variance explained unique by humans in Figure 3.
+
+![Figure 3](C:\Users\ondre\Documents\GITHUB\HOPE_Hypothesis1\Outputs\Manual_edit\Figure3_20231019.png)
 
 # Numerical analysis of hypothesis 2
 
