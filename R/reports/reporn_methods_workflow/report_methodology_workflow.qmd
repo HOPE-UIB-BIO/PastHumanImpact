@@ -2928,7 +2928,7 @@ Here is an example for Europe:
 
 ```{r}
 #| label: temporal trend of case scores
-
+#| result: "hide"
 # get constrained spd scores
 data_scores_nested <-
   output_h1_spatial %>%
@@ -3080,8 +3080,10 @@ data_score_change_points <-
     ),
     r2 = 1 - error
   )
+```
 
-
+```{r}
+#| label: temporal trend of case scores figure
 data_fig_scores <-
   data_scores_merged %>%
   dplyr::filter(adjr2 > 0.1) %>%
@@ -3129,7 +3131,7 @@ data_fig_scores <-
           vjust = 0,
           hjust = 0,
           col = "grey30",
-          size = text_size / 5 # [config criteria]
+          size = text_size / 2 # [config criteria]
         ) +
         ggplot2::geom_text(
           mapping = ggplot2::aes(
@@ -3140,7 +3142,7 @@ data_fig_scores <-
           vjust = 0,
           hjust = 0,
           col = "grey30",
-          size = text_size / 5 # [config criteria]
+          size = text_size / 2 # [config criteria]
         ) +
         ggplot2::scale_colour_manual(
           values = palette_ecozones # [config criteria]
@@ -3203,7 +3205,48 @@ We used a principal component analysis (PCA) with standardisation of all indices
 Here is an example of PCA for Europe - Temperate Without dry season - 2000 yr slice:
 
 ```{r}
-#| label: xample PCA
+#| label: example PCA
+plot_pcoa <- function(pcoa_mod, name = NULL) {
+  scores <-
+    vegan::scores(pcoa_mod, tidy = TRUE)
+
+  species_scores <-
+    scores %>%
+    dplyr::filter(score == "species")
+
+  site_scores <-
+    scores %>%
+    dplyr::filter(score == "sites")
+
+  pcoa_plot <-
+    ggplot2::ggplot(
+      data = site_scores,
+      ggplot2::aes(
+        x = PC1,
+        y = PC2
+      )
+    ) +
+    ggplot2::coord_fixed() +
+    ggplot2::geom_point(size = 2) +
+    ggplot2::geom_segment(
+      data = species_scores,
+      aes(x = 0, xend = PC1, y = 0, yend = PC2),
+      inherit.aes = FALSE, arrow = arrow(length = unit(0.25, "cm")), colour = "black"
+    ) +
+    ggplot2::geom_text(
+      data = species_scores,
+      ggplot2::aes(x = PC1, y = PC2, label = label),
+      inherit.aes = FALSE, colour = "navy", fontface = "bold"
+    ) +
+    theme_bw() +
+    ggplot2::labs(
+      title = name
+    )
+
+
+  pcoa_plot
+}
+
 data_m2 <-
   targets::tar_read(
     name = "data_m2",
@@ -3213,13 +3256,22 @@ data_m2 <-
     )
   )
 
-data_m2 %>%
-  dplyr::filter(
-    region == "Europe" &
-      sel_classification == sel_data$sel_classification[[1]]
-  ) %>%
-  purrr::chuck("pca_analysis", 1, 1) %>%
-  vegan:::plot.cca(.)
+cowplot::plot_grid(
+  data_m2 %>%
+    dplyr::filter(
+      region == "Europe" &
+        sel_classification == sel_data$sel_classification[[1]]
+    ) %>%
+    purrr::chuck("pca_analysis", 1, 1) %>%
+    plot_pcoa(., name = "2000 yr slice"),
+  data_m2 %>%
+    dplyr::filter(
+      region == "Europe" &
+        sel_classification == sel_data$sel_classification[[1]]
+    ) %>%
+    purrr::chuck("pca_analysis", 1, 2) %>%
+    plot_pcoa(., name = "2500 yr slice")
+)
 ```
 
 To quantify the overall changes in the interrelationship among pollen assemblage properties, we employed symmetrical Procrustes sum-of squares (m2) to compare pairwise PCA changes within each time slice.
