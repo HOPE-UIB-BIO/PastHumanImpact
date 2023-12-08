@@ -303,17 +303,17 @@ climate_pred <- c("temp_annual", "temp_cold", "prec_summer", "prec_win")
 
 
 sel_region = "Europe"  
-age_min= 0
+age_min= 2500
 age_max = 9000
-human_pred = human_events
+human_pred = human_distance
 climate_pred = climate_pred
-time = c("age")
-figure_title = c("senario4")
+time = NULL
+figure_title = c("senario3")
 
 
 
 
-run_senrario4 <- {
+senario3 <- {
 
 data_to_run <- 
   data_all_merged %>%
@@ -341,7 +341,7 @@ hvar_spatial <- run_hvarpart(
   ),
   run_all_predictors = FALSE,
   time_series = TRUE,
-  get_significance = TRUE,
+  get_significance = FALSE,
   permutations = 999
 )
 
@@ -372,7 +372,7 @@ hvar_temporal <- run_hvarpart(
   ),
   run_all_predictors = FALSE,
   time_series = FALSE,
-  get_significance = TRUE,
+  get_significance = FALSE,
   permutations = 199
 )
 
@@ -624,7 +624,7 @@ figure_temporal <-
       fill = "transparent", color = NA
     ),
     line = ggplot2::element_line(linewidth = 0.01),
-    text = ggplot2::element_text(size = 10, color = "grey30"),
+    text = ggplot2::element_text(size = 4, color = "grey30"),
     plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
     # axis.text.x = ggplot2::element_blank(),
     axis.text.y = ggplot2::element_text(hjust = 1),
@@ -653,7 +653,7 @@ region_map_points <-
                  y = lat,
                  size = individual),
              alpha=0.5) +
-  scale_size_continuous(range=c(0,7),
+  scale_size_continuous(range=c(0,5),
                         limits = c(0, 1)) +
   theme(legend.position = "none")
 
@@ -665,13 +665,27 @@ combine_fig <- ggarrange(region_map_points,
                          ncol = 3, 
                          nrow = 1)
 
-ggsave(paste0(figure_title,".png"), combine_fig, width = 12, height = 6, dpi = 300)
+ggsave(paste0(figure_title,".png"), combine_fig, width = 15, height = 6, dpi = 300, bg = "white")
 
 }
 
 
 
 ########### Figure of human events for EUROPE ###################
+
+set_palette <-
+  c(
+    "bi" = "grey60",
+    "fi" = "#c99000",
+    "ei" = "#a17400",
+    "ec"= "#7b5800",
+   "cc" = "#573e00",
+   "fc" = "#00c92b",
+    "es" = "#c9009e",
+  "weak"  = "#9b541b",
+  "medium"  = "#5d261a",
+  "strong" =  "#1f0000"
+  )
 
 fig_human_events <- 
   human_predictors %>%
@@ -682,7 +696,7 @@ fig_human_events <-
                values_to = "type") %>%
   ggplot(aes(x = age, y = type, col = events)) +
   geom_point() +
-  scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
+  scale_colour_manual(values = set_palette, drop = TRUE) +
   geom_smooth(
     method = "gam",
     method.args = list(
