@@ -43,3 +43,15 @@ rmarkdown::render(
     fig_width = 10
   )
 )
+
+rmarkdown::render(
+  input = here::here(
+    "R/reports/reporn_methods_workflow/report_methodology_workflow.qmd"
+  ),
+  output_format = rmarkdown::pdf_document(
+    fig_width = 10
+  ),
+  output_file = here::here(
+    "R/reports/reporn_methods_workflow/report_methodology_workflow.pdf"
+  )
+)
