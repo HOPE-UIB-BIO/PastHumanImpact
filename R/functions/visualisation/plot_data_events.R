@@ -1,6 +1,7 @@
 plot_data_events <- function(data_source_events,
                              select_region = NULL,
-                             data_raw = FALSE) {
+                             data_raw = FALSE,
+                             sel_k = 10) {
   data_meta_work <-
     targets::tar_read(
       name = "data_meta",
@@ -91,7 +92,8 @@ plot_data_events <- function(data_source_events,
             data = .x,
             x_var = "age",
             y_var = "value",
-            error_family = "stats::binomial(link = 'logit')"
+            error_family = "stats::binomial(link = 'logit')",
+            sel_k = sel_k
           )
         ),
         otherwise = NA_character_
@@ -122,11 +124,15 @@ plot_data_events <- function(data_source_events,
     data_work_pred %>%
     tidyr::unnest(data_pred) %>%
     dplyr::select(
-      region,
-      sel_classification,
-      var_name,
-      age,
-      fit
+      dplyr::all_of(
+        c(
+          "region",
+          "sel_classification",
+          "var_name",
+          "age",
+          "fit"
+        )
+      )
     ) %>%
     dplyr::mutate(
       var_name = dplyr::case_when(
@@ -224,7 +230,6 @@ plot_data_events <- function(data_source_events,
       ),
       alpha = 0.3
     )
-
 
   return(fig)
 }

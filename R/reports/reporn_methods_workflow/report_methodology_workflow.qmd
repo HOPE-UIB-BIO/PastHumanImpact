@@ -1,0 +1,3462 @@
+---
+title: "Report methodology step-by-step"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    fig-width: 10
+    self_contained: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    fig-width: 10
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+#| label: chunk setup
+#| include: FALSE
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.path = "figures/"
+)
+```
+
+```{r}
+#| label: source config
+#| include: FALSE
+#| results: 'hide'
+#| warning: FALSE
+#| message: FALSE
+
+library(here)
+
+here::i_am("R/reports/reporn_methods_workflow/report_methodology_workflow.qmd")
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
+  )
+)
+
+invisible(
+  lapply(
+    list.files(
+      path = here::here("R/functions"),
+      pattern = "*.R",
+      recursive = TRUE,
+      full.names = TRUE
+    ),
+    source
+  )
+)
+```
+
+```{r}
+#| label: chunk theme
+#| include: FALSE
+ggplot2::theme_set(
+  ggplot2::theme_bw() +
+    ggplot2::theme(
+      axis.title = ggplot2::element_text(size = 25),
+      axis.text = ggplot2::element_text(size = 15),
+      strip.text = ggplot2::element_text(size = 15),
+      panel.grid = ggplot2::element_blank()
+    )
+)
+
+# simple templete to simplyfy ploting temporal figures
+plot_template_temporal <-
+  tibble::tibble() %>%
+  ggplot2::ggplot(
+    aes(x = age)
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    x = "age (cal yr BP)"
+  )
+
+fig_width_def <- 60 # this is used to wrap text.
+
+#' @description
+#' A helper function to colour the facets
+color_facets <-
+  function(sel_plot,
+           sel_palette,
+           direction = c("vertical", "horizontal"),
+           return_raw = FALSE) {
+    direction <- match.arg(direction)
+    g <-
+      ggplot2::ggplot_gtable(
+        ggplot2::ggplot_build(sel_plot)
+      )
+    stripr <-
+      which(grepl("strip-t", g$layout$name))
+
+    for (i in seq_along(stripr)) {
+      obejct_val <-
+        sort(stripr,
+          decreasing = ifelse(direction == "vertical",
+            TRUE,
+            FALSE
+          )
+        )[i]
+
+      j <-
+        which(grepl("rect", g$grobs[[obejct_val]]$grobs[[1]]$childrenOrder))
+
+      g$grobs[[obejct_val]]$grobs[[1]]$children[[j]]$gp$fill <-
+        sel_palette[i]
+    }
+
+    if (
+      return_raw == TRUE
+    ) {
+      return(g)
+    } else {
+      grid::grid.draw(g)
+    }
+  }
+```
+
+The objective of this report is to give an detailed description of individual steps of the data analysis
+
+# Pollen data aquisition
+
+## FOSSILPOL
+
+The compilation of a pollen dataset for our analysis is performed a priori.
+Raw pollen datasets are carefully selected with the *R-Fossilpol* package, and the guidelines to the workflow are well described in Flantua et al. 2023 and in our website [Fossilpol project](https://hope-uib-bio.github.io/FOSSILPOL-website/about.html).
+Most datasets are obtained from the [Neotoma Paleoecology Database](https://www.neotomadb.org).
+Some additional data are from private owners in areas with data gaps, which we have limited access to use.
+We do not have the intellectual property rights to make these data public available.
+Therefore, only the derivatives of the analysis can be publicly shared.
+Table 1 provides a summary of the settings used in the FOSSILPOL workflow to obtain a standardised project dataset.
+This input data are further filter during the data processing steps in HOPE to get the final collection of a standardized dataset of high data quality we can use further in our data analyses.
+
+### Harmonisation tables
+
+An important step in FOSSILPOL to obtain a standardised pollen data set within and across regions is the harmonisation of pollen types.
+Different analysts have different backgrounds and schools using different nomenclature, and the level of pollen taxonomic identifications and names can vary widely.
+To be able to make numerical comparisons of different pollen records, the level of pollen taxonomy should be similar.
+Consequently, pollen harmonisation tables have been produced for different regions to try to minimise biases related to this.
+The regional harmonisation tables created in our project are for Europe, Levant, Siberia, Southern Asia, Northern America, Latin America, and the Indo-Pacific region (Birks et al. harmonisation paper).
+These tables are used as input in the Fossilpol workflow above ([see Fossilpol step_by_step guide](https://hope-uib-bio.github.io/FOSSILPOL-website/step_by_step_guide.html)).
+<br>
+
+### Data pollen assembly
+
+We have applied a number of filtering criteria to obtain as high a data quality as possible so that we can compare the numerical estimates on standardised data sets.
+These filtering criteria are: remove potentially duplicated pollen records, sorting levels (samples) by age, remove levels (samples) lower than a threshold of total number pollen grains counted (= pollen sum), remove pollen records based on age (minimum and maximum age ranges), remove levels (samples) depending on the age of the last control point, remove samples beyond the age ranges of interest, and remove pollen records if the total number of samples (N) is too low.
+
+This filtering is done on the chronologies, raw pollen counts, harmonised pollen counts, and the age uncertainties from the age-depth models (Bchron).
+The preferable number of minimum pollen grains is set to 150, but this led to a great loss of datasets in regions with less data coverage, and we therefore reduced this number to 25 with the condition that less than 50 % of the samples must have a low pollen sum.
+This allow us to keep more datasets, but in the cases pollen records have a low minimum pollen sum, we acknowledge that the estimates of pollen assemblage properties (PAPs) are less robust.
+The maximum age beyond extrapolation is set to 3000 years because ages extrapolated beyond this threshold is considered highly uncertain.
+Finally, pollen records with less than 5 samples are removed for further analyses.
+
+```{r}
+#| label: load data pollen
+data_pollen <-
+  targets::tar_read(
+    name = data_assembly_filtered,
+    store = external_storage_targets
+  ) %>%
+  dplyr::select(
+    dataset_id,
+    levels,
+    counts_harmonised
+  )
+
+data_meta <-
+  targets::tar_read(
+    name = "data_meta",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  ) %>%
+  dplyr::mutate(
+    sel_classification = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
+  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+  dplyr::inner_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "sel_classification"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  )
+```
+
+```{r}
+#| label: plot data pollen spatial distribution
+fig_map <-
+  data_pollen %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = long,
+      y = lat
+    )
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_classic() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::coord_equal(
+    ratio = 1.3,
+    ylim = range(data_meta$lat),
+    xlim = range(data_meta$long)
+  ) +
+  ggplot2::labs(
+    title = "A) Spatial coverage and distribution of records",
+    x = expression(
+      paste(
+        "Longitude ", (degree ~ E)
+      )
+    ),
+    y = expression(
+      paste(
+        "Latitude ", (degree ~ N)
+      )
+    )
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq(-180, 180, by = 50)
+  ) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(-90, 90, by = 15)
+  ) +
+  ggplot2::geom_polygon(
+    data = ggplot2::map_data("world") %>%
+      dplyr::filter(lat > -60 & lat < 85),
+    ggplot2::aes(
+      group = group
+    ),
+    fill = "grey80",
+    alpha = 0.4
+  ) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      col = sel_classification
+    ),
+    size = 3,
+    shape = 19,
+    alpha = 0.1
+  ) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(
+      col = sel_classification
+    ),
+    size = 0.5,
+    shape = 20,
+    alpha = 1
+  ) +
+  ggplot2::geom_point(
+    col = "grey30",
+    size = 0.1,
+    shape = 20,
+    alpha = 1
+  )
+
+fig_recod_count <-
+  data_pollen %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::group_by(region, sel_classification) %>%
+  dplyr::count(
+    name = "n_records"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      y = n_records,
+      x = sel_classification,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    ~region,
+    nrow = 2,
+    dir = "h"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    y = "Number of records",
+    title = "B) Number of records in each climate zone"
+  ) +
+  ggplot2::geom_segment(
+    mapping = ggplot2::aes(
+      xend = sel_classification,
+      yend = 0
+    ),
+    col = "grey30"
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    shape = 21,
+    col = "grey30"
+  ) +
+  ggplot2::geom_text(
+    mapping = ggplot2::aes(
+      label = n_records
+    ),
+    nudge_y = 20,
+    col = "grey30",
+    size = text_size / 3
+  )
+
+fig_color_legend <-
+  data_meta %>%
+  dplyr::distinct(sel_classification) %>%
+  dplyr::mutate(
+    climate_zone_name = dplyr::case_when(
+      .default = sel_classification,
+      sel_classification == "Cold_Without_dry_season_Very_Cold_Summer" ~ "Cold - without dry season - very cold summer",
+      sel_classification == "Cold_Without_dry_season_Cold_Summer" ~ "Cold - without dry season - cold summer",
+      sel_classification == "Cold_Without_dry_season_Warm_Summer" ~ "Cold - without dry season - warm summer",
+      sel_classification == "Cold_Without_dry_season_Hot_Summer" ~ "Cold - without dry season - hot summer",
+      sel_classification == "Cold_Dry_Winter" ~ "Cold - dry winter",
+      sel_classification == "Cold_Dry_Summer" ~ "Cold - dry summer",
+      sel_classification == "Temperate_Without_dry_season" ~ "Temperate - without dry season",
+      sel_classification == "Temperate_Dry_Winter" ~ "Temperate - dry winter",
+      sel_classification == "Temperate_Dry_Summer" ~ "Temperate - dry summer"
+    ),
+    climate_zone_name = factor(
+      climate_zone_name,
+      levels = c(
+        "Arid",
+        "Tropical",
+        "Temperate - dry summer",
+        "Temperate - dry winter",
+        "Temperate - without dry season",
+        "Cold - dry summer",
+        "Cold - dry winter",
+        "Cold - without dry season - hot summer",
+        "Cold - without dry season - warm summer",
+        "Cold - without dry season - cold summer",
+        "Cold - without dry season - very cold summer",
+        "Polar"
+      )
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = 1,
+      y = climate_zone_name,
+      label = climate_zone_name,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::coord_cartesian(
+    xlim = c(0, 20)
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_void() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    panel.grid.major = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    plot.caption.position = "panel",
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    title = "C) Climate zone color legend"
+  ) +
+  ggplot2::geom_point(
+    shape = 22,
+    col = "gray30",
+    size = 10
+  ) +
+  ggplot2::geom_text(
+    mapping = ggplot2::aes(
+      x = 2
+    ),
+    col = "grey30",
+    size = text_size / 3,
+    hjust = 0
+  )
+
+cowplot::plot_grid(
+  fig_map,
+  fig_color_legend,
+  nrow = 1,
+  rel_widths = c(1, 0.2)
+)
+
+plot(fig_recod_count)
+
+
+```
+
+```{r}
+#| label: plot data pollen temporal distribution
+fig_temporal <-
+  data_pollen %>%
+  tidyr::unnest(levels) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::group_by(
+    region, sel_classification, dataset_id
+  ) %>%
+  dplyr::summarise(
+    .groups = "drop",
+    age_min = min(age),
+    age_max = max(age),
+    age_mean = mean(age)
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age_min,
+      xend = age_max,
+      y = reorder(dataset_id, age_mean),
+      yend = reorder(dataset_id, age_mean),
+      col = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    scales = "free_y",
+    ~region,
+    ncol = 1
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.y = ggplot2::element_blank(),
+    axis.ticks.y = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.y = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  ) +
+  ggplot2::labs(
+    title = "D) Temporal coverage of records",
+    x = "Age (cal yr BP)"
+  ) +
+  ggplot2::geom_segment(
+    alpha = 0.5,
+    linewidth = 0.5
+  )
+
+plot(fig_temporal)
+```
+
+```{r}
+#| label: plot data pollen taxa
+data_pollen_taxa <-
+  data_pollen %>%
+  dplyr::mutate(
+    taxa = purrr::map(
+      .progress = TRUE,
+      .x = counts_harmonised,
+      .f = ~ .x %>%
+        dplyr::select(-sample_id) %>%
+        names()
+    )
+  ) %>%
+  dplyr::select(
+    dataset_id, taxa
+  )
+
+data_pollen_taxa_n_per_dataset <-
+  data_pollen_taxa %>%
+  dplyr::mutate(
+    n_taxa = purrr::map_dbl(
+      .progress = TRUE,
+      .x = taxa,
+      .f = ~ length(.x)
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  )
+
+data_pollen_taxa_per_continnt <-
+  data_pollen_taxa %>%
+  tidyr::unnest(taxa) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::distinct(region, sel_classification, taxa) %>%
+  dplyr::group_by(region, sel_classification) %>%
+  dplyr::count(
+    name = "n_taxa"
+  ) %>%
+  dplyr::mutate(
+    region = factor(
+      region,
+      levels = c(
+        "North America",
+        "Europe",
+        "Asia",
+        "Latin America",
+        "Oceania"
+      )
+    )
+  )
+
+
+fig_taxa_basic <-
+  tibble::tibble() %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      y = n_taxa,
+      x = sel_classification,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_wrap(
+    ~region,
+    nrow = 2,
+    dir = "h"
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones # [config criteria]
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    text = ggplot2::element_text(
+      size = text_size # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
+    legend.position = "none",
+    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+  )
+
+fig_taxa_continent <-
+  fig_taxa_basic +
+  ggplot2::labs(
+    y = "Number of taxa",
+    title = "E) Total number of taxa in each climate zone"
+  ) +
+  ggplot2::geom_segment(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      xend = sel_classification,
+      yend = 0
+    ),
+    col = "grey30"
+  ) +
+  ggplot2::geom_point(
+    data = data_pollen_taxa_per_continnt,
+    size = 3,
+    shape = 21,
+    col = "grey30"
+  ) +
+  ggplot2::geom_text(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      label = n_taxa
+    ),
+    nudge_y = 70,
+    col = "grey30",
+    size = text_size / 3
+  )
+
+fig_taxa_per_record <-
+  fig_taxa_basic +
+  ggplot2::labs(
+    y = "Number of taxa",
+    title = "F) The number of taxa per record in each climate zone"
+  ) +
+  ggplot2::geom_jitter(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3
+  ) +
+  ggplot2::geom_violin(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3,
+    col = NA
+  ) +
+  ggplot2::geom_boxplot(
+    data = data_pollen_taxa_n_per_dataset,
+    fill = "white",
+    col = "grey30",
+    width = 0.1,
+    outlier.shape = NA
+  ) +
+  ggplot2::geom_point(
+    data = data_pollen_taxa_n_per_dataset %>%
+      dplyr::group_by(region, sel_classification) %>%
+      dplyr::summarise(
+        median = median(n_taxa)
+      ),
+    mapping = ggplot2::aes(
+      y = median
+    ),
+    shape = 22,
+    col = "gray30",
+    size = 3
+  )
+
+cowplot::plot_grid(
+  fig_taxa_continent,
+  fig_taxa_per_record,
+  nrow = 1
+)
+```
+
+## Example record
+
+Let's select a one record and use it as an example.
+
+```{r}
+#| label: plot example record
+sel_example_record <- "4197"
+
+sel_data <-
+  data_meta  %>% 
+  dplyr::filter(
+    dataset_id == sel_example_record
+  )
+
+sitename <- 
+  sel_data$handle
+
+x_lim <-
+  range(sel_data$long)
+
+y_lim <-
+  range(sel_data$lat)
+
+border_val <- 10
+
+p_position <-
+  sel_data %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = long,
+      y= lat,
+      col = sel_classification)
+  ) +
+  ggplot2::borders(
+    fill = "gray90", colour = "gray75"
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    colour = "black"
+  ) +
+  ggplot2::geom_point(
+    size = 1,
+    colour = "white"
+  ) +
+  ggplot2::coord_quickmap(
+    xlim = c(min(x_lim) - border_val, max(x_lim) + border_val),
+    ylim = c(min(y_lim) - border_val, max(y_lim) + border_val)
+  ) +
+  ggplot2::labs(
+    x = "longitude",
+    y = "latitude"
+  ) +
+  ggplot2::scale_color_manual(
+      values = palette_ecozones,
+  ) +
+  ggplot2::theme(
+    legend.position = "none"
+  )
+
+p_position +
+  ggplot2::geom_text(
+    ggplot2::aes(
+      label = sitename
+    ),
+    vjust = 0.1,
+    nudge_y = 1,
+    size = 7
+  ) +
+  ggplot2::geom_point(
+    size = 10
+  ) +
+  ggplot2::geom_point(
+    size = 3,
+    colour = "white"
+  ) +
+  ggplot2::labs(
+    subtitle = stringr::str_wrap("Location of the selected record", fig_width_def)
+  )
+```
+
+# Detection of past human presence
+
+To determine the impact of past humans on fundamental ecosystem properties, we need indicators of past human presence.
+We developed a method to combine the human event detection and pollen indicators of human activty identified from pollen records (based on expert knowledge) and the method for quantifying past human presence based on archaeological radiocarbon dates and Summed Probability Densities (SPD) (Bird et al. 2022).
+This was done to use a standardised variable as indicator of past human impact across the continents, and an attempt to reduce the potential circularity of human detection events derived from the same pollen records as the estimates of ecosystem properties.
+
+## Detection of human events
+
+For each pollen record, we have detected periods of human presence from the pollen data.
+Two methods have been used:
+
+1.  detection from pollen diagrams (North America, Europe, Asia, Indopacific)
+2.  detection using indicator taxa (Latin America).
+
+### Detection of human events in pollen diagrams
+
+First, a pollen diagram of each pollen record has been examined by a regional expert and the age of each event type has been recorded.
+
+```{r}
+#| label: table event types
+#| tbl-cap: Table 2 Type of human events identified in pollen diagrams
+event_table <-
+  data.frame(
+    Region = c(
+      "North America",
+      "Europe",
+      "Asia",
+      "Indopasific"
+    ),
+    `Event-type` = c(
+      paste(
+        "BI = Before Impact; FC = First Cultivation; ES = European Settlement"
+      ),
+      paste(
+        "BI = Before Impact; FI = First Indication; FCu = First Cultivation; EC = Extensive Clearance; CC = Complete Clearance"
+      ),
+      paste(
+        "BI = Before Impact; FI = First Indication; FCu = First Cultivation; EI = Extensive Impact"
+      ),
+      paste(
+        "no_impact = No Impact; weak = Weak Impact; medium = Medium Impact; strong = Strong Impact"
+      )
+    )
+  )
+
+event_table %>%
+  pander::pandoc.table(
+    caption = "Table 2: Type of human events identified in pollen diagrams"
+  )
+```
+
+Note that the event types are uniquely defined within continents, and human event types with the same name have different meanings between continents.
+More text about the human events will be added to methodology in the manuscript, see discussion notes for revision.
+
+An algorithm is made to screen the individual pollen records in Latin America based on the information related to each pollen indicator and what human event type it is associated with.
+First you get binary variables (0/1) associated with each event type that is identified in each pollen record.
+It is complemented with a new vector with the average ages in between levels (samples) of the identified event type.
+This is because the time of the events is assumed to have occurred prior to the changed event.
+It gives a new matrix that uses the new age vector combined with the events type.
+The different event types are assigned binary values (0/ 1) depending on if the event type is present (i.e. when the age of the specific event is detected).
+Ultimately, logical principles were followed and the binary values were adjusted to get the event data for each pollen record.
+
+Below is a figure that shows the data associated with human events in the example record.
+The colours represent the different types of human events in this record.
+The smooth trend lines represent simple binomial GAM models that show the main trends and alteration in the timing of events over time.
+
+```{r}
+#| label: plot events
+data_events <-
+  targets::tar_read(
+    name = "data_events_to_fit",
+    store = external_storage_targets
+  )
+
+data_events_sel <-
+  data_events  %>% 
+  tidyr::unnest(data_to_fit)  %>% 
+  dplyr::filter(
+    dataset_id %in% sel_example_record
+  )  %>% 
+  tidyr::nest(
+    data_to_fit = -var_name
+  )
+
+suppressWarnings(
+  plot_data_events(
+    data_source_events = data_events_sel,
+    sel_k = 50
+  ) +
+    ggplot2::labs(
+      title = stringr::str_wrap("Temporal trend for selected record", fig_width_def),
+    )
+)
+```
+
+## Arcehological radiocarbon dates and Summed Probability Densities
+
+The quantification of *summed probability distribution* (SPD) requires a distance to be selected around each site location to collect the relevant archaeological radiocarbon dates around it.
+This will limit the area of human presence and indirectly the amount of human activity relevant to pollen records from each site.
+
+```{r}
+#| label: rc settings
+dist_vect <-
+  c(5, 25, 50, 100, 250, 500) %>%
+  rlang::set_names()
+
+min_n_rc_dates <- 250
+```
+
+We used the global dataset of archeological radicarbon dates (C14 dates) from Bird et al. 2022.
+
+We have gathered the radiocarbon dates up to `r max(dist_vect)` km away and split them into groups (categories) by the distances to each of the sequence.
+
+Only C14 dates with valid geographical location (longitude and latitude), and 'LocAccuracy' \> 0 were selected.
+For each pollen record, C14 dates were classified by the geographical distance to the pollen record.
+The distance classes were: 5, 25, 50, 100, 250, 500 km.
+In each distance category, we used all C14 dates up to the maximum distance of selected category (for example: `250` contains all C14 dates up to 250 km including `5`, `25`,...).
+
+However, distance class with less dates than a minimum threshold (`r min_n_rc_dates` RC dates) is filtered out in order to maintain robust SPD estimation.
+
+```{r}
+#| label: plot C14 for exmple record
+data_c14_subset <-
+  targets::tar_read(
+    name = "data_c14_subset",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+# this is litle trick to split data into bins unig `findInterval` function
+sel_dist_vect <-
+    c(0, 5, 25, 50, 100, 250, 500) %>%
+    rlang::set_names(
+        nm = c(5, 25, 50, 100, 250, 500, Inf)
+    )
+
+sel_rc <-
+    data_c14_subset %>%
+    dplyr::filter(dataset_id == sel_example_record) %>%
+    tidyr::unnest(rc) %>%
+    dplyr::mutate(
+        dist_bin = names(sel_dist_vect)[findInterval(
+            dist,
+            sel_dist_vect,
+            all.inside = TRUE
+        )] %>%
+            as.character()
+    )
+
+sel_dist_to_plot <-
+    sel_dist_vect[1:(length(sel_dist_vect) - 1)]
+
+basic_col <-
+  palette_ecozones[
+    names(palette_ecozones) == data_meta %>%
+      dplyr::filter(
+        dataset_id == sel_example_record
+      ) %>%
+      purrr::pluck("sel_classification", 1)
+  ]
+
+pallette_dist_vec <-
+  colorRampPalette(
+    c(
+      colorspace::darken(basic_col, amount = 0.5),
+      basic_col,
+      colorspace::lighten(basic_col, amount = 0.75)
+    )
+  )(length(sel_dist_to_plot)) %>%
+  purrr::set_names((names(sel_dist_to_plot)))
+
+p_rc_1 <-
+    p_position +
+    ggplot2::geom_point(
+        data = sel_rc,
+        ggplot2::aes(
+            long, lat,
+            col = dist_bin
+        ),
+        size = 2,
+        alpha = 0.75
+    ) +
+    ggplot2::scale_color_manual(
+        values = pallette_dist_vec
+    ) +
+    ggplot2::labs(
+        colour = "distance to the site (km)",
+        subtitle = stringr::str_wrap("Location of selected RC dates by their distance", fig_width_def * 0.75)
+    )
+
+data_rc_count <-
+    names(sel_dist_to_plot) %>%
+    rlang::set_names() %>%
+    purrr::map_dfr(
+        .id = "max_dist",
+        .f = ~ sel_rc %>%
+            dplyr::filter(dist < as.numeric(.x))
+    ) %>%
+    dplyr::group_by(max_dist, dist_bin) %>%
+    dplyr::count() %>%
+    dplyr::arrange(as.numeric(max_dist), as.numeric(dist_bin)) %>%
+    dplyr::mutate(
+        max_dist = factor(max_dist, levels = names(sel_dist_to_plot)),
+        dist_bin = factor(dist_bin, levels = names(sel_dist_to_plot))
+    )
+
+valid_dist <-
+    data_rc_count %>%
+    dplyr::group_by(max_dist) %>%
+    dplyr::summarise(
+        n = sum(n)
+    ) %>%
+    dplyr::filter(n > min_n_rc_dates) %>% # [config]
+    purrr::pluck("max_dist")
+
+p_rc_2 <-
+    data_rc_count  %>% 
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(
+        ggplot2::aes(
+            max_dist,
+            n,
+            fill = dist_bin
+        ),
+        stat = "identity",
+        col = "gray75",
+        size = line_size
+    ) +
+    ggplot2::geom_hline(
+        yintercept = min_n_rc_dates, # [config]
+        colour = "gray30",
+        linewidth = 1,
+        lty = 2
+    ) +
+    geom_curve(
+         data = data.frame(
+            x1 = 2,
+            x2 = 1,
+            y1 = 1e3,
+            y2 = 300
+        ),
+        aes(x = x1, y = y1, xend = x2, yend = y2),
+        curvature = 0.25,
+        arrow = arrow(length = unit(0.03, "npc"))
+    ) +
+    geom_text(
+        data = data.frame(
+            x = 2,
+            y = 1e3,
+            text = "Threshold"
+        ),
+        aes(x, y, label = text),
+        size = 7,
+        hjust = 0.5,
+        vjust = 0.5,
+        nudge_y = 200
+    ) +
+    ggplot2::scale_fill_manual(
+        values = pallette_dist_vec
+    ) +
+    ggplot2::theme(
+        legend.position = "bottom",
+        axis.ticks.x = ggplot2::element_blank()
+    ) +
+    ggplot2::labs(
+        x = "Maximum distance to the site (km)",
+        y = "Number of RC dates",
+        fill = "distance to the site (km)",
+        subtitle = stringr::str_wrap("Number of RC dates in each distance category", fig_width_def * 0.75)
+    )
+
+common_legend <-
+    ggpubr::get_legend(p_rc_2)
+
+ggpubr::ggarrange(
+    ggpubr::ggarrange(
+        p_rc_1 +
+            ggplot2::theme(legend.position = "none"),
+        p_rc_2 +
+            ggplot2::theme(legend.position = "none")
+    ),
+    common_legend,
+    nrow = 2,
+    heights = c(10, 1)
+)
+```
+
+### Estimation of SPD
+
+In each distance category, SPD is estimated using `spd` function from `rcarbon` package for each year between a minimum threshold age and 12 ka.
+
+Radiocarbon dates were calibrated using `calibrate` function from `rcarbon` package with appropriate calibration curves ("IntCal20", "ShCal20", "mixed").
+Calibration curves were obtained `rcarbon` package and "mixed" was created using `rcarbon::mixCurves` function with 'p' = 0.5.
+Calibration curves were assigned by their geographical location following Hua et al., 2013.
+
+```{r}
+#| label: detect spd curve
+sel_cal_curve <-
+  data_c14_subset  %>% 
+    dplyr::filter(
+      dataset_id == sel_example_record
+  )  %>% 
+  purrr::pluck("curve_name")
+
+```
+
+For the selected sequences **`r sel_cal_curve`** have been used.
+
+The temporal distribution of SPDs constructed by different distances:
+
+```{r}
+#| label: plot temporal spd trend
+data_spd <-
+    targets::tar_read(
+      name = "data_spd",
+       store = paste0(
+         data_storage_path,
+         "_targets_h1"
+       )
+    )
+
+data_spd_sel_raw <-
+    data_spd %>%
+    dplyr::filter(
+        dataset_id == sel_example_record
+    )  %>% 
+    tidyr::unnest(spd)  %>% 
+    dplyr::select(-dataset_id)
+
+data_spd_sel <-
+    data_spd_sel_raw %>%
+    tidyr::pivot_longer(
+        cols = -age
+    ) %>%
+    dplyr::mutate(
+        name = stringr::str_replace(name, "x", ""),
+        name = factor(name, levels = dist_vect) # [config]
+    ) %>%
+    # limit to only plot the dates present
+    dplyr::filter(
+        name %in% valid_dist
+    )
+
+p2 <-
+  plot_template_temporal +
+  ggplot2::facet_wrap(~name, ncol = 1) +
+  ggplot2::scale_fill_manual(
+    values = pallette_dist_vec
+  ) +
+  ggplot2::theme(
+    axis.title.y = ggplot2::element_blank(),
+    axis.text.y = ggplot2::element_blank(),
+    axis.line.y = ggplot2::element_blank(),
+    axis.ticks.y = ggplot2::element_blank()
+  ) +
+  ggplot2::labs(
+    subtitle = stringr::str_wrap("Temporal distribution of SPD", fig_width_def * 2)
+  ) +
+  ggplot2::guides(
+    colour = "none",
+    fill = "none"
+  ) +
+  ggplot2::geom_ribbon(
+    data = data_spd_sel,
+    ggplot2::aes(
+      y = value,
+      ymin = 0,
+      ymax = value,
+      fill = name
+    )
+  )
+
+pallette_dist_vec_sub <-
+    pallette_dist_vec[names(pallette_dist_vec) %in% unique(data_spd_sel$name)]
+
+color_facets(
+    sel_plot = p2,
+    sel_palette = pallette_dist_vec_sub
+)
+```
+
+### Regional age cutoff
+
+The minimum threshold ages are different for different regions and are decided based on the availability of radiocarbon dating for the records we have in the different regions.
+In general, we observe there is a decrease in human presence when it increase.
+We considered this bias to radiocarbon dating may be limited on younger material in different subregions.
+Table 5 show the ages where data younger than age_from where removed.
+
+```{r}
+#| label: regional age cutoff
+age_cutoff_rc <-
+  data.frame(
+    region = c(
+      "Europe",
+      "Latin America",
+      "Asia",
+      "North America",
+      "Oceania"
+    ),
+    age_from = c(2000, 2000, 2000, 500, 500)
+  )
+
+age_cutoff_rc %>%
+  pander::pandoc.table(
+    capttion = "Table 5: Minimum ages above which C14 data was removed (age_from) for different regions"
+  )
+```
+
+### Selection of the distance
+
+In order to select the *best distance*, we want to know, which SPD curve is the best at explaining the changes in pollen events.
+
+Therefore, for each distance, we calculated *Redundancy Analysis* (RDA) with individual event values as response and SPD as predictors.
+
+Here is a visualisation of the data to fit:
+
+```{r}
+#| label: plot joined sdp & events
+event_types_vec <-
+  c(
+    "no impact",
+    "first impact",
+    "emerging impact",
+    "extensive clearince",
+    "complete clearince",
+    "first cultivation",
+    "europiean settlement",
+    "weak impact",
+    "medium impact",
+    "strong impact"
+  )
+
+data_events_to_plot <-
+  data_events_sel %>%
+  tidyr::unnest(data_to_fit) %>%
+  dplyr::select(-dataset_id) %>%
+  dplyr::mutate(
+    var_name = dplyr::case_when(
+      .default = "no impact",
+      var_name == "bi" ~ "no impact",
+      var_name == "fi" ~ "first impact",
+      var_name == "ei" ~ "emerging impact",
+      var_name == "ec" ~ "extensive clearince",
+      var_name == "cc" ~ "complete clearince",
+      var_name == "fc" ~ "first cultivation",
+      var_name == "es" ~ "europiean settlement",
+      var_name == "weak" ~ "weak impact",
+      var_name == "medium" ~ "medium impact",
+      var_name == "strong" ~ "strong impact"
+    ),
+    var_name = factor(
+      var_name,
+      levels = event_types_vec
+    )
+  )
+
+palette_events <-
+  c(
+    "grey60",
+    "#c99000",
+    "#a17400",
+    "#7b5800",
+    "#573e00",
+    "#00c92b",
+    "#c9009e",
+    "#9b541b",
+    "#5d261a",
+    "#1f0000"
+  ) %>%
+  rlang::set_names(
+    levels(data_events_to_plot$var_name)
+  )
+
+p1_vertical <-
+  plot_template_temporal +
+  ggplot2::geom_tile(
+    data = data_events_to_plot,
+    ggplot2::aes(
+      y = 1,
+      fill = var_name,
+      alpha = value
+    ),
+    col = "gray95",
+  ) +
+  ggplot2::facet_wrap(. ~ var_name, nrow = 1, scales = "free_x") +
+  ggplot2::scale_fill_manual(
+    values = palette_events
+  ) +
+  ggplot2::scale_color_manual(
+    values = palette_events
+  ) +
+  ggplot2::scale_alpha_continuous(
+    range = c(0, 1)
+  ) +
+  ggplot2::coord_flip(
+    xlim = c(8.5e3, 0)
+  ) +
+  ggplot2::theme(
+    axis.title.x = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank(),
+    axis.line.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank()
+  ) +
+  ggplot2::guides(
+    colour = "none",
+    fill = "none",
+    alpha = "none"
+  )
+
+p3_vertical <-
+  plot_template_temporal +
+  ggplot2::geom_tile(
+    data = data_spd_sel,
+    ggplot2::aes(
+      y = name,
+      fill = name,
+      alpha = value
+    ),
+    col = NA
+  ) +
+  ggplot2::facet_wrap(. ~ name, nrow = 1, scales = "free_x") +
+  ggplot2::scale_fill_manual(
+    values = pallette_dist_vec
+  ) +
+  ggplot2::scale_alpha_continuous(
+    range = c(0, 1)
+  ) +
+  ggplot2::coord_flip(
+    xlim = c(8.5e3, 0)
+  ) +
+  ggplot2::theme(
+    axis.title = ggplot2::element_blank(),
+    axis.text = ggplot2::element_blank(),
+    axis.line.x = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank()
+  ) +
+  ggplot2::guides(
+    colour = "none",
+    fill = "none",
+    alpha = "none"
+  )
+
+ggpubr::ggarrange(
+  color_facets(
+    sel_plot = p1_vertical,
+    sel_palette = palette_events,
+    direction = "horizontal",
+    return_raw = TRUE
+  ) %>%
+    ggplotify::as.ggplot(),
+  color_facets(
+    sel_plot = p3_vertical,
+    sel_palette = pallette_dist_vec_sub,
+    direction = "horizontal",
+    return_raw = TRUE
+  ) %>%
+    ggplotify::as.ggplot(),
+  align = "h"
+)
+```
+
+Or in a form of table:
+
+```{r}
+#| label: RDA data to fit
+data_to_fit_rda <-
+    dplyr::inner_join(
+        data_spd_sel %>%
+            tidyr::pivot_wider(
+                names_from = "name",
+                values_from = "value",
+                values_fill = 0
+            ),
+        data_events_to_plot %>%
+            tidyr::pivot_wider(
+                names_from = "var_name",
+                values_from = "value",
+                values_fill = 0
+            ),
+        by = "age"
+    ) %>%
+    dplyr::arrange(age) %>%
+    tibble::column_to_rownames("age")  %>% 
+    dplyr::relocate(
+        dplyr::any_of(event_types_vec)
+    ) 
+
+data_to_fit_rda_events <-
+    data_to_fit_rda %>%
+    dplyr::select(
+        dplyr::any_of(
+            event_types_vec
+        )
+    )
+
+data_to_fit_rda %>%
+  round(., 5) %>%
+  tibble::rownames_to_column("age") %>%
+  head() %>%
+  pander::pandoc.table()
+```
+
+We can plot the individual ordination, but it is not very informative.
+The size and occupancy of points correspond with their ages.
+
+```{r}
+#| label: RDA ordination
+data_rda <-
+    tibble::tibble(
+        valid_dist
+    ) %>%
+    dplyr::mutate(
+        valid_dist_num = as.numeric(as.character(valid_dist)),
+        ord = purrr::map(
+            .x = valid_dist_num,
+            .f = ~ vegan::rda(
+                as.formula(
+                    paste0(
+                        "data_to_fit_rda_events ~ `", eval(.x), "`"
+                    )
+                ),
+                data = data_to_fit_rda
+            ) %>%
+                return()
+        )
+    ) %>%
+    dplyr::mutate(
+        adj_Rsquared = purrr::map_dbl(
+            .x = ord,
+            .f = ~ {
+                res <-
+                    vegan::RsquareAdj(.x) %>%
+                    purrr::pluck("adj.r.squared")
+
+                if (
+                    is.null(res)
+                ) {
+                    return(0)
+                } else {
+                    return(res)
+                }
+            }
+        )
+    )
+
+ggpubr::ggarrange(
+    plotlist = purrr::map(
+        .x = data_rda$ord,
+        .f = ~ tibble::tibble() %>%
+          ggplot2::ggplot(
+            ggplot2::aes(
+              RDA1, PC1
+            )
+          ) +
+          ggplot2::geom_vline(
+            xintercept = 0
+          ) +
+          ggplot2::geom_hline(
+            yintercept = 0
+          ) +
+          ggplot2::geom_point(
+            data = vegan::scores(.x, display = "sites") %>%
+              as.data.frame() %>%
+              tibble::rownames_to_column("age") %>%
+              dplyr::mutate(age = as.numeric(age)),
+            aes(size = age, alpha = age),
+          ) +
+          ggplot2::scale_size_continuous(
+            range = c(3, 7)
+          ) +
+          geom_segment(
+            data = vegan::scores(.x, display = "species") %>%
+              as.data.frame() %>%
+              tibble::rownames_to_column("event_type"),
+            aes(x = 0, y = 0, xend = RDA1, yend = PC1, col = event_type),
+            arrow = arrow(length = unit(0.03, "npc")),
+            size = 1
+          ) +
+          ggplot2::guides(
+            size = "none",
+            alpha = "none"
+          ) +
+          ggplot2::coord_fixed() +
+          ggplot2::theme_void() +
+          ggplot2::scale_color_manual(
+            values = palette_events
+          )
+    ),
+    common.legend = TRUE,
+    legend = "bottom",
+    labels = c(valid_dist),
+    nrow = 2,
+    ncol = 2
+)
+
+```
+
+#### R2
+
+We can evaluate the amount of variability explained by each ordination.
+We then extracted adj.r2 for each SPD distance:
+
+```{r}
+#| label: RDA R2
+data_r2 <-
+    data_rda %>%
+    dplyr::select(
+        distance = valid_dist,
+        adj_Rsquared
+    )
+
+best_dis <-
+    data_r2 %>%
+    dplyr::filter(
+        adj_Rsquared == max(adj_Rsquared)
+    ) %>%
+    purrr::pluck("distance")
+
+dist_order <-
+    which(data_r2$distance == best_dis)
+
+max_r2 <- 
+    max(data_r2$adj_Rsquared)
+
+max_r2_to_plot <-  
+    ifelse(max_r2 > 0.35, 0.75, 0.5)
+
+data_r2  %>% 
+    ggplot2::ggplot(
+         aes(x = distance, y = adj_Rsquared)
+    ) +
+    ggplot2::geom_segment(
+        aes(
+            xend = distance,
+            y = 0,
+            yend = adj_Rsquared
+        )
+    ) +
+    ggplot2::geom_point(
+        size = 10,
+        colour = "gray30"
+    ) +
+    ggplot2::geom_point(
+        ggplot2::aes(col = distance),
+        size = 9
+    ) +
+    ggplot2::geom_segment(
+         data = data.frame(
+            x1 = dist_order,
+            x2 = dist_order,
+            y1 = (max_r2_to_plot * 0.9),
+            y2 = (max_r2 * 1.1)
+        ),
+        ggplot2::aes(x = x1, y = y1, xend = x2, yend = y2),
+        arrow = arrow(length = unit(0.03, "npc"))
+    ) +
+    ggplot2::geom_text(
+        data = data.frame(
+            x = dist_order,
+            y = (max_r2_to_plot * 0.9),
+            text = "Best"
+        ),
+        ggplot2::aes(x, y, label = text),
+        size = 7,
+        hjust = 0.5,
+        vjust = 0.1,
+        nudge_y = max_r2_to_plot * 0.01
+    ) +
+    ggplot2::scale_color_manual(
+        values = pallette_dist_vec_sub
+    ) +
+    ggplot2::guides(
+        colour = "none"
+    ) +
+    ggplot2::labs(
+        x = "Distance (km)",
+        y = "Adjusted R-square"
+    ) +
+    ggplot2::scale_y_continuous(
+        limits = c(0, max_r2_to_plot)
+    )
+```
+
+Therefore we have selected **`r best_dis`** as the best distance and the preferred SPD curve for **`r sel_example_record`** sequence
+
+## Selecting best distance per continent
+
+Here is a overview of the status of records base on the presence of human impact from pollen diagrams and C14 data
+
+```{r}
+#| label: status of records based on events and rc
+data_valid_n_rc_raw <-
+  dplyr::left_join(
+    data_meta,
+    data_c14_subset,
+    by = "dataset_id"
+  ) %>%
+  dplyr::mutate(
+    has_rc = purrr::map_lgl(
+      .x = rc,
+      .f = ~ is.data.frame(.x)
+    )
+  ) %>%
+  dplyr::mutate(
+    n_rc = purrr::map2_dbl(
+      .x = has_rc,
+      .y = rc,
+      .f = ~ ifelse(.x, nrow(.y), 0)
+    )
+  ) %>%
+  dplyr::mutate(
+    has_valid_n_rc = purrr::map_lgl(
+      .x = n_rc,
+      .f = ~ .x >= 50
+    )
+  ) %>%
+  dplyr::distinct(
+    region, sel_classification, dataset_id, has_valid_n_rc
+  ) %>%
+  tidyr::drop_na(region, sel_classification)
+
+data_id_has_human_impact <-
+  data_events %>%
+  dplyr::filter(
+    !var_name %in% c("bi", "no_impact")
+  ) %>%
+  tidyr::unnest(data_to_fit) %>%
+  dplyr::filter(value == 1) %>%
+  dplyr::distinct(dataset_id) %>%
+  dplyr::mutate(
+    have_events = TRUE
+  )
+
+data_valid_events_raw <-
+  data_meta %>%
+  dplyr::left_join(
+    data_id_has_human_impact,
+    by = "dataset_id"
+  ) %>%
+  dplyr::mutate(
+    have_events = ifelse(is.na(have_events), FALSE, have_events)
+  )
+
+ dplyr::full_join(
+   data_valid_n_rc_raw,
+   data_valid_events_raw,
+   by = dplyr::join_by(region, sel_classification, dataset_id)
+ ) %>%
+   dplyr::mutate(
+     status = dplyr::case_when(
+       have_events == TRUE & has_valid_n_rc == TRUE ~
+         "human presence & enough RC",
+       have_events == TRUE & has_valid_n_rc == FALSE ~
+         "human presence but not enough RC",
+       have_events == FALSE & has_valid_n_rc == TRUE ~
+         "no human presence but enough RC",
+       .default = "no human presence & not enough RC"
+     )
+   ) %>%
+   dplyr::mutate(
+     status = factor(
+       status,
+       levels = c(
+         "human presence & enough RC",
+         "human presence but not enough RC",
+         "no human presence but enough RC",
+         "no human presence & not enough RC"
+       )
+     )
+   ) %>%
+   dplyr::group_by(region, sel_classification, status) %>%
+   dplyr::count(
+     name = "N"
+   ) %>%
+   dplyr::ungroup() %>%
+   dplyr::mutate(N = as.double(N)) %>%
+   dplyr::arrange(
+     region, sel_classification, status
+   ) %>%
+   tidyr::complete(
+     region,
+     sel_classification,
+     status,
+     fill = list(N = 0.00001)
+   ) %>%
+   ggplot2::ggplot() +
+   ggplot2::facet_grid(
+     region ~ sel_classification
+   ) +
+   ggplot2::theme_bw() +
+   ggplot2::guides(
+     fill = ggplot2::guide_legend(ncol = 1)
+   ) +
+   ggplot2::theme(
+     axis.title = ggplot2::element_blank(),
+     axis.ticks = ggplot2::element_blank(),
+     axis.text = ggplot2::element_blank(),
+     legend.position = "right",
+     plot.caption.position = "panel",
+     strip.background = ggplot2::element_blank(),
+     strip.text = ggplot2::element_text(
+       size = text_size,
+       hjust = 0.01
+     ),
+     panel.grid.minor = ggplot2::element_blank(),
+     panel.grid.major = ggplot2::element_blank()
+   ) +
+   ggplot2::labs(
+     caption = "Human presence is detected from pollen data.",
+     fill = ""
+   ) +
+   ggplot2::coord_equal() +
+   waffle::geom_waffle(
+     mapping = ggplot2::aes(
+       fill = status,
+       values = N
+     ),
+     size = 1,
+     col = NA,
+     n_rows = 15,
+     make_proportional = FALSE
+   )
+```
+
+Now we can apply the selection of best distance to all sequences which fulfill such criteria: 1.
+Have events 2.
+Have at least one SPD constructed.
+
+We can summary the *best distance* per each continent
+
+```{r}
+#| label: best distance region summary data
+data_spd_best_dist <-
+  targets::tar_read(
+    name = "data_spd_best_dist",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_to_plot_best_dist <-
+   data_meta %>% 
+    dplyr::inner_join(
+        data_spd_best_dist,
+        by = "dataset_id"
+    ) 
+```
+
+```{r, region_summary-geo, fig.width = 12}
+# plot is space
+x_lim_dist <-
+    range(data_to_plot_best_dist$long)
+
+y_lim_dist <-
+    range(data_to_plot_best_dist$lat)
+
+data_to_plot_best_dist %>%
+    ggplot2::ggplot(
+        ggplot2::aes(long, lat)
+    ) +
+    ggplot2::borders(fill = "gray95", colour = NA) +
+    ggplot2::coord_quickmap(
+        ylim = c(min(y_lim_dist), max(y_lim_dist)),
+        xlim = c(min(x_lim_dist), max(x_lim_dist))
+    ) +
+    ggplot2::geom_point(
+        ggplot2::aes(
+            col = as.factor(best_dist),
+            shape = region
+        ),
+        alpha = 0.75,
+        size = 3,
+    ) +
+    ggplot2::geom_point(
+        size = 0.1,
+        alpha = 1
+    ) +
+    ggplot2::scale_size_continuous(
+        range = c(0.1, 6)
+    ) +
+    ggplot2::scale_color_manual(
+        values = pallette_dist_vec
+    ) +
+    ggplot2::guides(
+        size = "none",
+        shape = "none"
+    ) +
+    ggplot2::theme(
+        legend.position = "bottom"
+    ) +
+    ggplot2::labs(
+        x = "longitude",
+        y = "latitude",
+        color = "Best distance (km)",
+        size = "Best distance (km)",
+        subtitle = stringr::str_wrap(
+            "Spatial distribution of best distances",
+            fig_width_def * 2
+        )
+    )
+```
+
+```{r}
+#| label: best distance region summary plot
+# calculate summary
+data_to_plot_best_dist %>%
+    dplyr::group_by(region, best_dist) %>%
+    dplyr::count() %>%
+    ggplot2::ggplot(
+        ggplot2::aes(
+            x = as.factor(best_dist),
+            y = n
+        )
+    ) +
+    ggplot2::geom_bar(
+        ggplot2::aes(
+            fill = as.factor(best_dist)
+        ),
+        size = line_size,
+        col = "gray95",
+        stat = "identity",
+        position = ggplot2::position_dodge(),
+    ) +
+    ggplot2::facet_wrap(~region, nrow = 1) +
+    ggplot2::scale_fill_manual(
+        values = pallette_dist_vec
+    ) +
+    ggplot2::guides(
+        fill = "none"
+    ) +
+    ggplot2::labs(
+        y = "Number of sequences",
+        x = "Best distance (km)",
+        subtitle = stringr::str_wrap(
+            "Best distance per each continent",
+            fig_width_def * 2
+        )
+    )
+```
+
+# Pollen assemblage properties (PAP) estimation
+
+To prepare the response variables of our pollen dataset compilation and to be able to analyse fundamental properties of vegetation, we quantified standard estimates of pollen assemblage properties (PAP) (Bhatta et al. 2023).
+The PAP estimations provide different aspects of pollen assemblage diversity which includes palynological richness, diversity and evenness, compositional change and turnover, and Rate-of-Change (RoC).
+
+These response variables are calculated using the newly developed [R-Ecopol package](https://github.com/HOPE-UIB-BIO/R-Ecopol-package) that contain all the functions needed to estimate PAPs for our pollen data assembly.
+The base functions used in this package are derived from other dependency packages such as `mvpart` package (Therneau et al. 2014) to estimate pollen zonations with multivariate regression trees, `vegan` (Oksanen et al. 2022) for other mutivariate techniques and dissimilarity indices functions from `iNext` (Chao et al. 2014) that have been modified to extract interpolated Hill numbers based on a minimum sample size, and newly developed R functions to run DCCA using `Canoco 4.5` (ter Braak xxxx) to list a few, among other, dependency packages.
+Additionally, `R-Ratepol` (Mottl 2021) is used get the estimates of RoC
+
+```{r}
+#| label: example site - load pap data
+data_prepared_cp <-
+  targets::tar_read(
+    name = "data_prepared_cp",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_pap_example <-
+  data_prepared_cp %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+    dplyr::select(-dataset_id)
+```
+
+## Pollen richness, diversity, and evenness
+
+The different aspects of palynological diversity are estimated using Hill's effective species numbers N0, N1, N2, and the associated evenness ratios of N2/N1 and N1/N0.
+These are combined through one equation where the effective species numbers differ mainly in how the rare taxa are weighted in the parameter q:
+
+$$^q{D} = (\sum_{i=1}^{S} p_{i}^{q})^{1/(1-q)}$$
+
+When q is 0, rare and abundant taxa have equal weight and the number is simply the number of taxa in the sample.
+The equation is not possible to define for q = 1, but as it approaches 1, it is equal to the exponential of the well-known Shannon index and reports the number of equally common taxa.
+When q = 2, it is the same as the inverse Simpson diversity index and provides the number of equally abundant taxa with a low weight on rare taxa.
+The advantage of using effective species numbers is that they provide interpretable units and contain the doubling effect.
+To standardize the sample sizes, we use the rarefaction approach developed by Chao et al.
+These estimates are rarefied to the number of n = 150 grains, or in some cases to a lower sum (minimum n = 25).
+Some pollen records were only available as pollen percentages, and as the sample size is unknown, these are then rarefied to the minimum sum of percentages.
+The evenness ratios will be 1 if all taxa are equally abundant, and the ratios hence indicate changes in abundances between the numbers of rare, equally common, and abundant taxa.
+
+We acknowledge that even though attempts are made to standardise richness and diversity estimates based on standard sample size, there are additional biases that are not taken into consideration such as differences in total pollen production and pollen representation (Odgaard 1998, 2001).
+In some cases, the total pollen sum is also too low to be considered a robust estimate, but it was a choice made on balancing loosing too much information from geographical areas with less data coverage (see data filtering above).
+
+```{r}
+#| label: plot diversity
+dplyr::inner_join(
+  data_pap_example$PAP_diversity[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, dplyr::any_of(
+    names(data_pap_example$PAP_diversity[[1]])
+  )) %>%
+  tidyr::pivot_longer(
+    cols = -c(age, sample_id),
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Pollen diversity",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Compositional change
+
+Compositional change is calculated using multivariate regression trees (MRT) with age as the constraining variable.
+MRT is in general a robust tool to explore and predict changes in multivariate data sets using environmental predictor variables (De'ath, Simpson and Birks 2012).
+This technique has been adopted in palaeoecology to derive zonations in pollen diagrams or shifts between periods of homogeneous vegetation in time (Simpson and Birks 2012).
+We use the pollen taxa in percentages without any data transformations as the response and the median ages derived from the age-depth model as the constraining variable.
+The recursive partitioning are based on chi-square distances between pollen samples constrained by time.
+The number of cross-validation is set to 1000, and the optimal sized tree is chosen based on the 1SD rule (Simpson and Birks 2012).
+
+```{r}
+#| label: plot MRT
+dplyr::inner_join(
+  data_pap_example$mvrt_partitions[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, MRT_partitions) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = MRT_partitions
+    )
+  ) +
+  ggplot2::facet_wrap(~"MRT_partitions") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "MVR",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+    
+```
+
+## Compositional turnover
+
+Compositional turnover is estimated using detrended canonical correspondence analysis (DCCA) with age as the explanatory variable.
+Changes in Weighted average (WA) sample scores (CaseR scores sensu ter Braak and Smilauer 2012) are measures of compositional turnover in standard deviation (SD) units (Birks 2007).
+The WA scores are regressed with time using a second-order polynomial (age+age\^2) to allow more flexibility in the turnover pattern within a pollen record.
+Total compositional turnover is a measure of the total length of CaseR scores along the DCCA axis 1, whereas the pattern within a record is the measures between the individual samples along the DCCA axis 1.
+The response data are pollen percentages without any transformation to maintain the chi-square distances between samples, whereas the ages are the median ages derived from the age-depth model for each site.
+
+```{r}
+#| label: plot DCCA1
+dplyr::inner_join(
+  data_pap_example$dcca_scores[[1]],
+  data_pap_example$levels[[1]],
+  by = "sample_id"
+) %>%
+  dplyr::select(age, axis_1) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = axis_1
+    )
+  ) +
+  ggplot2::facet_wrap(~"axis_1") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "DCCA1",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Rate-of-change
+
+Rate-of-change for the pollen assemblages in the pollen records are quantified using the novel [R-Ratepol package](https://github.com/HOPE-UIB-BIO/R-Ratepol-package) (Mottl et al. 2021).
+RoC is estimated using moving windows of 500 years' time bins of five number of windows shifts where samples are randomly selected for each bin.
+This approach is shown to increase the correct detection of RoC peak-points than the more traditional approaches (Mottle et al. 2021).
+RoC are reported as dissimilarity per 500 years using the Chord dissimilarity coefficient.
+Sample size is standardized in each working unit to 150 grains or the lowest number detected in each dataset.
+We use only the RoC scores further in the analyses.
+
+```{r}
+#| label: plot RoC
+data_pap_example$PAP_roc[[1]] %>%
+  dplyr::select(Age, ROC) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = Age,
+      y = ROC
+    )
+  ) +
+  ggplot2::facet_wrap(~"ROC") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "ROC",
+    x = "age (cal yr BP)",
+    y = "value"
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Change-points detection and density estimates
+
+Change-points detection of the PAP variables are calculated using conventional regression trees (RT) for single variables with Euclidean distances.
+The transitions between the resulting groups (or zones) per variable is detected and saved as binary (0/1) variables.
+A change-point is defined as 1, where the mean ages between the two consecutive samples are used as the timing of this significant change.
+This is done individually for each PAP variable.
+
+The significant change points of the richness, diversity, and evenness variables are combined into one variable, and the significant change points of compositional turnover, compositional change, and rate-of-change is combined in a second variable.
+The density of these two variables are calculated using a Gaussian kernel,and re-scaled to each of specific age ranges for each individual pollen record (i.e. minimum and maximum ages).
+To solve the boundary issue in density estimation the data is reflected to 0.
+We extract the interpolated values at every 500 years time step.
+
+```{r}
+#| label: plot change-points
+data_density_estimate <-
+  targets::tar_read(
+    name = "data_density_estimate",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_change_points <-
+  targets::tar_read(
+    name = "data_change_points",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_change_points_example <-
+  data_change_points %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  )
+
+
+data_density_estimate %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("pap_density_rescale", 1) %>%
+  tidyr::pivot_longer(
+    cols = c("density_turnover", "density_diversity"),
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Density estimates",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_segment(
+    data = dplyr::bind_rows(
+      tibble::tibble(
+        age = c(
+          data_change_points_example$mvrt_cp[[1]],
+          data_change_points_example$dcca_cp[[1]],
+          data_change_points_example$roc_cp[[1]]
+        ),
+        var_name = "density_turnover"
+      ),
+      tibble::tibble(
+        age = data_change_points_example$diversity_cp[[1]]$age,
+        var_name = "density_diversity"
+      )
+    ),
+    mapping = ggplot2::aes(
+      x = age,
+      xend = age,
+      y = -Inf,
+      yend = Inf
+    ),
+    col = "gray30",
+    alpha = 0.5
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+## Equal spacing of variables
+
+All response variables have been estimated using the harmonised pollen records for each location.
+To obtain estimates of equal spacing of 500 years, we used linear interpolation.
+In the context of the temporal analysis we analyse samples distributed in space across time, and equal time steps are necessary.
+
+In order to choose a method of interpolation to obtain data on equal time steps, we compared generalise additive models (GAM), hierarchical generalised additive models (HGAM), and simple linear interpolation.
+By applying linear interpolation, we found that the correlation structure between the multivariate response variables are more similar to the original estimates without equal spacing than applying a GAM or HGAM.
+The GAM or HGAM models sometime showed unexpected patterns in single PAP estimate that changed these correlations.
+Since we cannot individually assess all the single models for each of the variable in all of the records (\>1000), we choose the simplest linear interpolation method.
+Similar issues were detected when estimating the density variables of changes points.
+The first approach was to estimate densities of the individual change points, and then use hierarchical generalised additive models (HGAM) to find the common pattern between the two groups representing significant changes in richness, diversity, and evenness, or change in pollen assemblages (MRT, RoC, DCCA1).
+As some of the models did not converge and showed inconsistent patterns we use the density estimates on the combined variables directly and extracted the interpolated values at every 500 years step.
+
+```{r}
+#| label: show data for hvar
+data_for_hvar <-
+  targets::tar_read(
+    name = "data_for_hvar",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+pap_vars <-
+  c(
+    "n0", "n1", "n2",
+    "n1_minus_n2", "n2_divided_by_n1",
+    "dcca_axis_1", "roc",
+    "density_turnover", "density_diversity"
+  )
+
+data_for_hvar %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  dplyr::select(-dataset_id) %>%
+  tidyr::unnest(data_merge) %>%
+  dplyr::select(
+    dplyr::all_of(
+      c(
+        "age",
+        pap_vars
+      )
+    )
+  ) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = pap_vars
+    )
+  )  %>% 
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "evenly spaced PAP estimates",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+```
+
+# Paleo Climate
+
+Paleoclimate from the CHELSA-TraCE21k downscaling algorithm is downloaded from the CHELSA database (Karger et al. 2021, Karger et al. 2021).
+The selected bioclimatic variables are annual mean temperatures ℃ (bio1, `temp_annual`), minimum temperatures of coldest month ℃ (bio6, `temp_cold`), precipitation of warmest quarter kg m-2 quarter-1 (bio18, `prec_summer`) and precipitation of coldest quarter kg m-2 quarter-1 (bio19, `prec_win`), where we extracted climate values for the coordinates for each dataset_id retrieving the full time series of every 100 years.
+In addition, we downloaded the monthly climatology for daily maximum near-surface temperature K/10 (tasmin).
+
+```{r}
+#| label: show climate
+data_climate <-
+  targets::tar_read(
+    name = "data_climate",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+climate_vars <-
+  c(
+    "temp_annual",
+    "temp_cold",
+    "prec_summer",
+    "prec_win"
+  )
+
+data_climate %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("climate_data", 1) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  dplyr::filter(
+    var_name %in% climate_vars
+  ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = climate_vars
+    )
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "Climate variables for the selected record",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()
+
+```
+
+# Numerical analysis
+
+The whole project is relative complex, therefore we included a conceptual workflow figure (Figure 1).
+Note: Figure is work in progress and will be improved with graphic designer.
+
+```{r}
+#| label: show Figure 1
+knitr::include_graphics(
+  here::here(
+    "Outputs/Mock_ups/Figure1_20231019.png"
+  )
+)
+```
+
+# Numerical analysis of hypothesis 1
+
+## Hierarchical variation partitioning (hVarPart)
+
+To find out if past human presence have an impact on the pollen assemblage properties, we use reduced rank multivariate regression, also known as distance-based redundancy analysis (db-RDA).
+We used the R package `rdacca.hp` to run hierarchial variation partitioning with several predictors.
+This is based on regular variation partitioning, but it estimate potentially a less biased individual variable importance (unique + shared) using the different combination of the order of predictor variables to get the average unique and shared variances in calculating the individual importance variable.
+We run db-RDA using *Gower-distances* as the pollen assemblage data is a mixture of different units.
+
+Depending on the type of spatial or temporal analysis for hypothesis 1, the predictor variables are either past human impact (SPDs), the palaeoclimatic variables, and/or time (see below).
+
+The imact of past humans (SPD) is of main interest.
+However, to get an understanding of the amount of human impact and the extent, it is a natural choice to compare it to climate.
+The palaeoclimate is represented by four variables: summer precipitation, winter precipitation, annual temperatures, and winter temperatures.
+These are selected as we considered them most relevant to represent major differences in climatic conditions globally (to reflect differences in warm, cold, dry, wet, or regions with high seasonality).
+Time is represented by the ages of each pollen record, however, this is more difficult to interpret.
+We assume age may represent time dependent changes such as natural successions and/or ecological changes due to interaction between taxa.
+
+```{r}
+#| label: plot all variables for selected record
+data_for_hvar %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  dplyr::select(-dataset_id) %>%
+  tidyr::unnest(data_merge) %>%
+  tidyr::pivot_longer(
+    cols = -age,
+    names_to = "var_name",
+    values_to = "value"
+  ) %>%
+  dplyr::mutate(
+    var_name = factor(
+      var_name,
+      levels = c(
+        pap_vars,
+        "spd",
+        climate_vars
+      )
+  ) 
+  ) %>% 
+  tidyr::drop_na(var_name) %>% 
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::facet_wrap(~var_name, nrow = 1, scales = "free_x") +
+  ggplot2::coord_flip() +
+  ggplot2::scale_x_continuous(
+    trans = "reverse"
+  ) +
+  ggplot2::labs(
+    title = "All variables for the selected record",
+    x = "age (cal yr BP)",
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line()    
+```
+
+In the hierarchichal variation partitioning analysis, the predictor variables can be applied either as individual predictors or as groups of predictors.
+In our case, we run the analysis with *groups of predictors*.
+This means that the palaeoclimatic variables are included as one matrix and not assessed as individual predictors.
+(The overall results is not very different from using individual predictors).
+
+The analysis is run in two different ways:
+
+1.  to analyse *spatial changes* which run the hierarchical variation partitioning for single record, then summarise per continent and climate zones
+2.  to analyse the *temporal patterns* in space for each region of the 500 year time steps.
+
+## Spatial changes
+
+We use the total adjusted r2 to assess the goodness-of-fit of models.
+Adjusted r2 is the modified version of r2 that corrects for the number of samples and predictors using the Ezekiel formula adjr2 = 1 - (1- r2)\*(n-1)/ (n-m-1), where n = number of samples in the dataset, and m is the number of variables.
+In vegan, these are so called semipartial r2 (Legendre et al. 2011).
+
+In the results, the negative adjusted r2 were replaced by 0.
+The assessment of a satisfactory model fit is contingent upon the underlying data characteristics.
+Thus, we considered the range of total adjusted r2 and removed models with a total fit falling below the 5% lower quantile threshold (i.e. total adj r2 below 0.121).
+
+We extracted the total variation of that whole model and the variances explained by individual predictors.
+There are three types of variation partition per each predictor:
+
+-   total predictor variation (= individual importance)
+-   shared predictor variation (= average shared partition)
+-   unique predictor variation (= average unique partition)
+
+We use the total model variation to calculate the percentage of shared and unique variation explained by each predictor.
+
+```{r}
+#| label: show example result of hvarpart
+output_h1_spatial <-
+  targets::tar_read(
+    name = "output_hvar_spatial",
+    store = paste0(
+      data_storage_path,
+      "_targets_h1"
+    )
+  )
+
+data_h1_example <-
+  output_h1_spatial %>%
+  dplyr::filter(
+    dataset_id == "26606"
+  ) %>%
+  purrr::chuck("varhp", 1)
+
+data_h1_res_example <-
+  data_h1_example %>%
+  purrr::chuck("summary_table") %>%
+  dplyr::mutate(
+    total_variance = data_h1_example$varhp_output$Total_explained_variation
+  ) %>%
+  dplyr::rename(
+    p_value = `Pr(>I)`,
+    Individual_percent = `I.perc(%)`
+  ) %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = Unique:Individual_percent,
+      .fns = ~ replace(., .x < 0, 0)
+    )
+  ) %>% # negative variances can be ignored
+  dplyr::mutate(
+    Individual_percent = Individual / total_variance * 100
+  ) %>% # recalculate individual percent
+  dplyr::mutate(
+    Unique_percent = Unique / total_variance * 100,
+    Average.share_percent = Average.share / total_variance * 100
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::select(
+    total_variance,
+    predictor,
+    predictor_unique = unique,
+    predictor_shared = average_share,
+    predictor_total = individual,
+    predictor_unique_percent = unique_percent,
+    predictor_shared_percent = average_share_percent,
+    predictor_total_percent = individual_percent
+  )
+
+
+data_h1_res_example %>%
+  pander::pandoc.table(
+    caption = "Table: Result table of a single record for spatial hierarchichal variation partitioning"
+  )
+  
+```
+
+```{r}
+#| label: h1 spatial visulalisation
+data_h1_res_example %>%
+  dplyr::select(
+    predictor, predictor_unique_percent, predictor_shared_percent
+  ) %>%
+  tidyr::pivot_longer(
+    cols = -predictor
+  ) %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = predictor,
+      y = value,
+      fill = predictor,
+      alpha = name
+    )
+  ) +
+  ggplot2::scale_y_continuous(
+    limits = c(0, 100),
+  ) +
+  ggplot2::scale_alpha_discrete(
+    "shared/unique",
+    range = c(0.5, 1),
+    labels = c("shared", "unique")
+  ) +
+  ggplot2::guides(
+    fill = "none",
+  ) +
+  ggplot2::labs(
+    y = "percent of variance explained by predictor",
+  ) +
+  ggplot2::geom_col(
+    position = ggplot2::position_dodge(
+      width = 0.9
+    )
+  )
+```
+
+However, for certain records, the shared variance of predictors is much larger than the total variance of the model.
+This caused percentages to be very high.
+
+```{r}
+#| label: show bad example result of hvarpart
+data_h1_example_bad <-
+  output_h1_spatial %>%
+  dplyr::filter(
+    dataset_id == sel_example_record
+  ) %>%
+  purrr::chuck("varhp", 1)
+
+data_h1_res_example_bad <-
+  data_h1_example_bad %>%
+  purrr::chuck("summary_table") %>%
+  dplyr::mutate(
+    total_variance = data_h1_example_bad$varhp_output$Total_explained_variation
+  ) %>%
+  dplyr::rename(
+    p_value = `Pr(>I)`,
+    Individual_percent = `I.perc(%)`
+  ) %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = Unique:Individual_percent,
+      .fns = ~ replace(., .x < 0, 0)
+    )
+  ) %>% # negative variances can be ignored
+  dplyr::mutate(
+    Individual_percent = Individual / total_variance * 100
+  ) %>% # recalculate individual percent
+  dplyr::mutate(
+    Unique_percent = Unique / total_variance * 100,
+    Average.share_percent = Average.share / total_variance * 100
+  ) %>%
+  janitor::clean_names() %>%
+  dplyr::select(
+    total_variance,
+    predictor,
+    predictor_unique = unique,
+    predictor_shared = average_share,
+    predictor_total = individual,
+    predictor_unique_percent = unique_percent,
+    predictor_shared_percent = average_share_percent,
+    predictor_total_percent = individual_percent
+  )
+
+
+data_h1_res_example_bad %>%
+  pander::pandoc.table(
+    caption = "Table: Result table of a single record for spatial hierarchichal variation partitioning"
+  )
+
+```
+
+In these cases, the outliers above 100% were removed.
+
+### Summary across climate zone per continent
+
+We then summarised the results per each climate zone within a continent.
+
+Here is an example of the distribution of unique variance explained by humans for Europe (part of Figure 3).
+
+```{r}
+#| label: plot unique human impact in Europe
+# Import tables for plotting
+source(
+  here::here(
+    "R/working_scripts/Results_script.R"
+  )
+)
+
+data_unique_human <-
+  data_spatial_vis %>%
+  dplyr::mutate(
+    sel_classification = as.factor(sel_classification),
+    region = factor(region,
+      levels = vec_regions
+    )
+  ) %>%
+  dplyr::full_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "sel_classification"
+  ) %>%
+  dplyr::filter(
+    predictor == "human"
+  ) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(
+    data_to_plot = -c(region)
+  ) %>%
+  dplyr::ungroup()
+
+get_unique_human_dist <- function(
+    data_source,
+    sel_region,
+    point_size = 3) {
+  data_work <-
+    data_source %>%
+    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "sel_classification"
+    )
+
+  data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = 1,
+        y = unique_percent
+      )
+    ) +
+    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 100)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      legend.position = "none",
+      panel.spacing.x = grid::unit(0, "mm"),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+    ) +
+    ggplot2::labs(
+      x = "Climate zone",
+      y = "Unique variance explained by human impact (%)"
+    ) +
+    ggplot2::geom_jitter(
+      mapping = ggplot2::aes(
+        col = sel_classification
+      ),
+      alpha = 0.3
+    ) +
+    ggplot2::geom_violin(
+      mapping = ggplot2::aes(
+        fill = sel_classification
+      ),
+      alpha = 0.3,
+      col = NA
+    ) +
+    ggplot2::geom_boxplot(
+      fill = "white",
+      col = "grey30",
+      width = 0.1,
+      outlier.shape = NA
+    ) +
+    ggplot2::geom_point(
+      data = data_work %>%
+        dplyr::group_by(sel_classification) %>%
+        dplyr::summarise(
+          unique_percent = median(unique_percent)
+        ),
+      mapping = ggplot2::aes(
+        fill = sel_classification
+      ),
+      shape = 22,
+      col = "gray30",
+      size = point_size
+    )
+}
+
+data_fig_unique_human_dist <-
+  data_unique_human %>%
+  dplyr::mutate(
+    plot = purrr::map(
+      .x = data_to_plot,
+      .f = ~ get_unique_human_dist(
+        data_source = .x
+      )
+    )
+  )
+
+data_fig_unique_human_dist %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  purrr::chuck("plot", 1) +
+  ggplot2::labs(
+    title = "Europe",
+    x = "Climate zone",
+    y = "Unique variance explained by human impact (%)"
+  )
+```
+
+We then estimate the the median value of variance explained by each predictor (unique and shared).
+
+```{r}
+#| label: h1 summary per ecozone per continent
+summary_spatial_median %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = predictors_spatial_order # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(n_records > 5) %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  get_circular_barplot() +
+  ggplot2::labs(
+    title = "Europe"
+  )
+```
+
+In addition, we plot the distribution of other parts of variance for each predictor on the whole continent.
+This is part of side plots for each continents in Figure 2.
+
+```{r}
+#| label: h1 summary per continent
+plot_dist_density <- function(
+    data_source, sel_predictor,
+    text_size = 6,
+    axis_to_right = TRUE) {
+  data_work <-
+    dplyr::filter(
+      data_source, predictor == sel_predictor
+    )
+
+  fig <-
+    data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = percentage
+      )
+    ) +
+    ggplot2::coord_flip() +
+    ggplot2::scale_colour_manual(
+      values = palette_predictors_parts # [config criteria]
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_predictors_parts # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size
+      ),
+      line = ggplot2::element_line(
+        linewidth = 0.01 # [config criteria]
+      ),
+      legend.position = "bottom",
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      # strip.text = ggplot2::element_blank(),
+      # axis.title = ggplot2::element_blank(),
+      # axis.text.x = ggplot2::element_blank(),
+      # axis.ticks = ggplot2::element_blank(),
+      # axis.ticks.length = grid::unit(0, "mm")
+    ) +
+    ggplot2::labs(
+      x = "Explained variability (%)",
+      y = "Number of records"
+    ) +
+    ggplot2::geom_density(
+      mapping = ggplot2::aes(
+        y = after_stat(count),
+        col = var_part,
+        fill = var_part
+      ),
+      alpha = 0.4,
+      linewidth = 0.1
+    )
+
+  if (isTRUE(axis_to_right)) {
+    fig <-
+      fig +
+      ggplot2::scale_x_continuous(
+        # name = NULL,
+        limits = c(0, 100),
+        breaks = seq(0, 100, by = 25),
+        expand = c(0, 0),
+        position = "top"
+      ) +
+      ggplot2::scale_y_continuous(
+        limits = c(0, NA)
+      )
+  } else {
+    fig <-
+      fig +
+      ggplot2::scale_x_continuous(
+        #  name = NULL,
+        limits = c(0, 100),
+        breaks = seq(0, 100, by = 25),
+        expand = c(0, 0),
+        position = "bottom"
+      ) +
+      ggplot2::scale_y_continuous(
+        trans = "reverse",
+        limits = c(NA, 0)
+      )
+  }
+
+  return(fig)
+}
+
+data_spatial_vis %>%
+  dplyr::mutate(
+    predictor = factor(
+      predictor,
+      levels = c("human", "climate", "time")
+    )
+  ) %>%
+  dplyr::mutate(
+    sel_classification = factor(sel_classification)
+  ) %>%
+  tidyr::pivot_longer(
+    c(unique_percent, average_share_percent, individual_percent),
+    names_to = "var_part",
+    values_to = "percentage"
+  ) %>%
+  dplyr::mutate(
+    var_part = factor(var_part,
+      levels = c(
+        "unique_percent",
+        "average_share_percent",
+        "individual_percent"
+      )
+    )
+  ) %>%
+  dplyr::filter(
+    region == "Europe" &
+      predictor == "human"
+  ) %>%
+  plot_dist_density(
+    data_source = .,
+    sel_predictor = "human",
+    text_size = 20,
+    axis_to_right = TRUE
+  ) +
+  ggplot2::labs(
+    title = "Europe - climate"
+  )
+```
+
+## Temporal changes - Continental trends
+
+We make a new Hierarchical Variance Partition analysis, however, this time we restructure the data, so that one model is run for all response and predictors within each 500-year time slice for each continent.
+This means that data from all records within continent for specific time slice are placed in the same model.
+The predictor groups in model are the past human presence and the matrix of palaeoclimatic variables (time is not included as all sample have same time).
+
+Similar to spatial changes, unique and shared variance explained by each predictor is extracted and plotted.
+In the figure, each bar (column) is a single model.
+The light grey bars are period, where we do not have data or model fail.
+The green color represent unique/shared variance explained by human predictor.
+
+```{r}
+#| label: show temporal example for humans inEurope 
+fig_human_temporal <-
+  summary_temporal_median %>%
+  tidyr::complete(
+    age,
+    tidyr::nesting(predictor, region)
+  ) %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  dplyr::mutate(
+    no_data = ifelse(is.na(percentage_median), TRUE, FALSE)
+  ) %>%
+  dplyr::mutate(
+    percentage_median = ifelse(no_data, 0, percentage_median)
+  ) %>%
+  get_predictor_barplot(
+    data_source = .,
+    sel_predictor = "human",
+    sel_palette = c("#00BA38") %>%
+      rlang::set_names("human"),
+    axis_to_right = TRUE
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    axis.title = ggplot2::element_text()
+  ) +
+  ggplot2::labs(
+    y = "Age (ka yr BP)"
+  )
+
+
+ggpubr::annotate_figure(
+  fig_human_temporal,
+  bottom = ggpubr::text_grob(
+    "Variance explined by human predictor (%)"
+  )
+)
+
+```
+
+## Figure 2
+
+Finally, all those parts are combined in Figure 2.
+
+```{r}
+#| label: show Figure 2
+knitr::include_graphics(
+  here::here(
+    "Outputs/Manual_edit/Figure2_20231019.png"
+  )
+)
+```
+
+## Temporal variation constrained by past humans
+
+To visualise the variation of pollen assemblage properties constrained by humans, we made a partial constrained analysis with SPD as the predictor while partial out the variation by climate and time, and plotted the constrained axis with time.
+Only records with where past human explained more than 10% of the variation are shown.
+To test if there is a consistent changes in human impact (as measured by the PAPs) across the continents, we compiled a matrix of human impact for these sequences, and used this as a response matrix in a MRT analysis with age as the predictor.
+The fit of the data was not too bad, but the prediction error \> 1 indicating low prediction power.
+
+Here is an example for Europe:
+
+```{r}
+#| label: temporal trend of case scores
+#| results: "hide"
+# get constrained spd scores
+data_scores_nested <-
+  output_h1_spatial %>%
+  dplyr::mutate(
+    constrained_scores = purrr::map(
+      .x = data_merge,
+      .f = purrr::possibly(
+        get_scores_constrained_spd,
+        otherwise = NA_real_
+      )
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id,
+        sel_classification,
+        region
+      ),
+    by = "dataset_id"
+  ) %>%
+  dplyr::select(
+    dataset_id,
+    region,
+    sel_classification,
+    constrained_scores
+  )
+
+data_constrained_scores <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    scores = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("scores")
+    )
+  ) %>%
+  tidyr::unnest(scores) %>%
+  dplyr::select(-constrained_scores)
+
+data_adjr2 <-
+  data_scores_nested %>%
+  dplyr::mutate(
+    adjr2 = purrr::map(
+      .x = constrained_scores,
+      .f = ~ .x %>%
+        purrr::pluck("adjr2")
+    )
+  ) %>%
+  tidyr::unnest(adjr2) %>%
+  dplyr::select(-constrained_scores)
+
+data_scores_merged <-
+  dplyr::left_join(
+    data_constrained_scores,
+    data_adjr2,
+    by = dplyr::join_by(
+      dataset_id, region, sel_classification
+    )
+  )
+
+data_score_mvpart <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::distinct(dataset_id, age, .keep_all = TRUE) %>%
+  dplyr::select(region, dataset_id, CAP1, age) %>%
+  tidyr::nest(data_nested = -c(region)) %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  dplyr::mutate(
+    data_for_mvpart = purrr::map(
+      .x = data_nested,
+      .f = ~ .x %>%
+        tidyr::pivot_wider(
+          names_from = dataset_id,
+          values_from = CAP1
+        )
+    )
+  ) %>%
+  dplyr::mutate(
+    mvpart = purrr::map(
+      .progress = TRUE,
+      .x = data_for_mvpart,
+      .f = ~ {
+        data_mv <- .x %>%
+          dplyr::select(-age)
+
+        data_age <- .x %>%
+          purrr::chuck("age")
+
+        mvpart_result <-
+          mvpart::mvpart(
+            data.matrix(data_mv) ~ data_age,
+            xv = "1se",
+            xvmult = 1000,
+            plot.add = FALSE,
+            data = data_mv
+          )
+
+        utils::capture.output(
+          change_points_age <-
+            as.data.frame(
+              summary(mvpart_result)$splits
+            ) %>%
+            purrr::pluck("index"),
+          file = "NUL"
+        )
+
+        list(
+          change_points_age = change_points_age,
+          mvpart_result = mvpart_result
+        ) %>%
+          return()
+      }
+    )
+  ) %>%
+  dplyr::select(region, mvpart)
+
+data_score_change_points <-
+  data_score_mvpart %>%
+  dplyr::mutate(
+    change_points_age = purrr::map(
+      .x = mvpart,
+      .f = ~ .x %>%
+        purrr::chuck("change_points_age")
+    ),
+    cv_error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("xerror"),
+        otherwise = NA_real_
+      )
+    ),
+    error = purrr::map_dbl(
+      .x = mvpart,
+      .f = purrr::possibly(
+        ~ .x %>%
+          purrr::chuck("mvpart_result", "cptable") %>%
+          as.data.frame() %>%
+          dplyr::slice_tail(n = 1) %>%
+          purrr::chuck("rel error"),
+        otherwise = NA_real_
+      )
+    ),
+    r2 = 1 - error
+  )
+```
+
+```{r}
+#| label: temporal trend of case scores figure
+data_fig_scores <-
+  data_scores_merged %>%
+  dplyr::filter(adjr2 > 0.1) %>%
+  dplyr::group_by(region) %>%
+  tidyr::nest(data_scores_merged = -c(region)) %>%
+  dplyr::left_join(
+    data_score_change_points,
+    by = dplyr::join_by(region)
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::pmap(
+      .l = list(
+        data_scores_merged,
+        change_points_age,
+        cv_error,
+        r2
+      ),
+      .f = ~ ggplot2::ggplot(
+        data = ..1,
+        mapping = ggplot2::aes(
+          x = age,
+          y = CAP1,
+          group = dataset_id
+        )
+      ) +
+        ggplot2::geom_line(
+          ggplot2::aes(
+            col = sel_classification
+          ),
+          alpha = 0.7,
+          linewidth = 0.2
+        ) +
+        ggplot2::geom_vline(
+          xintercept = ..2,
+          lty = 2,
+          col = "grey30",
+          linewidth = line_size * 2
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4.5,
+            x = 8.5e3,
+            label = paste("CV errror =", round(..3, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 2 # [config criteria]
+        ) +
+        ggplot2::geom_text(
+          mapping = ggplot2::aes(
+            y = 4,
+            x = 8.5e3,
+            label = paste("R2 =", round(..4, 2))
+          ),
+          vjust = 0,
+          hjust = 0,
+          col = "grey30",
+          size = text_size / 2 # [config criteria]
+        ) +
+        ggplot2::scale_colour_manual(
+          values = palette_ecozones # [config criteria]
+        ) +
+        ggplot2::scale_y_continuous(limits = c(0, 5)) +
+        ggplot2::scale_x_continuous(
+          trans = "reverse",
+          limits = c(8.5e3, 0),
+          breaks = seq(8.5e3, 0, by = -2e3)
+        ) +
+        ggplot2::theme_bw() +
+        ggplot2::theme(
+          text = ggplot2::element_text(
+            size = text_size # [config criteria]
+          ),
+          line = ggplot2::element_line(
+            linewidth = line_size # [config criteria]
+          ),
+          legend.position = "none",
+          panel.grid.minor = ggplot2::element_blank(),
+          plot.background = ggplot2::element_blank(),
+          plot.margin = grid::unit(c(0.2, 0.2, 0.2, 0), "mm"),
+          axis.title = ggplot2::element_blank()
+        ) +
+        ggplot2::labs(
+          y = "Scores",
+          x = "Age BP"
+        )
+    )
+  )
+
+data_fig_scores %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  purrr::chuck("plot", 1)
+
+```
+
+## Figure 3
+
+Those are then combined with the distribution of variance explained unique by humans in Figure 3.
+
+```{r}
+#| label: show Figure 3
+knitr::include_graphics(
+  here::here(
+    "Outputs/Manual_edit/Figure3_20231019.png"
+  )
+)
+```
+
+# Numerical analysis of hypothesis 2
+
+## Multidimentional shift
+
+To test Hypothesis 2, that the interrelationships among pollen assemblage properties in response to humans, we integrated assemblage properties at each 500-year time slice within climate zones across continents.
+We used a principal component analysis (PCA) with standardisation of all indices.
+
+Here is an example of PCA for Europe - Temperate Without dry season - 2000 yr slice:
+
+```{r}
+#| label: example PCA
+plot_pcoa <- function(pcoa_mod, name = NULL) {
+  scores <-
+    vegan::scores(pcoa_mod, tidy = TRUE)
+
+  species_scores <-
+    scores %>%
+    dplyr::filter(score == "species")
+
+  site_scores <-
+    scores %>%
+    dplyr::filter(score == "sites")
+
+  pcoa_plot <-
+    ggplot2::ggplot(
+      data = site_scores,
+      ggplot2::aes(
+        x = PC1,
+        y = PC2
+      )
+    ) +
+    ggplot2::coord_fixed() +
+    ggplot2::geom_point(size = 2) +
+    ggplot2::geom_segment(
+      data = species_scores,
+      aes(x = 0, xend = PC1, y = 0, yend = PC2),
+      inherit.aes = FALSE, arrow = arrow(length = unit(0.25, "cm")), colour = "black"
+    ) +
+    ggplot2::geom_text(
+      data = species_scores,
+      ggplot2::aes(x = PC1, y = PC2, label = label),
+      inherit.aes = FALSE, colour = "navy", fontface = "bold"
+    ) +
+    theme_bw() +
+    ggplot2::labs(
+      title = name
+    )
+
+
+  pcoa_plot
+}
+
+data_m2 <-
+  targets::tar_read(
+    name = "data_m2",
+    store = paste0(
+      data_storage_path,
+      "_targets_h2"
+    )
+  )
+
+cowplot::plot_grid(
+  data_m2 %>%
+    dplyr::filter(
+      region == "Europe" &
+        sel_classification == sel_data$sel_classification[[1]]
+    ) %>%
+    purrr::chuck("pca_analysis", 1, 1) %>%
+    plot_pcoa(., name = "2000 yr slice"),
+  data_m2 %>%
+    dplyr::filter(
+      region == "Europe" &
+        sel_classification == sel_data$sel_classification[[1]]
+    ) %>%
+    purrr::chuck("pca_analysis", 1, 2) %>%
+    plot_pcoa(., name = "2500 yr slice")
+)
+```
+
+To quantify the overall changes in the interrelationship among pollen assemblage properties, we employed symmetrical Procrustes sum-of squares (m2) to compare pairwise PCA changes within each time slice.
+
+Here is a m2 matrix of all time slices to each other for Europe - Temperate Without dry season:
+
+```{r}
+#| label: example m2
+data_m2 %>%
+  dplyr::filter(
+    region == "Europe" &
+      sel_classification == sel_data$sel_classification[[1]]
+  ) %>%
+  purrr::chuck("m2", 1) %>%
+  as.matrix()  %>% 
+  heatmap()
+```
+
+We can then plot the changes between subsequent time slices (diagonal+1 in the matrix) in relationship to the time.
+Here each point is a m2 value between 2 time slices, the full line represent GAM model and the dashed line LOESS smoother.
+Here is an example for Europe - Temperate Without dry season:
+
+```{r}
+#| label: example m2 temporal
+data_m2 %>%
+  dplyr::select(
+    m2_time_df,
+    region,
+    sel_classification
+  ) %>%
+  dplyr::filter(
+    region == "Europe" &
+      sel_classification == sel_data$sel_classification[[1]]
+  ) %>%
+  tidyr::unnest(cols = c(m2_time_df)) %>%
+  tidyr::complete(
+    time,
+    tidyr::nesting(sel_classification, region)
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::select(region, sel_classification, ecozone_koppen_5) %>%
+      dplyr::distinct(),
+    by = c("region", "sel_classification")
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    ),
+    ecozone_koppen_5 = factor(
+      ecozone_koppen_5,
+      levels = vec_climate_5 # [config criteria]
+    )
+  ) %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = as.numeric(time),
+      y = delta_m2,
+      col = sel_classification,
+      fill = sel_classification
+    )
+  ) +
+  ggplot2::facet_grid(
+    region ~ ecozone_koppen_5
+  ) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse",
+    limits = c(8.5e3, 500),
+    breaks = c(seq(8.5e3, 500, by = -2e3)),
+    labels = c(seq(8.5, 0.5, by = -2))
+  ) +
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::theme_minimal() +
+  ggplot2::scale_color_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  ggplot2::theme(
+    aspect.ratio = 1,
+    legend.position = "none",
+    panel.background = ggplot2::element_blank(),
+    strip.background = ggplot2::element_blank(),
+    # strip.text.y = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(
+      fill = "transparent",
+      color = NA
+    ),
+    panel.grid.major = ggplot2::element_line(
+      color = "grey90",
+      linewidth = 0.1
+    ),
+    axis.title.x = ggplot2::element_text(size = 10),
+   #  axis.title.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = 10, angle = 60),
+    axis.text.y = ggplot2::element_text(size = 10),
+    plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+  ) +
+  ggplot2::labs(
+    x = "Age (ka cal yr BP)",
+    y = "change in m2"
+  ) +
+  ggplot2::geom_point(size = 2) +
+  ggplot2::geom_smooth(
+    method = "loess",
+    formula = y ~ x,
+    linewidth = 0.1 * 2 ,
+    lty = 2,
+    se = FALSE
+  ) +
+  ggplot2::geom_smooth(
+    method = "gam",
+    se = FALSE,
+    formula = y ~ s(x, bs = "tp", k = 10),
+    method.args = list(
+      family =
+        mgcv::betar(link = "logit")
+    ),
+    linewidth = 0.2 * 2 
+  )
+```
+
+## General trends of predictors
+
+Because m2 matrix is on a level of climate zone within continent, we need to de determine the general patterns of past humans (as represented by SPD) and palaeoclimate within the climate zones in the continents.
+We used hierarchical Generalised Additive Models (HGAM) to depict their main trend.
+We decided to use the climate zones as regional division, therefore the general trends within the climate zones are based on the data we have and not reconstructing new variables within the climate zones.
+
+Here is a general trends of SPD (Extended Data Figure 8):
+
+```{r}
+#| label: show Figure SPD
+knitr::include_graphics(
+  here::here(
+    "Outputs/Supp/Supplementary_figure_spd.png"
+  )
+)
+```
+
+## hVarPart
+
+Subsequently, for each continent and climate zone, we used the pairwise m2 as distance matrices in hierarchical variation partitioning to quantify the importance of humans, climate, and time in explaining the multidimensional shifts among pollen assemblage properties through time.
+Subsequently, the explanatory variables derived from HGAMs are integrated into hierarchical variation partitioning to gauge the extent to which human activity and/or climate shifts influenced variations in the interrelationships among pollen assemblage properties.
+
+The visualisation is the same as H1.
+Here is an example for Europe:
+
+```{r}
+#| label: example hVarPart H2
+data_h2_vis %>%
+  dplyr::filter(
+    region == "Europe"
+  ) %>%
+  get_circular_barplot(
+    data_source = .,
+    y_var = "percentage",
+    fill_var = "group",
+    x_var = "predictor",
+    line_width = 0.2,
+    line_col = "grey75",
+    icon_size = 0.15,
+    y_max = 100,
+    y_step = 30,
+    col_vec = palette_ecozones, # [config criteria]
+    x_name = predictors_label # [config criteria]
+  )
+```
+
+## Figure 4
+
+Finally, all those parts are combined in Figure 4.
+
+```{r}
+#| label: show Figure 4
+knitr::include_graphics(
+  here::here(
+    "Outputs/Manual_edit/Figure4_20231019.png"
+  )
+)
+```
