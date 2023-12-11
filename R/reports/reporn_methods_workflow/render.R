@@ -40,7 +40,10 @@ rmarkdown::render(
   ),
   output_format = rmarkdown::html_document(
     self_contained = TRUE,
-    fig_width = 10
+    fig_width = 10,
+    toc = TRUE,
+    toc_depth = 3,
+    toc_float = TRUE
   )
 )
 
@@ -49,6 +52,8 @@ rmarkdown::render(
     "R/reports/reporn_methods_workflow/report_methodology_workflow.qmd"
   ),
   output_format = rmarkdown::pdf_document(
+    toc = TRUE,
+    toc_depth = 3,
     fig_width = 10
   ),
   output_file = here::here(

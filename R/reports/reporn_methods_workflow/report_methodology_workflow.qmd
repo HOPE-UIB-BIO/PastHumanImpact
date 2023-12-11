@@ -6,6 +6,10 @@ output:
     toc_float: yes
     fig-width: 10
     self_contained: yes
+  pdf_document:
+    toc: yes
+    toc_depth: 3
+    fig-width: 10
 editor: 
   markdown: 
     wrap: sentence
@@ -2928,7 +2932,7 @@ Here is an example for Europe:
 
 ```{r}
 #| label: temporal trend of case scores
-#| result: "hide"
+#| results: "hide"
 # get constrained spd scores
 data_scores_nested <-
   output_h1_spatial %>%
