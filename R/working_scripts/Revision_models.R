@@ -292,28 +292,16 @@ data_all_merged <- data_all %>%
 
 ################## REVISION TEST RUN ######################
 
-#parameter data filtering
 
-
-# model input
-human_events <-  c("fi", "fc", "ec", "cc")
-human_distance <- c("250")
-climate_pred <- c("temp_annual", "temp_cold", "prec_summer", "prec_win")
-
-
-
-sel_region = "Europe"  
-age_min= 2500
-age_max = 9000
-human_pred = human_distance
-climate_pred = climate_pred
-time = NULL
-figure_title = c("senario3")
-
-
-
-
-senario3 <- {
+# function to run scenarios 
+run_scenario <- function(sel_region = "Europe",
+                         age_min = 0,
+                         age_max = 9000,
+                         human_pred = human_event,
+                         climate_pred = climate_pred,
+                         time = NULL,
+                         response_vars = response_vars
+                         ) {
 
 data_to_run <- 
   data_all_merged %>%
@@ -327,13 +315,7 @@ data_to_run <-
 # 1. SPATIAL HVAR RECORD WISE
 hvar_spatial <- run_hvarpart(
   data_source = data_to_run,
-  response_vars = c(
-    "n0", "n1", "n2",
-    "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
-    "roc",
-    "dcca_axis_1",
-    "density_diversity", "density_turnover"
-  ),
+  response_vars = response_vars,
   predictor_vars = list(
     human = human_pred,
     climate = climate_pred,
@@ -349,6 +331,8 @@ hvar_spatial <- run_hvarpart(
 
 data_to_run_temporal <- 
   data_to_run %>%
+  filter(!dataset_id == 	
+           "COLE_etal_2015_CPL") %>%
   unnest(data_merge) %>%
   nest(data_merge = -c(region, age)) %>%
   mutate(n_samples = purrr::map_dbl(data_merge, 
@@ -359,13 +343,7 @@ data_to_run_temporal <-
 
 hvar_temporal <- run_hvarpart(
   data_source = data_to_run_temporal,
-  response_vars = c(
-    "n0", "n1", "n2",
-    "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
-    "roc",
-    "dcca_axis_1",
-    "density_diversity", "density_turnover"
-  ),
+  response_vars = response_vars,
   predictor_vars = list(
     human = human_pred,
     climate = climate_pred
@@ -503,171 +481,460 @@ summary_temporal_mean <-
     values_to = "ratio"
   ) 
 
-########### GET REGIONAL FIGURE ###########
-
-data_source_spatial <-
-  summary_spatial_mean %>% 
-  filter(region == sel_region) %>%
-  mutate(predictor = factor(predictor, levels = c("time", "climate", "human")))
-
-figure_spatial <- 
-  data_source_spatial %>%
-  ggplot2::ggplot(
-    mapping = ggplot2::aes(
-      x = get("ratio"),
-      y = get("predictor"),
-      fill = get("sel_classification")
-    )
-  ) +
-  ggplot2::theme(
-    legend.position = "none",
-    panel.background = ggplot2::element_rect(
-      fill = "white",
-      color = NA
-    ),
-    plot.background = ggplot2::element_rect(
-      fill = "white",
-      color = NA
-    ),
-    panel.border = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-    axis.line = ggplot2::element_blank(),
-    axis.title = ggplot2::element_blank(),
-    axis.ticks = ggplot2::element_blank(),
-    plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
-    panel.spacing = grid::unit(c(0, 0, 0, 0), "mm")
-  ) +
-  ggplot2::scale_fill_manual(
-    values = palette_ecozones,
-    drop = FALSE
-  ) +
-  
-  ggplot2::geom_col(
-    data = data_source_spatial %>%
-      dplyr::filter(
-        grepl(
-          "ratio_unique_mean",
-          importance_type
-        )
-      ),
-    width = 0.6,
-    position = ggplot2::position_dodge2(
-      width = 0.8,
-      preserve = "single"
-    ),
-    alpha = 1
-  ) +
-  ggplot2::geom_col(
-    data = data_source_spatial %>%
-      dplyr::filter(grepl(
-        "ratio_ind_mean",
-        importance_type
-      )),
-    width = .6,
-    position = ggplot2::position_dodge2(
-      width = 0.8,
-      preserve = "single"
-    ),
-    alpha = 0.4
-  )
-
-
-
-data_source_temporal <- 
-  summary_temporal_mean %>% 
-  filter(region == sel_region)%>%
-  filter(predictor %in% c("human", "climate")) %>%
-  filter(age <= age_max) 
-
-
-
-figure_temporal <-
-  data_source_temporal %>% 
-  ggplot2::ggplot() +
-  ggplot2::geom_bar(
-    data = data_source_temporal %>%
-      dplyr::filter(
-        importance_type == "ratio_unique_mean"
-      ),
-    mapping = ggplot2::aes(
-      x = as.factor(age / 1000),
-      y = get("ratio"),
-      fill = predictor
-    ),
-    stat = "identity",
-    width = .6,
-    alpha = 1,
-    show.legend = FALSE
-  ) +
-  ggplot2::geom_bar(
-    data = data_source_temporal %>%
-      dplyr::filter(
-        importance_type == "ratio_ind_mean"
-      ),
-    ggplot2::aes(
-      x = as.factor(age / 1000),
-      y = get("ratio"),
-      fill = predictor
-    ),
-    stat = "identity",
-    width = .6,
-    alpha = 0.4,
-    show.legend = FALSE
-  ) +
-  scale_x_discrete(limit = rev) +
-
-  ggplot2::theme(
-    panel.background = ggplot2::element_rect(
-      fill = "transparent", color = NA
-    ),
-    plot.background = ggplot2::element_rect(
-      fill = "transparent", color = NA
-    ),
-    line = ggplot2::element_line(linewidth = 0.01),
-    text = ggplot2::element_text(size = 4, color = "grey30"),
-    plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
-    # axis.text.x = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_text(hjust = 1),
-    axis.ticks.x = ggplot2::element_blank(),
-    axis.title = ggplot2::element_blank(),
-    axis.line = ggplot2::element_blank()
-  ) +
-  facet_wrap(~ predictor, ncol = 1, scales = "free_y") 
-
-
-
-region_map <- 
-  get_map_region(
-  rasterdata = data_geo_koppen,
-  select_region = sel_region,
-  sel_palette = palette_ecozones, # [config criteria]
-  sel_alpha = 0.5
+results <- list(
+  spatial_summary = spatial_summary,
+  temporal_summary = temporal_summary,
+  summary_spatial_mean = summary_spatial_mean,
+  summary_temporal_mean = summary_temporal_mean
 )
 
-region_map_points <- 
-  region_map +
-  geom_point(data = spatial_summary %>% 
-               filter(region == sel_region,
-                      predictor == "human"),
-             aes(x = long,
-                 y = lat,
-                 size = individual),
-             alpha=0.5) +
-  scale_size_continuous(range=c(0,5),
-                        limits = c(0, 1)) +
-  theme(legend.position = "none")
-
-
-combine_fig <- ggarrange(region_map_points, 
-                         figure_spatial, 
-                         figure_temporal, 
-                         labels = c("A", "B", "C"),
-                         ncol = 3, 
-                         nrow = 1)
-
-ggsave(paste0(figure_title,".png"), combine_fig, width = 15, height = 6, dpi = 300, bg = "white")
-
+return(results)
 }
+
+
+# plot scenarios events and spd combined
+plot_temporal_combined <- function(scenario4, scenario1) {
+  
+  data_source_temporal <- scenario4$summary_temporal_mean %>%
+    mutate(human_pred = "spd") %>%
+    full_join(
+      scenario1$summary_temporal_mean %>%
+        mutate(human_pred = "events"),
+      by = c("age", "region", "predictor", "importance_type", "human_pred", "ratio")
+    ) %>%
+    mutate(predictor = factor(predictor, levels = c("human", "climate"))) 
+  
+  figure_temporal <-
+    data_source_temporal %>% 
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(
+      data = data_source_temporal %>%
+        dplyr::filter(
+          importance_type == "ratio_unique_mean"
+        ),
+      mapping = ggplot2::aes(
+        x = as.factor(age / 1000),
+        y = get("ratio"),
+        fill = human_pred
+      ),
+      stat = "identity",
+      width = .6,
+      alpha = 1,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      show.legend = FALSE
+    ) +
+    ggplot2::geom_bar(
+      data = data_source_temporal %>%
+        dplyr::filter(
+          importance_type == "ratio_ind_mean"
+        ),
+      ggplot2::aes(
+        x = as.factor(age / 1000),
+        y = get("ratio"),
+        fill = human_pred
+      ),
+      stat = "identity",
+      width = .6,
+      alpha = 0.4,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      show.legend = FALSE
+    ) +
+    scale_y_continuous(
+      limits = c(-0.2, 1),
+      breaks = seq(-0.2, 1, 0.2)
+    ) +
+    scale_x_discrete(limit = rev) +
+    
+    ggplot2::theme(
+      panel.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      line = ggplot2::element_line(linewidth = 0.01),
+      text = ggplot2::element_text(size = 15, color = "grey30"),
+      # plot.margin = grid::unit(c(0, 0, 20, 20), "mm"),
+      # axis.text.x = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_text(hjust = 1),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title = ggplot2::element_text(size = 12, color = "grey30"),
+      axis.line = ggplot2::element_blank()
+    )+
+    facet_wrap(~ predictor, ncol = 1) +
+    labs(x = "Age (ka) BP", y = "Ratio of importance")  
+  
+  return(figure_temporal)
+}
+
+# plot combined spatial and temporal of scenario runs below
+plot_spatio_temporal <- function(data_source) {
+  data_source_spatial <-
+    data_source$summary_spatial_mean %>% 
+    filter(region == sel_region) %>%
+    mutate(predictor = factor(predictor, levels = c("time", "climate", "human")))
+  
+  figure_spatial <- 
+    data_source_spatial %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = get("ratio"),
+        y = get("predictor"),
+        fill = get("sel_classification")
+      )
+    ) +
+    ggplot2::theme(
+      legend.position = "none",
+      panel.background = ggplot2::element_rect(
+        fill = "white",
+        color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "white",
+        color = NA
+      ),
+      panel.border = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      panel.spacing = grid::unit(c(0, 0, 0, 0), "mm"),
+      text = ggplot2::element_text(size = 15, color = "grey30")
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones,
+      drop = FALSE
+    ) +
+    
+    ggplot2::geom_col(
+      data = data_source_spatial %>%
+        dplyr::filter(
+          grepl(
+            "ratio_unique_mean",
+            importance_type
+          )
+        ),
+      width = 0.6,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      alpha = 1
+    ) +
+    ggplot2::geom_col(
+      data = data_source_spatial %>%
+        dplyr::filter(grepl(
+          "ratio_ind_mean",
+          importance_type
+        )),
+      width = .6,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      alpha = 0.4
+    )
+  
+  data_source_temporal <- 
+    data_source$summary_temporal_mean %>%
+    mutate(predictor = factor(predictor, levels = c("human", "climate"))) 
+  
+  figure_temporal <-
+    data_source_temporal %>% 
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(
+      data = data_source_temporal %>%
+        dplyr::filter(
+          importance_type == "ratio_unique_mean"
+        ),
+      mapping = ggplot2::aes(
+        x = as.factor(age / 1000),
+        y = get("ratio"),
+        fill = predictor
+      ),
+      stat = "identity",
+      width = .6,
+      alpha = 1,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      show.legend = FALSE
+    ) +
+    ggplot2::geom_bar(
+      data = data_source_temporal %>%
+        dplyr::filter(
+          importance_type == "ratio_ind_mean"
+        ),
+      ggplot2::aes(
+        x = as.factor(age / 1000),
+        y = get("ratio"),
+        fill = predictor
+      ),
+      stat = "identity",
+      width = .6,
+      alpha = 0.4,
+      position = ggplot2::position_dodge2(
+        width = 0.8,
+        preserve = "single"
+      ),
+      show.legend = FALSE
+    ) +
+    scale_x_discrete(limit = rev) +
+    
+    ggplot2::theme(
+      panel.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent", color = NA
+      ),
+      line = ggplot2::element_line(linewidth = 0.01),
+      text = ggplot2::element_text(size = 15, color = "grey30"),
+      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      axis.text.x = ggplot2::element_text(size = 10, color = "grey30"),
+      axis.text.y = ggplot2::element_text(hjust = 1),
+      axis.ticks.x = ggplot2::element_blank(),
+      # axis.title = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank()
+    ) +
+    facet_wrap(~ predictor, ncol = 1) +
+    labs(x = "Age (ka) BP", y = "Ratio of importance")
+  
+  combine_fig <- ggarrange(figure_spatial, 
+                           figure_temporal, 
+                           labels = c("A", "B"),
+                           ncol = 2, 
+                           nrow = 1)
+  return(combine_fig)
+  
+  
+}
+
+
+########## RUN SCENARIOS ##########
+
+# model input
+
+# events
+human_events_eu <-  c("fi", "fc", "ec", "cc")
+human_events_na <- c("fc", "es")
+human_events_asia <- c("fi", "fc", "ei")
+human_events_la <- c("weak", "medium", "strong")
+human_events_ippd <- c("weak", "medium", "strong")
+
+# distance
+human_distance <- c("250")
+
+# climate
+climate_pred <- c("temp_annual", "temp_cold", "prec_summer", "prec_win")
+
+# responses
+response_vars <- c(
+  "n0", "n1", "n2",
+  "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+  "roc",
+  "dcca_axis_1",
+  "density_diversity", "density_turnover"
+)
+
+diversity_vars <-  c(
+  "n0", "n1", "n2",
+  "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0", 
+  "density_diversity"
+)
+
+turnover_vars <- c(
+  "roc",
+  "dcca_axis_1", 
+  "density_turnover"
+)
+
+select_vars <-  c(
+  "n0", 
+  "n2_divided_by_n1", 
+  "roc",
+  "dcca_axis_1"
+)
+
+
+# Europe
+
+# human predictors
+Europe_scenario1 <- run_scenario(
+  sel_region = "Europe",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+Europe_scenario4 <- run_scenario(
+  sel_region = "Europe",
+  age_min = 0,
+  age_max = 9000,
+  human_pred = human_events_eu,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+plot_temporal_combined(Europe_scenario4,
+                       Europe_scenario1)
+
+# responses
+Europe_scenario_all_response <- run_scenario(
+  sel_region = "Europe",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  response_vars = response_vars,
+  time = c("age")
+)
+
+plot_spatio_temporal(Europe_scenario_all_response)
+Europe_scenario_turnover <- run_scenario(
+  sel_region = "Europe",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  response_vars = turnover_vars,
+  time = c("age")
+)
+
+plot_spatio_temporal(Europe_scenario_turnover)
+
+
+Europe_scenario_diversity <- run_scenario(
+  sel_region = "Europe",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  response_vars = diversity_vars,
+  time = c("age")
+)
+
+plot_spatio_temporal(Europe_scenario_diversity)
+
+Europe_scenario_select <- run_scenario(
+  sel_region = "Europe",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  response_vars = select_vars,
+  time = c("age")
+)
+
+plot_spatio_temporal(Europe_scenario_select)
+
+
+# North America
+
+# predictor scenarios
+NA_scenario1 <- run_scenario(
+  sel_region = "North America",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+NA_scenario4 <- run_scenario(
+  sel_region = "North America",
+  age_min = 0,
+  age_max = 9000,
+  human_pred = human_events_na,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+plot_temporal_combined(NA_scenario4,
+                       NA_scenario1)
+
+
+# Latin America
+
+# predictor scenarios
+LA_scenario1 <- run_scenario(
+  sel_region = "Latin America",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+LA_scenario4 <- run_scenario(
+  sel_region = "Latin America",
+  age_min = 0,
+  age_max = 9000,
+  human_pred = human_events_la,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+plot_temporal_combined(LA_scenario4,
+                       LA_scenario1)
+
+
+# Asia
+
+# predictor scenarios
+A_scenario1 <- run_scenario(
+  sel_region = "Asia",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+A_scenario4 <- run_scenario(
+  sel_region = "Asia",
+  age_min = 0,
+  age_max = 9000,
+  human_pred = human_events_asia,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+plot_temporal_combined(A_scenario4,
+                       A_scenario1)
+
+# Oceania
+# predictor scenarios
+
+O_scenario1 <- run_scenario(
+  sel_region = "Oceania",
+  age_min = 2500,
+  age_max = 9000,
+  human_pred = human_distance,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+O_scenario4 <- run_scenario(
+  sel_region = "Oceania",
+  age_min = 0,
+  age_max = 9000,
+  human_pred = human_events_ippd,
+  climate_pred = climate_pred,
+  time = c("age")
+)
+
+plot_temporal_combined(O_scenario4,
+                       O_scenario1)
 
 
 
@@ -679,19 +946,21 @@ set_palette <-
     "fi" = "#c99000",
     "ei" = "#a17400",
     "ec"= "#7b5800",
-   "cc" = "#573e00",
-   "fc" = "#00c92b",
+    "cc" = "#573e00",
+    "fc" = "#00c92b",
     "es" = "#c9009e",
-  "weak"  = "#9b541b",
-  "medium"  = "#5d261a",
-  "strong" =  "#1f0000"
+    "weak"  = "#9b541b",
+    "medium"  = "#5d261a",
+    "strong" =  "#1f0000",
+    "no_impact" = "grey60"
+    
   )
 
 fig_human_events <- 
   human_predictors %>%
   filter(region == "Europe") %>%
   unnest(events) %>%
-  pivot_longer(cols = c("bi", "fi", "fc", "ec", "cc"), 
+  pivot_longer(cols = c("bi", "fi", "fc","ec" ,"cc"), 
                names_to = "events", 
                values_to = "type") %>%
   ggplot(aes(x = age, y = type, col = events)) +
@@ -708,7 +977,29 @@ fig_human_events <-
 
 
 
-
+# ### Figure regional maps
+# 
+# region_map <- 
+#   get_map_region(
+#     rasterdata = data_geo_koppen,
+#     select_region = sel_region,
+#     sel_palette = palette_ecozones, # [config criteria]
+#     sel_alpha = 0.5
+#   )
+# 
+# 
+# region_map_points <- 
+#   region_map +
+#   geom_point(data = spatial_summary %>% 
+#                filter(region == sel_region,
+#                       predictor == "human"),
+#              aes(x = long,
+#                  y = lat,
+#                  size = individual),
+#              alpha=0.5) +
+#   scale_size_continuous(range=c(0,5),
+#                         limits = c(0, 1)) +
+#   theme(legend.position = "none")
 
 
 
