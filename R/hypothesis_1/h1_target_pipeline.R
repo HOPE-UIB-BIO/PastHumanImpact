@@ -65,13 +65,13 @@ list(
         "North America",
         "Oceania"
       ),
-      age_from = c(2000, 2000, 2000, 2000, 500, 500),
-      age_end = rep(8500, 6)
+      age_from = c(2000, 2000, 2000, 2000, 2000, 2000),
+      age_end = rep(9000, 6)
     )
   ),
   targets::tar_target(
     name = spd_distance_vec,
-    command = c(5, 25, 50, 100, 250, 500) %>%
+    command = c(150, 250, 500) %>%
       rlang::set_names()
   ),
   # 1. Pollen data prepartion -----
@@ -236,7 +236,7 @@ list(
     name = data_events_to_fit,
     command = get_events_for_modelling(events)
   ),
-  # - interpolate data for even time steps
+  # - interpolate data for even time steps; rule 1 returns NAs beyond min-max range 
   targets::tar_target(
     name = events_interpolated,
     command = get_interpolated_data(
@@ -245,7 +245,7 @@ list(
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
       method = "constant",
-      rule = 1:2,
+      rule = 1,
       ties = "ordered",
       age_min = 0,
       age_max = 12e03,
@@ -335,7 +335,7 @@ list(
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
       method = "linear",
-      rule = 1:2,
+      rule = 1,
       ties = mean,
       age_min = 0,
       age_max = 12e03,
@@ -356,24 +356,34 @@ list(
   # #     limit_length = FALSE
   # #   )
   # # ),
+  # targets::tar_target(
+  #   name = data_spd_best_dist,
+  #   command = select_best_spd(
+  #     data_source_events = events_temporal_subset,
+  #     data_source_spd = data_spd_interpolated,
+  #     data_source_meta = data_meta,
+  #     data_source_dist_vec = spd_distance_vec
+  #   )
+  # ),
   targets::tar_target(
-    name = data_spd_best_dist,
-    command = select_best_spd(
-      data_source_events = events_temporal_subset,
-      data_source_spd = data_spd_interpolated,
-      data_source_meta = data_meta,
-      data_source_dist_vec = spd_distance_vec
-    )
-  ),
+      name = data_spd_events,
+      command = get_events_spd_combined(
+        data_source_events = events_temporal_subset,
+        data_source_spd = data_spd_interpolated,
+        data_source_meta = data_meta,
+        data_source_dummy_time = data_dummy_time,
+        select_spd_distance = 250
+      )
+    ),
   # - add SPD value for records without humans
-  targets::tar_target(
-    name = data_spd_full,
-    command = add_missing_spd_values(
-      data_source_spd = data_spd_best_dist,
-      data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time
-    )
-  ),
+  # targets::tar_target(
+  #   name = data_spd_full,
+  #   command = add_missing_spd_values(
+  #     data_source_spd = data_spd_dist,
+  #     data_source_meta = data_meta,
+  #     data_source_dummy_time = data_dummy_time
+  #   )
+  # ),
   # 5. Get CHELSA palaeoclimate -----
   # - a path to time reference table (from code)
   targets::tar_target(
