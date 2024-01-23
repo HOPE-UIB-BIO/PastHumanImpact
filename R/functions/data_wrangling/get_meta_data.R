@@ -42,7 +42,7 @@ get_meta_data <- function(data_assembly,
       dplyr::all_of(variables), age_min, age_max
     ) %>% 
     dplyr::mutate(
-      sel_classification = dplyr::case_when(
+      climate_ecozone = dplyr::case_when(
         ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
         ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
         ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
