@@ -46,7 +46,7 @@ data_polygons <-
     distance_buffer = 10 # 10° away from site
   )
 
-# - a path for c14 data
+# - path for c14 data
 data_c14_path <- 
     paste0(
     data_storage_path,
@@ -67,7 +67,7 @@ data_c14_path <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
- # - run spd in parallell session (base windows)
+ # - calculate spd in parallell session (base windows)
 
 cores <- parallel::detectCores() - 1  # leave one core 
 cl <- parallel::makeCluster(cores)
