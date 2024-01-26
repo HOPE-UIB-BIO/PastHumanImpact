@@ -11,7 +11,7 @@ get_spd <- function(data_source_c14,
                     data_source_dist_vec,
                     age_from = 0,
                     age_to = 12e3,
-                    age_timestep = 500,
+                    sel_smooth_size = 100,
                     min_n_dates = 50,
                     normalise_to_one = FALSE) {
   
@@ -53,8 +53,8 @@ get_spd <- function(data_source_c14,
                        sel_calcurve,
                        max_age,
                        min_age,
-                       sel_smooth_size = 100,
-                       min_n_dates = 50,
+                       sel_smooth_size = sel_smooth_size,
+                       min_n_dates = min_n_dates,
                        normalise_to_one = normalise_to_one) {
     data_sub <-
       data_source %>%
@@ -185,7 +185,7 @@ get_spd <- function(data_source_c14,
                     min_n_dates = min_n_dates,
                     max_age = age_to,
                     min_age = age_from,
-                    sel_smooth_size = age_timestep,
+                    sel_smooth_size = sel_smooth_size,
                     normalise_to_one = normalise_to_one
                   )
                 )
