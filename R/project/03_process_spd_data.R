@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis I
+#                   Pre-process spd data
 #
 #
 #                   O. Mottl, V. Felde
@@ -20,13 +20,18 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
+  )
+)
+# Load meta data
+source(
+  here::here(
+    "R/project/01_meta_data.R"
   )
 )
 
-
 #----------------------------------------------------------#
-# 1. Calculate spd density curves -----
+# 1. Load and prepare subsets of C14 dates -----
 #----------------------------------------------------------#
 
 # - distances to calculate spd density curves
@@ -45,7 +50,7 @@ data_polygons <-
 data_c14_path <- 
     paste0(
     data_storage_path,
-    "HOPE_Hypothesis1/Data/c14/data_rc_2022-11-29.rds"
+    "Data/c14/data_rc_2022-11-29.rds"
   )
 # - load c14 data
  data_c14 <- get_file_from_path(data_c14_path)
@@ -58,19 +63,52 @@ data_c14_path <-
     data_source_meta = data_meta
   )
 
-# - estimate spd for each distance
-data_spd <- 
-  get_spd(
-    data_source_c14 = data_c14_subset,
-    data_source_dist_vec = spd_distance_vec,
-    age_from = min_age,
-    age_to = max_age,
-    age_timestep = timestep,
-    min_n_dates = 50
+#---------------------------------------------------------------#
+# 2. Calculate spd for each distance per locality -----
+#---------------------------------------------------------------#
+
+ # - run spd in parallell session (base windows)
+
+cores <- parallel::detectCores() - 1  # leave one core 
+cl <- parallel::makeCluster(cores)
+
+data_c14_subset %>% 
+  split(.$dataset_id) %>% 
+  purrr::map(
+    .x = .,
+    .f = function(x) {
+      parallel::clusterExport(cl, c("x","spd_distance_vec", "min_age", "max_age", "get_spd"))
+      parallel::clusterEvalQ(cl, {
+        library(tidyverse)
+        library(rcarbon)
+        } )
+      parallel::parLapply(cl, spd_distance_vec, function(y) {
+        get_spd(
+          data_source_c14 = x,
+          data_source_dist_vec = y,
+          age_from = min_age,
+          age_to = max_age,
+          sel_smooth_size = 100,
+          min_n_dates = 50
+        )
+      })
+    }
+  ) %>% 
+  list_rbind %>% 
+  parallel::stopCluster() -> data_spd
+
+ 
+data_spd
+
+#----------------------------------------------------------#
+# 3. Save processed spd to data folder ------
+#----------------------------------------------------------#
+readr::write_rds(
+  x = data_spd,
+  file = paste0(
+    data_storage_path,
+    "Data/spd/data_spd_processed-2024-01-26.rds"
   )
-
-
-#### save here to data folder
-
+)
 
 
