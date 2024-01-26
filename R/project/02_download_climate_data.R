@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Climate data
+#                 Download palaeoclimate data
 #
 #
 #                   O. Mottl, V.A. Felde
@@ -20,18 +20,18 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
 source(
   here::here(
-    "R/01_meta_data.R"
+    "R/project/01_meta_data.R"
   )
 )
 
 #----------------------------------------------------------#
-# 1. Get CHELSA palaeoclimate data -----
+# 1. Download CHELSA palaeoclimate data -----
 #----------------------------------------------------------#
 
 # - a path to time reference table (from code)
@@ -61,8 +61,10 @@ data_climate <-
   )
 
 
+#----------------------------------------------------------#
+# 2. Save palaeoclimate data to data folder -----
+#----------------------------------------------------------#
 
-# - save climate data in data_storage
 readr::write_rds(
   x = data_climate,
   file = paste0(
