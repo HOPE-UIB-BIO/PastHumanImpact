@@ -40,6 +40,14 @@ get_meta_data <- function(data_assembly,
     ) %>%
     dplyr::select(
       dplyr::all_of(variables), age_min, age_max
+    ) %>% 
+    dplyr::mutate(
+      climate_ecozone = dplyr::case_when(
+        ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+        ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+        ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+        .default = ecozone_koppen_5
+      )
     ) %>%
     return()
 }

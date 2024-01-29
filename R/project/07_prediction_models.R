@@ -3,10 +3,10 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis I
+#                     Prediction models
 #
 #
-#                   O. Mottl, V. Felde
+#                   O. Mottl, V.A. Felde
 #                         2023
 #
 #----------------------------------------------------------#
@@ -56,7 +56,7 @@ data_for_hvar <-
     name = "data_hvar_filtered",
     store = paste0(
       data_storage_path,
-      "_targets_h1"
+      "_targets_project"
     )
   )
 
@@ -65,7 +65,7 @@ data_meta <-
     name = "data_meta",
     store = paste0(
       data_storage_path,
-      "_targets_h1"
+      "_targets_project"
     )
   )
 
@@ -191,3 +191,5 @@ list(
   # prepare data for hGAM
   tar_mapped_data
 )
+
+

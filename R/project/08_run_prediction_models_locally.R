@@ -3,10 +3,10 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis II
+#                   Run prediction models 
 #
 #
-#                   O. Mottl, V. Felde
+#                   O. Mottl, V.A. Felde
 #                         2023
 #
 #----------------------------------------------------------#
@@ -73,8 +73,8 @@ if (
       recursive = TRUE
     ) %>%
     stringr::str_replace(., "/mod.rds", "")
-
-
+  
+  
   data_targest_h2a_to_run <-
     data_targest_h2a_to_run %>%
     dplyr::filter(
@@ -93,7 +93,7 @@ purrr::walk2(
   .y = data_targest_h2a_to_run$name_simple,
   .f = ~ {
     message(.y)
-
+    
     if (
       file.exists(
         here::here(
@@ -104,7 +104,7 @@ purrr::walk2(
       message(" - skip")
       return()
     }
-
+    
     # targets cannot evaluate the name of a traget programatically, this is a
     # workaround
     eval(
@@ -115,11 +115,11 @@ purrr::walk2(
         )
       )
     )
-
+    
     sel_data <-
       data_list %>%
       purrr::chuck("sel_data")
-
+    
     if (
       nrow(sel_data) > 0
     ) {
@@ -128,12 +128,12 @@ purrr::walk2(
         purrr::chuck("dataset_id") %>%
         unique() %>%
         length()
-
+      
       message(n_recors)
-
+      
       use_parallel <-
         parallel::detectCores(logical = FALSE) < n_recors
-
+      
       # Fit GAM model
       data_mod <-
         REcopol::fit_hgam(
@@ -157,14 +157,14 @@ purrr::walk2(
           max_iterations = 200,
           verbose = TRUE
         )
-
+      
       readr::write_rds(
         data_mod,
         file = here::here(
           data_storage_path, "h2_predictor_jobs", .y, "mod.rds"
         )
       )
-
+      
       message(" - done")
     }
   }

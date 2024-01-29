@@ -9,23 +9,12 @@
 #' to sum to unity
 get_spd <- function(data_source_c14,
                     data_source_dist_vec,
-                    data_meta,
-                    age_cutoff_region,
+                    age_from = 0,
                     age_to = 12e3,
-                    age_timestep = 500,
+                    sel_smooth_size = 100,
                     min_n_dates = 50,
                     normalise_to_one = FALSE) {
   
-  
-
- # combine minimum cutoff age 
-  age_cutoff_rc <- data_meta %>%
-    dplyr::select(dataset_id, region) %>%
-    left_join(age_cutoff_region)
-  
-  # join minimum cut-off age per region
-  data_source_c14 <- data_source_c14 %>%
-    inner_join(age_cutoff_rc, by = "dataset_id")
   
   # helper functions
   get_spd_density <- function(data_source,
@@ -64,8 +53,8 @@ get_spd <- function(data_source_c14,
                        sel_calcurve,
                        max_age,
                        min_age,
-                       sel_smooth_size = 100,
-                       min_n_dates = 50,
+                       sel_smooth_size = sel_smooth_size,
+                       min_n_dates = min_n_dates,
                        normalise_to_one = normalise_to_one) {
     data_sub <-
       data_source %>%
@@ -150,27 +139,21 @@ get_spd <- function(data_source_c14,
     )
 
   # dummy table to bind all the results
-
+  dummy_table = tibble::tibble(
+    age = seq(
+      from = age_to, # [config]
+      to = age_from, # [config]
+      by = -1
+    )
+  )
+  
   data_rc_calcurve <- 
     data_rc_calcurve %>%
-    mutate(dummy_age_table = 
-             purrr::map(
-               .x = age_from,
-               .f = function(.x) {
-                 
-                 dummy_age <- tibble::tibble(
-                   age = seq(
-                     from = age_to, # [config]
-                     to = .x, 
-                     by = -1
-                   )
-                 )  
-                 return(dummy_age)
-               }
-             )
-    )
-  
+    dplyr::mutate(
+      dummy_age_table = list(dummy_table)
+      )
 
+  # get spd
   data_spd <-
     data_rc_calcurve %>%
     dplyr::mutate(
@@ -179,8 +162,7 @@ get_spd <- function(data_source_c14,
           rc, # ..1
           calcurve, # ..2
           dataset_id, # ..3
-          age_from, #..4
-          dummy_age_table #..5
+          dummy_age_table #..4
         ),
         .f = ~ {
           message(..3)
@@ -189,9 +171,7 @@ get_spd <- function(data_source_c14,
           
           sel_cal_curve <- ..2
           
-          age_from <- ..4
-          
-          dummy_age_table <- ..5
+          dummy_age_table <- ..4
           
           res <-
             dplyr::bind_cols(
@@ -205,7 +185,7 @@ get_spd <- function(data_source_c14,
                     min_n_dates = min_n_dates,
                     max_age = age_to,
                     min_age = age_from,
-                    sel_smooth_size = age_timestep,
+                    sel_smooth_size = sel_smooth_size,
                     normalise_to_one = normalise_to_one
                   )
                 )

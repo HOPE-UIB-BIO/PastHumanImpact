@@ -49,15 +49,3 @@ targets::tar_make(
     "_targets_h1"
   )
 )
-
-#----------------------------------------------------------#
-# 2.  check workflow -----
-#----------------------------------------------------------#
-
-targets::tar_visnetwork(
-  script = here::here("R/hypothesis_1/h1_target_pipeline.R"),
-  store = paste0(
-    data_storage_path,
-    "_targets_h1"
-  )
-)

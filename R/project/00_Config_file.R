@@ -6,7 +6,7 @@
 #                        Config File
 #
 #
-#                   O. Mottl, V. Felde
+#                   O. Mottl, V.A. Felde
 #                         2023
 #
 #----------------------------------------------------------#
@@ -140,7 +140,7 @@ data_storage_path <-
 external_storage_targets <-
   paste0(
     data_storage_path,
-    "_targets_h1"
+    "_targets_project"
   )
 
 #----------------------------------------------------------#

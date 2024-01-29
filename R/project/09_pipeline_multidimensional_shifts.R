@@ -3,10 +3,10 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis I
+#                      Hypothesis II
 #
 #
-#                   O. Mottl, V. Felde
+#                   O. Mottl, V.A. Felde
 #                         2023
 #
 #----------------------------------------------------------#
