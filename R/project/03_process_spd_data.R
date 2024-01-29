@@ -76,27 +76,27 @@ future::plan(
 
 
 
-data_spd <-
-  tidyr::expand_grid(
-    dataset_id = unique(data_c14_subset$dataset_id)
-  ) %>%
-  dplyr::mutate(
-    spd = furrr::future_map(
-      .progress = TRUE,
-      .x = dataset_id,
-      .f = ~ get_spd(
-        data_source_c14 = data_c14_subset,
-        data_source_dist_vec = 250,
-        sel_smooth_size = 100,
-        min_n_dates = 50,
-        age_from = min_age, # [config]
-        age_to = max_age # [config]
-      )
-    )
-  )
+# data_spd <-
+#   tidyr::expand_grid(
+#     dataset_id = unique(data_c14_subset$dataset_id)
+#   ) %>%
+#   dplyr::mutate(
+#     spd = furrr::future_map(
+#       .progress = TRUE,
+#       .x = dataset_id,
+#       .f = ~ get_spd(
+#         data_source_c14 = data_c14_subset,
+#         data_source_dist_vec = 250,
+#         sel_smooth_size = 100,
+#         min_n_dates = 50,
+#         age_from = min_age, # [config]
+#         age_to = max_age # [config]
+#       )
+#     )
+#   )
 
 
-# alternative
+# use future iwalk
 data_c14_subset %>%
   split(.$dataset_id) %>%
   rlang::set_names(data_c14_subset$dataset_id) %>%
@@ -107,7 +107,8 @@ data_c14_subset %>%
       
       if(
         !file.exists(
-          here::here(
+          paste0(
+            data_storage_path,
             "Data/spd/processed_spd/",
             paste0(
               .y,
@@ -125,8 +126,8 @@ data_c14_subset %>%
           age_from = min_age, # [config]
           age_to = max_age # [config]
         ) %>%
-          writer::write_rds(
-            here::here(
+          readr::write_rds(
+            paste0(data_storage_path,
               "Data/spd/processed_spd/",
               paste0(
                 .y,
@@ -139,4 +140,33 @@ data_c14_subset %>%
     }
   )
 
+#---------------------------------------------------------------#
+# 3. Load processed spds
+#---------------------------------------------------------------#
 
+spd_processed_vec <-
+  list.files(
+    here::here(data_storage_path, "Data/spd/processed_spd"),
+    pattern = "_spd.rds",
+    recursive = TRUE
+  )
+
+spd_processed_list <-
+  purrr::map(
+    .progress = TRUE,
+    .x = spd_processed_vec,
+    .f = ~ readr::read_rds(
+      here::here(
+        data_storage_path, "Data/spd/processed_spd", .x
+      )
+    )
+  ) %>%
+  purrr::set_names(
+    nm = stringr::str_replace(spd_processed_vec, "/_spd.rds", "")
+  )
+
+spd_processed_temp <- 
+  dplyr::bind_rows(.id = "dataset_id",
+                   spd_processed_list)
+
+#---------------------------------------------------------------#
