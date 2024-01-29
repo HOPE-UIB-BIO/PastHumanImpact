@@ -65,4 +65,12 @@ data_meta <-
     )
   )
 
+# - age table for dummy data
+data_dummy_time <- tibble::tibble(
+    age = seq(
+      from = min_age, # [config]
+      to = max_age, # [config]
+      by = timestep # [config]
+    )
+  )
 
