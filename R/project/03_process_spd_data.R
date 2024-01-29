@@ -36,7 +36,7 @@ source(
 
 # - distances to calculate spd density curves
  spd_distance_vec <- 
-  c(150, 250, 500) %>%
+  c(250) %>%
     rlang::set_names()
 
 # - get polygons for each dataset_id
@@ -67,48 +67,76 @@ data_c14_path <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
- # - calculate spd in parallell session (base windows)
+library(furrr)
 
-cores <- parallel::detectCores() - 1  # leave one core 
-cl <- parallel::makeCluster(cores)
-
-data_c14_subset %>% 
-  split(.$dataset_id) %>% 
-  purrr::map(
-    .x = .,
-    .f = function(x) {
-      parallel::clusterExport(cl, c("x","spd_distance_vec", "min_age", "max_age", "get_spd"))
-      parallel::clusterEvalQ(cl, {
-        library(tidyverse)
-        library(rcarbon)
-        } )
-      parallel::parLapply(cl, spd_distance_vec, function(y) {
-        get_spd(
-          data_source_c14 = x,
-          data_source_dist_vec = y,
-          age_from = min_age,
-          age_to = max_age,
-          sel_smooth_size = 100,
-          min_n_dates = 50
-        )
-      })
-    }
-  ) %>% 
-  list_rbind %>% 
-  parallel::stopCluster() -> data_spd
-
- 
-data_spd
-
-#----------------------------------------------------------#
-# 3. Save processed spd to data folder ------
-#----------------------------------------------------------#
-readr::write_rds(
-  x = data_spd,
-  file = paste0(
-    data_storage_path,
-    "Data/spd/data_spd_processed-2024-01-26.rds"
-  )
+future::plan(
+  future::multisession(),
+  workers = parallel::detectCores()-1
 )
+
+
+
+data_spd <-
+  tidyr::expand_grid(
+    dataset_id = unique(data_c14_subset$dataset_id)
+  ) %>%
+  dplyr::mutate(
+    spd = furrr::future_map(
+      .progress = TRUE,
+      .x = dataset_id,
+      .f = ~ get_spd(
+        data_source_c14 = data_c14_subset,
+        data_source_dist_vec = 250,
+        sel_smooth_size = 100,
+        min_n_dates = 50,
+        age_from = min_age, # [config]
+        age_to = max_age # [config]
+      )
+    )
+  )
+
+
+# alternative
+data_c14_subset %>%
+  split(.$dataset_id) %>%
+  rlang::set_names(data_c14_subset$dataset_id) %>%
+  furrr::future_iwalk(
+    .progress = TRUE,
+    .x = .,
+    .f = ~ {
+      
+      if(
+        !file.exists(
+          here::here(
+            "Data/spd/processed_spd/",
+            paste0(
+              .y,
+              "_spd.rds"
+            )
+          )
+        )
+      ) {
+        
+        get_spd(
+          data_source_c14 = .,
+          data_source_dist_vec = 250,
+          sel_smooth_size = 100,
+          min_n_dates = 50,
+          age_from = min_age, # [config]
+          age_to = max_age # [config]
+        ) %>%
+          writer::write_rds(
+            here::here(
+              "Data/spd/processed_spd/",
+              paste0(
+                .y,
+                "_spd.rds"
+              )
+            )
+          )
+        
+      }
+    }
+  )
 
 
