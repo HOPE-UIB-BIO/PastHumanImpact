@@ -151,6 +151,15 @@ min_age <- 0
 max_age <- 12e3
 timestep <- 500
 
+# - age table for dummy data
+data_dummy_time <- tibble::tibble(
+  age = seq(
+    from = min_age, # [config]
+    to = max_age, # [config]
+    by = timestep # [config]
+  )
+)
+
 vec_regions <-
   c(
     "North America",
