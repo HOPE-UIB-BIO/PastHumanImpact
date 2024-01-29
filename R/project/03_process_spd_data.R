@@ -140,4 +140,33 @@ data_c14_subset %>%
     }
   )
 
+#---------------------------------------------------------------#
+# 3. Load processed spds
+#---------------------------------------------------------------#
 
+spd_processed_vec <-
+  list.files(
+    here::here(data_storage_path, "Data/spd/processed_spd"),
+    pattern = "_spd.rds",
+    recursive = TRUE
+  )
+
+spd_processed_list <-
+  purrr::map(
+    .progress = TRUE,
+    .x = spd_processed_vec,
+    .f = ~ readr::read_rds(
+      here::here(
+        data_storage_path, "Data/spd/processed_spd", .x
+      )
+    )
+  ) %>%
+  purrr::set_names(
+    nm = stringr::str_replace(spd_processed_vec, "/_spd.rds", "")
+  )
+
+spd_processed_temp <- 
+  dplyr::bind_rows(.id = "dataset_id",
+                   spd_processed_list)
+
+#---------------------------------------------------------------#
