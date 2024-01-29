@@ -140,7 +140,7 @@ data_storage_path <-
 external_storage_targets <-
   paste0(
     data_storage_path,
-    "_targets_project"
+    "_targets_data"
   )
 
 #----------------------------------------------------------#

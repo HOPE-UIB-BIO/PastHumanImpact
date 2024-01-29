@@ -26,7 +26,7 @@ source(
   )
 )
 
-Sys.setenv(TAR_PROJECT = "project")
+Sys.setenv(TAR_PROJECT = "_targets_data")
 
 targets::tar_option_set(
   packages = package_list, # [config]
@@ -206,7 +206,7 @@ list(
       timestep = 500,
       verbose = TRUE
     )
-  ),
+  )
   # - merge PAPs together
 
-)
+) 

@@ -20,57 +20,31 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
 #----------------------------------------------------------#
-# 1. Load and filter meta data -----
+# 1. Load processed meta data -----
 #----------------------------------------------------------#
 
-# get path to the data assembly
-file_assembly_path <-
+# - path to meta data
+file_meta_data_path <-
   paste0(
     data_storage_path,
-    "Data/assembly/data_assembly_V2-2022-05-23.rds"
+    "Data/assembly/data_meta-2024-01-30.rds"
   )
-# - load data assembly from path
-data_assembly <-
-  get_data(file_assembly_path)
-
-# - filter pollen data
-data_assembly_filtered <- 
-  filter_all_data(data_assembly)
-
-
-# - select meta data for filtered dataset_id
+# - load processed meta data
 data_meta <-
-  get_meta_data(
-    data_assembly = data_assembly_filtered,
-    variables = c(
-      "dataset_id",
-      "handle",
-      "country",
-      "long",
-      "lat",
-      "altitude",
-      "depositionalenvironment",
-      "region",
-      "curve_name",
-      "ecozone_koppen_5",
-      "ecozone_koppen_15",
-      "ecozone_koppen_30",
-      "data_publicity",
-      "doi"
-    )
-  )
+  get_data(file_meta_data_path)
+
 
 #----------------------------------------------------------#
-# 2. Split meta data into different tibbles -----
+# 2. Split meta data  -----
 #----------------------------------------------------------#
 
 
-# - meta data regions
+# - meta data regions ----
 regions <- 
   data_meta %>%
   dplyr::select(
@@ -78,7 +52,7 @@ regions <-
     region
   ) 
 
-# - meta data climate zones
+# - meta data climate zones ----
 climate_zones <-
   data_meta %>%
   dplyr::select(
@@ -86,7 +60,7 @@ climate_zones <-
     climatezone
   ) 
 
-# - meta data locations
+# - meta data locations ----
 locations <- 
   data_meta %>%
   dplyr::select(
@@ -95,7 +69,7 @@ locations <-
     lat
   )
 
-# meta data altitude
+# meta data altitude -----
 altitude <-
   data_meta %>%
   dplyr::select(
@@ -103,7 +77,7 @@ altitude <-
     altitude
   )
 
-# - meta data age ranges
+# - meta data mean age ranges -----
 age_range <-
   data_meta %>%
   dplyr::select(
@@ -112,7 +86,7 @@ age_range <-
     age_max
   )
 
-# - meta data publication status
+# - meta data publication status ----
 publication_status <-
   data_meta %>%
   dplyr::select(

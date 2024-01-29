@@ -29,12 +29,12 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/project/01_meta_data.R"
+    "R/project/02_meta_data.R"
   )
 )
 
 # - Setting options for targets
-Sys.setenv(TAR_PROJECT = "project")
+Sys.setenv(TAR_PROJECT = "_targets_data")
 
 targets::tar_option_set(
   packages = package_list, # [config]
@@ -45,19 +45,14 @@ targets::tar_option_set(
   storage = "worker"
 )
 
-#----------------------------------------------------------#
-# 1. Load data -----
-#----------------------------------------------------------#
 
-# - load pollen data
-data_pollen
 
 #----------------------------------------------------------#
-# 2. Targets -----
+# 1. Targets -----
 #----------------------------------------------------------#
 
 list(
-  # - a path for events from diagrams
+  # - a path for events from diagrams ----
   targets::tar_target(
   name = events_diag_path,
   command = paste0(
@@ -66,22 +61,22 @@ list(
   ),
   format = "file"
 ),
-# - load events from diagrams
+# - load events from diagrams ----
 targets::tar_target(
   name = events_diag_raw,
   command = get_file_from_path(events_diag_path)
 ),
-# - turn events from diagrams into binary
+# - turn events from diagrams into binary ----
 targets::tar_target(
   name = events_diag_binary,
   command = get_events_as_binary(events_diag_raw, data_pollen)
 ),
-# add logical rules to the binary values (events from diag)
+# add logical rules to the binary values ----
 targets::tar_target(
   name = events_diag,
   command = add_logical_rules(events_diag_binary)
 ),
-# - a path for indicators (from code)
+# - a path for indicators ----
 targets::tar_target(
   name = events_indicators_path,
   command = paste0(
@@ -90,12 +85,12 @@ targets::tar_target(
   ),
   format = "file"
 ),
-# - load indicators
+# - load indicators ----
 targets::tar_target(
   name = events_indicators_raw,
   command = get_file_from_path(events_indicators_path)
 ),
-# - detect indicators in data
+# - detect indicators in data ----
 targets::tar_target(
   name = events_indicators,
   command = get_events_from_indicators(
@@ -113,7 +108,7 @@ targets::tar_target(
     )
   )
 ),
-# - a path for indices (from code)
+# - a path for indices ----
 targets::tar_target(
   name = events_indices_path,
   command = paste0(
@@ -122,12 +117,12 @@ targets::tar_target(
   ),
   format = "file"
 ),
-# - load indices
+# - load indices ----
 targets::tar_target(
   name = events_indices_raw,
   command = get_file_from_path(events_indices_path)
 ),
-# - detect indices in data
+# - detect indices in data ----
 targets::tar_target(
   name = events_indices,
   command = get_events_from_indices(
@@ -137,7 +132,7 @@ targets::tar_target(
     sel_region = "Latin America"
   )
 ),
-# - merge all events detected by code together
+# - merge all events detected by code together ----
 targets::tar_target(
   name = events_code,
   command = merge_indicators_and_indices(
@@ -145,7 +140,7 @@ targets::tar_target(
     data_source_indicators = events_indicators
   )
 ),
-# - merge all events together
+# - merge all events together ----
 targets::tar_target(
   name = events,
   command = merge_all_events(
@@ -153,12 +148,12 @@ targets::tar_target(
     data_source_events_code = events_code
   )
 ),
-# - prepare events for modelling
+# - prepare events for modelling ----
 targets::tar_target(
   name = data_events_to_fit,
   command = get_events_for_modelling(events)
 ),
-# - interpolate data for even time steps; rule 1 returns NAs beyond min-max range 
+# - interpolate data for even time steps ----
 targets::tar_target(
   name = events_interpolated,
   command = get_interpolated_data(
@@ -175,7 +170,7 @@ targets::tar_target(
     verbose = TRUE
   )
 ),
-# - subset event types relevant for each region
+# - subset event types relevant for each region ----
 targets::tar_target(
   name = events_temporal_subset,
   command = subset_event_types(
