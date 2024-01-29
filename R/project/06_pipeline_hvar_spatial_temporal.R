@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis I
+#                 Run analyses for Hypothesis I
 #
 #
 #                   O. Mottl, V.A. Felde
@@ -19,13 +19,21 @@
 
 library(here)
 
-# Load configuration
+# - Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/01_meta_data.R"
+  )
+)
+
+# - Setting for targets
 Sys.setenv(TAR_PROJECT = "project")
 
 targets::tar_option_set(
@@ -42,7 +50,7 @@ targets::tar_option_set(
 #----------------------------------------------------------#
 
 list(
-  # 1. Load climate data ----
+  # - Load climate data ----
   targets::tar_target(
     name = file_climate_path,
     command = paste0(
@@ -87,7 +95,7 @@ list(
       verbose = TRUE
     )
   ),
-  # 2. Load spd data ----
+  # - Load spd data ----
   targets::tar_target(
     name = file_spd_path,
     command = paste0(
@@ -156,8 +164,8 @@ list(
       remove_private = TRUE
     )
   ),
-  # 3. Hierarchical variation partitioning 
-  # - run spatial (within core) analysis with spd
+  # - Run analyses: Hierarchical variation partitioning 
+  # - spatial (within core) analysis with spd
   targets::tar_target(
     name = output_spatial_spd,
     command = run_hvarpart(
@@ -190,7 +198,7 @@ list(
       permutations = 999
     )
   ),
-  # - run spatial (within core) analysis with events
+  # - spatial (within core) analysis with events
   targets::tar_target(
     name = output_spatial_events,
     command = run_hvarpart(
