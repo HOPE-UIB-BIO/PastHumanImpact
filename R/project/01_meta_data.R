@@ -25,7 +25,7 @@ source(
 )
 
 #----------------------------------------------------------#
-# 1. Get meta data -----
+# 1. Load and filter meta data -----
 #----------------------------------------------------------#
 
 # get path to the data assembly
@@ -65,12 +65,57 @@ data_meta <-
     )
   )
 
-# - age table for dummy data
-data_dummy_time <- tibble::tibble(
-    age = seq(
-      from = min_age, # [config]
-      to = max_age, # [config]
-      by = timestep # [config]
-    )
+#----------------------------------------------------------#
+# 2. Split meta data into different tibbles -----
+#----------------------------------------------------------#
+
+
+# - meta data regions
+regions <- 
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    region
+  ) 
+
+# - meta data climate zones
+climate_zones <-
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    climatezone
+  ) 
+
+# - meta data locations
+locations <- 
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    long,
+    lat
   )
 
+# meta data altitude
+altitude <-
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    altitude
+  )
+
+# - meta data age ranges
+age_range <-
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    age_min,
+    age_max
+  )
+
+# - meta data publication status
+publication_status <-
+  data_meta %>%
+  dplyr::select(
+    dataset_id,
+    data_publicity
+  )
