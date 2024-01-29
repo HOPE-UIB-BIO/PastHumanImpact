@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#           Pollen assemblage properties estimates
+#               Calculate pollen assemblage properties
 #
 #
 #                   O. Mottl, V.A. Felde
@@ -22,7 +22,7 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
@@ -43,24 +43,13 @@ targets::tar_option_set(
 
 # the targets list:
 list(
-  # 0. setting variables ----
-  targets::tar_target(
-    name = data_dummy_time,
-    command = tibble::tibble(
-      age = seq(
-        from = min_age, # [config]
-        to = max_age, # [config]
-        by = timestep # [config]
-      )
-    )
-  ),
   # 1. Pollen data prepartion -----
   # get path to the data assembly
   targets::tar_target(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/assembly/data_assembly_V2-2022-05-23.rds"
+      "Data/assembly/data_assembly_V2-2022-05-23.rds"
     ),
     format = "file"
   ),
