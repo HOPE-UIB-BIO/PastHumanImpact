@@ -19,13 +19,21 @@
 
 library(here)
 
-# Load configuration
+# - Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/01_meta_data.R"
+  )
+)
+
+# - Setting options for targets
 Sys.setenv(TAR_PROJECT = "project")
 
 targets::tar_option_set(
@@ -41,8 +49,7 @@ targets::tar_option_set(
 # 1. Load data -----
 #----------------------------------------------------------#
 
-data_meta
-
+# - load pollen data
 data_pollen
 
 #----------------------------------------------------------#
@@ -50,17 +57,6 @@ data_pollen
 #----------------------------------------------------------#
 
 list(
-  # # 0. setting variables ----
-  # targets::tar_target(
-  #   name = data_dummy_time,
-  #   command = tibble::tibble(
-  #     age = seq(
-  #       from = min_age, # [config]
-  #       to = max_age, # [config]
-  #       by = timestep # [config]
-  #     )
-  #   )
-  # ),
   # - a path for events from diagrams
   targets::tar_target(
   name = events_diag_path,
@@ -70,7 +66,6 @@ list(
   ),
   format = "file"
 ),
-# 1. Human events -----
 # - load events from diagrams
 targets::tar_target(
   name = events_diag_raw,
