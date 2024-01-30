@@ -4,22 +4,15 @@ get_events_spd_combined <- function(
          data_source_events,
          data_source_spd,
          data_source_meta,
-         data_source_dummy_time,
-         select_spd_distance = 250) {
+         data_source_dummy_time) {
  
 
-  # select spd data distance  
- data_select_spd <- 
+  # set names to spd 
+ data_spd <- 
    data_source_spd %>%
     mutate(data = purrr::map(
         .x = data,
         .f = ~ {.x %>%
-          janitor::clean_names() %>%
-          dplyr::select(
-            dplyr::all_of(
-              c("age", paste0("x",select_spd_distance))
-            )
-          ) %>%
           rlang::set_names(
             nm = c("age", "spd")
           ) %>%
@@ -63,9 +56,10 @@ data_full_spd <-
 
 # add missing events data
 dummy_data_events <- 
-  tibble(age = seq(0,
-                   12000, 
-                   by = 500)) %>%
+  tibble(
+    age = seq(0, 
+              12000, 
+              by = 500)) %>%
   mutate(bi = 0,
          fc = 0,
          es = 0,
