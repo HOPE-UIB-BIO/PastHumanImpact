@@ -1,4 +1,4 @@
-get_data_hvar_timebin <- function(data_source,
+get_data_timebin <- function(data_source,
                                   data_meta) {
   
   data_source %>%

@@ -26,13 +26,6 @@ source(
   )
 )
 
-# - Load meta data
-source(
-  here::here(
-    "R/project/02_meta_data.R"
-  )
-)
-
 # - Setting options for targets
 Sys.setenv(TAR_PROJECT = "_targets_data")
 
@@ -45,6 +38,22 @@ targets::tar_option_set(
   storage = "worker"
 )
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
+# - Load pollen data
+data_pollen <-
+  targets::tar_read(
+    name = "data_pollen",
+    store = paste0(
+      data_storage_path,
+      "_targets_data"
+    )
+  )
 
 
 #----------------------------------------------------------#

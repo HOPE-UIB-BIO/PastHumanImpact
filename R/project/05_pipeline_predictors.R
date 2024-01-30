@@ -26,12 +26,6 @@ source(
   )
 )
 
-# - Load meta data
-source(
-  here::here(
-    "R/project/02_meta_data.R"
-  )
-)
 
 # - Setting for targets
 Sys.setenv(TAR_PROJECT = "_targets_data")
@@ -45,6 +39,23 @@ targets::tar_option_set(
   storage = "worker"
 )
 
+
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
+# Load events_temporal_subset
+events_temporal_subset <-
+  targets::tar_read(
+    name = "events_temporal_subset",
+    store = paste0(
+      data_storage_path,
+      "_targets_data"
+    )
+  )
 
 
 #----------------------------------------------------------#
@@ -146,8 +157,8 @@ list(
   # - combine predictor data ----
   targets::tar_target(
     name = data_predictors,
-    command = get_predictors_combined(
-      data_source_spd = data_spd_events,
+    command = get_data_predictors(
+      data_source_spd_events = data_spd_events,
       data_source_climate = data_climate_interpolated
     )
   )
