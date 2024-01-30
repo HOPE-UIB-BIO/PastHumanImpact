@@ -146,8 +146,8 @@ list(
   # - combine predictor data ----
   targets::tar_target(
     name = data_predictors,
-    command = get_predictors_combined(
-      data_source_spd = data_spd_events,
+    command = get_data_predictors(
+      data_source_spd_events = data_spd_events,
       data_source_climate = data_climate_interpolated
     )
   )
