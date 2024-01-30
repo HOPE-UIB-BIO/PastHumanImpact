@@ -72,7 +72,7 @@ data_properties <-
 list(
   # - combine properties and predictors ----
   targets::tar_target(
-    name = data_all_combined,
+    name = data_combined,
     command = get_data_combined(
       data_source_properties = data_properties,
       data_source_predictors = data_predictors
@@ -80,12 +80,20 @@ list(
   ),
   # - filter data for analyses ----
   targets::tar_target(
-    name = data_hvar,
-    command = get_data_hvar(
-      data_source = data_all_combined,
+    name = data_records,
+    command = get_data_filtered(
+      data_source = data_combined,
       age_min = 2000,
       age_max = 8500,
       remove_private = TRUE
+    )
+  ),
+  # - get data for timebins ----
+  targets::tar_target(
+    name = data_timebins,
+    command = get_data_timebin(
+      data_source = data_records_spatial,
+      data_meta = data_meta
     )
   ),
   # - Hierarchical variation partitioning: ----
@@ -93,7 +101,7 @@ list(
   targets::tar_target(
     name = output_spatial_spd,
     command = run_hvarpart(
-      data_source = data_hvar_filtered,
+      data_source = data_records,
       response_vars = c(
         "n0", 
         "n1", 
@@ -126,7 +134,7 @@ list(
   targets::tar_target(
     name = output_spatial_events,
     command = run_hvarpart(
-      data_source = data_hvar_filtered,
+      data_source = data_records,
       response_vars = c(
         "n0", 
         "n1", 
@@ -169,7 +177,7 @@ list(
   targets::tar_target(
     name = output_temporal_spd,
     command = run_hvarpart(
-      data_source = data_hvar_temporal,
+      data_source = data_timebins,
       response_vars = c(
         "n0", 
         "n1", 
@@ -201,7 +209,7 @@ list(
   targets::tar_target(
     name = output_temporal_events,
     command = run_hvarpart(
-      data_source = data_hvar_temporal,
+      data_source = data_timebins,
       response_vars = c(
         "n0", 
         "n1", 
