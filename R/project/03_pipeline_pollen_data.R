@@ -210,7 +210,7 @@ list(
   # - merge PAPs together
   targets::tar_target(
     name = data_properties,
-    command = get_combined_data_properties(
+    command = get_data_properties(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
       data_source_density = data_density_estimate,
