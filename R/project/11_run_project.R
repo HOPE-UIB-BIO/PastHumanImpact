@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                      Hypothesis I
+#                      Run project
 #
 #
 #                   O. Mottl, V. Felde
@@ -18,7 +18,7 @@
 #----------------------------------------------------------#
 
 targets::tar_make(
-     script = here::here("R/project/04_pipeline_pollen_data.R"),
+     script = here::here("R/project/03_pipeline_pollen_data.R"),
      store = paste0(
          data_storage_path,
          "_targets_data"
@@ -29,7 +29,7 @@ targets::tar_make(
 # 2. run target pipeline events data -----
 #----------------------------------------------------------#
 targets::tar_make(
-     script = here::here("R/project/05_pipeline_events.R"),
+     script = here::here("R/project/04_pipeline_events.R"),
      store = paste0(
          data_storage_path,
          "_targets_data"
@@ -37,7 +37,18 @@ targets::tar_make(
  )
 
 #----------------------------------------------------------#
-# 3. run target pipeline hvar spatial & temporal (h1) -----
+# 3. run target pipeline predictors -----
+#----------------------------------------------------------#
+targets::tar_make(
+  script = here::here("R/project/05_pipeline_predictors.R"),
+  store = paste0(
+    data_storage_path,
+    "_targets_data"
+  )
+)
+
+#----------------------------------------------------------#
+# 4. run target pipeline hvar spatial & temporal (h1) -----
 #----------------------------------------------------------#
 targets::tar_make(
      script = here::here("R/project/06_pipeline_hvar_spatial_temporal.R"),
@@ -48,7 +59,7 @@ targets::tar_make(
  )
 
 #----------------------------------------------------------#
-# 4. run target pipeline multidimensional shifts (h2) -----
+# 5. run target pipeline multidimensional shifts (h2) -----
 #----------------------------------------------------------#
 targets::tar_make(
      script = here::here("R/project/09_pipeline_multidimensional_shifts.R"),
