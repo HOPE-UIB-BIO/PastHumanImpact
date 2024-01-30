@@ -29,7 +29,7 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/project/01_meta_data.R"
+    "R/project/02_meta_data.R"
   )
 )
 
@@ -57,14 +57,14 @@ list(
     name = file_climate_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/climate/data_climate-2024-01-23.rds"
+      "Data/climate/data_climate-2024-01-23.rds"
     ),
     format = "file"
   ),
   # - load climate data ----
   targets::tar_target(
     name = data_climate,
-    command = get_data(file_climate_path)
+    command = get_file_from_path(file_climate_path)
   ),
   # - select climate variables ----
   targets::tar_target(
@@ -102,14 +102,14 @@ list(
     name = file_spd_path,
     command = paste0(
       data_storage_path,
-      "HOPE_Hypothesis1/Data/spd/data_spd-2024-01-30.rds"
+      "Data/spd/data_spd-2024-01-29.rds"
     ),
     format = "file"
   ),
   # - load spd data  ----
   targets::tar_target(
     name = data_spd,
-    command = get_data(file_spd_path)
+    command = get_file_from_path(file_spd_path)
   ),
   # - prepare spd for modelling ----
   targets::tar_target(
@@ -140,8 +140,7 @@ list(
       data_source_events = events_temporal_subset,
       data_source_spd = data_spd_interpolated,
       data_source_meta = data_meta,
-      data_source_dummy_time = data_dummy_time,
-      select_spd_distance = 250
+      data_source_dummy_time = data_dummy_time
     )
   ),
   # - combine predictor data ----

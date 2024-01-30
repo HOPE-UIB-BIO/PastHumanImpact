@@ -177,7 +177,7 @@ list(
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
       method = "linear",
-      rule = 1:2,
+      rule = 1,
       ties = mean,
       age_min = 0,
       age_max = 12e03,
@@ -199,14 +199,21 @@ list(
       vars_interpolate = c("age", "value"),
       group_var = "dataset_id",
       method = "linear",
-      rule = 1:2,
+      rule = 1,
       ties = mean,
       age_min = 0,
       age_max = 12e03,
       timestep = 500,
       verbose = TRUE
     )
-  )
+  ),
   # - merge PAPs together
-
-) 
+  targets::tar_target(
+    name = data_properties,
+    command = get_data_properties(
+      data_source_diversity = data_div_dcca_interpolated,
+      data_source_roc = data_roc_interpolated,
+      data_source_density = data_density_estimate,
+      used_rescale = TRUE)
+  )
+) # end of targets
