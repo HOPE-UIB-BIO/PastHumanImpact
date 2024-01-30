@@ -36,7 +36,7 @@ file_meta_data_path <-
   )
 # - load processed meta data
 data_meta <-
-  get_data(file_meta_data_path)
+  get_file_from_path(file_meta_data_path)
 
 
 #----------------------------------------------------------#
