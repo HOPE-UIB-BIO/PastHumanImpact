@@ -26,18 +26,6 @@ source(
   )
 )
 
-# - Setting options for targets
-Sys.setenv(TAR_PROJECT = "_targets_data")
-
-targets::tar_option_set(
-  packages = package_list, # [config]
-  memory = "transient",
-  garbage_collection = TRUE,
-  repository = "local",
-  seed = set_seed, # [config]
-  storage = "worker"
-)
-
 # - Load meta data
 source(
   here::here(

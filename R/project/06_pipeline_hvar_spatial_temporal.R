@@ -33,20 +33,8 @@ source(
   )
 )
 
-# - Setting for targets
-Sys.setenv(TAR_PROJECT = "_targets_h1")
 
-targets::tar_option_set(
-  packages = package_list, # [config]
-  memory = "transient",
-  garbage_collection = TRUE,
-  repository = "local",
-  seed = set_seed, # [config]
-  storage = "worker"
-)
-
-# - Load data from _targets_data
-
+# - Load predictor data from _targets_data
 data_predictors <-   
   targets::tar_read(
   name = "data_predictors",
@@ -56,6 +44,7 @@ data_predictors <-
   )
 )
 
+# - Load properties data from _targets_data
 data_properties <-   
   targets::tar_read(
     name = "data_properties",
