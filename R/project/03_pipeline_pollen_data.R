@@ -26,6 +26,12 @@ source(
   )
 )
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
 
 #----------------------------------------------------------#
 # 1. Targets -----

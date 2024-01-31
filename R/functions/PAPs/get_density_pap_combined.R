@@ -22,7 +22,7 @@ get_density_pap_combined <- function(data_source_change_points,
              age_max,
              ...) {
       if (
-        isTRUE(is.null(data_source))
+        length(data_source) == 0
       ) {
         res <-
           dummy_table %>%
