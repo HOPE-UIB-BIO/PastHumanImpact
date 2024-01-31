@@ -33,16 +33,6 @@ source(
     "R/project/02_meta_data.R"
   )
 )
-# 
-# # Load events_temporal_subset
-# events_temporal_subset <-
-#   targets::tar_read(
-#     name = "events_temporal_subset",
-#     store = paste0(
-#       data_storage_path,
-#       "_targets_data"
-#     )
-#   )
 
 
 #----------------------------------------------------------#
@@ -50,6 +40,19 @@ source(
 #----------------------------------------------------------#
 
 list(
+  # load events from _targets_events ----
+  targets::tar_target(
+    name = data_events_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_events/objects/events_temporal_subset"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = events_temporal_subset,
+    command = get_file_from_path(data_events_path)
+  ),
   # - file path to climate data ----
   targets::tar_target(
     name = file_climate_path,

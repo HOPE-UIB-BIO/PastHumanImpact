@@ -3,9 +3,8 @@
 #
 #                     GlobalHumanImpact
 #
-#                   1. Filter meta data
-#                   2. Download climate data
-#                   3. Calculate SPD
+#                
+#                     Calculate SPD
 #
 #                   O. Mottl, V.A. Felde
 #                         2023
@@ -25,104 +24,16 @@ source(
   )
 )
 
-#---------------------------------------------------------------#
-# 1.1. Filter meta data -----
-#---------------------------------------------------------------#
-
-# get path to the data assembly
-file_assembly_path <-
-  paste0(
-    data_storage_path,
-    "Data/assembly/data_assembly_V2-2022-05-23.rds"
-  )
-# - load data assembly from path
-data_assembly <-
-  get_data(file_assembly_path)
-
-# - filter pollen data
-data_assembly_filtered <- 
-  filter_all_data(data_assembly)
-
-
-# - select meta data for filtered dataset_id
-data_meta <-
-  get_meta_data(
-    data_assembly = data_assembly_filtered,
-    variables = c(
-      "dataset_id",
-      "handle",
-      "country",
-      "long",
-      "lat",
-      "altitude",
-      "depositionalenvironment",
-      "region",
-      "curve_name",
-      "ecozone_koppen_5",
-      "ecozone_koppen_15",
-      "ecozone_koppen_30",
-      "data_publicity",
-      "doi"
-    )
-  )
-
-#---------------------------------------------------------------#
-# 1.2. Save processed meta data to data folder -----
-#---------------------------------------------------------------#
-
-readr::write_rds(
-  x = data_meta,
-  file = paste0(
-    data_storage_path,
-    "Data/assembly/data_meta-2024-01-30.rds"
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
   )
 )
 
-#---------------------------------------------------------------#
-# 2.1. Download CHELSA palaeoclimate data -----
-#---------------------------------------------------------------#
-
-# - a path to time reference table (from code)
-time_ref_path <-
-  paste0(
-    data_storage_path,
-    "Data/climate/time_reference_table.rds"
-  )
-# - load table
-time_ref_table <- get_file_from_path(time_ref_path)
-
-# - download CHELSA data
-data_climate_chelsa <-
-  get_climate_data(
-    variables_selected = c("bio", "tasmin"),
-    bio_var_selected = c(1, 6, 12, 15, 18, 19),
-    time_var_selected = c(20:-200),
-    month_var_selected = c(1:12),
-    xy = data_meta
-  )
-
-# - get climate variables
-data_climate <-
-  get_climate_indices(
-    data_source = data_climate_chelsa,
-    time_ref = time_ref_table
-  )
-
 
 #---------------------------------------------------------------#
-# 2.2. Save palaeoclimate data to data folder -----
-#---------------------------------------------------------------#
-
-readr::write_rds(
-  x = data_climate,
-  file = paste0(
-    data_storage_path,
-    "Data/climate/data_climate-2024-01-23.rds"
-  )
-)
-
-#---------------------------------------------------------------#
-# 3.1. Load and prepare subsets of C14 dates -----
+# 1. Load and prepare subsets of C14 dates -----
 #---------------------------------------------------------------#
 
 # - distances to calculate spd density curves
@@ -155,7 +66,7 @@ data_c14_subset <-
   )
 
 #---------------------------------------------------------------#
-# 3.2. Calculate spd for each distance per locality -----
+# 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
 library(furrr)
@@ -210,7 +121,7 @@ data_c14_subset %>%
   )
 
 #---------------------------------------------------------------#
-# 3.3. Load processed spds ----
+# 3. Load processed spds ----
 #---------------------------------------------------------------#
 
 spd_processed_vec <-
@@ -239,7 +150,7 @@ data_spd <-
                    spd_processed_list)
 
 #---------------------------------------------------------------#
-# 3.4. Save spd data to data folder ----
+# 4. Save spd data to data folder ----
 #---------------------------------------------------------------#
 
 readr::write_rds(

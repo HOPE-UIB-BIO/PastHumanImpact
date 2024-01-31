@@ -33,22 +33,25 @@ source(
   )
 )
 
-# - Load pollen data
-data_pollen <-
-  targets::tar_read(
-    name = "data_pollen",
-    store = paste0(
-      data_storage_path,
-      "_targets_data"
-    )
-  )
-
 
 #----------------------------------------------------------#
 # 1. Targets -----
 #----------------------------------------------------------#
 
 list(
+  # get pollen data from _targets_data ----
+  targets::tar_target(
+    name = data_pollen_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_pollen_data/objects/data_pollen"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = data_pollen,
+    command = get_file_from_path(data_pollen_path)
+  ),
   # - a path for events from diagrams ----
   targets::tar_target(
   name = events_diag_path,
