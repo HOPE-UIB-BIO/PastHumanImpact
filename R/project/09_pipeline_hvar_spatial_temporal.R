@@ -76,10 +76,10 @@ list(
   ),
   # - filter data for analyses ----
   targets::tar_target(
-    name = data_records,
+    name = data_hvar_filtered,
     command = get_data_filtered(
-      data_source_combined = data_combined,
-      data_source_meta = data_meta,
+      data_source = data_combined,
+      data_meta = data_meta,
       age_from = 2000,
       age_to = 8500,
       remove_private = TRUE
@@ -87,9 +87,9 @@ list(
   ),
   # - get data for timebins ----
   targets::tar_target(
-    name = data_timebins,
+    name = data_hvar_timebins,
     command = get_data_timebin(
-      data_source = data_records_spatial,
+      data_source = data_hvar_filtered,
       data_meta = data_meta
     )
   ),
@@ -98,7 +98,7 @@ list(
   targets::tar_target(
     name = output_spatial_spd,
     command = run_hvarpart(
-      data_source = data_records,
+      data_source = data_hvar_filtered,
       response_vars = c(
         "n0", 
         "n1", 
@@ -131,7 +131,7 @@ list(
   targets::tar_target(
     name = output_spatial_events,
     command = run_hvarpart(
-      data_source = data_records,
+      data_source = data_hvar_filtered,
       response_vars = c(
         "n0", 
         "n1", 
@@ -174,7 +174,7 @@ list(
   targets::tar_target(
     name = output_temporal_spd,
     command = run_hvarpart(
-      data_source = data_timebins,
+      data_source = data_hvar_timebins,
       response_vars = c(
         "n0", 
         "n1", 
@@ -206,7 +206,7 @@ list(
   targets::tar_target(
     name = output_temporal_events,
     command = run_hvarpart(
-      data_source = data_timebins,
+      data_source = data_hvar_timebins,
       response_vars = c(
         "n0", 
         "n1", 
