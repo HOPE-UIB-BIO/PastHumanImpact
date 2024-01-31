@@ -137,11 +137,11 @@ data_storage_path <-
   purrr::pluck("path")
 
 
-external_storage_targets <-
-  paste0(
-    data_storage_path,
-    "_targets_data"
-  )
+# external_storage_targets <-
+#   paste0(
+#     data_storage_path,
+#     "_targets_data"
+#   )
 
 #----------------------------------------------------------#
 # 5. Define variables -----
