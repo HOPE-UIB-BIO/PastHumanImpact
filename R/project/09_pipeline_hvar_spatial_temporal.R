@@ -34,31 +34,38 @@ source(
 )
 
 
-# - Load predictor data from _targets_data
-data_predictors <-   
-  targets::tar_read(
-  name = "data_predictors",
-  store = paste0(
-    data_storage_path,
-    "_targets_data"
-  )
-)
-
-# - Load properties data from _targets_data
-data_properties <-   
-  targets::tar_read(
-    name = "data_properties",
-    store = paste0(
-      data_storage_path,
-      "_targets_data"
-    )
-  )
 
 #----------------------------------------------------------#
 # 1. Targets -----
 #----------------------------------------------------------#
 
 list(
+  # load data_properties ----
+  targets::tar_target(
+    name = data_properties_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_paps/objects/data_properties"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = data_properties,
+    command = get_file_from_path(data_properties_path)
+  ),
+  # load data_predictors ----
+  targets::tar_target(
+    name = data_predictor_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_predictors/objects/data_predictors"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = data_predictors,
+    command = get_file_from_path(data_predictors_path)
+  ),
   # - combine properties and predictors ----
   targets::tar_target(
     name = data_combined,
@@ -71,9 +78,10 @@ list(
   targets::tar_target(
     name = data_records,
     command = get_data_filtered(
-      data_source = data_combined,
-      age_min = 2000,
-      age_max = 8500,
+      data_source_combined = data_combined,
+      data_source_meta = data_meta,
+      age_from = 2000,
+      age_to = 8500,
       remove_private = TRUE
     )
   ),
