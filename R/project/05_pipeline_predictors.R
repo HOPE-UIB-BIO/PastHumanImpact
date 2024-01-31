@@ -33,16 +33,16 @@ source(
     "R/project/02_meta_data.R"
   )
 )
-
-# Load events_temporal_subset
-events_temporal_subset <-
-  targets::tar_read(
-    name = "events_temporal_subset",
-    store = paste0(
-      data_storage_path,
-      "_targets_data"
-    )
-  )
+# 
+# # Load events_temporal_subset
+# events_temporal_subset <-
+#   targets::tar_read(
+#     name = "events_temporal_subset",
+#     store = paste0(
+#       data_storage_path,
+#       "_targets_data"
+#     )
+#   )
 
 
 #----------------------------------------------------------#
