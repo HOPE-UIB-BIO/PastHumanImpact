@@ -34,31 +34,37 @@ source(
 )
 
 
-# - Load predictor data from _targets_data
-data_predictors <-   
-  targets::tar_read(
-  name = "data_predictors",
-  store = paste0(
-    data_storage_path,
-    "_targets_data"
-  )
-)
-
-# - Load properties data from _targets_data
-data_properties <-   
-  targets::tar_read(
-    name = "data_properties",
-    store = paste0(
-      data_storage_path,
-      "_targets_data"
-    )
-  )
-
 #----------------------------------------------------------#
 # 1. Targets -----
 #----------------------------------------------------------#
 
 list(
+  # load data_properties ----
+  targets::tar_target(
+    name = data_properties_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_paps/objects/data_properties"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = data_properties,
+    command = get_file_from_path(data_properties_path)
+  ),
+  # load data_predictors ----
+  targets::tar_target(
+    name = data_predictor_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_predictors/objects/data_predictors"
+    ),
+    format = "file"
+  ),
+  targets::tar_target(
+    name = data_predictors,
+    command = get_file_from_path(data_predictors_path)
+  ),
   # - combine properties and predictors ----
   targets::tar_target(
     name = data_combined,
@@ -69,19 +75,20 @@ list(
   ),
   # - filter data for analyses ----
   targets::tar_target(
-    name = data_records,
+    name = data_hvar_filtered,
     command = get_data_filtered(
       data_source = data_combined,
-      age_min = 2000,
-      age_max = 8500,
+      data_meta = data_meta,
+      age_from = 2000,
+      age_to = 8500,
       remove_private = TRUE
     )
   ),
   # - get data for timebins ----
   targets::tar_target(
-    name = data_timebins,
+    name = data_hvar_timebins,
     command = get_data_timebin(
-      data_source = data_records_spatial,
+      data_source = data_hvar_filtered,
       data_meta = data_meta
     )
   ),
@@ -90,7 +97,7 @@ list(
   targets::tar_target(
     name = output_spatial_spd,
     command = run_hvarpart(
-      data_source = data_records,
+      data_source = data_hvar_filtered,
       response_vars = c(
         "n0", 
         "n1", 
@@ -123,7 +130,7 @@ list(
   targets::tar_target(
     name = output_spatial_events,
     command = run_hvarpart(
-      data_source = data_records,
+      data_source = data_hvar_filtered,
       response_vars = c(
         "n0", 
         "n1", 
@@ -166,7 +173,7 @@ list(
   targets::tar_target(
     name = output_temporal_spd,
     command = run_hvarpart(
-      data_source = data_timebins,
+      data_source = data_hvar_timebins,
       response_vars = c(
         "n0", 
         "n1", 
@@ -198,7 +205,7 @@ list(
   targets::tar_target(
     name = output_temporal_events,
     command = run_hvarpart(
-      data_source = data_timebins,
+      data_source = data_hvar_timebins,
       response_vars = c(
         "n0", 
         "n1", 

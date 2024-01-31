@@ -2,9 +2,11 @@ get_data_predictors <- function(data_source_spd_events,
                                 data_source_climate) {
   
   dplyr::inner_join(
-    data_source_spd_events%>%
+    data_source_spd_events %>%
+      dplyr::select(
+        dataset_id, data_merge) %>%
       dplyr::rename(
-        spd_events = data
+        spd_events = data_merge
       ),
     data_source_climate %>%
       dplyr::rename(

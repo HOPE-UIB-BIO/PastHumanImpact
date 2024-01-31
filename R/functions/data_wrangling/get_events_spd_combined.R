@@ -26,7 +26,7 @@ data_full_spd <-
   data_source_meta %>%
    dplyr::distinct(dataset_id, age_min, age_max) %>%
    dplyr::left_join(
-     data_select_spd,
+     data_spd,
      by = "dataset_id"
    ) %>%
    dplyr::mutate(
@@ -82,12 +82,12 @@ data_full_events <-
    dplyr::mutate(
      events = purrr::pmap(
        .l = list(
-         data, # ..1
+         events, # ..1
          age_min, # ..2
          age_max # ..3
        ),
        .f = ~ ifelse(
-         test = isTRUE(is.null(..1)),
+         test = isTRUE(is.na(..1)),
          yes = return(
            dummy_data_events %>%
              dplyr::filter(
@@ -99,7 +99,7 @@ data_full_events <-
        )
      )
    ) %>%
-   dplyr::select(-c(age_min, age_max, data)) 
+   dplyr::select(-c(age_min, age_max, have_events)) 
   
   # merge events and spd  -----
   data_merge <-

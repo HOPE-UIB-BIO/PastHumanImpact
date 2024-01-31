@@ -48,7 +48,7 @@ targets::tar_visnetwork(
 )
 
 #----------------------------------------------------------#
-# 1. run target pipeline pollen data -----
+# 2. run target pipeline pollen assemblage properties -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -70,7 +70,7 @@ targets::tar_visnetwork(
 )
 
 #----------------------------------------------------------#
-# 2. run target pipeline events data -----
+# 3. run target pipeline events data -----
 #----------------------------------------------------------#
 targets::tar_make(
      script = here::here("R/project/07_pipeline_events.R"),
@@ -91,7 +91,7 @@ targets::tar_visnetwork(
 )
 
 #----------------------------------------------------------#
-# 3. run target pipeline predictors -----
+# 4. run target pipeline predictors -----
 #----------------------------------------------------------#
 targets::tar_make(
   script = here::here("R/project/08_pipeline_predictors.R"),
@@ -112,7 +112,7 @@ targets::tar_visnetwork(
 )
 
 #----------------------------------------------------------#
-# 4. run target pipeline hvar spatial & temporal (h1) -----
+# 5. run target pipeline hvar spatial & temporal (h1) -----
 #----------------------------------------------------------#
 targets::tar_make(
      script = here::here("R/project/09_pipeline_hvar_spatial_temporal.R"),
@@ -133,7 +133,7 @@ targets::tar_visnetwork(
 )
 
 #----------------------------------------------------------#
-# 5. run target pipeline multidimensional shifts (h2) -----
+# 6. run target pipeline multidimensional shifts (h2) -----
 #----------------------------------------------------------#
 targets::tar_make(
      script = here::here("R/project/09_pipeline_multidimensional_shifts.R"),
