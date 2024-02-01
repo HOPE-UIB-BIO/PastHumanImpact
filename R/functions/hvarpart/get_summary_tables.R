@@ -1,12 +1,21 @@
 get_summary_tables <- function(
   output_spatial,
-  output_temporal
+  output_temporal,
+  data_meta
 ) {
   
   # - get summary tables spatial ----
   # full table
   summary_table_spatial <-
-    data_source %>%
+    output_spatial %>%
+    dplyr::left_join(
+      data_meta %>%
+        dplyr::select(
+          dataset_id,
+          region,
+          climatezone
+        ), by = "dataset_id"
+    ) %>% # join region and climatezone
     dplyr::mutate(
       summary_table = purrr::map(
         .x = varhp,
@@ -35,36 +44,31 @@ get_summary_tables <- function(
            ratio_ind = individual/sum_importance) %>%
     ungroup()
   
-  # summarise to wmean values by predictor, climatezone, and region
-  summary_r2_spatial <-
-    spatial_summary %>%
+  # summarise ratios of importance using wmean ratios by model importance (i.e sum importance of individual predictors)
+  wmean_summary_spatial <-
+    summary_table_spatial %>%
     dplyr::group_by(
-      dplyr::across(
-        dplyr::all_of(
-          c("predictor",
-            "region", 
-            "climatezone")
-          )
-        )
-      ) %>% #need to fix this to weighted mean 
+      predictor,
+      region,
+      climatezone
+    ) %>% 
     dplyr::summarise(
       .groups = "drop",
       dplyr::across(
         dplyr::all_of(
           c("ratio_unique", 
             "ratio_ind")
-          ),
+        ),
         list(
-          mean = ~ mean(.x, na.rm = TRUE)
+          wmean = ~ weighted.mean(
+            x = .x, 
+            w = sum_importance, 
+            na.rm = TRUE)
         )
       )
-    )
-  
-  # reshape to long table with mean values
-  mean_summary_spatial <-
-    summary_r2_spatial %>%
+    ) %>%
     tidyr::pivot_longer(
-      dplyr::ends_with("mean"),
+      dplyr::ends_with("wmean"),
       names_to = "importance_type",
       values_to = "ratio"
     ) 
@@ -72,7 +76,7 @@ get_summary_tables <- function(
   # - get summary tables temporal ----
   # full table
   summary_table_temporal <-
-    output_temporal %>%
+    output_temporal  %>%
     dplyr::mutate(
       summary_table = purrr::map(
         .x = varhp,
@@ -97,18 +101,15 @@ get_summary_tables <- function(
     ungroup()
   
   
-  # summarise to wmean values by predictor, climatezone, and region
-  summary_r2_temporal <-
+  # summarise to wmean values by age, region, and predictor
+  wmean_summary_temporal <-
     summary_table_temporal %>%
     dplyr::group_by(
-      dplyr::across(
-        dplyr::all_of(
-          c("age",
-            "region", 
-            "predictor")
-          )
-        )
-    ) %>% #fix here to weighted mean
+      age,
+      region,
+      predictor
+    ) %>% 
+    #summarise weighted mean
     dplyr::summarise(
       .groups = "drop",
       dplyr::across(
@@ -117,16 +118,15 @@ get_summary_tables <- function(
             "ratio_ind")
           ),
         list(
-          mean = ~ mean(.x, na.rm = TRUE)
+          wmean = ~ weighted.mean(
+            x = .x, 
+            w = sum_importance, 
+            na.rm = TRUE)
         )
       )
-    )
-  
-  # reshape to long table with mean values
-  mean_summary_temporal <-
-    summary_r2_temporal %>%
+    ) %>%
     tidyr::pivot_longer(
-      dplyr::ends_with("mean"),
+      dplyr::ends_with("wmean"),
       names_to = "importance_type",
       values_to = "ratio"
     ) 
@@ -135,8 +135,8 @@ get_summary_tables <- function(
   results <- list(
     summary_table_spatial = summary_table_spatial,
     summary_table_temporal = summary_table_temporal,
-    mean_summary_spatial = mean_summary_spatial,
-    mean_summary_temporal = mean_summary_temporal
+    wmean_summary_spatial = wmean_summary_spatial,
+    wmean_summary_temporal = wmean_summary_temporal
   )
   
   return(results)
