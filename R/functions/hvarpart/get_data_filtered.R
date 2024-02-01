@@ -21,7 +21,7 @@ get_data_filtered <- function(data_source,
     }
     
   # - filter age limits within datasets
-  data_filtered %>%
+  data_source %>%
     dplyr::filter(dataset_id %in% keep_dataset) %>%
     tidyr::unnest(data_merge) %>%
     dplyr::filter(
