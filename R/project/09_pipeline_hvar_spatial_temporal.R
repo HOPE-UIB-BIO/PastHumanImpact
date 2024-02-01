@@ -63,7 +63,7 @@ list(
   ),
   targets::tar_target(
     name = data_predictors,
-    command = get_file_from_path(data_predictors_path)
+    command = get_file_from_path(data_predictor_path)
   ),
   # - combine properties and predictors ----
   targets::tar_target(
@@ -144,7 +144,7 @@ list(
         "density_turnover"
       ),
       predictor_vars = list(
-        human =  human = c(
+        human = c(
           "fi", 
           "fc", 
           "ec", 
