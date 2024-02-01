@@ -14,6 +14,7 @@ get_data_filtered <- function(data_source,
                       data_publicity) %>%
         dplyr::filter(!(region == "Latin America" 
                         & data_publicity == "private")) %>% 
+        dplyr::filter(!region == "Africa") %>% 
         pluck("dataset_id")
       
     } else {
