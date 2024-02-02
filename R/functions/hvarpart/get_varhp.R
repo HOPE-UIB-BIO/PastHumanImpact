@@ -19,20 +19,26 @@
 #' @return List of model outputs and a summary table of the results
 
 get_varhp <- function(data_source,
+                      response_dist = NULL,
                       response_vars = c(
-                        "n0", "n1", "n2",
-                        "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+                        "n0", 
+                        "n1", 
+                        "n2",
+                        "n1_minus_n2", 
+                        "n2_divided_by_n1", 
+                        "n1_divided_by_n0",
                         "roc",
-                        "dcca_axis_1"
+                        "dcca_axis_1",
+                        "density_diversity", 
+                        "density_turnover"
                       ),
-                      responce_dist = NULL,
                       predictor_vars = list(
                         human = c("spd"),
                         climate = c(
+                          "temp_annual",
                           "temp_cold",
                           "prec_summer",
-                          "prec_win",
-                          "gdm"
+                          "prec_win"
                         ),
                         time = c("age")
                       ),
@@ -44,9 +50,9 @@ get_varhp <- function(data_source,
   tryCatch(
     {
       if (
-        isTRUE(is.null(responce_dist))
+        isTRUE(is.null(response_dist))
       ) {
-        # prepare responses
+        # prepare responses without transformation
         data_resp <-
           data_source %>%
           dplyr::select(
@@ -56,10 +62,19 @@ get_varhp <- function(data_source,
             tidyselect:::where(~ any(!is.na(.)))
           )
 
-        responce_dist <-
-          vegan::vegdist(data_resp, method = "gower")
       } else {
-        responce_dist <- as.dist(responce_dist)
+        
+        # prepare responses with distances
+        data_resp <-
+          data_source %>%
+          dplyr::select(
+            dplyr::all_of(response_vars)
+          ) %>%
+          dplyr::select(
+            tidyselect:::where(~ any(!is.na(.)))
+          )
+        
+        data_resp <- vegan::vegdist(data_resp, method = response_dist)
       }
 
       # prepare predictors
@@ -74,23 +89,27 @@ get_varhp <- function(data_source,
         data_preds <-
           data_source %>%
           dplyr::select(all_of(predictor_vars)) %>%
-          dplyr::select(tidyselect:::where(~ any(. != 0))) %>%
-          dplyr::select(tidyselect:::where(~ any(!is.na(.))))
-
+          janitor::remove_empty("cols") %>%
+          dplyr::select(tidyselect:::where(~ any(. != 0))) 
+        
         output_table_dummy <-
           tibble::tibble(
             predictor = predictor_vars
           )
+        
       } else {
+        
         data_preds <-
           predictor_vars %>%
           purrr::map(
             .x = predictor_vars,
             .f = ~ data_source %>%
               dplyr::select(any_of(.x)) %>%
-              dplyr::select(tidyselect:::where(~ any(. != 0))) %>%
-              dplyr::select(tidyselect:::where(~ any(!is.na(.))))
-          )
+              janitor::remove_empty("cols") %>%
+              dplyr::select(
+                tidyselect:::where(~ any(. != 0))
+                )
+            )
 
         # filer out groups with no variables
         data_preds <-
@@ -110,10 +129,10 @@ get_varhp <- function(data_source,
       # should work for both list and just data.frame
       varhp <-
         rdacca.hp::rdacca.hp(
-          dv = responce_dist,
+          dv = data_resp,
           iv = data_preds,
-          add = TRUE,
-          method = "dbRDA",
+          method = "RDA",
+          scale = TRUE,
           type = "adjR2",
           var.part = TRUE,
           ...
@@ -133,10 +152,10 @@ get_varhp <- function(data_source,
         # should work for both list and just data.frame
         hp_signif <-
           perm_hvarpart(
-            dv = vegan::vegdist(data_resp, method = "gower"),
+            dv = data_resp,
             iv = data_preds,
-            method = "dbRDA",
-            add = TRUE,
+            method = "RDA",
+            scale = TRUE,
             type = "adjR2",
             permutations = permutations,
             series = time_series,
@@ -156,9 +175,8 @@ get_varhp <- function(data_source,
       # run model to get variation inflation factors of the predictors,
       #   and total unexplained and explained variation
       mod <-
-        vegan::capscale(responce_dist ~ as.matrix(as.data.frame(data_preds)),
-          dist = "gower",
-          add = TRUE,
+        vegan::rda(data_resp ~ as.matrix(as.data.frame(data_preds)),
+          scale = TRUE,
           data_source = data_preds
         )
 
