@@ -235,6 +235,24 @@ list(
       get_significance = FALSE,
       permutations = 999
     )
+  ),
+  # - summary tables with human = spd as predictor ----
+  targets::tar_target(
+    name = summary_tables_spd,
+    command = get_summary_tables(
+      output_spatial = output_spatial_spd,
+      output_temporal = output_temporal_spd,
+      data_meta = data_meta
+    )
+  ),
+  # - summary tables with human = events as predictor ----
+  targets::tar_target(
+    name = summary_tables_events,
+    command = get_summary_tables(
+      output_spatial = output_spatial_events,
+      output_temporal = output_temporal_events,
+      data_meta = data_meta
+    )
   )
 )
 
