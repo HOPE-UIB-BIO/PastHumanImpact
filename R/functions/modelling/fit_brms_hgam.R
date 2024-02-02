@@ -109,48 +109,16 @@ fit_brms_hgam <- function(
     )
   }
 
-  formula_gam <-
-    paste0(
-      y_var,
-      " ~ s(",
-      x_var,
-      ", k = ", sel_k,
-      ", bs = '", smooth_basis, "'",
-      ")"
+  formula_hgam_fin <-
+    get_hgam_formula(
+      y_var = y_var,
+      x_var = x_var,
+      group_var = group_var,
+      sel_k = sel_k,
+      sel_m = sel_m, ,
+      n_groups = n_groups,
+      common_trend = common_trend
     )
-
-  formula_hgam <-
-    paste(
-      paste0(
-        "s(", x_var,
-        ", by = ", group_var,
-        ", bs = '", smooth_basis, "'",
-        ", k = ", sel_k,
-        ", m = ", sel_m,
-        ")"
-      ),
-      paste0(
-        "s(", group_var,
-        ", bs = 're'",
-        ", k = ", n_groups,
-        ")"
-      ),
-      sep = " + "
-    )
-
-  if (
-    isTRUE(common_trend)
-  ) {
-    formula_hgam_fin <-
-      paste(
-        formula_gam,
-        formula_hgam,
-        sep = " + "
-      )
-  } else {
-    formula_hgam_fin <-
-      paste0(y_var, " ~ ", formula_hgam)
-  }
 
   try(
     fin_mod <-
@@ -160,6 +128,7 @@ fit_brms_hgam <- function(
         family = eval(parse(text = error_family)),
         silent = ifelse(isTRUE(verbose), 1, 0),
         chains = chains,
+        cores = number_of_cores,
         ...
       )
   )
