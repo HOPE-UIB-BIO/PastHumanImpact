@@ -3,22 +3,22 @@ get_data_m2 <- function(data_source = data_for_hvar,
                         min_samples = 5,
                         select_vars = NULL) {
   # prepare data
-  data_for_h2 <-
+  data_for_pca <-
     data_source %>%
     dplyr::inner_join(
       data_meta %>%
-        dplyr::select(dataset_id, region, sel_classification),
+        dplyr::select(dataset_id, region, climatezone),
       by = "dataset_id"
     ) %>%
     tidyr::unnest(data_merge) %>%
     dplyr::select(
       c(
-         "region", "sel_classification",
+         "region", "climatezone",
         dplyr::all_of(select_vars)
       )
     ) %>%
     tidyr::nest(
-      data = -c("age", "sel_classification", "region")
+      data = -c("age", "climatezone", "region")
     ) %>%
     dplyr::mutate(
       n_samples = purrr::map_dbl(
@@ -30,7 +30,7 @@ get_data_m2 <- function(data_source = data_for_hvar,
 
   # Run PCA analyses; get procrustes sum of square matrices; extract difference with time
   pap_procrustes <-
-    data_for_h2 %>%
+    data_for_pca %>%
     dplyr::mutate(
       pca_analysis = purrr::map(
         .x = data,
@@ -39,9 +39,9 @@ get_data_m2 <- function(data_source = data_for_hvar,
     ) %>%
     dplyr::mutate(
       pca_analysis = pca_analysis %>%
-        rlang::set_names(nm = data_for_h2$age)
+        rlang::set_names(nm = data_for_pca$age)
     ) %>%
-    dplyr::group_by(region, sel_classification) %>%
+    dplyr::group_by(region, climatezone) %>%
     dplyr::summarise(
       pca_analysis = list(pca_analysis)
     ) %>%
