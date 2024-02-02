@@ -59,7 +59,7 @@ subset_event_types <- function(data_source_events,
               dplyr::select(
                 .data = ..3,
                 dplyr::any_of(
-                  c("age", "bi", "fi", "fc", "ec")
+                  c("age", "bi", "fi", "fc", "ec", "cc")
                 )
               )
             ),
@@ -108,7 +108,8 @@ subset_event_types <- function(data_source_events,
                 bi = 1,
                 fi = 0,
                 fc = 0,
-                ec = 0
+                ec = 0,
+                cc = 0
               )
             ),
             "North America" = return(
