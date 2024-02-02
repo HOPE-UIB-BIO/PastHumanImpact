@@ -63,6 +63,9 @@ data_to_fit <-
     climate_zones, # loaded from 02_meta_data.R
     by = "dataset_id"
   ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
   dplyr::inner_join(
     data_predictors,
     by = "dataset_id"
