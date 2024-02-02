@@ -224,6 +224,8 @@ data_climate_zones <-
     )
   )
 
+min_n_records_per_climate_zone <- 5
+
 
 #----------------------------------------------------------#
 # 6. Graphical options -----
