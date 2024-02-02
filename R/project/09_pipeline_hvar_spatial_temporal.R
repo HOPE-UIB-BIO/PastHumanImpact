@@ -44,12 +44,12 @@ list(
     name = data_properties_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_paps/objects/data_properties"
+      "_targets_data/pipeline_paps/objects/data_properties_filtered"
     ),
     format = "file"
   ),
   targets::tar_target(
-    name = data_properties,
+    name = data_properties_filtered,
     command = get_file_from_path(data_properties_path)
   ),
   # load data_predictors ----
@@ -57,31 +57,20 @@ list(
     name = data_predictor_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_predictors/objects/data_predictors"
+      "_targets_data/pipeline_predictors/objects/data_predictors_filtered"
     ),
     format = "file"
   ),
   targets::tar_target(
-    name = data_predictors,
+    name = data_predictors_filtered,
     command = get_file_from_path(data_predictor_path)
   ),
-  # - combine properties and predictors ----
-  targets::tar_target(
-    name = data_combined,
-    command = get_data_combined(
-      data_source_properties = data_properties,
-      data_source_predictors = data_predictors
-    )
-  ),
-  # - filter data for analyses ----
+  # - combine properties and predictors for hvar ----
   targets::tar_target(
     name = data_hvar_filtered,
-    command = get_data_filtered(
-      data_source = data_combined,
-      data_meta = data_meta,
-      age_from = 2000,
-      age_to = 8500,
-      remove_private = TRUE
+    command = get_data_combined(
+      data_source_properties = data_properties_filtered,
+      data_source_predictors = data_predictors_filtered
     )
   ),
   # - get data for timebins ----
@@ -98,6 +87,7 @@ list(
     name = output_spatial_spd,
     command = run_hvarpart(
       data_source = data_hvar_filtered,
+      response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -131,6 +121,7 @@ list(
     name = output_spatial_events,
     command = run_hvarpart(
       data_source = data_hvar_filtered,
+      response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -174,6 +165,7 @@ list(
     name = output_temporal_spd,
     command = run_hvarpart(
       data_source = data_hvar_timebins,
+      response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -206,6 +198,7 @@ list(
     name = output_temporal_events,
     command = run_hvarpart(
       data_source = data_hvar_timebins,
+      response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
