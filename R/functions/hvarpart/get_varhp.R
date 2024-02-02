@@ -90,7 +90,7 @@ get_varhp <- function(data_source,
           data_source %>%
           dplyr::select(all_of(predictor_vars)) %>%
           janitor::remove_empty("cols") %>%
-          dplyr::select(tidyselect:::where(~ any(. != 0))) 
+          janitor::remove_constant()
         
         output_table_dummy <-
           tibble::tibble(
@@ -106,6 +106,7 @@ get_varhp <- function(data_source,
             .f = ~ data_source %>%
               dplyr::select(any_of(.x)) %>%
               janitor::remove_empty("cols") %>%
+              janitor::remove_constant() %>%
               dplyr::select(
                 tidyselect:::where(~ any(. != 0))
                 )
