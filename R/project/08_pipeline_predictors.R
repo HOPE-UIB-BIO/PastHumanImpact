@@ -151,6 +151,17 @@ list(
       data_source_spd_events = data_spd_events,
       data_source_climate = data_climate_interpolated
     )
+  ),
+  # - filter data properties for analyses ----
+  targets::tar_target(
+    name = data_predictors_filtered,
+    command = get_data_filtered(
+      data_source = data_predictors,
+      data_meta = data_meta,
+      age_from = 2000,
+      age_to = 8500,
+      remove_private = TRUE
+    )
   )
  
 )
