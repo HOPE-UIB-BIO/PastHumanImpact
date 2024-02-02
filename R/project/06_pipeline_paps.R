@@ -189,5 +189,39 @@ list(
       data_source_roc = data_roc_interpolated,
       data_source_density = data_density_estimate,
       used_rescale = TRUE)
+  ),
+  # - filter data properties for analyses ----
+  targets::tar_target(
+    name = data_properties_filtered,
+    command = get_data_filtered(
+      data_source = data_properties,
+      data_meta = data_meta,
+      age_from = 2000,
+      age_to = 8500,
+      remove_private = TRUE
+    )
+  ),
+  # - get data multidimensional shifts (procrustes m2)
+  targets::tar_target(
+    name = data_m2_filtered,
+    command = get_data_m2(
+      data_source = data_properties_filtered,
+      data_meta = data_meta,
+      min_samples = 5,
+      select_vars = c(
+        "dataset_id",
+        "age",
+        "n0", 
+        "n1", 
+        "n2",
+        "n1_minus_n2", 
+        "n2_divided_by_n1", 
+        "n1_divided_by_n0",
+        "roc",
+        "dcca_axis_1",
+        "density_diversity", 
+        "density_turnover"
+      )
+    )
   )
 ) # end of targets

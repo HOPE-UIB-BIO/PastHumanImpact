@@ -3,7 +3,7 @@ get_data_combined <- function(data_source_properties,
   
   
   
-  dplyr::left_join(
+  dplyr::inner_join(
     data_source_properties %>%
       dplyr::rename(
         properties = data_merge
@@ -22,8 +22,7 @@ get_data_combined <- function(data_source_properties,
           .x,
           .y,
           by = "age"
-        ) %>%
-          drop_na()
+        ) 
       ) 
     ) %>%
     dplyr::select(
