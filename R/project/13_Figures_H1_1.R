@@ -25,12 +25,64 @@ source(
   )
 )
 
-# - Load meta data
-source(
-  here::here(
-    "R/project/02_meta_data.R"
+#----------------------------------------------------------#
+# 1. Load results -----
+#----------------------------------------------------------#
+
+# - Load list of summary tables from pipeline spd
+summary_tables_spd <- targets::tar_read(
+  name = "summary_tables_spd",
+  store = paste0(
+    data_storage_path,
+    "_targets_data/analyses_h1"
   )
 )
+
+# - Load list of summary tables from events
+# summary_tables_events <- targets::tar_read(
+#   name = "summary_tables_events",
+#   store = paste0(
+#     data_storage_path,
+#     "_targets_data/analyses_h1"
+#   )
+# )
+
+# - Combine data for plotting ----
+
+data_for_plotting <-
+  dplyr::inner_join(
+    summary_tables_spd$wmean_summary_spatial %>%
+      tidyr::nest(data_spatial = -c(region)),
+    summary_tables_spd$wmean_summary_temporal %>%
+      tidyr::nest(data_temporal = -c(region)),
+    by = "region"
+  )
+
+# - distribution of ratios for individual records ----
+data_dist <- 
+  summary_tables_spd$summary_table_spatial %>%
+  dplyr::mutate(
+  predictor = factor(
+    predictor,
+    levels = c("human", "climate", "time")
+  )
+) %>%
+  dplyr::mutate(
+    climatezone = factor(climatezone)
+  ) %>%
+  tidyr::pivot_longer(
+    c(ratio_unique, ratio_ind),
+    names_to = "importance_type",
+    values_to = "ratio"
+  ) %>%
+  dplyr::mutate(
+    importance_type = factor(importance_type,
+                      levels = c(
+                        "ratio_unique",
+                        "ratio_ind"
+                      )
+    )
+  )
 
 #----------------------------------------------------------#
 # 1. Helper functions  -----
@@ -49,10 +101,10 @@ get_predictor_barplot_for_all_regions <- function(
       tidyr::nesting(predictor, region)
     ) %>%
     dplyr::mutate(
-      no_data = ifelse(is.na(percentage_median), TRUE, FALSE)
+      no_data = ifelse(is.na(ratio), TRUE, FALSE)
     ) %>%
     dplyr::mutate(
-      percentage_median = ifelse(no_data, 0, percentage_median)
+      ratio = ifelse(no_data, 0, ratio)
     ) %>%
     dplyr::group_by(region) %>%
     tidyr::nest(data_to_plot = -c(region)) %>%
@@ -62,7 +114,7 @@ get_predictor_barplot_for_all_regions <- function(
         .f = ~ get_predictor_barplot(
           data = .x,
           sel_predictor = sel_predictor,
-          x_var = "percentage_median",
+          x_var = "ratio",
           axis_to_right = axis_to_right,
           sel_palette = sel_palette
         )
@@ -81,7 +133,8 @@ get_predictor_barplot_for_all_regions <- function(
 # function for plot dist density -----
 
 plot_dist_density <- function(
-    data_source, sel_predictor,
+    data_source, 
+    sel_predictor,
     text_size = 6,
     axis_to_right = TRUE) {
   data_work <-
@@ -93,7 +146,7 @@ plot_dist_density <- function(
     data_work %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
-        x = percentage
+        x = ratio
       )
     ) +
     ggplot2::coord_flip() +
@@ -130,14 +183,14 @@ plot_dist_density <- function(
       axis.ticks.length = grid::unit(0, "mm")
     ) +
     ggplot2::labs(
-      x = "Explained variability (%)",
+      x = "Importance [ratio]",
       y = "Number of records"
     ) +
     ggplot2::geom_density(
       mapping = ggplot2::aes(
         y = after_stat(count),
-        col = var_part,
-        fill = var_part
+        col = importance_type,
+        fill = importance_type
       ),
       alpha = 0.4,
       linewidth = 0.1
@@ -148,8 +201,8 @@ plot_dist_density <- function(
       fig +
       ggplot2::scale_x_continuous(
         name = NULL,
-        limits = c(0, 100),
-        breaks = seq(0, 100, by = 25),
+        limits = c(-0.2, 1),
+        breaks = seq(-0.2, 1, by = 0.2),
         expand = c(0, 0),
         position = "top"
       ) +
@@ -161,8 +214,8 @@ plot_dist_density <- function(
       fig +
       ggplot2::scale_x_continuous(
         name = NULL,
-        limits = c(0, 100),
-        breaks = seq(0, 100, by = 25),
+        limits = c(-0.2, 1),
+        breaks = seq(-0.2, 1, by = 0.2),
         expand = c(0, 0),
         position = "bottom"
       ) +
@@ -272,70 +325,7 @@ add_circe_to_map <- function(
 }
 
 #----------------------------------------------------------#
-# 1. Data Wrangling -----
-#----------------------------------------------------------#
-# Combine output tables of spatial and temporal data
-input_spatial <-
-  summary_spatial_median %>%
-  dplyr::mutate(
-    sel_classification = factor(sel_classification)
-  ) %>%
-  dplyr::mutate(
-    predictor = factor(
-      predictor,
-      levels = predictors_spatial_order # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(n_records > 5) %>%
-  tidyr::nest(data_spatial = -c(region))
-
-input_temporal <-
-  summary_temporal_median %>%
-  dplyr::mutate(
-    predictor = factor(predictor,
-                       levels = c(
-                         "human",
-                         "climate"
-                       )
-    )
-  ) %>%
-  tidyr::nest(data_temporal = -c(region))
-
-data_dist <-
-  data_spatial_vis %>%
-  dplyr::mutate(
-    predictor = factor(
-      predictor,
-      levels = c("human", "climate", "time")
-    )
-  ) %>%
-  dplyr::mutate(
-    sel_classification = factor(sel_classification)
-  ) %>%
-  tidyr::pivot_longer(
-    c(unique_percent, average_share_percent, individual_percent),
-    names_to = "var_part",
-    values_to = "percentage"
-  ) %>%
-  dplyr::mutate(
-    var_part = factor(var_part,
-                      levels = c(
-                        "unique_percent",
-                        "average_share_percent",
-                        "individual_percent"
-                      )
-    )
-  )
-
-data_for_plotting <-
-  dplyr::inner_join(
-    input_spatial,
-    input_temporal,
-    by = "region"
-  )
-
-#----------------------------------------------------------#
-# 2. Figures -----
+# 2. Make figures -----
 #----------------------------------------------------------#
 
 #----------------------------------------------------------#
@@ -400,12 +390,12 @@ data_circle_plots <-
       .x = data_to_plot,
       .f = ~ get_circular_barplot(
         data = .x,
-        y_var = "percentage_median",
+        y_var = "ratio",
         x_var = "predictor",
         col_vec = palette_ecozones, # [config criteria]
         x_name = predictors_label, # [config criteria]
         icon_size = 0.15,
-        y_max = 45
+        y_max = 0.5
       )
     )
   )
