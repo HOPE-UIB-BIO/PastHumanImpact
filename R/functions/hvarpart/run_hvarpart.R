@@ -1,9 +1,15 @@
 #' @title Run hierarchial variation partitioning
 #' @description This wrapper run the hierarchical variation
 #' partitioning for the HOPE dataset.
+#' There is an option to use already calculated distance matrix by selecting
+#' `reponse_vars` == NULL, and `data_response_dist` == [name of a column]
 #' @param data_source input tibble
 #' @param reponse_vars
 #' vector of variables to be included in the response datasetet
+#' @param data_response_dist
+#' A name of column with already pre-calcuated distance
+#' @param response_dist
+#' NULL or a name of distance to be calculated with the function vegan::vegdist
 #' @param predictor_vars
 #' vector of names of predictor variables or list with names
 #' @param run_all_predictors logical; if predictor variables should be assessed
@@ -14,26 +20,21 @@
 #' @param permutations integer; number of permutations for p-values
 
 run_hvarpart <- function(data_source,
-                         response_dist = NULL,
                          response_vars = c(
-                           "n0", 
-                           "n1", 
-                           "n2",
-                           "n1_minus_n2", 
-                           "n2_divided_by_n1", 
-                           "n1_divided_by_n0",
+                           "n0", "n1", "n2",
+                           "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
                            "roc",
-                           "dcca_axis_1",
-                           "density_diversity", 
-                           "density_turnover"
+                           "dcca_axis_1"
                          ),
+                         response_dist = NULL,
+                         data_response_dist = NULL,
                          predictor_vars = list(
                            human = c("spd"),
                            climate = c(
-                             "temp_annual",
                              "temp_cold",
                              "prec_summer",
-                             "prec_win"
+                             "prec_win",
+                             "gdm"
                            ),
                            time = c("age")
                          ),
@@ -41,10 +42,10 @@ run_hvarpart <- function(data_source,
                          time_series = TRUE,
                          get_significance = TRUE,
                          permutations = 99) {
- 
   res <- NULL
-
- 
+  
+  if (!is.null(response_vars) & is.null(data_response_dist)
+  ) {
     res <-
       data_source %>%
       dplyr::mutate(
@@ -61,6 +62,32 @@ run_hvarpart <- function(data_source,
           )
         )
       )
-
+  } else if(!is.null(data_response_dist)) {
+    res <-
+      data_source %>%
+      dplyr::rename(
+        data_response_dist = eval(data_response_dist)
+      ) %>%
+      dplyr::mutate(
+        varhp = purrr::map2(
+          .x = data_merge,
+          .y = data_response_dist,
+          .f = ~ get_varhp(
+            data_source = .x,
+            permutations = permutations,
+            response_vars = NULL,
+            data_response_dist = .y,
+            predictor_vars = predictor_vars,
+            run_all_predictors = run_all_predictors,
+            time_series = time_series,
+            get_significance = get_significance
+          )
+        )
+      )
+  } else {
+    stop("No response variables or distance matrix provided")
+  }
+  
   return(res)
 }
+

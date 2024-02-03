@@ -2,11 +2,13 @@
 #' @description Function to select response and predictor variables and run
 #' hierarchical variation partitioning and permutation.
 #' There is an oprion to use already calculated distance matrix by selecting
-#' `reponse_vars` == NULL, and `responce_dist` == [name of a column]
+#' `reponse_vars` == NULL, and `data_response_dist` == [name of a column]
 #' @param data_source full dataset with response and predictor variables
 #' @param reponse_vars vector of names of response variables
-#' @param responce_dist
+#' @param data_response_dist
 #' A name of column with already pre-calcuated distance
+#' @param response_dist
+#' NULL or a name of distance to be calculated with the function vegan::vegdist
 #' @param predictor_vars
 #' vector of names of predictor variables or list with names
 #' @param run_all_predictors logical; if predictor variables should be assessed
@@ -20,6 +22,7 @@
 
 get_varhp <- function(data_source,
                       response_dist = NULL,
+                      data_response_dist = NULL,
                       response_vars = c(
                         "n0", 
                         "n1", 
@@ -49,9 +52,7 @@ get_varhp <- function(data_source,
                       ...) {
   tryCatch(
     {
-      if (
-        isTRUE(is.null(response_dist))
-      ) {
+      if (is.null(response_dist) & is.null(data_response_dist)) {
         # prepare responses without transformation
         data_resp <-
           data_source %>%
@@ -62,7 +63,7 @@ get_varhp <- function(data_source,
             tidyselect:::where(~ any(!is.na(.)))
           )
 
-      } else {
+      } else if (!is.null(response_dist)) {
         
         # prepare responses with distances
         data_resp <-
@@ -75,6 +76,11 @@ get_varhp <- function(data_source,
           )
         
         data_resp <- vegan::vegdist(data_resp, method = response_dist)
+        
+      } else if (!is.null(data_response_dist)) {
+        data_resp <- data_response_dist
+      } else {
+        stop("Something went wrong with response variables")
       }
 
       # prepare predictors

@@ -88,6 +88,7 @@ list(
     command = run_hvarpart(
       data_source = data_hvar_filtered,
       response_dist = NULL,
+      data_response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -122,6 +123,7 @@ list(
     command = run_hvarpart(
       data_source = data_hvar_filtered,
       response_dist = NULL,
+      data_response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -166,6 +168,7 @@ list(
     command = run_hvarpart(
       data_source = data_hvar_timebins,
       response_dist = NULL,
+      data_response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
@@ -199,6 +202,7 @@ list(
     command = run_hvarpart(
       data_source = data_hvar_timebins,
       response_dist = NULL,
+      data_response_dist = NULL,
       response_vars = c(
         "n0", 
         "n1", 
