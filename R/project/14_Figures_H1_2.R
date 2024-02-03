@@ -32,216 +32,28 @@ source(
   )
 )
 
-#----------------------------------------------------------#
-# 0. Setup -----
-#----------------------------------------------------------#
-
-library(here)
-
-# Load configuration
-source(
-  here::here(
-    "R/00_Config_file.R"
+# - Load list of summary tables from pipeline spd
+summary_tables_spd <- targets::tar_read(
+  name = "summary_tables_spd",
+  store = paste0(
+    data_storage_path,
+    "_targets_data/analyses_h1"
   )
 )
 
-# Import tables for plotting
-source(
-  here::here(
-    "R/working_scripts/Results_script.R"
+# Load output from pipeline hvar_spatial_temporal
+
+output_spatial_spd <- targets::tar_read(
+  name = "output_spatial_spd",
+  store = paste0(
+    data_storage_path,
+    "_targets_data/analyses_h1"
   )
 )
 
-# helper functions
-get_human_unique_on_map <- function(
-    data_source_varpar,
-    data_source_geo,
-    sel_region,
-    sel_alpha = 0.3) {
-  sel_data <-
-    data_source_varpar %>%
-    dplyr::filter(region == sel_region) %>%
-    dplyr::filter(predictor == "human") %>%
-    janitor::clean_names()
-  
-  sel_map <-
-    get_map_region(
-      rasterdata = data_source_geo %>%
-        dplyr::filter(region == sel_region),
-      select_region = sel_region,
-      sel_palette = palette_ecozones, # [config criteria]
-      sel_alpha = sel_alpha
-    )
-  
-  sel_map +
-    ggplot2::geom_point(
-      data = sel_data,
-      mapping = ggplot2::aes(
-        x = long,
-        y = lat,
-        col = sel_classification
-      ),
-      size = 0.1,
-      shape = 20,
-    ) +
-    ggplot2::geom_point(
-      data = sel_data,
-      mapping = ggplot2::aes(
-        x = long,
-        y = lat,
-        size = unique_percent,
-        col = sel_classification
-      ),
-      shape = 16,
-      alpha = 0.3,
-      show.legend = TRUE
-    ) +
-    ggplot2::scale_colour_manual(
-      values = palette_ecozones # [config criteria]
-    ) +
-    ggplot2::scale_size_continuous(
-      limits = c(0, 100),
-      range = c(0.2, 5)
-    )
-}
-
-get_unique_human_dist <- function(
-    data_source,
-    sel_region,
-    point_size = 3) {
-  data_work <-
-    data_source %>%
-    dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
-    dplyr::full_join(
-      data_climate_zones, # [config criteria]
-      .,
-      by = "sel_classification"
-    )
-  
-  data_work %>%
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        x = 1,
-        y = unique_percent
-      )
-    ) +
-    ggplot2::facet_wrap(~sel_classification, nrow = 1) +
-    ggplot2::scale_y_continuous(
-      limits = c(0, 100)
-    ) +
-    ggplot2::scale_fill_manual(
-      values = palette_ecozones # [config criteria]
-    ) +
-    ggplot2::scale_color_manual(
-      values = palette_ecozones # [config criteria]
-    ) +
-    ggplot2::theme_bw() +
-    ggplot2::theme(
-      text = ggplot2::element_text(
-        size = text_size # [config criteria]
-      ),
-      line = ggplot2::element_line(
-        linewidth = line_size # [config criteria]
-      ),
-      legend.position = "none",
-      panel.spacing.x = grid::unit(0, "mm"),
-      panel.border = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
-      axis.title = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      panel.grid.major.x = ggplot2::element_blank(),
-      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-    ) +
-    ggplot2::labs(
-      x = "Climate zone",
-      y = "Unique variance explained by human impact (%)"
-    ) +
-    ggplot2::geom_jitter(
-      mapping = ggplot2::aes(
-        col = sel_classification
-      ),
-      alpha = 0.3
-    ) +
-    ggplot2::geom_violin(
-      mapping = ggplot2::aes(
-        fill = sel_classification
-      ),
-      alpha = 0.3,
-      col = NA
-    ) +
-    ggplot2::geom_boxplot(
-      fill = "white",
-      col = "grey30",
-      width = 0.1,
-      outlier.shape = NA
-    ) +
-    ggplot2::geom_point(
-      data = data_work %>%
-        dplyr::group_by(sel_classification) %>%
-        dplyr::summarise(
-          unique_percent = median(unique_percent)
-        ),
-      mapping = ggplot2::aes(
-        fill = sel_classification
-      ),
-      shape = 22,
-      col = "gray30",
-      size = point_size
-    )
-}
-
-get_combined_row <- function(
-    sel_region,
-    sel_method = c("cowplot", "ggpubr"),
-    sel_widths = c(1.2, 1, 1.5),
-    remove = "x") {
-  sel_method <- match.arg(sel_method)
-  
-  if (
-    "x" %in% remove
-  ) {
-    fig_scores <-
-      get_plot_by_region(data_fig_scores, sel_region) +
-      ggpubr::rremove("x.text") +
-      ggpubr::rremove("x.ticks") +
-      ggpubr::rremove("x.title")
-  } else {
-    fig_scores <- get_plot_by_region(data_fig_scores, sel_region)
-  }
-  
-  if (
-    sel_method == "cowplot"
-  ) {
-    res <-
-      cowplot::plot_grid(
-        get_plot_by_region(data_fig_unique_human_dist, sel_region),
-        get_plot_by_region(data_fig_map, sel_region),
-        fig_scores,
-        nrow = 1,
-        rel_widths = sel_widths
-      )
-  }
-  
-  if (
-    sel_method == "ggpubr"
-  ) {
-    res <-
-      ggpubr::ggarrange(
-        get_plot_by_region(data_fig_unique_human_dist, sel_region),
-        get_plot_by_region(data_fig_map, sel_region),
-        fig_scores,
-        nrow = 1,
-        widths = sel_widths
-      )
-  }
-  return(res)
-}
 
 #----------------------------------------------------------#
-# 1. Load data -----
+# 1. Load for data for mapping climate zones -----
 #----------------------------------------------------------#
 data_geo_koppen <-
   readr::read_rds(
@@ -252,7 +64,7 @@ data_geo_koppen <-
   ) %>%
   tibble::as_tibble() %>%
   dplyr::mutate(
-    sel_classification = dplyr::case_when(
+    climatezone = dplyr::case_when(
       ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
       ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
       ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
@@ -282,11 +94,11 @@ data_geo_koppen <-
 # 2. Data Wrangling -----
 #----------------------------------------------------------#
 
-# data unique human
-data_unique_human <-
-  data_spatial_vis %>%
+# data importance human
+data_importance_human <-
+  summary_tables_spd$summary_table_spatial %>%
   dplyr::mutate(
-    sel_classification = as.factor(sel_classification),
+    climatezone = as.factor(climatezone),
     region = factor(region,
                     levels = vec_regions
     )
@@ -294,7 +106,7 @@ data_unique_human <-
   dplyr::full_join(
     data_climate_zones, # [config criteria]
     .,
-    by = "sel_classification"
+    by = "climatezone"
   ) %>%
   dplyr::filter(
     predictor == "human"
@@ -307,7 +119,7 @@ data_unique_human <-
 
 # get constrained spd scores
 data_scores_nested <-
-  output_h1_spatial %>%
+  output_spatial_spd %>%
   dplyr::mutate(
     constrained_scores = purrr::map(
       .x = data_merge,
@@ -321,7 +133,7 @@ data_scores_nested <-
     data_meta %>%
       dplyr::select(
         dataset_id,
-        sel_classification,
+        climatezone,
         region
       ),
     by = "dataset_id"
@@ -329,7 +141,7 @@ data_scores_nested <-
   dplyr::select(
     dataset_id,
     region,
-    sel_classification,
+    climatezone,
     constrained_scores
   )
 
@@ -362,7 +174,7 @@ data_scores_merged <-
     data_constrained_scores,
     data_adjr2,
     by = dplyr::join_by(
-      dataset_id, region, sel_classification
+      dataset_id, region, climatezone
     )
   )
 
@@ -455,15 +267,209 @@ data_score_change_points <-
   )
 
 #----------------------------------------------------------#
+# 2. Helper functions -----
+#----------------------------------------------------------#
+
+# helper functions
+get_human_importance_on_map <- function(
+    data_source_varpar,
+    data_source_geo,
+    sel_region,
+    sel_alpha = 0.3) {
+  sel_data <-
+    data_source_varpar %>%
+    dplyr::filter(region == sel_region) %>%
+    dplyr::filter(predictor == "human") %>%
+    janitor::clean_names()
+  
+  sel_map <-
+    get_map_region(
+      rasterdata = data_source_geo %>%
+        dplyr::filter(region == sel_region),
+      select_region = sel_region,
+      sel_palette = palette_ecozones, # [config criteria]
+      sel_alpha = sel_alpha
+    )
+  
+  sel_map +
+    ggplot2::geom_point(
+      data = sel_data,
+      mapping = ggplot2::aes(
+        x = long,
+        y = lat,
+        col = climatezone
+      ),
+      size = 0.1,
+      shape = 20,
+    ) +
+    ggplot2::geom_point(
+      data = sel_data,
+      mapping = ggplot2::aes(
+        x = long,
+        y = lat,
+        size = ratio_ind,
+        col = climatezone
+      ),
+      shape = 16,
+      alpha = 0.3,
+      show.legend = TRUE
+    ) +
+    ggplot2::scale_colour_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_size_continuous(
+      limits = c(0, 100),
+      range = c(0.2, 5)
+    )
+}
+
+get_importance_human_dist <- function(
+    data_source,
+    sel_region,
+    point_size = 3) {
+  data_work <-
+    data_source %>%
+    dplyr::mutate(climatezone = as.factor(climatezone)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "climatezone"
+    )
+  
+  data_work %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(
+        x = 1,
+        y = ratio_ind
+      )
+    ) +
+    ggplot2::facet_wrap(~climatezone, nrow = 1) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 100)
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones # [config criteria]
+    ) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(
+      text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      legend.position = "none",
+      panel.spacing.x = grid::unit(0, "mm"),
+      panel.border = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major.x = ggplot2::element_blank(),
+      plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
+    ) +
+    ggplot2::labs(
+      x = "Climate zones",
+      y = "Ratio importance of human"
+    ) +
+    ggplot2::geom_jitter(
+      mapping = ggplot2::aes(
+        col = climatezone
+      ),
+      alpha = 0.3
+    ) +
+    ggplot2::geom_violin(
+      mapping = ggplot2::aes(
+        fill = climatezone
+      ),
+      alpha = 0.3,
+      col = NA
+    ) +
+    ggplot2::geom_boxplot(
+      fill = "white",
+      col = "grey30",
+      width = 0.1,
+      outlier.shape = NA
+    ) +
+    ggplot2::geom_point(
+      data = data_work %>%
+        dplyr::group_by(climatezone) %>%
+        dplyr::summarise(
+          ratio_ind = median(ratio_ind)
+        ),
+      mapping = ggplot2::aes(
+        fill = climatezone
+      ),
+      shape = 22,
+      col = "gray30",
+      size = point_size
+    )
+}
+
+get_combined_row <- function(
+    sel_region,
+    sel_method = c("cowplot", "ggpubr"),
+    sel_widths = c(1.2, 1, 1.5),
+    remove = "x") {
+  sel_method <- match.arg(sel_method)
+  
+  if (
+    "x" %in% remove
+  ) {
+    fig_scores <-
+      get_plot_by_region(data_fig_scores, sel_region) +
+      ggpubr::rremove("x.text") +
+      ggpubr::rremove("x.ticks") +
+      ggpubr::rremove("x.title")
+  } else {
+    fig_scores <- get_plot_by_region(data_fig_scores, sel_region)
+  }
+  
+  if (
+    sel_method == "cowplot"
+  ) {
+    res <-
+      cowplot::plot_grid(
+        get_plot_by_region(data_fig_importance_human_dist, sel_region),
+        get_plot_by_region(data_fig_map, sel_region),
+        fig_scores,
+        nrow = 1,
+        rel_widths = sel_widths
+      )
+  }
+  
+  if (
+    sel_method == "ggpubr"
+  ) {
+    res <-
+      ggpubr::ggarrange(
+        get_plot_by_region(data_fig_importance_human_dist, sel_region),
+        get_plot_by_region(data_fig_map, sel_region),
+        fig_scores,
+        nrow = 1,
+        widths = sel_widths
+      )
+  }
+  return(res)
+}
+
+
+
+#----------------------------------------------------------#
 # 3. Unique human -----
 #----------------------------------------------------------#
 
-data_fig_unique_human_dist <-
-  data_unique_human %>%
+data_fig_importance_human_dist <-
+  data_importance_human %>%
   dplyr::mutate(
     plot = purrr::map(
       .x = data_to_plot,
-      .f = ~ get_unique_human_dist(
+      .f = ~ get_importance_human_dist(
         data_source = .x
       )
     )
@@ -480,8 +486,8 @@ data_fig_map <-
   dplyr::mutate(
     plot = purrr::map(
       .x = region,
-      .f = ~ get_human_unique_on_map(
-        data_source_varpar = data_spatial_vis,
+      .f = ~ get_human_importance_on_map(
+        data_source_varpar = summary_tables_spd$summary_table_spatial,
         data_source_geo = data_geo_koppen,
         sel_region = .x
       )
@@ -519,7 +525,7 @@ data_fig_scores <-
       ) +
         ggplot2::geom_line(
           ggplot2::aes(
-            col = sel_classification
+            col = climatezone
           ),
           alpha = 0.7,
           linewidth = 0.2
