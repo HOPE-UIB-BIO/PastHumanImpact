@@ -192,7 +192,7 @@ vec_climate_5 <-
 
 data_climate_zones <-
   tibble::tibble(
-    sel_classification = factor(
+    climatezone = factor(
       c(
         "Arid",
         "Cold_Dry_Summer",

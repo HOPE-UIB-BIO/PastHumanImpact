@@ -22,7 +22,7 @@ get_map_region <- function(rasterdata,
       mapping = ggplot2::aes(
         x = x,
         y = y,
-        fill = sel_classification
+        fill = climatezone
       ),
       alpha = sel_alpha
     ) +

@@ -1,11 +1,11 @@
 get_circular_barplot <- function(data_source,
-                                 y_var = "percentage_median",
+                                 y_var = "ratio",
                                  x_var = "predictor",
-                                 fill_var = "sel_classification",
+                                 fill_var = "climatezone",
                                  col_vec = palette_ecozones,
                                  x_name = x_label,
-                                 y_step = 10,
-                                 y_max = 50,
+                                 y_step = 0.2,
+                                 y_max = 0.5,
                                  line_col = "grey60",
                                  line_width = 0.1,
                                  background_col = "transparent",
@@ -44,8 +44,8 @@ get_circular_barplot <- function(data_source,
     ) +
     ggplot2::scale_y_continuous(
       expand = c(0, 0),
-      limits = c(-5, y_max + 0.1),
-      breaks = seq(0, y_max, by = y_step)
+      limits = c(-0.2, y_max + 0.1),
+      breaks = seq(-0.2, y_max, by = y_step)
     ) +
     ggplot2::scale_x_discrete(
       drop = FALSE
@@ -89,9 +89,9 @@ get_circular_barplot <- function(data_source,
     ) +
     ggplot2::annotate(
       "text",
-      x = rep(3.5, length(seq(20, y_max, by = y_step))),
-      y = seq(20, y_max, by = y_step),
-      label = paste0(seq(20, y_max, by = y_step), " %"),
+      x = rep(3.5, length(seq(0.2, y_max, by = y_step))),
+      y = seq(0.2, y_max, by = y_step),
+      label = paste0(seq(0.2, y_max, by = y_step), " ratio"),
       vjust = 0,
       size = 1.5
     ) +
@@ -99,8 +99,8 @@ get_circular_barplot <- function(data_source,
       data = data_source_trunk %>%
         dplyr::filter(
           grepl(
-            "unique_percent",
-            variance_partition
+            "ratio_ind_wmean",
+            importance_type
           )
         ),
       mapping = ggplot2::aes(
@@ -116,8 +116,8 @@ get_circular_barplot <- function(data_source,
     ggplot2::geom_col(
       data = data_source_trunk %>%
         dplyr::filter(grepl(
-          "average_share_percent",
-          variance_partition
+          "ratio_unique_wmean",
+          importance_type
         )),
       mapping = ggplot2::aes(
         fill = get(fill_var)
