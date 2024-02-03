@@ -24,65 +24,17 @@ source(
   )
 )
 
-Sys.setenv(TAR_PROJECT = "project_h2")
-
-targets::tar_option_set(
-  packages = package_list, # [config]
-  memory = "transient",
-  garbage_collection = TRUE,
-  repository = "local",
-  seed = set_seed, # [config]
-  storage = "worker"
-)
-
-vec_responses <-
-  c(
-    "dataset_id",
-    "age",
-    "n0",
-    "n1",
-    "n2",
-    "n1_minus_n2",
-    "n2_divided_by_n1",
-    "n1_divided_by_n0",
-    "dcca_axis_1", "roc",
-    "density_turnover",
-    "density_diversity"
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
   )
-
+)
 
 #----------------------------------------------------------#
 # 1. Load and data -----
 #----------------------------------------------------------#
 
-# These are targets from H1
-data_for_hvar <-
-  targets::tar_read(
-    name = "data_hvar_filtered",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  )
-
-data_meta <-
-  targets::tar_read(
-    name = "data_meta",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  )
-
-
-data_dummy_time <-
-  targets::tar_read(
-    name = "data_dummy_time",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  )
 
 # Load all results from SuperComputer
 vec_mods <-
@@ -108,35 +60,26 @@ mod_list <-
 
 
 #----------------------------------------------------------#
-# 4. Target pipeline -----
+# 2. Target pipeline -----
 #----------------------------------------------------------#
 
 # the targets list:
 list(
-  # add new agreed climate info
+  # - path to data for multidimensional shifts ----
   targets::tar_target(
-    name = data_meta_classification,
-    command = data_meta %>%
-      dplyr::mutate(
-        sel_classification = dplyr::case_when(
-          ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
-          ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
-          ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
-          .default = ecozone_koppen_5
-        )
-      )
+    name = data_m2_path,
+    command = paste0(
+      data_storage_path,
+      "_targets_data/pipeline_paps/objects/data_m2"
+    ),
+    format = "file"
   ),
-  # add get data for procrustes sum-of-squares (m2) analysis
+  # - load data for multidimensional shifts
   targets::tar_target(
     name = data_m2,
-    command = get_data_m2(
-      data_source = data_for_hvar,
-      data_meta = data_meta_classification,
-      min_samples = 5,
-      select_vars = vec_responses
-    )
+    command = get_file_from_path(data_m2_path)
   ),
-  # predict all models
+  # - predict all models
   targets::tar_target(
     name = mod_predicted,
     command = get_predition_from_model_list(
@@ -144,12 +87,12 @@ list(
       dummy_table = data_dummy_time
     )
   ),
-  # add names to predicted models
+  # - add names to predicted models
   targets::tar_target(
     name = mod_predicted_with_names,
     command = get_names_from_full_model_name(mod_predicted)
   ),
-  # merge datasets
+  # - merge datasets for hvar analyses of multidimensional shifts
   targets::tar_target(
     name = data_for_hvar_h2,
     command = get_data_for_h2_hvar(
@@ -157,13 +100,14 @@ list(
       data_predictors = mod_predicted_with_names
     )
   ),
-  # hierarchical variation partitioning
+  # - run hierarchical variation partitioning
   targets::tar_target(
-    name = output_hvar_h2,
+    name = output_hvar_h2_spd,
     command = run_hvarpart(
       data_source = data_for_hvar_h2,
       response_vars = NULL,
-      responce_dist = "m2",
+      response_dist = NULL,
+      data_response_dist = "m2",
       predictor_vars = list(
         human = c("spd"),
         climate = c(
