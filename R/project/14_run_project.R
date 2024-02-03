@@ -136,7 +136,7 @@ targets::tar_visnetwork(
 # 6. run target pipeline multidimensional shifts (h2) -----
 #----------------------------------------------------------#
 targets::tar_make(
-     script = here::here("R/project/09_pipeline_multidimensional_shifts.R"),
+     script = here::here("R/project/12_pipeline_multidimensional_shifts.R"),
      store = paste0(
          data_storage_path,
          "_targets_data/analyses_h2"
