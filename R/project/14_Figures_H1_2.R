@@ -318,8 +318,8 @@ get_human_importance_on_map <- function(
       values = palette_ecozones # [config criteria]
     ) +
     ggplot2::scale_size_continuous(
-      limits = c(0, 100),
-      range = c(0.2, 5)
+      limits = c(-0.2, 1),
+      range = c(0.1, 5)
     )
 }
 
@@ -345,7 +345,7 @@ get_importance_human_dist <- function(
     ) +
     ggplot2::facet_wrap(~climatezone, nrow = 1) +
     ggplot2::scale_y_continuous(
-      limits = c(0, 100)
+      limits = c(-0.2, 1)
     ) +
     ggplot2::scale_fill_manual(
       values = palette_ecozones # [config criteria]
@@ -461,7 +461,7 @@ get_combined_row <- function(
 
 
 #----------------------------------------------------------#
-# 3. Unique human -----
+# 3. Importance human -----
 #----------------------------------------------------------#
 
 data_fig_importance_human_dist <-
@@ -487,7 +487,11 @@ data_fig_map <-
     plot = purrr::map(
       .x = region,
       .f = ~ get_human_importance_on_map(
-        data_source_varpar = summary_tables_spd$summary_table_spatial,
+        data_source_varpar = summary_tables_spd$summary_table_spatial %>%
+          dplyr::left_join(
+            data_meta %>% dplyr::select(dataset_id, long, lat),
+            by = "dataset_id"
+          ) ,
         data_source_geo = data_geo_koppen,
         sel_region = .x
       )
