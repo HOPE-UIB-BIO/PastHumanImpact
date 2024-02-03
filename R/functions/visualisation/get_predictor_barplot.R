@@ -3,7 +3,7 @@
 get_predictor_barplot <-
   function(data_source,
            sel_predictor = "human",
-           x_var = "percentage_median",
+           x_var = "ratio",
            axis_to_right = TRUE,
            sel_palette,
            time_step = 1,
@@ -45,7 +45,7 @@ get_predictor_barplot <-
       ggplot2::geom_bar(
         data = data_source %>%
           dplyr::filter(
-            variance_partition == "unique_percent_median",
+            importance_type == "ratio_ind_wmean",
             predictor %in% sel_predictor
           ),
         mapping = ggplot2::aes(
@@ -61,7 +61,7 @@ get_predictor_barplot <-
       ggplot2::geom_bar(
         data = data_source %>%
           dplyr::filter(
-            variance_partition == "average_share_percent_median",
+            importance_type == "ratio_unique_wmean",
             predictor %in% sel_predictor
           ),
         ggplot2::aes(
@@ -100,8 +100,8 @@ get_predictor_barplot <-
         p_predictor +
         ggplot2::scale_x_continuous(
           name = NULL,
-          limits = c(0, 100),
-          breaks = seq(0, 100, by = 25),
+          limits = c(-0.2, 1),
+          breaks = seq(-0.2, 1, by = 0.2),
           expand = c(0, 0)
         ) +
 
@@ -116,8 +116,8 @@ get_predictor_barplot <-
         p_predictor +
         ggplot2::scale_x_reverse(
           name = NULL,
-          limits = c(100, 0),
-          breaks = seq(0, 100, by = 20),
+          limits = c(1, -0.2),
+          breaks = seq(-0.2, 1, by = 0.20),
           expand = c(0, 0)
         ) +
         ggplot2::scale_y_discrete(
