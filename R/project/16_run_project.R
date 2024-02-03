@@ -142,3 +142,30 @@ targets::tar_make(
          "_targets_data/analyses_h2"
      )
  )
+
+#----------------------------------------------------------#
+# 7. run scripts for figures ----
+#----------------------------------------------------------#
+
+# combined figure of h1 1 ----
+source(
+  here::here(
+    "R/project/14_Figures_H1_1.R"
+  )
+)
+
+# combined figure of h1 2 ----
+source(
+  here::here(
+    "R/project/15_Figures_H1_2.R"
+  )
+)
+
+# combined figure of h2 ----
+source(
+  here::here(
+    "R/project/16_Figures_H2.R"
+  )
+)
+
+# end of script ----
