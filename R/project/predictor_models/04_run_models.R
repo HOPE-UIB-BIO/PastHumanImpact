@@ -100,7 +100,7 @@ for (i in seq_len(nrow(models_to_run))) {
     fit_brms_hgam(
       y_var = "value",
       data_source = sel_data_to_fit,
-      error_family = models_to_run$errro_family[1],
+      error_family = models_to_run$error_family[1],
       chains = n_cores_to_use,
       iter = sel_set_min_iter_per_chain,
       prior = models_to_run$prior[1],
