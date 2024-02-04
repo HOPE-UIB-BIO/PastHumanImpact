@@ -23,6 +23,9 @@ source(
   )
 )
 
+library(brms)
+library(parallelly)
+
 n_cores_available <-
   as.numeric(parallelly::availableCores())
 
@@ -65,22 +68,42 @@ for (i in seq_len(nrow(models_to_run))) {
     next
   }
 
+  message(
+    "Running model for ",
+    models_to_run$variable[i],
+    " in ",
+    models_to_run$region[i],
+    " ",
+    models_to_run$climatezone[i]
+  )
+
   current_env <- environment()
 
-  sel_data_to_fit <-
+  sel_data_filtered <-
     data_to_fit %>%
     dplyr::filter(
-      region == models_to_run$region[1] &
-        climatezone == models_to_run$climatezone[1] &
-        variable == models_to_run$variable[1]
-    ) %>%
+      region == models_to_run$region[i] &
+        climatezone == models_to_run$climatezone[i] &
+        variable == models_to_run$variable[i]
+    )
+
+  sel_error_family <-
+    sel_data_filtered %>%
+    purrr::pluck("error_family", 1)
+
+  sel_data_to_fit <-
+    sel_data_filtered %>%
     purrr::chuck("data_to_fit", 1)
 
+  sel_data_prior <-
+    sel_data_filtered %>%
+    purrr::chuck("priors", 1)
+
   sel_set_total_iter <-
-    models_to_run$total_iterations[1]
+    models_to_run$total_iterations[i]
 
   sel_set_min_iter_per_chain <-
-    models_to_run$min_iterations_per_chain[1]
+    models_to_run$min_iterations_per_chain[i]
 
   if (
     (sel_set_total_iter / n_cores_available) < sel_set_min_iter_per_chain
@@ -100,19 +123,20 @@ for (i in seq_len(nrow(models_to_run))) {
     fit_brms_hgam(
       y_var = "value",
       data_source = sel_data_to_fit,
-      error_family = models_to_run$error_family[1],
+      error_family = sel_error_family,
       chains = n_cores_to_use,
       iter = sel_set_min_iter_per_chain,
-      prior = models_to_run$prior[1],
+      prior = sel_data_prior,
+      control = list(adapt_delta = 0.9)
     )
 
   if (
     exists("sel_mod", envir = current_env)
   ) {
-    models_to_run$last_run_date[1] <- as.character(Sys.Date())
-    models_to_run$last_run_time[1] <- as.character(Sys.time())
-    models_to_run$need_to_be_evaluated[1] <- TRUE
-    models_to_run$need_to_run[1] <- FALSE
+    models_to_run$last_run_date[i] <- as.character(Sys.Date())
+    models_to_run$last_run_time[i] <- as.character(Sys.time())
+    models_to_run$need_to_be_evaluated[i] <- TRUE
+    models_to_run$need_to_run[i] <- FALSE
 
     RUtilpol::save_latest_file(
       object_to_save = models_to_run,
@@ -127,9 +151,9 @@ for (i in seq_len(nrow(models_to_run))) {
     RUtilpol::save_latest_file(
       object_to_save = sel_mod,
       file_name = paste(
-        models_to_run$variable[1],
-        models_to_run$region[1],
-        models_to_run$climatezone[1],
+        models_to_run$variable[i],
+        models_to_run$region[i],
+        models_to_run$climatezone[i],
         sep = "__"
       ),
       dir = paste0(
@@ -143,11 +167,13 @@ for (i in seq_len(nrow(models_to_run))) {
 
   # clean up
   try(rm(sel_mod))
+  try(rm(sel_data_filtered))
+  try(rm(sel_error_family))
+  try(rm(sel_data_prior))
   try(rm(sel_data_to_fit))
   try(rm(sel_set_total_iter))
   try(rm(sel_set_min_iter_per_chain))
   try(rm(n_cores_to_use))
   try(rm(sel_iter_per_chain))
   try(rm(current_env))
-  try(rm(data_to_fit))
 }
