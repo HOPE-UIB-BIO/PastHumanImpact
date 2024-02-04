@@ -69,7 +69,7 @@ data_with_valid_climate_zones <-
 varivale_config <-
   tibble::tribble(
     ~variable, ~error_family,
-    "spd", "brms::hurdle_gamma(link = 'identity')",
+    "spd", "brms::hurdle_gamma(link='identity')",
     "fi", "stats::binomial(link='logit')",
     "fc", "stats::binomial(link='logit')",
     "ec", "stats::binomial(link='logit')",
@@ -81,9 +81,9 @@ varivale_config <-
     "strong", "stats::binomial(link='logit')",
     "temp_annual", "stats::gaussian(link='identity')",
     "temp_cold", "stats::gaussian(link='identity')",
-    "prec_annual", "brms::hurdle_gamma(link = 'log')",
-    "prec_summer", "brms::hurdle_gamma(link = 'log')",
-    "prec_win", "brms::hurdle_gamma(link = 'log')",
+    "prec_annual", "brms::hurdle_gamma(link='log')",
+    "prec_summer", "brms::hurdle_gamma(link='log')",
+    "prec_win", "brms::hurdle_gamma(link='log')",
   )
 
 data_valid_variables <-
@@ -172,7 +172,7 @@ data_to_fit <-
       ),
       .f = ~ brms::get_prior(
         formula = brms::bf(..1),
-        family = ..2,
+        family = eval(parse(text = ..2)),
         # we use the full dataset to estimate priors
         data = data_valid_variables %>%
           dplyr::filter(variable == ..3)
@@ -193,5 +193,5 @@ RUtilpol::save_latest_file(
     "Data/Predictor_models/"
   ),
   prefered_format = "rds",
-  use_sha = FALSE
+  use_sha = TRUE
 )
