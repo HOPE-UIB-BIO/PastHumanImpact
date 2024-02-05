@@ -123,7 +123,7 @@ fit_brms_hgam <- function(
   try(
     fin_mod <-
       brms::brm(
-        formula = stats::as.formula(formula_hgam_fin),
+        formula = brms::bf(stats::as.formula(formula_hgam_fin)),
         data = data_source,
         family = eval(parse(text = error_family)),
         silent = ifelse(isTRUE(verbose), 1, 0),
