@@ -49,6 +49,8 @@ model_config_table <-
     total_iterations = 4000,
     min_iterations_per_chain = 100,
     last_run_date = NA_character_,
+    last_run_start_time = NA_character_,
+    last_run_end_time = NA_character_,
     last_run_time = NA_character_,
     last_run_rhat_test_pass = FALSE,
     last_run_loo_test_pass = FALSE,
