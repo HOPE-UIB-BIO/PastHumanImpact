@@ -53,6 +53,7 @@ model_config_table <-
     last_run_end_time = NA_character_,
     last_run_time = NA_character_,
     last_run_rhat_test_pass = FALSE,
+    last_run_rhat_test_value = NA_real_,
     last_run_loo_test_pass = FALSE,
     last_run_loo_test_value = NA_real_,
     need_to_run = TRUE,

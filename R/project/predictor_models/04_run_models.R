@@ -60,13 +60,17 @@ models_to_run <-
 #----------------------------------------------------------#
 
 purrr::pwalk(
-  .progress = "progress of all models",
+  .progress = "Fitting: progress of all models",
   .l = list(
-    region, # ..1
-    climatezone, # ..2
-    variable # ..3
+    models_to_run$region, # ..1
+    models_to_run$climatezone, # ..2
+    models_to_run$variable # ..3
   ),
   .f = {
+    sel_region <- ..1
+    sel_climatezone <- ..2
+    sel_variable <- ..3
+
     # update the table
     models_to_run <-
       RUtilpol::get_latest_file(
@@ -80,10 +84,11 @@ purrr::pwalk(
       dplyr::arrange(n_records)
 
     sel_mod <-
+      models_to_run %>%
       dplyr::filter(
-        region == ..1 &
-          climatezone == ..2 &
-          variable == ..3
+        region == sel_region &
+          climatezone == sel_climatezone &
+          variable == sel_variable
       )
 
     if (
@@ -97,9 +102,9 @@ purrr::pwalk(
     sel_data_filtered <-
       data_to_fit %>%
       dplyr::filter(
-        region == ..1 &
-          climatezone == ..2 &
-          variable == ..3
+        region == sel_region &
+          climatezone == sel_climatezone &
+          variable == sel_variable
       )
 
     sel_error_family <-
@@ -157,39 +162,39 @@ purrr::pwalk(
         dplyr::mutate(
           last_run_date = dplyr::case_when(
             .default = last_run_date,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ as.character(Sys.Date())
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ as.character(Sys.Date())
           ),
           last_run_start_time = dplyr::case_when(
             .default = last_run_start_time,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ as.character(time_mod_start)
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ as.character(time_mod_start)
           ),
           last_run_end_time = dplyr::case_when(
             .default = last_run_end_time,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ as.character(time_mod_end)
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ as.character(time_mod_end)
           ),
           last_run_time = dplyr::case_when(
             .default = last_run_time,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ as.character(time_mod_end - time_mod_start)
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ as.character(time_mod_end - time_mod_start)
           ),
           need_to_be_evaluated = dplyr::case_when(
             .default = need_to_be_evaluated,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ TRUE
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ TRUE
           ),
           need_to_run = dplyr::case_when(
             .default = need_to_run,
-            region == ..1 &
-              climatezone == ..2 &
-              variable == ..3 ~ FALSE
+            region == sel_region &
+              climatezone == sel_climatezone &
+              variable == sel_variable ~ FALSE
           )
         )
 
@@ -206,9 +211,9 @@ purrr::pwalk(
       RUtilpol::save_latest_file(
         object_to_save = sel_mod,
         file_name = paste(
-          ..3,
-          ..1,
-          ..2,
+          sel_variable,
+          sel_region,
+          sel_climatezone,
           sep = "__"
         ),
         dir = paste0(
