@@ -94,39 +94,39 @@ get_summary_tables <- function(
     dplyr::select(-c(data_merge, varhp)) %>%
     dplyr::ungroup() %>%
     janitor::clean_names() %>%
-    group_by(age) %>%
+    group_by(age, region) %>%
     mutate(sum_importance = sum(individual),
            ratio_unique = unique/sum_importance,
            ratio_ind = individual/sum_importance) %>%
     ungroup()
   
   
-  # summarise to wmean values by age, region, and predictor
-  wmean_summary_temporal <-
+  # transform to long format
+ summary_temporal_long <-
     summary_table_temporal %>%
     dplyr::group_by(
       age,
       region,
       predictor
     ) %>% 
-    #summarise weighted mean
-    dplyr::summarise(
-      .groups = "drop",
-      dplyr::across(
-        dplyr::all_of(
-          c("ratio_unique", 
-            "ratio_ind")
-          ),
-        list(
-          wmean = ~ weighted.mean(
-            x = .x, 
-            w = sum_importance, 
-            na.rm = TRUE)
-        )
-      )
-    ) %>%
+    # #summarise weighted mean
+    # dplyr::summarise(
+    #   .groups = "drop",
+    #   dplyr::across(
+    #     dplyr::all_of(
+    #       c("ratio_unique", 
+    #         "ratio_ind")
+    #       ),
+    #     list(
+    #       wmean = ~ weighted.mean(
+    #         x = .x, 
+    #         w = sum_importance, 
+    #         na.rm = TRUE)
+    #     )
+    #   )
+    # ) %>%
     tidyr::pivot_longer(
-      dplyr::ends_with("wmean"),
+      dplyr::starts_with("ratio"),
       names_to = "importance_type",
       values_to = "ratio"
     ) 
@@ -136,7 +136,7 @@ get_summary_tables <- function(
     summary_table_spatial = summary_table_spatial,
     summary_table_temporal = summary_table_temporal,
     wmean_summary_spatial = wmean_summary_spatial,
-    wmean_summary_temporal = wmean_summary_temporal
+    summary_temporal_long = summary_temporal_long
   )
   
   return(results)
