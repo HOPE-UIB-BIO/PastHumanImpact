@@ -43,7 +43,7 @@ data_to_fit <-
     )
   )
 
-models_to_run <-
+models_to_run_order <-
   RUtilpol::get_latest_file(
     file_name = "predictor_models_config_table",
     dir = paste0(
@@ -51,8 +51,23 @@ models_to_run <-
       "Data/Predictor_models/"
     )
   ) %>%
-  # start with the smallest model first
-  dplyr::arrange(n_records)
+  # arrange in a custom order
+  dplyr::arrange(
+    match(
+      variable,
+      c(
+        "temp_annual",
+        "temp_cold",
+        "prec_summer",
+        "prec_win",
+        "spd",
+        "bi",
+        "fi", "fc", "ec", "ei", "cc", "es",
+        "weak", "medium", "strong"
+      )
+    ),
+    n_records
+  )
 
 
 #----------------------------------------------------------#
@@ -62,9 +77,9 @@ models_to_run <-
 purrr::pwalk(
   .progress = "Fitting: progress of all models",
   .l = list(
-    models_to_run$region, # ..1
-    models_to_run$climatezone, # ..2
-    models_to_run$variable # ..3
+    models_to_run_order$region, # ..1
+    models_to_run_order$climatezone, # ..2
+    models_to_run_order$variable # ..3
   ),
   .f = ~ {
     # save as obejct for easier debugging
@@ -80,9 +95,7 @@ purrr::pwalk(
           data_storage_path,
           "Data/Predictor_models/"
         )
-      ) %>%
-      # start with the smallest model first
-      dplyr::arrange(n_records)
+      )
 
     # get the selected model
     sel_mod <-
