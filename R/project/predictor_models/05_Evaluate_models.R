@@ -48,6 +48,12 @@ flag_model_to_rerun <- function(
         region == sel_region &
           climatezone == sel_climatezone &
           variable == sel_variable ~ TRUE
+      ),
+      last_evaluation_date = dplyr::case_when(
+        .default = as.character(last_evaluation_date),
+        region == sel_region &
+          climatezone == sel_climatezone &
+          variable == sel_variable ~ as.character(Sys.Date())
       )
     )
 
@@ -189,15 +195,14 @@ purrr::pwalk(
     rhat_res <-
       brms::rhat(mod)
 
-    rhat_above_threshold <-
-      (rhat_res >= rhat_threshold)
-
     avg_rhat_value <-
       mean(rhat_res, na.mr = TRUE)
 
     # We consider as pass if 90% of the values are below the threshold
     pass_rhat_test <-
-      stats::quantile(rhat_res, rhat_threshold_quantile)
+      as.logical(
+        stats::quantile(rhat_res, rhat_threshold_quantile) <= rhat_threshold
+      )
 
     # evaluation summary -----
 
@@ -243,6 +248,12 @@ purrr::pwalk(
           region == sel_region &
             climatezone == sel_climatezone &
             variable == sel_variable ~ need_to_be_rerun
+        ),
+        last_evaluation_date = dplyr::case_when(
+          .default = as.character(last_evaluation_date),
+          region == sel_region &
+            climatezone == sel_climatezone &
+            variable == sel_variable ~ as.character(Sys.Date())
         )
       )
 
