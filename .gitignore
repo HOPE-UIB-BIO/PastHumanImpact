@@ -5,7 +5,7 @@
 .Rhistory
 .RData
 .Ruserdata
-
+R/debug.R
 
 # Data folders
 Data/
@@ -13,3 +13,4 @@ _targets/
 
 # target yaml
 _targets.yaml
+
