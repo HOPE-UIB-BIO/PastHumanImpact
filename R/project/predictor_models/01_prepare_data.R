@@ -79,17 +79,56 @@ data_merge <-
   tidyr::drop_na(value)
 
 
+data_valid_variables <-
+  data_merge %>%
+  dplyr::filter(
+    variable %in% c(
+      "temp_annual",
+      "temp_cold",
+      "prec_summer",
+      "prec_win",
+      "bi",
+      "fi", "fc", "ec", "ei", "cc", "es",
+      "weak", "medium", "strong",
+      "spd"
+    )
+  ) %>%
+  # There is only certain combination of variables and regions possible.
+  # Filter out the rest
+  dplyr::mutate(
+    invalid_variable = dplyr::case_when(
+      .default = FALSE,
+      region == "Asia" & variable %in% c(
+        "weak", "medium", "strong", "ec", "cc", "es"
+      ) ~ TRUE,
+      region == "Europe" & variable %in% c(
+        "weak", "medium", "strong", "ei", "es"
+      ) ~ TRUE,
+      region == "North America" & variable %in% c(
+        "weak", "medium", "strong", "fi", "ec", "ei", "cc"
+      ) ~ TRUE,
+      region == "Latin America" & variable %in% c(
+        "medium", "fi", "fc", "ec", "ei", "cc", "es"
+      ) ~ TRUE,
+      region == "Oceania" & variable %in% c(
+        "fi", "fc", "ec", "ei", "cc", "es"
+      ) ~ TRUE,
+    )
+  ) %>%
+  dplyr::filter(!invalid_variable) %>%
+  dplyr::select(-invalid_variable)
+
 if (
   isTRUE(verbose)
 ) {
-  data_to_fit %>%
+  data_valid_variables %>%
     dplyr::select(variable, value) %>%
     split(.$variable) %>%
     purrr::map(~ summary(.x))
 }
 
 valid_climate_zones_by_n_records <-
-  data_merge %>%
+  data_valid_variables %>%
   dplyr::group_by(region, climatezone) %>%
   dplyr::distinct(dataset_id) %>%
   dplyr::summarise(
@@ -101,7 +140,7 @@ valid_climate_zones_by_n_records <-
   )
 
 data_filter_by_climatezone <-
-  data_merge %>%
+  data_valid_variables %>%
   dplyr::inner_join(
     valid_climate_zones_by_n_records,
     by = c("region", "climatezone")
@@ -147,7 +186,7 @@ data_prepared <-
 if (
   isTRUE(verbose)
 ) {
-  data_to_fit %>%
+  data_prepared %>%
     dplyr::group_by(region) %>%
     tidyr::nest() %>%
     purrr::chuck("data") %>%
@@ -181,5 +220,5 @@ RUtilpol::save_latest_file(
     "Data/Predictor_models/"
   ),
   prefered_format = "rds",
-  use_sha = FALSE
+  use_sha = TRUE
 )
