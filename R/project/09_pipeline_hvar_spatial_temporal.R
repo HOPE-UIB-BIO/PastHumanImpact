@@ -107,10 +107,8 @@ list(
           "temp_annual",
           "temp_cold",
           "prec_summer",
-          "prec_win"
+          "prec_win")
         ),
-        time = c("age")
-      ),
       run_all_predictors = FALSE,
       time_series = TRUE,
       get_significance = FALSE,
@@ -152,10 +150,8 @@ list(
           "temp_annual",
           "temp_cold",
           "prec_summer",
-          "prec_win"
+          "prec_win")
         ),
-        time = c("age")
-      ),
       run_all_predictors = FALSE,
       time_series = TRUE,
       get_significance = FALSE,
