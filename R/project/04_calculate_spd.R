@@ -76,6 +76,7 @@ future::plan(
   workers = parallel::detectCores()-1
 )
 
+
 # use future iwalk
 data_c14_subset %>%
   split(.$dataset_id) %>%
@@ -89,7 +90,7 @@ data_c14_subset %>%
         !file.exists(
           paste0(
             data_storage_path,
-            "Data/spd/processed_spd/",
+            "Data/spd/spd_temp/",
             paste0(
               .y,
               "_spd.rds"
@@ -100,7 +101,7 @@ data_c14_subset %>%
         
         get_spd(
           data_source_c14 = .,
-          data_source_dist_vec = 250,
+          data_source_dist_vec = spd_distance_vec,
           sel_smooth_size = 100,
           min_n_dates = 50,
           age_from = min_age, # [config]
@@ -108,7 +109,7 @@ data_c14_subset %>%
         ) %>%
           readr::write_rds(
             paste0(data_storage_path,
-                   "Data/spd/processed_spd/",
+                   "Data/spd/spd_temp/",
                    paste0(
                      .y,
                      "_spd.rds"
@@ -126,7 +127,7 @@ data_c14_subset %>%
 
 spd_processed_vec <-
   list.files(
-    here::here(data_storage_path, "Data/spd/processed_spd"),
+    here::here(data_storage_path, "Data/spd/spd_temp"),
     pattern = "_spd.rds",
     recursive = TRUE
   )
@@ -137,7 +138,7 @@ spd_processed_list <-
     .x = spd_processed_vec,
     .f = ~ readr::read_rds(
       here::here(
-        data_storage_path, "Data/spd/processed_spd", .x
+        data_storage_path, "Data/spd/spd_temp", .x
       )
     )
   ) %>%
@@ -145,7 +146,7 @@ spd_processed_list <-
     nm = stringr::str_replace(spd_processed_vec, "_spd.rds", "")
   )
 
-data_spd <- 
+data_spd_temp <- 
   dplyr::bind_rows(.id = "dataset_id",
                    spd_processed_list)
 
@@ -153,12 +154,16 @@ data_spd <-
 # 4. Save spd data to data folder ----
 #---------------------------------------------------------------#
 
-readr::write_rds(
-  x = data_spd,
-  file = paste0(
+
+RUtilpol::save_latest_file(
+  object_to_save = data_spd_temp,
+  file_name = "data_spd",
+  dir = paste0(
     data_storage_path,
-    "Data/spd/data_spd-2024-01-29.rds"
-  )
+    "Data/spd/"
+  ),
+  prefered_format = "rds",
+  use_sha = FALSE
 )
 
 #---------------------------------------------------------------#

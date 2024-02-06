@@ -68,22 +68,22 @@ data_with_valid_climate_zones <-
 # set error family for each variable
 varivale_config <-
   tibble::tribble(
-    ~variable, ~errro_family,
-    "spd", "Gamma",
-    "fi", "binomial",
-    "fc", "binomial",
-    "ec", "binomial",
-    "ei", "binomial",
-    "es", "binomial",
-    "cc", "binomial",
-    "weak", "binomial",
-    "medium", "binomial",
-    "strong", "binomial",
-    "temp_annual", "gaussian",
-    "temp_cold", "gaussian",
-    "prec_annual", "Gamma",
-    "prec_summer", "Gamma",
-    "prec_win", "Gamma",
+    ~variable, ~error_family,
+    "spd", "brms::hurdle_gamma(link='identity')",
+    "fi", "stats::binomial(link='logit')",
+    "fc", "stats::binomial(link='logit')",
+    "ec", "stats::binomial(link='logit')",
+    "ei", "stats::binomial(link='logit')",
+    "es", "stats::binomial(link='logit')",
+    "cc", "stats::binomial(link='logit')",
+    "weak", "stats::binomial(link='logit')",
+    "medium", "stats::binomial(link='logit')",
+    "strong", "stats::binomial(link='logit')",
+    "temp_annual", "stats::gaussian(link='identity')",
+    "temp_cold", "stats::gaussian(link='identity')",
+    "prec_annual", "brms::hurdle_gamma(link='log')",
+    "prec_summer", "brms::hurdle_gamma(link='log')",
+    "prec_win", "brms::hurdle_gamma(link='log')",
   )
 
 data_valid_variables <-
@@ -167,12 +167,12 @@ data_to_fit <-
       .progress = TRUE,
       .l = list(
         hgam_formula,
-        errro_family,
+        error_family,
         variable
       ),
       .f = ~ brms::get_prior(
         formula = brms::bf(..1),
-        family = ..2,
+        family = eval(parse(text = ..2)),
         # we use the full dataset to estimate priors
         data = data_valid_variables %>%
           dplyr::filter(variable == ..3)
@@ -193,5 +193,5 @@ RUtilpol::save_latest_file(
     "Data/Predictor_models/"
   ),
   prefered_format = "rds",
-  use_sha = FALSE
+  use_sha = TRUE
 )

@@ -44,13 +44,16 @@ data_to_fit <-
 
 model_config_table <-
   data_to_fit %>%
-  dplyr::distinct(region, climatezone, variable, n_records, errro_family) %>%
+  dplyr::distinct(region, climatezone, variable, n_records) %>%
   dplyr::mutate(
-    total_iterations = 2000,
+    total_iterations = 4000,
     min_iterations_per_chain = 100,
     last_run_date = NA_character_,
+    last_run_start_time = NA_character_,
+    last_run_end_time = NA_character_,
     last_run_time = NA_character_,
     last_run_rhat_test_pass = FALSE,
+    last_run_rhat_test_value = NA_real_,
     last_run_loo_test_pass = FALSE,
     last_run_loo_test_value = NA_real_,
     need_to_run = TRUE,
