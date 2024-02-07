@@ -27,7 +27,9 @@ library(brms)
 library(parallelly)
 
 n_cores_available <-
-  as.numeric(parallelly::availableCores())
+  as.numeric(
+    parallelly::availableCores()
+  )
 
 
 #----------------------------------------------------------#
@@ -87,19 +89,15 @@ purrr::pwalk(
     sel_climatezone <- ..2
     sel_variable <- ..3
 
-    # update the table
-    models_to_run <-
+    # get the selected model
+    sel_mod <-
       RUtilpol::get_latest_file(
         file_name = "predictor_models_config_table",
         dir = paste0(
           data_storage_path,
           "Data/Predictor_models/"
         )
-      )
-
-    # get the selected model
-    sel_mod <-
-      models_to_run %>%
+      ) %>%
       dplyr::filter(
         region == sel_region &
           climatezone == sel_climatezone &
@@ -108,7 +106,9 @@ purrr::pwalk(
 
     # check if the model needs to be run
     if (
-      sel_mod$need_to_run[[1]] == FALSE
+      sel_mod %>%
+        purrr::chuck("need_to_run", 1) %>%
+        isFALSE()
     ) {
       return()
     }
@@ -201,7 +201,16 @@ purrr::pwalk(
       exists("mod", envir = current_env)
     ) {
       models_to_run_updated <-
-        models_to_run %>%
+        # because the model can be run for a very long time load the table again
+        #   just before saving it (to prevent overwriting the changes
+        #   made by others)
+        RUtilpol::get_latest_file(
+          file_name = "predictor_models_config_table",
+          dir = paste0(
+            data_storage_path,
+            "Data/Predictor_models/"
+          )
+        ) %>%
         dplyr::mutate(
           last_run_date = dplyr::case_when(
             .default = as.character(last_run_date),
@@ -225,8 +234,11 @@ purrr::pwalk(
             .default = as.character(last_run_time),
             region == sel_region &
               climatezone == sel_climatezone &
-              variable == sel_variable ~ as.character(
-              time_mod_end - time_mod_start
+              variable == sel_variable ~ paste(
+              as.character(
+                round(time_mod_end - time_mod_start, 2)
+              ),
+              units(time_mod_end - time_mod_start)
             )
           ),
           need_to_be_evaluated = dplyr::case_when(
