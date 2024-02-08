@@ -70,8 +70,6 @@ data_c14_subset <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
-library(furrr)
-
 n_cores <-
   as.numeric(
     parallelly::availableCores()
