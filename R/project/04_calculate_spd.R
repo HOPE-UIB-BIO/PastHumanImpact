@@ -69,57 +69,84 @@ data_c14_subset <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
-library(furrr)
+# library(furrr)
+# 
+# future::plan(
+#   future::multisession(),
+#   workers = parallel::detectCores()-1
+# )
+# 
+# 
+# # use future iwalk
+# data_c14_subset %>%
+#   split(.$dataset_id) %>%
+#   rlang::set_names(data_c14_subset$dataset_id) %>%
+#   furrr::future_iwalk(
+#     .progress = TRUE,
+#     .x = .,
+#     .f = ~ {
+#       
+#       if(
+#         !file.exists(
+#           paste0(
+#             data_storage_path,
+#             "Data/spd/spd_test/",
+#             paste0(
+#               .y,
+#               "_spd.rds"
+#             )
+#           )
+#         )
+#       ) {
+#         
+#         get_spd(
+#           data_source_c14 = .,
+#           data_source_dist_vec = spd_distance_vec,
+#           sel_smooth_size = 100,
+#           min_n_dates = 50,
+#           age_from = min_age, # [config]
+#           age_to = max_age # [config]
+#         ) %>%
+#           readr::write_rds(
+#             paste0(data_storage_path,
+#                    "Data/spd/spd_test/",
+#                    paste0(
+#                      .y,
+#                      "_spd.rds"
+#                    )
+#             )
+#           )
+#         
+#       }
+#     }
+#   )
 
+
+#it works with future_map
 future::plan(
-  future::multisession(),
+  future::multicore,
   workers = parallel::detectCores()-1
 )
 
 
-# use future iwalk
-data_c14_subset %>%
-  split(.$dataset_id) %>%
-  rlang::set_names(data_c14_subset$dataset_id) %>%
-  furrr::future_iwalk(
-    .progress = TRUE,
-    .x = .,
-    .f = ~ {
-      
-      if(
-        !file.exists(
-          paste0(
-            data_storage_path,
-            "Data/spd/spd_temp/",
-            paste0(
-              .y,
-              "_spd.rds"
-            )
-          )
-        )
-      ) {
-        
-        get_spd(
-          data_source_c14 = .,
-          data_source_dist_vec = spd_distance_vec,
-          sel_smooth_size = 100,
-          min_n_dates = 50,
-          age_from = min_age, # [config]
-          age_to = max_age # [config]
-        ) %>%
-          readr::write_rds(
-            paste0(data_storage_path,
-                   "Data/spd/spd_temp/",
-                   paste0(
-                     .y,
-                     "_spd.rds"
-                   )
-            )
-          )
-        
-      }
-    }
+
+data_c14_list <- data_c14_subset %>%
+  split(.$dataset_id) 
+
+
+spd <- furrr::future_map(
+  .progress = TRUE,
+  data_c14_list, ~get_spd(
+    data_source_c14 = .x,
+    data_source_dist_vec = spd_distance_vec,
+    sel_smooth_size = 100,
+    min_n_dates = 50,
+    age_from = min_age, # [config]
+    age_to = max_age # [config]
   )
+) %>% 
+  bind_rows()
+
 
 #---------------------------------------------------------------#
 # 3. Load processed spds ----
