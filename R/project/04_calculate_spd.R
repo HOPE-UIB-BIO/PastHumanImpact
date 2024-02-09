@@ -16,6 +16,7 @@
 #--------------------------------------------------------------#
 
 library(here)
+library(furrr)
 
 # Load configuration
 source(
@@ -69,94 +70,43 @@ data_c14_subset <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
-library(furrr)
+n_cores <-
+  as.numeric(
+    parallelly::availableCores()
+  )
 
 future::plan(
-  future::multisession(),
-  workers = parallel::detectCores()-1
+  future::multicore,
+  workers = n_cores - 1
 )
 
+# split
+data_c14_list <- data_c14_subset %>%
+  split(.$dataset_id) 
 
-# use future iwalk
-data_c14_subset %>%
-  split(.$dataset_id) %>%
-  rlang::set_names(data_c14_subset$dataset_id) %>%
-  furrr::future_iwalk(
-    .progress = TRUE,
-    .x = .,
-    .f = ~ {
-      
-      if(
-        !file.exists(
-          paste0(
-            data_storage_path,
-            "Data/spd/spd_temp/",
-            paste0(
-              .y,
-              "_spd.rds"
-            )
-          )
-        )
-      ) {
-        
-        get_spd(
-          data_source_c14 = .,
-          data_source_dist_vec = spd_distance_vec,
-          sel_smooth_size = 100,
-          min_n_dates = 50,
-          age_from = min_age, # [config]
-          age_to = max_age # [config]
-        ) %>%
-          readr::write_rds(
-            paste0(data_storage_path,
-                   "Data/spd/spd_temp/",
-                   paste0(
-                     .y,
-                     "_spd.rds"
-                   )
-            )
-          )
-        
-      }
-    }
+# calculate spd
+data_spd <- furrr::future_map(
+  .progress = TRUE,
+  data_c14_list, ~get_spd(
+    data_source_c14 = .x,
+    data_source_dist_vec = spd_distance_vec,
+    sel_smooth_size = 100,
+    min_n_dates = 50,
+    age_from = min_age, # [config]
+    age_to = max_age # [config]
   )
+) %>% 
+  dplyr::bind_rows()
+
+
 
 #---------------------------------------------------------------#
-# 3. Load processed spds ----
-#---------------------------------------------------------------#
-
-spd_processed_vec <-
-  list.files(
-    here::here(data_storage_path, "Data/spd/spd_temp"),
-    pattern = "_spd.rds",
-    recursive = TRUE
-  )
-
-spd_processed_list <-
-  purrr::map(
-    .progress = TRUE,
-    .x = spd_processed_vec,
-    .f = ~ readr::read_rds(
-      here::here(
-        data_storage_path, "Data/spd/spd_temp", .x
-      )
-    )
-  ) %>%
-  purrr::set_names(
-    nm = stringr::str_replace(spd_processed_vec, "_spd.rds", "")
-  )
-
-data_spd_temp <- 
-  dplyr::bind_rows(.id = "dataset_id",
-                   spd_processed_list)
-
-#---------------------------------------------------------------#
-# 4. Save spd data to data folder ----
+# 3. Save spd data to data folder ----
 #---------------------------------------------------------------#
 
 
 RUtilpol::save_latest_file(
-  object_to_save = data_spd_temp,
+  object_to_save = data_spd,
   file_name = "data_spd",
   dir = paste0(
     data_storage_path,
