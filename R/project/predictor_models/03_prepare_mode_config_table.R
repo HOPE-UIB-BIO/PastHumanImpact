@@ -23,6 +23,7 @@ source(
   )
 )
 
+overweite_table <- FALSE
 
 #----------------------------------------------------------#
 # 0. Load data -----
@@ -46,7 +47,7 @@ model_config_table <-
   data_to_fit %>%
   dplyr::distinct(region, climatezone, variable, n_records) %>%
   dplyr::mutate(
-    total_iterations = 4000,
+    total_iterations = 3200,
     min_iterations_per_chain = 100,
     last_run_date = NA_character_,
     last_run_start_time = NA_character_,
@@ -65,12 +66,16 @@ model_config_table <-
 # 2. Save table -----
 #----------------------------------------------------------#
 
-RUtilpol::save_latest_file(
-  object_to_save = model_config_table,
-  file_name = "predictor_models_config_table",
-  dir = paste0(
-    data_storage_path,
-    "Data/Predictor_models/"
-  ),
-  prefered_format = "csv"
-)
+if (
+  isTRUE(overweite_table)
+) {
+  RUtilpol::save_latest_file(
+    object_to_save = model_config_table,
+    file_name = "predictor_models_config_table",
+    dir = paste0(
+      data_storage_path,
+      "Data/Predictor_models/"
+    ),
+    prefered_format = "csv"
+  )
+}
