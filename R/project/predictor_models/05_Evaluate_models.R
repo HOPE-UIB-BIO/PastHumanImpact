@@ -206,7 +206,24 @@ purrr::pwalk(
 
     # evaluation summary -----
 
-    need_to_be_rerun <- !pass_loo_test | !pass_rhat_test
+    is_event <-
+      dplyr::case_when(
+        .default = FALSE,
+        sel_variable == "bi" ~ TRUE,
+        sel_variable == "fi" ~ TRUE,
+        sel_variable == "fc" ~ TRUE,
+        sel_variable == "ec" ~ TRUE,
+        sel_variable == "ei" ~ TRUE,
+        sel_variable == "cc" ~ TRUE,
+        sel_variable == "es" ~ TRUE,
+        sel_variable == "weak" ~ TRUE,
+        sel_variable == "medium" ~ TRUE,
+        sel_variable == "strong" ~ TRUE
+      )
+
+    need_to_be_rerun <-
+      isFALSE(pass_rhat_test) |
+        (isFALSE(pass_loo_test) & isFALSE(is_event))
 
     # Update the model table -----
 
