@@ -12,6 +12,13 @@
     "Version": "3.16"
   },
   "Packages": {
+    "AsioHeaders": {
+      "Package": "AsioHeaders",
+      "Version": "1.22.1-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "85bf3bd8fa58da21a22d84fd4f4ef0a8"
+    },
     "BH": {
       "Package": "BH",
       "Version": "1.81.0-1",
@@ -1392,6 +1399,25 @@
       ],
       "Hash": "b544c397820e05a97d391b2d614a921a"
     },
+    "ggeffects": {
+      "Package": "ggeffects",
+      "Version": "1.4.0.17",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ggeffects",
+      "RemoteUsername": "strengejacke",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "a8af1d2864e1e9c48bbdf7322588ff0cd632e72c",
+      "Requirements": [
+        "R",
+        "graphics",
+        "insight",
+        "stats",
+        "utils"
+      ],
+      "Hash": "8d6425370f054943590dbe3da16485be"
+    },
     "ggforce": {
       "Package": "ggforce",
       "Version": "0.4.1",
@@ -1865,17 +1891,21 @@
     },
     "httpgd": {
       "Package": "httpgd",
-      "Version": "1.3.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "2.0.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "httpgd",
+      "RemoteUsername": "nx10",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "3f5f55822c4dce930155b91cedcfd4d483e3294e",
       "Requirements": [
-        "BH",
+        "AsioHeaders",
         "R",
         "cpp11",
-        "later",
-        "systemfonts"
+        "unigd"
       ],
-      "Hash": "cc356d19f2d5781ae139de614bfcdf86"
+      "Hash": "a720a67eac969c3fbab9dcadfad54deb"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -1978,16 +2008,21 @@
     },
     "insight": {
       "Package": "insight",
-      "Version": "0.19.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Version": "0.19.8.4",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "insight",
+      "RemoteUsername": "easystats",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "7f7a7e69db54fb952ff49f189ebf1d8eda4c9883",
       "Requirements": [
         "R",
         "methods",
         "stats",
         "utils"
       ],
-      "Hash": "e605299a4e3d10404ac7989b05c4a917"
+      "Hash": "027b597492a7fc0324e064d4e05b538c"
     },
     "isoband": {
       "Package": "isoband",
@@ -4054,6 +4089,18 @@
         "cpp11"
       ],
       "Hash": "f561504ec2897f4d46f0c7657e488ae1"
+    },
+    "unigd": {
+      "Package": "unigd",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cpp11",
+        "systemfonts"
+      ],
+      "Hash": "c12745d6a500d4e827073481e08533f0"
     },
     "units": {
       "Package": "units",
