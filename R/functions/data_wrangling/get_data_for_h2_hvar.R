@@ -2,9 +2,11 @@ get_data_for_h2_hvar <- function(
     data_predictors, data_m2) {
   data_pred_work <-
     data_predictors %>%
-    tidyr::unnest(data_pred) %>%
-    dplyr::select(-full_name) %>%
-    dplyr::group_by(predictor, region, group) %>%
+    dplyr::rename(
+      predictor = variable,
+      fit = value
+    ) %>%
+    dplyr::group_by(predictor, region, climatezone) %>%
     tidyr::nest() %>%
     dplyr::ungroup() %>%
     tidyr::pivot_wider(
@@ -29,16 +31,6 @@ get_data_for_h2_hvar <- function(
             dplyr::select(age, fit) %>%
             dplyr::rename(
               temp_cold = fit
-            )
-        )
-      ),
-      prec_annual = purrr::map(
-        .x = prec_annual,
-        .f = purrr::possibly(
-          ~ .x %>%
-            dplyr::select(age, fit) %>%
-            dplyr::rename(
-              prec_annual = fit
             )
         )
       ),
@@ -76,10 +68,9 @@ get_data_for_h2_hvar <- function(
         .l = list(
           temp_annual, # ..1
           temp_cold, # ..2
-          prec_annual, # ..3
-          prec_summer, # ..4
-          prec_win, # ..5
-          spd
+          prec_summer, # ..3
+          prec_win, # ..4
+          spd # ..5
         ),
         .f = purrr::possibly(
           ~ dplyr::inner_join(
@@ -99,10 +90,6 @@ get_data_for_h2_hvar <- function(
               ..5,
               by = "age"
             ) %>%
-            dplyr::inner_join(
-              ..6,
-              by = "age"
-            ) %>%
             drop_na(),
           otherwise = data.frame()
         )
@@ -113,7 +100,7 @@ get_data_for_h2_hvar <- function(
     data_pred_work,
     data_m2,
     by = dplyr::join_by(
-      "region", "group" == "sel_classification"
+      "region", "climatezone"
     )
   ) %>%
     # subset the data so that the yshare same time period
@@ -128,7 +115,7 @@ get_data_for_h2_hvar <- function(
       )
     ) %>%
     dplyr::select(
-      region, group, data_merge, m2
+      region, climatezone, data_merge, m2
     ) %>%
     return()
 }
