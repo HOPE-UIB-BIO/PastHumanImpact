@@ -101,7 +101,7 @@ list(
       run_all_predictors = FALSE,
       time_series = TRUE,
       get_significance = FALSE,
-      permutations = 999
+      method = "dbRDA"
     )
   )
 )
