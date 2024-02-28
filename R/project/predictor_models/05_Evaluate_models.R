@@ -23,8 +23,6 @@ source(
   )
 )
 
-library(brms)
-
 pareto_k_threshold <- 0.7
 loo_threshold <- 0.1
 rhat_threshold <- 1.1

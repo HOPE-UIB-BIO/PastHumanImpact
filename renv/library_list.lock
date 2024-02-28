@@ -1889,24 +1889,6 @@
       ],
       "Hash": "a865aa85bcb2697f47505bfd70422471"
     },
-    "httpgd": {
-      "Package": "httpgd",
-      "Version": "2.0.0",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "httpgd",
-      "RemoteUsername": "nx10",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "3f5f55822c4dce930155b91cedcfd4d483e3294e",
-      "Requirements": [
-        "AsioHeaders",
-        "R",
-        "cpp11",
-        "unigd"
-      ],
-      "Hash": "a720a67eac969c3fbab9dcadfad54deb"
-    },
     "httpuv": {
       "Package": "httpuv",
       "Version": "1.6.11",
@@ -4089,18 +4071,6 @@
         "cpp11"
       ],
       "Hash": "f561504ec2897f4d46f0c7657e488ae1"
-    },
-    "unigd": {
-      "Package": "unigd",
-      "Version": "0.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cpp11",
-        "systemfonts"
-      ],
-      "Hash": "c12745d6a500d4e827073481e08533f0"
     },
     "units": {
       "Package": "units",

@@ -23,12 +23,9 @@ source(
   )
 )
 
-library(ggeffects)
-library(insight)
-
 sel_region <- "Europe"
-sel_climatezone <- "Temperate_Dry_Summer"
-sel_variable <- "bi"
+sel_climatezone <- "Cold_Without_dry_season_Warm_Summer"
+sel_variable <- "temp_annual"
 
 
 #----------------------------------------------------------#
@@ -73,7 +70,11 @@ sel_mod <-
 #----------------------------------------------------------#
 
 data_predicted <-
-  predict_brms_model(sel_mod)
+  predict_brms_model(sel_mod) %>%
+  dplyr::select(-group) %>%
+  round(., digits = 8) %>%
+  tibble::as_tibble() %>%
+  janitor::clean_names()
 
 
 #----------------------------------------------------------#
@@ -90,68 +91,46 @@ is_event <-
     sel_variable == "spd" ~ FALSE
   )
 
+p0 <-
+  sel_raw_data %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::labs(
+    title = paste(
+      "Predicted general trend for",
+      sel_variable,
+      "in",
+      sel_region,
+      "and",
+      sel_climatezone
+    ),
+    x = "Age",
+    y = sel_variable
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      group = dataset_id
+    )
+  ) +
+  ggplot2::geom_line(
+    data = data_predicted,
+    ggplot2::aes(
+      x = age,
+      y = value
+    ),
+    color = "blue"
+  )
 
 if (
   isTRUE(is_event)
 ) {
-  sel_raw_data %>%
-    ggplot2::ggplot(
-      ggplot2::aes(
-        x = age,
-        y = value
-      )
-    ) +
-    ggplot2::labs(
-      title = paste(
-        "Predicted general trend for",
-        sel_variable,
-        "in",
-        sel_region,
-        "and",
-        sel_climatezone
-      ),
-      x = "Age",
-      y = sel_variable
-    ) +
+  p0 +
     ggplot2::facet_wrap(~dataset_id) +
-    ggplot2::geom_point() +
-    ggplot2::geom_line(
-      ggplot2::aes(
-        group = dataset_id
-      )
-    ) +
-    ggplot2::geom_ribbon(
-      data = data_predicted,
-      ggplot2::aes(
-        x = age,
-        y = value,
-        ymin = conf.low,
-        ymax = conf.high
-      ),
-      alpha = 0.2
-    ) +
-    ggplot2::geom_line(
-      data = data_predicted,
-      ggplot2::aes(
-        x = age,
-        y = value
-      ),
-      color = "blue"
-    )
-} else {
-  sel_raw_data %>%
-    ggplot2::ggplot(
-      ggplot2::aes(
-        x = age,
-        y = value
-      )
-    ) +
-    ggplot2::geom_point() +
-    ggplot2::geom_line(
-      ggplot2::aes(
-        group = dataset_id
-      )
-    ) +
     ggplot2::geom_ribbon(
       ggplot2::aes(
         group = dataset_id,
@@ -161,24 +140,28 @@ if (
       alpha = 0.2,
       col = "grey"
     ) +
-    ggplot2::geom_line(
+    ggplot2::geom_ribbon(
       data = data_predicted,
       ggplot2::aes(
         x = age,
-        y = value
+        y = value,
+        ymin = conf_low,
+        ymax = conf_high
       ),
-      color = "blue"
-    ) +
-    ggplot2::labs(
-      title = paste(
-        "Predicted general trend for",
-        sel_variable,
-        "in",
-        sel_region,
-        "and",
-        sel_climatezone
+      alpha = 0.2,
+      col = "blue"
+    )
+} else {
+  p0 +
+    ggplot2::geom_ribbon(
+      data = data_predicted,
+      ggplot2::aes(
+        x = age,
+        y = value,
+        ymin = conf_low,
+        ymax = conf_high
       ),
-      x = "Age",
-      y = sel_variable
+      alpha = 0.2,
+      col = "grey"
     )
 }

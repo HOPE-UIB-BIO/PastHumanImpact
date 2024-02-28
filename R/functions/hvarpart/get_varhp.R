@@ -78,7 +78,11 @@ get_varhp <- function(data_source,
         data_resp <- vegan::vegdist(data_resp, method = response_dist)
         
       } else if (!is.null(data_response_dist)) {
+        # if input is already a distance matrix
         data_resp <- data_response_dist
+        data_resp <- as.dist(data_resp)
+       
+        
       } else {
         stop("Something went wrong with response variables")
       }
@@ -143,7 +147,7 @@ get_varhp <- function(data_source,
           type = "adjR2",
           var.part = TRUE,
           ...
-        )
+       )
 
       # extract relevant summary output
       output_table <-
@@ -179,36 +183,6 @@ get_varhp <- function(data_source,
           )
       }
 
-      # run model to get variation inflation factors of the predictors,
-      #   and total unexplained and explained variation
-      mod <-
-        vegan::rda(data_resp ~ as.matrix(as.data.frame(data_preds)),
-          scale = TRUE,
-          data_source = data_preds
-        )
-
-      data_variation <-
-        tibble::tibble(
-          Total_eig = mod %>%
-            purrr::pluck("tot.chi"),
-          Constrained_eig = mod %>%
-            purrr::pluck("CCA") %>%
-            purrr::pluck("eig") %>%
-            sum(),
-          Unconstrained_eig = Total_eig - Constrained_eig
-        )
-
-      # add additional VIF information
-      # only works for all predictors
-      if (
-        isTRUE(run_all_predictors)
-      ) {
-        output_table <-
-          output_table %>%
-          dplyr::mutate(
-            Vif = vegan::vif.cca(mod),
-          )
-      }
 
       # left join with all predictors (from `output_table_dummy`)
       summary_table <-
@@ -230,8 +204,7 @@ get_varhp <- function(data_source,
       results <-
         list(
           varhp_output = varhp,
-          summary_table = summary_table,
-          summary_variation = data_variation
+          summary_table = summary_table
         )
 
       return(results)

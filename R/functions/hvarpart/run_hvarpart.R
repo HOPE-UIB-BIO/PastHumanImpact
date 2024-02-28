@@ -21,27 +21,30 @@
 
 run_hvarpart <- function(data_source,
                          response_vars = c(
-                           "n0", "n1", "n2",
-                           "n1_minus_n2", "n2_divided_by_n1", "n1_divided_by_n0",
+                           "n0", 
+                           "n1", 
+                           "n2",
+                           "n1_minus_n2", 
+                           "n2_divided_by_n1", 
+                           "n1_divided_by_n0",
                            "roc",
-                           "dcca_axis_1"
-                         ),
+                           "dcca_axis_1",
+                           "density_diversity", 
+                           "density_turnover"),
                          response_dist = NULL,
                          data_response_dist = NULL,
                          predictor_vars = list(
                            human = c("spd"),
                            climate = c(
+                             "temp_annual",
                              "temp_cold",
                              "prec_summer",
-                             "prec_win",
-                             "gdm"
-                           ),
-                           time = c("age")
-                         ),
+                             "prec_win")),
                          run_all_predictors = FALSE,
                          time_series = TRUE,
                          get_significance = TRUE,
-                         permutations = 99) {
+                         permutations = 99,
+                         ...) {
   res <- NULL
   
   if (!is.null(response_vars) & is.null(data_response_dist)
@@ -54,6 +57,7 @@ run_hvarpart <- function(data_source,
           .f = ~ get_varhp(
             data_source = .x,
             permutations = permutations,
+            response_dist = response_dist,
             response_vars = response_vars,
             predictor_vars = predictor_vars,
             run_all_predictors = run_all_predictors,
@@ -74,16 +78,18 @@ run_hvarpart <- function(data_source,
           .y = data_response_dist,
           .f = ~ get_varhp(
             data_source = .x,
+            data_response_dist = .y,
             permutations = permutations,
             response_vars = NULL,
-            data_response_dist = .y,
+            response_dist = NULL,
             predictor_vars = predictor_vars,
             run_all_predictors = run_all_predictors,
             time_series = time_series,
             get_significance = get_significance
+            )
           )
         )
-      )
+
   } else {
     stop("No response variables or distance matrix provided")
   }
