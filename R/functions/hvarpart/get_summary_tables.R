@@ -109,22 +109,22 @@ get_summary_tables <- function(
       region,
       predictor
     ) %>% 
-    # #summarise weighted mean
-    # dplyr::summarise(
-    #   .groups = "drop",
-    #   dplyr::across(
-    #     dplyr::all_of(
-    #       c("ratio_unique", 
-    #         "ratio_ind")
-    #       ),
-    #     list(
-    #       wmean = ~ weighted.mean(
-    #         x = .x, 
-    #         w = sum_importance, 
-    #         na.rm = TRUE)
-    #     )
-    #   )
-    # ) %>%
+    #summarise by model weight
+    dplyr::summarise(
+      .groups = "drop",
+      dplyr::across(
+        dplyr::all_of(
+          c("ratio_unique",
+            "ratio_ind")
+          ),
+        list(
+          wmean = ~ weighted.mean(
+            x = .x,
+            w = sum_importance,
+            na.rm = TRUE)
+        )
+      )
+    ) %>%
     tidyr::pivot_longer(
       dplyr::starts_with("ratio"),
       names_to = "importance_type",
