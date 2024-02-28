@@ -55,14 +55,13 @@ list(
   # - get the model configuration file
   targets::tar_target(
     name = mod_config_file,
-    command = RUtilpol::get_latest_file_name(
+    command = RUtilpol::get_latest_file(
       file_name = "predictor_models_config_table",
       dir = paste0(
         data_storage_path,
         "Data/Predictor_models/"
       )
-    ),
-    format = "file"
+    )
   ),
   # - load all models
   targets::tar_target(
@@ -95,13 +94,11 @@ list(
           "temp_cold",
           "prec_summer",
           "prec_win"
-        ),
-        time = c("age")
+        )
       ),
       run_all_predictors = FALSE,
-      time_series = TRUE,
-      get_significance = FALSE,
-      method = "dbRDA"
+      time_series = FALSE,
+      get_significance = FALSE
     )
   )
 )
