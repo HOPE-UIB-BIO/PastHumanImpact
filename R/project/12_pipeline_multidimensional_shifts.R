@@ -78,7 +78,6 @@ list(
       data_predictors = mod_predicted_merged
     )
   ),
-  # // TODO: debug and run
   # - run hierarchical variation partitioning
   targets::tar_target(
     name = output_hvar_h2_spd,
