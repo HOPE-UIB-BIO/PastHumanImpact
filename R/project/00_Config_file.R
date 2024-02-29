@@ -50,30 +50,33 @@ if (
 # Define packages
 package_list <-
   c(
-    "arrow",
     "assertthat",
+    "brms",
     "colorspace",
     "data.tree",
+    "furrr",
+    "future",
     "geosphere",
-    "ggpubr",
+    "ggeffects",
     "ggforce",
     "ggimage",
+    "ggpubr",
     "here",
-    # "httpgd",
+    "httpgd",
+    "insight",
     "janitor",
     "jsonlite",
     "kableExtra",
     "knitr",
     "languageserver",
-    "lifecycle",
     "mgcv",
+    "parallelly",
     "rcarbon",
     "rdacca.hp",
     "REcopol",
     "renv",
     "remotes",
     "rlang",
-    "roxygen2",
     "RRatepol",
     "RUtilpol",
     "tarchetypes",
@@ -176,7 +179,7 @@ data_regional_limits <-
   tibble::tibble(
     region = vec_regions,
     xmin = c(-170, -103, -10, 30, 110),
-    xmax = c(-50, -23, 40,  175.5, 154),
+    xmax = c(-50, -23, 40, 175.5, 154),
     ymin = c(15, -56, 35, 0, -45),
     ymax = c(80, 34, 70, 80, -3)
   )
@@ -274,7 +277,7 @@ palette_ecozones <-
 
 # Predictors
 palette_predictors <- c(
-  human = "grey50", #v#ffa600"
+  human = "grey50", # v#ffa600"
   climate = "grey50" # v#d74e92"
 )
 

@@ -23,9 +23,6 @@ source(
   )
 )
 
-library(brms)
-library(parallelly)
-
 n_cores_available <-
   as.numeric(
     parallelly::availableCores()
