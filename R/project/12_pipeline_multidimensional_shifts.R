@@ -31,6 +31,13 @@ source(
   )
 )
 
+mod_config_file <- RUtilpol::get_latest_file(
+  file_name = "predictor_models_config_table",
+  dir = paste0(
+    data_storage_path,
+    "Data/Predictor_models/"
+  )
+)
 
 #----------------------------------------------------------#
 # 2. Target pipeline -----
@@ -52,17 +59,17 @@ list(
     name = data_m2_filtered,
     command = get_file_from_path(data_m2_path)
   ),
-  # - get the model configuration file
-  targets::tar_target(
-    name = mod_config_file,
-    command = RUtilpol::get_latest_file(
-      file_name = "predictor_models_config_table",
-      dir = paste0(
-        data_storage_path,
-        "Data/Predictor_models/"
-      )
-    )
-  ),
+  # # - get the model configuration file
+  # targets::tar_target(
+  #   name = mod_config_file,
+  #   command = RUtilpol::get_latest_file(
+  #     file_name = "predictor_models_config_table",
+  #     dir = paste0(
+  #       data_storage_path,
+  #       "Data/Predictor_models/"
+  #     )
+  #   )
+  # ),
   # - load all models
   targets::tar_target(
     name = mod_predicted_merged,
