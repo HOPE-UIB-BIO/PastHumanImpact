@@ -259,3 +259,59 @@ get_spatial_barplot <- function(data_source_spatial) {
   )  
 return(figure_spatial)
 }
+
+
+
+
+
+data_dist %>%
+ # filter(n_records > 5) %>%
+  ggplot(aes(x = predictor, y  = ratio)) + 
+  ggdist::stat_halfeye(
+    aes(color = predictor,
+        fill = after_scale(lighten(color, .1))),
+    # adjust = .5,
+    width = .5,
+    .width = 0,
+    justification = -.7,
+    point_colour = NA) +
+  geom_boxplot(
+    aes(color = climatezone,
+        color = after_scale(darken(color, .1)),
+        fill = after_scale(desaturate(lighten(color, .8), .4))
+    ),
+    width = .6,
+    outlier.shape = NA
+  ) +
+  
+  geom_point(
+    aes(color = climatezone,
+        color = after_scale(darken(color, .1))),
+    fill = "white",
+    shape = 21,
+    stroke = .4,
+    size = 2,
+    position = position_dodge(width = .6)
+  ) + 
+  geom_point(
+    aes(fill = climatezone),
+    color = "transparent",
+    shape = 21,
+    stroke = .4,
+    size = 2,
+    alpha = .3,
+    position = position_dodge(width = .6)
+  ) +
+  theme(
+    legend.position = "none"
+  ) +
+  scale_y_continuous(
+    limits = c(-.2, 1.5),
+    expand = c(0, 0),
+    breaks = seq(0,1.5, by = .2)
+  ) +
+  scale_fill_manual(values = palette_ecozones) +
+  scale_color_manual(values = palette_ecozones) +
+  coord_flip() +
+  labs(x ="", y = "%") +
+  facet_wrap(~region, nrow = 1)
