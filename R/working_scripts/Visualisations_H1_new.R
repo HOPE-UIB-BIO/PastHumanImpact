@@ -119,6 +119,8 @@ data_dist <-
 #----------------------------------------------------------#
 # 2. helper functions for plotting -----
 #----------------------------------------------------------#
+#temporal plot ----
+
 get_figure_temporal <- function(data_source_temporal) {
   
   figure_temporal <-
@@ -190,4 +192,70 @@ get_figure_temporal <- function(data_source_temporal) {
   return(figure_temporal)
   
 }
+
+# spatial plot ----
+get_spatial_barplot <- function(data_source_spatial) {
   
+  figure_spatial <- 
+  data_source_spatial %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = get("ratio"),
+      y = get("predictor"),
+      fill = get("climatezone")
+    )
+  ) +
+  ggplot2::theme(
+    legend.position = "none",
+    panel.background = ggplot2::element_rect(
+      fill = "white",
+      color = NA
+    ),
+    plot.background = ggplot2::element_rect(
+      fill = "white",
+      color = NA
+    ),
+    panel.border = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.line = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+    plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+    panel.spacing = grid::unit(c(0, 0, 0, 0), "mm"),
+    text = ggplot2::element_text(size = 15, color = "grey30")
+  ) +
+  ggplot2::scale_fill_manual(
+    values = palette_ecozones,
+    drop = FALSE
+  ) +
+  
+  ggplot2::geom_col(
+    data = data_source_spatial %>%
+      dplyr::filter(
+        grepl(
+          "ratio_unique_wmean",
+          importance_type
+        )
+      ),
+    width = 0.6,
+    position = ggplot2::position_dodge2(
+      width = 0.8,
+      preserve = "single"
+    ),
+    alpha = 1
+  ) +
+  ggplot2::geom_col(
+    data = data_source_spatial %>%
+      dplyr::filter(grepl(
+        "ratio_ind_wmean",
+        importance_type
+      )),
+    width = .6,
+    position = ggplot2::position_dodge2(
+      width = 0.8,
+      preserve = "single"
+    ),
+    alpha = 0.4
+  )  
+return(figure_spatial)
+}
