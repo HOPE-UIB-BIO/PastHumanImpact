@@ -45,7 +45,7 @@ get_summary_tables <- function(
     ungroup()
   
   # summarise ratios of importance using wmean ratios by model importance (i.e sum importance of individual predictors)
-  wmean_summary_spatial <-
+  summary_spatial_long <-
     summary_table_spatial %>%
     dplyr::group_by(
       predictor,
@@ -135,7 +135,7 @@ get_summary_tables <- function(
   results <- list(
     summary_table_spatial = summary_table_spatial,
     summary_table_temporal = summary_table_temporal,
-    wmean_summary_spatial = wmean_summary_spatial,
+    summary_spatial_long = summary_spatial_long,
     summary_temporal_long = summary_temporal_long
   )
   
