@@ -46,6 +46,7 @@ output_spatial_spd <-
     )
   )
 
+
 output_temporal_spd <-
   targets::tar_read(
     name = "output_temporal_spd",
@@ -53,13 +54,6 @@ output_temporal_spd <-
       data_storage_path,
       "_targets_data/analyses_h1"
     )
-  )
-
-summary_tables_spd <-
-  get_summary_tables(
-    output_spatial = output_spatial_spd,
-    output_temporal = output_temporal_spd,
-    data_meta = data_meta
   )
 
 # - Load list of summary tables from events
@@ -81,12 +75,55 @@ output_temporal_events <-
     )
   )
 
-summary_tables_events <-
+
+# ------------------------------------ #
+
+data_spd_spatial_summary_by_climatezone <-
+  output_spatial_spd %>%
+  dplyr::left_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id, region, climatezone
+      ),
+    by = "dataset_id"
+  ) %>%
   get_summary_tables(
-    output_spatial = output_spatial_events,
-    output_temporal = output_temporal_events,
-    data_meta = data_meta
+    data_source = .,
+    data_type = "spatial",
+    group_var = c("region", "climatezone")
   )
+
+data_spd_temporal <-
+  output_temporal_spd %>%
+  get_summary_tables(
+    data_source = .,
+    data_type = "temporal",
+    group_var = c("region")
+  )
+
+data_events_spatial_summary_by_climatezone <-
+  output_spatial_events %>%
+  dplyr::left_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id, region, climatezone
+      ),
+    by = "dataset_id"
+  ) %>%
+  get_summary_tables(
+    data_source = .,
+    data_type = "spatial",
+    group_var = c("region", "climatezone")
+  )
+
+data_events_temporal <-
+  output_temporal_events %>%
+  get_summary_tables(
+    data_source = .,
+    data_type = "temporal",
+    group_var = c("region")
+  )
+
 
 #----------------------------------------------------------#
 # 2. Combine output data -----
@@ -94,32 +131,39 @@ summary_tables_events <-
 # Combine summary output for plotting ----
 data_for_plotting <-
   dplyr::inner_join(
-    summary_tables_spd %>%
-      purrr::chuck("summary_spatial_long") %>%
+    data_spd_spatial_summary_by_climatezone %>%
+      purrr::chuck("summary_table_weighted_mean") %>%
       tidyr::nest(data_spatial = -c(region)),
-    summary_tables_spd %>%
-      purrr::chuck("summary_temporal_long") %>%
-      tidyr::nest(data_temporal_spd = -c(region)),
+    data_spd_temporal %>%
+      purrr::chuck("summary_table_weighted_mean") %>%
+      tidyr::nest(data_spatial = -c(region)),
     by = "region"
   ) %>%
   dplyr::left_join(
-    summary_tables_events %>%
-      purrr::chuck("summary_temporal_long") %>%
-      tidyr::nest(data_temporal_events = -c(region)),
+    data_events_temporal %>%
+      purrr::chuck("summary_table_weighted_mean") %>%
+      tidyr::nest(data_spatial = -c(region)),
     by = "region"
-  )
+  ) %>%
+  rlang::set_names(c("region", "spd_spatial", "spd_temporal", "events_temporal"))
 
 # Combine temporal spd and events data for plotting ----
 data_source_temporal <-
   data_for_plotting %>%
-  dplyr::select(region, data_temporal_spd) %>%
-  unnest(col = data_temporal_spd) %>%
-  mutate(human_pred = "spd") %>%
-  full_join(
+  dplyr::select(region, spd_temporal) %>%
+  tidyr::unnest(col = spd_temporal) %>%
+  dplyr::mutate(human_pred = "spd") %>%
+  dplyr::full_join(
     data_for_plotting %>%
-      dplyr::select(region, data_temporal_events) %>%
-      unnest(col = data_temporal_events) %>%
-      mutate(human_pred = "events")
+      dplyr::select(region, events_temporal) %>%
+      tidyr::unnest(col = events_temporal) %>%
+      dplyr::mutate(human_pred = "events"),
+    by = dplyr::join_by(
+      region,
+      age, predictor,
+      importance_type, ratio,
+      human_pred
+    )
   ) %>%
   dplyr::mutate(
     predictor = factor(predictor, levels = c("human", "climate"))
@@ -127,8 +171,8 @@ data_source_temporal <-
 
 # Distribution of ratios for individual records ----
 data_dist <-
-  summary_tables_spd %>%
-  purrr::chuck("summary_table_spatial") %>%
+  data_spd_spatial_summary_by_climatezone %>%
+  purrr::chuck("summary_table") %>%
   dplyr::select(
     dataset_id,
     region,
