@@ -29,24 +29,63 @@ source(
 # 1. Load results -----
 #----------------------------------------------------------#
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
 # - Load list of summary tables from pipeline spd
-summary_tables_spd <-
+output_spatial_spd <-
   targets::tar_read(
-    name = "summary_tables_spd",
+    name = "output_spatial_spd",
     store = paste0(
       data_storage_path,
       "_targets_data/analyses_h1"
     )
   )
 
-# - Load list of summary tables from events
-summary_tables_events <-
+output_temporal_spd <-
   targets::tar_read(
-    name = "summary_tables_events",
+    name = "output_temporal_spd",
     store = paste0(
       data_storage_path,
       "_targets_data/analyses_h1"
     )
+  )
+
+summary_tables_spd <-
+  get_summary_tables(
+    output_spatial = output_spatial_spd,
+    output_temporal = output_temporal_spd,
+    data_meta = data_meta
+  )
+
+# - Load list of summary tables from events
+output_spatial_events <-
+  targets::tar_read(
+    name = "output_spatial_events",
+    store = paste0(
+      data_storage_path,
+      "_targets_data/analyses_h1"
+    )
+  )
+
+output_temporal_events <-
+  targets::tar_read(
+    name = "output_temporal_events",
+    store = paste0(
+      data_storage_path,
+      "_targets_data/analyses_h1"
+    )
+  )
+
+summary_tables_events <-
+  get_summary_tables(
+    output_spatial = output_spatial_events,
+    output_temporal = output_temporal_events,
+    data_meta = data_meta
   )
 
 #----------------------------------------------------------#

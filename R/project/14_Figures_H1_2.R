@@ -33,23 +33,31 @@ source(
 )
 
 # - Load list of summary tables from pipeline spd
-summary_tables_spd <- targets::tar_read(
-  name = "summary_tables_spd",
-  store = paste0(
-    data_storage_path,
-    "_targets_data/analyses_h1"
+output_spatial_spd <-
+  targets::tar_read(
+    name = "output_spatial_spd",
+    store = paste0(
+      data_storage_path,
+      "_targets_data/analyses_h1"
+    )
   )
-)
 
-# Load output from pipeline hvar_spatial_temporal
-
-output_spatial_spd <- targets::tar_read(
-  name = "output_spatial_spd",
-  store = paste0(
-    data_storage_path,
-    "_targets_data/analyses_h1"
+output_temporal_spd <-
+  targets::tar_read(
+    name = "output_temporal_spd",
+    store = paste0(
+      data_storage_path,
+      "_targets_data/analyses_h1"
+    )
   )
-)
+
+summary_tables_spd <-
+  get_summary_tables(
+    output_spatial = output_spatial_spd,
+    output_temporal = output_temporal_spd,
+    data_meta = data_meta
+  )
+
 
 
 #----------------------------------------------------------#
@@ -100,7 +108,7 @@ data_importance_human <-
   dplyr::mutate(
     climatezone = as.factor(climatezone),
     region = factor(region,
-                    levels = vec_regions
+      levels = vec_regions
     )
   ) %>%
   dplyr::full_join(
@@ -201,10 +209,10 @@ data_score_mvpart <-
       .f = ~ {
         data_mv <- .x %>%
           dplyr::select(-age)
-        
+
         data_age <- .x %>%
           purrr::chuck("age")
-        
+
         mvpart_result <-
           mvpart::mvpart(
             data.matrix(data_mv) ~ data_age,
@@ -213,7 +221,7 @@ data_score_mvpart <-
             plot.add = FALSE,
             data = data_mv
           )
-        
+
         utils::capture.output(
           change_points_age <-
             as.data.frame(
@@ -222,7 +230,7 @@ data_score_mvpart <-
             purrr::pluck("index"),
           file = "NUL"
         )
-        
+
         list(
           change_points_age = change_points_age,
           mvpart_result = mvpart_result
@@ -281,7 +289,7 @@ get_human_importance_on_map <- function(
     dplyr::filter(region == sel_region) %>%
     dplyr::filter(predictor == "human") %>%
     janitor::clean_names()
-  
+
   sel_map <-
     get_map_region(
       rasterdata = data_source_geo %>%
@@ -290,7 +298,7 @@ get_human_importance_on_map <- function(
       sel_palette = palette_ecozones, # [config criteria]
       sel_alpha = sel_alpha
     )
-  
+
   sel_map +
     ggplot2::geom_point(
       data = sel_data,
@@ -335,7 +343,7 @@ get_importance_human_dist <- function(
       .,
       by = "climatezone"
     )
-  
+
   data_work %>%
     ggplot2::ggplot(
       mapping = ggplot2::aes(
@@ -417,7 +425,7 @@ get_combined_row <- function(
     sel_widths = c(1.2, 1, 1.5),
     remove = "x") {
   sel_method <- match.arg(sel_method)
-  
+
   if (
     "x" %in% remove
   ) {
@@ -429,7 +437,7 @@ get_combined_row <- function(
   } else {
     fig_scores <- get_plot_by_region(data_fig_scores, sel_region)
   }
-  
+
   if (
     sel_method == "cowplot"
   ) {
@@ -442,7 +450,7 @@ get_combined_row <- function(
         rel_widths = sel_widths
       )
   }
-  
+
   if (
     sel_method == "ggpubr"
   ) {
@@ -491,7 +499,7 @@ data_fig_map <-
           dplyr::left_join(
             data_meta %>% dplyr::select(dataset_id, long, lat),
             by = "dataset_id"
-          ) ,
+          ),
         data_source_geo = data_geo_koppen,
         sel_region = .x
       )
