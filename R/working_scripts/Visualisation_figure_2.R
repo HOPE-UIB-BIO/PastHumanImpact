@@ -209,9 +209,9 @@ plot_density <- function(sel_var = "human") {
   p0 +
     ggplot2::facet_wrap(~region, nrow = 1) +
     ggplot2::theme(
-      axis.text.y = ggplot2::element_blank(),
-      axis.line.y = ggplot2::element_blank(),
-      axis.ticks.y = ggplot2::element_blank()
+      axis.text = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
     ) +
     ggplot2::geom_density(
       data = data_spd_records %>%
