@@ -148,12 +148,12 @@ data_spd_records_quantiles <-
   ) %>%
   dplyr::summarise(
     .groups = "drop",
-    q_95_upr = stats::quantile(ratio_unique, 0.975, na.rm = TRUE),
-    q_95_lwr = stats::quantile(ratio_unique, 0.025, na.rm = TRUE),
-    q_75_upr = stats::quantile(ratio_unique, 0.875, na.rm = TRUE),
-    q_75_lwr = stats::quantile(ratio_unique, 0.125, na.rm = TRUE),
-    q_50_upr = stats::quantile(ratio_unique, 0.75, na.rm = TRUE),
-    q_50_lwr = stats::quantile(ratio_unique, 0.25, na.rm = TRUE)
+    q_95_upr = stats::quantile(ratio_ind, 0.975, na.rm = TRUE),
+    q_95_lwr = stats::quantile(ratio_ind, 0.025, na.rm = TRUE),
+    q_75_upr = stats::quantile(ratio_ind, 0.875, na.rm = TRUE),
+    q_75_lwr = stats::quantile(ratio_ind, 0.125, na.rm = TRUE),
+    q_50_upr = stats::quantile(ratio_ind, 0.75, na.rm = TRUE),
+    q_50_lwr = stats::quantile(ratio_ind, 0.25, na.rm = TRUE)
   ) %>%
   tidyr::pivot_longer(
     cols = starts_with("q_"),
@@ -170,6 +170,7 @@ data_spd_records_quantiles <-
     values_from = value
   )
 
+summary(data_spd_records_quantiles)
 
 #----------------------------------------------------------#
 # 4. Build figure -----
@@ -217,7 +218,7 @@ plot_density <- function(sel_var = "human") {
       data = data_spd_records %>%
         dplyr::filter(predictor == sel_var),
       mapping = ggplot2::aes(
-        y = ratio_unique
+        y = ratio_ind
       ),
       # width = .5,
       # .width = 0,
@@ -231,7 +232,7 @@ plot_density <- function(sel_var = "human") {
           predictor == sel_var
         ) %>%
         dplyr::filter(
-          importance_type == "ratio_unique_wmean"
+          importance_type == "ratio_ind_wmean"
         ),
       mapping = ggplot2::aes(
         x = Inf,
@@ -278,7 +279,7 @@ plot_summary <- function(sel_var = "human") {
           predictor == sel_var
         ) %>%
         dplyr::filter(
-          importance_type == "ratio_unique_wmean"
+          importance_type == "ratio_ind_wmean"
         ),
       mapping = ggplot2::aes(
         x = predictor,
@@ -293,7 +294,7 @@ plot_summary <- function(sel_var = "human") {
           predictor == sel_var
         ) %>%
         dplyr::filter(
-          importance_type == "ratio_unique_wmean"
+          importance_type == "ratio_ind_wmean"
         ),
       mapping = ggplot2::aes(
         x = Inf,
