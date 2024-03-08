@@ -1,10 +1,10 @@
 get_all_predicted_general_trends <- function(data_source) {
   data_selected <-
     data_source %>%
-    dplyr::filter(
-      need_to_run == FALSE &
-        need_to_be_evaluated == FALSE
-    ) %>%
+    # dplyr::filter(
+    #   need_to_run == FALSE &
+    #     need_to_be_evaluated == FALSE
+    # ) %>%
     dplyr::mutate(
       is_h2_predictor = dplyr::case_when(
         .default = FALSE,
