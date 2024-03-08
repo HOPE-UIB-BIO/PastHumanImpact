@@ -76,7 +76,10 @@ data_rc_work <- RUtilpol::geo_assign_value(
     data_storage_path,
     "Data/ecoregions2017/"),
   sel_method = "tif",
-  file_name = "Beck_KG_V1_present_0p083"
+  file_name = "Beck_KG_V1_present_0p083",
+  tif_fill_na = TRUE,
+  tif_distance_step = 5e3,
+  tif_n_max_step = 20
 )
 
 #translate raster values to climatezones
