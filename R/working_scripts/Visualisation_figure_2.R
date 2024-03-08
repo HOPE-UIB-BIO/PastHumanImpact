@@ -50,6 +50,45 @@ output_spatial_spd <-
 # 2. Estimate averages -----
 #----------------------------------------------------------#
 
+add_predictor_as_factor <- function(data_source) {
+  data_source %>%
+    dplyr::mutate(
+      predictor = factor(
+        predictor,
+        levels = c("human", "climate")
+      )
+    ) %>%
+    return()
+}
+
+add_region_as_factor <- function(data_source) {
+  data_source %>%
+    dplyr::mutate(
+      region = factor(
+        region,
+        levels = vec_regions # [config criteria]
+      )
+    ) %>%
+    return()
+}
+
+add_climatezone_as_factor <- function(data_source) {
+  data_source %>%
+    dplyr::mutate(
+      climatezone = as.factor(climatezone),
+      region = factor(
+        region,
+        levels = vec_regions # [config criteria]
+      )
+    ) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "climatezone"
+    ) %>%
+    return()
+}
+
 data_spd_spatial_summary_by_climatezone <-
   output_spatial_spd %>%
   dplyr::left_join(
@@ -67,11 +106,17 @@ data_spd_spatial_summary_by_climatezone <-
 
 data_spd_records <-
   data_spd_spatial_summary_by_climatezone %>%
-  purrr::chuck("summary_table")
+  purrr::chuck("summary_table") %>%
+  add_predictor_as_factor() %>%
+  add_region_as_factor() %>%
+  add_climatezone_as_factor()
 
 data_spd_climatezone <-
   data_spd_spatial_summary_by_climatezone %>%
-  purrr::chuck("summary_table_weighted_mean")
+  purrr::chuck("summary_table_weighted_mean") %>%
+  add_predictor_as_factor() %>%
+  add_region_as_factor() %>%
+  add_climatezone_as_factor()
 
 data_spd_region <-
   output_spatial_spd %>%
@@ -87,7 +132,9 @@ data_spd_region <-
     data_type = "spatial",
     group_var = c("region")
   ) %>%
-  purrr::chuck("summary_table_weighted_mean")
+  purrr::chuck("summary_table_weighted_mean") %>%
+  add_predictor_as_factor() %>%
+  add_region_as_factor()
 
 
 #----------------------------------------------------------#
@@ -101,12 +148,12 @@ data_spd_records_quantiles <-
   ) %>%
   dplyr::summarise(
     .groups = "drop",
-    q_95_upr = stats::quantile(ratio_unique, 0.975, na.rm = TRUE),
-    q_95_lwr = stats::quantile(ratio_unique, 0.025, na.rm = TRUE),
-    q_75_upr = stats::quantile(ratio_unique, 0.875, na.rm = TRUE),
-    q_75_lwr = stats::quantile(ratio_unique, 0.125, na.rm = TRUE),
-    q_50_upr = stats::quantile(ratio_unique, 0.75, na.rm = TRUE),
-    q_50_lwr = stats::quantile(ratio_unique, 0.25, na.rm = TRUE)
+    q_95_upr = stats::quantile(ratio_ind, 0.975, na.rm = TRUE),
+    q_95_lwr = stats::quantile(ratio_ind, 0.025, na.rm = TRUE),
+    q_75_upr = stats::quantile(ratio_ind, 0.875, na.rm = TRUE),
+    q_75_lwr = stats::quantile(ratio_ind, 0.125, na.rm = TRUE),
+    q_50_upr = stats::quantile(ratio_ind, 0.75, na.rm = TRUE),
+    q_50_lwr = stats::quantile(ratio_ind, 0.25, na.rm = TRUE)
   ) %>%
   tidyr::pivot_longer(
     cols = starts_with("q_"),
@@ -123,6 +170,7 @@ data_spd_records_quantiles <-
     values_from = value
   )
 
+summary(data_spd_records_quantiles)
 
 #----------------------------------------------------------#
 # 4. Build figure -----
@@ -161,23 +209,51 @@ p0 <-
 plot_density <- function(sel_var = "human") {
   p0 +
     ggplot2::facet_wrap(~region, nrow = 1) +
-    ggdist::stat_slab(
+    ggplot2::theme(
+      axis.text = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
+    ) +
+    ggplot2::geom_density(
       data = data_spd_records %>%
         dplyr::filter(predictor == sel_var),
       mapping = ggplot2::aes(
-        x = predictor,
-        y = ratio_unique
+        y = ratio_ind
       ),
       # width = .5,
       # .width = 0,
       trim = FALSE,
-      expand = TRUE
+      fill = "grey",
+      col = NA
+    ) +
+    ggplot2::geom_segment(
+      data = data_spd_region %>%
+        dplyr::filter(
+          predictor == sel_var
+        ) %>%
+        dplyr::filter(
+          importance_type == "ratio_ind_wmean"
+        ),
+      mapping = ggplot2::aes(
+        x = Inf,
+        xend = -Inf,
+        y = ratio,
+        yend = ratio,
+      ),
+      lty = 3
     )
 }
 
 plot_summary <- function(sel_var = "human") {
   p0 +
     ggplot2::facet_grid(climatezone ~ region) +
+    ggplot2::theme(
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank(),
+      axis.line.y = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank()
+    ) +
     purrr::map(
       .x = c("95", "75", "50"),
       .f = ~ ggplot2::geom_segment(
@@ -194,7 +270,7 @@ plot_summary <- function(sel_var = "human") {
           col = climatezone
         ),
         alpha = 0.3,
-        linewidth = 2
+        linewidth = (0.5 + (1 - (as.numeric(.x) / 100))) * 2
       )
     ) +
     ggplot2::geom_point(
@@ -203,7 +279,7 @@ plot_summary <- function(sel_var = "human") {
           predictor == sel_var
         ) %>%
         dplyr::filter(
-          importance_type == "ratio_unique_wmean"
+          importance_type == "ratio_ind_wmean"
         ),
       mapping = ggplot2::aes(
         x = predictor,
@@ -218,7 +294,7 @@ plot_summary <- function(sel_var = "human") {
           predictor == sel_var
         ) %>%
         dplyr::filter(
-          importance_type == "ratio_unique_wmean"
+          importance_type == "ratio_ind_wmean"
         ),
       mapping = ggplot2::aes(
         x = Inf,
@@ -237,5 +313,6 @@ cowplot::plot_grid(
   plot_summary("climate"),
   ncol = 1,
   align = "v",
-  rel_heights = c(0.5, 1, 0.5, 1)
+  rel_heights = c(0.5, 1, 0.5, 1),
+  labels = c("Human", "", "Climate", "")
 )
