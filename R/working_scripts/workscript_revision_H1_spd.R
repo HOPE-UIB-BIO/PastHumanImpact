@@ -16,7 +16,7 @@
 #--------------------------------------------------------------#
 
 library(here)
-library(furrr)
+
 
 # Load configuration
 source(
@@ -167,3 +167,32 @@ summary_table_temporal <-
   data_source = results_temporal_spd,
   data_type = "temporal",
   group_var = "region")
+
+
+
+# plot spatial spd
+select_region <- "Asia"
+boundary <-
+  data_regional_limits %>% # [config criteria]
+  dplyr::filter(region %in% select_region)
+
+data_hvar_timebins %>%
+  unnest(data_merge) %>%
+  dplyr::filter(region == select_region) %>%
+  ggplot() +
+  ggplot2::borders(
+    fill = "grey90",
+    colour = "grey90",
+  ) +
+  ggplot2::coord_sf(
+    expand = TRUE,
+    ylim = c(boundary$ymin[1], boundary$ymax[1]),
+    xlim = c(boundary$xmin[1], boundary$xmax[1])
+  ) +
+  geom_point(aes(x = long, 
+                 y = lat,
+                 size = spd,
+                 col = spd),
+             alpha = 0.5) +
+  scale_color_gradient(low="lightblue", high="darkblue")+
+  facet_wrap(~age)
