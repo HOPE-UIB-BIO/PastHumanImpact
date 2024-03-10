@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                
+#
 #                     Calculate SPD
 #
 #                   O. Mottl, V.A. Felde
@@ -38,7 +38,7 @@ source(
 #---------------------------------------------------------------#
 
 # - distances to calculate spd density curves
-spd_distance_vec <- 
+spd_distance_vec <-
   c(500) %>%
   rlang::set_names()
 
@@ -50,13 +50,14 @@ data_polygons <-
   )
 
 # - path for c14 data
-data_c14_path <- 
+data_c14_path <-
   paste0(
     data_storage_path,
     "Data/c14/data_rc_2022-11-29.rds"
   )
 # - load c14 data
-data_c14 <- get_file_from_path(data_c14_path)
+data_c14 <-
+  get_file_from_path(data_c14_path)
 
 # - subset C14 data for each dataset_id and calculate distance to it
 data_c14_subset <-
@@ -70,27 +71,45 @@ data_c14_subset <-
 # 2. Calculate spd for each distance per locality -----
 #---------------------------------------------------------------#
 
+# in order to several machines can work on the same data, it is better that the
+#   list is in radnom order, so that the chnage that the same record  is
+#   processed by different machine machine is small.
+
+# get random seed
+set.seed(Sys.time())
+
+# get a random number sequence
+random_order <-
+  sample(seq_along(unique(data_c14_subset$dataset_id)))
+
+# split data into list
+data_c14_as_list <-
+  data_c14_subset %>%
+  split(.$dataset_id)
+
+# reorder list
+data_c14_as_list_reorder <-
+  data_c14_as_list[random_order]
+
+# get number of cores
 n_cores <-
   as.numeric(
     parallelly::availableCores()
   )
 
+# set future plan
 future::plan(
-  future::multicore,
+  future::multicore(),
   workers = n_cores - 1
 )
 
-
 # use future iwalk
-data_c14_subset %>%
-  split(.$dataset_id) %>%
-  rlang::set_names(data_c14_subset$dataset_id) %>%
+data_c14_as_list_reorder %>%
   furrr::future_iwalk(
     .progress = TRUE,
     .x = .,
     .f = ~ {
-      
-      if(
+      if (
         !file.exists(
           paste0(
             data_storage_path,
@@ -102,7 +121,6 @@ data_c14_subset %>%
           )
         )
       ) {
-        
         get_spd(
           data_source_c14 = .x,
           data_source_dist_vec = spd_distance_vec,
@@ -111,16 +129,20 @@ data_c14_subset %>%
           age_from = min_age, # [config]
           age_to = max_age # [config]
         ) %>%
-          readr::write_rds(
-            paste0(data_storage_path,
-                   "Data/spd/spd_temp/",
-                   paste0(
-                     .y,
-                     "_spd.rds"
-                   )
-            )
+          # in case that several machines estimate the same record at the same
+          #  time, we use the sha to avoid overwriting the file
+          RUtilpol::save_latest_file(
+            object_to_save = .,
+            dir = paste0(
+              data_storage_path,
+              "Data/spd/spd_temp/"
+            ),
+            file_name = paste0(
+              .y,
+              "_spd.rds"
+            ),
+            prefered_format = "rds"
           )
-        
       }
     }
   )
@@ -134,30 +156,36 @@ spd_processed_vec <-
     here::here(data_storage_path, "Data/spd/spd_temp"),
     pattern = "_spd.rds",
     recursive = TRUE
-  )
+  ) %>%
+  purrr::map(
+    .f = ~ RUtilpol::get_clean_name(.x)
+  ) %>%
+  unique()
 
 spd_processed_list <-
   purrr::map(
     .progress = TRUE,
     .x = spd_processed_vec,
-    .f = ~ readr::read_rds(
-      here::here(
-        data_storage_path, "Data/spd/spd_temp", .x
+    .f = ~ RUtilpol::get_latest_file(
+      file_name = .x,
+      dir = here::here(
+        data_storage_path, "Data/spd/spd_temp"
       )
     )
   ) %>%
   purrr::set_names(
-    nm = stringr::str_replace(spd_processed_vec, "_spd.rds", "")
+    nm = spd_processed_vec
   )
 
-data_spd_temp <- 
-  dplyr::bind_rows(.id = "dataset_id",
-                   spd_processed_list)
+data_spd_temp <-
+  dplyr::bind_rows(
+    .id = "dataset_id",
+    spd_processed_list
+  )
 
 #---------------------------------------------------------------#
 # 4. Save spd data to data folder ----
 #---------------------------------------------------------------#
-
 
 RUtilpol::save_latest_file(
   object_to_save = data_spd_temp,
