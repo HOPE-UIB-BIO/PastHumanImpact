@@ -97,9 +97,16 @@ n_cores <-
     parallelly::availableCores()
   )
 
+# select future backend based on OS
+future_backend <-
+  switch(Sys.info()["sysname"],
+    Windows = "future::multisession",
+    Linux = "future::multicore"
+  )
+
 # set future plan
 future::plan(
-  future::multicore(),
+  future_backend,
   workers = n_cores - 1
 )
 
@@ -109,6 +116,8 @@ data_c14_as_list_reorder %>%
     .progress = TRUE,
     .x = .,
     .f = ~ {
+      # output the records dataset_id to tract progress
+      message(.y)
       if (
         !file.exists(
           paste0(
