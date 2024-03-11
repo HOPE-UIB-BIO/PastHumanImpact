@@ -240,7 +240,7 @@ data_spd_temp <-
 
 RUtilpol::save_latest_file(
   object_to_save = data_spd_temp,
-  file_name = "data_spd",
+  file_name = "data_spd_500",
   dir = paste0(
     data_storage_path,
     "Data/spd/"
