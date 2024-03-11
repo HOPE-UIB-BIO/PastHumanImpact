@@ -103,7 +103,7 @@ list(
     name = file_spd_path,
     command = paste0(
       data_storage_path,
-      "data_spd_combine_2024-03-11.rds"
+      "Data/spd/spd_combine_2024-03-11.rds"
     ),
     format = "file"
   ),
@@ -115,7 +115,8 @@ list(
   # - prepare spd for modelling ----
   targets::tar_target(
     name = data_spd_to_fit,
-    command = get_spd_for_modelling(data_spd)
+    command = get_spd_for_modelling(data_spd %>% 
+                                      dplyr::select(-distance))
   ),
   # - interpolated spd values for each time slice ----
   targets::tar_target(
