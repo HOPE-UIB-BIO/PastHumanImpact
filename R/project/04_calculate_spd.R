@@ -39,7 +39,7 @@ source(
 
 # - distances to calculate spd density curves
 spd_distance_vec <- 
-  c(250) %>%
+  c(500) %>%
   rlang::set_names()
 
 # - get polygons for each dataset_id
