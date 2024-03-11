@@ -115,7 +115,7 @@ targets::tar_visnetwork(
 # 5. run target pipeline hvar spatial & temporal (h1) -----
 #----------------------------------------------------------#
 targets::tar_make(
-     script = here::here("R/project/09_pipeline_hvar_spatial_temporal.R"),
+     script = here::here("R/project/07_pipeline_hvar_spatial_temporal.R"),
      store = paste0(
          data_storage_path,
          "_targets_data/analyses_h1"
@@ -125,7 +125,7 @@ targets::tar_make(
 # check hvar spatial & temporal (h1)
 targets::tar_visnetwork(
   targets_only = TRUE,
-  script = here::here("R/project/09_pipeline_hvar_spatial_temporal.R"),
+  script = here::here("R/project/07_pipeline_hvar_spatial_temporal.R"),
   store = paste0(
     data_storage_path,
     "_targets_data/analyses_h1"
@@ -136,7 +136,7 @@ targets::tar_visnetwork(
 # 6. run target pipeline multidimensional shifts (h2) -----
 #----------------------------------------------------------#
 targets::tar_make(
-     script = here::here("R/project/12_pipeline_multidimensional_shifts.R"),
+     script = here::here("R/project/09_pipeline_multidimensional_shifts.R"),
      store = paste0(
          data_storage_path,
          "_targets_data/analyses_h2"
