@@ -62,8 +62,15 @@ data_spd_500 <-
 data_spd_combine <-
   data_spd_250 %>%
   dplyr::filter(!dataset_id %in% data_spd_500$dataset_id) %>%
+  mutate(spd = purrr::map(spd, 
+                          .f = ~.x %>% 
+                            rename(value = `250`))) %>%
   mutate(distance = 250) %>%
-  dplyr::left_join(data_spd_500 %>%
+  dplyr::full_join(data_spd_500 %>%
+                     mutate(
+                       spd = purrr::map(spd,
+                                        .f = ~.x %>% 
+                                          rename(value = `500`))) %>%
                      mutate(distance = 500))
  
 
