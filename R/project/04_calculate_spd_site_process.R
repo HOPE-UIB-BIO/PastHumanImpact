@@ -37,6 +37,39 @@ source(
 # 1. Load and prepare subsets of C14 dates -----
 #---------------------------------------------------------------#
 
+# - load data spd distance 250
+data_spd_250 <-
+  RUtilpol::get_latest_file(
+  file_name = "data_spd",
+  dir = paste0(
+  data_storage_path,
+  "Data/spd/")
+)
+
+# get dataset_ids for missing spds
+missing_spd_250 <- 
+  data_spd_250 %>%
+  dplyr::left_join(data_meta %>% 
+                     dplyr::select(
+                       dataset_id,
+                       region,
+                       climatezone,
+                       data_publicity),
+                   by = "dataset_id") %>%
+  dplyr::filter(
+    !(region == "Latin America" & data_publicity == "private"),
+    !region == "Africa") %>%
+  mutate(no_spd = purrr::map_lgl(
+    .x = spd, 
+    .f = ~ all(.x$`250` == 0))
+  ) %>%
+  dplyr::filter(no_spd == TRUE) %>%
+  pluck("dataset_id")
+
+#- get relvant subsets to estimate spd 500
+subset_data_meta <- data_meta %>%
+  dplyr::filter(dataset_id %in% missing_spd_250)
+
 # - distances to calculate spd density curves
 spd_distance_vec <-
   c(500) %>%
@@ -45,7 +78,7 @@ spd_distance_vec <-
 # - get polygons for each dataset_id
 data_polygons <-
   get_polygons(
-    data_source = data_meta,
+    data_source = subset_data_meta,
     distance_buffer = 10 # 10° away from site
   )
 
@@ -64,8 +97,9 @@ data_c14_subset <-
   subset_c14_data(
     data_source_c14 = data_c14,
     data_source_polygons = data_polygons,
-    data_source_meta = data_meta
+    data_source_meta = subset_data_meta
   )
+
 
 #---------------------------------------------------------------#
 # 2. Calculate spd for each distance per locality -----
@@ -122,7 +156,7 @@ data_c14_as_list_reorder %>%
         !file.exists(
           paste0(
             data_storage_path,
-            "Data/spd/spd_temp/",
+            "Data/spd/spd_temp_500/",
             paste0(
               .y,
               "_spd.rds"
@@ -144,7 +178,7 @@ data_c14_as_list_reorder %>%
             object_to_save = .,
             dir = paste0(
               data_storage_path,
-              "Data/spd/spd_temp/"
+              "Data/spd/spd_temp_500/"
             ),
             file_name = paste0(
               .y,
@@ -162,7 +196,7 @@ data_c14_as_list_reorder %>%
 
 spd_processed_vec <-
   list.files(
-    here::here(data_storage_path, "Data/spd/spd_temp"),
+    here::here(data_storage_path, "Data/spd/spd_temp_500"),
     pattern = "_spd.rds",
     recursive = TRUE
   ) %>%
@@ -178,7 +212,7 @@ spd_processed_list <-
     .f = ~ RUtilpol::get_latest_file(
       file_name = .x,
       dir = here::here(
-        data_storage_path, "Data/spd/spd_temp"
+        data_storage_path, "Data/spd/spd_temp_500"
       )
     )
   ) %>%
