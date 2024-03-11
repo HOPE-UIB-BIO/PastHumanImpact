@@ -16,7 +16,6 @@
 #--------------------------------------------------------------#
 
 library(here)
-library(furrr)
 
 # Load configuration
 source(
@@ -40,34 +39,40 @@ source(
 # - load data spd distance 250
 data_spd_250 <-
   RUtilpol::get_latest_file(
-  file_name = "data_spd",
-  dir = paste0(
-  data_storage_path,
-  "Data/spd/")
-)
+    file_name = "data_spd",
+    dir = paste0(
+      data_storage_path,
+      "Data/spd/"
+    )
+  )
 
 # get dataset_ids for missing spds
-missing_spd_250 <- 
+missing_spd_250 <-
   data_spd_250 %>%
-  dplyr::left_join(data_meta %>% 
-                     dplyr::select(
-                       dataset_id,
-                       region,
-                       climatezone,
-                       data_publicity),
-                   by = "dataset_id") %>%
+  dplyr::left_join(
+    data_meta %>%
+      dplyr::select(
+        dataset_id,
+        region,
+        climatezone,
+        data_publicity
+      ),
+    by = "dataset_id"
+  ) %>%
   dplyr::filter(
     !(region == "Latin America" & data_publicity == "private"),
-    !region == "Africa") %>%
-  mutate(no_spd = purrr::map_lgl(
-    .x = spd, 
-    .f = ~ all(.x$`250` == 0))
+    !region == "Africa"
   ) %>%
+  dplyr::mutate(no_spd = purrr::map_lgl(
+    .x = spd,
+    .f = ~ all(.x$`250` == 0)
+  )) %>%
   dplyr::filter(no_spd == TRUE) %>%
-  pluck("dataset_id")
+  purrr::pluck("dataset_id")
 
 #- get relvant subsets to estimate spd 500
-subset_data_meta <- data_meta %>%
+subset_data_meta <-
+  data_meta %>%
   dplyr::filter(dataset_id %in% missing_spd_250)
 
 # - distances to calculate spd density curves
@@ -217,7 +222,10 @@ spd_processed_list <-
     )
   ) %>%
   purrr::set_names(
-    nm = spd_processed_vec
+    nm = stringr::str_remove(
+      spd_processed_vec,
+      "_spd.rds"
+    )
   )
 
 data_spd_temp <-
