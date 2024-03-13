@@ -19,6 +19,6 @@ run_dbrda <- function(data_m2, data_pred){
   return(dbRDA_res)
 }
 else{
-  return(NA)
+  return(NULL)
 }
 }
