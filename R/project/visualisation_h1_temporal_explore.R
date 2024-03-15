@@ -70,7 +70,7 @@ palette_human_pred <-
 #----------------------------------------------------------#
 # 1. Summary tables -----
 #----------------------------------------------------------#
-
+#spd
 data_spd_temporal_summary_by_region <-
   output_temporal_spd %>%
   get_summary_tables(
@@ -78,8 +78,31 @@ data_spd_temporal_summary_by_region <-
     data_type = "temporal",
     group_var = c("region")
   )
-  
 
+# save table output
+data_spd_temporal_summary_by_region %>%
+  purrr::chuck("summary_table_weighted_mean") %>%
+  dplyr::filter(importance_type == "ratio_ind_wmean") %>%
+  pivot_wider(
+    names_from = region,
+    values_from = ratio
+  ) %>%
+  dplyr::select(
+    -importance_type) %>%
+  write_csv(here::here("summary_temporal_spd.csv"))  
+
+data_spd_temporal_summary_by_region %>%
+  purrr::chuck("summary_table_weighted_mean") %>%
+  dplyr::filter(importance_type == "ratio_ind_wmean") %>%
+  group_by(age, predictor) %>%
+  summarise(
+    min = min(ratio),
+    med = median(ratio),
+    max = max(ratio)
+  ) %>%
+  write_csv(here::here("summary_temporal_spd_by_age.csv"))
+
+# events
 data_events_temporal_summary_by_region <-
   output_temporal_events %>%
   get_summary_tables(
@@ -87,6 +110,32 @@ data_events_temporal_summary_by_region <-
     data_type = "temporal",
     group_var = c("region")
   )
+
+
+# save table output
+data_events_temporal_summary_by_region %>%
+  purrr::chuck("summary_table_weighted_mean") %>%
+  dplyr::filter(importance_type == "ratio_ind_wmean") %>%
+  pivot_wider(
+    names_from = region,
+    values_from = ratio
+  ) %>%
+  dplyr::select(
+    -importance_type) %>%
+  write_csv(here::here("summary_temporal_events.csv"))
+
+data_events_temporal_summary_by_region %>%
+  purrr::chuck("summary_table_weighted_mean") %>%
+  dplyr::filter(importance_type == "ratio_ind_wmean") %>%
+  group_by(age, predictor) %>%
+  summarise(
+    min = min(ratio),
+    med = median(ratio),
+    max = max(ratio)
+  ) %>%
+  write_csv(here::here("summary_temporal_events_by_age.csv"))
+
+
 #----------------------------------------------------------#
 # 2. helper functions and data wrangling -----
 #----------------------------------------------------------#
