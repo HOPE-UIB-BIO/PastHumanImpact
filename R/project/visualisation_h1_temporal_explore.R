@@ -157,7 +157,7 @@ ages_for_shading <-
              end_age = c( 8000,
                           0, 
                           7500,
-                          3500, 
+                          2500, 
                           0,
                           7000,
                           6000,
@@ -218,7 +218,8 @@ main_temporal_fig <-
     show.legend = FALSE) +
   ggplot2::scale_y_continuous(
     limits = c(-0.2, 1.2),
-    breaks = seq(-0.2, 1.2, 0.2)
+    breaks = seq(-0.2, 1.2, 0.2),
+    oob = scales::squish
   ) +
   ggplot2::scale_x_discrete(limit = rev) +
   scale_fill_manual(
@@ -251,8 +252,31 @@ main_temporal_fig <-
   ggplot2::facet_grid(predictor ~ region) +
   ggplot2::labs(x = "Age (ka) BP", 
                 y = "Ratio of importance",
-                fill = "Predictor as") 
+                fill = "Analyses run with human predictor") 
 
+main_temporal_fig
+
+#----------------------------------------------------------#
+# 4. save figure -----
+#----------------------------------------------------------#
+
+
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/temporal_h1"),
+      .x,
+      sep = "."
+    ),
+    plot = main_temporal_fig,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 80,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
 
 
 
