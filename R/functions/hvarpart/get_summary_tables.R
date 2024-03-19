@@ -28,8 +28,8 @@ get_summary_tables <- function(
     dplyr::mutate(
       # negative variances can be ignored
       dplyr::across(
-        .cols = Unique,
-        .fns = ~ replace(., .x < 0, 0.0001)
+        .cols = c(Unique, Individual),
+        .fns = ~ replace(., .x < 0, 0.000001)
       )
     )
 
