@@ -166,6 +166,7 @@ add_region_as_factor <- function(data_source) {
 data_spd_region <-
   data_spd_temporal_summary_by_region %>%
   purrr::chuck("summary_table_weighted_mean") %>%
+  filter(age > 1900) %>%
   add_predictor_as_factor() %>%
   add_region_as_factor() %>%
   mutate(human_pred = "spd")
@@ -225,17 +226,17 @@ ages_for_shading <-
 main_temporal_fig <-
   data_combined_temporal %>%
   ggplot2::ggplot() +
-  ggplot2::geom_rect(
-    data = ages_for_shading,
-    ggplot2::aes(
-      xmin = as.factor(start_age/1000),
-      xmax = as.factor(end_age/1000),
-      ymin = -Inf,
-      ymax = Inf
-    ),
-    fill = "grey50",
-    alpha = 0.2
-  ) +
+  # ggplot2::geom_rect(
+  #   data = ages_for_shading,
+  #   ggplot2::aes(
+  #     xmin = as.factor(start_age/1000),
+  #     xmax = as.factor(end_age/1000),
+  #     ymin = -Inf,
+  #     ymax = Inf
+  #   ),
+  #   fill = "grey50",
+  #   alpha = 0.2
+  # ) +
   ggplot2::geom_bar(
     data = . %>%
       dplyr::filter(
@@ -290,6 +291,10 @@ main_temporal_fig <-
       fill = "transparent",
       color = NA
     ),
+   panel.background = ggplot2::element_rect(
+     fill = "grey90",
+     color = NA
+   ),
     panel.grid.major = ggplot2::element_blank(),
     axis.title.x = ggplot2::element_text(size = 8),
     axis.title.y = ggplot2::element_text(size = 8),
@@ -298,10 +303,10 @@ main_temporal_fig <-
     axis.text.y = ggplot2::element_text(size = 8),
    # plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
   ) +
-  ggplot2::facet_grid(predictor ~ region) +
+  ggplot2::facet_grid(region ~ predictor) +
   ggplot2::labs(x = "Age (ka) BP", 
                 y = "Ratio of importance",
-                fill = "Analyses run with human predictor") 
+                fill = "HVARPART run with human predictor") 
 
 main_temporal_fig
 
