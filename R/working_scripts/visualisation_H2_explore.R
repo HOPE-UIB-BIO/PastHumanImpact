@@ -48,9 +48,53 @@ targets::tar_read(
       )
     )
 #----------------------------------------------------------#
-# 1. Summary tables -----
+# 1. Add model of dbRDA for visualisation -----
 #----------------------------------------------------------#
-  table_h2 <-  
+
+# add dbrda model to output_h2
+output_h2  <- 
+  output_h2 %>%
+  mutate(mod_dbrda = 
+           purrr::map2(
+             .x = data_response_dist,
+             .y = data_merge,
+             .f = ~run_dbrda(.x, .y)
+           )) %>%
+  mutate(scores_dbrda = 
+           purrr::map(
+             .x = mod_dbrda,
+             .f = ~get_scores_dbrda(.x)
+           )
+
+  )
+
+data_to_plot_trajectory <-
+  output_h2 %>%
+  dplyr::select(
+    region,
+    climatezone,
+    scores_dbrda) %>%
+  left_join(data_meta %>% 
+              dplyr::select(region, 
+                            climatezone, 
+                            ecozone_koppen_5) %>%
+              distinct()) %>%
+  dplyr::mutate(
+    region = factor(region,
+                    levels = vec_regions # [config criteria]
+    ),
+    ecozone_koppen_5 = factor(
+      ecozone_koppen_5,
+      levels = vec_climate_5 # [config criteria]
+    )
+  ) %>%
+  unnest(scores_dbrda)
+
+#----------------------------------------------------------#
+# 2. Summary tables -----
+#----------------------------------------------------------#
+# all data  
+table_h2 <-  
    output_h2 %>%
     dplyr::mutate(
        summary_table = purrr::map(
@@ -75,7 +119,8 @@ targets::tar_read(
     ratio_unique = unique/sum_importance,
     ratio_ind = individual/sum_importance) %>%
    ungroup()
-  
+
+# reshape long formate  
   summary_h2_long <-
     table_h2 %>%
     dplyr::group_by(
@@ -105,11 +150,15 @@ targets::tar_read(
       values_to = "ratio"
     ) 
   
+
+
   
 #----------------------------------------------------------#
-# 3. Figures -----
+# 3. Plot m2 change between consequtive time -----
 #----------------------------------------------------------# 
-  fig_m2_change_region <-
+ 
+# 3.1. Figure: Change in m2 between consecutive time  
+   fig_m2_change_region <-
     data_m2_filtered %>%
     dplyr::select(
       m2_time_df,
@@ -208,8 +257,11 @@ targets::tar_read(
       linewidth = 0.2
     )
 
-  # alternative 1: unique partition and predictor importance  
-wmean_importance_fig <-
+#----------------------------------------------------------#
+# 4. Ratio of predictor importance -----
+#----------------------------------------------------------#   
+
+pred_importance_fig <-
   summary_h2_long %>%
   dplyr::mutate(
     region = factor(region,
@@ -220,35 +272,16 @@ wmean_importance_fig <-
   ggplot2::geom_bar(
     data = . %>%
       dplyr::filter(
-        importance_type == "ratio_unique_wmean"
+        importance_type == "ratio_ind_wmean"
       ),
       mapping = ggplot2::aes(
-        x = ratio,
-        y = predictor,
+        y = ratio,
+        x = predictor,
         fill = climatezone
       ),
     stat = "identity",
     width = .6,
     alpha = 1,
-    position = ggplot2::position_dodge2(
-      width = 0.8,
-      preserve = "single"
-    ),
-    show.legend = FALSE
-  ) + 
-  ggplot2::geom_bar(
-    data = . %>%
-      dplyr::filter(
-        importance_type == "ratio_ind_wmean"
-      ),
-      mapping = ggplot2::aes(
-        x = ratio,
-        y = predictor,
-        fill = climatezone
-      ),
-    stat = "identity",
-    width = .6,
-    alpha = 0.4,
     position = ggplot2::position_dodge2(
       width = 0.8,
       preserve = "single"
@@ -265,170 +298,227 @@ wmean_importance_fig <-
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
     strip.text.y = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(
+      fill = "transparent",
+      color = NA
+    ),
+    axis.title.x = ggplot2::element_text(size = 8),
+    axis.title.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = 8),
+    axis.text.y = ggplot2::element_text(size = 6),
+    plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+  )+
+  ggplot2::scale_y_continuous(limits = c(0, 1.2)) +
+  facet_grid(
+  ~region
+  ) +
+    labs(x = "")
+
+pred_importance_fig
+
+
+
+#----------------------------------------------------------#
+# 5. Trajectory plot -----
+#----------------------------------------------------------# 
+
+
+main_trajectory_plot <-
+  data_to_plot_trajectory %>%
+  ggplot() +
+  # ggplot2::geom_segment(
+  #   data = . %>%
+  #     dplyr::filter(score %in% c("biplot")),
+  #   mapping = ggplot2::aes(
+  #     x = 0,
+  #     y = 0,
+  #     xend = dbRDA1,
+  #     yend = dbRDA2),
+  #   arrow = arrow(length = unit(0.03, "npc")),
+  #   col = "black"
+  # ) +
+  # geom_text(
+  #   data = . %>%
+  #     dplyr::filter(score %in% c("biplot")),
+  #   mapping = ggplot2::aes(
+  #     x = dbRDA1*1.2,
+  #     y = dbRDA2*1.2,
+  #     col = climatezone,
+  #     label = label),
+  #   size = 3
+  # ) +
+  geom_path(
+    data = . %>%  
+      dplyr::filter(score %in% c("sites")), 
+    mapping = ggplot2::aes(
+      x = dbRDA1,
+      y = dbRDA2,
+      col = climatezone
+    ),
+    lineend = "round",
+    linejoin = "bevel",
+    linewidth = 0.5,
+    arrow = arrow(
+      length = unit(0.1, "inches"),
+      ends = "last",
+      type = "open")) +
+  geom_vline(
+    xintercept = 0,
+    linetype = 2, 
+    linewidth = 0.1) +
+  geom_hline(
+    yintercept = 0, 
+    linetype = 2, 
+    linewidth = 0.1) +
+  # scale_y_continuous(
+  #   limits = c(-2.0, 2.0),
+  #   breaks = seq(-2.0, 2.0, by = 0.5)) +
+  # scale_x_continuous(
+  #   limits = c(-2, 1.5),
+  #   breaks = seq(-2, 1.5, by = 0.5)) +
+  scale_color_manual(
+    values = palette_ecozones,
+    drop = FALSE) +
+  ggplot2::theme(
+    aspect.ratio = 1,
+    legend.position = "none",
+    panel.background = ggplot2::element_blank(),
+    strip.background = ggplot2::element_blank(),
+    strip.text.y = ggplot2::element_blank(),
+    strip.text.x = ggplot2::element_blank(),
     panel.grid.minor = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
       color = NA
     ),
-    panel.grid.major = ggplot2::element_line(
-      color = "grey90",
-      linewidth = 0.1
-    ),
     axis.title.x = ggplot2::element_text(size = 6),
-    axis.title.y = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_text(size = 6),
     axis.text.x = ggplot2::element_text(size = 6, angle = 60),
     axis.text.y = ggplot2::element_text(size = 6),
     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-  )+
-  ggplot2::scale_x_continuous(limits = c(0, 1.2)) +
-  
-  facet_wrap(
-  ~region, nrow = 1 
-  )
+  )  +
+  ggplot2::facet_grid(
+    ecozone_koppen_5 ~ region,  
+  ) +
+  labs(x = "", y = "")
+    
 
-ggarrange(wmean_importance_fig,
-          fig_m2_change_region,
-          nrow = 2
-          )
+main_trajectory_plot
 
-# extract pcoa scores for plotting
-get_pcoa_sc <- function(pcoa_res){
-  table <- pcoa_res$points %>%
-    data.frame() %>%
-    rownames_to_column("age")
-  return(table)
-}
 
-# plot m2 trajectory changes
-plot_tracjectory_pcoa_scores <- 
-  function(data_source){
-  fig <- data_source %>%
-    ggplot( aes(x = X1, y = X2, col = climatezone)) +
-    geom_vline(xintercept = 0, linetype = 2, linewidth = 0.1) +
-    geom_hline(yintercept = 0, linetype = 2, linewidth = 0.1) +
-    scale_y_continuous(limits = c(-0.75, 0.5),
-                       breaks = seq(-0.75, 0.5, by = 0.25)) +
-    scale_x_continuous(limits = c(-0.6, 0.6),
-                       breaks = seq(-0.6, 0.6, by =0.3)) + 
-    scale_color_manual(
-      values = palette_ecozones,
-      drop = FALSE) + 
-    ggplot2::theme(
-      aspect.ratio = 1,
-      legend.position = "none",
-      panel.background = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      strip.text.y = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      plot.background = ggplot2::element_rect(
-        fill = "transparent",
-        color = NA
-      ),
-      panel.grid.major = ggplot2::element_line(
-        color = "grey90",
-        linewidth = 0.1
-      ),
-      axis.title.x = ggplot2::element_text(size = 6),
-      axis.title.y = ggplot2::element_text(size = 6),
-      axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-      axis.text.y = ggplot2::element_text(size = 6),
-      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-    )  +
-    geom_point() +
-    geom_path(lineend = "round", 
-              linejoin = "bevel",
-              arrow = arrow(length = unit(0.1, "inches"), 
-                            ends = "last",
-                            type = "open"),
-              linewidth = 0.75) +
-    labs(x = "", y = "") 
-  
-  return(fig)
-}
-
-# prepare data
-m2_pcoa_scores  <- 
-  data_m2_filtered %>%
-    dplyr::inner_join(
-      data_meta %>%
-        dplyr::select(region,climatezone, ecozone_koppen_5) %>%
-        dplyr::distinct(),
-      by = c("region", "climatezone")
-    ) %>%
-    dplyr::mutate(
-      region = factor(region,
-                      levels = vec_regions # [config criteria]
-      ),
-      ecozone_koppen_5 = factor(
-        ecozone_koppen_5,
-        levels = vec_climate_5 # [config criteria]
-      )
-    ) %>%
-  mutate(pcoa_scores = 
-           purrr::map(
-             .x = PCoA,
-             .f = get_pcoa_sc
-           )) %>%
-  dplyr::select(region, climatezone, ecozone_koppen_5, pcoa_scores) %>%
-  unnest(cols = pcoa_scores)  %>%
-  nest(data_to_plot = -c(region, ecozone_koppen_5))
-
-m2_pcoa_scores <-
-  m2_pcoa_scores %>%
-  mutate(m2_pcoa_fig = purrr::map(
-    .x = data_to_plot,
-    .f = plot_tracjectory_pcoa_scores)
-    )
          
+# # insert of importance
+# importance_inset_plot <- 
+#   summary_h2_long %>%
+#   filter(importance_type == "ratio_ind_wmean") %>%
+#   nest(data_for_inset = -c(region, climatezone)) %>%
+#   left_join(data_meta %>% 
+#               dplyr::select(region, climatezone, ecozone_koppen_5) %>%
+#               distinct()) %>%
+#   dplyr::mutate(
+#     region = factor(region,
+#                     levels = vec_regions # [config criteria]
+#     ),
+#     ecozone_koppen_5 = factor(
+#       ecozone_koppen_5,
+#       levels = vec_climate_5 # [config criteria]
+#     )
+#   ) %>%
+#   unnest(data_for_inset) %>%
+#   group_by(region, 
+#            ecozone_koppen_5) %>%
+#   ggplot2::ggplot() +
+#   ggplot2::geom_bar(
+#     mapping = ggplot2::aes(
+#       x = ratio,
+#       y = predictor,
+#       fill = climatezone
+#     ),
+#     stat = "identity",
+#     width = .3,
+#     alpha = 1,
+#     position = ggplot2::position_dodge2(
+#       width = 0.3,
+#       preserve = "single"
+#     ),
+#     show.legend = FALSE
+#   ) +
+#   ggplot2::scale_fill_manual(
+#     values = palette_ecozones,
+#     drop = FALSE
+#   ) +
+#   ggplot2::theme(
+#     aspect.ratio = 1,
+#     legend.position = "none",
+#     panel.background = ggplot2::element_blank(),
+#     strip.background = ggplot2::element_blank(),
+#     strip.text.y = ggplot2::element_blank(),
+#     panel.grid.minor = ggplot2::element_blank(),
+#     plot.background = ggplot2::element_rect(
+#       fill = "transparent",
+#       color = NA
+#     ),
+#     panel.grid.major = ggplot2::element_line(
+#       color = "grey90",
+#       linewidth = 0.1
+#     ),
+#     axis.title.x = ggplot2::element_text(size = 6),
+#     axis.title.y = ggplot2::element_blank(),
+#     axis.text.x = ggplot2::element_text(size = 6, angle = 60),
+#     axis.text.y = ggplot2::element_text(size = 6),
+#     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+#   ) +
+# labs(y = "", x = "") 
+#  
+# 
+# importance_inset_plot
 
-# arrange plot order
-m2_pcoa_scores <- 
-  m2_pcoa_scores %>%
-  arrange(factor(region, levels = vec_regions),
-          factor(ecozone_koppen_5, levels = vec_climate_5)) 
+ 
+
+#----------------------------------------------------------#
+# 7. Combine plots & save -----
+#----------------------------------------------------------#
+
+combine_h2 <-
+  cowplot::ggdraw() +
+  cowplot::draw_plot(
+   pred_importance_fig,
+    x = 0,
+    y = 0.78,
+    width = 1,
+    height = 0.22
+  ) +
+  cowplot::draw_plot(
+    main_trajectory_plot,
+    x = 0,
+    y = 0,
+    width = 1.0,
+    height = 0.78
+  )  
+
   
-# plotgrid
-  
-fig_trajectory_m2 <- 
-  m2_pcoa_scores$m2_pcoa_fig %>%
-  cowplot::plot_grid(plotlist = .,
-                     ncol = 5,
-                     nrow = 4,
-                     byrow = FALSE) 
-  
-# combine 
-  cowplot::plot_grid(
-    wmean_importance_fig,
-    fig_trajectory_m2,
-    nrow = 2
+
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/combine_h2"),
+      .x,
+      sep = "."
+    ),
+    plot = combine_h2,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 165,
+    units = image_units, # [config criteria]
+    bg = "white"
   )
-  
-ggsave(file = "importance_h2.png",
-       plot = wmean_importance_fig,
-       bg = "white",
-       width = 297,
-       height = 100,
-       units = "mm")  
-
-ggsave("fig_trajectory_m2.png",
-       plot = fig_trajectory_m2,
-       width = 297,
-       height = 210,
-        units = "mm",
-       bg = "white")
-
-
+)
 
 
 
 
 ##########################################################################
-# check dbRDA  
-output_h2$data_response_dist[[1]] %>% as.dist()
-output_h2$data_merge[[1]]
-  
-test <- dbrda(as.dist(output_h2$data_response_dist[[7]])~spd + temp_annual + temp_cold + prec_summer + prec_win,
-              output_h2$data_merge[[7]][,-1])
 
-plot(test)
   
