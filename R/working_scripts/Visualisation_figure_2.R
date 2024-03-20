@@ -181,7 +181,7 @@ sel_range <- c(0, 2)
 p0 <-
   tibble::tibble() %>%
   ggplot2::ggplot() +
-  ggplot2::coord_flip(
+  ggplot2::coord_cartesian(
     ylim = sel_range
   ) +
   ggplot2::theme(
@@ -208,11 +208,13 @@ p0 <-
 
 plot_density <- function(sel_var = "human") {
   p0 +
-    ggplot2::facet_wrap(~region, nrow = 1) +
+    ggplot2::facet_wrap(~region, ncol = 1) +
     ggplot2::theme(
-      axis.text = ggplot2::element_blank(),
-      axis.line = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.line.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank()
     ) +
     ggplot2::geom_density(
       data = data_spd_records %>%
@@ -246,13 +248,13 @@ plot_density <- function(sel_var = "human") {
 
 plot_summary <- function(sel_var = "human") {
   p0 +
-    ggplot2::facet_grid(climatezone ~ region) +
+    ggplot2::facet_grid(region ~ climatezone) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
       strip.text = ggplot2::element_blank(),
-      axis.text.y = ggplot2::element_blank(),
-      axis.line.y = ggplot2::element_blank(),
-      axis.ticks.y = ggplot2::element_blank()
+      axis.text = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
     ) +
     purrr::map(
       .x = c("95", "75", "50"),
@@ -311,8 +313,9 @@ cowplot::plot_grid(
   plot_summary("human"),
   plot_density("climate"),
   plot_summary("climate"),
-  ncol = 1,
+  ncol = 4,
+  nrow = 1,
   align = "v",
-  rel_heights = c(0.5, 1, 0.5, 1),
+  rel_widths = c(0.3, 1, 0.3, 1),
   labels = c("Human", "", "Climate", "")
 )
