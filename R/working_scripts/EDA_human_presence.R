@@ -21,7 +21,7 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
@@ -32,66 +32,45 @@ library(waffle)
 # 1. Load data -----
 #----------------------------------------------------------#
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
+# - load c14 data
 data_c14 <-
-  targets::tar_read(
-    name = "data_c14",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
+  paste0(
+    data_storage_path,
+    "Data/c14/data_rc_2022-11-29.rds"
+  ) %>%
+  get_file_from_path()
+
+# - get polygons for each dataset_id
+data_polygons <-
+  get_polygons(
+    data_source = data_meta,
+    distance_buffer = 10 # 10° away from site
   )
 
+# - subset C14 data for each dataset_id and calculate distance to it
 data_c14_subset <-
-  targets::tar_read(
-    name = "data_c14_subset",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
+  subset_c14_data(
+    data_source_c14 = data_c14,
+    data_source_polygons = data_polygons,
+    data_source_meta = data_meta
   )
 
 data_events <-
   targets::tar_read(
-    name = "data_events_to_fit",
+    name = "data_events_to_value",
     store = paste0(
       data_storage_path,
-      "_targets_h1"
+      "_targets_data/pipeline_events"
     )
   )
 
-data_meta <-
-  targets::tar_read(
-    name = "data_meta",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  ) %>%
-  dplyr::mutate(
-    sel_classification = dplyr::case_when(
-      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
-      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
-      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
-      .default = ecozone_koppen_5
-    )
-  ) %>%
-  dplyr::mutate(
-    sel_classification = as.factor(sel_classification)
-  ) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "sel_classification"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
-  dplyr::select(region, sel_classification, dataset_id, long, lat)
 
 #----------------------------------------------------------#
 # 2. Number of RC dates -----
@@ -109,7 +88,7 @@ data_c14_continents <-
     sel_method = "shapefile",
     file_name = "Regions",
     var = "region",
-    var_name = "region"
+    variable = "region"
   )
 
 # load KG climate translation table
@@ -132,7 +111,7 @@ data_c14_climate_zones <-
     sel_method = "tif",
     file_name = "Beck_KG_V1_present_0p083",
     var = "raster_values",
-    var_name = "koppen_raste_value"
+    variable = "koppen_raste_value"
   ) %>%
   dplyr::left_join(koppen_tranlation_table,
     by = c("koppen_raste_value" = "raster_values")
@@ -144,7 +123,7 @@ data_c14_climate_zones <-
     ecozone_koppen_5 = broadbiome
   ) %>%
   dplyr::mutate(
-    sel_classification = dplyr::case_when(
+    climatezone = dplyr::case_when(
       ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
       ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
       ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
@@ -155,12 +134,12 @@ data_c14_climate_zones <-
 fig_n_c14 <-
   data_c14_climate_zones %>%
   dplyr::filter(age < 12.5e3) %>%
-  tidyr::drop_na(region, sel_classification) %>%
-  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+  tidyr::drop_na(region, climatezone) %>%
+  dplyr::mutate(climatezone = as.factor(climatezone)) %>%
   dplyr::full_join(
     data_climate_zones, # [config criteria]
     .,
-    by = "sel_classification"
+    by = "climatezone"
   ) %>%
   dplyr::mutate(
     region = factor(region,
@@ -174,7 +153,7 @@ fig_n_c14 <-
     bin_size = 500
   ) %>%
   dplyr::group_by(
-    region, sel_classification, BIN
+    region, climatezone, BIN
   ) %>%
   dplyr::count() %>%
   ggplot2::ggplot() +
@@ -217,7 +196,7 @@ fig_n_c14 <-
     mapping = ggplot2::aes(
       x = BIN,
       y = n,
-      fill = sel_classification
+      fill = climatezone
     ),
     alpha = 1
   )
@@ -229,7 +208,7 @@ if (
   fig_n_c14 <-
     data_c14_climate_zones %>%
     dplyr::filter(age < 12.5e3) %>%
-    tidyr::drop_na(region, sel_classification) %>%
+    tidyr::drop_na(region, climatezone) %>%
     dplyr::mutate(
       region = factor(region,
         levels = vec_regions # [config criteria]
@@ -273,8 +252,8 @@ if (
       mapping = ggplot2::aes(
         x = age,
         y = ggplot2::after_stat(count),
-        fill = sel_classification,
-        col = sel_classification
+        fill = climatezone,
+        col = climatezone
       ),
       alpha = 0.2
     )
@@ -299,11 +278,15 @@ purrr::walk(
 #----------------------------------------------------------#
 # 3. N of valid RC -----
 #----------------------------------------------------------#
+
 data_valid_n_rc_raw <-
   dplyr::left_join(
     data_meta,
     data_c14_subset,
     by = "dataset_id"
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
   ) %>%
   dplyr::mutate(
     has_rc = purrr::map_lgl(
@@ -312,6 +295,28 @@ data_valid_n_rc_raw <-
     )
   ) %>%
   dplyr::mutate(
+    n_rc_250 = purrr::map2_dbl(
+      .x = has_rc,
+      .y = rc,
+      .f = ~ ifelse(
+        .x,
+        .y %>%
+          dplyr::filter(dist <= 250) %>%
+          nrow(),
+        0
+      )
+    ),
+    n_rc_500 = purrr::map2_dbl(
+      .x = has_rc,
+      .y = rc,
+      .f = ~ ifelse(
+        .x,
+        .y %>%
+          dplyr::filter(dist <= 500) %>%
+          nrow(),
+        0
+      )
+    ),
     n_rc = purrr::map2_dbl(
       .x = has_rc,
       .y = rc,
@@ -319,42 +324,50 @@ data_valid_n_rc_raw <-
     )
   ) %>%
   dplyr::mutate(
+    has_valid_n_rc_250 = purrr::map_lgl(
+      .x = n_rc_250,
+      .f = ~ .x >= min_number_of_rc_dates, # [config]
+    ),
+    has_valid_n_rc_500 = purrr::map_lgl(
+      .x = n_rc_500,
+      .f = ~ .x >= min_number_of_rc_dates, # [config]
+    ),
     has_valid_n_rc = purrr::map_lgl(
       .x = n_rc,
-      .f = ~ .x >= 50
+      .f = ~ .x >= min_number_of_rc_dates, # [config]
     )
   ) %>%
   dplyr::distinct(
-    region, sel_classification, dataset_id, has_valid_n_rc
+    region, climatezone, dataset_id,
+    has_valid_n_rc_250, has_valid_n_rc_500, has_valid_n_rc
   ) %>%
-  tidyr::drop_na(region, sel_classification)
+  tidyr::drop_na(region, climatezone)
 
-
-data_valid_n_rc <-
+# 250 km
+data_valid_n_rc_250 <-
   data_valid_n_rc_raw %>%
-  tidyr::drop_na(region, sel_classification) %>%
-  dplyr::group_by(region, sel_classification, has_valid_n_rc) %>%
+  tidyr::drop_na(region, climatezone) %>%
+  dplyr::group_by(region, climatezone, has_valid_n_rc_250) %>%
   dplyr::count(
     name = "N"
   ) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(N = as.double(N)) %>%
   dplyr::arrange(
-    region, sel_classification, has_valid_n_rc
+    region, climatezone, has_valid_n_rc_250
   ) %>%
   tidyr::complete(
     region,
-    sel_classification,
-    has_valid_n_rc,
+    climatezone,
+    has_valid_n_rc_250,
     fill = list(N = 0.00001)
   )
 
-
-fig_valid_n_rc <-
-  data_valid_n_rc %>%
+fig_valid_n_rc_250 <-
+  data_valid_n_rc_250 %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ sel_classification
+    region ~ climatezone
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -372,12 +385,13 @@ fig_valid_n_rc <-
     panel.grid.major = ggplot2::element_blank()
   ) +
   ggplot2::labs(
-    fill = "Has enough RC dates to construct SPD?"
+    fill = "Has enough RC dates to construct SPD?",
+    caption = "250 km is used as maximum distance from a record"
   ) +
   ggplot2::coord_equal() +
   waffle::geom_waffle(
     mapping = ggplot2::aes(
-      fill = has_valid_n_rc,
+      fill = has_valid_n_rc_250,
       values = N
     ),
     size = 1,
@@ -386,16 +400,88 @@ fig_valid_n_rc <-
     make_proportional = FALSE
   )
 
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Supp/C14_valid_datasets_250km"),
+      .x,
+      sep = "."
+    ),
+    plot = fig_valid_n_rc_250,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 180,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+# 500 km
+data_valid_n_rc_500 <-
+  data_valid_n_rc_raw %>%
+  tidyr::drop_na(region, climatezone) %>%
+  dplyr::group_by(region, climatezone, has_valid_n_rc_500) %>%
+  dplyr::count(
+    name = "N"
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(N = as.double(N)) %>%
+  dplyr::arrange(
+    region, climatezone, has_valid_n_rc_500
+  ) %>%
+  tidyr::complete(
+    region,
+    climatezone,
+    has_valid_n_rc_500,
+    fill = list(N = 0.00001)
+  )
+
+fig_valid_n_rc_500 <-
+  data_valid_n_rc_500 %>%
+  ggplot2::ggplot() +
+  ggplot2::facet_grid(
+    region ~ climatezone
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    axis.title = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+    axis.text = ggplot2::element_blank(),
+    legend.position = "right",
+    plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major = ggplot2::element_blank()
+  ) +
+  ggplot2::labs(
+    fill = "Has enough RC dates to construct SPD?",
+    caption = "500 km is used as maximum distance from a record"
+  ) +
+  ggplot2::coord_equal() +
+  waffle::geom_waffle(
+    mapping = ggplot2::aes(
+      fill = has_valid_n_rc_500,
+      values = N
+    ),
+    size = 1,
+    col = NA,
+    n_rows = 15,
+    make_proportional = FALSE
+  )
 
 purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/C14_valid_datasets"),
+      here::here("Outputs/Supp/C14_valid_datasets_500km"),
       .x,
       sep = "."
     ),
-    plot = fig_valid_n_rc,
+    plot = fig_valid_n_rc_500,
     width = image_width_vec["3col"], # [config criteria]
     height = 180,
     units = image_units, # [config criteria]
@@ -411,9 +497,9 @@ purrr::walk(
 data_id_has_human_impact <-
   data_events %>%
   dplyr::filter(
-    !var_name %in% c("bi", "no_impact")
+    !variable %in% c("bi", "no_impact")
   ) %>%
-  tidyr::unnest(data_to_fit) %>%
+  tidyr::unnest(data_to_value) %>%
   dplyr::filter(value == 1) %>%
   dplyr::distinct(dataset_id) %>%
   dplyr::mutate(
@@ -432,18 +518,18 @@ data_valid_events_raw <-
 
 data_valid_events <-
   data_valid_events_raw %>%
-  dplyr::group_by(region, sel_classification, have_events) %>%
+  dplyr::group_by(region, climatezone, have_events) %>%
   dplyr::count(
     name = "N"
   ) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(N = as.double(N)) %>%
   dplyr::arrange(
-    region, sel_classification, have_events
+    region, climatezone, have_events
   ) %>%
   tidyr::complete(
     region,
-    sel_classification,
+    climatezone,
     have_events,
     fill = list(N = 0.00001)
   )
@@ -452,7 +538,7 @@ fig_human_presence_detected <-
   data_valid_events %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ sel_classification
+    region ~ climatezone
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -507,15 +593,15 @@ fig_human_presence_status <-
   dplyr::full_join(
     data_valid_n_rc_raw,
     data_valid_events_raw,
-    by = dplyr::join_by(region, sel_classification, dataset_id)
+    by = dplyr::join_by(region, climatezone, dataset_id)
   ) %>%
   dplyr::mutate(
     status = dplyr::case_when(
-      have_events == TRUE & has_valid_n_rc == TRUE ~
+      have_events == TRUE & has_valid_n_rc_500 == TRUE ~
         "human presence & enough RC",
-      have_events == TRUE & has_valid_n_rc == FALSE ~
+      have_events == TRUE & has_valid_n_rc_500 == FALSE ~
         "human presence but not enough RC",
-      have_events == FALSE & has_valid_n_rc == TRUE ~
+      have_events == FALSE & has_valid_n_rc_500 == TRUE ~
         "no human presence but enough RC",
       .default = "no human presence & not enough RC"
     )
@@ -531,24 +617,24 @@ fig_human_presence_status <-
       )
     )
   ) %>%
-  dplyr::group_by(region, sel_classification, status) %>%
+  dplyr::group_by(region, climatezone, status) %>%
   dplyr::count(
     name = "N"
   ) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(N = as.double(N)) %>%
   dplyr::arrange(
-    region, sel_classification, status
+    region, climatezone, status
   ) %>%
   tidyr::complete(
     region,
-    sel_classification,
+    climatezone,
     status,
     fill = list(N = 0.00001)
   ) %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ sel_classification
+    region ~ climatezone
   ) +
   ggplot2::theme_bw() +
   ggplot2::guides(
@@ -569,7 +655,11 @@ fig_human_presence_status <-
     panel.grid.major = ggplot2::element_blank()
   ) +
   ggplot2::labs(
-    caption = "Human presence is detected from pollen data.",
+    caption = paste(
+      "Human presence is detected from pollen data.", "\n",
+      "Enough RC dates are defined as >= 50.", "\n",
+      "250/500 km is used as maximum distance from a record."
+    ),
     fill = ""
   ) +
   ggplot2::coord_equal() +
@@ -627,10 +717,146 @@ purrr::walk(
 # 6. Temporal trends of human impact  -----
 #----------------------------------------------------------#
 
-list_fig_event_temporal_trends <-
-  plot_data_events(
-    data_source_events = data_events
+mod_config_file <-
+  RUtilpol::get_latest_file(
+    file_name = "predictor_models_config_table",
+    dir = paste0(
+      data_storage_path,
+      "Data/Predictor_models/"
+    )
   )
+
+data_general_tredns_events_raw <-
+  get_all_predicted_general_trends(
+    data_source = mod_config_file,
+    sel_type = "events"
+  )
+
+data_general_tredns_events <-
+  data_general_tredns_events_raw %>%
+  dplyr::mutate(
+    climatezone = as.factor(climatezone)
+  ) %>%
+  dplyr::full_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "climatezone"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
+  dplyr::select(
+    dplyr::all_of(
+      c(
+        "region",
+        "climatezone",
+        "variable",
+        "age",
+        "value"
+      )
+    )
+  ) %>%
+  dplyr::mutate(
+    variable = dplyr::case_when(
+      .default = "no impact",
+      variable == "bi" ~ "no impact",
+      variable == "fi" ~ "first impact",
+      variable == "ei" ~ "emerging impact",
+      variable == "ec" ~ "extensive clearince",
+      variable == "cc" ~ "complete clearince",
+      variable == "fc" ~ "first cultivation",
+      variable == "es" ~ "europiean settlement",
+      variable == "weak" ~ "weak impact",
+      variable == "medium" ~ "medium impact",
+      variable == "strong" ~ "strong impact"
+    ),
+    variable = factor(
+      variable,
+      levels = c(
+        "no impact",
+        "first impact",
+        "emerging impact",
+        "extensive clearince",
+        "complete clearince",
+        "first cultivation",
+        "europiean settlement",
+        "weak impact",
+        "medium impact",
+        "strong impact"
+      )
+    )
+  )
+
+event_color_palette <-
+  c(
+    "grey60",
+    "#c99000",
+    "#a17400",
+    "#7b5800",
+    "#573e00",
+    "#00c92b",
+    "#c9009e",
+    "#9b541b",
+    "#5d261a",
+    "#1f0000"
+  ) %>%
+  rlang::set_names(
+    levels(data_general_tredns_events$variable)
+  )
+
+fig_event_temporal_trends <-
+  data_general_tredns_events %>%
+  ggplot2::ggplot(
+    mapping = ggplot2::aes(
+      x = age,
+      y = value,
+      col = variable
+    )
+  ) +
+  ggplot2::facet_grid(region ~ climatezone) +
+  # ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
+  ggplot2::scale_x_continuous(
+    trans = "reverse",
+    limits = c(12e3, 0),
+    breaks = seq(12e3, 0, by = -2e3),
+    labels = seq(12, 0, by = -2)
+  ) +
+  ggplot2::scale_fill_manual(
+    values = event_color_palette
+  ) +
+  ggplot2::scale_color_manual(
+    values = event_color_palette
+  ) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    legend.position = "bottom",
+    strip.background = ggplot2::element_blank(),
+    strip.text = ggplot2::element_text(
+      size = text_size,
+      hjust = 0.01
+    ),
+    panel.grid.minor = ggplot2::element_blank(),
+    axis.text.y = ggplot2::element_blank(),
+    axis.ticks.y = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_blank()
+  ) +
+  ggplot2::labs(
+    x = "Age (ka cal yr BP)"
+  ) +
+  ggplot2::geom_ribbon(
+    mapping = ggplot2::aes(
+      ymin = 0,
+      ymax = value,
+      fill = variable
+    ),
+    alpha = 0.3
+  )
+
 
 purrr::walk(
   .x = c("png", "pdf"),
@@ -640,7 +866,7 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = list_fig_event_temporal_trends,
+    plot = fig_event_temporal_trends,
     width = image_width_vec["3col"], # [config criteria]
     height = 180,
     units = image_units, # [config criteria]
