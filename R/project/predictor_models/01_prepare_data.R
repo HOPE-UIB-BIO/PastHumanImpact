@@ -57,6 +57,16 @@ if (
 # 2. Data wrangling -----
 #----------------------------------------------------------#
 
+data_pre_filter <-
+  get_data_filtered(
+    data_source = data_predictors,
+    data_meta = data_meta,
+    age_from = 0,
+    age_to = 8500,
+    remove_private = TRUE
+  )
+
+
 data_merge <-
   dplyr::inner_join(
     regions, # loaded from 02_meta_data.R
@@ -67,7 +77,7 @@ data_merge <-
     region != "Africa"
   ) %>%
   dplyr::inner_join(
-    data_predictors,
+    data_pre_filter,
     by = "dataset_id"
   ) %>%
   tidyr::unnest(data_merge) %>%
@@ -77,7 +87,6 @@ data_merge <-
     names_to = "variable"
   ) %>%
   tidyr::drop_na(value)
-
 
 data_valid_variables <-
   data_merge %>%
@@ -127,9 +136,28 @@ if (
     purrr::map(~ summary(.x))
 }
 
-valid_climate_zones_by_n_records <-
+data_filter_by_age <-
   data_valid_variables %>%
-  dplyr::group_by(region, climatezone) %>%
+  dplyr::mutate(
+    is_spd = dplyr::case_when(
+      .default = FALSE,
+      variable == "spd" ~ TRUE
+    )
+  ) %>%
+  dplyr::mutate(
+    is_valid_age = dplyr::case_when(
+      .default = TRUE,
+      is_spd == TRUE & age < 2000 ~ FALSE
+    )
+  ) %>%
+  dplyr::filter(
+    is_valid_age == TRUE
+  ) %>%
+  dplyr::select(-c(is_spd, is_valid_age))
+
+valid_climate_zones_by_n_records <-
+  data_filter_by_age %>%
+  dplyr::group_by(region, climatezone, variable) %>%
   dplyr::distinct(dataset_id) %>%
   dplyr::summarise(
     .groups = "drop",
@@ -140,10 +168,10 @@ valid_climate_zones_by_n_records <-
   )
 
 data_filter_by_climatezone <-
-  data_valid_variables %>%
+  data_filter_by_age %>%
   dplyr::inner_join(
     valid_climate_zones_by_n_records,
-    by = c("region", "climatezone")
+    by = c("region", "climatezone", "variable")
   )
 
 data_constant_variables <-
@@ -168,6 +196,27 @@ data_constant_variables <-
   dplyr::filter(is_it_constant) %>%
   dplyr::select(-is_it_constant)
 
+# Save constant variables for later visualisations
+data_filter_by_climatezone %>%
+  dplyr::inner_join(
+    data_constant_variables,
+    by = c("region", "climatezone", "variable")
+  ) %>%
+  dplyr::distinct(
+    region, climatezone, variable, age, value
+  ) %>%
+  RUtilpol::save_latest_file(
+    object_to_save = .,
+    file_name = "predictor_models_data_constant",
+    dir = paste0(
+      data_storage_path,
+      "Data/Predictor_models/"
+    ),
+    prefered_format = "rds",
+    use_sha = TRUE
+  )
+
+# Remove constant variables
 data_filter_out_constant <-
   data_filter_by_climatezone %>%
   dplyr::anti_join(
@@ -186,6 +235,8 @@ data_prepared <-
 if (
   isTRUE(verbose)
 ) {
+  summary(data_prepared)
+
   data_prepared %>%
     dplyr::group_by(region) %>%
     tidyr::nest() %>%
