@@ -45,6 +45,23 @@ output_spatial_spd <-
       "_targets_data/analyses_h1"
     )
   )
+# - Load data geo koppen 
+data_geo_koppen <-
+  readr::read_rds(
+    paste0(
+      data_storage_path,
+      "Data/ecoregions2017/data_geo_koppen.rds"
+    )
+  ) %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(
+    climatezone = dplyr::case_when(
+      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
+      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
+      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
+      .default = ecozone_koppen_5
+    )
+  )
 
 #----------------------------------------------------------#
 # 2. Estimate averages -----
@@ -88,6 +105,7 @@ add_climatezone_as_factor <- function(data_source) {
     ) %>%
     return()
 }
+
 
 data_spd_spatial_summary_by_climatezone <-
   output_spatial_spd %>%
@@ -176,19 +194,19 @@ summary(data_spd_records_quantiles)
 # 4. Build figure -----
 #----------------------------------------------------------#
 
-sel_range <- c(0, 2)
+sel_range <- c(0, 1)
 
 p0 <-
   tibble::tibble() %>%
   ggplot2::ggplot() +
-  ggplot2::coord_flip(
+  ggplot2::coord_cartesian(
     ylim = sel_range
   ) +
   ggplot2::theme(
     legend.position = "none"
   ) +
   ggplot2::scale_y_continuous(
-    expand = c(0, 0),
+    expand = c(0.05, 0.05),
     breaks = seq(
       min(sel_range),
       max(sel_range),
@@ -208,11 +226,13 @@ p0 <-
 
 plot_density <- function(sel_var = "human") {
   p0 +
-    ggplot2::facet_wrap(~region, nrow = 1) +
+    ggplot2::facet_wrap(~region, ncol = 1) +
     ggplot2::theme(
-      axis.text = ggplot2::element_blank(),
-      axis.line = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank()
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank(),
+      axis.line.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank()
     ) +
     ggplot2::geom_density(
       data = data_spd_records %>%
@@ -246,13 +266,13 @@ plot_density <- function(sel_var = "human") {
 
 plot_summary <- function(sel_var = "human") {
   p0 +
-    ggplot2::facet_grid(climatezone ~ region) +
+    ggplot2::facet_grid(region ~ climatezone) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
       strip.text = ggplot2::element_blank(),
-      axis.text.y = ggplot2::element_blank(),
-      axis.line.y = ggplot2::element_blank(),
-      axis.ticks.y = ggplot2::element_blank()
+      axis.text = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank()
     ) +
     purrr::map(
       .x = c("95", "75", "50"),
@@ -306,13 +326,91 @@ plot_summary <- function(sel_var = "human") {
     )
 }
 
-cowplot::plot_grid(
+main_spatial_fig <- 
+  cowplot::plot_grid(
   plot_density("human"),
   plot_summary("human"),
-  plot_density("climate"),
+  plot_density("climate")+theme(axis.text.y = element_blank()),
   plot_summary("climate"),
-  ncol = 1,
+  ncol = 4,
+  nrow = 1,
   align = "v",
-  rel_heights = c(0.5, 1, 0.5, 1),
-  labels = c("Human", "", "Climate", "")
+  rel_widths = c(0.3, 1, 0.3, 1)
+ # labels = c("Human", "", "Climate", "")
+)
+
+
+#----------------------------------------------------------#
+# 5. region maps -----
+#----------------------------------------------------------#
+datapoints <- 
+  data_meta %>% 
+  dplyr::select(dataset_id, long, lat, region, climatezone) %>%
+  dplyr::filter(dataset_id %in% output_spatial_spd$dataset_id)
+
+get_points_to_map <- function(map, data_source) {
+  
+  map +
+    geom_point(
+      data = data_source,
+      aes(
+        x = long,
+        y = lat
+      ),
+      size = 1.2,
+      shape = 21,
+      fill = "white",
+      alpha = 0.5
+    ) +
+    theme(
+      legend.position = "none"
+    ) %>%
+    return()
+}
+
+
+fig_maps <- 
+  cowplot::plot_grid(
+    get_map_region(rasterdata = data_geo_koppen, "North America") %>%
+      get_points_to_map(., data_source = datapoints),
+    get_map_region(rasterdata = data_geo_koppen, "Latin America") %>%
+      get_points_to_map(., data_source = datapoints),
+    get_map_region(rasterdata = data_geo_koppen, "Europe") %>%
+      get_points_to_map(., data_source = datapoints),
+    get_map_region(rasterdata = data_geo_koppen, "Asia") %>%
+      get_points_to_map(., data_source = datapoints),
+    get_map_region(rasterdata = data_geo_koppen, "Oceania") %>%
+      get_points_to_map(., data_source = datapoints),
+    ncol = 1
+  )
+
+
+
+#----------------------------------------------------------#
+# 6. combine figures and save -----
+#----------------------------------------------------------#
+figure2 <-
+  cowplot::plot_grid(
+    main_spatial_fig,
+    fig_maps,
+    ncol = 2,
+    #align = "v",
+    rel_widths =  c(2, 0.5)
+  )
+
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/spatial_h1"),
+      .x,
+      sep = "."
+    ),
+    plot = figure2,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 165,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
 )
