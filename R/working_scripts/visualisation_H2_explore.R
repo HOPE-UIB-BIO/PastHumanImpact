@@ -364,6 +364,17 @@ main_trajectory_plot <-
       length = unit(0.1, "inches"),
       ends = "first",
       type = "open")) +
+  geom_text(
+    data = . %>%
+      dplyr::filter(score %in% c("sites") & label %in% c("2000", "4000", "6000", "8000")),
+    mapping = ggplot2::aes(
+      x = dbRDA1,
+      y = dbRDA2,
+      col = climatezone,
+      label = label),
+    size = 2,
+    vjust = 1.5
+  ) +
   geom_vline(
     xintercept = 0,
     linetype = 2, 
