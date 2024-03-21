@@ -407,8 +407,8 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = main_spatial_fig,
-    width = image_width_vec["2col"], # [config criteria]
+    plot = figure2,
+    width = image_width_vec["3col"], # [config criteria]
     height = 165,
     units = image_units, # [config criteria]
     bg = "white"
