@@ -436,7 +436,7 @@ cowplot::plot_grid(
    cowplot::ggdraw() +
   cowplot::draw_plot(
    pred_importance_fig,
-    x = 0.63,
+    x = 0.7,
     y = 0,
     width = 0.2,
     height = 0.95
