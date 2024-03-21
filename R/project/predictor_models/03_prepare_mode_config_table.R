@@ -60,7 +60,11 @@ model_config_table <-
     need_to_run = TRUE,
     need_to_be_evaluated = FALSE,
     last_evaluation_date = NA_character_
+  ) %>%
+  dplyr::arrange(
+    region, variable, climatezone
   )
+
 
 #----------------------------------------------------------#
 # 2. Save table -----
