@@ -21,16 +21,10 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/00_Config_file.R"
+    "R/project/00_Config_file.R"
   )
 )
 
-# Import tables for plotting
-source(
-  here::here(
-    "R/working_scripts/Results_script.R"
-  )
-)
 
 plot_predictor <- function(
     data_source_raw,
@@ -43,32 +37,32 @@ plot_predictor <- function(
   ) {
     data_to_plot_raw <-
       data_source_raw %>%
+      dplyr::filter(variable == sel_predictor) %>%
       dplyr::mutate(
-        fit_rescale = get(sel_predictor)
+        fit_rescale = value
       )
 
     data_to_plot_pred <-
       data_source_pred %>%
-      tidyr::unnest(data_pred) %>%
-      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::filter(variable == sel_predictor) %>%
       dplyr::mutate(
-        fit_rescale = fit,
-        upr_rescale = upr,
-        lwr_rescale = lwr
+        fit_rescale = value,
+        upr_rescale = conf_high,
+        lwr_rescale = conf_low
       )
   } else {
     data_pred_mean_sd <-
       data_source_pred %>%
       tidyr::unnest(data_pred) %>%
-      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::filter(variable == sel_predictor) %>%
       dplyr::group_by(
         region,
-        sel_classification
+        climatezone
       ) %>%
       dplyr::summarise(
         .groups = "drop",
         dplyr::across(
-          "fit",
+          "value",
           list(
             mean = ~ mean(.x, na.rm = TRUE),
             sd = ~ sd(.x, na.rm = TRUE)
@@ -80,25 +74,24 @@ plot_predictor <- function(
       data_source_raw %>%
       dplyr::left_join(
         data_pred_mean_sd,
-        by = c("region", "sel_classification")
+        by = c("region", "climatezone")
       ) %>%
       dplyr::mutate(
-        fit_rescale = (get(sel_predictor) - fit_mean) / fit_sd
+        fit_rescale = (get(sel_predictor) - value_mean) / value_sd
       )
 
 
     data_to_plot_pred <-
       data_source_pred %>%
-      tidyr::unnest(data_pred) %>%
-      dplyr::filter(predictor == sel_predictor) %>%
+      dplyr::filter(variable == sel_predictor) %>%
       dplyr::left_join(
         data_pred_mean_sd,
-        by = c("region", "sel_classification")
+        by = c("region", "climatezone")
       ) %>%
       dplyr::mutate(
-        fit_rescale = (fit - fit_mean) / fit_sd,
-        upr_rescale = (upr - fit_mean) / fit_sd,
-        lwr_rescale = (lwr - fit_mean) / fit_sd
+        fit_rescale = (value - value_mean) / value_sd,
+        upr_rescale = (conf_high - value_mean) / value_sd,
+        lwr_rescale = (conf_low - value_mean) / value_sd
       )
   }
 
@@ -108,18 +101,19 @@ plot_predictor <- function(
       mapping = ggplot2::aes(
         x = age,
         y = fit_rescale,
-        col = sel_classification,
-        fill = sel_classification
+        col = climatezone,
+        fill = climatezone
       )
     ) +
     ggplot2::facet_grid(
-      region ~ sel_classification,
+      region ~ climatezone,
       scales = "free_y"
     ) +
     ggplot2::scale_x_continuous(
-      limits = c(0, 8.5e3),
-      breaks = c(seq(0, 8.5e3, by = 2000)),
-      labels = c(seq(0, 8.5, by = 2))
+      trans = "reverse",
+      limits = c(8.5e3, 0),
+      breaks = c(seq(8.5e3, 0, by = -2000)),
+      labels = c(seq(8.5, 0, by = -2))
     ) +
     ggplot2::coord_cartesian(
       ylim = sel_y_limits
@@ -180,52 +174,86 @@ plot_predictor <- function(
 # 1. Load data -----
 #----------------------------------------------------------#
 
-data_merge_unnest <-
-  targets::tar_read(
-    name = "data_merge_unnest",
-    store = paste0(
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
+data_predictors_raw_data <-
+  RUtilpol::get_latest_file(
+    file_name = "predictor_models_data_to_fit",
+    dir = paste0(
       data_storage_path,
-      "_targets_h2"
+      "Data/Predictor_models/"
     )
   ) %>%
-  dplyr::rename(sel_classification = group) %>%
-  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
+  dplyr::mutate(
+    climatezone = as.factor(climatezone)
+  ) %>%
   dplyr::full_join(
     data_climate_zones, # [config criteria]
     .,
-    by = "sel_classification"
+    by = "climatezone"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  ) %>%
+  tidyr::unnest(data_to_fit) %>%
+  dplyr::select(
+    region, climatezone, dataset_id, age, variable, value
   )
 
-mod_predicted_with_names <-
-  targets::tar_read(
-    name = "mod_predicted_with_names",
-    store = paste0(
+mod_config_file <-
+  RUtilpol::get_latest_file(
+    file_name = "predictor_models_config_table",
+    dir = paste0(
       data_storage_path,
-      "_targets_h2"
+      "Data/Predictor_models/"
     )
+  )
+
+data_general_tredns_raw <-
+  get_all_predicted_general_trends(
+    data_source = mod_config_file,
+    sel_type = "predictors"
+  )
+
+data_general_tredns <-
+  data_general_tredns_raw %>%
+  dplyr::mutate(
+    climatezone = as.factor(climatezone)
   ) %>%
-  dplyr::rename(sel_classification = group) %>%
-  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
   dplyr::full_join(
     data_climate_zones, # [config criteria]
     .,
-    by = "sel_classification"
+    by = "climatezone"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
   )
+
+
 
 #----------------------------------------------------------#
 # 2. Plot individual figures -----
 #----------------------------------------------------------#
-
-
-mod_predicted_with_names %>%
-  tidyr::unnest(data_pred) %>%
-  summary()
-
 list_fig_predictors <-
   purrr::pmap(
     .progress = TRUE,
     .l = list(
-      var_names = c(
+      variable = c(
         "temp_annual",
         "temp_cold",
         "prec_summer",
@@ -233,18 +261,18 @@ list_fig_predictors <-
         "spd"
       ) %>%
         rlang::set_names(),
-      plot_raw = c(rep(TRUE, 4), FALSE),
+      plot_raw = rep(TRUE, 5),
       y_limits = list(
         c(-10, 20),
         c(-30, 25),
         c(0, 1000),
         c(0, 2000),
-        c(-5, 10)
+        c(0, 2.5)
       )
     ),
     .f = ~ plot_predictor(
-      data_source_raw = data_merge_unnest,
-      data_source_pred = mod_predicted_with_names,
+      data_source_raw = data_predictors_raw_data,
+      data_source_pred = data_general_tredns,
       sel_predictor = ..1,
       plot_raw = ..2,
       sel_y_limits = ..3
