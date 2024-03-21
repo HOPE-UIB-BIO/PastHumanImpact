@@ -1,5 +1,7 @@
-get_all_predicted_general_trends <- function(data_source) {
-  data_selected <-
+get_all_predicted_general_trends <- function(data_source, sel_type = c("predictors", "events")) {
+  sel_type <- match.arg(sel_type)
+
+  data_work <-
     data_source %>%
     # dplyr::filter(
     #   need_to_run == FALSE &
@@ -14,11 +16,30 @@ get_all_predicted_general_trends <- function(data_source) {
         variable == "prec_win" ~ TRUE,
         variable == "spd" ~ TRUE
       )
-    ) %>%
-    dplyr::filter(is_h2_predictor)
+    )
+
+  if (
+    sel_type == "predictors"
+  ) {
+    data_selected <-
+      data_work %>%
+      dplyr::filter(
+        is_h2_predictor == TRUE
+      )
+  } else if (
+    sel_type == "events"
+  ) {
+    data_selected <-
+      data_work %>%
+      dplyr::filter(
+        is_h2_predictor == FALSE
+      )
+  } else {
+    stop("sel_type not recognized")
+  }
 
   purrr::pmap(
-    .data = "loading general trends models",
+    .progress = "loading general trends models",
     .l = list(
       data_selected$region, # ..1
       data_selected$climatezone, # ..2
@@ -52,7 +73,8 @@ get_all_predicted_general_trends <- function(data_source) {
       data_predicted <-
         RUtilpol::get_latest_file(
           file_name = sel_file_name,
-          dir = general_trends_dir
+          dir = general_trends_dir,
+          verbose = FALSE
         )
 
       return(data_predicted)
