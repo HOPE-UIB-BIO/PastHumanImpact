@@ -298,6 +298,7 @@ pred_importance_fig <-
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
     strip.text.y = ggplot2::element_blank(),
+    strip.text.x = ggplot2::element_blank(),
     panel.grid.major = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
@@ -309,9 +310,9 @@ pred_importance_fig <-
     axis.text.y = ggplot2::element_text(size = 6),
     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
   )+
-  ggplot2::scale_y_continuous(limits = c(0, 1.2)) +
-  facet_grid(
-  ~region
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  facet_wrap(
+  ~region, ncol = 1, scales = "free"
   ) +
     labs(x = "")
 
@@ -361,7 +362,7 @@ main_trajectory_plot <-
     linewidth = 0.5,
     arrow = arrow(
       length = unit(0.1, "inches"),
-      ends = "last",
+      ends = "first",
       type = "open")) +
   geom_vline(
     xintercept = 0,
@@ -385,116 +386,56 @@ main_trajectory_plot <-
     legend.position = "none",
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
-    strip.text.y = ggplot2::element_blank(),
-    strip.text.x = ggplot2::element_blank(),
+    #strip.text.y = ggplot2::element_blank(),
+   # strip.text.x = ggplot2::element_blank(),
     panel.grid.minor = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
       color = NA
     ),
-    axis.title.x = ggplot2::element_text(size = 6),
-    axis.title.y = ggplot2::element_text(size = 6),
-    axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-    axis.text.y = ggplot2::element_text(size = 6),
+    axis.title.x = ggplot2::element_text(size = 8),
+    axis.title.y = ggplot2::element_text(size = 8),
+    axis.text.x = ggplot2::element_text(size = 8, angle = 60),
+    axis.text.y = ggplot2::element_text(size = 8),
     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
   )  +
   ggplot2::facet_grid(
-    ecozone_koppen_5 ~ region,  
+    region ~ ecozone_koppen_5,  
   ) +
-  labs(x = "", y = "")
+  labs(x = "dbRDA 1", y = "dbRDA 2")
     
 
 main_trajectory_plot
 
 
-         
-# # insert of importance
-# importance_inset_plot <- 
-#   summary_h2_long %>%
-#   filter(importance_type == "ratio_ind_wmean") %>%
-#   nest(data_for_inset = -c(region, climatezone)) %>%
-#   left_join(data_meta %>% 
-#               dplyr::select(region, climatezone, ecozone_koppen_5) %>%
-#               distinct()) %>%
-#   dplyr::mutate(
-#     region = factor(region,
-#                     levels = vec_regions # [config criteria]
-#     ),
-#     ecozone_koppen_5 = factor(
-#       ecozone_koppen_5,
-#       levels = vec_climate_5 # [config criteria]
-#     )
-#   ) %>%
-#   unnest(data_for_inset) %>%
-#   group_by(region, 
-#            ecozone_koppen_5) %>%
-#   ggplot2::ggplot() +
-#   ggplot2::geom_bar(
-#     mapping = ggplot2::aes(
-#       x = ratio,
-#       y = predictor,
-#       fill = climatezone
-#     ),
-#     stat = "identity",
-#     width = .3,
-#     alpha = 1,
-#     position = ggplot2::position_dodge2(
-#       width = 0.3,
-#       preserve = "single"
-#     ),
-#     show.legend = FALSE
-#   ) +
-#   ggplot2::scale_fill_manual(
-#     values = palette_ecozones,
-#     drop = FALSE
-#   ) +
-#   ggplot2::theme(
-#     aspect.ratio = 1,
-#     legend.position = "none",
-#     panel.background = ggplot2::element_blank(),
-#     strip.background = ggplot2::element_blank(),
-#     strip.text.y = ggplot2::element_blank(),
-#     panel.grid.minor = ggplot2::element_blank(),
-#     plot.background = ggplot2::element_rect(
-#       fill = "transparent",
-#       color = NA
-#     ),
-#     panel.grid.major = ggplot2::element_line(
-#       color = "grey90",
-#       linewidth = 0.1
-#     ),
-#     axis.title.x = ggplot2::element_text(size = 6),
-#     axis.title.y = ggplot2::element_blank(),
-#     axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-#     axis.text.y = ggplot2::element_text(size = 6),
-#     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-#   ) +
-# labs(y = "", x = "") 
-#  
-# 
-# importance_inset_plot
-
- 
 
 #----------------------------------------------------------#
 # 7. Combine plots & save -----
 #----------------------------------------------------------#
+cowplot::plot_grid(
+  pred_importance_fig,
+  main_trajectory_plot,
+  ncol = 2,
+  rel_heights = c(0.5, 2)
+)
 
-combine_h2 <-
-  cowplot::ggdraw() +
+
+
+ figure4 <- 
+   cowplot::ggdraw() +
   cowplot::draw_plot(
    pred_importance_fig,
-    x = 0,
-    y = 0.78,
-    width = 1,
-    height = 0.22
+    x = 0.63,
+    y = 0,
+    width = 0.2,
+    height = 0.95
   ) +
   cowplot::draw_plot(
     main_trajectory_plot,
     x = 0,
     y = 0,
-    width = 1.0,
-    height = 0.78
+    width = 0.78,
+    height = 1
   )  
 
   
@@ -508,9 +449,9 @@ purrr::walk(
       .x,
       sep = "."
     ),
-    plot = combine_h2,
-    width = image_width_vec["2col"], # [config criteria]
-    height = 165,
+    plot = figure4,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 180,
     units = image_units, # [config criteria]
     bg = "white"
   )
