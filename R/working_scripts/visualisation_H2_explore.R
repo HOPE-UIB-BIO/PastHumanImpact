@@ -460,7 +460,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/combine_h2"),
+      here::here("Outputs/figure4_h2"),
       .x,
       sep = "."
     ),
