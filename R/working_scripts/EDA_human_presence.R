@@ -28,6 +28,26 @@ source(
 # remotes::install_github("hrbrmstr/waffle") # nolint
 library(waffle)
 
+reorder_region_and_climate_zone <- function(data_source) {
+  data_source %>%
+    dplyr::mutate(climatezone = as.factor(climatezone)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "climatezone"
+    ) %>%
+    dplyr::mutate(
+      region = factor(region,
+        levels = vec_regions # [config criteria]
+      )
+    ) %>%
+    dplyr::filter(
+      region != "Africa"
+    ) %>%
+    return()
+}
+
+
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
@@ -134,20 +154,7 @@ fig_n_c14 <-
   data_c14_climate_zones %>%
   dplyr::filter(age < 12.5e3) %>%
   tidyr::drop_na(region, climatezone) %>%
-  dplyr::mutate(climatezone = as.factor(climatezone)) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
+  reorder_region_and_climate_zone() %>%
   REcopol:::add_age_bin(
     bin_size = 500
   ) %>%
@@ -361,20 +368,7 @@ data_valid_n_rc_250 <-
     has_valid_n_rc_250,
     fill = list(N = 0.00001)
   ) %>%
-  dplyr::mutate(climatezone = as.factor(climatezone)) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  )
+  reorder_region_and_climate_zone()
 
 fig_valid_n_rc_250 <-
   data_valid_n_rc_250 %>%
@@ -447,7 +441,8 @@ data_valid_n_rc_500 <-
     climatezone,
     has_valid_n_rc_500,
     fill = list(N = 0.00001)
-  )
+  ) %>%
+  reorder_region_and_climate_zone()
 
 fig_valid_n_rc_500 <-
   data_valid_n_rc_500 %>%
@@ -510,9 +505,9 @@ purrr::walk(
 data_id_has_human_impact <-
   data_events %>%
   dplyr::filter(
-    !variable %in% c("bi", "no_impact")
+    !var_name %in% c("bi", "no_impact")
   ) %>%
-  tidyr::unnest(data_to_value) %>%
+  tidyr::unnest(data_to_fit) %>%
   dplyr::filter(value == 1) %>%
   dplyr::distinct(dataset_id) %>%
   dplyr::mutate(
@@ -545,7 +540,8 @@ data_valid_events <-
     climatezone,
     have_events,
     fill = list(N = 0.00001)
-  )
+  ) %>%
+  reorder_region_and_climate_zone()
 
 fig_human_presence_detected <-
   data_valid_events %>%
@@ -645,6 +641,7 @@ fig_human_presence_status <-
     status,
     fill = list(N = 0.00001)
   ) %>%
+  reorder_region_and_climate_zone() %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
     region ~ climatezone
@@ -753,7 +750,6 @@ data_general_tredns_constant <-
       "Data/Predictor_models/"
     )
   )
-
 
 
 data_general_tredns_events <-
