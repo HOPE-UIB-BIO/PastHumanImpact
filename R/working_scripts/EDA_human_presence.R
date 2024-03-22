@@ -64,7 +64,7 @@ data_c14_subset <-
 
 data_events <-
   targets::tar_read(
-    name = "data_events_to_value",
+    name = "data_events_to_fit",
     store = paste0(
       data_storage_path,
       "_targets_data/pipeline_events"
@@ -87,8 +87,7 @@ data_c14_continents <-
     ),
     sel_method = "shapefile",
     file_name = "Regions",
-    var = "region",
-    variable = "region"
+    var = "region"
   )
 
 # load KG climate translation table
@@ -96,7 +95,8 @@ koppen_tranlation_table <-
   readr::read_csv(
     paste0(
       data_storage_path, "Data/ecoregions2017/koppen_link.csv"
-    )
+    ),
+    show_col_types = FALSE
   )
 
 # assign the KG climate zones
@@ -110,13 +110,12 @@ data_c14_climate_zones <-
     ),
     sel_method = "tif",
     file_name = "Beck_KG_V1_present_0p083",
-    var = "raster_values",
-    variable = "koppen_raste_value"
+    var = "raster_values"
   ) %>%
   dplyr::left_join(koppen_tranlation_table,
-    by = c("koppen_raste_value" = "raster_values")
+    by = c("raster_values")
   ) %>%
-  dplyr::select(-koppen_raste_value) %>%
+  dplyr::select(-raster_values) %>%
   dplyr::rename(
     ecozone_koppen_30 = genzone,
     ecozone_koppen_15 = genzone_cluster,
@@ -361,6 +360,20 @@ data_valid_n_rc_250 <-
     climatezone,
     has_valid_n_rc_250,
     fill = list(N = 0.00001)
+  ) %>%
+  dplyr::mutate(climatezone = as.factor(climatezone)) %>%
+  dplyr::full_join(
+    data_climate_zones, # [config criteria]
+    .,
+    by = "climatezone"
+  ) %>%
+  dplyr::mutate(
+    region = factor(region,
+      levels = vec_regions # [config criteria]
+    )
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
   )
 
 fig_valid_n_rc_250 <-
@@ -731,6 +744,17 @@ data_general_tredns_events_raw <-
     data_source = mod_config_file,
     sel_type = "events"
   )
+
+data_general_tredns_constant <-
+  RUtilpol::get_latest_file(
+    file_name = "predictor_models_data_constant",
+    dir = paste0(
+      data_storage_path,
+      "Data/Predictor_models/"
+    )
+  )
+
+
 
 data_general_tredns_events <-
   data_general_tredns_events_raw %>%
