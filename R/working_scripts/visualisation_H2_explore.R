@@ -148,7 +148,16 @@ table_h2 <-
       dplyr::starts_with("ratio"),
       names_to = "importance_type",
       values_to = "ratio"
-    ) 
+    ) %>%
+    dplyr::mutate(
+      region = factor(region,
+                      levels = vec_regions # [config criteria]
+      ),
+      climatezone = factor(
+        climatezone,
+        levels = levels(data_climate_zones$climatezone) # [config criteria]
+      )
+    )
   
 
 
@@ -263,11 +272,6 @@ table_h2 <-
 
 pred_importance_fig <-
   summary_h2_long %>%
-  dplyr::mutate(
-    region = factor(region,
-                    levels = vec_regions # [config criteria]
-    )
-  )%>%
   ggplot2::ggplot() +
   ggplot2::geom_bar(
     data = . %>%
