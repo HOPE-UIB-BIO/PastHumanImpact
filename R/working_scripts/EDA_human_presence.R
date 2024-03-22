@@ -751,25 +751,15 @@ data_general_tredns_constant <-
     )
   )
 
+data_general_tredns_constant  %>% 
+dplyr::distinct(region, climatezone, variable) 
 
 data_general_tredns_events <-
-  data_general_tredns_events_raw %>%
-  dplyr::mutate(
-    climatezone = as.factor(climatezone)
+  dplyr::bind_rows(
+    data_general_tredns_constant,
+    data_general_tredns_events_raw
   ) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
+  reorder_region_and_climate_zone() %>%
   dplyr::select(
     dplyr::all_of(
       c(
