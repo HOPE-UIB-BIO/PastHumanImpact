@@ -387,17 +387,11 @@ main_trajectory_plot <-
     yintercept = 0, 
     linetype = 2, 
     linewidth = 0.1) +
-  # scale_y_continuous(
-  #   limits = c(-2.0, 2.0),
-  #   breaks = seq(-2.0, 2.0, by = 0.5)) +
-  # scale_x_continuous(
-  #   limits = c(-2, 1.5),
-  #   breaks = seq(-2, 1.5, by = 0.5)) +
+  coord_fixed(xlim = c(-2,2) ) +
   scale_color_manual(
     values = palette_ecozones,
     drop = FALSE) +
   ggplot2::theme(
-    aspect.ratio = 1,
     legend.position = "none",
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
