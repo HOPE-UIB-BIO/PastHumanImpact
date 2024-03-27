@@ -23,6 +23,9 @@ source(
   )
 )
 
+
+test_for_predictive_power <- FALSE
+
 pareto_k_threshold <- 0.7
 loo_threshold <- 0.1
 rhat_threshold <- 1.1
@@ -221,7 +224,8 @@ purrr::pwalk(
 
     need_to_be_rerun <-
       isFALSE(pass_rhat_test) |
-        (isFALSE(pass_loo_test) & isFALSE(is_event))
+        # (isFALSE(pass_loo_test) & isFALSE(is_event)) |
+        (isFALSE(pass_loo_test) & isTRUE(test_for_predictive_power))
 
     # Update the model table -----
 
