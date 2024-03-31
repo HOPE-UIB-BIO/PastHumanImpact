@@ -43,10 +43,6 @@ models_config_table <-
 
 models_to_predict <-
   models_config_table %>%
-  dplyr::filter(
-    need_to_run == FALSE &
-      need_to_be_evaluated == FALSE
-  ) %>%
   dplyr::mutate(
     is_h2_predictor = dplyr::case_when(
       .default = FALSE,
@@ -59,7 +55,6 @@ models_to_predict <-
   )
 
 # predict general trends
-
 purrr::pwalk(
   .progress = "Prediction: progress of all models",
   .l = list(
@@ -124,6 +119,27 @@ purrr::pwalk(
         verbose = FALSE
       )
 
+    if (
+      all(is.na(mod))
+    ) {
+      message(
+        paste(
+          "Model for",
+          sel_file_name,
+          "not valid. Rerun the model."
+        )
+      )
+
+      flag_model_to_rerun(
+        data_source = models_config_table,
+        sel_region = sel_region,
+        sel_climatezone = sel_climatezone,
+        sel_variable = sel_variable
+      )
+
+      return()
+    }
+
     # predict general trend -----
     data_predicted <-
       predict_brms_model(mod) %>%
@@ -142,8 +158,7 @@ purrr::pwalk(
       object_to_save = data_predicted,
       file_name = sel_file_name,
       dir = general_trends_dir,
-      prefered_format = "qs",
-      preset = "high"
+      prefered_format = "csv"
     )
   }
 )
