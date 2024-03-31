@@ -77,6 +77,12 @@ get_all_predicted_general_trends <- function(data_source, sel_type = c("predicto
           verbose = FALSE
         )
 
+      if (
+        !is.data.frame(data_predicted)
+      ) {
+        return(NULL)
+      }
+
       return(data_predicted)
     }
   ) %>%
