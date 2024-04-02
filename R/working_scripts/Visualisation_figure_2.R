@@ -372,15 +372,20 @@ get_points_to_map <- function(map, data_source) {
 fig_maps <- 
   cowplot::plot_grid(
     get_map_region(rasterdata = data_geo_koppen, "North America") %>%
-      get_points_to_map(., data_source = datapoints),
+      get_points_to_map(., data_source = datapoints %>% 
+                          dplyr::filter(region == "North America")),
     get_map_region(rasterdata = data_geo_koppen, "Latin America") %>%
-      get_points_to_map(., data_source = datapoints),
+      get_points_to_map(., data_source = datapoints %>% 
+                          dplyr::filter(region == "Latin America")),
     get_map_region(rasterdata = data_geo_koppen, "Europe") %>%
-      get_points_to_map(., data_source = datapoints),
+      get_points_to_map(., data_source = datapoints %>% 
+                          dplyr::filter(region == "Europe")),
     get_map_region(rasterdata = data_geo_koppen, "Asia") %>%
-      get_points_to_map(., data_source = datapoints),
+      get_points_to_map(., data_source = datapoints %>% 
+                          dplyr::filter(region == "Asia")),
     get_map_region(rasterdata = data_geo_koppen, "Oceania") %>%
-      get_points_to_map(., data_source = datapoints),
+      get_points_to_map(., data_source = datapoints %>% 
+                          dplyr::filter(region == "Oceania")),
     ncol = 1
   )
 
@@ -394,7 +399,6 @@ figure2 <-
     main_spatial_fig,
     fig_maps,
     ncol = 2,
-    #align = "v",
     rel_widths =  c(2, 0.5)
   )
 
@@ -403,7 +407,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/spatial_h1"),
+      here::here("Outputs/figure2_spatial_h1"),
       .x,
       sep = "."
     ),
