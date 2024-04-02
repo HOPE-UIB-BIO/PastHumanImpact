@@ -190,8 +190,8 @@ vec_climate_5 <-
     "Polar",
     "Cold",
     "Temperate",
-    "Arid",
-    "Tropical"
+    "Tropical",
+    "Arid"
   )
 
 data_climate_zones <-

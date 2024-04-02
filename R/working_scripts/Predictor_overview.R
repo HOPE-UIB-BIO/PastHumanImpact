@@ -111,12 +111,13 @@ plot_predictor <- function(
     ) +
     ggplot2::scale_x_continuous(
       trans = "reverse",
-      limits = c(8.5e3, 0),
-      breaks = c(seq(8.5e3, 0, by = -2000)),
-      labels = c(seq(8.5, 0, by = -2))
+      limits = c(8.5e3, 2),
+      breaks = c(seq(10e3, 2e3, by = -2000)),
+      labels = c(seq(10, 2, by = -2))
     ) +
     ggplot2::coord_cartesian(
-      ylim = sel_y_limits
+      ylim = sel_y_limits,
+      xlim = c(8.5e3, 2e3)
     ) +
     ggplot2::scale_color_manual(
       values = palette_ecozones
@@ -242,8 +243,19 @@ data_general_tredns <-
   ) %>%
   dplyr::filter(
     region != "Africa"
+  ) %>%
+  dplyr::mutate(
+    is_valid_spd_age = dplyr::case_when(
+      .default = TRUE,
+      variable == "spd" & age <= 2000 ~ FALSE
+    )
+  ) %>%
+  dplyr::filter(
+    age <= 8500
+  ) %>%
+  dplyr::filter(
+    is_valid_spd_age
   )
-
 
 
 #----------------------------------------------------------#

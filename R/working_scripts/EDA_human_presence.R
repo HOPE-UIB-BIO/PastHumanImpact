@@ -28,6 +28,26 @@ source(
 # remotes::install_github("hrbrmstr/waffle") # nolint
 library(waffle)
 
+reorder_region_and_climate_zone <- function(data_source) {
+  data_source %>%
+    dplyr::mutate(climatezone = as.factor(climatezone)) %>%
+    dplyr::full_join(
+      data_climate_zones, # [config criteria]
+      .,
+      by = "climatezone"
+    ) %>%
+    dplyr::mutate(
+      region = factor(region,
+        levels = vec_regions # [config criteria]
+      )
+    ) %>%
+    dplyr::filter(
+      region != "Africa"
+    ) %>%
+    return()
+}
+
+
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
@@ -64,7 +84,7 @@ data_c14_subset <-
 
 data_events <-
   targets::tar_read(
-    name = "data_events_to_value",
+    name = "data_events_to_fit",
     store = paste0(
       data_storage_path,
       "_targets_data/pipeline_events"
@@ -87,8 +107,7 @@ data_c14_continents <-
     ),
     sel_method = "shapefile",
     file_name = "Regions",
-    var = "region",
-    variable = "region"
+    var = "region"
   )
 
 # load KG climate translation table
@@ -96,7 +115,8 @@ koppen_tranlation_table <-
   readr::read_csv(
     paste0(
       data_storage_path, "Data/ecoregions2017/koppen_link.csv"
-    )
+    ),
+    show_col_types = FALSE
   )
 
 # assign the KG climate zones
@@ -110,13 +130,12 @@ data_c14_climate_zones <-
     ),
     sel_method = "tif",
     file_name = "Beck_KG_V1_present_0p083",
-    var = "raster_values",
-    variable = "koppen_raste_value"
+    var = "raster_values"
   ) %>%
   dplyr::left_join(koppen_tranlation_table,
-    by = c("koppen_raste_value" = "raster_values")
+    by = c("raster_values")
   ) %>%
-  dplyr::select(-koppen_raste_value) %>%
+  dplyr::select(-raster_values) %>%
   dplyr::rename(
     ecozone_koppen_30 = genzone,
     ecozone_koppen_15 = genzone_cluster,
@@ -135,20 +154,7 @@ fig_n_c14 <-
   data_c14_climate_zones %>%
   dplyr::filter(age < 12.5e3) %>%
   tidyr::drop_na(region, climatezone) %>%
-  dplyr::mutate(climatezone = as.factor(climatezone)) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
+  reorder_region_and_climate_zone() %>%
   REcopol:::add_age_bin(
     bin_size = 500
   ) %>%
@@ -361,7 +367,8 @@ data_valid_n_rc_250 <-
     climatezone,
     has_valid_n_rc_250,
     fill = list(N = 0.00001)
-  )
+  ) %>%
+  reorder_region_and_climate_zone()
 
 fig_valid_n_rc_250 <-
   data_valid_n_rc_250 %>%
@@ -434,7 +441,8 @@ data_valid_n_rc_500 <-
     climatezone,
     has_valid_n_rc_500,
     fill = list(N = 0.00001)
-  )
+  ) %>%
+  reorder_region_and_climate_zone()
 
 fig_valid_n_rc_500 <-
   data_valid_n_rc_500 %>%
@@ -497,9 +505,9 @@ purrr::walk(
 data_id_has_human_impact <-
   data_events %>%
   dplyr::filter(
-    !variable %in% c("bi", "no_impact")
+    !var_name %in% c("bi", "no_impact")
   ) %>%
-  tidyr::unnest(data_to_value) %>%
+  tidyr::unnest(data_to_fit) %>%
   dplyr::filter(value == 1) %>%
   dplyr::distinct(dataset_id) %>%
   dplyr::mutate(
@@ -532,7 +540,8 @@ data_valid_events <-
     climatezone,
     have_events,
     fill = list(N = 0.00001)
-  )
+  ) %>%
+  reorder_region_and_climate_zone()
 
 fig_human_presence_detected <-
   data_valid_events %>%
@@ -632,6 +641,7 @@ fig_human_presence_status <-
     status,
     fill = list(N = 0.00001)
   ) %>%
+  reorder_region_and_climate_zone() %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
     region ~ climatezone
@@ -732,24 +742,24 @@ data_general_tredns_events_raw <-
     sel_type = "events"
   )
 
-data_general_tredns_events <-
-  data_general_tredns_events_raw %>%
-  dplyr::mutate(
-    climatezone = as.factor(climatezone)
-  ) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
+data_general_tredns_constant <-
+  RUtilpol::get_latest_file(
+    file_name = "predictor_models_data_constant",
+    dir = paste0(
+      data_storage_path,
+      "Data/Predictor_models/"
     )
+  )
+
+data_general_tredns_constant  %>% 
+dplyr::distinct(region, climatezone, variable) 
+
+data_general_tredns_events <-
+  dplyr::bind_rows(
+    data_general_tredns_constant,
+    data_general_tredns_events_raw
   ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
+  reorder_region_and_climate_zone() %>%
   dplyr::select(
     dplyr::all_of(
       c(
