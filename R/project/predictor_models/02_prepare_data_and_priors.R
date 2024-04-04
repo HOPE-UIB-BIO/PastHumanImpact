@@ -38,30 +38,6 @@ data_prepared <-
   )
 
 #----------------------------------------------------------#
-# 2. estimte records per climatezone -----
-#----------------------------------------------------------#
-
-data_climate_zones_filtered <-
-  data_prepared %>%
-  dplyr::group_by(region, climatezone) %>%
-  dplyr::distinct(dataset_id) %>%
-  dplyr::summarise(
-    .groups = "drop",
-    n_records = dplyr::n()
-  ) %>%
-  dplyr::filter(
-    n_records >= min_n_records_per_climate_zone # [config]
-  )
-
-data_with_valid_climate_zones <-
-  data_prepared %>%
-  dplyr::inner_join(
-    data_climate_zones_filtered,
-    by = dplyr::join_by("region", "climatezone")
-  )
-
-
-#----------------------------------------------------------#
 # 2. make formulas -----
 #----------------------------------------------------------#
 
@@ -87,7 +63,7 @@ varivale_config <-
   )
 
 data_valid_variables <-
-  data_with_valid_climate_zones %>%
+  data_prepared %>%
   dplyr::inner_join(
     varivale_config,
     by = "variable"
@@ -122,6 +98,12 @@ data_formulas <-
   data_valid_variables %>%
   tidyr::nest(data_to_fit = c(dataset_id, age, value)) %>%
   dplyr::mutate(
+    n_records = purrr::map_dbl(
+      .x = data_to_fit,
+      .f = ~ .x %>%
+        dplyr::distinct(dataset_id) %>%
+        nrow()
+    ),
     hgam_formula = purrr::map(
       .x = n_records,
       .f = ~ as.formula(
