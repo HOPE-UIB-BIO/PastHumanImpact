@@ -9,6 +9,10 @@ dataset_trouble <- output_h2 %>%
   filter(region == "Europe",
          climatezone == "Cold_Without_dry_season_Warm_Summer")
 
+dataset_trouble2 <- output_h2 %>% 
+  filter(region == "Oceania",
+         climatezone == "Tropical")
+
 dataset_fine <- output_h2 %>% 
   filter(region == "Europe",
          climatezone == "Temperate_Without_dry_season")
@@ -63,26 +67,57 @@ rdacca.hp::rdacca.hp(
     var.part = TRUE
   )
 
+
+# dataset that fails; Oceania
+dataresp3 <- as.dist(dataset_trouble2$data_response_dist[[1]])
+
+datapreds3 <- list(
+  human = dataset_trouble2$data_merge[[1]] %>% 
+    dplyr::select(spd),
+  climate = dataset_trouble2$data_merge[[1]] %>% 
+    dplyr::select(temp_annual, 
+                  temp_cold, 
+                  prec_summer, 
+                  prec_win)
+)
+
+
+# original function
+rdacca.hp::rdacca.hp(
+  dv = dataresp3,
+  iv = datapreds3,
+  type = "adjR2",
+  var.part = TRUE
+)
+
 # what is the difference in datasets that creates this error?
 
 dataresp1
 dataresp2
+dataresp3
 
 datapreds1
 datapreds2
+datapreds3
 
 #check db-RDA
 # check dbRDA  
 
-
+# Europe
 dbrda(dataresp1 ~ spd + temp_annual + temp_cold + prec_summer + prec_win, data = dataset_trouble$data_merge %>% pluck(1), scale = TRUE) %>% 
   plot()
 
-# works - but no preds seems to explain the data well, and all the predictors are highly correlated
+#Oceania
+dbrda(dataresp3 ~ spd + temp_annual + temp_cold + prec_summer + prec_win, data = dataset_trouble2$data_merge %>% pluck(1), scale = TRUE) %>% 
+  plot()
+
 
 # kind of make sense it is not possible to partition variance 
 
 GGally::ggpairs(dataset_trouble$data_merge[[1]] %>% 
+                  dplyr::select(spd, temp_annual, temp_cold, prec_summer, prec_win))
+
+GGally::ggpairs(dataset_trouble2$data_merge[[1]] %>% 
                   dplyr::select(spd, temp_annual, temp_cold, prec_summer, prec_win))
 
 
