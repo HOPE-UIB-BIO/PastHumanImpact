@@ -77,18 +77,25 @@ datapreds3 <- list(
   climate = dataset_trouble2$data_merge[[1]] %>% 
     dplyr::select(temp_annual, 
                   temp_cold, 
-                  prec_summer, 
-                  prec_win)
+                  prec_summer,
+                  prec_win
+                  )
 )
 
 
 # original function
-rdacca.hp::rdacca.hp(
+
+  rdacca.hp::rdacca.hp(
   dv = dataresp3,
   iv = datapreds3,
   type = "adjR2",
-  var.part = TRUE
+  scale = TRUE,
+  sqrt.dist = FALSE,
+  var.part = TRUE,
+  add = FALSE
+  
 )
+
 
 # what is the difference in datasets that creates this error?
 
@@ -108,8 +115,11 @@ dbrda(dataresp1 ~ spd + temp_annual + temp_cold + prec_summer + prec_win, data =
   plot()
 
 #Oceania
-dbrda(dataresp3 ~ spd + temp_annual + temp_cold + prec_summer + prec_win, data = dataset_trouble2$data_merge %>% pluck(1), scale = TRUE) %>% 
-  plot()
+O_trop <- dbrda(dataresp3 ~  temp_annual + temp_cold + prec_summer + prec_win + spd, data = dataset_trouble2$data_merge %>% pluck(1), scale = TRUE) 
+
+plot(O_trop)
+
+vegan::RsquareAdj(O_trop)
 
 
 # kind of make sense it is not possible to partition variance 
