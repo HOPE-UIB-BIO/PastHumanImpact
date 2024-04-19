@@ -139,7 +139,7 @@ get_varhp <- function(data_source,
       # run hvarpar
       # should work for both list and just data.frame
       varhp <-
-        rdacca.hp::rdacca.hp(
+        rdacca_hp(
           dv = data_resp,
           iv = data_preds,
           method = "RDA",
