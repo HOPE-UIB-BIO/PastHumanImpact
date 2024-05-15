@@ -194,6 +194,21 @@ vec_climate_5 <-
     "Arid"
   )
 
+short_name_climatezone <- c(
+  "Polar" = "Polar",
+  "Cold_Without_dry_season_Very_Cold_Summer" ="Cold_Very_Cold_Summer",
+  "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
+  "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
+  "Cold_Without_dry_season_Hot_Summer" = "Cold_Hot_Summer",
+  "Cold_Dry_Winter" = "Cold_Dry_Winter",
+  "Cold_Dry_Summer" = "Cold_Dry_Summer",
+  "Temperate_Without_dry_season" = "Temperate",
+  "Temperate_Dry_Winter" = "Temperate_Dry_Winter",
+  "Temperate_Dry_Summer" = "Temperate_Dry_Summer",
+  "Tropical" = "Tropical",
+  "Arid" = "Arid"
+  )
+
 data_climate_zones <-
   tibble::tibble(
     climatezone = factor(
@@ -201,25 +216,25 @@ data_climate_zones <-
         "Arid",
         "Cold_Dry_Summer",
         "Cold_Dry_Winter",
-        "Cold_Without_dry_season_Cold_Summer",
-        "Cold_Without_dry_season_Hot_Summer",
-        "Cold_Without_dry_season_Very_Cold_Summer",
-        "Cold_Without_dry_season_Warm_Summer",
+        "Cold_Cold_Summer",
+        "Cold_Hot_Summer",
+        "Cold_Very_Cold_Summer",
+        "Cold_Warm_Summer",
         "Polar",
         "Temperate_Dry_Summer",
         "Temperate_Dry_Winter",
-        "Temperate_Without_dry_season",
+        "Temperate",
         "Tropical"
       ),
       levels = c(
         "Polar",
-        "Cold_Without_dry_season_Very_Cold_Summer",
-        "Cold_Without_dry_season_Cold_Summer",
-        "Cold_Without_dry_season_Warm_Summer",
-        "Cold_Without_dry_season_Hot_Summer",
+        "Cold_Very_Cold_Summer",
+        "Cold_Cold_Summer",
+        "Cold_Warm_Summer",
+        "Cold_Hot_Summer",
         "Cold_Dry_Winter",
         "Cold_Dry_Summer",
-        "Temperate_Without_dry_season",
+        "Temperate",
         "Temperate_Dry_Winter",
         "Temperate_Dry_Summer",
         "Tropical",
@@ -227,6 +242,9 @@ data_climate_zones <-
       )
     )
   )
+
+
+
 
 min_n_records_per_climate_zone <- 5
 
@@ -279,10 +297,9 @@ palette_ecozones <-
 
 # Predictors
 palette_predictors <- c(
-  human = "grey50", # v#ffa600"
-  climate = "grey50" # v#d74e92"
+  human = "#DAA520", # v#ffa600"
+  climate = "#483D8B" # v#d74e92"
 )
-
 
 # predictor parts
 palette_predictors_parts <-
