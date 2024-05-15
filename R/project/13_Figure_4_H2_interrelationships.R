@@ -48,7 +48,7 @@ targets::tar_read(
       )
     )
 #----------------------------------------------------------#
-# 1. Add model of dbRDA for visualisation -----
+# 1. Run and get scores dbRDA for visualisation -----
 #----------------------------------------------------------#
 
 # add dbrda model to output_h2
@@ -153,125 +153,40 @@ table_h2 <-
       region = factor(region,
                       levels = vec_regions # [config criteria]
       ),
+      climatezone = recode(climatezone, "Polar" = "Polar",
+                           "Cold_Without_dry_season_Very_Cold_Summer" ="Cold_Very_Cold_Summer",
+                           "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
+                           "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
+                           "Cold_Without_dry_season_Hot_Summer" = "Cold_Hot_Summer",
+                           "Cold_Dry_Winter" = "Cold_Dry_Winter",
+                           "Cold_Dry_Summer" = "Cold_Dry_Summer",
+                           "Temperate_Without_dry_season" = "Temperate",
+                           "Temperate_Dry_Winter" = "Temperate_Dry_Winter",
+                           "Temperate_Dry_Summer" = "Temperate_Dry_Summer",
+                           "Tropical" = "Tropical",
+                           "Arid" = "Arid"),
       climatezone = factor(
         climatezone,
-        levels = levels(data_climate_zones$climatezone) # [config criteria]
+        levels = levels(data_climate_zones$climatezone)# [config criteria]
       )
-    )
+    ) 
   
 
 
-  
-#----------------------------------------------------------#
-# 3. Plot m2 change between consequtive time -----
-#----------------------------------------------------------# 
- 
-# 3.1. Figure: Change in m2 between consecutive time  
-   fig_m2_change_region <-
-    data_m2_filtered %>%
-    dplyr::select(
-      m2_time_df,
-      region,
-      climatezone
-    ) %>%
-  
-    tidyr::unnest(cols = c(m2_time_df)) %>%
-    tidyr::complete(
-      time,
-      tidyr::nesting(climatezone, region)
-    ) %>%
-    dplyr::inner_join(
-      data_meta %>%
-        dplyr::select(region,climatezone, ecozone_koppen_5) %>%
-        dplyr::distinct(),
-      by = c("region", "climatezone")
-    ) %>%
-    dplyr::mutate(
-      region = factor(region,
-                      levels = vec_regions # [config criteria]
-      ),
-      ecozone_koppen_5 = factor(
-        ecozone_koppen_5,
-        levels = vec_climate_5 # [config criteria]
-      )
-    ) %>%
-    ggplot2::ggplot(
-      ggplot2::aes(
-        x = as.numeric(time),
-        y = delta_m2,
-        col = climatezone,
-        fill = climatezone
-      )
-    ) +
-    ggplot2::facet_grid(
-      ~ region
-    ) +
-    ggplot2::scale_x_continuous(
-      trans = "reverse",
-      limits = c(8.5e3, 500),
-      breaks = c(seq(8.5e3, 500, by = -2e3)),
-      labels = c(seq(8.5, 0.5, by = -2))
-    ) +
-    ggplot2::scale_y_continuous(limits = c(0, 1)) +
-    ggplot2::theme_minimal() +
-    ggplot2::scale_color_manual(
-      values = palette_ecozones,
-      drop = FALSE
-    ) +
-    ggplot2::scale_fill_manual(
-      values = palette_ecozones,
-      drop = FALSE
-    ) +
-    ggplot2::theme(
-      aspect.ratio = 1,
-      legend.position = "none",
-      panel.background = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      strip.text.y = ggplot2::element_blank(),
-      panel.grid.minor = ggplot2::element_blank(),
-      plot.background = ggplot2::element_rect(
-        fill = "transparent",
-        color = NA
-      ),
-      panel.grid.major = ggplot2::element_line(
-        color = "grey90",
-        linewidth = 0.1
-      ),
-      axis.title.x = ggplot2::element_text(size = 6),
-      axis.title.y = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_text(size = 6, angle = 60),
-      axis.text.y = ggplot2::element_text(size = 6),
-      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-    ) +
-    ggplot2::labs(
-      x = "Age (ka cal yr BP)",
-      y = "change in m2"
-    ) +
-    ggplot2::geom_point(size = 0.5) +
-    ggplot2::geom_smooth(
-      method = "loess",
-      formula = y ~ x,
-      linewidth = 0.1,
-      lty = 2,
-      se = FALSE
-    ) +
-    ggplot2::geom_smooth(
-      method = "gam",
-      se = FALSE,
-      formula = y ~ s(x, bs = "tp", k = 10),
-      method.args = list(
-        family =
-          mgcv::betar(link = "logit")
-      ),
-      linewidth = 0.2
-    )
 
 #----------------------------------------------------------#
-# 4. Ratio of predictor importance -----
+# 3. Ratio of predictor importance -----
 #----------------------------------------------------------#   
+
 
 pred_importance_fig <-
   summary_h2_long %>%
+  mutate(
+    predictor = factor(
+      predictor,
+      levels = c("human", "climate")
+    )
+  ) %>%
   ggplot2::ggplot() +
   ggplot2::geom_bar(
     data = . %>%
@@ -280,28 +195,25 @@ pred_importance_fig <-
       ),
       mapping = ggplot2::aes(
         y = ratio,
-        x = predictor,
-        fill = climatezone
+        x = climatezone,
+        fill = predictor
       ),
     stat = "identity",
-    width = .6,
+    width = 0.9,
     alpha = 1,
-    position = ggplot2::position_dodge2(
-      width = 0.8,
-      preserve = "single"
-    ),
+    position = "stack",
     show.legend = FALSE
   ) +
   ggplot2::scale_fill_manual(
-    values = palette_ecozones,
+    values = palette_predictors,
     drop = FALSE
   ) +
   ggplot2::theme(
-    aspect.ratio = 1,
+    aspect.ratio = 1/3,
     legend.position = "none",
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
-    strip.text.y = ggplot2::element_blank(),
+    #strip.text.y = ggplot2::element_blank(),
     strip.text.x = ggplot2::element_blank(),
     panel.grid.major = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
@@ -310,13 +222,13 @@ pred_importance_fig <-
     ),
     axis.title.x = ggplot2::element_text(size = 8),
     axis.title.y = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(size = 8),
+    axis.text.x = ggplot2::element_text(size = 8, angle = 60, hjust = 1),
     axis.text.y = ggplot2::element_text(size = 6),
     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
   )+
   ggplot2::scale_y_continuous(limits = c(0, 1)) +
   facet_wrap(
-  ~region, ncol = 1, scales = "free"
+  ~region, ncol = 1
   ) +
     labs(x = "")
 
@@ -325,35 +237,51 @@ pred_importance_fig
 
 
 #----------------------------------------------------------#
-# 5. Trajectory plot -----
+# 4. Trajectory plot -----
 #----------------------------------------------------------# 
 
 
-main_trajectory_plot <-
+
+figure_trajecotries <- 
   data_to_plot_trajectory %>%
-  ggplot() +
-  # ggplot2::geom_segment(
-  #   data = . %>%
-  #     dplyr::filter(score %in% c("biplot")),
-  #   mapping = ggplot2::aes(
-  #     x = 0,
-  #     y = 0,
-  #     xend = dbRDA1,
-  #     yend = dbRDA2),
-  #   arrow = arrow(length = unit(0.03, "npc")),
-  #   col = "black"
-  # ) +
-  # geom_text(
-  #   data = . %>%
-  #     dplyr::filter(score %in% c("biplot")),
-  #   mapping = ggplot2::aes(
-  #     x = dbRDA1*1.2,
-  #     y = dbRDA2*1.2,
-  #     col = climatezone,
-  #     label = label),
-  #   size = 3
-  # ) +
-  geom_path(
+     ggplot() +
+     ggplot2::geom_segment(
+       data = . %>%
+         dplyr::filter(score %in% c("biplot")),
+       mapping = ggplot2::aes(
+         x = 0,
+         y = 0,
+         xend = dbRDA1,
+         yend = dbRDA2),
+       arrow = arrow(length = unit(0.03, "npc")),
+       col = "black"
+     ) +
+     geom_text(
+       data = . %>%
+         dplyr::filter(score %in% c("biplot")),
+       mapping = ggplot2::aes(
+         x = dbRDA1*1.2,
+         y = dbRDA2*1.2,
+         label = label),
+       size = 3,
+       col = "black"
+     ) +
+     geom_path(
+       data = . %>%  
+         dplyr::filter(score %in% c("sites")), 
+       mapping = ggplot2::aes(
+         x = dbRDA1,
+         y = dbRDA2,
+         col = climatezone
+       ),
+       lineend = "round",
+       linejoin = "bevel",
+       linewidth = 0.5,
+       arrow = arrow(
+         length = unit(0.1, "inches"),
+         ends = "first",
+         type = "open")) +
+  geom_point(
     data = . %>%  
       dplyr::filter(score %in% c("sites")), 
     mapping = ggplot2::aes(
@@ -361,60 +289,59 @@ main_trajectory_plot <-
       y = dbRDA2,
       col = climatezone
     ),
-    lineend = "round",
-    linejoin = "bevel",
-    linewidth = 0.5,
-    arrow = arrow(
-      length = unit(0.1, "inches"),
-      ends = "first",
-      type = "open")) +
-  geom_text(
-    data = . %>%
-      dplyr::filter(score %in% c("sites") & label %in% c("2000", "4000", "6000", "8000")),
-    mapping = ggplot2::aes(
-      x = dbRDA1,
-      y = dbRDA2,
-      col = climatezone,
-      label = label),
-    size = 2,
-    vjust = 1.5
-  ) +
-  geom_vline(
-    xintercept = 0,
-    linetype = 2, 
-    linewidth = 0.1) +
-  geom_hline(
-    yintercept = 0, 
-    linetype = 2, 
-    linewidth = 0.1) +
-  coord_fixed(xlim = c(-2,2) ) +
-  scale_color_manual(
-    values = palette_ecozones,
-    drop = FALSE) +
-  ggplot2::theme(
-    legend.position = "none",
-    panel.background = ggplot2::element_blank(),
-    strip.background = ggplot2::element_blank(),
-    #strip.text.y = ggplot2::element_blank(),
-   # strip.text.x = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-    plot.background = ggplot2::element_rect(
-      fill = "transparent",
-      color = NA
-    ),
-    axis.title.x = ggplot2::element_text(size = 8),
-    axis.title.y = ggplot2::element_text(size = 8),
-    axis.text.x = ggplot2::element_text(size = 8, angle = 60),
-    axis.text.y = ggplot2::element_text(size = 8),
-    plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-  )  +
-  ggplot2::facet_grid(
-    region ~ ecozone_koppen_5,  
-  ) +
-  labs(x = "dbRDA 1", y = "dbRDA 2")
+    size = 0.5)+
+     geom_text(
+       data = . %>%
+         dplyr::filter(score %in% c("sites")) %>%
+         mutate(label = as.character(as.numeric(label)/1000)),
+       mapping = ggplot2::aes(
+         x = dbRDA1,
+         y = dbRDA2,
+         label = label),
+       size = 3,
+       vjust = 1.5,
+       col = "black"
+     ) +
+     geom_vline(
+       xintercept = 0,
+       linetype = 2, 
+       linewidth = 0.1) +
+     geom_hline(
+       yintercept = 0, 
+       linetype = 2, 
+       linewidth = 0.1) +
+     coord_fixed(xlim = c(-2,2) ) +
+     scale_color_manual(
+       values = palette_ecozones,
+       drop = FALSE) +
+     ggplot2::theme(
+       legend.position = "none",
+       panel.background = ggplot2::element_blank(),
+       strip.background = ggplot2::element_blank(),
+       #strip.text.y = ggplot2::element_blank(),
+       # strip.text.x = ggplot2::element_blank(),
+       panel.grid.minor = ggplot2::element_blank(),
+       plot.background = ggplot2::element_rect(
+         fill = "transparent",
+         color = NA
+       ),
+       axis.title.x = ggplot2::element_text(size = 8),
+       axis.title.y = ggplot2::element_text(size = 8),
+       axis.text.x = ggplot2::element_text(size = 8, angle = 60),
+       axis.text.y = ggplot2::element_text(size = 8),
+       plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+     )  +
+     ggplot2::facet_wrap(
+       ~climatezone+ region,
+     ) +
+     labs(x = "dbRDA 1", y = "dbRDA 2")
+ 
     
 
-main_trajectory_plot
+
+
+
+
 
 
 
@@ -447,9 +374,24 @@ cowplot::plot_grid(
     height = 1
   )  
 
-  
+ # save predictor importance
+ purrr::walk(
+   .x = c("png", "pdf"),
+   .f = ~ ggplot2::ggsave(
+     paste(
+       here::here("Outputs/Figure4_predictor_importance"),
+       .x,
+       sep = "."
+     ),
+     plot = pred_i,
+     width = image_width_vec["1col"], # [config criteria]
+     height = 160,
+     units = image_units, # [config criteria]
+     bg = "white"
+   )
+ )  
 
-
+# save trajectories
 purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
