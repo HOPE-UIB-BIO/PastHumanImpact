@@ -337,7 +337,7 @@ main_spatial_fig <-
   align = "v",
   rel_widths = c(0.3, 1, 0.3, 1)
  # labels = c("Human", "", "Climate", "")
-)
+) 
 
 
 #----------------------------------------------------------#
@@ -355,11 +355,11 @@ get_points_to_map <- function(map, data_source) {
       data = data_source,
       aes(
         x = long,
-        y = lat
+        y = lat,
+        fill = climatezone
       ),
       size = 1.2,
       shape = 21,
-      fill = "white",
       alpha = 0.5
     ) +
     theme(
@@ -371,24 +371,40 @@ get_points_to_map <- function(map, data_source) {
 
 fig_maps <- 
   cowplot::plot_grid(
-    get_map_region(rasterdata = data_geo_koppen, "North America") %>%
+    get_map_region(rasterdata = data_geo_koppen, 
+                   select_region = "North America",
+                   sel_alpha = 0.5) %>%
       get_points_to_map(., data_source = datapoints %>% 
                           dplyr::filter(region == "North America")),
-    get_map_region(rasterdata = data_geo_koppen, "Latin America") %>%
+    get_map_region(rasterdata = data_geo_koppen,
+                   select_region = "Latin America",
+                   sel_alpha = 0.5) %>%
       get_points_to_map(., data_source = datapoints %>% 
                           dplyr::filter(region == "Latin America")),
-    get_map_region(rasterdata = data_geo_koppen, "Europe") %>%
+    get_map_region(rasterdata = data_geo_koppen, 
+                   select_region = "Europe",
+                   sel_alpha = 0.5) %>%
       get_points_to_map(., data_source = datapoints %>% 
                           dplyr::filter(region == "Europe")),
-    get_map_region(rasterdata = data_geo_koppen, "Asia") %>%
+    get_map_region(rasterdata = data_geo_koppen, 
+                   select_region = "Asia",
+                   sel_alpha = 0.5) %>%
       get_points_to_map(., data_source = datapoints %>% 
                           dplyr::filter(region == "Asia")),
-    get_map_region(rasterdata = data_geo_koppen, "Oceania") %>%
+    get_map_region(rasterdata = data_geo_koppen,
+                   select_region = "Oceania",
+                   sel_alpha = 0.5) %>%
       get_points_to_map(., data_source = datapoints %>% 
                           dplyr::filter(region == "Oceania")),
     ncol = 1
   )
 
+legend_climatezones <- ggpubr::get_legend(
+  plot_summary("human")+ 
+    theme(legend.position = "bottom", 
+          legend.title = element_blank()))
+
+ggpubr::as_ggplot(legend_climatezones)
 
 
 #----------------------------------------------------------#
@@ -396,24 +412,29 @@ fig_maps <-
 #----------------------------------------------------------#
 figure2 <-
   cowplot::plot_grid(
+    cowplot::plot_grid(
     main_spatial_fig,
     fig_maps,
     ncol = 2,
     rel_widths =  c(2, 0.5)
+  ) ,
+  ggpubr::as_ggplot(legend_climatezones),
+    ncol = 1,
+    rel_heights = c(1, 0.1)
   )
-
+  
 
 purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure2_spatial_h1"),
+      here::here("Outputs/Figure2_h1_spatial"),
       .x,
       sep = "."
     ),
     plot = figure2,
     width = image_width_vec["3col"], # [config criteria]
-    height = 165,
+    height = 180,
     units = image_units, # [config criteria]
     bg = "white"
   )
