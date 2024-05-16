@@ -124,6 +124,10 @@ data_events_temporal <-
     group_var = c("region")
   )
 
+data_events_temporal$summary_table_weighted_mean %>% 
+  filter(importance_type == "ratio_ind_wmean") %>%
+  group_by(region, predictor) %>%
+  summarise(min = min(ratio), max = max(ratio))
 
 #----------------------------------------------------------#
 # 2. Combine output data -----
@@ -419,3 +423,82 @@ data_dist %>%
   ggplot2::coord_flip() +
   ggplot2::labs(x = "", y = "%") +
   ggplot2::facet_wrap(~region, nrow = 1)
+
+
+## temporal fig
+
+
+  data_combined_temporal %>%
+  ggplot2::ggplot() +
+ggplot2::geom_bar(
+  data = . %>%
+    dplyr::filter(
+      importance_type == "ratio_ind_wmean"
+    ),
+  ggplot2::aes(
+    x = as.factor(age / 1000),
+    y = get("ratio"),
+    fill = predictor
+  ),
+  stat = "identity",
+  width = 0.9,
+  alpha = 1,
+  position = "stack",
+  show.legend = TRUE
+) +
+  # geom_smooth(aes(
+  #   x = as.factor(age / 1000),
+  #   y = get("ratio"),
+  #   col = human_pred,
+  #   group = human_pred),
+  #   se = FALSE,
+  #   linetype = "dashed",
+  #   alpha = 0.5,
+  #   linewidth = 0.1,
+  #   show.legend = FALSE) +
+  ggplot2::scale_y_continuous(
+    limits = c(0, 1),
+    breaks = seq(0, 1, 0.2),
+    oob = scales::squish
+  ) +
+  ggplot2::scale_x_discrete(limit = rev) +
+  scale_fill_manual(
+    values = palette_predictors,
+    drop = FALSE) + 
+  scale_colour_manual(
+    values = palette_predictors,
+    drop = FALSE) +
+  guides(colour = "none")+
+  ggplot2::theme(
+    #aspect.ratio = 1/2,
+    legend.position = "top",
+    panel.background = ggplot2::element_blank(),
+    strip.background.y = ggplot2::element_blank(),
+    #strip.text.y = ggplot2::element_blank(),
+    legend.title = element_text(size=10),
+    #panel.grid.minor = ggplot2::element_blank(),
+    plot.background = ggplot2::element_rect(
+      fill = "transparent",
+      color = NA
+    ),
+    panel.grid.major = ggplot2::element_blank(),
+    axis.title.x = ggplot2::element_text(size = 10),
+    axis.title.y = ggplot2::element_text(size = 8),
+    axis.text.x = ggplot2::element_text(
+      size = 10),
+    axis.text.y = ggplot2::element_text(size = 8),
+    # plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+  ) +
+  ggplot2::facet_grid(region ~ human_pred) +
+  ggplot2::labs(x = "Age (ka) BP", 
+                y = "Ratio of importance",
+                fill = "Predictors") 
+
+
+
+
+
+
+
+
+

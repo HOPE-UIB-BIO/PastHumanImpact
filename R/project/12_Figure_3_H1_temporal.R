@@ -48,25 +48,7 @@ output_temporal_events <-
     )
   )
 
-# Predictors
-palette_predictors <- c(
-  human = "grey50", # v#ffa600"
-  climate = "grey30" # v#d74e92"
-)
 
-
-# predictor parts
-palette_human_pred <-
-  c(
-    "#9C8A6C",
-    "grey35"
-  ) %>%
-  rlang::set_names(
-    nm = c(
-      "spd",
-      "events"
-    )
-  )
 #----------------------------------------------------------#
 # 1. Summary tables -----
 #----------------------------------------------------------#
@@ -223,20 +205,92 @@ ages_for_shading <-
 
 
 
-main_temporal_fig <-
+# main_temporal_fig <-
+#   data_combined_temporal %>%
+#   ggplot2::ggplot() +
+#   # ggplot2::geom_rect(
+#   #   data = ages_for_shading,
+#   #   ggplot2::aes(
+#   #     xmin = as.factor(start_age/1000),
+#   #     xmax = as.factor(end_age/1000),
+#   #     ymin = -Inf,
+#   #     ymax = Inf
+#   #   ),
+#   #   fill = "grey50",
+#   #   alpha = 0.2
+#   # ) +
+#   ggplot2::geom_bar(
+#     data = . %>%
+#       dplyr::filter(
+#         importance_type == "ratio_ind_wmean"
+#       ),
+#     ggplot2::aes(
+#       x = as.factor(age / 1000),
+#       y = get("ratio"),
+#       fill = human_pred
+#     ),
+#     stat = "identity",
+#     width = 0.9,
+#     alpha = 1,
+#     position = ggplot2::position_dodge2(
+#       width = 1,
+#       preserve = "single"
+#     ),
+#     show.legend = TRUE
+#   ) +
+#   # geom_smooth(aes(
+#   #   x = as.factor(age / 1000),
+#   #   y = get("ratio"),
+#   #   col = human_pred,
+#   #   group = human_pred),
+#   #   se = FALSE,
+#   #   linetype = "dashed",
+#   #   alpha = 0.5,
+#   #   linewidth = 0.1,
+#   #   show.legend = FALSE) +
+#   ggplot2::scale_y_continuous(
+#     limits = c(-0.2, 1.2),
+#     breaks = seq(-0.2, 1.2, 0.2),
+#     oob = scales::squish
+#   ) +
+#   ggplot2::scale_x_discrete(limit = rev) +
+#   scale_fill_manual(
+#     values = palette_human_pred,
+#     drop = FALSE) + 
+#   scale_colour_manual(
+#     values = palette_human_pred,
+#     drop = FALSE) +
+#   guides(colour = "none")+
+#   ggplot2::theme(
+#     #aspect.ratio = 1/2,
+#     legend.position = "top",
+#     panel.background = ggplot2::element_blank(),
+#     strip.background.y = ggplot2::element_blank(),
+#     #strip.text.y = ggplot2::element_blank(),
+#     legend.title = element_text(size=10),
+#     #panel.grid.minor = ggplot2::element_blank(),
+#     plot.background = ggplot2::element_rect(
+#       fill = "transparent",
+#       color = NA
+#     ),
+#     panel.grid.major = ggplot2::element_blank(),
+#     axis.title.x = ggplot2::element_text(size = 8),
+#     axis.title.y = ggplot2::element_text(size = 8),
+#     axis.text.x = ggplot2::element_text(
+#       size = 8, angle = 60),
+#     axis.text.y = ggplot2::element_text(size = 8),
+#    # plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+#   ) +
+#   ggplot2::facet_grid(region ~ predictor) +
+#   ggplot2::labs(x = "Age (ka) BP", 
+#                 y = "Ratio of importance",
+#                 fill = "HVARPART with human predictor") 
+# 
+# main_temporal_fig
+
+main_temporal_fig2 <-
   data_combined_temporal %>%
   ggplot2::ggplot() +
-  # ggplot2::geom_rect(
-  #   data = ages_for_shading,
-  #   ggplot2::aes(
-  #     xmin = as.factor(start_age/1000),
-  #     xmax = as.factor(end_age/1000),
-  #     ymin = -Inf,
-  #     ymax = Inf
-  #   ),
-  #   fill = "grey50",
-  #   alpha = 0.2
-  # ) +
   ggplot2::geom_bar(
     data = . %>%
       dplyr::filter(
@@ -245,70 +299,47 @@ main_temporal_fig <-
     ggplot2::aes(
       x = as.factor(age / 1000),
       y = get("ratio"),
-      fill = human_pred
+      fill = predictor
     ),
     stat = "identity",
     width = 0.9,
     alpha = 1,
-    position = ggplot2::position_dodge2(
-      width = 0.9,
-      preserve = "single"
-    ),
+    position = "stack",
     show.legend = TRUE
   ) +
-  geom_smooth(aes(
-    x = as.factor(age / 1000),
-    y = get("ratio"),
-    col = human_pred,
-    group = human_pred),
-    se = FALSE,
-    linetype = "dashed",
-    alpha = 0.5,
-    linewidth = 0.1,
-    show.legend = FALSE) +
   ggplot2::scale_y_continuous(
-    limits = c(-0.2, 1.2),
-    breaks = seq(-0.2, 1.2, 0.2),
+    limits = c(0, 1),
+    breaks = seq(0, 1, 0.2),
     oob = scales::squish
   ) +
   ggplot2::scale_x_discrete(limit = rev) +
   scale_fill_manual(
-    values = palette_human_pred,
+    values = palette_predictors,
     drop = FALSE) + 
   scale_colour_manual(
-    values = palette_human_pred,
+    values = palette_predictors,
     drop = FALSE) +
   guides(colour = "none")+
   ggplot2::theme(
-    aspect.ratio = 1/2,
     legend.position = "top",
-   # panel.background = ggplot2::element_blank(),
+    panel.background = ggplot2::element_blank(),
     strip.background.y = ggplot2::element_blank(),
-    #strip.text.y = ggplot2::element_blank(),
     legend.title = element_text(size=10),
-    #panel.grid.minor = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
       color = NA
     ),
-   panel.background = ggplot2::element_rect(
-     fill = "grey90",
-     color = NA
-   ),
     panel.grid.major = ggplot2::element_blank(),
-    axis.title.x = ggplot2::element_text(size = 8),
+    axis.title.x = ggplot2::element_text(size = 10),
     axis.title.y = ggplot2::element_text(size = 8),
     axis.text.x = ggplot2::element_text(
-      size = 8, angle = 60),
-    axis.text.y = ggplot2::element_text(size = 8),
-   # plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+      size = 10),
+    axis.text.y = ggplot2::element_text(size = 8)
   ) +
-  ggplot2::facet_grid(region ~ predictor) +
-  ggplot2::labs(x = "Age (ka) BP", 
+  ggplot2::facet_grid(region ~ human_pred) +
+  ggplot2::labs(x = "Age ka BP", 
                 y = "Ratio of importance",
-                fill = "HVARPART run with human predictor") 
-
-main_temporal_fig
+                fill = "Predictors") 
 
 #----------------------------------------------------------#
 # 4. save figure -----
@@ -320,13 +351,13 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/temporal_h1"),
+      here::here("Outputs/Figure3_h1_temporal"),
       .x,
       sep = "."
     ),
-    plot = main_temporal_fig,
-    width = image_width_vec["3col"], # [config criteria]
-    height = 80,
+    plot = main_temporal_fig2,
+    width = image_width_vec["2col"], # [config criteria]
+    height = 165,
     units = image_units, # [config criteria]
     bg = "white"
   )
