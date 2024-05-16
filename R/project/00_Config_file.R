@@ -278,46 +278,91 @@ image_units <- "mm"
 
 # Define colour palette
 
+
 # Ecozones
+# palette_ecozones <-
+#   c(
+#     Polar = "#946dff",
+#     Cold_Without_dry_season_Very_Cold_Summer = "#C9D9FF",
+#     Cold_Without_dry_season_Cold_Summer = "#4CABFF",
+#     Cold_Without_dry_season_Warm_Summer = "#3E517A",
+#     Cold_Without_dry_season_Hot_Summer = "#012144",
+#     Cold_Dry_Winter = "#006138",
+#     Cold_Dry_Summer = "#863B28",
+#     Temperate_Without_dry_season = "#867718",
+#     Temperate_Dry_Winter = "#96E6B3",
+#     Temperate_Dry_Summer = "#BEEE62",
+#     Arid = "#EFE31E",
+#     Tropical = "#D81E5B"
+#   )
+
+#alternative palette 12 colours
+# "#7f3b08"
+# "#b35806"
+# "#e08214"
+# "#fdb863"
+# "#fee0b6"
+# "#f7f7f7"
+# "#d8daeb"
+# "#b2abd2"
+# "#8073ac"
+# "#542788"
+# "#2d004b"
+
+
+# "#40004b"
+# "#762a83"
+# "#9970ab"
+# "#c2a5cf"
+# "#e7d4e8"
+# "#f7f7f7"
+# "#d9f0d3"
+# "#a6dba0"
+# "#5aae61"
+# "#1b7837"
+# "#00441b"
+
+
+
 palette_ecozones <-
   c(
-    Polar = "#946dff",
-    Cold_Without_dry_season_Very_Cold_Summer = "#C9D9FF",
-    Cold_Without_dry_season_Cold_Summer = "#4CABFF",
-    Cold_Without_dry_season_Warm_Summer = "#3E517A",
-    Cold_Without_dry_season_Hot_Summer = "#012144",
-    Cold_Dry_Winter = "#006138",
-    Cold_Dry_Summer = "#863B28",
-    Temperate_Without_dry_season = "#867718",
-    Temperate_Dry_Winter = "#96E6B3",
-    Temperate_Dry_Summer = "#BEEE62",
-    Arid = "#EFE31E",
-    Tropical = "#D81E5B"
+    Polar = "#543005",
+    Cold_Without_dry_season_Very_Cold_Summer = "#8c510a",
+    Cold_Without_dry_season_Cold_Summer = "#bf812d",
+    Cold_Without_dry_season_Warm_Summer = "#dfc27d",
+    Cold_Without_dry_season_Hot_Summer = "#f6e8c3",
+    Cold_Dry_Winter = "#f5f5f5",
+    Cold_Dry_Summer = "#c7eae5",
+    Temperate_Without_dry_season = "#80cdc1",
+    Temperate_Dry_Winter = "#35978f",
+    Temperate_Dry_Summer = "#1f6f6f", 
+    Arid = "#01665e",
+    Tropical = "#003c30"
   )
 
 # Predictors
 palette_predictors <- c(
-  human = "#DAA520", # v#ffa600"
-  climate = "#483D8B" # v#d74e92"
+  human = "#c99b38", # v#ffa600"
+  climate = "#1f6f6f" # v#d74e92"
 )
 
-# predictor parts
-palette_predictors_parts <-
-  c(
-    "#9C8A6C",
-    "#BEB689",
-    "#DEDEB6"
-  ) %>%
-  rlang::set_names(
-    nm = c(
-      "unique_percent",
-      "average_share_percent",
-      "individual_percent"
-    )
-  )
+# # predictor parts
+# palette_predictors_parts <-
+#   c(
+#     "#9C8A6C",
+#     "#BEB689",
+#     "#DEDEB6"
+#   ) %>%
+#   rlang::set_names(
+#     nm = c(
+#       "unique_percent",
+#       "average_share_percent",
+#       "individual_percent"
+#     )
+#   )
+# 
+# # Parameters
+# predictors_spatial_order <- c("human", "time", "climate")
+# predictors_label <- c("Human", "Time", "Climate")
 
-# Parameters
-predictors_spatial_order <- c("human", "time", "climate")
-predictors_label <- c("Human", "Time", "Climate")
 
-# define common color
