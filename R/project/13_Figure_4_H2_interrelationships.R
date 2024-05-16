@@ -88,7 +88,25 @@ data_to_plot_trajectory <-
       levels = vec_climate_5 # [config criteria]
     )
   ) %>%
-  unnest(scores_dbrda)
+  unnest(scores_dbrda) %>%
+  mutate(
+  climatezone = recode(climatezone, 
+                       "Polar" = "Polar",
+                       "Cold_Without_dry_season_Very_Cold_Summer" ="Cold_Very_Cold_Summer",
+                       "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
+                       "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
+                       "Cold_Without_dry_season_Hot_Summer" = "Cold_Hot_Summer",
+                       "Cold_Dry_Winter" = "Cold_Dry_Winter",
+                       "Cold_Dry_Summer" = "Cold_Dry_Summer",
+                       "Temperate_Without_dry_season" = "Temperate",
+                       "Temperate_Dry_Winter" = "Temperate_Dry_Winter",
+                       "Temperate_Dry_Summer" = "Temperate_Dry_Summer",
+                       "Tropical" = "Tropical",
+                       "Arid" = "Arid"),
+climatezone = factor(
+  climatezone,
+  levels = levels(data_climate_zones$climatezone)# [config criteria]
+))
 
 #----------------------------------------------------------#
 # 2. Summary tables -----
@@ -153,7 +171,8 @@ table_h2 <-
       region = factor(region,
                       levels = vec_regions # [config criteria]
       ),
-      climatezone = recode(climatezone, "Polar" = "Polar",
+      climatezone = recode(climatezone, 
+                           "Polar" = "Polar",
                            "Cold_Without_dry_season_Very_Cold_Summer" ="Cold_Very_Cold_Summer",
                            "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
                            "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
@@ -241,9 +260,10 @@ pred_importance_fig
 #----------------------------------------------------------# 
 
 
+get_trajectory_figure <- function(data_source) {
 
-figure_trajecotries <- 
-  data_to_plot_trajectory %>%
+  fig <-
+  data_source %>%
      ggplot() +
      ggplot2::geom_segment(
        data = . %>%
@@ -262,7 +282,8 @@ figure_trajecotries <-
        mapping = ggplot2::aes(
          x = dbRDA1*1.2,
          y = dbRDA2*1.2,
-         label = label),
+         label = label
+         ),
        size = 3,
        col = "black"
      ) +
@@ -272,24 +293,26 @@ figure_trajecotries <-
        mapping = ggplot2::aes(
          x = dbRDA1,
          y = dbRDA2,
-         col = climatezone
+         col =  as.numeric(label)
        ),
        lineend = "round",
        linejoin = "bevel",
-       linewidth = 0.5,
-       arrow = arrow(
-         length = unit(0.1, "inches"),
-         ends = "first",
-         type = "open")) +
+       linewidth = 0.5
+       # arrow = arrow(
+       #   length = unit(0.1, "inches"),
+       #   ends = "first",
+       #   type = "open")
+       ) +
   geom_point(
     data = . %>%  
       dplyr::filter(score %in% c("sites")), 
     mapping = ggplot2::aes(
       x = dbRDA1,
       y = dbRDA2,
-      col = climatezone
+      col = as.numeric(label)
     ),
-    size = 0.5)+
+    size = 1.5
+    )+
      geom_text(
        data = . %>%
          dplyr::filter(score %in% c("sites")) %>%
@@ -297,25 +320,30 @@ figure_trajecotries <-
        mapping = ggplot2::aes(
          x = dbRDA1,
          y = dbRDA2,
-         label = label),
+         label = label,
+         col = as.numeric(label)*1000
+         ),
        size = 3,
        vjust = 1.5,
-       col = "black"
+       col = "black",
+       check_overlap = TRUE
      ) +
      geom_vline(
        xintercept = 0,
        linetype = 2, 
-       linewidth = 0.1) +
+       linewidth = 0.1,
+       col = "grey50") +
      geom_hline(
        yintercept = 0, 
        linetype = 2, 
-       linewidth = 0.1) +
+       linewidth = 0.1,
+       col = "grey50") +
      coord_fixed(xlim = c(-2,2) ) +
-     scale_color_manual(
-       values = palette_ecozones,
-       drop = FALSE) +
+     scale_color_gradientn(
+       colours = colorspace::sequential_hcl("BrwnYl", n = 12)) +
+
      ggplot2::theme(
-       legend.position = "none",
+       legend.position = "bottom",
        panel.background = ggplot2::element_blank(),
        strip.background = ggplot2::element_blank(),
        #strip.text.y = ggplot2::element_blank(),
@@ -331,14 +359,19 @@ figure_trajecotries <-
        axis.text.y = ggplot2::element_text(size = 8),
        plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
      )  +
-     ggplot2::facet_wrap(
-       ~climatezone+ region,
+     ggplot2::facet_grid(
+       region~ climatezone,
      ) +
-     labs(x = "dbRDA 1", y = "dbRDA 2")
+     labs(x = "dbRDA 1", y = "dbRDA 2", color = "Age BP")
+  
+  return(fig)
+}
  
     
 
 
+get_trajectory_figure(
+  data_to_plot_trajectory %>% filter(region == "North America"))
 
 
 
@@ -346,33 +379,9 @@ figure_trajecotries <-
 
 
 #----------------------------------------------------------#
-# 7. Combine plots & save -----
+# 7. Save -----
 #----------------------------------------------------------#
-cowplot::plot_grid(
-  pred_importance_fig,
-  main_trajectory_plot,
-  ncol = 2,
-  rel_heights = c(0.5, 2)
-)
 
-
-
- figure4 <- 
-   cowplot::ggdraw() +
-  cowplot::draw_plot(
-   pred_importance_fig,
-    x = 0.7,
-    y = 0,
-    width = 0.2,
-    height = 0.95
-  ) +
-  cowplot::draw_plot(
-    main_trajectory_plot,
-    x = 0,
-    y = 0,
-    width = 0.78,
-    height = 1
-  )  
 
  # save predictor importance
  purrr::walk(
@@ -383,8 +392,8 @@ cowplot::plot_grid(
        .x,
        sep = "."
      ),
-     plot = pred_i,
-     width = image_width_vec["1col"], # [config criteria]
+     plot = pred_importance_fig,
+     width = image_width_vec["2col"], # [config criteria]
      height = 160,
      units = image_units, # [config criteria]
      bg = "white"
@@ -396,18 +405,17 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2"),
+      here::here("Outputs/Figure_trajectories"),
       .x,
       sep = "."
     ),
-    plot = figure4,
+    plot = figure_trajectories,
     width = image_width_vec["3col"], # [config criteria]
-    height = 180,
+    height = 220,
     units = image_units, # [config criteria]
     bg = "white"
   )
 )
-
 
 
 

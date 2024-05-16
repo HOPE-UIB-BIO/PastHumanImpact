@@ -48,25 +48,7 @@ output_temporal_events <-
     )
   )
 
-# Predictors
-palette_predictors <- c(
-  human = "#DAA520", # v#ffa600"
-  climate = "#483D8B" # v#d74e92"
-)
 
-
-# predictor parts
-palette_human_pred <-
-  c(
-    "#8B008B",
-    "#DAA520"
-  ) %>%
-  rlang::set_names(
-    nm = c(
-      "spd",
-      "events"
-    )
-  )
 #----------------------------------------------------------#
 # 1. Summary tables -----
 #----------------------------------------------------------#
