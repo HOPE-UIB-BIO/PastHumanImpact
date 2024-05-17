@@ -212,7 +212,10 @@ main_temporal_fig2 <-
   ggplot2::ggplot() +
   ggplot2::facet_grid(
     region ~ age,
-    switch = "x"
+    switch = "x",
+    labeller = ggplot2::labeller(
+      region = ggplot2::label_wrap_gen(7)
+    )
   ) +
   ggplot2::geom_bar(
     ggplot2::aes(
@@ -262,6 +265,7 @@ main_temporal_fig2 <-
     ),
     panel.background = ggplot2::element_blank(),
     panel.spacing.x = ggplot2::unit(0.0, "lines"),
+    panel.spacing.y = ggplot2::unit(0.1, "lines"),
     panel.grid.major = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
@@ -303,7 +307,7 @@ purrr::walk(
     ),
     plot = main_temporal_fig2,
     width = image_width_vec["1col"], # [config criteria]
-    height = 165,
+    height = 120,
     units = image_units, # [config criteria]
     bg = "white"
   )
