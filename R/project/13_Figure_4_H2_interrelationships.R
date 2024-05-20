@@ -197,6 +197,7 @@ summary_h2_long <-
 # 3. Ratio of predictor importance -----
 #----------------------------------------------------------#
 
+
 pred_importance_fig <-
   summary_h2_long %>%
   dplyr::mutate(
@@ -271,7 +272,35 @@ pred_importance_fig <-
 # 4. Trajectory plot -----
 #----------------------------------------------------------#
 
-get_trajectory_figure <- function(data_source) {
+get_circe <- function(center = c(0, 0), radius = 1, npoints = 100) {
+  tt <- seq(0, 2 * pi, length.out = npoints)
+  xx <- center[1] + radius * cos(tt)
+  yy <- center[2] + radius * sin(tt)
+
+  data.frame(x = xx, y = yy) %>%
+    return()
+}
+
+add_circe <- function(data_source,
+                      line_col = "grey75",
+                      line_type = 3,
+                      ...) {
+  data_source +
+    ggplot2::geom_path(
+      data = get_circe(...),
+      mapping = ggplot2::aes(
+        x = x,
+        y = y,
+      ),
+      lty = line_type,
+      col = line_col,
+      linewidth = line_size # [config criteria]
+    ) %>%
+    return()
+}
+
+
+get_trajectory_figure <- function(data_source, add_circe = TRUE) {
   require(ggnewscale)
 
   data_biplot <-
@@ -378,9 +407,17 @@ get_trajectory_figure <- function(data_source) {
       axis.line = ggplot2::element_blank()
     )
 
+  if (
+    isTRUE(add_circe)
+  ) {
+    fig <-
+      add_circe(fig, radius = 0.5) %>%
+      add_circe(., radius = 1) %>%
+      add_circe(., radius = 1.5)
+  }
+
   return(fig)
 }
-
 
 figure_trajectories <-
   get_trajectory_figure(data_to_plot_trajectory)
@@ -393,7 +430,6 @@ figure_4 <-
     rel_heights = c(1, 2),
     rel_widths = c(1, 0.25)
   )
-
 
 
 #----------------------------------------------------------#
@@ -446,6 +482,254 @@ purrr::walk(
     plot = figure_4,
     width = image_width_vec["3col"], # [config criteria]
     height = 220,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+# Alternative Figure 4 -----
+
+get_importance_fig <- function(data_source, sel_region, sel_climate) {
+  data_source %>%
+    dplyr::filter(
+      region == sel_region &
+        climatezone == sel_climate &
+        importance_type == "ratio_ind_wmean"
+    ) %>%
+    dplyr::mutate(
+      predictor = factor(
+        predictor,
+        levels = c("human", "climate")
+      )
+    ) %>%
+    ggplot2::ggplot() +
+    ggplot2::geom_bar(
+      mapping = ggplot2::aes(
+        y = ratio,
+        x = climatezone,
+        fill = predictor
+      ),
+      stat = "identity",
+      width = 0.9,
+      alpha = 1,
+      position = "stack",
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_fill_manual(
+      values = palette_predictors,
+      drop = FALSE
+    ) +
+    ggplot2::scale_y_continuous(
+      limits = c(0, 1)
+    ) +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      legend.position = "none",
+      panel.background = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent",
+        color = NA
+      ),
+      axis.title = ggplot2::element_blank(),
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
+    )
+}
+
+get_trajectory_fig <- function(data_source, sel_region, sel_climate, axis_lim = 1.5, draw_circles = FALSE) {
+  require(ggnewscale)
+
+  data_biplot <-
+    data_source %>%
+    dplyr::filter(
+      region == sel_region &
+        climatezone == sel_climate &
+        score == "biplot"
+    ) %>%
+    dplyr::mutate(
+      pred_type = dplyr::case_when(
+        .default = "climate",
+        label == "spd" ~ "human"
+      )
+    )
+
+  data_sites <-
+    data_source %>%
+    dplyr::filter(
+      region == sel_region &
+        climatezone == sel_climate &
+        score == "sites"
+    ) %>%
+    dplyr::mutate(
+      age = as.numeric(label) / 1000
+    )
+
+  fig <-
+    ggplot2::ggplot() +
+    ggplot2::geom_vline(
+      xintercept = 0,
+      linetype = 3,
+      linewidth = line_size, # [config criteria]
+      col = "grey50"
+    ) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      linetype = 3,
+      linewidth = line_size, # [config criteria]
+      col = "grey50"
+    ) +
+    ggplot2::geom_path(
+      data = data_sites,
+      mapping = ggplot2::aes(
+        x = dbRDA1,
+        y = dbRDA2,
+        col = age
+      ),
+      lineend = "round",
+      linejoin = "bevel",
+      linewidth = 0.5,
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_color_gradientn(
+      "Age ka BP",
+      colours = colorspace::sequential_hcl("BrwnYl", n = 12)
+    ) +
+    ggnewscale::new_scale_color() +
+    ggplot2::geom_segment(
+      data = data_biplot,
+      mapping = ggplot2::aes(
+        x = 0,
+        y = 0,
+        xend = dbRDA1,
+        yend = dbRDA2,
+        col = pred_type
+      ),
+      arrow = ggplot2::arrow(
+        length = ggplot2::unit(0.03, "npc")
+      ),
+      linewidth = 0.75,
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_color_manual(
+      "Predictors",
+      values = palette_predictors, # [config criteria]
+      drop = FALSE
+    ) +
+    ggplot2::theme(
+      legend.position = "bottom",
+      legend.title = element_text(
+        size = text_size # [config criteria]
+      ),
+      legend.text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      text = ggplot2::element_text(size = text_size),
+      panel.background = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text = ggplot2::element_blank(),
+      plot.background = ggplot2::element_rect(
+        fill = "transparent",
+        color = NA
+      ),
+      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"),
+      axis.title = ggplot2::element_blank(),
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank()
+    ) +
+     ggplot2::coord_fixed(
+      xlim = c(-axis_lim, axis_lim),
+      ylim = c(-axis_lim, axis_lim),
+      expand = FALSE
+    ) 
+
+  if (
+    isTRUE(draw_circles)
+  ) {
+    fig <-
+      add_circe(fig, radius = 0.5) %>%
+      add_circe(., radius = 1) %>%
+      add_circe(., radius = 1.5) 
+  }
+
+  return(fig)
+}
+
+get_traj_w_intset_fig <- function(sel_region, sel_climate) {
+  get_trajectory_fig(
+    data_source = data_to_plot_trajectory,
+    sel_region = sel_region,
+    sel_climate = sel_climate,
+    draw_circles = TRUE
+  ) +
+    ggplot2::annotation_custom(
+      grob = cowplot::as_grob(
+        get_importance_fig(
+          data_source = summary_h2_long,
+          sel_region = sel_region,
+          sel_climate = sel_climate
+        )
+      ),
+      xmin = -1.45,
+      xmax = -1,
+      ymin = -1.6,
+      ymax = 1.6
+    ) %>%
+    return()
+}
+
+get_traj_w_intset_fig(
+  sel_region = "Europe",
+  sel_climate = "Arid"
+)
+
+data_plot_traj_intset <-
+  tidyr::expand_grid(
+    region = vec_regions, # [config criteria]
+    climatezone = data_climate_zones$climatezone_label # [config criteria]
+  ) %>%
+  dplyr::mutate(
+    list_fig_traj_intset = purrr::map2(
+      .progress = TRUE,
+      .x = region,
+      .y = climatezone,
+      .f = ~ get_traj_w_intset_fig(
+        sel_region = .x,
+        sel_climate = .y
+      )
+    )
+  )
+
+
+figure_4_b <-
+  cowplot::plot_grid(
+    plotlist = data_plot_traj_intset$list_fig_traj_intset,
+    nrow = length(vec_regions), # [config criteria]
+    ncol = length(data_climate_zones$climatezone_label) # [config criteria]
+  )
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Figure_4_b"),
+      .x,
+      sep = "."
+    ),
+    plot = figure_4_b,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 140,
     units = image_units, # [config criteria]
     bg = "white"
   )
