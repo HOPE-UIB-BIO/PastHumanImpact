@@ -55,21 +55,19 @@ add_climate_zone <- function(data_source) {
     dplyr::mutate(
       climatezone = dplyr::case_when(
         .default = climatezone,
-        climatezone == "Cold_Without_dry_season_Very_Cold_Summer" ~ "Cold - very cold summer",
-        climatezone == "Cold_Without_dry_season_Cold_Summer" ~ "Cold - cold summer",
-        climatezone == "Cold_Without_dry_season_Warm_Summer" ~ "Cold - warm summer",
-        climatezone == "Cold_Without_dry_season_Hot_Summer" ~ "Cold - hot - summer",
-        climatezone == "Cold_Dry_Winter" ~ "Cold - dry winter",
-        climatezone == "Cold_Dry_Summer" ~ "Cold - dry summer",
+        climatezone == "Cold_Without_dry_season_Very_Cold_Summer" ~ "Cold - Very Cold Summer",
+        climatezone == "Cold_Without_dry_season_Cold_Summer" ~ "Cold - Cold Summer",
+        climatezone == "Cold_Without_dry_season_Warm_Summer" ~ "Cold - Warm Summer",
+        climatezone == "Cold_Without_dry_season_Hot_Summer" ~ "Cold - Hot Summer",
+        climatezone == "Cold_Dry_Winter" ~ "Cold - Dry Winter",
+        climatezone == "Cold_Dry_Summer" ~ "Cold - Dry Summer",
         climatezone == "Temperate_Without_dry_season" ~ "Temperate",
-        climatezone == "Temperate_Dry_Winter" ~ "Temperate - dry winter",
-        climatezone == "Temperate_Dry_Summer" ~ "Temperate - dry summer"
+        climatezone == "Temperate_Dry_Winter" ~ "Temperate - Dry Winter",
+        climatezone == "Temperate_Dry_Summer" ~ "Temperate - Dry Summer"
       ),
       climatezone = factor(
         climatezone,
-        levels = levels(
-          data_climate_zones
-        ) # [config criteria]
+        levels = data_climate_zones$climatezone_label # [config criteria]
       )
     )
 }
@@ -120,8 +118,6 @@ data_to_plot_trajectory <-
   tidyr::unnest(scores_dbrda) %>%
   add_climate_zone()
 
-data_to_plot_trajectory$climatezone %>%
-  unique()
 
 #----------------------------------------------------------#
 # 2. Summary tables -----
@@ -234,149 +230,171 @@ pred_importance_fig <-
     legend.position = "none",
     panel.background = ggplot2::element_blank(),
     strip.background = ggplot2::element_blank(),
-    # strip.text.y = ggplot2::element_blank(),
+    strip.text.y = ggplot2::element_text(size = text_size), # [config criteria]
     strip.text.x = ggplot2::element_blank(),
+    panel.spacing.x = ggplot2::unit(0.0, "lines"),
+    panel.spacing.y = ggplot2::unit(0.1, "lines"),
     panel.grid.major = ggplot2::element_blank(),
     plot.background = ggplot2::element_rect(
       fill = "transparent",
       color = NA
     ),
-    axis.title.x = ggplot2::element_text(size = 8),
-    axis.title.y = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(size = 8, angle = 60, hjust = 1),
-    axis.text.y = ggplot2::element_text(size = 6),
+    axis.title.x = ggplot2::element_blank(),
+    axis.title.y = ggplot2::element_text(size = text_size), # [config criteria]
+    axis.text.x = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      angle = 60, hjust = 1
+    ),
+    axis.text.y = ggplot2::element_blank(),
+    axis.ticks.y = ggplot2::element_blank(),
+    line = ggplot2::element_line(
+      linewidth = line_size # [config criteria]
+    ),
     plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
   ) +
-  ggplot2::scale_y_continuous(limits = c(0, 1)) +
-  ggplot2::facet_wrap(
-    ~region,
-    ncol = 1
+  ggplot2::scale_y_continuous(
+    limits = c(0, 1)
   ) +
-  ggplot2::labs(x = "")
-
-pred_importance_fig
-
+  ggplot2::facet_grid(
+    region ~ "1",
+    labeller = ggplot2::labeller(
+      region = ggplot2::label_wrap_gen(7)
+    )
+  ) +
+  ggplot2::labs(
+    x = "",
+    y = "Ratio of importance"
+  )
 
 
 #----------------------------------------------------------#
 # 4. Trajectory plot -----
 #----------------------------------------------------------#
 
-
 get_trajectory_figure <- function(data_source) {
+  require(ggnewscale)
+
   data_biplot <-
     data_source %>%
-    dplyr::filter(score %in% c("biplot"))
+    dplyr::filter(score %in% c("biplot")) %>%
+    dplyr::mutate(
+      pred_type = dplyr::case_when(
+        .default = "climate",
+        label == "spd" ~ "human"
+      )
+    )
 
   data_sites <-
     data_source %>%
-    dplyr::filter(score %in% c("sites"))
+    dplyr::filter(score %in% c("sites")) %>%
+    dplyr::mutate(
+      age = as.numeric(label) / 1000
+    )
 
   fig <-
     ggplot2::ggplot() +
-    ggplot2::geom_segment(
-      data = data_biplot,
-      mapping = ggplot2::aes(
-        x = 0,
-        y = 0,
-        xend = dbRDA1,
-        yend = dbRDA2
-      ),
-      arrow = ggplot2::arrow(length = ggplot2::unit(0.03, "npc")),
-      col = "black"
+    ggplot2::coord_fixed(xlim = c(-2, 2)) +
+    ggplot2::facet_grid(
+      region ~ climatezone,
+      labeller = ggplot2::labeller(
+        region = ggplot2::label_wrap_gen(7),
+        climatezone = ggplot2::label_wrap_gen(7)
+      )
     ) +
-    ggplot2::geom_text(
-      data = data_biplot,
-      mapping = ggplot2::aes(
-        x = dbRDA1 * 1.2,
-        y = dbRDA2 * 1.2,
-        label = label
-      ),
-      size = 3,
-      col = "black"
+    ggplot2::geom_vline(
+      xintercept = 0,
+      linetype = 3,
+      linewidth = line_size, # [config criteria]
+      col = "grey50"
+    ) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      linetype = 3,
+      linewidth = line_size, # [config criteria]
+      col = "grey50"
     ) +
     ggplot2::geom_path(
       data = data_sites,
       mapping = ggplot2::aes(
         x = dbRDA1,
         y = dbRDA2,
-        col =  as.numeric(label)
+        col = age
       ),
       lineend = "round",
       linejoin = "bevel",
       linewidth = 0.5
-      # arrow = arrow(
-      #   length = unit(0.1, "inches"),
-      #   ends = "first",
-      #   type = "open")
     ) +
-    ggplot2::geom_point(
-      data = data_sites,
-      mapping = ggplot2::aes(
-        x = dbRDA1,
-        y = dbRDA2,
-        col = as.numeric(label)
-      ),
-      size = 1.5
-    ) +
-    ggplot2::geom_text(
-      data = data_sites %>%
-        dplyr::mutate(label = as.character(as.numeric(label) / 1000)),
-      mapping = ggplot2::aes(
-        x = dbRDA1,
-        y = dbRDA2,
-        label = label,
-        col = as.numeric(label) * 1000
-      ),
-      size = 3,
-      vjust = 1.5,
-      col = "black",
-      check_overlap = TRUE
-    ) +
-    ggplot2::geom_vline(
-      xintercept = 0,
-      linetype = 2,
-      linewidth = 0.1,
-      col = "grey50"
-    ) +
-    ggplot2::geom_hline(
-      yintercept = 0,
-      linetype = 2,
-      linewidth = 0.1,
-      col = "grey50"
-    ) +
-    ggplot2::coord_fixed(xlim = c(-2, 2)) +
     ggplot2::scale_color_gradientn(
+      "Age ka BP",
       colours = colorspace::sequential_hcl("BrwnYl", n = 12)
+    ) +
+    ggnewscale::new_scale_color() +
+    ggplot2::geom_segment(
+      data = data_biplot,
+      mapping = ggplot2::aes(
+        x = 0,
+        y = 0,
+        xend = dbRDA1,
+        yend = dbRDA2,
+        col = pred_type
+      ),
+      arrow = ggplot2::arrow(
+        length = ggplot2::unit(0.03, "npc")
+      ),
+      linewidth = 0.75
+    ) +
+    ggplot2::scale_color_manual(
+      "Predictors",
+      values = palette_predictors, # [config criteria]
+      drop = FALSE
     ) +
     ggplot2::theme(
       legend.position = "bottom",
+      legend.title = element_text(
+        size = text_size # [config criteria]
+      ),
+      legend.text = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      line = ggplot2::element_line(
+        linewidth = line_size # [config criteria]
+      ),
+      text = ggplot2::element_text(size = text_size),
       panel.background = ggplot2::element_blank(),
-      strip.background = ggplot2::element_blank(),
-      # strip.text.y = ggplot2::element_blank(),
-      # strip.text.x = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
+      strip.background = ggplot2::element_blank(),
+      strip.text.y = ggplot2::element_blank(),
+      strip.text.x = ggplot2::element_text(
+        size = text_size
+      ),
       plot.background = ggplot2::element_rect(
         fill = "transparent",
         color = NA
       ),
-      axis.title.x = ggplot2::element_text(size = 8),
-      axis.title.y = ggplot2::element_text(size = 8),
-      axis.text.x = ggplot2::element_text(size = 8, angle = 60),
-      axis.text.y = ggplot2::element_text(size = 8),
-      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm")
-    ) +
-    ggplot2::facet_grid(
-      region ~ climatezone,
-    ) +
-    ggplot2::labs(x = "dbRDA 1", y = "dbRDA 2", color = "Age BP")
+      plot.margin = ggplot2::unit(c(0, 0, 0, 0), "cm"),
+      axis.title = ggplot2::element_blank(),
+      axis.text = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      axis.line = ggplot2::element_blank()
+    )
 
   return(fig)
 }
 
-data_to_plot_trajectory %>%
-  filter(region == "North America") %>%
-  get_trajectory_figure()
+
+figure_trajectories <-
+  get_trajectory_figure(data_to_plot_trajectory)
+
+figure_4 <-
+  cowplot::plot_grid(
+    figure_trajectories,
+    pred_importance_fig,
+    nrow = 1,
+    rel_heights = c(1, 2),
+    rel_widths = c(1, 0.25)
+  )
+
+
 
 #----------------------------------------------------------#
 # 7. Save -----
@@ -417,6 +435,18 @@ purrr::walk(
   )
 )
 
-
-
-##########################################################################
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/Figure_4"),
+      .x,
+      sep = "."
+    ),
+    plot = figure_4,
+    width = image_width_vec["3col"], # [config criteria]
+    height = 220,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
