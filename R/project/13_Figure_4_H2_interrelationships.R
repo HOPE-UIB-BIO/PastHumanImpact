@@ -296,88 +296,20 @@ get_importance_fig <- function(
     )
 }
 
-get_trajectory_fig <- function(
-    data_source,
-    sel_region, sel_climate, axis_lim = 1.5, draw_circles = FALSE, legend_position = "none") {
-  require(ggnewscale)
-  `%>%` <- magrittr::`%>%`
-
-  data_biplot <-
-    data_source %>%
-    dplyr::filter(
-      region == sel_region &
-        climatezone == sel_climate &
-        score == "biplot"
-    ) %>%
-    dplyr::mutate(
-      pred_type = dplyr::case_when(
-        .default = "climate",
-        label == "spd" ~ "human"
-      )
-    )
-
-  data_sites <-
-    data_source %>%
-    dplyr::filter(
-      region == sel_region &
-        climatezone == sel_climate &
-        score == "sites"
-    ) %>%
-    dplyr::mutate(
-      age = as.numeric(label) / 1000
-    )
-
+get_empty_fig <- function(line_col = "grey85", legend_position = "none", draw_circles = TRUE, axis_lim = 1.5) {
   fig <-
     ggplot2::ggplot() +
     ggplot2::geom_vline(
       xintercept = 0,
       linetype = 3,
       linewidth = line_size, # [config criteria]
-      col = "grey50"
+      col = line_col
     ) +
     ggplot2::geom_hline(
       yintercept = 0,
       linetype = 3,
       linewidth = line_size, # [config criteria]
-      col = "grey50"
-    ) +
-    ggplot2::geom_path(
-      data = data_sites,
-      mapping = ggplot2::aes(
-        x = dbRDA1,
-        y = dbRDA2,
-        col = age
-      ),
-      lineend = "round",
-      linejoin = "bevel",
-      linewidth = 0.5,
-      show.legend = TRUE
-    ) +
-    ggplot2::scale_color_gradient(
-      "Age ka BP",
-      low = "#66C3FF",
-      high = "#3D348B"
-    ) +
-    ggnewscale::new_scale_color() +
-    ggplot2::geom_segment(
-      data = data_biplot,
-      mapping = ggplot2::aes(
-        x = 0,
-        y = 0,
-        xend = dbRDA1,
-        yend = dbRDA2,
-        col = pred_type
-      ),
-      arrow = ggplot2::arrow(
-        length = ggplot2::unit(0.03, "npc")
-      ),
-      linewidth = 0.75,
-      show.legend = FALSE
-    ) +
-    ggplot2::scale_color_manual(
-      "Predictors",
-      values = palette_predictors, # [config criteria]
-      drop = FALSE
+      col = line_col
     ) +
     ggplot2::theme(
       legend.position = legend_position,
@@ -416,10 +348,90 @@ get_trajectory_fig <- function(
     isTRUE(draw_circles)
   ) {
     fig <-
-      add_circe(fig, radius = 0.5) %>%
-      add_circe(., radius = 1) %>%
-      add_circe(., radius = 1.5)
+      add_circe(fig, radius = 0.5, line_col = line_col) %>%
+      add_circe(., radius = 1, line_col = line_col) %>%
+      add_circe(., radius = 1.5, line_col = line_col)
   }
+
+  return(fig)
+}
+
+get_trajectory_fig <- function(
+    data_source,
+    sel_region,
+    sel_climate,
+    ...) {
+  require(ggnewscale)
+  `%>%` <- magrittr::`%>%`
+
+  data_biplot <-
+    data_source %>%
+    dplyr::filter(
+      region == sel_region &
+        climatezone == sel_climate &
+        score == "biplot"
+    ) %>%
+    dplyr::mutate(
+      pred_type = dplyr::case_when(
+        .default = "climate",
+        label == "spd" ~ "human"
+      )
+    )
+
+  data_sites <-
+    data_source %>%
+    dplyr::filter(
+      region == sel_region &
+        climatezone == sel_climate &
+        score == "sites"
+    ) %>%
+    dplyr::mutate(
+      age = as.numeric(label) / 1000
+    )
+
+  fig <-
+    get_empty_fig(
+      line_col = "grey65",
+      ...
+    ) +
+    ggplot2::geom_path(
+      data = data_sites,
+      mapping = ggplot2::aes(
+        x = dbRDA1,
+        y = dbRDA2,
+        col = age
+      ),
+      lineend = "round",
+      linejoin = "bevel",
+      linewidth = 0.5,
+      show.legend = TRUE
+    ) +
+    ggplot2::scale_color_gradient(
+      "Age ka BP",
+      low = "#66C3FF",
+      high = "#3D348B"
+    ) +
+    ggnewscale::new_scale_color() +
+    ggplot2::geom_segment(
+      data = data_biplot,
+      mapping = ggplot2::aes(
+        x = 0,
+        y = 0,
+        xend = dbRDA1,
+        yend = dbRDA2,
+        col = pred_type
+      ),
+      arrow = ggplot2::arrow(
+        length = ggplot2::unit(0.03, "npc")
+      ),
+      linewidth = 0.75,
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_color_manual(
+      "Predictors",
+      values = palette_predictors, # [config criteria]
+      drop = FALSE
+    )
 
   return(fig)
 }
@@ -430,6 +442,8 @@ get_traj_w_intset_fig <- function(sel_region, sel_climate) {
     data_source = data_to_plot_trajectory,
     sel_region = sel_region,
     sel_climate = sel_climate,
+    axis_lim = 1.5,
+    legend_position = "none",
     draw_circles = TRUE
   ) +
     ggplot2::annotation_custom(
@@ -467,6 +481,14 @@ data_plot_traj_intset <-
         sel_climate = .y
       )
     )
+  )
+vec_emmpy_figs <-
+  c(5, 8, 10, 13:17, 26:28, 30, 32, 37, 43, 45:50, 52:53, 55)
+
+data_plot_traj_intset$list_fig_traj_intset[vec_emmpy_figs] <-
+  purrr::map(
+    .x = vec_emmpy_figs,
+    .f = ~ get_empty_fig()
   )
 
 figure_4_main <-
