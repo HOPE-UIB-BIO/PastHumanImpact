@@ -45,7 +45,7 @@ output_spatial_spd <-
       "_targets_data/analyses_h1"
     )
   )
-# - Load data geo koppen 
+# - Load data geo koppen
 data_geo_koppen <-
   readr::read_rds(
     paste0(
@@ -61,50 +61,12 @@ data_geo_koppen <-
       ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
       .default = ecozone_koppen_5
     )
-  )
+  ) %>%
+  add_climatezone_as_factor()
 
 #----------------------------------------------------------#
 # 2. Estimate averages -----
 #----------------------------------------------------------#
-
-add_predictor_as_factor <- function(data_source) {
-  data_source %>%
-    dplyr::mutate(
-      predictor = factor(
-        predictor,
-        levels = c("human", "climate")
-      )
-    ) %>%
-    return()
-}
-
-add_region_as_factor <- function(data_source) {
-  data_source %>%
-    dplyr::mutate(
-      region = factor(
-        region,
-        levels = vec_regions # [config criteria]
-      )
-    ) %>%
-    return()
-}
-
-add_climatezone_as_factor <- function(data_source) {
-  data_source %>%
-    dplyr::mutate(
-      climatezone = as.factor(climatezone),
-      region = factor(
-        region,
-        levels = vec_regions # [config criteria]
-      )
-    ) %>%
-    dplyr::full_join(
-      data_climate_zones, # [config criteria]
-      .,
-      by = "climatezone"
-    ) %>%
-    return()
-}
 
 
 data_spd_spatial_summary_by_climatezone <-
@@ -188,7 +150,6 @@ data_spd_records_quantiles <-
     values_from = value
   )
 
-summary(data_spd_records_quantiles)
 
 #----------------------------------------------------------#
 # 4. Build figure -----
@@ -326,34 +287,36 @@ plot_summary <- function(sel_var = "human") {
     )
 }
 
-main_spatial_fig <- 
+main_spatial_fig <-
   cowplot::plot_grid(
-  plot_density("human"),
-  plot_summary("human"),
-  plot_density("climate")+theme(axis.text.y = element_blank()),
-  plot_summary("climate"),
-  ncol = 4,
-  nrow = 1,
-  align = "v",
-  rel_widths = c(0.3, 1, 0.3, 1)
- # labels = c("Human", "", "Climate", "")
-) 
+    plot_density("human"),
+    plot_summary("human"),
+    plot_density("climate") +
+      ggplot2::theme(axis.text.y = ggplot2::element_blank()),
+    plot_summary("climate"),
+    ncol = 4,
+    nrow = 1,
+    align = "v",
+    rel_widths = c(0.3, 1, 0.3, 1)
+    # labels = c("Human", "", "Climate", "")
+  )
 
 
 #----------------------------------------------------------#
 # 5. region maps -----
 #----------------------------------------------------------#
-datapoints <- 
-  data_meta %>% 
+
+datapoints <-
+  data_meta %>%
   dplyr::select(dataset_id, long, lat, region, climatezone) %>%
+  add_climatezone_as_factor() %>%
   dplyr::filter(dataset_id %in% output_spatial_spd$dataset_id)
 
 get_points_to_map <- function(map, data_source) {
-  
   map +
-    geom_point(
+    ggplot2::geom_point(
       data = data_source,
-      aes(
+      mapping = ggplot2::aes(
         x = long,
         y = lat,
         fill = climatezone
@@ -362,49 +325,71 @@ get_points_to_map <- function(map, data_source) {
       shape = 21,
       alpha = 0.5
     ) +
-    theme(
+    ggplot2::theme(
       legend.position = "none"
     ) %>%
     return()
 }
 
 
-fig_maps <- 
+fig_maps <-
   cowplot::plot_grid(
-    get_map_region(rasterdata = data_geo_koppen, 
-                   select_region = "North America",
-                   sel_alpha = 0.5) %>%
-      get_points_to_map(., data_source = datapoints %>% 
-                          dplyr::filter(region == "North America")),
-    get_map_region(rasterdata = data_geo_koppen,
-                   select_region = "Latin America",
-                   sel_alpha = 0.5) %>%
-      get_points_to_map(., data_source = datapoints %>% 
-                          dplyr::filter(region == "Latin America")),
-    get_map_region(rasterdata = data_geo_koppen, 
-                   select_region = "Europe",
-                   sel_alpha = 0.5) %>%
-      get_points_to_map(., data_source = datapoints %>% 
-                          dplyr::filter(region == "Europe")),
-    get_map_region(rasterdata = data_geo_koppen, 
-                   select_region = "Asia",
-                   sel_alpha = 0.5) %>%
-      get_points_to_map(., data_source = datapoints %>% 
-                          dplyr::filter(region == "Asia")),
-    get_map_region(rasterdata = data_geo_koppen,
-                   select_region = "Oceania",
-                   sel_alpha = 0.5) %>%
-      get_points_to_map(., data_source = datapoints %>% 
-                          dplyr::filter(region == "Oceania")),
+    get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = "North America",
+      sel_alpha = 0.5
+    ) %>%
+      get_points_to_map(
+        data_source = datapoints %>%
+          dplyr::filter(region == "North America")
+      ),
+    get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = "Latin America",
+      sel_alpha = 0.5
+    ) %>%
+      get_points_to_map(
+        data_source = datapoints %>%
+          dplyr::filter(region == "Latin America")
+      ),
+    get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = "Europe",
+      sel_alpha = 0.5
+    ) %>%
+      get_points_to_map(
+        data_source = datapoints %>%
+          dplyr::filter(region == "Europe")
+      ),
+    get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = "Asia",
+      sel_alpha = 0.5
+    ) %>%
+      get_points_to_map(
+        data_source = datapoints %>%
+          dplyr::filter(region == "Asia")
+      ),
+    get_map_region(
+      rasterdata = data_geo_koppen,
+      select_region = "Oceania",
+      sel_alpha = 0.5
+    ) %>%
+      get_points_to_map(
+        data_source = datapoints %>%
+          dplyr::filter(region == "Oceania")
+      ),
     ncol = 1
   )
 
-legend_climatezones <- ggpubr::get_legend(
-  plot_summary("human")+ 
-    theme(legend.position = "bottom", 
-          legend.title = element_blank()))
-
-ggpubr::as_ggplot(legend_climatezones)
+legend_climatezones <-
+  ggpubr::get_legend(
+    plot_summary("human") +
+      ggplot2::theme(
+        legend.position = "bottom",
+        legend.title = ggplot2::element_blank()
+      )
+  )
 
 
 #----------------------------------------------------------#
@@ -413,16 +398,16 @@ ggpubr::as_ggplot(legend_climatezones)
 figure2 <-
   cowplot::plot_grid(
     cowplot::plot_grid(
-    main_spatial_fig,
-    fig_maps,
-    ncol = 2,
-    rel_widths =  c(2, 0.5)
-  ) ,
-  ggpubr::as_ggplot(legend_climatezones),
+      main_spatial_fig,
+      fig_maps,
+      ncol = 2,
+      rel_widths = c(2, 0.5)
+    ),
+    ggpubr::as_ggplot(legend_climatezones),
     ncol = 1,
     rel_heights = c(1, 0.1)
   )
-  
+
 
 purrr::walk(
   .x = c("png", "pdf"),
