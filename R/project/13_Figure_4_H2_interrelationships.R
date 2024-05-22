@@ -267,7 +267,9 @@ get_importance_fig <- function(
       drop = FALSE
     ) +
     ggplot2::scale_y_continuous(
-      limits = c(0, 1)
+      limits = c(0, 1),
+      breaks = seq(0, 1, 0.25),
+      labels = seq(0, 1, 0.25)
     ) +
     ggplot2::theme_void() +
     ggplot2::theme(
@@ -519,6 +521,49 @@ age_legend <-
     )
   )
 
+guide_legend_predicor <-
+  get_importance_fig(
+    data_source = summary_h2_long,
+    sel_region = "Europe",
+    sel_climate = "Polar"
+  ) +
+  ggplot2::theme(
+    axis.line.y = ggplot2::element_line(
+      color = "#636363",
+      linewidth = line_size
+    ),
+    axis.text.y = ggplot2::element_text(
+      color = "#636363",
+      size = text_size
+    ),
+    axis.title.y = ggplot2::element_text(
+      color = "#636363",
+      size = text_size,
+      angle = 90
+    ),
+    axis.ticks.y = ggplot2::element_line(
+      color = "#636363",
+      linewidth = line_size,
+      size = 0.5
+    ),
+    panel.grid.major.y = ggplot2::element_line(
+      color = "#636363",
+      linewidth = line_size # [config criteria]
+    ),
+    plot.margin = ggplot2::unit(c(0.1, 0.1, 0.1, 0.1), "cm")
+  ) +
+  ggplot2::labs(
+    y = "Ration of importance"
+  )
+
+guide_legend_trajectory <-
+  get_trajectory_fig(
+    data_source = data_to_plot_trajectory,
+    sel_region = "North America",
+    sel_climate = "Cold - Cold Summer",
+    draw_circles = TRUE
+  )
+
 
 #----------------------------------------------------------#
 # 5. Save -----
@@ -568,6 +613,38 @@ purrr::walk(
     plot = age_legend,
     width = image_width_vec["2col"], # [config criteria]
     height = 25,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/figure4_h2_guide_predictor"),
+      .x,
+      sep = "."
+    ),
+    plot = guide_legend_predicor,
+    width = 25, # [config criteria]
+    height = 50,
+    units = image_units, # [config criteria]
+    bg = "white"
+  )
+)
+
+purrr::walk(
+  .x = c("png", "pdf"),
+  .f = ~ ggplot2::ggsave(
+    paste(
+      here::here("Outputs/figure4_h2_guide_trajectory"),
+      .x,
+      sep = "."
+    ),
+    plot = guide_legend_trajectory,
+    width = 50, # [config criteria]
+    height = 50,
     units = image_units, # [config criteria]
     bg = "white"
   )
