@@ -333,18 +333,17 @@ image_units <- "mm"
 
 palette_ecozones <-
   c(
-    Polar = "#543005",
-    Cold_Without_dry_season_Very_Cold_Summer = "#8c510a",
-    Cold_Without_dry_season_Cold_Summer = "#bf812d",
-    Cold_Without_dry_season_Warm_Summer = "#dfc27d",
-    Cold_Without_dry_season_Hot_Summer = "#f6e8c3",
-    Cold_Dry_Winter = "#f5f5f5",
-    Cold_Dry_Summer = "#c7eae5",
-    Temperate_Without_dry_season = "#80cdc1",
-    Temperate_Dry_Winter = "#35978f",
-    Temperate_Dry_Summer = "#1f6f6f",
-    Arid = "#01665e",
-    Tropical = "#003c30"
+    "Polar" = "#543005",
+    "Cold - Cold Summer" = "#8c510a",
+    "Cold - Warm Summer" = "#bf812d",
+    "Cold - Hot Summer" = "#dfc27d",
+    "Cold - Dry Winter" = "#f5f5f5",
+    "Cold - Dry Summer" = "#c7eae5",
+    "Temperate" = "#80cdc1",
+    "Temperate - Dry Winter" = "#35978f",
+    "Temperate - Dry Summer" = "#1f6f6f",
+    "Arid" = "#01665e",
+    "Tropical" = "#003c30"
   )
 
 # Predictors
