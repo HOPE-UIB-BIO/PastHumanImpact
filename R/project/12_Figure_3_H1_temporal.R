@@ -207,8 +207,32 @@ data_combined_temporal <-
 # 3. build figure -----
 #----------------------------------------------------------#
 
+library(colorspace)
+
+palette_predictors_col <-
+  c(
+    palette_predictors,
+    colorspace::lighten(palette_predictors, amount = 0.5)
+  ) %>%
+  rlang::set_names(
+    nm = c(
+      "Humans (SPD)",
+      "Climate (SPD)",
+      "Humans (Events)",
+      "Climate (Events)"
+    )
+  )
+
 main_temporal_fig2 <-
   data_combined_temporal %>%
+  dplyr::mutate(
+    pred_col = dplyr::case_when(
+      predictor == "human" & human_pred == "spd" ~ "Humans (SPD)",
+      predictor == "climate" & human_pred == "spd" ~ "Climate (SPD)",
+      predictor == "human" & human_pred == "events" ~ "Humans (Events)",
+      predictor == "climate" & human_pred == "events" ~ "Climate (Events)"
+    )
+  ) %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
     region ~ age,
@@ -221,9 +245,9 @@ main_temporal_fig2 <-
     ggplot2::aes(
       x = human_pred,
       y = get("ratio"),
-      fill = predictor,
-      alpha = human_pred,
-      width = human_pred_width,
+      fill = pred_col,
+      # alpha = human_pred,
+      # width = human_pred_width,
       col = human_pred,
     ),
     stat = "identity",
@@ -240,7 +264,7 @@ main_temporal_fig2 <-
     limits = rev,
   ) +
   ggplot2::scale_fill_manual(
-    values = palette_predictors,
+    values = palette_predictors_col,
     drop = FALSE
   ) +
   ggplot2::scale_colour_manual(
@@ -253,10 +277,23 @@ main_temporal_fig2 <-
   ) +
   ggplot2::guides(
     colour = "none",
-    alpha = "none"
+    alpha = "none",
+    fill = ggplot2::guide_legend(
+      title = "Predictors",
+      title.position = "top",
+      title.theme = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      label.theme = ggplot2::element_text(
+        size = text_size # [config criteria]
+      ),
+      nrow = 2,
+      ncol = 2,
+      byrow = TRUE
+    )
   ) +
   ggplot2::theme(
-    legend.position = "top",
+    legend.position = "bottom",
     legend.title = element_text(
       size = text_size # [config criteria]
     ),
@@ -290,8 +327,7 @@ main_temporal_fig2 <-
   ) +
   ggplot2::labs(
     x = "Age ka BP",
-    y = "Ratio of importance",
-    fill = "Predictors"
+    y = "Ratio of importance"
   )
 
 #----------------------------------------------------------#
