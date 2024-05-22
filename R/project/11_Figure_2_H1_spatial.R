@@ -334,14 +334,24 @@ plot_summary <- function(sel_var = "human") {
 main_spatial_fig <-
   cowplot::plot_grid(
     plot_density("human"),
-    plot_summary("human"),
+    plot_summary("human") +
+      ggplot2::theme(
+        axis.title.y = ggplot2::element_blank(),
+        axis.text.y = ggplot2::element_blank(),
+        axis.ticks.y = ggplot2::element_blank()
+      ),
     plot_density("climate") +
       ggplot2::theme(
         axis.title.y = ggplot2::element_blank(),
         axis.text.y = ggplot2::element_blank(),
         axis.ticks.y = ggplot2::element_blank()
       ),
-    plot_summary("climate"),
+    plot_summary("climate") +
+      ggplot2::theme(
+        axis.title.y = ggplot2::element_blank(),
+        axis.text.y = ggplot2::element_blank(),
+        axis.ticks.y = ggplot2::element_blank()
+      ),
     ncol = 4,
     nrow = 1,
     rel_widths = c(0.3, 1, 0.28, 1)
