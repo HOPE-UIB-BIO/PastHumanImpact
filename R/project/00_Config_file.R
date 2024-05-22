@@ -196,7 +196,6 @@ vec_climate_5 <-
 
 short_name_climatezone <- c(
   "Polar" = "Polar",
-  "Cold_Without_dry_season_Very_Cold_Summer" = "Cold_Very_Cold_Summer",
   "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
   "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
   "Cold_Without_dry_season_Hot_Summer" = "Cold_Hot_Summer",
@@ -214,7 +213,6 @@ data_climate_zones <-
     climatezone = factor(
       c(
         "Polar",
-        "Cold_Very_Cold_Summer",
         "Cold_Cold_Summer",
         "Cold_Warm_Summer",
         "Cold_Hot_Summer",
@@ -228,7 +226,6 @@ data_climate_zones <-
       ),
       levels = c(
         "Polar",
-        "Cold_Very_Cold_Summer",
         "Cold_Cold_Summer",
         "Cold_Warm_Summer",
         "Cold_Hot_Summer",
@@ -243,7 +240,6 @@ data_climate_zones <-
     ),
     climatezone_label = c(
       "Polar",
-      "Cold - Very Cold Summer",
       "Cold - Cold Summer",
       "Cold - Warm Summer",
       "Cold - Hot Summer",
