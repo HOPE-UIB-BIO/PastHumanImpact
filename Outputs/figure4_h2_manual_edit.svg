@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
-   sodipodi:docname="Figure4_20240522.svg"
+   sodipodi:docname="figure4_h2_manual_edit.svg"
    xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -25,9 +25,9 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.73851712"
-     inkscape:cx="820.56324"
-     inkscape:cy="243.73166"
+     inkscape:zoom="1.0444209"
+     inkscape:cx="617.5671"
+     inkscape:cy="280.53823"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
@@ -3119,7 +3119,14 @@
        clipPathUnits="userSpaceOnUse"
        id="clipPath20287"><path
          d="M 31.67,2.83 H 68.03 V 138.89 H 31.67 Z"
-         id="path20285" /></clipPath></defs><g
+         id="path20285" /></clipPath></defs><rect
+     style="opacity:1;fill:#ffffff;stroke-width:0.35269;stroke-miterlimit:1"
+     id="rect3189"
+     width="282.71646"
+     height="165.93126"
+     x="-3.7999525"
+     y="-2.7866318"
+     ry="0.37483352" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1" /><g
