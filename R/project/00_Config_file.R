@@ -196,7 +196,6 @@ vec_climate_5 <-
 
 short_name_climatezone <- c(
   "Polar" = "Polar",
-  "Cold_Without_dry_season_Very_Cold_Summer" ="Cold_Very_Cold_Summer",
   "Cold_Without_dry_season_Cold_Summer" = "Cold_Cold_Summer",
   "Cold_Without_dry_season_Warm_Summer" = "Cold_Warm_Summer",
   "Cold_Without_dry_season_Hot_Summer" = "Cold_Hot_Summer",
@@ -207,28 +206,26 @@ short_name_climatezone <- c(
   "Temperate_Dry_Summer" = "Temperate_Dry_Summer",
   "Tropical" = "Tropical",
   "Arid" = "Arid"
-  )
+)
 
 data_climate_zones <-
   tibble::tibble(
     climatezone = factor(
       c(
-        "Arid",
-        "Cold_Dry_Summer",
-        "Cold_Dry_Winter",
-        "Cold_Cold_Summer",
-        "Cold_Hot_Summer",
-        "Cold_Very_Cold_Summer",
-        "Cold_Warm_Summer",
         "Polar",
-        "Temperate_Dry_Summer",
-        "Temperate_Dry_Winter",
+        "Cold_Cold_Summer",
+        "Cold_Warm_Summer",
+        "Cold_Hot_Summer",
+        "Cold_Dry_Winter",
+        "Cold_Dry_Summer",
         "Temperate",
-        "Tropical"
+        "Temperate_Dry_Winter",
+        "Temperate_Dry_Summer",
+        "Tropical",
+        "Arid"
       ),
       levels = c(
         "Polar",
-        "Cold_Very_Cold_Summer",
         "Cold_Cold_Summer",
         "Cold_Warm_Summer",
         "Cold_Hot_Summer",
@@ -240,11 +237,21 @@ data_climate_zones <-
         "Tropical",
         "Arid"
       )
+    ),
+    climatezone_label = c(
+      "Polar",
+      "Cold - Cold Summer",
+      "Cold - Warm Summer",
+      "Cold - Hot Summer",
+      "Cold - Dry Winter",
+      "Cold - Dry Summer",
+      "Temperate",
+      "Temperate - Dry Winter",
+      "Temperate - Dry Summer",
+      "Tropical",
+      "Arid"
     )
   )
-
-
-
 
 min_n_records_per_climate_zone <- 5
 
@@ -296,7 +303,7 @@ image_units <- "mm"
 #     Tropical = "#D81E5B"
 #   )
 
-#alternative palette 12 colours
+# alternative palette 12 colours
 # "#7f3b08"
 # "#b35806"
 # "#e08214"
@@ -335,7 +342,7 @@ palette_ecozones <-
     Cold_Dry_Summer = "#c7eae5",
     Temperate_Without_dry_season = "#80cdc1",
     Temperate_Dry_Winter = "#35978f",
-    Temperate_Dry_Summer = "#1f6f6f", 
+    Temperate_Dry_Summer = "#1f6f6f",
     Arid = "#01665e",
     Tropical = "#003c30"
   )
@@ -360,9 +367,7 @@ palette_predictors <- c(
 #       "individual_percent"
 #     )
 #   )
-# 
+#
 # # Parameters
 # predictors_spatial_order <- c("human", "time", "climate")
 # predictors_label <- c("Human", "Time", "Climate")
-
-
