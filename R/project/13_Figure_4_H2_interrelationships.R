@@ -388,8 +388,8 @@ get_trajectory_fig <- function(
     ) +
     ggplot2::scale_color_gradient(
       "Age ka BP",
-      low = "#66C3FF",
-      high = "#3D348B"
+      low = paletete_age["young"], # [config criteria]
+      high = paletete_age["old"] # [config criteria]
     ) +
     ggnewscale::new_scale_color() +
     ggplot2::geom_segment(

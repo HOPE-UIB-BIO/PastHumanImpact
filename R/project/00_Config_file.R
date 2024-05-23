@@ -290,17 +290,17 @@ common_gray <- "#636363"
 
 palette_ecozones <-
   c(
-    "Polar" = "#543005",
-    "Cold - Cold Summer" = "#8c510a",
-    "Cold - Warm Summer" = "#bf812d",
-    "Cold - Hot Summer" = "#dfc27d",
-    "Cold - Dry Winter" = "#f5f5f5",
-    "Cold - Dry Summer" = "#c7eae5",
-    "Temperate" = "#80cdc1",
-    "Temperate - Dry Winter" = "#35978f",
-    "Temperate - Dry Summer" = "#1f6f6f",
-    "Arid" = "#01665e",
-    "Tropical" = "#003c30"
+    "Polar" = "#907A8E",
+    "Cold - Cold Summer" = "#8C4418",
+    "Cold - Warm Summer" = "#DC702E",
+    "Cold - Hot Summer" = "#AA6133",
+    "Cold - Dry Winter" = "#CB8152",
+    "Cold - Dry Summer" = "#E59463",
+    "Temperate" = "#371E71",
+    "Temperate - Dry Winter" = "#562FB1",
+    "Temperate - Dry Summer" = "#9A7EDD",
+    "Arid" = "#DDDF78",
+    "Tropical" = "#D68FD6"
   )
 
 # Predictors
@@ -308,3 +308,9 @@ palette_predictors <- c(
   human = "#c99b38", # v#ffa600"
   climate = "#1f6f6f" # v#d74e92"
 )
+
+paletete_age <-
+  c(
+    "young" = "#66C3FF",
+    "old" = "#1337a3"
+  )
