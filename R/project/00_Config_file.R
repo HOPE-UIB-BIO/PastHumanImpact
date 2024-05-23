@@ -270,6 +270,7 @@ ggplot2::theme_set(
 # define general
 text_size <- 10
 line_size <- 0.1
+point_size <- 1
 
 # define output sizes
 image_width_vec <-
@@ -285,66 +286,21 @@ image_units <- "mm"
 
 # Define colour palette
 
-
-# Ecozones
-# palette_ecozones <-
-#   c(
-#     Polar = "#946dff",
-#     Cold_Without_dry_season_Very_Cold_Summer = "#C9D9FF",
-#     Cold_Without_dry_season_Cold_Summer = "#4CABFF",
-#     Cold_Without_dry_season_Warm_Summer = "#3E517A",
-#     Cold_Without_dry_season_Hot_Summer = "#012144",
-#     Cold_Dry_Winter = "#006138",
-#     Cold_Dry_Summer = "#863B28",
-#     Temperate_Without_dry_season = "#867718",
-#     Temperate_Dry_Winter = "#96E6B3",
-#     Temperate_Dry_Summer = "#BEEE62",
-#     Arid = "#EFE31E",
-#     Tropical = "#D81E5B"
-#   )
-
-# alternative palette 12 colours
-# "#7f3b08"
-# "#b35806"
-# "#e08214"
-# "#fdb863"
-# "#fee0b6"
-# "#f7f7f7"
-# "#d8daeb"
-# "#b2abd2"
-# "#8073ac"
-# "#542788"
-# "#2d004b"
-
-
-# "#40004b"
-# "#762a83"
-# "#9970ab"
-# "#c2a5cf"
-# "#e7d4e8"
-# "#f7f7f7"
-# "#d9f0d3"
-# "#a6dba0"
-# "#5aae61"
-# "#1b7837"
-# "#00441b"
-
-
+common_gray <- "#636363"
 
 palette_ecozones <-
   c(
-    Polar = "#543005",
-    Cold_Without_dry_season_Very_Cold_Summer = "#8c510a",
-    Cold_Without_dry_season_Cold_Summer = "#bf812d",
-    Cold_Without_dry_season_Warm_Summer = "#dfc27d",
-    Cold_Without_dry_season_Hot_Summer = "#f6e8c3",
-    Cold_Dry_Winter = "#f5f5f5",
-    Cold_Dry_Summer = "#c7eae5",
-    Temperate_Without_dry_season = "#80cdc1",
-    Temperate_Dry_Winter = "#35978f",
-    Temperate_Dry_Summer = "#1f6f6f",
-    Arid = "#01665e",
-    Tropical = "#003c30"
+    "Polar" = "#907A8E",
+    "Cold - Cold Summer" = "#8C4418",
+    "Cold - Warm Summer" = "#DC702E",
+    "Cold - Hot Summer" = "#AA6133",
+    "Cold - Dry Winter" = "#CB8152",
+    "Cold - Dry Summer" = "#E59463",
+    "Temperate" = "#371E71",
+    "Temperate - Dry Winter" = "#562FB1",
+    "Temperate - Dry Summer" = "#9A7EDD",
+    "Arid" = "#DDDF78",
+    "Tropical" = "#D68FD6"
   )
 
 # Predictors
@@ -353,21 +309,8 @@ palette_predictors <- c(
   climate = "#1f6f6f" # v#d74e92"
 )
 
-# # predictor parts
-# palette_predictors_parts <-
-#   c(
-#     "#9C8A6C",
-#     "#BEB689",
-#     "#DEDEB6"
-#   ) %>%
-#   rlang::set_names(
-#     nm = c(
-#       "unique_percent",
-#       "average_share_percent",
-#       "individual_percent"
-#     )
-#   )
-#
-# # Parameters
-# predictors_spatial_order <- c("human", "time", "climate")
-# predictors_label <- c("Human", "Time", "Climate")
+paletete_age <-
+  c(
+    "young" = "#66C3FF",
+    "old" = "#1337a3"
+  )
