@@ -602,7 +602,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Pollen_data"),
+      here::here("Outputs/Supp/Extended_data_figure_1"),
       .x,
       sep = "."
     ),
