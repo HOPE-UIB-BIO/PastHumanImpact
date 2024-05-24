@@ -154,7 +154,10 @@ fig_n_c14 <-
   ggplot2::facet_wrap(
     ~region,
     ncol = 1,
-    scales = "free_y"
+    scales = "free_y",
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7)
+    ) 
   ) +
   ggplot2::scale_color_manual(
     values = palette_ecozones
@@ -239,7 +242,10 @@ if (
     ggplot2::ggplot() +
     ggplot2::facet_wrap(
       ~region,
-      ncol = 1
+      ncol = 1,
+      labeller = ggplot2::labeller( 
+        region = ggplot2::label_wrap_gen(7)
+      )
     ) +
     ggplot2::scale_color_manual(
       values = palette_ecozones
@@ -415,7 +421,11 @@ fig_valid_n_rc_250 <-
   data_valid_n_rc_250 %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7),
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -458,7 +468,7 @@ fig_valid_n_rc_250 <-
     )
   ) +
   ggplot2::labs(
-    fill = "Has enough RC dates to construct SPD?",
+    fill = "Has enough RC dates?",
     caption = "250 km is used as maximum distance from a record"
   ) +
   ggplot2::coord_equal() +
@@ -514,7 +524,11 @@ fig_valid_n_rc_500 <-
   data_valid_n_rc_500 %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7),
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -557,7 +571,7 @@ fig_valid_n_rc_500 <-
     )
   ) +
   ggplot2::labs(
-    fill = "Has enough RC dates to construct SPD?",
+    fill = "Has enough RC dates?",
     caption = "500 km is used as maximum distance from a record"
   ) +
   ggplot2::coord_equal() +
@@ -640,7 +654,11 @@ fig_human_presence_detected <-
   data_valid_events %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7),
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -682,7 +700,7 @@ fig_human_presence_detected <-
     )
   ) +
   ggplot2::labs(
-    fill = "Human presence detected in pollen data?"
+    fill = "Human presence detected"
   ) +
   ggplot2::coord_equal() +
   waffle::geom_waffle(
@@ -761,7 +779,11 @@ fig_human_presence_status <-
   tidyr::drop_na(region, climatezone)   %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7),
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::guides(
@@ -969,8 +991,13 @@ fig_event_temporal_trends <-
       col = variable
     )
   ) +
-  ggplot2::facet_grid(region ~ climatezone) +
-  # ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
+  ggplot2::facet_grid(
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = ggplot2::label_wrap_gen(7),
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
+    ) +
   ggplot2::scale_x_continuous(
     trans = "reverse",
     limits = c(12e3, 0),
@@ -1026,7 +1053,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Extended_figure_3"),
+      here::here("Outputs/Supp/Extended_data_figure_3"),
       .x,
       sep = "."
     ),
