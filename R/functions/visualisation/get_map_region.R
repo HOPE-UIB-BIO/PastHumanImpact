@@ -38,6 +38,14 @@ get_map_region <- function(rasterdata,
     ggplot2::theme_void() +
     ggplot2::theme(
       legend.position = "none",
+      legend.text = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        colour = common_gray # [config criteria]
+      ),
+      legend.title = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        colour = common_gray # [config criteria]
+      ),
       panel.background = ggplot2::element_blank(),
       plot.background = ggplot2::element_blank(),
       panel.spacing = ggplot2::unit(c(0, 0, 0, 0), "null"),

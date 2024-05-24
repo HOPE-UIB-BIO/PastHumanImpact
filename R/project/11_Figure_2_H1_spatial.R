@@ -148,7 +148,8 @@ data_spd_records_quantiles <-
   tidyr::pivot_wider(
     names_from = quantile_type,
     values_from = value
-  )
+  ) %>%
+  add_climatezone_as_factor()
 
 
 #----------------------------------------------------------#
@@ -156,6 +157,12 @@ data_spd_records_quantiles <-
 #----------------------------------------------------------#
 
 sel_range <- c(0, 1)
+
+palette_ecozones_labels <-
+  palette_ecozones %>%
+  rlang::set_names(
+    nm = get_climatezone_label(names(palette_ecozones))
+  )
 
 p0 <-
   tibble::tibble() %>%
@@ -199,10 +206,10 @@ p0 <-
     )
   ) +
   ggplot2::scale_fill_manual(
-    values = palette_ecozones
+    values = palette_ecozones_labels
   ) +
   ggplot2::scale_color_manual(
-    values = palette_ecozones
+    values = palette_ecozones_labels
   ) +
   ggplot2::labs(
     x = "",
@@ -212,10 +219,17 @@ p0 <-
 plot_density <- function(sel_var = "human") {
   require(colorspace)
   p0 +
-    ggplot2::facet_wrap(~region, ncol = 1) +
+    ggplot2::facet_grid(
+      region ~ predictor,
+      switch = "x",
+    ) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_blank(),
+      strip.text.x = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        color = common_gray # [config criteria]
+      ),
+      strip.text.y = ggplot2::element_blank(),
       axis.text.x = ggplot2::element_blank(),
       axis.line.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank()
@@ -262,10 +276,19 @@ plot_density <- function(sel_var = "human") {
 plot_summary <- function(sel_var = "human") {
   require(colorspace)
   p0 +
-    ggplot2::facet_grid(region ~ climatezone) +
+    ggplot2::facet_grid(
+      region ~ climatezone_label,
+      switch = "x",
+      labeller = ggplot2::labeller(
+        region = ggplot2::label_wrap_gen(7)
+      )
+    ) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_blank(),
+      strip.text = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        color = common_gray # [config criteria]
+      ),
       axis.text = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
@@ -290,9 +313,9 @@ plot_summary <- function(sel_var = "human") {
           xend = predictor,
           y = upr,
           yend = lwr,
-          col = climatezone
+          col = climatezone_label
         ),
-        alpha = 0.3,
+        alpha = 0.8,
         linewidth = (0.1 + (1 - (as.numeric(.x) / 100))) * 5
       )
     ) +
@@ -325,17 +348,20 @@ plot_summary <- function(sel_var = "human") {
       mapping = ggplot2::aes(
         x = predictor,
         y = ratio,
-        col = climatezone
+        fill = climatezone_label
       ),
+      shape = 21,
+      col = common_gray, # [config criteria]
       size = point_size * 3, # [config criteria]
     )
 }
 
-main_spatial_fig <-
+fig_main <-
   cowplot::plot_grid(
     plot_density("human"),
     plot_summary("human") +
       ggplot2::theme(
+        strip.text.y = ggplot2::element_blank(),
         axis.title.y = ggplot2::element_blank(),
         axis.text.y = ggplot2::element_blank(),
         axis.ticks.y = ggplot2::element_blank()
@@ -354,7 +380,8 @@ main_spatial_fig <-
       ),
     ncol = 4,
     nrow = 1,
-    rel_widths = c(0.3, 1, 0.28, 1)
+    align = "v",
+    rel_widths = c(0.3, 0.95, 0.2, 1)
     # labels = c("Human", "", "Climate", "")
   )
 
@@ -388,59 +415,32 @@ get_points_to_map <- function(map, data_source) {
     return()
 }
 
+get_map_with_points <- function(sel_region, sel_alpha = 0.75) {
+  get_map_region(
+    rasterdata = data_geo_koppen,
+    select_region = sel_region,
+    sel_alpha = def_map_alpha
+  ) %>%
+    get_points_to_map(
+      data_source = datapoints %>%
+        dplyr::filter(region == sel_region)
+    ) %>%
+    return()
+}
+
 fig_maps <-
   cowplot::plot_grid(
-    get_map_region(
-      rasterdata = data_geo_koppen,
-      select_region = "North America",
-      sel_alpha = 0.5
-    ) %>%
-      get_points_to_map(
-        data_source = datapoints %>%
-          dplyr::filter(region == "North America")
-      ),
-    get_map_region(
-      rasterdata = data_geo_koppen,
-      select_region = "Latin America",
-      sel_alpha = 0.5
-    ) %>%
-      get_points_to_map(
-        data_source = datapoints %>%
-          dplyr::filter(region == "Latin America")
-      ),
-    get_map_region(
-      rasterdata = data_geo_koppen,
-      select_region = "Europe",
-      sel_alpha = 0.5
-    ) %>%
-      get_points_to_map(
-        data_source = datapoints %>%
-          dplyr::filter(region == "Europe")
-      ),
-    get_map_region(
-      rasterdata = data_geo_koppen,
-      select_region = "Asia",
-      sel_alpha = 0.5
-    ) %>%
-      get_points_to_map(
-        data_source = datapoints %>%
-          dplyr::filter(region == "Asia")
-      ),
-    get_map_region(
-      rasterdata = data_geo_koppen,
-      select_region = "Oceania",
-      sel_alpha = 0.5
-    ) %>%
-      get_points_to_map(
-        data_source = datapoints %>%
-          dplyr::filter(region == "Oceania")
-      ),
+    get_map_with_points("North America"),
+    get_map_with_points("Latin America"),
+    get_map_with_points("Europe"),
+    get_map_with_points("Asia"),
+    get_map_with_points("Oceania"),
     ncol = 1
   )
 
 legend_climatezones <-
   ggpubr::get_legend(
-    plot_summary("human") +
+    get_map_with_points("Latin America") +
       ggplot2::theme(
         legend.position = "bottom",
         legend.title = ggplot2::element_blank()
@@ -454,7 +454,7 @@ legend_climatezones <-
 figure2 <-
   cowplot::plot_grid(
     cowplot::plot_grid(
-      main_spatial_fig,
+      fig_main,
       fig_maps,
       ncol = 2,
       rel_widths = c(2, 0.5)
@@ -463,7 +463,6 @@ figure2 <-
     ncol = 1,
     rel_heights = c(1, 0.1)
   )
-
 
 purrr::walk(
   .x = c("png", "pdf"),
@@ -475,7 +474,7 @@ purrr::walk(
     ),
     plot = figure2,
     width = image_width_vec["3col"], # [config criteria]
-    height = 180,
+    height = 170,
     units = image_units, # [config criteria]
     bg = "white"
   )

@@ -3,7 +3,6 @@ add_climatezone_as_factor <- function(data_source) {
     dplyr::mutate(
       climatezone = dplyr::case_when(
         .default = climatezone,
-        climatezone == "Cold_Without_dry_season_Very_Cold_Summer" ~ "Cold - Very Cold Summer",
         climatezone == "Cold_Without_dry_season_Cold_Summer" ~ "Cold - Cold Summer",
         climatezone == "Cold_Without_dry_season_Warm_Summer" ~ "Cold - Warm Summer",
         climatezone == "Cold_Without_dry_season_Hot_Summer" ~ "Cold - Hot Summer",
@@ -16,6 +15,17 @@ add_climatezone_as_factor <- function(data_source) {
       climatezone = factor(
         climatezone,
         levels = data_climate_zones$climatezone_label # [config criteria]
+      ),
+      climatezone_label = get_climatezone_label(climatezone),
+      climatezone_label = factor(
+        climatezone_label,
+        levels = c(
+          "POL",
+          "CCS", "CWS", "CHS", "CDW", "CDS",
+          "TMP", "TDW", "TDS",
+          "TRO",
+          "ARD"
+        )
       )
     ) %>%
     return()
