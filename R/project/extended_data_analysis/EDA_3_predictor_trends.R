@@ -109,7 +109,7 @@ plot_predictor <- function(
       region ~ climatezone,
       scales = "free_y",
       labeller = ggplot2::labeller( 
-        region = ggplot2::label_wrap_gen(7),
+        region = as_labeller(region_labeller, default=label_wrap_gen(15)), 
         climatezone = ggplot2::label_wrap_gen(7) 
       ) 
       
