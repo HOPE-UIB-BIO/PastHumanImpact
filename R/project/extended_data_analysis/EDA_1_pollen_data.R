@@ -203,7 +203,7 @@ fig_recod_count <-
     nrow = 1,
     dir = "h",
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7)
+      region = as_labeller(region_labeller) # [config criteria]
     ) 
   ) +
   ggplot2::scale_fill_manual(
@@ -339,10 +339,7 @@ fig_taxa_basic <-
   ggplot2::facet_wrap(
     ~region,
     nrow = 1,
-    dir = "h",
-    labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7)
-    ) 
+    dir = "h"
   ) +
   ggplot2::scale_fill_manual(
     values = palette_ecozones # [config criteria]
@@ -485,7 +482,7 @@ fig_temporal <-
     ~region,
     nrow = 1,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7)
+      region = as_labeller(region_labeller) # [config criteria]
     ) 
   ) +
   ggplot2::scale_x_continuous(

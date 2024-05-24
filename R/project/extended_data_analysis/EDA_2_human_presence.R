@@ -156,7 +156,7 @@ fig_n_c14 <-
     ncol = 1,
     scales = "free_y",
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7)
+      region = as_labeller(region_labeller) # [config criteria]
     ) 
   ) +
   ggplot2::scale_color_manual(
@@ -244,7 +244,7 @@ if (
       ~region,
       ncol = 1,
       labeller = ggplot2::labeller( 
-        region = ggplot2::label_wrap_gen(7)
+        region = as_labeller(region_labeller) # [config criteria]
       )
     ) +
     ggplot2::scale_color_manual(
@@ -423,7 +423,7 @@ fig_valid_n_rc_250 <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7),
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7) 
     ) 
   ) +
@@ -526,7 +526,7 @@ fig_valid_n_rc_500 <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7),
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7) 
     ) 
   ) +
@@ -656,7 +656,7 @@ fig_human_presence_detected <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7),
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7) 
     ) 
   ) +
@@ -781,7 +781,7 @@ fig_human_presence_status <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7),
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7) 
     ) 
   ) +
@@ -994,7 +994,7 @@ fig_event_temporal_trends <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller( 
-      region = ggplot2::label_wrap_gen(7),
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7) 
     ) 
     ) +
