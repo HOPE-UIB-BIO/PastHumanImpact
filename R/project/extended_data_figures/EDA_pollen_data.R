@@ -53,9 +53,8 @@ data_pollen <-
 
 
 #----------------------------------------------------------#
-# 2. Spatial distribution -----
+# 2. Map of spatial distribution of records A_1 -----
 #----------------------------------------------------------#
-
 
 fig_map <-
   data_pollen %>%
@@ -148,6 +147,11 @@ fig_map <-
     alpha = 1
   )
 
+
+#----------------------------------------------------------#
+# 3. Climate zone legend A_2 -----
+#----------------------------------------------------------#
+
 legend_climatezones <-
   ggpubr::get_legend(
     fig_map +
@@ -164,9 +168,11 @@ legend_climatezones <-
         legend.title = ggplot2::element_blank()
       )
   )
+ 
+
 
 #----------------------------------------------------------#
-# 3. Record count -----
+# 4. Number of records B_1 -----
 #----------------------------------------------------------#
 
 fig_recod_count <-
@@ -253,26 +259,84 @@ fig_recod_count <-
     size = text_size / 3
   )
 
+
+
 #----------------------------------------------------------#
-# 4. Climate tone legend -----
+# 4. Taxonomic richness -----
 #----------------------------------------------------------#
 
-fig_color_legend <-
-  data_meta %>%
+data_pollen_taxa <-
+  data_pollen %>%
+  dplyr::mutate(
+    taxa = purrr::map(
+      .progress = TRUE,
+      .x = counts_harmonised,
+      .f = ~ .x %>%
+        dplyr::select(-sample_id) %>%
+        names()
+    )
+  ) %>%
+  dplyr::select(
+    dataset_id, taxa
+  )
+
+
+data_pollen_taxa_n_per_dataset <-
+  data_pollen_taxa %>%
+  dplyr::mutate(
+    n_taxa = purrr::map_dbl(
+      .progress = TRUE,
+      .x = taxa,
+      .f = ~ length(.x)
+    )
+  ) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  )  %>%
   add_climatezone_as_factor() %>% # [config criteria]
-  tidyr::drop_na(climatezone) %>%
-  dplyr::distinct(climatezone) %>%
+  add_region_as_factor() # [config criteria]
+
+
+data_pollen_taxa_per_continnt <-
+  data_pollen_taxa %>%
+  tidyr::unnest(taxa) %>%
+  dplyr::inner_join(
+    data_meta,
+    by = "dataset_id"
+  ) %>%
+  dplyr::filter(
+    region != "Africa"
+  )  %>%
+  dplyr::distinct(region, climatezone, taxa) %>%
+  dplyr::group_by(region, climatezone) %>%
+  dplyr::count(
+    name = "n_taxa"
+  ) %>%
+  add_climatezone_as_factor() %>% # [config criteria]
+  add_region_as_factor() %>% # [config criteria]
+ tidyr::drop_na(
+   climatezone, region
+ )
+
+# base plot
+fig_taxa_basic <-
+  tibble::tibble() %>%
   ggplot2::ggplot(
     mapping = ggplot2::aes(
-      x = 1,
-      y = climatezone,
-      label = climatezone,
+      y = n_taxa,
+      x = climatezone,
       col = climatezone,
       fill = climatezone
     )
   ) +
-  ggplot2::coord_cartesian(
-    xlim = c(0, 20)
+  ggplot2::facet_wrap(
+    ~region,
+    nrow = 1,
+    dir = "h"
   ) +
   ggplot2::scale_fill_manual(
     values = palette_ecozones # [config criteria]
@@ -280,7 +344,7 @@ fig_color_legend <-
   ggplot2::scale_color_manual(
     values = palette_ecozones # [config criteria]
   ) +
-  ggplot2::theme_void() +
+  ggplot2::theme_bw() +
   ggplot2::theme(
     text = ggplot2::element_text(
       size = text_size, # [config criteria]
@@ -290,31 +354,101 @@ fig_color_legend <-
       linewidth = line_size, # [config criteria]
       color = common_gray # [config criteria]
     ),
-    panel.grid.major = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
     plot.caption.position = "panel",
+    strip.background = ggplot2::element_blank(),
+    # strip.text = ggplot2::element_text(
+    #   size = text_size, # [config criteria]
+    #   color = common_gray, # [config criteria]
+    #   hjust = 0.01
+    # ),
+    strip.text = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_blank(),
+    axis.ticks.x = ggplot2::element_blank(),
+    axis.title.x = ggplot2::element_blank(),
+    panel.grid.minor = ggplot2::element_blank(),
+    panel.grid.major.x = ggplot2::element_blank(),
     legend.position = "none",
     plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-  ) +
+  )
+
+
+#----------------------------------------------------------#
+# 5. Number of taxa per record B_2 -----
+#----------------------------------------------------------#
+
+fig_taxa_per_record <-
+  fig_taxa_basic +
   ggplot2::labs(
-    title = "C) Climate zone color legend"
+    y = "N taxa per record",
+    #title = "C) The number of taxa per record in each climate zone"
+  ) +
+  ggplot2::geom_jitter(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3
+  ) +
+  ggplot2::geom_violin(
+    data = data_pollen_taxa_n_per_dataset,
+    alpha = 0.3,
+    col = NA
+  ) +
+  ggplot2::geom_boxplot(
+    data = data_pollen_taxa_n_per_dataset,
+    fill = "white",
+    col = common_gray, # [config criteria]
+    width = 0.1,
+    outlier.shape = NA
   ) +
   ggplot2::geom_point(
+    data = data_pollen_taxa_n_per_dataset %>%
+      dplyr::group_by(region, climatezone) %>%
+      dplyr::summarise(
+        median = median(n_taxa)
+      ),
+    mapping = ggplot2::aes(
+      y = median
+    ),
     shape = 22,
     col = common_gray, # [config criteria]
-    size = 10
-  ) +
-  ggplot2::geom_text(
-    mapping = ggplot2::aes(
-      x = 2
-    ),
-    col = common_gray, # [config criteria]
-    size = text_size / 3,
-    hjust = 0
+    size = 3
   )
 
 #----------------------------------------------------------#
-# 3. Temporal distribution -----
+# 6. Total number of taxa B_3 -----
+#----------------------------------------------------------#
+
+fig_taxa_continent <-
+  fig_taxa_basic +
+  ggplot2::labs(
+    y = "Total N taxa"
+    # title = "D) Total number of taxa in each climate zone"
+  ) +
+  ggplot2::geom_segment(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      xend = climatezone,
+      yend = 0
+    ),
+    col = common_gray # [config criteria]
+  ) +
+  ggplot2::geom_point(
+    data = data_pollen_taxa_per_continnt,
+    size = 3,
+    shape = 21,
+    col = common_gray # [config criteria]
+  ) +
+  ggplot2::geom_text(
+    data = data_pollen_taxa_per_continnt,
+    mapping = ggplot2::aes(
+      label = n_taxa
+    ),
+    nudge_y = 70,
+    col = common_gray, # [config criteria],
+    size = text_size / 3
+  )
+
+
+#----------------------------------------------------------#
+# 7. Temporal coverage of records -----
 #----------------------------------------------------------#
 
 fig_temporal <-
@@ -396,186 +530,7 @@ fig_temporal <-
   )
 
 #----------------------------------------------------------#
-# 4. taxonomic richness -----
-#----------------------------------------------------------#
-
-data_pollen_taxa <-
-  data_pollen %>%
-  dplyr::mutate(
-    taxa = purrr::map(
-      .progress = TRUE,
-      .x = counts_harmonised,
-      .f = ~ .x %>%
-        dplyr::select(-sample_id) %>%
-        names()
-    )
-  ) %>%
-  dplyr::select(
-    dataset_id, taxa
-  )
-
-
-data_pollen_taxa_n_per_dataset <-
-  data_pollen_taxa %>%
-  dplyr::mutate(
-    n_taxa = purrr::map_dbl(
-      .progress = TRUE,
-      .x = taxa,
-      .f = ~ length(.x)
-    )
-  ) %>%
-  dplyr::inner_join(
-    data_meta,
-    by = "dataset_id"
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  )  %>%
-  add_climatezone_as_factor() %>% # [config criteria]
-  add_region_as_factor() # [config criteria]
-
-
-data_pollen_taxa_per_continnt <-
-  data_pollen_taxa %>%
-  tidyr::unnest(taxa) %>%
-  dplyr::inner_join(
-    data_meta,
-    by = "dataset_id"
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  )  %>%
-  dplyr::distinct(region, climatezone, taxa) %>%
-  dplyr::group_by(region, climatezone) %>%
-  dplyr::count(
-    name = "n_taxa"
-  ) %>%
-  add_climatezone_as_factor() %>% # [config criteria]
-  add_region_as_factor() %>% # [config criteria]
- tidyr::drop_na(
-   climatezone, region
- )
-
-
-fig_taxa_basic <-
-  tibble::tibble() %>%
-  ggplot2::ggplot(
-    mapping = ggplot2::aes(
-      y = n_taxa,
-      x = climatezone,
-      col = climatezone,
-      fill = climatezone
-    )
-  ) +
-  ggplot2::facet_wrap(
-    ~region,
-    nrow = 1,
-    dir = "h"
-  ) +
-  ggplot2::scale_fill_manual(
-    values = palette_ecozones # [config criteria]
-  ) +
-  ggplot2::scale_color_manual(
-    values = palette_ecozones # [config criteria]
-  ) +
-  ggplot2::theme_bw() +
-  ggplot2::theme(
-    text = ggplot2::element_text(
-      size = text_size, # [config criteria]
-      color = common_gray # [config criteria]
-    ),
-    line = ggplot2::element_line(
-      linewidth = line_size, # [config criteria]
-      color = common_gray # [config criteria]
-    ),
-    plot.caption.position = "panel",
-    strip.background = ggplot2::element_blank(),
-    # strip.text = ggplot2::element_text(
-    #   size = text_size, # [config criteria]
-    #   color = common_gray, # [config criteria]
-    #   hjust = 0.01
-    # ),
-    strip.text = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    axis.ticks.x = ggplot2::element_blank(),
-    axis.title.x = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major.x = ggplot2::element_blank(),
-    legend.position = "none",
-    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 0.1), "mm")
-  )
-
-fig_taxa_continent <-
-  fig_taxa_basic +
-  ggplot2::labs(
-    y = "Total N taxa"
-   # title = "D) Total number of taxa in each climate zone"
-  ) +
-  ggplot2::geom_segment(
-    data = data_pollen_taxa_per_continnt,
-    mapping = ggplot2::aes(
-      xend = climatezone,
-      yend = 0
-    ),
-    col = common_gray # [config criteria]
-  ) +
-  ggplot2::geom_point(
-    data = data_pollen_taxa_per_continnt,
-    size = 3,
-    shape = 21,
-    col = common_gray # [config criteria]
-  ) +
-  ggplot2::geom_text(
-    data = data_pollen_taxa_per_continnt,
-    mapping = ggplot2::aes(
-      label = n_taxa
-    ),
-    nudge_y = 70,
-    col = common_gray, # [config criteria],
-    size = text_size / 3
-  )
-
-
-fig_taxa_per_record <-
-  fig_taxa_basic +
-  ggplot2::labs(
-    y = "N taxa per record",
-    #title = "C) The number of taxa per record in each climate zone"
-  ) +
-  ggplot2::geom_jitter(
-    data = data_pollen_taxa_n_per_dataset,
-    alpha = 0.3
-  ) +
-  ggplot2::geom_violin(
-    data = data_pollen_taxa_n_per_dataset,
-    alpha = 0.3,
-    col = NA
-  ) +
-  ggplot2::geom_boxplot(
-    data = data_pollen_taxa_n_per_dataset,
-    fill = "white",
-    col = common_gray, # [config criteria]
-    width = 0.1,
-    outlier.shape = NA
-  ) +
-  ggplot2::geom_point(
-    data = data_pollen_taxa_n_per_dataset %>%
-      dplyr::group_by(region, climatezone) %>%
-      dplyr::summarise(
-        median = median(n_taxa)
-      ),
-    mapping = ggplot2::aes(
-      y = median
-    ),
-    shape = 22,
-    col = common_gray, # [config criteria]
-    size = 3
-  )
-
-
-
-#----------------------------------------------------------#
-# 5. Merge -----
+# 8. Extended data figure 1 -----
 #----------------------------------------------------------#
 
 fig_merge <-
