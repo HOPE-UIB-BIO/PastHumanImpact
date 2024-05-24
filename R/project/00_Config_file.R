@@ -284,6 +284,16 @@ image_width_vec <-
   )
 image_units <- "mm"
 
+# region labeller 
+region_labeller <- c(
+  `North America` = "North America",
+  `Latin America` = "Central & South America",
+  `Europe` = "Europe",
+  `Asia` = "Asia",
+  `Oceania` = "Oceania"
+)
+
+
 # Define colour palette
 
 common_gray <- "#636363"
