@@ -29,34 +29,6 @@ source(
 library(waffle)
 
 
-text_colour_theme <- ggplot2::theme(
-  
-  legend.text = ggplot2::element_text(
-    size = text_size, # [config criteria]
-    color = common_gray # [config criteria]
-  ),
-  legend.title = ggplot2::element_text(
-    size = text_size, # [config criteria]
-    color = common_gray # [config criteria]
-  ),
-  text = ggplot2::element_text(
-    size = text_size, # [config criteria]
-    color = common_gray # [config criteria]
-  ),
-  axis.text.y = ggplot2::element_text(
-    size = text_size, # [config criteria]
-    color = common_gray # [config criteria]
-  ),
-  axis.title.y = ggplot2::element_text(
-    size = text_size, # [config criteria]
-    color = common_gray # [config criteria]
-  ),
-  line = ggplot2::element_line(
-    linewidth = line_size, # [config criteria]
-    color = common_gray # [config criteria]
-  )
-)
-
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
