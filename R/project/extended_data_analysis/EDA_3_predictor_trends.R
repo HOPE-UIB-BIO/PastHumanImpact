@@ -307,3 +307,21 @@ list_fig_predictors %>%
       bg = "white"
     )
   )
+
+list_fig_predictors %>%
+  purrr::iwalk(
+    .progress = TRUE,
+    .f = ~ ggplot2::ggsave(
+      paste0(
+        here::here("Outputs/Supp"),
+        "/Extended_data_figure_",
+        .y,
+        ".pdf"
+      ),
+      plot = .x,
+      width = image_width_vec["3col"], # [config criteria]
+      height = 200,
+      units = image_units, # [config criteria]
+      bg = "white"
+    )
+  )
