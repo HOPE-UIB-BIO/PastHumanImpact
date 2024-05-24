@@ -25,6 +25,13 @@ source(
   )
 )
 
+# - Load meta data
+source(
+  here::here(
+    "R/project/02_meta_data.R"
+  )
+)
+
 #----------------------------------------------------------#
 # 1. Load data -----
 #----------------------------------------------------------#
@@ -40,36 +47,6 @@ data_pollen <-
     counts_harmonised
   )
 
-data_meta <-
-  targets::tar_read(
-    name = "data_meta",
-    store = paste0(
-      data_storage_path,
-      "_targets_h1"
-    )
-  ) %>%
-  dplyr::mutate(
-    sel_classification = dplyr::case_when(
-      ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
-      ecozone_koppen_5 == "Cold" ~ ecozone_koppen_15,
-      ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
-      .default = ecozone_koppen_5
-    )
-  ) %>%
-  dplyr::filter(
-    region != "Africa"
-  ) %>%
-  dplyr::mutate(sel_classification = as.factor(sel_classification)) %>%
-  dplyr::inner_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "sel_classification"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  )
 
 #----------------------------------------------------------#
 # 2. Spatial distribution -----
