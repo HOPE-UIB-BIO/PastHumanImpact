@@ -92,7 +92,7 @@ plot_predictor <- function(
         fit_rescale = (value - value_mean) / value_sd,
         upr_rescale = (conf_high - value_mean) / value_sd,
         lwr_rescale = (conf_low - value_mean) / value_sd
-      )
+      ) 
   }
 
   fig_res <-
@@ -107,7 +107,12 @@ plot_predictor <- function(
     ) +
     ggplot2::facet_grid(
       region ~ climatezone,
-      scales = "free_y"
+      scales = "free_y",
+      labeller = ggplot2::labeller( 
+        region = as_labeller(region_labeller, default=label_wrap_gen(15)), 
+        climatezone = ggplot2::label_wrap_gen(7) 
+      ) 
+      
     ) +
     ggplot2::scale_x_continuous(
       trans = "reverse",
@@ -128,15 +133,31 @@ plot_predictor <- function(
     ggplot2::theme_bw() +
     ggplot2::theme(
       legend.position = "none",
-      panel.grid.minor = ggplot2::element_blank()
+      panel.grid.minor = ggplot2::element_blank(), 
+      strip.background = ggplot2::element_rect(
+        fill = "transparent",
+        color = "transparent"
+      ),
+      strip.text = ggplot2::element_text(
+        size = text_size, # [config criteria]
+       color = common_gray # [config criteria]
+        ),
+      axis.title = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        color = common_gray # [config criteria]
+      ),
+      axis.text = ggplot2::element_text(
+        size = text_size, # [config criteria]
+        color = common_gray # [config criteria]
+      )
     ) +
     ggplot2::labs(
-      x = "Age (ka cal BP years)",
-      y = "Centrelasied and standardised values (sd units)",
-      caption = paste(
-        "Thin lines represent the raw data.",
-        "Thick lines represent the predicted model."
-      )
+      x = "Age (cal ka BP)",
+      y = "Centralised and standardised values (sd units)"
+      # caption = paste(
+      #   "Thin lines represent the raw data.",
+      #   "Thick lines represent the predicted model."
+      # )
     ) +
     ggplot2::geom_line(
       data = data_to_plot_raw,
@@ -144,7 +165,7 @@ plot_predictor <- function(
         group = dataset_id
       ),
       alpha = 0.3,
-      linewidth = 0.1
+      linewidth = line_size # [config criteria]
     ) +
     ggplot2::geom_ribbon(
       mapping = ggplot2::aes(
@@ -190,19 +211,8 @@ data_predictors_raw_data <-
       "Data/Predictor_models/"
     )
   ) %>%
-  dplyr::mutate(
-    climatezone = as.factor(climatezone)
-  ) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
+  add_climatezone_as_factor() %>%
+  add_region_as_factor() %>%
   dplyr::filter(
     region != "Africa"
   ) %>%
@@ -228,19 +238,8 @@ data_general_tredns_raw <-
 
 data_general_tredns <-
   data_general_tredns_raw %>%
-  dplyr::mutate(
-    climatezone = as.factor(climatezone)
-  ) %>%
-  dplyr::full_join(
-    data_climate_zones, # [config criteria]
-    .,
-    by = "climatezone"
-  ) %>%
-  dplyr::mutate(
-    region = factor(region,
-      levels = vec_regions # [config criteria]
-    )
-  ) %>%
+  add_climatezone_as_factor() %>%
+  add_region_as_factor() %>% 
   dplyr::filter(
     region != "Africa"
   ) %>%
@@ -297,9 +296,27 @@ list_fig_predictors %>%
     .f = ~ ggplot2::ggsave(
       paste0(
         here::here("Outputs/Supp"),
-        "/Supplementary_figure_",
+        "/Extended_data_figure_",
         .y,
         ".png"
+      ),
+      plot = .x,
+      width = image_width_vec["3col"], # [config criteria]
+      height = 200,
+      units = image_units, # [config criteria]
+      bg = "white"
+    )
+  )
+
+list_fig_predictors %>%
+  purrr::iwalk(
+    .progress = TRUE,
+    .f = ~ ggplot2::ggsave(
+      paste0(
+        here::here("Outputs/Supp"),
+        "/Extended_data_figure_",
+        .y,
+        ".pdf"
       ),
       plot = .x,
       width = image_width_vec["3col"], # [config criteria]

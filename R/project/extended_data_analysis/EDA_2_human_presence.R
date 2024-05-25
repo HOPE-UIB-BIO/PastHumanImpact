@@ -28,25 +28,6 @@ source(
 # remotes::install_github("hrbrmstr/waffle") # nolint
 library(waffle)
 
-reorder_region_and_climate_zone <- function(data_source) {
-  data_source %>%
-    dplyr::mutate(climatezone = as.factor(climatezone)) %>%
-    dplyr::full_join(
-      data_climate_zones, # [config criteria]
-      .,
-      by = "climatezone"
-    ) %>%
-    dplyr::mutate(
-      region = factor(region,
-        levels = vec_regions # [config criteria]
-      )
-    ) %>%
-    dplyr::filter(
-      region != "Africa"
-    ) %>%
-    return()
-}
-
 
 #----------------------------------------------------------#
 # 1. Load data -----
@@ -148,13 +129,20 @@ data_c14_climate_zones <-
       ecozone_koppen_5 == "Temperate" ~ ecozone_koppen_15,
       .default = ecozone_koppen_5
     )
-  )
+  ) %>%
+  add_climatezone_as_factor() %>%
+  dplyr::filter(
+    region != "Africa"
+  ) 
+
+
 
 fig_n_c14 <-
   data_c14_climate_zones %>%
   dplyr::filter(age < 12.5e3) %>%
   tidyr::drop_na(region, climatezone) %>%
-  reorder_region_and_climate_zone() %>%
+  add_region_as_factor() %>%
+  add_climatezone_as_factor() %>%
   REcopol:::add_age_bin(
     bin_size = 500
   ) %>%
@@ -166,7 +154,10 @@ fig_n_c14 <-
   ggplot2::facet_wrap(
     ~region,
     ncol = 1,
-    scales = "free_y"
+    scales = "free_y",
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller) # [config criteria]
+    ) 
   ) +
   ggplot2::scale_color_manual(
     values = palette_ecozones
@@ -186,13 +177,38 @@ fig_n_c14 <-
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
-      size = text_size,
+      size = text_size, # [config criteria]
+      color = common_gray, # [config criteria]
       hjust = 0.01
     ),
-    panel.grid.minor = ggplot2::element_blank()
-  ) +
+    panel.grid.minor = ggplot2::element_blank(),
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    legend.title = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.text.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.title.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
+    )
+  )+
   ggplot2::labs(
-    x = "Age (ka uncal yr)",
+    x = "Age (uncal ka BP)",
     y = "Number of RC dates",
     col = "Climate zone",
     fill = "Climate zone",
@@ -226,7 +242,10 @@ if (
     ggplot2::ggplot() +
     ggplot2::facet_wrap(
       ~region,
-      ncol = 1
+      ncol = 1,
+      labeller = ggplot2::labeller( 
+        region = as_labeller(region_labeller) # [config criteria]
+      )
     ) +
     ggplot2::scale_color_manual(
       values = palette_ecozones
@@ -249,10 +268,36 @@ if (
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
       strip.text = ggplot2::element_text(
-        size = text_size,
+        size = text_size, # [config criteria]
+        color = common_gray, # [config criteria]
         hjust = 0.01
       ),
-      panel.grid.minor = ggplot2::element_blank()
+      panel.grid.minor = ggplot2::element_blank(),
+        legend.text = ggplot2::element_text(
+          size = text_size, # [config criteria]
+          color = common_gray # [config criteria]
+        ),
+        legend.title = ggplot2::element_text(
+          size = text_size, # [config criteria]
+          color = common_gray # [config criteria]
+        ),
+        text = ggplot2::element_text(
+          size = text_size, # [config criteria]
+          color = common_gray # [config criteria]
+        ),
+        axis.text.y = ggplot2::element_text(
+          size = text_size, # [config criteria]
+          color = common_gray # [config criteria]
+        ),
+        axis.title.y = ggplot2::element_text(
+          size = text_size, # [config criteria]
+          color = common_gray # [config criteria]
+        ),
+        line = ggplot2::element_line(
+          linewidth = line_size, # [config criteria]
+          color = common_gray # [config criteria]
+        )
+      
     ) +
     ggplot2::geom_density(
       mapping = ggplot2::aes(
@@ -294,6 +339,8 @@ data_valid_n_rc_raw <-
   dplyr::filter(
     region != "Africa"
   ) %>%
+  add_climatezone_as_factor() %>% # [config criteria]
+  add_region_as_factor() %>% # [config criteria]
   dplyr::mutate(
     has_rc = purrr::map_lgl(
       .x = rc,
@@ -368,13 +415,17 @@ data_valid_n_rc_250 <-
     has_valid_n_rc_250,
     fill = list(N = 0.00001)
   ) %>%
-  reorder_region_and_climate_zone()
+  tidyr::drop_na(region, climatezone)
 
 fig_valid_n_rc_250 <-
   data_valid_n_rc_250 %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -385,14 +436,39 @@ fig_valid_n_rc_250 <-
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
-      size = text_size,
+      size = text_size, # [config criteria]
+      color = common_gray, # [config criteria]
       hjust = 0.01
     ),
     panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major = ggplot2::element_blank()
+    panel.grid.major = ggplot2::element_blank(),  
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    legend.title = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.text.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.title.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
+    )
   ) +
   ggplot2::labs(
-    fill = "Has enough RC dates to construct SPD?",
+    fill = "Has enough RC dates?",
     caption = "250 km is used as maximum distance from a record"
   ) +
   ggplot2::coord_equal() +
@@ -442,13 +518,17 @@ data_valid_n_rc_500 <-
     has_valid_n_rc_500,
     fill = list(N = 0.00001)
   ) %>%
-  reorder_region_and_climate_zone()
+  tidyr::drop_na(region, climatezone)
 
 fig_valid_n_rc_500 <-
   data_valid_n_rc_500 %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -459,14 +539,39 @@ fig_valid_n_rc_500 <-
     plot.caption.position = "panel",
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
-      size = text_size,
+      size = text_size, # [config criteria]
+      color = common_gray, # [config criteria]
       hjust = 0.01
     ),
     panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major = ggplot2::element_blank()
+    panel.grid.major = ggplot2::element_blank(),
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    legend.title = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.text.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.title.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
+    )
   ) +
   ggplot2::labs(
-    fill = "Has enough RC dates to construct SPD?",
+    fill = "Has enough RC dates?",
     caption = "500 km is used as maximum distance from a record"
   ) +
   ggplot2::coord_equal() +
@@ -522,7 +627,9 @@ data_valid_events_raw <-
   ) %>%
   dplyr::mutate(
     have_events = ifelse(is.na(have_events), FALSE, have_events)
-  )
+  ) %>%
+  add_climatezone_as_factor() %>%
+  add_region_as_factor()
 
 data_valid_events <-
   data_valid_events_raw %>%
@@ -541,13 +648,17 @@ data_valid_events <-
     have_events,
     fill = list(N = 0.00001)
   ) %>%
-  reorder_region_and_climate_zone()
+  tidyr::drop_na(region, climatezone)
 
 fig_human_presence_detected <-
   data_valid_events %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::theme(
@@ -562,10 +673,34 @@ fig_human_presence_detected <-
       hjust = 0.01
     ),
     panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major = ggplot2::element_blank()
+    panel.grid.major = ggplot2::element_blank(),
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    legend.title = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.text.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.title.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
+    )
   ) +
   ggplot2::labs(
-    fill = "Human presence detected in pollen data?"
+    fill = "Human presence detected"
   ) +
   ggplot2::coord_equal() +
   waffle::geom_waffle(
@@ -641,10 +776,14 @@ fig_human_presence_status <-
     status,
     fill = list(N = 0.00001)
   ) %>%
-  reorder_region_and_climate_zone() %>%
+  tidyr::drop_na(region, climatezone)   %>%
   ggplot2::ggplot() +
   ggplot2::facet_grid(
-    region ~ climatezone
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
   ) +
   ggplot2::theme_bw() +
   ggplot2::guides(
@@ -659,10 +798,31 @@ fig_human_presence_status <-
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
       size = text_size,
+      color = common_gray,
       hjust = 0.01
     ),
     panel.grid.minor = ggplot2::element_blank(),
-    panel.grid.major = ggplot2::element_blank()
+    panel.grid.major = ggplot2::element_blank(),
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    legend.title = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    axis.title.y = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
+    )
   ) +
   ggplot2::labs(
     caption = paste(
@@ -700,7 +860,7 @@ purrr::walk(
   )
 )
 
-suppl_figure_1 <-
+extended_figure_2 <-
   cowplot::plot_grid(
     fig_n_c14,
     fig_human_presence_status,
@@ -711,11 +871,11 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Supplementary_figure_1"),
+      here::here("Outputs/Supp/Extended_data_figure_2"),
       .x,
       sep = "."
     ),
-    plot = suppl_figure_1,
+    plot = extended_figure_2,
     width = image_width_vec["3col"], # [config criteria]
     height = 250,
     units = image_units, # [config criteria]
@@ -724,7 +884,8 @@ purrr::walk(
 )
 
 #----------------------------------------------------------#
-# 6. Temporal trends of human impact  -----
+# 6. Extended data figure 3: 
+#    Temporal trends of human impact  -----
 #----------------------------------------------------------#
 
 mod_config_file <-
@@ -777,10 +938,10 @@ data_general_tredns_events <-
       variable == "bi" ~ "no impact",
       variable == "fi" ~ "first impact",
       variable == "ei" ~ "emerging impact",
-      variable == "ec" ~ "extensive clearince",
-      variable == "cc" ~ "complete clearince",
+      variable == "ec" ~ "extensive clearance",
+      variable == "cc" ~ "complete clearance",
       variable == "fc" ~ "first cultivation",
-      variable == "es" ~ "europiean settlement",
+      variable == "es" ~ "european settlement",
       variable == "weak" ~ "weak impact",
       variable == "medium" ~ "medium impact",
       variable == "strong" ~ "strong impact"
@@ -791,16 +952,18 @@ data_general_tredns_events <-
         "no impact",
         "first impact",
         "emerging impact",
-        "extensive clearince",
-        "complete clearince",
+        "extensive clearance",
+        "complete clearance",
         "first cultivation",
-        "europiean settlement",
+        "european settlement",
         "weak impact",
         "medium impact",
         "strong impact"
       )
     )
-  )
+  ) %>%
+  add_climatezone_as_factor() %>%
+  add_region_as_factor()
 
 event_color_palette <-
   c(
@@ -828,8 +991,13 @@ fig_event_temporal_trends <-
       col = variable
     )
   ) +
-  ggplot2::facet_grid(region ~ climatezone) +
-  # ggplot2::scale_colour_hue(c = 50, l = 50, h = c(30, 300)) +
+  ggplot2::facet_grid(
+    region ~ climatezone,
+    labeller = ggplot2::labeller( 
+      region = as_labeller(region_labeller, default=label_wrap_gen(15)), # [config criteria]
+      climatezone = ggplot2::label_wrap_gen(7) 
+    ) 
+    ) +
   ggplot2::scale_x_continuous(
     trans = "reverse",
     limits = c(12e3, 0),
@@ -848,7 +1016,20 @@ fig_event_temporal_trends <-
     strip.background = ggplot2::element_blank(),
     strip.text = ggplot2::element_text(
       size = text_size,
+      color = common_gray, # [config criteria]
       hjust = 0.01
+    ),
+    legend.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
+    ),
+    line = ggplot2::element_line(
+      linewidth = line_size, # [config criteria]
+      color = common_gray # [config criteria]
     ),
     panel.grid.minor = ggplot2::element_blank(),
     axis.text.y = ggplot2::element_blank(),
@@ -856,7 +1037,7 @@ fig_event_temporal_trends <-
     axis.title.y = ggplot2::element_blank()
   ) +
   ggplot2::labs(
-    x = "Age (ka cal yr BP)"
+    x = "Age (cal ka BP)"
   ) +
   ggplot2::geom_ribbon(
     mapping = ggplot2::aes(
@@ -872,7 +1053,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Supplementary_figure_2"),
+      here::here("Outputs/Supp/Extended_data_figure_3"),
       .x,
       sep = "."
     ),
