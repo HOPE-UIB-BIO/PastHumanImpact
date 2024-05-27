@@ -82,7 +82,7 @@ perm_hvarpart <- function(dv,
       n <- nrow(iv[[1]])
       nvar <- length(iv)
     }
-    
+
     permutations <- permutations - 1
   }
 

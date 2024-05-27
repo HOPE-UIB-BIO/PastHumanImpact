@@ -200,38 +200,38 @@ filter_all_data <- function(data_source,
   #' @description Calculates pollen sum and test if each level has more pollen
   #' sum than `min_n_grains`.
   get_sampleid_rowsums <- function(data_source,
-             min_n_grains) {
-      current_frame <- sys.nframe()
+                                   min_n_grains) {
+    current_frame <- sys.nframe()
 
-      current_env <- sys.frame(which = current_frame)
+    current_env <- sys.frame(which = current_frame)
 
-      RUtilpol::check_class("data_source", "data.frame")
+    RUtilpol::check_class("data_source", "data.frame")
 
-      RUtilpol::check_col_names("data_source", "sample_id")
+    RUtilpol::check_col_names("data_source", "sample_id")
 
-      RUtilpol::check_class("min_n_grains", "numeric")
+    RUtilpol::check_class("min_n_grains", "numeric")
 
-      data_strip <-
-        data_source %>%
-        dplyr::select(-tidyselect::contains("sample_id"))
+    data_strip <-
+      data_source %>%
+      dplyr::select(-tidyselect::contains("sample_id"))
 
-      data_subset <-
-        data_source %>%
-        dplyr::mutate(rowsum = rowSums(data_strip)) %>%
-        dplyr::filter(rowsum > min_n_grains)
+    data_subset <-
+      data_source %>%
+      dplyr::mutate(rowsum = rowSums(data_strip)) %>%
+      dplyr::filter(rowsum > min_n_grains)
 
-      if (
-        nrow(data_subset) > 0
-      ) {
-        data_res <- data_subset
+    if (
+      nrow(data_subset) > 0
+    ) {
+      data_res <- data_subset
 
-        data_res$sample_id %>%
-          unique() %>%
-          return()
-      } else {
-        return(NA_character_)
-      }
+      data_res$sample_id %>%
+        unique() %>%
+        return()
+    } else {
+      return(NA_character_)
     }
+  }
 
   #' @title Test if enough levels fulfil criteria of pollen sum
   #' @param data_counts Data.frame with pollen data

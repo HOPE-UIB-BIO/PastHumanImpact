@@ -1,13 +1,12 @@
-
 #' @title Combine all variables that represent pollen assembly properties
 #' @description Combining the data of the different pollen assemblage properties
 #' @return A new data set of the relevant PAP estimations
 #'
 prepare_data_cp <- function(data_pollen,
-                        data_diversity,
-                        data_mrt,
-                        data_roc,
-                        data_dcca) {
+                            data_diversity,
+                            data_mrt,
+                            data_roc,
+                            data_dcca) {
   data_levels <-
     data_pollen %>%
     dplyr::select(

@@ -13,7 +13,7 @@ get_data_m2 <- function(data_source = data_for_hvar,
     tidyr::unnest(data_merge) %>%
     dplyr::select(
       c(
-         "region", "climatezone",
+        "region", "climatezone",
         dplyr::all_of(select_vars)
       )
     ) %>%

@@ -1,8 +1,8 @@
 #' @title Get a polygon around each pollen record
 #' @description Make a polygon in `distance_buffer` disatnce from each site.
 get_polygons <- function(data_source,
-                          n_points = 10,
-                          distance_buffer = 10) {
+                         n_points = 10,
+                         distance_buffer = 10) {
   # helper functions
   create_dummy_points <- function(data_source_long,
                                   data_source_lat,

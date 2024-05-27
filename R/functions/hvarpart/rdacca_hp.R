@@ -1,4 +1,4 @@
-#' @title Multivariate hierarchial variation partitioning 
+#' @title Multivariate hierarchial variation partitioning
 #' @description This function originate from rdacca.hp package, but with minor change in function to run distance-based RDA so it works for all datasets switching dbrda with capscale from vegan package
 #' @param dv response data either as a data.frame or a dist object
 #' @param iv data.frame or list of data.frames with predictor variables
@@ -11,19 +11,15 @@
 #' @param var.part logical; if TRUE, the function will return the partitioning results
 #' @return List of model outputs and partitioning results
 
-
-
-
-rdacca_hp <- function (dv, 
-                       iv, 
-                       method = c("RDA", "dbRDA", "CCA"), 
-                       type = c("adjR2", "R2"), 
-                       scale = FALSE, 
-                       add = FALSE, 
-                       sqrt.dist = FALSE, 
-                       n.perm = 1000, 
-                       var.part = FALSE) {
-  
+rdacca_hp <- function(dv,
+                      iv,
+                      method = c("RDA", "dbRDA", "CCA"),
+                      type = c("adjR2", "R2"),
+                      scale = FALSE,
+                      add = FALSE,
+                      sqrt.dist = FALSE,
+                      n.perm = 1000,
+                      var.part = FALSE) {
   if (is.data.frame(iv) || is.matrix(iv)) {
     iv <- as.data.frame(iv)
     if (sum(is.na(dv)) >= 1 || sum(is.na(iv)) >= 1) {
@@ -31,25 +27,28 @@ rdacca_hp <- function (dv,
     }
     if (nrow(iv) <= ncol(iv)) {
       stop("sample size (row) is less than the number of predictors")
-    }
-    else {
+    } else {
       method <- method[1]
       type <- type[1]
       if (inherits(dv, "dist")) {
         method <- "dbRDA"
       }
-      if (method %in% c("dbRDA", "dbrda", "DBRDA") && !inherits(dv, 
-                                                                "dist")) {
+      if (method %in% c("dbRDA", "dbrda", "DBRDA") && !inherits(
+        dv,
+        "dist"
+      )) {
         stop("response variables should be a 'dist' matrix for dbRDA")
       }
-      if (method %in% c("RDA", "rda")) 
+      if (method %in% c("RDA", "rda")) {
         dv <- scale(dv, scale = scale)
+      }
       iv <- as.data.frame(iv)
       ivname <- colnames(iv)
       iv.name <- ivname
       nvar <- dim(iv)[2]
-      if (nvar < 2) 
+      if (nvar < 2) {
         stop("Analysis not conducted. Insufficient number of predictors.")
+      }
       totalN <- 2^nvar - 1
       binarymx <- matrix(0, nvar, totalN)
       for (i in 1:totalN) {
@@ -59,41 +58,50 @@ rdacca_hp <- function (dv,
       for (i in 1:totalN) {
         tmp.design.ct <- iv[as.logical(binarymx[, i])]
         if (method == "RDA" || method == "rda") {
-          gfa <- vegan::RsquareAdj(vegan::rda(dv ~ ., 
-                                              tmp.design.ct))
+          gfa <- vegan::RsquareAdj(vegan::rda(
+            dv ~ .,
+            tmp.design.ct
+          ))
         }
         if (method == "CCA" || method == "cca") {
-          gfa <- vegan::RsquareAdj(vegan::cca(dv ~ ., 
-                                              tmp.design.ct, permutations = n.perm))
+          gfa <- vegan::RsquareAdj(vegan::cca(dv ~ .,
+            tmp.design.ct,
+            permutations = n.perm
+          ))
         }
-        if (method == "dbRDA" || method == "dbrda" || 
-            method == "DBRDA") {
-          gfa <- vegan::RsquareAdj(vegan::capscale(dv ~ 
-                                                     ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
+        if (method == "dbRDA" || method == "dbrda" ||
+          method == "DBRDA") {
+          gfa <- vegan::RsquareAdj(vegan::capscale(dv ~
+            ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
         }
-        if (type == "R2") 
+        if (type == "R2") {
           commonM[i, 2] <- gfa$r.squared
-        if (type == "adjR2") 
+        }
+        if (type == "adjR2") {
           commonM[i, 2] <- gfa$adj.r.squared
+        }
       }
       commonlist <- vector("list", totalN)
       seqID <- vector()
       for (i in 1:nvar) {
-        seqID[i] = 2^(i - 1)
+        seqID[i] <- 2^(i - 1)
       }
       for (i in 1:totalN) {
         bit <- binarymx[1, i]
-        if (bit == 1) 
+        if (bit == 1) {
           ivname <- c(0, -seqID[1])
-        else ivname <- seqID[1]
+        } else {
+          ivname <- seqID[1]
+        }
         for (j in 2:nvar) {
           bit <- binarymx[j, i]
           if (bit == 1) {
             alist <- ivname
             blist <- genList(ivname, -seqID[j])
             ivname <- c(alist, blist)
+          } else {
+            ivname <- genList(ivname, seqID[j])
           }
-          else ivname <- genList(ivname, seqID[j])
         }
         ivname <- ivname * -1
         commonlist[[i]] <- ivname
@@ -107,8 +115,9 @@ rdacca_hp <- function (dv,
           indexu <- abs(indexs)
           if (indexu != 0) {
             ccvalue <- commonM[indexu, 2]
-            if (indexs < 0) 
+            if (indexs < 0) {
               ccvalue <- ccvalue * -1
+            }
             ccsum <- ccsum + ccvalue
           }
         }
@@ -128,36 +137,44 @@ rdacca_hp <- function (dv,
       outputcommonM <- matrix(nrow = totalN + 1, ncol = 2)
       totalRSquare <- sum(commonM[, 3])
       for (i in 1:totalN) {
-        outputcommonM[i, 1] <- round(commonM[commonM[i, 
-                                                     1], 3], digits = 4)
-        outputcommonM[i, 2] <- round((commonM[commonM[i, 
-                                                      1], 3]/totalRSquare) * 100, digits = 2)
+        outputcommonM[i, 1] <- round(commonM[commonM[
+          i,
+          1
+        ], 3], digits = 4)
+        outputcommonM[i, 2] <- round((commonM[commonM[
+          i,
+          1
+        ], 3] / totalRSquare) * 100, digits = 2)
       }
-      outputcommonM[totalN + 1, 1] <- round(totalRSquare, 
-                                            digits = 4)
+      outputcommonM[totalN + 1, 1] <- round(totalRSquare,
+        digits = 4
+      )
       outputcommonM[totalN + 1, 2] <- round(100, digits = 4)
       rowNames <- NULL
       for (i in 1:totalN) {
         ii <- commonM[i, 1]
         nbits <- sum(binarymx[, ii])
         cbits <- 0
-        if (nbits == 1) 
+        if (nbits == 1) {
           rowName <- "Unique to "
-        else rowName <- "Common to "
+        } else {
+          rowName <- "Common to "
+        }
         for (j in 1:nvar) {
           if (binarymx[j, ii] == 1) {
-            if (nbits == 1) 
+            if (nbits == 1) {
               rowName <- paste(rowName, iv.name[j], sep = "")
-            else {
+            } else {
               cbits <- cbits + 1
               if (cbits == nbits) {
                 rowName <- paste(rowName, "and ", sep = "")
-                rowName <- paste(rowName, iv.name[j], 
-                                 sep = "")
-              }
-              else {
-                rowName <- paste(rowName, iv.name[j], 
-                                 sep = "")
+                rowName <- paste(rowName, iv.name[j],
+                  sep = ""
+                )
+              } else {
+                rowName <- paste(rowName, iv.name[j],
+                  sep = ""
+                )
                 rowName <- paste(rowName, ", ", sep = "")
               }
             }
@@ -167,54 +184,64 @@ rdacca_hp <- function (dv,
       }
       rowNames <- c(rowNames, "Total")
       rowNames <- format.default(rowNames, justify = "left")
-      colNames <- format.default(c("Fractions", " % Total"), 
-                                 justify = "right")
+      colNames <- format.default(c("Fractions", " % Total"),
+        justify = "right"
+      )
       dimnames(outputcommonM) <- list(rowNames, colNames)
       VariableImportance <- matrix(nrow = nvar, ncol = 4)
       for (i in 1:nvar) {
-        VariableImportance[i, 3] <- round(sum(binarymx[i, 
-        ] * (commonM[, 3]/apply(binarymx, 2, sum))), 
-        digits = 4)
+        VariableImportance[i, 3] <- round(sum(binarymx[i, ] * (commonM[, 3] / apply(binarymx, 2, sum))),
+          digits = 4
+        )
       }
-      VariableImportance[, 1] <- outputcommonM[1:nvar, 
-                                               1]
-      VariableImportance[, 2] <- VariableImportance[, 3] - 
+      VariableImportance[, 1] <- outputcommonM[
+        1:nvar,
+        1
+      ]
+      VariableImportance[, 2] <- VariableImportance[, 3] -
         VariableImportance[, 1]
-      total = round(sum(VariableImportance[, 3]), digits = 3)
-      VariableImportance[, 4] <- round(100 * VariableImportance[, 
-                                                                3]/total, 2)
-      dimnames(VariableImportance) <- list(iv.name, c("Unique", 
-                                                      "Average.share", "Individual", "I.perc(%)"))
+      total <- round(sum(VariableImportance[, 3]), digits = 3)
+      VariableImportance[, 4] <- round(100 * VariableImportance[
+        ,
+        3
+      ] / total, 2)
+      dimnames(VariableImportance) <- list(iv.name, c(
+        "Unique",
+        "Average.share", "Individual", "I.perc(%)"
+      ))
       if (var.part) {
-        outputList <- list(Method_Type = c(method, type), 
-                           Total_explained_variation = total, Var.part = outputcommonM, 
-                           Hier.part = VariableImportance)
-      }
-      else {
-        outputList <- list(Method_Type = c(method, type), 
-                           Total_explained_variation = total, Hier.part = VariableImportance)
+        outputList <- list(
+          Method_Type = c(method, type),
+          Total_explained_variation = total, Var.part = outputcommonM,
+          Hier.part = VariableImportance
+        )
+      } else {
+        outputList <- list(
+          Method_Type = c(method, type),
+          Total_explained_variation = total, Hier.part = VariableImportance
+        )
       }
       class(outputList) <- "rdaccahp"
       outputList
     }
-  }
-  else {
+  } else {
     nvar <- length(iv)
-    if (sum(unlist(lapply(iv, is.data.frame))) < nvar) 
+    if (sum(unlist(lapply(iv, is.data.frame))) < nvar) {
       stop("data.frame is required for each group explanatory table")
+    }
     if (sum(is.na(dv)) >= 1 | sum(is.na(unlist(iv))) >= 1) {
       stop("NA/NaN/Inf is not allowed in this analysis")
-    }
-    else {
+    } else {
       method <- method[1]
       type <- type[1]
       if (inherits(dv, "dist")) {
         method <- "dbRDA"
       }
-      if (method == "dbRDA" || method == "dbrda" || method == 
-          "DBRDA") {
-        if (!inherits(dv, "dist")) 
+      if (method == "dbRDA" || method == "dbrda" || method ==
+        "DBRDA") {
+        if (!inherits(dv, "dist")) {
           return("dv should be a 'dist' matrix for dbRDA")
+        }
       }
       if (method == "RDA" || method == "rda") {
         dv <- scale(dv, scale = scale)
@@ -222,17 +249,18 @@ rdacca_hp <- function (dv,
       ilist <- names(iv)
       if (is.null(ilist)) {
         names(iv) <- paste("X", 1:nvar, sep = "")
-      }
-      else {
+      } else {
         whichnoname <- which(ilist == "")
-        names(iv)[whichnoname] <- paste("X", whichnoname, 
-                                        sep = "")
+        names(iv)[whichnoname] <- paste("X", whichnoname,
+          sep = ""
+        )
       }
       ilist <- names(iv)
       ivlist <- ilist
       iv.name <- ilist
-      if (nvar < 2) 
+      if (nvar < 2) {
         stop("Analysis not conducted. Insufficient number of predictor groups.")
+      }
       ivID <- matrix(nrow = nvar, ncol = 1)
       for (i in 0:nvar - 1) {
         ivID[i + 1] <- 2^i
@@ -249,22 +277,24 @@ rdacca_hp <- function (dv,
         if (N == 1) {
           tmp.design.ct <- ivls[[1]]
           if (method == "RDA" || method == "rda") {
-            gfa <- vegan::RsquareAdj(vegan::rda(dv ~ 
-                                                  ., tmp.design.ct))
+            gfa <- vegan::RsquareAdj(vegan::rda(dv ~
+              ., tmp.design.ct))
           }
           if (method == "CCA" || method == "cca") {
-            gfa <- vegan::RsquareAdj(vegan::cca(dv ~ 
-                                                  ., tmp.design.ct, permutations = n.perm))
+            gfa <- vegan::RsquareAdj(vegan::cca(dv ~
+              ., tmp.design.ct, permutations = n.perm))
           }
-          if (method == "dbRDA" || method == "dbrda" || 
-              method == "DBRDA") {
-            gfa <- vegan::RsquareAdj(vegan::capscale(dv ~ 
-                                                    ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
+          if (method == "dbRDA" || method == "dbrda" ||
+            method == "DBRDA") {
+            gfa <- vegan::RsquareAdj(vegan::capscale(dv ~
+              ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
           }
-          if (type == "R2") 
+          if (type == "R2") {
             commonM[i, 2] <- gfa$r.squared
-          if (type == "adjR2") 
+          }
+          if (type == "adjR2") {
             commonM[i, 2] <- gfa$adj.r.squared
+          }
         }
         if (N > 1) {
           tmp.design.ct <- ivls[[1]]
@@ -272,38 +302,43 @@ rdacca_hp <- function (dv,
             tmp.design.ct <- cbind(tmp.design.ct, ivls[[k]])
           }
           if (method == "RDA" || method == "rda") {
-            gfa <- vegan::RsquareAdj(vegan::rda(dv ~ 
-                                                  ., tmp.design.ct))
+            gfa <- vegan::RsquareAdj(vegan::rda(dv ~
+              ., tmp.design.ct))
           }
           if (method == "CCA" || method == "cca") {
-            gfa <- vegan::RsquareAdj(vegan::cca(dv ~ 
-                                                  ., tmp.design.ct, permutations = n.perm))
+            gfa <- vegan::RsquareAdj(vegan::cca(dv ~
+              ., tmp.design.ct, permutations = n.perm))
           }
-          if (method == "dbRDA" || method == "dbrda" || 
-              method == "DBRDA") {
-            gfa <- vegan::RsquareAdj(vegan::capscale(dv ~ 
-                                                       ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
+          if (method == "dbRDA" || method == "dbrda" ||
+            method == "DBRDA") {
+            gfa <- vegan::RsquareAdj(vegan::capscale(dv ~
+              ., tmp.design.ct, add = add, sqrt.dist = sqrt.dist))
           }
-          if (type == "R2") 
+          if (type == "R2") {
             commonM[i, 2] <- gfa$r.squared
-          if (type == "adjR2") 
+          }
+          if (type == "adjR2") {
             commonM[i, 2] <- gfa$adj.r.squared
+          }
         }
       }
       commonalityList <- vector("list", totalN)
       for (i in 1:totalN) {
         bit <- binarymx[1, i]
-        if (bit == 1) 
+        if (bit == 1) {
           ilist <- c(0, -ivID[1])
-        else ilist <- ivID[1]
+        } else {
+          ilist <- ivID[1]
+        }
         for (j in 2:nvar) {
           bit <- binarymx[j, i]
           if (bit == 1) {
             alist <- ilist
             blist <- genList(ilist, -ivID[j])
             ilist <- c(alist, blist)
+          } else {
+            ilist <- genList(ilist, ivID[j])
           }
-          else ilist <- genList(ilist, ivID[j])
         }
         ilist <- ilist * -1
         commonalityList[[i]] <- ilist
@@ -311,14 +346,15 @@ rdacca_hp <- function (dv,
       for (i in 1:totalN) {
         r2list <- unlist(commonalityList[i])
         numlist <- length(r2list)
-        ccsum = 0
+        ccsum <- 0
         for (j in 1:numlist) {
           indexs <- r2list[[j]]
           indexu <- abs(indexs)
           if (indexu != 0) {
             ccvalue <- commonM[indexu, 2]
-            if (indexs < 0) 
+            if (indexs < 0) {
               ccvalue <- ccvalue * -1
+            }
             ccsum <- ccsum + ccvalue
           }
         }
@@ -338,36 +374,44 @@ rdacca_hp <- function (dv,
       outputcommonM <- matrix(nrow = totalN + 1, ncol = 2)
       totalRSquare <- sum(commonM[, 3])
       for (i in 1:totalN) {
-        outputcommonM[i, 1] <- round(commonM[commonM[i, 
-                                                     1], 3], digits = 4)
-        outputcommonM[i, 2] <- round((commonM[commonM[i, 
-                                                      1], 3]/totalRSquare) * 100, digits = 2)
+        outputcommonM[i, 1] <- round(commonM[commonM[
+          i,
+          1
+        ], 3], digits = 4)
+        outputcommonM[i, 2] <- round((commonM[commonM[
+          i,
+          1
+        ], 3] / totalRSquare) * 100, digits = 2)
       }
-      outputcommonM[totalN + 1, 1] <- round(totalRSquare, 
-                                            digits = 4)
+      outputcommonM[totalN + 1, 1] <- round(totalRSquare,
+        digits = 4
+      )
       outputcommonM[totalN + 1, 2] <- round(100, digits = 4)
-      rowNames = NULL
+      rowNames <- NULL
       for (i in 1:totalN) {
         ii <- commonM[i, 1]
         nbits <- sum(binarymx[, ii])
         cbits <- 0
-        if (nbits == 1) 
+        if (nbits == 1) {
           rowName <- "Unique to "
-        else rowName = "Common to "
+        } else {
+          rowName <- "Common to "
+        }
         for (j in 1:nvar) {
           if (binarymx[j, ii] == 1) {
-            if (nbits == 1) 
+            if (nbits == 1) {
               rowName <- paste(rowName, ivlist[j], sep = "")
-            else {
-              cbits = cbits + 1
+            } else {
+              cbits <- cbits + 1
               if (cbits == nbits) {
                 rowName <- paste(rowName, "and ", sep = "")
-                rowName <- paste(rowName, ivlist[j], 
-                                 sep = "")
-              }
-              else {
-                rowName <- paste(rowName, ivlist[j], 
-                                 sep = "")
+                rowName <- paste(rowName, ivlist[j],
+                  sep = ""
+                )
+              } else {
+                rowName <- paste(rowName, ivlist[j],
+                  sep = ""
+                )
                 rowName <- paste(rowName, ", ", sep = "")
               }
             }
@@ -377,32 +421,42 @@ rdacca_hp <- function (dv,
       }
       rowNames <- c(rowNames, "Total")
       rowNames <- format.default(rowNames, justify = "left")
-      colNames <- format.default(c("Fractions", " % Total"), 
-                                 justify = "right")
+      colNames <- format.default(c("Fractions", " % Total"),
+        justify = "right"
+      )
       dimnames(outputcommonM) <- list(rowNames, colNames)
       VariableImportance <- matrix(nrow = nvar, ncol = 4)
       for (i in 1:nvar) {
-        VariableImportance[i, 3] <- round(sum(binarymx[i, 
-        ] * (commonM[, 3]/apply(binarymx, 2, sum))), 
-        digits = 4)
+        VariableImportance[i, 3] <- round(sum(binarymx[i, ] * (commonM[, 3] / apply(binarymx, 2, sum))),
+          digits = 4
+        )
       }
-      VariableImportance[, 1] <- outputcommonM[1:nvar, 
-                                               1]
-      VariableImportance[, 2] <- VariableImportance[, 3] - 
+      VariableImportance[, 1] <- outputcommonM[
+        1:nvar,
+        1
+      ]
+      VariableImportance[, 2] <- VariableImportance[, 3] -
         VariableImportance[, 1]
-      total = round(sum(VariableImportance[, 3]), digits = 3)
-      VariableImportance[, 4] <- round(100 * VariableImportance[, 
-                                                                3]/total, 2)
-      dimnames(VariableImportance) <- list(iv.name, c("Unique", 
-                                                      "Average.share", "Individual", "I.perc(%)"))
+      total <- round(sum(VariableImportance[, 3]), digits = 3)
+      VariableImportance[, 4] <- round(100 * VariableImportance[
+        ,
+        3
+      ] / total, 2)
+      dimnames(VariableImportance) <- list(iv.name, c(
+        "Unique",
+        "Average.share", "Individual", "I.perc(%)"
+      ))
       if (var.part) {
-        outputList <- list(Method_Type = c(method, type), 
-                           Total_explained_variation = total, Var.part = outputcommonM, 
-                           Hier.part = VariableImportance)
-      }
-      else {
-        outputList <- list(Method_Type = c(method, type), 
-                           Total_explained_variation = total, Hier.part = VariableImportance)
+        outputList <- list(
+          Method_Type = c(method, type),
+          Total_explained_variation = total, Var.part = outputcommonM,
+          Hier.part = VariableImportance
+        )
+      } else {
+        outputList <- list(
+          Method_Type = c(method, type),
+          Total_explained_variation = total, Hier.part = VariableImportance
+        )
       }
       class(outputList) <- "rdaccahp"
       outputList

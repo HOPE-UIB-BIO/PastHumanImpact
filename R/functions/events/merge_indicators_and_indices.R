@@ -1,5 +1,5 @@
 #' @title Merge indicator and indices
-#' @description Level is flagged as specific event type if it is present in any 
+#' @description Level is flagged as specific event type if it is present in any
 #' source of data (indices or indicators)
 merge_indicators_and_indices <- function(data_source_indices,
                                          data_source_indicators) {

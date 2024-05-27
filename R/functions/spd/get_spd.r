@@ -14,8 +14,6 @@ get_spd <- function(data_source_c14,
                     sel_smooth_size = 100,
                     min_n_dates = 50,
                     normalise_to_one = FALSE) {
-  
-  
   # helper functions
   get_spd_density <- function(data_source,
                               sel_dist,
@@ -139,19 +137,19 @@ get_spd <- function(data_source_c14,
     )
 
   # dummy table to bind all the results
-  dummy_table = tibble::tibble(
+  dummy_table <- tibble::tibble(
     age = seq(
       from = age_to, # [config]
       to = age_from, # [config]
       by = -1
     )
   )
-  
-  data_rc_calcurve <- 
+
+  data_rc_calcurve <-
     data_rc_calcurve %>%
     dplyr::mutate(
       dummy_age_table = list(dummy_table)
-      )
+    )
 
   # get spd
   data_spd <-
@@ -162,17 +160,17 @@ get_spd <- function(data_source_c14,
           rc, # ..1
           calcurve, # ..2
           dataset_id, # ..3
-          dummy_age_table #..4
+          dummy_age_table # ..4
         ),
         .f = ~ {
           message(..3)
-          
+
           sel_data <- ..1
-          
+
           sel_cal_curve <- ..2
-          
+
           dummy_age_table <- ..4
-          
+
           res <-
             dplyr::bind_cols(
               dummy_age_table,
@@ -190,7 +188,7 @@ get_spd <- function(data_source_c14,
                   )
                 )
             )
-          
+
           return(res)
         }
       )

@@ -11,50 +11,49 @@
 #' @return Turn change points of pap variables into density variables
 #'
 get_density_pap_combined <- function(data_source_change_points,
-                            data_source_meta,
-                            data_source_dummy_time,
-                            limit_length = TRUE) {
+                                     data_source_meta,
+                                     data_source_dummy_time,
+                                     limit_length = TRUE) {
   # helper function
-  get_density_subset <-
-    function(data_source,
-             dummy_table,
-             age_min,
-             age_max,
-             ...) {
-      if (
-        length(data_source) == 0
-      ) {
-        res <-
-          dummy_table %>%
-          dplyr::mutate(
-            density = 0
-          )
-      } else {
-        res <-
-          REcopol::get_density(
-            data_source = data_source,
-            reflected = TRUE,
-            values_range = c(
-              age_min = age_min,
-              age_max = age_max
-            ),
-            bw = 1000 / max(dummy_table$age),
-            n = max(dummy_table$age),
-            ...
-          ) %>%
-          dplyr::mutate(
-            age = ceiling(var)
-          ) %>%
-          dplyr::filter(
-            age %in% dummy_table$age
-          ) %>%
-          dplyr::select(
-            age, density
-          )
-      }
-      return(res)
+  get_density_subset <- function(data_source,
+                                 dummy_table,
+                                 age_min,
+                                 age_max,
+                                 ...) {
+    if (
+      length(data_source) == 0
+    ) {
+      res <-
+        dummy_table %>%
+        dplyr::mutate(
+          density = 0
+        )
+    } else {
+      res <-
+        REcopol::get_density(
+          data_source = data_source,
+          reflected = TRUE,
+          values_range = c(
+            age_min = age_min,
+            age_max = age_max
+          ),
+          bw = 1000 / max(dummy_table$age),
+          n = max(dummy_table$age),
+          ...
+        ) %>%
+        dplyr::mutate(
+          age = ceiling(var)
+        ) %>%
+        dplyr::filter(
+          age %in% dummy_table$age
+        ) %>%
+        dplyr::select(
+          age, density
+        )
     }
-  
+    return(res)
+  }
+
   data_age_lim <-
     data_source_meta %>%
     dplyr::select(
@@ -64,14 +63,14 @@ get_density_pap_combined <- function(data_source_change_points,
     dplyr::mutate(
       dummy_table = list(data_source_dummy_time)
     )
-  
+
   data_source_main <-
     data_source_change_points %>%
     dplyr::left_join(
       data_age_lim,
       by = "dataset_id"
     )
-  
+
   if (
     isTRUE(limit_length)
   ) {
@@ -87,7 +86,7 @@ get_density_pap_combined <- function(data_source_change_points,
         )
       )
   }
-  
+
   data_cp_density <-
     data_source_main %>%
     dplyr::mutate(
@@ -96,9 +95,10 @@ get_density_pap_combined <- function(data_source_change_points,
           mvrt_cp,
           roc_cp,
           roc_pp,
-          dcca_cp),
-        .f = ~c(..1,..2,..3,..4)
-        )
+          dcca_cp
+        ),
+        .f = ~ c(..1, ..2, ..3, ..4)
+      )
     ) %>%
     dplyr::mutate(
       density_turnover = purrr::pmap(
@@ -128,10 +128,10 @@ get_density_pap_combined <- function(data_source_change_points,
           age_min = ..3,
           age_max = ..4
         )
-      )  
       )
-    
-  
+    )
+
+
   data_cp_density_merge <-
     data_cp_density %>%
     dplyr::mutate(
@@ -157,10 +157,10 @@ get_density_pap_combined <- function(data_source_change_points,
                 density_diversity = density
               ),
             by = "age"
-          ) 
+          )
       )
     )
-  
+
   # subset data and rescale to 1
   data_cp_density_merge %>%
     dplyr::select(dataset_id, pap_density) %>%
@@ -177,6 +177,6 @@ get_density_pap_combined <- function(data_source_change_points,
           ) %>%
           return()
       )
-    )  %>% 
+    ) %>%
     return()
 }

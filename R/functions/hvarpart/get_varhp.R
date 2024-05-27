@@ -24,15 +24,15 @@ get_varhp <- function(data_source,
                       response_dist = NULL,
                       data_response_dist = NULL,
                       response_vars = c(
-                        "n0", 
-                        "n1", 
+                        "n0",
+                        "n1",
                         "n2",
-                        "n1_minus_n2", 
-                        "n2_divided_by_n1", 
+                        "n1_minus_n2",
+                        "n2_divided_by_n1",
                         "n1_divided_by_n0",
                         "roc",
                         "dcca_axis_1",
-                        "density_diversity", 
+                        "density_diversity",
                         "density_turnover"
                       ),
                       predictor_vars = list(
@@ -62,9 +62,7 @@ get_varhp <- function(data_source,
           dplyr::select(
             tidyselect:::where(~ any(!is.na(.)))
           )
-
       } else if (!is.null(response_dist)) {
-        
         # prepare responses with distances
         data_resp <-
           data_source %>%
@@ -74,15 +72,12 @@ get_varhp <- function(data_source,
           dplyr::select(
             tidyselect:::where(~ any(!is.na(.)))
           )
-        
+
         data_resp <- vegan::vegdist(data_resp, method = response_dist)
-        
       } else if (!is.null(data_response_dist)) {
         # if input is already a distance matrix
         data_resp <- data_response_dist
         data_resp <- as.dist(data_resp)
-       
-        
       } else {
         stop("Something went wrong with response variables")
       }
@@ -101,14 +96,12 @@ get_varhp <- function(data_source,
           dplyr::select(all_of(predictor_vars)) %>%
           janitor::remove_empty("cols") %>%
           janitor::remove_constant()
-        
+
         output_table_dummy <-
           tibble::tibble(
             predictor = predictor_vars
           )
-        
       } else {
-        
         data_preds <-
           predictor_vars %>%
           purrr::map(
@@ -119,8 +112,8 @@ get_varhp <- function(data_source,
               janitor::remove_constant() %>%
               dplyr::select(
                 tidyselect:::where(~ any(. != 0))
-                )
-            )
+              )
+          )
 
         # filer out groups with no variables
         data_preds <-
@@ -147,7 +140,7 @@ get_varhp <- function(data_source,
           type = "adjR2",
           var.part = TRUE,
           ...
-       )
+        )
 
       # extract relevant summary output
       output_table <-

@@ -40,7 +40,7 @@ get_meta_data <- function(data_assembly,
     ) %>%
     dplyr::select(
       dplyr::all_of(variables), age_min, age_max
-    ) %>% 
+    ) %>%
     dplyr::mutate(
       climatezone = dplyr::case_when(
         ecozone_koppen_15 == "Cold_Without_dry_season" ~ ecozone_koppen_30,
