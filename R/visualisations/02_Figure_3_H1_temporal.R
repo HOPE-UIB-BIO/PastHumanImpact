@@ -207,8 +207,6 @@ data_combined_temporal <-
 # 3. build figure -----
 #----------------------------------------------------------#
 
-library(colorspace)
-
 palette_predictors_col <-
   c(
     palette_predictors,

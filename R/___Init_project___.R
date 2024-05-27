@@ -90,40 +90,42 @@ sapply(
     "assertthat",
     "brms",
     "colorspace",
-    "data.tree",
     "furrr",
     "future",
     "geosphere",
     "ggeffects",
-    "ggforce",
-    "ggimage",
     "ggpubr",
     "here",
     "httpgd",
     "insight",
     "janitor",
     "jsonlite",
-    "kableExtra",
     "knitr",
     "languageserver",
-    "mgcv",
     "parallelly",
     "rcarbon",
     "rdacca.hp",
     "renv",
     "remotes",
     "rlang",
-    "tarchetypes",
     "targets",
     "terra",
     "tidyverse",
     "usethis",
     "utils",
     "vegan",
-    "venneuler"
+    "yaml"
   ),
   utils::install.packages,
   character.only = TRUE
+)
+
+# install waffle from GitHub
+remotes::install_github(
+  repo = "hrbrmstr/waffle",
+  ref = "HEAD",
+  quiet = FALSE,
+  upgrade = "ask"
 )
 
 # install RUtilpol from GitHub

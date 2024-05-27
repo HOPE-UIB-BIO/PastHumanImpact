@@ -16,7 +16,6 @@
 #--------------------------------------------------------------#
 
 library(here)
-library(furrr)
 
 # Load configuration
 source(

@@ -125,10 +125,6 @@ data_formulas <-
 
 # This is very computationally demanding.
 # Use Future to parallelize the process
-library(future)
-library(furrr)
-library(parallelly)
-library(brms)
 
 # set up future
 future::plan(
