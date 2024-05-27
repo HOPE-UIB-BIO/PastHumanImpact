@@ -127,6 +127,6 @@ add_logical_rules <- function(data_source) {
           return(res)
         }
       )
-    )  %>% 
+    ) %>%
     dplyr::select(dataset_id, events_updated)
 }

@@ -1,5 +1,4 @@
-get_data_for_h2_hvar <- function(
-    data_predictors, data_m2) {
+get_data_for_h2_hvar <- function(data_predictors, data_m2) {
   data_pred_work <-
     data_predictors %>%
     dplyr::rename(

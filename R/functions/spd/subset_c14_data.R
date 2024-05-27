@@ -1,5 +1,5 @@
 #' @title Subset RC data only within each polygon
-#' @description Subset RC data for each site based on a polygon around site 
+#' @description Subset RC data for each site based on a polygon around site
 subset_c14_data <- function(data_source_c14,
                             data_source_polygons,
                             data_source_meta) {
@@ -78,8 +78,8 @@ subset_c14_data <- function(data_source_c14,
             ) / 1e3 # to convert to km
           )
       )
-    )  %>% 
+    ) %>%
     dplyr::select(-c(long, lat))
 
-    return(data_with_distance)
+  return(data_with_distance)
 }

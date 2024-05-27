@@ -22,7 +22,7 @@ get_data_filtered <- function(data_source,
       purrr::chuck("dataset_id")
   } else {
     keep_dataset <-
-      meta_data  %>% 
+      meta_data %>%
       purrr::chuck("dataset_id")
   }
 

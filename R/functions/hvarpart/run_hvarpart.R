@@ -21,16 +21,17 @@
 
 run_hvarpart <- function(data_source,
                          response_vars = c(
-                           "n0", 
-                           "n1", 
+                           "n0",
+                           "n1",
                            "n2",
-                           "n1_minus_n2", 
-                           "n2_divided_by_n1", 
+                           "n1_minus_n2",
+                           "n2_divided_by_n1",
                            "n1_divided_by_n0",
                            "roc",
                            "dcca_axis_1",
-                           "density_diversity", 
-                           "density_turnover"),
+                           "density_diversity",
+                           "density_turnover"
+                         ),
                          response_dist = NULL,
                          data_response_dist = NULL,
                          predictor_vars = list(
@@ -39,14 +40,16 @@ run_hvarpart <- function(data_source,
                              "temp_annual",
                              "temp_cold",
                              "prec_summer",
-                             "prec_win")),
+                             "prec_win"
+                           )
+                         ),
                          run_all_predictors = FALSE,
                          time_series = TRUE,
                          get_significance = TRUE,
                          permutations = 99,
                          ...) {
   res <- NULL
-  
+
   if (!is.null(response_vars) & is.null(data_response_dist)
   ) {
     res <-
@@ -66,7 +69,7 @@ run_hvarpart <- function(data_source,
           )
         )
       )
-  } else if(!is.null(data_response_dist)) {
+  } else if (!is.null(data_response_dist)) {
     res <-
       data_source %>%
       dplyr::rename(
@@ -86,14 +89,12 @@ run_hvarpart <- function(data_source,
             run_all_predictors = run_all_predictors,
             time_series = time_series,
             get_significance = get_significance
-            )
           )
         )
-
+      )
   } else {
     stop("No response variables or distance matrix provided")
   }
-  
+
   return(res)
 }
-

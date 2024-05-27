@@ -2,10 +2,10 @@
 #' @description For each site, test each level with the list of event indicators
 #' and clasify each level as a event type (binary).
 get_events_from_indicators <- function(data_source_indicators,
-                                          data_source_pollen,
-                                          data_source_meta,
-                                          sel_region = "Latin America",
-                                          country_w_pinus = c("Mexico", "Guatemala", "Honduras", "Nicaragua", "Costa Rica")) {
+                                       data_source_pollen,
+                                       data_source_meta,
+                                       sel_region = "Latin America",
+                                       country_w_pinus = c("Mexico", "Guatemala", "Honduras", "Nicaragua", "Costa Rica")) {
   data_subset <-
     data_source_pollen %>%
     dplyr::inner_join(

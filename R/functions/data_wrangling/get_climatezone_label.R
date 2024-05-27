@@ -1,4 +1,4 @@
-get_climatezone_label <- function(x){
+get_climatezone_label <- function(x) {
   dplyr::case_when(
     .default = NA_character_,
     x == "Polar" ~ "POL",
