@@ -122,30 +122,31 @@ invisible(
 
 
 #----------------------------------------------------------#
-# 4. Authorise the user -----
+# 4.Define directory for external storage -----
 #----------------------------------------------------------#
 
-# Define directory for external storage for users
-auth_tibble <-
-  tibble::tribble(
-    ~name, ~path,
-    "ondrej", "C:/Users/ondre/My Drive/",
-    "vfe032", "G:/My Drive/",
-    "ondre", "H:/My Drive/",
-    "vivia", "H:/Min disk/"
+# !!!  IMPORTANT  !!!
+
+# This solution was created for members of HOPE team to store data
+#   in a common directory
+
+# If you want to run this project make sure to coppy all data into
+#     the Data folder in the root directory of the project
+
+if (
+  file.exists(
+    here::here("secrets.yaml")
   )
-
-data_storage_path <-
-  auth_tibble %>%
-  dplyr::filter(name == Sys.info()["user"]) %>%
-  purrr::pluck("path")
-
-
-# external_storage_targets <-
-#   paste0(
-#     data_storage_path,
-#     "_targets_data"
-#   )
+) {
+  data_storage_path <-
+    yaml::read_yaml(
+      here::here("secrets.yaml")
+    ) %>%
+    purrr::chuck(Sys.info()["user"])
+} else {
+  data_storage_path <-
+    here::here("Data")
+}
 
 #----------------------------------------------------------#
 # 5. Define variables -----

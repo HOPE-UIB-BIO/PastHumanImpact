@@ -14,3 +14,5 @@ _targets/
 # target yaml
 _targets.yaml
 
+# secret files
+secrets.yaml
