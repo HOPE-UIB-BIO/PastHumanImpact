@@ -28,7 +28,7 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/project/02_meta_data.R"
+    "R/main_analysis/02_meta_data.R"
   )
 )
 

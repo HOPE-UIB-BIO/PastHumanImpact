@@ -22,7 +22,7 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/project/00_Config_file.R"
+    "R/00_Config_file.R"
   )
 )
 

@@ -20,7 +20,7 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/project/00_Config_file.R"
+    "R/00_Config_file.R"
   )
 )
 
@@ -38,37 +38,37 @@ if (
 ) {
   source(
     here::here(
-      "R/project/predictor_models/01_prepare_data.R"
+      "R/predictor_models/01_prepare_data.R"
     )
   )
 
   source(
     here::here(
-      "R/project/predictor_models/02_prepare_data_and_priors.R"
+      "R/predictor_models/02_prepare_data_and_priors.R"
     )
   )
 
   source(
     here::here(
-      "R/project/predictor_models/03_prepare_mode_config_table.R"
+      "R/predictor_models/03_prepare_mode_config_table.R"
     )
   )
 
   source(
     here::here(
-      "R/project/predictor_models/04_run_models.R"
+      "R/predictor_models/04_run_models.R"
     )
   )
 
   source(
     here::here(
-      "R/project/predictor_models/05_Evaluate_models.R"
+      "R/predictor_models/05_Evaluate_models.R"
     )
   )
 
   source(
     here::here(
-      "R/project/predictor_models/06_Predict_general_trends.R"
+      "R/predictor_models/06_Predict_general_trends.R"
     )
   )
 }
