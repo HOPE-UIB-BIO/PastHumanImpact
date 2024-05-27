@@ -551,7 +551,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2"),
+      here::here("Outputs/Figures/Figure4_h2"),
       .x,
       sep = "."
     ),
@@ -568,7 +568,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2_legend_predictor"),
+      here::here("Outputs/Figures/Figure4_h2_legend_predictor"),
       .x,
       sep = "."
     ),
@@ -584,7 +584,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2_legend_age"),
+      here::here("Outputs/Figures/Figure4_h2_legend_age"),
       .x,
       sep = "."
     ),
@@ -600,7 +600,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2_guide_predictor"),
+      here::here("Outputs/Figures/Figure4_h2_guide_predictor"),
       .x,
       sep = "."
     ),
@@ -616,7 +616,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/figure4_h2_guide_trajectory"),
+      here::here("Outputs/Figures/Figure4_h2_guide_trajectory"),
       .x,
       sep = "."
     ),

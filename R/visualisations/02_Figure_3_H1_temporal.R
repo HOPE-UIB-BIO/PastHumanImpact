@@ -337,7 +337,7 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Figure3_h1_temporal"),
+      here::here("Outputs/Figures/Figure3_h1_temporal"),
       .x,
       sep = "."
     ),

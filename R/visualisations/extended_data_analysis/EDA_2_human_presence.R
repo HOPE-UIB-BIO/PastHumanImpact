@@ -313,7 +313,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/C14_N"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/C14_N"
+      ),
       .x,
       sep = "."
     ),
@@ -486,7 +488,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/C14_valid_datasets_250km"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/C14_valid_datasets_250km"
+      ),
       .x,
       sep = "."
     ),
@@ -589,7 +593,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/C14_valid_datasets_500km"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/C14_valid_datasets_500km"
+      ),
       .x,
       sep = "."
     ),
@@ -717,7 +723,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Events_valid_datasets"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/Events_valid_datasets"
+      ),
       .x,
       sep = "."
     ),
@@ -847,7 +855,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Events_and_RC_status"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/Events_and_RC_status"
+      ),
       .x,
       sep = "."
     ),
@@ -870,7 +880,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Extended_data_figure_2"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/Extended_data_figure_2"
+      ),
       .x,
       sep = "."
     ),
@@ -1052,7 +1064,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     paste(
-      here::here("Outputs/Supp/Extended_data_figure_3"),
+      here::here(
+        "Outputs/Figures/Extended_data_figures/Extended_data_figure_3"
+      ),
       .x,
       sep = "."
     ),

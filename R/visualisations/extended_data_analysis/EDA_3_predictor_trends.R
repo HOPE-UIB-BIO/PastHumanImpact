@@ -293,7 +293,9 @@ list_fig_predictors %>%
     .progress = TRUE,
     .f = ~ ggplot2::ggsave(
       paste0(
-        here::here("Outputs/Supp"),
+        here::here(
+          "Outputs/Figures/Extended_data_figures"
+        ),
         "/Extended_data_figure_",
         .y,
         ".png"
@@ -311,7 +313,9 @@ list_fig_predictors %>%
     .progress = TRUE,
     .f = ~ ggplot2::ggsave(
       paste0(
-        here::here("Outputs/Supp"),
+        here::here(
+          "Outputs/Figures/Extended_data_figures"
+        ),
         "/Extended_data_figure_",
         .y,
         ".pdf"
