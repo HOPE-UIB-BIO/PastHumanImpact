@@ -23,7 +23,7 @@ library(here)
 # - Load configuration
 source(
   here::here(
-    "R/project/00_Config_file.R"
+    "R/00_Config_file.R"
   )
 )
 
@@ -269,21 +269,21 @@ if (
 # combined figure of h1 1 ----
 source(
   here::here(
-    "R/visualisations/01_Figure_2_H1_spatial"
+    "R/visualisations/01_Figure_2_H1_spatial.R"
   )
 )
 
 # combined figure of h1 2 ----
 source(
   here::here(
-    "R/visualisations/02_Figure_3_H1_temporal"
+    "R/visualisations/02_Figure_3_H1_temporal.R"
   )
 )
 
 # combined figure of h2 ----
 source(
   here::here(
-    "R/visualisations/03_Figure_4_H2_interrelationships"
+    "R/visualisations/03_Figure_4_H2_interrelationships.R"
   )
 )
 

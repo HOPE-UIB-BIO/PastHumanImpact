@@ -21,7 +21,7 @@ library(here)
 # - Load configuration
 source(
   here::here(
-    "R/project/00_Config_file.R"
+    "R/00_Config_file.R"
   )
 )
 
@@ -32,7 +32,7 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/project/02_meta_data.R"
+    "R/main_analysis/02_meta_data.R"
   )
 )
 
@@ -419,7 +419,7 @@ get_map_with_points <- function(sel_region, sel_alpha = 0.75) {
   get_map_region(
     rasterdata = data_geo_koppen,
     select_region = sel_region,
-    sel_alpha = def_map_alpha
+    sel_alpha = sel_alpha
   ) %>%
     get_points_to_map(
       data_source = datapoints %>%

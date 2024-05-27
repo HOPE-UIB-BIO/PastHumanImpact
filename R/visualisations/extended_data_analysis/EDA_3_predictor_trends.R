@@ -21,7 +21,7 @@ library(here)
 # Load configuration
 source(
   here::here(
-    "R/project/00_Config_file.R"
+    "R/00_Config_file.R"
   )
 )
 
@@ -197,7 +197,7 @@ plot_predictor <- function(
 # - Load meta data
 source(
   here::here(
-    "R/project/02_meta_data.R"
+    "R/main_analysis/02_meta_data.R"
   )
 )
 
