@@ -126,7 +126,7 @@ invisible(
 #   in a common directory
 
 # If you want to run this project make sure to coppy all data into
-#     the Data folder in the root directory of the project
+#     the `Data` folder in the root directory of the project
 
 if (
   file.exists(
