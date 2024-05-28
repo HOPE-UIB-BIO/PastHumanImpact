@@ -34,7 +34,7 @@ data_to_fit <-
     file_name = "predictor_models_data_to_fit",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -78,7 +78,7 @@ if (
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     ),
     prefered_format = "csv"
   )

@@ -40,7 +40,7 @@ data_predictors <-
     name = "data_predictors",
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_predictors"
+      "Targets_data/pipeline_predictors"
     )
   )
 
@@ -210,7 +210,7 @@ data_filter_by_climatezone %>%
     file_name = "predictor_models_data_constant",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     ),
     prefered_format = "rds",
     use_sha = TRUE
@@ -268,7 +268,7 @@ RUtilpol::save_latest_file(
   file_name = "predictor_models_data_prepared",
   dir = paste0(
     data_storage_path,
-    "Data/Predictor_models/"
+    "Predictor_models/"
   ),
   prefered_format = "rds",
   use_sha = TRUE

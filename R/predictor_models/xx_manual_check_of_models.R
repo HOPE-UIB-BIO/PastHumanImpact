@@ -42,7 +42,7 @@ mod <-
     ),
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/Mods"
+      "Predictor_models/Mods"
     ),
     verbose = TRUE
   )

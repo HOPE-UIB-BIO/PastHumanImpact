@@ -35,7 +35,7 @@ models_config_table <-
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -78,7 +78,7 @@ purrr::pwalk(
     predictor_models_dir <-
       paste0(
         data_storage_path,
-        "Data/Predictor_models/"
+        "Predictor_models/"
       )
 
     general_trends_dir <-

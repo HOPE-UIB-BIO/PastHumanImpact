@@ -75,7 +75,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/pipeline_pollen_data"
+    "Targets_data/pipeline_pollen_data"
   )
 )
 
@@ -90,7 +90,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_pollen_data"
+      "Targets_data/pipeline_pollen_data"
     )
   )
 }
@@ -106,7 +106,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/pipeline_paps"
+    "Targets_data/pipeline_paps"
   )
 )
 
@@ -121,7 +121,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_paps"
+      "Targets_data/pipeline_paps"
     )
   )
 }
@@ -137,7 +137,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/pipeline_events"
+    "Targets_data/pipeline_events"
   )
 )
 
@@ -152,7 +152,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_events"
+      "Targets_data/pipeline_events"
     )
   )
 }
@@ -168,7 +168,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/pipeline_predictors"
+    "Targets_data/pipeline_predictors"
   )
 )
 
@@ -183,7 +183,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_predictors"
+      "Targets_data/pipeline_predictors"
     )
   )
 }
@@ -199,7 +199,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/analyses_h1"
+    "Targets_data/analyses_h1"
   )
 )
 
@@ -214,7 +214,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h1"
+      "Targets_data/analyses_h1"
     )
   )
 }
@@ -243,7 +243,7 @@ targets::tar_make(
   ),
   store = paste0(
     data_storage_path,
-    "_targets_data/analyses_h2"
+    "Targets_data/analyses_h2"
   )
 )
 
@@ -257,7 +257,7 @@ if (
     ),
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h2"
+      "Targets_data/analyses_h2"
     )
   )
 }

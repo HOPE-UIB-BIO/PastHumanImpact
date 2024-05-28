@@ -44,7 +44,7 @@ list(
     name = data_properties_filtered_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_paps/objects/data_properties_filtered"
+      "Targets_data/pipeline_paps/objects/data_properties_filtered"
     ),
     format = "file"
   ),
@@ -58,7 +58,7 @@ list(
     name = data_properties_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_paps/objects/data_properties"
+      "Targets_data/pipeline_paps/objects/data_properties"
     ),
     format = "file"
   ),
@@ -71,7 +71,7 @@ list(
     name = data_predictor_filtered_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_predictors/objects/data_predictors_filtered"
+      "Targets_data/pipeline_predictors/objects/data_predictors_filtered"
     ),
     format = "file"
   ),
@@ -84,7 +84,7 @@ list(
     name = data_predictor_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_predictors/objects/data_predictors"
+      "Targets_data/pipeline_predictors/objects/data_predictors"
     ),
     format = "file"
   ),

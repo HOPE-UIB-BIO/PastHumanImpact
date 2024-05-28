@@ -45,7 +45,7 @@ list(
     name = data_events_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_events/objects/events_temporal_subset"
+      "Targets_data/pipeline_events/objects/events_temporal_subset"
     ),
     format = "file"
   ),
@@ -58,7 +58,7 @@ list(
     name = file_climate_path,
     command = paste0(
       data_storage_path,
-      "Data/climate/data_climate-2024-01-23.rds"
+      "ccclimate/data_climate-2024-01-23.rds"
     ),
     format = "file"
   ),
@@ -103,7 +103,7 @@ list(
     name = file_spd_path,
     command = paste0(
       data_storage_path,
-      "Data/spd/data_spd_combine_2024-03-11.rds"
+      "SPD/data_spd_combine_2024-03-11.rds"
     ),
     format = "file"
   ),

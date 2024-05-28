@@ -40,7 +40,7 @@ source(
 time_ref_path <-
   paste0(
     data_storage_path,
-    "Data/climate/time_reference_table.rds"
+    "Climate/time_reference_table.rds"
   )
 # - load table
 time_ref_table <- get_file_from_path(time_ref_path)
@@ -71,6 +71,6 @@ readr::write_rds(
   x = data_climate,
   file = paste0(
     data_storage_path,
-    "Data/climate/data_climate-2024-01-23.rds"
+    "Climate/data_climate-2024-01-23.rds"
   )
 )

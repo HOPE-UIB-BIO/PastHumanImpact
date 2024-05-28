@@ -42,7 +42,7 @@ data_spd_250 <-
     file_name = "data_spd",
     dir = paste0(
       data_storage_path,
-      "Data/spd/"
+      "SPD/"
     )
   )
 
@@ -91,7 +91,7 @@ data_polygons <-
 data_c14_path <-
   paste0(
     data_storage_path,
-    "Data/c14/data_rc_2022-11-29.rds"
+    "C14/data_rc_2022-11-29.rds"
   )
 # - load c14 data
 data_c14 <-
@@ -161,7 +161,7 @@ data_c14_as_list_reorder %>%
         !file.exists(
           paste0(
             data_storage_path,
-            "Data/spd/spd_temp_500/",
+            "SPD/spd_temp_500/",
             paste0(
               .y,
               "_spd.rds"
@@ -183,7 +183,7 @@ data_c14_as_list_reorder %>%
             object_to_save = .,
             dir = paste0(
               data_storage_path,
-              "Data/spd/spd_temp_500/"
+              "SPD/spd_temp_500/"
             ),
             file_name = paste0(
               .y,
@@ -201,7 +201,7 @@ data_c14_as_list_reorder %>%
 
 spd_processed_vec <-
   list.files(
-    here::here(data_storage_path, "Data/spd/spd_temp_500"),
+    here::here(data_storage_path, "SPD/spd_temp_500"),
     pattern = "_spd.rds",
     recursive = TRUE
   ) %>%
@@ -217,7 +217,7 @@ spd_processed_list <-
     .f = ~ RUtilpol::get_latest_file(
       file_name = .x,
       dir = here::here(
-        data_storage_path, "Data/spd/spd_temp_500"
+        data_storage_path, "SPD/spd_temp_500"
       )
     )
   ) %>%
@@ -243,7 +243,7 @@ RUtilpol::save_latest_file(
   file_name = "data_spd_500",
   dir = paste0(
     data_storage_path,
-    "Data/spd/"
+    "SPD/"
   ),
   prefered_format = "rds",
   use_sha = FALSE

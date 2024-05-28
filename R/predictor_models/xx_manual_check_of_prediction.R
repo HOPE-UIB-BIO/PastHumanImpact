@@ -38,7 +38,7 @@ sel_raw_data <-
     file_name = "predictor_models_data_to_fit",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   ) %>%
   dplyr::filter(
@@ -59,7 +59,7 @@ sel_mod <-
     ),
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/Mods"
+      "Predictor_models/Mods"
     ),
     verbose = TRUE
   )

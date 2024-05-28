@@ -42,7 +42,7 @@ models_to_run <-
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -68,7 +68,7 @@ purrr::pwalk(
         file_name = "predictor_models_config_table",
         dir = paste0(
           data_storage_path,
-          "Data/Predictor_models/"
+          "Predictor_models/"
         ),
         verbose = FALSE
       )
@@ -109,7 +109,7 @@ purrr::pwalk(
         ),
         dir = paste0(
           data_storage_path,
-          "Data/Predictor_models/Mods"
+          "Predictor_models/Mods"
         ),
         verbose = FALSE
       )
@@ -245,7 +245,7 @@ purrr::pwalk(
       file_name = "predictor_models_config_table",
       dir = paste0(
         data_storage_path,
-        "Data/Predictor_models/"
+        "Predictor_models/"
       ),
       prefered_format = "csv",
       verbose = TRUE
