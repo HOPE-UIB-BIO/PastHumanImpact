@@ -40,7 +40,7 @@ source(
 data_c14 <-
   paste0(
     data_storage_path,
-    "Data/c14/data_rc_2022-11-29.rds"
+    "C14/data_rc_2022-11-29.rds"
   ) %>%
   get_file_from_path()
 
@@ -64,7 +64,7 @@ data_events <-
     name = "data_events_to_fit",
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_events"
+      "Targets_data/pipeline_events"
     )
   )
 
@@ -80,7 +80,8 @@ data_c14_continents <-
   RUtilpol::geo_assign_value(
     data_source = .,
     dir = paste0(
-      data_storage_path, "Data/Regions_shapefile/"
+      data_storage_path,
+      "Spatial/Regions_shapefile/"
     ),
     sel_method = "shapefile",
     file_name = "Regions",
@@ -91,7 +92,8 @@ data_c14_continents <-
 koppen_tranlation_table <-
   readr::read_csv(
     paste0(
-      data_storage_path, "Data/ecoregions2017/koppen_link.csv"
+      data_storage_path,
+      "Spatial/Climatezones/koppen_link.csv"
     ),
     show_col_types = FALSE
   )
@@ -103,7 +105,8 @@ data_c14_climate_zones <-
   RUtilpol::geo_assign_value(
     data_source = .,
     dir = paste0(
-      data_storage_path, "Data/ecoregions2017/"
+      data_storage_path,
+      "Spatial/Climatezones/"
     ),
     sel_method = "tif",
     file_name = "Beck_KG_V1_present_0p083",
@@ -130,8 +133,6 @@ data_c14_climate_zones <-
   dplyr::filter(
     region != "Africa"
   )
-
-
 
 fig_n_c14 <-
   data_c14_climate_zones %>%
@@ -900,7 +901,7 @@ mod_config_file <-
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -915,7 +916,7 @@ data_general_tredns_constant <-
     file_name = "predictor_models_data_constant",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 

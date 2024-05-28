@@ -40,7 +40,7 @@ data_spd_250 <-
     file_name = "data_spd",
     dir = paste0(
       data_storage_path,
-      "Data/spd/"
+      "SPD/"
     )
   )
 
@@ -50,7 +50,7 @@ data_spd_500 <-
     file_name = "data_spd_500",
     dir = paste0(
       data_storage_path,
-      "Data/spd/"
+      "SPD/"
     )
   )
 
@@ -85,7 +85,7 @@ RUtilpol::save_latest_file(
   file_name = "data_spd_combine",
   dir = paste0(
     data_storage_path,
-    "Data/spd/"
+    "SPD/"
   ),
   prefered_format = "rds",
   use_sha = FALSE

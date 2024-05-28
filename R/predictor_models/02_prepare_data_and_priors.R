@@ -33,7 +33,7 @@ data_prepared <-
     file_name = "predictor_models_data_prepared",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -168,7 +168,7 @@ RUtilpol::save_latest_file(
   file_name = "predictor_models_data_to_fit",
   dir = paste0(
     data_storage_path,
-    "Data/Predictor_models/"
+    "Predictor_models/"
   ),
   prefered_format = "rds",
   use_sha = TRUE

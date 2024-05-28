@@ -35,7 +35,7 @@ mod_config_file <- RUtilpol::get_latest_file(
   file_name = "predictor_models_config_table",
   dir = paste0(
     data_storage_path,
-    "Data/Predictor_models/"
+    "Predictor_models/"
   )
 )
 
@@ -50,7 +50,7 @@ list(
     name = data_m2_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_paps/objects/data_m2_filtered"
+      "Targets_data/pipeline_paps/objects/data_m2_filtered"
     ),
     format = "file"
   ),
@@ -66,7 +66,7 @@ list(
   #     file_name = "predictor_models_config_table",
   #     dir = paste0(
   #       data_storage_path,
-  #       "Data/Predictor_models/"
+  #       "Predictor_models/"
   #     )
   #   )
   # ),

@@ -34,7 +34,7 @@ output_h2 <-
     name = "output_hvar_h2_spd",
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h2"
+      "Targets_data/analyses_h2"
     )
   )
 
@@ -43,7 +43,7 @@ data_m2_filtered <-
     name = "data_m2_filtered",
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h2"
+      "Targets_data/analyses_h2"
     )
   )
 #----------------------------------------------------------#

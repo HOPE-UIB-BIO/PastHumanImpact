@@ -34,7 +34,7 @@ output_temporal_spd <-
     name = "output_temporal_spd",
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h1"
+      "Targets_data/analyses_h1"
     )
   )
 
@@ -44,7 +44,7 @@ output_temporal_events <-
     name = "output_temporal_events",
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h1"
+      "Targets_data/analyses_h1"
     )
   )
 

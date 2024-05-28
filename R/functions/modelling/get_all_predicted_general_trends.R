@@ -61,7 +61,7 @@ get_all_predicted_general_trends <- function(data_source, sel_type = c("predicto
       predictor_models_dir <-
         paste0(
           data_storage_path,
-          "Data/Predictor_models/"
+          "Predictor_models/"
         )
 
       general_trends_dir <-

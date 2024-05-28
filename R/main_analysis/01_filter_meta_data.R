@@ -33,11 +33,11 @@ source(
 file_assembly_path <-
   paste0(
     data_storage_path,
-    "Data/assembly/data_assembly_V2-2022-05-23.rds"
+    "Assembly/data_assembly-2022-05-23.rds"
   )
 # - load data assembly from path
 data_assembly <-
-  get_data(file_assembly_path)
+  get_file_from_path(file_assembly_path)
 
 # - filter pollen data
 data_assembly_filtered <-
@@ -74,6 +74,6 @@ readr::write_rds(
   x = data_meta,
   file = paste0(
     data_storage_path,
-    "Data/assembly/data_meta-2024-01-30.rds"
+    "Assembly/data_meta-2024-01-30.rds"
   )
 )

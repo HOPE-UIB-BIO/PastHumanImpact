@@ -38,7 +38,7 @@ data_to_fit <-
     file_name = "predictor_models_data_to_fit",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 
@@ -47,7 +47,7 @@ models_to_run_order <-
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   ) %>%
   # arrange in a custom order
@@ -92,7 +92,7 @@ purrr::pwalk(
         file_name = "predictor_models_config_table",
         dir = paste0(
           data_storage_path,
-          "Data/Predictor_models/"
+          "Predictor_models/"
         )
       ) %>%
       dplyr::filter(
@@ -205,7 +205,7 @@ purrr::pwalk(
           file_name = "predictor_models_config_table",
           dir = paste0(
             data_storage_path,
-            "Data/Predictor_models/"
+            "Predictor_models/"
           )
         ) %>%
         dplyr::mutate(
@@ -258,7 +258,7 @@ purrr::pwalk(
         file_name = "predictor_models_config_table",
         dir = paste0(
           data_storage_path,
-          "Data/Predictor_models/"
+          "Predictor_models/"
         ),
         prefered_format = "csv"
       )
@@ -274,7 +274,7 @@ purrr::pwalk(
         ),
         dir = paste0(
           data_storage_path,
-          "Data/Predictor_models/Mods"
+          "Predictor_models/Mods"
         ),
         prefered_format = "qs",
         preset = "archive"

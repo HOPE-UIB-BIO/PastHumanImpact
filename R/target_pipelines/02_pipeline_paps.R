@@ -39,12 +39,12 @@ source(
 
 # the targets list:
 list(
-  # get pollen data from _targets_data ----
+  # get pollen data from Targets_data ----
   targets::tar_target(
     name = data_pollen_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_pollen_data/objects/data_pollen"
+      "Targets_data/pipeline_pollen_data/objects/data_pollen"
     ),
     format = "file"
   ),

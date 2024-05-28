@@ -52,7 +52,7 @@ data_polygons <-
 data_c14_path <-
   paste0(
     data_storage_path,
-    "Data/c14/data_rc_2022-11-29.rds"
+    "C14/data_rc_2022-11-29.rds"
   )
 # - load c14 data
 data_c14 <- get_file_from_path(data_c14_path)
@@ -109,7 +109,7 @@ RUtilpol::save_latest_file(
   file_name = "data_spd",
   dir = paste0(
     data_storage_path,
-    "Data/spd/"
+    "SPD/"
   ),
   prefered_format = "rds",
   use_sha = FALSE

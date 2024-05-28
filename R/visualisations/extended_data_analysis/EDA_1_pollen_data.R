@@ -41,7 +41,7 @@ data_pollen <-
     name = data_assembly_filtered,
     store = paste0(
       data_storage_path,
-      "_targets_data/pipeline_pollen_data"
+      "Targets_data/pipeline_pollen_data"
     )
   ) %>%
   dplyr::select(

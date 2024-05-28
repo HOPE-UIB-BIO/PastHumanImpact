@@ -30,7 +30,7 @@ flag_model_to_rerun <- function(
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     ),
     prefered_format = "csv",
     verbose = FALSE

@@ -42,7 +42,7 @@ output_spatial_spd <-
     name = "output_spatial_spd",
     store = paste0(
       data_storage_path,
-      "_targets_data/analyses_h1"
+      "Targets_data/analyses_h1"
     )
   )
 # - Load data geo koppen
@@ -50,7 +50,7 @@ data_geo_koppen <-
   readr::read_rds(
     paste0(
       data_storage_path,
-      "Data/ecoregions2017/data_geo_koppen.rds"
+      "Spatial/Climatezones/data_geo_koppen.rds"
     )
   ) %>%
   tibble::as_tibble() %>%

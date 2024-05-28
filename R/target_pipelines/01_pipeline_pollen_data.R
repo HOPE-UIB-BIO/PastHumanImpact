@@ -45,14 +45,14 @@ list(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "Data/assembly/data_assembly_V2-2022-05-23.rds"
+      "Assembly/data_assembly-2022-05-23.rds"
     ),
     format = "file"
   ),
   # - load data assembly from path
   targets::tar_target(
     name = data_assembly,
-    command = get_data(file_assembly_path)
+    command = get_file_from_path(file_assembly_path)
   ),
   # - filter pollen data
   targets::tar_target(

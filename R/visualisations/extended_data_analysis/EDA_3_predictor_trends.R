@@ -206,7 +206,7 @@ data_predictors_raw_data <-
     file_name = "predictor_models_data_to_fit",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   ) %>%
   add_climatezone_as_factor() %>%
@@ -224,7 +224,7 @@ mod_config_file <-
     file_name = "predictor_models_config_table",
     dir = paste0(
       data_storage_path,
-      "Data/Predictor_models/"
+      "Predictor_models/"
     )
   )
 

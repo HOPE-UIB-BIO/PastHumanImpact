@@ -39,12 +39,12 @@ source(
 #----------------------------------------------------------#
 
 list(
-  # get pollen data from _targets_data ----
+  # get pollen data from Targets_data ----
   targets::tar_target(
     name = data_pollen_path,
     command = paste0(
       data_storage_path,
-      "_targets_data/pipeline_pollen_data/objects/data_pollen"
+      "Targets_data/pipeline_pollen_data/objects/data_pollen"
     ),
     format = "file"
   ),
@@ -57,7 +57,7 @@ list(
     name = events_diag_path,
     command = paste0(
       data_storage_path,
-      "Data/events/events_from_diagrams_2022-11-24.rds"
+      "Events/events_from_diagrams_2022-11-24.rds"
     ),
     format = "file"
   ),
@@ -81,7 +81,7 @@ list(
     name = events_indicators_path,
     command = paste0(
       data_storage_path,
-      "Data/events/events_from_code_indicators_2022-11-25.rds"
+      "Events/events_from_code_indicators_2022-11-25.rds"
     ),
     format = "file"
   ),
@@ -113,7 +113,7 @@ list(
     name = events_indices_path,
     command = paste0(
       data_storage_path,
-      "Data/events/events_from_code_indices_2022-11-25.rds"
+      "Events/events_from_code_indices_2022-11-25.rds"
     ),
     format = "file"
   ),
