@@ -48,9 +48,3 @@ source(
     "R/spd_calculation/03_combine_spd.R"
   )
 )
-
-source(
-  here::here(
-    "R/spd_calculation/04_summary_spd_events.R"
-  )
-)
