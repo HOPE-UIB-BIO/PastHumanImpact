@@ -25,6 +25,9 @@ source(
   )
 )
 
+region_label_wrap <- 10
+
+
 #----------------------------------------------------------#
 # 1. Load results -----
 #----------------------------------------------------------#
@@ -171,6 +174,8 @@ p0 <-
     ylim = sel_range
   ) +
   ggplot2::theme(
+    plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+    panel.spacing.y = grid::unit(5, "mm"),
     legend.position = "none",
     legend.text = ggplot2::element_text(
       size = text_size, # [config criteria]
@@ -195,9 +200,14 @@ p0 <-
     line = ggplot2::element_line(
       linewidth = line_size, # [config criteria]
       color = common_gray # [config criteria]
+    ),
+    strip.text = ggplot2::element_text(
+      size = text_size, # [config criteria]
+      color = common_gray # [config criteria]
     )
   ) +
   ggplot2::scale_y_continuous(
+    position = "right",
     expand = c(0.05, 0.05),
     breaks = seq(
       min(sel_range),
@@ -221,15 +231,16 @@ plot_density <- function(sel_var = "human") {
   p0 +
     ggplot2::facet_grid(
       region ~ predictor,
-      switch = "x",
+      switch = "both",
+      labeller = ggplot2::labeller(
+        region = ggplot2::label_wrap_gen(region_label_wrap)
+      )
+    ) +
+    ggplot2::scale_x_continuous(
+      trans = "reverse"
     ) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
-      strip.text.x = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      strip.text.y = ggplot2::element_blank(),
       axis.text.x = ggplot2::element_blank(),
       axis.line.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank()
@@ -278,17 +289,13 @@ plot_summary <- function(sel_var = "human") {
   p0 +
     ggplot2::facet_grid(
       region ~ climatezone_label,
-      switch = "x",
+      switch = "both",
       labeller = ggplot2::labeller(
-        region = ggplot2::label_wrap_gen(7)
+        region = ggplot2::label_wrap_gen(region_label_wrap)
       )
     ) +
     ggplot2::theme(
       strip.background = ggplot2::element_blank(),
-      strip.text = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
       axis.text = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank()
@@ -358,7 +365,12 @@ plot_summary <- function(sel_var = "human") {
 
 fig_main <-
   cowplot::plot_grid(
-    plot_density("human"),
+    plot_density("human") +
+      ggplot2::theme(
+        axis.title.y = ggplot2::element_blank(),
+        axis.text.y = ggplot2::element_blank(),
+        axis.ticks.y = ggplot2::element_blank()
+      ),
     plot_summary("human") +
       ggplot2::theme(
         strip.text.y = ggplot2::element_blank(),
@@ -366,23 +378,25 @@ fig_main <-
         axis.text.y = ggplot2::element_blank(),
         axis.ticks.y = ggplot2::element_blank()
       ),
+    NULL,
     plot_density("climate") +
       ggplot2::theme(
+        strip.text.y = ggplot2::element_blank(),
         axis.title.y = ggplot2::element_blank(),
         axis.text.y = ggplot2::element_blank(),
         axis.ticks.y = ggplot2::element_blank()
       ),
     plot_summary("climate") +
       ggplot2::theme(
-        axis.title.y = ggplot2::element_blank(),
-        axis.text.y = ggplot2::element_blank(),
-        axis.ticks.y = ggplot2::element_blank()
+        strip.text.y = ggplot2::element_blank(),
+        axis.line.y = ggplot2::element_line(
+          linewidth = line_size, # [config criteria]
+          color = common_gray # [config criteria]
+        )
       ),
-    ncol = 4,
     nrow = 1,
     align = "v",
-    rel_widths = c(0.3, 0.95, 0.2, 1)
-    # labels = c("Human", "", "Climate", "")
+    rel_widths = c(0.32, 0.95, 0.05, 0.2, 1)
   )
 
 
@@ -403,11 +417,16 @@ get_points_to_map <- function(map, data_source) {
       mapping = ggplot2::aes(
         x = long,
         y = lat,
+        col = climatezone,
         fill = climatezone
       ),
       size = point_size, # [config criteria]
-      shape = 21,
-      alpha = 0.5
+      shape = 16,
+      alpha = 1,
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_color_manual(
+      values = palette_ecozones
     ) +
     ggplot2::theme(
       legend.position = "none"
@@ -415,7 +434,7 @@ get_points_to_map <- function(map, data_source) {
     return()
 }
 
-get_map_with_points <- function(sel_region, sel_alpha = 0.75) {
+get_map_with_points <- function(sel_region, sel_alpha = 0) {
   get_map_region(
     rasterdata = data_geo_koppen,
     select_region = sel_region,
@@ -440,7 +459,7 @@ fig_maps <-
 
 legend_climatezones <-
   ggpubr::get_legend(
-    get_map_with_points("Latin America") +
+    get_map_with_points("Latin America", sel_alpha = 1) +
       ggplot2::theme(
         legend.position = "bottom",
         legend.title = ggplot2::element_blank()
@@ -454,10 +473,15 @@ legend_climatezones <-
 figure2 <-
   cowplot::plot_grid(
     cowplot::plot_grid(
+      cowplot::plot_grid(
+        fig_maps,
+        NULL,
+        ncol = 1,
+        rel_heights = c(1, 0.075)
+      ),
       fig_main,
-      fig_maps,
       ncol = 2,
-      rel_widths = c(2, 0.5)
+      rel_widths = c(0.5, 2)
     ),
     ggpubr::as_ggplot(legend_climatezones),
     ncol = 1,
