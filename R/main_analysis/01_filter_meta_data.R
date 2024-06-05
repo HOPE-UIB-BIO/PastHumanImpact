@@ -33,7 +33,7 @@ source(
 file_assembly_path <-
   paste0(
     data_storage_path,
-    "Assembly/data_assembly-2022-05-23.rds"
+    "Assembly/data_assembly-2024-06-05.rds"
   )
 # - load data assembly from path
 data_assembly <-
@@ -74,6 +74,6 @@ readr::write_rds(
   x = data_meta,
   file = paste0(
     data_storage_path,
-    "Assembly/data_meta-2024-01-30.rds"
+    "Assembly/data_meta-2024-06-05.rds"
   )
 )
