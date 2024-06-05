@@ -32,7 +32,7 @@ source(
 file_meta_data_path <-
   paste0(
     data_storage_path,
-    "Assembly/data_meta-2024-01-30.rds"
+    "Assembly/data_meta-2024-06-05.rds"
   )
 # - load processed meta data
 data_meta <-
