@@ -33,13 +33,13 @@ source(
 
 source(
   here::here(
-    "R/spd_calculation/01_calculate_spd.R"
+    "R/spd_calculation/01_calculate_spd_250.R"
   )
 )
 
 source(
   here::here(
-    "R/spd_calculation/02_calculate_spd_site_process.R"
+    "R/spd_calculation/02_calculate_spd_500.R"
   )
 )
 

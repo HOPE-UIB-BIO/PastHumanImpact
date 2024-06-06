@@ -4,7 +4,7 @@
 #                     GlobalHumanImpact
 #
 #
-#                     Calculate SPD
+#              Calculate SPD in 500 km distance
 #
 #                   O. Mottl, V.A. Felde
 #                         2024
@@ -39,7 +39,7 @@ source(
 # - load data spd distance 250
 data_spd_250 <-
   RUtilpol::get_latest_file(
-    file_name = "data_spd",
+    file_name = "data_spd_250",
     dir = paste0(
       data_storage_path,
       "SPD/"
@@ -51,17 +51,8 @@ missing_spd_250 <-
   data_spd_250 %>%
   dplyr::left_join(
     data_meta %>%
-      dplyr::select(
-        dataset_id,
-        region,
-        climatezone,
-        data_publicity
-      ),
+      dplyr::distinct(dataset_id),
     by = "dataset_id"
-  ) %>%
-  dplyr::filter(
-    !(region == "Latin America" & data_publicity == "private"),
-    !region == "Africa"
   ) %>%
   dplyr::mutate(no_spd = purrr::map_lgl(
     .x = spd,
@@ -74,11 +65,6 @@ missing_spd_250 <-
 subset_data_meta <-
   data_meta %>%
   dplyr::filter(dataset_id %in% missing_spd_250)
-
-# - distances to calculate spd density curves
-spd_distance_vec <-
-  c(500) %>%
-  rlang::set_names()
 
 # - get polygons for each dataset_id
 data_polygons <-
@@ -104,6 +90,11 @@ data_c14_subset <-
     data_source_polygons = data_polygons,
     data_source_meta = subset_data_meta
   )
+
+# - distances to calculate spd density curves
+spd_distance_vec <-
+  c(500) %>%
+  rlang::set_names()
 
 
 #---------------------------------------------------------------#
@@ -248,5 +239,3 @@ RUtilpol::save_latest_file(
   prefered_format = "rds",
   use_sha = FALSE
 )
-
-#---------------------------------------------------------------#
