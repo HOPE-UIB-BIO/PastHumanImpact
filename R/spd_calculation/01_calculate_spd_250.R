@@ -31,6 +31,12 @@ source(
   )
 )
 
+make_dir(
+  paste0(
+    data_storage_path,
+    "SPD/spd_temp_250"
+  )
+)
 
 #---------------------------------------------------------------#
 # 1. Load and prepare subsets of C14 dates -----
@@ -49,6 +55,7 @@ data_c14_path <-
     data_storage_path,
     "C14/data_rc_2022-11-29.rds"
   )
+
 # - load c14 data
 data_c14 <-
   get_file_from_path(data_c14_path)

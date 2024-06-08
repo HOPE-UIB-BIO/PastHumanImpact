@@ -31,6 +31,14 @@ source(
   )
 )
 
+make_dir(
+  paste0(
+    data_storage_path,
+    "SPD/spd_temp_500"
+  )
+)
+
+
 
 #---------------------------------------------------------------#
 # 1. Load and prepare subsets of C14 dates -----
