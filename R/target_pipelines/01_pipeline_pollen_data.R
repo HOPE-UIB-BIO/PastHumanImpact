@@ -45,7 +45,7 @@ list(
     name = file_assembly_path,
     command = paste0(
       data_storage_path,
-      "Assembly/data_assembly-2022-05-23.rds"
+      "Assembly/data_assembly-2024-06-05.rds"
     ),
     format = "file"
   ),
