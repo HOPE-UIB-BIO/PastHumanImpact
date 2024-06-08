@@ -23,6 +23,13 @@ source(
   )
 )
 
+make_dir(
+  paste0(
+    data_storage_path,
+    "Predictor_models/Mods"
+  )
+)
+
 n_cores_available <-
   as.numeric(
     parallelly::availableCores()
