@@ -4,7 +4,7 @@
 #                     GlobalHumanImpact
 #
 #
-#                     Calculate SPD
+#              Calculate SPD in 250 km distance
 #
 #                   O. Mottl, V.A. Felde
 #                         2024
@@ -31,59 +31,21 @@ source(
   )
 )
 
+make_dir(
+  paste0(
+    data_storage_path,
+    "SPD/spd_temp_250"
+  )
+)
 
 #---------------------------------------------------------------#
 # 1. Load and prepare subsets of C14 dates -----
 #---------------------------------------------------------------#
 
-# - load data spd distance 250
-data_spd_250 <-
-  RUtilpol::get_latest_file(
-    file_name = "data_spd",
-    dir = paste0(
-      data_storage_path,
-      "SPD/"
-    )
-  )
-
-# get dataset_ids for missing spds
-missing_spd_250 <-
-  data_spd_250 %>%
-  dplyr::left_join(
-    data_meta %>%
-      dplyr::select(
-        dataset_id,
-        region,
-        climatezone,
-        data_publicity
-      ),
-    by = "dataset_id"
-  ) %>%
-  dplyr::filter(
-    !(region == "Latin America" & data_publicity == "private"),
-    !region == "Africa"
-  ) %>%
-  dplyr::mutate(no_spd = purrr::map_lgl(
-    .x = spd,
-    .f = ~ all(.x$`250` == 0)
-  )) %>%
-  dplyr::filter(no_spd == TRUE) %>%
-  purrr::pluck("dataset_id")
-
-#- get relvant subsets to estimate spd 500
-subset_data_meta <-
-  data_meta %>%
-  dplyr::filter(dataset_id %in% missing_spd_250)
-
-# - distances to calculate spd density curves
-spd_distance_vec <-
-  c(500) %>%
-  rlang::set_names()
-
 # - get polygons for each dataset_id
 data_polygons <-
   get_polygons(
-    data_source = subset_data_meta,
+    data_source = data_meta,
     distance_buffer = 10 # 10° away from site
   )
 
@@ -93,6 +55,7 @@ data_c14_path <-
     data_storage_path,
     "C14/data_rc_2022-11-29.rds"
   )
+
 # - load c14 data
 data_c14 <-
   get_file_from_path(data_c14_path)
@@ -102,8 +65,13 @@ data_c14_subset <-
   subset_c14_data(
     data_source_c14 = data_c14,
     data_source_polygons = data_polygons,
-    data_source_meta = subset_data_meta
+    data_source_meta = data_meta
   )
+
+# - distances to calculate spd density curves
+spd_distance_vec <-
+  c(250) %>%
+  rlang::set_names()
 
 
 #---------------------------------------------------------------#
@@ -161,7 +129,7 @@ data_c14_as_list_reorder %>%
         !file.exists(
           paste0(
             data_storage_path,
-            "SPD/spd_temp_500/",
+            "SPD/spd_temp_250/",
             paste0(
               .y,
               "_spd.rds"
@@ -183,7 +151,7 @@ data_c14_as_list_reorder %>%
             object_to_save = .,
             dir = paste0(
               data_storage_path,
-              "SPD/spd_temp_500/"
+              "SPD/spd_temp_250/"
             ),
             file_name = paste0(
               .y,
@@ -195,13 +163,14 @@ data_c14_as_list_reorder %>%
     }
   )
 
+
 #---------------------------------------------------------------#
 # 3. Load processed spds ----
 #---------------------------------------------------------------#
 
 spd_processed_vec <-
   list.files(
-    here::here(data_storage_path, "SPD/spd_temp_500"),
+    here::here(data_storage_path, "SPD/spd_temp_250"),
     pattern = "_spd.rds",
     recursive = TRUE
   ) %>%
@@ -217,7 +186,7 @@ spd_processed_list <-
     .f = ~ RUtilpol::get_latest_file(
       file_name = .x,
       dir = here::here(
-        data_storage_path, "SPD/spd_temp_500"
+        data_storage_path, "SPD/spd_temp_250"
       )
     )
   ) %>%
@@ -240,7 +209,7 @@ data_spd_temp <-
 
 RUtilpol::save_latest_file(
   object_to_save = data_spd_temp,
-  file_name = "data_spd_500",
+  file_name = "data_spd_250",
   dir = paste0(
     data_storage_path,
     "SPD/"
@@ -248,5 +217,3 @@ RUtilpol::save_latest_file(
   prefered_format = "rds",
   use_sha = FALSE
 )
-
-#---------------------------------------------------------------#
