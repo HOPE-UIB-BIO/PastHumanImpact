@@ -13,3 +13,27 @@ The repository consists of modular R-script and individual functions organised b
 * `R/___Init_project___.R` - set up the project on each machine. [**EACH USER SHOULD RUN THIS SCRIPT FIRST**]
 * `R/00_Config_file` - The configuration file is the master file in terms of setting all criteria used throughout the repo, loading the required packages and saving settings throughout the repo.
 * `R/01_run_project.R` - is the main script to run the project. It will run all the scripts in the correct order.
+
+## Data
+
+❗ **The data used in this project is NOT included in this repository** ❗
+
+ The data is stored in a separate repository and is accessed can be downloaded from ZENODO: [![](https://img.shields.io/badge/DOI-10.5281/zenodo.11369243-yellow)](https://doi.org/10.5281/zenodo.11369243)
+
+After downloading the data, the data should be placed in the `Data` folder.
+
+The data should be stored in the following structure:
+
+``` r
+Data/
+├── Assembly/
+├── C14/
+├── Climate/
+├── Events/
+├── Predictor_models/
+├── Spatial/
+├── SPD/
+└── Targets_data/
+```
+
+Then the `R/00_Config_file.R` (Section 4) should be updated with the correct path to the data.
