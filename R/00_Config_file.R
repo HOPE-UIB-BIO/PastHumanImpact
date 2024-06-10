@@ -117,7 +117,7 @@ invisible(
 
 
 #----------------------------------------------------------#
-# 4.Define directory for external storage -----
+# 4. Define directory for external storage -----
 #----------------------------------------------------------#
 
 # !!!  IMPORTANT  !!!
@@ -142,6 +142,9 @@ if (
   data_storage_path <-
     here::here("Data")
 }
+
+check_storage_folders(data_storage_path)
+
 
 #----------------------------------------------------------#
 # 5. Define variables -----
