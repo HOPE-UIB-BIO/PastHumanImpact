@@ -104,9 +104,12 @@ list(
   # - file path to spd data ----
   targets::tar_target(
     name = file_spd_path,
-    command = paste0(
-      data_storage_path,
-      "SPD/data_spd_combine_2024-03-11.rds"
+    command = RUtilpol::get_latest_file_name(
+      file_name = "data_spd_combine",
+      dir = paste0(
+        data_storage_path,
+        "SPD/"
+      )
     ),
     format = "file"
   ),

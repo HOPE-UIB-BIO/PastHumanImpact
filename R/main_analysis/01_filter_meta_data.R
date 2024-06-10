@@ -29,20 +29,19 @@ source(
 # 1. Filter meta data -----
 #---------------------------------------------------------------#
 
-# get path to the data assembly
-file_assembly_path <-
-  paste0(
-    data_storage_path,
-    "Assembly/data_assembly-2024-06-05.rds"
-  )
 # - load data assembly from path
 data_assembly <-
-  get_file_from_path(file_assembly_path)
+  RUtilpol::get_latest_file(
+    file_name = "data_assembly",
+    dir = paste0(
+      data_storage_path,
+      "Assembly/"
+    )
+  )
 
 # - filter pollen data
 data_assembly_filtered <-
   filter_all_data(data_assembly)
-
 
 # - select meta data for filtered dataset_id
 data_meta <-
@@ -70,10 +69,12 @@ data_meta <-
 # 2. Save processed meta data to data folder -----
 #---------------------------------------------------------------#
 
-readr::write_rds(
-  x = data_meta,
-  file = paste0(
+RUtilpol::save_latest_file(
+  file_name = "data_meta",
+  dir = paste0(
     data_storage_path,
-    "Assembly/data_meta-2024-06-05.rds"
-  )
+    "Meta/"
+  ),
+  prefered_format = "rds",
+  use_sha = FALSE
 )
