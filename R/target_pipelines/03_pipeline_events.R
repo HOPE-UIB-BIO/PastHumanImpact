@@ -55,9 +55,12 @@ list(
   # - a path for events from diagrams ----
   targets::tar_target(
     name = events_diag_path,
-    command = paste0(
-      data_storage_path,
-      "Events/events_from_diagrams_2022-11-24.rds"
+    command = RUtilpol::get_latest_file_name(
+      file_name = "events_from_diagrams",
+      dir = paste0(
+        data_storage_path,
+        "Events/"
+      )
     ),
     format = "file"
   ),
@@ -79,9 +82,12 @@ list(
   # - a path for indicators ----
   targets::tar_target(
     name = events_indicators_path,
-    command = paste0(
-      data_storage_path,
-      "Events/events_from_code_indicators_2022-11-25.rds"
+    command = RUtilpol::get_latest_file_name(
+      file_name = "events_from_code_indicators",
+      dir = paste0(
+        data_storage_path,
+        "Events/"
+      )
     ),
     format = "file"
   ),
@@ -111,9 +117,12 @@ list(
   # - a path for indices ----
   targets::tar_target(
     name = events_indices_path,
-    command = paste0(
-      data_storage_path,
-      "Events/events_from_code_indices_2022-11-25.rds"
+    command = RUtilpol::get_latest_file_name(
+      file_name = "events_from_code_indices",
+      dir = paste0(
+        data_storage_path,
+        "Events/"
+      )
     ),
     format = "file"
   ),

@@ -28,15 +28,15 @@ source(
 # 1. Load processed meta data -----
 #----------------------------------------------------------#
 
-# - path to meta data
-file_meta_data_path <-
-  paste0(
-    data_storage_path,
-    "Assembly/data_meta-2024-06-05.rds"
-  )
 # - load processed meta data
 data_meta <-
-  get_file_from_path(file_meta_data_path)
+  RUtilpol::get_latest_file(
+    file_name = "data_meta",
+    dir = paste0(
+      data_storage_path,
+      "Assembly/"
+    )
+  )
 
 
 #----------------------------------------------------------#
