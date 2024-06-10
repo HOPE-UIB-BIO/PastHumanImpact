@@ -45,6 +45,10 @@ source(
 # 2. Dowload all climate data -----
 #----------------------------------------------------------#
 
+# Will skip if data is already downloaded
+#  and stored in the data_storage_path
+# If you want to redownload the data, set the
+#  variable 'rewrite' to TRUE in the script
 # !!! Warning: This will take a while to run !!!
 source(
   here::here(
@@ -57,6 +61,10 @@ source(
 # 3. Prepare all SPD values -----
 #----------------------------------------------------------#
 
+# Will skip if data is already downloaded
+#  and stored in the data_storage_path
+# If you want to redownload the data, set the
+#  variable 'rewrite' to TRUE in the script
 # !!! Warning: This will take a while to run !!!
 source(
   here::here(
@@ -66,7 +74,7 @@ source(
 
 
 #----------------------------------------------------------#
-# 4. run target pipeline pollen data -----
+# 4. Run target pipeline pollen data -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -97,9 +105,10 @@ if (
 
 
 #----------------------------------------------------------#
-# 5. run target pipeline pollen assemblage properties -----
+# 5. Run target pipeline pollen assemblage properties -----
 #----------------------------------------------------------#
 
+# !!! Warning: This will take a while to run !!!
 targets::tar_make(
   script = here::here(
     "R/target_pipelines/02_pipeline_paps.R"
@@ -128,7 +137,7 @@ if (
 
 
 #----------------------------------------------------------#
-# 6. run target pipeline events data -----
+# 6. Run target pipeline events data -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -159,7 +168,7 @@ if (
 
 
 #----------------------------------------------------------#
-# 7. run target pipeline predictors -----
+# 7. Run target pipeline predictors -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -190,7 +199,7 @@ if (
 
 
 #----------------------------------------------------------#
-# 8. run target pipeline hvar spatial & temporal (H1) -----
+# 8. Run target pipeline hvar spatial & temporal (H1) -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -220,12 +229,18 @@ if (
 }
 
 #----------------------------------------------------------#
-# 9. run all predictore gerenral trends (H2) -----
+# 9. Run all predictore gerenral trends (H2) -----
 #----------------------------------------------------------#
 
-# !!! Warning: This will take a while to run !!!
-#   see the script for details about settings
-
+# # Running the models is very computationally expensive.
+#   Therefore, it is curently set to to skip.
+# If you prefer to manually rerun all model, you need to:
+#   1.set it set the variable 'rerun' to TRUE in the
+#     `R/main_analysis/05_prediction_models.r` script a
+#   2. manualy flagg the models to rerun in the
+#     `Predictor_models/predictor_models_config_table.csv`.
+#     Specifically, column `need_to_run` should be set to TRUE.
+#   !!! Warning: This will take a while to run !!!
 source(
   here::here(
     "R/main_analysis/05_prediction_models"
@@ -234,7 +249,7 @@ source(
 
 
 #----------------------------------------------------------#
-# 10. run target pipeline multidimensional shifts (H2) -----
+# 10. Run target pipeline multidimensional shifts (H2) -----
 #----------------------------------------------------------#
 
 targets::tar_make(
@@ -263,7 +278,7 @@ if (
 }
 
 #----------------------------------------------------------#
-# 11. run scripts for figures ----
+# 11. Run scripts for figures ----
 #----------------------------------------------------------#
 
 # combined figure of h1 1 ----
