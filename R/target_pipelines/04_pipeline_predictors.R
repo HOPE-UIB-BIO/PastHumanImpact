@@ -56,9 +56,12 @@ list(
   # - file path to climate data ----
   targets::tar_target(
     name = file_climate_path,
-    command = paste0(
-      data_storage_path,
-      "ccclimate/data_climate-2024-01-23.rds"
+    command = RUtilpol::get_latest_file_name(
+      file_name = "data_climate",
+      dir = paste0(
+        data_storage_path,
+        "Climate/"
+      )
     ),
     format = "file"
   ),
