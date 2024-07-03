@@ -517,7 +517,7 @@ fig_temporal <-
     panel.grid.minor = ggplot2::element_blank(),
     panel.grid.major.y = ggplot2::element_blank(),
     legend.position = "none",
-    plot.margin = grid::unit(c(0.1, 0.1, 0.1, 5), "mm")
+    plot.margin = grid::unit(c(3, 0.1, 0.1, 5), "mm")
   ) +
   ggplot2::labs(
     title = "C) Temporal coverage of records",
