@@ -10,7 +10,7 @@ The repository consists of modular R-script and individual functions organised b
 
 ### Reference
 
-This code is currently supporting the publication "*Climate outweighs human effects on vegetation properties during the early-to-mid Holocene*": [![static-badge](https://img.shields.io/badge/preprint--link-In_Review-blue)](https://www.researchsquare.com/article/rs-4692574/v1)
+This code is currently supporting the publication "*Climate outweighs human effects on vegetation properties during the early-to-mid Holocene*": [![static-badge](https://img.shields.io/badge/DOI-10.21203/rs.3.rs--4692574/v1-blue)](https://doi.org/10.21203/rs.3.rs-4692574/v1)
 
 Note: See [Releases](https://github.com/HOPE-UIB-BIO/PastHumanImpact/releases/) for the version of the code that supports the publication.
 
