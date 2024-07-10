@@ -8,6 +8,12 @@ This repository is a part of the ERC HOPE project and is set to estimate if huma
 
 The repository consists of modular R-script and individual functions organised by individual tasks, as well as using the {[targets](https://books.ropensci.org/targets/)} R package to create workflows for specific subroutines. Therefore, the project is divided into several steps, each step is a separate task (R scripts and/or target pipeline).
 
+### Reference
+
+This code is currently supporting the publication "*Climate outweighs human effects on vegetation properties during the early-to-mid Holocene*": [![static-badge](https://img.shields.io/badge/DOI-10.21203/rs.3.rs--4692574/v1-blue)](https://doi.org/10.21203/rs.3.rs-4692574/v1)
+
+Note: See [Releases](https://github.com/HOPE-UIB-BIO/PastHumanImpact/releases/) for the version of the code that supports the publication.
+
 ## Setup
 
 * `R/___Init_project___.R` - set up the project on each machine. [**EACH USER SHOULD RUN THIS SCRIPT FIRST**]
