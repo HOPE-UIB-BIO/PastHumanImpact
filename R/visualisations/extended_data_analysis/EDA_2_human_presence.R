@@ -1062,7 +1062,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Extended_data_figures/Extended_data_figure_3"
+        "Outputs/Figures/Extended_data_figures/Extended_data_figure_9"
       ),
       .x,
       sep = "."

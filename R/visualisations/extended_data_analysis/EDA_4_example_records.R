@@ -64,7 +64,6 @@ data_meta_analysis <-
   dplyr::select(dataset_id) %>%
   dplyr::inner_join(data_meta, by = "dataset_id")
 
-
 data_pollen_analysis <-
   data_pollen %>%
   dplyr::filter(dataset_id %in% data_meta_analysis$dataset_id)
@@ -101,11 +100,11 @@ data_to_plot <-
       .progress = TRUE,
       .x = data_merge,
       .f = ~ .x %>%
+        dplyr::select(-"n1_minus_n2")  %>% 
         dplyr::rename(
           "N0" = n0,
           "N1" = n1,
           "N2" = n2,
-          "N1 minus N2" = n1_minus_n2,
           "N2 divided by N1" = n2_divided_by_n1,
           "N1 divided by N0" = n1_divided_by_n0,
           "DCCA axis 1" = dcca_axis_1,
@@ -462,7 +461,7 @@ plot_example_figure <- function(
   list_fig_paps_line <-
     c(
       "N0", "N1", "N2",
-      "N1 minus N2", "N2 divided by N1", "N1 divided by N0",
+      "N2 divided by N1", "N1 divided by N0",
       "DCCA axis 1", "ROC"
     ) %>%
     purrr::map(
@@ -488,7 +487,7 @@ plot_example_figure <- function(
         nrow = 1,
         labels = c(
           "N0", "N1", "N2",
-          "N1 minus N2", "N2 divided by N1", "N1 divided by N0",
+          "N2 divided by N1", "N1 divided by N0",
           "DCCA axis 1", "ROC"
         ),
         label_size = text_size, # [config criteria]
@@ -525,6 +524,7 @@ plot_example_figure <- function(
     rel_widths = c(2, 0.5, 16)
   )
 }
+
 
 
 #----------------------------------------------------------#
@@ -566,7 +566,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Extended_data_figures/Extended_data_figure_4"
+        "Outputs/Figures/Extended_data_figures/Extended_data_figure_3"
       ),
       .x,
       sep = "."
