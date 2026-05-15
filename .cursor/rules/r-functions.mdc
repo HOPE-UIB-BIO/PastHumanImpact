@@ -1,0 +1,10 @@
+---
+description: R function documentation and test guidance for PastHumanImpact
+globs:
+  - "R/functions/**/*.R"
+  - "R/tests/testthat/test-*.R"
+alwaysApply: false
+---
+
+Read `.ai/r-functions.md` before editing R functions, roxygen2 documentation, or
+function tests. Also apply `.ai/r-coding.md` to all R code.
