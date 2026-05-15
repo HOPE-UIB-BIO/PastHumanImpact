@@ -1,0 +1,9 @@
+---
+description: R coding guidance for PastHumanImpact
+globs:
+  - "**/*.R"
+alwaysApply: false
+---
+
+Read `.ai/r-coding.md` before editing R scripts, target pipelines, data
+processing, modelling, or visualisation code in this repository.

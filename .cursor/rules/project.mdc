@@ -1,0 +1,7 @@
+---
+description: PastHumanImpact project-wide assistant routing
+alwaysApply: true
+---
+
+Use `AGENTS.md` as the repository entry point. Canonical assistant guidance lives
+in `.ai/`; tool-native files are compatibility adapters.

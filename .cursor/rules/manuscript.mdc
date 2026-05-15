@@ -1,0 +1,10 @@
+---
+description: Manuscript and Quarto guidance for PastHumanImpact
+globs:
+  - "Manuscript/**/*.md"
+  - "**/*.qmd"
+alwaysApply: false
+---
+
+Read `.ai/manuscript.md` before editing manuscript or Quarto files. Apply
+`.ai/r-coding.md` to R chunks.
