@@ -44,6 +44,8 @@ and assistants that need a compact validation target.
 - Test files are named `test-<function_name>.R` and use `testthat` conventions.
 - Tests cover happy paths, edge cases, and error conditions without depending on
   implementation internals.
+- Relevant test runner or focused test file has been executed before the change
+  is treated as complete.
 
 ## Visualisation and Quarto Checks
 
