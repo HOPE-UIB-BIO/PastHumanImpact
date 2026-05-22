@@ -33,19 +33,14 @@ if (
   already_synch <- FALSE
 }
 
-if (
-  isFALSE(already_synch)
-) {
-  library(here)
-  # Synchronise the package versions
-  renv::restore(
-    lockfile = here::here("renv/library_list.lock")
-  )
-  already_synch <- TRUE
+# Synchronise the package versions
+renv::restore(
+  lockfile = file.path("renv", "library_list.lock")
+)
+already_synch <- TRUE
 
-  # Save snapshot of package versions
-  # renv::snapshot(lockfile = here::here("renv/library_list.lock"))  # do only for update
-}
+# Save snapshot of package versions
+# renv::snapshot(lockfile = file.path("renv", "library_list.lock"))  # do only for update
 
 # Define packages
 package_list <-
@@ -95,7 +90,11 @@ sapply(package_list, library, character.only = TRUE)
 current_date <- Sys.Date()
 
 # project directory is set up by 'here' package, Adjust if needed
-current_dir <- here::here()
+current_dir <- normalizePath(
+  ".",
+  winslash = "/",
+  mustWork = TRUE
+)
 
 
 #----------------------------------------------------------#
@@ -130,17 +129,20 @@ invisible(
 
 if (
   file.exists(
-    here::here("secrets.yaml")
+    "secrets.yaml"
   )
 ) {
   data_storage_path <-
     yaml::read_yaml(
-      here::here("secrets.yaml")
-    ) %>%
-    purrr::chuck(Sys.info()["user"])
+      "secrets.yaml"
+    ) |>
+    purrr::pluck(
+      Sys.info()["user"],
+      .default = "Data"
+    )
 } else {
   data_storage_path <-
-    here::here("Data")
+    "Data"
 }
 
 check_storage_folders(data_storage_path)
@@ -155,7 +157,7 @@ max_age <- 12e3
 timestep <- 500
 
 # - age table for dummy data
-data_dummy_time <- tibble::tibble(
+data_dummy_time <- data.frame(
   age = seq(
     from = min_age, # [config]
     to = max_age, # [config]
@@ -164,24 +166,33 @@ data_dummy_time <- tibble::tibble(
 )
 
 vec_regions <-
-  c(
-    "North America",
-    "Latin America",
-    "Europe",
-    "Asia",
-    "Oceania"
-  ) %>%
-  rlang::set_names()
+  setNames(
+    c(
+      "North America",
+      "Latin America",
+      "Europe",
+      "Asia",
+      "Oceania"
+    ),
+    c(
+      "North America",
+      "Latin America",
+      "Europe",
+      "Asia",
+      "Oceania"
+    )
+  )
 
 
 # regional limits
 data_regional_limits <-
-  tibble::tibble(
+  data.frame(
     region = vec_regions,
     xmin = c(-170, -103, -10, 30, 110),
     xmax = c(-50, -23, 40, 175.5, 154),
     ymin = c(15, -56, 35, 0, -45),
-    ymax = c(80, 34, 70, 80, -3)
+    ymax = c(80, 34, 70, 80, -3),
+    stringsAsFactors = FALSE
   )
 
 vec_climate_5 <-
@@ -208,7 +219,7 @@ short_name_climatezone <- c(
 )
 
 data_climate_zones <-
-  tibble::tibble(
+  data.frame(
     climatezone = factor(
       c(
         "Polar",
@@ -249,7 +260,8 @@ data_climate_zones <-
       "Temperate - Dry Summer",
       "Tropical",
       "Arid"
-    )
+    ),
+    stringsAsFactors = FALSE
   )
 
 min_n_records_per_climate_zone <- 5
@@ -273,12 +285,12 @@ point_size <- 1
 
 # define output sizes
 image_width_vec <-
-  c(
-    90,
-    180,
-    270
-  ) %>%
-  rlang::set_names(
+  setNames(
+    c(
+      90,
+      180,
+      270
+    ),
     c("1col", "2col", "3col")
   )
 image_units <- "mm"
