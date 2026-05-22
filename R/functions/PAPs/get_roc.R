@@ -11,6 +11,14 @@
 #' @param n_rand number of randomisations
 #' @param n_individuals_to_standardise set to  150 grains
 #' @param transformation_coef coefficient distances
+#' @param peak_point_method Peak-point detection method passed to
+#'   `detect_fun`.
+#' @param sd_for_peak_detection Numeric SD threshold for peak detection.
+#' @param verbose Logical. If `TRUE` (default), progress messages are printed.
+#' @param estimate_fun Function used to estimate rate of change. Defaults to
+#'   `RRatepol::fc_estimate_RoC`.
+#' @param detect_fun Function used to detect peak points. Defaults to
+#'   `RRatepol::fc_detect_peak_points`.
 #' @return For each sequence the ROC results
 #'
 get_roc <- function(data_pollen,
@@ -27,7 +35,41 @@ get_roc <- function(data_pollen,
                     transformation_coef = "chisq",
                     peak_point_method = "trend_non_linear",
                     sd_for_peak_detection = 2,
+                    verbose = TRUE,
+                    estimate_fun = RRatepol::fc_estimate_RoC,
+                    detect_fun = RRatepol::fc_detect_peak_points,
                     ...) {
+  assertthat::assert_that(
+    is.data.frame(data_pollen),
+    msg = "`data_pollen` must be a data frame."
+  )
+  req_columns <- c(
+    "counts_harmonised",
+    "levels",
+    "age_uncertainty",
+    "pollen_percentage",
+    "dataset_id",
+    "end_of_interest_period"
+  )
+  assertthat::assert_that(
+    all(req_columns %in% names(data_pollen)),
+    msg = "`data_pollen` is missing required columns."
+  )
+  assertthat::assert_that(
+    is.logical(verbose),
+    length(verbose) == 1,
+    !is.na(verbose),
+    msg = "`verbose` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.function(estimate_fun),
+    msg = "`estimate_fun` must be a function."
+  )
+  assertthat::assert_that(
+    is.function(detect_fun),
+    msg = "`detect_fun` must be a function."
+  )
+
   data_work_roc <-
     data_pollen %>%
     dplyr::mutate(
@@ -43,13 +85,15 @@ get_roc <- function(data_pollen,
         .f = ~ {
           current_env <- environment()
 
-          message(
-            msg = paste("dataset", ..5)
-          )
+          if (isTRUE(verbose)) {
+            message(
+              msg = paste("dataset", ..5)
+            )
+          }
 
           try(
             roc_res <-
-              RRatepol::fc_estimate_RoC(
+              estimate_fun(
                 data_source_community = ..1,
                 data_source_age = ..2,
                 age_uncertainty = ..3,
@@ -70,7 +114,7 @@ get_roc <- function(data_pollen,
                 interest_threshold = ..6,
                 time_standardisation = size_of_bin
               ) %>%
-              RRatepol::fc_detect_peak_points(
+              detect_fun(
                 data_source = .,
                 sel_method = peak_point_method,
                 sd_threshold = sd_for_peak_detection

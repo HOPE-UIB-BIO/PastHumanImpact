@@ -17,6 +17,10 @@
 #' @param get_significance logical; Should significance of predictors be
 #' estimated? (takes along time)
 #' @param permutations integers; numbers of permutations
+#' @param hvar_fun Function used to compute hierarchical variation
+#'   partitioning. Defaults to `rdacca_hp`.
+#' @param perm_fun Function used for permutation significance. Defaults to
+#'   `perm_hvarpart`.
 #' @param ... see parameters of functions within
 #' @return List of model outputs and a summary table of the results
 
@@ -49,7 +53,81 @@ get_varhp <- function(data_source,
                       time_series = TRUE,
                       get_significance = TRUE,
                       permutations = 99,
+                      hvar_fun = NULL,
+                      perm_fun = NULL,
                       ...) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.logical(run_all_predictors),
+    length(run_all_predictors) == 1,
+    !is.na(run_all_predictors),
+    msg = "`run_all_predictors` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(time_series),
+    length(time_series) == 1,
+    !is.na(time_series),
+    msg = "`time_series` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(get_significance),
+    length(get_significance) == 1,
+    !is.na(get_significance),
+    msg = "`get_significance` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.numeric(permutations),
+    length(permutations) == 1,
+    permutations > 0,
+    msg = "`permutations` must be a positive number."
+  )
+  if (is.null(response_dist) && is.null(data_response_dist)) {
+    assertthat::assert_that(
+      is.character(response_vars),
+      length(response_vars) > 0,
+      msg = "`response_vars` must be a non-empty character vector when no response distance is provided."
+    )
+    assertthat::assert_that(
+      all(response_vars %in% names(data_source)),
+      msg = "All `response_vars` must exist in `data_source`."
+    )
+  }
+
+  assertthat::assert_that(
+    is.list(predictor_vars),
+    msg = "`predictor_vars` must be a list."
+  )
+
+  if (is.null(hvar_fun)) {
+    assertthat::assert_that(
+      exists("rdacca_hp", mode = "function"),
+      msg = "`rdacca_hp` must be available or provide `hvar_fun`."
+    )
+    hvar_fun <-
+      get("rdacca_hp", mode = "function")
+  }
+
+  if (is.null(perm_fun)) {
+    assertthat::assert_that(
+      exists("perm_hvarpart", mode = "function"),
+      msg = "`perm_hvarpart` must be available or provide `perm_fun`."
+    )
+    perm_fun <-
+      get("perm_hvarpart", mode = "function")
+  }
+
+  assertthat::assert_that(
+    is.function(hvar_fun),
+    msg = "`hvar_fun` must be a function."
+  )
+  assertthat::assert_that(
+    is.function(perm_fun),
+    msg = "`perm_fun` must be a function."
+  )
+
   tryCatch(
     {
       if (is.null(response_dist) & is.null(data_response_dist)) {
@@ -132,7 +210,7 @@ get_varhp <- function(data_source,
       # run hvarpar
       # should work for both list and just data.frame
       varhp <-
-        rdacca_hp(
+        hvar_fun(
           dv = data_resp,
           iv = data_preds,
           method = "RDA",
@@ -155,7 +233,7 @@ get_varhp <- function(data_source,
       ) {
         # should work for both list and just data.frame
         hp_signif <-
-          perm_hvarpart(
+          perm_fun(
             dv = data_resp,
             iv = data_preds,
             method = "RDA",
@@ -202,6 +280,13 @@ get_varhp <- function(data_source,
 
       return(results)
     },
-    error = function(err) NA
+    error = function(err) {
+      cli::cli_abort(
+        message = c(
+          "get_varhp() failed.",
+          "x" = conditionMessage(err)
+        )
+      )
+    }
   )
 }

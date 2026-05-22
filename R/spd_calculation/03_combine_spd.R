@@ -68,7 +68,7 @@ data_spd_combine <-
         dplyr::rename(value = `250`)
     )
   ) %>%
-  dplyR::mutate(distance = 250) %>%
+  dplyr::mutate(distance = 250) %>%
   dplyr::full_join(
     data_spd_500 %>%
       dplyr::mutate(

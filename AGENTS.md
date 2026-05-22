@@ -11,6 +11,7 @@ correct source documents.
 | Any repository work | `AGENTS.md` |
 | R scripts, target pipelines, data processing, and visualisation | `.ai/r-coding.md` |
 | R functions, roxygen2 docs, and function tests | `.ai/r-functions.md` |
+| Contract-first function and test work | `.ai/r-functions.md` |
 | Manuscript, Markdown, and Quarto-style narrative work | `.ai/manuscript.md` |
 | Git workflow, branch safety, worktrees, and review workflow | `.ai/git-workflow.md` |
 | Debugging and bug fixes | `.ai/debugging.md` |
@@ -21,6 +22,7 @@ correct source documents.
 
 - GitHub Copilot uses files under `.github/` for instruction routing, commit
   message guidance, and custom agent discovery.
+- Copilot function and test work should also read `.ai/r-functions.md`.
 - Claude and Gemini use root redirect files that point back to `AGENTS.md`.
 - Cursor uses `.cursor/rules/*.mdc` to route file globs back to `.ai/`.
 - Other tools should load this file first and then follow the relevant `.ai/`

@@ -11,6 +11,8 @@
 #' method
 #' @param permutations integer; number of permutation for randomised datasets
 #' @param verbose Logical; Should progress be output?
+#' @param rdacca_fun Function used to fit hierarchical variation partitioning.
+#'   Defaults to `rdacca.hp::rdacca.hp`.
 #' @return provide p-values of varpart
 
 perm_hvarpart <- function(dv,
@@ -23,7 +25,48 @@ perm_hvarpart <- function(dv,
                           n.perm = 1000,
                           permutations = 1000,
                           series = TRUE,
-                          verbose = FALSE) {
+                          verbose = FALSE,
+                          rdacca_fun = rdacca.hp::rdacca.hp) {
+  method <- match.arg(method)
+  type <- match.arg(type)
+
+  assertthat::assert_that(
+    is.data.frame(dv) || is.matrix(dv) || inherits(dv, "dist"),
+    msg = "`dv` must be a data.frame, matrix, or dist object."
+  )
+  assertthat::assert_that(
+    is.data.frame(iv) || is.list(iv),
+    msg = "`iv` must be a data.frame or list of data.frames."
+  )
+  assertthat::assert_that(
+    is.numeric(n.perm),
+    length(n.perm) == 1,
+    n.perm > 0,
+    msg = "`n.perm` must be a positive number."
+  )
+  assertthat::assert_that(
+    is.numeric(permutations),
+    length(permutations) == 1,
+    permutations > 0,
+    msg = "`permutations` must be a positive number."
+  )
+  assertthat::assert_that(
+    is.logical(series),
+    length(series) == 1,
+    !is.na(series),
+    msg = "`series` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(verbose),
+    length(verbose) == 1,
+    !is.na(verbose),
+    msg = "`verbose` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.function(rdacca_fun),
+    msg = "`rdacca_fun` must be a function."
+  )
+
   # helper function
   get_r2q <- function(data_source) {
     data_source %>%
@@ -35,7 +78,7 @@ perm_hvarpart <- function(dv,
 
   # observed values
   obs <-
-    rdacca.hp::rdacca.hp(
+    rdacca_fun(
       dv = dv,
       iv = iv,
       method = method,
@@ -86,7 +129,9 @@ perm_hvarpart <- function(dv,
     permutations <- permutations - 1
   }
 
-  cat("\nPlease wait: running", permutations, "permutations \n")
+  if (isTRUE(verbose)) {
+    message(paste("Running", permutations, "permutations"))
+  }
 
   for (i in 1:permutations) {
     if (
@@ -136,7 +181,7 @@ perm_hvarpart <- function(dv,
     }
 
     simu <-
-      rdacca.hp::rdacca.hp(
+      rdacca_fun(
         dv = dv,
         iv = newiv,
         method = method,

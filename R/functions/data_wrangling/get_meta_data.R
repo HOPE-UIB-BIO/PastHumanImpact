@@ -1,6 +1,9 @@
 #' @title Get meta data and add age limits
 #' @description Get a subset of the full data assembly derived from RFossilpol
 #' and add age litims of data
+#' @param data_assembly A data frame with a `levels` list-column and metadata
+#'   columns listed in `variables`.
+#' @param variables Character vector of metadata columns to keep.
 #' @return
 #' Get a reduced tibble of selected variables from the full data assembly
 
@@ -21,6 +24,24 @@ get_meta_data <- function(data_assembly,
                             "data_publicity",
                             "doi"
                           )) {
+  assertthat::assert_that(
+    is.data.frame(data_assembly),
+    msg = "`data_assembly` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.character(variables),
+    length(variables) > 0,
+    msg = "`variables` must be a non-empty character vector."
+  )
+  assertthat::assert_that(
+    "levels" %in% names(data_assembly),
+    msg = "`data_assembly` must contain a levels column."
+  )
+  assertthat::assert_that(
+    all(variables %in% names(data_assembly)),
+    msg = "All `variables` must exist in `data_assembly`."
+  )
+
   data_assembly %>%
     dplyr::mutate(
       age_lim = purrr::map(

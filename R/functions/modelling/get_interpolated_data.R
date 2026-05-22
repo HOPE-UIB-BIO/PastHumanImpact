@@ -1,3 +1,19 @@
+#' @title Interpolate nested modelling time series
+#' @description
+#' Interpolates nested input series by grouping variable and reshapes output to
+#' wide nested tables by variable name.
+#' @param data_source Data frame containing nested `data_to_fit` tables.
+#' @param variable Name of the variable column in nested data.
+#' @param vars_interpolate Character vector of x and y columns for interpolation.
+#' @param group_var Grouping column name used to split series.
+#' @param method Interpolation method passed to `stats::approx()`.
+#' @param rule Extrapolation rule passed to `stats::approx()`.
+#' @param ties Tie handling passed to `stats::approx()`.
+#' @param age_min Minimum output age.
+#' @param age_max Maximum output age.
+#' @param timestep Output timestep.
+#' @param verbose Logical; if `TRUE`, prints progress comments.
+#' @return Data frame with `dataset_id` and nested interpolated `data` tables.
 get_interpolated_data <- function(data_source,
                                   variable = "var_name",
                                   vars_interpolate = c("age", "value"),
@@ -9,6 +25,39 @@ get_interpolated_data <- function(data_source,
                                   age_max = 12e03,
                                   timestep = 500,
                                   verbose = TRUE) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    "data_to_fit" %in% names(data_source),
+    msg = "`data_source` must contain `data_to_fit`."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$data_to_fit, is.data.frame)),
+    msg = "`data_to_fit` entries must be data frames."
+  )
+  assertthat::assert_that(
+    is.character(variable) && length(variable) == 1,
+    msg = "`variable` must be a single character value."
+  )
+  assertthat::assert_that(
+    is.character(vars_interpolate),
+    msg = "`vars_interpolate` must be character."
+  )
+  assertthat::assert_that(
+    is.character(group_var) && length(group_var) == 1,
+    msg = "`group_var` must be a single character value."
+  )
+  assertthat::assert_that(
+    is.character(method) && length(method) == 1,
+    msg = "`method` must be a single character value."
+  )
+  assertthat::assert_that(
+    is.logical(verbose) && length(verbose) == 1,
+    msg = "`verbose` must be a single logical value."
+  )
+
   RUtilpol::check_class("variable", "character")
   RUtilpol::check_class("vars_interpolate", "character")
   RUtilpol::check_class("method", "character")

@@ -1,8 +1,47 @@
 #' @title  select spd distance data
+#' @param data_source_events Data frame with `dataset_id` and list-column `events`.
+#' @param data_source_spd Data frame with `dataset_id` and list-column `data`.
+#' @param data_source_meta Data frame with `dataset_id`, `age_min`, and `age_max`.
+#' @param data_source_dummy_time Data frame with `age` used for missing SPD fills.
+#' @return Data frame combining nested SPD and event time series per dataset.
 get_events_spd_combined <- function(data_source_events,
                                     data_source_spd,
                                     data_source_meta,
                                     data_source_dummy_time) {
+  assertthat::assert_that(
+    is.data.frame(data_source_events),
+    msg = "`data_source_events` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_spd),
+    msg = "`data_source_spd` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_meta),
+    msg = "`data_source_meta` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_dummy_time),
+    msg = "`data_source_dummy_time` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    all(c("dataset_id", "events") %in% names(data_source_events)),
+    msg = "`data_source_events` must contain `dataset_id` and `events`."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "data") %in% names(data_source_spd)),
+    msg = "`data_source_spd` must contain `dataset_id` and `data`."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "age_min", "age_max") %in% names(data_source_meta)),
+    msg = "`data_source_meta` must contain `dataset_id`, `age_min`, and `age_max`."
+  )
+  assertthat::assert_that(
+    "age" %in% names(data_source_dummy_time),
+    msg = "`data_source_dummy_time` must contain `age`."
+  )
+
   # set names to spd
   data_spd <-
     data_source_spd %>%

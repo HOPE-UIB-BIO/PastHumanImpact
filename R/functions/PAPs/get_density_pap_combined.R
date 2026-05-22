@@ -14,6 +14,38 @@ get_density_pap_combined <- function(data_source_change_points,
                                      data_source_meta,
                                      data_source_dummy_time,
                                      limit_length = TRUE) {
+  assertthat::assert_that(
+    is.data.frame(data_source_change_points),
+    msg = "`data_source_change_points` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_meta),
+    msg = "`data_source_meta` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_dummy_time),
+    msg = "`data_source_dummy_time` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.logical(limit_length) && length(limit_length) == 1,
+    msg = "`limit_length` must be a single logical value."
+  )
+
+  assertthat::assert_that(
+    all(c(
+      "dataset_id", "diversity_cp", "mvrt_cp", "roc_cp", "roc_pp", "dcca_cp"
+    ) %in% names(data_source_change_points)),
+    msg = "`data_source_change_points` is missing required columns."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "age_min", "age_max") %in% names(data_source_meta)),
+    msg = "`data_source_meta` must contain `dataset_id`, `age_min`, and `age_max`."
+  )
+  assertthat::assert_that(
+    "age" %in% names(data_source_dummy_time),
+    msg = "`data_source_dummy_time` must contain `age`."
+  )
+
   # helper function
   get_density_subset <- function(data_source,
                                  dummy_table,
@@ -29,7 +61,7 @@ get_density_pap_combined <- function(data_source_change_points,
           density = 0
         )
     } else {
-      res <-
+      data_density <-
         REcopol::get_density(
           data_source = data_source,
           reflected = TRUE,
@@ -40,16 +72,24 @@ get_density_pap_combined <- function(data_source_change_points,
           bw = 1000 / max(dummy_table$age),
           n = max(dummy_table$age),
           ...
-        ) %>%
-        dplyr::mutate(
-          age = ceiling(var)
-        ) %>%
-        dplyr::filter(
-          age %in% dummy_table$age
-        ) %>%
-        dplyr::select(
-          age, density
         )
+
+      data_interp <-
+        stats::approx(
+          x = data_density$var,
+          y = data_density$density,
+          xout = dummy_table$age,
+          method = "linear",
+          ties = "ordered",
+          rule = 2
+        )
+
+      res <-
+        data.frame(
+          age = data_interp$x,
+          density = data_interp$y
+        ) %>%
+        tibble::as_tibble()
     }
     return(res)
   }

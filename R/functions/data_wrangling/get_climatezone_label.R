@@ -1,5 +1,15 @@
+#' @title Get short climatezone labels
+#' @description Map long climatezone labels to short code labels.
+#' @param x Character vector of climatezone labels.
+#' @return Character vector with mapped short labels.
 get_climatezone_label <- function(x) {
-  dplyr::case_when(
+  assertthat::assert_that(
+    is.character(x),
+    msg = "`x` must be a character vector."
+  )
+
+  res_label <-
+    dplyr::case_when(
     .default = NA_character_,
     x == "Polar" ~ "POL",
     x == "Cold - Cold Summer" ~ "CCS",
@@ -13,4 +23,6 @@ get_climatezone_label <- function(x) {
     x == "Tropical" ~ "TRO",
     x == "Arid" ~ "ARD"
   )
+
+  return(res_label)
 }

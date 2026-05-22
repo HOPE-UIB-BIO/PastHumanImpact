@@ -1,7 +1,31 @@
+#' @title Build summary tables from hvarpart outputs
+#' @description
+#' Build raw and weighted-mean importance summary tables from nested `varhp`
+#' outputs for spatial or temporal grouping.
+#' @param data_source Data frame containing at least `varhp` and grouping columns.
+#' @param data_type One of `spatial` or `temporal`.
+#' @param group_var Character vector of grouping column names.
+#' @return List with `summary_table` and `summary_table_weighted_mean`.
 get_summary_tables <- function(
-    data_source,
-    data_type = c("spatial", "temporal"),
-    group_var = c("region")) {
+  data_source,
+  data_type = c("spatial", "temporal"),
+  group_var = c("region")
+) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.character(group_var) && length(group_var) > 0,
+    msg = "`group_var` must be a non-empty character vector."
+  )
+
+  assertthat::assert_that(
+    assertthat::has_name(data_source, c("varhp", "data_merge")),
+    msg = "`data_source` must contain `varhp` and `data_merge`."
+  )
+
   data_type <- match.arg(data_type)
 
   assertthat::assert_that(
@@ -54,7 +78,6 @@ get_summary_tables <- function(
       janitor::clean_names() %>%
       dplyr::group_by(dataset_id)
   }
-
 
 
   if (

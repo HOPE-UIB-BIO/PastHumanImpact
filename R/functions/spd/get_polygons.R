@@ -3,6 +3,23 @@
 get_polygons <- function(data_source,
                          n_points = 10,
                          distance_buffer = 10) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "long", "lat") %in% names(data_source)),
+    msg = "`data_source` must contain `dataset_id`, `long`, and `lat`."
+  )
+  assertthat::assert_that(
+    is.numeric(n_points) && length(n_points) == 1 && n_points >= 3,
+    msg = "`n_points` must be a single numeric value >= 3."
+  )
+  assertthat::assert_that(
+    is.numeric(distance_buffer) && length(distance_buffer) == 1 && distance_buffer > 0,
+    msg = "`distance_buffer` must be a single positive numeric value."
+  )
+
   # helper functions
   create_dummy_points <- function(data_source_long,
                                   data_source_lat,

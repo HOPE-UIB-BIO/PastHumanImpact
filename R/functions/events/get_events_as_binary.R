@@ -1,10 +1,40 @@
-#' @title Get binary data from event detection
-#' @param data_source_events Data.frame with ages of human detection
-#' @param data_source_pollen Data.frame with filtered pollen data
-#' @description For each site, get a list of ages of all levels,
-#' add ages of all ages in between levels, an then simply check the start of
-#' huan detection. All ages younger than that have `1`, everything else have `0`
-get_events_as_binary <- function(data_source_events, data_source_pollen) {
+#' @title Convert Event Ages To Binary Event Series
+#' @description
+#' For each dataset, expand pollen levels to intermediate ages and convert event
+#' ages to binary indicator columns (`1` after event onset, `0` before onset).
+#' @param data_source_events A data frame with columns `dataset_id`, `region`,
+#'   and `events_age` (list-column of data frames with columns `name` and
+#'   `age`).
+#' @param data_source_pollen A data frame with columns `dataset_id` and
+#'   `levels` (list-column of data frames with column `age`).
+#' @param verbose Logical. If `TRUE` (default), progress messages are printed.
+#' @return
+#' A data frame with columns `dataset_id`, `region`, and `events_binary`
+#' (list-column of data frames with an `age` column and one binary column per
+#' event type).
+get_events_as_binary <- function(data_source_events,
+                                 data_source_pollen,
+                                 verbose = TRUE) {
+  assertthat::assert_that(
+    is.data.frame(data_source_events),
+    msg = "`data_source_events` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_pollen),
+    msg = "`data_source_pollen` must be a data frame."
+  )
+
+  req_events <- c("dataset_id", "region", "events_age")
+  req_pollen <- c("dataset_id", "levels")
+
+  assertthat::assert_that(
+    all(req_events %in% names(data_source_events)),
+    msg = "`data_source_events` must contain dataset_id, region, and events_age."
+  )
+  assertthat::assert_that(
+    all(req_pollen %in% names(data_source_pollen)),
+    msg = "`data_source_pollen` must contain dataset_id and levels."
+  )
   data_work <-
     data_source_pollen %>%
     dplyr::select(dataset_id, levels) %>%
@@ -19,7 +49,26 @@ get_events_as_binary <- function(data_source_events, data_source_pollen) {
       events_binary = purrr::pmap(
         .l = list(events_age, levels, dataset_id),
         .f = ~ {
-          message(..3)
+          assertthat::assert_that(
+            is.data.frame(..1),
+            msg = "`events_age` entries must be data frames."
+          )
+          assertthat::assert_that(
+            is.data.frame(..2),
+            msg = "`levels` entries must be data frames."
+          )
+          assertthat::assert_that(
+            all(c("name", "age") %in% names(..1)),
+            msg = "Each `events_age` table must contain columns `name` and `age`."
+          )
+          assertthat::assert_that(
+            "age" %in% names(..2),
+            msg = "Each `levels` table must contain an `age` column."
+          )
+
+          if (isTRUE(verbose)) {
+            message(..3)
+          }
 
           events_age <-
             ..1$age %>%

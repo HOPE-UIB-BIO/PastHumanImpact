@@ -1,5 +1,5 @@
 ---
-applyTo: ["**/R/functions/**", "**/R/tests/testthat/**"]
+applyTo: ["**/R/functions/**", "**/R/tests/testthat/**", "**/R/testing/**"]
 ---
 
 # Function Test Instructions

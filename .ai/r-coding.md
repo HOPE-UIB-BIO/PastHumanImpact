@@ -70,6 +70,8 @@ Prefer type prefixes for important objects:
 
 Use descriptive full words. Avoid unclear abbreviations.
 
+Prefer creating a new object name for transformed data rather than overwriting an existing object in memory. Reuse an object name only when there is a clear reason (for example memory constraints, tight loops, or deliberate in-place workflow), and keep that choice explicit.
+
 Function names should be verbs. Data objects should be nouns.
 
 ## Formatting
@@ -215,3 +217,5 @@ following nearby visualisation scripts.
 - Keep generated data and figures traceable to scripts, targets, or configured
   external data.
 - Do not rely on interactive R state.
+- Do not use environment variables (`Sys.setenv()`, `Sys.getenv()`) to control normal project logic. Treat this as an exceptional last resort.
+- Prefer explicit function/script inputs (`flag_*`, arguments, config objects) over hidden global environment switches.

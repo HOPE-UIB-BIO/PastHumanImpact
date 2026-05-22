@@ -1,3 +1,20 @@
+#' @title Fit a hierarchical GAM with brms
+#' @description
+#' Fits a hierarchical GAM model using age as predictor and grouped series as
+#' random smooths.
+#' @param data_source Data frame with response, predictor, and grouping columns.
+#' @param x_var Name of the predictor column.
+#' @param y_var Name of the response column.
+#' @param group_var Name of the grouping column.
+#' @param error_family Character name of the model family.
+#' @param smooth_basis Smooth basis type (`"tp"` or `"cr"`).
+#' @param sel_k Basis dimension `k`.
+#' @param sel_m Basis penalty order `m`; if `NULL`, chosen from `common_trend`.
+#' @param common_trend Logical; controls shared versus group-specific smooth.
+#' @param verbose Logical; prints progress when `TRUE`.
+#' @param chains Integer number of MCMC chains.
+#' @param ... Additional arguments passed to `brms::brm()`.
+#' @return A fitted `brmsfit` object, or `NA_real_` when fitting fails.
 fit_brms_hgam <- function(
     data_source,
     x_var = "age",
