@@ -34,13 +34,27 @@ if (
 }
 
 # Synchronise the package versions
-renv::restore(
-  lockfile = file.path("renv", "library_list.lock")
-)
-already_synch <- TRUE
+if (isFALSE(already_synch)) {
+  tryCatch(
+    renv::restore(
+      lockfile = here::here("renv", "library_list.lock")
+    ),
+    error = function(err) {
+      warning(
+        paste(
+          "renv::restore() failed; continuing with current environment:",
+          conditionMessage(err)
+        ),
+        call. = FALSE
+      )
+    }
+  )
+
+  already_synch <- TRUE
+}
 
 # Save snapshot of package versions
-# renv::snapshot(lockfile = file.path("renv", "library_list.lock"))  # do only for update
+# renv::snapshot(lockfile = here::here("renv", "library_list.lock"))  # do only for update
 
 # Define packages
 package_list <-
@@ -63,14 +77,22 @@ package_list <-
     "parallelly",
     "rcarbon",
     "rdacca.hp",
+    "dplyr",
+    "magrittr",
+    "purrr",
+    "readr",
     "REcopol",
     "renv",
     "remotes",
     "rlang",
     "RRatepol",
     "RUtilpol",
+    "stringr",
     "targets",
     "terra",
+    "tibble",
+    "tidyr",
+    "stringr",
     "tidyverse",
     "usethis",
     "utils",
@@ -79,8 +101,23 @@ package_list <-
     "yaml"
   )
 
-# Attach all packages
-sapply(package_list, library, character.only = TRUE)
+# Attach all packages that are available and warn for missing ones.
+load_package_safely <- function(package_name) {
+  if (requireNamespace(package_name, quietly = TRUE)) {
+    suppressPackageStartupMessages(
+      library(package_name, character.only = TRUE)
+    )
+  } else {
+    warning(
+      paste0("Package not available in current environment: ", package_name),
+      call. = FALSE
+    )
+  }
+}
+
+invisible(
+  lapply(package_list, load_package_safely)
+)
 
 
 #----------------------------------------------------------#
@@ -105,7 +142,7 @@ current_dir <- normalizePath(
 invisible(
   lapply(
     list.files(
-      path = "R/functions",
+      path = here::here("R", "functions"),
       pattern = "*.R",
       recursive = TRUE,
       full.names = TRUE
@@ -129,12 +166,12 @@ invisible(
 
 if (
   file.exists(
-    "secrets.yaml"
+    here::here("secrets.yaml")
   )
 ) {
   data_storage_path <-
     yaml::read_yaml(
-      "secrets.yaml"
+      here::here("secrets.yaml")
     ) |>
     purrr::pluck(
       Sys.info()["user"],
@@ -145,7 +182,18 @@ if (
     "Data"
 }
 
-check_storage_folders(data_storage_path)
+if (dir.exists(data_storage_path)) {
+  check_storage_folders(data_storage_path)
+} else {
+  warning(
+    paste0(
+      "Configured data storage path does not exist: ",
+      data_storage_path,
+      ". Continuing without external storage checks."
+    ),
+    call. = FALSE
+  )
+}
 
 
 #----------------------------------------------------------#
