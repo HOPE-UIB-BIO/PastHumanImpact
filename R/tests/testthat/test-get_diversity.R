@@ -62,3 +62,15 @@ testthat::test_that("get_diversity() handles empty input", {
   testthat::expect_equal(names(res_div), c("dataset_id", "PAP_diversity"))
   testthat::expect_equal(nrow(res_div), 0L)
 })
+
+testthat::test_that("get_diversity() validates required columns", {
+  bad_input <-
+    tibble::tibble(
+      dataset_id = 1L
+    )
+
+  testthat::expect_error(
+    get_diversity(data_pollen = bad_input),
+    regexp = "counts_harmonised"
+  )
+})

@@ -82,3 +82,16 @@ testthat::test_that("get_dcca() handles empty input", {
   testthat::expect_equal(nrow(result), 0L)
   testthat::expect_true(all(c("dataset_id", "dcca", "dcca_scores", "dcca_grad_length") %in% names(result)))
 })
+
+testthat::test_that("get_dcca() validates required columns", {
+  bad_input <-
+    tibble::tibble(
+      dataset_id = 1L,
+      levels = list(data.frame(sample_id = "s1", age = 100))
+    )
+
+  testthat::expect_error(
+    get_dcca(bad_input),
+    regexp = "percentages_harmonised"
+  )
+})

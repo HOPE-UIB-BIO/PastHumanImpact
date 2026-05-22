@@ -102,3 +102,28 @@ testthat::test_that("get_data_timebin() groups correctly across multiple regions
   testthat::expect_equal(length(unique(vec_regions)), 2L)
   testthat::expect_equal(nrow(res_timebin), 2L)
 })
+
+testthat::test_that("get_data_timebin() validates required columns", {
+  data_source <-
+    data.frame(
+      dataset_id = 1L,
+      stringsAsFactors = FALSE
+    )
+
+  data_meta <-
+    data.frame(
+      dataset_id = 1L,
+      lat = 50,
+      long = 10,
+      region = "Europe",
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_data_timebin(
+      data_source = data_source,
+      data_meta = data_meta
+    ),
+    regexp = "data_merge"
+  )
+})

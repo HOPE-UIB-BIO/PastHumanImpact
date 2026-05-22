@@ -27,3 +27,10 @@ testthat::test_that("get_m2_time_df() handles empty vectors", {
   testthat::expect_equal(names(res_df), c("time", "delta_m2"))
   testthat::expect_equal(nrow(res_df), 0L)
 })
+
+testthat::test_that("get_m2_time_df() validates atomic input", {
+  testthat::expect_error(
+    get_m2_time_df(data = list(0.1, 0.2)),
+    regexp = "atomic vector"
+  )
+})

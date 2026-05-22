@@ -59,6 +59,13 @@ testthat::test_that("run_pca() errors when required columns are absent", {
 
   testthat::expect_error(
     run_pca(data_bad),
-    regexp = "n0|subscript out of bounds|undefined columns"
+    regexp = "n0|density_diversity"
+  )
+})
+
+testthat::test_that("run_pca() validates scale argument", {
+  testthat::expect_error(
+    run_pca(data.frame(), scale = "yes"),
+    regexp = "single logical"
   )
 })

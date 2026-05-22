@@ -66,3 +66,25 @@ testthat::test_that("transform_ages adds missing time_month_value as zero", {
   testthat::expect_identical(vec_time_month_value, 0)
   testthat::expect_identical(vec_age, 1000)
 })
+
+testthat::test_that("transform_ages() validates required columns", {
+  data_source <-
+    data.frame(
+      dataset_id = 1
+    )
+
+  trans_data <-
+    data.frame(
+      timeID = 10,
+      startyear = 900,
+      endyear = 1000
+    )
+
+  testthat::expect_error(
+    transform_ages(
+      data_source = data_source,
+      trans_data = trans_data
+    ),
+    regexp = "time_id"
+  )
+})

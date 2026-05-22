@@ -122,3 +122,14 @@ testthat::test_that("get_events_from_indicators() returns expected core columns"
     all(c("dataset_id", "age", "weak", "strong") %in% names(res_events))
   )
 })
+
+testthat::test_that("get_events_from_indicators() validates required columns", {
+  testthat::expect_error(
+    get_events_from_indicators(
+      data_source_indicators = data.frame(level_2 = "Pinus"),
+      data_source_pollen = data.frame(dataset_id = 1),
+      data_source_meta = data.frame(dataset_id = 1, region = "Latin America")
+    ),
+    regexp = "data_source_indicators"
+  )
+})

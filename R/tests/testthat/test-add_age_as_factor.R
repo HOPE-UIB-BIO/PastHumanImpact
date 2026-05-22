@@ -56,3 +56,15 @@ testthat::test_that("add_age_as_factor() sets out-of-range ages to NA", {
   testthat::expect_true(is.na(vec_age[[2]]))
   testthat::expect_identical(as.character(vec_age[[3]]), "2")
 })
+
+testthat::test_that("add_age_as_factor() errors without required age column", {
+  data_input <-
+    data.frame(
+      value = c(1, 2)
+    )
+
+  testthat::expect_error(
+    add_age_as_factor(data_source = data_input),
+    regexp = "must contain `age`"
+  )
+})

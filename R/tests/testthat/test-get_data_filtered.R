@@ -42,7 +42,7 @@ testthat::test_that("get_data_filtered removes Africa and private Latin America,
   )
 })
 
-testthat::test_that("get_data_filtered() keeps private Latin America when remove_private is FALSE currently errors", {
+testthat::test_that("get_data_filtered() keeps private Latin America when remove_private is FALSE", {
   data_meta <-
     data.frame(
       dataset_id = c(1L, 2L),
@@ -60,15 +60,45 @@ testthat::test_that("get_data_filtered() keeps private Latin America when remove
       )
     )
 
-  testthat::expect_error(
+  res_data <-
     get_data_filtered(
       data_source = data_source,
       data_meta = data_meta,
       age_from = 2000,
       age_to = 8500,
       remove_private = FALSE
+    )
+
+  vec_ids <-
+    dplyr::pull(res_data, dataset_id)
+
+  testthat::expect_true(all(c(1L, 2L) %in% vec_ids))
+})
+
+testthat::test_that("get_data_filtered() validates remove_private input", {
+  data_meta <-
+    data.frame(
+      dataset_id = 1L,
+      region = "Europe",
+      data_publicity = "public",
+      stringsAsFactors = FALSE
+    )
+
+  data_source <-
+    tibble::tibble(
+      dataset_id = 1L,
+      data_merge = list(
+        data.frame(age = c(3000L, 4000L), val = 1)
+      )
+    )
+
+  testthat::expect_error(
+    get_data_filtered(
+      data_source = data_source,
+      data_meta = data_meta,
+      remove_private = "yes"
     ),
-    regexp = "meta_data"
+    regexp = "single logical"
   )
 })
 

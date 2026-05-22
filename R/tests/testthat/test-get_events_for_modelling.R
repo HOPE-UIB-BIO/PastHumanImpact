@@ -97,3 +97,16 @@ testthat::test_that("get_events_for_modelling() returns expected var groups", {
   )
   testthat::expect_true(all(purrr::map_lgl(dplyr::pull(result, data_to_fit), ~ all(c("dataset_id", "age", "value") %in% names(.x)))))
 })
+
+testthat::test_that("get_events_for_modelling() validates events_updated column", {
+  bad_source <-
+    data.frame(
+      dataset_id = 1,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_events_for_modelling(bad_source),
+    regexp = "events_updated"
+  )
+})

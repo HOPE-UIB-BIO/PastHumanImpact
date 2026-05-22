@@ -132,3 +132,14 @@ testthat::test_that("get_events_from_indices() applies grain threshold for STRON
     c(FALSE, TRUE)
   )
 })
+
+testthat::test_that("get_events_from_indices() validates required columns", {
+  testthat::expect_error(
+    get_events_from_indices(
+      data_source_indices = data.frame(evidence = "STRONG"),
+      data_source_pollen = data.frame(dataset_id = 1),
+      data_source_meta = data.frame(dataset_id = 1, region = "Latin America")
+    ),
+    regexp = "data_source_indices"
+  )
+})

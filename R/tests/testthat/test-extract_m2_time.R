@@ -40,6 +40,20 @@ testthat::test_that("extract_m2_time() returns empty vector for one-row input", 
 testthat::test_that("extract_m2_time() errors for non-matrix input", {
   testthat::expect_error(
     extract_m2_time(data = c(1, 2, 3)),
-    regexp = "incorrect number of dimensions|dim"
+    regexp = "must be a matrix"
+  )
+})
+
+testthat::test_that("extract_m2_time() validates square matrix input", {
+  non_square <-
+    matrix(
+      c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+      nrow = 2,
+      ncol = 3
+    )
+
+  testthat::expect_error(
+    extract_m2_time(data = non_square),
+    regexp = "square matrix"
   )
 })

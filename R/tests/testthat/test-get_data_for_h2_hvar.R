@@ -130,3 +130,30 @@ testthat::test_that("get_data_for_h2_hvar() keeps only ages present in m2 colnam
 
   testthat::expect_identical(dplyr::pull(data_data_merge, age), c(2, 3))
 })
+
+testthat::test_that("get_data_for_h2_hvar() validates predictor columns", {
+  data_predictors <-
+    data.frame(
+      region = "Europe",
+      climatezone = "Temperate",
+      variable = "temp_annual",
+      age = 1,
+      stringsAsFactors = FALSE
+    )
+
+  data_m2 <-
+    data.frame(
+      region = "Europe",
+      climatezone = "Temperate",
+      m2 = I(list(matrix(1, nrow = 1, ncol = 1, dimnames = list("a", "1")))),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_data_for_h2_hvar(
+      data_predictors = data_predictors,
+      data_m2 = data_m2
+    ),
+    regexp = "data_predictors"
+  )
+})

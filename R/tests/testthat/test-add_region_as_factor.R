@@ -56,3 +56,15 @@ testthat::test_that("add_region_as_factor() preserves other columns", {
   testthat::expect_identical(dplyr::pull(res_data, metric), c(3.1, 4.2))
   testthat::expect_identical(dplyr::pull(res_data, id), c("a", "b"))
 })
+
+testthat::test_that("add_region_as_factor() errors without region", {
+  data_input <-
+    data.frame(
+      climatezone = c("Temperate", "Arid")
+    )
+
+  testthat::expect_error(
+    add_region_as_factor(data_source = data_input),
+    regexp = "must contain `region`"
+  )
+})

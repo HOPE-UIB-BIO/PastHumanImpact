@@ -100,3 +100,29 @@ testthat::test_that("get_density_pap_combined() handles empty change points", {
   testthat::expect_true(all(c("age", "density_turnover", "density_diversity") %in% names(pd)))
   testthat::expect_equal(nrow(pd), 3L)
 })
+
+testthat::test_that("get_density_pap_combined() validates required columns", {
+  bad_cp <-
+    tibble::tibble(
+      dataset_id = 1L
+    )
+
+  data_meta <-
+    tibble::tibble(
+      dataset_id = 1L,
+      age_min = 100,
+      age_max = 300
+    )
+
+  dummy_time <-
+    data.frame(age = seq(100, 300, by = 100))
+
+  testthat::expect_error(
+    get_density_pap_combined(
+      data_source_change_points = bad_cp,
+      data_source_meta = data_meta,
+      data_source_dummy_time = dummy_time
+    ),
+    regexp = "required columns"
+  )
+})

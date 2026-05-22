@@ -34,3 +34,10 @@ testthat::test_that("get_scores_dbrda returns tidy scores for score-able objects
   testthat::expect_s3_class(result, "tbl_df")
   testthat::expect_true("label" %in% names(result))
 })
+
+testthat::test_that("get_scores_dbrda validates atomic input", {
+  testthat::expect_error(
+    get_scores_dbrda(dbrda_mod = 42),
+    regexp = "model-like object"
+  )
+})

@@ -35,3 +35,10 @@ testthat::test_that("get_chelsa_trace21k_urls generates correct count for non-bi
     all(grepl("tasmin", dplyr::pull(result, file)))
   )
 })
+
+testthat::test_that("get_chelsa_trace21k_urls validates variable names", {
+  testthat::expect_error(
+    get_chelsa_trace21k_urls(variables = "invalid"),
+    regexp = "must contain only"
+  )
+})

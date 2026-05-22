@@ -78,3 +78,15 @@ testthat::test_that("get_procrustes_m2() handles two-element list (2x2 matrix)",
   testthat::expect_true(is.na(res_mat["x", "y"]))
   testthat::expect_false(is.na(res_mat["y", "x"]))
 })
+
+testthat::test_that("get_procrustes_m2() validates named non-empty list input", {
+  testthat::expect_error(
+    get_procrustes_m2(data_list = list()),
+    regexp = "must not be empty"
+  )
+
+  testthat::expect_error(
+    get_procrustes_m2(data_list = list(NULL)),
+    regexp = "non-empty element names"
+  )
+})

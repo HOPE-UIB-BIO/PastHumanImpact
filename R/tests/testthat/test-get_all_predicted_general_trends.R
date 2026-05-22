@@ -33,3 +33,19 @@ testthat::test_that("get_all_predicted_general_trends returns empty for empty ev
 
   testthat::expect_identical(nrow(result), 0L)
 })
+
+testthat::test_that("get_all_predicted_general_trends validates required columns", {
+  bad_source <-
+    data.frame(
+      region = character(0),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_all_predicted_general_trends(
+      data_source = bad_source,
+      sel_type = "events"
+    ),
+    regexp = "climatezone"
+  )
+})

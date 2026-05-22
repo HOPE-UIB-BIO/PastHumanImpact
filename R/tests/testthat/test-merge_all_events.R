@@ -49,3 +49,13 @@ testthat::test_that("merge_all_events() handles empty inputs", {
   testthat::expect_equal(nrow(result), 1L)
   testthat::expect_identical(dplyr::pull(result, dataset_id), 5)
 })
+
+testthat::test_that("merge_all_events() validates input types", {
+  data_a <-
+    data.frame(dataset_id = 1, age = 100, weak = TRUE, strong = FALSE)
+
+  testthat::expect_error(
+    merge_all_events(data_a, "not_a_table"),
+    regexp = "must be data frames"
+  )
+})

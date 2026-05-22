@@ -53,3 +53,10 @@ testthat::test_that("get_climatezone_label() handles empty input", {
   testthat::expect_type(res_label, "character")
   testthat::expect_length(res_label, 0L)
 })
+
+testthat::test_that("get_climatezone_label() validates character input", {
+  testthat::expect_error(
+    get_climatezone_label(1:3),
+    regexp = "must be a character vector"
+  )
+})

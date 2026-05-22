@@ -67,3 +67,10 @@ testthat::test_that("predict_brms_model keeps scale for identity link", {
   testthat::expect_equal(result[["conf.low"]], baseline[["conf.low"]])
   testthat::expect_equal(result[["conf.high"]], baseline[["conf.high"]])
 })
+
+testthat::test_that("predict_brms_model validates model input", {
+  testthat::expect_error(
+    predict_brms_model(NULL),
+    regexp = "must not be NULL"
+  )
+})

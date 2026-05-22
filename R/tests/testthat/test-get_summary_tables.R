@@ -44,3 +44,21 @@ testthat::test_that("get_summary_tables temporal returns list with summary_table
   testthat::expect_true(nrow(result$summary_table) > 0)
   testthat::expect_true(nrow(result$summary_table_weighted_mean) > 0)
 })
+
+testthat::test_that("get_summary_tables validates required varhp/data_merge columns", {
+  data_bad <-
+    data.frame(
+      region = "EU",
+      age = 100,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_summary_tables(
+      data_source = data_bad,
+      data_type = "temporal",
+      group_var = "region"
+    ),
+    regexp = "varhp"
+  )
+})

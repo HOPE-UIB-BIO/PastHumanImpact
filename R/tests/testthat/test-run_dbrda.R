@@ -30,3 +30,27 @@ testthat::test_that("run_dbrda returns dbrda object for valid inputs", {
 
   testthat::expect_true(inherits(result, "dbrda"))
 })
+
+testthat::test_that("run_dbrda validates age column when inputs are provided", {
+  comm <-
+    matrix(
+      c(
+        0, 1, 2,
+        1, 0, 1,
+        2, 1, 0
+      ),
+      nrow = 3,
+      byrow = TRUE
+    )
+
+  bad_pred <-
+    data.frame(
+      temp = c(10, 11, 12),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    run_dbrda(comm, bad_pred),
+    regexp = "age"
+  )
+})

@@ -53,3 +53,15 @@ testthat::test_that("add_predictor_as_factor() returns expected column count", {
   testthat::expect_true("predictor" %in% names(res_data))
   testthat::expect_true("value" %in% names(res_data))
 })
+
+testthat::test_that("add_predictor_as_factor() errors without predictor", {
+  data_input <-
+    data.frame(
+      value = c(1, 2)
+    )
+
+  testthat::expect_error(
+    add_predictor_as_factor(data_source = data_input),
+    regexp = "must contain `predictor`"
+  )
+})

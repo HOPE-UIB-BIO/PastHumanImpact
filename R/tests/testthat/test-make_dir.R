@@ -32,9 +32,9 @@ testthat::test_that("make_dir() can be called repeatedly", {
   testthat::expect_true(is.logical(res_second))
 })
 
-testthat::test_that("make_dir() returns a try-error for invalid path input", {
-  res_make <-
-    make_dir(dir_path = 1)
-
-  testthat::expect_true(inherits(res_make, "try-error"))
+testthat::test_that("make_dir() validates invalid path input", {
+  testthat::expect_error(
+    make_dir(dir_path = 1),
+    regexp = "single character path"
+  )
 })

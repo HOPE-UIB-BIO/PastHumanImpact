@@ -72,3 +72,26 @@ testthat::test_that("get_pollen_data() handles empty input", {
   testthat::expect_equal(nrow(result), 0L)
   testthat::expect_true("percentages_harmonised" %in% names(result))
 })
+
+testthat::test_that("get_pollen_data() validates requested variables", {
+  testthat::skip_if_not_installed("REcopol")
+
+  data_assembly <-
+    data.frame(
+      dataset_id = 1,
+      counts_harmonised = I(list(data.frame(sample_id = "s1", a = 1))),
+      levels = I(list(data.frame(sample_id = "s1", age = 100))),
+      age_uncertainty = I(list(NULL)),
+      pollen_percentage = FALSE,
+      end_of_interest_period = 1000,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_pollen_data(
+      data_assembly = data_assembly,
+      variables = c("dataset_id", "missing_column")
+    ),
+    regexp = "requested `variables`"
+  )
+})

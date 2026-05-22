@@ -77,3 +77,16 @@ testthat::test_that("get_spd_for_modelling() rounds to three decimals", {
 
   testthat::expect_identical(dplyr::pull(data_x, value), c(0.123, 0.123))
 })
+
+testthat::test_that("get_spd_for_modelling() validates spd column", {
+  bad_source <-
+    data.frame(
+      dataset_id = 1,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_spd_for_modelling(bad_source),
+    regexp = "must contain `spd`"
+  )
+})

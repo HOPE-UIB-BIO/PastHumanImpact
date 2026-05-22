@@ -58,3 +58,10 @@ testthat::test_that("get_hgam_formula derives sel_m from common trend", {
     "var ~ s(age, by = dataset_id, bs = 'tp', k = 10, m = 2) + s(dataset_id, bs = 're', k = 2)"
   )
 })
+
+testthat::test_that("get_hgam_formula validates n_groups", {
+  testthat::expect_error(
+    get_hgam_formula(n_groups = 0),
+    regexp = "n_groups"
+  )
+})

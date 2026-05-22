@@ -84,3 +84,16 @@ testthat::test_that("get_climate_data_for_interpolation() returns empty for unma
 
   testthat::expect_equal(nrow(result), 0L)
 })
+
+testthat::test_that("get_climate_data_for_interpolation() validates climate_data column", {
+  bad_source <-
+    data.frame(
+      dataset_id = 1L,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_climate_data_for_interpolation(data_source = bad_source),
+    regexp = "climate_data"
+  )
+})

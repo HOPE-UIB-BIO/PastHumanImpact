@@ -66,3 +66,15 @@ testthat::test_that("add_climatezone_as_factor() sets unknown labels to NA", {
   testthat::expect_true(is.na(vec_climatezone_label[[1]]))
   testthat::expect_identical(as.character(vec_climatezone_label[[2]]), "POL")
 })
+
+testthat::test_that("add_climatezone_as_factor() errors without climatezone", {
+  data_input <-
+    data.frame(
+      region = c("Europe", "Asia")
+    )
+
+  testthat::expect_error(
+    add_climatezone_as_factor(data_source = data_input),
+    regexp = "must contain `climatezone`"
+  )
+})

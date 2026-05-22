@@ -125,3 +125,45 @@ testthat::test_that("prepare_data_cp() output contains required list-columns", {
   testthat::expect_true(all(c("levels", "PAP_diversity", "mvrt_partitions", "PAP_roc", "dcca_scores") %in% names(result)))
   testthat::expect_equal(nrow(result), 1L)
 })
+
+testthat::test_that("prepare_data_cp() validates required columns", {
+  data_pollen <-
+    tibble::tibble(
+      dataset_id = 1L,
+      levels = list(data.frame(sample_id = "s1", age = 100, stringsAsFactors = FALSE))
+    )
+
+  bad_diversity <-
+    tibble::tibble(
+      dataset_id = 1L
+    )
+
+  data_mrt <-
+    tibble::tibble(
+      dataset_id = 1L,
+      mvrt_partitions = list(data.frame(sample_id = "s1", group = 1L, stringsAsFactors = FALSE))
+    )
+
+  data_roc <-
+    tibble::tibble(
+      dataset_id = 1L,
+      PAP_roc = list(data.frame(Age = 100, ROC = 0.1, Peak = FALSE, stringsAsFactors = FALSE))
+    )
+
+  data_dcca <-
+    tibble::tibble(
+      dataset_id = 1L,
+      dcca_scores = list(data.frame(sample_id = "s1", axis_1 = 0.2, stringsAsFactors = FALSE))
+    )
+
+  testthat::expect_error(
+    prepare_data_cp(
+      data_pollen = data_pollen,
+      data_diversity = bad_diversity,
+      data_mrt = data_mrt,
+      data_roc = data_roc,
+      data_dcca = data_dcca
+    ),
+    regexp = "PAP_diversity"
+  )
+})

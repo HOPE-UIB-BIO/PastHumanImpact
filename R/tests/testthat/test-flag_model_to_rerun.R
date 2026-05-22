@@ -182,3 +182,25 @@ testthat::test_that("flag_model_to_rerun() writes one saved table", {
 
   testthat::expect_true(length(files_saved) >= 1L)
 })
+
+testthat::test_that("flag_model_to_rerun() validates required columns", {
+  testthat::skip_if_not_installed("RUtilpol")
+
+  data_source <-
+    data.frame(
+      region = "Europe",
+      climatezone = "Temperate",
+      variable = "temp_annual",
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    flag_model_to_rerun(
+      data_source = data_source,
+      sel_region = "Europe",
+      sel_climatezone = "Temperate",
+      sel_variable = "temp_annual"
+    ),
+    regexp = "required model config columns"
+  )
+})

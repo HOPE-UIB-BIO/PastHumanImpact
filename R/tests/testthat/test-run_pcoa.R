@@ -50,6 +50,13 @@ testthat::test_that("run_pcoa() errors when distances include NA", {
 
   testthat::expect_error(
     run_pcoa(data_m2 = mat_m2),
-    regexp = "missing values|NA"
+    regexp = "must not contain NA"
+  )
+})
+
+testthat::test_that("run_pcoa() validates matrix input", {
+  testthat::expect_error(
+    run_pcoa(data_m2 = c(0, 1, 2)),
+    regexp = "must be a matrix"
   )
 })

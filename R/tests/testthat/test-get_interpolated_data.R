@@ -101,3 +101,19 @@ testthat::test_that("get_interpolated_data() interpolates linearly between point
   data_nested <- dplyr::pull(result, data)[[1]]
   testthat::expect_identical(dplyr::pull(data_nested, var_a), c(0, 1, 2))
 })
+
+testthat::test_that("get_interpolated_data() validates data_to_fit column", {
+  bad_source <-
+    data.frame(
+      dataset_id = 1,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_interpolated_data(
+      data_source = bad_source,
+      verbose = FALSE
+    ),
+    regexp = "data_to_fit"
+  )
+})

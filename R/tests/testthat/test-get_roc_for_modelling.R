@@ -72,3 +72,16 @@ testthat::test_that("get_roc_for_modelling() drops NA ROC rows", {
   testthat::expect_equal(nrow(data_roc), 2L)
   testthat::expect_identical(dplyr::pull(data_roc, age), c(100, 300))
 })
+
+testthat::test_that("get_roc_for_modelling() validates PAP_roc column", {
+  bad_source <-
+    data.frame(
+      dataset_id = 1,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_roc_for_modelling(bad_source),
+    regexp = "PAP_roc"
+  )
+})

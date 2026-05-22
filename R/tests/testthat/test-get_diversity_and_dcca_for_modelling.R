@@ -165,3 +165,42 @@ testthat::test_that("get_diversity_and_dcca_for_modelling() drops NA values afte
   testthat::expect_equal(nrow(data_div), 1L)
   testthat::expect_identical(dplyr::pull(data_div, age), 100)
 })
+
+testthat::test_that("get_diversity_and_dcca_for_modelling() validates PAP_diversity input", {
+  bad_diversity <-
+    data.frame(
+      dataset_id = 1,
+      stringsAsFactors = FALSE
+    )
+
+  data_source_dcca <-
+    data.frame(
+      dcca_scores = I(list(data.frame(
+        dataset_id = 1,
+        sample_id = "s1",
+        axis_1 = 0.2
+      ))),
+      stringsAsFactors = FALSE
+    )
+
+  data_source_pollen <-
+    data.frame(
+      dataset_id = 1,
+      levels = I(list(data.frame(
+        sample_id = "s1",
+        age = 100,
+        lower = 90,
+        upper = 110
+      ))),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_diversity_and_dcca_for_modelling(
+      data_source_diversity = bad_diversity,
+      data_source_dcca = data_source_dcca,
+      data_source_pollen = data_source_pollen
+    ),
+    regexp = "PAP_diversity"
+  )
+})
