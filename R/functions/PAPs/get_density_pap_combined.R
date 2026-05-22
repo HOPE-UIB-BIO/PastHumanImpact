@@ -61,7 +61,7 @@ get_density_pap_combined <- function(data_source_change_points,
           density = 0
         )
     } else {
-      res <-
+      data_density <-
         REcopol::get_density(
           data_source = data_source,
           reflected = TRUE,
@@ -72,16 +72,24 @@ get_density_pap_combined <- function(data_source_change_points,
           bw = 1000 / max(dummy_table$age),
           n = max(dummy_table$age),
           ...
-        ) %>%
-        dplyr::mutate(
-          age = ceiling(var)
-        ) %>%
-        dplyr::filter(
-          age %in% dummy_table$age
-        ) %>%
-        dplyr::select(
-          age, density
         )
+
+      data_interp <-
+        stats::approx(
+          x = data_density$var,
+          y = data_density$density,
+          xout = dummy_table$age,
+          method = "linear",
+          ties = "ordered",
+          rule = 2
+        )
+
+      res <-
+        data.frame(
+          age = data_interp$x,
+          density = data_interp$y
+        ) %>%
+        tibble::as_tibble()
     }
     return(res)
   }
