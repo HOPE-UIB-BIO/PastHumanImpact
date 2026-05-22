@@ -70,6 +70,8 @@ Prefer type prefixes for important objects:
 
 Use descriptive full words. Avoid unclear abbreviations.
 
+Prefer creating a new object name for transformed data rather than overwriting an existing object in memory. Reuse an object name only when there is a clear reason (for example memory constraints, tight loops, or deliberate in-place workflow), and keep that choice explicit.
+
 Function names should be verbs. Data objects should be nouns.
 
 ## Formatting
