@@ -18,6 +18,9 @@
 #' @param get_significance logical; Should significance of predictors be
 #' estimated? (takes along time)
 #' @param permutations integer; number of permutations for p-values
+#' @return
+#' A data frame with original columns and a `varhp` list-column containing
+#' outputs from `get_varhp()`.
 
 run_hvarpart <- function(data_source,
                          response_vars = c(
@@ -48,6 +51,35 @@ run_hvarpart <- function(data_source,
                          get_significance = TRUE,
                          permutations = 99,
                          ...) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    "data_merge" %in% names(data_source),
+    msg = "`data_source` must contain a data_merge column."
+  )
+
+  if (!is.null(response_vars)) {
+    assertthat::assert_that(
+      is.character(response_vars),
+      length(response_vars) > 0,
+      msg = "`response_vars` must be a non-empty character vector or NULL."
+    )
+  }
+
+  if (!is.null(data_response_dist)) {
+    assertthat::assert_that(
+      is.character(data_response_dist),
+      length(data_response_dist) == 1,
+      msg = "`data_response_dist` must be a single column name or NULL."
+    )
+    assertthat::assert_that(
+      data_response_dist %in% names(data_source),
+      msg = "`data_response_dist` must exist in `data_source`."
+    )
+  }
+
   res <- NULL
 
   if (!is.null(response_vars) & is.null(data_response_dist)
@@ -72,8 +104,8 @@ run_hvarpart <- function(data_source,
   } else if (!is.null(data_response_dist)) {
     res <-
       data_source %>%
-      dplyr::rename(
-        data_response_dist = eval(data_response_dist)
+      dplyr::mutate(
+        data_response_dist = .data[[data_response_dist]]
       ) %>%
       dplyr::mutate(
         varhp = purrr::map2(
@@ -93,7 +125,7 @@ run_hvarpart <- function(data_source,
         )
       )
   } else {
-    stop("No response variables or distance matrix provided")
+    cli::cli_abort("No response variables or distance matrix provided")
   }
 
   return(res)

@@ -11,6 +11,31 @@
 get_mrt <- function(data_pollen,
                     n_rand = 999,
                     transformation_coef = "chisq") {
+  assertthat::assert_that(
+    is.data.frame(data_pollen),
+    msg = "`data_pollen` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "percentages_harmonised", "levels") %in% names(data_pollen)),
+    msg = "`data_pollen` must contain `dataset_id`, `percentages_harmonised`, and `levels`."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_pollen$percentages_harmonised, is.data.frame)),
+    msg = "`percentages_harmonised` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_pollen$levels, is.data.frame)),
+    msg = "`levels` entries must be data frames."
+  )
+  assertthat::assert_that(
+    is.numeric(n_rand) && length(n_rand) == 1 && n_rand > 0,
+    msg = "`n_rand` must be a single positive numeric value."
+  )
+  assertthat::assert_that(
+    is.character(transformation_coef) && length(transformation_coef) == 1,
+    msg = "`transformation_coef` must be a single character value."
+  )
+
   data_work_mrt <-
     data_pollen %>%
     dplyr::mutate(

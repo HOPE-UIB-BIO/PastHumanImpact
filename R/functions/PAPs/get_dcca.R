@@ -17,6 +17,23 @@
 #' for DCCA 1
 
 get_dcca <- function(data_pollen, ...) {
+  assertthat::assert_that(
+    is.data.frame(data_pollen),
+    msg = "`data_pollen` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "percentages_harmonised", "levels") %in% names(data_pollen)),
+    msg = "`data_pollen` must contain `dataset_id`, `percentages_harmonised`, and `levels`."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_pollen$percentages_harmonised, is.data.frame)),
+    msg = "`percentages_harmonised` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_pollen$levels, is.data.frame)),
+    msg = "`levels` entries must be data frames."
+  )
+
   data_dcca <-
     data_pollen %>%
     dplyr::mutate(

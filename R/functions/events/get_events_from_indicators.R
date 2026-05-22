@@ -1,11 +1,60 @@
 #' @title Detect events based on indicators
-#' @description For each site, test each level with the list of event indicators
-#' and clasify each level as a event type (binary).
+#' @description
+#' For each site and pollen level, test event indicator taxa and classify each
+#' age level as weak/strong event evidence.
+#' @param data_source_indicators Data frame with columns `level_2` and `evidence`.
+#' @param data_source_pollen Data frame with columns `dataset_id`, `country`,
+#' `counts_harmonised`, and `levels`.
+#' @param data_source_meta Data frame with columns `dataset_id` and `region`.
+#' @param sel_region Character scalar region name used for filtering.
+#' @param country_w_pinus Character vector of countries where `Pinus` STRONG
+#' evidence is excluded.
+#' @return Data frame with columns `dataset_id`, `age`, `weak`, and `strong`.
 get_events_from_indicators <- function(data_source_indicators,
                                        data_source_pollen,
                                        data_source_meta,
                                        sel_region = "Latin America",
                                        country_w_pinus = c("Mexico", "Guatemala", "Honduras", "Nicaragua", "Costa Rica")) {
+  assertthat::assert_that(
+    is.data.frame(data_source_indicators),
+    msg = "`data_source_indicators` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.data.frame(data_source_pollen),
+    msg = "`data_source_pollen` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.data.frame(data_source_meta),
+    msg = "`data_source_meta` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    all(c("level_2", "evidence") %in% names(data_source_indicators)),
+    msg = "`data_source_indicators` must contain `level_2` and `evidence`."
+  )
+
+  assertthat::assert_that(
+    all(c("dataset_id", "country", "counts_harmonised", "levels") %in% names(data_source_pollen)),
+    msg = "`data_source_pollen` must contain `dataset_id`, `country`, `counts_harmonised`, and `levels`."
+  )
+
+  assertthat::assert_that(
+    all(c("dataset_id", "region") %in% names(data_source_meta)),
+    msg = "`data_source_meta` must contain `dataset_id` and `region`."
+  )
+
+  assertthat::assert_that(
+    is.character(sel_region) && length(sel_region) == 1,
+    msg = "`sel_region` must be a single character value."
+  )
+
+  assertthat::assert_that(
+    is.character(country_w_pinus),
+    msg = "`country_w_pinus` must be a character vector."
+  )
+
   data_subset <-
     data_source_pollen %>%
     dplyr::inner_join(

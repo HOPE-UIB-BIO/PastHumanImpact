@@ -20,6 +20,48 @@ rdacca_hp <- function(dv,
                       sqrt.dist = FALSE,
                       n.perm = 1000,
                       var.part = FALSE) {
+  method <- match.arg(method)
+  type <- match.arg(type)
+
+  assertthat::assert_that(
+    is.data.frame(dv) || is.matrix(dv) || inherits(dv, "dist"),
+    msg = "`dv` must be a data.frame, matrix, or dist object."
+  )
+  assertthat::assert_that(
+    is.data.frame(iv) || is.matrix(iv) || is.list(iv),
+    msg = "`iv` must be a data.frame, matrix, or list of data.frames."
+  )
+  assertthat::assert_that(
+    is.logical(scale),
+    length(scale) == 1,
+    !is.na(scale),
+    msg = "`scale` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(add),
+    length(add) == 1,
+    !is.na(add),
+    msg = "`add` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(sqrt.dist),
+    length(sqrt.dist) == 1,
+    !is.na(sqrt.dist),
+    msg = "`sqrt.dist` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.numeric(n.perm),
+    length(n.perm) == 1,
+    n.perm > 0,
+    msg = "`n.perm` must be a positive number."
+  )
+  assertthat::assert_that(
+    is.logical(var.part),
+    length(var.part) == 1,
+    !is.na(var.part),
+    msg = "`var.part` must be TRUE or FALSE."
+  )
+
   if (is.data.frame(iv) || is.matrix(iv)) {
     iv <- as.data.frame(iv)
     if (sum(is.na(dv)) >= 1 || sum(is.na(iv)) >= 1) {

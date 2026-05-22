@@ -1,4 +1,26 @@
+#' @title Load all predicted general trend tables
+#' @description
+#' Load and combine stored prediction outputs for selected predictor or event
+#' variable groups.
+#' @param data_source Data frame with columns `region`, `climatezone`, `variable`.
+#' @param sel_type One of `predictors` or `events`.
+#' @return Data frame with combined loaded prediction rows.
 get_all_predicted_general_trends <- function(data_source, sel_type = c("predictors", "events")) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    all(c("region", "climatezone", "variable") %in% names(data_source)),
+    msg = "`data_source` must contain `region`, `climatezone`, and `variable`."
+  )
+
+  assertthat::assert_that(
+    exists("data_storage_path"),
+    msg = "`data_storage_path` must be available in the session."
+  )
+
   sel_type <- match.arg(sel_type)
 
   data_work <-
@@ -38,7 +60,8 @@ get_all_predicted_general_trends <- function(data_source, sel_type = c("predicto
     stop("sel_type not recognized")
   }
 
-  purrr::pmap(
+  res_data <-
+    purrr::pmap(
     .progress = "loading general trends models",
     .l = list(
       data_selected$region, # ..1
@@ -86,6 +109,7 @@ get_all_predicted_general_trends <- function(data_source, sel_type = c("predicto
       return(data_predicted)
     }
   ) %>%
-    dplyr::bind_rows() %>%
-    return()
+    dplyr::bind_rows()
+
+  return(res_data)
 }

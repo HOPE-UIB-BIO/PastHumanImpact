@@ -5,6 +5,31 @@
 #' @return A nested tibble with climate variables per dataset_id
 
 get_climate_indices <- function(data_source, time_ref) {
+  assertthat::assert_that(
+    is.list(data_source),
+    msg = "`data_source` must be a list-like object."
+  )
+  assertthat::assert_that(
+    !is.null(data_source$data),
+    msg = "`data_source` must contain `data`."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source$data),
+    msg = "`data_source$data` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "climate") %in% names(data_source$data)),
+    msg = "`data_source$data` must contain `dataset_id` and `climate`."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$data$climate, is.data.frame)),
+    msg = "`climate` entries must be data frames."
+  )
+  assertthat::assert_that(
+    is.data.frame(time_ref),
+    msg = "`time_ref` must be a data frame."
+  )
+
   data_source %>%
     # get list of climate data for each dataset
     purrr::pluck("data", "climate") %>%

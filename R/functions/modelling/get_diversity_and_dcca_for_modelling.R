@@ -1,6 +1,53 @@
+#' @title Prepare diversity and DCCA data for modelling
+#' @description
+#' Combines diversity, DCCA, and pollen-age uncertainty inputs into nested
+#' long-format modelling tables with variable-specific weights.
+#' @param data_source_diversity Data frame with list-column `PAP_diversity`.
+#' @param data_source_dcca Data frame with list-column `dcca_scores`.
+#' @param data_source_pollen Data frame with columns `dataset_id` and list-column `levels`.
+#' @return Data frame with columns `var_name` and nested `data_to_fit` tables.
 get_diversity_and_dcca_for_modelling <- function(data_source_diversity,
                                                  data_source_dcca,
                                                  data_source_pollen) {
+  assertthat::assert_that(
+    is.data.frame(data_source_diversity),
+    msg = "`data_source_diversity` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_dcca),
+    msg = "`data_source_dcca` must be a data frame."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_pollen),
+    msg = "`data_source_pollen` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    "PAP_diversity" %in% names(data_source_diversity),
+    msg = "`data_source_diversity` must contain `PAP_diversity`."
+  )
+  assertthat::assert_that(
+    "dcca_scores" %in% names(data_source_dcca),
+    msg = "`data_source_dcca` must contain `dcca_scores`."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "levels") %in% names(data_source_pollen)),
+    msg = "`data_source_pollen` must contain `dataset_id` and `levels`."
+  )
+
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source_diversity$PAP_diversity, is.data.frame)),
+    msg = "`PAP_diversity` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source_dcca$dcca_scores, is.data.frame)),
+    msg = "`dcca_scores` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source_pollen$levels, is.data.frame)),
+    msg = "`levels` entries must be data frames."
+  )
+
   data_ages <-
     data_source_pollen %>%
     tidyr::unnest(levels) %>%

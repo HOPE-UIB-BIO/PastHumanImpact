@@ -1,10 +1,60 @@
 #' @title Detect events based on idices
-#' @description For each site, test each level with the list of event indices
-#' and clasify each level as a event type (binary).
+#' @description
+#' For each site and pollen level, test index taxon combinations and classify
+#' each age level as weak/strong event evidence.
+#' @param data_source_indices Data frame with columns `evidence`, `taxa_vector`,
+#' and `grain_eval_present`.
+#' @param data_source_pollen Data frame with columns `dataset_id`, `country`,
+#' `counts_harmonised`, and `levels`.
+#' @param data_source_meta Data frame with columns `dataset_id` and `region`.
+#' @param sel_region Character scalar region name used for filtering.
+#' @param verbose Logical. If `TRUE` (default), progress messages are printed.
+#' @return Data frame with columns `dataset_id`, `age`, `weak`, and `strong`.
 get_events_from_indices <- function(data_source_indices,
                                     data_source_pollen,
                                     data_source_meta,
-                                    sel_region = "Latin America") {
+                                    sel_region = "Latin America",
+                                    verbose = TRUE) {
+  assertthat::assert_that(
+    is.data.frame(data_source_indices),
+    msg = "`data_source_indices` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.data.frame(data_source_pollen),
+    msg = "`data_source_pollen` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.data.frame(data_source_meta),
+    msg = "`data_source_meta` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    all(c("evidence", "taxa_vector", "grain_eval_present") %in% names(data_source_indices)),
+    msg = "`data_source_indices` must contain `evidence`, `taxa_vector`, and `grain_eval_present`."
+  )
+
+  assertthat::assert_that(
+    all(c("dataset_id", "country", "counts_harmonised", "levels") %in% names(data_source_pollen)),
+    msg = "`data_source_pollen` must contain `dataset_id`, `country`, `counts_harmonised`, and `levels`."
+  )
+
+  assertthat::assert_that(
+    all(c("dataset_id", "region") %in% names(data_source_meta)),
+    msg = "`data_source_meta` must contain `dataset_id` and `region`."
+  )
+
+  assertthat::assert_that(
+    is.character(sel_region) && length(sel_region) == 1,
+    msg = "`sel_region` must be a single character value."
+  )
+
+  assertthat::assert_that(
+    is.logical(verbose) && length(verbose) == 1,
+    msg = "`verbose` must be a single logical value."
+  )
+
   `%>%` <- magrittr::`%>%`
 
   # helper function
@@ -14,7 +64,7 @@ get_events_from_indices <- function(data_source_indices,
              sel_type,
              sel_dataset_id = NULL) {
       if (
-        isFALSE(is.null(sel_dataset_id))
+        isTRUE(verbose) && isFALSE(is.null(sel_dataset_id))
       ) {
         message(sel_dataset_id)
       }

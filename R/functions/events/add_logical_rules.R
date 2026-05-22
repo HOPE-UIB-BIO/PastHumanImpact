@@ -1,8 +1,36 @@
-#' @title Apply logical rules to binary events
-#' @param data_source Data.file with binary events
-#' @description For each site, apply region-specific rules to the binary data.
-#' For example, in Europe "bit" is stoped by "cc" and "ec", etc
-add_logical_rules <- function(data_source) {
+#' @title Apply Region-Specific Logical Rules To Binary Events
+#' @description
+#' For each dataset, apply region-specific event logic to harmonise binary
+#' event signals (for example, in Europe `bi` is constrained by `cc` and `ec`).
+#' @param data_source A data frame with columns `dataset_id`, `region`, and
+#'   `events_binary` (list-column of event tables).
+#' @param verbose Logical. If `TRUE` (default), progress messages are printed.
+#' @return
+#' A data frame with columns `dataset_id` and `events_updated` (list-column of
+#' region-specific, rule-adjusted event tables).
+add_logical_rules <- function(data_source, verbose = TRUE) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "region", "events_binary") %in% names(data_source)),
+    msg = "`data_source` must contain dataset_id, region, and events_binary."
+  )
+
+  allowed_regions <- c("Europe", "North America", "Asia", "Oceania")
+  invalid_regions <-
+    setdiff(unique(data_source$region), allowed_regions)
+
+  if (length(invalid_regions) > 0) {
+    cli::cli_abort(
+      message = c(
+        "Unsupported region(s) in `data_source`.",
+        "x" = paste(invalid_regions, collapse = ", ")
+      )
+    )
+  }
+
   data_source %>%
     dplyr::mutate(
       events_updated = purrr::pmap(
@@ -15,7 +43,14 @@ add_logical_rules <- function(data_source) {
           sel_region <- ..2
           sel_events <- ..3
 
-          message(sel_dataset_id)
+          assertthat::assert_that(
+            is.data.frame(sel_events),
+            msg = "Each `events_binary` entry must be a data frame."
+          )
+
+          if (isTRUE(verbose)) {
+            message(sel_dataset_id)
+          }
 
           switch(sel_region,
             "Europe" = {
@@ -121,6 +156,9 @@ add_logical_rules <- function(data_source) {
                   )
                 ) %>%
                 dplyr::select(age, no_impact, weak, medium, strong)
+            },
+            {
+              cli::cli_abort("Unsupported region: {.val {sel_region}}")
             }
           )
 

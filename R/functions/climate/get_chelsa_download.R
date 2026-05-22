@@ -2,6 +2,27 @@
 #' @description This function download, extract, and delete downloaded tif files so they do not fill up storage space
 #' @return A tibble with the meta data, and climatic data for all locations in extract data
 get_chelsa_download <- function(md, skip_existing = TRUE, method = "curl", extract_data = NULL) {
+  assertthat::assert_that(
+    is.data.frame(md),
+    msg = "`md` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("file", "url") %in% names(md)),
+    msg = "`md` must contain `file` and `url` columns."
+  )
+  assertthat::assert_that(
+    is.logical(skip_existing) && length(skip_existing) == 1,
+    msg = "`skip_existing` must be a single logical value."
+  )
+  assertthat::assert_that(
+    is.character(method) && length(method) == 1,
+    msg = "`method` must be a single character value."
+  )
+  assertthat::assert_that(
+    is.null(extract_data) || is.data.frame(extract_data),
+    msg = "`extract_data` must be NULL or a data frame."
+  )
+
   dest <- tempdir()
 
   for (i in 1:nrow(md)) {

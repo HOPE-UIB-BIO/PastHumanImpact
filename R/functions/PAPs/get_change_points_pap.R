@@ -5,6 +5,31 @@
 #' @return New variables of change points in pollen assemblage properties
 #'
 get_change_points_pap <- function(data_source) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "mvrt_cp", "PAP_diversity", "levels", "PAP_roc", "dcca_scores") %in% names(data_source)),
+    msg = "`data_source` is missing required columns for change-point estimation."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$PAP_diversity, is.data.frame)),
+    msg = "`PAP_diversity` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$levels, is.data.frame)),
+    msg = "`levels` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$PAP_roc, is.data.frame)),
+    msg = "`PAP_roc` entries must be data frames."
+  )
+  assertthat::assert_that(
+    all(purrr::map_lgl(data_source$dcca_scores, is.data.frame)),
+    msg = "`dcca_scores` entries must be data frames."
+  )
+
   data_diversity_cp <-
     data_source %>%
     dplyr::mutate(

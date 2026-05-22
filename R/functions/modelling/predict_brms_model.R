@@ -1,4 +1,19 @@
+#' @title Predict marginal response from fitted model
+#' @description
+#' Builds age-wise marginal predictions using `ggeffects::predict_response()`
+#' and applies extra exponentiation when the model link is `log`.
+#' @param mod Fitted model object accepted by `ggeffects::predict_response()`.
+#' @return Data frame with columns `age`, `value`, and confidence bounds.
 predict_brms_model <- function(mod) {
+  assertthat::assert_that(
+    !is.null(mod),
+    msg = "`mod` must not be NULL."
+  )
+  assertthat::assert_that(
+    !is.atomic(mod),
+    msg = "`mod` must be a fitted model object."
+  )
+
   data_predicted <-
     ggeffects::predict_response(
       model = mod,

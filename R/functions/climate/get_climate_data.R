@@ -7,6 +7,31 @@ get_climate_data <- function(variables_selected = c("bio", "tasmin"),
                              time_var_selected = c(20:-200),
                              month_var_selected = c(1:12),
                              xy = data_meta) {
+  assertthat::assert_that(
+    is.character(variables_selected),
+    msg = "`variables_selected` must be a character vector."
+  )
+  assertthat::assert_that(
+    is.numeric(bio_var_selected),
+    msg = "`bio_var_selected` must be numeric."
+  )
+  assertthat::assert_that(
+    is.numeric(time_var_selected),
+    msg = "`time_var_selected` must be numeric."
+  )
+  assertthat::assert_that(
+    is.numeric(month_var_selected),
+    msg = "`month_var_selected` must be numeric."
+  )
+  assertthat::assert_that(
+    is.data.frame(xy),
+    msg = "`xy` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "long", "lat") %in% names(xy)),
+    msg = "`xy` must contain `dataset_id`, `long`, and `lat`."
+  )
+
   # meta data into data.frame with x (long) y (lat) data only
   xy_data <-
     xy %>%

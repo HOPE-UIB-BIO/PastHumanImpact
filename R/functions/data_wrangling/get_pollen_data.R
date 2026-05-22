@@ -13,7 +13,23 @@ get_pollen_data <- function(data_assembly,
                               "pollen_percentage",
                               "end_of_interest_period"
                             )) {
-  data_assembly %>%
+  assertthat::assert_that(
+    is.data.frame(data_assembly),
+    msg = "`data_assembly` must be a data frame."
+  )
+
+  assertthat::assert_that(
+    is.character(variables) && length(variables) > 0,
+    msg = "`variables` must be a non-empty character vector."
+  )
+
+  assertthat::assert_that(
+    all(variables %in% names(data_assembly)),
+    msg = "All requested `variables` must exist in `data_assembly`."
+  )
+
+  res_data <-
+    data_assembly %>%
     dplyr::select(
       dplyr::all_of(variables)
     ) %>%
@@ -25,6 +41,7 @@ get_pollen_data <- function(data_assembly,
           method = "percentages"
         )
       )
-    ) %>%
-    return()
+    )
+
+  return(res_data)
 }

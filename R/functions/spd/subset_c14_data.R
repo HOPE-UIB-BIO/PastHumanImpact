@@ -3,6 +3,27 @@
 subset_c14_data <- function(data_source_c14,
                             data_source_polygons,
                             data_source_meta) {
+  assertthat::assert_that(
+    is.data.frame(data_source_c14),
+    msg = "`data_source_c14` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("LabID", "lat", "long", "Age", "Error") %in% names(data_source_c14)),
+    msg = "`data_source_c14` must contain `LabID`, `lat`, `long`, `Age`, and `Error`."
+  )
+  assertthat::assert_that(
+    inherits(data_source_polygons, c("sf", "data.frame")),
+    msg = "`data_source_polygons` must be an sf or data frame object."
+  )
+  assertthat::assert_that(
+    is.data.frame(data_source_meta),
+    msg = "`data_source_meta` must be a data frame."
+  )
+  assertthat::assert_that(
+    all(c("dataset_id", "long", "lat", "curve_name") %in% names(data_source_meta)),
+    msg = "`data_source_meta` must contain `dataset_id`, `long`, `lat`, and `curve_name`."
+  )
+
   # make uniqu and select columns
   data_rc_work <-
     data_source_c14 %>%
