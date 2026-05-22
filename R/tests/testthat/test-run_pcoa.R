@@ -31,8 +31,11 @@ testthat::test_that("run_pcoa() accepts non-symmetric matrices", {
       nrow = 3
     )
 
-  res_pcoa <-
-    run_pcoa(data_m2 = mat_m2)
+  res_pcoa <- NULL
+  testthat::expect_warning(
+    res_pcoa <- run_pcoa(data_m2 = mat_m2),
+    regexp = "only 1 of the first 2 eigenvalues are > 0"
+  )
 
   testthat::expect_equal(nrow(res_pcoa$points), 3L)
 })
