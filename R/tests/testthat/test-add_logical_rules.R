@@ -92,3 +92,12 @@ testthat::test_that("add_logical_rules() errors for unsupported regions", {
     regexp = "Unsupported region"
   )
 })
+
+testthat::test_that("add_logical_rules() validates required columns", {
+  testthat::expect_error(
+    add_logical_rules(
+      data_source = data.frame(dataset_id = 1, region = "Europe")
+    ),
+    regexp = "must contain"
+  )
+})

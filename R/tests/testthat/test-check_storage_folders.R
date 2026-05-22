@@ -56,6 +56,13 @@ testthat::test_that("check_storage_folders() errors for non-existing root", {
 
   testthat::expect_error(
     check_storage_folders(path_missing),
-    regexp = "cannot open the connection|Data folder structure is not as expected"
+    regexp = "must point to an existing directory"
+  )
+})
+
+testthat::test_that("check_storage_folders() validates path input type", {
+  testthat::expect_error(
+    check_storage_folders(path = 123),
+    regexp = "single character"
   )
 })

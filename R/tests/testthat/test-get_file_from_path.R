@@ -55,3 +55,10 @@ testthat::test_that("get_file_from_path() errors for invalid RDS content", {
     regexp = "unknown input format|error reading"
   )
 })
+
+testthat::test_that("get_file_from_path() validates path input type", {
+  testthat::expect_error(
+    get_file_from_path(path = 123),
+    regexp = "single character"
+  )
+})

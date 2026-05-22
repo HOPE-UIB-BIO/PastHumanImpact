@@ -79,3 +79,25 @@ testthat::test_that("get_data_predictors() removes rows with NA after merge", {
   testthat::expect_equal(nrow(data_merge), 1L)
   testthat::expect_identical(dplyr::pull(data_merge, age), 1)
 })
+
+testthat::test_that("get_data_predictors() validates required columns", {
+  data_source_spd_events <-
+    data.frame(
+      dataset_id = 1,
+      wrong = I(list(data.frame(age = 1, spd = 10)))
+    )
+
+  data_source_climate <-
+    data.frame(
+      dataset_id = 1,
+      data = I(list(data.frame(age = 1, temp = 5)))
+    )
+
+  testthat::expect_error(
+    get_data_predictors(
+      data_source_spd_events = data_source_spd_events,
+      data_source_climate = data_source_climate
+    ),
+    regexp = "must contain dataset_id and data_merge"
+  )
+})

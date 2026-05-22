@@ -81,3 +81,25 @@ testthat::test_that("get_data_combined() returns merged age intersection", {
 
   testthat::expect_identical(dplyr::pull(data_merge, age), c(2, 3))
 })
+
+testthat::test_that("get_data_combined() validates required columns", {
+  data_source_properties <-
+    data.frame(
+      dataset_id = 1,
+      wrong_column = I(list(data.frame(age = 1, x = 10)))
+    )
+
+  data_source_predictors <-
+    data.frame(
+      dataset_id = 1,
+      data_merge = I(list(data.frame(age = 1, y = 20)))
+    )
+
+  testthat::expect_error(
+    get_data_combined(
+      data_source_properties = data_source_properties,
+      data_source_predictors = data_source_predictors
+    ),
+    regexp = "must contain dataset_id and data_merge"
+  )
+})

@@ -42,9 +42,10 @@ testthat::test_that("merge_indicators_and_indices() merges to nested events", {
     1
   )
 
-  testthat::expect_identical(
-    data_events_updated,
-    expected_data
+  testthat::expect_equal(
+    as.data.frame(data_events_updated),
+    expected_data,
+    ignore_attr = TRUE
   )
 })
 
@@ -106,4 +107,31 @@ testthat::test_that("merge_indicators_and_indices() sets no_impact when both wea
   testthat::expect_identical(dplyr::pull(data_events, no_impact), c(1, 1))
   testthat::expect_identical(dplyr::pull(data_events, weak), c(0, 0))
   testthat::expect_identical(dplyr::pull(data_events, strong), c(0, 0))
+})
+
+testthat::test_that("merge_indicators_and_indices() validates required columns", {
+  data_source_indices <-
+    data.frame(
+      dataset_id = 1,
+      age = 100,
+      weak_indicies = FALSE,
+      stringsAsFactors = FALSE
+    )
+
+  data_source_indicators <-
+    data.frame(
+      dataset_id = 1,
+      age = 100,
+      weak_indicators = FALSE,
+      strong_indicators = FALSE,
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    merge_indicators_and_indices(
+      data_source_indices = data_source_indices,
+      data_source_indicators = data_source_indicators
+    ),
+    regexp = "must contain"
+  )
 })

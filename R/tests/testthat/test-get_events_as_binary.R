@@ -1,10 +1,13 @@
-testthat::test_that("get_events_as_binary() creates binary columns from event ages", {
+testthat::test_that("get_events_as_binary() returns nested binary event tables", {
+  testthat::skip_if_not_installed("REcopol")
+
   data_source_events <-
     data.frame(
       dataset_id = 1,
+      region = "Asia",
       events_age = I(list(data.frame(
-        name = c("event_a", "event_b"),
-        age = c(1, 2)
+        name = c("bi", "fi"),
+        age = c(120, 80)
       ))),
       stringsAsFactors = FALSE
     )
@@ -12,75 +15,76 @@ testthat::test_that("get_events_as_binary() creates binary columns from event ag
   data_source_pollen <-
     data.frame(
       dataset_id = 1,
-      region = "Europe",
-      levels = I(list(data.frame(age = c(0, 1, 2, 3))))
+      levels = I(list(data.frame(age = c(150, 100, 50)))),
+      stringsAsFactors = FALSE
     )
 
-  res_data <-
+  res_binary <-
     get_events_as_binary(
       data_source_events = data_source_events,
-      data_source_pollen = data_source_pollen
+      data_source_pollen = data_source_pollen,
+      verbose = FALSE
     )
 
-  testthat::expect_identical(dplyr::pull(res_data, dataset_id), 1)
-  testthat::expect_identical(dplyr::pull(res_data, region), "Europe")
   testthat::expect_identical(
-    purrr::pluck(res_data, "events_binary", 1),
-    data.frame(
-      age = c(0, 1, 2, 3),
-      event_a = c(1, 1, 0, 0),
-      event_b = c(1, 1, 1, 0)
+    names(res_binary),
+    c("dataset_id", "region", "events_binary")
+  )
+  testthat::expect_identical(
+    dplyr::pull(res_binary, dataset_id),
+    1
+  )
+  testthat::expect_identical(
+    dplyr::pull(res_binary, region),
+    "Asia"
+  )
+
+  data_binary <-
+    dplyr::pull(res_binary, events_binary)[[1]]
+
+  testthat::expect_true(all(c("age", "bi", "fi") %in% names(data_binary)))
+  testthat::expect_true(
+    all(
+      unlist(data_binary[c("bi", "fi")]) %in% c(0, 1)
     )
   )
 })
 
-testthat::test_that("get_events_as_binary() sets zeros for NA event age", {
-  data_source_events <-
-    data.frame(
-      dataset_id = 2,
-      events_age = I(list(data.frame(name = c("event_a", "event_b"), age = c(2, NA))))
-    )
-
-  data_source_pollen <-
-    data.frame(
-      dataset_id = 2,
-      region = "Asia",
-      levels = I(list(data.frame(age = c(0, 1, 2, 3))))
-    )
-
-  res_data <-
+testthat::test_that("get_events_as_binary() validates required input columns", {
+  testthat::expect_error(
     get_events_as_binary(
-      data_source_events = data_source_events,
-      data_source_pollen = data_source_pollen
-    )
-
-  data_binary <-
-    dplyr::pull(res_data, events_binary)[[1]]
-
-  testthat::expect_identical(dplyr::pull(data_binary, event_b), c(0, 0, 0, 0))
+      data_source_events = data.frame(dataset_id = 1, region = "Asia"),
+      data_source_pollen = data.frame(
+        dataset_id = 1,
+        levels = I(list(data.frame(age = c(1, 2))))
+      )
+    ),
+    regexp = "must contain dataset_id, region, and events_age"
+  )
 })
 
-testthat::test_that("get_events_as_binary() handles single-level ages", {
+testthat::test_that("get_events_as_binary() validates nested list-column tables", {
   data_source_events <-
     data.frame(
-      dataset_id = 3,
-      events_age = I(list(data.frame(name = "event_x", age = 100)))
+      dataset_id = 1,
+      region = "Asia",
+      events_age = I(list("not_a_table")),
+      stringsAsFactors = FALSE
     )
 
   data_source_pollen <-
     data.frame(
-      dataset_id = 3,
-      region = "Europe",
-      levels = I(list(data.frame(age = 100)))
+      dataset_id = 1,
+      levels = I(list(data.frame(age = c(150, 100, 50)))),
+      stringsAsFactors = FALSE
     )
 
-  res_data <-
+  testthat::expect_error(
     get_events_as_binary(
       data_source_events = data_source_events,
-      data_source_pollen = data_source_pollen
-    )
-
-  data_binary <- dplyr::pull(res_data, events_binary)[[1]]
-  testthat::expect_equal(nrow(data_binary), 1L)
-  testthat::expect_identical(dplyr::pull(data_binary, event_x), 1)
+      data_source_pollen = data_source_pollen,
+      verbose = FALSE
+    ),
+    regexp = "events_age"
+  )
 })

@@ -100,3 +100,63 @@ testthat::test_that("get_data_properties() drops rows with NA after merge", {
   testthat::expect_equal(nrow(data_merge), 1L)
   testthat::expect_identical(dplyr::pull(data_merge, age), 1)
 })
+
+testthat::test_that("get_data_properties() validates required columns", {
+  data_source_diversity <-
+    data.frame(
+      dataset_id = 1,
+      wrong = I(list(data.frame(age = 1, diversity = 10)))
+    )
+
+  data_source_roc <-
+    data.frame(
+      dataset_id = 1,
+      data = I(list(data.frame(age = 1, roc = 0.1)))
+    )
+
+  data_source_density <-
+    data.frame(
+      dataset_id = 1,
+      pap_density_rescale = I(list(data.frame(age = 1, density = 1)))
+    )
+
+  testthat::expect_error(
+    get_data_properties(
+      data_source_diversity = data_source_diversity,
+      data_source_roc = data_source_roc,
+      data_source_density = data_source_density,
+      used_rescale = TRUE
+    ),
+    regexp = "must contain dataset_id and data"
+  )
+})
+
+testthat::test_that("get_data_properties() validates used_rescale flag", {
+  data_source_diversity <-
+    data.frame(
+      dataset_id = 1,
+      data = I(list(data.frame(age = 1, diversity = 10)))
+    )
+
+  data_source_roc <-
+    data.frame(
+      dataset_id = 1,
+      data = I(list(data.frame(age = 1, roc = 0.1)))
+    )
+
+  data_source_density <-
+    data.frame(
+      dataset_id = 1,
+      pap_density_rescale = I(list(data.frame(age = 1, density = 1)))
+    )
+
+  testthat::expect_error(
+    get_data_properties(
+      data_source_diversity = data_source_diversity,
+      data_source_roc = data_source_roc,
+      data_source_density = data_source_density,
+      used_rescale = NA
+    ),
+    regexp = "must be TRUE or FALSE"
+  )
+})

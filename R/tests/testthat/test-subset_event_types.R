@@ -131,3 +131,29 @@ testthat::test_that("subset_event_types() errors for unsupported regions", {
     regexp = "Unsupported region"
   )
 })
+
+testthat::test_that("subset_event_types() validates required inputs", {
+  data_source_meta <-
+    data.frame(
+      dataset_id = 1,
+      region = "Asia",
+      age_min = 0,
+      age_max = 2,
+      stringsAsFactors = FALSE
+    )
+
+  data_source_events <-
+    data.frame(
+      dataset_id = 1,
+      data = I(list(data.frame(age = c(0, 1, 2), bi = c(1, 0, 0))))
+    )
+
+  testthat::expect_error(
+    subset_event_types(
+      data_source_events = data_source_events,
+      data_source_meta = data_source_meta,
+      data_source_dummy_time = data.frame(x = 1)
+    ),
+    regexp = "age column"
+  )
+})

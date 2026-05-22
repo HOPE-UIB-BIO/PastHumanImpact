@@ -102,3 +102,34 @@ testthat::test_that("get_meta_data() climatezone logic follows configured preced
     c("Cold_Dry_Winter", "Temperate_Dry_Summer", "Arid")
   )
 })
+
+testthat::test_that("get_meta_data() validates required columns", {
+  data_assembly <-
+    data.frame(
+      dataset_id = 1,
+      handle = "site-1",
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_meta_data(data_assembly = data_assembly),
+    regexp = "must contain a levels column"
+  )
+})
+
+testthat::test_that("get_meta_data() validates selected variables", {
+  data_assembly <-
+    data.frame(
+      dataset_id = 1,
+      levels = I(list(data.frame(age = c(100, 200)))),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    get_meta_data(
+      data_assembly = data_assembly,
+      variables = c("dataset_id", "missing_column")
+    ),
+    regexp = "must exist"
+  )
+})
