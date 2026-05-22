@@ -215,3 +215,5 @@ following nearby visualisation scripts.
 - Keep generated data and figures traceable to scripts, targets, or configured
   external data.
 - Do not rely on interactive R state.
+- Do not use environment variables (`Sys.setenv()`, `Sys.getenv()`) to control normal project logic. Treat this as an exceptional last resort.
+- Prefer explicit function/script inputs (`flag_*`, arguments, config objects) over hidden global environment switches.

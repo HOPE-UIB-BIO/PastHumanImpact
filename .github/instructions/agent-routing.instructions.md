@@ -18,6 +18,7 @@ is retained as a compatibility adapter for tools that still inspect
 | General routing | `AGENTS.md` |
 | R coding, tidyverse, performance, visualisation | `.ai/r-coding.md` |
 | R functions, roxygen2 documentation, tests | `.ai/r-functions.md` |
+| Contract-first function and test work | `.ai/r-functions.md` |
 | Debugging and bug fixes | `.ai/debugging.md` |
 | Git, branches, worktrees, commits, review workflow | `.ai/git-workflow.md` |
 | Manuscript, Markdown, and Quarto-style narrative work | `.ai/manuscript.md` |
@@ -31,6 +32,8 @@ is retained as a compatibility adapter for tools that still inspect
   discovery.
 - `.github/instructions/*.instructions.md` remains for Copilot `applyTo`
   routing.
+- `.ai/r-functions.md` is the canonical home for contract-first function and
+  test guardrails.
 - `.github/agents/*.agent.md` remains for Copilot custom-agent discovery.
 - `CLAUDE.md`, `GEMINI.md`, and `.cursor/rules/*.mdc` route other tools to the
   same canonical `.ai/` files.
