@@ -1,0 +1,283 @@
+## Response Draft: Pollen-Sum Filtering
+
+```{r}
+#| label: setup-pollen-response
+#| include: false
+#| warning: false
+#| message: false
+here::i_am("Manuscript/COMMSENV-25-2408/Reply/response_pollen_sum_filtering.qmd")
+
+source(
+  here::here("R/00_Config_file.R")
+)
+
+fmt_int <- function(x) {
+  format(round(x), big.mark = ",", scientific = FALSE, trim = TRUE)
+}
+
+fmt_pct <- function(x, digits = 1) {
+  stringr::str_c(
+    format(round(100 * x, digits), nsmall = digits, trim = TRUE),
+    "%"
+  )
+}
+
+path_rowsum <-
+  here::here("Outputs", "Tables", "pollen_sample_rowsums_by_climatezone.csv")
+path_ret_overall <-
+  here::here("Outputs", "Tables", "pollen_threshold_retention_overall.csv")
+
+required_paths <-
+  c(
+    path_rowsum,
+    path_ret_overall
+  )
+
+missing_paths <- required_paths[!file.exists(required_paths)]
+if (
+  length(missing_paths) > 0
+) {
+  stop(
+    stringr::str_c(
+      "Missing required input files:",
+      stringr::str_c(missing_paths, collapse = "; "),
+      sep = " "
+    ),
+    call. = FALSE
+  )
+}
+
+rowsum <-
+  readr::read_csv(
+    path_rowsum,
+    show_col_types = FALSE
+  )
+ret_overall <-
+  readr::read_csv(
+    path_ret_overall,
+    show_col_types = FALSE
+  ) |>
+  dplyr::arrange(.data$threshold)
+
+baseline_threshold <-
+  ret_overall |>
+  dplyr::summarise(
+    value = min(.data$threshold, na.rm = TRUE)
+  ) |>
+  dplyr::pull(.data$value)
+
+thresholds <-
+  ret_overall |>
+  dplyr::distinct(.data$threshold) |>
+  dplyr::arrange(.data$threshold) |>
+  dplyr::pull(.data$threshold)
+
+thresholds_nonbaseline <- thresholds[thresholds > baseline_threshold]
+
+rowsum_values <-
+  rowsum |>
+  dplyr::pull(.data$rowsum)
+
+share_samples_ge <-
+  purrr::map_dbl(
+    thresholds,
+    ~ mean(rowsum_values >= .x, na.rm = TRUE)
+  )
+
+names(share_samples_ge) <- as.character(thresholds)
+
+n_samples_baseline <- nrow(rowsum)
+
+fig_rowsum <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_analyses",
+    "supplement_density_rowsum_by_climatezone.png"
+  )
+fig_overall <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_analyses",
+    "supplement_threshold_retention_overall.png"
+  )
+fig_region <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_analyses",
+    "supplement_threshold_retention_region_facets.png"
+  )
+fig_region_clim <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_analyses",
+    "supplement_threshold_retention_region_climatezone.png"
+  )
+
+figure_paths <- c(
+  fig_rowsum,
+  fig_overall,
+  fig_region,
+  fig_region_clim
+)
+
+missing_figures <- figure_paths[!file.exists(figure_paths)]
+if (
+  length(missing_figures) > 0
+) {
+  stop(
+    stringr::str_c(
+      "Missing required figure files:",
+      stringr::str_c(missing_figures, collapse = "; "),
+      sep = " "
+    ),
+    call. = FALSE
+  )
+}
+```
+
+
+We appreciate the reviewer's concern regarding low pollen-count samples and potential impacts on PAP estimates.
+
+We agree that this point requires explicit quantification and clarification in both the manuscript and response letter. We have now added targeted diagnostics that directly evaluate retained sample-count distributions and the consequences of stricter pollen-count thresholds for record and sample retention.
+
+First, we clarify that the low-count values are used as filtering thresholds in preprocessing, not as a blanket forcing of all samples to one fixed count in the diagnostics presented here. To evaluate whether low-count samples dominate the retained dataset, we quantified the empirical sample-count distribution in the baseline filtered data ($N = `r fmt_int(n_samples_baseline)`$ samples).
+
+```{r}
+#| label: text-sample-shares
+#| echo: false
+#| results: asis
+share_lines <-
+  purrr::map_chr(
+    thresholds,
+    ~ stringr::str_glue(
+      "{fmt_pct(share_samples_ge[[as.character(.x)]])} of samples have >={fmt_int(.x)} grains"
+    )
+  )
+
+cat(
+  stringr::str_glue(
+    "{stringr::str_c(share_lines, collapse = '; ')}.\n"
+  )
+)
+```
+
+Thus, the retained dataset is not dominated by very low-count samples.
+
+```{r}
+#| label: fig-density-rowsum-climatezone
+#| fig-cap: "Distribution of retained sample pollen sums by continent and climate zone."
+#| out-width: "100%"
+knitr::include_graphics(fig_rowsum)
+```
+
+Second, we evaluated sensitivity to stricter thresholds by recomputing retention at higher count criteria relative to the baseline threshold (`r fmt_int(baseline_threshold)`).
+
+```{r}
+#| label: text-retention-summary
+#| results: asis
+ret_nonbase <-
+  ret_overall |>
+  dplyr::filter(
+    .data$threshold %in% thresholds_nonbaseline
+  ) |>
+  dplyr::arrange(.data$threshold)
+
+if (
+  nrow(ret_nonbase) > 0
+) {
+  rec_txt <-
+    ret_nonbase |>
+    dplyr::transmute(
+      summary = stringr::str_glue(
+        "{fmt_pct(.data$prop_retained)} at {fmt_int(.data$threshold)}"
+      )
+    ) |>
+    dplyr::pull(.data$summary) |>
+    stringr::str_c(collapse = ", ")
+
+  samp_txt <-
+    ret_nonbase |>
+    dplyr::transmute(
+      summary = stringr::str_glue(
+        "{fmt_pct(.data$prop_samples_retained)} at {fmt_int(.data$threshold)}"
+      )
+    ) |>
+    dplyr::pull(.data$summary) |>
+    stringr::str_c(collapse = ", ")
+
+  cat(stringr::str_glue("Record retention is {rec_txt}.\n\n"))
+  cat(stringr::str_glue("Sample retention is {samp_txt}.\n"))
+} else {
+  cat("No stricter-than-baseline thresholds were found in the retention table.\n")
+}
+```
+
+These results show the expected trade-off: stricter thresholds reduce potential low-count bias but also remove substantial fractions of records and samples, particularly in data-sparse regions.
+
+Third, we now present retention summaries globally, by continent, and by continent-climatezone combinations to show where losses occur under stricter filtering. This makes the representational trade-off transparent rather than implicit.
+
+In response to the reviewer, we have therefore strengthened both the methods text and supplementary evidence by adding: (i) explicit reporting of retained pollen-sum distributions, (ii) explicit retention sensitivity analyses at higher thresholds, and (iii) clearer framing that PAP-based analyses are in the pollen domain and remain subject to known compositional and production biases.
+
+```{r}
+#| label: fig-threshold-retention-overall
+#| fig-cap: "Overall retention sensitivity under stricter pollen-sum thresholds."
+#| out-width: "100%"
+knitr::include_graphics(fig_overall)
+```
+
+```{r}
+#| label: fig-threshold-retention-region
+#| fig-cap: "Continent-level retention sensitivity under stricter pollen-sum thresholds."
+#| out-width: "100%"
+knitr::include_graphics(fig_region)
+```
+
+```{r}
+#| label: fig-threshold-retention-region-climatezone
+#| fig-cap: "Continent x climate zone retention sensitivity under stricter pollen-sum thresholds."
+#| out-width: "100%"
+knitr::include_graphics(fig_region_clim)
+```
+
+### Data-derived summary table
+
+```{r}
+#| label: tbl-retention-overall
+#| tbl-cap: "Overall retention metrics by threshold (derived from pollen_threshold_retention_overall.csv)."
+#| echo: false
+
+ret_table <-
+  ret_overall |>
+  dplyr::select(
+    "threshold",
+    "n_records_retained",
+    "n_samples_retained",
+    "prop_retained",
+    "prop_samples_retained"
+  ) |>
+  dplyr::mutate(
+    threshold = fmt_int(.data$threshold),
+    n_records_retained = fmt_int(.data$n_records_retained),
+    n_samples_retained = fmt_int(.data$n_samples_retained),
+    prop_retained = fmt_pct(.data$prop_retained),
+    prop_samples_retained = fmt_pct(.data$prop_samples_retained)
+  ) |>
+  dplyr::rename(
+    "Threshold" = .data$threshold,
+    "Records retained" = .data$n_records_retained,
+    "Samples retained" = .data$n_samples_retained,
+    "Record retention" = .data$prop_retained,
+    "Sample retention" = .data$prop_samples_retained
+  )
+
+knitr::kable(ret_table, align = c("r", "r", "r", "r", "r"))
+```
+
+### Notes for manuscript integration
+
+- Methods: Add a short paragraph distinguishing threshold-based filtering decisions from downstream empirical distribution diagnostics.
+- Discussion/limitations: Add a short paragraph framing threshold choice as a bias-coverage trade-off quantified by the sensitivity outputs.
