@@ -12,6 +12,8 @@
 #' @param maximum_age_extrapolation Maximum age, which be can be extrapolated
 #' beyond the oldest chronology control point
 #' @param min_n_levels Minimal number of levels each sequence has to have
+#' @param verbose Logical. If `TRUE` (default), progress and success messages
+#' are printed.
 filter_all_data <- function(data_source,
                             variable_vec = c(
                               "levels",
@@ -23,7 +25,8 @@ filter_all_data <- function(data_source,
                             target_n_grains = 150,
                             percentage_samples = 50,
                             maximum_age_extrapolation = 3000,
-                            min_n_levels = 5) {
+                            min_n_levels = 5,
+                            verbose = TRUE) {
   #----------------------------------------------------------#
   # 1. Argument check -----
   #----------------------------------------------------------#
@@ -54,8 +57,59 @@ filter_all_data <- function(data_source,
 
   RUtilpol::check_class("min_n_levels", "numeric")
 
+  RUtilpol::check_class("verbose", "logical")
+
   current_frame <- sys.nframe()
   current_env <- sys.frame(which = current_frame)
+
+  report_heading <- function(msg) {
+    if (
+      isTRUE(verbose)
+    ) {
+      RUtilpol::output_heading(
+        msg = msg,
+        size = "h2"
+      )
+    }
+  }
+
+  report_comment <- function(msg) {
+    if (
+      isTRUE(verbose)
+    ) {
+      RUtilpol::output_comment(msg)
+    }
+  }
+
+  check_if_loaded_silent <- function(file_name, env) {
+    if (
+      isTRUE(verbose)
+    ) {
+      RUtilpol::check_if_loaded(
+        file_name = file_name,
+        env = env
+      )
+    } else {
+      assertthat::assert_that(
+        exists(file_name, envir = env),
+        msg = paste("'", file_name, "' was not loaded", sep = "")
+      )
+    }
+  }
+
+  stop_if_not_silent <- function(flag, false_msg, true_msg) {
+    if (
+      isTRUE(flag)
+    ) {
+      if (
+        isTRUE(verbose)
+      ) {
+        message("\n", true_msg, "\n")
+      }
+    } else {
+      stop(false_msg, call. = FALSE)
+    }
+  }
 
   #----------------------------------------------------------#
   # 2. Helper functions -----
@@ -464,10 +518,7 @@ filter_all_data <- function(data_source,
 
   # - Sort LEVELS by Age -----
 
-  RUtilpol::output_heading(
-    msg = "Sorting levels by age",
-    size = "h2"
-  )
+  report_heading("Sorting levels by age")
 
   data_ages_sorted <-
     data_unique %>%
@@ -487,14 +538,14 @@ filter_all_data <- function(data_source,
       variable_vec = variable_vec
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_ages_sorted",
     env = current_env
   )
 
   RUtilpol::check_class("data_ages_sorted", "data.frame")
 
-  RUtilpol::output_comment("All levels were sorted by ages")
+  report_comment("All levels were sorted by ages")
 
   # - Filter out LEVELS with duplicated age -----
 
@@ -517,7 +568,7 @@ filter_all_data <- function(data_source,
       variable_vec = variable_vec
     )
 
-  RUtilpol::stop_if_not(
+  stop_if_not_silent(
     purrr::map_lgl(
       data_ages_unique_age$levels,
       ~ .x$age %>%
@@ -532,10 +583,7 @@ filter_all_data <- function(data_source,
 
   # - Filter out by pollen sum -----
 
-  RUtilpol::output_heading(
-    msg = "Filtering levels by pollen sums",
-    size = "h2"
-  )
+  report_heading("Filtering levels by pollen sums")
 
   data_pollen_sum_filtered <-
     data_ages_unique_age %>%
@@ -559,21 +607,18 @@ filter_all_data <- function(data_source,
       variable_vec = variable_vec
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_pollen_sum_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_pollen_sum_filtered", "data.frame")
 
-  RUtilpol::output_comment("All levels were filtered out by pollen sum")
+  report_comment("All levels were filtered out by pollen sum")
 
-  RUtilpol::output_heading(
-    msg = "Filtering sequences by pollen sums",
-    size = "h2"
-  )
+  report_heading("Filtering sequences by pollen sums")
 
-  RUtilpol::stop_if_not(
+  stop_if_not_silent(
     any(
       purrr::map_lgl(data_pollen_sum_filtered$young_age, is.na),
       purrr::map_lgl(data_pollen_sum_filtered$old_age, is.na)
@@ -611,23 +656,20 @@ filter_all_data <- function(data_source,
     dplyr::filter(fullfil_test == TRUE) %>%
     dplyr::select(-fullfil_test)
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_percentage_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_percentage_filtered", "data.frame")
 
-  RUtilpol::output_comment("All sequences were filtered out by pollen sum")
+  report_comment("All sequences were filtered out by pollen sum")
 
   # - Filter out SEQUENCES based on age limits  -----
 
-  RUtilpol::output_heading(
-    msg = "Filtering sequences by age limits",
-    size = "h2"
-  )
+  report_heading("Filtering sequences by age limits")
 
-  RUtilpol::stop_if_not(
+  stop_if_not_silent(
     any(
       purrr::map_lgl(data_percentage_filtered$young_age, is.na),
       purrr::map_lgl(data_percentage_filtered$old_age, is.na)
@@ -655,21 +697,18 @@ filter_all_data <- function(data_source,
     dplyr::filter(fullfil_test == TRUE) %>%
     dplyr::select(-fullfil_test)
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_age_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_age_filtered", "data.frame")
 
-  RUtilpol::output_comment("All sequences were filtered out by age limits")
+  report_comment("All sequences were filtered out by age limits")
 
   #  - Filter out LEVELS by the last control point  -----
 
-  RUtilpol::output_heading(
-    msg = "Filtering out levels beyond last chron.control point",
-    size = "h2"
-  )
+  report_heading("Filtering out levels beyond last chron.control point")
 
   data_extrapolation_filtered <-
     data_age_filtered %>%
@@ -689,23 +728,20 @@ filter_all_data <- function(data_source,
       variable_vec = variable_vec
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_extrapolation_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_extrapolation_filtered", "data.frame")
 
-  RUtilpol::output_comment("All levels beyond last chron.control point were filtered out")
+  report_comment("All levels beyond last chron.control point were filtered out")
 
   # - Filter out LEVELS beyond age limit  -----
 
-  RUtilpol::output_heading(
-    msg = "Filtering out levels beyond age limits",
-    size = "h2"
-  )
+  report_heading("Filtering out levels beyond age limits")
 
-  RUtilpol::stop_if_not(
+  stop_if_not_silent(
     any(
       purrr::map_lgl(
         data_extrapolation_filtered$end_of_interest_period,
@@ -737,22 +773,19 @@ filter_all_data <- function(data_source,
       variable_vec = variable_vec
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_age_limit_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_age_limit_filtered", "data.frame")
 
-  RUtilpol::output_comment("All levels beyond age limits were filtered out")
+  report_comment("All levels beyond age limits were filtered out")
 
 
   # - Filters out SEQUENCES based on N of levels   -----
 
-  RUtilpol::output_heading(
-    msg = "Filtering out sequnces by number of levels",
-    size = "h2"
-  )
+  report_heading("Filtering out sequnces by number of levels")
 
   data_n_leves_filtered <-
     data_age_limit_filtered %>%
@@ -763,7 +796,7 @@ filter_all_data <- function(data_source,
       n_sample_counts >= min_n_levels
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_n_leves_filtered",
     env = current_env
   )
@@ -772,7 +805,7 @@ filter_all_data <- function(data_source,
 
   RUtilpol::check_col_names("data_n_leves_filtered", "n_sample_counts")
 
-  RUtilpol::output_comment("All sequences were filtered out based on number of levels")
+  report_comment("All sequences were filtered out based on number of levels")
 
 
   data_filtered <-
@@ -797,14 +830,14 @@ filter_all_data <- function(data_source,
       )
     )
 
-  RUtilpol::check_if_loaded(
+  check_if_loaded_silent(
     file_name = "data_filtered",
     env = current_env
   )
 
   RUtilpol::check_class("data_filtered", "data.frame")
 
-  RUtilpol::output_comment(
+  report_comment(
     "All sequences and levels were filtered out based on user's preferences"
   )
 
