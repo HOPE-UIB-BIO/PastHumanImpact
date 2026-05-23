@@ -14,12 +14,11 @@
 #   the whole repo. It loads packages, defines important variables,
 #   authorises the user, and saves config file.
 
-# Set the current environment
+# Set the current environment1
 current_env <- environment()
 
 # set seed
 set_seed <- 1234
-set.seed(set_seed)
 
 #----------------------------------------------------------#
 # 1. Load packages -----
@@ -173,10 +172,7 @@ if (
     yaml::read_yaml(
       here::here("secrets.yaml")
     ) |>
-    purrr::pluck(
-      Sys.info()["user"],
-      .default = "Data"
-    )
+    purrr::pluck("Data")
 } else {
   data_storage_path <-
     "Data"
