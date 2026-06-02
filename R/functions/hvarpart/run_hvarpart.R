@@ -18,6 +18,8 @@
 #' @param get_significance logical; Should significance of predictors be
 #' estimated? (takes along time)
 #' @param permutations integer; number of permutations for p-values
+#' @param fail_on_error logical; if `TRUE` (default), abort on first
+#' `get_varhp()` error. If `FALSE`, store `NULL` for failed groups and continue.
 #' @return
 #' A data frame with original columns and a `varhp` list-column containing
 #' outputs from `get_varhp()`.
@@ -50,6 +52,7 @@ run_hvarpart <- function(data_source,
                          time_series = TRUE,
                          get_significance = TRUE,
                          permutations = 99,
+                         fail_on_error = TRUE,
                          ...) {
   assertthat::assert_that(
     is.data.frame(data_source),
@@ -80,25 +83,54 @@ run_hvarpart <- function(data_source,
     )
   }
 
+  assertthat::assert_that(
+    is.logical(fail_on_error),
+    length(fail_on_error) == 1,
+    !is.na(fail_on_error),
+    msg = "`fail_on_error` must be a single TRUE/FALSE value."
+  )
+
+  get_varhp_safe <-
+    purrr::possibly(
+      .f = get_varhp,
+      otherwise = NULL,
+      quiet = TRUE
+    )
+
   res <- NULL
 
-  if (!is.null(response_vars) & is.null(data_response_dist)
+  if (!is.null(response_vars) && is.null(data_response_dist)
   ) {
     res <-
       data_source %>%
       dplyr::mutate(
         varhp = purrr::map(
           .x = data_merge,
-          .f = ~ get_varhp(
-            data_source = .x,
-            permutations = permutations,
-            response_dist = response_dist,
-            response_vars = response_vars,
-            predictor_vars = predictor_vars,
-            run_all_predictors = run_all_predictors,
-            time_series = time_series,
-            get_significance = get_significance
-          )
+          .f = ~ {
+            if (isTRUE(fail_on_error)) {
+              get_varhp(
+                data_source = .x,
+                permutations = permutations,
+                response_dist = response_dist,
+                response_vars = response_vars,
+                predictor_vars = predictor_vars,
+                run_all_predictors = run_all_predictors,
+                time_series = time_series,
+                get_significance = get_significance
+              )
+            } else {
+              get_varhp_safe(
+                data_source = .x,
+                permutations = permutations,
+                response_dist = response_dist,
+                response_vars = response_vars,
+                predictor_vars = predictor_vars,
+                run_all_predictors = run_all_predictors,
+                time_series = time_series,
+                get_significance = get_significance
+              )
+            }
+          }
         )
       )
   } else if (!is.null(data_response_dist)) {
@@ -111,21 +143,55 @@ run_hvarpart <- function(data_source,
         varhp = purrr::map2(
           .x = data_merge,
           .y = data_response_dist,
-          .f = ~ get_varhp(
-            data_source = .x,
-            data_response_dist = .y,
-            permutations = permutations,
-            response_vars = NULL,
-            response_dist = NULL,
-            predictor_vars = predictor_vars,
-            run_all_predictors = run_all_predictors,
-            time_series = time_series,
-            get_significance = get_significance
-          )
+          .f = ~ {
+            if (isTRUE(fail_on_error)) {
+              get_varhp(
+                data_source = .x,
+                data_response_dist = .y,
+                permutations = permutations,
+                response_vars = NULL,
+                response_dist = NULL,
+                predictor_vars = predictor_vars,
+                run_all_predictors = run_all_predictors,
+                time_series = time_series,
+                get_significance = get_significance
+              )
+            } else {
+              get_varhp_safe(
+                data_source = .x,
+                data_response_dist = .y,
+                permutations = permutations,
+                response_vars = NULL,
+                response_dist = NULL,
+                predictor_vars = predictor_vars,
+                run_all_predictors = run_all_predictors,
+                time_series = time_series,
+                get_significance = get_significance
+              )
+            }
+          }
         )
       )
   } else {
     cli::cli_abort("No response variables or distance matrix provided")
+  }
+
+  if (!isTRUE(fail_on_error)) {
+    n_failed <-
+      purrr::map_lgl(
+        .x = res$varhp,
+        .f = is.null
+      ) %>%
+      sum()
+
+    if (n_failed > 0) {
+      cli::cli_warn(
+        c(
+          "Some hvar groups failed and were skipped.",
+          "i" = "{n_failed} element(s) in `varhp` are NULL."
+        )
+      )
+    }
   }
 
   return(res)

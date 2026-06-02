@@ -60,6 +60,7 @@ package_list <-
   c(
     "assertthat",
     "brms",
+    "collinear",
     "colorspace",
     "furrr",
     "future",
@@ -91,7 +92,6 @@ package_list <-
     "terra",
     "tibble",
     "tidyr",
-    "stringr",
     "tidyverse",
     "usethis",
     "utils",

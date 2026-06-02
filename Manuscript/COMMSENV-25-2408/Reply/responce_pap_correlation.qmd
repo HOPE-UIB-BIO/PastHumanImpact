@@ -1,0 +1,334 @@
+---
+format:
+  html:
+    self-contained: true
+  pdf:
+    keep-tex: false
+---
+
+## Response Draft: Correlated PAP Responses
+
+```{r}
+#| label: setup-pap-correlation-response
+#| include: false
+#| warning: false
+#| message: false
+
+source(
+  here::here("R/00_Config_file.R")
+)
+
+path_col_summary <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "Collinearity",
+    "pap_collinearity_hvar_influence_summary.csv"
+  )
+
+path_col_by_dataset <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "Collinearity",
+    "pap_collinearity_hvar_influence_by_dataset.csv"
+  )
+
+path_col_corr <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "Collinearity",
+    "pap_collinearity_summary.csv"
+  )
+
+fig_influence <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Extended_data_figures",
+    "Collinearity",
+    "EDA_5b_pap_collinearity_hvar_influence.png"
+  )
+
+fig_correlation <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Extended_data_figures",
+    "Collinearity",
+    "EDA_5a_pap_collinearity_correlation.png"
+  )
+
+fig_reduced_simple <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Extended_data_figures",
+    "Collinearity",
+    "EDA_5c_h1_spatial_reduced_simple.png"
+  )
+
+required_paths <-
+  c(
+    path_col_summary,
+    path_col_by_dataset,
+    path_col_corr,
+    fig_correlation,
+    fig_influence,
+    fig_reduced_simple
+  )
+
+missing_paths <- required_paths[!file.exists(required_paths)]
+if (
+  length(missing_paths) > 0
+) {
+  stop(
+    stringr::str_c(
+      "Missing required input files:",
+      stringr::str_c(missing_paths, collapse = "; "),
+      sep = " "
+    ),
+    call. = FALSE
+  )
+}
+
+col_summary <-
+  readr::read_csv(
+    path_col_summary,
+    show_col_types = FALSE
+  )
+
+col_by_dataset <-
+  readr::read_csv(
+    path_col_by_dataset,
+    show_col_types = FALSE
+  )
+
+col_corr <-
+  readr::read_csv(
+    path_col_corr,
+    show_col_types = FALSE
+  )
+
+col_climate <-
+  col_summary |>
+  dplyr::filter(.data$predictor == "climate")
+
+col_human <-
+  col_summary |>
+  dplyr::filter(.data$predictor == "human")
+
+n_datasets_total <-
+  col_climate |>
+  dplyr::pull(.data$n_datasets)
+
+n_complete_pairs <-
+  col_climate |>
+  dplyr::pull(.data$n_with_complete_pairs)
+
+median_climate_baseline <-
+  col_climate |>
+  dplyr::pull(.data$median_baseline)
+
+median_climate_reduced <-
+  col_climate |>
+  dplyr::pull(.data$median_reduced)
+
+median_human_baseline <-
+  col_human |>
+  dplyr::pull(.data$median_baseline)
+
+median_human_reduced <-
+  col_human |>
+  dplyr::pull(.data$median_reduced)
+
+median_delta_climate <-
+  col_climate |>
+  dplyr::pull(.data$median_delta_ratio)
+
+q95_abs_delta_climate <-
+  col_climate |>
+  dplyr::pull(.data$q95_abs_delta_ratio)
+
+max_median_abs_correlation <-
+  col_corr |>
+  dplyr::summarise(value = max(.data$median_abs_correlation, na.rm = TRUE)) |>
+  dplyr::pull(.data$value)
+
+n_pairs_total <- nrow(col_corr)
+
+n_pairs_high_cor <-
+  col_corr |>
+  dplyr::filter(.data$median_abs_correlation >= 0.8) |>
+  nrow()
+
+n_pairs_very_high_cor <-
+  col_corr |>
+  dplyr::filter(.data$median_abs_correlation >= 0.9) |>
+  nrow()
+
+top_cor_pairs <-
+  col_corr |>
+  dplyr::arrange(dplyr::desc(.data$median_abs_correlation)) |>
+  dplyr::slice_head(n = 3) |>
+  dplyr::transmute(
+    label = stringr::str_glue(
+      "{.data$x} vs {.data$y} ({format(round(.data$median_abs_correlation, 3), nsmall = 3, trim = TRUE, scientific = FALSE)})"
+    )
+  ) |>
+  dplyr::pull(.data$label)
+
+comparison_table <-
+  col_by_dataset |>
+  dplyr::filter(
+    .data$predictor %in% c("climate", "human")
+  ) |>
+  dplyr::select(
+    .data$dataset_id,
+    .data$predictor,
+    .data$baseline,
+    .data$reduced_collinear_v1
+  ) |>
+  tidyr::pivot_wider(
+    names_from = .data$predictor,
+    values_from = c(.data$baseline, .data$reduced_collinear_v1)
+  )
+
+n_climate_gt_human_baseline <-
+  comparison_table |>
+  dplyr::filter(
+    !is.na(.data$baseline_climate),
+    !is.na(.data$baseline_human),
+    .data$baseline_climate > .data$baseline_human
+  ) |>
+  nrow()
+
+n_climate_gt_human_reduced <-
+  comparison_table |>
+  dplyr::filter(
+    !is.na(.data$reduced_collinear_v1_climate),
+    !is.na(.data$reduced_collinear_v1_human),
+    .data$reduced_collinear_v1_climate > .data$reduced_collinear_v1_human
+  ) |>
+  nrow()
+
+n_dominance_switch <-
+  comparison_table |>
+  dplyr::filter(
+    !is.na(.data$baseline_climate),
+    !is.na(.data$baseline_human),
+    !is.na(.data$reduced_collinear_v1_climate),
+    !is.na(.data$reduced_collinear_v1_human)
+  ) |>
+  dplyr::mutate(
+    climate_dominant_baseline = .data$baseline_climate > .data$baseline_human,
+    climate_dominant_reduced = .data$reduced_collinear_v1_climate > .data$reduced_collinear_v1_human
+  ) |>
+  dplyr::filter(
+    .data$climate_dominant_baseline != .data$climate_dominant_reduced
+  ) |>
+  nrow()
+
+n_large_delta <-
+  col_by_dataset |>
+  dplyr::filter(
+    .data$predictor == "climate",
+    !is.na(.data$abs_delta_ratio),
+    .data$abs_delta_ratio >= 0.2
+  ) |>
+  nrow()
+
+prop_large_delta <-
+  if (
+    n_complete_pairs > 0
+  ) {
+    n_large_delta / n_complete_pairs
+  } else {
+    NA_real_
+  }
+
+fmt_int <- function(x) {
+  format(round(x), big.mark = ",", scientific = FALSE, trim = TRUE)
+}
+
+fmt_num <- function(x, digits = 3) {
+  format(round(x, digits), nsmall = digits, trim = TRUE, scientific = FALSE)
+}
+```
+
+We appreciate the reviewer’s concern that correlations among PAP response variables could influence model interpretation.
+
+Our view is that some correlation among PAP responses is expected because several PAP metrics summarize related properties of the same assemblage structure.
+
+We nevertheless performed a dedicated robustness analysis and removed collinear PAP responses before re-running the H1 spatial SPD models.
+
+To make this transparent, we report the workflow using three linked figures: (A) grouped PAP correlation diagnostics, (B) changes in importance ratios after response reduction, and (C) reduced-response reconstruction of the simple spatial summary pattern.
+
+### A. Correlation structure among PAP responses
+
+Figure A documents where response-metric overlap is strongest and which PAP pairs are most likely to create redundancy in downstream models.
+
+Across `r fmt_int(n_pairs_total)` PAP pairs, `r fmt_int(n_pairs_high_cor)` had median absolute correlation >= 0.8 and `r fmt_int(n_pairs_very_high_cor)` had median absolute correlation >= 0.9.
+
+The highest-correlation pairs were `r stringr::str_c(top_cor_pairs, collapse = "; ")`.
+
+This supports the reviewer's point that some response metrics are strongly correlated and justifies running a reduced-response sensitivity model.
+
+```{r}
+#| label: fig-pap-collinearity-correlation
+#| fig-cap: "Pairwise PAP correlation diagnostics used to identify collinear response variables."
+#| out-width: "100%"
+#| echo: false
+knitr::include_graphics(fig_correlation)
+```
+
+### B. Effect on climate-vs-human importance ratios
+
+Figure B shows the direct model-comparison result after removing collinear PAP responses.
+
+This comparison includes `r fmt_int(n_datasets_total)` datasets, with `r fmt_int(n_complete_pairs)` datasets that had complete baseline and reduced model pairs.
+
+The median climate importance ratio changed from `r fmt_num(median_climate_baseline)` in the baseline model to `r fmt_num(median_climate_reduced)` in the reduced-response model.
+
+The median human importance ratio changed from `r fmt_num(median_human_baseline)` to `r fmt_num(median_human_reduced)`.
+
+The median climate change (reduced minus baseline) was `r format(median_delta_climate, scientific = TRUE, digits = 3)`, which is effectively zero at practical precision.
+
+Climate remained larger than human in `r fmt_int(n_climate_gt_human_baseline)` baseline datasets and `r fmt_int(n_climate_gt_human_reduced)` reduced-response datasets with non-missing paired values.
+
+The strongest median absolute pairwise PAP correlation observed across grouped diagnostics was `r fmt_num(max_median_abs_correlation)`.
+
+Only `r fmt_int(n_dominance_switch)` datasets switched dominance class (climate-dominant vs human-dominant) between baseline and reduced-response runs.
+
+Larger shifts were limited: `r fmt_int(n_large_delta)` of `r fmt_int(n_complete_pairs)` complete pairs had absolute climate-ratio change >= 0.2 (`r fmt_num(100 * prop_large_delta, 1)`%).
+
+These sensitivity results show that reducing correlated PAP responses does not materially change the main conclusion that climate explains more variation than human predictors at the focal spatial and temporal scales.
+
+```{r}
+#| label: fig-pap-collinearity-influence
+#| fig-cap: "Sensitivity of predictor importance ratios after reducing collinear PAP responses."
+#| out-width: "100%"
+#| echo: false
+knitr::include_graphics(fig_influence)
+```
+
+### C. Visual pattern check against the main spatial summary
+
+Figure C compares the reduced-response output in the same visual summary style used for the main H1 spatial interpretation.
+
+The broad spatial pattern remains unchanged, with climate-dominant structure retained across most region-climate combinations, indicating that the key interpretation is not an artifact of response redundancy.
+
+```{r}
+#| label: fig-pap-collinearity-reduced-simple
+#| fig-cap: "Reduced-response reconstruction of the simple spatial summary pattern used for visual comparison with the main result."
+#| out-width: "100%"
+#| echo: false
+knitr::include_graphics(fig_reduced_simple)
+```
+
+### Notes for manuscript integration
+
+- Methods: Add one sentence stating that a collinearity-based reduced-PAP sensitivity analysis was run.
+- Results: Report that baseline and reduced-PAP models yield near-identical median climate and human importance ratios.
+- Discussion: Clarify that expected metric inter-correlation does not alter the central inference.
