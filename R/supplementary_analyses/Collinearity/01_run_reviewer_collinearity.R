@@ -10,12 +10,6 @@
 #
 #----------------------------------------------------------#
 
-# Reviewer-only runner for issue #329 collinearity sensitivity.
-
-#----------------------------------------------------------#
-# 0. Setup -----
-#----------------------------------------------------------#
-
 library(here)
 
 source(
@@ -32,7 +26,7 @@ visualise_pipeline <- TRUE
 
 targets::tar_make(
   script = here::here(
-    "R/target_pipelines/05_pipeline_hvar_spatial_temporal_reviewer_collinearity.R"
+    "R/supplementary_analyses/Collinearity/05_pipeline_h1_reviewer_collinearity.R"
   ),
   store = file.path(
     data_storage_path,
@@ -47,7 +41,7 @@ if (
   targets::tar_visnetwork(
     targets_only = TRUE,
     script = here::here(
-      "R/target_pipelines/05_pipeline_hvar_spatial_temporal_reviewer_collinearity.R"
+      "R/supplementary_analyses/Collinearity/05_pipeline_h1_reviewer_collinearity.R"
     ),
     store = file.path(
       data_storage_path,
@@ -58,12 +52,12 @@ if (
 }
 
 #----------------------------------------------------------#
-# 2. Build reviewer collinearity figure -----
+# 2. Build reviewer collinearity outputs -----
 #----------------------------------------------------------#
 
 source(
   here::here(
-    "R/visualisations/extended_data_analysis/EDA_5_pap_collinearity.R"
+    "R/supplementary_analyses/Collinearity/02_run_collinearity_outputs.R"
   )
 )
 

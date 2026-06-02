@@ -157,14 +157,14 @@ plot_hvar_influence <-
 readr::write_csv(
   data_hvar_influence,
   here::here(
-    "Outputs/Tables/pap_collinearity_hvar_influence_by_dataset.csv"
+    "Outputs/Tables/Collinearity/pap_collinearity_hvar_influence_by_dataset.csv"
   )
 )
 
 readr::write_csv(
   data_hvar_influence_summary,
   here::here(
-    "Outputs/Tables/pap_collinearity_hvar_influence_summary.csv"
+    "Outputs/Tables/Collinearity/pap_collinearity_hvar_influence_summary.csv"
   )
 )
 
@@ -173,7 +173,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
       here::here(
-        "Outputs/Figures/Extended_data_figures/EDA_5b_pap_collinearity_hvar_influence"
+        "Outputs/Figures/Extended_data_figures/Collinearity/EDA_5b_pap_collinearity_hvar_influence"
       ),
       ".",
       .x

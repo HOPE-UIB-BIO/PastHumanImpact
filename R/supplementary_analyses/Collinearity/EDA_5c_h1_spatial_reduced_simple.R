@@ -170,7 +170,7 @@ plot_reduced_simple <-
 readr::write_csv(
   data_spatial_reduced,
   here::here(
-    "Outputs/Tables/pap_collinearity_reduced_simple_fig2_table.csv"
+    "Outputs/Tables/Collinearity/pap_collinearity_reduced_simple_fig2_table.csv"
   )
 )
 
@@ -179,7 +179,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
       here::here(
-        "Outputs/Figures/Extended_data_figures/EDA_5c_h1_spatial_reduced_simple"
+        "Outputs/Figures/Extended_data_figures/Collinearity/EDA_5c_h1_spatial_reduced_simple"
       ),
       ".",
       .x

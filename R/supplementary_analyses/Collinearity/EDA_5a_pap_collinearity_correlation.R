@@ -124,7 +124,7 @@ plot_correlation <-
 readr::write_csv(
   data_correlation_summary,
   here::here(
-    "Outputs/Tables/pap_collinearity_summary.csv"
+    "Outputs/Tables/Collinearity/pap_collinearity_summary.csv"
   )
 )
 
@@ -133,7 +133,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
       here::here(
-        "Outputs/Figures/Extended_data_figures/EDA_5a_pap_collinearity_correlation"
+        "Outputs/Figures/Extended_data_figures/Collinearity/EDA_5a_pap_collinearity_correlation"
       ),
       ".",
       .x
