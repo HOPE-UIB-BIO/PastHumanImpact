@@ -128,3 +128,72 @@ testthat::test_that("run_hvarpart() validates required inputs", {
     regexp = "must exist in"
   )
 })
+
+testthat::test_that("run_hvarpart() can continue when one group fails", {
+  data_source <-
+    data.frame(
+      dataset_id = c(1, 2),
+      data_merge = I(
+        list(
+          data.frame(fail = TRUE, stringsAsFactors = FALSE),
+          data.frame(fail = FALSE, stringsAsFactors = FALSE)
+        )
+      ),
+      stringsAsFactors = FALSE
+    )
+
+  old_get_varhp <-
+    get("get_varhp", envir = .GlobalEnv)
+
+  on.exit(
+    assign("get_varhp", old_get_varhp, envir = .GlobalEnv),
+    add = TRUE
+  )
+
+  assign(
+    "get_varhp",
+    function(data_source,
+             permutations,
+             response_dist,
+             response_vars,
+             predictor_vars,
+             run_all_predictors,
+             time_series,
+             get_significance) {
+      if (
+        isTRUE(data_source$fail[[1]])
+      ) {
+        stop("mock failure", call. = FALSE)
+      }
+
+      list(
+        summary_table = data.frame(
+          predictor = "human",
+          Individual = 0.1,
+          stringsAsFactors = FALSE
+        )
+      )
+    },
+    envir = .GlobalEnv
+  )
+
+  res_data <-
+    run_hvarpart(
+      data_source = data_source,
+      response_vars = c("roc"),
+      response_dist = NULL,
+      data_response_dist = NULL,
+      predictor_vars = list(human = c("spd")),
+      run_all_predictors = FALSE,
+      time_series = FALSE,
+      get_significance = FALSE,
+      permutations = 9,
+      fail_on_error = FALSE
+    )
+
+  varhp_col <-
+    dplyr::pull(res_data, varhp)
+
+  testthat::expect_true(is.null(varhp_col[[1]]))
+  testthat::expect_type(varhp_col[[2]], "list")
+})
