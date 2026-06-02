@@ -1,3 +1,11 @@
+---
+format:
+  html:
+    self-contained: true
+  pdf:
+    keep-tex: false
+---
+
 ## Response Draft: Pollen-Sum Filtering
 
 ```{r}
@@ -5,7 +13,6 @@
 #| include: false
 #| warning: false
 #| message: false
-here::i_am("Manuscript/COMMSENV-25-2408/Reply/response_pollen_sum_filtering.qmd")
 
 source(
   here::here("R/00_Config_file.R")
@@ -171,6 +178,7 @@ Thus, the retained dataset is not dominated by very low-count samples.
 #| label: fig-density-rowsum-climatezone
 #| fig-cap: "Distribution of retained sample pollen sums by continent and climate zone."
 #| out-width: "100%"
+#| echo: false
 knitr::include_graphics(fig_rowsum)
 ```
 
@@ -179,6 +187,7 @@ Second, we evaluated sensitivity to stricter thresholds by recomputing retention
 ```{r}
 #| label: text-retention-summary
 #| results: asis
+#| echo: false
 ret_nonbase <-
   ret_overall |>
   dplyr::filter(
@@ -226,6 +235,7 @@ In response to the reviewer, we have therefore strengthened both the methods tex
 #| label: fig-threshold-retention-overall
 #| fig-cap: "Overall retention sensitivity under stricter pollen-sum thresholds."
 #| out-width: "100%"
+#| echo: false
 knitr::include_graphics(fig_overall)
 ```
 
@@ -233,6 +243,7 @@ knitr::include_graphics(fig_overall)
 #| label: fig-threshold-retention-region
 #| fig-cap: "Continent-level retention sensitivity under stricter pollen-sum thresholds."
 #| out-width: "100%"
+#| echo: false
 knitr::include_graphics(fig_region)
 ```
 
@@ -240,6 +251,7 @@ knitr::include_graphics(fig_region)
 #| label: fig-threshold-retention-region-climatezone
 #| fig-cap: "Continent x climate zone retention sensitivity under stricter pollen-sum thresholds."
 #| out-width: "100%"
+#| echo: false
 knitr::include_graphics(fig_region_clim)
 ```
 
@@ -249,6 +261,8 @@ knitr::include_graphics(fig_region_clim)
 #| label: tbl-retention-overall
 #| tbl-cap: "Overall retention metrics by threshold (derived from pollen_threshold_retention_overall.csv)."
 #| echo: false
+#| error: false
+#| warning: false
 
 ret_table <-
   ret_overall |>
