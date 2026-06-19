@@ -14,6 +14,9 @@ _targets.yaml
 secrets.yaml
 Manuscript/_internal/
 
+# Temporary analysis outputs
+Data/Temp/
+
 # VSCode settings
 .vscode/settings.json
 
