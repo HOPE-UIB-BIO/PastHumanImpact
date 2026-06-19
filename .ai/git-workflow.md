@@ -18,6 +18,12 @@ This includes:
 Safe read-only operations are allowed: `git status`, `git diff`, `git log`,
 `git branch` as a list operation, and `git worktree list`.
 
+When a task requires renaming or moving a tracked file, always use
+`git mv <old_path> <new_path>` instead of a filesystem rename, copy, or
+delete/recreate sequence so Git records the change as a move and preserves file
+history. Treat `git mv` as a state-changing operation: use it only when the user
+has requested or approved the rename or move.
+
 ## Branch Strategy
 
 Use `main` as the stable integration branch. New feature branches and worktrees
