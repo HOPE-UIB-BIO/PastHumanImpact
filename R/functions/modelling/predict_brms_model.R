@@ -36,7 +36,7 @@ predict_brms_model <- function(mod, newdata = NULL, model_config_row = NULL) {
     )
 
     data_predicted <-
-      brms::fitted(
+      stats::fitted(
         object = mod,
         newdata = newdata,
         re_formula = NA,
