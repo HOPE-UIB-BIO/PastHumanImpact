@@ -4,8 +4,8 @@
 
 Create modelled PAP-through-time figures for all PAP metrics by
 `region x climatezone`, while redesigning `R/temporal_models` into a general
-modelling framework that can handle predictors, events, and PAPs with shared
-run/evaluate/rerun tracking.
+modelling framework that can fit one temporal model per analysis unit and share
+run/evaluate/rerun tracking across predictors, events, and PAPs.
 
 ## Scope
 
@@ -14,6 +14,8 @@ run/evaluate/rerun tracking.
   `need_to_be_evaluated`, convergence diagnostics, rerun flags, saved model
   files, and saved prediction files.
 - Make that lifecycle general enough for predictors, events, and PAPs.
+- Fit PAP models separately for each `region x climatezone` combination, so
+  each model estimates one general trajectory across cores within that stratum.
 - Refactor existing functions and scripts where they already own the behavior.
   Add new functions only when there is no suitable existing owner or when
   extracting script logic is needed to keep analytical scripts clean.
@@ -28,7 +30,7 @@ changes.
 
 **Tasks:**
 
-- [x] Create `Data/Temp/plan_pap_temporal_models_2026-06-19.md`.
+- [x] Create `Data/Plans/plan_pap_temporal_models_2026-06-19.md`.
 - [x] Include formula-research questions, validation gates, and model
   references.
 
@@ -39,35 +41,37 @@ changes.
 ## Formula Research
 
 **Goal:** Decide the new HGAM formula from evidence and small executable tests,
-with special attention to whether `bs = "fs"` is required.
+with special attention to whether core-specific wiggliness through `dataset_id`
+is required.
 
 **Tasks:**
 
-- [ ] Review HGAM guidance from Pedersen et al. 2019, `mgcv` factor-smooth
+- [x] Review HGAM guidance from Pedersen et al. 2019, `mgcv` factor-smooth
   documentation, and `brms` smooth documentation.
-- [ ] Use `Data/Temp/research_hgam_formula_pap.R` with a small sampled PAP
+- [x] Use `Data/Temp/research_hgam_formula_pap.R` with a small sampled PAP
   dataset.
-- [ ] Compare at least these candidate profiles:
-  - Current-style dataset smooth:
-    `s(age, by = dataset_id) + s(dataset_id, bs = "re")`.
-  - Stratum factor smooth:
-    `s(age_ka, k = 8) + s(age_ka, stratum, bs = "fs", k = 5) +
-    (1 | dataset_id)`.
-  - Optional stricter comparator: region-climatezone smooth without
-    `bs = "fs"` only if needed to prove the tradeoff.
-- [ ] Measure formula construction, prior extraction, model compilation/fit on
+- [x] Compare candidate profiles for separate `region x climatezone` models:
+  - Shared within-stratum smooth plus dataset random intercept.
+  - Shared within-stratum smooth plus dataset random intercept and slope.
+  - Shared within-stratum smooth plus dataset factor smooth with `bs = "fs"`.
+  - Current-style dataset smooth comparator.
+- [x] Measure formula construction, prior extraction, model compilation/fit on
   a tiny subset, prediction shape, runtime, warnings, and convergence
   diagnostics.
-- [ ] Record the chosen default formula and rationale in this file.
+- [x] Record the chosen default formula and rationale in this file.
 
 **Validation:**
 
 - Temporary research script runs from a clean R session.
-- The selected formula successfully fits a tiny representative PAP subset and
-  produces predictions for all sampled strata.
-- The chosen formula keeps full data complexity at
-  `region x climatezone x dataset_id` level without using dataset-level smooths
-  unless tests justify the cost.
+- The selected formula successfully fits a tiny representative PAP subset from
+  one `region x climatezone` stratum and produces predictions.
+- The chosen formula keeps full data complexity at `dataset_id` level inside
+  each `region x climatezone` model.
+
+**Research artifact:**
+
+Research notes and results are recorded separately in
+`Data/Temp/research_hgam_formula_pap_summary.qmd`.
 
 ## General Model Framework
 
@@ -77,8 +81,9 @@ and PAPs.
 **Tasks:**
 
 - [ ] Add a general model-spec table with fields for `analysis`, `variable`,
-  `family_key`, `engine`, `model_profile`, age limits, minimum records, run
-  flags, evaluation flags, diagnostics, paths, and output IDs.
+  `region`, `climatezone`, `family_key`, `engine`, `model_profile`, age limits,
+  minimum records, run flags, evaluation flags, diagnostics, paths, and output
+  IDs.
 - [ ] Replace string families plus `eval(parse())` with a tested family-mapping
   function.
 - [ ] Refactor `get_hgam_formula()` into the shared formula-string engine.
@@ -107,8 +112,8 @@ trajectories.
   `density_diversity`, `density_turnover`.
 - [ ] Filter to the agreed temporal range, exclude Africa, and apply
   `min_n_records_per_climate_zone`.
-- [ ] Fit one model per PAP variable using the selected formula profile and
-  existing-style model tracking.
+- [ ] Fit one model per PAP variable per `region x climatezone` using the
+  selected formula profile and existing-style model tracking.
 
 **Validation:**
 
@@ -138,29 +143,6 @@ zone.
 - Spot checks confirm plotted predictions match saved prediction tables.
 - Focused `targets::tar_manifest()` and, where feasible, focused `tar_make()`
   checks pass for PAP and H1 temporal dependencies.
-
-## Formula Decision Record
-
-Default profile for first implementation: `stratum_fs`.
-
-Candidate formula:
-
-```r
-value ~ s(age_ka, k = 8, bs = "cr") +
-  s(age_ka, stratum, bs = "fs", k = 5) +
-  (1 | dataset_id)
-```
-
-Rationale to verify in the research script:
-
-- `bs = "fs"` directly represents random wiggly curves for factor levels and is
-  the specific HGAM mechanism that matches the desired
-  `region x climatezone` trajectory deviations.
-- Applying `bs = "fs"` to `stratum`, not `dataset_id`, keeps the full
-  region-climatezone complexity while avoiding a separate smooth for every
-  record.
-- `(1 | dataset_id)` retains repeated-observation dependence for pollen
-  records without the cost of dataset-level smooths.
 
 ## Risks
 
