@@ -15,8 +15,14 @@
 #' @param model_profile Formula profile to build. `dataset_smooth` preserves
 #' the historical formula. `stratum_fs` uses a random factor smooth by stratum
 #' plus a dataset random intercept. `stratum_by` is a non-`fs` comparator.
+#' `stratum_fs_dataset_slope` adds a dataset-specific linear age effect.
+#' `stratum_fs_dataset_fs` adds dataset-specific factor smooths.
+#' `within_stratum_dataset_intercept`, `within_stratum_dataset_slope`, and
+#' `within_stratum_dataset_fs` are profiles for separate models fitted within
+#' one region-climatezone stratum.
 #' @param stratum_var Character scalar stratum variable name.
 #' @param stratum_k Integer basis dimension for stratum smooths.
+#' @param group_k Integer basis dimension for dataset-level factor smooths.
 #' @return Character scalar formula.
 get_hgam_formula <- function(
   x_var = "age",
@@ -27,9 +33,19 @@ get_hgam_formula <- function(
   sel_m = NULL,
   n_groups = NULL,
   common_trend = TRUE,
-  model_profile = c("dataset_smooth", "stratum_fs", "stratum_by"),
+  model_profile = c(
+    "dataset_smooth",
+    "stratum_fs",
+    "stratum_by",
+    "stratum_fs_dataset_slope",
+    "stratum_fs_dataset_fs",
+    "within_stratum_dataset_intercept",
+    "within_stratum_dataset_slope",
+    "within_stratum_dataset_fs"
+  ),
   stratum_var = "stratum",
-  stratum_k = 5
+  stratum_k = 5,
+  group_k = 3
 ) {
   model_profile <- match.arg(model_profile)
 
@@ -59,6 +75,13 @@ get_hgam_formula <- function(
   assertthat::assert_that(
     assertthat::is.count(stratum_k),
     msg = "'stratum_k' must be an integer"
+  )
+
+  RUtilpol::check_class("group_k", "numeric")
+
+  assertthat::assert_that(
+    assertthat::is.count(group_k),
+    msg = "'group_k' must be an integer"
   )
 
   RUtilpol::check_class("sel_m", c("NULL", "numeric"))
@@ -168,6 +191,123 @@ get_hgam_formula <- function(
         ),
         paste0("(1 | ", group_var, ")"),
         sep = " + "
+      )
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (model_profile == "stratum_fs_dataset_slope") {
+    formula_hgam <-
+      paste(
+        paste0(
+          "s(", x_var,
+          ", ", stratum_var,
+          ", bs = 'fs'",
+          ", k = ", stratum_k,
+          ")"
+        ),
+        paste0("(1 + ", x_var, " | ", group_var, ")"),
+        sep = " + "
+      )
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (model_profile == "stratum_fs_dataset_fs") {
+    formula_hgam <-
+      paste(
+        paste0(
+          "s(", x_var,
+          ", ", stratum_var,
+          ", bs = 'fs'",
+          ", k = ", stratum_k,
+          ")"
+        ),
+        paste0(
+          "s(", x_var,
+          ", ", group_var,
+          ", bs = 'fs'",
+          ", k = ", group_k,
+          ")"
+        ),
+        sep = " + "
+      )
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (model_profile == "within_stratum_dataset_intercept") {
+    formula_hgam <-
+      paste0("(1 | ", group_var, ")")
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (model_profile == "within_stratum_dataset_slope") {
+    formula_hgam <-
+      paste0("(1 + ", x_var, " | ", group_var, ")")
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (model_profile == "within_stratum_dataset_fs") {
+    formula_hgam <-
+      paste0(
+        "s(", x_var,
+        ", ", group_var,
+        ", bs = 'fs'",
+        ", k = ", group_k,
+        ")"
       )
 
     if (
