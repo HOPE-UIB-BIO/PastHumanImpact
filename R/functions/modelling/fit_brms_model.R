@@ -1,0 +1,266 @@
+#' @title Fit a temporal brms model
+#' @description
+#' Fit one temporal `brms` model either from explicit arguments or from a
+#' one-row model configuration table. Errors during fitting return `NA_real_`
+#' so lifecycle scripts can flag reruns.
+#' @param data_source Data frame with response, predictor, and grouping columns.
+#' @param model_config_row Optional one-row model configuration data frame.
+#' @param x_var Name of the predictor column.
+#' @param y_var Name of the response column.
+#' @param group_var Name of the repeated-record grouping column.
+#' @param family_key Stable family key used by `get_model_family()`.
+#' @param smooth_basis Smooth basis type (`"tp"` or `"cr"`).
+#' @param sel_k Basis dimension for the common smooth.
+#' @param sel_m Optional smooth penalty order.
+#' @param common_trend Logical. If `TRUE`, include a shared smooth.
+#' @param model_profile Formula profile used by `get_hgam_formula()`.
+#' @param stratum_var Name of region-climatezone stratum column.
+#' @param stratum_k Basis dimension for stratum smooths.
+#' @param total_iterations Integer total MCMC iterations. Used when
+#' `model_config_row` is not supplied.
+#' @param min_iterations_per_chain Integer minimum iterations per chain.
+#' @param max_chains Integer maximum number of chains.
+#' @param verbose Logical. If `TRUE`, progress messages are printed.
+#' @param ... Additional arguments passed to `brms::brm()`.
+#' @return A fitted `brmsfit` object, or `NA_real_` when fitting fails.
+#' @examples
+#' \dontrun{
+#' mod <- fit_brms_model(data_source = data_model, model_config_row = config[1, ])
+#' }
+fit_brms_model <- function(
+  data_source,
+  model_config_row = NULL,
+  x_var = "age_ka",
+  y_var = "value",
+  group_var = "dataset_id",
+  family_key = "student_identity",
+  smooth_basis = c("tp", "cr"),
+  sel_k = 8,
+  sel_m = NULL,
+  common_trend = TRUE,
+  model_profile = c("stratum_fs", "dataset_smooth", "stratum_by"),
+  stratum_var = "stratum",
+  stratum_k = 5,
+  total_iterations = 3200,
+  min_iterations_per_chain = 100,
+  max_chains = 4,
+  verbose = TRUE,
+  ...
+) {
+  assertthat::assert_that(
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
+  )
+
+  if (
+    isFALSE(is.null(model_config_row))
+  ) {
+    assertthat::assert_that(
+      is.data.frame(model_config_row),
+      nrow(model_config_row) == 1,
+      msg = "`model_config_row` must be a one-row data frame."
+    )
+
+    required_config_cols <-
+      c(
+        "variable",
+        "family_key",
+        "model_profile",
+        "x_var",
+        "y_var",
+        "group_var",
+        "stratum_var",
+        "total_iterations",
+        "min_iterations_per_chain",
+        "max_chains"
+      )
+
+    assertthat::assert_that(
+      all(required_config_cols %in% names(model_config_row)),
+      msg = "`model_config_row` is missing required config columns."
+    )
+
+    sel_variable <- model_config_row[["variable"]][1]
+    x_var <- model_config_row[["x_var"]][1]
+    y_var <- model_config_row[["y_var"]][1]
+    group_var <- model_config_row[["group_var"]][1]
+    family_key <- model_config_row[["family_key"]][1]
+    model_profile <- model_config_row[["model_profile"]][1]
+    stratum_var <- model_config_row[["stratum_var"]][1]
+    total_iterations <- model_config_row[["total_iterations"]][1]
+    min_iterations_per_chain <-
+      model_config_row[["min_iterations_per_chain"]][1]
+    max_chains <- model_config_row[["max_chains"]][1]
+
+    assertthat::assert_that(
+      all(c("variable", x_var, y_var, group_var, stratum_var) %in%
+        names(data_source)),
+      msg = "`data_source` is missing required model columns."
+    )
+
+    data_source <-
+      data_source %>%
+      dplyr::filter(variable == sel_variable)
+
+    assertthat::assert_that(
+      nrow(data_source) > 0,
+      msg = "`data_source` has no rows for the selected model variable."
+    )
+  }
+
+  model_profile <- match.arg(model_profile)
+  smooth_basis <- match.arg(smooth_basis)
+
+  assertthat::assert_that(
+    is.character(y_var),
+    length(y_var) == 1,
+    is.character(x_var),
+    length(x_var) == 1,
+    is.character(group_var),
+    length(group_var) == 1,
+    is.character(stratum_var),
+    length(stratum_var) == 1,
+    msg = "Model variable names must be character scalars."
+  )
+  assertthat::assert_that(
+    is.character(family_key),
+    length(family_key) == 1,
+    msg = "`family_key` must be a character scalar."
+  )
+  assertthat::assert_that(
+    assertthat::is.count(sel_k),
+    assertthat::is.count(stratum_k),
+    assertthat::is.count(total_iterations),
+    assertthat::is.count(min_iterations_per_chain),
+    assertthat::is.count(max_chains),
+    msg = "Smooth and iteration settings must be positive integers."
+  )
+  assertthat::assert_that(
+    is.logical(common_trend),
+    length(common_trend) == 1,
+    !is.na(common_trend),
+    msg = "`common_trend` must be TRUE or FALSE."
+  )
+  assertthat::assert_that(
+    is.logical(verbose),
+    length(verbose) == 1,
+    !is.na(verbose),
+    msg = "`verbose` must be TRUE or FALSE."
+  )
+
+  required_data_cols <-
+    if (
+      model_profile == "dataset_smooth"
+    ) {
+      c(group_var, y_var, x_var)
+    } else {
+      c(group_var, stratum_var, y_var, x_var)
+    }
+
+  assertthat::assert_that(
+    all(required_data_cols %in% names(data_source)),
+    msg = "`data_source` is missing required model columns."
+  )
+
+  data_source <-
+    data_source %>%
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::all_of(group_var),
+        as.factor
+      )
+    )
+
+  if (
+    model_profile != "dataset_smooth"
+  ) {
+    data_source <-
+      data_source %>%
+      dplyr::mutate(
+        dplyr::across(
+          dplyr::all_of(stratum_var),
+          as.factor
+        )
+      )
+  }
+
+  n_groups <-
+    data_source %>%
+    dplyr::distinct(.data[[group_var]]) %>%
+    nrow()
+
+  n_chains <-
+    min(max_chains, parallelly::availableCores())
+
+  if (
+    (total_iterations / n_chains) < min_iterations_per_chain
+  ) {
+    n_chains <-
+      max(1, floor(total_iterations / min_iterations_per_chain))
+  }
+
+  iter_per_chain <-
+    ceiling(total_iterations / n_chains)
+
+  if (
+    isTRUE(verbose)
+  ) {
+    cli::cli_inform(
+      paste(
+        "Fitting",
+        ifelse(
+          is.null(model_config_row),
+          "brms model",
+          model_config_row[["model_id"]][1]
+        ),
+        "with",
+        n_chains,
+        "chain(s)."
+      )
+    )
+  }
+
+  formula_model <-
+    get_hgam_formula(
+      y_var = y_var,
+      x_var = x_var,
+      group_var = group_var,
+      smooth_basis = smooth_basis,
+      sel_k = sel_k,
+      sel_m = sel_m,
+      n_groups = n_groups,
+      common_trend = common_trend,
+      model_profile = model_profile,
+      stratum_var = stratum_var,
+      stratum_k = stratum_k
+    )
+
+  res_model <-
+    tryCatch(
+      {
+        brms::brm(
+          formula = brms::bf(stats::as.formula(formula_model)),
+          data = data_source,
+          family = get_model_family(family_key = family_key),
+          silent = ifelse(isTRUE(verbose), 1, 2),
+          chains = n_chains,
+          cores = n_chains,
+          iter = iter_per_chain,
+          ...
+        )
+      },
+      error = function(err) {
+        if (
+          isTRUE(verbose)
+        ) {
+          cli::cli_warn(
+            paste("Model fitting failed:", conditionMessage(err))
+          )
+        }
+
+        NA_real_
+      }
+    )
+
+  return(res_model)
+}

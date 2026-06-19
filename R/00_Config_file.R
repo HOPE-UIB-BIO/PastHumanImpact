@@ -179,7 +179,7 @@ if (
 }
 
 if (dir.exists(data_storage_path)) {
-  check_storage_folders(data_storage_path)
+  check_storage_folders(data_storage_path, create_missing = TRUE)
 } else {
   warning(
     paste0(

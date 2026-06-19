@@ -65,3 +65,22 @@ testthat::test_that("get_hgam_formula validates n_groups", {
     regexp = "n_groups"
   )
 })
+
+testthat::test_that("get_hgam_formula builds a stratum fs formula", {
+  result <-
+    get_hgam_formula(
+      x_var = "age_ka",
+      y_var = "value",
+      group_var = "dataset_id",
+      stratum_var = "stratum",
+      smooth_basis = "cr",
+      sel_k = 8,
+      stratum_k = 5,
+      model_profile = "stratum_fs"
+    )
+
+  testthat::expect_identical(
+    result,
+    "value ~ s(age_ka, k = 8, bs = 'cr') + s(age_ka, stratum, bs = 'fs', k = 5) + (1 | dataset_id)"
+  )
+})

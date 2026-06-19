@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                     Predictor models
+#                  General temporal models
 #                   manual check of models
 #
 #                   O. Mottl, V.A. Felde
@@ -31,18 +31,14 @@ source(
 sel_region <- "Europe"
 sel_climatezone <- "Temperate_Dry_Summer"
 sel_variable <- "prec_summer"
+sel_model_id <- paste("predictor_temporal", sel_variable, sep = "__")
 
 mod <-
   RUtilpol::get_latest_file(
-    file_name = paste(
-      sel_variable,
-      sel_region,
-      sel_climatezone,
-      sep = "__"
-    ),
+    file_name = sel_model_id,
     dir = paste0(
       data_storage_path,
-      "Predictor_models/Mods"
+      "Temporal_models/Mods"
     ),
     verbose = TRUE
   )

@@ -203,28 +203,30 @@ source(
 
 data_predictors_raw_data <-
   RUtilpol::get_latest_file(
-    file_name = "predictor_models_data_to_fit",
+    file_name = "general_temporal_model_data",
     dir = paste0(
       data_storage_path,
-      "Predictor_models/"
+      "Temporal_models/"
     )
+  ) %>%
+  dplyr::filter(
+    analysis == "predictor_temporal"
   ) %>%
   add_climatezone_as_factor() %>%
   add_region_as_factor() %>%
   dplyr::filter(
     region != "Africa"
   ) %>%
-  tidyr::unnest(data_to_fit) %>%
   dplyr::select(
     region, climatezone, dataset_id, age, variable, value
   )
 
 mod_config_file <-
   RUtilpol::get_latest_file(
-    file_name = "predictor_models_config_table",
+    file_name = "general_model_config_table",
     dir = paste0(
       data_storage_path,
-      "Predictor_models/"
+      "Temporal_models/"
     )
   )
 

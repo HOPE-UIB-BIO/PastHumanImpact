@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                     Prediction models
+#                  General temporal models
 #
 #
 #                   O. Mottl, V.A. Felde
@@ -24,7 +24,7 @@ source(
   )
 )
 
-# Runnning the models is very computationally expensive. Therefore, we have to
+# Running the models is very computationally expensive. Therefore, we have to
 #   decide whether we want to rerun the models or not.
 rerun <- FALSE
 
@@ -38,37 +38,37 @@ if (
 ) {
   source(
     here::here(
-      "R/predictor_models/01_prepare_data.R"
+      "R/temporal_models/01_prepare_data.R"
     )
   )
 
   source(
     here::here(
-      "R/predictor_models/02_prepare_data_and_priors.R"
+      "R/temporal_models/02_prepare_data_and_priors.R"
     )
   )
 
   source(
     here::here(
-      "R/predictor_models/03_prepare_mode_config_table.R"
+      "R/temporal_models/03_prepare_model_config_table.R"
     )
   )
 
   source(
     here::here(
-      "R/predictor_models/04_run_models.R"
+      "R/temporal_models/04_run_models.R"
     )
   )
 
   source(
     here::here(
-      "R/predictor_models/05_Evaluate_models.R"
+      "R/temporal_models/05_evaluate_models.R"
     )
   )
 
   source(
     here::here(
-      "R/predictor_models/06_Predict_general_trends.R"
+      "R/temporal_models/06_predict_general_trends.R"
     )
   )
 }

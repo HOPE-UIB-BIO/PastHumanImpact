@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#                     Predictor models
+#                  General temporal models
 #                 manual check of prediction
 #
 #                   O. Mottl, V.A. Felde
@@ -26,6 +26,7 @@ source(
 sel_region <- "Europe"
 sel_climatezone <- "Cold_Without_dry_season_Warm_Summer"
 sel_variable <- "temp_annual"
+sel_model_id <- paste("predictor_temporal", sel_variable, sep = "__")
 
 
 #----------------------------------------------------------#
@@ -33,33 +34,43 @@ sel_variable <- "temp_annual"
 #----------------------------------------------------------#
 
 # raw data
-sel_raw_data <-
+data_general_model <-
   RUtilpol::get_latest_file(
-    file_name = "predictor_models_data_to_fit",
+    file_name = "general_temporal_model_data",
     dir = paste0(
       data_storage_path,
-      "Predictor_models/"
+      "Temporal_models/"
+    )
+  )
+
+sel_raw_data <-
+  data_general_model %>%
+  dplyr::filter(
+    analysis == "predictor_temporal" &
+      region == sel_region &
+      climatezone == sel_climatezone &
+      variable == sel_variable
+  )
+
+sel_mod_config <-
+  RUtilpol::get_latest_file(
+    file_name = "general_model_config_table",
+    dir = paste0(
+      data_storage_path,
+      "Temporal_models/"
     )
   ) %>%
   dplyr::filter(
-    region == sel_region &
-      climatezone == sel_climatezone &
-      variable == sel_variable
-  ) %>%
-  purrr::chuck("data_to_fit", 1)
+    model_id == sel_model_id
+  )
 
 # load the model
 sel_mod <-
   RUtilpol::get_latest_file(
-    file_name = paste(
-      sel_variable,
-      sel_region,
-      sel_climatezone,
-      sep = "__"
-    ),
+    file_name = sel_model_id,
     dir = paste0(
       data_storage_path,
-      "Predictor_models/Mods"
+      "Temporal_models/Mods"
     ),
     verbose = TRUE
   )
@@ -69,12 +80,29 @@ sel_mod <-
 # 2. predict general trend -----
 #----------------------------------------------------------#
 
+data_new <-
+  get_model_newdata(
+    data_source = data_general_model,
+    model_config_row = sel_mod_config
+  ) %>%
+  dplyr::filter(
+    region == sel_region &
+      climatezone == sel_climatezone
+  )
+
 data_predicted <-
-  predict_brms_model(sel_mod) %>%
-  dplyr::select(-group) %>%
-  round(., digits = 8) %>%
-  tibble::as_tibble() %>%
-  janitor::clean_names()
+  predict_brms_model(
+    mod = sel_mod,
+    newdata = data_new,
+    model_config_row = sel_mod_config
+  ) %>%
+  dplyr::mutate(
+    value = estimate,
+    dplyr::across(
+      dplyr::where(is.numeric),
+      ~ round(.x, digits = 8)
+    )
+  )
 
 
 #----------------------------------------------------------#

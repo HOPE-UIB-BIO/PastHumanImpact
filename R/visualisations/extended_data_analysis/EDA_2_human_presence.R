@@ -898,10 +898,10 @@ purrr::walk(
 
 mod_config_file <-
   RUtilpol::get_latest_file(
-    file_name = "predictor_models_config_table",
+    file_name = "general_model_config_table",
     dir = paste0(
       data_storage_path,
-      "Predictor_models/"
+      "Temporal_models/"
     )
   )
 
@@ -913,10 +913,10 @@ data_general_tredns_events_raw <-
 
 data_general_tredns_constant <-
   RUtilpol::get_latest_file(
-    file_name = "predictor_models_data_constant",
+    file_name = "temporal_model_data_constant",
     dir = paste0(
       data_storage_path,
-      "Predictor_models/"
+      "Temporal_models/"
     )
   )
 

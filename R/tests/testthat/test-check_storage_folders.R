@@ -8,8 +8,8 @@ testthat::test_that("check_storage_folders() accepts expected tree", {
       "C14",
       "Climate",
       "Events",
-      "Predictor_models",
-      "Predictor_models/General_trends",
+      "Temporal_models",
+      "Temporal_models/General_trends",
       "Spatial",
       "Spatial/Climatezones",
       "Spatial/Regions_shapefile",
@@ -50,6 +50,21 @@ testthat::test_that("check_storage_folders() errors when required folder is miss
   )
 })
 
+testthat::test_that("check_storage_folders() can create missing expected folders", {
+  root_dir <-
+    file.path(tempdir(), "storage-check-create")
+
+  dir.create(root_dir, recursive = TRUE, showWarnings = FALSE)
+
+  testthat::expect_silent(
+    check_storage_folders(root_dir, create_missing = TRUE)
+  )
+
+  testthat::expect_true(
+    dir.exists(file.path(root_dir, "Temporal_models", "General_trends"))
+  )
+})
+
 testthat::test_that("check_storage_folders() errors for non-existing root", {
   path_missing <-
     file.path(tempdir(), "does-not-exist", "nested")
@@ -64,5 +79,12 @@ testthat::test_that("check_storage_folders() validates path input type", {
   testthat::expect_error(
     check_storage_folders(path = 123),
     regexp = "single character"
+  )
+})
+
+testthat::test_that("check_storage_folders() validates create_missing input type", {
+  testthat::expect_error(
+    check_storage_folders(path = tempdir(), create_missing = "yes"),
+    regexp = "single logical"
   )
 })

@@ -13,7 +13,8 @@ Main project areas:
 - `R/main_analysis/` - ordered analysis scripts used by `R/01_run_project.R`
 - `R/target_pipelines/` - `{targets}` pipeline definitions
 - `R/functions/` - reusable project functions
-- `R/predictor_models/` - model preparation, fitting, checks, and prediction
+- `R/temporal_models/` - temporal model preparation, fitting, checks, and
+  prediction
 - `R/spd_calculation/` - radiocarbon SPD calculation scripts
 - `R/visualisations/` - manuscript and exploratory figures
 

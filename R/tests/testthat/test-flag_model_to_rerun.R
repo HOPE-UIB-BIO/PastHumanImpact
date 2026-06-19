@@ -8,7 +8,7 @@ testthat::test_that("flag_model_to_rerun() updates selected row and saves table"
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -51,8 +51,8 @@ testthat::test_that("flag_model_to_rerun() updates selected row and saves table"
 
   saved <-
     RUtilpol::get_latest_file(
-      file_name = "predictor_models_config_table",
-      dir = paste0(temp_storage_root_unix, "/Predictor_models"),
+      file_name = "general_model_config_table",
+      dir = paste0(temp_storage_root_unix, "/Temporal_models"),
       verbose = FALSE
     )
 
@@ -70,7 +70,7 @@ testthat::test_that("flag_model_to_rerun() leaves unmatched rows unchanged", {
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -113,8 +113,8 @@ testthat::test_that("flag_model_to_rerun() leaves unmatched rows unchanged", {
 
   saved <-
     RUtilpol::get_latest_file(
-      file_name = "predictor_models_config_table",
-      dir = paste0(temp_storage_root_unix, "/Predictor_models"),
+      file_name = "general_model_config_table",
+      dir = paste0(temp_storage_root_unix, "/Temporal_models"),
       verbose = FALSE
     )
 
@@ -132,7 +132,7 @@ testthat::test_that("flag_model_to_rerun() writes one saved table", {
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -175,8 +175,8 @@ testthat::test_that("flag_model_to_rerun() writes one saved table", {
 
   files_saved <-
     list.files(
-      path = file.path(temp_storage_root, "Predictor_models"),
-      pattern = "predictor_models_config_table",
+      path = file.path(temp_storage_root, "Temporal_models"),
+      pattern = "general_model_config_table",
       full.names = FALSE
     )
 
@@ -202,5 +202,33 @@ testthat::test_that("flag_model_to_rerun() validates required columns", {
       sel_variable = "temp_annual"
     ),
     regexp = "required model config columns"
+  )
+})
+
+testthat::test_that("flag_model_to_rerun() supports model_id configs", {
+  data_source <-
+    data.frame(
+      model_id = c("pap_temporal__n0", "pap_temporal__roc"),
+      need_to_be_evaluated = c(TRUE, TRUE),
+      need_to_run = c(FALSE, FALSE),
+      last_evaluation_date = c("2020-01-01", "2020-01-01"),
+      stringsAsFactors = FALSE
+    )
+
+  result <-
+    flag_model_to_rerun(
+      data_source = data_source,
+      sel_model_id = "pap_temporal__n0",
+      save_table = FALSE
+    )
+
+  testthat::expect_identical(
+    result[["need_to_be_evaluated"]],
+    c(FALSE, TRUE)
+  )
+  testthat::expect_identical(result[["need_to_run"]], c(TRUE, FALSE))
+  testthat::expect_equal(
+    as.Date(result[["last_evaluation_date"]][1]),
+    Sys.Date()
   )
 })

@@ -23,7 +23,7 @@ This file tracks the project-wide test rollout for the `testthat` suite under `R
 - `get_chelsa_download`: input contract hardened for required download metadata columns and control argument types; new per-function tests added for invalid-input coverage.
 - `get_climate_data`: input contract hardened for selected-variable vectors and required coordinate columns in `xy`; new per-function tests added for invalid-input coverage.
 - `get_events_spd_combined`: contract expanded (including roxygen params/return) with required input-shape validation; new per-function tests added for invalid-input coverage.
-- `fit_brms_hgam`: roxygen contract added to document modelling intent, arguments, and failure return behavior.
+- `fit_brms_model`: roxygen contract added to document modelling intent, arguments, and failure return behavior.
 - `get_density_pap_combined`: input contract hardened for required source/meta/dummy-time columns and logical controls; tests expanded with explicit invalid-input coverage.
 - `get_data_m2`: roxygen contract added, input contract hardened for source/meta shape and nested payloads, and a new per-function test file added with happy-path and invalid-input coverage.
 - `run_pca`: input contract hardened for source table shape and `scale` flag, roxygen contract expanded, tests expanded with explicit invalid-input coverage.
