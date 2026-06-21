@@ -63,7 +63,7 @@ model_config_table <-
     analysis = "general_temporal",
     family_key = family_key_by_model,
     engine = "brms",
-    model_profile = "stratum_fs",
+    model_profile = "within_stratum_dataset_fs",
     age_min = 0,
     age_max = 8500,
     timestep = 500,
@@ -78,8 +78,16 @@ model_config_table <-
   ) %>%
   dplyr::left_join(
     data_model_specs %>%
-      dplyr::select(analysis, model_id, variable, engine, model_profile),
-    by = c("analysis", "model_id", "variable")
+      dplyr::select(
+        analysis,
+        model_id,
+        variable,
+        region,
+        climatezone,
+        engine,
+        model_profile
+      ),
+    by = c("analysis", "model_id", "variable", "region", "climatezone")
   ) %>%
   dplyr::relocate(engine, model_profile, .after = family_key)
 
@@ -99,8 +107,30 @@ config_exists <-
   is.na() %>%
   isFALSE()
 
+config_needs_refresh <- FALSE
+
 if (
-  isTRUE(overwrite_table) || isFALSE(config_exists)
+  isTRUE(config_exists)
+) {
+  config_current <-
+    RUtilpol::get_latest_file(
+      file_name = "general_model_config_table",
+      dir = paste0(
+        data_storage_path,
+        "Temporal_models/"
+      ),
+      verbose = FALSE
+    )
+
+  config_needs_refresh <-
+    !all(c("output_id", "region", "climatezone") %in% names(config_current)) ||
+    !setequal(config_current[["model_id"]], model_config_table[["model_id"]])
+}
+
+if (
+  isTRUE(overwrite_table) ||
+    isFALSE(config_exists) ||
+    isTRUE(config_needs_refresh)
 ) {
   RUtilpol::save_latest_file(
     object_to_save = model_config_table,

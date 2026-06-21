@@ -43,10 +43,10 @@ data_general_model <-
 
 data_model_specs <-
   data_general_model %>%
-  dplyr::distinct(analysis, variable) %>%
+  dplyr::distinct(analysis, variable, region, climatezone) %>%
   dplyr::mutate(
     engine = "brms",
-    model_profile = "stratum_fs",
+    model_profile = "within_stratum_dataset_fs",
     family_key = purrr::map2_chr(
       .x = variable,
       .y = analysis,
@@ -55,7 +55,16 @@ data_model_specs <-
         analysis = .y
       )
     ),
-    model_id = stringr::str_c(analysis, variable, sep = "__"),
+    output_id = stringr::str_c(
+      analysis,
+      variable,
+      region,
+      climatezone,
+      sep = "__"
+    ) %>%
+      stringr::str_replace_all("[^A-Za-z0-9_]+", "_") %>%
+      stringr::str_replace_all("^_|_$", ""),
+    model_id = output_id,
     formula_text = purrr::pmap_chr(
       .l = list(model_profile),
       .f = ~ get_hgam_formula(
@@ -66,20 +75,24 @@ data_model_specs <-
         stratum_var = "stratum",
         smooth_basis = "cr",
         sel_k = 8,
-        stratum_k = 5
+        stratum_k = 5,
+        group_k = 3
       )
     )
   ) %>%
   dplyr::select(
     analysis,
     model_id,
+    output_id,
     variable,
+    region,
+    climatezone,
     family_key,
     engine,
     model_profile,
     formula_text
   ) %>%
-  dplyr::arrange(analysis, variable)
+  dplyr::arrange(analysis, variable, region, climatezone)
 
 
 #----------------------------------------------------------#
