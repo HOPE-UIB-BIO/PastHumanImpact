@@ -13,7 +13,19 @@ testthat::test_that("get_default_model_family_key() maps model classes", {
   )
   testthat::expect_identical(
     get_default_model_family_key("n0", "pap_temporal"),
-    "student_identity"
+    "gamma_log"
+  )
+  testthat::expect_identical(
+    get_default_model_family_key("n1_minus_n2", "pap_temporal"),
+    "hurdle_gamma_log"
+  )
+  testthat::expect_identical(
+    get_default_model_family_key("dcca_axis_1", "pap_temporal"),
+    "hurdle_gamma_log"
+  )
+  testthat::expect_identical(
+    get_default_model_family_key("density_diversity", "pap_temporal"),
+    "zero_one_inflated_beta_logit"
   )
 })
 

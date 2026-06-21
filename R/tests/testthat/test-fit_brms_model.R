@@ -38,6 +38,26 @@ testthat::test_that("fit_brms_model() validates integer sel_k", {
   )
 })
 
+testthat::test_that("fit_brms_model() validates adapt_delta", {
+  data_source <-
+    data.frame(
+      dataset_id = c("d1", "d1", "d2"),
+      stratum = c("s1", "s1", "s1"),
+      age_ka = c(0, 1, 0),
+      value = c(1.0, 1.5, 2.0),
+      stringsAsFactors = FALSE
+    )
+
+  testthat::expect_error(
+    fit_brms_model(
+      data_source = data_source,
+      adapt_delta = 1.5,
+      verbose = FALSE
+    ),
+    regexp = "adapt_delta"
+  )
+})
+
 testthat::test_that("fit_brms_model() returns NA when model fitting fails", {
   data_source <-
     data.frame(
@@ -91,6 +111,8 @@ testthat::test_that("fit_brms_model() accepts a config row", {
       total_iterations = 100,
       min_iterations_per_chain = 100,
       max_chains = 1,
+      adapt_delta = 0.9,
+      max_treedepth = 10,
       stringsAsFactors = FALSE
     )
 

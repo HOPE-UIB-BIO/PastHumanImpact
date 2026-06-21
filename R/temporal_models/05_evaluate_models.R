@@ -95,7 +95,8 @@ purrr::walk(
         pareto_k_threshold = pareto_k_threshold,
         loo_threshold = loo_threshold,
         rhat_threshold = rhat_threshold,
-        rhat_threshold_quantile = rhat_threshold_quantile
+        rhat_threshold_quantile = rhat_threshold_quantile,
+        max_treedepth_threshold = sel_mod_config[["max_treedepth"]][1]
       )
 
     models_to_run_updated <-
@@ -110,6 +111,31 @@ purrr::walk(
           .default = last_run_rhat_test_value,
           model_id == sel_model_id ~
             model_diagnostics[["last_run_rhat_test_value"]][1]
+        ),
+        last_run_rhat_q90 = dplyr::case_when(
+          .default = last_run_rhat_q90,
+          model_id == sel_model_id ~
+            model_diagnostics[["last_run_rhat_q90"]][1]
+        ),
+        last_run_rhat_max = dplyr::case_when(
+          .default = last_run_rhat_max,
+          model_id == sel_model_id ~
+            model_diagnostics[["last_run_rhat_max"]][1]
+        ),
+        last_run_neff_ratio_min = dplyr::case_when(
+          .default = last_run_neff_ratio_min,
+          model_id == sel_model_id ~
+            model_diagnostics[["last_run_neff_ratio_min"]][1]
+        ),
+        last_run_divergent_transitions = dplyr::case_when(
+          .default = last_run_divergent_transitions,
+          model_id == sel_model_id ~
+            model_diagnostics[["last_run_divergent_transitions"]][1]
+        ),
+        last_run_max_treedepth_transitions = dplyr::case_when(
+          .default = last_run_max_treedepth_transitions,
+          model_id == sel_model_id ~
+            model_diagnostics[["last_run_max_treedepth_transitions"]][1]
         ),
         last_run_loo_test_pass = dplyr::case_when(
           .default = last_run_loo_test_pass,

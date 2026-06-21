@@ -6,6 +6,17 @@ testthat::test_that("get_model_family() returns known families", {
   testthat::expect_true(inherits(result, "family"))
   testthat::expect_identical(result[["family"]], "student")
   testthat::expect_identical(result[["link"]], "identity")
+
+  result_gamma <- get_model_family("gamma_log")
+  result_beta <- get_model_family("zero_one_inflated_beta_logit")
+
+  testthat::expect_identical(result_gamma[["family"]], "gamma")
+  testthat::expect_identical(result_gamma[["link"]], "log")
+  testthat::expect_identical(
+    result_beta[["family"]],
+    "zero_one_inflated_beta"
+  )
+  testthat::expect_identical(result_beta[["link"]], "logit")
 })
 
 testthat::test_that("get_model_family() rejects unknown keys", {

@@ -78,8 +78,23 @@ purrr::walk(
       models_config_current %>%
       dplyr::filter(model_id == sel_model_id)
 
+    sel_mod_file_exists <-
+      RUtilpol::get_latest_file_name(
+        file_name = sel_model_id,
+        dir = paste0(
+          data_storage_path,
+          "Temporal_models/Mods"
+        )
+      ) %>%
+      is.na() %>%
+      isFALSE()
+
     if (
-      isFALSE(sel_mod_config[["need_to_run"]][1])
+      isFALSE(sel_mod_config[["need_to_run"]][1]) &&
+        !(
+          isTRUE(sel_mod_config[["need_to_be_evaluated"]][1]) &&
+            isFALSE(sel_mod_file_exists)
+        )
     ) {
       return()
     }
@@ -97,11 +112,24 @@ purrr::walk(
       fit_brms_model(
         data_source = data_general_model,
         model_config_row = sel_mod_config,
-        verbose = TRUE,
-        control = list(adapt_delta = 0.9)
+        verbose = TRUE
       )
 
     time_mod_end <- Sys.time()
+
+    if (
+      !all(is.na(mod))
+    ) {
+      RUtilpol::save_latest_file(
+        object_to_save = mod,
+        file_name = sel_model_id,
+        dir = paste0(
+          data_storage_path,
+          "Temporal_models/Mods"
+        ),
+        prefered_format = "qs"
+      )
+    }
 
     models_to_run_updated <-
       RUtilpol::get_latest_file(
@@ -154,15 +182,5 @@ purrr::walk(
       prefered_format = "csv"
     )
 
-    RUtilpol::save_latest_file(
-      object_to_save = mod,
-      file_name = sel_model_id,
-      dir = paste0(
-        data_storage_path,
-        "Temporal_models/Mods"
-      ),
-      prefered_format = "qs",
-      preset = "archive"
-    )
   }
 )

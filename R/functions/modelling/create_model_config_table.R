@@ -15,6 +15,15 @@
 #' @param total_iterations Integer total MCMC iterations.
 #' @param min_iterations_per_chain Integer minimum iterations per chain.
 #' @param max_chains Integer maximum number of chains.
+#' @param adapt_delta Numeric target average proposal acceptance probability.
+#' @param max_treedepth Integer maximum NUTS tree depth.
+#' @param large_model_min_records Integer record threshold for large-model
+#' sampling settings.
+#' @param large_model_total_iterations Integer total MCMC iterations for large
+#' models.
+#' @param large_model_adapt_delta Numeric `adapt_delta` for large models.
+#' @param large_model_max_treedepth Integer maximum NUTS tree depth for large
+#' models.
 #' @return Tibble with general model lifecycle fields.
 #' @examples
 #' \dontrun{
@@ -32,7 +41,13 @@ create_model_config_table <- function(
   min_records = min_n_records_per_climate_zone,
   total_iterations = 3200,
   min_iterations_per_chain = 100,
-  max_chains = 4
+  max_chains = 4,
+  adapt_delta = 0.9,
+  max_treedepth = 10,
+  large_model_min_records = 100,
+  large_model_total_iterations = 6400,
+  large_model_adapt_delta = 0.95,
+  large_model_max_treedepth = 12
 ) {
   assertthat::assert_that(
     is.data.frame(data_model),
@@ -67,7 +82,22 @@ create_model_config_table <- function(
     assertthat::is.count(min_iterations_per_chain),
     assertthat::is.count(max_chains),
     assertthat::is.count(min_records),
+    assertthat::is.count(max_treedepth),
+    assertthat::is.count(large_model_min_records),
+    assertthat::is.count(large_model_total_iterations),
+    assertthat::is.count(large_model_max_treedepth),
     msg = "Iteration, chain, and record settings must be positive integers."
+  )
+  assertthat::assert_that(
+    is.numeric(adapt_delta),
+    length(adapt_delta) == 1,
+    adapt_delta > 0,
+    adapt_delta < 1,
+    is.numeric(large_model_adapt_delta),
+    length(large_model_adapt_delta) == 1,
+    large_model_adapt_delta > 0,
+    large_model_adapt_delta < 1,
+    msg = "`adapt_delta` values must be numeric scalars between 0 and 1."
   )
 
   if (
@@ -147,15 +177,34 @@ create_model_config_table <- function(
       age_max = age_max,
       timestep = timestep,
       min_records = min_records,
-      total_iterations = total_iterations,
+      total_iterations = dplyr::if_else(
+        n_records >= large_model_min_records,
+        large_model_total_iterations,
+        total_iterations
+      ),
       min_iterations_per_chain = min_iterations_per_chain,
       max_chains = max_chains,
+      adapt_delta = dplyr::if_else(
+        n_records >= large_model_min_records,
+        large_model_adapt_delta,
+        adapt_delta
+      ),
+      max_treedepth = dplyr::if_else(
+        n_records >= large_model_min_records,
+        large_model_max_treedepth,
+        max_treedepth
+      ),
       last_run_date = NA_character_,
       last_run_start_time = NA_character_,
       last_run_end_time = NA_character_,
       last_run_time = NA_character_,
       last_run_rhat_test_pass = FALSE,
       last_run_rhat_test_value = NA_real_,
+      last_run_rhat_q90 = NA_real_,
+      last_run_rhat_max = NA_real_,
+      last_run_neff_ratio_min = NA_real_,
+      last_run_divergent_transitions = NA_integer_,
+      last_run_max_treedepth_transitions = NA_integer_,
       last_run_loo_test_pass = FALSE,
       last_run_loo_test_value = NA_real_,
       need_to_run = TRUE,
@@ -187,6 +236,8 @@ create_model_config_table <- function(
       total_iterations,
       min_iterations_per_chain,
       max_chains,
+      adapt_delta,
+      max_treedepth,
       dplyr::everything()
     ) %>%
     dplyr::arrange(analysis, variable)

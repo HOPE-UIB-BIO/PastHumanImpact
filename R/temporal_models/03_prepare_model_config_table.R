@@ -70,7 +70,13 @@ model_config_table <-
     min_records = min_n_records_per_climate_zone,
     total_iterations = 3200,
     min_iterations_per_chain = 100,
-    max_chains = 4
+    max_chains = 4,
+    adapt_delta = 0.9,
+    max_treedepth = 10,
+    large_model_min_records = 100,
+    large_model_total_iterations = 6400,
+    large_model_adapt_delta = 0.95,
+    large_model_max_treedepth = 12
   ) %>%
   dplyr::select(
     -engine,
@@ -108,6 +114,31 @@ config_exists <-
   isFALSE()
 
 config_needs_refresh <- FALSE
+config_current <- NULL
+
+model_definition_cols <-
+  c(
+    "model_id",
+    "variable",
+    "region",
+    "climatezone",
+    "family_key",
+    "engine",
+    "model_profile",
+    "x_var",
+    "y_var",
+    "group_var",
+    "stratum_var",
+    "age_min",
+    "age_max",
+    "timestep",
+    "min_records",
+    "total_iterations",
+    "min_iterations_per_chain",
+    "max_chains",
+    "adapt_delta",
+    "max_treedepth"
+  )
 
 if (
   isTRUE(config_exists)
@@ -122,9 +153,96 @@ if (
       verbose = FALSE
     )
 
+  if (
+    !"adapt_delta" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        adapt_delta = 0.9
+      )
+  }
+
+  if (
+    !"max_treedepth" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        max_treedepth = 10
+      )
+  }
+
+  if (
+    !"last_run_rhat_q90" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        last_run_rhat_q90 = NA_real_
+      )
+  }
+
+  if (
+    !"last_run_rhat_max" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        last_run_rhat_max = NA_real_
+      )
+  }
+
+  if (
+    !"last_run_neff_ratio_min" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        last_run_neff_ratio_min = NA_real_
+      )
+  }
+
+  if (
+    !"last_run_divergent_transitions" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        last_run_divergent_transitions = NA_integer_
+      )
+  }
+
+  if (
+    !"last_run_max_treedepth_transitions" %in% names(config_current)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        last_run_max_treedepth_transitions = NA_integer_
+      )
+  }
+
   config_needs_refresh <-
     !all(c("output_id", "region", "climatezone") %in% names(config_current)) ||
+    !all(model_definition_cols %in% names(config_current)) ||
     !setequal(config_current[["model_id"]], model_config_table[["model_id"]])
+
+  if (
+    isFALSE(config_needs_refresh)
+  ) {
+    config_needs_refresh <-
+      isFALSE(
+        identical(
+          config_current %>%
+            dplyr::select(dplyr::all_of(model_definition_cols)) %>%
+            dplyr::arrange(model_id),
+          model_config_table %>%
+            dplyr::select(dplyr::all_of(model_definition_cols)) %>%
+            dplyr::arrange(model_id)
+        )
+      )
+  }
 }
 
 if (
@@ -132,6 +250,118 @@ if (
     isFALSE(config_exists) ||
     isTRUE(config_needs_refresh)
 ) {
+  if (
+    isTRUE(config_exists) &&
+      all(model_definition_cols %in% names(config_current)) &&
+      all(model_definition_cols %in% names(model_config_table))
+  ) {
+    model_definition_current <-
+      config_current %>%
+      dplyr::select(dplyr::all_of(model_definition_cols)) %>%
+      dplyr::mutate(
+        model_definition = do.call(
+          paste,
+          c(
+            dplyr::across(dplyr::everything()),
+            sep = "\r"
+          )
+        )
+      ) %>%
+      dplyr::select(model_id, model_definition_current = model_definition)
+
+    model_definition_new <-
+      model_config_table %>%
+      dplyr::select(dplyr::all_of(model_definition_cols)) %>%
+      dplyr::mutate(
+        model_definition = do.call(
+          paste,
+          c(
+            dplyr::across(dplyr::everything()),
+            sep = "\r"
+          )
+        )
+      ) %>%
+      dplyr::select(model_id, model_definition_new = model_definition)
+
+    model_ids_changed <-
+      model_definition_new %>%
+      dplyr::left_join(
+        model_definition_current,
+        by = "model_id"
+      ) %>%
+      dplyr::filter(
+        is.na(model_definition_current) |
+          model_definition_new != model_definition_current
+      ) %>%
+      dplyr::pull(model_id)
+
+    lifecycle_cols <-
+      c(
+        "last_run_date",
+        "last_run_start_time",
+        "last_run_end_time",
+        "last_run_time",
+        "last_run_rhat_test_pass",
+        "last_run_rhat_test_value",
+        "last_run_rhat_q90",
+        "last_run_rhat_max",
+        "last_run_neff_ratio_min",
+        "last_run_divergent_transitions",
+        "last_run_max_treedepth_transitions",
+        "last_run_loo_test_pass",
+        "last_run_loo_test_value",
+        "need_to_run",
+        "need_to_be_evaluated",
+        "last_evaluation_date",
+        "prediction_written",
+        "last_prediction_date"
+      )
+
+    lifecycle_cols <-
+      lifecycle_cols[
+        lifecycle_cols %in% names(config_current) &
+          lifecycle_cols %in% names(model_config_table)
+      ]
+
+    config_lifecycle_current <-
+      config_current %>%
+      dplyr::select(model_id, dplyr::all_of(lifecycle_cols)) %>%
+      dplyr::rename_with(
+        .fn = ~ paste0(.x, "_current"),
+        .cols = -model_id
+      )
+
+    model_config_table <-
+      model_config_table %>%
+      dplyr::left_join(
+        config_lifecycle_current,
+        by = "model_id"
+      )
+
+    for (
+      lifecycle_col in lifecycle_cols
+    ) {
+      lifecycle_col_current <-
+        paste0(
+          lifecycle_col,
+          "_current"
+        )
+
+      use_current_value <-
+        !(model_config_table[["model_id"]] %in% model_ids_changed) &
+          !is.na(model_config_table[[lifecycle_col_current]])
+
+      model_config_table[[lifecycle_col]][use_current_value] <-
+        model_config_table[[lifecycle_col_current]][use_current_value]
+    }
+
+    model_config_table <-
+      model_config_table %>%
+      dplyr::select(
+        -dplyr::ends_with("_current")
+      )
+  }
+
   RUtilpol::save_latest_file(
     object_to_save = model_config_table,
     file_name = "general_model_config_table",

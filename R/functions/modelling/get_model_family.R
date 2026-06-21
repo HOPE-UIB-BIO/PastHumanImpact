@@ -6,7 +6,8 @@
 #' @return A family object accepted by `brms::brm()`.
 #' @details
 #' Supported keys are `gaussian_identity`, `student_identity`,
-#' `bernoulli_logit`, and `hurdle_gamma_log`.
+#' `bernoulli_logit`, `gamma_log`, `hurdle_gamma_log`, and
+#' `zero_one_inflated_beta_logit`.
 #' @examples
 #' \dontrun{
 #' family_object <- get_model_family("student_identity")
@@ -30,7 +31,10 @@ get_model_family <- function(family_key) {
       gaussian_identity = stats::gaussian(link = "identity"),
       student_identity = brms::student(link = "identity"),
       bernoulli_logit = brms::bernoulli(link = "logit"),
+      gamma_log = brms::brmsfamily("Gamma", link = "log"),
       hurdle_gamma_log = brms::hurdle_gamma(link = "log"),
+      zero_one_inflated_beta_logit =
+        brms::brmsfamily("zero_one_inflated_beta", link = "logit"),
       NULL
     )
 

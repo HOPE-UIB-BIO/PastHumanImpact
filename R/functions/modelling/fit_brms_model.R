@@ -21,6 +21,10 @@
 #' `model_config_row` is not supplied.
 #' @param min_iterations_per_chain Integer minimum iterations per chain.
 #' @param max_chains Integer maximum number of chains.
+#' @param adapt_delta Numeric target average proposal acceptance probability.
+#' @param max_treedepth Integer maximum NUTS tree depth.
+#' @param control Optional list passed to the `control` argument of
+#' `brms::brm()`. Explicit values override `adapt_delta` and `max_treedepth`.
 #' @param verbose Logical. If `TRUE`, progress messages are printed.
 #' @param ... Additional arguments passed to `brms::brm()`.
 #' @return A fitted `brmsfit` object, or `NA_real_` when fitting fails.
@@ -55,6 +59,9 @@ fit_brms_model <- function(
   total_iterations = 3200,
   min_iterations_per_chain = 100,
   max_chains = 4,
+  adapt_delta = 0.9,
+  max_treedepth = 10,
+  control = NULL,
   verbose = TRUE,
   ...
 ) {
@@ -83,7 +90,9 @@ fit_brms_model <- function(
         "stratum_var",
         "total_iterations",
         "min_iterations_per_chain",
-        "max_chains"
+        "max_chains",
+        "adapt_delta",
+        "max_treedepth"
       )
 
     assertthat::assert_that(
@@ -102,6 +111,8 @@ fit_brms_model <- function(
     min_iterations_per_chain <-
       model_config_row[["min_iterations_per_chain"]][1]
     max_chains <- model_config_row[["max_chains"]][1]
+    adapt_delta <- model_config_row[["adapt_delta"]][1]
+    max_treedepth <- model_config_row[["max_treedepth"]][1]
     if (
       "group_k" %in% names(model_config_row)
     ) {
@@ -161,7 +172,19 @@ fit_brms_model <- function(
     assertthat::is.count(total_iterations),
     assertthat::is.count(min_iterations_per_chain),
     assertthat::is.count(max_chains),
+    assertthat::is.count(max_treedepth),
     msg = "Smooth and iteration settings must be positive integers."
+  )
+  assertthat::assert_that(
+    is.numeric(adapt_delta),
+    length(adapt_delta) == 1,
+    adapt_delta > 0,
+    adapt_delta < 1,
+    msg = "`adapt_delta` must be a numeric scalar between 0 and 1."
+  )
+  assertthat::assert_that(
+    is.null(control) || is.list(control),
+    msg = "`control` must be NULL or a list."
   )
   assertthat::assert_that(
     is.logical(common_trend),
@@ -264,6 +287,21 @@ fit_brms_model <- function(
       group_k = group_k
     )
 
+  brms_control <-
+    utils::modifyList(
+      x = list(
+        adapt_delta = adapt_delta,
+        max_treedepth = max_treedepth
+      ),
+      val = if (
+        is.null(control)
+      ) {
+        list()
+      } else {
+        control
+      }
+    )
+
   res_model <-
     tryCatch(
       {
@@ -275,6 +313,7 @@ fit_brms_model <- function(
           chains = n_chains,
           cores = n_chains,
           iter = iter_per_chain,
+          control = brms_control,
           ...
         )
       },
