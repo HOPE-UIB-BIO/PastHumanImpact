@@ -80,16 +80,16 @@ and PAPs.
 
 **Tasks:**
 
-- [ ] Add a general model-spec table with fields for `analysis`, `variable`,
+- [x] Add a general model-spec table with fields for `analysis`, `variable`,
   `region`, `climatezone`, `family_key`, `engine`, `model_profile`, age limits,
   minimum records, run flags, evaluation flags, diagnostics, paths, and output
   IDs.
-- [ ] Replace string families plus `eval(parse())` with a tested family-mapping
+- [x] Replace string families plus `eval(parse())` with a tested family-mapping
   function.
-- [ ] Refactor `get_hgam_formula()` into the shared formula-string engine.
-- [ ] Generalise model running, evaluation, rerun flagging, and prediction
+- [x] Refactor `get_hgam_formula()` into the shared formula-string engine.
+- [x] Generalise model running, evaluation, rerun flagging, and prediction
   extraction so PAPs use the same lifecycle as existing predictor/event models.
-- [ ] Keep existing predictor/event behaviour readable during transition; avoid
+- [x] Keep existing predictor/event behaviour readable during transition; avoid
   breaking current saved outputs unnecessarily.
 
 **Validation:**
@@ -106,11 +106,11 @@ trajectories.
 
 **Tasks:**
 
-- [ ] Build PAP model input from `data_properties`, joined to metadata.
-- [ ] Include all PAPs: `n0`, `n1`, `n2`, `n1_minus_n2`,
+- [x] Build PAP model input from `data_properties`, joined to metadata.
+- [x] Include all PAPs: `n0`, `n1`, `n2`, `n1_minus_n2`,
   `n2_divided_by_n1`, `n1_divided_by_n0`, `roc`, `dcca_axis_1`,
   `density_diversity`, `density_turnover`.
-- [ ] Filter to the agreed temporal range, exclude Africa, and apply
+- [x] Filter to the agreed temporal range, exclude Africa, and apply
   `min_n_records_per_climate_zone`.
 - [ ] Fit one model per PAP variable per `region x climatezone` using the
   selected formula profile and existing-style model tracking.
