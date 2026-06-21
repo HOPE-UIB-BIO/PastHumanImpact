@@ -43,7 +43,21 @@ get_model_newdata <- function(data_source, model_config_row) {
 
   data_strata <-
     data_source %>%
-    dplyr::filter(variable == sel_variable) %>%
+    dplyr::filter(variable == sel_variable)
+
+  if (
+    all(c("region", "climatezone") %in% names(model_config_row))
+  ) {
+    data_strata <-
+      data_strata %>%
+      dplyr::filter(
+        region == model_config_row[["region"]][1],
+        climatezone == model_config_row[["climatezone"]][1]
+      )
+  }
+
+  data_strata <-
+    data_strata %>%
     dplyr::group_by(region, climatezone, .data[[stratum_var]]) %>%
     dplyr::summarise(
       dataset_id = as.character(dplyr::first(.data[[group_var]])),
@@ -75,6 +89,10 @@ get_model_newdata <- function(data_source, model_config_row) {
   assertthat::assert_that(
     x_var %in% names(res_newdata),
     msg = "`x_var` must be created in prediction newdata."
+  )
+  assertthat::assert_that(
+    nrow(res_newdata) > 0,
+    msg = "`data_source` has no rows for the selected prediction config."
   )
 
   return(res_newdata)

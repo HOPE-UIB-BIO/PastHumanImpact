@@ -2,8 +2,8 @@
 #' @description
 #' Build one lifecycle/configuration row per model from long model input data.
 #' @param data_model Data frame containing `dataset_id`, `stratum`, and
-#' `variable`. If `analysis` is present, models are grouped by both `analysis`
-#' and `variable`.
+#' `variable`, `region`, and `climatezone`. If `analysis` is present, models
+#' are grouped by `analysis`, `variable`, `region`, and `climatezone`.
 #' @param analysis Character scalar analysis name.
 #' @param family_key Character scalar or named character vector of family keys.
 #' @param engine Character scalar modelling engine.
@@ -25,7 +25,7 @@ create_model_config_table <- function(
   analysis = "pap_temporal",
   family_key = "student_identity",
   engine = "brms",
-  model_profile = "stratum_fs",
+  model_profile = "within_stratum_dataset_fs",
   age_min = 0,
   age_max = 8500,
   timestep = 500,
@@ -39,8 +39,19 @@ create_model_config_table <- function(
     msg = "`data_model` must be a data frame."
   )
   assertthat::assert_that(
-    all(c("dataset_id", "stratum", "variable") %in% names(data_model)),
-    msg = "`data_model` must contain `dataset_id`, `stratum`, and `variable`."
+    all(
+      c(
+        "dataset_id",
+        "stratum",
+        "region",
+        "climatezone",
+        "variable"
+      ) %in% names(data_model)
+    ),
+    msg = paste(
+      "`data_model` must contain `dataset_id`, `stratum`, `region`,",
+      "`climatezone`, and `variable`."
+    )
   )
   assertthat::assert_that(
     is.character(analysis),
@@ -72,14 +83,23 @@ create_model_config_table <- function(
 
   data_summary <-
     data_work %>%
-    dplyr::group_by(analysis, variable) %>%
+    dplyr::group_by(analysis, variable, region, climatezone) %>%
     dplyr::summarise(
       n_records = dplyr::n_distinct(dataset_id),
       n_strata = dplyr::n_distinct(stratum),
       .groups = "drop"
     ) %>%
     dplyr::mutate(
-      model_id = stringr::str_c(analysis, variable, sep = "__")
+      output_id = stringr::str_c(
+        analysis,
+        variable,
+        region,
+        climatezone,
+        sep = "__"
+      ) %>%
+        stringr::str_replace_all("[^A-Za-z0-9_]+", "_") %>%
+        stringr::str_replace_all("^_|_$", ""),
+      model_id = output_id
     )
 
   if (length(family_key) == 1 && is.null(names(family_key))) {
@@ -123,8 +143,6 @@ create_model_config_table <- function(
       y_var = "value",
       group_var = "dataset_id",
       stratum_var = "stratum",
-      region = "all",
-      climatezone = "all",
       age_min = age_min,
       age_max = age_max,
       timestep = timestep,
@@ -149,6 +167,7 @@ create_model_config_table <- function(
     dplyr::select(
       analysis,
       model_id,
+      output_id,
       variable,
       region,
       climatezone,

@@ -16,6 +16,7 @@
 #' @param model_profile Formula profile used by `get_hgam_formula()`.
 #' @param stratum_var Name of region-climatezone stratum column.
 #' @param stratum_k Basis dimension for stratum smooths.
+#' @param group_k Basis dimension for dataset-level factor smooths.
 #' @param total_iterations Integer total MCMC iterations. Used when
 #' `model_config_row` is not supplied.
 #' @param min_iterations_per_chain Integer minimum iterations per chain.
@@ -38,9 +39,19 @@ fit_brms_model <- function(
   sel_k = 8,
   sel_m = NULL,
   common_trend = TRUE,
-  model_profile = c("stratum_fs", "dataset_smooth", "stratum_by"),
+  model_profile = c(
+    "within_stratum_dataset_fs",
+    "within_stratum_dataset_slope",
+    "within_stratum_dataset_intercept",
+    "dataset_smooth",
+    "stratum_fs",
+    "stratum_by",
+    "stratum_fs_dataset_slope",
+    "stratum_fs_dataset_fs"
+  ),
   stratum_var = "stratum",
   stratum_k = 5,
+  group_k = 3,
   total_iterations = 3200,
   min_iterations_per_chain = 100,
   max_chains = 4,
@@ -91,9 +102,14 @@ fit_brms_model <- function(
     min_iterations_per_chain <-
       model_config_row[["min_iterations_per_chain"]][1]
     max_chains <- model_config_row[["max_chains"]][1]
+    if (
+      "group_k" %in% names(model_config_row)
+    ) {
+      group_k <- model_config_row[["group_k"]][1]
+    }
 
     assertthat::assert_that(
-      all(c("variable", x_var, y_var, group_var, stratum_var) %in%
+      all(c("variable", "region", "climatezone", x_var, y_var, group_var) %in%
         names(data_source)),
       msg = "`data_source` is missing required model columns."
     )
@@ -101,6 +117,17 @@ fit_brms_model <- function(
     data_source <-
       data_source %>%
       dplyr::filter(variable == sel_variable)
+
+    if (
+      all(c("region", "climatezone") %in% names(model_config_row))
+    ) {
+      data_source <-
+        data_source %>%
+        dplyr::filter(
+          region == model_config_row[["region"]][1],
+          climatezone == model_config_row[["climatezone"]][1]
+        )
+    }
 
     assertthat::assert_that(
       nrow(data_source) > 0,
@@ -130,6 +157,7 @@ fit_brms_model <- function(
   assertthat::assert_that(
     assertthat::is.count(sel_k),
     assertthat::is.count(stratum_k),
+    assertthat::is.count(group_k),
     assertthat::is.count(total_iterations),
     assertthat::is.count(min_iterations_per_chain),
     assertthat::is.count(max_chains),
@@ -232,7 +260,8 @@ fit_brms_model <- function(
       common_trend = common_trend,
       model_profile = model_profile,
       stratum_var = stratum_var,
-      stratum_k = stratum_k
+      stratum_k = stratum_k,
+      group_k = group_k
     )
 
   res_model <-

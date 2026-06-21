@@ -64,11 +64,13 @@ testthat::test_that("fit_brms_model() returns NA when model fitting fails", {
 testthat::test_that("fit_brms_model() accepts a config row", {
   data_source <-
     data.frame(
-      model_id = "pap_temporal__n0",
+      model_id = "pap_temporal__n0__Europe__Temperate",
       analysis = "pap_temporal",
       variable = "n0",
+      region = c("Europe", "Europe", "Asia"),
+      climatezone = c("Temperate", "Temperate", "Cold"),
       dataset_id = c("d1", "d1", "d2"),
-      stratum = c("s1", "s1", "s1"),
+      stratum = c("Europe__Temperate", "Europe__Temperate", "Asia__Cold"),
       age_ka = c(0, 1, 0),
       value = c(1.0, 1.5, 2.0),
       stringsAsFactors = FALSE
@@ -76,10 +78,12 @@ testthat::test_that("fit_brms_model() accepts a config row", {
 
   model_config_row <-
     data.frame(
-      model_id = "pap_temporal__n0",
+      model_id = "pap_temporal__n0__Europe__Temperate",
       variable = "n0",
+      region = "Europe",
+      climatezone = "Temperate",
       family_key = "not_a_valid_family",
-      model_profile = "stratum_fs",
+      model_profile = "within_stratum_dataset_fs",
       x_var = "age_ka",
       y_var = "value",
       group_var = "dataset_id",
