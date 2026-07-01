@@ -67,6 +67,7 @@ purrr::walk(
       dplyr::filter(model_id == sel_model_id)
 
     if (
+      isFALSE(sel_mod_config[["is_model_eligible"]][1]) ||
       isFALSE(sel_mod_config[["need_to_be_evaluated"]][1])
     ) {
       return()
@@ -154,6 +155,14 @@ purrr::walk(
         need_to_run = dplyr::case_when(
           .default = need_to_run,
           model_id == sel_model_id ~ model_diagnostics[["need_to_run"]][1]
+        ),
+        prediction_written = dplyr::case_when(
+          .default = prediction_written,
+          model_id == sel_model_id ~ FALSE
+        ),
+        last_prediction_date = dplyr::case_when(
+          .default = as.character(last_prediction_date),
+          model_id == sel_model_id ~ NA_character_
         ),
         last_evaluation_date = dplyr::case_when(
           .default = as.character(last_evaluation_date),

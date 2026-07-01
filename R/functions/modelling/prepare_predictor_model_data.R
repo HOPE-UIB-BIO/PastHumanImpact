@@ -199,10 +199,6 @@ prepare_predictor_model_data <- function(
 
   data_model <-
     data_filter_by_climatezone %>%
-    dplyr::anti_join(
-      data_constant_variables,
-      by = c("region", "climatezone", "variable")
-    ) %>%
     dplyr::mutate(
       age_ka = age / 1000,
       stratum = stringr::str_c(region, climatezone, sep = "__"),

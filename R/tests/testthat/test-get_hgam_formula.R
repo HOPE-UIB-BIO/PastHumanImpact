@@ -50,12 +50,12 @@ testthat::test_that("get_hgam_formula derives sel_m from common trend", {
 
   testthat::expect_identical(
     result_true,
-    "var ~ s(age, k = 10, bs = 'tp') + s(age, by = dataset_id, bs = 'tp', k = 10, m = 1) + s(dataset_id, bs = 're', k = 2)"
+    "var ~ s(age, k = 10, bs = 'cr') + s(age, by = dataset_id, bs = 'cr', k = 10, m = 1) + s(dataset_id, bs = 're', k = 2)"
   )
 
   testthat::expect_identical(
     result_false,
-    "var ~ s(age, by = dataset_id, bs = 'tp', k = 10, m = 2) + s(dataset_id, bs = 're', k = 2)"
+    "var ~ s(age, by = dataset_id, bs = 'cr', k = 10, m = 2) + s(dataset_id, bs = 're', k = 2)"
   )
 })
 

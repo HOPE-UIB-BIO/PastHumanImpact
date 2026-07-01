@@ -105,9 +105,20 @@ testthat::test_that("fit_brms_model() accepts a config row", {
       family_key = "not_a_valid_family",
       model_profile = "within_stratum_dataset_fs",
       x_var = "age_ka",
+      x_model_var = "age_ka_scaled",
+      x_mean = 0.5,
+      x_sd = stats::sd(c(0, 1)),
       y_var = "value",
       group_var = "dataset_id",
       stratum_var = "stratum",
+      smooth_basis = "cr",
+      common_k = 8,
+      group_k = 3,
+      is_model_eligible = TRUE,
+      formula_text = paste(
+        "value ~ s(age_ka_scaled, k = 8, bs = 'cr') +",
+        "s(age_ka_scaled, dataset_id, bs = 'fs', k = 3)"
+      ),
       total_iterations = 100,
       min_iterations_per_chain = 100,
       max_chains = 1,
@@ -124,4 +135,52 @@ testthat::test_that("fit_brms_model() accepts a config row", {
     )
 
   testthat::expect_identical(result, NA_real_)
+})
+
+testthat::test_that("fit_brms_model() rejects ineligible config", {
+  data_source <-
+    data.frame(
+      analysis = "pap_temporal",
+      variable = "n0",
+      region = "Europe",
+      climatezone = "Temperate",
+      dataset_id = c("d1", "d1"),
+      stratum = "Europe__Temperate",
+      age_ka = c(0, 1),
+      value = c(1, 1)
+    )
+
+  model_config_row <-
+    data.frame(
+      variable = "n0",
+      region = "Europe",
+      climatezone = "Temperate",
+      family_key = "gamma_log",
+      model_profile = "within_stratum_dataset_fs",
+      x_var = "age_ka",
+      x_model_var = "age_ka_scaled",
+      x_mean = 0.5,
+      x_sd = stats::sd(c(0, 1)),
+      y_var = "value",
+      group_var = "dataset_id",
+      stratum_var = "stratum",
+      smooth_basis = "cr",
+      common_k = 8,
+      group_k = 3,
+      is_model_eligible = FALSE,
+      total_iterations = 100,
+      min_iterations_per_chain = 100,
+      max_chains = 1,
+      adapt_delta = 0.9,
+      max_treedepth = 10
+    )
+
+  testthat::expect_error(
+    fit_brms_model(
+      data_source = data_source,
+      model_config_row = model_config_row,
+      verbose = FALSE
+    ),
+    regexp = "not eligible"
+  )
 })

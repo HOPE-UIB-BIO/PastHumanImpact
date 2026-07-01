@@ -93,6 +93,6 @@ testthat::test_that("prepare_predictor_model_data() returns constants separately
       min_records = 2
     )
 
-  testthat::expect_identical(nrow(result[["data_model"]]), 0L)
+  testthat::expect_true(nrow(result[["data_model"]]) > 0)
   testthat::expect_true(nrow(result[["data_constant"]]) > 0)
 })

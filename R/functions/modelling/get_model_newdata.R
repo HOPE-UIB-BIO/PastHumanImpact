@@ -24,6 +24,9 @@ get_model_newdata <- function(data_source, model_config_row) {
     c(
       "variable",
       "x_var",
+      "x_model_var",
+      "x_mean",
+      "x_sd",
       "group_var",
       "stratum_var",
       "age_min",
@@ -40,6 +43,7 @@ get_model_newdata <- function(data_source, model_config_row) {
   group_var <- model_config_row[["group_var"]][1]
   stratum_var <- model_config_row[["stratum_var"]][1]
   x_var <- model_config_row[["x_var"]][1]
+  x_model_var <- model_config_row[["x_model_var"]][1]
 
   data_strata <-
     data_source %>%
@@ -93,6 +97,30 @@ get_model_newdata <- function(data_source, model_config_row) {
   assertthat::assert_that(
     nrow(res_newdata) > 0,
     msg = "`data_source` has no rows for the selected prediction config."
+  )
+
+  res_newdata <-
+    standardise_model_predictor(
+      data_source = res_newdata,
+      x_var = x_var,
+      x_model_var = x_model_var,
+      x_mean = model_config_row[["x_mean"]][1],
+      x_sd = model_config_row[["x_sd"]][1]
+    )
+
+  x_back_transformed <-
+    res_newdata[[x_model_var]] * model_config_row[["x_sd"]][1] +
+    model_config_row[["x_mean"]][1]
+
+  assertthat::assert_that(
+    isTRUE(
+      all.equal(
+        x_back_transformed,
+        res_newdata[[x_var]],
+        tolerance = sqrt(.Machine$double.eps)
+      )
+    ),
+    msg = "The standardised predictor cannot be back-transformed exactly."
   )
 
   return(res_newdata)

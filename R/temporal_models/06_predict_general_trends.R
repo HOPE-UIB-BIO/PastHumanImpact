@@ -70,6 +70,19 @@ list_predictions <-
         models_config_table %>%
         dplyr::filter(model_id == sel_model_id)
 
+      if (
+        isFALSE(sel_mod_config[["is_model_eligible"]][1])
+      ) {
+        return(NULL)
+      }
+
+      if (
+        isTRUE(sel_mod_config[["need_to_run"]][1]) ||
+          isTRUE(sel_mod_config[["need_to_be_evaluated"]][1])
+      ) {
+        return(NULL)
+      }
+
       sel_file_exists <-
         RUtilpol::get_latest_file_name(
           file_name = sel_model_id,
@@ -82,7 +95,9 @@ list_predictions <-
         isFALSE()
 
       if (
-        isTRUE(sel_file_exists) && isFALSE(rewrite)
+        isTRUE(sel_file_exists) &&
+          isFALSE(rewrite) &&
+          isTRUE(sel_mod_config[["prediction_written"]][1])
       ) {
         data_existing <-
           RUtilpol::get_latest_file(
@@ -95,13 +110,6 @@ list_predictions <-
           )
 
         return(data_existing)
-      }
-
-      if (
-        isTRUE(sel_mod_config[["need_to_run"]][1]) ||
-          isTRUE(sel_mod_config[["need_to_be_evaluated"]][1])
-      ) {
-        return(NULL)
       }
 
       mod <-
@@ -157,7 +165,14 @@ list_predictions <-
       )
 
       models_to_run_updated <-
-        models_config_table %>%
+        RUtilpol::get_latest_file(
+          file_name = "general_model_config_table",
+          dir = paste0(
+            data_storage_path,
+            "Temporal_models/"
+          ),
+          verbose = FALSE
+        ) %>%
         dplyr::mutate(
           prediction_written = dplyr::case_when(
             .default = prediction_written,

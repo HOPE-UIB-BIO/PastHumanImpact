@@ -28,7 +28,7 @@ get_hgam_formula <- function(
   x_var = "age",
   y_var = "var",
   group_var = "dataset_id",
-  smooth_basis = c("tp", "cr"),
+  smooth_basis = c("cr", "tp"),
   sel_k = 10,
   sel_m = NULL,
   n_groups = NULL,

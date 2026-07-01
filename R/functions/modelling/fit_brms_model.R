@@ -6,10 +6,15 @@
 #' @param data_source Data frame with response, predictor, and grouping columns.
 #' @param model_config_row Optional one-row model configuration data frame.
 #' @param x_var Name of the predictor column.
+#' @param x_model_var Name of the standardised predictor column.
+#' @param x_mean Optional predictor mean. Calculated from `data_source` when
+#' omitted and no config row is supplied.
+#' @param x_sd Optional predictor standard deviation. Calculated from
+#' `data_source` when omitted and no config row is supplied.
 #' @param y_var Name of the response column.
 #' @param group_var Name of the repeated-record grouping column.
 #' @param family_key Stable family key used by `get_model_family()`.
-#' @param smooth_basis Smooth basis type (`"tp"` or `"cr"`).
+#' @param smooth_basis Smooth basis type (`"cr"` or `"tp"`).
 #' @param sel_k Basis dimension for the common smooth.
 #' @param sel_m Optional smooth penalty order.
 #' @param common_trend Logical. If `TRUE`, include a shared smooth.
@@ -36,10 +41,13 @@ fit_brms_model <- function(
   data_source,
   model_config_row = NULL,
   x_var = "age_ka",
+  x_model_var = stringr::str_c(x_var, "scaled", sep = "_"),
+  x_mean = NULL,
+  x_sd = NULL,
   y_var = "value",
   group_var = "dataset_id",
   family_key = "student_identity",
-  smooth_basis = c("tp", "cr"),
+  smooth_basis = c("cr", "tp"),
   sel_k = 8,
   sel_m = NULL,
   common_trend = TRUE,
@@ -85,9 +93,16 @@ fit_brms_model <- function(
         "family_key",
         "model_profile",
         "x_var",
+        "x_model_var",
+        "x_mean",
+        "x_sd",
         "y_var",
         "group_var",
         "stratum_var",
+        "smooth_basis",
+        "common_k",
+        "group_k",
+        "is_model_eligible",
         "total_iterations",
         "min_iterations_per_chain",
         "max_chains",
@@ -102,22 +117,27 @@ fit_brms_model <- function(
 
     sel_variable <- model_config_row[["variable"]][1]
     x_var <- model_config_row[["x_var"]][1]
+    x_model_var <- model_config_row[["x_model_var"]][1]
+    x_mean <- model_config_row[["x_mean"]][1]
+    x_sd <- model_config_row[["x_sd"]][1]
     y_var <- model_config_row[["y_var"]][1]
     group_var <- model_config_row[["group_var"]][1]
     family_key <- model_config_row[["family_key"]][1]
     model_profile <- model_config_row[["model_profile"]][1]
     stratum_var <- model_config_row[["stratum_var"]][1]
+    smooth_basis <- model_config_row[["smooth_basis"]][1]
+    sel_k <- model_config_row[["common_k"]][1]
+    group_k <- model_config_row[["group_k"]][1]
     total_iterations <- model_config_row[["total_iterations"]][1]
     min_iterations_per_chain <-
       model_config_row[["min_iterations_per_chain"]][1]
     max_chains <- model_config_row[["max_chains"]][1]
     adapt_delta <- model_config_row[["adapt_delta"]][1]
     max_treedepth <- model_config_row[["max_treedepth"]][1]
-    if (
-      "group_k" %in% names(model_config_row)
-    ) {
-      group_k <- model_config_row[["group_k"]][1]
-    }
+    assertthat::assert_that(
+      isTRUE(model_config_row[["is_model_eligible"]][1]),
+      msg = "The selected model is not eligible for fitting."
+    )
 
     assertthat::assert_that(
       all(c("variable", "region", "climatezone", x_var, y_var, group_var) %in%
@@ -154,6 +174,9 @@ fit_brms_model <- function(
     length(y_var) == 1,
     is.character(x_var),
     length(x_var) == 1,
+    is.character(x_model_var),
+    length(x_model_var) == 1,
+    x_var != x_model_var,
     is.character(group_var),
     length(group_var) == 1,
     is.character(stratum_var),
@@ -212,6 +235,27 @@ fit_brms_model <- function(
     all(required_data_cols %in% names(data_source)),
     msg = "`data_source` is missing required model columns."
   )
+
+  if (
+    is.null(x_mean)
+  ) {
+    x_mean <- mean(data_source[[x_var]])
+  }
+
+  if (
+    is.null(x_sd)
+  ) {
+    x_sd <- stats::sd(data_source[[x_var]])
+  }
+
+  data_source <-
+    standardise_model_predictor(
+      data_source = data_source,
+      x_var = x_var,
+      x_model_var = x_model_var,
+      x_mean = x_mean,
+      x_sd = x_sd
+    )
 
   data_source <-
     data_source %>%
@@ -274,7 +318,7 @@ fit_brms_model <- function(
   formula_model <-
     get_hgam_formula(
       y_var = y_var,
-      x_var = x_var,
+      x_var = x_model_var,
       group_var = group_var,
       smooth_basis = smooth_basis,
       sel_k = sel_k,
@@ -286,6 +330,16 @@ fit_brms_model <- function(
       stratum_k = stratum_k,
       group_k = group_k
     )
+
+  if (
+    isFALSE(is.null(model_config_row)) &&
+      "formula_text" %in% names(model_config_row)
+  ) {
+    assertthat::assert_that(
+      identical(formula_model, model_config_row[["formula_text"]][1]),
+      msg = "The generated formula does not match config `formula_text`."
+    )
+  }
 
   brms_control <-
     utils::modifyList(

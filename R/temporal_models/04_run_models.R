@@ -78,6 +78,12 @@ purrr::walk(
       models_config_current %>%
       dplyr::filter(model_id == sel_model_id)
 
+    if (
+      isFALSE(sel_mod_config[["is_model_eligible"]][1])
+    ) {
+      return()
+    }
+
     sel_mod_file_exists <-
       RUtilpol::get_latest_file_name(
         file_name = sel_model_id,
@@ -169,6 +175,14 @@ purrr::walk(
         need_to_run = dplyr::case_when(
           .default = need_to_run,
           model_id == sel_model_id ~ all(is.na(mod))
+        ),
+        prediction_written = dplyr::case_when(
+          .default = prediction_written,
+          model_id == sel_model_id ~ FALSE
+        ),
+        last_prediction_date = dplyr::case_when(
+          .default = as.character(last_prediction_date),
+          model_id == sel_model_id ~ NA_character_
         )
       )
 

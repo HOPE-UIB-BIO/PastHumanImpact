@@ -64,6 +64,14 @@ model_config_table <-
     family_key = family_key_by_model,
     engine = "brms",
     model_profile = "within_stratum_dataset_fs",
+    x_var = "age_ka",
+    x_model_var = "age_ka_scaled",
+    y_var = "value",
+    group_var = "dataset_id",
+    stratum_var = "stratum",
+    smooth_basis = "cr",
+    common_k = 8,
+    group_k = 3,
     age_min = 0,
     age_max = 8500,
     timestep = 500,
@@ -77,25 +85,7 @@ model_config_table <-
     large_model_total_iterations = 6400,
     large_model_adapt_delta = 0.95,
     large_model_max_treedepth = 12
-  ) %>%
-  dplyr::select(
-    -engine,
-    -model_profile
-  ) %>%
-  dplyr::left_join(
-    data_model_specs %>%
-      dplyr::select(
-        analysis,
-        model_id,
-        variable,
-        region,
-        climatezone,
-        engine,
-        model_profile
-      ),
-    by = c("analysis", "model_id", "variable", "region", "climatezone")
-  ) %>%
-  dplyr::relocate(engine, model_profile, .after = family_key)
+  )
 
 
 #----------------------------------------------------------#
@@ -124,11 +114,25 @@ model_definition_cols <-
     "climatezone",
     "family_key",
     "engine",
+    "requested_model_profile",
     "model_profile",
+    "profile_adjustment_reason",
+    "is_model_eligible",
+    "ineligibility_reason",
     "x_var",
+    "x_model_var",
+    "x_mean",
+    "x_sd",
     "y_var",
     "group_var",
     "stratum_var",
+    "smooth_basis",
+    "common_k",
+    "group_k",
+    "response_n_unique",
+    "datasets_with_response_variation",
+    "predictor_n_unique",
+    "formula_text",
     "age_min",
     "age_max",
     "timestep",
@@ -232,14 +236,16 @@ if (
     isFALSE(config_needs_refresh)
   ) {
     config_needs_refresh <-
-      isFALSE(
-        identical(
+      !isTRUE(
+        all.equal(
           config_current %>%
             dplyr::select(dplyr::all_of(model_definition_cols)) %>%
             dplyr::arrange(model_id),
           model_config_table %>%
             dplyr::select(dplyr::all_of(model_definition_cols)) %>%
-            dplyr::arrange(model_id)
+            dplyr::arrange(model_id),
+          check.attributes = FALSE,
+          tolerance = sqrt(.Machine$double.eps)
         )
       )
   }
@@ -259,6 +265,12 @@ if (
       config_current %>%
       dplyr::select(dplyr::all_of(model_definition_cols)) %>%
       dplyr::mutate(
+        dplyr::across(
+          dplyr::where(is.numeric),
+          ~ signif(.x, digits = 15)
+        )
+      ) %>%
+      dplyr::mutate(
         model_definition = do.call(
           paste,
           c(
@@ -272,6 +284,12 @@ if (
     model_definition_new <-
       model_config_table %>%
       dplyr::select(dplyr::all_of(model_definition_cols)) %>%
+      dplyr::mutate(
+        dplyr::across(
+          dplyr::where(is.numeric),
+          ~ signif(.x, digits = 15)
+        )
+      ) %>%
       dplyr::mutate(
         model_definition = do.call(
           paste,
