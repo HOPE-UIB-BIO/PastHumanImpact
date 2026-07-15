@@ -46,36 +46,16 @@ path_model_dir <-
     "Mods"
   )
 
+git_state <-
+  get_git_state(
+    repo_path = here::here(),
+    verbose = TRUE
+  )
+
 git_commit <-
-  tryCatch(
-    system2(
-      command = "git",
-      args = c("rev-parse", "HEAD"),
-      stdout = TRUE,
-      stderr = FALSE
-    )[1],
-    error = function(err) NA_character_
-  )
-
-git_status <-
-  tryCatch(
-    system2(
-      command = "git",
-      args = c("status", "--porcelain"),
-      stdout = TRUE,
-      stderr = FALSE
-    ),
-    error = function(err) NA_character_
-  )
-
+  git_state[["git_commit"]][1]
 git_is_dirty <-
-  if (
-    all(is.na(git_status))
-  ) {
-    NA
-  } else {
-    length(git_status) > 0L
-  }
+  git_state[["git_is_dirty"]][1]
 
 
 #----------------------------------------------------------#
