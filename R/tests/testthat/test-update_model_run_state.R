@@ -10,6 +10,11 @@ testthat::test_that("run-state transitions record and advance seeds", {
       last_run_id = NA_character_,
       last_run_seed_attempt = NA_integer_,
       last_run_seed = NA_integer_,
+      model_file_name = NA_character_,
+      model_chain_seeds_json = NA_character_,
+      model_seed_source = "not_fitted",
+      model_provenance_status = "not_fitted",
+      model_audit_reason = NA_character_,
       last_run_start_time = NA_character_,
       last_run_end_time = NA_character_,
       last_run_time = NA_character_,
@@ -65,6 +70,11 @@ testthat::test_that("successful run-state transitions queue evaluation", {
       last_run_id = NA_character_,
       last_run_seed_attempt = NA_integer_,
       last_run_seed = NA_integer_,
+      model_file_name = NA_character_,
+      model_chain_seeds_json = NA_character_,
+      model_seed_source = "not_fitted",
+      model_provenance_status = "not_fitted",
+      model_audit_reason = NA_character_,
       last_run_start_time = NA_character_,
       last_run_end_time = NA_character_,
       last_run_time = NA_character_,
@@ -84,6 +94,8 @@ testthat::test_that("successful run-state transitions queue evaluation", {
       run_id = "run_1",
       run_seed_attempt = 1L,
       run_seed = 101L,
+      model_file_name = "model_a__attempt__1.qs",
+      model_chain_seeds_json = '{"chain_1":101}',
       event = "fit_succeeded",
       run_start_time = run_start_time,
       event_time = run_start_time + 60
@@ -93,4 +105,16 @@ testthat::test_that("successful run-state transitions queue evaluation", {
   testthat::expect_true(result[["need_to_be_evaluated"]])
   testthat::expect_false(result[["prediction_written"]])
   testthat::expect_true(is.na(result[["last_prediction_date"]]))
+  testthat::expect_identical(
+    result[["model_file_name"]],
+    "model_a__attempt__1.qs"
+  )
+  testthat::expect_identical(
+    result[["model_chain_seeds_json"]],
+    '{"chain_1":101}'
+  )
+  testthat::expect_identical(
+    result[["model_provenance_status"]],
+    "configured_run_recorded"
+  )
 })

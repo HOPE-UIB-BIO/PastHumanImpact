@@ -140,10 +140,10 @@ evaluate_configured_temporal_model <- function(
   }
 
   mod <-
-    RUtilpol::get_latest_file(
-      file_name = model_id,
-      dir = model_dir,
-      verbose = FALSE
+    load_brms_model_file(
+      model_dir = model_dir,
+      model_file_name = sel_mod_config[["model_file_name"]][1],
+      model_id = model_id
     )
 
   model_diagnostics <-
@@ -302,10 +302,7 @@ evaluate_configured_temporal_model <- function(
       event_time = Sys.time(),
       run_seed = evaluation_run_seed,
       run_seed_attempt = evaluation_seed_attempt,
-      model_file_name = RUtilpol::get_latest_file_name(
-        file_name = model_id,
-        dir = model_dir
-      ),
+      model_file_name = sel_mod_config[["model_file_name"]][1],
       git_commit = git_commit,
       git_is_dirty = git_is_dirty
     )

@@ -176,13 +176,29 @@ run_configured_temporal_model <- function(
     }
   }
 
+  configured_model_file <-
+    if (
+      "model_file_name" %in% names(sel_mod_config)
+    ) {
+      sel_mod_config[["model_file_name"]][1]
+    } else {
+      NA_character_
+    }
   sel_mod_file_exists <-
-    RUtilpol::get_latest_file_name(
-      file_name = model_id,
-      dir = model_dir
-    ) %>%
-    is.na() %>%
-    isFALSE()
+    if (
+      !is.na(configured_model_file) && nzchar(configured_model_file)
+    ) {
+      file.exists(
+        file.path(model_dir, configured_model_file)
+      )
+    } else {
+      RUtilpol::get_latest_file_name(
+        file_name = model_id,
+        dir = model_dir
+      ) %>%
+        is.na() %>%
+        isFALSE()
+    }
 
   if (
     isFALSE(sel_mod_config[["need_to_run"]][1]) &&
@@ -276,25 +292,29 @@ run_configured_temporal_model <- function(
     fit_error <- NA_character_
   }
 
-  if (
-    isTRUE(fit_succeeded)
-  ) {
-    RUtilpol::save_latest_file(
-      object_to_save = mod,
-      file_name = model_id,
-      dir = model_dir,
-      prefered_format = "qs"
-    )
-  }
-
   model_file_name <-
     if (
       isTRUE(fit_succeeded)
     ) {
-      RUtilpol::get_latest_file_name(
-        file_name = model_id,
-        dir = model_dir
+      save_brms_model_run(
+        mod = mod,
+        model_dir = model_dir,
+        run_id = run_id
       )
+    } else {
+      NA_character_
+    }
+  model_chain_seeds_json <-
+    if (
+      isTRUE(fit_succeeded)
+    ) {
+      get_brms_chain_seeds(mod) %>%
+        as.list() %>%
+        jsonlite::toJSON(
+          auto_unbox = TRUE,
+          digits = NA
+        ) %>%
+        as.character()
     } else {
       NA_character_
     }
@@ -310,6 +330,8 @@ run_configured_temporal_model <- function(
       run_id = run_id,
       run_seed_attempt = sel_mod_config[["seed_attempt"]][1],
       run_seed = sel_mod_config[["sampling_seed"]][1],
+      model_file_name = model_file_name,
+      model_chain_seeds_json = model_chain_seeds_json,
       event = ifelse(
         isTRUE(fit_succeeded),
         "fit_succeeded",
@@ -326,9 +348,13 @@ run_configured_temporal_model <- function(
     prefered_format = "csv"
   )
 
+  res_config <-
+    models_to_run_updated %>%
+    dplyr::filter(model_id == .env$model_id)
+
   data_run_finished <-
     create_model_run_event(
-      model_config_row = sel_mod_config,
+      model_config_row = res_config,
       run_id = run_id,
       event = ifelse(
         isTRUE(fit_succeeded),
@@ -336,6 +362,8 @@ run_configured_temporal_model <- function(
         "fit_failed"
       ),
       event_time = time_mod_end,
+      run_seed = sel_mod_config[["sampling_seed"]][1],
+      run_seed_attempt = sel_mod_config[["seed_attempt"]][1],
       model_file_name = model_file_name,
       error_message = fit_error,
       git_commit = git_commit,
@@ -346,10 +374,6 @@ run_configured_temporal_model <- function(
     data_event = data_run_finished,
     path_history = path_history
   )
-
-  res_config <-
-    models_to_run_updated %>%
-    dplyr::filter(model_id == .env$model_id)
 
   return(invisible(res_config))
 }

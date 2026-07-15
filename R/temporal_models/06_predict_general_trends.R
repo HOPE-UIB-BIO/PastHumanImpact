@@ -113,13 +113,14 @@ list_predictions <-
       }
 
       mod <-
-        RUtilpol::get_latest_file(
-          file_name = sel_model_id,
-          dir = paste0(
+        load_brms_model_file(
+          model_dir = file.path(
             data_storage_path,
-            "Temporal_models/Mods"
+            "Temporal_models",
+            "Mods"
           ),
-          verbose = FALSE
+          model_file_name = sel_mod_config[["model_file_name"]][1],
+          model_id = sel_model_id
         )
 
       if (

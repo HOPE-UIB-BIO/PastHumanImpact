@@ -257,8 +257,46 @@ if (
       )
   }
 
+  config_provenance_needs_refresh <-
+    !all(
+      c(
+        "model_file_name",
+        "model_chain_seeds_json",
+        "model_seed_source",
+        "model_provenance_status",
+        "model_audit_reason"
+      ) %in% names(config_current)
+    )
+
+  if (
+    !"model_file_name" %in% names(config_current)
+  ) {
+    config_current[["model_file_name"]] <- NA_character_
+  }
+  if (
+    !"model_chain_seeds_json" %in% names(config_current)
+  ) {
+    config_current[["model_chain_seeds_json"]] <- NA_character_
+  }
+  if (
+    !"model_seed_source" %in% names(config_current)
+  ) {
+    config_current[["model_seed_source"]] <- "not_audited"
+  }
+  if (
+    !"model_provenance_status" %in% names(config_current)
+  ) {
+    config_current[["model_provenance_status"]] <- "not_audited"
+  }
+  if (
+    !"model_audit_reason" %in% names(config_current)
+  ) {
+    config_current[["model_audit_reason"]] <- NA_character_
+  }
+
   config_needs_refresh <-
     isTRUE(config_seed_needs_refresh) ||
+    isTRUE(config_provenance_needs_refresh) ||
     !all(c("output_id", "region", "climatezone") %in% names(config_current)) ||
     !all(model_definition_cols %in% names(config_current)) ||
     !setequal(config_current[["model_id"]], model_config_table[["model_id"]])
@@ -359,6 +397,11 @@ if (
         "last_run_id",
         "last_run_seed_attempt",
         "last_run_seed",
+        "model_file_name",
+        "model_chain_seeds_json",
+        "model_seed_source",
+        "model_provenance_status",
+        "model_audit_reason",
         "last_run_start_time",
         "last_run_end_time",
         "last_run_time",

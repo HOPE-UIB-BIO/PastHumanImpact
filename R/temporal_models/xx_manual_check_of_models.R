@@ -31,16 +31,39 @@ source(
 sel_region <- "Europe"
 sel_climatezone <- "Temperate_Dry_Summer"
 sel_variable <- "prec_summer"
-sel_model_id <- paste("predictor_temporal", sel_variable, sep = "__")
+
+sel_mod_config <-
+  RUtilpol::get_latest_file(
+    file_name = "general_model_config_table",
+    dir = file.path(
+      data_storage_path,
+      "Temporal_models"
+    )
+  ) %>%
+  dplyr::filter(
+    analysis == "predictor_temporal",
+    region == sel_region,
+    climatezone == sel_climatezone,
+    variable == sel_variable
+  )
+
+assertthat::assert_that(
+  nrow(sel_mod_config) == 1L,
+  msg = "The selected values must identify exactly one model."
+)
+
+sel_model_id <-
+  sel_mod_config[["model_id"]][1]
 
 mod <-
-  RUtilpol::get_latest_file(
-    file_name = sel_model_id,
-    dir = paste0(
+  load_brms_model_file(
+    model_dir = file.path(
       data_storage_path,
-      "Temporal_models/Mods"
+      "Temporal_models",
+      "Mods"
     ),
-    verbose = TRUE
+    model_file_name = sel_mod_config[["model_file_name"]][1],
+    model_id = sel_model_id
   )
 
 summary(mod)

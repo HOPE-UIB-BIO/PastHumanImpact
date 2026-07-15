@@ -7,6 +7,8 @@
 #' @param run_id Character scalar run identifier.
 #' @param run_seed_attempt Positive integer seed-attempt number.
 #' @param run_seed Positive integer sampling seed.
+#' @param model_file_name Optional exact saved model filename.
+#' @param model_chain_seeds_json Optional JSON object with chain-specific seeds.
 #' @param event One of `fit_started`, `fit_succeeded`, or `fit_failed`.
 #' @param run_start_time POSIXct scalar fit start time.
 #' @param event_time POSIXct scalar time of the state transition.
@@ -30,6 +32,8 @@ update_model_run_state <- function(
   run_id,
   run_seed_attempt,
   run_seed,
+  model_file_name = NA_character_,
+  model_chain_seeds_json = NA_character_,
   event = c("fit_started", "fit_succeeded", "fit_failed"),
   run_start_time,
   event_time
@@ -46,6 +50,11 @@ update_model_run_state <- function(
       "last_run_id",
       "last_run_seed_attempt",
       "last_run_seed",
+      "model_file_name",
+      "model_chain_seeds_json",
+      "model_seed_source",
+      "model_provenance_status",
+      "model_audit_reason",
       "last_run_start_time",
       "last_run_end_time",
       "last_run_time",
@@ -76,6 +85,13 @@ update_model_run_state <- function(
     assertthat::is.count(run_seed_attempt),
     assertthat::is.count(run_seed),
     msg = "Run seed values must be positive integers."
+  )
+  assertthat::assert_that(
+    is.character(model_file_name),
+    length(model_file_name) == 1L,
+    is.character(model_chain_seeds_json),
+    length(model_chain_seeds_json) == 1L,
+    msg = "Model provenance values must be character scalars."
   )
   assertthat::assert_that(
     inherits(run_start_time, "POSIXct"),
@@ -110,6 +126,30 @@ update_model_run_state <- function(
       last_run_seed = dplyr::case_when(
         .default = as.integer(last_run_seed),
         model_id == .env$model_id ~ as.integer(.env$run_seed)
+      ),
+      model_file_name = dplyr::case_when(
+        .default = as.character(model_file_name),
+        model_id == .env$model_id & .env$fit_succeeded ~
+          .env$model_file_name
+      ),
+      model_chain_seeds_json = dplyr::case_when(
+        .default = as.character(model_chain_seeds_json),
+        model_id == .env$model_id & .env$fit_succeeded ~
+          .env$model_chain_seeds_json
+      ),
+      model_seed_source = dplyr::case_when(
+        .default = as.character(model_seed_source),
+        model_id == .env$model_id & .env$fit_succeeded ~
+          "configured_sampling_seed"
+      ),
+      model_provenance_status = dplyr::case_when(
+        .default = as.character(model_provenance_status),
+        model_id == .env$model_id & .env$fit_succeeded ~
+          "configured_run_recorded"
+      ),
+      model_audit_reason = dplyr::case_when(
+        .default = as.character(model_audit_reason),
+        model_id == .env$model_id & .env$fit_succeeded ~ NA_character_
       ),
       last_run_start_time = dplyr::case_when(
         .default = as.character(last_run_start_time),
