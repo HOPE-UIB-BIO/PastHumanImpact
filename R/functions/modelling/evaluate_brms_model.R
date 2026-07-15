@@ -1,6 +1,8 @@
 #' @title Evaluate one brms model
 #' @description
-#' Compute LOO and Rhat lifecycle diagnostics for a fitted `brms` model.
+#' Compute LOO and sampler diagnostics for a fitted `brms` model. LOO results
+#' are recorded for model assessment, while reruns are requested only when
+#' sampler diagnostics fail.
 #' @param mod Fitted `brmsfit` object or `NA_real_`.
 #' @param pareto_k_threshold Numeric Pareto-k threshold.
 #' @param loo_threshold Numeric maximum proportion above Pareto-k threshold.
@@ -119,7 +121,6 @@ evaluate_brms_model <- function(
       last_run_loo_test_pass = pass_loo_test,
       last_run_loo_test_value = loo_value,
       need_to_run = isFALSE(pass_rhat_test) |
-        isFALSE(pass_loo_test) |
         divergent_transitions > 0 |
         max_treedepth_transitions > 0
     )

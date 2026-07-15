@@ -25,6 +25,7 @@
 #' @param max_chains Integer maximum number of chains.
 #' @param adapt_delta Numeric target average proposal acceptance probability.
 #' @param max_treedepth Integer maximum NUTS tree depth.
+#' @param seed_base Non-negative integer used to derive model-specific seeds.
 #' @param large_model_min_records Integer record threshold for large models.
 #' @param large_model_total_iterations Total iterations for large models.
 #' @param large_model_adapt_delta `adapt_delta` for large models.
@@ -57,6 +58,7 @@ create_model_config_table <- function(
   max_chains = 4,
   adapt_delta = 0.9,
   max_treedepth = 10,
+  seed_base = 1234L,
   large_model_min_records = 100,
   large_model_total_iterations = 6400,
   large_model_adapt_delta = 0.95,
@@ -118,6 +120,14 @@ create_model_config_table <- function(
     assertthat::is.count(large_model_total_iterations),
     assertthat::is.count(large_model_max_treedepth),
     msg = "Iteration, basis, chain, and record settings must be integers."
+  )
+  assertthat::assert_that(
+    is.numeric(seed_base),
+    length(seed_base) == 1L,
+    is.finite(seed_base),
+    seed_base >= 0,
+    seed_base %% 1 == 0,
+    msg = "`seed_base` must be a non-negative integer scalar."
   )
   assertthat::assert_that(
     is.numeric(adapt_delta),
@@ -297,6 +307,14 @@ create_model_config_table <- function(
         large_model_max_treedepth,
         max_treedepth
       ),
+      seed_base = as.integer(seed_base),
+      seed_attempt = 1L,
+      sampling_seed = get_model_seed(
+        model_id = model_id,
+        seed_attempt = seed_attempt,
+        seed_base = seed_base
+      ),
+      seed_change_reason = "initial_model_seed",
       formula_text = purrr::pmap_chr(
         .l = list(
           x_model_var,
@@ -322,6 +340,9 @@ create_model_config_table <- function(
         )
       ),
       last_run_date = NA_character_,
+      last_run_id = NA_character_,
+      last_run_seed_attempt = NA_integer_,
+      last_run_seed = NA_integer_,
       last_run_start_time = NA_character_,
       last_run_end_time = NA_character_,
       last_run_time = NA_character_,
@@ -381,6 +402,10 @@ create_model_config_table <- function(
       max_chains,
       adapt_delta,
       max_treedepth,
+      seed_base,
+      seed_attempt,
+      sampling_seed,
+      seed_change_reason,
       dplyr::everything()
     ) %>%
     dplyr::arrange(analysis, variable)

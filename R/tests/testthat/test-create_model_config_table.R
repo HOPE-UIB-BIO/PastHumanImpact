@@ -57,6 +57,9 @@ testthat::test_that("create_model_config_table() creates one row per variable an
   )))
   testthat::expect_true("last_run_rhat_q90" %in% names(result))
   testthat::expect_true("last_run_neff_ratio_min" %in% names(result))
+  testthat::expect_true(all(result[["seed_attempt"]] == 1L))
+  testthat::expect_length(unique(result[["sampling_seed"]]), 3L)
+  testthat::expect_true(all(is.na(result[["last_run_seed"]])))
 })
 
 testthat::test_that("create_model_config_table() applies large-model sampling settings", {

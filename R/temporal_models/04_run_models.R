@@ -22,12 +22,69 @@ source(
   )
 )
 
-make_dir(
-  paste0(
+path_temporal_models <-
+  file.path(
     data_storage_path,
-    "Temporal_models/Mods"
+    "Temporal_models"
   )
-)
+
+path_model_dir <-
+  file.path(
+    path_temporal_models,
+    "Mods"
+  )
+
+make_dir(path_model_dir)
+
+path_model_run_history <-
+  file.path(
+    path_temporal_models,
+    "general_model_run_history.csv"
+  )
+
+data_interrupted_runs <-
+  if (
+    file.exists(path_model_run_history)
+  ) {
+    readr::read_csv(
+      path_model_run_history,
+      show_col_types = FALSE
+    ) |>
+      get_interrupted_model_runs()
+  } else {
+    tibble::tibble()
+  }
+
+git_commit <-
+  tryCatch(
+    system2(
+      command = "git",
+      args = c("rev-parse", "HEAD"),
+      stdout = TRUE,
+      stderr = FALSE
+    )[1],
+    error = function(err) NA_character_
+  )
+
+git_status <-
+  tryCatch(
+    system2(
+      command = "git",
+      args = c("status", "--porcelain"),
+      stdout = TRUE,
+      stderr = FALSE
+    ),
+    error = function(err) NA_character_
+  )
+
+git_is_dirty <-
+  if (
+    all(is.na(git_status))
+  ) {
+    NA
+  } else {
+    length(git_status) > 0L
+  }
 
 
 #----------------------------------------------------------#
@@ -37,19 +94,13 @@ make_dir(
 data_general_model <-
   RUtilpol::get_latest_file(
     file_name = "general_temporal_model_data",
-    dir = paste0(
-      data_storage_path,
-      "Temporal_models/"
-    )
+    dir = path_temporal_models
   )
 
 models_to_run_order <-
   RUtilpol::get_latest_file(
     file_name = "general_model_config_table",
-    dir = paste0(
-      data_storage_path,
-      "Temporal_models/"
-    )
+    dir = path_temporal_models
   ) %>%
   dplyr::arrange(analysis, variable)
 
@@ -61,140 +112,15 @@ models_to_run_order <-
 purrr::walk(
   .progress = "Fitting general temporal models",
   .x = models_to_run_order[["model_id"]],
-  .f = ~ {
-    sel_model_id <- .x
-
-    models_config_current <-
-      RUtilpol::get_latest_file(
-        file_name = "general_model_config_table",
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/"
-        ),
-        verbose = FALSE
-      )
-
-    sel_mod_config <-
-      models_config_current %>%
-      dplyr::filter(model_id == sel_model_id)
-
-    if (
-      isFALSE(sel_mod_config[["is_model_eligible"]][1])
-    ) {
-      return()
-    }
-
-    sel_mod_file_exists <-
-      RUtilpol::get_latest_file_name(
-        file_name = sel_model_id,
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/Mods"
-        )
-      ) %>%
-      is.na() %>%
-      isFALSE()
-
-    if (
-      isFALSE(sel_mod_config[["need_to_run"]][1]) &&
-        !(
-          isTRUE(sel_mod_config[["need_to_be_evaluated"]][1]) &&
-            isFALSE(sel_mod_file_exists)
-        )
-    ) {
-      return()
-    }
-
-    message(
-      paste(
-        "Will fit general model",
-        sel_model_id
-      )
-    )
-
-    time_mod_start <- Sys.time()
-
-    mod <-
-      fit_brms_model(
-        data_source = data_general_model,
-        model_config_row = sel_mod_config,
-        verbose = TRUE
-      )
-
-    time_mod_end <- Sys.time()
-
-    if (
-      !all(is.na(mod))
-    ) {
-      RUtilpol::save_latest_file(
-        object_to_save = mod,
-        file_name = sel_model_id,
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/Mods"
-        ),
-        prefered_format = "qs"
-      )
-    }
-
-    models_to_run_updated <-
-      RUtilpol::get_latest_file(
-        file_name = "general_model_config_table",
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/"
-        ),
-        verbose = FALSE
-      ) %>%
-      dplyr::mutate(
-        last_run_date = dplyr::case_when(
-          .default = as.character(last_run_date),
-          model_id == sel_model_id ~ as.character(Sys.Date())
-        ),
-        last_run_start_time = dplyr::case_when(
-          .default = as.character(last_run_start_time),
-          model_id == sel_model_id ~ as.character(time_mod_start)
-        ),
-        last_run_end_time = dplyr::case_when(
-          .default = as.character(last_run_end_time),
-          model_id == sel_model_id ~ as.character(time_mod_end)
-        ),
-        last_run_time = dplyr::case_when(
-          .default = as.character(last_run_time),
-          model_id == sel_model_id ~ paste(
-            as.character(
-              round(time_mod_end - time_mod_start, 2)
-            ),
-            units(time_mod_end - time_mod_start)
-          )
-        ),
-        need_to_be_evaluated = dplyr::case_when(
-          .default = need_to_be_evaluated,
-          model_id == sel_model_id ~ !all(is.na(mod))
-        ),
-        need_to_run = dplyr::case_when(
-          .default = need_to_run,
-          model_id == sel_model_id ~ all(is.na(mod))
-        ),
-        prediction_written = dplyr::case_when(
-          .default = prediction_written,
-          model_id == sel_model_id ~ FALSE
-        ),
-        last_prediction_date = dplyr::case_when(
-          .default = as.character(last_prediction_date),
-          model_id == sel_model_id ~ NA_character_
-        )
-      )
-
-    RUtilpol::save_latest_file(
-      object_to_save = models_to_run_updated,
-      file_name = "general_model_config_table",
-      dir = paste0(
-        data_storage_path,
-        "Temporal_models/"
-      ),
-      prefered_format = "csv"
-    )
-
-  }
+  .f = ~ run_configured_temporal_model(
+    model_id = .x,
+    data_source = data_general_model,
+    config_dir = path_temporal_models,
+    model_dir = path_model_dir,
+    path_history = path_model_run_history,
+    data_interrupted_runs = data_interrupted_runs,
+    git_commit = git_commit,
+    git_is_dirty = git_is_dirty,
+    verbose = TRUE
+  )
 )

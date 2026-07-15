@@ -27,6 +27,44 @@ loo_threshold <- 0.1
 rhat_threshold <- 1.1
 rhat_threshold_quantile <- 0.9
 
+path_model_run_history <-
+  file.path(
+    data_storage_path,
+    "Temporal_models",
+    "general_model_run_history.csv"
+  )
+
+git_commit <-
+  tryCatch(
+    system2(
+      command = "git",
+      args = c("rev-parse", "HEAD"),
+      stdout = TRUE,
+      stderr = FALSE
+    )[1],
+    error = function(err) NA_character_
+  )
+
+git_status <-
+  tryCatch(
+    system2(
+      command = "git",
+      args = c("status", "--porcelain"),
+      stdout = TRUE,
+      stderr = FALSE
+    ),
+    error = function(err) NA_character_
+  )
+
+git_is_dirty <-
+  if (
+    all(is.na(git_status))
+  ) {
+    NA
+  } else {
+    length(git_status) > 0L
+  }
+
 
 #----------------------------------------------------------#
 # 1. Load config table -----
@@ -100,6 +138,11 @@ purrr::walk(
         max_treedepth_threshold = sel_mod_config[["max_treedepth"]][1]
       )
 
+    sampler_diagnostics_failed <-
+      isFALSE(model_diagnostics[["last_run_rhat_test_pass"]][1]) ||
+      model_diagnostics[["last_run_divergent_transitions"]][1] > 0L ||
+      model_diagnostics[["last_run_max_treedepth_transitions"]][1] > 0L
+
     models_to_run_updated <-
       models_config_current %>%
       dplyr::mutate(
@@ -170,6 +213,17 @@ purrr::walk(
         )
       )
 
+    if (
+      isTRUE(sampler_diagnostics_failed)
+    ) {
+      models_to_run_updated <-
+        advance_model_seed(
+          data_config = models_to_run_updated,
+          model_ids = sel_model_id,
+          reason = "sampler_diagnostics_failed"
+        )
+    }
+
     RUtilpol::save_latest_file(
       object_to_save = models_to_run_updated,
       file_name = "general_model_config_table",
@@ -179,6 +233,73 @@ purrr::walk(
       ),
       prefered_format = "csv",
       verbose = TRUE
+    )
+
+    sel_mod_config_updated <-
+      models_to_run_updated %>%
+      dplyr::filter(model_id == sel_model_id)
+
+    evaluation_run_id <-
+      sel_mod_config[["last_run_id"]][1]
+
+    if (
+      is.na(evaluation_run_id) || !nzchar(evaluation_run_id)
+    ) {
+      evaluation_run_id <-
+        stringr::str_c(
+          sel_model_id,
+          "legacy_evaluation",
+          as.character(Sys.Date()),
+          sep = "__"
+        )
+    }
+
+    evaluation_run_seed <-
+      sel_mod_config[["last_run_seed"]][1]
+
+    if (
+      is.na(evaluation_run_seed)
+    ) {
+      evaluation_run_seed <-
+        sel_mod_config[["sampling_seed"]][1]
+    }
+
+    evaluation_seed_attempt <-
+      sel_mod_config[["last_run_seed_attempt"]][1]
+
+    if (
+      is.na(evaluation_seed_attempt)
+    ) {
+      evaluation_seed_attempt <-
+        sel_mod_config[["seed_attempt"]][1]
+    }
+
+    data_evaluation_event <-
+      create_model_run_event(
+        model_config_row = sel_mod_config_updated,
+        run_id = evaluation_run_id,
+        event = ifelse(
+          isTRUE(model_diagnostics[["need_to_run"]][1]),
+          "evaluation_failed",
+          "evaluation_passed"
+        ),
+        event_time = Sys.time(),
+        run_seed = evaluation_run_seed,
+        run_seed_attempt = evaluation_seed_attempt,
+        model_file_name = RUtilpol::get_latest_file_name(
+          file_name = sel_model_id,
+          dir = paste0(
+            data_storage_path,
+            "Temporal_models/Mods"
+          )
+        ),
+        git_commit = git_commit,
+        git_is_dirty = git_is_dirty
+      )
+
+    append_model_run_event(
+      data_event = data_evaluation_event,
+      path_history = path_model_run_history
     )
   }
 )

@@ -81,6 +81,7 @@ model_config_table <-
     max_chains = 4,
     adapt_delta = 0.9,
     max_treedepth = 10,
+    seed_base = set_seed,
     large_model_min_records = 100,
     large_model_total_iterations = 6400,
     large_model_adapt_delta = 0.95,
@@ -136,12 +137,7 @@ model_definition_cols <-
     "age_min",
     "age_max",
     "timestep",
-    "min_records",
-    "total_iterations",
-    "min_iterations_per_chain",
-    "max_chains",
-    "adapt_delta",
-    "max_treedepth"
+    "min_records"
   )
 
 if (
@@ -156,6 +152,40 @@ if (
       ),
       verbose = FALSE
     )
+
+  seed_lifecycle_cols <-
+    c(
+      "seed_base",
+      "seed_attempt",
+      "sampling_seed",
+      "seed_change_reason",
+      "last_run_id",
+      "last_run_seed_attempt",
+      "last_run_seed"
+    )
+
+  config_seed_needs_refresh <-
+    !all(seed_lifecycle_cols %in% names(config_current))
+
+  if (
+    isTRUE(config_seed_needs_refresh)
+  ) {
+    config_current <-
+      config_current %>%
+      dplyr::mutate(
+        seed_base = as.integer(set_seed),
+        seed_attempt = 1L,
+        sampling_seed = get_model_seed(
+          model_id = model_id,
+          seed_attempt = seed_attempt,
+          seed_base = seed_base
+        ),
+        seed_change_reason = "migrated_initial_model_seed",
+        last_run_id = NA_character_,
+        last_run_seed_attempt = NA_integer_,
+        last_run_seed = NA_integer_
+      )
+  }
 
   if (
     !"adapt_delta" %in% names(config_current)
@@ -228,6 +258,7 @@ if (
   }
 
   config_needs_refresh <-
+    isTRUE(config_seed_needs_refresh) ||
     !all(c("output_id", "region", "climatezone") %in% names(config_current)) ||
     !all(model_definition_cols %in% names(config_current)) ||
     !setequal(config_current[["model_id"]], model_config_table[["model_id"]])
@@ -315,7 +346,19 @@ if (
 
     lifecycle_cols <-
       c(
+        "total_iterations",
+        "min_iterations_per_chain",
+        "max_chains",
+        "adapt_delta",
+        "max_treedepth",
+        "seed_base",
+        "seed_attempt",
+        "sampling_seed",
+        "seed_change_reason",
         "last_run_date",
+        "last_run_id",
+        "last_run_seed_attempt",
+        "last_run_seed",
         "last_run_start_time",
         "last_run_end_time",
         "last_run_time",

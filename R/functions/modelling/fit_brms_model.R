@@ -28,6 +28,7 @@
 #' @param max_chains Integer maximum number of chains.
 #' @param adapt_delta Numeric target average proposal acceptance probability.
 #' @param max_treedepth Integer maximum NUTS tree depth.
+#' @param sampling_seed Positive integer sampling seed passed to `brms`.
 #' @param control Optional list passed to the `control` argument of
 #' `brms::brm()`. Explicit values override `adapt_delta` and `max_treedepth`.
 #' @param verbose Logical. If `TRUE`, progress messages are printed.
@@ -69,6 +70,7 @@ fit_brms_model <- function(
   max_chains = 4,
   adapt_delta = 0.9,
   max_treedepth = 10,
+  sampling_seed = 1234L,
   control = NULL,
   verbose = TRUE,
   ...
@@ -107,7 +109,8 @@ fit_brms_model <- function(
         "min_iterations_per_chain",
         "max_chains",
         "adapt_delta",
-        "max_treedepth"
+        "max_treedepth",
+        "sampling_seed"
       )
 
     assertthat::assert_that(
@@ -134,6 +137,7 @@ fit_brms_model <- function(
     max_chains <- model_config_row[["max_chains"]][1]
     adapt_delta <- model_config_row[["adapt_delta"]][1]
     max_treedepth <- model_config_row[["max_treedepth"]][1]
+    sampling_seed <- model_config_row[["sampling_seed"]][1]
     assertthat::assert_that(
       isTRUE(model_config_row[["is_model_eligible"]][1]),
       msg = "The selected model is not eligible for fitting."
@@ -196,6 +200,7 @@ fit_brms_model <- function(
     assertthat::is.count(min_iterations_per_chain),
     assertthat::is.count(max_chains),
     assertthat::is.count(max_treedepth),
+    assertthat::is.count(sampling_seed),
     msg = "Smooth and iteration settings must be positive integers."
   )
   assertthat::assert_that(
@@ -367,6 +372,7 @@ fit_brms_model <- function(
           chains = n_chains,
           cores = n_chains,
           iter = iter_per_chain,
+          seed = as.integer(sampling_seed),
           control = brms_control,
           ...
         )
@@ -380,7 +386,10 @@ fit_brms_model <- function(
           )
         }
 
-        NA_real_
+        res_failure <- NA_real_
+        attr(res_failure, "fit_error") <- conditionMessage(err)
+
+        res_failure
       }
     )
 

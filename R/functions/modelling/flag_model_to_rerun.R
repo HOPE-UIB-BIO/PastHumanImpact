@@ -11,6 +11,8 @@
 #' @param config_file_name Character scalar saved config table basename.
 #' @param storage_subdir Character scalar subdirectory under `data_storage_path`.
 #' @param save_table Logical. If `TRUE`, persist the updated table.
+#' @param advance_seed Logical. If `TRUE`, advance the selected model seed.
+#' @param seed_change_reason Character reason recorded for the seed change.
 #' @return Invisible updated data frame.
 flag_model_to_rerun <- function(
   data_source,
@@ -20,7 +22,9 @@ flag_model_to_rerun <- function(
   sel_model_id = NULL,
   config_file_name = "general_model_config_table",
   storage_subdir = "Temporal_models",
-  save_table = TRUE
+  save_table = TRUE,
+  advance_seed = TRUE,
+  seed_change_reason = "manual_rerun"
 ) {
   assertthat::assert_that(
     is.data.frame(data_source),
@@ -37,6 +41,30 @@ flag_model_to_rerun <- function(
     ),
     msg = "`data_source` must contain required model config columns."
   )
+  assertthat::assert_that(
+    is.logical(advance_seed),
+    length(advance_seed) == 1L,
+    !is.na(advance_seed),
+    msg = "`advance_seed` must be one non-missing logical value."
+  )
+
+  if (
+    isTRUE(advance_seed)
+  ) {
+    seed_columns <-
+      c(
+        "model_id",
+        "seed_base",
+        "seed_attempt",
+        "sampling_seed",
+        "seed_change_reason"
+      )
+
+    assertthat::assert_that(
+      all(seed_columns %in% names(data_source)),
+      msg = "Seed advancement requires model seed configuration columns."
+    )
+  }
 
   use_model_id <-
     isFALSE(is.null(sel_model_id))
@@ -101,6 +129,17 @@ flag_model_to_rerun <- function(
         rows_to_update ~ as.character(Sys.Date())
       )
     )
+
+  if (
+    isTRUE(advance_seed) && any(rows_to_update)
+  ) {
+    models_to_run_updated <-
+      advance_model_seed(
+        data_config = models_to_run_updated,
+        model_ids = models_to_run_updated[["model_id"]][rows_to_update],
+        reason = seed_change_reason
+      )
+  }
 
   if (
     isTRUE(save_table)

@@ -78,7 +78,8 @@ testthat::test_that("fit_brms_model() returns NA when model fitting fails", {
       verbose = FALSE
     )
 
-  testthat::expect_identical(result, NA_real_)
+  testthat::expect_true(is.na(result))
+  testthat::expect_match(attr(result, "fit_error"), "family")
 })
 
 testthat::test_that("fit_brms_model() accepts a config row", {
@@ -124,6 +125,7 @@ testthat::test_that("fit_brms_model() accepts a config row", {
       max_chains = 1,
       adapt_delta = 0.9,
       max_treedepth = 10,
+      sampling_seed = 1234L,
       stringsAsFactors = FALSE
     )
 
@@ -134,7 +136,8 @@ testthat::test_that("fit_brms_model() accepts a config row", {
       verbose = FALSE
     )
 
-  testthat::expect_identical(result, NA_real_)
+  testthat::expect_true(is.na(result))
+  testthat::expect_match(attr(result, "fit_error"), "family")
 })
 
 testthat::test_that("fit_brms_model() rejects ineligible config", {
@@ -172,7 +175,8 @@ testthat::test_that("fit_brms_model() rejects ineligible config", {
       min_iterations_per_chain = 100,
       max_chains = 1,
       adapt_delta = 0.9,
-      max_treedepth = 10
+      max_treedepth = 10,
+      sampling_seed = 1234L
     )
 
   testthat::expect_error(
