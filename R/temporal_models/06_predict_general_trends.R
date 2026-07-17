@@ -23,12 +23,26 @@ source(
 )
 
 rewrite <- FALSE
+max_prediction_draws <- 1000L
+
+path_temporal_models <-
+  file.path(
+    data_storage_path,
+    "Temporal_models"
+  )
+path_model_dir <-
+  file.path(
+    path_temporal_models,
+    "Mods"
+  )
+path_prediction_dir <-
+  file.path(
+    path_temporal_models,
+    "General_trends"
+  )
 
 make_dir(
-  paste0(
-    data_storage_path,
-    "Temporal_models/General_trends"
-  )
+  path_prediction_dir
 )
 
 
@@ -39,20 +53,31 @@ make_dir(
 data_general_model <-
   RUtilpol::get_latest_file(
     file_name = "general_temporal_model_data",
-    dir = paste0(
-      data_storage_path,
-      "Temporal_models/"
-    )
+    dir = path_temporal_models
   )
 
-models_config_table <-
+data_model_config <-
   RUtilpol::get_latest_file(
     file_name = "general_model_config_table",
-    dir = paste0(
-      data_storage_path,
-      "Temporal_models/"
-    )
+    dir = path_temporal_models
   )
+
+data_models_pending <-
+  data_model_config %>%
+  dplyr::filter(
+    is_model_eligible,
+    need_to_run | need_to_be_evaluated
+  )
+
+assertthat::assert_that(
+  nrow(data_models_pending) == 0L,
+  msg = "All eligible temporal models must pass evaluation before prediction."
+)
+
+vec_model_ids_ready <-
+  data_model_config %>%
+  dplyr::filter(is_model_eligible) %>%
+  dplyr::pull(model_id)
 
 
 #----------------------------------------------------------#
@@ -62,141 +87,17 @@ models_config_table <-
 list_predictions <-
   purrr::map(
     .progress = "Predicting general temporal models",
-    .x = models_config_table[["model_id"]],
-    .f = ~ {
-      sel_model_id <- .x
-
-      sel_mod_config <-
-        models_config_table %>%
-        dplyr::filter(model_id == sel_model_id)
-
-      if (
-        isFALSE(sel_mod_config[["is_model_eligible"]][1])
-      ) {
-        return(NULL)
-      }
-
-      if (
-        isTRUE(sel_mod_config[["need_to_run"]][1]) ||
-          isTRUE(sel_mod_config[["need_to_be_evaluated"]][1])
-      ) {
-        return(NULL)
-      }
-
-      sel_file_exists <-
-        RUtilpol::get_latest_file_name(
-          file_name = sel_model_id,
-          dir = paste0(
-            data_storage_path,
-            "Temporal_models/General_trends"
-          )
-        ) %>%
-        is.na() %>%
-        isFALSE()
-
-      if (
-        isTRUE(sel_file_exists) &&
-          isFALSE(rewrite) &&
-          isTRUE(sel_mod_config[["prediction_written"]][1])
-      ) {
-        data_existing <-
-          RUtilpol::get_latest_file(
-            file_name = sel_model_id,
-            dir = paste0(
-              data_storage_path,
-              "Temporal_models/General_trends"
-            ),
-            verbose = FALSE
-          )
-
-        return(data_existing)
-      }
-
-      mod <-
-        load_brms_model_file(
-          model_dir = file.path(
-            data_storage_path,
-            "Temporal_models",
-            "Mods"
-          ),
-          model_file_name = sel_mod_config[["model_file_name"]][1],
-          model_id = sel_model_id
-        )
-
-      if (
-        all(is.na(mod))
-      ) {
-        flag_model_to_rerun(
-          data_source = models_config_table,
-          sel_model_id = sel_model_id,
-          config_file_name = "general_model_config_table"
-        )
-
-        return(NULL)
-      }
-
-      data_new <-
-        get_model_newdata(
-          data_source = data_general_model,
-          model_config_row = sel_mod_config
-        )
-
-      data_predicted <-
-        predict_brms_model(
-          mod = mod,
-          newdata = data_new,
-          model_config_row = sel_mod_config
-        ) %>%
-        dplyr::mutate(
-          value = estimate,
-          dplyr::across(
-            dplyr::where(is.numeric),
-            ~ round(.x, digits = 8)
-          )
-        )
-
-      RUtilpol::save_latest_file(
-        object_to_save = data_predicted,
-        file_name = sel_model_id,
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/General_trends"
-        ),
-        prefered_format = "csv"
-      )
-
-      models_to_run_updated <-
-        RUtilpol::get_latest_file(
-          file_name = "general_model_config_table",
-          dir = paste0(
-            data_storage_path,
-            "Temporal_models/"
-          ),
-          verbose = FALSE
-        ) %>%
-        dplyr::mutate(
-          prediction_written = dplyr::case_when(
-            .default = prediction_written,
-            model_id == sel_model_id ~ TRUE
-          ),
-          last_prediction_date = dplyr::case_when(
-            .default = as.character(last_prediction_date),
-            model_id == sel_model_id ~ as.character(Sys.Date())
-          )
-        )
-
-      RUtilpol::save_latest_file(
-        object_to_save = models_to_run_updated,
-        file_name = "general_model_config_table",
-        dir = paste0(
-          data_storage_path,
-          "Temporal_models/"
-        ),
-        prefered_format = "csv"
-      )
-
-      return(data_predicted)
-    }
+    .x = vec_model_ids_ready,
+    .f = ~ predict_configured_temporal_model(
+      model_id = .x,
+      data_source = data_general_model,
+      config_dir = path_temporal_models,
+      model_dir = path_model_dir,
+      prediction_dir = path_prediction_dir,
+      rewrite = rewrite,
+      max_prediction_draws = max_prediction_draws,
+      verbose = TRUE
+    )
   )
 
 data_predictions <-
@@ -210,10 +111,7 @@ if (
   RUtilpol::save_latest_file(
     object_to_save = data_predictions,
     file_name = "general_temporal_model_predictions",
-    dir = paste0(
-      data_storage_path,
-      "Temporal_models/General_trends"
-    ),
+    dir = path_prediction_dir,
     prefered_format = "csv"
   )
 
@@ -227,10 +125,7 @@ if (
     RUtilpol::save_latest_file(
       object_to_save = data_pap_predictions,
       file_name = "pap_temporal_model_predictions",
-      dir = paste0(
-        data_storage_path,
-        "Temporal_models/General_trends"
-      ),
+      dir = path_prediction_dir,
       prefered_format = "csv"
     )
 
