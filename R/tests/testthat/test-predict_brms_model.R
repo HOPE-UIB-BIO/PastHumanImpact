@@ -102,6 +102,68 @@ testthat::test_that("predict_brms_model averages datasets within draws", {
   testthat::expect_true(all(result[["source_model_file"]] == "model_a.qs"))
 })
 
+testthat::test_that("predict_brms_model retains dataset trajectories", {
+  testthat::skip_if_not_installed("brms")
+  testthat::skip_if_not_installed("posterior")
+
+  mod <-
+    structure(list(), class = "brmsfit")
+  data_new <-
+    tibble::tibble(
+      region = "Europe",
+      climatezone = "Temperate",
+      stratum = "Europe__Temperate",
+      dataset_id = factor(c("d1", "d2")),
+      age = c(0, 0),
+      age_ka = c(0, 0),
+      age_ka_scaled = c(-1, -1)
+    )
+  model_config_row <-
+    tibble::tibble(
+      analysis = "pap_temporal",
+      model_id = "pap_temporal__n0__Europe__Temperate",
+      variable = "n0",
+      group_var = "dataset_id",
+      model_profile = "within_stratum_dataset_fs",
+      model_file_name = "model_a.qs"
+    )
+  mat_expected <-
+    matrix(
+      c(1, 3, 2, 4),
+      nrow = 2,
+      byrow = TRUE
+    )
+
+  testthat::local_mocked_bindings(
+    ndraws = function(...) 2L,
+    .package = "posterior"
+  )
+  testthat::local_mocked_bindings(
+    posterior_epred = function(...) mat_expected,
+    .package = "brms"
+  )
+
+  result <-
+    predict_brms_model(
+      mod = mod,
+      newdata = data_new,
+      model_config_row = model_config_row,
+      max_prediction_draws = 2L,
+      prediction_range = "group_observed",
+      prediction_estimand = "dataset_specific"
+    )
+
+  testthat::expect_identical(nrow(result), 2L)
+  testthat::expect_equal(result[["estimate"]], c(1.5, 3.5))
+  testthat::expect_identical(
+    as.character(result[["dataset_id"]]),
+    c("d1", "d2")
+  )
+  testthat::expect_true(all(
+    result[["prediction_estimand"]] == "dataset_specific"
+  ))
+})
+
 testthat::test_that("predict_brms_model keeps scale for identity link", {
   testthat::skip_if_not_installed("ggeffects")
   testthat::skip_if_not_installed("insight")

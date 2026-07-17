@@ -65,10 +65,10 @@ data_pap_observed <-
   add_region_as_factor() %>%
   add_climatezone_as_factor() %>%
   dplyr::mutate(
-    pap_label = get_pap_label(variable),
+    pap_label = get_temporal_variable_label(variable),
     pap_label = factor(
       pap_label,
-      levels = get_pap_label(vec_all_paps)
+      levels = get_temporal_variable_label(vec_all_paps)
     )
   )
 
@@ -80,10 +80,10 @@ data_pap_predictions <-
   add_region_as_factor() %>%
   add_climatezone_as_factor() %>%
   dplyr::mutate(
-    pap_label = get_pap_label(variable),
+    pap_label = get_temporal_variable_label(variable),
     pap_label = factor(
       pap_label,
-      levels = get_pap_label(vec_all_paps)
+      levels = get_temporal_variable_label(vec_all_paps)
     )
   )
 

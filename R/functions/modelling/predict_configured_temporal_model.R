@@ -1,7 +1,7 @@
 #' @title Predict one configured temporal model
 #' @description
-#' Load one exact fitted model, create its dataset-age prediction grid, save
-#' equal-weighted dataset predictions, and update prediction lifecycle state.
+#' Load one exact fitted model, create its dataset-age prediction grid, and
+#' save either equal-weighted general trends or dataset-specific trajectories.
 #' @param model_id Character scalar model identifier.
 #' @param data_source Data frame containing all temporal model input data.
 #' @param config_dir Existing directory containing the model configuration.
@@ -11,6 +11,9 @@
 #' @param max_prediction_draws Maximum posterior draws used for prediction.
 #' @param prediction_range Character scalar describing the prediction age
 #' range. See `get_model_newdata()`.
+#' @param prediction_estimand Character scalar selecting equal-weighted general
+#' trends or dataset-specific trajectories. Only general trends update the
+#' configuration prediction lifecycle state.
 #' @param config_file_name Character scalar configuration basename.
 #' @param verbose Logical. If `TRUE`, print save progress.
 #' @return Prediction data frame, or `NULL` for ineligible or pending models.
@@ -33,6 +36,10 @@ predict_configured_temporal_model <- function(
   rewrite = FALSE,
   max_prediction_draws = 1000L,
   prediction_range = c("configured", "group_observed"),
+  prediction_estimand = c(
+    "equal_weighted_dataset_mean",
+    "dataset_specific"
+  ),
   config_file_name = "general_model_config_table",
   verbose = TRUE
 ) {
@@ -71,6 +78,8 @@ predict_configured_temporal_model <- function(
   )
   prediction_range <-
     match.arg(prediction_range)
+  prediction_estimand <-
+    match.arg(prediction_estimand)
   assertthat::assert_that(
     is.character(config_file_name),
     length(config_file_name) == 1L,
@@ -116,10 +125,14 @@ predict_configured_temporal_model <- function(
     ) %>%
     any()
 
+  lifecycle_prediction_exists <-
+    prediction_estimand == "dataset_specific" ||
+    isTRUE(model_config_row[["prediction_written"]][1])
+
   if (
     isTRUE(prediction_file_exists) &&
       isFALSE(rewrite) &&
-      isTRUE(model_config_row[["prediction_written"]][1])
+      isTRUE(lifecycle_prediction_exists)
   ) {
     res_existing <-
       RUtilpol::get_latest_file(
@@ -142,7 +155,7 @@ predict_configured_temporal_model <- function(
       ) &&
       all(
         res_existing[["prediction_estimand"]] ==
-          "equal_weighted_dataset_mean"
+          prediction_estimand
       ) &&
       all(
         res_existing[["prediction_range"]] == prediction_range
@@ -151,6 +164,15 @@ predict_configured_temporal_model <- function(
     if (
       isTRUE(has_current_provenance)
     ) {
+      res_existing <-
+        res_existing %>%
+        dplyr::mutate(
+          dplyr::across(
+            dplyr::any_of("dataset_id"),
+            as.character
+          )
+        )
+
       return(res_existing)
     }
 
@@ -181,10 +203,15 @@ predict_configured_temporal_model <- function(
       newdata = data_new,
       model_config_row = model_config_row,
       max_prediction_draws = max_prediction_draws,
-      prediction_range = prediction_range
+      prediction_range = prediction_range,
+      prediction_estimand = prediction_estimand
     ) %>%
     dplyr::mutate(
       value = estimate,
+      dplyr::across(
+        dplyr::any_of("dataset_id"),
+        as.character
+      ),
       dplyr::across(
         dplyr::where(is.numeric),
         ~ round(.x, digits = 8)
@@ -205,30 +232,34 @@ predict_configured_temporal_model <- function(
     verbose = verbose
   )
 
-  data_config_updated <-
-    RUtilpol::get_latest_file(
+  if (
+    prediction_estimand == "equal_weighted_dataset_mean"
+  ) {
+    data_config_updated <-
+      RUtilpol::get_latest_file(
+        file_name = config_file_name,
+        dir = config_dir,
+        verbose = FALSE
+      ) %>%
+      dplyr::mutate(
+        prediction_written = dplyr::case_when(
+          .default = prediction_written,
+          model_id == .env$model_id ~ TRUE
+        ),
+        last_prediction_date = dplyr::case_when(
+          .default = as.character(last_prediction_date),
+          model_id == .env$model_id ~ as.character(Sys.Date())
+        )
+      )
+
+    RUtilpol::save_latest_file(
+      object_to_save = data_config_updated,
       file_name = config_file_name,
       dir = config_dir,
-      verbose = FALSE
-    ) %>%
-    dplyr::mutate(
-      prediction_written = dplyr::case_when(
-        .default = prediction_written,
-        model_id == .env$model_id ~ TRUE
-      ),
-      last_prediction_date = dplyr::case_when(
-        .default = as.character(last_prediction_date),
-        model_id == .env$model_id ~ as.character(Sys.Date())
-      )
+      prefered_format = "csv",
+      verbose = verbose
     )
-
-  RUtilpol::save_latest_file(
-    object_to_save = data_config_updated,
-    file_name = config_file_name,
-    dir = config_dir,
-    prefered_format = "csv",
-    verbose = verbose
-  )
+  }
 
   return(res_prediction)
 }

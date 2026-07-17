@@ -1,8 +1,9 @@
-#' @title Predict marginal response from fitted model
+#' @title Predict response from a fitted model
 #' @description
-#' Builds age-wise marginal predictions. When `newdata` is supplied for a
-#' `brmsfit`, posterior expected responses are averaged equally across datasets
-#' within each posterior draw. Otherwise the legacy
+#' Builds age-wise predictions. When `newdata` is supplied for a `brmsfit`,
+#' posterior expected responses are either retained for each dataset or
+#' averaged equally across datasets within each posterior draw. Otherwise the
+#' legacy
 #' `ggeffects::predict_response()` path is used.
 #' @param mod Fitted model object accepted by `ggeffects::predict_response()`.
 #' @param newdata Optional prediction data for fitted `brmsfit` models.
@@ -12,18 +13,24 @@
 #' used for marginal predictions.
 #' @param prediction_range Character scalar describing whether prediction rows
 #' use the configured range or each dataset's observed range.
+#' @param prediction_estimand Character scalar selecting equal-weighted general
+#' trends or dataset-specific trajectories.
 #' @return Data frame with age, posterior estimate, uncertainty bounds, and
 #' prediction provenance columns.
 #' @details
-#' Dataset-specific smooths and random effects are included. Expected responses
-#' are averaged with equal dataset weights within each posterior draw, so
-#' uncertainty intervals describe the posterior dataset-mean trajectory.
+#' Dataset-specific smooths and random effects are included. General trends
+#' average expected responses with equal dataset weights within each posterior
+#' draw. Dataset-specific predictions retain each fitted core trajectory.
 predict_brms_model <- function(
   mod,
   newdata = NULL,
   model_config_row = NULL,
   max_prediction_draws = 1000L,
-  prediction_range = c("configured", "group_observed")
+  prediction_range = c("configured", "group_observed"),
+  prediction_estimand = c(
+    "equal_weighted_dataset_mean",
+    "dataset_specific"
+  )
 ) {
   assertthat::assert_that(
     !is.null(mod),
@@ -69,6 +76,8 @@ predict_brms_model <- function(
     )
     prediction_range <-
       match.arg(prediction_range)
+    prediction_estimand <-
+      match.arg(prediction_estimand)
 
     n_available_draws <-
       posterior::ndraws(mod)
@@ -92,11 +101,20 @@ predict_brms_model <- function(
         draw_ids = prediction_draw_ids
       )
 
+    summary_group_var <-
+      if (
+        prediction_estimand == "equal_weighted_dataset_mean"
+      ) {
+        model_config_row[["group_var"]][1]
+      } else {
+        NULL
+      }
+
     res_data <-
       summarise_prediction_draws(
         mat_draws = mat_expected_response,
         data_new = newdata,
-        group_var = model_config_row[["group_var"]][1]
+        group_var = summary_group_var
       ) %>%
       dplyr::mutate(
         analysis = model_config_row[["analysis"]][1],
@@ -106,7 +124,7 @@ predict_brms_model <- function(
         source_model_file = model_config_row[["model_file_name"]][1],
         prediction_draws_used = length(prediction_draw_ids),
         prediction_range = prediction_range,
-        prediction_estimand = "equal_weighted_dataset_mean"
+        prediction_estimand = prediction_estimand
       )
 
     return(res_data)

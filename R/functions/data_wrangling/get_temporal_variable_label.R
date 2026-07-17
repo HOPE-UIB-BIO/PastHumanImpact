@@ -1,10 +1,10 @@
-#' @title Get display labels for PAP variables
-#' @description Map PAP variable names to concise figure labels.
-#' @param x Character vector of PAP variable names.
+#' @title Get temporal variable labels
+#' @description Map temporal PAP and predictor names to concise figure labels.
+#' @param x Character vector of temporal variable names.
 #' @return Character vector with mapped labels. Unknown names are unchanged.
 #' @examples
-#' get_pap_label(c("n0", "roc"))
-get_pap_label <- function(x) {
+#' get_temporal_variable_label(c("n0", "temp_annual", "spd"))
+get_temporal_variable_label <- function(x) {
   assertthat::assert_that(
     is.character(x),
     msg = "`x` must be a character vector."
@@ -12,6 +12,11 @@ get_pap_label <- function(x) {
 
   res_label <-
     dplyr::case_when(
+      x == "spd" ~ "SPD",
+      x == "temp_annual" ~ "Mean annual temperature",
+      x == "temp_cold" ~ "Cold-month temperature",
+      x == "prec_summer" ~ "Summer precipitation",
+      x == "prec_win" ~ "Winter precipitation",
       x == "n0" ~ "Taxonomic richness",
       x == "n1" ~ "Shannon diversity",
       x == "n2" ~ "Simpson diversity",
