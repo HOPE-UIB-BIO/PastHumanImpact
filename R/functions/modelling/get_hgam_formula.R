@@ -17,9 +17,11 @@
 #' plus a dataset random intercept. `stratum_by` is a non-`fs` comparator.
 #' `stratum_fs_dataset_slope` adds a dataset-specific linear age effect.
 #' `stratum_fs_dataset_fs` adds dataset-specific factor smooths.
-#' `within_stratum_dataset_intercept`, `within_stratum_dataset_slope`, and
+#' `within_stratum_dataset_intercept`, `within_stratum_dataset_slope`,
+#' `within_stratum_dataset_slope_uncorrelated`, and
 #' `within_stratum_dataset_fs` are profiles for separate models fitted within
-#' one region-climatezone stratum.
+#' one region-climatezone stratum. The uncorrelated slope profile estimates
+#' dataset intercept and slope variation without their correlation.
 #' @param stratum_var Character scalar stratum variable name.
 #' @param stratum_k Integer basis dimension for stratum smooths.
 #' @param group_k Integer basis dimension for dataset-level factor smooths.
@@ -41,6 +43,7 @@ get_hgam_formula <- function(
     "stratum_fs_dataset_fs",
     "within_stratum_dataset_intercept",
     "within_stratum_dataset_slope",
+    "within_stratum_dataset_slope_uncorrelated",
     "within_stratum_dataset_fs"
   ),
   stratum_var = "stratum",
@@ -286,6 +289,25 @@ get_hgam_formula <- function(
   } else if (model_profile == "within_stratum_dataset_slope") {
     formula_hgam <-
       paste0("(1 + ", x_var, " | ", group_var, ")")
+
+    if (
+      isTRUE(common_trend)
+    ) {
+      formula_hgam_fin <-
+        paste(
+          formula_gam,
+          formula_hgam,
+          sep = " + "
+        )
+    } else {
+      formula_hgam_fin <-
+        paste0(y_var, " ~ ", formula_hgam)
+    }
+  } else if (
+    model_profile == "within_stratum_dataset_slope_uncorrelated"
+  ) {
+    formula_hgam <-
+      paste0("(1 + ", x_var, " || ", group_var, ")")
 
     if (
       isTRUE(common_trend)

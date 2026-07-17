@@ -55,6 +55,7 @@ fit_brms_model <- function(
   model_profile = c(
     "within_stratum_dataset_fs",
     "within_stratum_dataset_slope",
+    "within_stratum_dataset_slope_uncorrelated",
     "within_stratum_dataset_intercept",
     "dataset_smooth",
     "stratum_fs",

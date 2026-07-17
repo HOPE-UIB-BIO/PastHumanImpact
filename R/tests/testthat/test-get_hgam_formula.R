@@ -145,6 +145,16 @@ testthat::test_that("get_hgam_formula builds within-stratum dataset formulas", {
       model_profile = "within_stratum_dataset_slope"
     )
 
+  result_slope_uncorrelated <-
+    get_hgam_formula(
+      x_var = "age_ka",
+      y_var = "value",
+      group_var = "dataset_id",
+      smooth_basis = "cr",
+      sel_k = 8,
+      model_profile = "within_stratum_dataset_slope_uncorrelated"
+    )
+
   result_fs <-
     get_hgam_formula(
       x_var = "age_ka",
@@ -163,6 +173,10 @@ testthat::test_that("get_hgam_formula builds within-stratum dataset formulas", {
   testthat::expect_identical(
     result_slope,
     "value ~ s(age_ka, k = 8, bs = 'cr') + (1 + age_ka | dataset_id)"
+  )
+  testthat::expect_identical(
+    result_slope_uncorrelated,
+    "value ~ s(age_ka, k = 8, bs = 'cr') + (1 + age_ka || dataset_id)"
   )
   testthat::expect_identical(
     result_fs,
