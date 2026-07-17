@@ -24,6 +24,9 @@ source(
 
 rewrite <- FALSE
 max_prediction_draws <- 1000L
+prediction_range <- "group_observed"
+vec_requested_analyses <-
+  commandArgs(trailingOnly = TRUE)
 
 path_temporal_models <-
   file.path(
@@ -62,9 +65,28 @@ data_model_config <-
     dir = path_temporal_models
   )
 
+vec_available_analyses <-
+  data_model_config %>%
+  dplyr::filter(is_model_eligible) %>%
+  dplyr::distinct(analysis) %>%
+  dplyr::pull(analysis)
+
+if (
+  length(vec_requested_analyses) == 0L
+) {
+  vec_requested_analyses <-
+    vec_available_analyses
+}
+
+assertthat::assert_that(
+  all(vec_requested_analyses %in% vec_available_analyses),
+  msg = "Requested analyses must exist among eligible temporal models."
+)
+
 data_models_pending <-
   data_model_config %>%
   dplyr::filter(
+    analysis %in% vec_requested_analyses,
     is_model_eligible,
     need_to_run | need_to_be_evaluated
   )
@@ -76,7 +98,10 @@ assertthat::assert_that(
 
 vec_model_ids_ready <-
   data_model_config %>%
-  dplyr::filter(is_model_eligible) %>%
+  dplyr::filter(
+    analysis %in% vec_requested_analyses,
+    is_model_eligible
+  ) %>%
   dplyr::pull(model_id)
 
 
@@ -96,6 +121,7 @@ list_predictions <-
       prediction_dir = path_prediction_dir,
       rewrite = rewrite,
       max_prediction_draws = max_prediction_draws,
+      prediction_range = prediction_range,
       verbose = TRUE
     )
   )
@@ -106,7 +132,8 @@ data_predictions <-
   dplyr::bind_rows()
 
 if (
-  nrow(data_predictions) > 0
+  nrow(data_predictions) > 0 &&
+    setequal(vec_requested_analyses, vec_available_analyses)
 ) {
   RUtilpol::save_latest_file(
     object_to_save = data_predictions,
@@ -115,25 +142,26 @@ if (
     prefered_format = "csv"
   )
 
-  data_pap_predictions <-
-    data_predictions %>%
-    dplyr::filter(analysis == "pap_temporal")
+}
 
-  if (
-    nrow(data_pap_predictions) > 0
-  ) {
-    RUtilpol::save_latest_file(
-      object_to_save = data_pap_predictions,
-      file_name = "pap_temporal_model_predictions",
-      dir = path_prediction_dir,
-      prefered_format = "csv"
-    )
+data_pap_predictions <-
+  data_predictions %>%
+  dplyr::filter(analysis == "pap_temporal")
 
-    readr::write_csv(
-      data_pap_predictions,
-      here::here(
-        "Outputs/Tables/pap_temporal_trends_by_region_climatezone.csv"
-      )
+if (
+  nrow(data_pap_predictions) > 0
+) {
+  RUtilpol::save_latest_file(
+    object_to_save = data_pap_predictions,
+    file_name = "pap_temporal_model_predictions",
+    dir = path_prediction_dir,
+    prefered_format = "csv"
+  )
+
+  readr::write_csv(
+    data_pap_predictions,
+    here::here(
+      "Outputs/Tables/pap_temporal_trends_by_region_climatezone.csv"
     )
-  }
+  )
 }

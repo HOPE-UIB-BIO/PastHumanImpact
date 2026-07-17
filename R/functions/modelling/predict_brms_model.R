@@ -10,6 +10,8 @@
 #' to append `analysis`, `model_id`, and `variable`.
 #' @param max_prediction_draws Maximum number of evenly spaced posterior draws
 #' used for marginal predictions.
+#' @param prediction_range Character scalar describing whether prediction rows
+#' use the configured range or each dataset's observed range.
 #' @return Data frame with age, posterior estimate, uncertainty bounds, and
 #' prediction provenance columns.
 #' @details
@@ -20,7 +22,8 @@ predict_brms_model <- function(
   mod,
   newdata = NULL,
   model_config_row = NULL,
-  max_prediction_draws = 1000L
+  max_prediction_draws = 1000L,
+  prediction_range = c("configured", "group_observed")
 ) {
   assertthat::assert_that(
     !is.null(mod),
@@ -64,6 +67,8 @@ predict_brms_model <- function(
       assertthat::is.count(max_prediction_draws),
       msg = "`max_prediction_draws` must be a positive integer."
     )
+    prediction_range <-
+      match.arg(prediction_range)
 
     n_available_draws <-
       posterior::ndraws(mod)
@@ -100,6 +105,7 @@ predict_brms_model <- function(
         model_profile = model_config_row[["model_profile"]][1],
         source_model_file = model_config_row[["model_file_name"]][1],
         prediction_draws_used = length(prediction_draw_ids),
+        prediction_range = prediction_range,
         prediction_estimand = "equal_weighted_dataset_mean"
       )
 

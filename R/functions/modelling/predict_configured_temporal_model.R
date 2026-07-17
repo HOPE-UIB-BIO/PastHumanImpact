@@ -9,6 +9,8 @@
 #' @param prediction_dir Existing directory for per-model prediction files.
 #' @param rewrite Logical. If `TRUE`, replace an existing current prediction.
 #' @param max_prediction_draws Maximum posterior draws used for prediction.
+#' @param prediction_range Character scalar describing the prediction age
+#' range. See `get_model_newdata()`.
 #' @param config_file_name Character scalar configuration basename.
 #' @param verbose Logical. If `TRUE`, print save progress.
 #' @return Prediction data frame, or `NULL` for ineligible or pending models.
@@ -30,6 +32,7 @@ predict_configured_temporal_model <- function(
   prediction_dir,
   rewrite = FALSE,
   max_prediction_draws = 1000L,
+  prediction_range = c("configured", "group_observed"),
   config_file_name = "general_model_config_table",
   verbose = TRUE
 ) {
@@ -66,6 +69,8 @@ predict_configured_temporal_model <- function(
     !is.na(verbose),
     msg = "Prediction controls must be valid scalar values."
   )
+  prediction_range <-
+    match.arg(prediction_range)
   assertthat::assert_that(
     is.character(config_file_name),
     length(config_file_name) == 1L,
@@ -124,7 +129,11 @@ predict_configured_temporal_model <- function(
       )
 
     required_provenance_columns <-
-      c("source_model_file", "prediction_estimand")
+      c(
+        "source_model_file",
+        "prediction_estimand",
+        "prediction_range"
+      )
     has_current_provenance <-
       all(required_provenance_columns %in% names(res_existing)) &&
       all(
@@ -134,6 +143,9 @@ predict_configured_temporal_model <- function(
       all(
         res_existing[["prediction_estimand"]] ==
           "equal_weighted_dataset_mean"
+      ) &&
+      all(
+        res_existing[["prediction_range"]] == prediction_range
       )
 
     if (
@@ -160,14 +172,16 @@ predict_configured_temporal_model <- function(
   data_new <-
     get_model_newdata(
       data_source = data_source,
-      model_config_row = model_config_row
+      model_config_row = model_config_row,
+      prediction_range = prediction_range
     )
   res_prediction <-
     predict_brms_model(
       mod = mod,
       newdata = data_new,
       model_config_row = model_config_row,
-      max_prediction_draws = max_prediction_draws
+      max_prediction_draws = max_prediction_draws,
+      prediction_range = prediction_range
     ) %>%
     dplyr::mutate(
       value = estimate,

@@ -82,7 +82,8 @@ testthat::test_that("predict_brms_model averages datasets within draws", {
       mod = mod,
       newdata = data_new,
       model_config_row = model_config_row,
-      max_prediction_draws = 2L
+      max_prediction_draws = 2L,
+      prediction_range = "group_observed"
     )
 
   testthat::expect_identical(nrow(result), 2L)
@@ -95,6 +96,9 @@ testthat::test_that("predict_brms_model averages datasets within draws", {
     result[["prediction_estimand"]] == "equal_weighted_dataset_mean"
   ))
   testthat::expect_identical(result[["prediction_draws_used"]], c(2L, 2L))
+  testthat::expect_true(all(
+    result[["prediction_range"]] == "group_observed"
+  ))
   testthat::expect_true(all(result[["source_model_file"]] == "model_a.qs"))
 })
 

@@ -112,7 +112,7 @@ trajectories.
   `density_diversity`, `density_turnover`.
 - [x] Filter to the agreed temporal range, exclude Africa, and apply
   `min_n_records_per_climate_zone`.
-- [ ] Fit one model per PAP variable per `region x climatezone` using the
+- [x] Fit one model per PAP variable per `region x climatezone` using the
   selected formula profile and existing-style model tracking.
 
 **Validation:**
@@ -129,12 +129,12 @@ zone.
 
 **Tasks:**
 
-- [ ] Extract population-level fitted trajectories with uncertainty on the
+- [x] Extract population-level fitted trajectories with uncertainty on the
   response scale.
-- [ ] Save combined prediction tables under `Outputs/Tables/`.
-- [ ] Generate one figure per PAP metric, faceted `region ~ climatezone_label`,
+- [x] Save combined prediction tables under `Outputs/Tables/`.
+- [x] Generate one figure per PAP metric, faceted `region ~ climatezone_label`,
   with observed dataset trajectories, fitted mean, and credible ribbon.
-- [ ] Save manuscript-ready `.png` and `.pdf` outputs under
+- [x] Save manuscript-ready `.png` and `.pdf` outputs under
   `Outputs/Figures/Extended_data_figures/`.
 
 **Validation:**
