@@ -40,7 +40,14 @@ vec_all_paps <-
 
 # Select a subset here when preparing the final primary figure.
 vec_primary_paps <-
-  vec_all_paps
+  vec_all_paps[
+    !vec_all_paps %in% c(
+      "n1",
+      "n2",
+      "n2_divided_by_n1",
+      "n1_divided_by_n0"
+    )
+  ]
 
 path_temporal_models <-
   file.path(data_storage_path, "Temporal_models")
