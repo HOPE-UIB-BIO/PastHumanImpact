@@ -32,7 +32,8 @@ path_pap_figure_dir <-
   here::here(
     "Outputs",
     "Figures",
-    "Extended_data_figures"
+    "Supplementary_figures",
+    "PAP_temporal_trends"
   )
 
 path_pap_primary <-

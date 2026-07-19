@@ -19,7 +19,10 @@
 #'   data_predictions = data_pap_predictions,
 #'   pap_variables = "n0",
 #'   layout = "strata",
-#'   output_dir = "Outputs/Figures",
+#'   output_dir = paste0(
+#'     "Outputs/Figures/Supplementary_figures/",
+#'     "PAP_temporal_trends"
+#'   ),
 #'   output_stem = "PAP_through_time_n0",
 #'   width = 270,
 #'   height = 240

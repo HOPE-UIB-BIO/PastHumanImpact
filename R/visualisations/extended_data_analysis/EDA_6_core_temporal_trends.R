@@ -3,7 +3,7 @@
 #
 #                   GlobalHumanImpact
 #
-#                    Extended data
+#                 Supplementary figures
 #              Core-level temporal trends
 #
 #                   O. Mottl, V.A. Felde
@@ -61,7 +61,12 @@ path_model_dir <-
 path_prediction_dir <-
   file.path(path_temporal_models, "Core_trends")
 path_figure_dir <-
-  here::here("Outputs", "Figures", "Core_temporal_trends")
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_figures",
+    "Core_temporal_trends"
+  )
 
 make_dir(path_prediction_dir)
 make_dir(path_figure_dir)

@@ -18,7 +18,10 @@
 #'   data_observed = data_core_observed,
 #'   data_predictions = data_core_predictions,
 #'   data_metadata = data_core_metadata,
-#'   output_dir = "Outputs/Figures/Core_temporal_trends"
+#'   output_dir = paste0(
+#'     "Outputs/Figures/Supplementary_figures/",
+#'     "Core_temporal_trends"
+#'   )
 #' )
 #' }
 save_core_temporal_figure <- function(

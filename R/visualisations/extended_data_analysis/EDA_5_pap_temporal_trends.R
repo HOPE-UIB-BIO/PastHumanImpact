@@ -3,7 +3,7 @@
 #
 #                   GlobalHumanImpact
 #
-#                    Extended data
+#                 Supplementary figures
 #                  PAP temporal trends
 #
 #                   V. Felde, O. Mottl
@@ -54,7 +54,12 @@ path_temporal_models <-
 path_prediction_dir <-
   file.path(path_temporal_models, "General_trends")
 path_figure_dir <-
-  here::here("Outputs", "Figures", "Extended_data_figures")
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_figures",
+    "PAP_temporal_trends"
+  )
 
 make_dir(path_figure_dir)
 
