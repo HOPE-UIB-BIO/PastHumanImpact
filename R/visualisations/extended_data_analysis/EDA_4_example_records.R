@@ -3,11 +3,11 @@
 #
 #                   GlobalHumanImpact
 #
-#                    VISUALISATION
-#           Supplementary: Example records
+#                 Supplementary figures
+#            HVarPart core temporal examples
 #
 #                   V. Felde, O. Mottl
-#                         2024
+#                         2026
 #
 #----------------------------------------------------------#
 
@@ -18,563 +18,469 @@
 
 library(here)
 
-# Load configuration
 source(
-  here::here(
-    "R/00_Config_file.R"
-  )
+  here::here("R/00_Config_file.R")
 )
 
-# Load meta data
-source(
-  here::here(
-    "R/main_analysis/02_meta_data.R"
+rewrite_predictions <- FALSE
+max_prediction_draws <- 250L
+min_n_age_points <- 8L
+min_total_explained_variation <- 0.1
+vec_example_dataset_ids <-
+  c(
+    human = "14944",
+    climate = "15394"
   )
-)
+
+vec_temporal_analyses <-
+  c("predictor_temporal", "pap_temporal")
+vec_temporal_variables <-
+  c(
+    "spd",
+    "temp_annual",
+    "temp_cold",
+    "prec_summer",
+    "prec_win",
+    "n0",
+    "n1",
+    "n2",
+    "n1_minus_n2",
+    "n2_divided_by_n1",
+    "n1_divided_by_n0",
+    "roc",
+    "dcca_axis_1",
+    "density_diversity",
+    "density_turnover"
+  )
+vec_temporal_labels <-
+  get_temporal_variable_label(vec_temporal_variables)
+
+path_temporal_models <-
+  file.path(data_storage_path, "Temporal_models")
+path_model_dir <-
+  file.path(path_temporal_models, "Mods")
+path_prediction_dir <-
+  file.path(path_temporal_models, "Core_trends")
+path_figure_dir <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_figures",
+    "Core_examples"
+  )
+
+make_dir(path_figure_dir)
 
 
 #----------------------------------------------------------#
-# 1. Load data -----
+# 1. Load model and HVarPart data -----
 #----------------------------------------------------------#
 
-data_h1_results <-
+data_general_model <-
+  RUtilpol::get_latest_file(
+    file_name = "general_temporal_model_data",
+    dir = path_temporal_models
+  )
+data_model_config <-
+  RUtilpol::get_latest_file(
+    file_name = "general_model_config_table",
+    dir = path_temporal_models
+  )
+data_meta <-
+  RUtilpol::get_latest_file(
+    file_name = "data_meta",
+    dir = file.path(data_storage_path, "Assembly")
+  )
+data_hvarpart <-
   targets::tar_read(
     name = "output_spatial_spd",
-    store = paste0(
+    store = file.path(
       data_storage_path,
-      "Targets_data/analyses_h1"
+      "Targets_data",
+      "analyses_h1"
     )
   )
 
-data_pollen <-
-  targets::tar_read(
-    name = "data_pollen",
-    store = paste0(
+data_raw_diversity <-
+  targets::tar_read_raw(
+    name = "data_diversity_and_dcca",
+    store = file.path(
       data_storage_path,
-      "Targets_data/pipeline_pollen_data"
+      "Targets_data",
+      "pipeline_paps"
+    )
+  )
+data_raw_roc <-
+  targets::tar_read_raw(
+    name = "data_roc_for_modelling",
+    store = file.path(
+      data_storage_path,
+      "Targets_data",
+      "pipeline_paps"
+    )
+  )
+data_raw_climate <-
+  targets::tar_read_raw(
+    name = "data_climate_for_interpolation",
+    store = file.path(
+      data_storage_path,
+      "Targets_data",
+      "pipeline_predictors"
+    )
+  )
+data_raw_spd <-
+  targets::tar_read_raw(
+    name = "data_spd_to_fit",
+    store = file.path(
+      data_storage_path,
+      "Targets_data",
+      "pipeline_predictors"
     )
   )
 
+
 #----------------------------------------------------------#
-# 2. Data Wrangling -----
+# 2. Select contrasting complete cores -----
 #----------------------------------------------------------#
 
-data_meta_analysis <-
-  data_h1_results %>%
-  dplyr::select(dataset_id) %>%
-  dplyr::inner_join(data_meta, by = "dataset_id")
+data_hvarpart_importance <-
+  get_hvarpart_importance(data_hvarpart = data_hvarpart)
+data_temporal_coverage <-
+  data_general_model %>%
+  dplyr::filter(
+    .data[["analysis"]] %in% vec_temporal_analyses,
+    .data[["variable"]] %in% vec_temporal_variables
+  ) %>%
+  dplyr::group_by(.data[["dataset_id"]]) %>%
+  dplyr::summarise(
+    n_variables = dplyr::n_distinct(.data[["variable"]]),
+    n_age_points = dplyr::n_distinct(.data[["age"]]),
+    .groups = "drop"
+  ) %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]])
+  )
+data_hvarpart_coverage <-
+  data_hvarpart_importance %>%
+  dplyr::group_by(.data[["dataset_id"]]) %>%
+  dplyr::summarise(
+    has_human = "human" %in% .data[["predictor"]],
+    has_climate = "climate" %in% .data[["predictor"]],
+    total_explained_variation = mean(
+      .data[["total_explained_variation"]]
+    ),
+    importance_in_display_range = all(
+      dplyr::between(.data[["importance_percent"]], 0, 100)
+    ),
+    .groups = "drop"
+  ) %>%
+  dplyr::filter(
+    .data[["has_human"]],
+    .data[["has_climate"]],
+    .data[["importance_in_display_range"]],
+    .data[["total_explained_variation"]] >=
+      min_total_explained_variation
+  )
+data_complete_models <-
+  data_model_config %>%
+  dplyr::filter(
+    .data[["analysis"]] %in% vec_temporal_analyses,
+    .data[["variable"]] %in% vec_temporal_variables,
+    .data[["is_model_eligible"]],
+    !.data[["need_to_run"]],
+    !.data[["need_to_be_evaluated"]]
+  )
 
-data_pollen_analysis <-
-  data_pollen %>%
-  dplyr::filter(dataset_id %in% data_meta_analysis$dataset_id)
+assertthat::assert_that(
+  setequal(
+    unique(data_complete_models[["variable"]]),
+    vec_temporal_variables
+  ),
+  msg = "All temporal variables require completed eligible models."
+)
 
-data_to_plot <-
-  data_meta_analysis %>%
-  dplyr::left_join(
-    data_pollen_analysis,
+vec_available_dataset_ids <-
+  data_temporal_coverage %>%
+  dplyr::filter(
+    .data[["n_variables"]] == length(vec_temporal_variables),
+    .data[["n_age_points"]] >= min_n_age_points
+  ) %>%
+  dplyr::inner_join(
+    data_hvarpart_coverage %>%
+      dplyr::select(dataset_id),
     by = "dataset_id"
   ) %>%
+  dplyr::pull(.data[["dataset_id"]])
+
+assertthat::assert_that(
+  all(unname(vec_example_dataset_ids) %in% vec_available_dataset_ids),
+  msg = "The established HVarPart example cores require complete inputs."
+)
+
+data_selected_examples <-
+  tibble::tibble(
+    example_type = names(vec_example_dataset_ids),
+    dataset_id = unname(vec_example_dataset_ids)
+  ) %>%
   dplyr::left_join(
-    data_h1_results,
+    data_hvarpart_importance,
+    by = c(
+      "dataset_id",
+      "example_type" = "predictor"
+    )
+  ) %>%
+  dplyr::left_join(
+    data_temporal_coverage,
+    by = "dataset_id"
+  )
+
+data_selected_strata <-
+  data_general_model %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]]),
+    region = as.character(.data[["region"]]),
+    climatezone = as.character(.data[["climatezone"]])
+  ) %>%
+  dplyr::filter(
+    .data[["dataset_id"]] %in%
+      data_selected_examples[["dataset_id"]]
+  ) %>%
+  dplyr::distinct(
+    .data[["dataset_id"]],
+    .data[["region"]],
+    .data[["climatezone"]]
+  )
+data_selected_examples <-
+  data_selected_examples %>%
+  dplyr::left_join(
+    data_selected_strata,
+    by = "dataset_id"
+  )
+
+readr::write_csv(
+  x = data_selected_examples,
+  file = file.path(
+    path_figure_dir,
+    "HVarPart_core_temporal_example_selection.csv"
+  )
+)
+
+
+#----------------------------------------------------------#
+# 3. Prepare current temporal predictions -----
+#----------------------------------------------------------#
+
+data_config_selected <-
+  data_complete_models %>%
+  dplyr::mutate(
+    region = as.character(.data[["region"]]),
+    climatezone = as.character(.data[["climatezone"]])
+  ) %>%
+  dplyr::semi_join(
+    data_selected_strata,
+    by = c("region", "climatezone")
+  )
+
+list_core_predictions <-
+  purrr::map(
+    .x = data_config_selected[["model_id"]],
+    .f = ~ predict_configured_temporal_model(
+      model_id = .x,
+      data_source = data_general_model,
+      config_dir = path_temporal_models,
+      model_dir = path_model_dir,
+      prediction_dir = path_prediction_dir,
+      rewrite = rewrite_predictions,
+      max_prediction_draws = max_prediction_draws,
+      prediction_range = "group_observed",
+      prediction_estimand = "dataset_specific",
+      verbose = TRUE
+    ),
+    .progress = "Loading selected core predictions"
+  )
+
+data_core_predictions <-
+  list_core_predictions %>%
+  purrr::compact() %>%
+  dplyr::bind_rows() %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]])
+  ) %>%
+  dplyr::filter(
+    .data[["dataset_id"]] %in%
+      data_selected_examples[["dataset_id"]]
+  ) %>%
+  add_region_as_factor() %>%
+  add_climatezone_as_factor() %>%
+  dplyr::mutate(
+    variable_label = factor(
+      get_temporal_variable_label(.data[["variable"]]),
+      levels = vec_temporal_labels
+    )
+  )
+data_core_observed <-
+  data_general_model %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]])
+  ) %>%
+  dplyr::filter(
+    .data[["dataset_id"]] %in%
+      data_selected_examples[["dataset_id"]],
+    .data[["analysis"]] %in% vec_temporal_analyses,
+    .data[["variable"]] %in% vec_temporal_variables
+  ) %>%
+  add_region_as_factor() %>%
+  add_climatezone_as_factor() %>%
+  dplyr::mutate(
+    variable_label = factor(
+      get_temporal_variable_label(.data[["variable"]]),
+      levels = vec_temporal_labels
+    )
+  )
+data_core_raw <-
+  prepare_raw_temporal_data(
+    data_diversity = data_raw_diversity,
+    data_roc = data_raw_roc,
+    data_climate = data_raw_climate,
+    data_spd = data_raw_spd,
+    dataset_ids = data_selected_examples[["dataset_id"]],
+    age_min = 500,
+    age_max = 8500
+  ) %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]])
+  ) %>%
+  dplyr::inner_join(
+    data_meta %>%
+      dplyr::mutate(
+        dataset_id = as.character(.data[["dataset_id"]])
+      ) %>%
+      dplyr::select(
+        dataset_id,
+        region,
+        climatezone
+      ),
     by = "dataset_id"
   ) %>%
   add_region_as_factor() %>%
   add_climatezone_as_factor() %>%
   dplyr::mutate(
-    data_pollen = purrr::map2(
-      .progress = TRUE,
-      .x = levels,
-      .y = counts_harmonised,
-      .f = ~ dplyr::inner_join(
-        .x %>%
-          dplyr::select(
-            sample_id,
-            age
-          ),
-        .y,
-        by = "sample_id"
-      ) %>%
-        dplyr::select(-sample_id)
-    ),
-    data_merge = purrr::map(
-      .progress = TRUE,
-      .x = data_merge,
-      .f = ~ .x %>%
-        dplyr::select(-"n1_minus_n2")  %>% 
-        dplyr::rename(
-          "N0" = n0,
-          "N1" = n1,
-          "N2" = n2,
-          "N2 divided by N1" = n2_divided_by_n1,
-          "N1 divided by N0" = n1_divided_by_n0,
-          "DCCA axis 1" = dcca_axis_1,
-          "ROC" = roc,
-          "Density diversity" = density_diversity,
-          "Density turnover" = density_turnover,
-          "SPD" = spd,
-          "MAT" = temp_annual,
-          "MTCO" = temp_cold,
-          "MAPS" = prec_summer,
-          "MAPW" = prec_win
-        )
-    ),
-    total_explained_variation = purrr::map_dbl(
-      .progress = TRUE,
-      .x = varhp,
-      .f = purrr::possibly(
-        ~ .x %>% purrr::chuck("varhp_output", "Total_explained_variation"),
-        otherwise = NA_real_
-      )
-    ),
-    varpar_summary_table = purrr::map(
-      .progress = TRUE,
-      .x = varhp,
-      .f = purrr::possibly(
-        ~ .x$summary_table %>%
-          janitor::clean_names(),
-        otherwise = tibble::tibble()
-      )
-    ),
+    variable_label = factor(
+      get_temporal_variable_label(.data[["variable"]]),
+      levels = vec_temporal_labels
+    )
+  )
+data_core_metadata <-
+  data_meta %>%
+  dplyr::mutate(
+    dataset_id = as.character(.data[["dataset_id"]])
   ) %>%
-  dplyr::select(
-    dataset_id,
-    region,
-    climatezone,
-    data_pollen,
-    data_merge,
-    total_explained_variation,
-    varpar_summary_table
-  )
+  dplyr::filter(
+    .data[["dataset_id"]] %in%
+      data_selected_examples[["dataset_id"]]
+  ) %>%
+  dplyr::distinct(.data[["dataset_id"]], .keep_all = TRUE)
+
+assertthat::assert_that(
+  setequal(
+    unique(data_core_predictions[["dataset_id"]]),
+    data_selected_examples[["dataset_id"]]
+  ),
+  msg = "Both selected cores require current dataset-specific predictions."
+)
 
 
 #----------------------------------------------------------#
-# 4. Helper function -----
+# 4. Build HVarPart core examples -----
 #----------------------------------------------------------#
 
-plot_example_figure <- function(
-    data_source,
-    sel_example_record,
-    time_step = 1) {
-  p0 <-
-    ggplot2::ggplot(
-      mapping = ggplot2::aes(
-        x = age,
-        y = value
-      )
-    ) +
-    ggplot2::facet_wrap(
-      ~predictor,
-      nrow = 1,
-      scales = "free_x",
-      labeller = ggplot2::labeller(
-        predictor = ggplot2::label_wrap_gen(5)
-      )
-    ) +
-    ggplot2::scale_y_continuous(
-      breaks = scales::pretty_breaks(n = 3)
-    ) +
-    ggplot2::scale_x_continuous(
-      trans = "reverse",
-      breaks = seq(2e3, 8.5e3, time_step * 1e3),
-      labels = seq(2, 8.5, time_step)
-    ) +
-    ggplot2::coord_flip(
-      xlim = c(8.5e3, 2e3)
-    ) +
-    ggplot2::labs(
-      x = "Age (ka cal yr BP)",
-      y = "Value"
-    ) +
-    ggplot2::theme(
-      plot.margin = grid::unit(c(0, 1, 0, 1), "mm"),
-      panel.spacing.y = grid::unit(3, "mm"),
-      legend.position = "none",
-      legend.text = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      legend.title = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      text = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      axis.text.y = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      axis.text.x = ggplot2::element_blank(),
-      axis.title.y = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      axis.title.x = ggplot2::element_blank(),
-      axis.line.x = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
-      line = ggplot2::element_line(
-        linewidth = line_size, # [config criteria]
-        color = common_gray # [config criteria]
-      ),
-      strip.background = ggplot2::element_rect(
-        fill = "white",
-        color = common_gray # [config criteria]
-      ),
-      strip.text = ggplot2::element_blank()
-    ) +
-    ggplot2::geom_vline(
-      xintercept = seq(0, 10e3, time_step * 1e3),
-      col = colorspace::lighten(common_gray, amount = 0.5), # [config criteria]
-      linetype = 1,
-      alpha = 0.5,
-      linewidth = line_size # [config criteria]
-    )
+vec_selected_ids <-
+  data_selected_examples[["dataset_id"]]
+list_raw_by_dataset <-
+  split(data_core_raw, data_core_raw[["dataset_id"]])
+list_observed_by_dataset <-
+  split(data_core_observed, data_core_observed[["dataset_id"]])
+list_predictions_by_dataset <-
+  split(data_core_predictions, data_core_predictions[["dataset_id"]])
+list_metadata_by_dataset <-
+  split(data_core_metadata, data_core_metadata[["dataset_id"]])
 
-  plot_line <- function(data_source, sel_col = "black", show_axis = FALSE) {
-    if (
-      isFALSE(show_axis)
-    ) {
-      p0 <-
-        p0 +
-        ggplot2::theme(
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    }
-
-    p0 +
-      ggplot2::geom_line(
-        data = data_source,
-        linewidth = line_size * 5,
-        color = sel_col
-      )
-  }
-
-  plot_line_by_var <- function(data_source, sel_var, ...) {
-    data_source %>%
-      dplyr::select(
-        age,
-        !!sel_var
-      ) %>%
-      tidyr::pivot_longer(
-        cols = -age,
-        names_to = "predictor",
-        values_to = "value"
-      ) %>%
-      plot_line(
-        data_source = .,
-        ...
-      )
-  }
-
-  plot_density <- function(data_source, sel_col = "black", show_axis = FALSE) {
-    if (
-      isFALSE(show_axis)
-    ) {
-      p0 <-
-        p0 +
-        ggplot2::theme(
-          axis.title.y = ggplot2::element_blank(),
-          axis.text.y = ggplot2::element_blank(),
-          axis.ticks.y = ggplot2::element_blank()
-        )
-    }
-    p0 +
-      ggplot2::geom_ribbon(
-        data = data_source,
-        mapping = ggplot2::aes(
-          x = age,
-          ymax = value,
-          ymin = 0
-        ),
-        orientation = "x",
-        color = sel_col,
-        fill = colorspace::lighten(sel_col, amount = 0.5),
-        linewidth = line_size * 5
-      )
-  }
-
-  plot_density_by_var <- function(data_source, sel_var, ...) {
-    data_source %>%
-      dplyr::select(
-        age,
-        !!sel_var
-      ) %>%
-      tidyr::pivot_longer(
-        cols = -age,
-        names_to = "predictor",
-        values_to = "value"
-      ) %>%
-      plot_density(
-        data_source = .,
-        ...
-      )
-  }
-
-  data_sub <-
-    data_source %>%
-    dplyr::filter(dataset_id == sel_example_record)
-
-
-
-  fig_importance <-
-    data_sub$varpar_summary_table[[1]] %>%
-    dplyr::select(
-      predictor,
-      ratio = i_perc_percent
-    ) %>%
-    ggplot2::ggplot() +
-    ggplot2::geom_bar(
-      ggplot2::aes(
-        x = 1,
-        y = ratio / 100,
-        fill = predictor,
-        color = predictor,
-      ),
-      stat = "identity",
-      col = NA,
-      position = "stack",
-      show.legend = TRUE
-    ) +
-    ggplot2::scale_y_continuous(
-      position = "left",
-      limits = c(0, 1),
-      breaks = seq(0, 1, 0.2),
-      oob = scales::squish
-    ) +
-    ggplot2::scale_fill_manual(
-      values = palette_predictors,
-      drop = FALSE
-    ) +
-    ggplot2::scale_colour_manual(
-      values = palette_predictors,
-      drop = FALSE
-    ) +
-    ggplot2::guides(
-      colour = "none",
-      alpha = "none",
-      fill = ggplot2::guide_legend(
-        title = "Predictors",
-        title.position = "top",
-        title.theme = ggplot2::element_text(
-          size = text_size, # [config criteria]
-          colour = common_gray
-        ),
-        label.theme = ggplot2::element_text(
-          size = text_size, # [config criteria]
-          colour = common_gray
-        ),
-        nrow = 2,
-        ncol = 2,
-        byrow = TRUE
-      )
-    ) +
-    ggplot2::theme(
-      legend.position = "bottom",
-      legend.title = element_text(
-        size = text_size, # [config criteria]
-        colour = common_gray,
-      ),
-      legend.text = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        colour = common_gray
-      ),
-      legend.margin = ggplot2::margin(
-        t = 0,
-        r = 0,
-        b = 0,
-        l = 0,
-        unit = "pt"
-      ),
-      panel.background = ggplot2::element_blank(),
-      panel.grid.major = ggplot2::element_blank(),
-      plot.background = ggplot2::element_rect(
-        fill = "transparent",
-        colour = NA
-      ),
-      axis.title = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        colour = common_gray
-      ),
-      axis.text.x = ggplot2::element_blank(),
-      axis.ticks.x = ggplot2::element_blank(),
-      axis.line.x = ggplot2::element_blank(),
-      text = ggplot2::element_text(
-        size = text_size, # [config criteria]
-        colour = common_gray
-      ),
-      line = ggplot2::element_line(
-        linewidth = line_size, # [config criteria]
-        colour  = common_gray
-      )
-    ) +
-    ggplot2::labs(
-      y = "Ratio of importance",
-      x = NULL
-    )
-
-  fig_spd <-
-    plot_density_by_var(
-      data_source = data_sub$data_merge[[1]],
-      sel_var = "SPD",
-      sel_col = palette_predictors["human"],
-      show_axis = TRUE
-    )
-
-  list_fig_climate <-
-    c(
-      "MAT", "MTCO", "MAPS", "MAPW"
-    ) %>%
-    purrr::map(
-      .f = ~ plot_line_by_var(
-        data_source = data_sub$data_merge[[1]],
-        sel_var = .x,
-        sel_col = palette_predictors["climate"]
-      )
-    )
-
-  fig_predictors <-
-    cowplot::plot_grid(
-      fig_spd,
-      NULL,
-      cowplot::plot_grid(
-        plotlist = list_fig_climate,
-        nrow = 1,
-        labels = c("MAT", "MTCO", "MAPS", "MAPW"),
-        label_size = text_size, # [config criteria]
-        label_colour = common_gray, # [config criteria]
-        hjust = -0.5,
-        vjust = 0.5
-      ),
-      nrow = 1,
-      labels = c("SPD", NULL, NULL),
-      label_size = text_size, # [config criteria]
-      label_colour = common_gray, # [config criteria]
-      hjust = -1.5,
-      vjust = 0.5,
-      rel_widths = c(2, 0.5, 4)
-    )
-
-
-  list_fig_paps_line <-
-    c(
-      "N0", "N1", "N2",
-      "N2 divided by N1", "N1 divided by N0",
-      "DCCA axis 1", "ROC"
-    ) %>%
-    purrr::map(
-      .f = ~ plot_line_by_var(
-        data_source = data_sub$data_merge[[1]],
-        sel_var = .x
-      )
-    )
-
-  list_fig_paps_density <-
-    c("Density diversity", "Density turnover") %>%
-    purrr::map(
-      .f = ~ plot_density_by_var(
-        data_source = data_sub$data_merge[[1]],
-        sel_var = .x
-      )
-    )
-
-  fig_paps <-
-    cowplot::plot_grid(
-      cowplot::plot_grid(
-        plotlist = list_fig_paps_line,
-        nrow = 1,
-        labels = c(
-          "N0", "N1", "N2",
-          "N2 divided by N1", "N1 divided by N0",
-          "DCCA axis 1", "ROC"
-        ),
-        label_size = text_size, # [config criteria]
-        label_colour = common_gray, # [config criteria]
-        hjust = -0.5,
-        vjust = 0.5
-      ),
-      cowplot::plot_grid(
-        plotlist = list_fig_paps_density,
-        nrow = 1,
-        labels = c("Density diversity", "Density turnover"),
-        label_size = text_size, # [config criteria]
-        label_colour = common_gray, # [config criteria]
-        hjust = -0.5,
-        vjust = 0.5
-      ),
-      nrow = 1,
-      align = "h",
-      rel_widths = c(8, 2)
-    )
-
-  cowplot::plot_grid(
-    fig_importance,
-    NULL,
-    cowplot::plot_grid(
-      fig_predictors,
-      NULL,
-      fig_paps,
-      nrow = 1,
-      align = "h",
-      rel_widths = c(5.5, 0.5, 10)
+data_figure_inputs <-
+  data_selected_examples %>%
+  dplyr::transmute(
+    dataset_id = .data[["dataset_id"]],
+    example_type = .data[["example_type"]],
+    data_raw = unname(list_raw_by_dataset[vec_selected_ids]),
+    data_observed = unname(list_observed_by_dataset[vec_selected_ids]),
+    data_predictions = unname(
+      list_predictions_by_dataset[vec_selected_ids]
     ),
-    nrow = 1,
-    rel_widths = c(2, 0.5, 16)
+    data_metadata = unname(list_metadata_by_dataset[vec_selected_ids])
+  ) %>%
+  dplyr::mutate(
+    plot = purrr::pmap(
+      .l = list(
+        data_raw,
+        data_observed,
+        data_predictions,
+        data_metadata
+      ),
+      .f = ~ plot_hvarpart_core_temporal_example(
+        data_raw = ..1,
+        data_observed = ..2,
+        data_predictions = ..3,
+        data_metadata = ..4,
+        data_importance = data_hvarpart_importance
+      )
+    ),
+    panel_label = stringr::str_glue(
+      "{c('A', 'B')} ",
+      "{stringr::str_to_title(as.character(example_type))}-dominated example"
+    ),
+    plot_labelled = purrr::map2(
+      .x = plot,
+      .y = panel_label,
+      .f = ~ cowplot::ggdraw() +
+        cowplot::draw_plot(
+          plot = .x,
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 0.96
+        ) +
+        cowplot::draw_label(
+          label = .y,
+          x = 0,
+          y = 1,
+          hjust = 0,
+          vjust = 1,
+          fontface = "bold",
+          size = 11
+        )
+    )
   )
-}
 
-
-
-#----------------------------------------------------------#
-# 4. Plot results -----
-#----------------------------------------------------------#
-
-human_example_id <- "14944"
-
-fig_human_example <-
-  plot_example_figure(
-    data_source = data_to_plot,
-    sel_example_record = human_example_id
-  )
-
-
-climate_example_id <- "15394"
-
-fig_climate_example <-
-  plot_example_figure(
-    data_source = data_to_plot,
-    sel_example_record = climate_example_id
-  )
-
-fig_example_merged <-
+plot_examples <-
   cowplot::plot_grid(
-    fig_human_example,
-    fig_climate_example,
-    nrow = 2,
-    rel_heights = c(1, 1),
-    labels = "AUTO"
+    plotlist = data_figure_inputs[["plot_labelled"]],
+    ncol = 1,
+    align = "v"
   )
-
-#----------------------------------------------------------#
-# 5. Save -----
-#----------------------------------------------------------#
 
 purrr::walk(
-  .x = c("png", "pdf"),
+  c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
-    paste(
-      here::here(
-        "Outputs/Figures/Extended_data_figures/Extended_data_figure_3"
-      ),
-      .x,
-      sep = "."
+    filename = file.path(
+      path_figure_dir,
+      stringr::str_glue(
+        "HVarPart_core_temporal_examples.{.x}"
+      )
     ),
-    plot = fig_example_merged,
-    width = image_width_vec["3col"], # [config criteria]
-    height = 220,
-    units = image_units, # [config criteria]
+    plot = plot_examples,
+    width = 360,
+    height = 300,
+    units = "mm",
+    dpi = 300,
     bg = "white"
   )
 )
