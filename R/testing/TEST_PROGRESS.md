@@ -8,7 +8,7 @@ This file tracks the project-wide test rollout for the `testthat` suite under `R
 - Smoke test: complete
 - Contract-first rollout: complete
 - Contract coverage gate: complete (all checked functions have roxygen, argument assertions, and tests)
-- Latest full-suite validation: `[ FAIL 0 | WARN 0 | SKIP 0 | PASS 427 ]`, `EXIT_CODE=0`
+- Latest full-suite validation: `[ FAIL 0 | WARN 1 | SKIP 1 | PASS 759 ]`, `EXIT_CODE=0`
 
 ### Active Batches
 
@@ -20,6 +20,10 @@ This file tracks the project-wide test rollout for the `testthat` suite under `R
 
 ### Completed In This Iteration
 
+- `get_hvarpart_importance`: nested HVarPart results are validated, failed fits are ignored, duplicate estimates are consolidated, and explained-variation shares are normalised for plotting; focused tests cover each case.
+- `plot_hvarpart_importance`: human and climate importance estimates are displayed independently around zero alongside total explained variation; focused plotting tests added.
+- `plot_hvarpart_core_temporal_example`: current raw, interpolated, and modelled core trajectories are combined with HVarPart results; focused composition tests added.
+- `plot_predictor_temporal_trends`: predictor-wide temporal panels now use a reusable plotting contract and semantic supplementary outputs; focused plotting tests added.
 - `get_chelsa_download`: input contract hardened for required download metadata columns and control argument types; new per-function tests added for invalid-input coverage.
 - `get_climate_data`: input contract hardened for selected-variable vectors and required coordinate columns in `xy`; new per-function tests added for invalid-input coverage.
 - `get_events_spd_combined`: contract expanded (including roxygen params/return) with required input-shape validation; new per-function tests added for invalid-input coverage.
