@@ -1,0 +1,275 @@
+---
+title: "Response: PAP temporal trends"
+format:
+  html:
+    self-contained: true
+    toc: true
+  pdf:
+    keep-tex: true
+    fig-pos: H
+    include-in-header:
+      text: |
+        \usepackage{pdflscape}
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup-pap-temporal-response
+#| include: false
+
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_pap_temporal_trends.qmd"
+)
+
+source(
+  here::here("R/00_Config_file.R")
+)
+
+path_pap_figure_dir <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "Supplementary_figures",
+    "PAP_temporal_trends"
+  )
+
+path_pap_primary <-
+  file.path(
+    path_pap_figure_dir,
+    "PAP_through_time_primary.png"
+  )
+
+vec_pap_variables <-
+  c(
+    "n0",
+    "n1",
+    "n2",
+    "n1_minus_n2",
+    "n2_divided_by_n1",
+    "n1_divided_by_n0",
+    "roc",
+    "dcca_axis_1",
+    "density_diversity",
+    "density_turnover"
+  )
+
+vec_pap_figure_paths <-
+  stats::setNames(
+    file.path(
+      path_pap_figure_dir,
+      stringr::str_glue(
+        "PAP_through_time_{vec_pap_variables}.png"
+      )
+    ),
+    vec_pap_variables
+  )
+
+vec_required_figures <-
+  c(
+    path_pap_primary,
+    unname(vec_pap_figure_paths)
+  )
+
+assertthat::assert_that(
+  all(file.exists(vec_required_figures)),
+  msg = "All PAP temporal response figures must exist before rendering."
+)
+```
+
+## Reviewer comment
+
+> Though two records are presented in Extended Fig. 3, a key figure missing from this work is a presentation of the full set of PAPs through time for each region. The authors have presented the set of predictor variables, rather than the response variables, which, in my view, are of substantially less importance than the response variables themselves. I find it difficult to make sense of and interpret statistical analyses for which at least some abstraction of the response variables (here, PAPs) are not presented in a paper and thus, for me, these need to be included.
+
+## Draft response
+
+We thank the reviewer for this important suggestion and agree that the temporal behaviour of the response variables should be visible before their relationships with climate and human predictors are interpreted.
+
+We have therefore added a new overview figure showing modelled trajectories for a selected set of complementary pollen assemblage properties (PAPs) across continents and climate zones.
+
+We also provide the complete set of PAP trajectories as metric-specific Extended Data figures.
+
+These figures include all PAPs used in the analyses: taxonomic richness ($N_0$), Shannon diversity ($N_1$), Simpson diversity ($N_2$), the difference between Shannon and Simpson diversity ($N_1-N_2$), the Simpson-to-Shannon diversity ratio ($N_2/N_1$), the Shannon-diversity-to-richness ratio ($N_1/N_0$), rate of change, DCCA axis 1, diversity density, and turnover density.
+
+We have added a corresponding description to the Methods and Results and now refer to these figures before presenting the variation-partitioning results.
+
+This addition makes the temporal structure, regional heterogeneity, data coverage, and uncertainty of the PAP response variables directly visible and provides the empirical context needed to interpret the subsequent comparison of climate and human predictors.
+
+```{=latex}
+\begin{landscape}
+```
+
+```{r}
+#| label: pap-temporal-primary
+#| out-width: "70%"
+#| fig-align: center
+
+knitr::include_graphics(path_pap_primary)
+```
+
+*Overview of modelled temporal trajectories for selected pollen assemblage properties across continents and climate zones. Lines show equal-weighted general trajectories across contributing pollen records; ribbons show posterior uncertainty. Colours identify climate zones.*
+
+```{=latex}
+\clearpage
+```
+
+### Taxonomic richness
+
+```{r}
+#| label: fig-pap-temporal-n0
+#| fig-cap: "Temporal trajectories of taxonomic richness (N0) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n0"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Shannon diversity
+
+```{r}
+#| label: fig-pap-temporal-n1
+#| fig-cap: "Temporal trajectories of Shannon diversity (N1) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n1"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Simpson diversity
+
+```{r}
+#| label: fig-pap-temporal-n2
+#| fig-cap: "Temporal trajectories of Simpson diversity (N2) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n2"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Shannon-Simpson diversity difference
+
+```{r}
+#| label: fig-pap-temporal-n1-minus-n2
+#| fig-cap: "Temporal trajectories of the difference between Shannon and Simpson diversity (N1 - N2) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n1_minus_n2"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Simpson-to-Shannon diversity ratio
+
+```{r}
+#| label: fig-pap-temporal-n2-divided-by-n1
+#| fig-cap: "Temporal trajectories of the Simpson-to-Shannon diversity ratio (N2 / N1) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n2_divided_by_n1"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Shannon-diversity-to-richness ratio
+
+```{r}
+#| label: fig-pap-temporal-n1-divided-by-n0
+#| fig-cap: "Temporal trajectories of the Shannon-diversity-to-richness ratio (N1 / N0) by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["n1_divided_by_n0"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Rate of change
+
+```{r}
+#| label: fig-pap-temporal-roc
+#| fig-cap: "Temporal trajectories of rate of change by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["roc"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### DCCA axis 1
+
+```{r}
+#| label: fig-pap-temporal-dcca-axis-1
+#| fig-cap: "Temporal trajectories of DCCA axis 1 by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["dcca_axis_1"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Diversity density
+
+```{r}
+#| label: fig-pap-temporal-density-diversity
+#| fig-cap: "Temporal trajectories of diversity density by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["density_diversity"]])
+```
+
+```{=latex}
+\clearpage
+```
+
+### Turnover density
+
+```{r}
+#| label: fig-pap-temporal-density-turnover
+#| fig-cap: "Temporal trajectories of turnover density by continent and climate zone."
+#| out-width: "85%"
+#| fig-align: center
+
+knitr::include_graphics(vec_pap_figure_paths[["density_turnover"]])
+```
+
+```{=latex}
+\end{landscape}
+```
+
+## Manuscript integration
+
+- Add the overview as an Extended Data figure and assign its final figure number.
+- Add the metric-specific continent-by-climate-zone grids to the Extended Data or Supplementary Information.
+- Introduce the response-variable trajectories before interpreting predictor importance.
+- State in the Methods that the general trend is an equal-weighted average of record-specific posterior expected responses.
+- Confirm the final PAP subset retained in the overview figure.
+- Confirm that the displayed temporal range is consistent with the revised manuscript title, Methods, and Results.

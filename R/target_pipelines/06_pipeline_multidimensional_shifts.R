@@ -32,10 +32,10 @@ source(
 )
 
 mod_config_file <- RUtilpol::get_latest_file(
-  file_name = "predictor_models_config_table",
+  file_name = "general_model_config_table",
   dir = paste0(
     data_storage_path,
-    "Predictor_models/"
+    "Temporal_models/"
   )
 )
 
@@ -63,10 +63,10 @@ list(
   # targets::tar_target(
   #   name = mod_config_file,
   #   command = RUtilpol::get_latest_file(
-  #     file_name = "predictor_models_config_table",
+  #     file_name = "general_model_config_table",
   #     dir = paste0(
   #       data_storage_path,
-  #       "Predictor_models/"
+  #       "Temporal_models/"
   #     )
   #   )
   # ),

@@ -36,7 +36,7 @@ Data/
 ├── C14/
 ├── Climate/
 ├── Events/
-├── Predictor_models/
+├── Temporal_models/
 ├── Spatial/
 ├── SPD/
 └── Targets_data/

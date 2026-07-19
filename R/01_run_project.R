@@ -229,21 +229,21 @@ if (
 }
 
 #----------------------------------------------------------#
-# 9. Run all predictore gerenral trends (H2) -----
+# 9. Run all general temporal models -----
 #----------------------------------------------------------#
 
 # # Running the models is very computationally expensive.
 #   Therefore, it is curently set to to skip.
-# If you prefer to manually rerun all model, you need to:
-#   1.set it set the variable 'rerun' to TRUE in the
-#     `R/main_analysis/05_prediction_models.r` script a
-#   2. manualy flagg the models to rerun in the
-#     `Predictor_models/predictor_models_config_table.csv`.
+# If you prefer to manually rerun all models, you need to:
+#   1. set the variable `rerun` to TRUE in the
+#     `R/main_analysis/05_temporal_models.R` script.
+#   2. manually flag the models to rerun in the
+#     `Temporal_models/general_model_config_table.csv`.
 #     Specifically, column `need_to_run` should be set to TRUE.
 #   !!! Warning: This will take a while to run !!!
 source(
   here::here(
-    "R/main_analysis/05_prediction_models"
+    "R/main_analysis/05_temporal_models"
   )
 )
 

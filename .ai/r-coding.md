@@ -13,7 +13,8 @@ Main project areas:
 - `R/main_analysis/` - ordered analysis scripts used by `R/01_run_project.R`
 - `R/target_pipelines/` - `{targets}` pipeline definitions
 - `R/functions/` - reusable project functions
-- `R/predictor_models/` - model preparation, fitting, checks, and prediction
+- `R/temporal_models/` - temporal model preparation, fitting, checks, and
+  prediction
 - `R/spd_calculation/` - radiocarbon SPD calculation scripts
 - `R/visualisations/` - manuscript and exploratory figures
 
@@ -110,7 +111,9 @@ if (
 ## Namespaces and Packages
 
 - Use `pkg::function()` for non-base calls.
-- Do not add new package dependencies casually.
+- New R package dependencies may be added when they materially improve the
+  implementation, but the agent must explain the need and receive explicit
+  user approval before installing, recording, or using them in project code.
 - Do not call `library()` inside functions.
 - Keep package loading centralized in `R/00_Config_file.R` unless a script is a
   minimal reproducible debug script.

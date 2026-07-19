@@ -1,0 +1,3 @@
+example_type,dataset_id,importance_percent,total_explained_variation,n_hvarpart_results,n_variables,n_age_points,region,climatezone
+human,14944,77.19,0.606,1,15,17,North America,Cold_Dry_Summer
+climate,15394,80.09,0.683,1,15,14,Latin America,Tropical

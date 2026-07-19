@@ -8,7 +8,7 @@ testthat::test_that("flag_model_to_rerun() updates selected row and saves table"
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -46,13 +46,14 @@ testthat::test_that("flag_model_to_rerun() updates selected row and saves table"
     data_source = data_source,
     sel_region = "Europe",
     sel_climatezone = "Temperate",
-    sel_variable = "temp_annual"
+    sel_variable = "temp_annual",
+    advance_seed = FALSE
   )
 
   saved <-
     RUtilpol::get_latest_file(
-      file_name = "predictor_models_config_table",
-      dir = paste0(temp_storage_root_unix, "/Predictor_models"),
+      file_name = "general_model_config_table",
+      dir = paste0(temp_storage_root_unix, "/Temporal_models"),
       verbose = FALSE
     )
 
@@ -70,7 +71,7 @@ testthat::test_that("flag_model_to_rerun() leaves unmatched rows unchanged", {
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -108,13 +109,14 @@ testthat::test_that("flag_model_to_rerun() leaves unmatched rows unchanged", {
     data_source = data_source,
     sel_region = "Oceania",
     sel_climatezone = "Arid",
-    sel_variable = "prec_annual"
+    sel_variable = "prec_annual",
+    advance_seed = FALSE
   )
 
   saved <-
     RUtilpol::get_latest_file(
-      file_name = "predictor_models_config_table",
-      dir = paste0(temp_storage_root_unix, "/Predictor_models"),
+      file_name = "general_model_config_table",
+      dir = paste0(temp_storage_root_unix, "/Temporal_models"),
       verbose = FALSE
     )
 
@@ -132,7 +134,7 @@ testthat::test_that("flag_model_to_rerun() writes one saved table", {
     gsub("\\\\", "/", temp_storage_root)
 
   dir.create(
-    file.path(temp_storage_root, "Predictor_models"),
+    file.path(temp_storage_root, "Temporal_models"),
     recursive = TRUE,
     showWarnings = FALSE
   )
@@ -170,13 +172,14 @@ testthat::test_that("flag_model_to_rerun() writes one saved table", {
     data_source = data_source,
     sel_region = "Europe",
     sel_climatezone = "Temperate",
-    sel_variable = "temp_annual"
+    sel_variable = "temp_annual",
+    advance_seed = FALSE
   )
 
   files_saved <-
     list.files(
-      path = file.path(temp_storage_root, "Predictor_models"),
-      pattern = "predictor_models_config_table",
+      path = file.path(temp_storage_root, "Temporal_models"),
+      pattern = "general_model_config_table",
       full.names = FALSE
     )
 
@@ -199,8 +202,67 @@ testthat::test_that("flag_model_to_rerun() validates required columns", {
       data_source = data_source,
       sel_region = "Europe",
       sel_climatezone = "Temperate",
-      sel_variable = "temp_annual"
+      sel_variable = "temp_annual",
+      advance_seed = FALSE
     ),
     regexp = "required model config columns"
+  )
+})
+
+testthat::test_that("flag_model_to_rerun() supports model_id configs", {
+  data_source <-
+    data.frame(
+      model_id = c("pap_temporal__n0", "pap_temporal__roc"),
+      need_to_be_evaluated = c(TRUE, TRUE),
+      need_to_run = c(FALSE, FALSE),
+      last_evaluation_date = c("2020-01-01", "2020-01-01"),
+      stringsAsFactors = FALSE
+    )
+
+  result <-
+    flag_model_to_rerun(
+      data_source = data_source,
+      sel_model_id = "pap_temporal__n0",
+      save_table = FALSE,
+      advance_seed = FALSE
+    )
+
+  testthat::expect_identical(
+    result[["need_to_be_evaluated"]],
+    c(FALSE, TRUE)
+  )
+  testthat::expect_identical(result[["need_to_run"]], c(TRUE, FALSE))
+  testthat::expect_equal(
+    as.Date(result[["last_evaluation_date"]][1]),
+    Sys.Date()
+  )
+})
+
+testthat::test_that("flag_model_to_rerun() advances the selected seed", {
+  data_source <-
+    data.frame(
+      model_id = c("pap_temporal__n0", "pap_temporal__roc"),
+      need_to_be_evaluated = c(TRUE, TRUE),
+      need_to_run = c(FALSE, FALSE),
+      last_evaluation_date = c("2020-01-01", "2020-01-01"),
+      seed_base = c(1234L, 1234L),
+      seed_attempt = c(1L, 1L),
+      sampling_seed = c(101L, 102L),
+      seed_change_reason = "initial_model_seed",
+      stringsAsFactors = FALSE
+    )
+
+  result <-
+    flag_model_to_rerun(
+      data_source = data_source,
+      sel_model_id = "pap_temporal__n0",
+      save_table = FALSE
+    )
+
+  testthat::expect_identical(result[["seed_attempt"]], c(2L, 1L))
+  testthat::expect_false(result[["sampling_seed"]][1] == 101L)
+  testthat::expect_identical(
+    result[["seed_change_reason"]][1],
+    "manual_rerun"
   )
 })
