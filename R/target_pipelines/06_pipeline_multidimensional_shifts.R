@@ -106,5 +106,54 @@ list(
       time_series = FALSE,
       get_significance = FALSE
     )
+  ),
+  # - preserve raw HVarPart components and diagnostics ----
+  targets::tar_target(
+    name = data_hvarpart_h2_importance,
+    command = get_hvarpart_importance(
+      data_source = output_hvar_h2_spd |>
+        dplyr::mutate(analysis = "h2_spd"),
+      id_cols = c(
+        "analysis",
+        "region",
+        "climatezone"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h2_audit_overall,
+    command = summarise_hvarpart_audit(
+      data_importance = data_hvarpart_h2_importance,
+      group_vars = "analysis"
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h2_profiles_overall,
+    command = compare_hvarpart_importance_profiles(
+      data_importance = data_hvarpart_h2_importance,
+      group_vars = "analysis"
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h2_audit_strata,
+    command = summarise_hvarpart_audit(
+      data_importance = data_hvarpart_h2_importance,
+      group_vars = c(
+        "analysis",
+        "region",
+        "climatezone"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h2_profiles_strata,
+    command = compare_hvarpart_importance_profiles(
+      data_importance = data_hvarpart_h2_importance,
+      group_vars = c(
+        "analysis",
+        "region",
+        "climatezone"
+      )
+    )
   )
 )

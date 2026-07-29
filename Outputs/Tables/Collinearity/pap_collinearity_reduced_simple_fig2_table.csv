@@ -1,111 +1,79 @@
-region,climatezone_label,predictor,climatezone,importance_type,ratio
-North America,POL,Climate,Polar,ratio_ind_wmean,0.8282047013033131
-North America,POL,Humans,Polar,ratio_ind_wmean,0.1717952986966868
-North America,CCS,Climate,Cold - Cold Summer,ratio_ind_wmean,0.7800695868641889
-North America,CCS,Humans,Cold - Cold Summer,ratio_ind_wmean,0.21993041313581105
-North America,CWS,Climate,Cold - Warm Summer,ratio_ind_wmean,0.7127495072693915
-North America,CWS,Humans,Cold - Warm Summer,ratio_ind_wmean,0.2872504927306085
-North America,CHS,Climate,Cold - Hot Summer,ratio_ind_wmean,0.7335039298823376
-North America,CHS,Humans,Cold - Hot Summer,ratio_ind_wmean,0.26649607011766235
-North America,CDW,Climate,NA,NA,0
-North America,CDW,Humans,NA,NA,0
-North America,CDS,Climate,Cold - Dry Summer,ratio_ind_wmean,0.710633776640153
-North America,CDS,Humans,Cold - Dry Summer,ratio_ind_wmean,0.2893662233598469
-North America,TMP,Climate,Temperate,ratio_ind_wmean,0.6368248094447118
-North America,TMP,Humans,Temperate,ratio_ind_wmean,0.3631751905552882
-North America,TDW,Climate,NA,NA,0
-North America,TDW,Humans,NA,NA,0
-North America,TDS,Climate,Temperate - Dry Summer,ratio_ind_wmean,0.6244798679340219
-North America,TDS,Humans,Temperate - Dry Summer,ratio_ind_wmean,0.3755201320659782
-North America,TRO,Climate,NA,NA,0
-North America,TRO,Humans,NA,NA,0
-North America,ARD,Climate,Arid,ratio_ind_wmean,0.6501107467742329
-North America,ARD,Humans,Arid,ratio_ind_wmean,0.34988925322576714
-Central & South America,POL,Climate,Polar,ratio_ind_wmean,0.7965582547946443
-Central & South America,POL,Humans,Polar,ratio_ind_wmean,0.20344174520535588
-Central & South America,CCS,Climate,NA,NA,0
-Central & South America,CCS,Humans,NA,NA,0
-Central & South America,CWS,Climate,NA,NA,0
-Central & South America,CWS,Humans,NA,NA,0
-Central & South America,CHS,Climate,NA,NA,0
-Central & South America,CHS,Humans,NA,NA,0
-Central & South America,CDW,Climate,NA,NA,0
-Central & South America,CDW,Humans,NA,NA,0
-Central & South America,CDS,Climate,Cold - Dry Summer,ratio_ind_wmean,0.921038870489803
-Central & South America,CDS,Humans,Cold - Dry Summer,ratio_ind_wmean,0.07896112951019697
-Central & South America,TMP,Climate,Temperate,ratio_ind_wmean,0.7069848994079223
-Central & South America,TMP,Humans,Temperate,ratio_ind_wmean,0.2930151005920777
-Central & South America,TDW,Climate,Temperate - Dry Winter,ratio_ind_wmean,0.7084257206208426
-Central & South America,TDW,Humans,Temperate - Dry Winter,ratio_ind_wmean,0.2915742793791574
-Central & South America,TDS,Climate,Temperate - Dry Summer,ratio_ind_wmean,0.9450651348474279
-Central & South America,TDS,Humans,Temperate - Dry Summer,ratio_ind_wmean,0.05493486515257214
-Central & South America,TRO,Climate,Tropical,ratio_ind_wmean,0.6862733554024638
-Central & South America,TRO,Humans,Tropical,ratio_ind_wmean,0.31372664459753613
-Central & South America,ARD,Climate,Arid,ratio_ind_wmean,0.7222864297720671
-Central & South America,ARD,Humans,Arid,ratio_ind_wmean,0.27771357022793286
-Europe,POL,Climate,Polar,ratio_ind_wmean,0.8174675692794513
-Europe,POL,Humans,Polar,ratio_ind_wmean,0.18253243072054867
-Europe,CCS,Climate,Cold - Cold Summer,ratio_ind_wmean,0.7943168574756567
-Europe,CCS,Humans,Cold - Cold Summer,ratio_ind_wmean,0.20568314252434322
-Europe,CWS,Climate,Cold - Warm Summer,ratio_ind_wmean,0.8201672158312117
-Europe,CWS,Humans,Cold - Warm Summer,ratio_ind_wmean,0.1798327841687883
-Europe,CHS,Climate,NA,NA,0
-Europe,CHS,Humans,NA,NA,0
-Europe,CDW,Climate,NA,NA,0
-Europe,CDW,Humans,NA,NA,0
-Europe,CDS,Climate,Cold - Dry Summer,ratio_ind_wmean,0.7609311518833072
-Europe,CDS,Humans,Cold - Dry Summer,ratio_ind_wmean,0.23906884811669288
-Europe,TMP,Climate,Temperate,ratio_ind_wmean,0.6735933689225402
-Europe,TMP,Humans,Temperate,ratio_ind_wmean,0.3264066310774599
-Europe,TDW,Climate,NA,NA,0
-Europe,TDW,Humans,NA,NA,0
-Europe,TDS,Climate,Temperate - Dry Summer,ratio_ind_wmean,0.837822045524752
-Europe,TDS,Humans,Temperate - Dry Summer,ratio_ind_wmean,0.16217795447524788
-Europe,TRO,Climate,NA,NA,0
-Europe,TRO,Humans,NA,NA,0
-Europe,ARD,Climate,Arid,ratio_ind_wmean,0.9921588455501738
-Europe,ARD,Humans,Arid,ratio_ind_wmean,0.007841154449826328
-Asia,POL,Climate,Polar,ratio_ind_wmean,0.7614078400000382
-Asia,POL,Humans,Polar,ratio_ind_wmean,0.23859215999996192
-Asia,CCS,Climate,Cold - Cold Summer,ratio_ind_wmean,0.9360690371045646
-Asia,CCS,Humans,Cold - Cold Summer,ratio_ind_wmean,0.06393096289543562
-Asia,CWS,Climate,Cold - Warm Summer,ratio_ind_wmean,0.8616469953045124
-Asia,CWS,Humans,Cold - Warm Summer,ratio_ind_wmean,0.13835300469548759
-Asia,CHS,Climate,Cold - Hot Summer,ratio_ind_wmean,0.6226671191041738
-Asia,CHS,Humans,Cold - Hot Summer,ratio_ind_wmean,0.3773328808958263
-Asia,CDW,Climate,Cold - Dry Winter,ratio_ind_wmean,0.8598550138726466
-Asia,CDW,Humans,Cold - Dry Winter,ratio_ind_wmean,0.14014498612735338
-Asia,CDS,Climate,Cold - Dry Summer,ratio_ind_wmean,0.9882326746169753
-Asia,CDS,Humans,Cold - Dry Summer,ratio_ind_wmean,0.011767325383024763
-Asia,TMP,Climate,Temperate,ratio_ind_wmean,0.8663823000489913
-Asia,TMP,Humans,Temperate,ratio_ind_wmean,0.13361769995100856
-Asia,TDW,Climate,Temperate - Dry Winter,ratio_ind_wmean,0.49153242461792646
-Asia,TDW,Humans,Temperate - Dry Winter,ratio_ind_wmean,0.5084675753820735
-Asia,TDS,Climate,Temperate - Dry Summer,ratio_ind_wmean,0.940444226901687
-Asia,TDS,Humans,Temperate - Dry Summer,ratio_ind_wmean,0.05955577309831299
-Asia,TRO,Climate,NA,NA,0
-Asia,TRO,Humans,NA,NA,0
-Asia,ARD,Climate,Arid,ratio_ind_wmean,0.8034002227668267
-Asia,ARD,Humans,Arid,ratio_ind_wmean,0.19659977723317332
-Oceania,POL,Climate,NA,NA,0
-Oceania,POL,Humans,NA,NA,0
-Oceania,CCS,Climate,Cold - Cold Summer,ratio_ind_wmean,0.972568578553616
-Oceania,CCS,Humans,Cold - Cold Summer,ratio_ind_wmean,0.027431421446384045
-Oceania,CWS,Climate,Cold - Warm Summer,ratio_ind_wmean,0.46515076618882845
-Oceania,CWS,Humans,Cold - Warm Summer,ratio_ind_wmean,0.5348492338111716
-Oceania,CHS,Climate,NA,NA,0
-Oceania,CHS,Humans,NA,NA,0
-Oceania,CDW,Climate,NA,NA,0
-Oceania,CDW,Humans,NA,NA,0
-Oceania,CDS,Climate,NA,NA,0
-Oceania,CDS,Humans,NA,NA,0
-Oceania,TMP,Climate,Temperate,ratio_ind_wmean,0.675595546212104
-Oceania,TMP,Humans,Temperate,ratio_ind_wmean,0.32440445378789606
-Oceania,TDW,Climate,Temperate - Dry Winter,ratio_ind_wmean,0.6449717514124294
-Oceania,TDW,Humans,Temperate - Dry Winter,ratio_ind_wmean,0.3550282485875706
-Oceania,TDS,Climate,Temperate - Dry Summer,ratio_ind_wmean,0.7594627594627594
-Oceania,TDS,Humans,Temperate - Dry Summer,ratio_ind_wmean,0.24053724053724052
-Oceania,TRO,Climate,Tropical,ratio_ind_wmean,0.6743668409219119
-Oceania,TRO,Humans,Tropical,ratio_ind_wmean,0.32563315907808793
-Oceania,ARD,Climate,Arid,ratio_ind_wmean,0.6896640826873386
-Oceania,ARD,Humans,Arid,ratio_ind_wmean,0.31033591731266147
+analysis,region,climatezone,predictor,profile,individual_sum,total_sum,pooled_allocation,n_models,ratio,climatezone_label
+spatial_spd_reduced,Asia,Arid,Climate,signed,5.6201,6.926,0.8114496101645972,19,0.8114496101645972,ARD
+spatial_spd_reduced,Asia,Arid,Humans,signed,1.3062,6.926,0.18859370488016172,19,0.18859370488016172,ARD
+spatial_spd_reduced,Asia,Cold - Dry Summer,Climate,signed,1.5623,1.45,1.077448275862069,4,1.077448275862069,CDS
+spatial_spd_reduced,Asia,Cold - Dry Summer,Humans,signed,-0.1129,1.45,-0.07786206896551724,4,-0.07786206896551724,CDS
+spatial_spd_reduced,Asia,Cold - Dry Winter,Climate,signed,7.9919,9.11,0.8772667398463228,23,0.8772667398463228,CDW
+spatial_spd_reduced,Asia,Cold - Dry Winter,Humans,signed,1.1185,9.11,0.12277716794731067,23,0.12277716794731067,CDW
+spatial_spd_reduced,Asia,Cold - Cold Summer,Climate,signed,3.8362000000000003,4.044,0.9486152324431257,9,0.9486152324431257,CCS
+spatial_spd_reduced,Asia,Cold - Cold Summer,Humans,signed,0.20779999999999998,4.044,0.051384767556874385,9,0.051384767556874385,CCS
+spatial_spd_reduced,Asia,Cold - Hot Summer,Climate,signed,0.1835,0.295,0.6220338983050848,1,0.6220338983050848,CHS
+spatial_spd_reduced,Asia,Cold - Hot Summer,Humans,signed,0.1112,0.295,0.3769491525423729,1,0.3769491525423729,CHS
+spatial_spd_reduced,Asia,Cold - Warm Summer,Climate,signed,5.3366999999999996,6.188,0.8624272786037491,16,0.8624272786037491,CWS
+spatial_spd_reduced,Asia,Cold - Warm Summer,Humans,signed,0.8506,6.188,0.13745959922430512,16,0.13745959922430512,CWS
+spatial_spd_reduced,Asia,Polar,Climate,signed,3.197,4.16,0.7685096153846154,10,0.7685096153846154,POL
+spatial_spd_reduced,Asia,Polar,Humans,signed,0.9614,4.16,0.23110576923076923,10,0.23110576923076923,POL
+spatial_spd_reduced,Asia,Temperate - Dry Summer,Climate,signed,2.3671,2.465,0.9602839756592293,5,0.9602839756592293,TDS
+spatial_spd_reduced,Asia,Temperate - Dry Summer,Humans,signed,0.0974,2.465,0.039513184584178504,5,0.039513184584178504,TDS
+spatial_spd_reduced,Asia,Temperate - Dry Winter,Climate,signed,1.309,2.663,0.4915508824633872,6,0.4915508824633872,TDW
+spatial_spd_reduced,Asia,Temperate - Dry Winter,Humans,signed,1.3541,2.663,0.508486669170109,6,0.508486669170109,TDW
+spatial_spd_reduced,Asia,Temperate,Climate,signed,3.4962,4.028,0.8679741807348561,7,0.8679741807348561,TMP
+spatial_spd_reduced,Asia,Temperate,Humans,signed,0.5317,4.028,0.1320009930486594,7,0.1320009930486594,TMP
+spatial_spd_reduced,Europe,Arid,Climate,signed,3.0121000000000002,2.964,1.0162280701754387,7,1.0162280701754387,ARD
+spatial_spd_reduced,Europe,Arid,Humans,signed,-0.050300000000000004,2.964,-0.016970310391363024,7,-0.016970310391363024,ARD
+spatial_spd_reduced,Europe,Cold - Dry Summer,Climate,signed,1.5122,1.963,0.7703515028018338,4,0.7703515028018338,CDS
+spatial_spd_reduced,Europe,Cold - Dry Summer,Humans,signed,0.45230000000000004,1.963,0.230412633723892,4,0.230412633723892,CDS
+spatial_spd_reduced,Europe,Cold - Cold Summer,Climate,signed,30.4899,37.844,0.8056732903498572,93,0.8056732903498572,CCS
+spatial_spd_reduced,Europe,Cold - Cold Summer,Humans,signed,7.3572,37.844,0.19440862488109079,93,0.19440862488109079,CCS
+spatial_spd_reduced,Europe,Cold - Warm Summer,Climate,signed,45.7505,54.528,0.839027655516432,147,0.839027655516432,CWS
+spatial_spd_reduced,Europe,Cold - Warm Summer,Humans,signed,8.7774,54.528,0.1609705105633803,147,0.1609705105633803,CWS
+spatial_spd_reduced,Europe,Polar,Climate,signed,9.5647,11.654,0.8207224987128883,30,0.8207224987128883,POL
+spatial_spd_reduced,Europe,Polar,Humans,signed,2.0896,11.654,0.17930324352153768,30,0.17930324352153768,POL
+spatial_spd_reduced,Europe,Temperate - Dry Summer,Climate,signed,4.3713,5.173,0.8450222308138411,14,0.8450222308138411,TDS
+spatial_spd_reduced,Europe,Temperate - Dry Summer,Humans,signed,0.8015,5.173,0.15493910690121787,14,0.15493910690121787,TDS
+spatial_spd_reduced,Europe,Temperate,Climate,signed,26.6902,39.474000000000004,0.67614632416274,91,0.67614632416274,TMP
+spatial_spd_reduced,Europe,Temperate,Humans,signed,12.7836,39.474000000000004,0.3238486092111263,91,0.3238486092111263,TMP
+spatial_spd_reduced,Central & South America,Arid,Climate,signed,1.1168,1.503,0.7430472388556222,5,0.7430472388556222,ARD
+spatial_spd_reduced,Central & South America,Arid,Humans,signed,0.3855,1.503,0.2564870259481038,5,0.2564870259481038,ARD
+spatial_spd_reduced,Central & South America,Cold - Dry Summer,Climate,signed,0.5284,0.573,0.9221640488656195,2,0.9221640488656195,CDS
+spatial_spd_reduced,Central & South America,Cold - Dry Summer,Humans,signed,0.0453,0.573,0.07905759162303666,2,0.07905759162303666,CDS
+spatial_spd_reduced,Central & South America,Polar,Climate,signed,8.0663,10.073,0.8007842747940037,22,0.8007842747940037,POL
+spatial_spd_reduced,Central & South America,Polar,Humans,signed,2.0059,10.073,0.19913630497369203,22,0.19913630497369203,POL
+spatial_spd_reduced,Central & South America,Temperate - Dry Summer,Climate,signed,2.7406,2.775,0.9876036036036037,8,0.9876036036036037,TDS
+spatial_spd_reduced,Central & South America,Temperate - Dry Summer,Humans,signed,0.03470000000000001,2.775,0.012504504504504507,8,0.012504504504504507,TDS
+spatial_spd_reduced,Central & South America,Temperate - Dry Winter,Climate,signed,0.5112,0.7210000000000001,0.7090152565880721,2,0.7090152565880721,TDW
+spatial_spd_reduced,Central & South America,Temperate - Dry Winter,Humans,signed,0.2104,0.7210000000000001,0.2918169209431345,2,0.2918169209431345,TDW
+spatial_spd_reduced,Central & South America,Temperate,Climate,signed,4.4332,6.08,0.7291447368421053,17,0.7291447368421053,TMP
+spatial_spd_reduced,Central & South America,Temperate,Humans,signed,1.6465999999999998,6.08,0.2708223684210526,17,0.2708223684210526,TMP
+spatial_spd_reduced,Central & South America,Tropical,Climate,signed,5.0706,7.275,0.6969896907216494,15,0.6969896907216494,TRO
+spatial_spd_reduced,Central & South America,Tropical,Humans,signed,2.2044,7.275,0.30301030927835054,15,0.30301030927835054,TRO
+spatial_spd_reduced,North America,Arid,Climate,signed,3.0997,4.793,0.6467139578552055,16,0.6467139578552055,ARD
+spatial_spd_reduced,North America,Arid,Humans,signed,1.6946,4.793,0.3535572710202379,16,0.3535572710202379,ARD
+spatial_spd_reduced,North America,Cold - Dry Summer,Climate,signed,13.238199999999999,18.634,0.7104325426639475,47,0.7104325426639475,CDS
+spatial_spd_reduced,North America,Cold - Dry Summer,Humans,signed,5.3956,18.634,0.28955672426746804,47,0.28955672426746804,CDS
+spatial_spd_reduced,North America,Cold - Cold Summer,Climate,signed,46.347,58.956,0.7861286383065337,136,0.7861286383065337,CCS
+spatial_spd_reduced,North America,Cold - Cold Summer,Humans,signed,12.6088,58.956,0.21386796933306193,136,0.21386796933306193,CCS
+spatial_spd_reduced,North America,Cold - Hot Summer,Climate,signed,17.0905,23.094,0.7400407032129557,53,0.7400407032129557,CHS
+spatial_spd_reduced,North America,Cold - Hot Summer,Humans,signed,6.0022,23.094,0.2599030051095523,53,0.2599030051095523,CHS
+spatial_spd_reduced,North America,Cold - Warm Summer,Climate,signed,63.037,88.205,0.7146647015475314,195,0.7146647015475314,CWS
+spatial_spd_reduced,North America,Cold - Warm Summer,Humans,signed,25.1694,88.205,0.28535117056856185,195,0.28535117056856185,CWS
+spatial_spd_reduced,North America,Polar,Climate,signed,11.5173,13.692,0.8411700262927257,37,0.8411700262927257,POL
+spatial_spd_reduced,North America,Polar,Humans,signed,2.1752,13.692,0.1588664913818288,37,0.1588664913818288,POL
+spatial_spd_reduced,North America,Temperate - Dry Summer,Climate,signed,3.5322,5.466,0.6462129527991218,15,0.6462129527991218,TDS
+spatial_spd_reduced,North America,Temperate - Dry Summer,Humans,signed,1.9354,5.466,0.3540797658251006,15,0.3540797658251006,TDS
+spatial_spd_reduced,North America,Temperate,Climate,signed,8.934899999999999,14.113,0.6330971444767235,39,0.6330971444767235,TMP
+spatial_spd_reduced,North America,Temperate,Humans,signed,5.1769,14.113,0.3668178275348969,39,0.3668178275348969,TMP
+spatial_spd_reduced,Oceania,Arid,Climate,signed,0.2669,0.387,0.6896640826873386,1,0.6896640826873386,ARD
+spatial_spd_reduced,Oceania,Arid,Humans,signed,0.1201,0.387,0.31033591731266147,1,0.31033591731266147,ARD
+spatial_spd_reduced,Oceania,Cold - Cold Summer,Climate,signed,0.156,0.16,0.975,1,0.975,CCS
+spatial_spd_reduced,Oceania,Cold - Cold Summer,Humans,signed,0.0044,0.16,0.0275,1,0.0275,CCS
+spatial_spd_reduced,Oceania,Cold - Warm Summer,Climate,signed,0.0941,0.202,0.4658415841584158,1,0.4658415841584158,CWS
+spatial_spd_reduced,Oceania,Cold - Warm Summer,Humans,signed,0.1082,0.202,0.5356435643564357,1,0.5356435643564357,CWS
+spatial_spd_reduced,Oceania,Temperate - Dry Summer,Climate,signed,0.1244,0.164,0.7585365853658536,1,0.7585365853658536,TDS
+spatial_spd_reduced,Oceania,Temperate - Dry Summer,Humans,signed,0.0394,0.164,0.24024390243902435,1,0.24024390243902435,TDS
+spatial_spd_reduced,Oceania,Temperate - Dry Winter,Climate,signed,0.2854,0.442,0.6457013574660633,1,0.6457013574660633,TDW
+spatial_spd_reduced,Oceania,Temperate - Dry Winter,Humans,signed,0.1571,0.442,0.3554298642533936,1,0.3554298642533936,TDW
+spatial_spd_reduced,Oceania,Temperate,Climate,signed,8.4313,12.315,0.6846366220056842,26,0.6846366220056842,TMP
+spatial_spd_reduced,Oceania,Temperate,Humans,signed,3.8822,12.315,0.31524157531465696,26,0.31524157531465696,TMP
+spatial_spd_reduced,Oceania,Tropical,Climate,signed,1.407,2.062,0.6823472356935015,4,0.6823472356935015,TRO
+spatial_spd_reduced,Oceania,Tropical,Humans,signed,0.6545,2.062,0.3174102812803104,4,0.3174102812803104,TRO

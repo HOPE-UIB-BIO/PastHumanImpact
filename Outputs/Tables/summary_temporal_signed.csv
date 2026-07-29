@@ -1,0 +1,321 @@
+analysis,region,age,predictor,profile,individual_sum,total_sum,pooled_allocation,n_models
+temporal_events,Asia,500,climate,signed,0.0718,0.136,0.5279411764705882,1
+temporal_events,Asia,500,human,signed,0.0646,0.136,0.475,1
+temporal_events,Asia,1000,climate,signed,0.0429,0.094,0.4563829787234043,1
+temporal_events,Asia,1000,human,signed,0.0509,0.094,0.5414893617021277,1
+temporal_events,Asia,1500,climate,signed,0.0517,0.129,0.4007751937984496,1
+temporal_events,Asia,1500,human,signed,0.0774,0.129,0.6,1
+temporal_events,Asia,2000,climate,signed,0.0533,0.111,0.48018018018018016,1
+temporal_events,Asia,2000,human,signed,0.0573,0.111,0.5162162162162162,1
+temporal_events,Asia,2500,climate,signed,0.0655,0.107,0.6121495327102804,1
+temporal_events,Asia,2500,human,signed,0.0416,0.107,0.38878504672897196,1
+temporal_events,Asia,3000,climate,signed,0.0691,0.113,0.611504424778761,1
+temporal_events,Asia,3000,human,signed,0.0444,0.113,0.3929203539823009,1
+temporal_events,Asia,3500,climate,signed,0.0893,0.1,0.893,1
+temporal_events,Asia,3500,human,signed,0.0103,0.1,0.103,1
+temporal_events,Asia,4000,climate,signed,0.0679,0.096,0.7072916666666667,1
+temporal_events,Asia,4000,human,signed,0.0276,0.096,0.2875,1
+temporal_events,Asia,4500,climate,signed,0.0763,0.093,0.8204301075268818,1
+temporal_events,Asia,4500,human,signed,0.017,0.093,0.1827956989247312,1
+temporal_events,Asia,5000,climate,signed,0.0758,0.098,0.7734693877551021,1
+temporal_events,Asia,5000,human,signed,0.0219,0.098,0.22346938775510203,1
+temporal_events,Asia,5500,climate,signed,0.0915,0.104,0.8798076923076923,1
+temporal_events,Asia,5500,human,signed,0.0126,0.104,0.12115384615384615,1
+temporal_events,Asia,6000,climate,signed,0.0935,0.099,0.9444444444444444,1
+temporal_events,Asia,6000,human,signed,0.0055,0.099,0.05555555555555555,1
+temporal_events,Asia,6500,climate,signed,0.1074,0.11,0.9763636363636363,1
+temporal_events,Asia,6500,human,signed,0.0025,0.11,0.022727272727272728,1
+temporal_events,Asia,7000,climate,signed,0.1207,0.13,0.9284615384615384,1
+temporal_events,Asia,7000,human,signed,0.0097,0.13,0.07461538461538461,1
+temporal_events,Asia,7500,climate,signed,0.1277,0.135,0.945925925925926,1
+temporal_events,Asia,7500,human,signed,0.0072,0.135,0.05333333333333333,1
+temporal_events,Asia,8000,climate,signed,0.1574,0.166,0.9481927710843374,1
+temporal_events,Asia,8000,human,signed,0.0089,0.166,0.0536144578313253,1
+temporal_events,Asia,8500,climate,signed,0.1602,0.172,0.9313953488372094,1
+temporal_events,Asia,8500,human,signed,0.0122,0.172,0.07093023255813954,1
+temporal_events,Europe,500,climate,signed,0.067,0.082,0.8170731707317074,1
+temporal_events,Europe,500,human,signed,0.0145,0.082,0.17682926829268292,1
+temporal_events,Europe,1000,climate,signed,0.1067,0.126,0.8468253968253968,1
+temporal_events,Europe,1000,human,signed,0.0197,0.126,0.15634920634920635,1
+temporal_events,Europe,1500,climate,signed,0.0939,0.115,0.8165217391304347,1
+temporal_events,Europe,1500,human,signed,0.021,0.115,0.1826086956521739,1
+temporal_events,Europe,2000,climate,signed,0.0854,0.108,0.7907407407407407,1
+temporal_events,Europe,2000,human,signed,0.0226,0.108,0.20925925925925926,1
+temporal_events,Europe,2500,climate,signed,0.0711,0.084,0.8464285714285713,1
+temporal_events,Europe,2500,human,signed,0.0128,0.084,0.15238095238095237,1
+temporal_events,Europe,3000,climate,signed,0.0612,0.072,0.85,1
+temporal_events,Europe,3000,human,signed,0.0103,0.072,0.14305555555555557,1
+temporal_events,Europe,3500,climate,signed,0.0559,0.089,0.6280898876404495,1
+temporal_events,Europe,3500,human,signed,0.0327,0.089,0.3674157303370787,1
+temporal_events,Europe,4000,climate,signed,0.085,0.091,0.9340659340659342,1
+temporal_events,Europe,4000,human,signed,0.0064,0.091,0.07032967032967033,1
+temporal_events,Europe,4500,climate,signed,0.0849,0.089,0.953932584269663,1
+temporal_events,Europe,4500,human,signed,0.0044,0.089,0.04943820224719102,1
+temporal_events,Europe,5000,climate,signed,0.0702,0.079,0.8886075949367088,1
+temporal_events,Europe,5000,human,signed,0.009,0.079,0.11392405063291139,1
+temporal_events,Europe,5500,climate,signed,0.086,0.089,0.9662921348314606,1
+temporal_events,Europe,5500,human,signed,0.0027,0.089,0.030337078651685397,1
+temporal_events,Europe,6000,climate,signed,0.0773,0.104,0.7432692307692308,1
+temporal_events,Europe,6000,human,signed,0.0272,0.104,0.26153846153846155,1
+temporal_events,Europe,6500,climate,signed,0.0717,0.074,0.968918918918919,1
+temporal_events,Europe,6500,human,signed,0.0025,0.074,0.033783783783783786,1
+temporal_events,Europe,7000,climate,signed,0.0799,0.1,0.7989999999999999,1
+temporal_events,Europe,7000,human,signed,0.0203,0.1,0.20299999999999999,1
+temporal_events,Europe,7500,climate,signed,0.0786,0.106,0.7415094339622642,1
+temporal_events,Europe,7500,human,signed,0.0269,0.106,0.2537735849056604,1
+temporal_events,Europe,8000,climate,signed,0.0778,0.087,0.8942528735632184,1
+temporal_events,Europe,8000,human,signed,0.0089,0.087,0.10229885057471265,1
+temporal_events,Europe,8500,climate,signed,0.074,0.078,0.9487179487179487,1
+temporal_events,Europe,8500,human,signed,0.0041,0.078,0.05256410256410257,1
+temporal_events,Latin America,500,climate,signed,0.0687,0.078,0.8807692307692307,1
+temporal_events,Latin America,500,human,signed,0.0097,0.078,0.12435897435897436,1
+temporal_events,Latin America,1000,climate,signed,0.095,0.093,1.021505376344086,1
+temporal_events,Latin America,1000,human,signed,-0.0021,0.093,-0.02258064516129032,1
+temporal_events,Latin America,1500,climate,signed,0.1286,0.129,0.9968992248062014,1
+temporal_events,Latin America,1500,human,signed,8e-4,0.129,0.006201550387596899,1
+temporal_events,Latin America,2000,climate,signed,0.151,0.157,0.9617834394904459,1
+temporal_events,Latin America,2000,human,signed,0.0058,0.157,0.03694267515923567,1
+temporal_events,Latin America,2500,climate,signed,0.1404,0.159,0.8830188679245282,1
+temporal_events,Latin America,2500,human,signed,0.0186,0.159,0.11698113207547169,1
+temporal_events,Latin America,3000,climate,signed,0.1672,0.172,0.9720930232558139,1
+temporal_events,Latin America,3000,human,signed,0.0046,0.172,0.02674418604651163,1
+temporal_events,Latin America,3500,climate,signed,0.1634,0.183,0.8928961748633879,1
+temporal_events,Latin America,3500,human,signed,0.0194,0.183,0.10601092896174864,1
+temporal_events,Latin America,4000,climate,signed,0.1758,0.189,0.9301587301587302,1
+temporal_events,Latin America,4000,human,signed,0.013,0.189,0.06878306878306878,1
+temporal_events,Latin America,4500,climate,signed,0.1668,0.178,0.9370786516853933,1
+temporal_events,Latin America,4500,human,signed,0.0115,0.178,0.06460674157303371,1
+temporal_events,Latin America,5000,climate,signed,0.1677,0.165,1.0163636363636361,1
+temporal_events,Latin America,5000,human,signed,-0.0031,0.165,-0.018787878787878787,1
+temporal_events,Latin America,5500,climate,signed,0.1625,0.16,1.015625,1
+temporal_events,Latin America,5500,human,signed,-0.0026,0.16,-0.01625,1
+temporal_events,Latin America,6000,climate,signed,0.1538,0.152,1.0118421052631579,1
+temporal_events,Latin America,6000,human,signed,-0.0018,0.152,-0.011842105263157895,1
+temporal_events,Latin America,6500,climate,signed,0.161,0.164,0.9817073170731707,1
+temporal_events,Latin America,6500,human,signed,0.0032,0.164,0.01951219512195122,1
+temporal_events,Latin America,7000,climate,signed,0.124,0.132,0.9393939393939393,1
+temporal_events,Latin America,7000,human,signed,0.0077,0.132,0.058333333333333334,1
+temporal_events,Latin America,7500,climate,signed,0.1417,0.145,0.9772413793103448,1
+temporal_events,Latin America,7500,human,signed,0.0034,0.145,0.023448275862068966,1
+temporal_events,Latin America,8000,climate,signed,0.1162,0.111,1.0468468468468468,1
+temporal_events,Latin America,8000,human,signed,-0.0053,0.111,-0.047747747747747746,1
+temporal_events,Latin America,8500,climate,signed,0.1219,0.117,1.0418803418803417,1
+temporal_events,Latin America,8500,human,signed,-0.0052,0.117,-0.04444444444444444,1
+temporal_events,North America,500,climate,signed,0.1032,0.158,0.6531645569620254,1
+temporal_events,North America,500,human,signed,0.0551,0.158,0.3487341772151899,1
+temporal_events,North America,1000,climate,signed,0.0947,0.109,0.8688073394495414,1
+temporal_events,North America,1000,human,signed,0.0145,0.109,0.13302752293577982,1
+temporal_events,North America,1500,climate,signed,0.0953,0.102,0.9343137254901961,1
+temporal_events,North America,1500,human,signed,0.0065,0.102,0.06372549019607843,1
+temporal_events,North America,2000,climate,signed,0.0974,0.101,0.9643564356435643,1
+temporal_events,North America,2000,human,signed,0.0033,0.101,0.03267326732673267,1
+temporal_events,North America,2500,climate,signed,0.0964,0.102,0.9450980392156864,1
+temporal_events,North America,2500,human,signed,0.0061,0.102,0.05980392156862746,1
+temporal_events,North America,3000,climate,signed,0.1001,0.108,0.9268518518518518,1
+temporal_events,North America,3000,human,signed,0.0076,0.108,0.07037037037037037,1
+temporal_events,North America,3500,climate,signed,0.097,0.105,0.9238095238095239,1
+temporal_events,North America,3500,human,signed,0.0084,0.105,0.08,1
+temporal_events,North America,4000,climate,signed,0.0872,0.094,0.9276595744680851,1
+temporal_events,North America,4000,human,signed,0.0071,0.094,0.07553191489361702,1
+temporal_events,North America,4500,climate,signed,0.0957,0.103,0.929126213592233,1
+temporal_events,North America,4500,human,signed,0.0076,0.103,0.07378640776699029,1
+temporal_events,North America,5000,climate,signed,0.0978,0.109,0.8972477064220183,1
+temporal_events,North America,5000,human,signed,0.0108,0.109,0.09908256880733946,1
+temporal_events,North America,5500,climate,signed,0.0839,0.093,0.9021505376344087,1
+temporal_events,North America,5500,human,signed,0.0089,0.093,0.0956989247311828,1
+temporal_events,North America,6000,climate,signed,0.0898,0.099,0.907070707070707,1
+temporal_events,North America,6000,human,signed,0.0094,0.099,0.09494949494949495,1
+temporal_events,North America,6500,climate,signed,0.0905,0.099,0.914141414141414,1
+temporal_events,North America,6500,human,signed,0.0088,0.099,0.08888888888888889,1
+temporal_events,North America,7000,climate,signed,0.0937,0.095,0.9863157894736843,1
+temporal_events,North America,7000,human,signed,0.0011,0.095,0.011578947368421053,1
+temporal_events,North America,7500,climate,signed,0.0882,0.103,0.8563106796116505,1
+temporal_events,North America,7500,human,signed,0.0148,0.103,0.14368932038834953,1
+temporal_events,North America,8000,climate,signed,0.1074,0.132,0.8136363636363636,1
+temporal_events,North America,8000,human,signed,0.0248,0.132,0.18787878787878787,1
+temporal_events,North America,8500,climate,signed,0.1051,0.147,0.7149659863945579,1
+temporal_events,North America,8500,human,signed,0.0422,0.147,0.2870748299319728,1
+temporal_events,Oceania,500,climate,signed,0.0856,0.068,1.2588235294117645,1
+temporal_events,Oceania,500,human,signed,-0.018,0.068,-0.2647058823529411,1
+temporal_events,Oceania,1000,climate,signed,0.0864,0.119,0.7260504201680673,1
+temporal_events,Oceania,1000,human,signed,0.0322,0.119,0.27058823529411763,1
+temporal_events,Oceania,1500,climate,signed,0.0727,0.067,1.0850746268656717,1
+temporal_events,Oceania,1500,human,signed,-0.0055,0.067,-0.08208955223880596,1
+temporal_events,Oceania,2000,climate,signed,0.0211,0.031,0.6806451612903226,1
+temporal_events,Oceania,2000,human,signed,0.0096,0.031,0.30967741935483867,1
+temporal_events,Oceania,2500,climate,signed,0.1016,0.121,0.8396694214876033,1
+temporal_events,Oceania,2500,human,signed,0.0198,0.121,0.16363636363636366,1
+temporal_events,Oceania,3000,climate,signed,0.1241,0.141,0.8801418439716313,1
+temporal_events,Oceania,3000,human,signed,0.0173,0.141,0.12269503546099292,1
+temporal_events,Oceania,3500,climate,signed,0.1352,0.12,1.1266666666666667,1
+temporal_events,Oceania,3500,human,signed,-0.0147,0.12,-0.1225,1
+temporal_events,Oceania,4000,climate,signed,0.0995,0.087,1.1436781609195403,1
+temporal_events,Oceania,4000,human,signed,-0.0125,0.087,-0.14367816091954025,1
+temporal_spd,Asia,500,climate,signed,0.0949,0.092,1.0315217391304348,1
+temporal_spd,Asia,500,human,signed,-0.0032,0.092,-0.034782608695652174,1
+temporal_spd,Asia,1000,climate,signed,0.0574,0.066,0.8696969696969696,1
+temporal_spd,Asia,1000,human,signed,0.0084,0.066,0.12727272727272726,1
+temporal_spd,Asia,1500,climate,signed,0.0779,0.083,0.9385542168674698,1
+temporal_spd,Asia,1500,human,signed,0.0052,0.083,0.06265060240963854,1
+temporal_spd,Asia,2000,climate,signed,0.0769,0.097,0.7927835051546391,1
+temporal_spd,Asia,2000,human,signed,0.0203,0.097,0.2092783505154639,1
+temporal_spd,Asia,2500,climate,signed,0.089,0.094,0.9468085106382979,1
+temporal_spd,Asia,2500,human,signed,0.0055,0.094,0.058510638297872335,1
+temporal_spd,Asia,3000,climate,signed,0.0861,0.091,0.9461538461538461,1
+temporal_spd,Asia,3000,human,signed,0.0049,0.091,0.05384615384615385,1
+temporal_spd,Asia,3500,climate,signed,0.0882,0.094,0.9382978723404255,1
+temporal_spd,Asia,3500,human,signed,0.0056,0.094,0.059574468085106386,1
+temporal_spd,Asia,4000,climate,signed,0.0717,0.076,0.9434210526315789,1
+temporal_spd,Asia,4000,human,signed,0.0047,0.076,0.0618421052631579,1
+temporal_spd,Asia,4500,climate,signed,0.0704,0.084,0.8380952380952381,1
+temporal_spd,Asia,4500,human,signed,0.014,0.084,0.16666666666666666,1
+temporal_spd,Asia,5000,climate,signed,0.0665,0.087,0.7643678160919541,1
+temporal_spd,Asia,5000,human,signed,0.02,0.087,0.2298850574712644,1
+temporal_spd,Asia,5500,climate,signed,0.0865,0.093,0.9301075268817204,1
+temporal_spd,Asia,5500,human,signed,0.0065,0.093,0.06989247311827956,1
+temporal_spd,Asia,6000,climate,signed,0.0794,0.106,0.749056603773585,1
+temporal_spd,Asia,6000,human,signed,0.0266,0.106,0.2509433962264151,1
+temporal_spd,Asia,6500,climate,signed,0.1015,0.106,0.9575471698113208,1
+temporal_spd,Asia,6500,human,signed,0.0049,0.106,0.04622641509433962,1
+temporal_spd,Asia,7000,climate,signed,0.1105,0.133,0.8308270676691729,1
+temporal_spd,Asia,7000,human,signed,0.0223,0.133,0.16766917293233083,1
+temporal_spd,Asia,7500,climate,signed,0.1148,0.133,0.863157894736842,1
+temporal_spd,Asia,7500,human,signed,0.018,0.133,0.13533834586466165,1
+temporal_spd,Asia,8000,climate,signed,0.1502,0.16,0.93875,1
+temporal_spd,Asia,8000,human,signed,0.0097,0.16,0.060625,1
+temporal_spd,Asia,8500,climate,signed,0.1613,0.167,0.9658682634730539,1
+temporal_spd,Asia,8500,human,signed,0.0055,0.167,0.03293413173652694,1
+temporal_spd,Europe,500,climate,signed,0.0764,0.088,0.8681818181818182,1
+temporal_spd,Europe,500,human,signed,0.0119,0.088,0.13522727272727275,1
+temporal_spd,Europe,1000,climate,signed,0.1194,0.125,0.9552,1
+temporal_spd,Europe,1000,human,signed,0.0057,0.125,0.0456,1
+temporal_spd,Europe,1500,climate,signed,0.1003,0.102,0.9833333333333334,1
+temporal_spd,Europe,1500,human,signed,0.002,0.102,0.019607843137254905,1
+temporal_spd,Europe,2000,climate,signed,0.0924,0.096,0.9624999999999999,1
+temporal_spd,Europe,2000,human,signed,0.0035,0.096,0.036458333333333336,1
+temporal_spd,Europe,2500,climate,signed,0.0791,0.083,0.9530120481927711,1
+temporal_spd,Europe,2500,human,signed,0.0041,0.083,0.04939759036144579,1
+temporal_spd,Europe,3000,climate,signed,0.0582,0.064,0.909375,1
+temporal_spd,Europe,3000,human,signed,0.0057,0.064,0.0890625,1
+temporal_spd,Europe,3500,climate,signed,0.0511,0.071,0.719718309859155,1
+temporal_spd,Europe,3500,human,signed,0.02,0.071,0.28169014084507044,1
+temporal_spd,Europe,4000,climate,signed,0.0787,0.084,0.9369047619047619,1
+temporal_spd,Europe,4000,human,signed,0.0057,0.084,0.06785714285714285,1
+temporal_spd,Europe,4500,climate,signed,0.081,0.084,0.9642857142857143,1
+temporal_spd,Europe,4500,human,signed,0.0028,0.084,0.03333333333333333,1
+temporal_spd,Europe,5000,climate,signed,0.0645,0.069,0.9347826086956521,1
+temporal_spd,Europe,5000,human,signed,0.0045,0.069,0.06521739130434781,1
+temporal_spd,Europe,5500,climate,signed,0.0868,0.087,0.9977011494252874,1
+temporal_spd,Europe,5500,human,signed,6e-4,0.087,0.006896551724137931,1
+temporal_spd,Europe,6000,climate,signed,0.0706,0.082,0.8609756097560974,1
+temporal_spd,Europe,6000,human,signed,0.0117,0.082,0.14268292682926828,1
+temporal_spd,Europe,6500,climate,signed,0.0567,0.086,0.6593023255813955,1
+temporal_spd,Europe,6500,human,signed,0.0294,0.086,0.3418604651162791,1
+temporal_spd,Europe,7000,climate,signed,0.0687,0.086,0.7988372093023256,1
+temporal_spd,Europe,7000,human,signed,0.0175,0.086,0.20348837209302328,1
+temporal_spd,Europe,7500,climate,signed,0.0641,0.119,0.538655462184874,1
+temporal_spd,Europe,7500,human,signed,0.0547,0.119,0.4596638655462185,1
+temporal_spd,Europe,8000,climate,signed,0.0784,0.094,0.8340425531914893,1
+temporal_spd,Europe,8000,human,signed,0.0154,0.094,0.16382978723404257,1
+temporal_spd,Europe,8500,climate,signed,0.0686,0.078,0.8794871794871794,1
+temporal_spd,Europe,8500,human,signed,0.0089,0.078,0.1141025641025641,1
+temporal_spd,Latin America,500,climate,signed,0.0689,0.061,1.1295081967213116,1
+temporal_spd,Latin America,500,human,signed,-0.0075,0.061,-0.12295081967213115,1
+temporal_spd,Latin America,1000,climate,signed,0.0946,0.093,1.017204301075269,1
+temporal_spd,Latin America,1000,human,signed,-0.0015,0.093,-0.016129032258064516,1
+temporal_spd,Latin America,1500,climate,signed,0.1278,0.144,0.8875000000000001,1
+temporal_spd,Latin America,1500,human,signed,0.0164,0.144,0.1138888888888889,1
+temporal_spd,Latin America,2000,climate,signed,0.1496,0.153,0.9777777777777779,1
+temporal_spd,Latin America,2000,human,signed,0.003,0.153,0.0196078431372549,1
+temporal_spd,Latin America,2500,climate,signed,0.1453,0.152,0.955921052631579,1
+temporal_spd,Latin America,2500,human,signed,0.0068,0.152,0.04473684210526316,1
+temporal_spd,Latin America,3000,climate,signed,0.1837,0.193,0.9518134715025907,1
+temporal_spd,Latin America,3000,human,signed,0.009,0.193,0.0466321243523316,1
+temporal_spd,Latin America,3500,climate,signed,0.1927,0.207,0.9309178743961354,1
+temporal_spd,Latin America,3500,human,signed,0.0146,0.207,0.07053140096618359,1
+temporal_spd,Latin America,4000,climate,signed,0.1913,0.218,0.8775229357798165,1
+temporal_spd,Latin America,4000,human,signed,0.027,0.218,0.1238532110091743,1
+temporal_spd,Latin America,4500,climate,signed,0.1816,0.197,0.9218274111675127,1
+temporal_spd,Latin America,4500,human,signed,0.0157,0.197,0.0796954314720812,1
+temporal_spd,Latin America,5000,climate,signed,0.1821,0.207,0.8797101449275363,1
+temporal_spd,Latin America,5000,human,signed,0.0252,0.207,0.12173913043478261,1
+temporal_spd,Latin America,5500,climate,signed,0.1684,0.178,0.946067415730337,1
+temporal_spd,Latin America,5500,human,signed,0.0094,0.178,0.052808988764044947,1
+temporal_spd,Latin America,6000,climate,signed,0.1557,0.165,0.9436363636363636,1
+temporal_spd,Latin America,6000,human,signed,0.0096,0.165,0.058181818181818175,1
+temporal_spd,Latin America,6500,climate,signed,0.163,0.159,1.0251572327044025,1
+temporal_spd,Latin America,6500,human,signed,-0.0044,0.159,-0.027672955974842768,1
+temporal_spd,Latin America,7000,climate,signed,0.122,0.128,0.953125,1
+temporal_spd,Latin America,7000,human,signed,0.0064,0.128,0.05,1
+temporal_spd,Latin America,7500,climate,signed,0.1495,0.156,0.9583333333333333,1
+temporal_spd,Latin America,7500,human,signed,0.0065,0.156,0.041666666666666664,1
+temporal_spd,Latin America,8000,climate,signed,0.1198,0.172,0.6965116279069768,1
+temporal_spd,Latin America,8000,human,signed,0.0524,0.172,0.3046511627906977,1
+temporal_spd,Latin America,8500,climate,signed,0.1274,0.137,0.9299270072992701,1
+temporal_spd,Latin America,8500,human,signed,0.0097,0.137,0.0708029197080292,1
+temporal_spd,North America,500,climate,signed,0.1045,0.158,0.6613924050632911,1
+temporal_spd,North America,500,human,signed,0.0532,0.158,0.33670886075949363,1
+temporal_spd,North America,1000,climate,signed,0.0931,0.103,0.9038834951456312,1
+temporal_spd,North America,1000,human,signed,0.0102,0.103,0.09902912621359225,1
+temporal_spd,North America,1500,climate,signed,0.0961,0.103,0.9330097087378642,1
+temporal_spd,North America,1500,human,signed,0.0072,0.103,0.06990291262135923,1
+temporal_spd,North America,2000,climate,signed,0.0979,0.103,0.950485436893204,1
+temporal_spd,North America,2000,human,signed,0.0054,0.103,0.052427184466019426,1
+temporal_spd,North America,2500,climate,signed,0.1004,0.109,0.9211009174311927,1
+temporal_spd,North America,2500,human,signed,0.0082,0.109,0.07522935779816514,1
+temporal_spd,North America,3000,climate,signed,0.1033,0.114,0.906140350877193,1
+temporal_spd,North America,3000,human,signed,0.011,0.114,0.09649122807017543,1
+temporal_spd,North America,3500,climate,signed,0.1002,0.104,0.9634615384615385,1
+temporal_spd,North America,3500,human,signed,0.0038,0.104,0.03653846153846154,1
+temporal_spd,North America,4000,climate,signed,0.0879,0.098,0.8969387755102041,1
+temporal_spd,North America,4000,human,signed,0.0103,0.098,0.10510204081632653,1
+temporal_spd,North America,4500,climate,signed,0.0982,0.107,0.9177570093457944,1
+temporal_spd,North America,4500,human,signed,0.0092,0.107,0.08598130841121496,1
+temporal_spd,North America,5000,climate,signed,0.1011,0.108,0.9361111111111111,1
+temporal_spd,North America,5000,human,signed,0.0067,0.108,0.062037037037037036,1
+temporal_spd,North America,5500,climate,signed,0.087,0.098,0.8877551020408162,1
+temporal_spd,North America,5500,human,signed,0.0114,0.098,0.11632653061224489,1
+temporal_spd,North America,6000,climate,signed,0.0931,0.106,0.8783018867924529,1
+temporal_spd,North America,6000,human,signed,0.0125,0.106,0.11792452830188681,1
+temporal_spd,North America,6500,climate,signed,0.0944,0.104,0.9076923076923077,1
+temporal_spd,North America,6500,human,signed,0.0092,0.104,0.08846153846153847,1
+temporal_spd,North America,7000,climate,signed,0.0938,0.106,0.8849056603773585,1
+temporal_spd,North America,7000,human,signed,0.0121,0.106,0.11415094339622642,1
+temporal_spd,North America,7500,climate,signed,0.0924,0.104,0.8884615384615384,1
+temporal_spd,North America,7500,human,signed,0.0119,0.104,0.11442307692307693,1
+temporal_spd,North America,8000,climate,signed,0.1183,0.125,0.9464,1
+temporal_spd,North America,8000,human,signed,0.0066,0.125,0.0528,1
+temporal_spd,North America,8500,climate,signed,0.1151,0.12,0.9591666666666666,1
+temporal_spd,North America,8500,human,signed,0.0048,0.12,0.04,1
+temporal_spd,Oceania,500,climate,signed,0.0852,0.093,0.9161290322580645,1
+temporal_spd,Oceania,500,human,signed,0.0074,0.093,0.07956989247311828,1
+temporal_spd,Oceania,1000,climate,signed,0.0631,0.094,0.6712765957446809,1
+temporal_spd,Oceania,1000,human,signed,0.0314,0.094,0.33404255319148934,1
+temporal_spd,Oceania,1500,climate,signed,0.0559,0.083,0.6734939759036144,1
+temporal_spd,Oceania,1500,human,signed,0.0268,0.083,0.3228915662650602,1
+temporal_spd,Oceania,2000,climate,signed,0.0083,0.032,0.259375,1
+temporal_spd,Oceania,2000,human,signed,0.0232,0.032,0.725,1
+temporal_spd,Oceania,2500,climate,signed,0.0794,0.102,0.7784313725490196,1
+temporal_spd,Oceania,2500,human,signed,0.0224,0.102,0.21960784313725493,1
+temporal_spd,Oceania,3000,climate,signed,0.123,0.153,0.803921568627451,1
+temporal_spd,Oceania,3000,human,signed,0.0304,0.153,0.19869281045751636,1
+temporal_spd,Oceania,3500,climate,signed,0.1355,0.16,0.846875,1
+temporal_spd,Oceania,3500,human,signed,0.0243,0.16,0.15187499999999998,1
+temporal_spd,Oceania,4000,climate,signed,0.0957,0.106,0.9028301886792452,1
+temporal_spd,Oceania,4000,human,signed,0.0101,0.106,0.09528301886792452,1
+temporal_spd,Oceania,4500,climate,signed,0.1186,0.123,0.9642276422764228,1
+temporal_spd,Oceania,4500,human,signed,0.0048,0.123,0.03902439024390244,1
+temporal_spd,Oceania,5000,climate,signed,0.0633,0.076,0.8328947368421052,1
+temporal_spd,Oceania,5000,human,signed,0.0126,0.076,0.16578947368421054,1
+temporal_spd,Oceania,5500,climate,signed,0.0631,0.069,0.9144927536231884,1
+temporal_spd,Oceania,5500,human,signed,0.0057,0.069,0.08260869565217391,1
+temporal_spd,Oceania,6000,climate,signed,0.0688,0.068,1.011764705882353,1
+temporal_spd,Oceania,6000,human,signed,-0.0013,0.068,-0.019117647058823527,1
+temporal_spd,Oceania,6500,climate,signed,0.0866,0.074,1.1702702702702703,1
+temporal_spd,Oceania,6500,human,signed,-0.0124,0.074,-0.16756756756756758,1
+temporal_spd,Oceania,7500,climate,signed,0.0584,0.051,1.1450980392156864,1
+temporal_spd,Oceania,7500,human,signed,-0.007,0.051,-0.13725490196078433,1
+temporal_spd,Oceania,8000,climate,signed,0.0847,0.083,1.0204819277108432,1
+temporal_spd,Oceania,8000,human,signed,-0.0015,0.083,-0.018072289156626505,1
+temporal_spd,Oceania,8500,climate,signed,0.1405,0.141,0.99645390070922,1
+temporal_spd,Oceania,8500,human,signed,4e-4,0.141,0.002836879432624114,1

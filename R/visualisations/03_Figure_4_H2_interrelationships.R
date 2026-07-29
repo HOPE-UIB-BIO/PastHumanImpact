@@ -97,82 +97,22 @@ data_to_plot_trajectory <-
 #----------------------------------------------------------#
 # 2. Summary tables -----
 #----------------------------------------------------------#
-# all data
-table_h2 <-
-  # add dbrda model to output_h2
-  output_h2 %>%
-  mutate(
-    mod_dbrda = purrr::map2(
-      .x = data_response_dist,
-      .y = data_merge,
-      .f = ~ run_dbrda(.x, .y)
-    )
-  ) %>%
-  mutate(
-    scores_dbrda = purrr::map(
-      .x = mod_dbrda,
-      .f = ~ get_scores_dbrda(.x)
-    )
-  ) %>%
-  dplyr::mutate(
-    summary_table = purrr::map(
-      .x = varhp,
-      .f = ~ .x %>%
-        purrr::pluck("summary_table")
-    )
-  ) %>%
-  tidyr::unnest(summary_table) %>%
-  dplyr::select(-c(data_merge, data_response_dist, varhp)) %>%
-  dplyr::mutate(
-    dplyr::across(
-      .cols = Unique,
-      .fns = ~ replace(., .x < 0, 0.0001)
-    )
-  ) %>% # negative variances can be ignored
-  janitor::clean_names() %>%
-  dplyr::group_by(
-    region, climatezone
-  ) %>%
-  dplyr::mutate(
-    sum_importance = sum(individual),
-    ratio_unique = unique / sum_importance,
-    ratio_ind = individual / sum_importance
-  ) %>%
-  dplyr::ungroup()
+data_h2_importance <-
+  get_hvarpart_importance(
+    data_source = output_h2 %>%
+      dplyr::mutate(analysis = "h2_spd"),
+    id_cols = c("analysis", "region", "climatezone")
+  )
 
-# reshape long formate
 summary_h2_long <-
-  table_h2 %>%
-  dplyr::group_by(
-    region,
-    climatezone,
-    predictor
-  ) %>%
-  # summarise by model weight
-  dplyr::summarise(
-    .groups = "drop",
-    dplyr::across(
-      dplyr::all_of(
-        c(
-          "ratio_unique",
-          "ratio_ind"
-        )
-      ),
-      list(
-        wmean = ~ weighted.mean(
-          x = .x,
-          w = sum_importance,
-          na.rm = TRUE
-        )
-      )
-    )
-  ) %>%
-  tidyr::pivot_longer(
-    dplyr::starts_with("ratio"),
-    names_to = "importance_type",
-    values_to = "ratio"
+  summarise_hvarpart_importance(
+    data_importance = data_h2_importance,
+    group_vars = c("analysis", "region", "climatezone"),
+    profile = "signed"
   ) %>%
   dplyr::mutate(
+    importance_type = "ratio_ind_wmean",
+    ratio = pooled_allocation,
     region = factor(region,
       levels = vec_regions # [config criteria]
     )
@@ -227,16 +167,20 @@ get_importance_fig <- function(
       )
     ) %>%
     ggplot2::ggplot() +
-    ggplot2::geom_bar(
+    ggplot2::geom_hline(
+      yintercept = c(0, 1),
+      colour = "grey75",
+      linewidth = line_size
+    ) +
+    ggplot2::geom_col(
       mapping = ggplot2::aes(
         y = ratio,
         x = climatezone,
         fill = predictor
       ),
-      stat = "identity",
-      width = 0.9,
+      width = 0.7,
       alpha = 1,
-      position = "stack",
+      position = ggplot2::position_dodge(width = 0.75),
       show.legend = TRUE
     ) +
     ggplot2::scale_fill_manual(
@@ -244,11 +188,7 @@ get_importance_fig <- function(
       values = palette_predictors,
       drop = FALSE
     ) +
-    ggplot2::scale_y_continuous(
-      limits = c(0, 1),
-      breaks = seq(0, 1, 0.25),
-      labels = seq(0, 1, 0.25)
-    ) +
+    ggplot2::scale_y_continuous() +
     ggplot2::theme_void() +
     ggplot2::theme(
       legend.position = legend_position,
@@ -531,7 +471,7 @@ guide_legend_predicor <-
     plot.margin = ggplot2::unit(c(0.1, 0.1, 0.1, 0.1), "cm")
   ) +
   ggplot2::labs(
-    y = "Ration of importance"
+    y = "Signed allocation of adjusted explained variation"
   )
 
 guide_legend_trajectory <-

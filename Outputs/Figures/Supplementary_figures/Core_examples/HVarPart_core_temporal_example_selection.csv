@@ -1,3 +1,3 @@
-example_type,dataset_id,importance_percent,total_explained_variation,n_hvarpart_results,n_variables,n_age_points,region,climatezone
-human,14944,77.19,0.606,1,15,17,North America,Cold_Dry_Summer
-climate,15394,80.09,0.683,1,15,14,Latin America,Tropical
+example_type,dataset_id,model_id,unique,average_share,individual,individual_percent,predictor_present,total_adjusted_r_squared,model_result_available,has_required_predictors,has_finite_total,has_positive_total,has_finite_individual,has_negative_unique,has_negative_individual,is_importance_eligible,exclusion_reason,n_variables,n_age_points,region,climatezone
+human,14944,dataset_id=14944,0.3829,0.08489999999999998,0.4678,77.19,TRUE,0.606,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,NA,15,17,North America,Cold_Dry_Summer
+climate,15394,dataset_id=15394,0.5053,0.04170000000000007,0.547,80.09,TRUE,0.683,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE,FALSE,TRUE,NA,15,14,Latin America,Tropical

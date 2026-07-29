@@ -294,5 +294,165 @@ list(
       get_significance = FALSE,
       permutations = 999
     )
+  ),
+  # - preserve raw HVarPart components and diagnostics ----
+  targets::tar_target(
+    name = data_hvarpart_spatial_spd_importance,
+    command = get_hvarpart_importance(
+      data_source = output_spatial_spd |>
+        dplyr::left_join(
+          data_meta |>
+            dplyr::select(
+              dataset_id,
+              region,
+              climatezone
+            ),
+          by = "dataset_id"
+        ) |>
+        dplyr::mutate(analysis = "spatial_spd"),
+      id_cols = c(
+        "analysis",
+        "dataset_id",
+        "region",
+        "climatezone"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = data_hvarpart_spatial_events_importance,
+    command = get_hvarpart_importance(
+      data_source = output_spatial_events |>
+        dplyr::left_join(
+          data_meta |>
+            dplyr::select(
+              dataset_id,
+              region,
+              climatezone
+            ),
+          by = "dataset_id"
+        ) |>
+        dplyr::mutate(analysis = "spatial_events"),
+      id_cols = c(
+        "analysis",
+        "dataset_id",
+        "region",
+        "climatezone"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = data_hvarpart_temporal_spd_importance,
+    command = get_hvarpart_importance(
+      data_source = output_temporal_spd |>
+        dplyr::mutate(analysis = "temporal_spd"),
+      id_cols = c(
+        "analysis",
+        "region",
+        "age"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = data_hvarpart_temporal_events_importance,
+    command = get_hvarpart_importance(
+      data_source = output_temporal_events |>
+        dplyr::mutate(analysis = "temporal_events"),
+      id_cols = c(
+        "analysis",
+        "region",
+        "age"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = data_hvarpart_h1_importance,
+    command = dplyr::bind_rows(
+      data_hvarpart_spatial_spd_importance,
+      data_hvarpart_spatial_events_importance,
+      data_hvarpart_temporal_spd_importance,
+      data_hvarpart_temporal_events_importance
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_audit_overall,
+    command = summarise_hvarpart_audit(
+      data_importance = data_hvarpart_h1_importance,
+      group_vars = "analysis"
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_profiles_overall,
+    command = compare_hvarpart_importance_profiles(
+      data_importance = data_hvarpart_h1_importance,
+      group_vars = "analysis"
+    )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_audit_spatial,
+    command = data_hvarpart_h1_importance |>
+      dplyr::filter(
+        .data[["analysis"]] %in% c(
+          "spatial_spd",
+          "spatial_events"
+        )
+      ) |>
+      summarise_hvarpart_audit(
+        group_vars = c(
+          "analysis",
+          "region",
+          "climatezone"
+        )
+      )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_profiles_spatial,
+    command = data_hvarpart_h1_importance |>
+      dplyr::filter(
+        .data[["analysis"]] %in% c(
+          "spatial_spd",
+          "spatial_events"
+        )
+      ) |>
+      compare_hvarpart_importance_profiles(
+        group_vars = c(
+          "analysis",
+          "region",
+          "climatezone"
+        )
+      )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_audit_temporal,
+    command = data_hvarpart_h1_importance |>
+      dplyr::filter(
+        .data[["analysis"]] %in% c(
+          "temporal_spd",
+          "temporal_events"
+        )
+      ) |>
+      summarise_hvarpart_audit(
+        group_vars = c(
+          "analysis",
+          "region",
+          "age"
+        )
+      )
+  ),
+  targets::tar_target(
+    name = table_hvarpart_h1_profiles_temporal,
+    command = data_hvarpart_h1_importance |>
+      dplyr::filter(
+        .data[["analysis"]] %in% c(
+          "temporal_spd",
+          "temporal_events"
+        )
+      ) |>
+      compare_hvarpart_importance_profiles(
+        group_vars = c(
+          "analysis",
+          "region",
+          "age"
+        )
+      )
   )
 )

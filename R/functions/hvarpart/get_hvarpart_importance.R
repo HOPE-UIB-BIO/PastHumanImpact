@@ -1,107 +1,263 @@
-#' @title Extract HVarPart predictor importance
+#' @title Extract unmodified HVarPart importance components
 #' @description
-#' Extract predictor importance percentages and total explained variation from
-#' nested HVarPart results for each dataset.
-#' @param data_hvarpart Data frame containing `dataset_id` and nested `varhp`
-#' results.
-#' @return A tibble with `dataset_id`, `predictor`, `importance_percent`, and
-#' `total_explained_variation`, and `n_hvarpart_results` columns. Duplicate
-#' dataset-predictor results are consolidated using their arithmetic means.
+#' Extract predictor-level hierarchical-partitioning components directly from
+#' `varhp_output$Hier.part` and attach model-level eligibility diagnostics.
+#' Values returned by HVarPart are never truncated, averaged, or silently
+#' discarded.
+#' @param data_source Data frame containing a `varhp` list-column.
+#' @param id_cols Character vector naming columns that uniquely identify one
+#' HVarPart model.
+#' @param expected_predictors Character vector of required predictor groups.
+#' @return
+#' A tibble with one row per model and expected predictor. It retains `unique`,
+#' `average_share`, `individual`, `individual_percent`, and
+#' `total_adjusted_r_squared`, plus explicit availability, eligibility,
+#' negative-contribution, and exclusion diagnostics.
 #' @examples
 #' \dontrun{
 #' data_importance <-
-#'   get_hvarpart_importance(data_hvarpart = data_h1_results)
+#'   get_hvarpart_importance(
+#'     data_source = data_h1_results,
+#'     id_cols = "dataset_id"
+#'   )
 #' }
-get_hvarpart_importance <- function(data_hvarpart) {
+get_hvarpart_importance <- function(
+  data_source,
+  id_cols,
+  expected_predictors = c("human", "climate")
+) {
+  reserved_columns <-
+    c(
+      "model_id",
+      "predictor",
+      "unique",
+      "average_share",
+      "individual",
+      "individual_percent",
+      "total_adjusted_r_squared"
+    )
+
   assertthat::assert_that(
-    is.data.frame(data_hvarpart),
-    all(c("dataset_id", "varhp") %in% names(data_hvarpart)),
-    is.list(data_hvarpart[["varhp"]]),
-    msg = "HVarPart data must contain dataset IDs and nested results."
+    is.data.frame(data_source),
+    msg = "`data_source` must be a data frame."
   )
+  assertthat::assert_that(
+    is.character(id_cols),
+    length(id_cols) > 0L,
+    !anyNA(id_cols),
+    !anyDuplicated(id_cols),
+    msg = "`id_cols` must be a non-empty vector of unique column names."
+  )
+  assertthat::assert_that(
+    is.character(expected_predictors),
+    length(expected_predictors) > 0L,
+    !anyNA(expected_predictors),
+    !anyDuplicated(expected_predictors),
+    msg = "`expected_predictors` must contain unique predictor names."
+  )
+  assertthat::assert_that(
+    all(c(id_cols, "varhp") %in% names(data_source)),
+    is.list(data_source[["varhp"]]),
+    msg = "`data_source` must contain identifier columns and nested results."
+  )
+  assertthat::assert_that(
+    !any(id_cols %in% reserved_columns),
+    msg = "`id_cols` cannot use reserved HVarPart output names."
+  )
+
+  data_ids <-
+    data_source |>
+    dplyr::select(dplyr::all_of(id_cols))
+
+  assertthat::assert_that(
+    nrow(dplyr::distinct(data_ids)) == nrow(data_ids),
+    msg = "`id_cols` must uniquely identify every HVarPart model."
+  )
+
+  model_ids <-
+    data_ids |>
+    purrr::pmap_chr(
+      .f = function(...) {
+        list_values <- list(...)
+        vec_values <-
+          purrr::map_chr(
+            .x = list_values,
+            .f = ~ ifelse(
+              is.na(.x),
+              "<NA>",
+              as.character(.x)
+            )
+          )
+
+        res_id <-
+          stringr::str_c(
+            id_cols,
+            "=",
+            vec_values,
+            collapse = "|"
+          )
+
+        return(res_id)
+      }
+    )
+
+  extract_model_components <- function(data_varhp) {
+    data_expected <-
+      tibble::tibble(
+        predictor = expected_predictors
+      )
+
+    empty_result <- function() {
+      res_empty <-
+        data_expected |>
+        dplyr::mutate(
+          unique = NA_real_,
+          average_share = NA_real_,
+          individual = NA_real_,
+          individual_percent = NA_real_,
+          total_adjusted_r_squared = NA_real_,
+          model_result_available = FALSE,
+          predictor_present = FALSE
+        )
+
+      return(res_empty)
+    }
+
+    if (
+      !is.list(data_varhp) ||
+        !"varhp_output" %in% names(data_varhp) ||
+        !is.list(data_varhp[["varhp_output"]])
+    ) {
+      return(empty_result())
+    }
+
+    data_output <- data_varhp[["varhp_output"]]
+
+    if (
+      !"Hier.part" %in% names(data_output) ||
+        is.null(data_output[["Hier.part"]])
+    ) {
+      return(empty_result())
+    }
+
+    data_hier <-
+      data_output[["Hier.part"]] |>
+      as.data.frame() |>
+      tibble::rownames_to_column("predictor")
+
+    required_fields <-
+      c(
+        "Unique",
+        "Average.share",
+        "Individual",
+        "I.perc(%)"
+      )
+
+    for (
+      field_name in setdiff(required_fields, names(data_hier))
+    ) {
+      data_hier[[field_name]] <- NA_real_
+    }
+
+    total_adjusted_r_squared <-
+      if (
+        "Total_explained_variation" %in% names(data_output) &&
+          length(data_output[["Total_explained_variation"]]) == 1L
+      ) {
+        as.numeric(data_output[["Total_explained_variation"]])
+      } else {
+        NA_real_
+      }
+
+    data_raw <-
+      data_hier |>
+      dplyr::transmute(
+        predictor = as.character(.data[["predictor"]]),
+        unique = as.numeric(.data[["Unique"]]),
+        average_share = as.numeric(.data[["Average.share"]]),
+        individual = as.numeric(.data[["Individual"]]),
+        individual_percent = as.numeric(.data[["I.perc(%)"]]),
+        predictor_present = TRUE
+      ) |>
+      dplyr::filter(.data[["predictor"]] %in% expected_predictors)
+
+    res_components <-
+      data_expected |>
+      dplyr::left_join(
+        data_raw,
+        by = "predictor"
+      ) |>
+      dplyr::mutate(
+        predictor_present = tidyr::replace_na(
+          .data[["predictor_present"]],
+          FALSE
+        ),
+        total_adjusted_r_squared = total_adjusted_r_squared,
+        model_result_available = TRUE
+      )
+
+    return(res_components)
+  }
 
   data_importance <-
-    data_hvarpart %>%
-    dplyr::transmute(
-      dataset_id = as.character(.data[["dataset_id"]]),
-      importance = purrr::map(
-        .data[["varhp"]],
-        .f = ~ {
-          if (
-            !is.list(.x) ||
-              !all(c("summary_table", "varhp_output") %in% names(.x))
-          ) {
-            return(tibble::tibble())
-          }
-
-          summary_table <-
-            .x[["summary_table"]]
-          varhp_output <-
-            .x[["varhp_output"]]
-
-          if (
-            !is.list(varhp_output) ||
-              !"Total_explained_variation" %in% names(varhp_output)
-          ) {
-            return(tibble::tibble())
-          }
-
-          total_explained_variation <-
-            varhp_output[["Total_explained_variation"]]
-
-          if (
-            !is.data.frame(summary_table) ||
-              !all(
-                c("predictor", "I.perc(%)") %in% names(summary_table)
-              ) ||
-              length(total_explained_variation) != 1L
-          ) {
-            return(tibble::tibble())
-          }
-
-          res_summary <-
-            summary_table %>%
-            dplyr::transmute(
-              predictor = as.character(.data[["predictor"]]),
-              importance_percent = as.numeric(.data[["I.perc(%)"]]),
-              total_explained_variation = as.numeric(
-                total_explained_variation
-              )
-            )
-
-          return(res_summary)
-        }
-      )
-    ) %>%
-    tidyr::unnest(cols = importance) %>%
-    dplyr::filter(
-      is.finite(.data[["importance_percent"]]),
-      is.finite(.data[["total_explained_variation"]])
-    ) %>%
-    dplyr::group_by(
-      .data[["dataset_id"]],
-      .data[["predictor"]]
-    ) %>%
-    dplyr::summarise(
-      importance_percent = mean(.data[["importance_percent"]]),
-      total_explained_variation = mean(
-        .data[["total_explained_variation"]]
-      ),
-      n_hvarpart_results = dplyr::n(),
-      .groups = "drop"
-    ) %>%
-    dplyr::group_by(.data[["dataset_id"]]) %>%
+    data_source |>
+    dplyr::select(dplyr::all_of(c(id_cols, "varhp"))) |>
     dplyr::mutate(
-      total_explained_variation = mean(
-        .data[["total_explained_variation"]]
+      model_id = model_ids,
+      components = purrr::map(
+        .x = .data[["varhp"]],
+        .f = extract_model_components
       )
-    ) %>%
-    dplyr::ungroup()
-
-  assertthat::assert_that(
-    nrow(data_importance) > 0L,
-    msg = "No valid HVarPart importance results were found."
-  )
+    ) |>
+    dplyr::select(
+      dplyr::all_of(c(id_cols, "model_id", "components"))
+    ) |>
+    tidyr::unnest(cols = "components") |>
+    dplyr::group_by(
+      dplyr::across(
+        dplyr::all_of(
+          c(id_cols, "model_id")
+        )
+      )
+    ) |>
+    dplyr::mutate(
+      has_required_predictors = all(.data[["predictor_present"]]),
+      has_finite_total = all(
+        is.finite(.data[["total_adjusted_r_squared"]])
+      ),
+      has_positive_total = dplyr::first(.data[["has_finite_total"]]) &&
+        dplyr::first(.data[["total_adjusted_r_squared"]]) > 0,
+      has_finite_individual = all(
+        is.finite(.data[["individual"]])
+      ),
+      has_negative_unique = any(
+        .data[["unique"]] < 0,
+        na.rm = TRUE
+      ),
+      has_negative_individual = any(
+        .data[["individual"]] < 0,
+        na.rm = TRUE
+      ),
+      is_importance_eligible =
+        all(.data[["model_result_available"]]) &&
+        dplyr::first(.data[["has_required_predictors"]]) &&
+        dplyr::first(.data[["has_finite_total"]]) &&
+        dplyr::first(.data[["has_positive_total"]]) &&
+        dplyr::first(.data[["has_finite_individual"]]),
+      exclusion_reason = dplyr::case_when(
+        !all(.data[["model_result_available"]]) ~ "missing_result",
+        !dplyr::first(.data[["has_required_predictors"]]) ~
+          "missing_predictor",
+        !dplyr::first(.data[["has_finite_total"]]) ~ "non_finite_total",
+        !dplyr::first(.data[["has_positive_total"]]) ~
+          "non_positive_total",
+        !dplyr::first(.data[["has_finite_individual"]]) ~
+          "non_finite_individual",
+        .default = NA_character_
+      )
+    ) |>
+    dplyr::ungroup() |>
+    dplyr::relocate(dplyr::all_of(c(id_cols, "model_id", "predictor")))
 
   return(data_importance)
 }

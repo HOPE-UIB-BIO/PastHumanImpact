@@ -1,0 +1,144 @@
+---
+title: "Response: HVarPart relative importance"
+format:
+  html:
+    embed-resources: true
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+library(here)
+library(dplyr)
+library(readr)
+library(tidyr)
+
+table_dir <- here::here("Outputs", "Tables", "HVarPart")
+figure_dir <- here::here(
+  "Outputs", "Figures", "Extended_data_figures", "HVarPart"
+)
+
+audit <- read_csv(
+  file.path(table_dir, "hvarpart_model_audit.csv"),
+  show_col_types = FALSE,
+  guess_max = Inf
+)
+profiles <- read_csv(
+  file.path(table_dir, "hvarpart_profile_comparison.csv"),
+  show_col_types = FALSE,
+  guess_max = Inf
+)
+validation <- read_csv(
+  file.path(table_dir, "hvarpart_validation_provenance.csv"),
+  show_col_types = FALSE
+)
+
+audit_overall <- audit |>
+  filter(aggregation_level == "analysis")
+profiles_overall <- profiles |>
+  filter(aggregation_level == "analysis")
+spatial_spd <- profiles_overall |>
+  filter(analysis == "spatial_spd")
+
+value_for <- function(data, selected_profile, selected_predictor) {
+  data |>
+    filter(
+      profile == selected_profile,
+      predictor == selected_predictor
+    ) |>
+    pull(pooled_allocation)
+}
+
+fmt_pct <- function(x) scales::percent(x, accuracy = 0.1)
+all_conclusions_stable <- profiles_overall |>
+  select(analysis, profile, predictor, pooled_allocation) |>
+  pivot_wider(names_from = predictor, values_from = pooled_allocation) |>
+  summarise(stable = all(climate > human)) |>
+  pull(stable)
+```
+
+## Response
+
+We thank the reviewer for identifying that the previous post-processing did
+not preserve negative adjusted hierarchical-partitioning contributions. We
+have replaced that pathway with a single extractor that retains HVarPart's
+`Unique`, `Average.share`, `Individual`, `I.perc(%)`, and total adjusted
+
+$R^2$ values without truncation.
+
+Our primary estimand is now the **signed allocation of adjusted explained
+variation**. Within reporting group $g$, predictor $p$ is pooled as
+
+$$
+A_{p,g} = \frac{\sum_m I_{p,m}}{\sum_m R^2_{\mathrm{adj},m}},
+$$
+
+where $I_{p,m}$ is HVarPart's unmodified individual contribution. Models are
+excluded only when required predictors are absent, the total adjusted $R^2$ is
+non-finite or non-positive, or individual contributions are non-finite. Every
+exclusion is recorded in
+`Outputs/Tables/HVarPart/hvarpart_model_audit.csv`.
+
+A negative allocation is an adjusted partitioning result, often associated
+with shared information, suppression, collinearity, weak information, or
+sampling variation. It is **not** evidence of a negative ecological effect.
+
+For spatial SPD, the signed pooled allocation is
+`r fmt_pct(value_for(spatial_spd, "signed", "climate"))` for climate and
+`r fmt_pct(value_for(spatial_spd, "signed", "human"))` for human predictors.
+The exact-zero sensitivity gives
+`r fmt_pct(value_for(spatial_spd, "zero_truncated", "climate"))` climate,
+while excluding complete models with any negative contribution gives
+`r fmt_pct(value_for(spatial_spd, "exclude_negative", "climate"))` climate.
+Across all five analyses, climate remains larger than human under all three
+profiles: `r ifelse(all_conclusions_stable, "yes", "no")`.
+
+```{r}
+#| label: tbl-hvarpart-audit
+#| tbl-cap: "Model-level HVarPart eligibility audit. Counts are not duplicated across predictor rows."
+audit_overall |>
+  select(
+    analysis, n_models, n_eligible, n_excluded,
+    n_negative_unique, n_negative_individual
+  ) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: fig-hvarpart-profiles
+#| fig-cap: "Signed primary allocation and two sensitivity profiles. Values are pooled from unmodified fitted HVarPart results."
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(figure_dir, "hvarpart_profile_comparison.png")
+)
+```
+
+## Figure changes
+
+Figure 2 has first been recreated with its region-map and predictor-panel
+composition retained. It now labels the estimand "Signed allocation of
+adjusted explained variation". The central view uses shared global 1st--99th
+percentile limits rounded outward; boundary symbols and counts identify values
+outside those limits. No value is removed from the exported data, and a
+full-range supplementary rendering is provided.
+
+Temporal H1 and H2 importance displays are unstacked and include explicit zero
+and one reference lines. The established cores 14944 and 15394 show HVarPart's
+original percentages and label total adjusted $R^2$ explicitly.
+
+## Reconciliation
+
+```{r}
+#| label: tbl-hvarpart-validation
+#| tbl-cap: "Programmatic reconciliation of formulas, exclusions, figure values, and artifacts."
+validation |>
+  knitr::kable()
+```
+
+All numerical statements in this response are computed from
+`hvarpart_profile_comparison.csv`; audit statements use
+`hvarpart_model_audit.csv`; and reconciliation uses
+`hvarpart_validation_provenance.csv`.

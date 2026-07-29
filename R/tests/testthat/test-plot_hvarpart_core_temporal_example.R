@@ -45,8 +45,8 @@ testthat::test_that("plot_hvarpart_core_temporal_example() combines plots", {
     tibble::tibble(
       dataset_id = "core_a",
       predictor = c("human", "climate"),
-      importance_percent = c(60, 40),
-      total_explained_variation = 0.35
+      individual_percent = c(60, 40),
+      total_adjusted_r_squared = 0.35
     )
 
   res_plot <-

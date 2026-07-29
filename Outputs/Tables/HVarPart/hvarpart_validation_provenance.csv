@@ -1,0 +1,8 @@
+check,passed
+unique_model_predictor_keys,TRUE
+signed_direct_formula,TRUE
+paired_signed_allocations_sum_to_one,TRUE
+audit_exclusions_reconcile,TRUE
+figure2_values_match_components,TRUE
+climate_larger_under_all_profiles,TRUE
+required_artifacts_exist,TRUE

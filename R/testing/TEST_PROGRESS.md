@@ -50,7 +50,7 @@ This file tracks the project-wide test rollout for the `testthat` suite under `R
 - `get_hgam_formula`: roxygen contract added and tests expanded with invalid-input coverage for grouping-count validation.
 - `get_chelsa_trace21k_urls`: input contract hardened with explicit argument validation and explicit namespace usage for string and case helpers; tests expanded with invalid-input coverage.
 - `get_climate_data_for_interpolation`: roxygen contract added, explicit input validation added for source shape and nested climate tables, deprecated selection warning removed, tests expanded with invalid-input coverage.
-- `get_summary_tables`: roxygen contract added, explicit input validation added for required summary columns and grouping args, tests expanded with invalid-input coverage.
+- HVarPart importance now uses the canonical raw extractor and explicit signed/sensitivity summaries; the overlapping legacy summary helper was removed.
 - `merge_all_events`: roxygen contract expanded, explicit input validation added for variadic data-frame inputs, tests expanded with invalid-input coverage.
 - `get_pollen_data`: input contract hardened for source table and requested variable selection, tests expanded with invalid-input coverage.
 - `make_dir`: roxygen contract added, explicit path-type validation added, tests aligned to explicit invalid-input failure behavior.
