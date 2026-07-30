@@ -3,7 +3,7 @@ h2_spd,analysis,31,31,0,0,0,0,0,0,1,0,NA,NA,NA
 spatial_events,analysis,1262,257,1005,998,0,1,6,0,75,34,NA,NA,NA
 spatial_spd,analysis,1262,1118,144,104,0,2,38,0,481,265,NA,NA,NA
 temporal_events,analysis,85,76,9,9,0,0,0,0,13,10,NA,NA,NA
-temporal_spd,analysis,85,84,1,0,0,0,1,0,17,9,NA,NA,NA
+temporal_spd,analysis,70,69,1,0,0,0,1,0,14,6,NA,NA,NA
 spatial_events,region_climatezone,32,9,23,22,0,0,1,0,4,1,Asia,Arid,NA
 spatial_events,region_climatezone,8,3,5,5,0,0,0,0,0,0,Asia,Cold_Dry_Summer,NA
 spatial_events,region_climatezone,35,5,30,30,0,0,0,0,0,0,Asia,Cold_Dry_Winter,NA
@@ -175,9 +175,6 @@ temporal_events,region_age,1,0,1,1,0,0,0,0,0,0,Oceania,NA,7000
 temporal_events,region_age,1,0,1,1,0,0,0,0,0,0,Oceania,NA,7500
 temporal_events,region_age,1,0,1,1,0,0,0,0,0,0,Oceania,NA,8000
 temporal_events,region_age,1,0,1,1,0,0,0,0,0,0,Oceania,NA,8500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Asia,NA,500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,1000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,1500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,3000
@@ -192,9 +189,6 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,7500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,8500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,1000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,1500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,3000
@@ -209,9 +203,6 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,7500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,8500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,1000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,1500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Latin America,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Latin America,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,3000
@@ -226,9 +217,6 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,7500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,8500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,1000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,1500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,3000
@@ -243,9 +231,6 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,7500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,8500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,1000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,1500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,3000

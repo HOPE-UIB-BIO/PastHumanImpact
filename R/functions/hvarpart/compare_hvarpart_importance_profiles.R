@@ -1,12 +1,20 @@
 #' @title Compare HVarPart importance profiles
 #' @description
-#' Compute signed, exact zero-truncated, and negative-exclusion HVarPart
-#' summaries and report their difference from the signed primary estimate.
+#' Computes signed, exact zero-truncated, and negative-exclusion HVarPart
+#' summaries. Differences retain the signed profile as an unmodified numerical
+#' reference, while the zero-truncated profile is used in main figures.
 #' @param data_importance Predictor-level output from
 #' `get_hvarpart_importance()`.
 #' @param group_vars Character vector of columns defining reported groups.
 #' @return
 #' A tibble containing all profile summaries and `delta_from_signed`.
+#' @examples
+#' \dontrun{
+#' compare_hvarpart_importance_profiles(
+#'   data_importance = importance,
+#'   group_vars = "analysis"
+#' )
+#' }
 compare_hvarpart_importance_profiles <- function(
   data_importance,
   group_vars
@@ -19,17 +27,16 @@ compare_hvarpart_importance_profiles <- function(
     msg = "Profile comparison inputs must contain valid grouping columns."
   )
 
-  vec_profiles <-
-    c(
-      "signed",
-      "zero_truncated",
-      "exclude_negative"
-    )
+  vec_profiles <- c(
+    "signed",
+    "zero_truncated",
+    "exclude_negative"
+  )
 
   data_profiles <-
     vec_profiles |>
     purrr::map(
-      .f = ~ summarise_hvarpart_importance(
+      ~ summarise_hvarpart_importance(
         data_importance = data_importance,
         group_vars = group_vars,
         profile = .x

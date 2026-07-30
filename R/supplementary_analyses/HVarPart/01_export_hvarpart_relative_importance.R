@@ -28,6 +28,7 @@ data_h1_importance <- dplyr::bind_rows(
   ),
   get_hvarpart_importance(
     targets::tar_read("output_temporal_spd", store = store_h1) |>
+      dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500)) |>
       dplyr::mutate(analysis = "temporal_spd"),
     id_cols = c("analysis", "region", "age")
   ),
@@ -44,7 +45,20 @@ data_h2_importance <- get_hvarpart_importance(
   id_cols = c("analysis", "region", "climatezone")
 )
 
-data_importance <- dplyr::bind_rows(data_h1_importance, data_h2_importance)
+analysis_export_order <- c(
+  "temporal_spd",
+  "temporal_events",
+  "spatial_spd",
+  "spatial_events",
+  "h2_spd"
+)
+data_importance <-
+  dplyr::bind_rows(data_h1_importance, data_h2_importance) |>
+  dplyr::arrange(
+    match(.data[["analysis"]], analysis_export_order),
+    .data[["model_id"]],
+    .data[["predictor"]]
+  )
 
 table_audit <- dplyr::bind_rows(
   summarise_hvarpart_audit(data_importance, "analysis") |>
@@ -75,6 +89,11 @@ table_audit <- dplyr::bind_rows(
 table_profiles <- dplyr::bind_rows(
   compare_hvarpart_importance_profiles(data_importance, "analysis") |>
     dplyr::mutate(aggregation_level = "analysis"),
+  compare_hvarpart_importance_profiles(
+    data_importance,
+    c("analysis", "model_id")
+  ) |>
+    dplyr::mutate(aggregation_level = "model"),
   compare_hvarpart_importance_profiles(
     data_h1_importance |>
       dplyr::filter(stringr::str_starts(.data[["analysis"]], "spatial")),
@@ -117,9 +136,7 @@ readr::write_csv(
 )
 
 figure_profiles <-
-  table_profiles |>
-  dplyr::filter(.data[["aggregation_level"]] == "analysis") |>
-  plot_hvarpart_profile_comparison()
+  plot_hvarpart_profile_comparison(table_profiles)
 
 purrr::walk(c("png", "pdf"), function(extension) {
   ggplot2::ggsave(
