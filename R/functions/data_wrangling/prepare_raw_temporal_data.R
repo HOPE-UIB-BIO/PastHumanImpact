@@ -10,6 +10,7 @@
 #' @param dataset_ids Optional character vector of datasets to retain.
 #' @param age_min Numeric minimum age in calibrated years BP.
 #' @param age_max Numeric maximum age in calibrated years BP.
+#' @param spd_age_min Numeric minimum valid SPD age in calibrated years BP.
 #' @return
 #' Tibble with `analysis`, `dataset_id`, `age`, `variable`, and `value`.
 #' @details
@@ -32,7 +33,8 @@ prepare_raw_temporal_data <- function(
   data_spd,
   dataset_ids = NULL,
   age_min = 500,
-  age_max = 8500
+  age_max = 8500,
+  spd_age_min = 2000
 ) {
   list_sources <-
     list(data_diversity, data_roc, data_climate, data_spd)
@@ -56,6 +58,9 @@ prepare_raw_temporal_data <- function(
     length(age_max) == 1L,
     is.finite(age_max),
     age_min <= age_max,
+    is.numeric(spd_age_min),
+    length(spd_age_min) == 1L,
+    is.finite(spd_age_min),
     msg = "Dataset and age filters must be valid."
   )
 
@@ -113,6 +118,10 @@ prepare_raw_temporal_data <- function(
       age,
       variable = var_name,
       value
+    ) %>%
+    dplyr::filter(
+      .data[["variable"]] != "spd" |
+        .data[["age"]] >= spd_age_min
     ) %>%
     tidyr::drop_na(dataset_id, age, value)
 

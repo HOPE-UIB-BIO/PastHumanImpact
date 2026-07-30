@@ -75,7 +75,7 @@ data_predictor_predictions <-
   dplyr::filter(
     region != "Africa",
     age <= 8500,
-    !(variable == "spd" & age <= 2000)
+    !(variable == "spd" & age < 2000)
   )
 
 data_figure_specs <-

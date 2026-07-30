@@ -54,10 +54,10 @@ testthat::test_that("plot_core_temporal_trends plots raw and fitted data", {
   testthat::expect_s3_class(result, "ggplot")
   testthat::expect_s3_class(result[["facet"]], "FacetGrid")
   testthat::expect_length(result[["layers"]], 5L)
-  testthat::expect_identical(
-    result[["layers"]][[1]][["data"]][["variable"]],
-    data_raw[["variable"]]
-  )
+  testthat::expect_false(any(
+    result[["layers"]][[1]][["data"]][["variable"]] == "spd" &
+      result[["layers"]][[1]][["data"]][["age"]] < 2000
+  ))
   testthat::expect_setequal(
     as.character(
       result[["layers"]][[1]][["data"]][["colour_group"]]

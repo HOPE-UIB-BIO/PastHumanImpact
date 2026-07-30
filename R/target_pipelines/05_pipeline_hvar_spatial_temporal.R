@@ -151,6 +151,12 @@ list(
       data_meta = data_meta
     )
   ),
+  targets::tar_target(
+    name = data_hvar_timebins_spd,
+    description = "Temporal H1 SPD bins restricted to the valid 2-8.5 ka range.",
+    command = data_hvar_timebins |>
+      dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500))
+  ),
   # - Hierarchical variation partitioning: ----
   # - run spatial (within core) analysis with spd age from 2000 ----
   targets::tar_target(
@@ -235,9 +241,9 @@ list(
   # - run temporal analysis with spd ----
   targets::tar_target(
     name = output_temporal_spd,
-    description = "Temporal H1 partitioning with SPD as human predictor.",
+    description = "Temporal H1 SPD partitioning restricted to 2-8.5 ka.",
     command = run_hvarpart(
-      data_source = data_hvar_timebins,
+      data_source = data_hvar_timebins_spd,
       response_dist = NULL,
       data_response_dist = NULL,
       response_vars = c(
@@ -364,6 +370,7 @@ list(
     description = "Raw signed importance from temporal SPD models.",
     command = get_hvarpart_importance(
       data_source = output_temporal_spd |>
+        dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500)) |>
         dplyr::mutate(analysis = "temporal_spd"),
       id_cols = c(
         "analysis",

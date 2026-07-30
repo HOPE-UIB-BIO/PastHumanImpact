@@ -75,6 +75,12 @@ get_model_newdata <- function(
     data_source %>%
     dplyr::filter(variable == sel_variable)
 
+  if (identical(sel_variable, "spd")) {
+    data_strata <-
+      data_strata %>%
+      dplyr::filter(.data[["age"]] >= 2000)
+  }
+
   if (
     "analysis" %in% names(model_config_row) &&
       "analysis" %in% names(data_strata)
@@ -110,7 +116,11 @@ get_model_newdata <- function(
     data_ages <-
       tibble::tibble(
         age = seq(
-          from = model_config_row[["age_min"]][1],
+          from = if (identical(sel_variable, "spd")) {
+            max(model_config_row[["age_min"]][1], 2000)
+          } else {
+            model_config_row[["age_min"]][1]
+          },
           to = model_config_row[["age_max"]][1],
           by = model_config_row[["timestep"]][1]
         )
