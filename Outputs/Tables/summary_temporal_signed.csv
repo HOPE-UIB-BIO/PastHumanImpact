@@ -151,12 +151,6 @@ temporal_events,Oceania,3500,climate,signed,0.1352,0.12,1.1266666666666667,1
 temporal_events,Oceania,3500,human,signed,-0.0147,0.12,-0.1225,1
 temporal_events,Oceania,4000,climate,signed,0.0995,0.087,1.1436781609195403,1
 temporal_events,Oceania,4000,human,signed,-0.0125,0.087,-0.14367816091954025,1
-temporal_spd,Asia,500,climate,signed,0.0949,0.092,1.0315217391304348,1
-temporal_spd,Asia,500,human,signed,-0.0032,0.092,-0.034782608695652174,1
-temporal_spd,Asia,1000,climate,signed,0.0574,0.066,0.8696969696969696,1
-temporal_spd,Asia,1000,human,signed,0.0084,0.066,0.12727272727272726,1
-temporal_spd,Asia,1500,climate,signed,0.0779,0.083,0.9385542168674698,1
-temporal_spd,Asia,1500,human,signed,0.0052,0.083,0.06265060240963854,1
 temporal_spd,Asia,2000,climate,signed,0.0769,0.097,0.7927835051546391,1
 temporal_spd,Asia,2000,human,signed,0.0203,0.097,0.2092783505154639,1
 temporal_spd,Asia,2500,climate,signed,0.089,0.094,0.9468085106382979,1
@@ -185,12 +179,6 @@ temporal_spd,Asia,8000,climate,signed,0.1502,0.16,0.93875,1
 temporal_spd,Asia,8000,human,signed,0.0097,0.16,0.060625,1
 temporal_spd,Asia,8500,climate,signed,0.1613,0.167,0.9658682634730539,1
 temporal_spd,Asia,8500,human,signed,0.0055,0.167,0.03293413173652694,1
-temporal_spd,Europe,500,climate,signed,0.0764,0.088,0.8681818181818182,1
-temporal_spd,Europe,500,human,signed,0.0119,0.088,0.13522727272727275,1
-temporal_spd,Europe,1000,climate,signed,0.1194,0.125,0.9552,1
-temporal_spd,Europe,1000,human,signed,0.0057,0.125,0.0456,1
-temporal_spd,Europe,1500,climate,signed,0.1003,0.102,0.9833333333333334,1
-temporal_spd,Europe,1500,human,signed,0.002,0.102,0.019607843137254905,1
 temporal_spd,Europe,2000,climate,signed,0.0924,0.096,0.9624999999999999,1
 temporal_spd,Europe,2000,human,signed,0.0035,0.096,0.036458333333333336,1
 temporal_spd,Europe,2500,climate,signed,0.0791,0.083,0.9530120481927711,1
@@ -219,12 +207,6 @@ temporal_spd,Europe,8000,climate,signed,0.0784,0.094,0.8340425531914893,1
 temporal_spd,Europe,8000,human,signed,0.0154,0.094,0.16382978723404257,1
 temporal_spd,Europe,8500,climate,signed,0.0686,0.078,0.8794871794871794,1
 temporal_spd,Europe,8500,human,signed,0.0089,0.078,0.1141025641025641,1
-temporal_spd,Latin America,500,climate,signed,0.0689,0.061,1.1295081967213116,1
-temporal_spd,Latin America,500,human,signed,-0.0075,0.061,-0.12295081967213115,1
-temporal_spd,Latin America,1000,climate,signed,0.0946,0.093,1.017204301075269,1
-temporal_spd,Latin America,1000,human,signed,-0.0015,0.093,-0.016129032258064516,1
-temporal_spd,Latin America,1500,climate,signed,0.1278,0.144,0.8875000000000001,1
-temporal_spd,Latin America,1500,human,signed,0.0164,0.144,0.1138888888888889,1
 temporal_spd,Latin America,2000,climate,signed,0.1496,0.153,0.9777777777777779,1
 temporal_spd,Latin America,2000,human,signed,0.003,0.153,0.0196078431372549,1
 temporal_spd,Latin America,2500,climate,signed,0.1453,0.152,0.955921052631579,1
@@ -253,12 +235,6 @@ temporal_spd,Latin America,8000,climate,signed,0.1198,0.172,0.6965116279069768,1
 temporal_spd,Latin America,8000,human,signed,0.0524,0.172,0.3046511627906977,1
 temporal_spd,Latin America,8500,climate,signed,0.1274,0.137,0.9299270072992701,1
 temporal_spd,Latin America,8500,human,signed,0.0097,0.137,0.0708029197080292,1
-temporal_spd,North America,500,climate,signed,0.1045,0.158,0.6613924050632911,1
-temporal_spd,North America,500,human,signed,0.0532,0.158,0.33670886075949363,1
-temporal_spd,North America,1000,climate,signed,0.0931,0.103,0.9038834951456312,1
-temporal_spd,North America,1000,human,signed,0.0102,0.103,0.09902912621359225,1
-temporal_spd,North America,1500,climate,signed,0.0961,0.103,0.9330097087378642,1
-temporal_spd,North America,1500,human,signed,0.0072,0.103,0.06990291262135923,1
 temporal_spd,North America,2000,climate,signed,0.0979,0.103,0.950485436893204,1
 temporal_spd,North America,2000,human,signed,0.0054,0.103,0.052427184466019426,1
 temporal_spd,North America,2500,climate,signed,0.1004,0.109,0.9211009174311927,1
@@ -287,12 +263,6 @@ temporal_spd,North America,8000,climate,signed,0.1183,0.125,0.9464,1
 temporal_spd,North America,8000,human,signed,0.0066,0.125,0.0528,1
 temporal_spd,North America,8500,climate,signed,0.1151,0.12,0.9591666666666666,1
 temporal_spd,North America,8500,human,signed,0.0048,0.12,0.04,1
-temporal_spd,Oceania,500,climate,signed,0.0852,0.093,0.9161290322580645,1
-temporal_spd,Oceania,500,human,signed,0.0074,0.093,0.07956989247311828,1
-temporal_spd,Oceania,1000,climate,signed,0.0631,0.094,0.6712765957446809,1
-temporal_spd,Oceania,1000,human,signed,0.0314,0.094,0.33404255319148934,1
-temporal_spd,Oceania,1500,climate,signed,0.0559,0.083,0.6734939759036144,1
-temporal_spd,Oceania,1500,human,signed,0.0268,0.083,0.3228915662650602,1
 temporal_spd,Oceania,2000,climate,signed,0.0083,0.032,0.259375,1
 temporal_spd,Oceania,2000,human,signed,0.0232,0.032,0.725,1
 temporal_spd,Oceania,2500,climate,signed,0.0794,0.102,0.7784313725490196,1

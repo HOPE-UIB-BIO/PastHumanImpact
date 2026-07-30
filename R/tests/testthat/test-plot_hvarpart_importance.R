@@ -28,6 +28,14 @@ testthat::test_that("plot_hvarpart_importance() plots both predictors", {
     "0.350",
     fixed = TRUE
   )
+  testthat::expect_true(any(vapply(
+    res_plot$layers,
+    function(layer) {
+      inherits(layer$geom, "GeomHline") &&
+        identical(layer$aes_params$linetype, 2)
+    },
+    logical(1)
+  )))
 })
 
 testthat::test_that("plot_hvarpart_importance() requires two predictors", {

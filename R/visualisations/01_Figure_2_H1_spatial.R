@@ -1,9 +1,24 @@
-# Corrected recreation of Figure 2. A complete redesign is intentionally
-# deferred until this recreation has been reviewed.
+#----------------------------------------------------------#
+#
+#                     GlobalHumanImpact
+#
+#                 Hypothesis I: Figure 2
+#
+#                   O. Mottl, V.A. Felde
+#                         2026
+#
+#----------------------------------------------------------#
+
+#----------------------------------------------------------#
+# 0. Setup -----
+#----------------------------------------------------------#
 library(here)
 source(here::here("R/00_Config_file.R"))
 source(here::here("R/main_analysis/02_meta_data.R"))
 
+#----------------------------------------------------------#
+# 1. Load and extract fitted results -----
+#----------------------------------------------------------#
 output_spatial_spd <- targets::tar_read(
   name = "output_spatial_spd",
   store = paste0(data_storage_path, "Targets_data/analyses_h1")
@@ -34,23 +49,42 @@ data_geo_koppen <-
   ) |>
   add_climatezone_as_factor()
 
-figure2_recreation <- plot_hvarpart_spatial_recreation(
+#----------------------------------------------------------#
+# 2. Build balance main and signed supplementary figures -----
+#----------------------------------------------------------#
+figure2_balance <- plot_hvarpart_spatial_balance(
+  data_importance = data_importance,
+  data_meta = data_meta,
+  data_geo_koppen = data_geo_koppen
+)
+figure2_signed <- plot_hvarpart_spatial_signed(
   data_importance = data_importance,
   data_meta = data_meta,
   data_geo_koppen = data_geo_koppen
 )
 
-dir.create(here::here("Outputs/Tables/HVarPart"), recursive = TRUE, showWarnings = FALSE)
+#----------------------------------------------------------#
+# 3. Save figures and source tables -----
+#----------------------------------------------------------#
+dir.create(
+  here::here("Outputs/Tables/HVarPart"),
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 dir.create(
   here::here("Outputs/Figures/Extended_data_figures/HVarPart"),
   recursive = TRUE,
   showWarnings = FALSE
 )
 
-purrr::walk(c("png", "pdf"), function(extension) {
+save_figure2 <- function(extension) {
   ggplot2::ggsave(
-    paste0(here::here("Outputs/Figures/Figure2_h1_spatial"), ".", extension),
-    plot = figure2_recreation$central_plot,
+    paste0(
+      here::here("Outputs/Figures/Figure2_h1_spatial"),
+      ".",
+      extension
+    ),
+    plot = figure2_balance$plot,
     width = image_width_vec[["3col"]],
     height = 170,
     units = image_units,
@@ -59,28 +93,50 @@ purrr::walk(c("png", "pdf"), function(extension) {
   ggplot2::ggsave(
     paste0(
       here::here(
-        "Outputs/Figures/Extended_data_figures/HVarPart/Figure2_h1_spatial_full_range"
+        paste0(
+          "Outputs/Figures/Extended_data_figures/HVarPart/",
+          "Figure2_h1_spatial_signed_full_range"
+        )
       ),
       ".",
       extension
     ),
-    plot = figure2_recreation$full_range_plot,
+    plot = figure2_signed$plot,
     width = image_width_vec[["3col"]],
-    height = 170,
+    height = 180,
     units = image_units,
     bg = "white"
   )
-})
+}
+purrr::walk(c("png", "pdf"), save_figure2)
 
 readr::write_csv(
-  figure2_recreation$record_values,
+  figure2_signed$record_values,
   here::here("Outputs/Tables/HVarPart/figure2_record_values.csv")
 )
 readr::write_csv(
-  figure2_recreation$summary_values,
+  figure2_signed$climatezone_values,
   here::here("Outputs/Tables/HVarPart/figure2_pooled_values.csv")
 )
 readr::write_csv(
-  figure2_recreation$tail_counts,
-  here::here("Outputs/Tables/HVarPart/figure2_display_tail_counts.csv")
+  figure2_signed$region_values,
+  here::here("Outputs/Tables/HVarPart/figure2_region_values.csv")
+)
+readr::write_csv(
+  figure2_balance$record_values,
+  here::here(
+    "Outputs/Tables/HVarPart/figure2_balance_record_values.csv"
+  )
+)
+readr::write_csv(
+  figure2_balance$climatezone_values,
+  here::here(
+    "Outputs/Tables/HVarPart/figure2_balance_climatezone_values.csv"
+  )
+)
+readr::write_csv(
+  figure2_balance$region_values,
+  here::here(
+    "Outputs/Tables/HVarPart/figure2_balance_region_values.csv"
+  )
 )

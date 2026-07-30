@@ -117,7 +117,8 @@ plot_hvarpart_importance <- function(
     ggplot2::geom_hline(
       yintercept = 0,
       colour = "grey50",
-      linewidth = 0.3
+      linewidth = 0.3,
+      linetype = 2
     ) +
     ggplot2::geom_col(width = 0.7) +
     ggplot2::geom_text(
