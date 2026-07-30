@@ -169,18 +169,27 @@ plot_core_temporal_trends <- function(
     )
   data_raw_plot <-
     data_raw %>%
+    dplyr::filter(
+      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+    ) %>%
     dplyr::left_join(
       data_colour_groups,
       by = "variable"
     )
   data_observed_plot <-
     data_observed %>%
+    dplyr::filter(
+      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+    ) %>%
     dplyr::left_join(
       data_colour_groups,
       by = "variable"
     )
   data_predictions_plot <-
     data_predictions %>%
+    dplyr::filter(
+      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+    ) %>%
     dplyr::left_join(
       data_colour_groups,
       by = "variable"

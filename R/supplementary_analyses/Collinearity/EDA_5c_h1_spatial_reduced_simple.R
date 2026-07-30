@@ -58,16 +58,17 @@ data_spatial_reduced <-
       ),
     by = "dataset_id"
   ) |>
-  get_summary_tables(
+  dplyr::mutate(analysis = "spatial_spd_reduced") |>
+  get_hvarpart_importance(
     data_source = _,
-    data_type = "spatial",
-    group_var = c("region", "climatezone")
+    id_cols = c("analysis", "dataset_id", "region", "climatezone")
   ) |>
-  purrr::chuck("summary_table_weighted_mean") |>
-  dplyr::filter(
-    importance_type == "ratio_ind_wmean"
+  summarise_hvarpart_importance(
+    group_vars = c("analysis", "region", "climatezone"),
+    profile = "signed"
   ) |>
   dplyr::mutate(
+    ratio = pooled_allocation,
     predictor = dplyr::case_when(
       predictor == "human" ~ "Humans",
       predictor == "climate" ~ "Climate",
@@ -84,19 +85,12 @@ data_spatial_reduced <-
     climatezone_label = factor(
       climatezone_label,
       levels = get_climatezone_label(data_climate_zones$climatezone_label)
-    ),
-    ratio = tidyr::replace_na(ratio, 0)
+    )
   ) |>
   dplyr::filter(
     !is.na(region),
     !is.na(climatezone_label),
     !is.na(predictor)
-  ) |>
-  tidyr::complete(
-    region,
-    climatezone_label,
-    predictor,
-    fill = list(ratio = 0)
   )
 
 #----------------------------------------------------------#
@@ -113,7 +107,7 @@ plot_reduced_simple <-
     )
   ) +
   ggplot2::geom_col(
-    position = "stack",
+    position = ggplot2::position_dodge(width = 0.9),
     linewidth = line_size * 0.5,
     color = "white"
   ) +
@@ -128,11 +122,8 @@ plot_reduced_simple <-
       "Climate" = palette_predictors[["climate"]]
     )
   ) +
-  ggplot2::scale_y_continuous(
-    limits = c(0, 1),
-    breaks = seq(0, 1, 0.25),
-    expand = c(0, 0)
-  ) +
+  ggplot2::geom_hline(yintercept = c(0, 1), colour = "grey70") +
+  ggplot2::scale_y_continuous() +
   ggplot2::scale_x_discrete(
     drop = FALSE
   ) +

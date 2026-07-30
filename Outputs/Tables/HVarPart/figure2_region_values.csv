@@ -1,0 +1,6 @@
+analysis,region,predictor,profile,individual_sum,total_sum,pooled_allocation,n_models,line_colour
+spatial_spd,Asia,human,signed,5.1675,36.127,0.14303706369197552,98,#F7E6CD
+spatial_spd,Europe,human,signed,27.8923,132.286,0.21084846469014104,381,#F9E0BC
+spatial_spd,Latin America,human,signed,5.5834,26.343,0.2119500436548609,71,#F9E0BC
+spatial_spd,North America,human,signed,53.7047,201.551,0.2664571249956587,533,#FADBAE
+spatial_spd,Oceania,human,signed,4.3678,14.016,0.31162956621004567,35,#FAD7A2

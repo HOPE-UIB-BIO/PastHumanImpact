@@ -1,100 +1,173 @@
-testthat::test_that("get_hvarpart_importance() extracts nested results", {
-  data_hvarpart <-
+make_hvarpart_result <- function(
+  individual = c(-0.02, 0.12),
+  unique = c(-0.03, 0.1),
+  average_share = c(0.01, 0.02),
+  individual_percent = c(-20, 120),
+  total = 0.1,
+  predictors = c("human", "climate")
+) {
+  data_hier <-
+    data.frame(
+      Unique = unique,
+      Average.share = average_share,
+      Individual = individual,
+      check.names = FALSE
+    )
+  data_hier[["I.perc(%)"]] <- individual_percent
+  rownames(data_hier) <- predictors
+
+  res_result <-
+    list(
+      varhp_output = list(
+        Hier.part = data_hier,
+        Total_explained_variation = total
+      )
+    )
+
+  return(res_result)
+}
+
+testthat::test_that("get_hvarpart_importance() preserves raw signed fields", {
+  data_source <-
     tibble::tibble(
-      dataset_id = c("core_a", "core_b"),
+      dataset_id = "core_a",
+      varhp = list(make_hvarpart_result())
+    )
+
+  res_importance <-
+    get_hvarpart_importance(
+      data_source = data_source,
+      id_cols = "dataset_id"
+    )
+
+  testthat::expect_s3_class(res_importance, "tbl_df")
+  testthat::expect_identical(nrow(res_importance), 2L)
+  testthat::expect_equal(
+    res_importance[["individual"]],
+    c(-0.02, 0.12)
+  )
+  testthat::expect_equal(
+    res_importance[["individual_percent"]],
+    c(-20, 120)
+  )
+  testthat::expect_true(
+    all(res_importance[["is_importance_eligible"]])
+  )
+  testthat::expect_true(
+    all(res_importance[["has_negative_individual"]])
+  )
+  testthat::expect_true(
+    all(is.na(res_importance[["exclusion_reason"]]))
+  )
+})
+
+testthat::test_that("get_hvarpart_importance() records missing results", {
+  data_source <-
+    tibble::tibble(
+      dataset_id = "failed",
+      varhp = list(NULL)
+    )
+
+  res_importance <-
+    get_hvarpart_importance(
+      data_source = data_source,
+      id_cols = "dataset_id"
+    )
+
+  testthat::expect_identical(nrow(res_importance), 2L)
+  testthat::expect_false(
+    any(res_importance[["is_importance_eligible"]])
+  )
+  testthat::expect_identical(
+    unique(res_importance[["exclusion_reason"]]),
+    "missing_result"
+  )
+})
+
+testthat::test_that("get_hvarpart_importance() diagnoses invalid models", {
+  data_source <-
+    tibble::tibble(
+      dataset_id = c(
+        "missing_predictor",
+        "zero_total",
+        "non_finite_total",
+        "non_finite_individual"
+      ),
       varhp = list(
-        list(
-          varhp_output = list(Total_explained_variation = 0.4),
-          summary_table = tibble::tibble(
-            predictor = c("human", "climate"),
-            `I.perc(%)` = c(70, 30)
-          )
+        make_hvarpart_result(
+          individual = 0.1,
+          unique = 0.08,
+          average_share = 0.02,
+          individual_percent = 100,
+          predictors = "human"
         ),
-        list(
-          varhp_output = list(Total_explained_variation = 0.2),
-          summary_table = tibble::tibble(
-            predictor = c("human", "climate"),
-            `I.perc(%)` = c(20, 80)
-          )
+        make_hvarpart_result(total = 0),
+        make_hvarpart_result(total = NA_real_),
+        make_hvarpart_result(
+          individual = c(NA_real_, 0.12)
         )
       )
     )
 
   res_importance <-
-    get_hvarpart_importance(data_hvarpart = data_hvarpart)
+    get_hvarpart_importance(
+      data_source = data_source,
+      id_cols = "dataset_id"
+    )
 
-  testthat::expect_s3_class(res_importance, "tbl_df")
-  testthat::expect_identical(nrow(res_importance), 4L)
-  testthat::expect_named(
-    res_importance,
+  data_reasons <-
+    res_importance |>
+    dplyr::distinct(
+      .data[["dataset_id"]],
+      .data[["exclusion_reason"]]
+    )
+
+  testthat::expect_identical(
+    data_reasons[["exclusion_reason"]],
     c(
-      "dataset_id",
-      "predictor",
-      "importance_percent",
-      "total_explained_variation",
-      "n_hvarpart_results"
+      "missing_predictor",
+      "non_positive_total",
+      "non_finite_total",
+      "non_finite_individual"
     )
   )
-  testthat::expect_equal(
-    sort(res_importance[["importance_percent"]]),
-    sort(c(70, 30, 20, 80))
+})
+
+testthat::test_that("get_hvarpart_importance() validates unique model IDs", {
+  data_source <-
+    tibble::tibble(
+      dataset_id = c("core_a", "core_a"),
+      varhp = list(
+        make_hvarpart_result(),
+        make_hvarpart_result()
+      )
+    )
+
+  testthat::expect_error(
+    get_hvarpart_importance(
+      data_source = data_source,
+      id_cols = "dataset_id"
+    ),
+    regexp = "uniquely identify"
   )
 })
 
 testthat::test_that("get_hvarpart_importance() validates its contract", {
   testthat::expect_error(
     get_hvarpart_importance(
-      data_hvarpart = tibble::tibble(dataset_id = "core_a")
+      data_source = tibble::tibble(dataset_id = "core_a"),
+      id_cols = "dataset_id"
     ),
-    "nested results"
+    regexp = "nested results"
   )
-})
-
-testthat::test_that("get_hvarpart_importance() skips failed results", {
-  data_hvarpart <-
-    tibble::tibble(
-      dataset_id = c("failed", "valid"),
-      varhp = list(
-        NA,
-        list(
-          varhp_output = list(Total_explained_variation = 0.4),
-          summary_table = tibble::tibble(
-            predictor = c("human", "climate"),
-            `I.perc(%)` = c(70, 30)
-          )
-        )
-      )
-    )
-
-  res_importance <-
-    get_hvarpart_importance(data_hvarpart = data_hvarpart)
-
-  testthat::expect_identical(
-    unique(res_importance[["dataset_id"]]),
-    "valid"
-  )
-})
-
-testthat::test_that("get_hvarpart_importance() consolidates duplicates", {
-  nested_result <-
-    list(
-      varhp_output = list(Total_explained_variation = 0.4),
-      summary_table = tibble::tibble(
-        predictor = c("human", "climate"),
-        `I.perc(%)` = c(70, 30)
-      )
-    )
-  data_hvarpart <-
-    tibble::tibble(
-      dataset_id = c("core_a", "core_a"),
-      varhp = list(nested_result, nested_result)
-    )
-
-  res_importance <-
-    get_hvarpart_importance(data_hvarpart = data_hvarpart)
-
-  testthat::expect_identical(
-    res_importance[["n_hvarpart_results"]],
-    c(2L, 2L)
+  testthat::expect_error(
+    get_hvarpart_importance(
+      data_source = tibble::tibble(
+        dataset_id = "core_a",
+        varhp = list(NULL)
+      ),
+      id_cols = "missing_id"
+    ),
+    regexp = "nested results"
   )
 })

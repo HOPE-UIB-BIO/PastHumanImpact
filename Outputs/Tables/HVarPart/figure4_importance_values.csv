@@ -1,0 +1,156 @@
+analysis,region,climatezone,predictor,profile,individual_sum,total_sum,pooled_allocation,n_models,climatezone_label,climate,human,importance_balance
+h2_spd,Asia,Arid,climate,zero_truncated,0.5843,0.6986,0.8363870598339537,1,ARD,NA,NA,NA
+h2_spd,Asia,Arid,human,zero_truncated,0.1143,0.6986,0.16361294016604638,1,ARD,NA,NA,NA
+h2_spd,Asia,Cold - Dry Summer,climate,zero_truncated,0.8835,1.0857999999999999,0.8136857616503961,1,CDS,NA,NA,NA
+h2_spd,Asia,Cold - Dry Summer,human,zero_truncated,0.2023,1.0857999999999999,0.186314238349604,1,CDS,NA,NA,NA
+h2_spd,Asia,Cold - Dry Winter,climate,zero_truncated,0.8045,1.0611,0.7581754782772595,1,CDW,NA,NA,NA
+h2_spd,Asia,Cold - Dry Winter,human,zero_truncated,0.2566,1.0611,0.24182452172274058,1,CDW,NA,NA,NA
+h2_spd,Asia,Cold - Cold Summer,climate,zero_truncated,0.5738,0.8378,0.6848889949868704,1,CCS,NA,NA,NA
+h2_spd,Asia,Cold - Cold Summer,human,zero_truncated,0.264,0.8378,0.31511100501312966,1,CCS,NA,NA,NA
+h2_spd,Asia,Cold - Warm Summer,climate,zero_truncated,0.4086,0.4188,0.9756446991404012,1,CWS,NA,NA,NA
+h2_spd,Asia,Cold - Warm Summer,human,zero_truncated,0.0102,0.4188,0.024355300859598854,1,CWS,NA,NA,NA
+h2_spd,Asia,Polar,climate,zero_truncated,0.6599,0.9466000000000001,0.6971265582083245,1,POL,NA,NA,NA
+h2_spd,Asia,Polar,human,zero_truncated,0.2867,0.9466000000000001,0.30287344179167547,1,POL,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Summer,climate,zero_truncated,0.6126,0.9174,0.6677567037279268,1,TDS,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Summer,human,zero_truncated,0.3048,0.9174,0.3322432962720733,1,TDS,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Winter,climate,zero_truncated,0.603,0.8755999999999999,0.6886706258565556,1,TDW,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Winter,human,zero_truncated,0.2726,0.8755999999999999,0.3113293741434445,1,TDW,NA,NA,NA
+h2_spd,Asia,Temperate,climate,zero_truncated,0.7753,0.8371,0.9261736948990563,1,TMP,NA,NA,NA
+h2_spd,Asia,Temperate,human,zero_truncated,0.0618,0.8371,0.07382630510094373,1,TMP,NA,NA,NA
+h2_spd,Europe,Arid,climate,zero_truncated,0.2408,0.3255,0.7397849462365591,1,ARD,NA,NA,NA
+h2_spd,Europe,Arid,human,zero_truncated,0.0847,0.3255,0.26021505376344084,1,ARD,NA,NA,NA
+h2_spd,Europe,Cold - Cold Summer,climate,zero_truncated,0.9466,1.0756999999999999,0.8799851259644883,1,CCS,NA,NA,NA
+h2_spd,Europe,Cold - Cold Summer,human,zero_truncated,0.1291,1.0756999999999999,0.12001487403551177,1,CCS,NA,NA,NA
+h2_spd,Europe,Cold - Warm Summer,climate,zero_truncated,0.9871,1.0389,0.9501395706997786,1,CWS,NA,NA,NA
+h2_spd,Europe,Cold - Warm Summer,human,zero_truncated,0.0518,1.0389,0.04986042930022139,1,CWS,NA,NA,NA
+h2_spd,Europe,Polar,climate,zero_truncated,0.6551,0.7449,0.8794469056249161,1,POL,NA,NA,NA
+h2_spd,Europe,Polar,human,zero_truncated,0.0898,0.7449,0.12055309437508391,1,POL,NA,NA,NA
+h2_spd,Europe,Temperate - Dry Summer,climate,zero_truncated,0.5066,0.7131000000000001,0.7104192960314122,1,TDS,NA,NA,NA
+h2_spd,Europe,Temperate - Dry Summer,human,zero_truncated,0.2065,0.7131000000000001,0.2895807039685878,1,TDS,NA,NA,NA
+h2_spd,Europe,Temperate,climate,zero_truncated,0.9482,1.0141,0.935016270584755,1,TMP,NA,NA,NA
+h2_spd,Europe,Temperate,human,zero_truncated,0.0659,1.0141,0.06498372941524505,1,TMP,NA,NA,NA
+h2_spd,Latin America,Arid,climate,zero_truncated,0.7841,0.9533,0.8225112766180636,1,ARD,NA,NA,NA
+h2_spd,Latin America,Arid,human,zero_truncated,0.1692,0.9533,0.17748872338193641,1,ARD,NA,NA,NA
+h2_spd,Latin America,Polar,climate,zero_truncated,0.6635,0.8633,0.7685624927603383,1,POL,NA,NA,NA
+h2_spd,Latin America,Polar,human,zero_truncated,0.1998,0.8633,0.23143750723966178,1,POL,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Summer,climate,zero_truncated,0.2475,0.4022,0.6153654898060666,1,TDS,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Summer,human,zero_truncated,0.1547,0.4022,0.38463451019393335,1,TDS,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Winter,climate,zero_truncated,0.4114,0.584,0.7044520547945206,1,TDW,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Winter,human,zero_truncated,0.1726,0.584,0.2955479452054795,1,TDW,NA,NA,NA
+h2_spd,Latin America,Temperate,climate,zero_truncated,0.2174,0.658,0.3303951367781155,1,TMP,NA,NA,NA
+h2_spd,Latin America,Temperate,human,zero_truncated,0.4406,0.658,0.6696048632218845,1,TMP,NA,NA,NA
+h2_spd,Latin America,Tropical,climate,zero_truncated,0.6561,0.8333,0.7873514940597623,1,TRO,NA,NA,NA
+h2_spd,Latin America,Tropical,human,zero_truncated,0.1772,0.8333,0.2126485059402376,1,TRO,NA,NA,NA
+h2_spd,North America,Arid,climate,zero_truncated,0.7208,0.7499,0.9611948259767968,1,ARD,NA,NA,NA
+h2_spd,North America,Arid,human,zero_truncated,0.0291,0.7499,0.0388051740232031,1,ARD,NA,NA,NA
+h2_spd,North America,Cold - Dry Summer,climate,zero_truncated,0.6726,0.7678,0.8760093774420421,1,CDS,NA,NA,NA
+h2_spd,North America,Cold - Dry Summer,human,zero_truncated,0.0952,0.7678,0.1239906225579578,1,CDS,NA,NA,NA
+h2_spd,North America,Cold - Cold Summer,climate,zero_truncated,0.8751,1.32,0.6629545454545455,1,CCS,NA,NA,NA
+h2_spd,North America,Cold - Cold Summer,human,zero_truncated,0.4449,1.32,0.33704545454545454,1,CCS,NA,NA,NA
+h2_spd,North America,Cold - Hot Summer,climate,zero_truncated,0.764,0.9429000000000001,0.8102662000212111,1,CHS,NA,NA,NA
+h2_spd,North America,Cold - Hot Summer,human,zero_truncated,0.1789,0.9429000000000001,0.18973379997878884,1,CHS,NA,NA,NA
+h2_spd,North America,Cold - Warm Summer,climate,zero_truncated,0.9947,1.1331,0.8778572058953314,1,CWS,NA,NA,NA
+h2_spd,North America,Cold - Warm Summer,human,zero_truncated,0.1384,1.1331,0.1221427941046686,1,CWS,NA,NA,NA
+h2_spd,North America,Polar,climate,zero_truncated,0.6302,0.7029,0.8965713472755726,1,POL,NA,NA,NA
+h2_spd,North America,Polar,human,zero_truncated,0.0727,0.7029,0.10342865272442738,1,POL,NA,NA,NA
+h2_spd,North America,Temperate - Dry Summer,climate,zero_truncated,0.5903,0.7321000000000001,0.8063106133041934,1,TDS,NA,NA,NA
+h2_spd,North America,Temperate - Dry Summer,human,zero_truncated,0.1418,0.7321000000000001,0.19368938669580657,1,TDS,NA,NA,NA
+h2_spd,North America,Temperate,climate,zero_truncated,0.5098,0.8497,0.599976462280805,1,TMP,NA,NA,NA
+h2_spd,North America,Temperate,human,zero_truncated,0.3399,0.8497,0.40002353771919497,1,TMP,NA,NA,NA
+h2_spd,Oceania,Temperate,climate,zero_truncated,0.8384,1.0604,0.7906450396076953,1,TMP,NA,NA,NA
+h2_spd,Oceania,Temperate,human,zero_truncated,0.222,1.0604,0.20935496039230478,1,TMP,NA,NA,NA
+h2_spd,Oceania,Tropical,climate,zero_truncated,0.8612,1.0207,0.8437346918781229,1,TRO,NA,NA,NA
+h2_spd,Oceania,Tropical,human,zero_truncated,0.1595,1.0207,0.15626530812187717,1,TRO,NA,NA,NA
+h2_spd,Asia,Arid,NA,balance,NA,NA,NA,1,ARD,0.8363870598339537,0.16361294016604638,-0.6727741196679073
+h2_spd,Asia,Cold - Dry Summer,NA,balance,NA,NA,NA,1,CDS,0.8136857616503961,0.186314238349604,-0.627371523300792
+h2_spd,Asia,Cold - Dry Winter,NA,balance,NA,NA,NA,1,CDW,0.7581754782772595,0.24182452172274058,-0.5163509565545189
+h2_spd,Asia,Cold - Cold Summer,NA,balance,NA,NA,NA,1,CCS,0.6848889949868704,0.31511100501312966,-0.36977798997374073
+h2_spd,Asia,Cold - Warm Summer,NA,balance,NA,NA,NA,1,CWS,0.9756446991404012,0.024355300859598854,-0.9512893982808024
+h2_spd,Asia,Polar,NA,balance,NA,NA,NA,1,POL,0.6971265582083245,0.30287344179167547,-0.394253116416649
+h2_spd,Asia,Temperate - Dry Summer,NA,balance,NA,NA,NA,1,TDS,0.6677567037279268,0.3322432962720733,-0.33551340745585356
+h2_spd,Asia,Temperate - Dry Winter,NA,balance,NA,NA,NA,1,TDW,0.6886706258565556,0.3113293741434445,-0.37734125171311106
+h2_spd,Asia,Temperate,NA,balance,NA,NA,NA,1,TMP,0.9261736948990563,0.07382630510094373,-0.8523473897981126
+h2_spd,Europe,Arid,NA,balance,NA,NA,NA,1,ARD,0.7397849462365591,0.26021505376344084,-0.47956989247311826
+h2_spd,Europe,Cold - Cold Summer,NA,balance,NA,NA,NA,1,CCS,0.8799851259644883,0.12001487403551177,-0.7599702519289765
+h2_spd,Europe,Cold - Warm Summer,NA,balance,NA,NA,NA,1,CWS,0.9501395706997786,0.04986042930022139,-0.9002791413995572
+h2_spd,Europe,Polar,NA,balance,NA,NA,NA,1,POL,0.8794469056249161,0.12055309437508391,-0.7588938112498322
+h2_spd,Europe,Temperate - Dry Summer,NA,balance,NA,NA,NA,1,TDS,0.7104192960314122,0.2895807039685878,-0.42083859206282437
+h2_spd,Europe,Temperate,NA,balance,NA,NA,NA,1,TMP,0.935016270584755,0.06498372941524505,-0.87003254116951
+h2_spd,Latin America,Arid,NA,balance,NA,NA,NA,1,ARD,0.8225112766180636,0.17748872338193641,-0.6450225532361271
+h2_spd,Latin America,Polar,NA,balance,NA,NA,NA,1,POL,0.7685624927603383,0.23143750723966178,-0.5371249855206766
+h2_spd,Latin America,Temperate - Dry Summer,NA,balance,NA,NA,NA,1,TDS,0.6153654898060666,0.38463451019393335,-0.2307309796121333
+h2_spd,Latin America,Temperate - Dry Winter,NA,balance,NA,NA,NA,1,TDW,0.7044520547945206,0.2955479452054795,-0.40890410958904105
+h2_spd,Latin America,Temperate,NA,balance,NA,NA,NA,1,TMP,0.3303951367781155,0.6696048632218845,0.339209726443769
+h2_spd,Latin America,Tropical,NA,balance,NA,NA,NA,1,TRO,0.7873514940597623,0.2126485059402376,-0.5747029881195247
+h2_spd,North America,Arid,NA,balance,NA,NA,NA,1,ARD,0.9611948259767968,0.0388051740232031,-0.9223896519535938
+h2_spd,North America,Cold - Dry Summer,NA,balance,NA,NA,NA,1,CDS,0.8760093774420421,0.1239906225579578,-0.7520187548840843
+h2_spd,North America,Cold - Cold Summer,NA,balance,NA,NA,NA,1,CCS,0.6629545454545455,0.33704545454545454,-0.3259090909090909
+h2_spd,North America,Cold - Hot Summer,NA,balance,NA,NA,NA,1,CHS,0.8102662000212111,0.18973379997878884,-0.6205324000424223
+h2_spd,North America,Cold - Warm Summer,NA,balance,NA,NA,NA,1,CWS,0.8778572058953314,0.1221427941046686,-0.7557144117906629
+h2_spd,North America,Polar,NA,balance,NA,NA,NA,1,POL,0.8965713472755726,0.10342865272442738,-0.7931426945511453
+h2_spd,North America,Temperate - Dry Summer,NA,balance,NA,NA,NA,1,TDS,0.8063106133041934,0.19368938669580657,-0.6126212266083868
+h2_spd,North America,Temperate,NA,balance,NA,NA,NA,1,TMP,0.599976462280805,0.40002353771919497,-0.19995292456161007
+h2_spd,Oceania,Temperate,NA,balance,NA,NA,NA,1,TMP,0.7906450396076953,0.20935496039230478,-0.5812900792153906
+h2_spd,Oceania,Tropical,NA,balance,NA,NA,NA,1,TRO,0.8437346918781229,0.15626530812187717,-0.6874693837562458
+h2_spd,Asia,Arid,climate,signed,0.5843,0.699,0.8359084406294708,1,ARD,NA,NA,NA
+h2_spd,Asia,Arid,human,signed,0.1143,0.699,0.16351931330472103,1,ARD,NA,NA,NA
+h2_spd,Asia,Cold - Dry Summer,climate,signed,0.8835,1.086,0.8135359116022098,1,CDS,NA,NA,NA
+h2_spd,Asia,Cold - Dry Summer,human,signed,0.2023,1.086,0.18627992633517496,1,CDS,NA,NA,NA
+h2_spd,Asia,Cold - Dry Winter,climate,signed,0.8045,1.061,0.7582469368520264,1,CDW,NA,NA,NA
+h2_spd,Asia,Cold - Dry Winter,human,signed,0.2566,1.061,0.24184731385485392,1,CDW,NA,NA,NA
+h2_spd,Asia,Cold - Cold Summer,climate,signed,0.5738,0.838,0.6847255369928401,1,CCS,NA,NA,NA
+h2_spd,Asia,Cold - Cold Summer,human,signed,0.264,0.838,0.3150357995226731,1,CCS,NA,NA,NA
+h2_spd,Asia,Cold - Warm Summer,climate,signed,0.4086,0.419,0.9751789976133652,1,CWS,NA,NA,NA
+h2_spd,Asia,Cold - Warm Summer,human,signed,0.0102,0.419,0.024343675417661102,1,CWS,NA,NA,NA
+h2_spd,Asia,Polar,climate,signed,0.6599,0.947,0.6968321013727562,1,POL,NA,NA,NA
+h2_spd,Asia,Polar,human,signed,0.2867,0.947,0.30274551214361145,1,POL,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Summer,climate,signed,0.6126,0.917,0.6680479825517993,1,TDS,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Summer,human,signed,0.3048,0.917,0.33238822246455835,1,TDS,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Winter,climate,signed,0.603,0.876,0.6883561643835616,1,TDW,NA,NA,NA
+h2_spd,Asia,Temperate - Dry Winter,human,signed,0.2726,0.876,0.31118721461187215,1,TDW,NA,NA,NA
+h2_spd,Asia,Temperate,climate,signed,0.7753,0.837,0.926284348864994,1,TMP,NA,NA,NA
+h2_spd,Asia,Temperate,human,signed,0.0618,0.837,0.07383512544802867,1,TMP,NA,NA,NA
+h2_spd,Europe,Arid,climate,signed,0.2408,0.326,0.7386503067484662,1,ARD,NA,NA,NA
+h2_spd,Europe,Arid,human,signed,0.0847,0.326,0.2598159509202454,1,ARD,NA,NA,NA
+h2_spd,Europe,Cold - Cold Summer,climate,signed,0.9466,1.076,0.8797397769516728,1,CCS,NA,NA,NA
+h2_spd,Europe,Cold - Cold Summer,human,signed,0.1291,1.076,0.11998141263940519,1,CCS,NA,NA,NA
+h2_spd,Europe,Cold - Warm Summer,climate,signed,0.9871,1.039,0.9500481231953802,1,CWS,NA,NA,NA
+h2_spd,Europe,Cold - Warm Summer,human,signed,0.0518,1.039,0.04985563041385948,1,CWS,NA,NA,NA
+h2_spd,Europe,Polar,climate,signed,0.6551,0.745,0.8793288590604027,1,POL,NA,NA,NA
+h2_spd,Europe,Polar,human,signed,0.0898,0.745,0.12053691275167785,1,POL,NA,NA,NA
+h2_spd,Europe,Temperate - Dry Summer,climate,signed,0.5066,0.713,0.7105189340813465,1,TDS,NA,NA,NA
+h2_spd,Europe,Temperate - Dry Summer,human,signed,0.2065,0.713,0.28962131837307153,1,TDS,NA,NA,NA
+h2_spd,Europe,Temperate,climate,signed,0.9482,1.014,0.9351084812623275,1,TMP,NA,NA,NA
+h2_spd,Europe,Temperate,human,signed,0.0659,1.014,0.06499013806706114,1,TMP,NA,NA,NA
+h2_spd,Latin America,Arid,climate,signed,0.7841,0.953,0.8227701993704093,1,ARD,NA,NA,NA
+h2_spd,Latin America,Arid,human,signed,0.1692,0.953,0.17754459601259182,1,ARD,NA,NA,NA
+h2_spd,Latin America,Polar,climate,signed,0.6635,0.863,0.7688296639629201,1,POL,NA,NA,NA
+h2_spd,Latin America,Polar,human,signed,0.1998,0.863,0.23151796060254926,1,POL,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Summer,climate,signed,0.2475,0.402,0.6156716417910447,1,TDS,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Summer,human,signed,0.1547,0.402,0.38482587064676615,1,TDS,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Winter,climate,signed,0.4114,0.584,0.7044520547945206,1,TDW,NA,NA,NA
+h2_spd,Latin America,Temperate - Dry Winter,human,signed,0.1726,0.584,0.2955479452054795,1,TDW,NA,NA,NA
+h2_spd,Latin America,Temperate,climate,signed,0.2174,0.658,0.3303951367781155,1,TMP,NA,NA,NA
+h2_spd,Latin America,Temperate,human,signed,0.4406,0.658,0.6696048632218845,1,TMP,NA,NA,NA
+h2_spd,Latin America,Tropical,climate,signed,0.6561,0.833,0.7876350540216087,1,TRO,NA,NA,NA
+h2_spd,Latin America,Tropical,human,signed,0.1772,0.833,0.21272509003601442,1,TRO,NA,NA,NA
+h2_spd,North America,Arid,climate,signed,0.7208,0.75,0.9610666666666666,1,ARD,NA,NA,NA
+h2_spd,North America,Arid,human,signed,0.0291,0.75,0.0388,1,ARD,NA,NA,NA
+h2_spd,North America,Cold - Dry Summer,climate,signed,0.6726,0.768,0.87578125,1,CDS,NA,NA,NA
+h2_spd,North America,Cold - Dry Summer,human,signed,0.0952,0.768,0.12395833333333334,1,CDS,NA,NA,NA
+h2_spd,North America,Cold - Cold Summer,climate,signed,0.8751,1.32,0.6629545454545455,1,CCS,NA,NA,NA
+h2_spd,North America,Cold - Cold Summer,human,signed,0.4449,1.32,0.33704545454545454,1,CCS,NA,NA,NA
+h2_spd,North America,Cold - Hot Summer,climate,signed,0.764,0.943,0.8101802757158006,1,CHS,NA,NA,NA
+h2_spd,North America,Cold - Hot Summer,human,signed,0.1789,0.943,0.1897136797454931,1,CHS,NA,NA,NA
+h2_spd,North America,Cold - Warm Summer,climate,signed,0.9947,1.133,0.8779346866725508,1,CWS,NA,NA,NA
+h2_spd,North America,Cold - Warm Summer,human,signed,0.1384,1.133,0.12215357458075904,1,CWS,NA,NA,NA
+h2_spd,North America,Polar,climate,signed,0.6302,0.703,0.896443812233286,1,POL,NA,NA,NA
+h2_spd,North America,Polar,human,signed,0.0727,0.703,0.10341394025604553,1,POL,NA,NA,NA
+h2_spd,North America,Temperate - Dry Summer,climate,signed,0.5903,0.732,0.8064207650273225,1,TDS,NA,NA,NA
+h2_spd,North America,Temperate - Dry Summer,human,signed,0.1418,0.732,0.19371584699453553,1,TDS,NA,NA,NA
+h2_spd,North America,Temperate,climate,signed,0.5098,0.85,0.599764705882353,1,TMP,NA,NA,NA
+h2_spd,North America,Temperate,human,signed,0.3399,0.85,0.39988235294117647,1,TMP,NA,NA,NA
+h2_spd,Oceania,Temperate,climate,signed,0.8384,1.06,0.7909433962264151,1,TMP,NA,NA,NA
+h2_spd,Oceania,Temperate,human,signed,0.222,1.06,0.20943396226415092,1,TMP,NA,NA,NA
+h2_spd,Oceania,Tropical,climate,signed,0.8612,1.021,0.8434867776689521,1,TRO,NA,NA,NA
+h2_spd,Oceania,Tropical,human,signed,0.1595,1.021,0.15621939275220373,1,TRO,NA,NA,NA

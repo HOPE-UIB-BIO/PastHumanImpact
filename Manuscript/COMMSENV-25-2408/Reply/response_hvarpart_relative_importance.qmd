@@ -1,0 +1,242 @@
+---
+title: "Additional HVarPart sensitivity analysis"
+format:
+  html:
+    embed-resources: true
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_hvarpart_relative_importance.qmd"
+)
+source(here::here("R/00_Config_file.R"))
+
+table_dir <- here::here("Outputs", "Tables", "HVarPart")
+main_figure_dir <- here::here("Outputs", "Figures")
+figure_dir <- here::here(
+  "Outputs", "Figures", "Extended_data_figures", "HVarPart"
+)
+
+audit <- readr::read_csv(
+  file.path(table_dir, "hvarpart_model_audit.csv"),
+  show_col_types = FALSE,
+  guess_max = Inf
+)
+profiles <- readr::read_csv(
+  file.path(table_dir, "hvarpart_profile_comparison.csv"),
+  show_col_types = FALSE,
+  guess_max = Inf
+)
+audit_overall <- audit |>
+  dplyr::filter(.data[["aggregation_level"]] == "analysis")
+profiles_overall <- profiles |>
+  dplyr::filter(.data[["aggregation_level"]] == "analysis")
+spatial_spd <- profiles_overall |>
+  dplyr::filter(.data[["analysis"]] == "spatial_spd")
+
+value_for <- function(data, selected_profile, selected_predictor) {
+  data |>
+    dplyr::filter(
+      .data[["profile"]] == selected_profile,
+      .data[["predictor"]] == selected_predictor
+    ) |>
+    dplyr::pull(.data[["pooled_allocation"]])
+}
+
+fmt_pct <- function(x) scales::percent(x, accuracy = 0.1)
+all_conclusions_stable <-
+  profiles_overall |>
+  dplyr::select(
+    .data[["analysis"]],
+    .data[["profile"]],
+    .data[["predictor"]],
+    .data[["pooled_allocation"]]
+  ) |>
+  tidyr::pivot_wider(
+    names_from = "predictor",
+    values_from = "pooled_allocation"
+  ) |>
+  dplyr::summarise(stable = all(.data[["climate"]] > .data[["human"]])) |>
+  dplyr::pull(.data[["stable"]])
+```
+
+## Additional analysis and correction
+
+During additional quality-control checks of the hierarchical variation
+partitioning results, we identified an error in our previous post-processing:
+negative adjusted contributions were not retained. This issue was identified
+by the authors rather than raised by the reviewers. We replaced the previous
+pathway with a single extractor that preserves HVarPart's `Unique`,
+`Average.share`, `Individual`, `I.perc(%)`, and total adjusted $R^2$ values.
+
+We compared three reporting profiles:
+
+1. **Signed:** retain each unmodified individual contribution.
+2. **Zero-truncated:** replace negative individual contributions with exactly
+   zero and recompute the denominator from the truncated contributions.
+3. **Exclude-negative:** exclude the complete model if either predictor has a
+   negative individual contribution.
+
+Within reporting group $g$, the signed allocation of predictor $p$ is
+
+$$
+A_{p,g} = \frac{\sum_m I_{p,m}}{\sum_m R^2_{\mathrm{adj},m}},
+$$
+
+where $I_{p,m}$ is HVarPart's unmodified individual contribution. Models are
+otherwise excluded only when required predictors are absent, the denominator
+is non-finite or non-positive, or an individual contribution is non-finite.
+Every exclusion is recorded in
+`Outputs/Tables/HVarPart/hvarpart_model_audit.csv`.
+
+A negative signed allocation is an adjusted partitioning result. It is not
+evidence of a negative ecological effect.
+
+## Results and presentation
+
+For spatial SPD models, the zero-truncated allocations underlying the main
+balance figure are
+`r fmt_pct(value_for(spatial_spd, "zero_truncated", "climate"))` for climate
+and
+`r fmt_pct(value_for(spatial_spd, "zero_truncated", "human"))` for human
+impact. The corresponding unmodified signed allocations are
+`r fmt_pct(value_for(spatial_spd, "signed", "climate"))` and
+`r fmt_pct(value_for(spatial_spd, "signed", "human"))`. Excluding complete
+models with any negative contribution gives
+`r fmt_pct(value_for(spatial_spd, "exclude_negative", "climate"))` for climate.
+
+Across all five analyses, climate remains larger than human impact under all
+three profiles:
+`r ifelse(all_conclusions_stable, "yes", "no")`.
+
+Because the profiles support the same overall interpretation, the main figures
+use the bounded difference between paired zero-truncated human and climate
+allocations. Figure 2 applies this balance spatially, Figure 3 through time,
+and Figure 4 within its importance insets. Signed versions of Figures 2--4 are
+provided in the Supplementary Information, and the
+exclude-negative analysis is reported as an additional sensitivity profile.
+
+```{r}
+#| label: tbl-hvarpart-audit
+#| tbl-cap: "Model-level HVarPart eligibility audit. Counts are not duplicated across predictor rows."
+audit_overall |>
+  dplyr::select(
+    .data[["analysis"]],
+    .data[["n_models"]],
+    .data[["n_eligible"]],
+    .data[["n_excluded"]],
+    .data[["n_negative_unique"]],
+    .data[["n_negative_individual"]]
+  ) |>
+  dplyr::mutate(
+    analysis = stringr::str_replace_all(.data[["analysis"]], "_", " ")
+  ) |>
+  knitr::kable(
+    col.names = c(
+      "Analysis", "Models", "Eligible", "Excluded",
+      "Neg. unique", "Neg. individual"
+    )
+  )
+```
+
+```{r}
+#| label: fig-hvarpart-profiles
+#| fig-cap: "Zero-truncated main-figure allocation and two sensitivity profiles, calculated from the preserved fitted HVarPart results."
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(figure_dir, "hvarpart_profile_comparison.png")
+)
+```
+
+## Figure changes
+
+Figure 2 now expresses the complementary human and climate allocations as
+human minus climate importance. The bounded scale runs from -1 (climate
+impact) through 0 (equal importance) to 1 (human impact). For each continent,
+the figure combines the continent-wide distribution of record-level balances,
+pooled climate-zone balances, and a horizontal line for the pooled continental
+balance. Densities use a continuous climate-to-neutral-to-human colour scale;
+the climate-zone panels use the same scale as a pale background while their
+summary points retain categorical climate-zone colours. Maps and continental
+density panels do not use the background gradient. The supplementary
+counterpart reports the unmodified signed human allocation on a focused -0.5
+to 1.5 display while retaining every value in its source table.
+
+```{r}
+#| label: embed-hvarpart-spatial-main
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(main_figure_dir, "Figure2_h1_spatial.png")
+)
+```
+
+*Revised main manuscript Figure 2. Spatial balance between zero-truncated human and climate allocations.*
+
+```{r}
+#| label: embed-hvarpart-spatial-signed
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(figure_dir, "Figure2_h1_spatial_signed_full_range.png")
+)
+```
+
+*Supplementary signed Figure 2. Unmodified signed human allocation, displayed from -0.5 to 1.5; all values are retained in the source table.*
+
+The main temporal H1 figure shows the balance through time as lollipops drawn
+from equal importance to each estimate. Point shape distinguishes the SPD and
+event human-impact proxies, while point colour uses the same
+climate-neutral-human scale as Figure 2 against a pale version of that
+gradient. SPD estimates are restricted to 2--8.5 ka BP, whereas event-based
+estimates span 0.5--8.5 ka BP. Its supplementary counterpart applies the same
+age domains and shows the unmodified signed allocations as grouped, unstacked
+bars with zero and one reference lines. The H2 main-figure insets
+likewise use one outlined balance lollipop per region and climate zone against
+the pale gradient; supplementary insets retain separate unmodified signed
+human and climate allocations.
+
+```{r}
+#| label: embed-hvarpart-temporal-main
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(main_figure_dir, "Figure3_h1_temporal.png")
+)
+```
+
+*Revised main manuscript Figure 3. Temporal balance between zero-truncated human and climate allocations.*
+
+```{r}
+#| label: embed-hvarpart-temporal-signed
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(figure_dir, "Figure3_h1_temporal_signed_full_range.png")
+)
+```
+
+*Supplementary signed Figure 3. Unmodified signed climate and human allocations through time.*
+
+```{r}
+#| label: embed-hvarpart-h2-main
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(main_figure_dir, "Figure4_h2.png")
+)
+```
+
+*Revised main manuscript Figure 4. Multidimensional community-change ordinations with balance lollipops for human and climate importance.*
+
+```{r}
+#| label: embed-hvarpart-h2-signed
+#| out-width: "100%"
+knitr::include_graphics(
+  file.path(figure_dir, "Figure4_h2_signed_full_range.png")
+)
+```
+
+*Supplementary signed Figure 4. Multidimensional community-change ordinations with separate unmodified signed human and climate allocations.*

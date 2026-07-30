@@ -18,6 +18,37 @@ This includes:
 Safe read-only operations are allowed: `git status`, `git diff`, `git log`,
 `git branch` as a list operation, and `git worktree list`.
 
+### Human-Owned Commit and Push Workflow
+
+The human performs commits and pushes by default. An agent's normal workflow
+ends after editing and validation, with changes left uncommitted and unpushed.
+Do not propose, initiate, or treat committing or pushing as a routine completion
+step.
+
+An agent may perform a commit or push only as a rare exception using this
+two-step authorization process:
+
+1. The human directly asks the agent to perform that specific Git operation.
+2. Immediately before acting, the agent restates the exact operation and asks
+   the human to confirm it.
+3. The agent runs the operation only after receiving fresh, unambiguous
+   confirmation.
+
+Before confirming a commit, report the exact files or staged scope, validation
+results, and proposed commit message. Before confirming a push, report the
+branch, exact commit SHA or SHAs, remote, and destination ref.
+
+Commit and push authorization are separate. A request or confirmation to commit
+never authorizes a push. Each direct request and confirmation applies only to
+the stated operation and expires after it is performed. Earlier approval, an
+existing remote branch, or an existing pull request never authorizes another
+commit or push.
+
+Requests to implement, fix, build, validate, finish a plan, publish, prepare a
+pull request, update a pull request, or continue work are not direct requests to
+commit or push. If the human has not directly requested the agent to perform the
+operation, leave changes uncommitted or commits unpushed for the human to handle.
+
 When a task requires renaming or moving a tracked file, always use
 `git mv <old_path> <new_path>` instead of a filesystem rename, copy, or
 delete/recreate sequence so Git records the change as a move and preserves file
@@ -74,10 +105,12 @@ was intentionally regenerated. Do not bulk-copy the entire data directory.
 ## Completing Work
 
 When work is ready, report the files changed and the validation that passed.
-If a commit or push is needed, stop and ask the user to run or approve the exact
-git operation.
+Leave changes uncommitted and unpushed so the human can perform those operations.
+Do not proactively ask to commit or push. If the human directly asks the agent
+to perform either operation as a rare exception, follow the two-step
+authorization process above.
 
-Recommended manual commands after explicit user approval:
+If requested, provide the human with relevant manual commands, such as:
 
 ```powershell
 git checkout main

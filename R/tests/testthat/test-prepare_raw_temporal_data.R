@@ -39,9 +39,9 @@ testthat::test_that("prepare_raw_temporal_data combines raw sources", {
       var_name = "value",
       data_to_fit = list(
         tibble::tibble(
-          dataset_id = "d1",
-          age = 2500,
-          value = 0.5
+          dataset_id = c("d1", "d1"),
+          age = c(1500, 2500),
+          value = c(0.2, 0.5)
         )
       )
     )
@@ -63,6 +63,9 @@ testthat::test_that("prepare_raw_temporal_data combines raw sources", {
     c("n0", "roc", "temp_annual", "spd")
   )
   testthat::expect_true(all(result[["dataset_id"]] == "d1"))
+  testthat::expect_false(any(
+    result[["variable"]] == "spd" & result[["age"]] < 2000
+  ))
   testthat::expect_false(any(
     result[["variable"]] %in%
       c("density_diversity", "density_turnover")

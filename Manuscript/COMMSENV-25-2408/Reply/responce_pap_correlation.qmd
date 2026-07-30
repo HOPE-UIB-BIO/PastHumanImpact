@@ -1,7 +1,7 @@
 ---
 format:
   html:
-    self-contained: true
+    embed-resources: true
   pdf:
     keep-tex: false
 ---
@@ -13,10 +13,6 @@ format:
 #| include: false
 #| warning: false
 #| message: false
-
-source(
-  here::here("R/00_Config_file.R")
-)
 
 path_col_summary <-
   here::here(
@@ -263,7 +259,7 @@ Our view is that some correlation among PAP responses is expected because severa
 
 We nevertheless performed a dedicated robustness analysis and removed collinear PAP responses before re-running the H1 spatial SPD models.
 
-To make this transparent, we report the workflow using three linked figures: (A) grouped PAP correlation diagnostics, (B) changes in importance ratios after response reduction, and (C) reduced-response reconstruction of the simple spatial summary pattern.
+To make this transparent, we report the workflow using three linked figures: (A) grouped PAP correlation diagnostics, (B) changes in signed allocations of adjusted explained variation after response reduction, and (C) reduced-response reconstruction of the simple spatial summary pattern.
 
 ### A. Correlation structure among PAP responses
 
@@ -283,9 +279,9 @@ This supports the reviewer's point that some response metrics are strongly corre
 knitr::include_graphics(fig_correlation)
 ```
 
-### B. Effect on climate-vs-human importance ratios
+### B. Effect on climate-vs-human signed allocations
 
-Figure B shows the direct model-comparison result after removing collinear PAP responses.
+Figure B shows the direct model-comparison result after removing collinear PAP responses. Negative allocations are retained; missing ratios are not replaced with zero. A negative allocation is an adjusted partitioning result and does not imply a negative ecological effect.
 
 This comparison includes `r fmt_int(n_datasets_total)` datasets, with `r fmt_int(n_complete_pairs)` datasets that had complete baseline and reduced model pairs.
 
@@ -307,7 +303,7 @@ These sensitivity results show that reducing correlated PAP responses does not m
 
 ```{r}
 #| label: fig-pap-collinearity-influence
-#| fig-cap: "Sensitivity of predictor importance ratios after reducing collinear PAP responses."
+#| fig-cap: "Sensitivity of signed allocations of adjusted explained variation after reducing collinear PAP responses; missing values are retained as missing."
 #| out-width: "100%"
 #| echo: false
 knitr::include_graphics(fig_influence)
@@ -330,5 +326,5 @@ knitr::include_graphics(fig_reduced_simple)
 ### Notes for manuscript integration
 
 - Methods: Add one sentence stating that a collinearity-based reduced-PAP sensitivity analysis was run.
-- Results: Report that baseline and reduced-PAP models yield near-identical median climate and human importance ratios.
+- Results: Report that baseline and reduced-PAP models yield near-identical median climate and human signed allocations.
 - Discussion: Clarify that expected metric inter-correlation does not alter the central inference.

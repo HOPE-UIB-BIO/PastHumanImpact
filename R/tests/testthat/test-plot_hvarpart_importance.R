@@ -3,8 +3,8 @@ testthat::test_that("plot_hvarpart_importance() plots both predictors", {
     tibble::tibble(
       dataset_id = c("core_a", "core_a", "core_b", "core_b"),
       predictor = rep(c("human", "climate"), 2),
-      importance_percent = c(60, 40, 20, 80),
-      total_explained_variation = c(0.35, 0.35, 0.2, 0.2)
+      individual_percent = c(60, 40, 20, 80),
+      total_adjusted_r_squared = c(0.35, 0.35, 0.2, 0.2)
     )
 
   res_plot <-
@@ -25,9 +25,17 @@ testthat::test_that("plot_hvarpart_importance() plots both predictors", {
   )
   testthat::expect_match(
     res_plot[["labels"]][["subtitle"]],
-    "35.0%",
+    "0.350",
     fixed = TRUE
   )
+  testthat::expect_true(any(vapply(
+    res_plot$layers,
+    function(layer) {
+      inherits(layer$geom, "GeomHline") &&
+        identical(layer$aes_params$linetype, 2)
+    },
+    logical(1)
+  )))
 })
 
 testthat::test_that("plot_hvarpart_importance() requires two predictors", {
@@ -35,8 +43,8 @@ testthat::test_that("plot_hvarpart_importance() requires two predictors", {
     tibble::tibble(
       dataset_id = "core_a",
       predictor = "human",
-      importance_percent = 100,
-      total_explained_variation = 0.35
+      individual_percent = 100,
+      total_adjusted_r_squared = 0.35
     )
 
   testthat::expect_error(

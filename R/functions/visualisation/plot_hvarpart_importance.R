@@ -1,7 +1,7 @@
 #' @title Plot HVarPart importance for one core
 #' @description
-#' Plot climate and human importance percentages and report total explained
-#' variation for one dataset.
+#' Plot the original HVarPart percentages and report total adjusted R-squared
+#' for one dataset.
 #' @param data_importance Long-format HVarPart importance data for one or more
 #' datasets.
 #' @param dataset_id Character scalar identifying the dataset to plot.
@@ -24,8 +24,8 @@ plot_hvarpart_importance <- function(
     c(
       "dataset_id",
       "predictor",
-      "importance_percent",
-      "total_explained_variation"
+      "individual_percent",
+      "total_adjusted_r_squared"
     )
 
   assertthat::assert_that(
@@ -57,19 +57,19 @@ plot_hvarpart_importance <- function(
     setequal(as.character(data_selected[["predictor"]]),
       c("human", "climate")),
     dplyr::n_distinct(
-      data_selected[["total_explained_variation"]]
+      data_selected[["total_adjusted_r_squared"]]
     ) == 1L,
     msg = "Each core must have human and climate HVarPart results."
   )
 
-  total_explained_variation <-
-    unique(data_selected[["total_explained_variation"]])
+  total_adjusted_r_squared <-
+    unique(data_selected[["total_adjusted_r_squared"]])
   res_plot <-
     ggplot2::ggplot(
       data = data_selected,
       mapping = ggplot2::aes(
         x = predictor,
-        y = importance_percent,
+        y = individual_percent,
         fill = predictor
       )
     ) +
@@ -92,8 +92,8 @@ plot_hvarpart_importance <- function(
     ggplot2::labs(
       title = "HVarPart",
       subtitle = stringr::str_glue(
-        "Explained: ",
-        "{scales::percent(total_explained_variation, accuracy = 0.1)}"
+        "Total adjusted R²: ",
+        "{scales::number(total_adjusted_r_squared, accuracy = 0.001)}"
       ),
       x = NULL,
       y = "Individual importance",
@@ -117,16 +117,17 @@ plot_hvarpart_importance <- function(
     ggplot2::geom_hline(
       yintercept = 0,
       colour = "grey50",
-      linewidth = 0.3
+      linewidth = 0.3,
+      linetype = 2
     ) +
     ggplot2::geom_col(width = 0.7) +
     ggplot2::geom_text(
       mapping = ggplot2::aes(
         label = stringr::str_glue(
-          "{round(importance_percent, 1)}%"
+          "{round(individual_percent, 1)}%"
         ),
         vjust = dplyr::if_else(
-          importance_percent >= 0,
+          individual_percent >= 0,
           -0.3,
           1.3
         )

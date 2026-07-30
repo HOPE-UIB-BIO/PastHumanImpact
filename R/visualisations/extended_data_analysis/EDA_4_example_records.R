@@ -144,7 +144,10 @@ data_raw_spd <-
 #----------------------------------------------------------#
 
 data_hvarpart_importance <-
-  get_hvarpart_importance(data_hvarpart = data_hvarpart)
+  get_hvarpart_importance(
+    data_source = data_hvarpart,
+    id_cols = "dataset_id"
+  )
 data_temporal_coverage <-
   data_general_model %>%
   dplyr::filter(
@@ -166,11 +169,11 @@ data_hvarpart_coverage <-
   dplyr::summarise(
     has_human = "human" %in% .data[["predictor"]],
     has_climate = "climate" %in% .data[["predictor"]],
-    total_explained_variation = mean(
-      .data[["total_explained_variation"]]
+    total_adjusted_r_squared = mean(
+      .data[["total_adjusted_r_squared"]]
     ),
     importance_in_display_range = all(
-      dplyr::between(.data[["importance_percent"]], 0, 100)
+      dplyr::between(.data[["individual_percent"]], 0, 100)
     ),
     .groups = "drop"
   ) %>%
@@ -178,7 +181,7 @@ data_hvarpart_coverage <-
     .data[["has_human"]],
     .data[["has_climate"]],
     .data[["importance_in_display_range"]],
-    .data[["total_explained_variation"]] >=
+    .data[["total_adjusted_r_squared"]] >=
       min_total_explained_variation
   )
 data_complete_models <-

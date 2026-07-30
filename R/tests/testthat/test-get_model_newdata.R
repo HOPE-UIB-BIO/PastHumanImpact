@@ -105,8 +105,8 @@ testthat::test_that("get_model_newdata() respects dataset age ranges", {
       climatezone = "Temperate",
       stratum = "Europe__Temperate",
       dataset_id = c("d1", "d1", "d2", "d2"),
-      age = c(0, 500, 500, 1000),
-      age_ka = c(0, 0.5, 0.5, 1),
+      age = c(2000, 2500, 2500, 3000),
+      age_ka = c(2, 2.5, 2.5, 3),
       variable = "spd",
       value = c(1, 2, 3, 4)
     )
@@ -120,7 +120,7 @@ testthat::test_that("get_model_newdata() respects dataset age ranges", {
       group_var = "dataset_id",
       stratum_var = "stratum",
       age_min = 0,
-      age_max = 1000,
+      age_max = 3000,
       timestep = 500,
       region = "Europe",
       climatezone = "Temperate"
@@ -143,7 +143,7 @@ testthat::test_that("get_model_newdata() respects dataset age ranges", {
         .groups = "drop"
       ) %>%
       dplyr::pull(age_min),
-    c(0, 500)
+    c(2000, 2500)
   )
   testthat::expect_equal(
     result %>%
@@ -153,6 +153,37 @@ testthat::test_that("get_model_newdata() respects dataset age ranges", {
         .groups = "drop"
       ) %>%
       dplyr::pull(age_max),
-    c(500, 1000)
+    c(2500, 3000)
   )
+})
+
+testthat::test_that("get_model_newdata() never extrapolates SPD below 2 ka", {
+  data_source <-
+    tibble::tibble(
+      region = "Europe",
+      climatezone = "Temperate",
+      stratum = "Europe__Temperate",
+      dataset_id = "d1",
+      age = c(1500, 2000, 2500),
+      age_ka = c(1.5, 2, 2.5),
+      variable = "spd",
+      value = c(1, 2, 3)
+    )
+  model_config_row <-
+    tibble::tibble(
+      variable = "spd",
+      x_var = "age_ka",
+      x_model_var = "age_ka_scaled",
+      x_mean = 2,
+      x_sd = 0.5,
+      group_var = "dataset_id",
+      stratum_var = "stratum",
+      age_min = 0,
+      age_max = 3000,
+      timestep = 500
+    )
+
+  result <- get_model_newdata(data_source, model_config_row)
+
+  testthat::expect_gte(min(result[["age"]]), 2000)
 })

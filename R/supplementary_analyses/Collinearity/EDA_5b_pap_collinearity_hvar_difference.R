@@ -53,13 +53,22 @@ data_hvar_spatial_spd_reduced <-
 
 data_hvar_importance <-
   dplyr::bind_rows(
-    extract_hvar_importance(
-      data_hvar = data_hvar_spatial_spd_baseline,
-      model_label = "baseline"
+    get_hvarpart_importance(
+      data_source = data_hvar_spatial_spd_baseline |>
+        dplyr::mutate(model = "baseline"),
+      id_cols = c("model", "dataset_id")
     ),
-    extract_hvar_importance(
-      data_hvar = data_hvar_spatial_spd_reduced,
-      model_label = "reduced_collinear_v1"
+    get_hvarpart_importance(
+      data_source = data_hvar_spatial_spd_reduced |>
+        dplyr::mutate(model = "reduced_collinear_v1"),
+      id_cols = c("model", "dataset_id")
+    )
+  ) |>
+  dplyr::mutate(
+    importance_ratio = dplyr::if_else(
+      .data[["is_importance_eligible"]],
+      .data[["individual"]] / .data[["total_adjusted_r_squared"]],
+      NA_real_
     )
   ) |>
   dplyr::arrange(dataset_id, predictor, model)
