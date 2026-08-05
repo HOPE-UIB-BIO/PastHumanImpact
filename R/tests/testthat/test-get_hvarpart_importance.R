@@ -4,7 +4,8 @@ make_hvarpart_result <- function(
   average_share = c(0.01, 0.02),
   individual_percent = c(-20, 120),
   total = 0.1,
-  predictors = c("human", "climate")
+  predictors = c("human", "climate"),
+  include_varpart = TRUE
 ) {
   data_hier <-
     data.frame(
@@ -16,12 +17,42 @@ make_hvarpart_result <- function(
   data_hier[["I.perc(%)"]] <- individual_percent
   rownames(data_hier) <- predictors
 
+  data_output <-
+    list(
+      Hier.part = data_hier,
+      Total_explained_variation = total
+    )
+
+  if (
+    include_varpart &&
+      length(predictors) == 2L
+  ) {
+    data_varpart <-
+      data.frame(
+        Fractions = c(unique, total - sum(unique), total),
+        check.names = FALSE
+      )
+    rownames(data_varpart) <-
+      c(
+        stringr::str_c(
+          "Unique to ",
+          predictors
+        ),
+        stringr::str_c(
+          "Common to ",
+          stringr::str_c(
+            predictors,
+            collapse = ", and "
+          )
+        ),
+        "Total"
+      )
+    data_output[["Var.part"]] <- data_varpart
+  }
+
   res_result <-
     list(
-      varhp_output = list(
-        Hier.part = data_hier,
-        Total_explained_variation = total
-      )
+      varhp_output = data_output
     )
 
   return(res_result)
@@ -50,6 +81,12 @@ testthat::test_that("get_hvarpart_importance() preserves raw signed fields", {
     res_importance[["individual_percent"]],
     c(-20, 120)
   )
+  testthat::expect_equal(
+    res_importance[["varpart_unique"]],
+    c(-0.03, 0.1)
+  )
+  testthat::expect_equal(res_importance[["shared"]], c(0.03, 0.03))
+  testthat::expect_true(all(res_importance[["has_finite_varpart"]]))
   testthat::expect_true(
     all(res_importance[["is_importance_eligible"]])
   )
@@ -59,6 +96,24 @@ testthat::test_that("get_hvarpart_importance() preserves raw signed fields", {
   testthat::expect_true(
     all(is.na(res_importance[["exclusion_reason"]]))
   )
+})
+
+testthat::test_that("importance eligibility is independent of Var.part", {
+  data_source <-
+    tibble::tibble(
+      dataset_id = "legacy",
+      varhp = list(make_hvarpart_result(include_varpart = FALSE))
+    )
+
+  res_importance <-
+    get_hvarpart_importance(
+      data_source = data_source,
+      id_cols = "dataset_id"
+    )
+
+  testthat::expect_true(all(res_importance[["is_importance_eligible"]]))
+  testthat::expect_false(any(res_importance[["varpart_available"]]))
+  testthat::expect_false(any(res_importance[["has_finite_varpart"]]))
 })
 
 testthat::test_that("get_hvarpart_importance() records missing results", {

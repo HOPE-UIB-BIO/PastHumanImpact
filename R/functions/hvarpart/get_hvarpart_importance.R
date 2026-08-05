@@ -1,7 +1,8 @@
 #' @title Extract unmodified HVarPart importance components
 #' @description
 #' Extract predictor-level hierarchical-partitioning components directly from
-#' `varhp_output$Hier.part` and attach model-level eligibility diagnostics.
+#' `varhp_output$Hier.part`, retain direct commonality fractions from
+#' `varhp_output$Var.part`, and attach model-level eligibility diagnostics.
 #' Values returned by HVarPart are never truncated, averaged, or silently
 #' discarded.
 #' @param data_source Data frame containing a `varhp` list-column.
@@ -10,9 +11,11 @@
 #' @param expected_predictors Character vector of required predictor groups.
 #' @return
 #' A tibble with one row per model and expected predictor. It retains `unique`,
-#' `average_share`, `individual`, `individual_percent`, and
+#' `average_share`, `individual`, `individual_percent`,
+#' `varpart_unique`, `shared`, `varpart_total`, and
 #' `total_adjusted_r_squared`, plus explicit availability, eligibility,
-#' negative-contribution, and exclusion diagnostics.
+#' negative-contribution, and exclusion diagnostics. Hierarchical individual
+#' importance remains separate from direct variation fractions.
 #' @examples
 #' \dontrun{
 #' data_importance <-
@@ -34,6 +37,9 @@ get_hvarpart_importance <- function(
       "average_share",
       "individual",
       "individual_percent",
+      "varpart_unique",
+      "shared",
+      "varpart_total",
       "total_adjusted_r_squared"
     )
 
@@ -115,9 +121,13 @@ get_hvarpart_importance <- function(
           average_share = NA_real_,
           individual = NA_real_,
           individual_percent = NA_real_,
+          varpart_unique = NA_real_,
+          shared = NA_real_,
+          varpart_total = NA_real_,
           total_adjusted_r_squared = NA_real_,
           model_result_available = FALSE,
-          predictor_present = FALSE
+          predictor_present = FALSE,
+          varpart_available = FALSE
         )
 
       return(res_empty)
@@ -169,6 +179,83 @@ get_hvarpart_importance <- function(
         NA_real_
       }
 
+    data_varpart <-
+      if (
+        "Var.part" %in% names(data_output) &&
+          !is.null(data_output[["Var.part"]])
+      ) {
+        data_output[["Var.part"]] |>
+          as.data.frame() |>
+          tibble::rownames_to_column("component") |>
+          dplyr::mutate(
+            component = stringr::str_squish(.data[["component"]])
+          )
+      } else {
+        NULL
+      }
+
+    varpart_available <-
+      !is.null(data_varpart) &&
+      "Fractions" %in% names(data_varpart)
+
+    if (
+      varpart_available
+    ) {
+      data_varpart <-
+        data_varpart |>
+        dplyr::transmute(
+          component = .data[["component"]],
+          fraction = as.numeric(.data[["Fractions"]])
+        )
+
+      data_varpart_unique <-
+        data_varpart |>
+        dplyr::filter(
+          stringr::str_starts(.data[["component"]], "Unique to ")
+        ) |>
+        dplyr::transmute(
+          predictor = stringr::str_remove(
+            .data[["component"]],
+            "^Unique to "
+          ),
+          varpart_unique = .data[["fraction"]]
+        )
+      shared_values <-
+        data_varpart |>
+        dplyr::filter(
+          stringr::str_starts(.data[["component"]], "Common to ")
+        ) |>
+        dplyr::pull("fraction")
+      shared <-
+        if (
+          length(shared_values) == 1L
+        ) {
+          shared_values
+        } else {
+          NA_real_
+        }
+      varpart_total_values <-
+        data_varpart |>
+        dplyr::filter(.data[["component"]] == "Total") |>
+        dplyr::pull("fraction")
+      varpart_total <-
+        if (
+          length(varpart_total_values) == 1L
+        ) {
+          varpart_total_values
+        } else {
+          NA_real_
+        }
+    } else {
+      data_varpart_unique <-
+        tibble::tibble(
+          predictor = character(),
+          varpart_unique = numeric()
+        )
+      shared <- NA_real_
+      varpart_total <- NA_real_
+    }
+
     data_raw <-
       data_hier |>
       dplyr::transmute(
@@ -184,6 +271,10 @@ get_hvarpart_importance <- function(
     res_components <-
       data_expected |>
       dplyr::left_join(
+        data_varpart_unique,
+        by = "predictor"
+      ) |>
+      dplyr::left_join(
         data_raw,
         by = "predictor"
       ) |>
@@ -192,8 +283,11 @@ get_hvarpart_importance <- function(
           .data[["predictor_present"]],
           FALSE
         ),
+        shared = shared,
+        varpart_total = varpart_total,
         total_adjusted_r_squared = total_adjusted_r_squared,
-        model_result_available = TRUE
+        model_result_available = TRUE,
+        varpart_available = varpart_available
       )
 
     return(res_components)
@@ -230,6 +324,11 @@ get_hvarpart_importance <- function(
       has_finite_individual = all(
         is.finite(.data[["individual"]])
       ),
+      has_finite_varpart =
+        all(.data[["varpart_available"]]) &&
+        all(is.finite(.data[["varpart_unique"]])) &&
+        all(is.finite(.data[["shared"]])) &&
+        all(is.finite(.data[["varpart_total"]])),
       has_negative_unique = any(
         .data[["unique"]] < 0,
         na.rm = TRUE
