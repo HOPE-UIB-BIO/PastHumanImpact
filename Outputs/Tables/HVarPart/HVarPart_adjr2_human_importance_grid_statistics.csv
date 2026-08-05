@@ -1,0 +1,40 @@
+region,climatezone,n_models,has_x_variation,has_y_variation,correlation_available,spearman_rho,pearson_r,importance_profile
+Asia,Arid,19,TRUE,TRUE,TRUE,0.22456140350877193,0.5116766007090395,human_importance_signed
+Asia,Cold_Dry_Summer,4,TRUE,TRUE,TRUE,0.2,0.286615176414111,human_importance_signed
+Asia,Cold_Dry_Winter,21,TRUE,TRUE,TRUE,-0.03116883116883117,0.03333258732807669,human_importance_signed
+Asia,Cold_Without_dry_season_Cold_Summer,9,TRUE,TRUE,TRUE,-0.03333333333333333,-0.15219115909792053,human_importance_signed
+Asia,Cold_Without_dry_season_Hot_Summer,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Asia,Cold_Without_dry_season_Warm_Summer,16,TRUE,TRUE,TRUE,0.30780593028179404,0.24846521447502223,human_importance_signed
+Asia,Polar,10,TRUE,TRUE,TRUE,0.07878787878787878,0.24287453669351952,human_importance_signed
+Asia,Temperate_Dry_Summer,5,TRUE,TRUE,TRUE,-0.6999999999999998,-0.31965465331353016,human_importance_signed
+Asia,Temperate_Dry_Winter,6,TRUE,TRUE,TRUE,-0.5428571428571428,-0.1041195309952274,human_importance_signed
+Asia,Temperate_Without_dry_season,7,TRUE,TRUE,TRUE,-0.46428571428571414,-0.5107365820637578,human_importance_signed
+Europe,Arid,7,TRUE,TRUE,TRUE,0.6428571428571427,0.8600610360445654,human_importance_signed
+Europe,Cold_Dry_Summer,3,TRUE,TRUE,TRUE,-0.5,-0.8410111979754643,human_importance_signed
+Europe,Cold_Without_dry_season_Cold_Summer,92,TRUE,TRUE,TRUE,0.3727925344451603,0.47127631071314235,human_importance_signed
+Europe,Cold_Without_dry_season_Warm_Summer,144,TRUE,TRUE,TRUE,-0.033800246978413113,-0.11694931353820026,human_importance_signed
+Europe,Polar,30,TRUE,TRUE,TRUE,-0.39795057317607163,-0.5379195082227624,human_importance_signed
+Europe,Temperate_Dry_Summer,14,TRUE,TRUE,TRUE,-0.7846153846153846,-0.6019990765475193,human_importance_signed
+Europe,Temperate_Without_dry_season,91,TRUE,TRUE,TRUE,-0.0570648170858667,-0.11696979271482495,human_importance_signed
+Latin America,Arid,5,TRUE,TRUE,TRUE,0.6999999999999998,0.5334962467514496,human_importance_signed
+Latin America,Cold_Dry_Summer,2,TRUE,TRUE,FALSE,NA,NA,human_importance_signed
+Latin America,Polar,22,TRUE,TRUE,TRUE,0.05364201016374929,-0.00323284809142244,human_importance_signed
+Latin America,Temperate_Dry_Summer,8,TRUE,TRUE,TRUE,0.5714285714285715,0.2020509652049935,human_importance_signed
+Latin America,Temperate_Dry_Winter,2,TRUE,TRUE,FALSE,NA,NA,human_importance_signed
+Latin America,Temperate_Without_dry_season,17,TRUE,TRUE,TRUE,0.5392156862745099,0.631138559867934,human_importance_signed
+Latin America,Tropical,15,TRUE,TRUE,TRUE,0.16428571428571426,0.4646374674144819,human_importance_signed
+North America,Arid,16,TRUE,TRUE,TRUE,-0.5088235294117647,-0.5281608167446723,human_importance_signed
+North America,Cold_Dry_Summer,46,TRUE,TRUE,TRUE,-0.0037619488128276283,-0.12665764729146178,human_importance_signed
+North America,Cold_Without_dry_season_Cold_Summer,135,TRUE,TRUE,TRUE,-0.06130437327745876,-0.04165126941149508,human_importance_signed
+North America,Cold_Without_dry_season_Hot_Summer,53,TRUE,TRUE,TRUE,-0.0033061183408914425,-0.026984034289349514,human_importance_signed
+North America,Cold_Without_dry_season_Warm_Summer,194,TRUE,TRUE,TRUE,0.004668598151095178,0.035950362096118384,human_importance_signed
+North America,Polar,35,TRUE,TRUE,TRUE,0.05561002996145193,0.2015332139888717,human_importance_signed
+North America,Temperate_Dry_Summer,16,TRUE,TRUE,TRUE,-0.35,-0.5210500914875777,human_importance_signed
+North America,Temperate_Without_dry_season,38,TRUE,TRUE,TRUE,-0.3265306127336449,-0.32830973422190163,human_importance_signed
+Oceania,Arid,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Oceania,Cold_Without_dry_season_Cold_Summer,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Oceania,Cold_Without_dry_season_Warm_Summer,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Oceania,Temperate_Dry_Summer,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Oceania,Temperate_Dry_Winter,1,FALSE,FALSE,FALSE,NA,NA,human_importance_signed
+Oceania,Temperate_Without_dry_season,26,TRUE,TRUE,TRUE,-0.14122072355483176,-0.30251653045413246,human_importance_signed
+Oceania,Tropical,4,TRUE,TRUE,TRUE,-0.8,-0.9772152174341879,human_importance_signed

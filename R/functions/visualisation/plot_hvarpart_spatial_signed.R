@@ -66,7 +66,7 @@ plot_hvarpart_spatial_signed <- function(
         limits = c(0, 1),
         oob = scales::squish,
         breaks = c(0, 0.5, 1),
-        labels = c("≤ 0", "0.5", "≥ 1"),
+        labels = c("\u2264 0", "0.5", "\u2265 1"),
         guide = guide
       )
 

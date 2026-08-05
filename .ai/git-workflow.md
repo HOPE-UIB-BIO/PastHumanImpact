@@ -81,7 +81,7 @@ code -n ..\PastHumanImpact_<feature_name>
 In the new worktree, restore the R environment before running analyses:
 
 ```r
-renv::restore(lockfile = here::here("renv/library_list.lock"))
+renv::restore(lockfile = here::here("renv.lock"))
 ```
 
 Data are not bundled with the repository. Each worktree needs access to the
