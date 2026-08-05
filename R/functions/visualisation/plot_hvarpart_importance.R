@@ -92,7 +92,7 @@ plot_hvarpart_importance <- function(
     ggplot2::labs(
       title = "HVarPart",
       subtitle = stringr::str_glue(
-        "Total adjusted R²: ",
+        "Total adjusted R\u00b2: ",
         "{scales::number(total_adjusted_r_squared, accuracy = 0.001)}"
       ),
       x = NULL,

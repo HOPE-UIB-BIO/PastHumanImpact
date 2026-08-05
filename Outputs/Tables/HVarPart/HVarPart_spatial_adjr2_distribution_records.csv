@@ -1,0 +1,1157 @@
+model_id,dataset_id,region,climatezone,adjusted_r_squared,climatezone_label
+analysis=spatial_spd|dataset_id=1001|region=North America|climatezone=Cold_Dry_Summer,1001,North America,Cold - Dry Summer,0.23,CDS
+analysis=spatial_spd|dataset_id=1002|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1002,North America,Cold - Warm Summer,0.335,CWS
+analysis=spatial_spd|dataset_id=1003|region=North America|climatezone=Cold_Dry_Summer,1003,North America,Cold - Dry Summer,0.294,CDS
+analysis=spatial_spd|dataset_id=1006|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1006,North America,Cold - Cold Summer,0.526,CCS
+analysis=spatial_spd|dataset_id=1010|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1010,North America,Cold - Cold Summer,0.347,CCS
+analysis=spatial_spd|dataset_id=1013|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1013,North America,Cold - Warm Summer,0.311,CWS
+analysis=spatial_spd|dataset_id=1024|region=North America|climatezone=Polar,1024,North America,Polar,0.676,POL
+analysis=spatial_spd|dataset_id=1028|region=North America|climatezone=Polar,1028,North America,Polar,0.49,POL
+analysis=spatial_spd|dataset_id=1030|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1030,North America,Cold - Cold Summer,0.234,CCS
+analysis=spatial_spd|dataset_id=1104|region=North America|climatezone=Cold_Dry_Summer,1104,North America,Cold - Dry Summer,0.344,CDS
+analysis=spatial_spd|dataset_id=1105|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1105,North America,Cold - Warm Summer,0.623,CWS
+analysis=spatial_spd|dataset_id=1107|region=North America|climatezone=Polar,1107,North America,Polar,0.354,POL
+analysis=spatial_spd|dataset_id=1142|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1142,North America,Cold - Cold Summer,0.403,CCS
+analysis=spatial_spd|dataset_id=1148|region=North America|climatezone=Temperate_Dry_Summer,1148,North America,Temperate - Dry Summer,0.457,TDS
+analysis=spatial_spd|dataset_id=1149|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1149,North America,Cold - Warm Summer,0.592,CWS
+analysis=spatial_spd|dataset_id=1152|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1152,North America,Cold - Cold Summer,0.333,CCS
+analysis=spatial_spd|dataset_id=1153|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1153,North America,Cold - Warm Summer,0.558,CWS
+analysis=spatial_spd|dataset_id=1154|region=Latin America|climatezone=Temperate_Dry_Winter,1154,Latin America,Temperate - Dry Winter,0.468,TDW
+analysis=spatial_spd|dataset_id=1157|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1157,North America,Cold - Warm Summer,0.291,CWS
+analysis=spatial_spd|dataset_id=1160|region=North America|climatezone=Temperate_Without_dry_season,1160,North America,Temperate,0.34,TMP
+analysis=spatial_spd|dataset_id=12|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,12,Europe,Cold - Warm Summer,0.488,CWS
+analysis=spatial_spd|dataset_id=13051|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,13051,North America,Cold - Warm Summer,0.282,CWS
+analysis=spatial_spd|dataset_id=13097|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,13097,North America,Cold - Warm Summer,0.275,CWS
+analysis=spatial_spd|dataset_id=1390|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1390,North America,Cold - Cold Summer,0.43,CCS
+analysis=spatial_spd|dataset_id=1391|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1391,North America,Cold - Warm Summer,0.423,CWS
+analysis=spatial_spd|dataset_id=1393|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1393,North America,Cold - Cold Summer,0.674,CCS
+analysis=spatial_spd|dataset_id=14110|region=Europe|climatezone=Temperate_Without_dry_season,14110,Europe,Temperate,0.458,TMP
+analysis=spatial_spd|dataset_id=14134|region=Asia|climatezone=Temperate_Without_dry_season,14134,Asia,Temperate,0.541,TMP
+analysis=spatial_spd|dataset_id=14264|region=Latin America|climatezone=Tropical,14264,Latin America,Tropical,0.072,TRO
+analysis=spatial_spd|dataset_id=14274|region=Europe|climatezone=Temperate_Without_dry_season,14274,Europe,Temperate,0.505,TMP
+analysis=spatial_spd|dataset_id=14289|region=Europe|climatezone=Temperate_Without_dry_season,14289,Europe,Temperate,0.188,TMP
+analysis=spatial_spd|dataset_id=1432|region=North America|climatezone=Cold_Dry_Summer,1432,North America,Cold - Dry Summer,0.671,CDS
+analysis=spatial_spd|dataset_id=1434|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,1434,Europe,Cold - Warm Summer,0.629,CWS
+analysis=spatial_spd|dataset_id=1435|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,1435,Europe,Cold - Warm Summer,0.519,CWS
+analysis=spatial_spd|dataset_id=1438|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,1438,Europe,Cold - Cold Summer,-0.077,CCS
+analysis=spatial_spd|dataset_id=1440|region=Europe|climatezone=Arid,1440,Europe,Arid,0.312,ARD
+analysis=spatial_spd|dataset_id=1443|region=Latin America|climatezone=Polar,1443,Latin America,Polar,0.535,POL
+analysis=spatial_spd|dataset_id=1444|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,1444,Asia,Cold - Warm Summer,0.503,CWS
+analysis=spatial_spd|dataset_id=1445|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1445,North America,Cold - Cold Summer,0.155,CCS
+analysis=spatial_spd|dataset_id=1448|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1448,North America,Cold - Warm Summer,0.249,CWS
+analysis=spatial_spd|dataset_id=14498|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,14498,North America,Cold - Cold Summer,0.27,CCS
+analysis=spatial_spd|dataset_id=1450|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1450,North America,Cold - Warm Summer,0.235,CWS
+analysis=spatial_spd|dataset_id=14512|region=Europe|climatezone=Temperate_Without_dry_season,14512,Europe,Temperate,0.254,TMP
+analysis=spatial_spd|dataset_id=1451|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1451,North America,Cold - Warm Summer,0.358,CWS
+analysis=spatial_spd|dataset_id=14523|region=Europe|climatezone=Temperate_Without_dry_season,14523,Europe,Temperate,0.438,TMP
+analysis=spatial_spd|dataset_id=14525|region=Europe|climatezone=Temperate_Without_dry_season,14525,Europe,Temperate,0.708,TMP
+analysis=spatial_spd|dataset_id=14549|region=North America|climatezone=Cold_Dry_Summer,14549,North America,Cold - Dry Summer,0.162,CDS
+analysis=spatial_spd|dataset_id=14556|region=Europe|climatezone=Temperate_Without_dry_season,14556,Europe,Temperate,0.421,TMP
+analysis=spatial_spd|dataset_id=14612|region=Asia|climatezone=Arid,14612,Asia,Arid,0.318,ARD
+analysis=spatial_spd|dataset_id=14619|region=Asia|climatezone=Cold_Dry_Winter,14619,Asia,Cold - Dry Winter,-0.045,CDW
+analysis=spatial_spd|dataset_id=14799|region=North America|climatezone=Cold_Dry_Summer,14799,North America,Cold - Dry Summer,0.109,CDS
+analysis=spatial_spd|dataset_id=14803|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,14803,North America,Cold - Cold Summer,0.365,CCS
+analysis=spatial_spd|dataset_id=14884|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,14884,North America,Cold - Cold Summer,0.307,CCS
+analysis=spatial_spd|dataset_id=14923|region=North America|climatezone=Arid,14923,North America,Arid,-0.022,ARD
+analysis=spatial_spd|dataset_id=14944|region=North America|climatezone=Cold_Dry_Summer,14944,North America,Cold - Dry Summer,0.606,CDS
+analysis=spatial_spd|dataset_id=14948|region=North America|climatezone=Polar,14948,North America,Polar,0.398,POL
+analysis=spatial_spd|dataset_id=14951|region=North America|climatezone=Cold_Dry_Summer,14951,North America,Cold - Dry Summer,0.501,CDS
+analysis=spatial_spd|dataset_id=15032|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15032,North America,Cold - Warm Summer,0.319,CWS
+analysis=spatial_spd|dataset_id=15035|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15035,North America,Cold - Warm Summer,0.611,CWS
+analysis=spatial_spd|dataset_id=15061|region=Latin America|climatezone=Temperate_Dry_Summer,15061,Latin America,Temperate - Dry Summer,0.317,TDS
+analysis=spatial_spd|dataset_id=15081|region=North America|climatezone=Temperate_Without_dry_season,15081,North America,Temperate,0.724,TMP
+analysis=spatial_spd|dataset_id=15101|region=Latin America|climatezone=Temperate_Dry_Summer,15101,Latin America,Temperate - Dry Summer,0.212,TDS
+analysis=spatial_spd|dataset_id=15103|region=Latin America|climatezone=Temperate_Dry_Summer,15103,Latin America,Temperate - Dry Summer,0.458,TDS
+analysis=spatial_spd|dataset_id=15130|region=Latin America|climatezone=Temperate_Without_dry_season,15130,Latin America,Temperate,0.26,TMP
+analysis=spatial_spd|dataset_id=15132|region=Latin America|climatezone=Temperate_Without_dry_season,15132,Latin America,Temperate,0.032,TMP
+analysis=spatial_spd|dataset_id=15136|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15136,North America,Cold - Warm Summer,0.305,CWS
+analysis=spatial_spd|dataset_id=15138|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15138,North America,Cold - Warm Summer,0.242,CWS
+analysis=spatial_spd|dataset_id=15142|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,15142,North America,Cold - Hot Summer,0.389,CHS
+analysis=spatial_spd|dataset_id=15185|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15185,North America,Cold - Cold Summer,0.575,CCS
+analysis=spatial_spd|dataset_id=15189|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15189,North America,Cold - Cold Summer,0.532,CCS
+analysis=spatial_spd|dataset_id=15191|region=North America|climatezone=Temperate_Without_dry_season,15191,North America,Temperate,0.124,TMP
+analysis=spatial_spd|dataset_id=15201|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15201,North America,Cold - Cold Summer,0.275,CCS
+analysis=spatial_spd|dataset_id=15203|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15203,North America,Cold - Warm Summer,0.296,CWS
+analysis=spatial_spd|dataset_id=1520|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1520,North America,Cold - Hot Summer,0.232,CHS
+analysis=spatial_spd|dataset_id=15214|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15214,North America,Cold - Cold Summer,0.058,CCS
+analysis=spatial_spd|dataset_id=15232|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15232,North America,Cold - Cold Summer,0.133,CCS
+analysis=spatial_spd|dataset_id=1523|region=North America|climatezone=Temperate_Without_dry_season,1523,North America,Temperate,-0.02,TMP
+analysis=spatial_spd|dataset_id=15244|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,15244,North America,Cold - Hot Summer,0.374,CHS
+analysis=spatial_spd|dataset_id=15247|region=Latin America|climatezone=Temperate_Dry_Winter,15247,Latin America,Temperate - Dry Winter,0.279,TDW
+analysis=spatial_spd|dataset_id=1524|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1524,North America,Cold - Warm Summer,0.649,CWS
+analysis=spatial_spd|dataset_id=15259|region=Latin America|climatezone=Polar,15259,Latin America,Polar,0.497,POL
+analysis=spatial_spd|dataset_id=15276|region=North America|climatezone=Temperate_Without_dry_season,15276,North America,Temperate,0.224,TMP
+analysis=spatial_spd|dataset_id=15288|region=North America|climatezone=Temperate_Without_dry_season,15288,North America,Temperate,0.333,TMP
+analysis=spatial_spd|dataset_id=15292|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15292,North America,Cold - Warm Summer,0.575,CWS
+analysis=spatial_spd|dataset_id=15296|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15296,North America,Cold - Warm Summer,0.117,CWS
+analysis=spatial_spd|dataset_id=15302|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,15302,North America,Cold - Hot Summer,0.342,CHS
+analysis=spatial_spd|dataset_id=15306|region=Latin America|climatezone=Polar,15306,Latin America,Polar,0.355,POL
+analysis=spatial_spd|dataset_id=15309|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15309,North America,Cold - Warm Summer,0.154,CWS
+analysis=spatial_spd|dataset_id=15325|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15325,North America,Cold - Warm Summer,0.101,CWS
+analysis=spatial_spd|dataset_id=15331|region=Latin America|climatezone=Polar,15331,Latin America,Polar,-0.172,POL
+analysis=spatial_spd|dataset_id=15333|region=North America|climatezone=Arid,15333,North America,Arid,0.136,ARD
+analysis=spatial_spd|dataset_id=15350|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15350,North America,Cold - Warm Summer,0.434,CWS
+analysis=spatial_spd|dataset_id=15356|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15356,North America,Cold - Cold Summer,0.121,CCS
+analysis=spatial_spd|dataset_id=15366|region=Latin America|climatezone=Polar,15366,Latin America,Polar,0.482,POL
+analysis=spatial_spd|dataset_id=15368|region=North America|climatezone=Arid,15368,North America,Arid,0.259,ARD
+analysis=spatial_spd|dataset_id=15392|region=North America|climatezone=Polar,15392,North America,Polar,0.509,POL
+analysis=spatial_spd|dataset_id=15394|region=Latin America|climatezone=Tropical,15394,Latin America,Tropical,0.683,TRO
+analysis=spatial_spd|dataset_id=15403|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15403,North America,Cold - Warm Summer,0.35,CWS
+analysis=spatial_spd|dataset_id=15413|region=North America|climatezone=Cold_Dry_Summer,15413,North America,Cold - Dry Summer,0.406,CDS
+analysis=spatial_spd|dataset_id=15417|region=North America|climatezone=Cold_Dry_Summer,15417,North America,Cold - Dry Summer,-0.018,CDS
+analysis=spatial_spd|dataset_id=15420|region=North America|climatezone=Polar,15420,North America,Polar,0.434,POL
+analysis=spatial_spd|dataset_id=15462|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15462,North America,Cold - Cold Summer,0.506,CCS
+analysis=spatial_spd|dataset_id=1548|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1548,North America,Cold - Warm Summer,0.369,CWS
+analysis=spatial_spd|dataset_id=15586|region=North America|climatezone=Cold_Dry_Summer,15586,North America,Cold - Dry Summer,0.069,CDS
+analysis=spatial_spd|dataset_id=15594|region=North America|climatezone=Cold_Dry_Summer,15594,North America,Cold - Dry Summer,0.493,CDS
+analysis=spatial_spd|dataset_id=15624|region=Asia|climatezone=Temperate_Without_dry_season,15624,Asia,Temperate,0.646,TMP
+analysis=spatial_spd|dataset_id=15646|region=North America|climatezone=Cold_Dry_Summer,15646,North America,Cold - Dry Summer,0.48,CDS
+analysis=spatial_spd|dataset_id=15649|region=Asia|climatezone=Temperate_Without_dry_season,15649,Asia,Temperate,0.464,TMP
+analysis=spatial_spd|dataset_id=15656|region=Asia|climatezone=Temperate_Without_dry_season,15656,Asia,Temperate,0.309,TMP
+analysis=spatial_spd|dataset_id=15667|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15667,North America,Cold - Cold Summer,0.32,CCS
+analysis=spatial_spd|dataset_id=15678|region=Asia|climatezone=Cold_Without_dry_season_Hot_Summer,15678,Asia,Cold - Hot Summer,0.216,CHS
+analysis=spatial_spd|dataset_id=15682|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15682,North America,Cold - Warm Summer,0.499,CWS
+analysis=spatial_spd|dataset_id=1569|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1569,North America,Cold - Cold Summer,0.444,CCS
+analysis=spatial_spd|dataset_id=15709|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,15709,Asia,Cold - Warm Summer,0.495,CWS
+analysis=spatial_spd|dataset_id=15713|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15713,North America,Cold - Cold Summer,0.129,CCS
+analysis=spatial_spd|dataset_id=15715|region=North America|climatezone=Cold_Dry_Summer,15715,North America,Cold - Dry Summer,0.338,CDS
+analysis=spatial_spd|dataset_id=15719|region=North America|climatezone=Polar,15719,North America,Polar,0.38,POL
+analysis=spatial_spd|dataset_id=1571|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1571,North America,Cold - Warm Summer,0.186,CWS
+analysis=spatial_spd|dataset_id=15720|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,15720,Asia,Cold - Warm Summer,0.206,CWS
+analysis=spatial_spd|dataset_id=15724|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15724,North America,Cold - Cold Summer,0.508,CCS
+analysis=spatial_spd|dataset_id=15732|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15732,North America,Cold - Warm Summer,0.218,CWS
+analysis=spatial_spd|dataset_id=15734|region=North America|climatezone=Cold_Dry_Summer,15734,North America,Cold - Dry Summer,0.354,CDS
+analysis=spatial_spd|dataset_id=15738|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15738,North America,Cold - Cold Summer,0.491,CCS
+analysis=spatial_spd|dataset_id=15740|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15740,North America,Cold - Warm Summer,0.244,CWS
+analysis=spatial_spd|dataset_id=1574|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1574,North America,Cold - Hot Summer,0.246,CHS
+analysis=spatial_spd|dataset_id=15762|region=North America|climatezone=Cold_Dry_Summer,15762,North America,Cold - Dry Summer,0.199,CDS
+analysis=spatial_spd|dataset_id=15766|region=North America|climatezone=Temperate_Dry_Summer,15766,North America,Temperate - Dry Summer,0.055,TDS
+analysis=spatial_spd|dataset_id=15768|region=North America|climatezone=Temperate_Dry_Summer,15768,North America,Temperate - Dry Summer,0.258,TDS
+analysis=spatial_spd|dataset_id=15776|region=North America|climatezone=Temperate_Dry_Summer,15776,North America,Temperate - Dry Summer,0.113,TDS
+analysis=spatial_spd|dataset_id=15778|region=North America|climatezone=Cold_Dry_Summer,15778,North America,Cold - Dry Summer,0.568,CDS
+analysis=spatial_spd|dataset_id=1577|region=Europe|climatezone=Temperate_Without_dry_season,1577,Europe,Temperate,0.477,TMP
+analysis=spatial_spd|dataset_id=15783|region=North America|climatezone=Polar,15783,North America,Polar,0.263,POL
+analysis=spatial_spd|dataset_id=15785|region=North America|climatezone=Polar,15785,North America,Polar,0.333,POL
+analysis=spatial_spd|dataset_id=15789|region=North America|climatezone=Polar,15789,North America,Polar,0.123,POL
+analysis=spatial_spd|dataset_id=15793|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15793,North America,Cold - Warm Summer,0.47,CWS
+analysis=spatial_spd|dataset_id=15829|region=North America|climatezone=Polar,15829,North America,Polar,0.53,POL
+analysis=spatial_spd|dataset_id=15831|region=North America|climatezone=Temperate_Without_dry_season,15831,North America,Temperate,0.237,TMP
+analysis=spatial_spd|dataset_id=15855|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15855,North America,Cold - Cold Summer,0.02,CCS
+analysis=spatial_spd|dataset_id=15866|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15866,North America,Cold - Warm Summer,0.281,CWS
+analysis=spatial_spd|dataset_id=15872|region=North America|climatezone=Temperate_Without_dry_season,15872,North America,Temperate,0.374,TMP
+analysis=spatial_spd|dataset_id=15876|region=North America|climatezone=Arid,15876,North America,Arid,0.375,ARD
+analysis=spatial_spd|dataset_id=15902|region=North America|climatezone=Temperate_Without_dry_season,15902,North America,Temperate,0.275,TMP
+analysis=spatial_spd|dataset_id=15904|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15904,North America,Cold - Warm Summer,0.045,CWS
+analysis=spatial_spd|dataset_id=1590|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1590,North America,Cold - Cold Summer,0.638,CCS
+analysis=spatial_spd|dataset_id=15919|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15919,North America,Cold - Warm Summer,0.842,CWS
+analysis=spatial_spd|dataset_id=15922|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15922,North America,Cold - Warm Summer,0.551,CWS
+analysis=spatial_spd|dataset_id=15925|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15925,North America,Cold - Warm Summer,0.364,CWS
+analysis=spatial_spd|dataset_id=15929|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,15929,North America,Cold - Warm Summer,0.728,CWS
+analysis=spatial_spd|dataset_id=15955|region=Latin America|climatezone=Polar,15955,Latin America,Polar,0.149,POL
+analysis=spatial_spd|dataset_id=15967|region=North America|climatezone=Cold_Dry_Summer,15967,North America,Cold - Dry Summer,0.373,CDS
+analysis=spatial_spd|dataset_id=15970|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15970,North America,Cold - Cold Summer,0.55,CCS
+analysis=spatial_spd|dataset_id=15976|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,15976,North America,Cold - Cold Summer,0.244,CCS
+analysis=spatial_spd|dataset_id=15|region=Latin America|climatezone=Arid,15,Latin America,Arid,0.063,ARD
+analysis=spatial_spd|dataset_id=16009|region=North America|climatezone=Temperate_Without_dry_season,16009,North America,Temperate,0.24,TMP
+analysis=spatial_spd|dataset_id=16016|region=North America|climatezone=Arid,16016,North America,Arid,0.115,ARD
+analysis=spatial_spd|dataset_id=1604|region=North America|climatezone=Polar,1604,North America,Polar,0.387,POL
+analysis=spatial_spd|dataset_id=16054|region=North America|climatezone=Cold_Dry_Summer,16054,North America,Cold - Dry Summer,0.535,CDS
+analysis=spatial_spd|dataset_id=16061|region=North America|climatezone=Cold_Dry_Summer,16061,North America,Cold - Dry Summer,0.322,CDS
+analysis=spatial_spd|dataset_id=16073|region=North America|climatezone=Temperate_Dry_Summer,16073,North America,Temperate - Dry Summer,0.366,TDS
+analysis=spatial_spd|dataset_id=16075|region=North America|climatezone=Cold_Dry_Summer,16075,North America,Cold - Dry Summer,0.247,CDS
+analysis=spatial_spd|dataset_id=1607|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1607,North America,Cold - Warm Summer,0.426,CWS
+analysis=spatial_spd|dataset_id=16081|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,16081,North America,Cold - Warm Summer,0.295,CWS
+analysis=spatial_spd|dataset_id=16103|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,16103,North America,Cold - Warm Summer,0.095,CWS
+analysis=spatial_spd|dataset_id=1610|region=Latin America|climatezone=Arid,1610,Latin America,Arid,0.114,ARD
+analysis=spatial_spd|dataset_id=16129|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,16129,North America,Cold - Hot Summer,0.318,CHS
+analysis=spatial_spd|dataset_id=16131|region=North America|climatezone=Cold_Dry_Summer,16131,North America,Cold - Dry Summer,0.058,CDS
+analysis=spatial_spd|dataset_id=16133|region=North America|climatezone=Arid,16133,North America,Arid,0.056,ARD
+analysis=spatial_spd|dataset_id=16175|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,16175,North America,Cold - Hot Summer,0.671,CHS
+analysis=spatial_spd|dataset_id=1617|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1617,North America,Cold - Cold Summer,0.278,CCS
+analysis=spatial_spd|dataset_id=16193|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,16193,North America,Cold - Warm Summer,0.516,CWS
+analysis=spatial_spd|dataset_id=16212|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,16212,Europe,Cold - Warm Summer,0.296,CWS
+analysis=spatial_spd|dataset_id=16214|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,16214,Europe,Cold - Warm Summer,0.017,CWS
+analysis=spatial_spd|dataset_id=16217|region=Europe|climatezone=Temperate_Without_dry_season,16217,Europe,Temperate,0.379,TMP
+analysis=spatial_spd|dataset_id=16219|region=Europe|climatezone=Temperate_Without_dry_season,16219,Europe,Temperate,0.4,TMP
+analysis=spatial_spd|dataset_id=1621|region=Latin America|climatezone=Tropical,1621,Latin America,Tropical,0.406,TRO
+analysis=spatial_spd|dataset_id=1622|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1622,North America,Cold - Warm Summer,0.069,CWS
+analysis=spatial_spd|dataset_id=16231|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,16231,North America,Cold - Warm Summer,0.268,CWS
+analysis=spatial_spd|dataset_id=16236|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,16236,North America,Cold - Cold Summer,0.606,CCS
+analysis=spatial_spd|dataset_id=16238|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,16238,North America,Cold - Cold Summer,0.19,CCS
+analysis=spatial_spd|dataset_id=16269|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,16269,North America,Cold - Cold Summer,0.364,CCS
+analysis=spatial_spd|dataset_id=1626|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1626,North America,Cold - Warm Summer,0.591,CWS
+analysis=spatial_spd|dataset_id=16275|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,16275,North America,Cold - Cold Summer,0.502,CCS
+analysis=spatial_spd|dataset_id=16278|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,16278,North America,Cold - Warm Summer,0.296,CWS
+analysis=spatial_spd|dataset_id=1630|region=Oceania|climatezone=Temperate_Without_dry_season,1630,Oceania,Temperate,0.271,TMP
+analysis=spatial_spd|dataset_id=1631|region=Latin America|climatezone=Polar,1631,Latin America,Polar,0.653,POL
+analysis=spatial_spd|dataset_id=1632|region=North America|climatezone=Cold_Dry_Summer,1632,North America,Cold - Dry Summer,0.326,CDS
+analysis=spatial_spd|dataset_id=1633|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1633,North America,Cold - Hot Summer,0.429,CHS
+analysis=spatial_spd|dataset_id=1639|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1639,North America,Cold - Warm Summer,0.696,CWS
+analysis=spatial_spd|dataset_id=1642|region=North America|climatezone=Temperate_Dry_Summer,1642,North America,Temperate - Dry Summer,0.151,TDS
+analysis=spatial_spd|dataset_id=1646|region=Latin America|climatezone=Polar,1646,Latin America,Polar,0.471,POL
+analysis=spatial_spd|dataset_id=1648|region=North America|climatezone=Temperate_Without_dry_season,1648,North America,Temperate,0.623,TMP
+analysis=spatial_spd|dataset_id=1650|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1650,North America,Cold - Cold Summer,0.45,CCS
+analysis=spatial_spd|dataset_id=1654|region=Latin America|climatezone=Polar,1654,Latin America,Polar,0.344,POL
+analysis=spatial_spd|dataset_id=1656|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1656,North America,Cold - Cold Summer,0.37,CCS
+analysis=spatial_spd|dataset_id=1657|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1657,North America,Cold - Cold Summer,-0.114,CCS
+analysis=spatial_spd|dataset_id=1658|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1658,North America,Cold - Warm Summer,0.207,CWS
+analysis=spatial_spd|dataset_id=1661|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1661,North America,Cold - Hot Summer,0.599,CHS
+analysis=spatial_spd|dataset_id=1663|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1663,North America,Cold - Warm Summer,0.453,CWS
+analysis=spatial_spd|dataset_id=1667|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1667,North America,Cold - Warm Summer,0.432,CWS
+analysis=spatial_spd|dataset_id=1670|region=North America|climatezone=Temperate_Without_dry_season,1670,North America,Temperate,0.18,TMP
+analysis=spatial_spd|dataset_id=1679|region=Latin America|climatezone=Polar,1679,Latin America,Polar,0.549,POL
+analysis=spatial_spd|dataset_id=1691|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1691,North America,Cold - Cold Summer,0.561,CCS
+analysis=spatial_spd|dataset_id=1693|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1693,North America,Cold - Cold Summer,0.32,CCS
+analysis=spatial_spd|dataset_id=1694|region=Latin America|climatezone=Temperate_Without_dry_season,1694,Latin America,Temperate,-0.035,TMP
+analysis=spatial_spd|dataset_id=1698|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1698,North America,Cold - Warm Summer,0.224,CWS
+analysis=spatial_spd|dataset_id=1701|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1701,North America,Cold - Warm Summer,0.231,CWS
+analysis=spatial_spd|dataset_id=1703|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1703,North America,Cold - Warm Summer,0.639,CWS
+analysis=spatial_spd|dataset_id=1704|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1704,North America,Cold - Cold Summer,0.095,CCS
+analysis=spatial_spd|dataset_id=1705|region=North America|climatezone=Temperate_Without_dry_season,1705,North America,Temperate,0.384,TMP
+analysis=spatial_spd|dataset_id=1707|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1707,North America,Cold - Cold Summer,0.395,CCS
+analysis=spatial_spd|dataset_id=1711|region=Latin America|climatezone=Temperate_Dry_Summer,1711,Latin America,Temperate - Dry Summer,0.33,TDS
+analysis=spatial_spd|dataset_id=1715|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1715,North America,Cold - Warm Summer,0.509,CWS
+analysis=spatial_spd|dataset_id=1716|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1716,North America,Cold - Warm Summer,0.384,CWS
+analysis=spatial_spd|dataset_id=1719|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1719,North America,Cold - Warm Summer,0.482,CWS
+analysis=spatial_spd|dataset_id=17292|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17292,North America,Cold - Cold Summer,0.384,CCS
+analysis=spatial_spd|dataset_id=17296|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17296,North America,Cold - Cold Summer,0.1,CCS
+analysis=spatial_spd|dataset_id=17304|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17304,North America,Cold - Warm Summer,0.498,CWS
+analysis=spatial_spd|dataset_id=17320|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17320,North America,Cold - Cold Summer,0.311,CCS
+analysis=spatial_spd|dataset_id=17334|region=Europe|climatezone=Temperate_Without_dry_season,17334,Europe,Temperate,0.545,TMP
+analysis=spatial_spd|dataset_id=17336|region=Europe|climatezone=Temperate_Without_dry_season,17336,Europe,Temperate,0.522,TMP
+analysis=spatial_spd|dataset_id=1733|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1733,North America,Cold - Cold Summer,0.259,CCS
+analysis=spatial_spd|dataset_id=17354|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17354,North America,Cold - Cold Summer,0.495,CCS
+analysis=spatial_spd|dataset_id=17359|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17359,North America,Cold - Cold Summer,0.613,CCS
+analysis=spatial_spd|dataset_id=1735|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1735,North America,Cold - Hot Summer,0.343,CHS
+analysis=spatial_spd|dataset_id=17363|region=North America|climatezone=Temperate_Without_dry_season,17363,North America,Temperate,0.436,TMP
+analysis=spatial_spd|dataset_id=17368|region=Latin America|climatezone=Polar,17368,Latin America,Polar,0.293,POL
+analysis=spatial_spd|dataset_id=17371|region=Latin America|climatezone=Polar,17371,Latin America,Polar,0.568,POL
+analysis=spatial_spd|dataset_id=17377|region=North America|climatezone=Cold_Dry_Summer,17377,North America,Cold - Dry Summer,0.424,CDS
+analysis=spatial_spd|dataset_id=17381|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17381,North America,Cold - Cold Summer,0.523,CCS
+analysis=spatial_spd|dataset_id=17385|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17385,North America,Cold - Cold Summer,0.483,CCS
+analysis=spatial_spd|dataset_id=17391|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17391,North America,Cold - Cold Summer,0.202,CCS
+analysis=spatial_spd|dataset_id=17393|region=North America|climatezone=Cold_Dry_Summer,17393,North America,Cold - Dry Summer,0.193,CDS
+analysis=spatial_spd|dataset_id=17396|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17396,North America,Cold - Warm Summer,0.581,CWS
+analysis=spatial_spd|dataset_id=17400|region=North America|climatezone=Polar,17400,North America,Polar,0.285,POL
+analysis=spatial_spd|dataset_id=17402|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17402,North America,Cold - Cold Summer,0.247,CCS
+analysis=spatial_spd|dataset_id=17404|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17404,North America,Cold - Warm Summer,0.631,CWS
+analysis=spatial_spd|dataset_id=17406|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17406,North America,Cold - Warm Summer,0.391,CWS
+analysis=spatial_spd|dataset_id=17419|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17419,North America,Cold - Cold Summer,0.189,CCS
+analysis=spatial_spd|dataset_id=1755|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1755,North America,Cold - Cold Summer,0.461,CCS
+analysis=spatial_spd|dataset_id=1761|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1761,North America,Cold - Cold Summer,0.387,CCS
+analysis=spatial_spd|dataset_id=1762|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1762,North America,Cold - Cold Summer,0.233,CCS
+analysis=spatial_spd|dataset_id=1763|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1763,North America,Cold - Warm Summer,0.21,CWS
+analysis=spatial_spd|dataset_id=1766|region=North America|climatezone=Arid,1766,North America,Arid,0.349,ARD
+analysis=spatial_spd|dataset_id=17689|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17689,North America,Cold - Warm Summer,0.422,CWS
+analysis=spatial_spd|dataset_id=1768|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1768,North America,Cold - Warm Summer,0.122,CWS
+analysis=spatial_spd|dataset_id=1769|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1769,North America,Cold - Cold Summer,0.519,CCS
+analysis=spatial_spd|dataset_id=1770|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1770,North America,Cold - Cold Summer,0.459,CCS
+analysis=spatial_spd|dataset_id=17711|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17711,North America,Cold - Cold Summer,0.605,CCS
+analysis=spatial_spd|dataset_id=17713|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,17713,North America,Cold - Cold Summer,0.621,CCS
+analysis=spatial_spd|dataset_id=1771|region=Latin America|climatezone=Polar,1771,Latin America,Polar,-0.002,POL
+analysis=spatial_spd|dataset_id=1773|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1773,North America,Cold - Warm Summer,0.325,CWS
+analysis=spatial_spd|dataset_id=1776|region=North America|climatezone=Temperate_Without_dry_season,1776,North America,Temperate,0.273,TMP
+analysis=spatial_spd|dataset_id=1780|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1780,North America,Cold - Cold Summer,0.441,CCS
+analysis=spatial_spd|dataset_id=1782|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1782,North America,Cold - Hot Summer,0.63,CHS
+analysis=spatial_spd|dataset_id=1786|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1786,North America,Cold - Warm Summer,0.247,CWS
+analysis=spatial_spd|dataset_id=17873|region=Latin America|climatezone=Temperate_Dry_Summer,17873,Latin America,Temperate - Dry Summer,-0.199,TDS
+analysis=spatial_spd|dataset_id=17880|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17880,North America,Cold - Warm Summer,0.367,CWS
+analysis=spatial_spd|dataset_id=1788|region=North America|climatezone=Polar,1788,North America,Polar,0.462,POL
+analysis=spatial_spd|dataset_id=17945|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,17945,North America,Cold - Warm Summer,0.506,CWS
+analysis=spatial_spd|dataset_id=1807|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1807,North America,Cold - Warm Summer,0.224,CWS
+analysis=spatial_spd|dataset_id=18100|region=Latin America|climatezone=Tropical,18100,Latin America,Tropical,0.237,TRO
+analysis=spatial_spd|dataset_id=18104|region=Latin America|climatezone=Temperate_Dry_Summer,18104,Latin America,Temperate - Dry Summer,0.265,TDS
+analysis=spatial_spd|dataset_id=18108|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,18108,North America,Cold - Cold Summer,0.205,CCS
+analysis=spatial_spd|dataset_id=18110|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,18110,North America,Cold - Warm Summer,0.554,CWS
+analysis=spatial_spd|dataset_id=18123|region=Latin America|climatezone=Arid,18123,Latin America,Arid,0.273,ARD
+analysis=spatial_spd|dataset_id=1814|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1814,North America,Cold - Warm Summer,0.483,CWS
+analysis=spatial_spd|dataset_id=1817|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1817,North America,Cold - Warm Summer,0.569,CWS
+analysis=spatial_spd|dataset_id=1820|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1820,North America,Cold - Warm Summer,0.654,CWS
+analysis=spatial_spd|dataset_id=1823|region=North America|climatezone=Polar,1823,North America,Polar,0.246,POL
+analysis=spatial_spd|dataset_id=1824|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1824,North America,Cold - Hot Summer,0.334,CHS
+analysis=spatial_spd|dataset_id=1829|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1829,North America,Cold - Warm Summer,0.338,CWS
+analysis=spatial_spd|dataset_id=1835|region=North America|climatezone=Polar,1835,North America,Polar,0.592,POL
+analysis=spatial_spd|dataset_id=1841|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1841,North America,Cold - Warm Summer,0.355,CWS
+analysis=spatial_spd|dataset_id=1843|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,1843,Asia,Cold - Warm Summer,0.486,CWS
+analysis=spatial_spd|dataset_id=1844|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,1844,Asia,Cold - Warm Summer,0.626,CWS
+analysis=spatial_spd|dataset_id=1848|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1848,North America,Cold - Warm Summer,0.454,CWS
+analysis=spatial_spd|dataset_id=1849|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1849,North America,Cold - Cold Summer,0.591,CCS
+analysis=spatial_spd|dataset_id=1854|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1854,North America,Cold - Cold Summer,0.512,CCS
+analysis=spatial_spd|dataset_id=1856|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1856,North America,Cold - Cold Summer,0.313,CCS
+analysis=spatial_spd|dataset_id=1862|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1862,North America,Cold - Warm Summer,0.562,CWS
+analysis=spatial_spd|dataset_id=1880|region=Latin America|climatezone=Temperate_Without_dry_season,1880,Latin America,Temperate,0.528,TMP
+analysis=spatial_spd|dataset_id=1883|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1883,North America,Cold - Warm Summer,0.677,CWS
+analysis=spatial_spd|dataset_id=1890|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1890,North America,Cold - Cold Summer,0.456,CCS
+analysis=spatial_spd|dataset_id=1897|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,1897,North America,Cold - Hot Summer,0.289,CHS
+analysis=spatial_spd|dataset_id=1902|region=North America|climatezone=Cold_Dry_Summer,1902,North America,Cold - Dry Summer,0.522,CDS
+analysis=spatial_spd|dataset_id=1904|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1904,North America,Cold - Warm Summer,0.601,CWS
+analysis=spatial_spd|dataset_id=19266|region=North America|climatezone=Polar,19266,North America,Polar,0.292,POL
+analysis=spatial_spd|dataset_id=19323|region=North America|climatezone=Cold_Dry_Summer,19323,North America,Cold - Dry Summer,0.43,CDS
+analysis=spatial_spd|dataset_id=1961|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1961,North America,Cold - Warm Summer,0.364,CWS
+analysis=spatial_spd|dataset_id=1965|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1965,North America,Cold - Warm Summer,0.512,CWS
+analysis=spatial_spd|dataset_id=1966|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1966,North America,Cold - Warm Summer,0.498,CWS
+analysis=spatial_spd|dataset_id=1968|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1968,North America,Cold - Warm Summer,0.606,CWS
+analysis=spatial_spd|dataset_id=1970|region=North America|climatezone=Arid,1970,North America,Arid,0.258,ARD
+analysis=spatial_spd|dataset_id=1980|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1980,North America,Cold - Warm Summer,0.386,CWS
+analysis=spatial_spd|dataset_id=19814|region=North America|climatezone=Cold_Dry_Summer,19814,North America,Cold - Dry Summer,0.172,CDS
+analysis=spatial_spd|dataset_id=1981|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,1981,North America,Cold - Warm Summer,0.197,CWS
+analysis=spatial_spd|dataset_id=19820|region=North America|climatezone=Temperate_Dry_Summer,19820,North America,Temperate - Dry Summer,0.261,TDS
+analysis=spatial_spd|dataset_id=19834|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,19834,North America,Cold - Hot Summer,0.058,CHS
+analysis=spatial_spd|dataset_id=1987|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,1987,North America,Cold - Cold Summer,0.526,CCS
+analysis=spatial_spd|dataset_id=19901|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,19901,Europe,Cold - Warm Summer,0.035,CWS
+analysis=spatial_spd|dataset_id=19909|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,19909,Europe,Cold - Cold Summer,0.022,CCS
+analysis=spatial_spd|dataset_id=19913|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,19913,Europe,Cold - Cold Summer,0.604,CCS
+analysis=spatial_spd|dataset_id=19937|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,19937,North America,Cold - Hot Summer,0.137,CHS
+analysis=spatial_spd|dataset_id=19967|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,19967,North America,Cold - Warm Summer,0.448,CWS
+analysis=spatial_spd|dataset_id=19995|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,19995,North America,Cold - Cold Summer,0.344,CCS
+analysis=spatial_spd|dataset_id=20001|region=North America|climatezone=Temperate_Dry_Summer,20001,North America,Temperate - Dry Summer,0.34,TDS
+analysis=spatial_spd|dataset_id=20012|region=Europe|climatezone=Temperate_Without_dry_season,20012,Europe,Temperate,0.199,TMP
+analysis=spatial_spd|dataset_id=20018|region=Europe|climatezone=Polar,20018,Europe,Polar,0.414,POL
+analysis=spatial_spd|dataset_id=20029|region=Europe|climatezone=Polar,20029,Europe,Polar,0.42,POL
+analysis=spatial_spd|dataset_id=20034|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,20034,Europe,Cold - Cold Summer,0.129,CCS
+analysis=spatial_spd|dataset_id=20046|region=Europe|climatezone=Polar,20046,Europe,Polar,0.355,POL
+analysis=spatial_spd|dataset_id=2004|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2004,North America,Cold - Cold Summer,0.573,CCS
+analysis=spatial_spd|dataset_id=20050|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,20050,Europe,Cold - Cold Summer,0.239,CCS
+analysis=spatial_spd|dataset_id=2011|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2011,North America,Cold - Warm Summer,0.393,CWS
+analysis=spatial_spd|dataset_id=20131|region=Europe|climatezone=Temperate_Without_dry_season,20131,Europe,Temperate,0.505,TMP
+analysis=spatial_spd|dataset_id=20188|region=North America|climatezone=Polar,20188,North America,Polar,0.296,POL
+analysis=spatial_spd|dataset_id=20194|region=North America|climatezone=Arid,20194,North America,Arid,0.132,ARD
+analysis=spatial_spd|dataset_id=20223|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,20223,Europe,Cold - Warm Summer,0.17,CWS
+analysis=spatial_spd|dataset_id=2023|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2023,North America,Cold - Warm Summer,0.43,CWS
+analysis=spatial_spd|dataset_id=2025|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2025,North America,Cold - Cold Summer,0.531,CCS
+analysis=spatial_spd|dataset_id=20279|region=Europe|climatezone=Polar,20279,Europe,Polar,0.515,POL
+analysis=spatial_spd|dataset_id=20281|region=North America|climatezone=Arid,20281,North America,Arid,0.26,ARD
+analysis=spatial_spd|dataset_id=20285|region=Europe|climatezone=Polar,20285,Europe,Polar,0.402,POL
+analysis=spatial_spd|dataset_id=2028|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2028,North America,Cold - Warm Summer,0.782,CWS
+analysis=spatial_spd|dataset_id=20293|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,20293,Europe,Cold - Cold Summer,0.487,CCS
+analysis=spatial_spd|dataset_id=20295|region=North America|climatezone=Cold_Dry_Summer,20295,North America,Cold - Dry Summer,0.365,CDS
+analysis=spatial_spd|dataset_id=20304|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,20304,North America,Cold - Cold Summer,0.322,CCS
+analysis=spatial_spd|dataset_id=20306|region=North America|climatezone=Arid,20306,North America,Arid,0.083,ARD
+analysis=spatial_spd|dataset_id=20372|region=North America|climatezone=Cold_Dry_Summer,20372,North America,Cold - Dry Summer,0.374,CDS
+analysis=spatial_spd|dataset_id=20397|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,20397,North America,Cold - Warm Summer,0.673,CWS
+analysis=spatial_spd|dataset_id=203|region=North America|climatezone=Temperate_Without_dry_season,203,North America,Temperate,0.365,TMP
+analysis=spatial_spd|dataset_id=2048|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2048,North America,Cold - Warm Summer,0.507,CWS
+analysis=spatial_spd|dataset_id=2049|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2049,North America,Cold - Cold Summer,0.412,CCS
+analysis=spatial_spd|dataset_id=2050|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2050,North America,Cold - Cold Summer,0.392,CCS
+analysis=spatial_spd|dataset_id=20515|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,20515,North America,Cold - Hot Summer,0.398,CHS
+analysis=spatial_spd|dataset_id=2053|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2053,North America,Cold - Warm Summer,0.336,CWS
+analysis=spatial_spd|dataset_id=20609|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,20609,North America,Cold - Warm Summer,0.171,CWS
+analysis=spatial_spd|dataset_id=20613|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,20613,North America,Cold - Warm Summer,0.456,CWS
+analysis=spatial_spd|dataset_id=20616|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,20616,North America,Cold - Cold Summer,0.618,CCS
+analysis=spatial_spd|dataset_id=20649|region=North America|climatezone=Polar,20649,North America,Polar,0.426,POL
+analysis=spatial_spd|dataset_id=20651|region=North America|climatezone=Polar,20651,North America,Polar,0.039,POL
+analysis=spatial_spd|dataset_id=2065|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2065,North America,Cold - Warm Summer,0.345,CWS
+analysis=spatial_spd|dataset_id=20678|region=North America|climatezone=Cold_Dry_Summer,20678,North America,Cold - Dry Summer,0.449,CDS
+analysis=spatial_spd|dataset_id=206|region=North America|climatezone=Polar,206,North America,Polar,0.158,POL
+analysis=spatial_spd|dataset_id=20758|region=North America|climatezone=Temperate_Dry_Summer,20758,North America,Temperate - Dry Summer,0.226,TDS
+analysis=spatial_spd|dataset_id=20833|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,20833,North America,Cold - Warm Summer,0.337,CWS
+analysis=spatial_spd|dataset_id=20838|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,20838,North America,Cold - Cold Summer,0.207,CCS
+analysis=spatial_spd|dataset_id=20872|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,20872,North America,Cold - Cold Summer,0.431,CCS
+analysis=spatial_spd|dataset_id=20883|region=North America|climatezone=Cold_Dry_Summer,20883,North America,Cold - Dry Summer,-0.129,CDS
+analysis=spatial_spd|dataset_id=208|region=North America|climatezone=Polar,208,North America,Polar,0.434,POL
+analysis=spatial_spd|dataset_id=20922|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,20922,North America,Cold - Cold Summer,0.306,CCS
+analysis=spatial_spd|dataset_id=209|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,209,North America,Cold - Cold Summer,0.456,CCS
+analysis=spatial_spd|dataset_id=20|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,20,Europe,Cold - Cold Summer,0.424,CCS
+analysis=spatial_spd|dataset_id=210|region=North America|climatezone=Arid,210,North America,Arid,0.544,ARD
+analysis=spatial_spd|dataset_id=21314|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,21314,North America,Cold - Cold Summer,0.479,CCS
+analysis=spatial_spd|dataset_id=21319|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,21319,North America,Cold - Cold Summer,0.65,CCS
+analysis=spatial_spd|dataset_id=21539|region=Latin America|climatezone=Tropical,21539,Latin America,Tropical,0.532,TRO
+analysis=spatial_spd|dataset_id=21580|region=Latin America|climatezone=Tropical,21580,Latin America,Tropical,0.278,TRO
+analysis=spatial_spd|dataset_id=215|region=Europe|climatezone=Temperate_Without_dry_season,215,Europe,Temperate,0.76,TMP
+analysis=spatial_spd|dataset_id=21603|region=Latin America|climatezone=Arid,21603,Latin America,Arid,0.246,ARD
+analysis=spatial_spd|dataset_id=21606|region=Latin America|climatezone=Arid,21606,Latin America,Arid,0.745,ARD
+analysis=spatial_spd|dataset_id=21675|region=Latin America|climatezone=Tropical,21675,Latin America,Tropical,0.576,TRO
+analysis=spatial_spd|dataset_id=21700|region=Latin America|climatezone=Temperate_Without_dry_season,21700,Latin America,Temperate,0.692,TMP
+analysis=spatial_spd|dataset_id=21708|region=Latin America|climatezone=Temperate_Dry_Summer,21708,Latin America,Temperate - Dry Summer,0.331,TDS
+analysis=spatial_spd|dataset_id=21762|region=Latin America|climatezone=Polar,21762,Latin America,Polar,0.372,POL
+analysis=spatial_spd|dataset_id=21770|region=North America|climatezone=Temperate_Without_dry_season,21770,North America,Temperate,0.397,TMP
+analysis=spatial_spd|dataset_id=21772|region=North America|climatezone=Temperate_Without_dry_season,21772,North America,Temperate,0.175,TMP
+analysis=spatial_spd|dataset_id=21774|region=North America|climatezone=Temperate_Without_dry_season,21774,North America,Temperate,0.433,TMP
+analysis=spatial_spd|dataset_id=21790|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,21790,Europe,Cold - Cold Summer,0.52,CCS
+analysis=spatial_spd|dataset_id=21807|region=Latin America|climatezone=Tropical,21807,Latin America,Tropical,0.763,TRO
+analysis=spatial_spd|dataset_id=21818|region=Latin America|climatezone=Polar,21818,Latin America,Polar,0.458,POL
+analysis=spatial_spd|dataset_id=21838|region=Latin America|climatezone=Polar,21838,Latin America,Polar,0.42,POL
+analysis=spatial_spd|dataset_id=21895|region=Latin America|climatezone=Tropical,21895,Latin America,Tropical,0.233,TRO
+analysis=spatial_spd|dataset_id=21903|region=Latin America|climatezone=Tropical,21903,Latin America,Tropical,0.287,TRO
+analysis=spatial_spd|dataset_id=21913|region=Latin America|climatezone=Tropical,21913,Latin America,Tropical,0.481,TRO
+analysis=spatial_spd|dataset_id=21915|region=Latin America|climatezone=Tropical,21915,Latin America,Tropical,0.613,TRO
+analysis=spatial_spd|dataset_id=21917|region=Latin America|climatezone=Polar,21917,Latin America,Polar,0.14,POL
+analysis=spatial_spd|dataset_id=21926|region=Latin America|climatezone=Polar,21926,Latin America,Polar,0.225,POL
+analysis=spatial_spd|dataset_id=21938|region=Latin America|climatezone=Polar,21938,Latin America,Polar,0.434,POL
+analysis=spatial_spd|dataset_id=21978|region=Latin America|climatezone=Temperate_Without_dry_season,21978,Latin America,Temperate,0.376,TMP
+analysis=spatial_spd|dataset_id=219|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,219,North America,Cold - Warm Summer,0.606,CWS
+analysis=spatial_spd|dataset_id=22047|region=Latin America|climatezone=Temperate_Without_dry_season,22047,Latin America,Temperate,0.302,TMP
+analysis=spatial_spd|dataset_id=22049|region=Latin America|climatezone=Temperate_Without_dry_season,22049,Latin America,Temperate,0.132,TMP
+analysis=spatial_spd|dataset_id=22101|region=Latin America|climatezone=Polar,22101,Latin America,Polar,0.412,POL
+analysis=spatial_spd|dataset_id=221|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,221,North America,Cold - Warm Summer,0.369,CWS
+analysis=spatial_spd|dataset_id=22316|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22316,Europe,Cold - Warm Summer,0.416,CWS
+analysis=spatial_spd|dataset_id=22322|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22322,Europe,Cold - Warm Summer,-0.091,CWS
+analysis=spatial_spd|dataset_id=22330|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,22330,Asia,Cold - Warm Summer,0.16,CWS
+analysis=spatial_spd|dataset_id=22344|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22344,Europe,Cold - Warm Summer,0.15,CWS
+analysis=spatial_spd|dataset_id=22346|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22346,Europe,Cold - Warm Summer,0.169,CWS
+analysis=spatial_spd|dataset_id=22352|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22352,Europe,Cold - Warm Summer,0.232,CWS
+analysis=spatial_spd|dataset_id=22367|region=Europe|climatezone=Polar,22367,Europe,Polar,0.516,POL
+analysis=spatial_spd|dataset_id=22400|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,22400,North America,Cold - Cold Summer,0.097,CCS
+analysis=spatial_spd|dataset_id=22407|region=North America|climatezone=Cold_Dry_Summer,22407,North America,Cold - Dry Summer,0.403,CDS
+analysis=spatial_spd|dataset_id=22650|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22650,Europe,Cold - Cold Summer,0.195,CCS
+analysis=spatial_spd|dataset_id=22652|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22652,Europe,Cold - Cold Summer,0.1,CCS
+analysis=spatial_spd|dataset_id=22656|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22656,Europe,Cold - Warm Summer,0.411,CWS
+analysis=spatial_spd|dataset_id=2265|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2265,North America,Cold - Warm Summer,0.637,CWS
+analysis=spatial_spd|dataset_id=22660|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22660,Europe,Cold - Cold Summer,0.367,CCS
+analysis=spatial_spd|dataset_id=22662|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22662,Europe,Cold - Cold Summer,0.415,CCS
+analysis=spatial_spd|dataset_id=22669|region=Europe|climatezone=Temperate_Without_dry_season,22669,Europe,Temperate,0.346,TMP
+analysis=spatial_spd|dataset_id=2266|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2266,North America,Cold - Warm Summer,0.28,CWS
+analysis=spatial_spd|dataset_id=22678|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22678,Europe,Cold - Warm Summer,-0.079,CWS
+analysis=spatial_spd|dataset_id=22683|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22683,Europe,Cold - Cold Summer,0.173,CCS
+analysis=spatial_spd|dataset_id=22687|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22687,Europe,Cold - Warm Summer,-0.133,CWS
+analysis=spatial_spd|dataset_id=22689|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22689,Europe,Cold - Warm Summer,0.197,CWS
+analysis=spatial_spd|dataset_id=22709|region=Europe|climatezone=Temperate_Without_dry_season,22709,Europe,Temperate,0.45,TMP
+analysis=spatial_spd|dataset_id=2270|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2270,North America,Cold - Hot Summer,0.454,CHS
+analysis=spatial_spd|dataset_id=22711|region=Europe|climatezone=Temperate_Without_dry_season,22711,Europe,Temperate,0.471,TMP
+analysis=spatial_spd|dataset_id=22723|region=Europe|climatezone=Temperate_Without_dry_season,22723,Europe,Temperate,0.541,TMP
+analysis=spatial_spd|dataset_id=22732|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22732,Europe,Cold - Warm Summer,0.513,CWS
+analysis=spatial_spd|dataset_id=22745|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22745,Europe,Cold - Cold Summer,0.181,CCS
+analysis=spatial_spd|dataset_id=22757|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22757,Europe,Cold - Cold Summer,0.292,CCS
+analysis=spatial_spd|dataset_id=22759|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22759,Europe,Cold - Warm Summer,0.095,CWS
+analysis=spatial_spd|dataset_id=22773|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22773,Europe,Cold - Cold Summer,0.356,CCS
+analysis=spatial_spd|dataset_id=22786|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22786,Europe,Cold - Cold Summer,0.61,CCS
+analysis=spatial_spd|dataset_id=22788|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22788,Europe,Cold - Warm Summer,-0.233,CWS
+analysis=spatial_spd|dataset_id=22791|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22791,Europe,Cold - Warm Summer,0.231,CWS
+analysis=spatial_spd|dataset_id=22793|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22793,Europe,Cold - Cold Summer,0.454,CCS
+analysis=spatial_spd|dataset_id=22797|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22797,Europe,Cold - Cold Summer,0.45,CCS
+analysis=spatial_spd|dataset_id=22805|region=Europe|climatezone=Temperate_Without_dry_season,22805,Europe,Temperate,0.427,TMP
+analysis=spatial_spd|dataset_id=22812|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22812,Europe,Cold - Warm Summer,0.3,CWS
+analysis=spatial_spd|dataset_id=22814|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22814,Europe,Cold - Warm Summer,0.177,CWS
+analysis=spatial_spd|dataset_id=22817|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22817,Europe,Cold - Warm Summer,0.178,CWS
+analysis=spatial_spd|dataset_id=22820|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22820,Europe,Cold - Warm Summer,-0.038,CWS
+analysis=spatial_spd|dataset_id=22828|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22828,Europe,Cold - Warm Summer,0.17,CWS
+analysis=spatial_spd|dataset_id=22842|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22842,Europe,Cold - Cold Summer,0.112,CCS
+analysis=spatial_spd|dataset_id=22847|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22847,Europe,Cold - Warm Summer,0.304,CWS
+analysis=spatial_spd|dataset_id=22849|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22849,Europe,Cold - Warm Summer,0.263,CWS
+analysis=spatial_spd|dataset_id=22851|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22851,Europe,Cold - Warm Summer,0.381,CWS
+analysis=spatial_spd|dataset_id=2286|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2286,North America,Cold - Warm Summer,0.635,CWS
+analysis=spatial_spd|dataset_id=2287|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2287,North America,Cold - Warm Summer,0.595,CWS
+analysis=spatial_spd|dataset_id=22890|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22890,Europe,Cold - Warm Summer,0.301,CWS
+analysis=spatial_spd|dataset_id=22894|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22894,Europe,Cold - Cold Summer,0.214,CCS
+analysis=spatial_spd|dataset_id=2289|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2289,North America,Cold - Warm Summer,0.194,CWS
+analysis=spatial_spd|dataset_id=228|region=North America|climatezone=Temperate_Dry_Summer,228,North America,Temperate - Dry Summer,0.529,TDS
+analysis=spatial_spd|dataset_id=22908|region=Europe|climatezone=Temperate_Without_dry_season,22908,Europe,Temperate,0.459,TMP
+analysis=spatial_spd|dataset_id=22910|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22910,Europe,Cold - Warm Summer,0.305,CWS
+analysis=spatial_spd|dataset_id=2292|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2292,North America,Cold - Warm Summer,0.239,CWS
+analysis=spatial_spd|dataset_id=22936|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22936,Europe,Cold - Warm Summer,0.294,CWS
+analysis=spatial_spd|dataset_id=22942|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22942,Europe,Cold - Warm Summer,0.423,CWS
+analysis=spatial_spd|dataset_id=22944|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22944,Europe,Cold - Warm Summer,0.021,CWS
+analysis=spatial_spd|dataset_id=22950|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22950,Europe,Cold - Warm Summer,0.048,CWS
+analysis=spatial_spd|dataset_id=22960|region=Europe|climatezone=Polar,22960,Europe,Polar,0.35,POL
+analysis=spatial_spd|dataset_id=22966|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22966,Europe,Cold - Warm Summer,0.457,CWS
+analysis=spatial_spd|dataset_id=22969|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,22969,North America,Cold - Cold Summer,-0.133,CCS
+analysis=spatial_spd|dataset_id=22971|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,22971,Europe,Cold - Warm Summer,0.266,CWS
+analysis=spatial_spd|dataset_id=22976|region=Europe|climatezone=Temperate_Dry_Summer,22976,Europe,Temperate - Dry Summer,0.038,TDS
+analysis=spatial_spd|dataset_id=2297|region=North America|climatezone=Polar,2297,North America,Polar,0.488,POL
+analysis=spatial_spd|dataset_id=22980|region=Europe|climatezone=Arid,22980,Europe,Arid,0.182,ARD
+analysis=spatial_spd|dataset_id=22988|region=Europe|climatezone=Polar,22988,Europe,Polar,0.349,POL
+analysis=spatial_spd|dataset_id=22992|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,22992,Europe,Cold - Cold Summer,0.174,CCS
+analysis=spatial_spd|dataset_id=23004|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,23004,Europe,Cold - Warm Summer,0.188,CWS
+analysis=spatial_spd|dataset_id=23006|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,23006,Europe,Cold - Warm Summer,0.088,CWS
+analysis=spatial_spd|dataset_id=23008|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,23008,Europe,Cold - Warm Summer,0.284,CWS
+analysis=spatial_spd|dataset_id=2303|region=North America|climatezone=Polar,2303,North America,Polar,0.315,POL
+analysis=spatial_spd|dataset_id=2311|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2311,North America,Cold - Cold Summer,0.786,CCS
+analysis=spatial_spd|dataset_id=2314|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2314,North America,Cold - Hot Summer,0.291,CHS
+analysis=spatial_spd|dataset_id=2318|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2318,North America,Cold - Warm Summer,0.341,CWS
+analysis=spatial_spd|dataset_id=2324|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2324,North America,Cold - Cold Summer,0.741,CCS
+analysis=spatial_spd|dataset_id=232|region=North America|climatezone=Temperate_Without_dry_season,232,North America,Temperate,0.467,TMP
+analysis=spatial_spd|dataset_id=2332|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2332,North America,Cold - Warm Summer,0.321,CWS
+analysis=spatial_spd|dataset_id=2335|region=Europe|climatezone=Temperate_Dry_Summer,2335,Europe,Temperate - Dry Summer,0.159,TDS
+analysis=spatial_spd|dataset_id=2342|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2342,North America,Cold - Warm Summer,0.377,CWS
+analysis=spatial_spd|dataset_id=2343|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2343,North America,Cold - Warm Summer,0.504,CWS
+analysis=spatial_spd|dataset_id=234|region=North America|climatezone=Cold_Dry_Summer,234,North America,Cold - Dry Summer,0.426,CDS
+analysis=spatial_spd|dataset_id=2351|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2351,North America,Cold - Cold Summer,0.489,CCS
+analysis=spatial_spd|dataset_id=2352|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2352,North America,Cold - Cold Summer,0.71,CCS
+analysis=spatial_spd|dataset_id=2367|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2367,North America,Cold - Cold Summer,0.343,CCS
+analysis=spatial_spd|dataset_id=236|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,236,North America,Cold - Warm Summer,0.282,CWS
+analysis=spatial_spd|dataset_id=2373|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2373,North America,Cold - Warm Summer,0.544,CWS
+analysis=spatial_spd|dataset_id=2377|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2377,North America,Cold - Warm Summer,0.387,CWS
+analysis=spatial_spd|dataset_id=2378|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2378,North America,Cold - Warm Summer,0.461,CWS
+analysis=spatial_spd|dataset_id=2381|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2381,North America,Cold - Cold Summer,0.262,CCS
+analysis=spatial_spd|dataset_id=2382|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2382,North America,Cold - Warm Summer,0.288,CWS
+analysis=spatial_spd|dataset_id=2385|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2385,North America,Cold - Hot Summer,0.134,CHS
+analysis=spatial_spd|dataset_id=2391|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2391,North America,Cold - Warm Summer,0.292,CWS
+analysis=spatial_spd|dataset_id=2395|region=Latin America|climatezone=Tropical,2395,Latin America,Tropical,0.219,TRO
+analysis=spatial_spd|dataset_id=239|region=North America|climatezone=Temperate_Dry_Summer,239,North America,Temperate - Dry Summer,-0.003,TDS
+analysis=spatial_spd|dataset_id=24032|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24032,Europe,Cold - Warm Summer,0.422,CWS
+analysis=spatial_spd|dataset_id=24042|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24042,Europe,Cold - Warm Summer,0.048,CWS
+analysis=spatial_spd|dataset_id=24048|region=Europe|climatezone=Polar,24048,Europe,Polar,0.17,POL
+analysis=spatial_spd|dataset_id=24053|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24053,Europe,Cold - Cold Summer,0.25,CCS
+analysis=spatial_spd|dataset_id=24055|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24055,Europe,Cold - Cold Summer,0.424,CCS
+analysis=spatial_spd|dataset_id=24057|region=Europe|climatezone=Polar,24057,Europe,Polar,0.2,POL
+analysis=spatial_spd|dataset_id=24061|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24061,Europe,Cold - Cold Summer,0.214,CCS
+analysis=spatial_spd|dataset_id=24080|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24080,Europe,Cold - Cold Summer,0.403,CCS
+analysis=spatial_spd|dataset_id=24089|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24089,Europe,Cold - Warm Summer,0.642,CWS
+analysis=spatial_spd|dataset_id=24091|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24091,Europe,Cold - Warm Summer,0.248,CWS
+analysis=spatial_spd|dataset_id=24097|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24097,Europe,Cold - Warm Summer,0.116,CWS
+analysis=spatial_spd|dataset_id=24110|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24110,Europe,Cold - Warm Summer,0.308,CWS
+analysis=spatial_spd|dataset_id=24118|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24118,Europe,Cold - Warm Summer,0.427,CWS
+analysis=spatial_spd|dataset_id=24155|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24155,Europe,Cold - Cold Summer,0.447,CCS
+analysis=spatial_spd|dataset_id=24161|region=Asia|climatezone=Cold_Dry_Summer,24161,Asia,Cold - Dry Summer,0.172,CDS
+analysis=spatial_spd|dataset_id=24166|region=Asia|climatezone=Temperate_Dry_Summer,24166,Asia,Temperate - Dry Summer,0.395,TDS
+analysis=spatial_spd|dataset_id=24175|region=Asia|climatezone=Arid,24175,Asia,Arid,0.499,ARD
+analysis=spatial_spd|dataset_id=24190|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24190,Europe,Cold - Cold Summer,0.214,CCS
+analysis=spatial_spd|dataset_id=24195|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24195,Europe,Cold - Cold Summer,0.322,CCS
+analysis=spatial_spd|dataset_id=24250|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24250,Europe,Cold - Warm Summer,0.536,CWS
+analysis=spatial_spd|dataset_id=24256|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24256,Europe,Cold - Warm Summer,0.471,CWS
+analysis=spatial_spd|dataset_id=24303|region=Europe|climatezone=Polar,24303,Europe,Polar,0.182,POL
+analysis=spatial_spd|dataset_id=24317|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24317,Europe,Cold - Cold Summer,0.319,CCS
+analysis=spatial_spd|dataset_id=24319|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24319,Europe,Cold - Cold Summer,0.356,CCS
+analysis=spatial_spd|dataset_id=24321|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24321,Europe,Cold - Warm Summer,0.546,CWS
+analysis=spatial_spd|dataset_id=24348|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24348,Europe,Cold - Cold Summer,0.19,CCS
+analysis=spatial_spd|dataset_id=24356|region=Europe|climatezone=Temperate_Without_dry_season,24356,Europe,Temperate,0.572,TMP
+analysis=spatial_spd|dataset_id=24390|region=Europe|climatezone=Temperate_Dry_Summer,24390,Europe,Temperate - Dry Summer,0.495,TDS
+analysis=spatial_spd|dataset_id=24414|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24414,Europe,Cold - Warm Summer,0.358,CWS
+analysis=spatial_spd|dataset_id=24441|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24441,Europe,Cold - Warm Summer,0.437,CWS
+analysis=spatial_spd|dataset_id=24461|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24461,Europe,Cold - Warm Summer,0.592,CWS
+analysis=spatial_spd|dataset_id=24467|region=Europe|climatezone=Temperate_Without_dry_season,24467,Europe,Temperate,0.272,TMP
+analysis=spatial_spd|dataset_id=24593|region=Europe|climatezone=Temperate_Without_dry_season,24593,Europe,Temperate,0.487,TMP
+analysis=spatial_spd|dataset_id=2476|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2476,North America,Cold - Cold Summer,0.083,CCS
+analysis=spatial_spd|dataset_id=24840|region=Europe|climatezone=Temperate_Without_dry_season,24840,Europe,Temperate,0.414,TMP
+analysis=spatial_spd|dataset_id=24861|region=Europe|climatezone=Temperate_Without_dry_season,24861,Europe,Temperate,0.467,TMP
+analysis=spatial_spd|dataset_id=24863|region=Europe|climatezone=Temperate_Without_dry_season,24863,Europe,Temperate,0.376,TMP
+analysis=spatial_spd|dataset_id=24867|region=Europe|climatezone=Temperate_Without_dry_season,24867,Europe,Temperate,0.286,TMP
+analysis=spatial_spd|dataset_id=24952|region=Europe|climatezone=Temperate_Without_dry_season,24952,Europe,Temperate,0.302,TMP
+analysis=spatial_spd|dataset_id=24956|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,24956,Europe,Cold - Warm Summer,0.112,CWS
+analysis=spatial_spd|dataset_id=24993|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24993,Europe,Cold - Cold Summer,0.804,CCS
+analysis=spatial_spd|dataset_id=24996|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,24996,Europe,Cold - Cold Summer,0.652,CCS
+analysis=spatial_spd|dataset_id=25221|region=Europe|climatezone=Temperate_Without_dry_season,25221,Europe,Temperate,0.224,TMP
+analysis=spatial_spd|dataset_id=25232|region=Europe|climatezone=Temperate_Without_dry_season,25232,Europe,Temperate,0.313,TMP
+analysis=spatial_spd|dataset_id=25285|region=Europe|climatezone=Temperate_Without_dry_season,25285,Europe,Temperate,0.422,TMP
+analysis=spatial_spd|dataset_id=25318|region=Europe|climatezone=Temperate_Without_dry_season,25318,Europe,Temperate,0.317,TMP
+analysis=spatial_spd|dataset_id=25344|region=Europe|climatezone=Temperate_Without_dry_season,25344,Europe,Temperate,0.289,TMP
+analysis=spatial_spd|dataset_id=25370|region=Europe|climatezone=Temperate_Without_dry_season,25370,Europe,Temperate,0.613,TMP
+analysis=spatial_spd|dataset_id=25372|region=Europe|climatezone=Temperate_Without_dry_season,25372,Europe,Temperate,0.467,TMP
+analysis=spatial_spd|dataset_id=253|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,253,North America,Cold - Cold Summer,0.327,CCS
+analysis=spatial_spd|dataset_id=254|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,254,North America,Cold - Warm Summer,0.52,CWS
+analysis=spatial_spd|dataset_id=25763|region=Europe|climatezone=Polar,25763,Europe,Polar,0.233,POL
+analysis=spatial_spd|dataset_id=25767|region=Europe|climatezone=Polar,25767,Europe,Polar,0.128,POL
+analysis=spatial_spd|dataset_id=2576|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2576,North America,Cold - Warm Summer,0.092,CWS
+analysis=spatial_spd|dataset_id=25773|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,25773,Europe,Cold - Warm Summer,0.18,CWS
+analysis=spatial_spd|dataset_id=25786|region=Latin America|climatezone=Tropical,25786,Latin America,Tropical,0.536,TRO
+analysis=spatial_spd|dataset_id=2580|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2580,North America,Cold - Cold Summer,-0.018,CCS
+analysis=spatial_spd|dataset_id=25837|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,25837,Europe,Cold - Cold Summer,0.306,CCS
+analysis=spatial_spd|dataset_id=2586|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2586,North America,Cold - Warm Summer,0.167,CWS
+analysis=spatial_spd|dataset_id=2588|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2588,North America,Cold - Cold Summer,0.294,CCS
+analysis=spatial_spd|dataset_id=258|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,258,North America,Cold - Cold Summer,0.628,CCS
+analysis=spatial_spd|dataset_id=2590|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2590,North America,Cold - Cold Summer,0.018,CCS
+analysis=spatial_spd|dataset_id=2591|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2591,North America,Cold - Warm Summer,0.369,CWS
+analysis=spatial_spd|dataset_id=2593|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2593,North America,Cold - Hot Summer,0.426,CHS
+analysis=spatial_spd|dataset_id=2594|region=Latin America|climatezone=Temperate_Without_dry_season,2594,Latin America,Temperate,0.377,TMP
+analysis=spatial_spd|dataset_id=2599|region=North America|climatezone=Cold_Dry_Summer,2599,North America,Cold - Dry Summer,-0.003,CDS
+analysis=spatial_spd|dataset_id=25|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,25,North America,Cold - Cold Summer,0.625,CCS
+analysis=spatial_spd|dataset_id=2609|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2609,North America,Cold - Hot Summer,0.432,CHS
+analysis=spatial_spd|dataset_id=260|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,260,North America,Cold - Warm Summer,0.396,CWS
+analysis=spatial_spd|dataset_id=2610|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2610,North America,Cold - Warm Summer,0.427,CWS
+analysis=spatial_spd|dataset_id=2611|region=North America|climatezone=Cold_Dry_Summer,2611,North America,Cold - Dry Summer,0.091,CDS
+analysis=spatial_spd|dataset_id=2615|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2615,North America,Cold - Warm Summer,0.327,CWS
+analysis=spatial_spd|dataset_id=2617|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2617,North America,Cold - Hot Summer,0.405,CHS
+analysis=spatial_spd|dataset_id=2619|region=North America|climatezone=Temperate_Dry_Summer,2619,North America,Temperate - Dry Summer,0.198,TDS
+analysis=spatial_spd|dataset_id=2620|region=North America|climatezone=Arid,2620,North America,Arid,0.509,ARD
+analysis=spatial_spd|dataset_id=2622|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2622,North America,Cold - Cold Summer,0.288,CCS
+analysis=spatial_spd|dataset_id=2623|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2623,North America,Cold - Hot Summer,0.332,CHS
+analysis=spatial_spd|dataset_id=2626|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2626,North America,Cold - Warm Summer,0.582,CWS
+analysis=spatial_spd|dataset_id=2629|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2629,North America,Cold - Warm Summer,0.041,CWS
+analysis=spatial_spd|dataset_id=26319|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,26319,Europe,Cold - Cold Summer,0.383,CCS
+analysis=spatial_spd|dataset_id=2634|region=North America|climatezone=Arid,2634,North America,Arid,0.344,ARD
+analysis=spatial_spd|dataset_id=2637|region=North America|climatezone=Cold_Dry_Summer,2637,North America,Cold - Dry Summer,0.394,CDS
+analysis=spatial_spd|dataset_id=2642|region=North America|climatezone=Cold_Dry_Summer,2642,North America,Cold - Dry Summer,0.773,CDS
+analysis=spatial_spd|dataset_id=26431|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26431,Europe,Cold - Warm Summer,0.218,CWS
+analysis=spatial_spd|dataset_id=26435|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26435,Europe,Cold - Warm Summer,-0.194,CWS
+analysis=spatial_spd|dataset_id=26439|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26439,Europe,Cold - Warm Summer,0.098,CWS
+analysis=spatial_spd|dataset_id=2643|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,2643,Asia,Cold - Warm Summer,0.191,CWS
+analysis=spatial_spd|dataset_id=26448|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,26448,Europe,Cold - Cold Summer,0.381,CCS
+analysis=spatial_spd|dataset_id=2644|region=North America|climatezone=Cold_Dry_Summer,2644,North America,Cold - Dry Summer,0.25,CDS
+analysis=spatial_spd|dataset_id=2645|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2645,North America,Cold - Hot Summer,0.389,CHS
+analysis=spatial_spd|dataset_id=2647|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2647,North America,Cold - Cold Summer,0.411,CCS
+analysis=spatial_spd|dataset_id=26499|region=Europe|climatezone=Polar,26499,Europe,Polar,0.344,POL
+analysis=spatial_spd|dataset_id=26505|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26505,Europe,Cold - Warm Summer,0.006,CWS
+analysis=spatial_spd|dataset_id=26514|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26514,Europe,Cold - Warm Summer,0.25,CWS
+analysis=spatial_spd|dataset_id=26518|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,26518,Europe,Cold - Warm Summer,-0.158,CWS
+analysis=spatial_spd|dataset_id=26520|region=Europe|climatezone=Polar,26520,Europe,Polar,0.313,POL
+analysis=spatial_spd|dataset_id=2652|region=North America|climatezone=Polar,2652,North America,Polar,0.347,POL
+analysis=spatial_spd|dataset_id=2654|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2654,North America,Cold - Warm Summer,0.401,CWS
+analysis=spatial_spd|dataset_id=26606|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,26606,North America,Cold - Warm Summer,0.672,CWS
+analysis=spatial_spd|dataset_id=26608|region=Europe|climatezone=Temperate_Dry_Summer,26608,Europe,Temperate - Dry Summer,0.614,TDS
+analysis=spatial_spd|dataset_id=2661|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2661,North America,Cold - Cold Summer,0.271,CCS
+analysis=spatial_spd|dataset_id=2663|region=North America|climatezone=Temperate_Without_dry_season,2663,North America,Temperate,0.519,TMP
+analysis=spatial_spd|dataset_id=2671|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2671,North America,Cold - Cold Summer,0.271,CCS
+analysis=spatial_spd|dataset_id=275|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,275,North America,Cold - Warm Summer,0.254,CWS
+analysis=spatial_spd|dataset_id=279|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,279,North America,Cold - Warm Summer,0.004,CWS
+analysis=spatial_spd|dataset_id=281|region=North America|climatezone=Temperate_Without_dry_season,281,North America,Temperate,0.03,TMP
+analysis=spatial_spd|dataset_id=285|region=Oceania|climatezone=Cold_Without_dry_season_Cold_Summer,285,Oceania,Cold - Cold Summer,0.019,CCS
+analysis=spatial_spd|dataset_id=2879|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2879,North America,Cold - Cold Summer,0.312,CCS
+analysis=spatial_spd|dataset_id=287|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,287,North America,Cold - Hot Summer,0.529,CHS
+analysis=spatial_spd|dataset_id=2880|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2880,North America,Cold - Cold Summer,0.257,CCS
+analysis=spatial_spd|dataset_id=2882|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2882,North America,Cold - Cold Summer,0.665,CCS
+analysis=spatial_spd|dataset_id=2888|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,2888,North America,Cold - Warm Summer,0.476,CWS
+analysis=spatial_spd|dataset_id=2899|region=Latin America|climatezone=Temperate_Dry_Summer,2899,Latin America,Temperate - Dry Summer,0.211,TDS
+analysis=spatial_spd|dataset_id=2908|region=Latin America|climatezone=Cold_Dry_Summer,2908,Latin America,Cold - Dry Summer,0.485,CDS
+analysis=spatial_spd|dataset_id=2919|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2919,North America,Cold - Hot Summer,0.154,CHS
+analysis=spatial_spd|dataset_id=29236|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,29236,Europe,Cold - Warm Summer,0.312,CWS
+analysis=spatial_spd|dataset_id=2925|region=North America|climatezone=Polar,2925,North America,Polar,0.347,POL
+analysis=spatial_spd|dataset_id=294|region=Latin America|climatezone=Temperate_Without_dry_season,294,Latin America,Temperate,0.398,TMP
+analysis=spatial_spd|dataset_id=2951|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2951,North America,Cold - Cold Summer,0.164,CCS
+analysis=spatial_spd|dataset_id=2953|region=North America|climatezone=Temperate_Without_dry_season,2953,North America,Temperate,0.536,TMP
+analysis=spatial_spd|dataset_id=2954|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2954,North America,Cold - Cold Summer,0.218,CCS
+analysis=spatial_spd|dataset_id=2955|region=North America|climatezone=Polar,2955,North America,Polar,0.444,POL
+analysis=spatial_spd|dataset_id=2959|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2959,North America,Cold - Hot Summer,0.208,CHS
+analysis=spatial_spd|dataset_id=2961|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,2961,North America,Cold - Hot Summer,0.497,CHS
+analysis=spatial_spd|dataset_id=2962|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,2962,North America,Cold - Cold Summer,0.623,CCS
+analysis=spatial_spd|dataset_id=298|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,298,North America,Cold - Warm Summer,0.256,CWS
+analysis=spatial_spd|dataset_id=302|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,302,North America,Cold - Cold Summer,0.016,CCS
+analysis=spatial_spd|dataset_id=3031|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3031,North America,Cold - Hot Summer,0.436,CHS
+analysis=spatial_spd|dataset_id=3032|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3032,North America,Cold - Warm Summer,0.316,CWS
+analysis=spatial_spd|dataset_id=3035|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3035,North America,Cold - Warm Summer,0.579,CWS
+analysis=spatial_spd|dataset_id=3041|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3041,North America,Cold - Warm Summer,0.734,CWS
+analysis=spatial_spd|dataset_id=3042|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3042,North America,Cold - Warm Summer,0.59,CWS
+analysis=spatial_spd|dataset_id=3043|region=Oceania|climatezone=Temperate_Without_dry_season,3043,Oceania,Temperate,0.582,TMP
+analysis=spatial_spd|dataset_id=3046|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3046,North America,Cold - Warm Summer,0.246,CWS
+analysis=spatial_spd|dataset_id=3047|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3047,North America,Cold - Warm Summer,0.579,CWS
+analysis=spatial_spd|dataset_id=3048|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,3048,North America,Cold - Cold Summer,0.119,CCS
+analysis=spatial_spd|dataset_id=304|region=North America|climatezone=Temperate_Without_dry_season,304,North America,Temperate,0.58,TMP
+analysis=spatial_spd|dataset_id=3054|region=North America|climatezone=Arid,3054,North America,Arid,0.478,ARD
+analysis=spatial_spd|dataset_id=3056|region=North America|climatezone=Polar,3056,North America,Polar,0.176,POL
+analysis=spatial_spd|dataset_id=3058|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3058,North America,Cold - Warm Summer,0.202,CWS
+analysis=spatial_spd|dataset_id=306|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,306,North America,Cold - Cold Summer,0.638,CCS
+analysis=spatial_spd|dataset_id=308|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,308,North America,Cold - Warm Summer,0.524,CWS
+analysis=spatial_spd|dataset_id=309|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,309,North America,Cold - Warm Summer,0.379,CWS
+analysis=spatial_spd|dataset_id=3125|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,3125,North America,Cold - Cold Summer,0.569,CCS
+analysis=spatial_spd|dataset_id=3130|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3130,North America,Cold - Warm Summer,0.362,CWS
+analysis=spatial_spd|dataset_id=3138|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3138,North America,Cold - Warm Summer,0.588,CWS
+analysis=spatial_spd|dataset_id=3149|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,3149,North America,Cold - Cold Summer,0.446,CCS
+analysis=spatial_spd|dataset_id=316|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,316,North America,Cold - Hot Summer,0.245,CHS
+analysis=spatial_spd|dataset_id=317|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,317,Europe,Cold - Cold Summer,0.417,CCS
+analysis=spatial_spd|dataset_id=318|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,318,North America,Cold - Cold Summer,0.578,CCS
+analysis=spatial_spd|dataset_id=32426|region=Oceania|climatezone=Temperate_Without_dry_season,32426,Oceania,Temperate,0.473,TMP
+analysis=spatial_spd|dataset_id=324|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,324,North America,Cold - Warm Summer,0.232,CWS
+analysis=spatial_spd|dataset_id=328|region=North America|climatezone=Temperate_Without_dry_season,328,North America,Temperate,0.31,TMP
+analysis=spatial_spd|dataset_id=329|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,329,North America,Cold - Warm Summer,0.35,CWS
+analysis=spatial_spd|dataset_id=32|region=Latin America|climatezone=Polar,32,Latin America,Polar,0.53,POL
+analysis=spatial_spd|dataset_id=331|region=North America|climatezone=Temperate_Without_dry_season,331,North America,Temperate,0.696,TMP
+analysis=spatial_spd|dataset_id=332|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,332,North America,Cold - Warm Summer,0.64,CWS
+analysis=spatial_spd|dataset_id=336|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,336,North America,Cold - Cold Summer,0.366,CCS
+analysis=spatial_spd|dataset_id=339|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,339,North America,Cold - Warm Summer,0.445,CWS
+analysis=spatial_spd|dataset_id=340|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,340,North America,Cold - Warm Summer,0.39,CWS
+analysis=spatial_spd|dataset_id=342|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,342,Europe,Cold - Cold Summer,0.523,CCS
+analysis=spatial_spd|dataset_id=343|region=North America|climatezone=Cold_Dry_Summer,343,North America,Cold - Dry Summer,0.085,CDS
+analysis=spatial_spd|dataset_id=3452|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3452,North America,Cold - Warm Summer,0.243,CWS
+analysis=spatial_spd|dataset_id=34553|region=Oceania|climatezone=Temperate_Without_dry_season,34553,Oceania,Temperate,0.528,TMP
+analysis=spatial_spd|dataset_id=3468|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3468,North America,Cold - Hot Summer,0.43,CHS
+analysis=spatial_spd|dataset_id=346|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,346,North America,Cold - Warm Summer,0.432,CWS
+analysis=spatial_spd|dataset_id=3471|region=North America|climatezone=Polar,3471,North America,Polar,0.456,POL
+analysis=spatial_spd|dataset_id=3473|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3473,North America,Cold - Warm Summer,0.399,CWS
+analysis=spatial_spd|dataset_id=3482|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3482,North America,Cold - Warm Summer,0.684,CWS
+analysis=spatial_spd|dataset_id=3484|region=North America|climatezone=Temperate_Without_dry_season,3484,North America,Temperate,0.44,TMP
+analysis=spatial_spd|dataset_id=3487|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3487,North America,Cold - Hot Summer,0.274,CHS
+analysis=spatial_spd|dataset_id=3488|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3488,North America,Cold - Hot Summer,0.673,CHS
+analysis=spatial_spd|dataset_id=3492|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3492,North America,Cold - Warm Summer,0.429,CWS
+analysis=spatial_spd|dataset_id=3493|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3493,North America,Cold - Warm Summer,0.44,CWS
+analysis=spatial_spd|dataset_id=3500|region=North America|climatezone=Temperate_Without_dry_season,3500,North America,Temperate,0.322,TMP
+analysis=spatial_spd|dataset_id=352|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,352,North America,Cold - Hot Summer,0.366,CHS
+analysis=spatial_spd|dataset_id=3558|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3558,North America,Cold - Hot Summer,0.427,CHS
+analysis=spatial_spd|dataset_id=355|region=Latin America|climatezone=Polar,355,Latin America,Polar,0.213,POL
+analysis=spatial_spd|dataset_id=3563|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,3563,North America,Cold - Hot Summer,0.231,CHS
+analysis=spatial_spd|dataset_id=3565|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3565,North America,Cold - Warm Summer,0.78,CWS
+analysis=spatial_spd|dataset_id=356|region=Latin America|climatezone=Polar,356,Latin America,Polar,0.453,POL
+analysis=spatial_spd|dataset_id=3582|region=North America|climatezone=Temperate_Without_dry_season,3582,North America,Temperate,0.572,TMP
+analysis=spatial_spd|dataset_id=363|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,363,Europe,Cold - Warm Summer,0.309,CWS
+analysis=spatial_spd|dataset_id=369|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,369,North America,Cold - Warm Summer,0.447,CWS
+analysis=spatial_spd|dataset_id=374|region=Europe|climatezone=Temperate_Without_dry_season,374,Europe,Temperate,0.46,TMP
+analysis=spatial_spd|dataset_id=3774|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3774,North America,Cold - Warm Summer,0.36,CWS
+analysis=spatial_spd|dataset_id=3830|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3830,North America,Cold - Warm Summer,0.241,CWS
+analysis=spatial_spd|dataset_id=3839|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,3839,North America,Cold - Warm Summer,0.332,CWS
+analysis=spatial_spd|dataset_id=3861|region=Asia|climatezone=Arid,3861,Asia,Arid,0.28,ARD
+analysis=spatial_spd|dataset_id=3871|region=Europe|climatezone=Temperate_Without_dry_season,3871,Europe,Temperate,0.05,TMP
+analysis=spatial_spd|dataset_id=3875|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,3875,Europe,Cold - Warm Summer,1,CWS
+analysis=spatial_spd|dataset_id=3879|region=Europe|climatezone=Temperate_Without_dry_season,3879,Europe,Temperate,0.367,TMP
+analysis=spatial_spd|dataset_id=3884|region=Europe|climatezone=Temperate_Without_dry_season,3884,Europe,Temperate,0.381,TMP
+analysis=spatial_spd|dataset_id=3896|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,3896,Asia,Cold - Cold Summer,0.408,CCS
+analysis=spatial_spd|dataset_id=3900|region=Europe|climatezone=Temperate_Without_dry_season,3900,Europe,Temperate,0.126,TMP
+analysis=spatial_spd|dataset_id=3910|region=Europe|climatezone=Temperate_Without_dry_season,3910,Europe,Temperate,0.698,TMP
+analysis=spatial_spd|dataset_id=3926|region=Europe|climatezone=Polar,3926,Europe,Polar,0.42,POL
+analysis=spatial_spd|dataset_id=3927|region=Asia|climatezone=Temperate_Dry_Summer,3927,Asia,Temperate - Dry Summer,0.571,TDS
+analysis=spatial_spd|dataset_id=3928|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,3928,Europe,Cold - Cold Summer,0.248,CCS
+analysis=spatial_spd|dataset_id=3935|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,3935,Europe,Cold - Warm Summer,0.342,CWS
+analysis=spatial_spd|dataset_id=3938|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,3938,Europe,Cold - Warm Summer,0.184,CWS
+analysis=spatial_spd|dataset_id=39474|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,39474,North America,Cold - Warm Summer,0.482,CWS
+analysis=spatial_spd|dataset_id=3972|region=Europe|climatezone=Temperate_Without_dry_season,3972,Europe,Temperate,0.37,TMP
+analysis=spatial_spd|dataset_id=3977|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,3977,Europe,Cold - Warm Summer,0.081,CWS
+analysis=spatial_spd|dataset_id=40111|region=North America|climatezone=Temperate_Without_dry_season,40111,North America,Temperate,0.211,TMP
+analysis=spatial_spd|dataset_id=4011|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4011,Europe,Cold - Warm Summer,0.209,CWS
+analysis=spatial_spd|dataset_id=4012|region=Europe|climatezone=Temperate_Without_dry_season,4012,Europe,Temperate,0.437,TMP
+analysis=spatial_spd|dataset_id=4017|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4017,Europe,Cold - Cold Summer,0.322,CCS
+analysis=spatial_spd|dataset_id=4024|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4024,Europe,Cold - Cold Summer,0.042,CCS
+analysis=spatial_spd|dataset_id=4041|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4041,Europe,Cold - Cold Summer,0.605,CCS
+analysis=spatial_spd|dataset_id=4042|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4042,Europe,Cold - Warm Summer,0.629,CWS
+analysis=spatial_spd|dataset_id=40448|region=Europe|climatezone=Polar,40448,Europe,Polar,0.256,POL
+analysis=spatial_spd|dataset_id=40450|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40450,Europe,Cold - Warm Summer,0.29,CWS
+analysis=spatial_spd|dataset_id=40452|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40452,Europe,Cold - Warm Summer,0.178,CWS
+analysis=spatial_spd|dataset_id=40454|region=Europe|climatezone=Temperate_Without_dry_season,40454,Europe,Temperate,0.268,TMP
+analysis=spatial_spd|dataset_id=40564|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40564,Europe,Cold - Warm Summer,0.404,CWS
+analysis=spatial_spd|dataset_id=40566|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40566,Europe,Cold - Warm Summer,0.397,CWS
+analysis=spatial_spd|dataset_id=40567|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40567,Europe,Cold - Warm Summer,0.103,CWS
+analysis=spatial_spd|dataset_id=4056|region=Europe|climatezone=Temperate_Without_dry_season,4056,Europe,Temperate,0.685,TMP
+analysis=spatial_spd|dataset_id=40579|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,40579,Europe,Cold - Cold Summer,0.702,CCS
+analysis=spatial_spd|dataset_id=40582|region=Europe|climatezone=Polar,40582,Europe,Polar,0.055,POL
+analysis=spatial_spd|dataset_id=4058|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4058,Europe,Cold - Cold Summer,0.083,CCS
+analysis=spatial_spd|dataset_id=40627|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40627,Europe,Cold - Warm Summer,0.084,CWS
+analysis=spatial_spd|dataset_id=40634|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,40634,Europe,Cold - Cold Summer,0.21,CCS
+analysis=spatial_spd|dataset_id=40642|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,40642,Europe,Cold - Cold Summer,0.04,CCS
+analysis=spatial_spd|dataset_id=40666|region=North America|climatezone=Temperate_Without_dry_season,40666,North America,Temperate,0.09,TMP
+analysis=spatial_spd|dataset_id=40791|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40791,North America,Cold - Warm Summer,0.575,CWS
+analysis=spatial_spd|dataset_id=40793|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,40793,North America,Cold - Hot Summer,0.372,CHS
+analysis=spatial_spd|dataset_id=40795|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40795,North America,Cold - Warm Summer,0.41,CWS
+analysis=spatial_spd|dataset_id=40797|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40797,North America,Cold - Warm Summer,0.517,CWS
+analysis=spatial_spd|dataset_id=40799|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40799,North America,Cold - Warm Summer,0.131,CWS
+analysis=spatial_spd|dataset_id=40803|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,40803,North America,Cold - Hot Summer,0.373,CHS
+analysis=spatial_spd|dataset_id=4081|region=Asia|climatezone=Cold_Dry_Winter,4081,Asia,Cold - Dry Winter,0.341,CDW
+analysis=spatial_spd|dataset_id=40844|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,40844,North America,Cold - Hot Summer,0.265,CHS
+analysis=spatial_spd|dataset_id=40854|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,40854,North America,Cold - Hot Summer,0.11,CHS
+analysis=spatial_spd|dataset_id=40861|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,40861,North America,Cold - Hot Summer,0.214,CHS
+analysis=spatial_spd|dataset_id=40875|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40875,North America,Cold - Warm Summer,0.485,CWS
+analysis=spatial_spd|dataset_id=40914|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40914,North America,Cold - Warm Summer,0.38,CWS
+analysis=spatial_spd|dataset_id=4092|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4092,Europe,Cold - Cold Summer,0.58,CCS
+analysis=spatial_spd|dataset_id=40949|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40949,Europe,Cold - Warm Summer,-0.003,CWS
+analysis=spatial_spd|dataset_id=40951|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40951,Europe,Cold - Warm Summer,0.23,CWS
+analysis=spatial_spd|dataset_id=40958|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,40958,Europe,Cold - Warm Summer,0.127,CWS
+analysis=spatial_spd|dataset_id=40976|region=North America|climatezone=Temperate_Dry_Summer,40976,North America,Temperate - Dry Summer,0.207,TDS
+analysis=spatial_spd|dataset_id=40988|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40988,North America,Cold - Warm Summer,0.513,CWS
+analysis=spatial_spd|dataset_id=40990|region=Asia|climatezone=Cold_Dry_Winter,40990,Asia,Cold - Dry Winter,0.199,CDW
+analysis=spatial_spd|dataset_id=40992|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,40992,North America,Cold - Warm Summer,0.325,CWS
+analysis=spatial_spd|dataset_id=40997|region=Asia|climatezone=Cold_Dry_Winter,40997,Asia,Cold - Dry Winter,0.318,CDW
+analysis=spatial_spd|dataset_id=41001|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,41001,North America,Cold - Hot Summer,0.16,CHS
+analysis=spatial_spd|dataset_id=41016|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,41016,North America,Cold - Hot Summer,0.703,CHS
+analysis=spatial_spd|dataset_id=41018|region=North America|climatezone=Temperate_Without_dry_season,41018,North America,Temperate,0.377,TMP
+analysis=spatial_spd|dataset_id=41025|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,41025,North America,Cold - Hot Summer,0.106,CHS
+analysis=spatial_spd|dataset_id=41027|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,41027,North America,Cold - Warm Summer,0.641,CWS
+analysis=spatial_spd|dataset_id=41183|region=North America|climatezone=Cold_Dry_Summer,41183,North America,Cold - Dry Summer,0.256,CDS
+analysis=spatial_spd|dataset_id=41189|region=Europe|climatezone=Temperate_Without_dry_season,41189,Europe,Temperate,0.327,TMP
+analysis=spatial_spd|dataset_id=4118|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4118,Europe,Cold - Warm Summer,0.241,CWS
+analysis=spatial_spd|dataset_id=4120|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4120,Europe,Cold - Warm Summer,0.393,CWS
+analysis=spatial_spd|dataset_id=41222|region=Europe|climatezone=Temperate_Without_dry_season,41222,Europe,Temperate,0.285,TMP
+analysis=spatial_spd|dataset_id=41228|region=Europe|climatezone=Temperate_Without_dry_season,41228,Europe,Temperate,0.341,TMP
+analysis=spatial_spd|dataset_id=41241|region=Europe|climatezone=Temperate_Without_dry_season,41241,Europe,Temperate,0.134,TMP
+analysis=spatial_spd|dataset_id=41245|region=Asia|climatezone=Cold_Dry_Winter,41245,Asia,Cold - Dry Winter,0.56,CDW
+analysis=spatial_spd|dataset_id=41247|region=Asia|climatezone=Temperate_Dry_Winter,41247,Asia,Temperate - Dry Winter,0.282,TDW
+analysis=spatial_spd|dataset_id=41305|region=Europe|climatezone=Temperate_Without_dry_season,41305,Europe,Temperate,-0.209,TMP
+analysis=spatial_spd|dataset_id=41310|region=Europe|climatezone=Temperate_Without_dry_season,41310,Europe,Temperate,-0.112,TMP
+analysis=spatial_spd|dataset_id=4133|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4133,Europe,Cold - Cold Summer,0.427,CCS
+analysis=spatial_spd|dataset_id=4136|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4136,Europe,Cold - Cold Summer,0.241,CCS
+analysis=spatial_spd|dataset_id=4137|region=Asia|climatezone=Arid,4137,Asia,Arid,0.224,ARD
+analysis=spatial_spd|dataset_id=41399|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,41399,Europe,Cold - Warm Summer,0.571,CWS
+analysis=spatial_spd|dataset_id=41421|region=Europe|climatezone=Temperate_Without_dry_season,41421,Europe,Temperate,0.372,TMP
+analysis=spatial_spd|dataset_id=41448|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,41448,Europe,Cold - Cold Summer,0.219,CCS
+analysis=spatial_spd|dataset_id=4145|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4145,Europe,Cold - Cold Summer,0.425,CCS
+analysis=spatial_spd|dataset_id=41467|region=Europe|climatezone=Temperate_Without_dry_season,41467,Europe,Temperate,0.482,TMP
+analysis=spatial_spd|dataset_id=41469|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,41469,Europe,Cold - Warm Summer,0.216,CWS
+analysis=spatial_spd|dataset_id=4147|region=Europe|climatezone=Temperate_Without_dry_season,4147,Europe,Temperate,0.262,TMP
+analysis=spatial_spd|dataset_id=41485|region=Europe|climatezone=Temperate_Without_dry_season,41485,Europe,Temperate,0.598,TMP
+analysis=spatial_spd|dataset_id=4148|region=Europe|climatezone=Temperate_Without_dry_season,4148,Europe,Temperate,0.514,TMP
+analysis=spatial_spd|dataset_id=41491|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,41491,Europe,Cold - Warm Summer,0.497,CWS
+analysis=spatial_spd|dataset_id=41499|region=North America|climatezone=Cold_Dry_Summer,41499,North America,Cold - Dry Summer,0.375,CDS
+analysis=spatial_spd|dataset_id=41502|region=Europe|climatezone=Temperate_Without_dry_season,41502,Europe,Temperate,0.26,TMP
+analysis=spatial_spd|dataset_id=4150|region=Europe|climatezone=Temperate_Without_dry_season,4150,Europe,Temperate,0.44,TMP
+analysis=spatial_spd|dataset_id=41527|region=Europe|climatezone=Temperate_Without_dry_season,41527,Europe,Temperate,0.171,TMP
+analysis=spatial_spd|dataset_id=41543|region=Europe|climatezone=Temperate_Dry_Summer,41543,Europe,Temperate - Dry Summer,0.218,TDS
+analysis=spatial_spd|dataset_id=4154|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4154,Europe,Cold - Warm Summer,0.157,CWS
+analysis=spatial_spd|dataset_id=41580|region=North America|climatezone=Polar,41580,North America,Polar,-0.018,POL
+analysis=spatial_spd|dataset_id=41585|region=North America|climatezone=Polar,41585,North America,Polar,0.288,POL
+analysis=spatial_spd|dataset_id=41589|region=Europe|climatezone=Polar,41589,Europe,Polar,0.262,POL
+analysis=spatial_spd|dataset_id=41606|region=North America|climatezone=Polar,41606,North America,Polar,0.525,POL
+analysis=spatial_spd|dataset_id=41612|region=North America|climatezone=Polar,41612,North America,Polar,0.066,POL
+analysis=spatial_spd|dataset_id=41614|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,41614,North America,Cold - Cold Summer,0.466,CCS
+analysis=spatial_spd|dataset_id=41631|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,41631,Europe,Cold - Warm Summer,0.606,CWS
+analysis=spatial_spd|dataset_id=41634|region=Europe|climatezone=Temperate_Without_dry_season,41634,Europe,Temperate,0.217,TMP
+analysis=spatial_spd|dataset_id=4168|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4168,Europe,Cold - Cold Summer,0.188,CCS
+analysis=spatial_spd|dataset_id=4170|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4170,Europe,Cold - Warm Summer,0.494,CWS
+analysis=spatial_spd|dataset_id=41748|region=Europe|climatezone=Polar,41748,Europe,Polar,0.414,POL
+analysis=spatial_spd|dataset_id=41756|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,41756,Europe,Cold - Cold Summer,0.339,CCS
+analysis=spatial_spd|dataset_id=41762|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,41762,North America,Cold - Warm Summer,0.445,CWS
+analysis=spatial_spd|dataset_id=41764|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,41764,Europe,Cold - Cold Summer,0.146,CCS
+analysis=spatial_spd|dataset_id=41770|region=Europe|climatezone=Temperate_Without_dry_season,41770,Europe,Temperate,0.484,TMP
+analysis=spatial_spd|dataset_id=41835|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,41835,Europe,Cold - Cold Summer,0.458,CCS
+analysis=spatial_spd|dataset_id=4183|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4183,Europe,Cold - Cold Summer,0.518,CCS
+analysis=spatial_spd|dataset_id=41842|region=Europe|climatezone=Polar,41842,Europe,Polar,0.282,POL
+analysis=spatial_spd|dataset_id=4184|region=Europe|climatezone=Cold_Dry_Summer,4184,Europe,Cold - Dry Summer,0.665,CDS
+analysis=spatial_spd|dataset_id=41909|region=Europe|climatezone=Temperate_Dry_Summer,41909,Europe,Temperate - Dry Summer,0.354,TDS
+analysis=spatial_spd|dataset_id=41911|region=Europe|climatezone=Temperate_Dry_Summer,41911,Europe,Temperate - Dry Summer,0.051,TDS
+analysis=spatial_spd|dataset_id=4192|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4192,Europe,Cold - Warm Summer,0.252,CWS
+analysis=spatial_spd|dataset_id=4197|region=Europe|climatezone=Temperate_Without_dry_season,4197,Europe,Temperate,0.039,TMP
+analysis=spatial_spd|dataset_id=4198|region=Europe|climatezone=Temperate_Without_dry_season,4198,Europe,Temperate,0.062,TMP
+analysis=spatial_spd|dataset_id=4200|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4200,Europe,Cold - Cold Summer,0.565,CCS
+analysis=spatial_spd|dataset_id=4203|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4203,Europe,Cold - Warm Summer,0.445,CWS
+analysis=spatial_spd|dataset_id=4209|region=Europe|climatezone=Temperate_Without_dry_season,4209,Europe,Temperate,0.293,TMP
+analysis=spatial_spd|dataset_id=4213|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4213,Europe,Cold - Warm Summer,0.278,CWS
+analysis=spatial_spd|dataset_id=4239|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4239,Europe,Cold - Cold Summer,0.381,CCS
+analysis=spatial_spd|dataset_id=4251|region=Europe|climatezone=Temperate_Without_dry_season,4251,Europe,Temperate,0.556,TMP
+analysis=spatial_spd|dataset_id=42542|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,42542,Europe,Cold - Cold Summer,0.283,CCS
+analysis=spatial_spd|dataset_id=42563|region=Europe|climatezone=Temperate_Without_dry_season,42563,Europe,Temperate,0.454,TMP
+analysis=spatial_spd|dataset_id=42566|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42566,Europe,Cold - Warm Summer,0.583,CWS
+analysis=spatial_spd|dataset_id=4256|region=Europe|climatezone=Temperate_Dry_Summer,4256,Europe,Temperate - Dry Summer,0.219,TDS
+analysis=spatial_spd|dataset_id=42570|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42570,Europe,Cold - Warm Summer,0.514,CWS
+analysis=spatial_spd|dataset_id=4258|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4258,Europe,Cold - Cold Summer,0.068,CCS
+analysis=spatial_spd|dataset_id=4259|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4259,Europe,Cold - Cold Summer,0.512,CCS
+analysis=spatial_spd|dataset_id=42649|region=Europe|climatezone=Temperate_Without_dry_season,42649,Europe,Temperate,0.581,TMP
+analysis=spatial_spd|dataset_id=42668|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42668,Europe,Cold - Warm Summer,0.287,CWS
+analysis=spatial_spd|dataset_id=42671|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42671,Europe,Cold - Warm Summer,0.486,CWS
+analysis=spatial_spd|dataset_id=42681|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42681,Europe,Cold - Warm Summer,0.5,CWS
+analysis=spatial_spd|dataset_id=42683|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42683,Europe,Cold - Warm Summer,0.425,CWS
+analysis=spatial_spd|dataset_id=42692|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42692,Europe,Cold - Warm Summer,0.273,CWS
+analysis=spatial_spd|dataset_id=4269|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4269,Europe,Cold - Warm Summer,0.452,CWS
+analysis=spatial_spd|dataset_id=42720|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,42720,Europe,Cold - Warm Summer,0.188,CWS
+analysis=spatial_spd|dataset_id=42722|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,42722,North America,Cold - Warm Summer,0.438,CWS
+analysis=spatial_spd|dataset_id=42745|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,42745,North America,Cold - Cold Summer,0.114,CCS
+analysis=spatial_spd|dataset_id=4279|region=Europe|climatezone=Temperate_Without_dry_season,4279,Europe,Temperate,0.415,TMP
+analysis=spatial_spd|dataset_id=4286|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4286,Europe,Cold - Cold Summer,0.069,CCS
+analysis=spatial_spd|dataset_id=4288|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4288,Europe,Cold - Cold Summer,0.51,CCS
+analysis=spatial_spd|dataset_id=4308|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4308,Europe,Cold - Warm Summer,0.35,CWS
+analysis=spatial_spd|dataset_id=4311|region=Europe|climatezone=Temperate_Without_dry_season,4311,Europe,Temperate,0.474,TMP
+analysis=spatial_spd|dataset_id=4314|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4314,Europe,Cold - Warm Summer,0.499,CWS
+analysis=spatial_spd|dataset_id=4320|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4320,Europe,Cold - Warm Summer,0.599,CWS
+analysis=spatial_spd|dataset_id=43295|region=Latin America|climatezone=Cold_Dry_Summer,43295,Latin America,Cold - Dry Summer,0.19,CDS
+analysis=spatial_spd|dataset_id=4330|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4330,Europe,Cold - Warm Summer,0.397,CWS
+analysis=spatial_spd|dataset_id=43513|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,43513,Europe,Cold - Cold Summer,0.403,CCS
+analysis=spatial_spd|dataset_id=43525|region=Europe|climatezone=Temperate_Without_dry_season,43525,Europe,Temperate,0.348,TMP
+analysis=spatial_spd|dataset_id=43533|region=Europe|climatezone=Temperate_Without_dry_season,43533,Europe,Temperate,0.203,TMP
+analysis=spatial_spd|dataset_id=4355|region=Europe|climatezone=Polar,4355,Europe,Polar,0.42,POL
+analysis=spatial_spd|dataset_id=4359|region=Europe|climatezone=Temperate_Without_dry_season,4359,Europe,Temperate,0.566,TMP
+analysis=spatial_spd|dataset_id=4360|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4360,Europe,Cold - Cold Summer,0.396,CCS
+analysis=spatial_spd|dataset_id=4362|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4362,Europe,Cold - Warm Summer,0.574,CWS
+analysis=spatial_spd|dataset_id=4364|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4364,Europe,Cold - Warm Summer,0.014,CWS
+analysis=spatial_spd|dataset_id=4367|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4367,Europe,Cold - Warm Summer,0.188,CWS
+analysis=spatial_spd|dataset_id=4369|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4369,Europe,Cold - Warm Summer,0.262,CWS
+analysis=spatial_spd|dataset_id=4372|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4372,Europe,Cold - Cold Summer,0.274,CCS
+analysis=spatial_spd|dataset_id=4373|region=Europe|climatezone=Temperate_Without_dry_season,4373,Europe,Temperate,0.13,TMP
+analysis=spatial_spd|dataset_id=4375|region=Europe|climatezone=Temperate_Without_dry_season,4375,Europe,Temperate,0.468,TMP
+analysis=spatial_spd|dataset_id=4377|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4377,Europe,Cold - Warm Summer,0.239,CWS
+analysis=spatial_spd|dataset_id=4378|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4378,Europe,Cold - Warm Summer,0.315,CWS
+analysis=spatial_spd|dataset_id=4382|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4382,Europe,Cold - Warm Summer,0.353,CWS
+analysis=spatial_spd|dataset_id=4383|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4383,Europe,Cold - Warm Summer,0.092,CWS
+analysis=spatial_spd|dataset_id=4385|region=Europe|climatezone=Temperate_Without_dry_season,4385,Europe,Temperate,0.267,TMP
+analysis=spatial_spd|dataset_id=4391|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4391,Europe,Cold - Cold Summer,0.32,CCS
+analysis=spatial_spd|dataset_id=4393|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4393,Europe,Cold - Cold Summer,0.246,CCS
+analysis=spatial_spd|dataset_id=4397|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4397,Europe,Cold - Warm Summer,0.182,CWS
+analysis=spatial_spd|dataset_id=4398|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4398,Europe,Cold - Warm Summer,0.088,CWS
+analysis=spatial_spd|dataset_id=4403|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4403,Europe,Cold - Warm Summer,0.451,CWS
+analysis=spatial_spd|dataset_id=4410|region=Europe|climatezone=Temperate_Without_dry_season,4410,Europe,Temperate,0.33,TMP
+analysis=spatial_spd|dataset_id=4421|region=Europe|climatezone=Temperate_Without_dry_season,4421,Europe,Temperate,0.205,TMP
+analysis=spatial_spd|dataset_id=4425|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4425,Europe,Cold - Warm Summer,0.366,CWS
+analysis=spatial_spd|dataset_id=4436|region=Europe|climatezone=Temperate_Without_dry_season,4436,Europe,Temperate,0.31,TMP
+analysis=spatial_spd|dataset_id=4442|region=Asia|climatezone=Cold_Dry_Summer,4442,Asia,Cold - Dry Summer,0.506,CDS
+analysis=spatial_spd|dataset_id=4445|region=Europe|climatezone=Temperate_Without_dry_season,4445,Europe,Temperate,0.354,TMP
+analysis=spatial_spd|dataset_id=4466|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4466,Europe,Cold - Warm Summer,0.358,CWS
+analysis=spatial_spd|dataset_id=4467|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4467,Europe,Cold - Cold Summer,0.225,CCS
+analysis=spatial_spd|dataset_id=44723|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,44723,Europe,Cold - Warm Summer,0.308,CWS
+analysis=spatial_spd|dataset_id=4472|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4472,Europe,Cold - Cold Summer,0.331,CCS
+analysis=spatial_spd|dataset_id=4473|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4473,Europe,Cold - Warm Summer,0.157,CWS
+analysis=spatial_spd|dataset_id=4479|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4479,Europe,Cold - Warm Summer,0.342,CWS
+analysis=spatial_spd|dataset_id=4485|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4485,Europe,Cold - Warm Summer,0.076,CWS
+analysis=spatial_spd|dataset_id=44896|region=Europe|climatezone=Temperate_Without_dry_season,44896,Europe,Temperate,0.256,TMP
+analysis=spatial_spd|dataset_id=4492|region=Europe|climatezone=Temperate_Without_dry_season,4492,Europe,Temperate,0.23,TMP
+analysis=spatial_spd|dataset_id=44941|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,44941,Europe,Cold - Cold Summer,0.329,CCS
+analysis=spatial_spd|dataset_id=44951|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,44951,Europe,Cold - Warm Summer,0.308,CWS
+analysis=spatial_spd|dataset_id=4497|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4497,Europe,Cold - Warm Summer,0.487,CWS
+analysis=spatial_spd|dataset_id=4501|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4501,Europe,Cold - Cold Summer,0.277,CCS
+analysis=spatial_spd|dataset_id=4509|region=Asia|climatezone=Cold_Dry_Summer,4509,Asia,Cold - Dry Summer,0.555,CDS
+analysis=spatial_spd|dataset_id=45101|region=Europe|climatezone=Arid,45101,Europe,Arid,0.382,ARD
+analysis=spatial_spd|dataset_id=45105|region=Europe|climatezone=Cold_Dry_Summer,45105,Europe,Cold - Dry Summer,0.52,CDS
+analysis=spatial_spd|dataset_id=45117|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45117,Europe,Cold - Cold Summer,0.419,CCS
+analysis=spatial_spd|dataset_id=4517|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4517,Europe,Cold - Warm Summer,0.44,CWS
+analysis=spatial_spd|dataset_id=45188|region=Europe|climatezone=Temperate_Dry_Summer,45188,Europe,Temperate - Dry Summer,0.015,TDS
+analysis=spatial_spd|dataset_id=45192|region=Europe|climatezone=Temperate_Dry_Summer,45192,Europe,Temperate - Dry Summer,0.591,TDS
+analysis=spatial_spd|dataset_id=4524|region=Europe|climatezone=Temperate_Without_dry_season,4524,Europe,Temperate,0.674,TMP
+analysis=spatial_spd|dataset_id=45281|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45281,Europe,Cold - Cold Summer,0.209,CCS
+analysis=spatial_spd|dataset_id=45312|region=Europe|climatezone=Polar,45312,Europe,Polar,0.613,POL
+analysis=spatial_spd|dataset_id=45319|region=Europe|climatezone=Arid,45319,Europe,Arid,0.451,ARD
+analysis=spatial_spd|dataset_id=4531|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4531,Europe,Cold - Warm Summer,0.412,CWS
+analysis=spatial_spd|dataset_id=45320|region=Europe|climatezone=Arid,45320,Europe,Arid,0.57,ARD
+analysis=spatial_spd|dataset_id=45322|region=Europe|climatezone=Temperate_Dry_Summer,45322,Europe,Temperate - Dry Summer,0.222,TDS
+analysis=spatial_spd|dataset_id=45324|region=Europe|climatezone=Temperate_Dry_Summer,45324,Europe,Temperate - Dry Summer,0.357,TDS
+analysis=spatial_spd|dataset_id=45329|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45329,Europe,Cold - Warm Summer,0.473,CWS
+analysis=spatial_spd|dataset_id=45343|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45343,Europe,Cold - Cold Summer,0.351,CCS
+analysis=spatial_spd|dataset_id=45345|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45345,Europe,Cold - Cold Summer,0.505,CCS
+analysis=spatial_spd|dataset_id=45347|region=Europe|climatezone=Polar,45347,Europe,Polar,0.528,POL
+analysis=spatial_spd|dataset_id=45349|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45349,Europe,Cold - Cold Summer,0.348,CCS
+analysis=spatial_spd|dataset_id=45351|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45351,Europe,Cold - Cold Summer,0.415,CCS
+analysis=spatial_spd|dataset_id=45377|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45377,Europe,Cold - Warm Summer,0.258,CWS
+analysis=spatial_spd|dataset_id=45379|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45379,Europe,Cold - Warm Summer,0.493,CWS
+analysis=spatial_spd|dataset_id=45381|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45381,Europe,Cold - Warm Summer,0.413,CWS
+analysis=spatial_spd|dataset_id=45383|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45383,Europe,Cold - Warm Summer,0.728,CWS
+analysis=spatial_spd|dataset_id=45385|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45385,Europe,Cold - Warm Summer,0.515,CWS
+analysis=spatial_spd|dataset_id=45387|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45387,Europe,Cold - Warm Summer,0.634,CWS
+analysis=spatial_spd|dataset_id=45389|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45389,Europe,Cold - Warm Summer,0.287,CWS
+analysis=spatial_spd|dataset_id=45391|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45391,Europe,Cold - Warm Summer,0.339,CWS
+analysis=spatial_spd|dataset_id=45393|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45393,Europe,Cold - Warm Summer,0.46,CWS
+analysis=spatial_spd|dataset_id=45395|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45395,Europe,Cold - Warm Summer,0.469,CWS
+analysis=spatial_spd|dataset_id=4539|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4539,Europe,Cold - Cold Summer,0.246,CCS
+analysis=spatial_spd|dataset_id=45400|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45400,Europe,Cold - Warm Summer,0.02,CWS
+analysis=spatial_spd|dataset_id=4542|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4542,Europe,Cold - Cold Summer,0.512,CCS
+analysis=spatial_spd|dataset_id=4543|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,4543,Asia,Cold - Cold Summer,0.268,CCS
+analysis=spatial_spd|dataset_id=4545|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,4545,Europe,Cold - Warm Summer,0.398,CWS
+analysis=spatial_spd|dataset_id=4549|region=Europe|climatezone=Polar,4549,Europe,Polar,0.124,POL
+analysis=spatial_spd|dataset_id=4555|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,4555,Europe,Cold - Cold Summer,0.309,CCS
+analysis=spatial_spd|dataset_id=45636|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45636,Europe,Cold - Cold Summer,-0.171,CCS
+analysis=spatial_spd|dataset_id=45639|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45639,Europe,Cold - Cold Summer,0.339,CCS
+analysis=spatial_spd|dataset_id=45642|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45642,Europe,Cold - Cold Summer,0.517,CCS
+analysis=spatial_spd|dataset_id=45648|region=Oceania|climatezone=Temperate_Without_dry_season,45648,Oceania,Temperate,0.484,TMP
+analysis=spatial_spd|dataset_id=45698|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45698,Europe,Cold - Cold Summer,0.39,CCS
+analysis=spatial_spd|dataset_id=45701|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45701,Europe,Cold - Cold Summer,0.523,CCS
+analysis=spatial_spd|dataset_id=45704|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45704,Europe,Cold - Cold Summer,0.391,CCS
+analysis=spatial_spd|dataset_id=45707|region=Europe|climatezone=Cold_Dry_Summer,45707,Europe,Cold - Dry Summer,-0.017,CDS
+analysis=spatial_spd|dataset_id=45710|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45710,Europe,Cold - Cold Summer,0.605,CCS
+analysis=spatial_spd|dataset_id=45713|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,45713,Europe,Cold - Cold Summer,0.467,CCS
+analysis=spatial_spd|dataset_id=45716|region=Europe|climatezone=Polar,45716,Europe,Polar,0.417,POL
+analysis=spatial_spd|dataset_id=45719|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45719,Europe,Cold - Warm Summer,0.569,CWS
+analysis=spatial_spd|dataset_id=45722|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45722,Europe,Cold - Warm Summer,0.711,CWS
+analysis=spatial_spd|dataset_id=45725|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45725,Europe,Cold - Warm Summer,0.416,CWS
+analysis=spatial_spd|dataset_id=45728|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,45728,Europe,Cold - Warm Summer,0.115,CWS
+analysis=spatial_spd|dataset_id=45731|region=Europe|climatezone=Cold_Dry_Summer,45731,Europe,Cold - Dry Summer,0.367,CDS
+analysis=spatial_spd|dataset_id=46280|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46280,Europe,Cold - Warm Summer,0.056,CWS
+analysis=spatial_spd|dataset_id=46292|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,46292,North America,Cold - Warm Summer,0.501,CWS
+analysis=spatial_spd|dataset_id=46447|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,46447,Asia,Cold - Cold Summer,0.498,CCS
+analysis=spatial_spd|dataset_id=46457|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,46457,Europe,Cold - Cold Summer,0.338,CCS
+analysis=spatial_spd|dataset_id=46462|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46462,Asia,Cold - Warm Summer,0.378,CWS
+analysis=spatial_spd|dataset_id=46466|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46466,Asia,Cold - Warm Summer,0.108,CWS
+analysis=spatial_spd|dataset_id=46473|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46473,Asia,Cold - Warm Summer,-0.029,CWS
+analysis=spatial_spd|dataset_id=46477|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46477,Europe,Cold - Warm Summer,0.138,CWS
+analysis=spatial_spd|dataset_id=46479|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46479,Asia,Cold - Warm Summer,0.357,CWS
+analysis=spatial_spd|dataset_id=46481|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46481,Europe,Cold - Warm Summer,0.226,CWS
+analysis=spatial_spd|dataset_id=46483|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46483,Asia,Cold - Warm Summer,0.219,CWS
+analysis=spatial_spd|dataset_id=46485|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,46485,Asia,Cold - Warm Summer,0.486,CWS
+analysis=spatial_spd|dataset_id=46490|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46490,Europe,Cold - Warm Summer,0.417,CWS
+analysis=spatial_spd|dataset_id=46516|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46516,Europe,Cold - Warm Summer,0.273,CWS
+analysis=spatial_spd|dataset_id=46544|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,46544,Europe,Cold - Warm Summer,0.398,CWS
+analysis=spatial_spd|dataset_id=46611|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,46611,North America,Cold - Cold Summer,0.443,CCS
+analysis=spatial_spd|dataset_id=46630|region=North America|climatezone=Temperate_Dry_Summer,46630,North America,Temperate - Dry Summer,0.02,TDS
+analysis=spatial_spd|dataset_id=46645|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,46645,North America,Cold - Cold Summer,0.152,CCS
+analysis=spatial_spd|dataset_id=46659|region=North America|climatezone=Polar,46659,North America,Polar,-0.053,POL
+analysis=spatial_spd|dataset_id=46672|region=North America|climatezone=Temperate_Without_dry_season,46672,North America,Temperate,0.14,TMP
+analysis=spatial_spd|dataset_id=46680|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,46680,North America,Cold - Cold Summer,0.379,CCS
+analysis=spatial_spd|dataset_id=46730|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,46730,North America,Cold - Cold Summer,0.254,CCS
+analysis=spatial_spd|dataset_id=46803|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,46803,North America,Cold - Cold Summer,0.53,CCS
+analysis=spatial_spd|dataset_id=46998|region=Latin America|climatezone=Temperate_Without_dry_season,46998,Latin America,Temperate,0.078,TMP
+analysis=spatial_spd|dataset_id=47005|region=Europe|climatezone=Temperate_Without_dry_season,47005,Europe,Temperate,0.524,TMP
+analysis=spatial_spd|dataset_id=47011|region=Latin America|climatezone=Temperate_Without_dry_season,47011,Latin America,Temperate,0.459,TMP
+analysis=spatial_spd|dataset_id=47110|region=Oceania|climatezone=Temperate_Without_dry_season,47110,Oceania,Temperate,0.322,TMP
+analysis=spatial_spd|dataset_id=47502|region=Latin America|climatezone=Temperate_Without_dry_season,47502,Latin America,Temperate,0.482,TMP
+analysis=spatial_spd|dataset_id=47520|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,47520,Europe,Cold - Cold Summer,0.483,CCS
+analysis=spatial_spd|dataset_id=47537|region=Europe|climatezone=Temperate_Dry_Summer,47537,Europe,Temperate - Dry Summer,0.637,TDS
+analysis=spatial_spd|dataset_id=47555|region=North America|climatezone=Temperate_Without_dry_season,47555,North America,Temperate,0.174,TMP
+analysis=spatial_spd|dataset_id=47564|region=Latin America|climatezone=Tropical,47564,Latin America,Tropical,0.372,TRO
+analysis=spatial_spd|dataset_id=47590|region=Europe|climatezone=Temperate_Dry_Summer,47590,Europe,Temperate - Dry Summer,0.453,TDS
+analysis=spatial_spd|dataset_id=47604|region=Europe|climatezone=Polar,47604,Europe,Polar,0.42,POL
+analysis=spatial_spd|dataset_id=47687|region=North America|climatezone=Arid,47687,North America,Arid,0.229,ARD
+analysis=spatial_spd|dataset_id=47817|region=Asia|climatezone=Arid,47817,Asia,Arid,0.346,ARD
+analysis=spatial_spd|dataset_id=48072|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48072,Europe,Cold - Warm Summer,0.164,CWS
+analysis=spatial_spd|dataset_id=48358|region=Europe|climatezone=Polar,48358,Europe,Polar,0.463,POL
+analysis=spatial_spd|dataset_id=48361|region=North America|climatezone=Cold_Dry_Summer,48361,North America,Cold - Dry Summer,0.445,CDS
+analysis=spatial_spd|dataset_id=48363|region=North America|climatezone=Cold_Dry_Summer,48363,North America,Cold - Dry Summer,0.409,CDS
+analysis=spatial_spd|dataset_id=48614|region=Latin America|climatezone=Temperate_Without_dry_season,48614,Latin America,Temperate,0.168,TMP
+analysis=spatial_spd|dataset_id=48616|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,48616,North America,Cold - Cold Summer,0.415,CCS
+analysis=spatial_spd|dataset_id=48621|region=Latin America|climatezone=Temperate_Without_dry_season,48621,Latin America,Temperate,0.103,TMP
+analysis=spatial_spd|dataset_id=48624|region=Latin America|climatezone=Temperate_Dry_Summer,48624,Latin America,Temperate - Dry Summer,0.251,TDS
+analysis=spatial_spd|dataset_id=48633|region=Latin America|climatezone=Temperate_Without_dry_season,48633,Latin America,Temperate,0.278,TMP
+analysis=spatial_spd|dataset_id=48685|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,48685,North America,Cold - Hot Summer,1,CHS
+analysis=spatial_spd|dataset_id=48697|region=Latin America|climatezone=Temperate_Without_dry_season,48697,Latin America,Temperate,0.572,TMP
+analysis=spatial_spd|dataset_id=48721|region=North America|climatezone=Cold_Dry_Summer,48721,North America,Cold - Dry Summer,0.233,CDS
+analysis=spatial_spd|dataset_id=48735|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,48735,Europe,Cold - Cold Summer,0.421,CCS
+analysis=spatial_spd|dataset_id=48738|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48738,Europe,Cold - Warm Summer,0.586,CWS
+analysis=spatial_spd|dataset_id=48769|region=Europe|climatezone=Temperate_Without_dry_season,48769,Europe,Temperate,0.235,TMP
+analysis=spatial_spd|dataset_id=48777|region=Europe|climatezone=Temperate_Without_dry_season,48777,Europe,Temperate,0.319,TMP
+analysis=spatial_spd|dataset_id=48782|region=Europe|climatezone=Temperate_Without_dry_season,48782,Europe,Temperate,0.179,TMP
+analysis=spatial_spd|dataset_id=48798|region=Europe|climatezone=Temperate_Without_dry_season,48798,Europe,Temperate,0.323,TMP
+analysis=spatial_spd|dataset_id=48816|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,48816,North America,Cold - Warm Summer,0.188,CWS
+analysis=spatial_spd|dataset_id=48818|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,48818,North America,Cold - Warm Summer,0.363,CWS
+analysis=spatial_spd|dataset_id=48889|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,48889,North America,Cold - Warm Summer,0.348,CWS
+analysis=spatial_spd|dataset_id=48895|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,48895,North America,Cold - Warm Summer,0.643,CWS
+analysis=spatial_spd|dataset_id=48917|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48917,Europe,Cold - Warm Summer,0.243,CWS
+analysis=spatial_spd|dataset_id=48925|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,48925,North America,Cold - Warm Summer,0.439,CWS
+analysis=spatial_spd|dataset_id=48931|region=Europe|climatezone=Arid,48931,Europe,Arid,0.034,ARD
+analysis=spatial_spd|dataset_id=48935|region=Europe|climatezone=Arid,48935,Europe,Arid,0.436,ARD
+analysis=spatial_spd|dataset_id=48948|region=Europe|climatezone=Polar,48948,Europe,Polar,0.251,POL
+analysis=spatial_spd|dataset_id=48950|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48950,Europe,Cold - Warm Summer,0.168,CWS
+analysis=spatial_spd|dataset_id=48960|region=Europe|climatezone=Temperate_Without_dry_season,48960,Europe,Temperate,0.254,TMP
+analysis=spatial_spd|dataset_id=48966|region=Europe|climatezone=Temperate_Without_dry_season,48966,Europe,Temperate,0.505,TMP
+analysis=spatial_spd|dataset_id=48973|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48973,Europe,Cold - Warm Summer,-0.146,CWS
+analysis=spatial_spd|dataset_id=48976|region=Europe|climatezone=Temperate_Without_dry_season,48976,Europe,Temperate,0.579,TMP
+analysis=spatial_spd|dataset_id=48982|region=Europe|climatezone=Cold_Without_dry_season_Cold_Summer,48982,Europe,Cold - Cold Summer,0.308,CCS
+analysis=spatial_spd|dataset_id=48984|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,48984,Europe,Cold - Warm Summer,0.495,CWS
+analysis=spatial_spd|dataset_id=48986|region=Europe|climatezone=Temperate_Without_dry_season,48986,Europe,Temperate,0.34,TMP
+analysis=spatial_spd|dataset_id=489|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,489,North America,Cold - Hot Summer,0.214,CHS
+analysis=spatial_spd|dataset_id=492|region=North America|climatezone=Temperate_Without_dry_season,492,North America,Temperate,0.07,TMP
+analysis=spatial_spd|dataset_id=497|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,497,North America,Cold - Hot Summer,0.465,CHS
+analysis=spatial_spd|dataset_id=501|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,501,North America,Cold - Cold Summer,0.258,CCS
+analysis=spatial_spd|dataset_id=506|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,506,North America,Cold - Cold Summer,0.243,CCS
+analysis=spatial_spd|dataset_id=510|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,510,North America,Cold - Warm Summer,0.574,CWS
+analysis=spatial_spd|dataset_id=513|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,513,North America,Cold - Hot Summer,0.54,CHS
+analysis=spatial_spd|dataset_id=514|region=North America|climatezone=Polar,514,North America,Polar,0.458,POL
+analysis=spatial_spd|dataset_id=516|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,516,North America,Cold - Warm Summer,0.475,CWS
+analysis=spatial_spd|dataset_id=517|region=North America|climatezone=Cold_Dry_Summer,517,North America,Cold - Dry Summer,0.538,CDS
+analysis=spatial_spd|dataset_id=518|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,518,North America,Cold - Warm Summer,0.182,CWS
+analysis=spatial_spd|dataset_id=519|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,519,North America,Cold - Warm Summer,-0.01,CWS
+analysis=spatial_spd|dataset_id=525|region=North America|climatezone=Polar,525,North America,Polar,0.187,POL
+analysis=spatial_spd|dataset_id=527|region=North America|climatezone=Cold_Dry_Summer,527,North America,Cold - Dry Summer,0.421,CDS
+analysis=spatial_spd|dataset_id=531|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,531,Europe,Cold - Warm Summer,0.208,CWS
+analysis=spatial_spd|dataset_id=532|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,532,North America,Cold - Warm Summer,0.678,CWS
+analysis=spatial_spd|dataset_id=533|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,533,North America,Cold - Cold Summer,0.264,CCS
+analysis=spatial_spd|dataset_id=534|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,534,North America,Cold - Warm Summer,0.654,CWS
+analysis=spatial_spd|dataset_id=537|region=Latin America|climatezone=Polar,537,Latin America,Polar,0.644,POL
+analysis=spatial_spd|dataset_id=539|region=North America|climatezone=Temperate_Without_dry_season,539,North America,Temperate,0.306,TMP
+analysis=spatial_spd|dataset_id=543|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,543,North America,Cold - Cold Summer,0.273,CCS
+analysis=spatial_spd|dataset_id=549|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,549,North America,Cold - Cold Summer,0.481,CCS
+analysis=spatial_spd|dataset_id=550|region=North America|climatezone=Temperate_Dry_Summer,550,North America,Temperate - Dry Summer,0.365,TDS
+analysis=spatial_spd|dataset_id=672|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,672,North America,Cold - Warm Summer,0.683,CWS
+analysis=spatial_spd|dataset_id=673|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,673,North America,Cold - Cold Summer,0.26,CCS
+analysis=spatial_spd|dataset_id=678|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,678,North America,Cold - Cold Summer,0.493,CCS
+analysis=spatial_spd|dataset_id=679|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,679,North America,Cold - Warm Summer,0.249,CWS
+analysis=spatial_spd|dataset_id=684|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,684,North America,Cold - Hot Summer,0.525,CHS
+analysis=spatial_spd|dataset_id=688|region=North America|climatezone=Polar,688,North America,Polar,0.196,POL
+analysis=spatial_spd|dataset_id=691|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,691,North America,Cold - Cold Summer,0.642,CCS
+analysis=spatial_spd|dataset_id=699|region=North America|climatezone=Temperate_Without_dry_season,699,North America,Temperate,0.12,TMP
+analysis=spatial_spd|dataset_id=701|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,701,North America,Cold - Cold Summer,0.436,CCS
+analysis=spatial_spd|dataset_id=720|region=Europe|climatezone=Polar,720,Europe,Polar,0.414,POL
+analysis=spatial_spd|dataset_id=723|region=Europe|climatezone=Cold_Without_dry_season_Warm_Summer,723,Europe,Cold - Warm Summer,0.394,CWS
+analysis=spatial_spd|dataset_id=772|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,772,North America,Cold - Warm Summer,0.226,CWS
+analysis=spatial_spd|dataset_id=773|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,773,North America,Cold - Warm Summer,0.594,CWS
+analysis=spatial_spd|dataset_id=776|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,776,North America,Cold - Warm Summer,0.428,CWS
+analysis=spatial_spd|dataset_id=777|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,777,North America,Cold - Cold Summer,0.531,CCS
+analysis=spatial_spd|dataset_id=778|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,778,North America,Cold - Cold Summer,0.267,CCS
+analysis=spatial_spd|dataset_id=782|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,782,North America,Cold - Warm Summer,0.091,CWS
+analysis=spatial_spd|dataset_id=784|region=Europe|climatezone=Temperate_Without_dry_season,784,Europe,Temperate,0.348,TMP
+analysis=spatial_spd|dataset_id=785|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,785,North America,Cold - Warm Summer,0.631,CWS
+analysis=spatial_spd|dataset_id=790|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,790,North America,Cold - Cold Summer,0.429,CCS
+analysis=spatial_spd|dataset_id=796|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,796,North America,Cold - Cold Summer,0.296,CCS
+analysis=spatial_spd|dataset_id=805|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,805,North America,Cold - Hot Summer,0.436,CHS
+analysis=spatial_spd|dataset_id=808|region=North America|climatezone=Temperate_Dry_Summer,808,North America,Temperate - Dry Summer,0.36,TDS
+analysis=spatial_spd|dataset_id=811|region=North America|climatezone=Cold_Dry_Summer,811,North America,Cold - Dry Summer,0.589,CDS
+analysis=spatial_spd|dataset_id=813|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,813,North America,Cold - Hot Summer,0.466,CHS
+analysis=spatial_spd|dataset_id=816|region=North America|climatezone=Temperate_Dry_Summer,816,North America,Temperate - Dry Summer,0.578,TDS
+analysis=spatial_spd|dataset_id=821|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,821,North America,Cold - Warm Summer,0.484,CWS
+analysis=spatial_spd|dataset_id=823|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,823,North America,Cold - Warm Summer,0.583,CWS
+analysis=spatial_spd|dataset_id=834|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,834,North America,Cold - Cold Summer,0.637,CCS
+analysis=spatial_spd|dataset_id=835|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,835,North America,Cold - Cold Summer,-0.119,CCS
+analysis=spatial_spd|dataset_id=841|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,841,North America,Cold - Cold Summer,0.294,CCS
+analysis=spatial_spd|dataset_id=843|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,843,North America,Cold - Cold Summer,0.43,CCS
+analysis=spatial_spd|dataset_id=844|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,844,North America,Cold - Cold Summer,0.039,CCS
+analysis=spatial_spd|dataset_id=847|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,847,North America,Cold - Hot Summer,0.061,CHS
+analysis=spatial_spd|dataset_id=849|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,849,North America,Cold - Warm Summer,0.52,CWS
+analysis=spatial_spd|dataset_id=852|region=North America|climatezone=Temperate_Without_dry_season,852,North America,Temperate,0.109,TMP
+analysis=spatial_spd|dataset_id=853|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,853,North America,Cold - Cold Summer,0.342,CCS
+analysis=spatial_spd|dataset_id=856|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,856,North America,Cold - Cold Summer,0.145,CCS
+analysis=spatial_spd|dataset_id=857|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,857,North America,Cold - Warm Summer,0.49,CWS
+analysis=spatial_spd|dataset_id=859|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,859,North America,Cold - Cold Summer,0.449,CCS
+analysis=spatial_spd|dataset_id=860|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,860,North America,Cold - Warm Summer,0.216,CWS
+analysis=spatial_spd|dataset_id=871|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,871,North America,Cold - Warm Summer,0.469,CWS
+analysis=spatial_spd|dataset_id=872|region=Latin America|climatezone=Temperate_Without_dry_season,872,Latin America,Temperate,0.383,TMP
+analysis=spatial_spd|dataset_id=876|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,876,Asia,Cold - Warm Summer,0.503,CWS
+analysis=spatial_spd|dataset_id=878|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,878,North America,Cold - Warm Summer,0.129,CWS
+analysis=spatial_spd|dataset_id=966|region=North America|climatezone=Cold_Dry_Summer,966,North America,Cold - Dry Summer,0.385,CDS
+analysis=spatial_spd|dataset_id=969|region=North America|climatezone=Temperate_Without_dry_season,969,North America,Temperate,0.333,TMP
+analysis=spatial_spd|dataset_id=971|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,971,North America,Cold - Warm Summer,0.348,CWS
+analysis=spatial_spd|dataset_id=973|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,973,North America,Cold - Warm Summer,0.63,CWS
+analysis=spatial_spd|dataset_id=974|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,974,North America,Cold - Warm Summer,0.757,CWS
+analysis=spatial_spd|dataset_id=982|region=North America|climatezone=Cold_Without_dry_season_Warm_Summer,982,North America,Cold - Warm Summer,0.439,CWS
+analysis=spatial_spd|dataset_id=987|region=North America|climatezone=Cold_Without_dry_season_Cold_Summer,987,North America,Cold - Cold Summer,0.404,CCS
+analysis=spatial_spd|dataset_id=991|region=North America|climatezone=Arid,991,North America,Arid,0.213,ARD
+analysis=spatial_spd|dataset_id=999|region=North America|climatezone=Cold_Without_dry_season_Hot_Summer,999,North America,Cold - Hot Summer,0.273,CHS
+analysis=spatial_spd|dataset_id=Lake_Moon|region=Asia|climatezone=Cold_Dry_Winter,Lake_Moon,Asia,Cold - Dry Winter,0.273,CDW
+analysis=spatial_spd|dataset_id=PANGAEA.783359|region=Asia|climatezone=Temperate_Dry_Summer,PANGAEA.783359,Asia,Temperate - Dry Summer,0.209,TDS
+analysis=spatial_spd|dataset_id=PANGAEA.834960|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,PANGAEA.834960,Asia,Cold - Cold Summer,0.339,CCS
+analysis=spatial_spd|dataset_id=PANGAEA.884462|region=Asia|climatezone=Arid,PANGAEA.884462,Asia,Arid,0.459,ARD
+analysis=spatial_spd|dataset_id=PANGAEA.896256|region=Asia|climatezone=Arid,PANGAEA.896256,Asia,Arid,0.298,ARD
+analysis=spatial_spd|dataset_id=PVT_Akkol_Lake|region=Asia|climatezone=Polar,PVT_Akkol_Lake,Asia,Polar,0.269,POL
+analysis=spatial_spd|dataset_id=PVT_Ayongwama_Co|region=Asia|climatezone=Polar,PVT_Ayongwama_Co,Asia,Polar,0.549,POL
+analysis=spatial_spd|dataset_id=PVT_Barkol_Lake|region=Asia|climatezone=Arid,PVT_Barkol_Lake,Asia,Arid,-0.044,ARD
+analysis=spatial_spd|dataset_id=PVT_Chaiwopu_Lake|region=Asia|climatezone=Arid,PVT_Chaiwopu_Lake,Asia,Arid,0.302,ARD
+analysis=spatial_spd|dataset_id=PVT_Dahaizi_Lake|region=Asia|climatezone=Temperate_Dry_Winter,PVT_Dahaizi_Lake,Asia,Temperate - Dry Winter,0.328,TDW
+analysis=spatial_spd|dataset_id=PVT_Daihai_Lake_2004|region=Asia|climatezone=Arid,PVT_Daihai_Lake_2004,Asia,Arid,0.402,ARD
+analysis=spatial_spd|dataset_id=PVT_Dajiuhu_2013|region=Asia|climatezone=Cold_Dry_Winter,PVT_Dajiuhu_2013,Asia,Cold - Dry Winter,-0.115,CDW
+analysis=spatial_spd|dataset_id=PVT_Dali_Nur_Jiangjunpaozi_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Dali_Nur_Jiangjunpaozi_Lake,Asia,Cold - Dry Winter,0.291,CDW
+analysis=spatial_spd|dataset_id=PVT_Dali_Nur_Liuzhouwan_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Dali_Nur_Liuzhouwan_Lake,Asia,Cold - Dry Winter,0.477,CDW
+analysis=spatial_spd|dataset_id=PVT_Dalianhai_Lake|region=Asia|climatezone=Arid,PVT_Dalianhai_Lake,Asia,Arid,0.094,ARD
+analysis=spatial_spd|dataset_id=PVT_Daluoba_basin|region=Asia|climatezone=Arid,PVT_Daluoba_basin,Asia,Arid,-0.11,ARD
+analysis=spatial_spd|dataset_id=PVT_Dongganchi|region=Asia|climatezone=Cold_Dry_Winter,PVT_Dongganchi,Asia,Cold - Dry Winter,0.168,CDW
+analysis=spatial_spd|dataset_id=PVT_Erhai_Lake|region=Asia|climatezone=Temperate_Dry_Winter,PVT_Erhai_Lake,Asia,Temperate - Dry Winter,0.286,TDW
+analysis=spatial_spd|dataset_id=PVT_Erhailongwan_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Erhailongwan_Lake,Asia,Cold - Dry Winter,0.407,CDW
+analysis=spatial_spd|dataset_id=PVT_Ganhai_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Ganhai_Lake,Asia,Cold - Dry Winter,0.343,CDW
+analysis=spatial_spd|dataset_id=PVT_Gantang|region=Asia|climatezone=Temperate_Without_dry_season,PVT_Gantang,Asia,Temperate,0.069,TMP
+analysis=spatial_spd|dataset_id=PVT_Gonghai_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Gonghai_Lake,Asia,Cold - Dry Winter,0.398,CDW
+analysis=spatial_spd|dataset_id=PVT_Guangfulin|region=Asia|climatezone=Temperate_Without_dry_season,PVT_Guangfulin,Asia,Temperate,0.7,TMP
+analysis=spatial_spd|dataset_id=PVT_Kendegelukol_Lake|region=Asia|climatezone=Polar,PVT_Kendegelukol_Lake,Asia,Polar,0.623,POL
+analysis=spatial_spd|dataset_id=PVT_Koucha_Lake|region=Asia|climatezone=Polar,PVT_Koucha_Lake,Asia,Polar,0.257,POL
+analysis=spatial_spd|dataset_id=PVT_Kuhai_Lake|region=Asia|climatezone=Polar,PVT_Kuhai_Lake,Asia,Polar,0.283,POL
+analysis=spatial_spd|dataset_id=PVT_Longquan_Lake_LC2|region=Asia|climatezone=Temperate_Without_dry_season,PVT_Longquan_Lake_LC2,Asia,Temperate,0.531,TMP
+analysis=spatial_spd|dataset_id=PVT_Lop_Nur_Luo4|region=Asia|climatezone=Arid,PVT_Lop_Nur_Luo4,Asia,Arid,0.263,ARD
+analysis=spatial_spd|dataset_id=PVT_Luanhaizi_LH2|region=Asia|climatezone=Cold_Dry_Winter,PVT_Luanhaizi_LH2,Asia,Cold - Dry Winter,0.612,CDW
+analysis=spatial_spd|dataset_id=PVT_Mengcun|region=Asia|climatezone=Cold_Dry_Winter,PVT_Mengcun,Asia,Cold - Dry Winter,0.336,CDW
+analysis=spatial_spd|dataset_id=PVT_Naleng_Co|region=Asia|climatezone=Polar,PVT_Naleng_Co,Asia,Polar,0.317,POL
+analysis=spatial_spd|dataset_id=PVT_Nantun|region=Asia|climatezone=Temperate_Dry_Winter,PVT_Nantun,Asia,Temperate - Dry Winter,0.36,TDW
+analysis=spatial_spd|dataset_id=PVT_Qigai_Nuur|region=Asia|climatezone=Arid,PVT_Qigai_Nuur,Asia,Arid,0.657,ARD
+analysis=spatial_spd|dataset_id=PVT_Qinghai_Lake_QH2000|region=Asia|climatezone=Cold_Dry_Winter,PVT_Qinghai_Lake_QH2000,Asia,Cold - Dry Winter,0.556,CDW
+analysis=spatial_spd|dataset_id=PVT_Qongjiamong_Co|region=Asia|climatezone=Polar,PVT_Qongjiamong_Co,Asia,Polar,0.198,POL
+analysis=spatial_spd|dataset_id=PVT_Ren_Co_R1|region=Asia|climatezone=Polar,PVT_Ren_Co_R1,Asia,Polar,0.226,POL
+analysis=spatial_spd|dataset_id=PVT_Sanjiaocheng_Section|region=Asia|climatezone=Arid,PVT_Sanjiaocheng_Section,Asia,Arid,0.293,ARD
+analysis=spatial_spd|dataset_id=PVT_Sayram_Lake|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,PVT_Sayram_Lake,Asia,Cold - Warm Summer,0.398,CWS
+analysis=spatial_spd|dataset_id=PVT_Shaamar|region=Asia|climatezone=Cold_Dry_Winter,PVT_Shaamar,Asia,Cold - Dry Winter,0.19,CDW
+analysis=spatial_spd|dataset_id=PVT_Shayema_Lake|region=Asia|climatezone=Temperate_Dry_Winter,PVT_Shayema_Lake,Asia,Temperate - Dry Winter,0.377,TDW
+analysis=spatial_spd|dataset_id=PVT_Sihailongwan_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Sihailongwan_Lake,Asia,Cold - Dry Winter,0.285,CDW
+analysis=spatial_spd|dataset_id=PVT_Sujiawan|region=Asia|climatezone=Cold_Dry_Winter,PVT_Sujiawan,Asia,Cold - Dry Winter,0.583,CDW
+analysis=spatial_spd|dataset_id=PVT_Tiancai_Lake|region=Asia|climatezone=Cold_Dry_Winter,PVT_Tiancai_Lake,Asia,Cold - Dry Winter,0.433,CDW
+analysis=spatial_spd|dataset_id=PVT_Uzunkol_Lake|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,PVT_Uzunkol_Lake,Asia,Cold - Cold Summer,0.456,CCS
+analysis=spatial_spd|dataset_id=PVT_Wulungu_Lake|region=Asia|climatezone=Arid,PVT_Wulungu_Lake,Asia,Arid,0.369,ARD
+analysis=spatial_spd|dataset_id=PVT_Xiehu_Lake_SO4|region=Asia|climatezone=Cold_Dry_Winter,PVT_Xiehu_Lake_SO4,Asia,Cold - Dry Winter,0.363,CDW
+analysis=spatial_spd|dataset_id=PVT_Ximen_Co|region=Asia|climatezone=Polar,PVT_Ximen_Co,Asia,Polar,0.342,POL
+analysis=spatial_spd|dataset_id=PVT_Xingyun_Lake|region=Asia|climatezone=Temperate_Dry_Winter,PVT_Xingyun_Lake,Asia,Temperate - Dry Winter,0.58,TDW
+analysis=spatial_spd|dataset_id=PVT_Yamant_Nur_Lake|region=Asia|climatezone=Arid,PVT_Yamant_Nur_Lake,Asia,Arid,0.277,ARD
+analysis=spatial_spd|dataset_id=PVT_Yidun_Lake|region=Asia|climatezone=Polar,PVT_Yidun_Lake,Asia,Polar,0.348,POL
+analysis=spatial_spd|dataset_id=PVT_Zoige_RH|region=Asia|climatezone=Cold_Dry_Winter,PVT_Zoige_RH,Asia,Cold - Dry Winter,0.458,CDW
+analysis=spatial_spd|dataset_id=cao_101|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,cao_101,Asia,Cold - Warm Summer,0.462,CWS
+analysis=spatial_spd|dataset_id=cao_124|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,cao_124,Asia,Cold - Cold Summer,0.405,CCS
+analysis=spatial_spd|dataset_id=cao_134|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,cao_134,Asia,Cold - Cold Summer,0.323,CCS
+analysis=spatial_spd|dataset_id=cao_158|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,cao_158,Asia,Cold - Warm Summer,0.333,CWS
+analysis=spatial_spd|dataset_id=cao_51|region=Asia|climatezone=Cold_Without_dry_season_Warm_Summer,cao_51,Asia,Cold - Warm Summer,-0.184,CWS
+analysis=spatial_spd|dataset_id=cao_57|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,cao_57,Asia,Cold - Cold Summer,0.599,CCS
+analysis=spatial_spd|dataset_id=cao_80|region=Asia|climatezone=Cold_Without_dry_season_Cold_Summer,cao_80,Asia,Cold - Cold Summer,0.508,CCS
+analysis=spatial_spd|dataset_id=cao_8|region=Asia|climatezone=Cold_Dry_Winter,cao_8,Asia,Cold - Dry Winter,0.5,CDW
+analysis=spatial_spd|dataset_id=ippd_1016|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_1016,Oceania,Temperate,0.6,TMP
+analysis=spatial_spd|dataset_id=ippd_1070|region=Oceania|climatezone=Tropical,ippd_1070,Oceania,Tropical,0.39,TRO
+analysis=spatial_spd|dataset_id=ippd_1443|region=Oceania|climatezone=Tropical,ippd_1443,Oceania,Tropical,0.488,TRO
+analysis=spatial_spd|dataset_id=ippd_1444|region=Oceania|climatezone=Tropical,ippd_1444,Oceania,Tropical,0.388,TRO
+analysis=spatial_spd|dataset_id=ippd_1999|region=Oceania|climatezone=Tropical,ippd_1999,Oceania,Tropical,0.473,TRO
+analysis=spatial_spd|dataset_id=ippd_2000|region=Oceania|climatezone=Temperate_Dry_Winter,ippd_2000,Oceania,Temperate - Dry Winter,0.264,TDW
+analysis=spatial_spd|dataset_id=ippd_2008|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2008,Oceania,Temperate,0.737,TMP
+analysis=spatial_spd|dataset_id=ippd_2009|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2009,Oceania,Temperate,0.258,TMP
+analysis=spatial_spd|dataset_id=ippd_2094|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2094,Oceania,Temperate,0.649,TMP
+analysis=spatial_spd|dataset_id=ippd_2113|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2113,Oceania,Temperate,0.353,TMP
+analysis=spatial_spd|dataset_id=ippd_2122|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2122,Oceania,Temperate,0.182,TMP
+analysis=spatial_spd|dataset_id=ippd_2133|region=Oceania|climatezone=Temperate_Dry_Summer,ippd_2133,Oceania,Temperate - Dry Summer,0.139,TDS
+analysis=spatial_spd|dataset_id=ippd_2163|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2163,Oceania,Temperate,0.47,TMP
+analysis=spatial_spd|dataset_id=ippd_2179|region=Oceania|climatezone=Tropical,ippd_2179,Oceania,Tropical,-0.021,TRO
+analysis=spatial_spd|dataset_id=ippd_2216|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2216,Oceania,Temperate,0.138,TMP
+analysis=spatial_spd|dataset_id=ippd_2264|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2264,Oceania,Temperate,0.218,TMP
+analysis=spatial_spd|dataset_id=ippd_2268|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2268,Oceania,Temperate,0.449,TMP
+analysis=spatial_spd|dataset_id=ippd_2270|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2270,Oceania,Temperate,0.475,TMP
+analysis=spatial_spd|dataset_id=ippd_2271|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2271,Oceania,Temperate,0.837,TMP
+analysis=spatial_spd|dataset_id=ippd_2283|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2283,Oceania,Temperate,0.075,TMP
+analysis=spatial_spd|dataset_id=ippd_2284|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2284,Oceania,Temperate,0.743,TMP
+analysis=spatial_spd|dataset_id=ippd_2287|region=Oceania|climatezone=Arid,ippd_2287,Oceania,Arid,0.345,ARD
+analysis=spatial_spd|dataset_id=ippd_2306|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2306,Oceania,Temperate,0.011,TMP
+analysis=spatial_spd|dataset_id=ippd_2308|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2308,Oceania,Temperate,0.542,TMP
+analysis=spatial_spd|dataset_id=ippd_2313|region=Oceania|climatezone=Cold_Without_dry_season_Warm_Summer,ippd_2313,Oceania,Cold - Warm Summer,0.162,CWS
+analysis=spatial_spd|dataset_id=ippd_2357|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_2357,Oceania,Temperate,0.419,TMP
+analysis=spatial_spd|dataset_id=ippd_975|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_975,Oceania,Temperate,0.743,TMP
+analysis=spatial_spd|dataset_id=ippd_978|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_978,Oceania,Temperate,0.605,TMP
+analysis=spatial_spd|dataset_id=ippd_991|region=Oceania|climatezone=Temperate_Without_dry_season,ippd_991,Oceania,Temperate,0.184,TMP
+analysis=spatial_spd|dataset_id=pg_711911|region=Asia|climatezone=Arid,pg_711911,Asia,Arid,0.319,ARD
+analysis=spatial_spd|dataset_id=pg_711930|region=Asia|climatezone=Temperate_Dry_Summer,pg_711930,Asia,Temperate - Dry Summer,0.16,TDS
+analysis=spatial_spd|dataset_id=pg_738918|region=Asia|climatezone=Cold_Dry_Summer,pg_738918,Asia,Cold - Dry Summer,0.136,CDS
+analysis=spatial_spd|dataset_id=pg_858056|region=Asia|climatezone=Temperate_Dry_Summer,pg_858056,Asia,Temperate - Dry Summer,0.518,TDS
+analysis=spatial_spd|dataset_id=pg_874340|region=Asia|climatezone=Arid,pg_874340,Asia,Arid,0.008,ARD
+analysis=spatial_spd|dataset_id=pg_884740|region=Asia|climatezone=Arid,pg_884740,Asia,Arid,0.291,ARD
+analysis=spatial_spd|dataset_id=pg_907390|region=Asia|climatezone=Arid,pg_907390,Asia,Arid,0.299,ARD

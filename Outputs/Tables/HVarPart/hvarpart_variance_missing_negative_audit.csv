@@ -1,0 +1,5 @@
+analysis,n_models,n_available,n_accounting_invalid,n_negative_unique_human,n_negative_unique_climate,n_negative_shared,n_negative_unexplained,max_absolute_accounting_residual
+spatial_events,1262,263,0,56,31,74,0,6.000000000000449e-4
+spatial_spd,1262,1156,0,428,108,347,0,6.000000000000449e-4
+temporal_events,85,76,0,13,0,14,0,6.000000000000033e-4
+temporal_spd,70,70,0,13,1,22,0,5.999999999999894e-4
