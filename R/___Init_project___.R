@@ -11,152 +11,151 @@
 #
 #----------------------------------------------------------#
 
-# Script to prepare all necessary components of environment to run the Project.
-#   Needs to be run only once
+# Prepare the reproducible R environment for a fresh project checkout.
+# Run this script from the project root. The root `renv.lock` is the
+# authoritative package specification.
+#
+# This initializer deliberately does not install individual project packages
+# or create a snapshot. `renv::restore()` installs the exact locked versions;
+# snapshotting is a separate, intentional maintenance operation.
 
 
 #----------------------------------------------------------#
-# Step 0: Install {renv} for package management -----
+# 0. Bootstrap renv -----
 #----------------------------------------------------------#
 
 if (
-  "renv" %in% utils::installed.packages()
+  isFALSE(
+    requireNamespace(
+      package = "renv",
+      quietly = TRUE
+    )
+  )
 ) {
-  library(renv)
-} else {
-  # install package
-  utils::install.packages("renv")
-
-  # load the package
-  library(renv)
+  message("Package {renv} is not installed; installing it from CRAN.")
+  utils::install.packages(
+    pkgs = "renv"
+  )
 }
 
-#----------------------------------------------------------#
-# Step 1: Activate 'renv' project -----
-#----------------------------------------------------------#
-
-# NOTE: The R may ask the User to restart the session (R).
-#   After that, continue with the next step
-
-renv::activate()
-
-#----------------------------------------------------------#
-# Step 1: Install {here} for file navigation -----
-#----------------------------------------------------------#
-
 if (
-  "here" %in% utils::installed.packages()
+  isFALSE(
+    requireNamespace(
+      package = "renv",
+      quietly = TRUE
+    )
+  )
 ) {
-  library(here)
-} else {
-  # install package
-  utils::install.packages("here")
-
-  # load the package
-  library(here)
+  stop(
+    "Package {renv} could not be installed; project setup cannot continue.",
+    call. = FALSE
+  )
 }
 
+
 #----------------------------------------------------------#
-# Step 2: Synchronize package versions with the project -----
+# 1. Locate the project and lockfile -----
 #----------------------------------------------------------#
 
-# If there is no lock file present make a new snapshot
-if (
-  isTRUE("library_list.lock" %in% list.files(here::here("renv")))
-) {
-  cat("The project already has a lockfile. Restoring packages", "\n")
-
-  renv::restore(
-    lockfile = here::here("renv/library_list.lock")
+path_project <-
+  normalizePath(
+    path = ".",
+    winslash = "/",
+    mustWork = TRUE
   )
 
-  cat("Set up completed. You can continute to run the project", "\n")
+path_lockfile <-
+  file.path(
+    path_project,
+    "renv.lock"
+  )
 
-  cat("Do NOT run the rest of this script", "\n")
-} else {
-  cat("The project seems to be new (no lockfile)", "\n")
-
-  cat("Continue with this script", "\n")
+if (
+  isFALSE(
+    file.exists(path_lockfile)
+  )
+) {
+  stop(
+    "The root renv.lock was not found at ",
+    path_lockfile,
+    ". Run this script from the project root.",
+    call. = FALSE
+  )
 }
 
-#----------------------------------------------------------#
-# Step 3: Install packages to the project -----
-#----------------------------------------------------------#
-
-
-# install all packages in the lst from CRAN
-sapply(
-  c(
-    "assertthat",
-    "brms",
-    "colorspace",
-    "furrr",
-    "future",
-    "geosphere",
-    "ggeffects",
-    "ggpubr",
-    "here",
-    "httpgd",
-    "insight",
-    "janitor",
-    "jsonlite",
-    "knitr",
-    "languageserver",
-    "parallelly",
-    "rcarbon",
-    "rdacca.hp",
-    "renv",
-    "remotes",
-    "rlang",
-    "targets",
-    "terra",
-    "tidyverse",
-    "usethis",
-    "utils",
-    "vegan",
-    "yaml"
-  ),
-  utils::install.packages,
-  character.only = TRUE
-)
-
-# install waffle from GitHub
-remotes::install_github(
-  repo = "hrbrmstr/waffle",
-  ref = "HEAD",
-  quiet = FALSE,
-  upgrade = "ask"
-)
-
-# install RUtilpol from GitHub
-remotes::install_github(
-  repo = "HOPE-UIB-BIO/R-Utilpol-package",
-  ref = "HEAD",
-  quiet = FALSE,
-  upgrade = "ask"
-)
-
-
-# install RRatepol from GitHub
-devtools::install_github(
-  "HOPE-UIB-BIO/R-Ratepol-package",
-  quiet = FALSE,
-  upgrade = FALSE
-)
-
-# install REcolpol from GitHub
-devtools::install_github(
-  "HOPE-UIB-BIO/R-Ecopol-package",
-  quiet = FALSE,
-  upgrade = FALSE
-)
 
 #----------------------------------------------------------#
-# Step 4: Save versions of packages -----
+# 2. Activate the project library -----
 #----------------------------------------------------------#
 
-renv::snapshot(
-  lockfile = here::here("renv/library_list.lock")
+message(
+  "Activating the renv project at ",
+  path_project,
+  "."
 )
 
-cat("Set up completed. You can continute to run the project", "\n")
+renv::activate(
+  project = path_project
+)
+
+# In an interactive session, renv may request an R restart after first
+# activation. If so, restart R and run this script once more.
+
+
+#----------------------------------------------------------#
+# 3. Restore the locked package versions -----
+#----------------------------------------------------------#
+
+message(
+  "Restoring packages from ",
+  path_lockfile,
+  "."
+)
+
+renv::restore(
+  project = path_project,
+  lockfile = path_lockfile,
+  prompt = FALSE
+)
+
+
+#----------------------------------------------------------#
+# 4. Verify the restored environment -----
+#----------------------------------------------------------#
+
+res_project_status <-
+  renv::status(
+    project = path_project,
+    lockfile = path_lockfile
+  )
+
+if (
+  isFALSE(
+    isTRUE(
+      res_project_status[["synchronized"]]
+    )
+  )
+) {
+  stop(
+    "The restored project library is not synchronized with renv.lock.",
+    call. = FALSE
+  )
+}
+
+message("Project setup completed; the renv library matches renv.lock.")
+
+
+#----------------------------------------------------------#
+# Lockfile maintenance -----
+#----------------------------------------------------------#
+
+# Package changes are declared in `package_list` in `R/00_Config_file.R`.
+# Sourcing that configuration regenerates `R/package_dependencies.R`.
+# After an intentional package change, review the environment and update the
+# root lockfile explicitly with:
+#
+# renv::snapshot(
+#   project = path_project,
+#   lockfile = path_lockfile,
+#   prompt = FALSE
+# )

@@ -26,34 +26,51 @@ set_seed <- 1234
 
 if (
   isFALSE(
-    exists("already_synch", envir = current_env)
+    exists(
+      x = "already_synch",
+      envir = current_env
+    )
   )
 ) {
   already_synch <- FALSE
 }
 
-# Synchronise the package versions
-if (isFALSE(already_synch)) {
-  tryCatch(
-    renv::restore(
-      lockfile = here::here("renv", "library_list.lock")
-    ),
-    error = function(err) {
-      warning(
-        paste(
-          "renv::restore() failed; continuing with current environment:",
-          conditionMessage(err)
-        ),
-        call. = FALSE
-      )
-    }
-  )
+# Restore the locked environment and report whether restoration succeeded.
+restore_project_library <- function() {
+  flag_restore_success <-
+    tryCatch(
+      {
+        renv::restore(
+          lockfile = here::here("renv.lock"),
+          prompt = FALSE
+        )
 
-  already_synch <- TRUE
+        TRUE
+      },
+      error = function(err) {
+        warning(
+          "renv::restore() failed; continuing with current environment: ",
+          conditionMessage(err),
+          call. = FALSE
+        )
+
+        FALSE
+      }
+    )
+
+  return(flag_restore_success)
+}
+
+# Synchronise the package versions.
+if (
+  isFALSE(already_synch)
+) {
+  already_synch <-
+    restore_project_library()
 }
 
 # Save snapshot of package versions
-# renv::snapshot(lockfile = here::here("renv", "library_list.lock"))  # do only for update
+# renv::snapshot(lockfile = here::here("renv.lock"))  # do only for update
 
 # Define packages
 package_list <-
@@ -79,6 +96,7 @@ package_list <-
     "rdacca.hp",
     "dplyr",
     "magrittr",
+    "maps",
     "purrr",
     "readr",
     "REcopol",
@@ -99,6 +117,26 @@ package_list <-
     "waffle",
     "yaml"
   )
+
+# Retry restoration when a declared package is missing, even if an earlier
+# configuration run cached `already_synch = TRUE`.
+vec_installed_packages <-
+  rownames(
+    utils::installed.packages()
+  )
+
+vec_missing_packages <-
+  setdiff(
+    x = package_list,
+    y = vec_installed_packages
+  )
+
+if (
+  length(vec_missing_packages) > 0L
+) {
+  already_synch <-
+    restore_project_library()
+}
 
 # Attach all packages that are available and warn for missing ones.
 load_package_safely <- function(package_name) {
@@ -137,16 +175,31 @@ current_dir <- normalizePath(
 # 3. Load functions -----
 #----------------------------------------------------------#
 
-# get vector of general functions and source them
+# Get the general functions and always decode their source as UTF-8.
+vec_function_files <-
+  list.files(
+    path = here::here("R", "functions"),
+    pattern = "*.R",
+    recursive = TRUE,
+    full.names = TRUE
+  )
+vec_function_files |>
+  purrr::walk(
+    .f = ~
+      source(
+        file = .x,
+        encoding = "UTF-8"
+      )
+  )
+
+# Keep the static renv manifest synchronized with the canonical package list.
 invisible(
-  lapply(
-    list.files(
-      path = here::here("R", "functions"),
-      pattern = "*.R",
-      recursive = TRUE,
-      full.names = TRUE
-    ),
-    source
+  write_package_dependencies_manifest(
+    vec_package_names = package_list,
+    path_output_file = here::here(
+      "R",
+      "package_dependencies.R"
+    )
   )
 )
 
