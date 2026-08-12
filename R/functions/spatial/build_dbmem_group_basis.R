@@ -82,11 +82,12 @@ build_dbmem_group_basis <- function(
       long_col = long_col,
       lat_col = lat_col
     )
-  run_threshold <-
+  result_threshold <-
     purrr::safely(
       .f = purrr::quietly(adespatial::give.thresh)
+    )(
+      matdist = mat_distance
     )
-  result_threshold <- run_threshold(matdist = mat_distance)
 
   if (
     !is.null(result_threshold[["error"]])
@@ -99,12 +100,10 @@ build_dbmem_group_basis <- function(
   } else {
     threshold_km <-
       as.numeric(result_threshold[["result"]][["result"]])
-    run_dbmem <-
+    result_dbmem <-
       purrr::safely(
         .f = purrr::quietly(adespatial::dbmem)
-      )
-    result_dbmem <-
-      run_dbmem(
+      )(
         xyORdist = stats::as.dist(mat_distance),
         thresh = threshold_km,
         MEM.autocor = "positive",

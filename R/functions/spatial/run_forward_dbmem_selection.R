@@ -47,12 +47,10 @@ run_forward_dbmem_selection <- function(
     msg = "Forward dbMEM selection inputs do not satisfy the contract."
   )
 
-  run_selection <-
+  result_selection <-
     purrr::safely(
       .f = purrr::quietly(adespatial::forward.sel)
-    )
-  result_selection <-
-    run_selection(
+    )(
       Y = response_residual,
       X = mem_residual,
       K = max_selected,

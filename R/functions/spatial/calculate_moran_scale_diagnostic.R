@@ -71,17 +71,23 @@ calculate_moran_scale_diagnostic <- function(
         "constant_response"
       }
   } else {
-    vec_permuted_i <-
-      seq_len(permutations) |>
-      purrr::map_dbl(
-        .f = ~ calculate_moran_i(
-          values = permute_values_within_blocks(
-            values = vec_values,
-            blocks = blocks
-          ),
-          weights = mat_weights
-        )
+    mat_permuted <-
+      generate_block_permutation_matrix(
+        values = vec_values,
+        blocks = blocks,
+        permutations = permutations
       )
+    mat_centered <-
+      sweep(
+        x = mat_permuted,
+        MARGIN = 2L,
+        STATS = colMeans(mat_permuted),
+        FUN = "-"
+      )
+    vec_permuted_i <-
+      nrow(data_source) / sum(mat_weights) *
+      colSums(mat_centered * (mat_weights %*% mat_centered)) /
+      colSums(mat_centered^2)
     p_value <-
       (1 + sum(vec_permuted_i >= observed_i, na.rm = TRUE)) /
       (permutations + 1)
