@@ -1,0 +1,300 @@
+region,age,predictor,Unique,Average.share,Individual,I.perc(%),model_profile
+Europe,2000,human,0.0047,-0.0012000000000000001,0.0035,3.65,human_climate
+Europe,2000,climate,0.0936,-0.0012000000000000066,0.0924,96.25,human_climate
+Europe,2000,human,0.0028,2.000000000000001e-4,0.003,1.67,human_climate_space
+Europe,2000,climate,0.0529,0.019599999999999992,0.0725,40.28,human_climate_space
+Europe,2000,space,0.0843,0.0203,0.1046,58.11,human_climate_space
+Europe,2500,human,0.0067,-0.0026,0.0041,4.94,human_climate
+Europe,2500,climate,0.0817,-0.002599999999999991,0.0791,95.3,human_climate
+Europe,2500,human,0.0019,6.000000000000001e-4,0.0025,1.44,human_climate_space
+Europe,2500,climate,0.066,0.0059999999999999915,0.072,41.38,human_climate_space
+Europe,2500,space,0.0907,0.0087,0.0994,57.13,human_climate_space
+Europe,3000,human,7e-4,0.005,0.0057,8.91,human_climate
+Europe,3000,climate,0.0532,0.0050000000000000044,0.0582,90.94,human_climate
+Europe,3000,human,0.0121,5.000000000000004e-4,0.0126,7.97,human_climate_space
+Europe,3000,climate,0.0348,0.015400000000000004,0.0502,31.77,human_climate_space
+Europe,3000,space,0.0937,0.0010000000000000009,0.0947,59.94,human_climate_space
+Europe,3500,human,0.0136,0.006400000000000001,0.02,28.17,human_climate
+Europe,3500,climate,0.0448,0.0063,0.0511,71.97,human_climate
+Europe,3500,human,0.0119,0.0057,0.0176,8.76,human_climate_space
+Europe,3500,climate,0.0522,0.0010999999999999968,0.0533,26.52,human_climate_space
+Europe,3500,space,0.13,2.0000000000000573e-4,0.1302,64.78,human_climate_space
+Europe,4000,human,-7e-4,0.0064,0.0057,6.79,human_climate
+Europe,4000,climate,0.0724,0.0063,0.0787,93.69,human_climate
+Europe,4000,human,0.0059,0.0030999999999999995,0.009,4.57,human_climate_space
+Europe,4000,climate,0.0497,0.0177,0.0674,34.21,human_climate_space
+Europe,4000,space,0.1126,0.007999999999999993,0.1206,61.22,human_climate_space
+Europe,4500,human,-6e-4,0.0034,0.0028,3.33,human_climate
+Europe,4500,climate,0.0776,0.0034000000000000002,0.081,96.43,human_climate
+Europe,4500,human,-0.0012,0.0034000000000000002,0.0022,1.15,human_climate_space
+Europe,4500,climate,0.0787,0.002599999999999991,0.0813,42.34,human_climate_space
+Europe,4500,space,0.1083,1.0000000000000286e-4,0.1084,56.46,human_climate_space
+Europe,5000,human,4e-4,0.0040999999999999995,0.0045,6.52,human_climate
+Europe,5000,climate,0.0604,0.0040999999999999995,0.0645,93.48,human_climate
+Europe,5000,human,-2e-4,0.0032,0.003,1.84,human_climate_space
+Europe,5000,climate,0.0505,0.007899999999999997,0.0584,35.83,human_climate_space
+Europe,5000,space,0.094,0.007599999999999996,0.1016,62.33,human_climate_space
+Europe,5500,human,0.0016,-0.001,6e-4,0.69,human_climate
+Europe,5500,climate,0.0878,-0.0010000000000000009,0.0868,99.77,human_climate
+Europe,5500,human,0.0011,-2.000000000000001e-4,9e-4,0.43,human_climate_space
+Europe,5500,climate,0.0594,0.0138,0.0732,34.86,human_climate_space
+Europe,5500,space,0.1226,0.013299999999999992,0.1359,64.71,human_climate_space
+Europe,6000,human,0.0076,0.0041,0.0117,14.27,human_climate
+Europe,6000,climate,0.0666,0.00399999999999999,0.0706,86.1,human_climate
+Europe,6000,human,0.0176,-2.0000000000000226e-4,0.0174,9.35,human_climate_space
+Europe,6000,climate,0.0548,0.010700000000000001,0.0655,35.22,human_climate_space
+Europe,6000,space,0.1037,-6.000000000000033e-4,0.1031,55.43,human_climate_space
+Europe,6500,human,0.0167,0.0127,0.0294,34.19,human_climate
+Europe,6500,climate,0.044,0.012700000000000003,0.0567,65.93,human_climate
+Europe,6500,human,0.0236,0.007700000000000002,0.0313,17.39,human_climate_space
+Europe,6500,climate,0.0315,0.0174,0.0489,27.17,human_climate_space
+Europe,6500,space,0.0936,0.0058,0.0994,55.22,human_climate_space
+Europe,7000,human,0.0077,0.009800000000000001,0.0175,20.35,human_climate
+Europe,7000,climate,0.0589,0.009799999999999996,0.0687,79.88,human_climate
+Europe,7000,human,-7e-4,0.011999999999999999,0.0113,6.01,human_climate_space
+Europe,7000,climate,0.0438,0.015400000000000004,0.0592,31.49,human_climate_space
+Europe,7000,space,0.1014,0.015799999999999995,0.1172,62.34,human_climate_space
+Europe,7500,human,0.0431,0.0116,0.0547,45.97,human_climate
+Europe,7500,climate,0.0524,0.011700000000000002,0.0641,53.87,human_climate
+Europe,7500,human,0.0261,0.019099999999999995,0.0452,24.43,human_climate_space
+Europe,7500,climate,0.048,0.012900000000000002,0.0609,32.92,human_climate_space
+Europe,7500,space,0.0659,0.012700000000000003,0.0786,42.49,human_climate_space
+Europe,8000,human,0.0165,-0.0011000000000000003,0.0154,16.38,human_climate
+Europe,8000,climate,0.0794,-0.0010000000000000009,0.0784,83.4,human_climate
+Europe,8000,human,0.0171,-0.0011000000000000003,0.016,9.3,human_climate_space
+Europe,8000,climate,0.0704,0.003699999999999995,0.0741,43.08,human_climate_space
+Europe,8000,space,0.0784,0.003799999999999998,0.0822,47.79,human_climate_space
+Europe,8500,human,0.0029,0.006,0.0089,11.41,human_climate
+Europe,8500,climate,0.0626,0.0059999999999999915,0.0686,87.95,human_climate
+Europe,8500,human,0.0032,0.006200000000000001,0.0094,6.31,human_climate_space
+Europe,8500,climate,0.0614,0.006999999999999999,0.0684,45.91,human_climate_space
+Europe,8500,space,0.0714,-2.0000000000000573e-4,0.0712,47.79,human_climate_space
+North America,2000,human,0.0024,0.0030000000000000005,0.0054,5.24,human_climate
+North America,2000,climate,0.0949,0.0030000000000000027,0.0979,95.05,human_climate
+North America,2000,human,3e-4,0.0035,0.0038,1.81,human_climate_space
+North America,2000,climate,0.0139,0.043,0.0569,27.1,human_climate_space
+North America,2000,space,0.1069,0.04250000000000001,0.1494,71.14,human_climate_space
+North America,2500,human,0.0078,4.0000000000000105e-4,0.0082,7.52,human_climate
+North America,2500,climate,0.1,3.999999999999976e-4,0.1004,92.11,human_climate
+North America,2500,human,0.0051,0.0015999999999999999,0.0067,3.03,human_climate_space
+North America,2500,climate,0.0199,0.040299999999999996,0.0602,27.24,human_climate_space
+North America,2500,space,0.1127,0.041800000000000004,0.1545,69.91,human_climate_space
+North America,3000,human,0.01,9.999999999999992e-4,0.011,9.65,human_climate
+North America,3000,climate,0.1022,0.0011000000000000038,0.1033,90.61,human_climate
+North America,3000,human,0.0048,0.003100000000000001,0.0079,3.74,human_climate_space
+North America,3000,climate,0.0177,0.0428,0.0605,28.67,human_climate_space
+North America,3000,space,0.097,0.045899999999999996,0.1429,67.73,human_climate_space
+North America,3500,human,0.0024,0.0014000000000000002,0.0038,3.65,human_climate
+North America,3500,climate,0.0988,0.0013999999999999985,0.1002,96.35,human_climate
+North America,3500,human,8e-4,0.0017000000000000001,0.0025,1.14,human_climate_space
+North America,3500,climate,0.0215,0.0395,0.061,27.73,human_climate_space
+North America,3500,space,0.1162,0.04039999999999999,0.1566,71.18,human_climate_space
+North America,4000,human,0.007,0.0033,0.0103,10.51,human_climate
+North America,4000,climate,0.0846,0.0033000000000000113,0.0879,89.69,human_climate
+North America,4000,human,0.006,0.0026,0.0086,4.55,human_climate_space
+North America,4000,climate,0.0148,0.037,0.0518,27.41,human_climate_space
+North America,4000,space,0.091,0.0378,0.1288,68.15,human_climate_space
+North America,4500,human,0.0079,0.001299999999999999,0.0092,8.6,human_climate
+North America,4500,climate,0.0968,0.0013999999999999985,0.0982,91.78,human_climate
+North America,4500,human,0.0067,0.0012000000000000005,0.0079,3.67,human_climate_space
+North America,4500,climate,0.0163,0.040900000000000006,0.0572,26.6,human_climate_space
+North America,4500,space,0.1073,0.042300000000000004,0.1496,69.58,human_climate_space
+North America,5000,human,0.0064,2.999999999999999e-4,0.0067,6.2,human_climate
+North America,5000,climate,0.1008,2.999999999999947e-4,0.1011,93.61,human_climate
+North America,5000,human,0.0032,0.0015999999999999994,0.0048,2.38,human_climate_space
+North America,5000,climate,0.0167,0.042,0.0587,29.06,human_climate_space
+North America,5000,space,0.094,0.044300000000000006,0.1383,68.47,human_climate_space
+North America,5500,human,0.0111,2.999999999999999e-4,0.0114,11.63,human_climate
+North America,5500,climate,0.0867,2.999999999999947e-4,0.087,88.78,human_climate
+North America,5500,human,0.0122,-6.000000000000016e-4,0.0116,5.83,human_climate_space
+North America,5500,climate,0.0167,0.035,0.0517,25.98,human_climate_space
+North America,5500,space,0.1008,0.03509999999999999,0.1359,68.29,human_climate_space
+North America,6000,human,0.0117,8.000000000000004e-4,0.0125,11.79,human_climate
+North America,6000,climate,0.0922,8.99999999999998e-4,0.0931,87.83,human_climate
+North America,6000,human,0.0128,-1.0000000000000113e-4,0.0127,6.2,human_climate_space
+North America,6000,climate,0.0152,0.039,0.0542,26.44,human_climate_space
+North America,6000,space,0.0996,0.038599999999999995,0.1382,67.41,human_climate_space
+North America,6500,human,0.0093,-9.99999999999994e-5,0.0092,8.85,human_climate
+North America,6500,climate,0.0945,-1.0000000000000286e-4,0.0944,90.77,human_climate
+North America,6500,human,0.0077,6.999999999999992e-4,0.0084,3.8,human_climate_space
+North America,6500,climate,0.0211,0.0366,0.0577,26.11,human_climate_space
+North America,6500,space,0.1171,0.03749999999999999,0.1546,69.95,human_climate_space
+North America,7000,human,0.0107,0.0014000000000000002,0.0121,11.42,human_climate
+North America,7000,climate,0.0925,0.0012999999999999956,0.0938,88.49,human_climate
+North America,7000,human,0.0092,0.0017000000000000001,0.0109,4.89,human_climate_space
+North America,7000,climate,0.027,0.033699999999999994,0.0607,27.22,human_climate_space
+North America,7000,space,0.1169,0.03420000000000001,0.1511,67.76,human_climate_space
+North America,7500,human,0.0101,0.0018000000000000013,0.0119,11.44,human_climate
+North America,7500,climate,0.0907,0.0016999999999999932,0.0924,88.85,human_climate
+North America,7500,human,0.0077,0.0020999999999999994,0.0098,4.78,human_climate_space
+North America,7500,climate,0.0334,0.0295,0.0629,30.68,human_climate_space
+North America,7500,space,0.1009,0.031499999999999986,0.1324,64.59,human_climate_space
+North America,8000,human,0.0078,-0.0011999999999999997,0.0066,5.28,human_climate
+North America,8000,climate,0.1195,-0.0011999999999999927,0.1183,94.64,human_climate
+North America,8000,human,0.0083,-7.000000000000001e-4,0.0076,3.52,human_climate_space
+North America,8000,climate,0.0423,0.0381,0.0804,37.22,human_climate_space
+North America,8000,space,0.0914,0.0369,0.1283,59.4,human_climate_space
+North America,8500,human,0.0042,5.999999999999998e-4,0.0048,4,human_climate
+North America,8500,climate,0.1145,5.999999999999894e-4,0.1151,95.92,human_climate
+North America,8500,human,0.0028,0.0016999999999999997,0.0045,1.96,human_climate_space
+North America,8500,climate,0.0284,0.044000000000000004,0.0724,31.48,human_climate_space
+North America,8500,space,0.1105,0.04290000000000001,0.1534,66.7,human_climate_space
+Latin America,2000,human,-0.0011,0.0041,0.003,1.96,human_climate
+Latin America,2000,climate,0.1454,0.004200000000000009,0.1496,97.78,human_climate
+Latin America,2000,human,8e-4,0.003999999999999999,0.0048,2.86,human_climate_space
+Latin America,2000,climate,0.1257,0.014899999999999997,0.1406,83.69,human_climate_space
+Latin America,2000,space,0.0156,0.0072000000000000015,0.0228,13.57,human_climate_space
+Latin America,2500,human,-5e-4,0.007299999999999999,0.0068,4.47,human_climate
+Latin America,2500,climate,0.1381,0.007200000000000012,0.1453,95.59,human_climate
+Latin America,3000,human,0.0156,-0.0066,0.009,4.66,human_climate
+Latin America,3000,climate,0.1903,-0.006599999999999995,0.1837,95.18,human_climate
+Latin America,3000,human,0.0256,-0.011700000000000002,0.0139,6.5,human_climate_space
+Latin America,3000,climate,0.1867,-0.0049000000000000155,0.1818,84.95,human_climate_space
+Latin America,3000,space,0.0207,-0.0029,0.0178,8.32,human_climate_space
+Latin America,4000,human,0.0389,-0.011899999999999997,0.027,12.39,human_climate
+Latin America,4000,climate,0.2032,-0.011899999999999994,0.1913,87.75,human_climate
+Latin America,4000,human,0.0407,-0.0133,0.0274,12.29,human_climate_space
+Latin America,4000,climate,0.2092,-0.015399999999999997,0.1938,86.91,human_climate_space
+Latin America,4000,space,0.0044,-0.0028000000000000004,0.0016,0.72,human_climate_space
+Latin America,4500,human,0.0212,-0.005500000000000001,0.0157,7.97,human_climate
+Latin America,4500,climate,0.187,-0.005399999999999988,0.1816,92.18,human_climate
+Latin America,5000,human,0.0388,-0.013600000000000001,0.0252,12.17,human_climate
+Latin America,5000,climate,0.1957,-0.013600000000000001,0.1821,87.97,human_climate
+Latin America,5000,human,0.0214,-0.0022000000000000006,0.0192,8.07,human_climate_space
+Latin America,5000,climate,0.1147,0.029600000000000015,0.1443,60.63,human_climate_space
+Latin America,5000,space,0.0309,0.043800000000000006,0.0747,31.39,human_climate_space
+Latin America,5500,human,0.0135,-0.0040999999999999995,0.0094,5.28,human_climate
+Latin America,5500,climate,0.1725,-0.0040999999999999925,0.1684,94.61,human_climate
+Latin America,6000,human,0.016,-0.006400000000000001,0.0096,5.82,human_climate
+Latin America,6000,climate,0.162,-0.0063,0.1557,94.36,human_climate
+Latin America,6500,human,-0.0045,9.99999999999994e-5,-0.0044,-2.77,human_climate
+Latin America,6500,climate,0.1629,1.0000000000001674e-4,0.163,102.52,human_climate
+Latin America,7000,human,0.0025,0.0039000000000000003,0.0064,5,human_climate
+Latin America,7000,climate,0.1181,0.0039000000000000007,0.122,95.31,human_climate
+Latin America,7500,human,0.0136,-0.0070999999999999995,0.0065,4.17,human_climate
+Latin America,7500,climate,0.1567,-0.007200000000000012,0.1495,95.83,human_climate
+Latin America,7500,human,0.0128,-0.005900000000000001,0.0069,3.81,human_climate_space
+Latin America,7500,climate,0.1123,0.01590000000000001,0.1282,70.83,human_climate_space
+Latin America,7500,space,0.0249,0.0208,0.0457,25.25,human_climate_space
+Latin America,8000,human,0.0572,-0.004799999999999999,0.0524,30.47,human_climate
+Latin America,8000,climate,0.1246,-0.004799999999999999,0.1198,69.65,human_climate
+Latin America,8500,human,0.0166,-0.0069,0.0097,7.08,human_climate
+Latin America,8500,climate,0.1343,-0.0068999999999999895,0.1274,92.99,human_climate
+Latin America,8500,human,0.0151,-0.005300000000000001,0.0098,5.66,human_climate_space
+Latin America,8500,climate,0.0683,0.026999999999999996,0.0953,55.09,human_climate_space
+Latin America,8500,space,0.0362,0.031999999999999994,0.0682,39.42,human_climate_space
+Latin America,3500,human,0.0261,-0.011500000000000002,0.0146,7.05,human_climate
+Latin America,3500,climate,0.2043,-0.0116,0.1927,93.09,human_climate
+Oceania,2000,human,0.0088,0.014399999999999998,0.0232,72.5,human_climate
+Oceania,2000,climate,-0.006,0.0143,0.0083,25.94,human_climate
+Oceania,2500,human,0.0038,0.0186,0.0224,21.96,human_climate
+Oceania,2500,climate,0.0608,0.0186,0.0794,77.84,human_climate
+Oceania,2500,human,0.0044,0.0197,0.0241,18.54,human_climate_space
+Oceania,2500,climate,0.0794,0.010700000000000001,0.0901,69.31,human_climate_space
+Oceania,2500,space,0.0284,-0.0125,0.0159,12.23,human_climate_space
+Oceania,3000,human,0.0235,0.0069,0.0304,19.87,human_climate
+Oceania,3000,climate,0.1162,0.0068000000000000005,0.123,80.39,human_climate
+Oceania,3500,human,0.0216,0.0026999999999999975,0.0243,15.19,human_climate
+Oceania,3500,climate,0.1327,0.002799999999999997,0.1355,84.69,human_climate
+Oceania,3500,human,0.027,9.000000000000015e-4,0.0279,15.41,human_climate_space
+Oceania,3500,climate,0.1524,-0.006200000000000011,0.1462,80.77,human_climate_space
+Oceania,3500,space,0.0213,-0.0144,0.0069,3.81,human_climate_space
+Oceania,4000,human,0.0011,0.009,0.0101,9.53,human_climate
+Oceania,4000,climate,0.0867,0.008999999999999994,0.0957,90.28,human_climate
+Oceania,4000,human,0.0068,0.007400000000000001,0.0142,10.6,human_climate_space
+Oceania,4000,climate,0.1041,0.0016000000000000042,0.1057,78.88,human_climate_space
+Oceania,4000,space,0.0281,-0.0141,0.014,10.45,human_climate_space
+Oceania,4500,human,4e-4,0.004399999999999999,0.0048,3.9,human_climate
+Oceania,4500,climate,0.1142,0.004400000000000001,0.1186,96.42,human_climate
+Oceania,4500,human,4e-4,0.0052,0.0056,4.06,human_climate_space
+Oceania,4500,climate,0.1283,-0.001799999999999996,0.1265,91.67,human_climate_space
+Oceania,4500,space,0.0144,-0.008799999999999999,0.0056,4.06,human_climate_space
+Oceania,5000,human,-0.0023,0.0149,0.0126,16.58,human_climate
+Oceania,5000,climate,0.0484,0.014899999999999997,0.0633,83.29,human_climate
+Oceania,5000,human,7e-4,0.013900000000000001,0.0146,15.87,human_climate_space
+Oceania,5000,climate,0.0662,0.006500000000000006,0.0727,79.02,human_climate_space
+Oceania,5000,space,0.0157,-0.011399999999999999,0.0043,4.67,human_climate_space
+Oceania,5500,human,-0.0019,0.0076,0.0057,8.26,human_climate
+Oceania,5500,climate,0.0556,0.007500000000000007,0.0631,91.45,human_climate
+Oceania,6000,human,-0.0025,0.0012000000000000001,-0.0013,-1.91,human_climate
+Oceania,6000,climate,0.0676,0.0012000000000000066,0.0688,101.18,human_climate
+Oceania,7000,human,-0.0166,0.0028000000000000004,-0.0138,197.14,human_climate
+Oceania,7000,climate,0.0038,0.0028,0.0066,-94.29,human_climate
+Oceania,7500,human,-0.0064,-5.999999999999998e-4,-0.007,-13.73,human_climate
+Oceania,7500,climate,0.059,-5.999999999999964e-4,0.0584,114.51,human_climate
+Oceania,7500,human,0.0113,-0.0106,7e-4,0.75,human_climate_space
+Oceania,7500,climate,0.0787,-0.0116,0.0671,72.15,human_climate_space
+Oceania,7500,space,0.0414,-0.0163,0.0251,26.99,human_climate_space
+Asia,2000,human,0.0289,-0.0086,0.0203,20.93,human_climate
+Asia,2000,climate,0.0855,-0.00860000000000001,0.0769,79.28,human_climate
+Asia,2000,human,0.0172,-0.0023999999999999994,0.0148,11.56,human_climate_space
+Asia,2000,climate,0.0881,-0.009499999999999995,0.0786,61.41,human_climate_space
+Asia,2000,space,0.031,0.0039000000000000007,0.0349,27.27,human_climate_space
+Asia,2500,human,0.0109,-0.0054,0.0055,5.85,human_climate
+Asia,2500,climate,0.0944,-0.005400000000000002,0.089,94.68,human_climate
+Asia,2500,human,0.0036,-7.999999999999999e-4,0.0028,2.19,human_climate_space
+Asia,2500,climate,0.0953,-0.004900000000000002,0.0904,70.62,human_climate_space
+Asia,2500,space,0.0334,0.0011999999999999997,0.0346,27.03,human_climate_space
+Asia,3000,human,0.0098,-0.0049,0.0049,5.38,human_climate
+Asia,3000,climate,0.091,-0.004900000000000002,0.0861,94.62,human_climate
+Asia,3000,human,0.0047,-0.0017000000000000001,0.003,2.46,human_climate_space
+Asia,3000,climate,0.0825,1.0000000000000286e-4,0.0826,67.7,human_climate_space
+Asia,3000,space,0.0309,0.0053999999999999986,0.0363,29.75,human_climate_space
+Asia,3500,human,4e-4,0.0052,0.0056,5.96,human_climate
+Asia,3500,climate,0.0829,0.005299999999999999,0.0882,93.83,human_climate
+Asia,3500,human,0.0058,0.003000000000000001,0.0088,6.88,human_climate_space
+Asia,3500,climate,0.093,7.000000000000062e-4,0.0937,73.2,human_climate_space
+Asia,3500,space,0.0338,-0.008699999999999996,0.0251,19.61,human_climate_space
+Asia,4000,human,0.0039,8.000000000000004e-4,0.0047,6.18,human_climate
+Asia,4000,climate,0.0709,7.999999999999952e-4,0.0717,94.34,human_climate
+Asia,4500,human,0.0028,0.0112,0.014,16.67,human_climate
+Asia,4500,climate,0.0592,0.011200000000000002,0.0704,83.81,human_climate
+Asia,4500,human,0.0032,0.0118,0.015,12,human_climate_space
+Asia,4500,climate,0.0588,0.012100000000000007,0.0709,56.72,human_climate_space
+Asia,4500,space,0.0402,-0.0013999999999999985,0.0388,31.04,human_climate_space
+Asia,5000,human,0.0056,0.0144,0.02,22.99,human_climate
+Asia,5000,climate,0.0521,0.014400000000000003,0.0665,76.44,human_climate
+Asia,5000,human,0.0129,0.0112,0.0241,21.52,human_climate_space
+Asia,5000,climate,0.0524,0.014700000000000005,0.0671,59.91,human_climate_space
+Asia,5000,space,0.0256,-0.004700000000000003,0.0209,18.66,human_climate_space
+Asia,5500,human,-9e-4,0.0073999999999999995,0.0065,6.99,human_climate
+Asia,5500,climate,0.0791,0.00739999999999999,0.0865,93.01,human_climate
+Asia,5500,human,-0.0012,0.0079,0.0067,5,human_climate_space
+Asia,5500,climate,0.0838,0.005400000000000002,0.0892,66.57,human_climate_space
+Asia,5500,space,0.041,-0.0029,0.0381,28.43,human_climate_space
+Asia,6000,human,0.0122,0.014399999999999998,0.0266,25.09,human_climate
+Asia,6000,climate,0.065,0.014399999999999996,0.0794,74.91,human_climate
+Asia,6000,human,0.0221,0.009799999999999996,0.0319,24.17,human_climate_space
+Asia,6000,climate,0.0757,0.009399999999999992,0.0851,64.47,human_climate_space
+Asia,6000,space,0.0261,-0.011000000000000001,0.0151,11.44,human_climate_space
+Asia,6500,human,-0.0025,0.0074,0.0049,4.62,human_climate
+Asia,6500,climate,0.0941,0.007400000000000004,0.1015,95.75,human_climate
+Asia,6500,human,-0.0028,0.0077,0.0049,4.26,human_climate_space
+Asia,6500,climate,0.0901,0.009499999999999995,0.0996,86.61,human_climate_space
+Asia,6500,space,0.0089,0.0017999999999999995,0.0107,9.3,human_climate_space
+Asia,7000,human,0.0076,0.014700000000000001,0.0223,16.77,human_climate
+Asia,7000,climate,0.0958,0.014700000000000005,0.1105,83.08,human_climate
+Asia,7500,human,0.0036,0.0144,0.018,13.53,human_climate
+Asia,7500,climate,0.1005,0.014299999999999993,0.1148,86.32,human_climate
+Asia,7500,human,0.0056,0.0142,0.0198,11.72,human_climate_space
+Asia,7500,climate,0.0984,0.016199999999999992,0.1146,67.81,human_climate_space
+Asia,7500,space,0.0367,-0.0017000000000000001,0.035,20.71,human_climate_space
+Asia,8000,human,2e-4,0.0095,0.0097,6.06,human_climate
+Asia,8000,climate,0.1406,0.009599999999999997,0.1502,93.88,human_climate
+Asia,8000,human,0.0012,0.0092,0.0104,5.28,human_climate_space
+Asia,8000,climate,0.137,0.011499999999999982,0.1485,75.38,human_climate_space
+Asia,8000,space,0.037,0.0011000000000000038,0.0381,19.34,human_climate_space
+Asia,8500,human,-0,0.0055,0.0055,3.29,human_climate
+Asia,8500,climate,0.1558,0.005500000000000005,0.1613,96.59,human_climate
+Asia,8500,human,-0.0034,0.0069,0.0035,1.79,human_climate_space
+Asia,8500,climate,0.173,-0.0033999999999999864,0.1696,86.53,human_climate_space
+Asia,8500,space,0.0291,-0.0063999999999999994,0.0227,11.58,human_climate_space
+Oceania,6500,human,-0.0143,0.0019000000000000006,-0.0124,-16.76,human_climate
+Oceania,6500,climate,0.0847,0.001899999999999999,0.0866,117.03,human_climate
+Oceania,8000,human,6e-4,-0.0021,-0.0015,-1.81,human_climate
+Oceania,8000,climate,0.0868,-0.0021000000000000046,0.0847,102.05,human_climate
+Oceania,8500,human,0.0061,-0.0057,4e-4,0.28,human_climate
+Oceania,8500,climate,0.1462,-0.005699999999999983,0.1405,99.65,human_climate
+Oceania,8500,human,-0.0039,0.0015,-0.0024,-1.26,human_climate_space
+Oceania,8500,climate,0.0564,0.0414,0.0978,51.2,human_climate_space
+Oceania,8500,space,0.0504,0.0455,0.0959,50.21,human_climate_space

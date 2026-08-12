@@ -75,6 +75,7 @@ if (
 # Define packages
 package_list <-
   c(
+    "adespatial",
     "assertthat",
     "brms",
     "collinear",

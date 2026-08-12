@@ -1,0 +1,71 @@
+region,age,human_climate_human,human_climate_climate,human_climate_space_human,human_climate_space_climate,baseline_balance,spatial_balance,baseline_ranking,spatial_ranking,ranking_changed,status,n_selected
+Europe,2000,0.0035,0.0924,0.003,0.0725,-0.08889999999999999,-0.06949999999999999,climate,climate,FALSE,spatial_model_estimated,7
+Europe,2500,0.0041,0.0791,0.0025,0.072,-0.075,-0.06949999999999999,climate,climate,FALSE,spatial_model_estimated,8
+Europe,3000,0.0057,0.0582,0.0126,0.0502,-0.052500000000000005,-0.0376,climate,climate,FALSE,spatial_model_estimated,8
+Europe,3500,0.02,0.0511,0.0176,0.0533,-0.0311,-0.035699999999999996,climate,climate,FALSE,spatial_model_estimated,8
+Europe,4000,0.0057,0.0787,0.009,0.0674,-0.07300000000000001,-0.0584,climate,climate,FALSE,spatial_model_estimated,12
+Europe,4500,0.0028,0.081,0.0022,0.0813,-0.0782,-0.0791,climate,climate,FALSE,spatial_model_estimated,11
+Europe,5000,0.0045,0.0645,0.003,0.0584,-0.060000000000000005,-0.0554,climate,climate,FALSE,spatial_model_estimated,8
+Europe,5500,6e-4,0.0868,9e-4,0.0732,-0.0862,-0.0723,climate,climate,FALSE,spatial_model_estimated,13
+Europe,6000,0.0117,0.0706,0.0174,0.0655,-0.058899999999999994,-0.048100000000000004,climate,climate,FALSE,spatial_model_estimated,6
+Europe,6500,0.0294,0.0567,0.0313,0.0489,-0.0273,-0.017599999999999998,climate,climate,FALSE,spatial_model_estimated,7
+Europe,7000,0.0175,0.0687,0.0113,0.0592,-0.051199999999999996,-0.047900000000000005,climate,climate,FALSE,spatial_model_estimated,6
+Europe,7500,0.0547,0.0641,0.0452,0.0609,-0.009400000000000006,-0.015700000000000006,climate,climate,FALSE,spatial_model_estimated,6
+Europe,8000,0.0154,0.0784,0.016,0.0741,-0.063,-0.0581,climate,climate,FALSE,spatial_model_estimated,8
+Europe,8500,0.0089,0.0686,0.0094,0.0684,-0.059699999999999996,-0.059000000000000004,climate,climate,FALSE,spatial_model_estimated,4
+North America,2000,0.0054,0.0979,0.0038,0.0569,-0.0925,-0.0531,climate,climate,FALSE,spatial_model_estimated,7
+North America,2500,0.0082,0.1004,0.0067,0.0602,-0.0922,-0.0535,climate,climate,FALSE,spatial_model_estimated,6
+North America,3000,0.011,0.1033,0.0079,0.0605,-0.09230000000000001,-0.052599999999999994,climate,climate,FALSE,spatial_model_estimated,7
+North America,3500,0.0038,0.1002,0.0025,0.061,-0.0964,-0.058499999999999996,climate,climate,FALSE,spatial_model_estimated,5
+North America,4000,0.0103,0.0879,0.0086,0.0518,-0.0776,-0.0432,climate,climate,FALSE,spatial_model_estimated,5
+North America,4500,0.0092,0.0982,0.0079,0.0572,-0.089,-0.0493,climate,climate,FALSE,spatial_model_estimated,6
+North America,5000,0.0067,0.1011,0.0048,0.0587,-0.0944,-0.053900000000000003,climate,climate,FALSE,spatial_model_estimated,5
+North America,5500,0.0114,0.087,0.0116,0.0517,-0.0756,-0.040100000000000004,climate,climate,FALSE,spatial_model_estimated,7
+North America,6000,0.0125,0.0931,0.0127,0.0542,-0.0806,-0.041499999999999995,climate,climate,FALSE,spatial_model_estimated,8
+North America,6500,0.0092,0.0944,0.0084,0.0577,-0.0852,-0.049300000000000004,climate,climate,FALSE,spatial_model_estimated,7
+North America,7000,0.0121,0.0938,0.0109,0.0607,-0.0817,-0.0498,climate,climate,FALSE,spatial_model_estimated,9
+North America,7500,0.0119,0.0924,0.0098,0.0629,-0.08049999999999999,-0.053099999999999994,climate,climate,FALSE,spatial_model_estimated,7
+North America,8000,0.0066,0.1183,0.0076,0.0804,-0.11170000000000001,-0.0728,climate,climate,FALSE,spatial_model_estimated,12
+North America,8500,0.0048,0.1151,0.0045,0.0724,-0.1103,-0.0679,climate,climate,FALSE,spatial_model_estimated,11
+Latin America,2000,0.003,0.1496,0.0048,0.1406,-0.1466,-0.1358,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,2500,0.0068,0.1453,NA,NA,-0.1385,-0.1385,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,3000,0.009,0.1837,0.0139,0.1818,-0.1747,-0.1679,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,4000,0.027,0.1913,0.0274,0.1938,-0.1643,-0.1664,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,4500,0.0157,0.1816,NA,NA,-0.16590000000000002,-0.16590000000000002,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,5000,0.0252,0.1821,0.0192,0.1443,-0.1569,-0.12510000000000002,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,5500,0.0094,0.1684,NA,NA,-0.159,-0.159,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,6000,0.0096,0.1557,NA,NA,-0.1461,-0.1461,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,6500,-0.0044,0.163,NA,NA,-0.1674,-0.1674,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,7000,0.0064,0.122,NA,NA,-0.1156,-0.1156,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,7500,0.0065,0.1495,0.0069,0.1282,-0.143,-0.1213,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,8000,0.0524,0.1198,NA,NA,-0.0674,-0.0674,climate,climate,FALSE,no_spatial_terms_selected,0
+Latin America,8500,0.0097,0.1274,0.0098,0.0953,-0.11770000000000001,-0.08549999999999999,climate,climate,FALSE,spatial_model_estimated,1
+Latin America,3500,0.0146,0.1927,NA,NA,-0.1781,-0.1781,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,2000,0.0232,0.0083,NA,NA,0.014899999999999998,0.014899999999999998,human,human,FALSE,no_spatial_terms_selected,0
+Oceania,2500,0.0224,0.0794,0.0241,0.0901,-0.056999999999999995,-0.066,climate,climate,FALSE,spatial_model_estimated,1
+Oceania,3000,0.0304,0.123,NA,NA,-0.0926,-0.0926,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,3500,0.0243,0.1355,0.0279,0.1462,-0.11120000000000001,-0.11829999999999999,climate,climate,FALSE,spatial_model_estimated,1
+Oceania,4000,0.0101,0.0957,0.0142,0.1057,-0.0856,-0.0915,climate,climate,FALSE,spatial_model_estimated,1
+Oceania,4500,0.0048,0.1186,0.0056,0.1265,-0.1138,-0.12090000000000001,climate,climate,FALSE,spatial_model_estimated,1
+Oceania,5000,0.0126,0.0633,0.0146,0.0727,-0.050699999999999995,-0.0581,climate,climate,FALSE,spatial_model_estimated,1
+Oceania,5500,0.0057,0.0631,NA,NA,-0.05740000000000001,-0.05740000000000001,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,6000,-0.0013,0.0688,NA,NA,-0.0701,-0.0701,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,7000,-0.0138,0.0066,NA,NA,-0.0204,-0.0204,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,7500,-0.007,0.0584,7e-4,0.0671,-0.0654,-0.0664,climate,climate,FALSE,spatial_model_estimated,1
+Asia,2000,0.0203,0.0769,0.0148,0.0786,-0.0566,-0.0638,climate,climate,FALSE,spatial_model_estimated,1
+Asia,2500,0.0055,0.089,0.0028,0.0904,-0.08349999999999999,-0.0876,climate,climate,FALSE,spatial_model_estimated,1
+Asia,3000,0.0049,0.0861,0.003,0.0826,-0.0812,-0.0796,climate,climate,FALSE,spatial_model_estimated,1
+Asia,3500,0.0056,0.0882,0.0088,0.0937,-0.0826,-0.0849,climate,climate,FALSE,spatial_model_estimated,1
+Asia,4000,0.0047,0.0717,NA,NA,-0.067,-0.067,climate,climate,FALSE,no_spatial_terms_selected,0
+Asia,4500,0.014,0.0704,0.015,0.0709,-0.056400000000000006,-0.055900000000000005,climate,climate,FALSE,spatial_model_estimated,1
+Asia,5000,0.02,0.0665,0.0241,0.0671,-0.0465,-0.04300000000000001,climate,climate,FALSE,spatial_model_estimated,1
+Asia,5500,0.0065,0.0865,0.0067,0.0892,-0.07999999999999999,-0.0825,climate,climate,FALSE,spatial_model_estimated,2
+Asia,6000,0.0266,0.0794,0.0319,0.0851,-0.0528,-0.0532,climate,climate,FALSE,spatial_model_estimated,1
+Asia,6500,0.0049,0.1015,0.0049,0.0996,-0.0966,-0.09469999999999999,climate,climate,FALSE,spatial_model_estimated,1
+Asia,7000,0.0223,0.1105,NA,NA,-0.0882,-0.0882,climate,climate,FALSE,no_spatial_terms_selected,0
+Asia,7500,0.018,0.1148,0.0198,0.1146,-0.0968,-0.0948,climate,climate,FALSE,spatial_model_estimated,2
+Asia,8000,0.0097,0.1502,0.0104,0.1485,-0.1405,-0.1381,climate,climate,FALSE,spatial_model_estimated,2
+Asia,8500,0.0055,0.1613,0.0035,0.1696,-0.1558,-0.1661,climate,climate,FALSE,spatial_model_estimated,2
+Oceania,6500,-0.0124,0.0866,NA,NA,-0.09899999999999999,-0.09899999999999999,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,8000,-0.0015,0.0847,NA,NA,-0.0862,-0.0862,climate,climate,FALSE,no_spatial_terms_selected,0
+Oceania,8500,4e-4,0.1405,-0.0024,0.0978,-0.1401,-0.1002,climate,climate,FALSE,spatial_model_estimated,1

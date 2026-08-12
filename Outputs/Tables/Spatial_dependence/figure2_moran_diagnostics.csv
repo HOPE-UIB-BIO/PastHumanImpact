@@ -1,0 +1,29 @@
+value,distance_km,n_records,n_connected,n_edges,moran_i,expected_i,p_greater,positive_autocorrelation,permutations,status,spatial_scope,spatial_group,stage,profile
+signed_balance,250,1118,1058,8480,0.06098863100047841,-8.952551477170994e-4,0.001,TRUE,999,estimated,global,All,baseline,signed
+signed_residual,250,1118,1058,8480,0.016898460462942296,-8.952551477170994e-4,0.048,TRUE,999,estimated,global,All,residual,signed
+zero_balance,250,1118,1058,8480,0.10281760093684243,-8.952551477170994e-4,0.001,TRUE,999,estimated,global,All,baseline,zero_truncated
+zero_residual,250,1118,1058,8480,0.043842642478546794,-8.952551477170994e-4,0.002,TRUE,999,estimated,global,All,residual,zero_truncated
+signed_balance,500,1118,1104,21956,0.040589644418341196,-8.952551477170994e-4,0.001,TRUE,999,estimated,global,All,baseline,signed
+signed_residual,500,1118,1104,21956,0.0022512567318477093,-8.952551477170994e-4,0.217,FALSE,999,estimated,global,All,residual,signed
+zero_balance,500,1118,1104,21956,0.07138514849998043,-8.952551477170994e-4,0.001,TRUE,999,estimated,global,All,baseline,zero_truncated
+zero_residual,500,1118,1104,21956,0.006613939629081109,-8.952551477170994e-4,0.093,FALSE,999,estimated,global,All,residual,zero_truncated
+signed_balance,411.41119655714897,381,381,8776,0.035343788405076335,-0.002631578947368421,0.004,TRUE,999,estimated,dbmem_connectivity,Europe,baseline,signed
+signed_residual,411.41119655714897,381,381,8776,-0.0015728995371943595,-0.002631578947368421,0.397,FALSE,999,estimated,dbmem_connectivity,Europe,residual,signed
+zero_balance,411.41119655714897,381,381,8776,0.057038439195288185,-0.002631578947368421,0.001,TRUE,999,estimated,dbmem_connectivity,Europe,baseline,zero_truncated
+zero_residual,411.41119655714897,381,381,8776,0.0035459818574803395,-0.002631578947368421,0.205,FALSE,999,estimated,dbmem_connectivity,Europe,residual,zero_truncated
+signed_balance,890.1172404285654,533,533,22889,0.010298202228023698,-0.0018796992481203006,0.03,TRUE,999,estimated,dbmem_connectivity,North America,baseline,signed
+signed_residual,890.1172404285654,533,533,22889,-0.011270258020422967,-0.0018796992481203006,0.985,FALSE,999,estimated,dbmem_connectivity,North America,residual,signed
+zero_balance,890.1172404285654,533,533,22889,0.02544221882071761,-0.0018796992481203006,0.002,TRUE,999,estimated,dbmem_connectivity,North America,baseline,zero_truncated
+zero_residual,890.1172404285654,533,533,22889,-0.005244619775742168,-0.0018796992481203006,0.7,FALSE,999,estimated,dbmem_connectivity,North America,residual,zero_truncated
+signed_balance,1757.9132308461055,71,71,740,0.0934475029518682,-0.014285714285714285,0.003,TRUE,999,estimated,dbmem_connectivity,Latin America,baseline,signed
+signed_residual,1757.9132308461055,71,71,740,0.025558523664734663,-0.014285714285714285,0.078,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,signed
+zero_balance,1757.9132308461055,71,71,740,0.14212647906911352,-0.014285714285714285,0.001,TRUE,999,estimated,dbmem_connectivity,Latin America,baseline,zero_truncated
+zero_residual,1757.9132308461055,71,71,740,0.04074578712282242,-0.014285714285714285,0.05,TRUE,999,estimated,dbmem_connectivity,Latin America,residual,zero_truncated
+signed_balance,1455.4209814077676,98,98,904,0.06328339867462501,-0.010309278350515464,0.003,TRUE,999,estimated,dbmem_connectivity,Asia,baseline,signed
+signed_residual,1455.4209814077676,98,98,904,-2.3150894093088766e-4,-0.010309278350515464,0.301,FALSE,999,estimated,dbmem_connectivity,Asia,residual,signed
+zero_balance,1455.4209814077676,98,98,904,0.08427688504888241,-0.010309278350515464,0.011,TRUE,999,estimated,dbmem_connectivity,Asia,baseline,zero_truncated
+zero_residual,1455.4209814077676,98,98,904,0.0031451106063879195,-0.010309278350515464,0.275,FALSE,999,estimated,dbmem_connectivity,Asia,residual,zero_truncated
+signed_balance,1178.1024675848141,35,35,371,-0.05100599914073221,-0.029411764705882353,0.876,FALSE,999,estimated,dbmem_connectivity,Oceania,baseline,signed
+signed_residual,1178.1024675848141,35,35,371,-0.06687774100438615,-0.029411764705882353,0.983,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,signed
+zero_balance,1178.1024675848141,35,35,371,-0.05780789222928822,-0.029411764705882353,0.942,FALSE,999,estimated,dbmem_connectivity,Oceania,baseline,zero_truncated
+zero_residual,1178.1024675848141,35,35,371,-0.07473913357104278,-0.029411764705882353,0.996,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,zero_truncated

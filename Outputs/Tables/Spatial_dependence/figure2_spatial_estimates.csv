@@ -1,0 +1,91 @@
+aggregation_level,profile,adjusted_balance,n_records,weight_sum,region,climatezone,ranking,selection_status
+overall,signed,-0.5267994489236881,1118,410.323,All,All,climate,selected
+region,signed,-0.713950784731641,98,36.127,Asia,All,climate,selected
+region,signed,-0.5862087923480463,381,132.286,Europe,All,climate,selected
+region,signed,-0.576187222412026,71,26.343,Latin America,All,climate,selected
+region,signed,-0.4581639019572308,533,201.551,North America,All,climate,selected
+region,signed,-0.37784827145969,35,14.016,Oceania,All,climate,selected
+region_climatezone,signed,-0.5800100033344446,19,5.998,Asia,Arid,climate,selected
+region_climatezone,signed,-1.126734842951059,4,1.369,Asia,Cold_Dry_Summer,climate,selected
+region_climatezone,signed,-0.7646891607959461,21,8.091,Asia,Cold_Dry_Winter,climate,selected
+region_climatezone,signed,-0.8277339642481597,9,3.8040000000000003,Asia,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,signed,0.009259259259259207,1,0.216,Asia,Cold_Without_dry_season_Hot_Summer,human,selected
+region_climatezone,signed,-0.7877854846895619,16,5.911,Asia,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,signed,-0.6596424384525205,10,3.412,Asia,Polar,climate,selected
+region_climatezone,signed,-1.0125202374527793,5,1.853,Asia,Temperate_Dry_Summer,climate,selected
+region_climatezone,signed,0.007591504744690536,6,2.213,Asia,Temperate_Dry_Winter,human,selected
+region_climatezone,signed,-0.8193251533742331,7,3.2600000000000002,Asia,Temperate_Without_dry_season,climate,selected
+region_climatezone,signed,-1.0834185281595787,7,2.367,Europe,Arid,climate,selected
+region_climatezone,signed,-0.6037313824138522,3,1.552,Europe,Cold_Dry_Summer,climate,selected
+region_climatezone,signed,-0.6083082043554732,92,32.201,Europe,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,signed,-0.695236443674989,144,46.689,Europe,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,signed,-0.6686955204985735,30,10.23,Europe,Polar,climate,selected
+region_climatezone,signed,-0.5466769067768897,14,4.423,Europe,Temperate_Dry_Summer,climate,selected
+region_climatezone,signed,-0.36581207220097894,91,34.824,Europe,Temperate_Without_dry_season,climate,selected
+region_climatezone,signed,-0.47126995142262323,5,1.441,Latin America,Arid,climate,selected
+region_climatezone,signed,-0.8982222222222219,2,0.675,Latin America,Cold_Dry_Summer,climate,selected
+region_climatezone,signed,-0.6357290420789389,22,9.197,Latin America,Polar,climate,selected
+region_climatezone,signed,-1.006821052631579,8,2.375,Latin America,Temperate_Dry_Summer,climate,selected
+region_climatezone,signed,-0.47911646586345374,2,0.7470000000000001,Latin America,Temperate_Dry_Winter,climate,selected
+region_climatezone,signed,-0.48046263345195733,17,5.62,Latin America,Temperate_Without_dry_season,climate,selected
+region_climatezone,signed,-0.4130089058524175,15,6.288,Latin America,Tropical,climate,selected
+region_climatezone,signed,-0.3015249810307601,16,4.34,North America,Arid,climate,selected
+region_climatezone,signed,-0.30652414076425455,46,16.687,North America,Cold_Dry_Summer,climate,selected
+region_climatezone,signed,-0.5753435312087529,135,51.556,North America,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,signed,-0.4805653855503896,53,19.405,North America,Cold_Without_dry_season_Hot_Summer,climate,selected
+region_climatezone,signed,-0.401571040627421,194,80.14,North America,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,signed,-0.7528185868755104,35,12.4,North America,Polar,climate,selected
+region_climatezone,signed,-0.3682697244851502,16,4.484,North America,Temperate_Dry_Summer,climate,selected
+region_climatezone,signed,-0.3001713318001561,38,12.539,North America,Temperate_Without_dry_season,climate,selected
+region_climatezone,signed,-0.47613902371293504,1,0.345,Oceania,Arid,climate,selected
+region_climatezone,signed,-3.1785898617569677,1,0.019,Oceania,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,signed,0.21653257036839277,1,0.162,Oceania,Cold_Without_dry_season_Warm_Summer,human,selected
+region_climatezone,signed,-0.6353938563461982,1,0.139,Oceania,Temperate_Dry_Summer,climate,selected
+region_climatezone,signed,-0.13980255680275105,1,0.264,Oceania,Temperate_Dry_Winter,climate,selected
+region_climatezone,signed,-0.36824683593758545,26,11.348,Oceania,Temperate_Without_dry_season,climate,selected
+region_climatezone,signed,-0.4613259133850389,4,1.7389999999999999,Oceania,Tropical,climate,selected
+overall,zero_truncated,-0.510434904927791,1118,416.2161,All,All,climate,selected
+region,zero_truncated,-0.6912613828177493,98,36.6122,Asia,All,climate,selected
+region,zero_truncated,-0.5628882889253258,381,134.5243,Europe,All,climate,selected
+region,zero_truncated,-0.5415668934998014,71,26.9361,Latin America,All,climate,selected
+region,zero_truncated,-0.44940895043771334,533,203.8542,North America,All,climate,selected
+region,zero_truncated,-0.36522925004856904,35,14.289299999999999,Oceania,All,climate,selected
+region_climatezone,zero_truncated,-0.557016102530398,19,6.086,Asia,Arid,climate,selected
+region_climatezone,zero_truncated,-1,4,1.4558,Asia,Cold_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.7403908278577611,21,8.2031,Asia,Cold_Dry_Winter,climate,selected
+region_climatezone,zero_truncated,-0.8109825987287693,9,3.8388,Asia,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,zero_truncated,0.009276437847866366,1,0.21560000000000001,Asia,Cold_Without_dry_season_Hot_Summer,human,selected
+region_climatezone,zero_truncated,-0.7848278656693739,16,5.9227,Asia,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,zero_truncated,-0.6312894213876328,10,3.4721,Asia,Polar,climate,selected
+region_climatezone,zero_truncated,-0.9209767154337521,5,1.9412,Asia,Temperate_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,0.00759150474469046,6,2.213,Asia,Temperate_Dry_Winter,human,selected
+region_climatezone,zero_truncated,-0.8170899843745213,7,3.2639,Asia,Temperate_Without_dry_season,climate,selected
+region_climatezone,zero_truncated,-0.9865146236615455,7,2.4724,Europe,Arid,climate,selected
+region_climatezone,zero_truncated,-0.5913871190830933,3,1.5733000000000001,Europe,Cold_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.5799782079433714,92,32.8568,Europe,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,zero_truncated,-0.6577583766221526,144,47.7975,Europe,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,zero_truncated,-0.6682452252962235,30,10.2689,Europe,Polar,climate,selected
+region_climatezone,zero_truncated,-0.5659725849036875,14,4.5288,Europe,Temperate_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.3549277095115045,91,35.0266,Europe,Temperate_Without_dry_season,climate,selected
+region_climatezone,zero_truncated,-0.4296116504854367,5,1.4832,Latin America,Arid,climate,selected
+region_climatezone,zero_truncated,-0.8991546789262936,2,0.6743,Latin America,Cold_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.6210712323158313,22,9.280899999999999,Latin America,Polar,climate,selected
+region_climatezone,zero_truncated,-0.8561358414144956,8,2.5677,Latin America,Temperate_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.4791806132012319,2,0.7469,Latin America,Temperate_Dry_Winter,climate,selected
+region_climatezone,zero_truncated,-0.4435307588216925,17,5.7642,Latin America,Temperate_Without_dry_season,climate,selected
+region_climatezone,zero_truncated,-0.384380501332004,15,6.4189,Latin America,Tropical,climate,selected
+region_climatezone,zero_truncated,-0.30255847846472755,16,4.4887999999999995,North America,Arid,climate,selected
+region_climatezone,zero_truncated,-0.307588157234376,46,16.8393,North America,Cold_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.5608371897699841,135,52.3466,North America,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,zero_truncated,-0.45837792814781175,53,19.716,North America,Cold_Without_dry_season_Hot_Summer,climate,selected
+region_climatezone,zero_truncated,-0.39696867603228103,194,80.5674,North America,Cold_Without_dry_season_Warm_Summer,climate,selected
+region_climatezone,zero_truncated,-0.7282984070011648,35,12.5822,North America,Polar,climate,selected
+region_climatezone,zero_truncated,-0.3712512146948952,16,4.5013,North America,Temperate_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.3015364268029367,38,12.8126,North America,Temperate_Without_dry_season,climate,selected
+region_climatezone,zero_truncated,-0.47936959232430304,1,0.3453,Oceania,Arid,climate,selected
+region_climatezone,zero_truncated,-1.1906026357738688,1,0.0375,Oceania,Cold_Without_dry_season_Cold_Summer,climate,selected
+region_climatezone,zero_truncated,0.23719881403366863,1,0.1616,Oceania,Cold_Without_dry_season_Warm_Summer,human,selected
+region_climatezone,zero_truncated,-0.6417024029808698,1,0.1386,Oceania,Temperate_Dry_Summer,climate,selected
+region_climatezone,zero_truncated,-0.15531652687657582,1,0.2643,Oceania,Temperate_Dry_Winter,climate,selected
+region_climatezone,zero_truncated,-0.3599118623044564,26,11.57,Oceania,Temperate_Without_dry_season,climate,selected
+region_climatezone,zero_truncated,-0.4248630778930975,4,1.772,Oceania,Tropical,climate,selected
