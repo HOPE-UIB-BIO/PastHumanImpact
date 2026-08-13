@@ -195,7 +195,7 @@ vec_function_files |>
 
 # Keep the static renv manifest synchronized with the canonical package list.
 invisible(
-  write_package_dependencies_manifest(
+  save_package_dependencies_manifest(
     vec_package_names = package_list,
     path_output_file = here::here(
       "R",
@@ -233,7 +233,7 @@ if (
 }
 
 if (dir.exists(data_storage_path)) {
-  check_storage_folders(data_storage_path, create_missing = TRUE)
+  validate_storage_folders(data_storage_path, create_missing = TRUE)
 } else {
   warning(
     paste0(

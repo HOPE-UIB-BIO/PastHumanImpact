@@ -26,7 +26,7 @@ testthat::test_that(
 
     testthat::expect_true(
       all(c(
-        "baseline",
+        "unthinned",
         "thinning",
         "leave_region_out",
         "leave_climatezone_out"
@@ -39,7 +39,7 @@ testthat::test_that(
     testthat::expect_true(
       all(is.finite(
         dplyr::pull(
-          dplyr::filter(result, .data[["sensitivity_type"]] == "baseline"),
+          dplyr::filter(result, .data[["sensitivity_type"]] == "unthinned"),
           "absolute_deviation"
         )
       ))

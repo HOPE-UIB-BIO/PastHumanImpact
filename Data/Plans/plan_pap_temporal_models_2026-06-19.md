@@ -86,7 +86,7 @@ and PAPs.
   IDs.
 - [x] Replace string families plus `eval(parse())` with a tested family-mapping
   function.
-- [x] Refactor `get_hgam_formula()` into the shared formula-string engine.
+- [x] Refactor `build_hgam_formula()` into the shared formula-string engine.
 - [x] Generalise model running, evaluation, rerun flagging, and prediction
   extraction so PAPs use the same lifecycle as existing predictor/event models.
 - [x] Keep existing predictor/event behaviour readable during transition; avoid
@@ -97,7 +97,7 @@ and PAPs.
 - Focused tests pass for model specs, family mapping, formula builder,
   config-table creation, rerun flagging, and prediction output contracts.
 - Existing tests for `fit_brms_model()`, `predict_brms_model()`, and
-  `get_all_predicted_general_trends()` are updated or replaced intentionally.
+  `predict_general_trends()` are updated or replaced intentionally.
 
 ## PAP Model Inputs And Fitting
 
@@ -135,7 +135,7 @@ zone.
 - [x] Generate one figure per PAP metric, faceted `region ~ climatezone_label`,
   with observed dataset trajectories, fitted mean, and credible ribbon.
 - [x] Save manuscript-ready `.png` and `.pdf` outputs under
-  `Outputs/Figures/Extended_data_figures/`.
+  `Outputs/Figures/H1/Temporal/`.
 
 **Validation:**
 

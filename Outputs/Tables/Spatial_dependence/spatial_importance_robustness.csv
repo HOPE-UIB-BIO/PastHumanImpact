@@ -1,0 +1,3 @@
+profile,unthinned_ranking,spatial_ranking,spatial_agreement,min_thinning_agreement,deterministic_agreement,robustness_class,residual_spatial_dependence
+signed,climate,climate,TRUE,1,TRUE,robust,TRUE
+zero_truncated,climate,climate,TRUE,1,TRUE,robust,TRUE

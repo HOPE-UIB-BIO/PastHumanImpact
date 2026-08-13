@@ -51,7 +51,7 @@ list(
   ),
   targets::tar_target(
     name = events_temporal_subset,
-    command = get_file_from_path(data_events_path)
+    command = resolve_file_path(data_events_path)
   ),
   # - file path to climate data ----
   targets::tar_target(
@@ -68,12 +68,12 @@ list(
   # - load climate data ----
   targets::tar_target(
     name = data_climate,
-    command = get_file_from_path(file_climate_path)
+    command = resolve_file_path(file_climate_path)
   ),
   # - select climate variables ----
   targets::tar_target(
     name = data_climate_for_interpolation,
-    command = get_climate_data_for_interpolation(
+    command = prepare_climate_interpolation_data(
       data_source = data_climate,
       sel_var = c(
         "temp_annual",
@@ -87,7 +87,7 @@ list(
   # - interpolate climate values for each time slice ----
   targets::tar_target(
     name = data_climate_interpolated,
-    command = get_interpolated_data(
+    command = prepare_interpolated_model_data(
       data_source = data_climate_for_interpolation,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
@@ -116,18 +116,18 @@ list(
   # - load spd data  ----
   targets::tar_target(
     name = data_spd,
-    command = get_file_from_path(file_spd_path)
+    command = resolve_file_path(file_spd_path)
   ),
   # - prepare spd for modelling ----
   targets::tar_target(
     name = data_spd_to_fit,
-    command = get_spd_for_modelling(data_spd %>%
+    command = prepare_spd_model_data(data_spd %>%
       dplyr::select(-distance))
   ),
   # - interpolated spd values for each time slice ----
   targets::tar_target(
     name = data_spd_interpolated,
-    command = get_interpolated_data(
+    command = prepare_interpolated_model_data(
       data_source = data_spd_to_fit,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
@@ -144,7 +144,7 @@ list(
   # - combine spd and human impact events ----
   targets::tar_target(
     name = data_spd_events,
-    command = get_events_spd_combined(
+    command = aggregate_events_spd(
       data_source_events = events_temporal_subset,
       data_source_spd = data_spd_interpolated,
       data_source_meta = data_meta,
@@ -154,7 +154,7 @@ list(
   # - combine predictor data ----
   targets::tar_target(
     name = data_predictors,
-    command = get_data_predictors(
+    command = prepare_predictor_data(
       data_source_spd_events = data_spd_events,
       data_source_climate = data_climate_interpolated
     )
@@ -162,7 +162,7 @@ list(
   # - filter data properties for analyses ----
   targets::tar_target(
     name = data_predictors_filtered,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_predictors,
       data_meta = data_meta,
       age_from = 2000,

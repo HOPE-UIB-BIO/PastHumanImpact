@@ -76,7 +76,7 @@ testthat::test_that("LOO-only failure is recorded without a rerun", {
     )
 
   data_config <-
-    create_model_config_table(
+    build_model_config_table(
       data_model = data_model,
       analysis = "pap_temporal",
       family_key = "gamma_log",

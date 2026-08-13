@@ -45,7 +45,7 @@ if (
 #----------------------------------------------------------#
 
 data_assembly_target <-
-  get_file_from_path(
+  resolve_file_path(
     file.path(
       path_store_pollen,
       "data_assembly"
@@ -53,7 +53,7 @@ data_assembly_target <-
   )
 
 data_assembly_filtered_target <-
-  get_file_from_path(
+  resolve_file_path(
     file.path(
       path_store_pollen,
       "data_assembly_filtered"
@@ -101,13 +101,13 @@ audit_rarefaction <-
 #----------------------------------------------------------#
 
 data_samples_pre_filter <-
-  extract_pollen_sample_counts(
+  compute_pollen_sample_counts(
     data_source = data_assembly_target,
     stage_label = "pre_filter"
   )
 
 data_samples_post_filter <-
-  extract_pollen_sample_counts(
+  compute_pollen_sample_counts(
     data_source = data_assembly_filtered_target,
     stage_label = "post_filter_baseline"
   )

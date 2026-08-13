@@ -42,27 +42,27 @@ fig_influence <-
   here::here(
     "Outputs",
     "Figures",
-    "Extended_data_figures",
-    "Collinearity",
-    "EDA_5b_pap_collinearity_hvar_influence.png"
+    "H1",
+    "Spatial",
+    "pap_collinearity_hvarpart_influence.png"
   )
 
 fig_correlation <-
   here::here(
     "Outputs",
     "Figures",
-    "Extended_data_figures",
-    "Collinearity",
-    "EDA_5a_pap_collinearity_correlation.png"
+    "H1",
+    "Spatial",
+    "pap_collinearity_correlation.png"
   )
 
 fig_reduced_simple <-
   here::here(
     "Outputs",
     "Figures",
-    "Extended_data_figures",
-    "Collinearity",
-    "EDA_5c_h1_spatial_reduced_simple.png"
+    "H1",
+    "Spatial",
+    "human_climate_balance_reduced_predictors.png"
   )
 
 required_paths <-

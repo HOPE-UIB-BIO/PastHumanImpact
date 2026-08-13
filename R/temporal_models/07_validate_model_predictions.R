@@ -26,19 +26,29 @@ source(
 
 sel_model_id <-
   "predictor_temporal__spd__Europe__Temperate_Without_dry_season"
+
 max_prediction_draws <- 1000L
 
 path_temporal_models <-
   file.path(data_storage_path, "Temporal_models")
+
 path_model_dir <-
   file.path(path_temporal_models, "Mods")
+
 path_figure_dir <-
-  here::here("Outputs", "Figures", "Model_diagnostics")
+  here::here(
+    "Outputs",
+    "Figures",
+    "Diagnostics",
+    "Temporal_models"
+  )
+
 path_table_dir <-
   here::here("Outputs", "Tables")
 
-make_dir(path_figure_dir)
-make_dir(path_table_dir)
+run_directory_setup(path_figure_dir)
+
+run_directory_setup(path_table_dir)
 
 output_stem <-
   "spd_europe_temperate_without_dry_season_prediction_validation"
@@ -102,11 +112,11 @@ assertthat::assert_that(
 
 
 #----------------------------------------------------------#
-# 2. Predict each core over its observed time span -----
+# 2. Predict each dataset over its observed time span -----
 #----------------------------------------------------------#
 
-data_core_new <-
-  get_model_newdata(
+data_dataset_new <-
+  prepare_model_prediction_data(
     data_source = data_observed,
     model_config_row = model_config_row,
     prediction_range = "group_observed"
@@ -120,8 +130,10 @@ data_core_new <-
 
 n_available_draws <-
   posterior::ndraws(mod_selected)
+
 n_prediction_draws <-
   min(max_prediction_draws, n_available_draws)
+
 vec_prediction_draw_ids <-
   seq(
     from = 1,
@@ -131,19 +143,19 @@ vec_prediction_draw_ids <-
   round() %>%
   unique()
 
-mat_core_expected_response <-
+mat_dataset_expected_response <-
   brms::posterior_epred(
     object = mod_selected,
-    newdata = data_core_new,
+    newdata = data_dataset_new,
     re_formula = NULL,
     allow_new_levels = FALSE,
     draw_ids = vec_prediction_draw_ids
   )
 
-data_core_predictions <-
+data_dataset_predictions <-
   summarise_prediction_draws(
-    mat_draws = mat_core_expected_response,
-    data_new = data_core_new,
+    mat_draws = mat_dataset_expected_response,
+    data_new = data_dataset_new,
     group_var = NULL
   ) %>%
   dplyr::mutate(
@@ -162,8 +174,8 @@ data_core_predictions <-
 
 data_supported_general <-
   summarise_prediction_draws(
-    mat_draws = mat_core_expected_response,
-    data_new = data_core_new,
+    mat_draws = mat_dataset_expected_response,
+    data_new = data_dataset_new,
     group_var = model_config_row[["group_var"]][1]
   ) %>%
   dplyr::mutate(
@@ -173,11 +185,11 @@ data_supported_general <-
     source_model_file = model_config_row[["model_file_name"]][1],
     prediction_draws_used = length(vec_prediction_draw_ids),
     prediction_range = "group_observed",
-    trend_definition = "Observed core support"
+    trend_definition = "Observed dataset support"
   )
 
 data_configured_new <-
-  get_model_newdata(
+  prepare_model_prediction_data(
     data_source = data_observed,
     model_config_row = model_config_row,
     prediction_range = "configured"
@@ -209,6 +221,7 @@ data_general_predictions <-
 
 n_fitted_datasets <-
   dplyr::n_distinct(data_observed[["dataset_id"]])
+
 data_general_comparison <-
   data_supported_general %>%
   dplyr::filter(
@@ -236,16 +249,16 @@ assertthat::assert_that(
   max(data_general_comparison[["absolute_difference"]]) < 1e-10,
   msg = paste(
     "Configured and independently reproduced general trends do not match",
-    "where all fitted cores are represented."
+    "where all fitted datasets are represented."
   )
 )
 
 
 #----------------------------------------------------------#
-# 4. Plot core-level fits -----
+# 4. Plot dataset-level fits -----
 #----------------------------------------------------------#
 
-plot_core_predictions <-
+plot_dataset_predictions <-
   ggplot2::ggplot() +
   ggplot2::facet_wrap(
     ggplot2::vars(dataset_id),
@@ -264,10 +277,10 @@ plot_core_predictions <-
   ggplot2::labs(
     x = "Age (cal ka BP)",
     y = "SPD",
-    title = "Observed and fitted core trajectories"
+    title = "Observed and fitted dataset trajectories"
   ) +
   ggplot2::geom_ribbon(
-    data = data_core_predictions,
+    data = data_dataset_predictions,
     mapping = ggplot2::aes(
       x = age_ka,
       ymin = conf_low,
@@ -277,7 +290,7 @@ plot_core_predictions <-
     alpha = 0.25
   ) +
   ggplot2::geom_line(
-    data = data_core_predictions,
+    data = data_dataset_predictions,
     mapping = ggplot2::aes(
       x = age_ka,
       y = estimate
@@ -307,13 +320,13 @@ plot_general_prediction <-
   ggplot2::scale_color_manual(
     values = c(
       "Configured full range" = "#0072B2",
-      "Observed core support" = "#D55E00"
+      "Observed dataset support" = "#D55E00"
     )
   ) +
   ggplot2::scale_fill_manual(
     values = c(
       "Configured full range" = "#56B4E9",
-      "Observed core support" = "#E69F00"
+      "Observed dataset support" = "#E69F00"
     )
   ) +
   ggplot2::theme_bw() +
@@ -326,7 +339,7 @@ plot_general_prediction <-
     y = "SPD",
     color = NULL,
     fill = NULL,
-    title = "General SPD trend across fitted cores"
+    title = "General SPD trend across fitted datasets"
   ) +
   ggplot2::geom_line(
     data = data_observed,
@@ -366,13 +379,15 @@ plot_general_prediction <-
 #----------------------------------------------------------#
 
 readr::write_csv(
-  data_core_predictions,
-  file.path(path_table_dir, paste0(output_stem, "_cores.csv"))
+  data_dataset_predictions,
+  file.path(path_table_dir, paste0(output_stem, "_dataset_predictions.csv"))
 )
+
 readr::write_csv(
   data_general_predictions,
   file.path(path_table_dir, paste0(output_stem, "_general.csv"))
 )
+
 readr::write_csv(
   data_general_comparison,
   file.path(path_table_dir, paste0(output_stem, "_comparison.csv"))
@@ -383,9 +398,9 @@ purrr::walk(
   ~ ggplot2::ggsave(
     filename = file.path(
       path_figure_dir,
-      paste0(output_stem, "_cores.", .x)
+      paste0(output_stem, "_dataset_predictions.", .x)
     ),
-    plot = plot_core_predictions,
+    plot = plot_dataset_predictions,
     width = 420,
     height = 520,
     units = "mm",
@@ -394,6 +409,7 @@ purrr::walk(
     bg = "white"
   )
 )
+
 purrr::walk(
   c("png", "pdf"),
   ~ ggplot2::ggsave(

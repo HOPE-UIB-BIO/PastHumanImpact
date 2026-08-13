@@ -45,6 +45,28 @@ predictor_vars_h1 <-
       "prec_win"
     )
   )
+predictor_vars_events_h1 <-
+  list(
+    human = c(
+      "fi",
+      "fc",
+      "ec",
+      "cc",
+      "es",
+      "ei",
+      "weak",
+      "medium",
+      "strong"
+    ),
+    climate = predictor_vars_h1[["climate"]]
+  )
+predictor_columns_h1 <-
+  unique(
+    c(
+      unlist(predictor_vars_h1, use.names = FALSE),
+      unlist(predictor_vars_events_h1, use.names = FALSE)
+    )
+  )
 
 #----------------------------------------------------------#
 # 1. Targets -----
@@ -60,7 +82,10 @@ list(
       permutations = 999L,
       alpha = 0.05,
       min_unique_locations = 20L,
-      min_residual_df = 10L
+      min_residual_df = 10L,
+      min_unique_ages = 10L,
+      min_temporal_residual_df = 5L,
+      temporal_distances_years = c(500, 1000)
     )
   ),
   targets::tar_target(
@@ -77,7 +102,7 @@ list(
   ),
   targets::tar_target(
     name = data_meta,
-    command = get_file_from_path(data_meta_path)
+    command = resolve_file_path(data_meta_path)
   ),
   targets::tar_target(
     name = data_properties_filtered_path,
@@ -92,7 +117,7 @@ list(
   ),
   targets::tar_target(
     name = data_properties_filtered,
-    command = get_file_from_path(data_properties_filtered_path)
+    command = resolve_file_path(data_properties_filtered_path)
   ),
   targets::tar_target(
     name = data_properties_path,
@@ -107,7 +132,7 @@ list(
   ),
   targets::tar_target(
     name = data_properties,
-    command = get_file_from_path(data_properties_path)
+    command = resolve_file_path(data_properties_path)
   ),
   targets::tar_target(
     name = data_predictors_filtered_path,
@@ -122,7 +147,7 @@ list(
   ),
   targets::tar_target(
     name = data_predictors_filtered,
-    command = get_file_from_path(data_predictors_filtered_path)
+    command = resolve_file_path(data_predictors_filtered_path)
   ),
   targets::tar_target(
     name = data_predictors_path,
@@ -137,18 +162,18 @@ list(
   ),
   targets::tar_target(
     name = data_predictors,
-    command = get_file_from_path(data_predictors_path)
+    command = resolve_file_path(data_predictors_path)
   ),
   targets::tar_target(
     name = data_hvar_filtered,
-    command = get_data_combined(
+    command = prepare_combined_data(
       data_source_properties = data_properties_filtered,
       data_source_predictors = data_predictors_filtered
     )
   ),
   targets::tar_target(
     name = data_properties_temporal,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_properties,
       data_meta = data_meta,
       age_from = 0,
@@ -158,7 +183,7 @@ list(
   ),
   targets::tar_target(
     name = data_predictors_temporal,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_predictors,
       data_meta = data_meta,
       age_from = 0,
@@ -168,22 +193,66 @@ list(
   ),
   targets::tar_target(
     name = data_hvar_temporal,
-    command = get_data_combined(
+    command = prepare_combined_data(
       data_source_properties = data_properties_temporal,
       data_source_predictors = data_predictors_temporal
     )
   ),
   targets::tar_target(
+    name = output_dataset_age_collapse_filtered,
+    command = aggregate_hvar_dataset_ages(
+      data_source = data_hvar_filtered,
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_columns_h1
+    )
+  ),
+  targets::tar_target(
+    name = data_hvar_filtered_unique_age,
+    command = output_dataset_age_collapse_filtered[["data"]]
+  ),
+  targets::tar_target(
+    name = table_dataset_age_collapse_filtered,
+    command = output_dataset_age_collapse_filtered[["audit"]]
+  ),
+  targets::tar_target(
+    name = output_dataset_age_collapse_temporal,
+    command = aggregate_hvar_dataset_ages(
+      data_source = data_hvar_temporal,
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_columns_h1
+    )
+  ),
+  targets::tar_target(
+    name = data_hvar_temporal_unique_age,
+    command = output_dataset_age_collapse_temporal[["data"]]
+  ),
+  targets::tar_target(
+    name = table_dataset_age_collapse_temporal,
+    command = output_dataset_age_collapse_temporal[["audit"]]
+  ),
+  targets::tar_target(
+    name = data_hvar_timebins_unique_age,
+    command = prepare_hvarpart_timebin_data(
+      data_source = data_hvar_temporal_unique_age,
+      data_meta = data_meta
+    )
+  ),
+  targets::tar_target(
+    name = data_hvar_timebins_spd_unique_age,
+    command = data_hvar_timebins_unique_age |>
+      dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500))
+  ),
+  targets::tar_target(
     name = data_hvar_timebins_spd,
-    command = get_data_timebin(
+    command = prepare_hvarpart_timebin_data(
       data_source = data_hvar_temporal,
       data_meta = data_meta
     ) |>
       dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500))
   ),
   targets::tar_target(
-    name = output_spatial_spd_issue325,
-    command = run_hvarpart(
+    name = output_spatial_spd_sensitivity,
+    command = fit_hvarpart_models(
       data_source = data_hvar_filtered,
       response_vars = response_vars_h1,
       predictor_vars = predictor_vars_h1,
@@ -197,9 +266,9 @@ list(
     )
   ),
   targets::tar_target(
-    name = data_spatial_importance_issue325,
-    command = get_hvarpart_importance(
-      data_source = output_spatial_spd_issue325 |>
+    name = data_spatial_importance_sensitivity,
+    command = compute_hvarpart_importance(
+      data_source = output_spatial_spd_sensitivity |>
         dplyr::left_join(
           data_meta |>
             dplyr::select(
@@ -211,7 +280,7 @@ list(
             ),
           by = "dataset_id"
         ) |>
-        dplyr::mutate(analysis = "spatial_spd_issue325"),
+        dplyr::mutate(analysis = "spatial_spd_sensitivity"),
       id_cols = c(
         "analysis",
         "dataset_id",
@@ -221,16 +290,16 @@ list(
     )
   ),
   targets::tar_target(
-    name = data_figure2_spatial_records,
+    name = data_spatial_importance_records,
     command = prepare_spatial_importance_records(
-      data_importance = data_spatial_importance_issue325,
+      data_importance = data_spatial_importance_sensitivity,
       data_meta = data_meta
     )
   ),
   targets::tar_target(
-    name = output_figure2_spatial_filter,
-    command = analyse_spatial_importance(
-      data_records = data_figure2_spatial_records,
+    name = output_spatial_importance_filter,
+    command = fit_spatial_importance(
+      data_records = data_spatial_importance_records,
       permutations = spatial_sensitivity_config[["permutations"]],
       alpha = spatial_sensitivity_config[["alpha"]],
       min_unique_locations =
@@ -243,9 +312,9 @@ list(
     )
   ),
   targets::tar_target(
-    name = data_figure2_thinning_ledger,
-    command = run_spatial_thinning(
-      data_source = data_figure2_spatial_records,
+    name = data_spatial_importance_thinning,
+    command = select_spatial_thinning(
+      data_source = data_spatial_importance_records,
       strata = c("region", "climatezone"),
       distance_km =
         spatial_sensitivity_config[["thinning_distances_km"]],
@@ -256,53 +325,53 @@ list(
     )
   ),
   targets::tar_target(
-    name = table_figure2_spatial_sensitivity,
+    name = table_spatial_importance_sensitivity,
     command = summarise_spatial_importance_sensitivity(
-      data_records = data_figure2_spatial_records,
-      data_thinning = data_figure2_thinning_ledger
+      data_records = data_spatial_importance_records,
+      data_thinning = data_spatial_importance_thinning
     )
   ),
   targets::tar_target(
-    name = table_figure2_spatial_estimates,
-    command = output_figure2_spatial_filter[["estimates"]]
+    name = table_spatial_importance_estimates,
+    command = output_spatial_importance_filter[["estimates"]]
   ),
   targets::tar_target(
-    name = table_figure2_moran_diagnostics,
-    command = output_figure2_spatial_filter[["moran_diagnostics"]]
+    name = table_spatial_importance_moran,
+    command = output_spatial_importance_filter[["moran_diagnostics"]]
   ),
   targets::tar_target(
-    name = table_figure2_dbmem_diagnostics,
-    command = output_figure2_spatial_filter[["dbmem"]][["diagnostics"]]
+    name = table_spatial_importance_dbmem_diagnostics,
+    command = output_spatial_importance_filter[["dbmem"]][["diagnostics"]]
   ),
   targets::tar_target(
-    name = table_figure2_dbmem_selection,
+    name = table_spatial_importance_dbmem_selection,
     command = tibble::tibble(
-      status = output_figure2_spatial_filter[["selection"]][["status"]],
+      status = output_spatial_importance_filter[["selection"]][["status"]],
       n_complete =
-        output_figure2_spatial_filter[["selection"]][["n_complete"]],
+        output_spatial_importance_filter[["selection"]][["n_complete"]],
       n_candidates =
-        output_figure2_spatial_filter[["selection"]][["n_candidates"]],
+        output_spatial_importance_filter[["selection"]][["n_candidates"]],
       global_p_value =
-        output_figure2_spatial_filter[["selection"]][["global_p_value"]],
+        output_spatial_importance_filter[["selection"]][["global_p_value"]],
       full_adjusted_r_squared = purrr::pluck(
-        output_figure2_spatial_filter,
+        output_spatial_importance_filter,
         "selection",
         "full_adjusted_r_squared"
       ),
       selected_names = stringr::str_c(
-        output_figure2_spatial_filter[["selection"]][["selected_names"]],
+        output_spatial_importance_filter[["selection"]][["selected_names"]],
         collapse = ";"
       )
     )
   ),
   targets::tar_target(
-    name = table_figure2_robustness,
+    name = table_spatial_importance_robustness,
     command = classify_spatial_robustness(
-      data_sensitivity = table_figure2_spatial_sensitivity,
-      data_spatial_estimates = table_figure2_spatial_estimates
+      data_sensitivity = table_spatial_importance_sensitivity,
+      data_spatial_estimates = table_spatial_importance_estimates
     ) |>
       dplyr::left_join(
-        table_figure2_moran_diagnostics |>
+        table_spatial_importance_moran |>
           dplyr::filter(
             .data[["spatial_scope"]] == "global",
             .data[["stage"]] == "residual"
@@ -319,9 +388,8 @@ list(
   ),
   targets::tar_target(
     name = data_hvar_timebin_groups,
-    command = split(
-      data_hvar_timebins_spd,
-      seq_len(nrow(data_hvar_timebins_spd))
+    command = prepare_hvarpart_timebin_groups(
+      data_source = data_hvar_timebins_spd
     ),
     iteration = "list"
   ),
@@ -330,7 +398,7 @@ list(
     command = list(
       region = data_hvar_timebin_groups[["region"]][1],
       age = data_hvar_timebin_groups[["age"]][1],
-      result = analyse_spatial_hvarpart_group(
+      result = fit_spatial_hvarpart_group(
         data_group = data_hvar_timebin_groups[["data_merge"]][[1]],
         response_vars = response_vars_h1,
         predictor_vars = predictor_vars_h1,
@@ -373,10 +441,10 @@ list(
       )
   ),
   targets::tar_target(
-    name = table_temporal_partial_fractions,
+    name = table_temporal_unique_adjusted_r2,
     command = output_temporal_spatial_group |>
       purrr::map_dfr(
-        .f = ~ .x[["result"]][["partial_fractions"]] |>
+        .f = ~ .x[["result"]][["unique_adjusted_r2"]] |>
           dplyr::mutate(
             region = .x[["region"]],
             age = .x[["age"]],
@@ -413,8 +481,8 @@ list(
     command = output_temporal_spatial_group |>
       purrr::map_dfr(
         .f = ~ {
-          data_baseline <-
-            .x[["result"]][["baseline_hvarpart"]][["summary_table"]] |>
+          data_human_climate_only <-
+            .x[["result"]][["human_climate_only_hvarpart"]][["summary_table"]] |>
             dplyr::mutate(model_profile = "human_climate")
           data_spatial <-
             if (
@@ -425,7 +493,7 @@ list(
               .x[["result"]][["spatial_hvarpart"]][["summary_table"]] |>
                 dplyr::mutate(model_profile = "human_climate_space")
             }
-          dplyr::bind_rows(data_baseline, data_spatial) |>
+          dplyr::bind_rows(data_human_climate_only, data_spatial) |>
             dplyr::mutate(
               region = .x[["region"]],
               age = .x[["age"]],
@@ -452,17 +520,17 @@ list(
         values_from = "Individual"
       ) |>
       dplyr::mutate(
-        baseline_balance =
+        human_climate_only_balance =
           .data[["human_climate_human"]] -
           .data[["human_climate_climate"]],
         spatial_balance = dplyr::coalesce(
           .data[["human_climate_space_human"]] -
             .data[["human_climate_space_climate"]],
-          .data[["baseline_balance"]]
+          .data[["human_climate_only_balance"]]
         ),
-        baseline_ranking = dplyr::case_when(
-          .data[["baseline_balance"]] > 0 ~ "human",
-          .data[["baseline_balance"]] < 0 ~ "climate",
+        human_climate_only_ranking = dplyr::case_when(
+          .data[["human_climate_only_balance"]] > 0 ~ "human",
+          .data[["human_climate_only_balance"]] < 0 ~ "climate",
           .default = "tie"
         ),
         spatial_ranking = dplyr::case_when(
@@ -471,7 +539,7 @@ list(
           .default = "tie"
         ),
         ranking_changed =
-          .data[["baseline_ranking"]] != .data[["spatial_ranking"]]
+          .data[["human_climate_only_ranking"]] != .data[["spatial_ranking"]]
       ) |>
       dplyr::left_join(
         table_temporal_spatial_status |>
@@ -487,9 +555,319 @@ list(
       )
   ),
   targets::tar_target(
+    name = output_time_controlled_hvarpart_spd,
+    command = fit_temporal_hvarpart_datasets(
+      data_source = data_hvar_filtered_unique_age,
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_vars_h1,
+      min_unique_ages =
+        spatial_sensitivity_config[["min_unique_ages"]],
+      min_residual_df =
+        spatial_sensitivity_config[["min_temporal_residual_df"]],
+      distance_years =
+        spatial_sensitivity_config[["temporal_distances_years"]],
+      permutations = spatial_sensitivity_config[["permutations"]],
+      seed = spatial_sensitivity_config[["seed"]]
+    )
+  ),
+  targets::tar_target(
+    name = output_time_controlled_hvarpart_events,
+    command = fit_temporal_hvarpart_datasets(
+      data_source = data_hvar_filtered_unique_age,
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_vars_events_h1,
+      min_unique_ages =
+        spatial_sensitivity_config[["min_unique_ages"]],
+      min_residual_df =
+        spatial_sensitivity_config[["min_temporal_residual_df"]],
+      distance_years =
+        spatial_sensitivity_config[["temporal_distances_years"]],
+      permutations = spatial_sensitivity_config[["permutations"]],
+      seed = spatial_sensitivity_config[["seed"]] + 10000L
+    )
+  ),
+  targets::tar_target(
+    name = result_time_controlled_hvarpart_spd,
+    command = summarise_temporal_hvarpart_results(
+      data_results = output_time_controlled_hvarpart_spd,
+      analysis = "spatial_spd"
+    )
+  ),
+  targets::tar_target(
+    name = result_time_controlled_hvarpart_events,
+    command = summarise_temporal_hvarpart_results(
+      data_results = output_time_controlled_hvarpart_events,
+      analysis = "spatial_events"
+    )
+  ),
+  targets::tar_target(
+    name = table_time_control_status,
+    command = dplyr::bind_rows(
+      result_time_controlled_hvarpart_spd[["status"]],
+      result_time_controlled_hvarpart_events[["status"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_time_control_hierarchical_contributions,
+    command = dplyr::bind_rows(
+      result_time_controlled_hvarpart_spd[["components"]],
+      result_time_controlled_hvarpart_events[["components"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_time_control_unique_adjusted_r2,
+    command = dplyr::bind_rows(
+      result_time_controlled_hvarpart_spd[["unique_adjusted_r2"]],
+      result_time_controlled_hvarpart_events[["unique_adjusted_r2"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_time_control_residual_moran,
+    command = dplyr::bind_rows(
+      result_time_controlled_hvarpart_spd[["residual_moran"]],
+      result_time_controlled_hvarpart_events[["residual_moran"]]
+    )
+  ),
+  targets::tar_target(
+    name = data_time_controlled_balance_records_all,
+    command = prepare_time_controlled_importance_records(
+      data_components = table_time_control_hierarchical_contributions,
+      data_status = table_time_control_status,
+      data_meta = data_meta
+    )
+  ),
+  targets::tar_target(
+    name = data_time_controlled_balance_records,
+    command = data_time_controlled_balance_records_all |>
+      dplyr::filter(
+        .data[["analysis"]] == "spatial_spd",
+        is.finite(.data[["signed_balance"]]),
+        .data[["signed_weight"]] > 0,
+        is.finite(.data[["zero_balance"]]),
+        .data[["zero_weight"]] > 0
+      )
+  ),
+  targets::tar_target(
+    name = data_human_climate_only_matched_records,
+    command = prepare_human_climate_only_records(
+      data_records = data_time_controlled_balance_records
+    )
+  ),
+  targets::tar_target(
+    name = table_human_climate_only_matched_estimates,
+    command = summarise_spatial_importance_subset(
+      data_subset = data_human_climate_only_matched_records,
+      sensitivity_type = "human_climate_only"
+    ) |>
+      dplyr::mutate(
+        ranking = dplyr::case_when(
+          .data[["importance_balance"]] > 0 ~ "human",
+          .data[["importance_balance"]] < 0 ~ "climate",
+          .default = "tie"
+        )
+      )
+  ),
+  targets::tar_target(
+    name = output_spatiotemporal_balance_filter,
+    command = fit_spatial_importance(
+      data_records = data_time_controlled_balance_records,
+      permutations = spatial_sensitivity_config[["permutations"]],
+      alpha = spatial_sensitivity_config[["alpha"]],
+      min_unique_locations =
+        spatial_sensitivity_config[["min_unique_locations"]],
+      min_residual_df =
+        spatial_sensitivity_config[["min_residual_df"]],
+      distance_km =
+        spatial_sensitivity_config[["thinning_distances_km"]],
+      seed = spatial_sensitivity_config[["seed"]]
+    )
+  ),
+  targets::tar_target(
+    name = data_spatiotemporal_balance_thinning,
+    command = select_spatial_thinning(
+      data_source = data_time_controlled_balance_records,
+      strata = c("region", "climatezone"),
+      distance_km =
+        spatial_sensitivity_config[["thinning_distances_km"]],
+      repetitions =
+        spatial_sensitivity_config[["thinning_repetitions"]],
+      id_col = "model_id",
+      seed = spatial_sensitivity_config[["seed"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_sensitivity,
+    command = summarise_spatial_importance_sensitivity(
+      data_records = data_time_controlled_balance_records,
+      data_thinning = data_spatiotemporal_balance_thinning
+    )
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_estimates,
+    command = output_spatiotemporal_balance_filter[["estimates"]]
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_moran,
+    command = output_spatiotemporal_balance_filter[["moran_diagnostics"]]
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_dbmem_diagnostics,
+    command = output_spatiotemporal_balance_filter[["dbmem"]][[
+      "diagnostics"
+    ]]
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_dbmem_selection,
+    command = tibble::tibble(
+      status =
+        output_spatiotemporal_balance_filter[["selection"]][["status"]],
+      n_complete =
+        output_spatiotemporal_balance_filter[["selection"]][[
+          "n_complete"
+        ]],
+      n_candidates =
+        output_spatiotemporal_balance_filter[["selection"]][[
+          "n_candidates"
+        ]],
+      global_p_value =
+        output_spatiotemporal_balance_filter[["selection"]][[
+          "global_p_value"
+        ]],
+      full_adjusted_r_squared =
+        output_spatiotemporal_balance_filter[["selection"]][[
+          "full_adjusted_r_squared"
+        ]],
+      selected_terms = stringr::str_c(
+        output_spatiotemporal_balance_filter[["selection"]][[
+          "selected_names"
+        ]],
+        collapse = ";"
+      )
+    )
+  ),
+  targets::tar_target(
+    name = table_spatiotemporal_balance_robustness,
+    command = classify_spatiotemporal_robustness(
+      data_sensitivity = table_spatiotemporal_balance_sensitivity,
+      data_spatial_estimates = table_spatiotemporal_balance_estimates,
+      data_human_climate_only = table_human_climate_only_matched_estimates
+    )
+  ),
+  targets::tar_target(
+    name = output_spatial_controlled_hvarpart_spd,
+    command = fit_spatial_hvarpart_dataset(
+      data_source = data_hvar_timebins_spd_unique_age,
+      analysis = "temporal_spd",
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_vars_h1,
+      permutations = spatial_sensitivity_config[["permutations"]],
+      alpha = spatial_sensitivity_config[["alpha"]],
+      min_unique_locations =
+        spatial_sensitivity_config[["min_unique_locations"]],
+      min_residual_df =
+        spatial_sensitivity_config[["min_residual_df"]],
+      distance_km =
+        spatial_sensitivity_config[["thinning_distances_km"]],
+      seed = spatial_sensitivity_config[["seed"]]
+    )
+  ),
+  targets::tar_target(
+    name = output_spatial_controlled_hvarpart_events,
+    command = fit_spatial_hvarpart_dataset(
+      data_source = data_hvar_timebins_unique_age,
+      analysis = "temporal_events",
+      response_vars = response_vars_h1,
+      predictor_vars = predictor_vars_events_h1,
+      permutations = spatial_sensitivity_config[["permutations"]],
+      alpha = spatial_sensitivity_config[["alpha"]],
+      min_unique_locations =
+        spatial_sensitivity_config[["min_unique_locations"]],
+      min_residual_df =
+        spatial_sensitivity_config[["min_residual_df"]],
+      distance_km =
+        spatial_sensitivity_config[["thinning_distances_km"]],
+      seed = spatial_sensitivity_config[["seed"]] + 10000L
+    )
+  ),
+  targets::tar_target(
+    name = result_spatial_controlled_hvarpart_spd,
+    command = summarise_spatial_hvarpart_results(
+      data_results = output_spatial_controlled_hvarpart_spd
+    )
+  ),
+  targets::tar_target(
+    name = result_spatial_controlled_hvarpart_events,
+    command = summarise_spatial_hvarpart_results(
+      data_results = output_spatial_controlled_hvarpart_events
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_status,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["status"]],
+      result_spatial_controlled_hvarpart_events[["status"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_dbmem_selection,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["selection"]],
+      result_spatial_controlled_hvarpart_events[["selection"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_dbmem_diagnostics,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["dbmem_diagnostics"]],
+      result_spatial_controlled_hvarpart_events[["dbmem_diagnostics"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_hierarchical_contributions,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["components"]],
+      result_spatial_controlled_hvarpart_events[["components"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_unique_adjusted_r2,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["unique_adjusted_r2"]],
+      result_spatial_controlled_hvarpart_events[["unique_adjusted_r2"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_residual_moran,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["residual_moran"]],
+      result_spatial_controlled_hvarpart_events[["residual_moran"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_remaining_signal,
+    command = dplyr::bind_rows(
+      result_spatial_controlled_hvarpart_spd[["remaining_spatial_test"]],
+      result_spatial_controlled_hvarpart_events[["remaining_spatial_test"]]
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_zero_truncated_composition,
+    command = prepare_spatial_hvarpart_composition(
+      data_components = table_spatial_control_hierarchical_contributions,
+      data_status = table_spatial_control_status
+    )
+  ),
+  targets::tar_target(
+    name = table_spatial_control_rankings,
+    command = diagnose_spatial_hvarpart_rankings(
+      data_components = table_spatial_control_hierarchical_contributions,
+      data_status = table_spatial_control_status
+    )
+  ),
+  targets::tar_target(
     name = table_spatial_sensitivity_provenance,
     command = tibble::tibble(
-      analysis = "issue_325_spatial_dependence",
+      analysis = "spatiotemporal_control",
       git_commit = system2(
         command = "git",
         args = c("rev-parse", "HEAD"),
@@ -515,6 +893,14 @@ list(
         spatial_sensitivity_config[["min_unique_locations"]],
       min_residual_df =
         spatial_sensitivity_config[["min_residual_df"]],
+      min_unique_ages =
+        spatial_sensitivity_config[["min_unique_ages"]],
+      min_temporal_residual_df =
+        spatial_sensitivity_config[["min_temporal_residual_df"]],
+      temporal_distances_years = stringr::str_c(
+        spatial_sensitivity_config[["temporal_distances_years"]],
+        collapse = ";"
+      ),
       adespatial_version = as.character(
         utils::packageVersion("adespatial")
       ),

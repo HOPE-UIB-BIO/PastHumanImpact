@@ -58,7 +58,7 @@ data_model_specs <-
     family_key = purrr::map2_chr(
       .x = variable,
       .y = analysis,
-      .f = ~ get_default_model_family_key(
+      .f = ~ resolve_default_model_family_key(
         variable = .x,
         analysis = .y
       )

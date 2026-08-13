@@ -32,7 +32,7 @@ path_store_h1 <-
 
 data_h1_importance <-
   dplyr::bind_rows(
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_spd",
         store = path_store_h1
@@ -54,7 +54,7 @@ data_h1_importance <-
         "climatezone"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_events",
         store = path_store_h1
@@ -76,7 +76,7 @@ data_h1_importance <-
         "climatezone"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_spd",
         store = path_store_h1
@@ -95,7 +95,7 @@ data_h1_importance <-
         "age"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_events",
         store = path_store_h1
@@ -114,7 +114,7 @@ data_h1_importance <-
 #----------------------------------------------------------#
 
 data_decomposition <-
-  get_hvarpart_variance_decomposition(
+  compute_hvarpart_variance_decomposition(
     data_importance = data_h1_importance,
     id_cols = c(
       "analysis",
@@ -179,7 +179,7 @@ table_variance_audit <-
 #----------------------------------------------------------#
 
 data_correlation <-
-  get_hvarpart_correlation_values(
+  compute_hvarpart_correlation_values(
     data_importance = data_h1_importance |>
       dplyr::filter(.data[["analysis"]] == "spatial_spd"),
     id_cols = c(
@@ -226,7 +226,7 @@ data_geo_koppen <-
       .default = ecozone_koppen_5
     )
   ) |>
-  add_climatezone_as_factor()
+  prepare_climatezone_factor()
 
 plot_distribution <-
   plot_hvarpart_adjr2_distribution(
@@ -287,7 +287,7 @@ path_output_tables <-
 
 path_output_figures <-
   here::here(
-    "Outputs/Figures/Extended_data_figures/HVarPart"
+    "Outputs/Figures/Diagnostics/HVarPart"
   )
 
 dir.create(
@@ -358,7 +358,7 @@ readr::write_csv(
   )
 )
 readr::write_csv(
-  data_correlation |> add_climatezone_as_factor(),
+  data_correlation |> prepare_climatezone_factor(),
   file.path(
     path_output_tables,
     "HVarPart_adjr2_human_importance_model_values.csv"

@@ -1,0 +1,147 @@
+analysis,region,age,spatial_group,n_records,n_unique_locations,n_colocated_records,n_positive_mem,threshold_km,warning_message,status
+temporal_spd,Europe,2000,all,389,365,46,82,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,2500,all,392,368,46,83,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,3000,all,387,362,48,81,412.1709840477786,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Europe,3500,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,4000,all,387,363,46,81,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,4500,all,388,364,46,81,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,5000,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,5500,all,385,360,48,82,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,6000,all,387,362,48,81,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,6500,all,380,357,44,80,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,7000,all,388,366,42,83,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,7500,all,383,358,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,8000,all,376,352,46,78,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,Europe,8500,all,359,340,38,75,411.41119655714897,Non euclidean distance,eligible
+temporal_spd,North America,2000,all,540,535,10,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,2500,all,534,529,10,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,3000,all,533,528,10,130,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,3500,all,537,532,10,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,4000,all,545,540,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,4500,all,541,537,8,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,5000,all,539,535,8,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,5500,all,544,539,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,6000,all,535,531,8,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,6500,all,543,538,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,7000,all,540,535,10,134,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,7500,all,542,538,8,136,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,8000,all,532,527,10,131,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,North America,8500,all,523,518,10,129,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Latin America,2000,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,2500,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,3000,all,86,80,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,4000,all,85,79,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,4500,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,5000,all,84,78,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,5500,all,86,80,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,6000,all,82,76,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_spd,Latin America,6500,all,82,76,11,11,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Latin America,7000,all,81,75,11,11,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Latin America,7500,all,81,76,9,10,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Latin America,8000,all,74,69,9,9,2088.890382773922,Non euclidean distance,eligible
+temporal_spd,Latin America,8500,all,71,68,6,10,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Latin America,3500,all,84,79,9,13,2098.9631171848405,Non euclidean distance,eligible
+temporal_spd,Oceania,2000,all,46,46,0,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,2500,all,45,44,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,3000,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,3500,all,46,45,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,4000,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,4500,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,5000,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,5500,all,46,45,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,6000,all,45,44,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,7000,all,42,41,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,7500,all,42,41,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,2000,all,174,171,5,42,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,2500,all,171,168,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,3000,all,174,171,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,3500,all,172,170,4,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,4000,all,174,171,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,4500,all,171,168,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,5000,all,174,171,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,5500,all,173,170,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,6000,all,175,172,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,6500,all,163,161,4,39,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,7000,all,160,158,4,38,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,7500,all,153,152,2,36,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,8000,all,150,148,4,37,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Asia,8500,all,138,136,4,32,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,6500,all,43,42,2,7,2346.3054694835387,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,8000,all,40,39,2,7,2346.3054694835387,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_spd,Oceania,8500,all,39,38,2,6,2346.3054694835387,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Europe,500,all,277,258,36,57,475.52348173311066,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Europe,1000,all,369,346,44,77,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,1500,all,386,362,46,82,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,2000,all,389,365,46,82,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,2500,all,392,368,46,83,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,3000,all,387,362,48,81,412.1709840477786,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Europe,3500,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,4000,all,387,363,46,81,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,4500,all,388,364,46,81,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,5000,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,5500,all,385,360,48,82,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,6000,all,387,362,48,81,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,6500,all,380,357,44,80,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,7000,all,388,366,42,83,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,7500,all,383,358,48,80,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,8000,all,376,352,46,78,411.41119655714897,Non euclidean distance,eligible
+temporal_events,Europe,8500,all,359,340,38,75,411.41119655714897,Non euclidean distance,eligible
+temporal_events,North America,500,all,451,449,4,106,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,1000,all,519,516,6,128,1108.972917364936,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,1500,all,539,534,10,134,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,2000,all,540,535,10,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,2500,all,534,529,10,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,3000,all,533,528,10,130,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,3500,all,537,532,10,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,4000,all,545,540,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,4500,all,541,537,8,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,5000,all,539,535,8,132,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,5500,all,544,539,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,6000,all,535,531,8,133,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,6500,all,543,538,10,135,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,7000,all,540,535,10,134,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,7500,all,542,538,8,136,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,8000,all,532,527,10,131,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,North America,8500,all,523,518,10,129,1102.3683550552284,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,500,all,73,67,11,10,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,1000,all,86,80,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,1500,all,86,81,10,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,2000,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,2500,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,3000,all,86,80,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,4000,all,85,79,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,4500,all,87,81,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,5000,all,84,78,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,5500,all,86,80,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,6000,all,82,76,11,11,1998.094756296175,Non euclidean distance,eligible
+temporal_events,Latin America,6500,all,82,76,11,11,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,7000,all,81,75,11,11,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,7500,all,81,76,9,10,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,8000,all,74,69,9,9,2088.890382773922,Non euclidean distance,eligible
+temporal_events,Latin America,8500,all,71,68,6,10,1998.094756296175,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Latin America,3500,all,84,79,9,13,2098.9631171848405,Non euclidean distance,eligible
+temporal_events,Oceania,500,all,33,32,2,4,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,1000,all,44,43,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,1500,all,45,44,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,2000,all,46,46,0,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,2500,all,45,44,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,3000,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,3500,all,46,45,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Oceania,4000,all,47,46,2,5,3842.7040250381247,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,1500,all,171,168,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,2000,all,174,171,5,42,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,2500,all,171,168,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,3000,all,174,171,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,3500,all,172,170,4,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,4000,all,174,171,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,4500,all,171,168,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,5000,all,174,171,5,40,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,5500,all,173,170,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,6000,all,175,172,5,41,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,6500,all,163,161,4,39,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,7000,all,160,158,4,38,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,7500,all,153,152,2,36,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,8000,all,150,148,4,37,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,8500,all,138,136,4,32,2386.4103701983595,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,1000,all,156,154,4,35,2307.7441142648972,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+temporal_events,Asia,500,all,110,110,0,25,2307.7441142648972,Non euclidean distance,eligible

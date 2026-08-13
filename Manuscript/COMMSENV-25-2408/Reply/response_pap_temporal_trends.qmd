@@ -32,14 +32,14 @@ path_pap_figure_dir <-
   here::here(
     "Outputs",
     "Figures",
-    "Supplementary_figures",
-    "PAP_temporal_trends"
+    "H1",
+    "Temporal"
   )
 
 path_pap_primary <-
   file.path(
     path_pap_figure_dir,
-    "PAP_through_time_primary.png"
+    "pap_trend_primary.png"
   )
 
 vec_pap_variables <-

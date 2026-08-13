@@ -45,7 +45,7 @@ data_assembly_filtered <-
 
 # - select meta data for filtered dataset_id
 data_meta <-
-  get_meta_data(
+  prepare_metadata(
     data_assembly = data_assembly_filtered,
     variables = c(
       "dataset_id",

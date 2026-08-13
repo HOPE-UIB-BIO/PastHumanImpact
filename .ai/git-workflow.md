@@ -44,6 +44,12 @@ the stated operation and expires after it is performed. Earlier approval, an
 existing remote branch, or an existing pull request never authorizes another
 commit or push.
 
+### Commit Message Content
+
+Write commit messages in terms of durable domain behavior and repository changes.
+Never include GitHub issue or pull-request numbers in an authored commit subject or body, including hash-prefixed, `issue_`-prefixed, or `PR`-prefixed numeric forms.
+Keep tracker links in GitHub issue and pull-request metadata rather than making the code history depend on external numbering.
+
 Requests to implement, fix, build, validate, finish a plan, publish, prepare a
 pull request, update a pull request, or continue work are not direct requests to
 commit or push. If the human has not directly requested the agent to perform the

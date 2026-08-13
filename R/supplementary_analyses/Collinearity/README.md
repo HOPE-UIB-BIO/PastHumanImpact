@@ -1,4 +1,4 @@
-# Collinearity Supplementary Bundle
+# PAP Collinearity Analysis
 
 This folder contains runner, pipeline entry, and visualisation scripts for reviewer collinearity analyses.
 
@@ -10,16 +10,16 @@ This folder contains runner, pipeline entry, and visualisation scripts for revie
 
 ## Visualisation Scripts
 
-- `EDA_5a_pap_collinearity_correlation.R`: correlation structure among PAP variables.
-- `EDA_5b_pap_collinearity_hvar_difference.R`: baseline vs reduced predictor importance ratio differences.
-- `EDA_5c_h1_spatial_reduced_simple.R`: simple Figure 2 style chart using reduced predictors.
+- `pap_collinearity_correlation.R`: correlation structure among PAP variables.
+- `pap_collinearity_hvarpart_influence.R`: baseline vs reduced predictor importance ratio differences.
+- `human_climate_balance_reduced_predictors.R`: simplified spatial balance chart using reduced predictors.
 
 ## Output Locations
 
 - Tables: `Outputs/Tables/Collinearity/`
-- Figures: `Outputs/Figures/Extended_data_figures/Collinearity/`
+- Figures: `Outputs/Figures/H1/Spatial/`
 
 ## Related Readmes
 
 - `Outputs/Tables/Collinearity/README.md`
-- `Outputs/Figures/Extended_data_figures/Collinearity/README.md`
+- `Outputs/Figures/H1/Spatial/README.md`

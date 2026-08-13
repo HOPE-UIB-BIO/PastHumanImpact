@@ -20,7 +20,7 @@ path_tables <-
   here::here("Outputs", "Tables")
 
 path_figures <-
-  here::here("Outputs", "Figures", "Supplementary_analyses")
+  here::here("Outputs", "Figures", "Data")
 
 if (
   isFALSE(dir.exists(path_figures))
@@ -31,7 +31,7 @@ if (
 palette_ecozones_labels <-
   palette_ecozones |>
   rlang::set_names(
-    nm = get_climatezone_label(names(palette_ecozones))
+    nm = resolve_climatezone_label(names(palette_ecozones))
   )
 
 format_threshold_axis <- function(x) {
@@ -56,15 +56,15 @@ data_retention_by_region <-
     file.path(path_tables, "pollen_threshold_retention_by_region.csv"),
     show_col_types = FALSE
   ) |>
-  add_region_as_factor()
+  prepare_region_factor()
 
 data_retention_by_region_climatezone <-
   readr::read_csv(
     file.path(path_tables, "pollen_threshold_retention_by_region_climatezone.csv"),
     show_col_types = FALSE
   ) |>
-  add_region_as_factor() |>
-  add_climatezone_as_factor() |>
+  prepare_region_factor() |>
+  prepare_climatezone_factor() |>
   dplyr::filter(
     is.na(climatezone) == FALSE,
     is.na(climatezone_label) == FALSE
@@ -75,8 +75,8 @@ data_sample_rowsums_climatezone <-
     file.path(path_tables, "pollen_sample_rowsums_by_climatezone.csv"),
     show_col_types = FALSE
   ) |>
-  add_region_as_factor() |>
-  add_climatezone_as_factor() |>
+  prepare_region_factor() |>
+  prepare_climatezone_factor() |>
   dplyr::filter(
     is.na(region) == FALSE,
     is.na(climatezone) == FALSE,

@@ -31,7 +31,7 @@ source(
   )
 )
 
-make_dir(
+run_directory_setup(
   paste0(
     data_storage_path,
     "SPD/spd_temp_250"
@@ -44,7 +44,7 @@ make_dir(
 
 # - get polygons for each dataset_id
 data_polygons <-
-  get_polygons(
+  build_spatial_polygons(
     data_source = data_meta,
     distance_buffer = 10 # 10° away from site
   )
@@ -58,11 +58,11 @@ data_c14_path <-
 
 # - load c14 data
 data_c14 <-
-  get_file_from_path(data_c14_path)
+  resolve_file_path(data_c14_path)
 
 # - subset C14 data for each dataset_id and calculate distance to it
 data_c14_subset <-
-  subset_c14_data(
+  filter_radiocarbon_data(
     data_source_c14 = data_c14,
     data_source_polygons = data_polygons,
     data_source_meta = data_meta
@@ -137,7 +137,7 @@ data_c14_as_list_reorder %>%
           )
         )
       ) {
-        get_spd(
+        compute_spd_by_distance(
           data_source_c14 = .x,
           data_source_dist_vec = spd_distance_vec,
           sel_smooth_size = 100,

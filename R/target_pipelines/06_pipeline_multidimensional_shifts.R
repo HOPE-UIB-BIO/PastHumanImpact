@@ -59,7 +59,7 @@ list(
   targets::tar_target(
     name = data_m2_filtered,
     description = "Filtered multidimensional-shift data for H2.",
-    command = get_file_from_path(data_m2_path)
+    command = resolve_file_path(data_m2_path)
   ),
   # # - get the model configuration file
   # targets::tar_target(
@@ -76,7 +76,7 @@ list(
   targets::tar_target(
     name = mod_predicted_merged,
     description = "Merged temporal-model predictions used as H2 predictors.",
-    command = get_all_predicted_general_trends(
+    command = predict_general_trends(
       data_source = mod_config_file
     )
   ),
@@ -84,7 +84,7 @@ list(
   targets::tar_target(
     name = data_for_hvar_h2,
     description = "Combined shifts and predictors for H2 partitioning.",
-    command = get_data_for_h2_hvar(
+    command = prepare_h2_hvarpart_data(
       data_m2 = data_m2_filtered,
       data_predictors = mod_predicted_merged
     )
@@ -93,7 +93,7 @@ list(
   targets::tar_target(
     name = output_hvar_h2_spd,
     description = "H2 partitioning with SPD and climate predictors.",
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_for_hvar_h2,
       response_vars = NULL,
       response_dist = NULL,
@@ -116,7 +116,7 @@ list(
   targets::tar_target(
     name = data_hvarpart_h2_importance,
     description = "Raw signed importance from H2 models.",
-    command = get_hvarpart_importance(
+    command = compute_hvarpart_importance(
       data_source = output_hvar_h2_spd |>
         dplyr::mutate(analysis = "h2_spd"),
       id_cols = c(
@@ -137,7 +137,7 @@ list(
   targets::tar_target(
     name = table_hvarpart_h2_profiles_overall,
     description = "Overall H2 comparison of importance profiles.",
-    command = compare_hvarpart_importance_profiles(
+    command = diagnose_hvarpart_importance_profiles(
       data_importance = data_hvarpart_h2_importance,
       group_vars = "analysis"
     )
@@ -157,7 +157,7 @@ list(
   targets::tar_target(
     name = table_hvarpart_h2_profiles_strata,
     description = "H2 profile comparison by region and climate zone.",
-    command = compare_hvarpart_importance_profiles(
+    command = diagnose_hvarpart_importance_profiles(
       data_importance = data_hvarpart_h2_importance,
       group_vars = c(
         "analysis",

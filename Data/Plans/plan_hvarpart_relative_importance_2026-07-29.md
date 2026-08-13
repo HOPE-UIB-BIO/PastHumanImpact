@@ -24,7 +24,7 @@ redesign is deferred until human review of that recreation.
 ### 2. Replace overlapping importance contracts
 
 - Make
-  `get_hvarpart_importance(data_source, id_cols, expected_predictors)` the
+  `compute_hvarpart_importance(data_source, id_cols, expected_predictors)` the
   canonical extractor.
 - Read `Unique`, `Average.share`, `Individual`, `I.perc(%)`, and total adjusted
   R-squared directly from `varhp_output`.

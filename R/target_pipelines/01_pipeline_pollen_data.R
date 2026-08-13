@@ -55,7 +55,7 @@ list(
   # - load data assembly from path
   targets::tar_target(
     name = data_assembly,
-    command = get_file_from_path(file_assembly_path)
+    command = resolve_file_path(file_assembly_path)
   ),
   # - filter pollen data
   targets::tar_target(
@@ -65,7 +65,7 @@ list(
   # 2. Get pollen data and relevant variables for PAP estimation -----
   targets::tar_target(
     name = data_pollen,
-    command = get_pollen_data(
+    command = prepare_pollen_data(
       data_assembly = data_assembly_filtered,
       variables = c(
         "dataset_id",

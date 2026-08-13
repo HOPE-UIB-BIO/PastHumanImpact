@@ -58,7 +58,7 @@ family_key_by_model <-
   tibble::deframe()
 
 model_config_table <-
-  create_model_config_table(
+  build_model_config_table(
     data_model = data_general_model,
     analysis = "general_temporal",
     family_key = family_key_by_model,
@@ -175,7 +175,7 @@ if (
       dplyr::mutate(
         seed_base = as.integer(set_seed),
         seed_attempt = 1L,
-        sampling_seed = get_model_seed(
+        sampling_seed = resolve_model_seed(
           model_id = model_id,
           seed_attempt = seed_attempt,
           seed_base = seed_base

@@ -20,13 +20,14 @@ source(
 
 path_script <-
   here::here(
-    "R/supplementary_analyses/Spatial_dependence/05_pipeline_h1_spatial_dependence.R"
+    "R/supplementary_analyses/Spatial_dependence",
+    "05_pipeline_h1_spatial_dependence.R"
   )
 path_store <-
   file.path(
     data_storage_path,
     "Targets_data",
-    "analyses_h1_reviewer_spatial_dependence"
+    "analyses_h1_reviewer_spatiotemporal_control"
   )
 
 targets::tar_make(

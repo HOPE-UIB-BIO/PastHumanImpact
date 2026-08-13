@@ -165,7 +165,7 @@ testthat::test_that("failed configured fits advance and record the seed", {
     )
 
   data_config <-
-    create_model_config_table(
+    build_model_config_table(
       data_model = data_model,
       analysis = "pap_temporal",
       family_key = "invalid_family",

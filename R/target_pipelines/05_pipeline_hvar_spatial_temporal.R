@@ -52,7 +52,7 @@ list(
   # Filtered pollen properties for spatial H1 models.
   targets::tar_target(
     name = data_properties_filtered,
-    command = get_file_from_path(data_properties_filtered_path)
+    command = resolve_file_path(data_properties_filtered_path)
   ),
 
   # load data_properties unfiltered range for temporal analysis ----
@@ -68,7 +68,7 @@ list(
   # Unfiltered pollen properties for temporal H1 models.
   targets::tar_target(
     name = data_properties,
-    command = get_file_from_path(data_properties_path)
+    command = resolve_file_path(data_properties_path)
   ),
   # load data_predictors ----
   # File path for filtered H1 predictor data.
@@ -83,7 +83,7 @@ list(
   # Filtered predictors for spatial H1 models.
   targets::tar_target(
     name = data_predictors_filtered,
-    command = get_file_from_path(data_predictor_filtered_path)
+    command = resolve_file_path(data_predictor_filtered_path)
   ),
   # load data_predictors unfiltered range for temporal analysis ----
   # File path for unfiltered H1 predictor data.
@@ -98,13 +98,13 @@ list(
   # Unfiltered predictors for temporal H1 models.
   targets::tar_target(
     name = data_predictors,
-    command = get_file_from_path(data_predictor_path)
+    command = resolve_file_path(data_predictor_path)
   ),
   # - filter data predictors for temporal from 0-8500 ----
   # Public temporal predictors restricted to 0-8.5 ka.
   targets::tar_target(
     name = data_predictors_temporal,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_predictors,
       data_meta = data_meta,
       age_from = 0,
@@ -116,7 +116,7 @@ list(
   # Public temporal pollen properties restricted to 0-8.5 ka.
   targets::tar_target(
     name = data_properties_temporal,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_properties,
       data_meta = data_meta,
       age_from = 0,
@@ -128,7 +128,7 @@ list(
   # Combined temporal properties and predictors for H1.
   targets::tar_target(
     name = data_hvar_temporal,
-    command = get_data_combined(
+    command = prepare_combined_data(
       data_source_properties = data_properties_temporal,
       data_source_predictors = data_predictors_temporal
     )
@@ -137,7 +137,7 @@ list(
   # Combined filtered properties and predictors for H1.
   targets::tar_target(
     name = data_hvar_filtered,
-    command = get_data_combined(
+    command = prepare_combined_data(
       data_source_properties = data_properties_filtered,
       data_source_predictors = data_predictors_filtered
     )
@@ -146,7 +146,7 @@ list(
   # Temporal H1 data aggregated into analysis time bins.
   targets::tar_target(
     name = data_hvar_timebins,
-    command = get_data_timebin(
+    command = prepare_hvarpart_timebin_data(
       data_source = data_hvar_temporal,
       data_meta = data_meta
     )
@@ -162,7 +162,7 @@ list(
   # Spatial H1 partitioning with SPD as human predictor.
   targets::tar_target(
     name = output_spatial_spd,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_filtered,
       response_dist = NULL,
       data_response_dist = NULL,
@@ -197,7 +197,7 @@ list(
   # Spatial H1 partitioning with event predictors.
   targets::tar_target(
     name = output_spatial_events,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_filtered,
       response_dist = NULL,
       data_response_dist = NULL,
@@ -242,7 +242,7 @@ list(
   # Temporal H1 SPD partitioning restricted to 2-8.5 ka.
   targets::tar_target(
     name = output_temporal_spd,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_timebins_spd,
       response_dist = NULL,
       data_response_dist = NULL,
@@ -277,7 +277,7 @@ list(
   # Temporal H1 partitioning with event predictors.
   targets::tar_target(
     name = output_temporal_events,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_timebins,
       response_dist = NULL,
       data_response_dist = NULL,
@@ -322,7 +322,7 @@ list(
   # Raw signed importance from spatial SPD models.
   targets::tar_target(
     name = data_hvarpart_spatial_spd_importance,
-    command = get_hvarpart_importance(
+    command = compute_hvarpart_importance(
       data_source = output_spatial_spd |>
         dplyr::left_join(
           data_meta |>
@@ -345,7 +345,7 @@ list(
   # Raw signed importance from spatial event models.
   targets::tar_target(
     name = data_hvarpart_spatial_events_importance,
-    command = get_hvarpart_importance(
+    command = compute_hvarpart_importance(
       data_source = output_spatial_events |>
         dplyr::left_join(
           data_meta |>
@@ -368,7 +368,7 @@ list(
   # Raw signed importance from temporal SPD models.
   targets::tar_target(
     name = data_hvarpart_temporal_spd_importance,
-    command = get_hvarpart_importance(
+    command = compute_hvarpart_importance(
       data_source = output_temporal_spd |>
         dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500)) |>
         dplyr::mutate(analysis = "temporal_spd"),
@@ -382,7 +382,7 @@ list(
   # Raw signed importance from temporal event models.
   targets::tar_target(
     name = data_hvarpart_temporal_events_importance,
-    command = get_hvarpart_importance(
+    command = compute_hvarpart_importance(
       data_source = output_temporal_events |>
         dplyr::mutate(analysis = "temporal_events"),
       id_cols = c(
@@ -413,7 +413,7 @@ list(
   # Overall H1 comparison of importance profiles.
   targets::tar_target(
     name = table_hvarpart_h1_profiles_overall,
-    command = compare_hvarpart_importance_profiles(
+    command = diagnose_hvarpart_importance_profiles(
       data_importance = data_hvarpart_h1_importance,
       group_vars = "analysis"
     )
@@ -446,7 +446,7 @@ list(
           "spatial_events"
         )
       ) |>
-      compare_hvarpart_importance_profiles(
+      diagnose_hvarpart_importance_profiles(
         group_vars = c(
           "analysis",
           "region",
@@ -482,7 +482,7 @@ list(
           "temporal_events"
         )
       ) |>
-      compare_hvarpart_importance_profiles(
+      diagnose_hvarpart_importance_profiles(
         group_vars = c(
           "analysis",
           "region",
@@ -493,7 +493,7 @@ list(
   # Signed and bounded model decompositions for all H1 analyses.
   targets::tar_target(
     name = data_hvarpart_h1_decomposition,
-    command = get_hvarpart_variance_decomposition(
+    command = compute_hvarpart_variance_decomposition(
       data_importance = data_hvarpart_h1_importance,
       id_cols = c(
         "analysis",
@@ -538,7 +538,7 @@ list(
   # Model values for spatial SPD fit-importance correlations.
   targets::tar_target(
     name = data_hvarpart_spatial_spd_correlation_values,
-    command = get_hvarpart_correlation_values(
+    command = compute_hvarpart_correlation_values(
       data_importance = data_hvarpart_spatial_spd_importance,
       id_cols = c(
         "analysis",

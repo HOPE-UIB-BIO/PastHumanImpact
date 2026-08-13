@@ -36,15 +36,15 @@ without changing `renv/library_list.lock` or adding dependencies.
 
 | Artifact | SHA-256 |
 | --- | --- |
-| `Outputs/Figures/Figure2_h1_spatial.png` | `16CD6D4C339A3C41C6AA5C1951E124306CB4F1CA4180D4DA3AFF36C95A3A5B15` |
-| `Outputs/Figures/Figure2_h1_spatial.pdf` | `BB06DC4B37E23FB12666D46B224ADD8A0F1AC55E5B65C7E4D58CBEB2F39B05EE` |
-| `Outputs/Figures/Figure3_h1_temporal.png` | `CA40D22A30331E80B268FF6C05460784FD375740AAD4433577E30370A8C8179F` |
-| `Outputs/Figures/Figure3_h1_temporal.pdf` | `975B1DF1BF6A4426A946EA6F660CDBE30CCEDF85A6A5993B62000F7ADFFFD3A6` |
-| `Outputs/Figures/Figure4_h2.png` | `07075BB47808BFFAC880586CB8A52F2EF3BA3CBC2CD2FA22C6348267D73EEB47` |
-| `Outputs/Figures/Figure4_h2.pdf` | `9CF3A84E632A59BB10A672B5853628563CDFD7FBE7E2E3E87092F436E20B5F87` |
-| `Outputs/Figures/Supplementary_figures/Core_examples/HVarPart_core_temporal_examples.png` | `2D5F1FC5D9B2606A4C50C5514D09302F152A104E071CB9FB506B17CA30B73F0F` |
-| `Outputs/Figures/Supplementary_figures/Core_examples/HVarPart_core_temporal_examples.pdf` | `B386B547C3D2D39DAB1EAEF78AD8B3B7A45725CF27D0F7C5271DEAD917C7B562` |
-| `Outputs/Figures/Extended_data_figures/Collinearity/EDA_5b_pap_collinearity_hvar_influence.png` | `E21525E467AD835D15DC792198D8FFD4A6BEF3F29C9D31CF9614AE29286C17F6` |
-| `Outputs/Figures/Extended_data_figures/Collinearity/EDA_5b_pap_collinearity_hvar_influence.pdf` | `4C6B5F4E82868E0DCBF57C078355362CE1700CD2DF0E0184A8059523565AA5C1` |
-| `Outputs/Figures/Extended_data_figures/Collinearity/EDA_5c_h1_spatial_reduced_simple.png` | `4B41BF04AAE043A78CB6C10A3D2554153804338C3DA28832D2D670D58A68006A` |
-| `Outputs/Figures/Extended_data_figures/Collinearity/EDA_5c_h1_spatial_reduced_simple.pdf` | `B93D1A3A9DB4DEA381A07555F331CD905C171768B929FCDB2719386BDCD962F6` |
+| `Outputs/Figures/H1/Spatial/human_climate_balance_time_and_space_controlled.png` | `16CD6D4C339A3C41C6AA5C1951E124306CB4F1CA4180D4DA3AFF36C95A3A5B15` |
+| `Outputs/Figures/H1/Spatial/human_climate_balance_time_and_space_controlled.pdf` | `BB06DC4B37E23FB12666D46B224ADD8A0F1AC55E5B65C7E4D58CBEB2F39B05EE` |
+| `Outputs/Figures/H1/Temporal/HVarPart/human_climate_space_zero_truncated_hierarchical_composition.png` | `CA40D22A30331E80B268FF6C05460784FD375740AAD4433577E30370A8C8179F` |
+| `Outputs/Figures/H1/Temporal/HVarPart/human_climate_space_zero_truncated_hierarchical_composition.pdf` | `975B1DF1BF6A4426A946EA6F660CDBE30CCEDF85A6A5993B62000F7ADFFFD3A6` |
+| `Outputs/Figures/H2/Interrelationships/predictor_interrelationships.png` | `07075BB47808BFFAC880586CB8A52F2EF3BA3CBC2CD2FA22C6348267D73EEB47` |
+| `Outputs/Figures/H2/Interrelationships/predictor_interrelationships.pdf` | `9CF3A84E632A59BB10A672B5853628563CDFD7FBE7E2E3E87092F436E20B5F87` |
+| `Outputs/Figures/H1/Dataset_trends/HVarPart_core_temporal_examples.png` | `2D5F1FC5D9B2606A4C50C5514D09302F152A104E071CB9FB506B17CA30B73F0F` |
+| `Outputs/Figures/H1/Dataset_trends/HVarPart_core_temporal_examples.pdf` | `B386B547C3D2D39DAB1EAEF78AD8B3B7A45725CF27D0F7C5271DEAD917C7B562` |
+| `Outputs/Figures/H1/Spatial/pap_collinearity_hvarpart_influence.png` | `E21525E467AD835D15DC792198D8FFD4A6BEF3F29C9D31CF9614AE29286C17F6` |
+| `Outputs/Figures/H1/Spatial/pap_collinearity_hvarpart_influence.pdf` | `4C6B5F4E82868E0DCBF57C078355362CE1700CD2DF0E0184A8059523565AA5C1` |
+| `Outputs/Figures/H1/Spatial/human_climate_balance_reduced_predictors.png` | `4B41BF04AAE043A78CB6C10A3D2554153804338C3DA28832D2D670D58A68006A` |
+| `Outputs/Figures/H1/Spatial/human_climate_balance_reduced_predictors.pdf` | `B93D1A3A9DB4DEA381A07555F331CD905C171768B929FCDB2719386BDCD962F6` |

@@ -4,7 +4,7 @@ testthat::test_that(
     data_sensitivity <-
       tibble::tibble(
         sensitivity_type = c(
-          "baseline",
+          "unthinned",
           rep("thinning", 4),
           "leave_region_out",
           "leave_climatezone_out"
@@ -43,7 +43,7 @@ testthat::test_that(
   {
     data_sensitivity <-
       tibble::tibble(
-        sensitivity_type = c("baseline", "thinning"),
+        sensitivity_type = c("unthinned", "thinning"),
         aggregation_level = "overall",
         profile = "signed",
         distance_km = c(NA, 250),

@@ -16,9 +16,17 @@ source(here::here("R/00_Config_file.R"))
 
 table_dir <- here::here("Outputs/Tables/HVarPart")
 general_table_dir <- here::here("Outputs/Tables")
-figure_dir <- here::here("Outputs/Figures")
-supplementary_figure_dir <- here::here(
-  "Outputs/Figures/Extended_data_figures/HVarPart"
+spatial_figure_dir <-
+  here::here("Outputs/Figures/H1/Spatial")
+
+temporal_figure_dir <-
+  here::here("Outputs/Figures/H1/Temporal/HVarPart")
+
+interrelationships_figure_dir <-
+  here::here("Outputs/Figures/H2/Interrelationships")
+
+diagnostic_figure_dir <- here::here(
+  "Outputs/Figures/Diagnostics/HVarPart"
 )
 
 #----------------------------------------------------------#
@@ -45,33 +53,33 @@ data_profiles <- readr::read_csv(
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_figure2 <- readr::read_csv(
-  file.path(table_dir, "figure2_record_values.csv"),
+data_untruncated_spatial_contributions <- readr::read_csv(
+  file.path(table_dir, "human_climate_balance_untruncated_dataset_values.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_figure2_balance <- readr::read_csv(
-  file.path(table_dir, "figure2_balance_record_values.csv"),
+data_time_space_controlled_balance <- readr::read_csv(
+  file.path(table_dir, "human_climate_balance_time_space_controlled_dataset_values.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_figure2_balance_climatezone <- readr::read_csv(
-  file.path(table_dir, "figure2_balance_climatezone_values.csv"),
+data_time_space_controlled_climate_zone <- readr::read_csv(
+  file.path(table_dir, "human_climate_balance_time_space_controlled_climate_zone_values.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_figure2_balance_region <- readr::read_csv(
-  file.path(table_dir, "figure2_balance_region_values.csv"),
+data_time_space_controlled_region <- readr::read_csv(
+  file.path(table_dir, "human_climate_balance_region_values.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_temporal_balance <- readr::read_csv(
-  file.path(general_table_dir, "summary_temporal_balance.csv"),
+  file.path(general_table_dir, "human_climate_temporal_balance.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_figure4 <- readr::read_csv(
-  file.path(table_dir, "figure4_importance_values.csv"),
+data_interrelationships <- readr::read_csv(
+  file.path(table_dir, "predictor_interrelationships_importance_values.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
@@ -122,50 +130,50 @@ audit_ok <- all(
       audit_overall$n_non_finite_individual
 )
 
-figure2_signed_ok <- all(
+plot_untruncated_spatial_contributions_ok <- all(
   abs(
-    data_figure2$signed_allocation -
-      data_figure2$individual / data_figure2$total_adjusted_r_squared
+    data_untruncated_spatial_contributions$signed_allocation -
+      data_untruncated_spatial_contributions$individual / data_untruncated_spatial_contributions$total_adjusted_r_squared
   ) < 1e-12
 )
-figure2_zero_ok <- all(
+spatial_zero_truncated_values_ok <- all(
   abs(
-    data_figure2$zero_truncated_allocation -
-      data_figure2$zero_truncated_individual /
-        data_figure2$zero_truncated_total
+    data_untruncated_spatial_contributions$zero_truncated_allocation -
+      data_untruncated_spatial_contributions$zero_truncated_individual /
+        data_untruncated_spatial_contributions$zero_truncated_total
   ) < 1e-12
 )
-figure2_human_only_ok <- identical(
-  unique(data_figure2$predictor),
+spatial_human_only_ok <- identical(
+  unique(data_untruncated_spatial_contributions$predictor),
   "human"
 )
-figure2_balance_formula_ok <- all(
+plot_time_space_controlled_balance_formula_ok <- all(
   abs(
-    data_figure2_balance$importance_balance -
+    data_time_space_controlled_balance$importance_balance -
       (
-        data_figure2_balance$human -
-          data_figure2_balance$climate
+        data_time_space_controlled_balance$human -
+          data_time_space_controlled_balance$climate
       )
   ) < 1e-12
 )
-figure2_balance_range_ok <- all(
-  data_figure2_balance$importance_balance >= -1 &
-    data_figure2_balance$importance_balance <= 1
+plot_time_space_controlled_balance_range_ok <- all(
+  data_time_space_controlled_balance$importance_balance >= -1 &
+    data_time_space_controlled_balance$importance_balance <= 1
 )
-figure2_balance_pooled_ok <- all(
+plot_time_space_controlled_balance_pooled_ok <- all(
   abs(
-    data_figure2_balance_climatezone$importance_balance -
+    data_time_space_controlled_climate_zone$importance_balance -
       (
-        data_figure2_balance_climatezone$human -
-          data_figure2_balance_climatezone$climate
+        data_time_space_controlled_climate_zone$human -
+          data_time_space_controlled_climate_zone$climate
       )
   ) < 1e-12
 ) && all(
   abs(
-    data_figure2_balance_region$importance_balance -
+    data_time_space_controlled_region$importance_balance -
       (
-        data_figure2_balance_region$human -
-          data_figure2_balance_region$climate
+        data_time_space_controlled_region$human -
+          data_time_space_controlled_region$climate
       )
   ) < 1e-12
 )
@@ -188,21 +196,21 @@ temporal_balance_age_domain_ok <- all(
   data_temporal_balance$analysis == "temporal_spd" &
     data_temporal_balance$age < 2000
 )
-data_figure4_balance <-
-  data_figure4 |>
+data_interrelationships_balance <-
+  data_interrelationships |>
   dplyr::filter(.data[["profile"]] == "balance")
-figure4_balance_formula_ok <- all(
+interrelationships_balance_formula_ok <- all(
   abs(
-    data_figure4_balance$importance_balance -
+    data_interrelationships_balance$importance_balance -
       (
-        data_figure4_balance$human -
-          data_figure4_balance$climate
+        data_interrelationships_balance$human -
+          data_interrelationships_balance$climate
       )
   ) < 1e-12
 )
-figure4_balance_range_ok <- all(
-  data_figure4_balance$importance_balance >= -1 &
-    data_figure4_balance$importance_balance <= 1
+interrelationships_balance_range_ok <- all(
+  data_interrelationships_balance$importance_balance >= -1 &
+    data_interrelationships_balance$importance_balance <= 1
 )
 
 conclusion_ok <-
@@ -237,51 +245,93 @@ artifact_paths <- c(
   file.path(table_dir, "hvarpart_components.csv"),
   file.path(table_dir, "hvarpart_model_audit.csv"),
   file.path(table_dir, "hvarpart_profile_comparison.csv"),
-  file.path(table_dir, "figure2_record_values.csv"),
-  file.path(table_dir, "figure2_pooled_values.csv"),
-  file.path(table_dir, "figure2_region_values.csv"),
-  file.path(table_dir, "figure2_balance_record_values.csv"),
-  file.path(table_dir, "figure2_balance_climatezone_values.csv"),
-  file.path(table_dir, "figure2_balance_region_values.csv"),
-  file.path(general_table_dir, "summary_temporal_balance.csv"),
-  file.path(table_dir, "figure4_importance_values.csv"),
-  file.path(figure_dir, "Figure2_h1_spatial.png"),
-  file.path(figure_dir, "Figure2_h1_spatial.pdf"),
-  file.path(figure_dir, "Figure3_h1_temporal.png"),
-  file.path(figure_dir, "Figure3_h1_temporal.pdf"),
-  file.path(figure_dir, "Figure4_h2.png"),
-  file.path(figure_dir, "Figure4_h2.pdf"),
+  file.path(table_dir, "human_climate_balance_untruncated_dataset_values.csv"),
+  file.path(table_dir, "human_climate_balance_untruncated_climate_zone_values.csv"),
+  file.path(table_dir, "human_climate_balance_untruncated_region_values.csv"),
+  file.path(table_dir, "human_climate_balance_time_space_controlled_dataset_values.csv"),
+  file.path(table_dir, "human_climate_balance_time_space_controlled_climate_zone_values.csv"),
+  file.path(table_dir, "human_climate_balance_region_values.csv"),
+  file.path(general_table_dir, "human_climate_temporal_balance.csv"),
+  file.path(table_dir, "predictor_interrelationships_importance_values.csv"),
   file.path(
-    supplementary_figure_dir,
-    "Figure2_h1_spatial_signed_full_range.png"
+    spatial_figure_dir,
+    "human_climate_balance_time_and_space_controlled.png"
   ),
   file.path(
-    supplementary_figure_dir,
-    "Figure2_h1_spatial_signed_full_range.pdf"
+    spatial_figure_dir,
+    "human_climate_balance_time_and_space_controlled.pdf"
   ),
   file.path(
-    supplementary_figure_dir,
-    "Figure3_h1_temporal_signed_full_range.png"
+    temporal_figure_dir,
+    paste0(
+      "human_climate_space_",
+      "zero_truncated_hierarchical_composition.png"
+    )
   ),
   file.path(
-    supplementary_figure_dir,
-    "Figure3_h1_temporal_signed_full_range.pdf"
+    temporal_figure_dir,
+    paste0(
+      "human_climate_space_",
+      "zero_truncated_hierarchical_composition.pdf"
+    )
   ),
   file.path(
-    supplementary_figure_dir,
-    "Figure4_h2_signed_full_range.png"
+    interrelationships_figure_dir,
+    "predictor_interrelationships.png"
   ),
   file.path(
-    supplementary_figure_dir,
-    "Figure4_h2_signed_full_range.pdf"
+    interrelationships_figure_dir,
+    "predictor_interrelationships.pdf"
   ),
   file.path(
-    supplementary_figure_dir,
-    "hvarpart_profile_comparison.png"
+    spatial_figure_dir,
+    paste0(
+      "human_climate_balance_",
+      "untruncated_hierarchical_contributions.png"
+    )
   ),
   file.path(
-    supplementary_figure_dir,
-    "hvarpart_profile_comparison.pdf"
+    spatial_figure_dir,
+    paste0(
+      "human_climate_balance_",
+      "untruncated_hierarchical_contributions.pdf"
+    )
+  ),
+  file.path(
+    temporal_figure_dir,
+    paste0(
+      "human_climate_only_",
+      "untruncated_hierarchical_contributions.png"
+    )
+  ),
+  file.path(
+    temporal_figure_dir,
+    paste0(
+      "human_climate_only_",
+      "untruncated_hierarchical_contributions.pdf"
+    )
+  ),
+  file.path(
+    interrelationships_figure_dir,
+    paste0(
+      "predictor_interrelationships_",
+      "untruncated_hierarchical_contributions.png"
+    )
+  ),
+  file.path(
+    interrelationships_figure_dir,
+    paste0(
+      "predictor_interrelationships_",
+      "untruncated_hierarchical_contributions.pdf"
+    )
+  ),
+  file.path(
+    diagnostic_figure_dir,
+    "hierarchical_profile_comparison.png"
+  ),
+  file.path(
+    diagnostic_figure_dir,
+    "hierarchical_profile_comparison.pdf"
   )
 )
 
@@ -292,17 +342,17 @@ validation <- tibble::tibble(
     "signed_direct_formula",
     "paired_signed_allocations_sum_to_one",
     "audit_exclusions_reconcile",
-    "figure2_signed_values_match_components",
-    "figure2_zero_truncated_values_match_components",
-    "figure2_signed_supplement_displays_human_only",
-    "figure2_balance_matches_human_minus_climate",
-    "figure2_balance_is_bounded",
-    "figure2_balance_pooled_values_reconcile",
-    "figure3_balance_matches_human_minus_climate",
-    "figure3_balance_is_bounded",
-    "figure3_spd_is_restricted_to_2_8.5_ka",
-    "figure4_balance_matches_human_minus_climate",
-    "figure4_balance_is_bounded",
+    "plot_untruncated_spatial_contributions_values_match_components",
+    "spatial_zero_truncated_values_match_components",
+    "plot_untruncated_spatial_contributions_supplement_displays_human_only",
+    "plot_time_space_controlled_balance_matches_human_minus_climate",
+    "plot_time_space_controlled_balance_is_bounded",
+    "plot_time_space_controlled_balance_pooled_values_reconcile",
+    "temporal_balance_matches_human_minus_climate",
+    "temporal_balance_is_bounded",
+    "temporal_spd_is_restricted_to_2_8.5_ka",
+    "interrelationships_balance_matches_human_minus_climate",
+    "interrelationships_balance_is_bounded",
     "climate_larger_under_all_profiles",
     "profile_comparison_contains_model_distributions",
     "main_and_signed_supplementary_artifacts_exist"
@@ -318,17 +368,17 @@ validation <- tibble::tibble(
     formula_ok,
     paired_sum_ok,
     audit_ok,
-    figure2_signed_ok,
-    figure2_zero_ok,
-    figure2_human_only_ok,
-    figure2_balance_formula_ok,
-    figure2_balance_range_ok,
-    figure2_balance_pooled_ok,
+    plot_untruncated_spatial_contributions_ok,
+    spatial_zero_truncated_values_ok,
+    spatial_human_only_ok,
+    plot_time_space_controlled_balance_formula_ok,
+    plot_time_space_controlled_balance_range_ok,
+    plot_time_space_controlled_balance_pooled_ok,
     temporal_balance_formula_ok,
     temporal_balance_range_ok,
     temporal_balance_age_domain_ok,
-    figure4_balance_formula_ok,
-    figure4_balance_range_ok,
+    interrelationships_balance_formula_ok,
+    interrelationships_balance_range_ok,
     conclusion_ok,
     profile_model_distribution_ok,
     all(file.exists(artifact_paths))

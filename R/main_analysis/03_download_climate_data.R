@@ -55,7 +55,7 @@ if (
 ) {
   # - load table
   time_ref_table <-
-    get_file_from_path(
+    resolve_file_path(
       paste0(
         data_storage_path,
         "Climate/time_reference_table.rds"
@@ -64,7 +64,7 @@ if (
 
   # - download CHELSA data
   data_climate_chelsa <-
-    get_climate_data(
+    load_climate_data(
       variables_selected = c("bio", "tasmin"),
       bio_var_selected = c(1, 6, 12, 15, 18, 19),
       time_var_selected = c(20:-200),
@@ -74,7 +74,7 @@ if (
 
   # - get climate variables
   data_climate <-
-    get_climate_indices(
+    compute_climate_indices(
       data_source = data_climate_chelsa,
       time_ref = time_ref_table
     )

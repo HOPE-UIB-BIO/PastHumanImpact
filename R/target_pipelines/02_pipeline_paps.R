@@ -50,13 +50,13 @@ list(
   ),
   targets::tar_target(
     name = data_pollen,
-    command = get_file_from_path(data_pollen_path)
+    command = resolve_file_path(data_pollen_path)
   ),
   # 3. Estimate PAPs -----
   # - calculate diversity
   targets::tar_target(
     name = data_diversity,
-    command = get_diversity(
+    command = compute_diversity(
       data_pollen,
       n_rand = 999,
       sel_method = "taxonomic"
@@ -67,7 +67,7 @@ list(
   # - use percentages without prior transformations
   targets::tar_target(
     name = data_dcca,
-    command = get_dcca(
+    command = compute_dcca(
       data_pollen,
       sel_method = "constrained",
       var_name_pred = "age",
@@ -79,7 +79,7 @@ list(
   # - calculate Rate-of-change (RoC)
   targets::tar_target(
     name = data_roc,
-    command = get_roc(
+    command = compute_roc(
       data_pollen,
       smoothing_method = "age.w",
       min_points_smoothing = 5,
@@ -100,7 +100,7 @@ list(
   # - use percentages without prior transformation
   targets::tar_target(
     name = data_mrt,
-    command = get_mrt(
+    command = compute_mrt(
       data_pollen,
       n_rand = 999,
       transformation_coef = "chisq"
@@ -120,12 +120,12 @@ list(
   # - calculate change points of all PAP variables by regression trees (RT)
   targets::tar_target(
     name = data_change_points,
-    command = get_change_points_pap(data_prepared_cp)
+    command = compute_pap_change_points(data_prepared_cp)
   ),
   # - calculate density of change points
   targets::tar_target(
     name = data_density_estimate,
-    command = get_density_pap_combined(
+    command = aggregate_density_pap(
       data_source_change_points = data_change_points,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time,
@@ -136,7 +136,7 @@ list(
   # - merge diversity and DCCA and prepare for modelling
   targets::tar_target(
     name = data_diversity_and_dcca,
-    command = get_diversity_and_dcca_for_modelling(
+    command = prepare_diversity_dcca_model_data(
       data_source_diversity = data_diversity,
       data_source_dcca = data_dcca,
       data_source_pollen = data_pollen
@@ -145,7 +145,7 @@ list(
   # - estimate diversity and DCCA on equal time slices
   targets::tar_target(
     name = data_div_dcca_interpolated,
-    command = get_interpolated_data(
+    command = prepare_interpolated_model_data(
       data_source = data_diversity_and_dcca,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
@@ -162,12 +162,12 @@ list(
   # - prepare RoC for modelling
   targets::tar_target(
     name = data_roc_for_modelling,
-    command = get_roc_for_modelling(data_roc)
+    command = prepare_roc_model_data(data_roc)
   ),
   # - estimate RoC on equal time slices
   targets::tar_target(
     name = data_roc_interpolated,
-    command = get_interpolated_data(
+    command = prepare_interpolated_model_data(
       data_source = data_roc_for_modelling,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
@@ -184,7 +184,7 @@ list(
   # - merge PAPs together
   targets::tar_target(
     name = data_properties,
-    command = get_data_properties(
+    command = summarise_data_properties(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
       data_source_density = data_density_estimate,
@@ -194,7 +194,7 @@ list(
   # - filter data properties for analyses ----
   targets::tar_target(
     name = data_properties_filtered,
-    command = get_data_filtered(
+    command = prepare_filtered_hvarpart_data(
       data_source = data_properties,
       data_meta = data_meta,
       age_from = 2000,
@@ -205,7 +205,7 @@ list(
   # - get data multidimensional shifts (procrustes m2)
   targets::tar_target(
     name = data_m2_filtered,
-    command = get_data_m2(
+    command = prepare_m2_data(
       data_source = data_properties_filtered,
       data_meta = data_meta,
       min_samples = 5,

@@ -1,4 +1,4 @@
-region,age,human_climate_human,human_climate_climate,human_climate_space_human,human_climate_space_climate,baseline_balance,spatial_balance,baseline_ranking,spatial_ranking,ranking_changed,status,n_selected
+region,age,human_climate_human,human_climate_climate,human_climate_space_human,human_climate_space_climate,human_climate_only_balance,spatial_balance,human_climate_only_ranking,spatial_ranking,ranking_changed,status,n_selected
 Europe,2000,0.0035,0.0924,0.003,0.0725,-0.08889999999999999,-0.06949999999999999,climate,climate,FALSE,spatial_model_estimated,7
 Europe,2500,0.0041,0.0791,0.0025,0.072,-0.075,-0.06949999999999999,climate,climate,FALSE,spatial_model_estimated,8
 Europe,3000,0.0057,0.0582,0.0126,0.0502,-0.052500000000000005,-0.0376,climate,climate,FALSE,spatial_model_estimated,8

@@ -74,7 +74,7 @@ legacy_model_audit <-
   purrr::map(
     .progress = "Auditing legacy temporal models",
     .x = legacy_model_ids,
-    .f = ~ audit_legacy_model_provenance(
+    .f = ~ diagnose_legacy_model_provenance(
       model_id = .x,
       model_dir = path_model_dir
     )
@@ -85,7 +85,7 @@ recorded_model_audit <-
   purrr::map(
     .progress = "Auditing recorded temporal models",
     .x = recorded_model_ids,
-    .f = ~ audit_legacy_model_provenance(
+    .f = ~ diagnose_legacy_model_provenance(
       model_id = .x,
       model_dir = path_model_dir
     )
@@ -123,7 +123,7 @@ RUtilpol::save_latest_file(
 #----------------------------------------------------------#
 
 model_config_updated <-
-  apply_model_provenance_audit(
+  evaluate_model_provenance(
     data_config = model_config,
     data_audit = model_provenance_audit
   )

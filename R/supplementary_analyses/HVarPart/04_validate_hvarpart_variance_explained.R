@@ -22,7 +22,7 @@ path_output_tables <-
 
 path_output_figures <-
   here::here(
-    "Outputs/Figures/Extended_data_figures/HVarPart"
+    "Outputs/Figures/Diagnostics/HVarPart"
   )
 
 tolerance <- 0.001
@@ -213,7 +213,7 @@ recomputed_grid <-
   )
 checked_grid <-
   table_grid |>
-  add_climatezone_as_factor() |>
+  prepare_climatezone_factor() |>
   dplyr::select(dplyr::all_of(names(recomputed_grid))) |>
   dplyr::mutate(
     climatezone = as.character(.data[["climatezone"]])
@@ -298,7 +298,7 @@ stopifnot(
   all(unique(data_correlation[["region"]]) %in% unname(vec_regions)),
   all(
     unique(data_correlation[["climatezone_label"]]) %in%
-      get_climatezone_label(data_climate_zones[["climatezone_label"]])
+      resolve_climatezone_label(data_climate_zones[["climatezone_label"]])
   )
 )
 

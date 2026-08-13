@@ -52,7 +52,7 @@ list(
   ),
   targets::tar_target(
     name = data_properties_filtered,
-    command = get_file_from_path(data_properties_filtered_path)
+    command = resolve_file_path(data_properties_filtered_path)
   ),
 
   # load data_predictors ----
@@ -69,12 +69,12 @@ list(
   ),
   targets::tar_target(
     name = data_predictors_filtered,
-    command = get_file_from_path(data_predictor_filtered_path)
+    command = resolve_file_path(data_predictor_filtered_path)
   ),
   # - combine properties and predictors for hvar spatial ----
   targets::tar_target(
     name = data_hvar_filtered,
-    command = get_data_combined(
+    command = prepare_combined_data(
       data_source_properties = data_properties_filtered,
       data_source_predictors = data_predictors_filtered
     )
@@ -120,7 +120,7 @@ list(
   # - PAP collinearity summary for H1 spatial data ----
   targets::tar_target(
     name = output_pap_collinearity_spatial,
-    command = get_pap_collinearity(
+    command = diagnose_pap_collinearity(
       data_source = data_hvar_filtered_with_meta,
       pap_vars = pap_response_vars_h1_baseline,
       group_var = c("region", "climatezone"),
@@ -134,7 +134,7 @@ list(
   # - reduced PAP response set for collinearity sensitivity ----
   targets::tar_target(
     name = pap_response_vars_h1_reduced_collinear_v1,
-    command = get_pap_reduced_vars(
+    command = select_reduced_pap_predictors(
       data_collinearity = output_pap_collinearity_spatial,
       min_selected_fraction = 0.5
     )
@@ -142,7 +142,7 @@ list(
   # - Hierarchical variation partitioning: baseline spatial SPD ----
   targets::tar_target(
     name = output_spatial_spd,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_filtered,
       response_dist = NULL,
       data_response_dist = NULL,
@@ -166,7 +166,7 @@ list(
   # - reduced PAP sensitivity: spatial SPD ----
   targets::tar_target(
     name = output_spatial_spd_reduced_collinear_v1,
-    command = run_hvarpart(
+    command = fit_hvarpart_models(
       data_source = data_hvar_filtered,
       response_dist = NULL,
       data_response_dist = NULL,

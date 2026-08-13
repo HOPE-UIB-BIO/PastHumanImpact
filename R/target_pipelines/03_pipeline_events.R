@@ -50,7 +50,7 @@ list(
   ),
   targets::tar_target(
     name = data_pollen,
-    command = get_file_from_path(data_pollen_path)
+    command = resolve_file_path(data_pollen_path)
   ),
   # - a path for events from diagrams ----
   targets::tar_target(
@@ -67,17 +67,17 @@ list(
   # - load events from diagrams ----
   targets::tar_target(
     name = events_diag_raw,
-    command = get_file_from_path(events_diag_path)
+    command = resolve_file_path(events_diag_path)
   ),
   # - turn events from diagrams into binary ----
   targets::tar_target(
     name = events_diag_binary,
-    command = get_events_as_binary(events_diag_raw, data_pollen)
+    command = classify_binary_events(events_diag_raw, data_pollen)
   ),
   # add logical rules to the binary values ----
   targets::tar_target(
     name = events_diag,
-    command = add_logical_rules(events_diag_binary)
+    command = classify_events_by_logical_rules(events_diag_binary)
   ),
   # - a path for indicators ----
   targets::tar_target(
@@ -94,12 +94,12 @@ list(
   # - load indicators ----
   targets::tar_target(
     name = events_indicators_raw,
-    command = get_file_from_path(events_indicators_path)
+    command = resolve_file_path(events_indicators_path)
   ),
   # - detect indicators in data ----
   targets::tar_target(
     name = events_indicators,
-    command = get_events_from_indicators(
+    command = classify_indicator_events(
       data_source_indicators = events_indicators_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -129,12 +129,12 @@ list(
   # - load indices ----
   targets::tar_target(
     name = events_indices_raw,
-    command = get_file_from_path(events_indices_path)
+    command = resolve_file_path(events_indices_path)
   ),
   # - detect indices in data ----
   targets::tar_target(
     name = events_indices,
-    command = get_events_from_indices(
+    command = classify_index_events(
       data_source_indices = events_indices_raw,
       data_source_pollen = data_pollen,
       data_source_meta = data_meta,
@@ -144,7 +144,7 @@ list(
   # - merge all events detected by code together ----
   targets::tar_target(
     name = events_code,
-    command = merge_indicators_and_indices(
+    command = aggregate_event_sources(
       data_source_indices = events_indices,
       data_source_indicators = events_indicators
     )
@@ -152,7 +152,7 @@ list(
   # - merge all events together ----
   targets::tar_target(
     name = events,
-    command = merge_all_events(
+    command = aggregate_events(
       data_source_events_diag = events_diag,
       data_source_events_code = events_code
     )
@@ -160,12 +160,12 @@ list(
   # - prepare events for modelling ----
   targets::tar_target(
     name = data_events_to_fit,
-    command = get_events_for_modelling(events)
+    command = prepare_event_model_data(events)
   ),
   # - interpolate data for even time steps ----
   targets::tar_target(
     name = events_interpolated,
-    command = get_interpolated_data(
+    command = prepare_interpolated_model_data(
       data_source = data_events_to_fit,
       variable = "var_name",
       vars_interpolate = c("age", "value"),
@@ -182,7 +182,7 @@ list(
   # - subset event types relevant for each region ----
   targets::tar_target(
     name = events_temporal_subset,
-    command = subset_event_types(
+    command = filter_event_types(
       data_source_events = events_interpolated,
       data_source_meta = data_meta,
       data_source_dummy_time = data_dummy_time

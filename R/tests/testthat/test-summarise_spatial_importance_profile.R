@@ -17,7 +17,7 @@ testthat::test_that(
         weight_col = "signed_weight",
         group_vars = character(),
         level_name = "overall",
-        sensitivity_type = "baseline"
+        sensitivity_type = "unthinned"
       )
 
     testthat::expect_equal(
@@ -39,7 +39,7 @@ testthat::test_that(
         weight_col = "weight",
         group_vars = character(),
         level_name = "overall",
-        sensitivity_type = "baseline"
+        sensitivity_type = "unthinned"
       ),
       "contract"
     )

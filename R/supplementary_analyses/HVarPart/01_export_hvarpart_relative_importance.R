@@ -32,7 +32,7 @@ path_store_h1 <-
 
 data_h1_importance <-
   dplyr::bind_rows(
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_spd",
         store = path_store_h1
@@ -54,7 +54,7 @@ data_h1_importance <-
         "climatezone"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_events",
         store = path_store_h1
@@ -76,7 +76,7 @@ data_h1_importance <-
         "climatezone"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_spd",
         store = path_store_h1
@@ -95,7 +95,7 @@ data_h1_importance <-
         "age"
       )
     ),
-    get_hvarpart_importance(
+    compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_events",
         store = path_store_h1
@@ -120,7 +120,7 @@ path_store_h2 <-
   )
 
 data_h2_importance <-
-  get_hvarpart_importance(
+  compute_hvarpart_importance(
     targets::tar_read(
       "output_hvar_h2_spd",
       store = path_store_h2
@@ -218,12 +218,12 @@ table_audit <-
 
 table_profiles <-
   dplyr::bind_rows(
-    compare_hvarpart_importance_profiles(
+    diagnose_hvarpart_importance_profiles(
       data_importance = data_importance,
       group_vars = "analysis"
     ) |>
       dplyr::mutate(aggregation_level = "analysis"),
-    compare_hvarpart_importance_profiles(
+    diagnose_hvarpart_importance_profiles(
       data_importance = data_importance,
       group_vars = c(
         "analysis",
@@ -231,7 +231,7 @@ table_profiles <-
       )
     ) |>
       dplyr::mutate(aggregation_level = "model"),
-    compare_hvarpart_importance_profiles(
+    diagnose_hvarpart_importance_profiles(
       data_importance = data_h1_importance |>
         dplyr::filter(
           stringr::str_starts(
@@ -246,7 +246,7 @@ table_profiles <-
       )
     ) |>
       dplyr::mutate(aggregation_level = "region_climatezone"),
-    compare_hvarpart_importance_profiles(
+    diagnose_hvarpart_importance_profiles(
       data_importance = data_h1_importance |>
         dplyr::filter(
           stringr::str_starts(
@@ -261,7 +261,7 @@ table_profiles <-
       )
     ) |>
       dplyr::mutate(aggregation_level = "region_age"),
-    compare_hvarpart_importance_profiles(
+    diagnose_hvarpart_importance_profiles(
       data_importance = data_h2_importance,
       group_vars = c(
         "analysis",
@@ -285,7 +285,7 @@ path_output_tables <-
 
 path_output_figures <-
   here::here(
-    "Outputs/Figures/Extended_data_figures/HVarPart"
+    "Outputs/Figures/Diagnostics/HVarPart"
   )
 
 dir.create(

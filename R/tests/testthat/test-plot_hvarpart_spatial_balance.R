@@ -1,9 +1,9 @@
 testthat::test_that(
   "plot_hvarpart_spatial_balance() creates the bounded balance",
   {
-    original_get_map_region <- get_map_region
+    original_get_map_region <- build_region_map
     assign(
-      "get_map_region",
+      "build_region_map",
       function(...) {
         ggplot2::ggplot() + ggplot2::theme_void()
       },
@@ -48,10 +48,11 @@ testthat::test_that(
         plot_hvarpart_spatial_balance(
           data_importance = data_importance,
           data_meta = data_meta,
-          data_geo_koppen = tibble::tibble()
+          data_geo_koppen = tibble::tibble(),
+          show_intervals = TRUE
         ),
         finally = assign(
-          "get_map_region",
+          "build_region_map",
           original_get_map_region,
           envir = globalenv()
         )
@@ -59,6 +60,13 @@ testthat::test_that(
 
     testthat::expect_s3_class(result$plot, "ggplot")
     testthat::expect_s3_class(result$statistical_plot, "ggplot")
+    testthat::expect_equal(
+      result[["statistical_plot"]][["labels"]][["y"]],
+      paste0(
+        "Relative importance\n",
+        "(Zero-truncated human\u2212climate balance)"
+      )
+    )
     testthat::expect_named(
       result,
       c(
@@ -79,6 +87,10 @@ testthat::test_that(
         result$record_values[["importance_balance"]] >= -1 &
           result$record_values[["importance_balance"]] <= 1
       )
+    )
+    testthat::expect_true(
+      "Continent" %in%
+        as.character(result[["density_values"]][["panel_label"]])
     )
     testthat::expect_equal(
       result$region_values[["importance_balance"]],
@@ -108,6 +120,24 @@ testthat::test_that(
         logical(1)
       )]
     testthat::expect_length(outlined_point_layers, 1)
+    interval_layers <-
+      result[["statistical_plot"]][["layers"]] |>
+      purrr::keep(~ inherits(.x[["geom"]], "GeomSegment"))
+    testthat::expect_length(
+      interval_layers,
+      3
+    )
+    testthat::expect_s3_class(
+      result[["statistical_plot"]][["theme"]][["panel.border"]],
+      "element_blank"
+    )
+    testthat::expect_s3_class(
+      result[["statistical_plot"]][["theme"]][["axis.line.y.right"]],
+      "element_line"
+    )
+    plot_theme <- result[["statistical_plot"]][["theme"]]
+    legend_background <- plot_theme[["legend.box.background"]]
+    testthat::expect_s3_class(legend_background, "element_rect")
     rect_layers <- result$statistical_plot$layers[vapply(
       result$statistical_plot$layers,
       function(layer) "background_balance" %in% names(layer$data),
@@ -115,7 +145,8 @@ testthat::test_that(
     )]
     testthat::expect_length(rect_layers, 1)
     testthat::expect_false(
-      "Density" %in% as.character(rect_layers[[1]]$data[["panel_label"]])
+      "Continent" %in%
+        as.character(rect_layers[[1]]$data[["panel_label"]])
     )
   }
 )

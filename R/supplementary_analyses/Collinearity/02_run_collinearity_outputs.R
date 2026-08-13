@@ -14,18 +14,18 @@ library(here)
 
 source(
   here::here(
-    "R/supplementary_analyses/Collinearity/EDA_5a_pap_collinearity_correlation.R"
+    "R/supplementary_analyses/Collinearity/pap_collinearity_correlation.R"
   )
 )
 
 source(
   here::here(
-    "R/supplementary_analyses/Collinearity/EDA_5b_pap_collinearity_hvar_difference.R"
+    "R/supplementary_analyses/Collinearity/pap_collinearity_hvarpart_influence.R"
   )
 )
 
 source(
   here::here(
-    "R/supplementary_analyses/Collinearity/EDA_5c_h1_spatial_reduced_simple.R"
+    "R/supplementary_analyses/Collinearity/human_climate_balance_reduced_predictors.R"
   )
 )

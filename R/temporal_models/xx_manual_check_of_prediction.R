@@ -92,7 +92,7 @@ sel_mod <-
 #----------------------------------------------------------#
 
 data_new <-
-  get_model_newdata(
+  prepare_model_prediction_data(
     data_source = data_general_model,
     model_config_row = sel_mod_config
   ) %>%

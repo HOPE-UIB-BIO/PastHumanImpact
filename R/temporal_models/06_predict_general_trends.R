@@ -44,7 +44,7 @@ path_prediction_dir <-
     "General_trends"
   )
 
-make_dir(
+run_directory_setup(
   path_prediction_dir
 )
 

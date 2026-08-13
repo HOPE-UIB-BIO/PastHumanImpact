@@ -47,7 +47,7 @@ path_model_dir <-
   )
 
 git_state <-
-  get_git_state(
+  load_git_state(
     repo_path = here::here(),
     verbose = TRUE
   )

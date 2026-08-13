@@ -14,7 +14,7 @@ testthat::test_that(
     data_result <-
       summarise_spatial_importance_subset(
         data_subset = data_input,
-        sensitivity_type = "baseline"
+        sensitivity_type = "unthinned"
       )
 
     testthat::expect_setequal(
@@ -34,7 +34,7 @@ testthat::test_that(
     testthat::expect_error(
       summarise_spatial_importance_subset(
         data_subset = 1:3,
-        sensitivity_type = "baseline"
+        sensitivity_type = "unthinned"
       ),
       "contract"
     )

@@ -34,7 +34,7 @@ path_model_dir <-
     "Mods"
   )
 
-make_dir(path_model_dir)
+run_directory_setup(path_model_dir)
 
 path_model_run_history <-
   file.path(
@@ -50,13 +50,13 @@ data_interrupted_runs <-
       path_model_run_history,
       show_col_types = FALSE
     ) |>
-      get_interrupted_model_runs()
+      select_interrupted_model_runs()
   } else {
     tibble::tibble()
   }
 
 git_state <-
-  get_git_state(
+  load_git_state(
     repo_path = here::here(),
     verbose = TRUE
   )
