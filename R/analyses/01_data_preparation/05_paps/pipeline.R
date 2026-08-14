@@ -29,28 +29,49 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
 #----------------------------------------------------------#
-# 1. Targets -----
+# 1. Upstream contract -----
+#----------------------------------------------------------#
+
+store_pollen <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/pollen"
+  )
+
+runner_data_preparation <-
+  "R/analyses/01_data_preparation/00_run.R"
+
+#----------------------------------------------------------#
+# 2. Targets -----
 #----------------------------------------------------------#
 
 # the targets list:
 list(
-  # get pollen data from Targets_data ----
   targets::tar_target(
-    name = data_pollen_path,
-    command = paste0(
-      data_storage_path,
-      "Targets_data/pipeline_pollen_data/objects/data_pollen"
+    name = fingerprint_pollen,
+    command = compute_target_store_fingerprint(
+      store = store_pollen,
+      target_names = "data_pollen",
+      runner = runner_data_preparation
     ),
-    format = "file"
+    cue = targets::tar_cue(mode = "always")
   ),
   targets::tar_target(
     name = data_pollen,
-    command = resolve_file_path(data_pollen_path)
+    command = {
+      fingerprint_pollen
+
+      load_target_store_value(
+        store = store_pollen,
+        target_name = "data_pollen",
+        runner = runner_data_preparation
+      )
+    }
   ),
   # 3. Estimate PAPs -----
   # - calculate diversity

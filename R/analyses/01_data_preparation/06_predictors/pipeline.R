@@ -30,28 +30,49 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
 
 #----------------------------------------------------------#
-# 1. Targets -----
+# 1. Upstream contract -----
+#----------------------------------------------------------#
+
+store_events <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/events"
+  )
+
+runner_data_preparation <-
+  "R/analyses/01_data_preparation/00_run.R"
+
+#----------------------------------------------------------#
+# 2. Targets -----
 #----------------------------------------------------------#
 
 list(
-  # load events from _targets_events ----
   targets::tar_target(
-    name = data_events_path,
-    command = paste0(
-      data_storage_path,
-      "Targets_data/pipeline_events/objects/events_temporal_subset"
+    name = fingerprint_events,
+    command = compute_target_store_fingerprint(
+      store = store_events,
+      target_names = "events_temporal_subset",
+      runner = runner_data_preparation
     ),
-    format = "file"
+    cue = targets::tar_cue(mode = "always")
   ),
   targets::tar_target(
     name = events_temporal_subset,
-    command = resolve_file_path(data_events_path)
+    command = {
+      fingerprint_events
+
+      load_target_store_value(
+        store = store_events,
+        target_name = "events_temporal_subset",
+        runner = runner_data_preparation
+      )
+    }
   ),
   # - file path to climate data ----
   targets::tar_target(

@@ -49,7 +49,10 @@ if (
 ) {
   source(
     here::here(
-      "R/spd_calculation/01_calculate_spd_250.R"
+      paste0(
+        "R/analyses/01_data_preparation/",
+        "03_archaeological_proxies/spd/01_calculate_spd_250.R"
+      )
     )
   )
 }
@@ -70,7 +73,10 @@ if (
 ) {
   source(
     here::here(
-      "R/spd_calculation/02_calculate_spd_500.R"
+      paste0(
+        "R/analyses/01_data_preparation/",
+        "03_archaeological_proxies/spd/02_calculate_spd_500.R"
+      )
     )
   )
 }
@@ -78,6 +84,9 @@ if (
 
 source(
   here::here(
-    "R/spd_calculation/03_combine_spd.R"
+    paste0(
+      "R/analyses/01_data_preparation/",
+      "03_archaeological_proxies/spd/03_combine_spd.R"
+    )
   )
 )
