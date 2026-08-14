@@ -19,6 +19,7 @@ aggregate_model_run_event <- function(
   assertthat::assert_that(
     is.data.frame(data_event),
     nrow(data_event) > 0L,
+    all(c("run_id", "event") %in% names(data_event)),
     msg = "`data_event` must be a non-empty data frame."
   )
   assertthat::assert_that(
@@ -35,17 +36,35 @@ aggregate_model_run_event <- function(
   if (
     isTRUE(history_exists)
   ) {
-    history_columns <-
+    data_history <-
       readr::read_csv(
         path_history,
-        n_max = 0L,
         show_col_types = FALSE
-      ) |>
-      names()
+      )
+
+    missing_history_columns <-
+      setdiff(names(data_event), names(data_history))
+
+    missing_event_columns <-
+      setdiff(names(data_history), names(data_event))
+
+    data_history[missing_history_columns] <- NA
+
+    data_event[missing_event_columns] <- NA
+
+    data_event <-
+      data_event |>
+      dplyr::select(dplyr::all_of(names(data_history)))
 
     assertthat::assert_that(
-      identical(history_columns, names(data_event)),
+      identical(names(data_history), names(data_event)),
       msg = "Run-history event columns do not match the existing CSV columns."
+    )
+
+    readr::write_csv(
+      data_history,
+      path_history,
+      na = "NA"
     )
   } else {
     dir.create(

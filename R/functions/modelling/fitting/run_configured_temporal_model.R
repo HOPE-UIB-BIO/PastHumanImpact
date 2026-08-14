@@ -7,6 +7,7 @@
 #' @param config_dir Character scalar directory containing the model config.
 #' @param model_dir Character scalar directory for fitted model files.
 #' @param path_history Character scalar path to the run-history CSV.
+#' @param request_id Character scalar authorizing this fitting attempt.
 #' @param data_interrupted_runs Data frame returned by
 #' `select_interrupted_model_runs()` or an empty data frame.
 #' @param config_file_name Character scalar model configuration basename.
@@ -22,7 +23,8 @@
 #'   data_source = data_general_model,
 #'   config_dir = "Data/Temporal_models",
 #'   model_dir = "Data/Temporal_models/Mods",
-#'   path_history = "Data/Temporal_models/general_model_run_history.csv"
+#'   path_history = "Data/Temporal_models/general_model_run_history.csv",
+#'   request_id = "approved-request-id"
 #' )
 #' }
 run_configured_temporal_model <- function(
@@ -31,6 +33,7 @@ run_configured_temporal_model <- function(
   config_dir,
   model_dir,
   path_history,
+  request_id,
   data_interrupted_runs = tibble::tibble(),
   config_file_name = "general_model_config_table",
   git_commit = NA_character_,
@@ -66,6 +69,13 @@ run_configured_temporal_model <- function(
     !is.na(path_history),
     nzchar(path_history),
     msg = "`path_history` must be a non-empty character scalar."
+  )
+  assertthat::assert_that(
+    is.character(request_id),
+    length(request_id) == 1L,
+    !is.na(request_id),
+    nzchar(request_id),
+    msg = "`request_id` must explicitly authorize one fitting attempt."
   )
   assertthat::assert_that(
     is.data.frame(data_interrupted_runs),
@@ -239,6 +249,7 @@ run_configured_temporal_model <- function(
     build_model_run_event(
       model_config_row = sel_mod_config,
       run_id = run_id,
+      request_id = request_id,
       event = "fit_started",
       event_time = time_mod_start,
       git_commit = git_commit,
@@ -356,6 +367,7 @@ run_configured_temporal_model <- function(
     build_model_run_event(
       model_config_row = res_config,
       run_id = run_id,
+      request_id = request_id,
       event = ifelse(
         isTRUE(fit_succeeded),
         "fit_succeeded",

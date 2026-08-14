@@ -77,7 +77,6 @@ package_list <-
   c(
     "adespatial",
     "assertthat",
-    "brms",
     "collinear",
     "colorspace",
     "furrr",

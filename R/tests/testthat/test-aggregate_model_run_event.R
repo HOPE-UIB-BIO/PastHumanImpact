@@ -44,6 +44,6 @@ testthat::test_that("aggregate_model_run_event() validates columns", {
       data_event = tibble::tibble(run_id = "run_2"),
       path_history = path_history
     ),
-    regexp = "columns"
+    regexp = "non-empty data frame"
   )
 })

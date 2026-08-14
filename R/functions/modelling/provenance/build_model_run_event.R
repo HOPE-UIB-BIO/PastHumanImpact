@@ -1,9 +1,10 @@
 #' @title Build a temporal model run-history event
 #' @description
-#' Create one auditable event containing the seed, sampler settings, code state,
-#' and a JSON snapshot of the selected model configuration.
+#' Create one auditable event containing the seed, sampler settings, code
+#' state, and a JSON snapshot of the selected model configuration.
 #' @param model_config_row One-row model configuration data frame.
 #' @param run_id Character scalar identifying one fit attempt.
+#' @param request_id Optional fitting-request identifier.
 #' @param event Character scalar event type.
 #' @param event_time POSIXct scalar event time.
 #' @param run_seed Optional integer seed used by the recorded fit.
@@ -25,6 +26,7 @@
 build_model_run_event <- function(
   model_config_row,
   run_id,
+  request_id = NA_character_,
   event,
   event_time = Sys.time(),
   run_seed = NULL,
@@ -69,6 +71,11 @@ build_model_run_event <- function(
     !is.na(run_id),
     nzchar(run_id),
     msg = "`run_id` must be a non-empty character scalar."
+  )
+  assertthat::assert_that(
+    is.character(request_id),
+    length(request_id) == 1L,
+    msg = "`request_id` must be a character scalar."
   )
 
   allowed_events <-
@@ -124,6 +131,7 @@ build_model_run_event <- function(
   res_event <-
     tibble::tibble(
       run_id = run_id,
+      request_id = request_id,
       event = event,
       event_time = format(
         event_time,

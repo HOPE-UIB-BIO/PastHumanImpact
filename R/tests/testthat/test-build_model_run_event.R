@@ -22,6 +22,7 @@ testthat::test_that("build_model_run_event() records reproducibility fields", {
     build_model_run_event(
       model_config_row = model_config_row,
       run_id = "model_a__attempt_2",
+      request_id = "request_a",
       event = "fit_started",
       event_time = as.POSIXct("2026-07-15 12:00:00", tz = "UTC"),
       git_commit = "abc123",
@@ -32,6 +33,7 @@ testthat::test_that("build_model_run_event() records reproducibility fields", {
   testthat::expect_identical(result[["run_seed"]], 456L)
   testthat::expect_identical(result[["run_seed_attempt"]], 2L)
   testthat::expect_identical(result[["event"]], "fit_started")
+  testthat::expect_identical(result[["request_id"]], "request_a")
   testthat::expect_match(result[["config_snapshot_json"]], "gamma_log")
 })
 
