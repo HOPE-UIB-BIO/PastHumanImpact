@@ -1,0 +1,218 @@
+---
+title: "Reciprocal spatial and temporal control of the H1 analysis"
+format:
+  html:
+    embed-resources: true
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_spatiotemporal_control.qmd"
+)
+source(here::here("R/00_Config_file.R"))
+
+table_dir <- here::here("Outputs", "Tables", "Spatial_dependence")
+spatial_figure_dir <- here::here(
+  "Outputs", "Figures", "H1", "Spatial"
+)
+
+temporal_figure_dir <- here::here(
+  "Outputs", "Figures", "H1", "Temporal", "HVarPart"
+)
+robustness <- readr::read_csv(
+  file.path(table_dir, "spatiotemporal_balance_robustness.csv"),
+  show_col_types = FALSE
+)
+human_climate_only <- readr::read_csv(
+  file.path(table_dir, "human_climate_only_matched_estimates.csv"),
+  show_col_types = FALSE
+)
+controlled <- readr::read_csv(
+  file.path(table_dir, "spatiotemporal_balance_estimates.csv"),
+  show_col_types = FALSE
+)
+time_status <- readr::read_csv(
+  file.path(table_dir, "time_control_status.csv"),
+  show_col_types = FALSE
+)
+temporal_moran <- readr::read_csv(
+  file.path(table_dir, "time_control_residual_moran.csv"),
+  show_col_types = FALSE
+)
+space_status <- readr::read_csv(
+  file.path(table_dir, "spatial_control_status.csv"),
+  show_col_types = FALSE
+)
+spatial_moran <- readr::read_csv(
+  file.path(table_dir, "spatial_control_residual_moran.csv"),
+  show_col_types = FALSE
+)
+rankings <- readr::read_csv(
+  file.path(table_dir, "spatial_control_rankings.csv"),
+  show_col_types = FALSE
+)
+balance_summary <-
+  human_climate_only |>
+  dplyr::filter(.data[["aggregation_level"]] == "overall") |>
+  dplyr::select(
+    .data[["profile"]],
+    original_balance = .data[["importance_balance"]]
+  ) |>
+  dplyr::left_join(
+    controlled |>
+      dplyr::filter(.data[["aggregation_level"]] == "overall") |>
+      dplyr::select(
+        .data[["profile"]],
+        controlled_balance = .data[["adjusted_balance"]]
+      ),
+    by = "profile"
+  ) |>
+  dplyr::left_join(robustness, by = "profile")
+diagnostic_summary <-
+  tibble::tibble(
+    diagnostic = c(
+      "Estimable time-controlled core-proxy models",
+      "Models with residual temporal dependence",
+      "Region-age models with selected spatial terms",
+      "Models with residual spatial dependence",
+      "Estimable human-climate ranking changes"
+    ),
+    count = c(
+      sum(stringr::str_starts(time_status[["status"]], "estimated")),
+      temporal_moran |>
+        dplyr::filter(
+          .data[["stage"]] == "time_controlled",
+          .data[["positive_autocorrelation"]]
+        ) |>
+        dplyr::distinct(
+          .data[["analysis"]],
+          .data[["dataset_id"]]
+        ) |>
+        nrow(),
+      sum(space_status[["status"]] == "spatial_model_estimated"),
+      spatial_moran |>
+        dplyr::filter(.data[["positive_autocorrelation"]]) |>
+        dplyr::distinct(
+          .data[["analysis"]],
+          .data[["region"]],
+          .data[["age"]]
+        ) |>
+        nrow(),
+      sum(rankings[["ranking_changed"]], na.rm = TRUE)
+    ),
+    denominator = c(
+      nrow(time_status),
+      sum(stringr::str_starts(time_status[["status"]], "estimated")),
+      nrow(space_status),
+      nrow(space_status),
+      sum(!is.na(rankings[["ranking_changed"]]))
+    )
+  )
+```
+
+## Response to the reviewer
+
+We agree that the H1 comparison must address both dimensions of dependence:
+repeated ages within a pollen core and nearby cores within a time slice. We
+therefore expanded the sensitivity analysis into reciprocal temporal and
+spatial control while retaining human impact and climate as the substantive
+drivers. Time and space are structural controls, not equivalent causal
+competitors.
+
+### Figure 2: time within cores, space during aggregation
+
+We first enforced one analytical row per core and 500-year age. Repeated PAP
+response estimates at the same age were averaged only after verifying that
+predictors were invariant. Conflicts and missing ages cause explicit failures.
+The human-plus-climate-only model is retained as a reference. The controlled
+model adds centred and scaled linear age as a third group. Linear age is used
+because cores contain at most 14 unique ages; temporal MEMs would consume too
+many residual degrees of freedom and require a separate detrending decision.
+
+The main Figure 2 value remains one bounded number per core:
+
+$$
+\frac{\max(I_H,0)-\max(I_C,0)}
+     {\max(I_H,0)+\max(I_C,0)}.
+$$
+
+Cores for which both contributions are non-positive are reported and excluded
+from this presentation profile. Continent-specific positive dbMEMs are selected
+from the signed time-controlled human-minus-climate difference conditional on
+continent-by-climate-zone strata and reused for the bounded balance. Markers
+are predictions at dbMEM equal to zero; distributions show observed controlled
+core values.
+
+```{r}
+knitr::kable(
+  balance_summary |>
+    dplyr::select(
+      .data[["profile"]],
+      .data[["original_balance"]],
+      .data[["controlled_balance"]],
+      .data[["min_thinning_agreement"]],
+      .data[["robustness_class"]]
+    ),
+  digits = 3
+)
+```
+
+```{r}
+#| fig-cap: >-
+#|   Time-controlled core balances and spatially filtered regional markers.
+knitr::include_graphics(
+  file.path(
+    spatial_figure_dir,
+    "human_climate_balance_time_and_space_controlled.png"
+  )
+)
+```
+
+### Figure 3: space within time slices
+
+Each region-by-age model uses one row per core. Positive dbMEMs are selected
+against the multivariate PAP response conditional on the complete human and
+climate groups using a global test and Blanchet double stopping. When no
+conditional spatial signal is detected, human-climate-only contributions
+contributions are retained and space is set to exactly zero for the
+presentation stack. Non-estimable models remain missing.
+
+The revised main Figure 3 uses zero-truncated hierarchical contributions for
+human impact, climate, and space. Signed hierarchical contributions and pure
+partial adjusted-R-squared fractions are exported and plotted separately; they
+are related diagnostics, not interchangeable estimates.
+
+```{r}
+#| fig-cap: "Human, climate, and selected spatial contributions through time."
+knitr::include_graphics(
+  file.path(
+    temporal_figure_dir,
+    "human_climate_space_zero_truncated_hierarchical_composition.png"
+  )
+)
+```
+
+```{r}
+knitr::kable(diagnostic_summary)
+```
+
+Residual temporal or spatial dependence remains visible in the diagnostics
+rather than being treated as automatically removed. The original two-group
+analyses, signed contributions, pure fractions, actual permutation counts,
+selection details, thinning replicates, exclusions, and provenance are retained
+as supplementary machine-readable outputs. Negative adjusted fractions are
+never replaced with arbitrary positive values.
+
+## Interpretation boundary
+
+The analysis tests whether the human-versus-climate conclusion is stable under
+explicit structural controls. It does not establish that time or space causes
+the PAP response, and it does not resolve finer-scale temporal autocorrelation
+within the original irregular pollen levels beyond the 500-year analysis units.

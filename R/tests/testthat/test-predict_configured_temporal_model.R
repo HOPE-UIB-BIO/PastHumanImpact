@@ -96,7 +96,7 @@ testthat::test_that("configured predictions update lifecycle state", {
     load_brms_model_file = function(...) {
       structure(list(), class = "brmsfit")
     },
-    get_model_newdata = function(...) {
+    prepare_model_prediction_data = function(...) {
       tibble::tibble(dataset_id = "d1", age = 0)
     },
     predict_brms_model = function(...) {
@@ -187,7 +187,7 @@ testthat::test_that("dataset predictions do not update general lifecycle", {
     load_brms_model_file = function(...) {
       structure(list(), class = "brmsfit")
     },
-    get_model_newdata = function(...) {
+    prepare_model_prediction_data = function(...) {
       tibble::tibble(dataset_id = "d1", age = 0)
     },
     predict_brms_model = function(...) {
@@ -353,7 +353,7 @@ testthat::test_that("stale configured predictions are regenerated", {
     load_brms_model_file = function(...) {
       structure(list(), class = "brmsfit")
     },
-    get_model_newdata = function(...) {
+    prepare_model_prediction_data = function(...) {
       tibble::tibble(dataset_id = "d1", age = 0)
     },
     predict_brms_model = function(...) {

@@ -1,0 +1,3 @@
+profile,original_ranking,time_controlled_ranking,fully_controlled_ranking,fully_controlled_agreement,min_thinning_agreement,deterministic_agreement,robustness_class
+signed,climate,climate,climate,TRUE,1,TRUE,robust
+zero_truncated,climate,climate,climate,TRUE,1,TRUE,robust

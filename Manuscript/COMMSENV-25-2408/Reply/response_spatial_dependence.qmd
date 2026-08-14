@@ -1,0 +1,187 @@
+---
+title: "Spatial-dependence sensitivity of the H1 analysis"
+format:
+  html:
+    embed-resources: true
+  pdf: default
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_spatial_dependence.qmd"
+)
+source(here::here("R/00_Config_file.R"))
+
+table_dir <- here::here("Outputs", "Tables", "Spatial_dependence")
+figure_dir <- here::here(
+  "Outputs", "Figures", "H1", "Spatial"
+)
+robustness <- readr::read_csv(
+  file.path(table_dir, "spatial_importance_robustness.csv"),
+  show_col_types = FALSE
+)
+sensitivity <- readr::read_csv(
+  file.path(table_dir, "spatial_importance_sensitivity.csv"),
+  show_col_types = FALSE
+)
+estimates <- readr::read_csv(
+  file.path(table_dir, "spatial_importance_estimates.csv"),
+  show_col_types = FALSE
+)
+status <- readr::read_csv(
+  file.path(table_dir, "temporal_spatial_status.csv"),
+  show_col_types = FALSE
+)
+partial <- readr::read_csv(
+  file.path(table_dir, "temporal_unique_adjusted_r2.csv"),
+  show_col_types = FALSE
+)
+moran <- readr::read_csv(
+  file.path(table_dir, "spatial_importance_moran_diagnostics.csv"),
+  show_col_types = FALSE
+)
+residual_moran <- readr::read_csv(
+  file.path(table_dir, "temporal_residual_moran.csv"),
+  show_col_types = FALSE
+)
+baseline_signed <-
+  sensitivity |>
+  dplyr::filter(
+    .data[["sensitivity_type"]] == "unthinned",
+    .data[["aggregation_level"]] == "overall",
+    .data[["profile"]] == "signed"
+  ) |>
+  dplyr::pull("importance_balance")
+adjusted_signed <-
+  estimates |>
+  dplyr::filter(
+    .data[["aggregation_level"]] == "overall",
+    .data[["profile"]] == "signed"
+  ) |>
+  dplyr::pull("adjusted_balance")
+thinning_agreement <-
+  sensitivity |>
+  dplyr::filter(
+    .data[["sensitivity_type"]] == "thinning",
+    .data[["aggregation_level"]] == "overall",
+    .data[["profile"]] == "signed"
+  ) |>
+  dplyr::group_by(.data[["distance_km"]]) |>
+  dplyr::summarise(
+    climate_agreement = mean(.data[["ranking"]] == "climate"),
+    .groups = "drop"
+  )
+agreement_250 <-
+  thinning_agreement[["climate_agreement"]][
+    thinning_agreement[["distance_km"]] == 250
+  ]
+agreement_500 <-
+  thinning_agreement[["climate_agreement"]][
+    thinning_agreement[["distance_km"]] == 500
+  ]
+n_spatial_models <- sum(status[["status"]] == "spatial_model_estimated")
+n_temporal_models <- nrow(status)
+n_residual_groups <-
+  residual_moran |>
+  dplyr::filter(.data[["positive_autocorrelation"]]) |>
+  dplyr::distinct(.data[["region"]], .data[["age"]]) |>
+  nrow()
+fmt_num <- function(value) format(round(value, 3), nsmall = 3)
+fmt_pct <- function(value) scales::percent(value, accuracy = 1)
+```
+
+## Response to the reviewer
+
+We agree that spatial dependence among pollen records can make densely sampled
+areas disproportionately influential. We therefore added a reproducible
+sensitivity analysis that combines spatial subsampling with explicit spatial
+control.
+
+The models contributing to Figure 2 are fitted separately within pollen cores.
+Coordinates are constant within a core and therefore cannot be included as a
+within-core predictor. We instead modelled spatial structure in the resulting
+core-level human-minus-climate importance balances. Positive distance-based
+Moran eigenvector maps (dbMEMs) were constructed independently within
+continents and selected conditional on the existing continent-by-climate-zone
+strata. We diagnosed Moran's I before and after filtering at 250 km and 500 km.
+
+As a design-based sensitivity, we also repeated the Figure 2 aggregation after
+100 random within-stratum thinnings at minimum distances of 250 km and 500 km.
+We additionally omitted each continent and each climate zone in turn. The
+classification was specified in advance: robust conclusions require agreement
+of the spatially filtered and deterministic estimates plus at least 95%
+agreement among thinning replicates.
+
+The signed overall balance changed only from
+`r fmt_num(baseline_signed)` to `r fmt_num(adjusted_signed)` after dbMEM
+filtering. Climate remained the larger contribution in
+`r fmt_pct(agreement_250)`
+of 250-km replicates and
+`r fmt_pct(agreement_500)`
+of 500-km replicates, and in every deterministic leave-out analysis. Both
+signed and zero-truncated profiles therefore meet the predeclared **robust**
+ranking criterion.
+
+```{r}
+knitr::kable(
+  robustness |>
+    dplyr::transmute(
+      Profile = .data[["profile"]],
+      Classification = .data[["robustness_class"]],
+      `Minimum thinning agreement` =
+        scales::percent(
+          .data[["min_thinning_agreement"]],
+          accuracy = 1
+        ),
+      `Residual dependence detected` =
+        .data[["residual_spatial_dependence"]]
+    )
+)
+```
+
+```{r}
+#| fig-cap: "Spatial autocorrelation before and after dbMEM filtering."
+knitr::include_graphics(
+  file.path(figure_dir, "human_climate_balance_moran.png")
+)
+```
+
+```{r}
+#| fig-cap: "Human-minus-climate balance after repeated spatial thinning."
+knitr::include_graphics(
+  file.path(figure_dir, "human_climate_balance_spatial_thinning.png")
+)
+```
+
+For the region-by-age analysis, sites occur together within each model, so
+space can be included directly. We selected dbMEMs conditional on the complete
+human and climate predictor sets, fitted a three-group hierarchical partition,
+and separately calculated pure human, pure climate, and pure spatial adjusted
+$R^2$ fractions. Hierarchical contributions and pure conditional fractions are
+reported separately because they answer different questions.
+
+Spatial terms were selected in `r n_spatial_models` of
+`r n_temporal_models` region-by-age models. Detectable positive residual
+autocorrelation remained on at least one diagnostic axis and distance scale in
+`r n_residual_groups` groups. Likewise, the Figure 2 residuals retained
+short-range autocorrelation at 250 km, although not at 500 km. We therefore
+interpret the ranking as robust to the implemented spatial controls, but do not
+claim that the data or residuals are spatially independent.
+
+```{r}
+#| fig-cap: "Pure human, climate, and spatial fractions through time."
+knitr::include_graphics(
+  file.path(figure_dir, "time_control_unique_adjusted_r2.png")
+)
+```
+
+Residual spatial dependence is reported rather than treated as automatically
+removed. Any region-age group with insufficient locations, rank limitations,
+or detectable residual autocorrelation remains explicitly flagged in the
+exported diagnostics.

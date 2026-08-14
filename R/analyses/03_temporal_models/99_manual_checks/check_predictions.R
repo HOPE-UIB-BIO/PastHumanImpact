@@ -1,0 +1,206 @@
+#----------------------------------------------------------#
+#
+#
+#                     GlobalHumanImpact
+#
+#                  General temporal models
+#                 manual check of prediction
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+
+
+#----------------------------------------------------------#
+# 0. Setup -----
+#----------------------------------------------------------#
+
+# Load configuration
+source(
+  here::here(
+    "R/00_Config_file.R"
+  )
+)
+
+sel_region <- "Europe"
+sel_climatezone <- "Cold_Without_dry_season_Warm_Summer"
+sel_variable <- "temp_annual"
+
+
+#----------------------------------------------------------#
+# 1. Load data -----
+#----------------------------------------------------------#
+
+# raw data
+data_general_model <-
+  RUtilpol::get_latest_file(
+    file_name = "general_temporal_model_data",
+    dir = paste0(
+      data_storage_path,
+      "Temporal_models/"
+    )
+  )
+
+sel_raw_data <-
+  data_general_model %>%
+  dplyr::filter(
+    analysis == "predictor_temporal" &
+      region == sel_region &
+      climatezone == sel_climatezone &
+      variable == sel_variable
+  )
+
+sel_mod_config <-
+  RUtilpol::get_latest_file(
+    file_name = "general_model_config_table",
+    dir = paste0(
+      data_storage_path,
+      "Temporal_models/"
+    )
+  ) %>%
+  dplyr::filter(
+    analysis == "predictor_temporal",
+    region == sel_region,
+    climatezone == sel_climatezone,
+    variable == sel_variable
+  )
+
+assertthat::assert_that(
+  nrow(sel_mod_config) == 1L,
+  msg = "The selected values must identify exactly one model."
+)
+
+sel_model_id <-
+  sel_mod_config[["model_id"]][1]
+
+# load the model
+sel_mod <-
+  load_brms_model_file(
+    model_dir = file.path(
+      data_storage_path,
+      "Temporal_models",
+      "Mods"
+    ),
+    model_file_name = sel_mod_config[["model_file_name"]][1],
+    model_id = sel_model_id
+  )
+
+
+#----------------------------------------------------------#
+# 2. predict general trend -----
+#----------------------------------------------------------#
+
+data_new <-
+  prepare_model_prediction_data(
+    data_source = data_general_model,
+    model_config_row = sel_mod_config
+  ) %>%
+  dplyr::filter(
+    region == sel_region &
+      climatezone == sel_climatezone
+  )
+
+data_predicted <-
+  predict_brms_model(
+    mod = sel_mod,
+    newdata = data_new,
+    model_config_row = sel_mod_config
+  ) %>%
+  dplyr::mutate(
+    value = estimate,
+    dplyr::across(
+      dplyr::where(is.numeric),
+      ~ round(.x, digits = 8)
+    )
+  )
+
+
+#----------------------------------------------------------#
+# 3. Visual check of predictom -----
+#----------------------------------------------------------#
+
+is_event <-
+  dplyr::case_when(
+    .default = TRUE,
+    sel_variable == "temp_annual" ~ FALSE,
+    sel_variable == "temp_cold" ~ FALSE,
+    sel_variable == "prec_summer" ~ FALSE,
+    sel_variable == "prec_win" ~ FALSE,
+    sel_variable == "spd" ~ FALSE
+  )
+
+p0 <-
+  sel_raw_data %>%
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = age,
+      y = value
+    )
+  ) +
+  ggplot2::labs(
+    title = paste(
+      "Predicted general trend for",
+      sel_variable,
+      "in",
+      sel_region,
+      "and",
+      sel_climatezone
+    ),
+    x = "Age",
+    y = sel_variable
+  ) +
+  ggplot2::geom_point() +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      group = dataset_id
+    )
+  ) +
+  ggplot2::geom_line(
+    data = data_predicted,
+    ggplot2::aes(
+      x = age,
+      y = value
+    ),
+    color = "blue"
+  )
+
+if (
+  isTRUE(is_event)
+) {
+  p0 +
+    ggplot2::facet_wrap(~dataset_id) +
+    ggplot2::geom_ribbon(
+      ggplot2::aes(
+        group = dataset_id,
+        ymin = 0,
+        ymax = value
+      ),
+      alpha = 0.2,
+      col = "grey"
+    ) +
+    ggplot2::geom_ribbon(
+      data = data_predicted,
+      ggplot2::aes(
+        x = age,
+        y = value,
+        ymin = conf_low,
+        ymax = conf_high
+      ),
+      alpha = 0.2,
+      col = "blue"
+    )
+} else {
+  p0 +
+    ggplot2::geom_ribbon(
+      data = data_predicted,
+      ggplot2::aes(
+        x = age,
+        y = value,
+        ymin = conf_low,
+        ymax = conf_high
+      ),
+      alpha = 0.2,
+      col = "grey"
+    )
+}

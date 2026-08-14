@@ -1,6 +1,6 @@
 testthat::test_that("project config is available to test files", {
   testthat::expect_true(exists("set_seed"))
-  testthat::expect_true(exists("add_age_as_factor"))
+  testthat::expect_true(exists("prepare_age_factor"))
 })
 
 testthat::test_that("set_seed is a single integer-like numeric", {
@@ -10,7 +10,7 @@ testthat::test_that("set_seed is a single integer-like numeric", {
 })
 
 testthat::test_that("core project functions are callable", {
-  testthat::expect_true(is.function(add_age_as_factor))
-  testthat::expect_true(is.function(add_climatezone_as_factor))
-  testthat::expect_true(is.function(add_region_as_factor))
+  testthat::expect_true(is.function(prepare_age_factor))
+  testthat::expect_true(is.function(prepare_climatezone_factor))
+  testthat::expect_true(is.function(prepare_region_factor))
 })

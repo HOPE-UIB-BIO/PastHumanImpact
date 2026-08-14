@@ -19,9 +19,16 @@ here::i_am(
 source(here::here("R/00_Config_file.R"))
 
 table_dir <- here::here("Outputs", "Tables", "HVarPart")
-main_figure_dir <- here::here("Outputs", "Figures")
+spatial_figure_dir <-
+  here::here("Outputs", "Figures", "H1", "Spatial")
+
+temporal_figure_dir <-
+  here::here("Outputs", "Figures", "H1", "Temporal", "HVarPart")
+
+interrelationships_figure_dir <-
+  here::here("Outputs", "Figures", "H2", "Interrelationships")
 figure_dir <- here::here(
-  "Outputs", "Figures", "Extended_data_figures", "HVarPart"
+  "Outputs", "Figures", "Diagnostics", "HVarPart"
 )
 
 audit <- readr::read_csv(
@@ -173,7 +180,10 @@ to 1.5 display while retaining every value in its source table.
 #| label: embed-hvarpart-spatial-main
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(main_figure_dir, "Figure2_h1_spatial.png")
+  file.path(
+    spatial_figure_dir,
+    "human_climate_balance_time_and_space_controlled.png"
+  )
 )
 ```
 
@@ -183,7 +193,13 @@ knitr::include_graphics(
 #| label: embed-hvarpart-spatial-signed
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(figure_dir, "Figure2_h1_spatial_signed_full_range.png")
+  file.path(
+    spatial_figure_dir,
+    paste0(
+      "human_climate_balance_",
+      "untruncated_hierarchical_contributions.png"
+    )
+  )
 )
 ```
 
@@ -205,7 +221,13 @@ human and climate allocations.
 #| label: embed-hvarpart-temporal-main
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(main_figure_dir, "Figure3_h1_temporal.png")
+  file.path(
+    temporal_figure_dir,
+    paste0(
+      "human_climate_space_",
+      "zero_truncated_hierarchical_composition.png"
+    )
+  )
 )
 ```
 
@@ -215,7 +237,13 @@ knitr::include_graphics(
 #| label: embed-hvarpart-temporal-signed
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(figure_dir, "Figure3_h1_temporal_signed_full_range.png")
+  file.path(
+    temporal_figure_dir,
+    paste0(
+      "human_climate_only_",
+      "untruncated_hierarchical_contributions.png"
+    )
+  )
 )
 ```
 
@@ -225,7 +253,10 @@ knitr::include_graphics(
 #| label: embed-hvarpart-h2-main
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(main_figure_dir, "Figure4_h2.png")
+  file.path(
+    interrelationships_figure_dir,
+    "predictor_interrelationships.png"
+  )
 )
 ```
 
@@ -235,7 +266,13 @@ knitr::include_graphics(
 #| label: embed-hvarpart-h2-signed
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(figure_dir, "Figure4_h2_signed_full_range.png")
+  file.path(
+    interrelationships_figure_dir,
+    paste0(
+      "predictor_interrelationships_",
+      "untruncated_hierarchical_contributions.png"
+    )
+  )
 )
 ```
 

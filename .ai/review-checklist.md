@@ -25,13 +25,15 @@ and assistants that need a compact validation target.
 ## R Code Checks
 
 - Script header and section headers follow project conventions.
-- Lines stay within the project line-length rule.
+- R code and roxygen stay within the project line-length rule; Markdown and Quarto prose is not hard-wrapped at 80 characters.
 - Indentation uses two spaces and no tabs.
-- Assignment uses `<-`; RHS function calls start on a new line after assignment.
+- Assignment uses `<-`; the right-hand side starts on a new line except for a short direct alias or simple atomic literal.
+- Every top-level executable statement is separated from the next statement by exactly one blank line.
 - Non-base calls use explicit namespaces.
 - No `library()` or `require()` inside functions.
 - Paths use `here::here()` where appropriate.
 - Names follow project naming conventions.
+- R identifiers, labels, comments, documentation, and filenames contain no GitHub issue or pull-request numbers.
 - Use `TRUE` and `FALSE`, not `T` or `F`.
 
 ## Function and Test Checks
@@ -42,14 +44,27 @@ and assistants that need a compact validation target.
 - Errors and warnings use project-approved `cli` patterns.
 - Function files avoid side effects and keep one primary function per file.
 - Test files are named `test-<function_name>.R` and use `testthat` conventions.
-- Tests cover happy paths, edge cases, and error conditions without depending on
-  implementation internals.
+- Tests cover happy paths, edge cases, and error conditions without depending on implementation internals.
 - Relevant test runner or focused test file has been executed before the change
   is treated as complete.
+
+## Target Pipeline Checks
+
+- Every `pipeline.R` uses the common project banner and section structure.
+- The header names the runner and warns that sourcing only declares targets.
+- Every `targets::tar_target()` name is a quoted character string.
+- Every target has an immediately preceding `# Why:` comment that explains
+  both what the target provides and why the graph needs it.
+- The registered pipeline-style contract test passes.
+- Pipeline manifests are generated without building expensive targets.
 
 ## Visualisation and Quarto Checks
 
 - Visualisation code uses the project canvas and save conventions.
+- Function, visualisation-script, and output paths follow `.ai/analysis-structure.md`.
+- Canonical output names describe the analysis and contain no figure numbers or publication-role terms such as `supplementary`, `extended`, or `extra`.
+- New names use `dataset` rather than `core` unless the physical sediment core or an external schema is explicitly meant.
+- Analysis-profile names state the calculation, such as `human_climate_only`, `untruncated_hierarchical_contributions`, `zero_truncated_hierarchical_composition`, or `unique_adjusted_r2`.
 - Manuscript and Quarto files follow project structure, chunk, rendering, and
   narrative traceability conventions.
 - Generated documentation changes do not introduce stale paths or broken links.

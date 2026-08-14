@@ -11,6 +11,8 @@ Format:
 
 Keep the line under 72 characters.
 
+Describe durable repository behavior without GitHub context. Never include an issue or pull-request number in the commit message.
+
 ## Subjects
 
 Use the narrowest meaningful subject.

@@ -1,0 +1,71 @@
+region,age,status,n_samples,selection_status,n_candidates,n_selected,global_p_value,spatial_adjusted_r_squared
+Europe,2000,spatial_model_estimated,392,selected,82,7,0.001,0.23038420998951203
+Europe,2500,spatial_model_estimated,398,selected,83,8,0.001,0.22989884094417112
+Europe,3000,spatial_model_estimated,399,selected,81,8,0.001,0.23451457466469916
+Europe,3500,spatial_model_estimated,400,selected,80,8,0.001,0.3136104272895721
+Europe,4000,spatial_model_estimated,399,selected,81,12,0.001,0.26025690614053554
+Europe,4500,spatial_model_estimated,394,selected,81,11,0.001,0.2747462967044164
+Europe,5000,spatial_model_estimated,385,selected,80,8,0.001,0.255615406579501
+Europe,5500,spatial_model_estimated,394,selected,82,13,0.001,0.2814189307165387
+Europe,6000,spatial_model_estimated,399,selected,81,6,0.001,0.26188821673688856
+Europe,6500,spatial_model_estimated,389,selected,80,7,0.001,0.2754151049369059
+Europe,7000,spatial_model_estimated,418,selected,83,6,0.001,0.27813878325850694
+Europe,7500,spatial_model_estimated,392,selected,80,6,0.001,0.24437221306496038
+Europe,8000,spatial_model_estimated,385,selected,78,8,0.001,0.21425183868126008
+Europe,8500,spatial_model_estimated,362,selected,75,4,0.001,0.22092318207025785
+North America,2000,spatial_model_estimated,558,selected,133,7,0.001,0.23646008284155584
+North America,2500,spatial_model_estimated,540,selected,132,6,0.001,0.22779245085351918
+North America,3000,spatial_model_estimated,536,selected,130,7,0.001,0.22342261025383303
+North America,3500,spatial_model_estimated,546,selected,132,5,0.001,0.2404177519863584
+North America,4000,spatial_model_estimated,551,selected,135,5,0.001,0.22532335851556684
+North America,4500,spatial_model_estimated,559,selected,133,6,0.001,0.23823890076496257
+North America,5000,spatial_model_estimated,545,selected,132,5,0.001,0.20511556228576022
+North America,5500,spatial_model_estimated,547,selected,135,7,0.001,0.20646055617012926
+North America,6000,spatial_model_estimated,538,selected,133,8,0.001,0.22458505798240058
+North America,6500,spatial_model_estimated,552,selected,135,7,0.001,0.23153741335002975
+North America,7000,spatial_model_estimated,549,selected,134,9,0.001,0.23170494505886996
+North America,7500,spatial_model_estimated,559,selected,136,7,0.001,0.2317588039552385
+North America,8000,spatial_model_estimated,543,selected,131,12,0.001,0.22265128467364137
+North America,8500,spatial_model_estimated,546,selected,129,11,0.001,0.24632915983659565
+Latin America,2000,spatial_model_estimated,87,selected,11,1,0.003,0.09639641289073075
+Latin America,2500,no_spatial_terms_selected,90,no_terms_selected,11,0,0.001,0.13469444576528755
+Latin America,3000,spatial_model_estimated,89,selected,11,1,0.001,0.12393901169165156
+Latin America,4000,spatial_model_estimated,85,selected,11,1,0.015,0.07525616368080223
+Latin America,4500,no_spatial_terms_selected,87,no_terms_selected,11,0,0.011,0.07198887476530846
+Latin America,5000,spatial_model_estimated,87,selected,11,1,0.001,0.11291675308451643
+Latin America,5500,no_spatial_terms_selected,89,no_terms_selected,11,0,0.004,0.10621479719779414
+Latin America,6000,no_spatial_terms_selected,85,no_terms_selected,11,0,0.001,0.10736652754886922
+Latin America,6500,no_spatial_terms_selected,82,no_terms_selected,11,0,0.033,0.05641703532903186
+Latin America,7000,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.055,0.06224299222130958
+Latin America,7500,spatial_model_estimated,84,selected,10,1,0.012,0.07985565244843518
+Latin America,8000,no_spatial_terms_selected,77,no_spatial_signal,9,0,0.106,0.032176338742271327
+Latin America,8500,spatial_model_estimated,71,selected,10,1,0.004,0.097570280731759
+Latin America,3500,no_spatial_terms_selected,87,no_terms_selected,13,0,0.037,0.06689572180537329
+Oceania,2000,no_spatial_terms_selected,46,no_terms_selected,5,0,0.018,0.07916033199580763
+Oceania,2500,spatial_model_estimated,48,selected,5,1,0.002,0.11973563296309864
+Oceania,3000,no_spatial_terms_selected,50,no_terms_selected,5,0,0.034,0.06530291912217867
+Oceania,3500,spatial_model_estimated,49,selected,5,1,0.009,0.09144093528156805
+Oceania,4000,spatial_model_estimated,50,selected,5,1,0.01,0.0963491699503809
+Oceania,4500,spatial_model_estimated,47,selected,5,1,0.011,0.09034974818315511
+Oceania,5000,spatial_model_estimated,50,selected,5,1,0.008,0.09545135238397973
+Oceania,5500,no_spatial_terms_selected,49,no_spatial_signal,5,0,0.074,0.05043291855460985
+Oceania,6000,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.076,0.05184354224025578
+Oceania,7000,no_spatial_terms_selected,42,no_terms_selected,5,0,0.012,0.1167411825448168
+Oceania,7500,spatial_model_estimated,48,selected,5,1,0.001,0.16594132693835428
+Asia,2000,spatial_model_estimated,175,selected,42,1,0.001,0.12053424461617512
+Asia,2500,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
+Asia,3000,spatial_model_estimated,177,selected,41,1,0.001,0.13197838125713102
+Asia,3500,spatial_model_estimated,184,selected,40,1,0.001,0.14659084826520075
+Asia,4000,no_spatial_terms_selected,193,no_terms_selected,41,0,0.001,0.18627184102384153
+Asia,4500,spatial_model_estimated,172,selected,40,1,0.001,0.13617332031023321
+Asia,5000,spatial_model_estimated,174,selected,40,1,0.002,0.11044248084865049
+Asia,5500,spatial_model_estimated,179,selected,41,2,0.001,0.12348763590430134
+Asia,6000,spatial_model_estimated,184,selected,41,1,0.001,0.10905535100100394
+Asia,6500,spatial_model_estimated,169,selected,39,1,0.03,0.05926109796526835
+Asia,7000,no_spatial_terms_selected,163,no_spatial_signal,38,0,0.118,0.036626034237106087
+Asia,7500,spatial_model_estimated,169,selected,36,2,0.001,0.11399619622000601
+Asia,8000,spatial_model_estimated,162,selected,37,2,0.001,0.12212754689264593
+Asia,8500,spatial_model_estimated,144,selected,32,2,0.002,0.10006415536003055
+Oceania,6500,no_spatial_terms_selected,43,no_terms_selected,7,0,0.041,0.08401913166316233
+Oceania,8000,no_spatial_terms_selected,43,no_terms_selected,7,0,0.001,0.18799712919919376
+Oceania,8500,spatial_model_estimated,47,selected,6,1,0.001,0.19549907895010088

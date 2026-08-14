@@ -1,0 +1,71 @@
+region,age,n_unselected_mem,p_value,status
+Europe,2000,75,0.001,estimated
+Europe,2500,75,0.001,estimated
+Europe,3000,73,0.001,estimated
+Europe,3500,72,0.001,estimated
+Europe,4000,69,0.001,estimated
+Europe,4500,70,0.001,estimated
+Europe,5000,72,0.001,estimated
+Europe,5500,69,0.001,estimated
+Europe,6000,75,0.001,estimated
+Europe,6500,73,0.001,estimated
+Europe,7000,77,0.001,estimated
+Europe,7500,74,0.001,estimated
+Europe,8000,70,0.001,estimated
+Europe,8500,71,0.001,estimated
+North America,2000,126,0.001,estimated
+North America,2500,126,0.001,estimated
+North America,3000,123,0.001,estimated
+North America,3500,127,0.001,estimated
+North America,4000,130,0.001,estimated
+North America,4500,127,0.001,estimated
+North America,5000,127,0.001,estimated
+North America,5500,128,0.001,estimated
+North America,6000,125,0.001,estimated
+North America,6500,128,0.001,estimated
+North America,7000,125,0.001,estimated
+North America,7500,129,0.001,estimated
+North America,8000,119,0.001,estimated
+North America,8500,118,0.001,estimated
+Latin America,2000,10,0.016,estimated
+Latin America,2500,11,0.001,estimated
+Latin America,3000,10,0.004,estimated
+Latin America,4000,10,0.029,estimated
+Latin America,4500,11,0.038,estimated
+Latin America,5000,10,0.014,estimated
+Latin America,5500,11,0.007,estimated
+Latin America,6000,11,0.003,estimated
+Latin America,6500,11,0.144,estimated
+Latin America,7000,11,0.092,estimated
+Latin America,7500,9,0.101,estimated
+Latin America,8000,9,0.216,estimated
+Latin America,8500,9,0.103,estimated
+Latin America,3500,13,0.062,estimated
+Oceania,2000,5,0.056,estimated
+Oceania,2500,4,0.029,estimated
+Oceania,3000,5,0.078,estimated
+Oceania,3500,4,0.057,estimated
+Oceania,4000,4,0.063,estimated
+Oceania,4500,4,0.063,estimated
+Oceania,5000,4,0.041,estimated
+Oceania,5500,5,0.142,estimated
+Oceania,6000,5,0.174,estimated
+Oceania,7000,5,0.031,estimated
+Oceania,7500,4,0.009,estimated
+Asia,2000,41,0.006,estimated
+Asia,2500,39,0.001,estimated
+Asia,3000,40,0.003,estimated
+Asia,3500,39,0.001,estimated
+Asia,4000,41,0.001,estimated
+Asia,4500,39,0.005,estimated
+Asia,5000,39,0.005,estimated
+Asia,5500,39,0.007,estimated
+Asia,6000,40,0.01,estimated
+Asia,6500,38,0.075,estimated
+Asia,7000,38,0.234,estimated
+Asia,7500,34,0.006,estimated
+Asia,8000,35,0.013,estimated
+Asia,8500,30,0.024,estimated
+Oceania,6500,7,0.12,estimated
+Oceania,8000,7,0.01,estimated
+Oceania,8500,5,0.007,estimated

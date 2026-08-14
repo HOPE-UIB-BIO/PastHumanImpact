@@ -4,30 +4,53 @@ Canonical guidance for authoring R functions, roxygen2 documentation, and functi
 
 ## Function Locations
 
-Project functions live under `R/functions/`, grouped by analysis domain:
+Project functions live under `R/functions/`, grouped first by analytical or computational responsibility and then, only when needed, by a shallow responsibility subgroup. Follow `.ai/analysis-structure.md` for the canonical directory tree and ownership boundaries.
 
-- `R/functions/climate/`
-- `R/functions/data_wrangling/`
-- `R/functions/events/`
-- `R/functions/hvarpart/`
-- `R/functions/modelling/`
-- `R/functions/PAPs/`
-- `R/functions/procrustes/`
-- `R/functions/spd/`
-- `R/functions/testing/`
-- `R/functions/visualisation/`
+Do not create folders based on publication status, tracker context, or temporary workflow roles. Names such as `supplementary`, `extended`, `extra`, GitHub issue numbers, and figure numbers do not describe a function's responsibility.
 
-Each function file should contain one primary function and should be named after that function. Keep helper functions private to the file only when they are small and tightly coupled; otherwise promote them to their own file.
+Each function file must contain exactly one function and must be named after that function. Every helper must therefore occupy its own matching file, even when it is only used by one other function. Do not declare named functions inside another function.
+
+Use `dataset` rather than `core` in new function, argument, object, and directory names. Use `core` only where the physical sediment core itself is the scientific subject or where an external schema requires the term.
 
 ## Function Style
 
 - Follow `.ai/r-coding.md` for naming, namespaces, line width, and formatting.
-- Function names are verbs in `snake_case`.
+- Follow the function-name contract below. Treat it as an enforceable API contract, not a stylistic preference.
 - Always use explicit argument names in function calls where practical.
 - Always end project functions with an explicit `return(res_object)`.
 - Do not call `library()` or `require()` inside functions.
 - Avoid global side effects. A function should not source files, mutate global variables, or write files unless writing is its documented purpose.
 - Do not use `Sys.setenv()` or `Sys.getenv()` for internal function control flow. Use explicit arguments and documented defaults instead.
+
+## Function-name contract
+
+Function names use lower snake case, begin with a verb, and describe the returned value or material side effect. Internal functions may begin with one leading dot. The basename of a function file must equal its function name after removing that internal leading dot.
+
+| Verb | Contract |
+| --- | --- |
+| `load_` | Retrieve an existing persistent object from a file, URL, database, target store, or configuration source. |
+| `save_` | Persist an object or artifact. |
+| `build_` | Construct a new structured object from supplied in-memory inputs without persistent input/output. |
+| `prepare_` | Transform data into a documented workflow-ready or model-ready contract. |
+| `validate_` | Enforce a contract and abort when it is violated. |
+| `diagnose_` | Return explanatory findings without defining model performance. |
+| `is_`, `has_` | Return a scalar or explicitly shape-documented logical predicate. |
+| `resolve_` | Apply a deterministic policy or fallback to choose one operational value or status. |
+| `compute_` | Return a mathematical or algorithmic result without evaluative judgement. |
+| `aggregate_` | Combine observations or evidence into grouped domain records. |
+| `summarise_` | Reduce data to summary statistics or a reporting table. |
+| `fit_` | Fit a statistical or machine-learning model. |
+| `predict_` | Generate predictions from a fitted model or predictive artifact. |
+| `score_` | Compute a documented metric set for one prediction or evidence contract. |
+| `evaluate_` | Produce a standardised performance or quality assessment. |
+| `select_` | Choose rows, variables, candidates, or a winning model using a documented rule. |
+| `run_` | Orchestrate a multi-step workflow with material side effects or pipeline execution. |
+| `plot_` | Return a plot object without saving it. |
+| `render_` | Materialise a document or multi-file rendered output. |
+
+Precise domain verbs are allowed when they remove ambiguity. Initially approved domain verbs are `filter_`, `classify_`, `interpolate_`, `scale_`, `project_`, `cluster_`, `deduplicate_`, and `normalise_`.
+
+Do not use vague retrieval verbs such as `get_` when the function computes, prepares, resolves, selects, or loads a value. Do not use a side-effect verb for a pure function or a pure-function verb for code that writes persistent state.
 
 ## Contract-First Guardrails
 
@@ -89,7 +112,7 @@ R/tests/testthat/test-<function_name>.R
 
 Every function in `R/functions/` should have a matching test file unless a documented exception is recorded in the active task notes or progress tracker.
 
-Project test execution is routed through `R/00_Config_file.R` first, then the helper functions in `R/functions/testing/`:
+Project test execution is routed through `R/00_Config_file.R` first, then the helper functions in `R/functions/workflow/testing/`:
 
 - `run_project_tests()` for the full suite.
 - `run_test_file()` for one focused test file.

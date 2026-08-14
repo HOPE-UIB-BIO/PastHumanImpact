@@ -1,0 +1,2 @@
+status,n_complete,n_candidates,global_p_value,full_adjusted_r_squared,selected_names
+selected,1118,244,0.01,0.08315233846690573,dbmem_015;dbmem_007;dbmem_074;dbmem_067;dbmem_041;dbmem_087;dbmem_002;dbmem_119;dbmem_154;dbmem_138;dbmem_072;dbmem_014;dbmem_008;dbmem_083;dbmem_130;dbmem_242

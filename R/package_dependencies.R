@@ -4,8 +4,8 @@
 if (
   FALSE
 ) {
+  library(adespatial)
   library(assertthat)
-  library(brms)
   library(collinear)
   library(colorspace)
   library(furrr)

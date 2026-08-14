@@ -10,13 +10,13 @@ Apply this file to all `.R` files. For functions and tests, also read
 
 Main project areas:
 
-- `R/main_analysis/` - ordered analysis scripts used by `R/01_run_project.R`
-- `R/target_pipelines/` - `{targets}` pipeline definitions
+- `R/analyses/` - ordered runners and colocated target pipelines
+- `R/analyses/00_profiles/` - validated analysis-profile registry
 - `R/functions/` - reusable project functions
-- `R/temporal_models/` - temporal model preparation, fitting, checks, and
-  prediction
-- `R/spd_calculation/` - radiocarbon SPD calculation scripts
-- `R/visualisations/` - manuscript and exploratory figures
+- `R/analyses/03_temporal_models/` - protected temporal-model lifecycle
+- `R/analyses/05_visualisations/` - manuscript and exploratory figures
+- `R/analyses/90_diagnostics/` - opt-in diagnostics
+- `R/analyses/91_sensitivity_analyses/` - opt-in sensitivities
 
 ## Project Setup
 
@@ -71,6 +71,10 @@ Prefer type prefixes for important objects:
 
 Use descriptive full words. Avoid unclear abbreviations.
 
+Never use GitHub issue or pull-request numbers in R identifiers, target names, analysis labels, configuration values, comments, roxygen documentation, or script filenames.
+Name code after its scientific meaning or computational role so it remains understandable without access to GitHub.
+Issue identifiers may appear in planning or reviewer-response documents whose explicit purpose is traceability, but executable code must not depend on that context.
+
 Prefer creating a new object name for transformed data rather than overwriting an existing object in memory. Reuse an object name only when there is a clear reason (for example memory constraints, tight loops, or deliberate in-place workflow), and keep that choice explicit.
 
 Function names should be verbs. Data objects should be nouns.
@@ -79,24 +83,67 @@ Function names should be verbs. Data objects should be nouns.
 
 - Use `<-` for assignment.
 - Use 2-space indentation.
-- Keep R code and roxygen lines to about 80 characters.
+- Keep R code and roxygen lines to about 80 characters. Do not apply this limit to prose in Markdown or Quarto files.
 - Use `TRUE` and `FALSE`, not `T` and `F`.
 - Prefer one argument per line for multi-argument calls.
 - Use explicit argument names where practical.
 
-When the right-hand side is a function call, put it on the next line:
+### Assignment layout
+
+Put the right-hand side on a new line after `<-` by default.
+This applies to function calls, vectors and lists, indexing, arithmetic expressions, conditionals, and pipelines.
 
 ```r
 data_records <-
   readr::read_csv(path_records)
+
+region_levels <-
+  c("North America", "Latin America", "Europe", "Asia", "Oceania")
+
+background_step <-
+  background_values[[2]] - background_values[[1]]
 ```
 
-Scalar literals may stay on one line:
+The only same-line exceptions are short direct aliases and simple atomic literals.
+Do not use this exception for a function call, indexing operation, calculation, or collection, even when it would fit on one line.
 
 ```r
 min_age <- 0
 flag_rerun <- FALSE
+data_records <- data_records_override
 ```
+
+### Vertical separation
+
+Separate every top-level executable statement within a block with exactly one blank line.
+An assignment, standalone function call, pipeline, or complete control-flow construct counts as one statement.
+Apply this rule even when two adjacent statements are closely related.
+
+```r
+data_records <-
+  prepare_records(data_source)
+
+data_summary <-
+  summarise_records(data_records)
+
+assertthat::assert_that(
+  nrow(data_summary) > 0L,
+  msg = "No summary records are available."
+)
+
+if (
+  isTRUE(use_override)
+) {
+  data_summary <- data_summary_override
+}
+
+write_summary(data_summary)
+```
+
+Do not insert blank lines inside a single continued expression merely to separate its arguments, pipeline stages, ggplot layers, or other continuation lines.
+Keep syntactically connected clauses such as `} else {` together.
+
+### Control flow
 
 Control-flow conditions are multi-line:
 
@@ -170,27 +217,56 @@ Use `.data[[column_name]]` when the column is stored as a character string.
 
 ## Targets Pipelines
 
-Pipeline scripts live in `R/target_pipelines/`. Keep target commands readable
-and deterministic.
+Every `pipeline.R` uses the common project banner and numbered section-header
+structure. Its header must name the repository-relative runner that executes
+the graph and must state that sourcing the pipeline only declares targets.
+
+Quote every target name and place a short `# Why:` comment immediately above
+each `targets::tar_target()` call. The comment must explain both what the target
+provides and why it exists in the graph. The installed `{targets}` API has no
+target-level `description` argument, so the comment is the maintained pipeline
+documentation.
+
+```r
+# Why: Validate profiles before fitting so unsupported analyses fail early.
+targets::tar_target(
+  name = "data_analysis_profiles",
+  command = validate_analysis_profiles(data_profiles)
+)
+```
+
+Each target pipeline lives beside its scientific operation and is named
+`pipeline.R`. Keep target commands readable and deterministic.
 
 When a target command becomes multi-step logic, move the logic into a function
 under `R/functions/` and call that function from the target.
 
-Use target stores consistently:
+Every pipeline owns one external store. Resolve stores with
+`resolve_pipeline_store_path()`, import only documented public targets, and
+include the upstream fingerprint as a formal target dependency. Never read a
+private target from another pipeline.
 
-| Script | Store |
-| --- | --- |
-| `01_pipeline_pollen_data.R` | `Targets_data/pipeline_pollen_data` |
-| `02_pipeline_paps.R` | `Targets_data/pipeline_paps` |
-| `03_pipeline_events.R` | `Targets_data/pipeline_events` |
-| `04_pipeline_predictors.R` | `Targets_data/pipeline_predictors` |
-| `05_pipeline_hvar_spatial_temporal.R` | `Targets_data/analyses_h1` |
-| `06_pipeline_multidimensional_shifts.R` | `Targets_data/analyses_h2` |
+Stable store roots are:
+
+- `Targets_data/data_preparation/`
+- `Targets_data/analyses_h1/`
+- `Targets_data/temporal_models/`
+- `Targets_data/analyses_h2/`
+- `Targets_data/sensitivity_analyses/`
+
+Analysis variants belong in `R/analyses/00_profiles/`; do not copy a pipeline
+to represent a radius, predictor set, or control variant.
+
+Temporal fitting additionally requires both `need_to_run == TRUE` and a valid,
+unconsumed request in `general_model_run_requests.csv`. No target invalidation
+or missing prediction may authorize an expensive fit.
 
 Before running expensive targets, prefer `targets::tar_manifest()` or
 `targets::tar_visnetwork()` to inspect the pipeline.
 
 ## Visualisation
+
+Follow `.ai/analysis-structure.md` for canonical visualisation-script and output paths. Organise generated figures by scientific analysis, never by their current manuscript number or by whether they are presently considered main, supplementary, extended, or extra material.
 
 Use constants from `R/00_Config_file.R` for figure style and size:
 
@@ -210,8 +286,7 @@ Build plots in this order:
 5. theme calls
 6. geoms, from bottom to top layer
 
-Save generated outputs under `Outputs/` or the configured external data path,
-following nearby visualisation scripts.
+Save generated outputs under `Outputs/` or the configured external data path using stable, descriptive analysis names. Publication assembly may copy selected outputs to numbered manuscript filenames, but analytical scripts must not generate numbered canonical filenames directly.
 
 ## Reproducibility
 

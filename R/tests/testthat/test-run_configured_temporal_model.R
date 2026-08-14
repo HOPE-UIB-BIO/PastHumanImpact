@@ -37,6 +37,7 @@ testthat::test_that("ineligible configured models are skipped", {
       config_dir = path_config_dir,
       model_dir = path_model_dir,
       path_history = file.path(path_test_root, "history.csv"),
+      request_id = "request_a",
       verbose = FALSE
     )
 
@@ -85,6 +86,7 @@ testthat::test_that("configured models without pending work are skipped", {
       config_dir = path_config_dir,
       model_dir = path_model_dir,
       path_history = file.path(path_test_root, "history.csv"),
+      request_id = "request_a",
       verbose = FALSE
     )
 
@@ -127,6 +129,7 @@ testthat::test_that("configured model IDs must match exactly one row", {
       config_dir = path_config_dir,
       model_dir = path_model_dir,
       path_history = file.path(path_test_root, "history.csv"),
+      request_id = "request_a",
       verbose = FALSE
     ),
     regexp = "exactly one"
@@ -165,7 +168,7 @@ testthat::test_that("failed configured fits advance and record the seed", {
     )
 
   data_config <-
-    create_model_config_table(
+    build_model_config_table(
       data_model = data_model,
       analysis = "pap_temporal",
       family_key = "invalid_family",
@@ -192,6 +195,7 @@ testthat::test_that("failed configured fits advance and record the seed", {
       config_dir = path_config_dir,
       model_dir = path_model_dir,
       path_history = path_history,
+      request_id = "request_a",
       verbose = FALSE
     )
 

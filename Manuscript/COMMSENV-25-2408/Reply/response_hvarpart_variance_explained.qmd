@@ -22,7 +22,7 @@ here::i_am(
 source(here::here("R/00_Config_file.R"))
 table_dir <- here::here("Outputs", "Tables", "HVarPart")
 figure_dir <- here::here(
-  "Outputs", "Figures", "Extended_data_figures", "HVarPart"
+  "Outputs", "Figures", "Diagnostics", "HVarPart"
 )
 audit <- readr::read_csv(
   file.path(table_dir, "hvarpart_variance_missing_negative_audit.csv"),

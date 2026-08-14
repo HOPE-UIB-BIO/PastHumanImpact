@@ -99,29 +99,29 @@ fig_rowsum <-
   here::here(
     "Outputs",
     "Figures",
-    "Supplementary_analyses",
-    "supplement_density_rowsum_by_climatezone.png"
+    "Data",
+    "pollen_sample_density_by_climate_zone.png"
   )
 fig_overall <-
   here::here(
     "Outputs",
     "Figures",
-    "Supplementary_analyses",
-    "supplement_threshold_retention_overall.png"
+    "Data",
+    "pollen_threshold_retention_overall.png"
   )
 fig_region <-
   here::here(
     "Outputs",
     "Figures",
-    "Supplementary_analyses",
-    "supplement_threshold_retention_region_facets.png"
+    "Data",
+    "pollen_threshold_retention_by_region.png"
   )
 fig_region_clim <-
   here::here(
     "Outputs",
     "Figures",
-    "Supplementary_analyses",
-    "supplement_threshold_retention_region_climatezone.png"
+    "Data",
+    "pollen_threshold_retention_by_region_and_climate_zone.png"
   )
 
 figure_paths <- c(
