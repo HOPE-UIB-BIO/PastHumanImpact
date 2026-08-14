@@ -1,0 +1,10 @@
+profile_id,analysis_family,analytical_unit,human_proxy,human_predictor_specification,spd_radius_specification,structural_control,profile_role,enabled,seed,configuration_reference
+within_dataset_spd_human_climate,h1,within_dataset,spd,spd,250_km_with_500_km_fallback,none,canonical,TRUE,1234,main
+within_dataset_events_human_climate,h1,within_dataset,events,all_event_groups,not_applicable,none,canonical,TRUE,1234,main
+time_slice_spd_human_climate,h1,time_slice,spd,spd,250_km_with_500_km_fallback,none,canonical,TRUE,1234,main
+time_slice_events_human_climate,h1,time_slice,events,all_event_groups,not_applicable,none,canonical,TRUE,1234,main
+within_dataset_spd_time_control,h1,within_dataset,spd,spd,250_km_with_500_km_fallback,time,canonical,TRUE,1234,main
+within_dataset_events_time_control,h1,within_dataset,events,all_event_groups,not_applicable,time,canonical,TRUE,11234,main
+time_slice_spd_spatial_control,h1,time_slice,spd,spd,250_km_with_500_km_fallback,space,canonical,TRUE,1234,main
+time_slice_events_spatial_control,h1,time_slice,events,all_event_groups,not_applicable,space,canonical,TRUE,11234,main
+spd_spatiotemporal_balance,h1,spatial_aggregation,spd,spd,250_km_with_500_km_fallback,time_and_space,canonical,TRUE,1234,main

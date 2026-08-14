@@ -1,0 +1,12 @@
+column,type,required,description
+profile_id,character,TRUE,Stable unique profile identifier
+analysis_family,character,TRUE,Scientific analysis family
+analytical_unit,character,TRUE,Unit at which the model is fitted
+human_proxy,character,TRUE,Human-impact proxy family
+human_predictor_specification,character,TRUE,Named predictor-set definition
+spd_radius_specification,character,TRUE,Named SPD radius and fallback policy
+structural_control,character,TRUE,None time space or combined control
+profile_role,character,TRUE,Canonical or sensitivity role
+enabled,logical,TRUE,Whether the profile is intentionally active
+seed,integer,TRUE,Profile-specific reproducibility seed
+configuration_reference,character,TRUE,Stable configuration family reference

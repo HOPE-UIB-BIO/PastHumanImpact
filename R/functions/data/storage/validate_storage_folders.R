@@ -36,12 +36,11 @@ validate_storage_folders <- function(path, create_missing = FALSE) {
     "Spatial/Regions_shapefile",
     "SPD",
     "Targets_data",
+    "Targets_data/data_preparation",
     "Targets_data/analyses_h1",
+    "Targets_data/temporal_models",
     "Targets_data/analyses_h2",
-    "Targets_data/pipeline_events",
-    "Targets_data/pipeline_paps",
-    "Targets_data/pipeline_pollen_data",
-    "Targets_data/pipeline_predictors"
+    "Targets_data/sensitivity_analyses"
   )
 
   if (

@@ -34,7 +34,11 @@ validate_function_names <- function(
     "project",
     "cluster",
     "deduplicate",
-    "normalise"
+    "normalise",
+    "add",
+    "cast",
+    "initialize",
+    "reconcile"
   )
 ) {
   assertthat::assert_that(
