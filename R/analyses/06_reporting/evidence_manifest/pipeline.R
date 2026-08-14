@@ -1,14 +1,37 @@
 #----------------------------------------------------------#
-# Stable evidence manifest for analysis products
+#
+#
+#                     GlobalHumanImpact
+#
+#               Analysis evidence manifest
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the analysis evidence manifest target graph.
+# Run with:
+#   R/analyses/06_reporting/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
 
 source(here::here("R/00_Config_file.R"))
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Prepare evidence artifacts so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_evidence_artifacts,
+    name = "data_evidence_artifacts",
     command = tibble::tribble(
       ~artifact_id, ~description, ~analysis_profile,
       ~source_pipeline, ~public_target, ~path,
@@ -48,14 +71,18 @@ list(
       )
     )
   ),
+  # Why: Materialize evidence manifest so downstream reporting uses an auditable
+  #   result.
   targets::tar_target(
-    name = table_evidence_manifest,
+    name = "table_evidence_manifest",
     command = build_evidence_manifest(
       data_artifacts = data_evidence_artifacts
     )
   ),
+  # Why: Track evidence manifest as a file target so file changes invalidate
+  #   downstream results.
   targets::tar_target(
-    name = file_evidence_manifest,
+    name = "file_evidence_manifest",
     command = {
       path_output <-
         here::here(

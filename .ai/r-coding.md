@@ -217,6 +217,24 @@ Use `.data[[column_name]]` when the column is stored as a character string.
 
 ## Targets Pipelines
 
+Every `pipeline.R` uses the common project banner and numbered section-header
+structure. Its header must name the repository-relative runner that executes
+the graph and must state that sourcing the pipeline only declares targets.
+
+Quote every target name and place a short `# Why:` comment immediately above
+each `targets::tar_target()` call. The comment must explain both what the target
+provides and why it exists in the graph. The installed `{targets}` API has no
+target-level `description` argument, so the comment is the maintained pipeline
+documentation.
+
+```r
+# Why: Validate profiles before fitting so unsupported analyses fail early.
+targets::tar_target(
+  name = "data_analysis_profiles",
+  command = validate_analysis_profiles(data_profiles)
+)
+```
+
 Each target pipeline lives beside its scientific operation and is named
 `pipeline.R`. Keep target commands readable and deterministic.
 

@@ -3,18 +3,20 @@
 #
 #                     GlobalHumanImpact
 #
-#               Calculate pollen assemblage properties
+#               Pollen-derived property preparation
 #
 #
 #                   O. Mottl, V.A. Felde
 #                         2024
 #
 #----------------------------------------------------------#
-
-
+# Defines the pollen-derived property preparation target graph.
+# Run with:
+#   R/analyses/01_data_preparation/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
 
 #----------------------------------------------------------#
-# 0. Setup -----
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -47,13 +49,13 @@ runner_data_preparation <-
   "R/analyses/01_data_preparation/00_run.R"
 
 #----------------------------------------------------------#
-# 2. Targets -----
+# 1. Define targets -----
 #----------------------------------------------------------#
 
-# the targets list:
 list(
+  # Why: Fingerprint pollen so upstream changes invalidate this pipeline store.
   targets::tar_target(
-    name = fingerprint_pollen,
+    name = "fingerprint_pollen",
     command = compute_target_store_fingerprint(
       store = store_pollen,
       target_names = "data_pollen",
@@ -61,8 +63,9 @@ list(
     ),
     cue = targets::tar_cue(mode = "always")
   ),
+  # Why: Prepare pollen so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_pollen,
+    name = "data_pollen",
     command = {
       fingerprint_pollen
 
@@ -75,8 +78,9 @@ list(
   ),
   # 3. Estimate PAPs -----
   # - calculate diversity
+  # Why: Prepare diversity so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_diversity,
+    name = "data_diversity",
     command = compute_diversity(
       data_pollen,
       n_rand = 999,
@@ -86,8 +90,9 @@ list(
   # - run detrended canonical correspondence analysis (DCCA) to estimate
   #     compositional turnover
   # - use percentages without prior transformations
+  # Why: Prepare dcca so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_dcca,
+    name = "data_dcca",
     command = compute_dcca(
       data_pollen,
       sel_method = "constrained",
@@ -98,8 +103,9 @@ list(
     )
   ),
   # - calculate Rate-of-change (RoC)
+  # Why: Prepare roc so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_roc,
+    name = "data_roc",
     command = compute_roc(
       data_pollen,
       smoothing_method = "age.w",
@@ -119,8 +125,9 @@ list(
   ),
   # - run multivariate regression trees (MRT) to estimate compositional change
   # - use percentages without prior transformation
+  # Why: Prepare mrt so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_mrt,
+    name = "data_mrt",
     command = compute_mrt(
       data_pollen,
       n_rand = 999,
@@ -128,8 +135,9 @@ list(
     )
   ),
   # - combine all PAP estimates into one tibble for get change-points
+  # Why: Prepare prepared cp so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_prepared_cp,
+    name = "data_prepared_cp",
     command = prepare_data_cp(
       data_pollen,
       data_diversity,
@@ -139,13 +147,17 @@ list(
     )
   ),
   # - calculate change points of all PAP variables by regression trees (RT)
+  # Why: Prepare change points so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_change_points,
+    name = "data_change_points",
     command = compute_pap_change_points(data_prepared_cp)
   ),
   # - calculate density of change points
+  # Why: Prepare density estimate so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_density_estimate,
+    name = "data_density_estimate",
     command = aggregate_density_pap(
       data_source_change_points = data_change_points,
       data_source_meta = data_meta,
@@ -155,8 +167,10 @@ list(
   ),
   # 4. Combine PAP data -----
   # - merge diversity and DCCA and prepare for modelling
+  # Why: Prepare diversity and dcca so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_diversity_and_dcca,
+    name = "data_diversity_and_dcca",
     command = prepare_diversity_dcca_model_data(
       data_source_diversity = data_diversity,
       data_source_dcca = data_dcca,
@@ -164,8 +178,10 @@ list(
     )
   ),
   # - estimate diversity and DCCA on equal time slices
+  # Why: Prepare div dcca interpolated so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_div_dcca_interpolated,
+    name = "data_div_dcca_interpolated",
     command = prepare_interpolated_model_data(
       data_source = data_diversity_and_dcca,
       variable = "var_name",
@@ -181,13 +197,17 @@ list(
     )
   ),
   # - prepare RoC for modelling
+  # Why: Prepare roc for modelling so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_roc_for_modelling,
+    name = "data_roc_for_modelling",
     command = prepare_roc_model_data(data_roc)
   ),
   # - estimate RoC on equal time slices
+  # Why: Prepare roc interpolated so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_roc_interpolated,
+    name = "data_roc_interpolated",
     command = prepare_interpolated_model_data(
       data_source = data_roc_for_modelling,
       variable = "var_name",
@@ -203,8 +223,9 @@ list(
     )
   ),
   # - merge PAPs together
+  # Why: Prepare properties so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_properties,
+    name = "data_properties",
     command = summarise_data_properties(
       data_source_diversity = data_div_dcca_interpolated,
       data_source_roc = data_roc_interpolated,
@@ -213,8 +234,10 @@ list(
     )
   ),
   # - filter data properties for analyses ----
+  # Why: Prepare properties filtered so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_properties_filtered,
+    name = "data_properties_filtered",
     command = prepare_filtered_hvarpart_data(
       data_source = data_properties,
       data_meta = data_meta,
@@ -224,8 +247,9 @@ list(
     )
   ),
   # - get data multidimensional shifts (procrustes m2)
+  # Why: Prepare m2 filtered so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_m2_filtered,
+    name = "data_m2_filtered",
     command = prepare_m2_data(
       data_source = data_properties_filtered,
       data_meta = data_meta,

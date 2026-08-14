@@ -1,5 +1,22 @@
 #----------------------------------------------------------#
-# H1 shared spatiotemporal inputs
+#
+#
+#                     GlobalHumanImpact
+#
+#               H1 shared spatiotemporal inputs
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the h1 shared spatiotemporal inputs target graph.
+# Run with:
+#   R/analyses/02_h1_spatiotemporal_hvarpart/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -78,18 +95,28 @@ predictor_sets_h1 <-
     )
   )
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Track analysis profiles as a file target so file changes invalidate
+  #   downstream results.
   targets::tar_target(
-    name = file_analysis_profiles,
+    name = "file_analysis_profiles",
     command = path_profiles,
     format = "file"
   ),
+  # Why: Prepare analysis profiles so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_analysis_profiles,
+    name = "data_analysis_profiles",
     command = load_analysis_profiles(file_analysis_profiles)
   ),
+  # Why: Define H1 analysis config once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_analysis_config,
+    name = "h1_analysis_config",
     command = list(
       seed = as.integer(set_seed),
       permutations = 999L,
@@ -103,16 +130,21 @@ list(
       thinning_repetitions = 100L
     )
   ),
+  # Why: Define H1 response variables once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_response_variables,
+    name = "h1_response_variables",
     command = response_vars_h1
   ),
+  # Why: Define H1 predictor sets once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_predictor_sets,
+    name = "h1_predictor_sets",
     command = predictor_sets_h1
   ),
+  # Why: Fingerprint PAPs so upstream changes invalidate this pipeline store.
   targets::tar_target(
-    name = fingerprint_paps,
+    name = "fingerprint_paps",
     command = compute_target_store_fingerprint(
       store = store_paps,
       target_names = c("data_properties", "data_properties_filtered"),
@@ -120,8 +152,10 @@ list(
     ),
     cue = targets::tar_cue(mode = "always")
   ),
+  # Why: Fingerprint predictors so upstream changes invalidate this pipeline
+  #   store.
   targets::tar_target(
-    name = fingerprint_predictors,
+    name = "fingerprint_predictors",
     command = compute_target_store_fingerprint(
       store = store_predictors,
       target_names = c("data_predictors", "data_predictors_filtered"),
@@ -129,8 +163,9 @@ list(
     ),
     cue = targets::tar_cue(mode = "always")
   ),
+  # Why: Prepare properties so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_properties,
+    name = "data_properties",
     command = {
       fingerprint_paps
 
@@ -141,8 +176,10 @@ list(
       )
     }
   ),
+  # Why: Prepare properties filtered so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_properties_filtered,
+    name = "data_properties_filtered",
     command = {
       fingerprint_paps
 
@@ -153,8 +190,9 @@ list(
       )
     }
   ),
+  # Why: Prepare predictors so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_predictors,
+    name = "data_predictors",
     command = {
       fingerprint_predictors
 
@@ -165,8 +203,10 @@ list(
       )
     }
   ),
+  # Why: Prepare predictors filtered so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_predictors_filtered,
+    name = "data_predictors_filtered",
     command = {
       fingerprint_predictors
 
@@ -177,8 +217,9 @@ list(
       )
     }
   ),
+  # Why: Prepare meta path so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_meta_path,
+    name = "data_meta_path",
     command = file.path(
       data_storage_path,
       "Assembly",
@@ -189,19 +230,24 @@ list(
     ),
     format = "file"
   ),
+  # Why: Prepare meta so downstream targets share one canonical dataset.
   targets::tar_target(
-    name = data_meta,
+    name = "data_meta",
     command = resolve_file_path(data_meta_path)
   ),
+  # Why: Prepare hvar filtered so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_hvar_filtered,
+    name = "data_hvar_filtered",
     command = prepare_combined_data(
       data_source_properties = data_properties_filtered,
       data_source_predictors = data_predictors_filtered
     )
   ),
+  # Why: Prepare properties temporal so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_properties_temporal,
+    name = "data_properties_temporal",
     command = prepare_filtered_hvarpart_data(
       data_source = data_properties,
       data_meta = data_meta,
@@ -210,8 +256,10 @@ list(
       remove_private = TRUE
     )
   ),
+  # Why: Prepare predictors temporal so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_predictors_temporal,
+    name = "data_predictors_temporal",
     command = prepare_filtered_hvarpart_data(
       data_source = data_predictors,
       data_meta = data_meta,
@@ -220,15 +268,19 @@ list(
       remove_private = TRUE
     )
   ),
+  # Why: Prepare hvar temporal so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_hvar_temporal,
+    name = "data_hvar_temporal",
     command = prepare_combined_data(
       data_source_properties = data_properties_temporal,
       data_source_predictors = data_predictors_temporal
     )
   ),
+  # Why: Compute dataset age collapse filtered once so downstream summaries
+  #   reuse the same result.
   targets::tar_target(
-    name = output_dataset_age_collapse_filtered,
+    name = "output_dataset_age_collapse_filtered",
     command = aggregate_hvar_dataset_ages(
       data_source = data_hvar_filtered,
       response_vars = h1_response_variables,
@@ -237,16 +289,22 @@ list(
       )
     )
   ),
+  # Why: Prepare hvar filtered unique age so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_hvar_filtered_unique_age,
+    name = "data_hvar_filtered_unique_age",
     command = output_dataset_age_collapse_filtered[["data"]]
   ),
+  # Why: Materialize dataset age collapse filtered so downstream reporting uses
+  #   an auditable result.
   targets::tar_target(
-    name = table_dataset_age_collapse_filtered,
+    name = "table_dataset_age_collapse_filtered",
     command = output_dataset_age_collapse_filtered[["audit"]]
   ),
+  # Why: Compute dataset age collapse temporal once so downstream summaries
+  #   reuse the same result.
   targets::tar_target(
-    name = output_dataset_age_collapse_temporal,
+    name = "output_dataset_age_collapse_temporal",
     command = aggregate_hvar_dataset_ages(
       data_source = data_hvar_temporal,
       response_vars = h1_response_variables,
@@ -255,23 +313,31 @@ list(
       )
     )
   ),
+  # Why: Prepare hvar temporal unique age so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_hvar_temporal_unique_age,
+    name = "data_hvar_temporal_unique_age",
     command = output_dataset_age_collapse_temporal[["data"]]
   ),
+  # Why: Materialize dataset age collapse temporal so downstream reporting uses
+  #   an auditable result.
   targets::tar_target(
-    name = table_dataset_age_collapse_temporal,
+    name = "table_dataset_age_collapse_temporal",
     command = output_dataset_age_collapse_temporal[["audit"]]
   ),
+  # Why: Prepare hvar timebins unique age so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_hvar_timebins_unique_age,
+    name = "data_hvar_timebins_unique_age",
     command = prepare_hvarpart_timebin_data(
       data_source = data_hvar_temporal_unique_age,
       data_meta = data_meta
     )
   ),
+  # Why: Prepare hvar timebins SPD unique age so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_hvar_timebins_spd_unique_age,
+    name = "data_hvar_timebins_spd_unique_age",
     command = data_hvar_timebins_unique_age |>
       dplyr::filter(dplyr::between(.data[["age"]], 2000, 8500))
   )

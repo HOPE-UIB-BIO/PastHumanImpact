@@ -1,5 +1,22 @@
 #----------------------------------------------------------#
-# Temporal-model predictions and cache reuse
+#
+#
+#                     GlobalHumanImpact
+#
+#               Temporal model predictions
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the temporal model predictions target graph.
+# Run with:
+#   R/analyses/03_temporal_models/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -24,17 +41,25 @@ store_inputs <-
 runner_temporal <-
   "R/analyses/03_temporal_models/00_run.R"
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Prepare temporal model so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_temporal_model,
+    name = "data_temporal_model",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "data_temporal_model",
       runner = runner_temporal
     )
   ),
+  # Why: Prepare temporal model predictions so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_temporal_model_predictions,
+    name = "data_temporal_model_predictions",
     command = run_temporal_model_predictions(
       data_source = data_temporal_model,
       config_dir = path_temporal_models,

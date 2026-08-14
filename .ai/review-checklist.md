@@ -48,6 +48,16 @@ and assistants that need a compact validation target.
 - Relevant test runner or focused test file has been executed before the change
   is treated as complete.
 
+## Target Pipeline Checks
+
+- Every `pipeline.R` uses the common project banner and section structure.
+- The header names the runner and warns that sourcing only declares targets.
+- Every `targets::tar_target()` name is a quoted character string.
+- Every target has an immediately preceding `# Why:` comment that explains
+  both what the target provides and why the graph needs it.
+- The registered pipeline-style contract test passes.
+- Pipeline manifests are generated without building expensive targets.
+
 ## Visualisation and Quarto Checks
 
 - Visualisation code uses the project canvas and save conventions.

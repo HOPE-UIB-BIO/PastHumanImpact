@@ -1,5 +1,22 @@
 #----------------------------------------------------------#
-# Temporal-model lifecycle configuration
+#
+#
+#                     GlobalHumanImpact
+#
+#               Temporal model configuration
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the temporal model configuration target graph.
+# Run with:
+#   R/analyses/03_temporal_models/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -46,9 +63,15 @@ store_inputs <-
 runner_temporal <-
   "R/analyses/03_temporal_models/00_run.R"
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Fingerprint temporal inputs so upstream changes invalidate this
+  #   pipeline store.
   targets::tar_target(
-    name = fingerprint_temporal_inputs,
+    name = "fingerprint_temporal_inputs",
     command = compute_target_store_fingerprint(
       store = store_inputs,
       target_names = c(
@@ -59,8 +82,10 @@ list(
     ),
     cue = targets::tar_cue(mode = "always")
   ),
+  # Why: Track temporal model config as a file target so file changes invalidate
+  #   downstream results.
   targets::tar_target(
-    name = file_temporal_model_config,
+    name = "file_temporal_model_config",
     command = file.path(
       path_temporal_models,
       RUtilpol::get_latest_file_name(
@@ -70,15 +95,19 @@ list(
     ),
     format = "file"
   ),
+  # Why: Prepare temporal model config source so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_temporal_model_config_source,
+    name = "data_temporal_model_config_source",
     command = readr::read_csv(
       file_temporal_model_config,
       show_col_types = FALSE
     )
   ),
+  # Why: Define temporal model input hash once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = temporal_model_input_hash,
+    name = "temporal_model_input_hash",
     command = {
       fingerprint_temporal_inputs
 
@@ -89,32 +118,40 @@ list(
       )
     }
   ),
+  # Why: Prepare temporal model so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_temporal_model,
+    name = "data_temporal_model",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "data_temporal_model",
       runner = runner_temporal
     )
   ),
+  # Why: Prepare temporal model specifications so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_temporal_model_specifications,
+    name = "data_temporal_model_specifications",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "data_temporal_model_specifications",
       runner = runner_temporal
     )
   ),
+  # Why: Define temporal family key by model once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = temporal_family_key_by_model,
+    name = "temporal_family_key_by_model",
     command = data_temporal_model_specifications |>
       dplyr::select(
         dplyr::all_of(c("model_id", "family_key"))
       ) |>
       tibble::deframe()
   ),
+  # Why: Prepare temporal model config candidate so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_temporal_model_config_candidate,
+    name = "data_temporal_model_config_candidate",
     command = build_model_config_table(
       data_model = data_temporal_model,
       analysis = "general_temporal",
@@ -157,8 +194,10 @@ list(
         hash_column = "specification_hash"
       )
   ),
+  # Why: Prepare temporal model config current so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_temporal_model_config_current,
+    name = "data_temporal_model_config_current",
     command = data_temporal_model_config_source |>
       dplyr::mutate(
         input_data_hash = temporal_model_input_hash,
@@ -176,16 +215,20 @@ list(
         hash_column = "specification_hash"
       )
   ),
+  # Why: Prepare temporal model config so downstream targets share one canonical
+  #   dataset.
   targets::tar_target(
-    name = data_temporal_model_config,
+    name = "data_temporal_model_config",
     command = reconcile_temporal_model_configuration(
       data_current = data_temporal_model_config_current,
       data_candidate = data_temporal_model_config_candidate
     ) |>
       compute_temporal_model_definition_hashes()
   ),
+  # Why: Materialize temporal model lifecycle audit so downstream reporting uses
+  #   an auditable result.
   targets::tar_target(
-    name = table_temporal_model_lifecycle_audit,
+    name = "table_temporal_model_lifecycle_audit",
     command = data_temporal_model_config |>
       dplyr::count(
         .data[["is_active_model"]],

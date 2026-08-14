@@ -1,5 +1,22 @@
 #----------------------------------------------------------#
-# H1 human-climate-only time-slice event models
+#
+#
+#                     GlobalHumanImpact
+#
+#               Time-slice event H1 models
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the time-slice event h1 models target graph.
+# Run with:
+#   R/analyses/02_h1_spatiotemporal_hvarpart/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -15,9 +32,15 @@ store_inputs <-
 runner_inputs <-
   "R/analyses/02_h1_spatiotemporal_hvarpart/00_run.R"
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Fingerprint H1 inputs so upstream changes invalidate this pipeline
+  #   store.
   targets::tar_target(
-    name = fingerprint_h1_inputs,
+    name = "fingerprint_h1_inputs",
     command = compute_target_store_fingerprint(
       store = store_inputs,
       target_names = c(
@@ -30,8 +53,10 @@ list(
     ),
     cue = targets::tar_cue(mode = "always")
   ),
+  # Why: Prepare hvar timebins unique age so downstream targets share one
+  #   canonical dataset.
   targets::tar_target(
-    name = data_hvar_timebins_unique_age,
+    name = "data_hvar_timebins_unique_age",
     command = {
       fingerprint_h1_inputs
 
@@ -42,24 +67,30 @@ list(
       )
     }
   ),
+  # Why: Define H1 response variables once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_response_variables,
+    name = "h1_response_variables",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "h1_response_variables",
       runner = runner_inputs
     )
   ),
+  # Why: Define H1 predictor sets once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_predictor_sets,
+    name = "h1_predictor_sets",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "h1_predictor_sets",
       runner = runner_inputs
     )
   ),
+  # Why: Define H1 analysis profile once so downstream targets use one
+  #   reproducible value.
   targets::tar_target(
-    name = h1_analysis_profile,
+    name = "h1_analysis_profile",
     command = load_target_store_value(
       store = store_inputs,
       target_name = "data_analysis_profiles",
@@ -70,8 +101,10 @@ list(
           "time_slice_events_human_climate"
       )
   ),
+  # Why: Compute temporal events once so downstream summaries reuse the same
+  #   result.
   targets::tar_target(
-    name = output_temporal_events,
+    name = "output_temporal_events",
     command = fit_hvarpart_models(
       data_source = data_hvar_timebins_unique_age,
       response_vars = h1_response_variables,
@@ -85,16 +118,20 @@ list(
       fail_on_error = FALSE
     )
   ),
+  # Why: Prepare hvarpart temporal events importance so downstream targets share
+  #   one canonical dataset.
   targets::tar_target(
-    name = data_hvarpart_temporal_events_importance,
+    name = "data_hvarpart_temporal_events_importance",
     command = compute_hvarpart_importance(
       data_source = output_temporal_events |>
         dplyr::mutate(analysis = "temporal_events"),
       id_cols = c("analysis", "region", "age")
     )
   ),
+  # Why: Materialize H1 result records so downstream reporting uses an auditable
+  #   result.
   targets::tar_target(
-    name = table_h1_result_records,
+    name = "table_h1_result_records",
     command = prepare_h1_result_records(
       data_components = data_hvarpart_temporal_events_importance,
       profile_id = h1_analysis_profile[["profile_id"]][1],

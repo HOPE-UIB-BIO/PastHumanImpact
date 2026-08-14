@@ -1,5 +1,22 @@
 #----------------------------------------------------------#
-# Temporal-model evaluation lifecycle
+#
+#
+#                     GlobalHumanImpact
+#
+#               Temporal model evaluation
+#
+#
+#                   O. Mottl, V.A. Felde
+#                         2024
+#
+#----------------------------------------------------------#
+# Defines the temporal model evaluation target graph.
+# Run with:
+#   R/analyses/03_temporal_models/00_run.R
+# Sourcing this script only declares targets; it does not execute them.
+
+#----------------------------------------------------------#
+# 0. Configure pipeline -----
 #----------------------------------------------------------#
 
 library(here)
@@ -15,9 +32,15 @@ path_model_dir <-
 path_run_history <-
   file.path(path_temporal_models, "general_model_run_history.csv")
 
+#----------------------------------------------------------#
+# 1. Define targets -----
+#----------------------------------------------------------#
+
 list(
+  # Why: Materialize temporal model evaluations so downstream reporting uses an
+  #   auditable result.
   targets::tar_target(
-    name = table_temporal_model_evaluations,
+    name = "table_temporal_model_evaluations",
     command = run_pending_temporal_model_evaluations(
       config_dir = path_temporal_models,
       model_dir = path_model_dir,
