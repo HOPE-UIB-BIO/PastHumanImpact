@@ -28,7 +28,7 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
@@ -41,7 +41,7 @@ data_pollen <-
     name = data_assembly_filtered,
     store = paste0(
       data_storage_path,
-      "Targets_data/pipeline_pollen_data"
+      "Targets_data/data_preparation/pollen"
     )
   ) %>%
   dplyr::select(

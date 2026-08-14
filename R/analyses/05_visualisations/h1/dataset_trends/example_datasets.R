@@ -97,7 +97,9 @@ data_hvarpart <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "analyses_h1"
+      "analyses_h1",
+      "human_climate_only",
+      "within_dataset_spd"
     )
   )
 
@@ -107,7 +109,8 @@ data_raw_diversity <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "pipeline_paps"
+      "data_preparation",
+      "paps"
     )
   )
 data_raw_roc <-
@@ -116,7 +119,8 @@ data_raw_roc <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "pipeline_paps"
+      "data_preparation",
+      "paps"
     )
   )
 data_raw_climate <-
@@ -125,7 +129,8 @@ data_raw_climate <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "pipeline_predictors"
+      "data_preparation",
+      "predictors"
     )
   )
 data_raw_spd <-
@@ -134,7 +139,8 @@ data_raw_spd <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "pipeline_predictors"
+      "data_preparation",
+      "predictors"
     )
   )
 

@@ -32,7 +32,7 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
@@ -64,7 +64,7 @@ data_events <-
     name = "data_events_to_fit",
     store = paste0(
       data_storage_path,
-      "Targets_data/pipeline_events"
+      "Targets_data/data_preparation/events"
     )
   )
 
@@ -421,7 +421,10 @@ fig_valid_n_rc_250 <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(region_labeller, default = label_wrap_gen(15)), # [config criteria]
+      region = as_labeller(
+        region_labeller,
+        default = label_wrap_gen(15)
+      ), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +
@@ -526,7 +529,10 @@ fig_valid_n_rc_500 <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(region_labeller, default = label_wrap_gen(15)), # [config criteria]
+      region = as_labeller(
+        region_labeller,
+        default = label_wrap_gen(15)
+      ), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +
@@ -658,7 +664,10 @@ fig_human_presence_detected <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(region_labeller, default = label_wrap_gen(15)), # [config criteria]
+      region = as_labeller(
+        region_labeller,
+        default = label_wrap_gen(15)
+      ), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +
@@ -785,7 +794,10 @@ fig_human_presence_status <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(region_labeller, default = label_wrap_gen(15)), # [config criteria]
+      region = as_labeller(
+        region_labeller,
+        default = label_wrap_gen(15)
+      ), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +
@@ -1002,7 +1014,10 @@ fig_event_temporal_trends <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(region_labeller, default = label_wrap_gen(15)), # [config criteria]
+      region = as_labeller(
+        region_labeller,
+        default = label_wrap_gen(15)
+      ), # [config criteria]
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +

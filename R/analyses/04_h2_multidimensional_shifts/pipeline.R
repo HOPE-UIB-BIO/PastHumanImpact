@@ -27,17 +27,27 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
-mod_config_file <- RUtilpol::get_latest_file(
-  file_name = "general_model_config_table",
-  dir = paste0(
-    data_storage_path,
-    "Temporal_models/"
+store_paps <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/paps"
   )
-)
+
+runner_data_preparation <-
+  "R/analyses/01_data_preparation/00_run.R"
+
+store_temporal_exports <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "temporal_models/exports"
+  )
+
+runner_temporal <-
+  "R/analyses/03_temporal_models/00_run.R"
 
 #----------------------------------------------------------#
 # 2. Target pipeline -----
@@ -47,43 +57,52 @@ mod_config_file <- RUtilpol::get_latest_file(
 list(
   # - path to data for multidimensional shifts ----
   targets::tar_target(
-    name = data_m2_path,
-    description = "File path for filtered multidimensional-shift data.",
-    command = paste0(
-      data_storage_path,
-      "Targets_data/pipeline_paps/objects/data_m2_filtered"
+    name = fingerprint_paps,
+    command = compute_target_store_fingerprint(
+      store = store_paps,
+      target_names = "data_m2_filtered",
+      runner = runner_data_preparation
     ),
-    format = "file"
+    cue = targets::tar_cue(mode = "always")
   ),
   # - load data for multidimensional shifts
   targets::tar_target(
     name = data_m2_filtered,
-    description = "Filtered multidimensional-shift data for H2.",
-    command = resolve_file_path(data_m2_path)
+    command = {
+      fingerprint_paps
+
+      load_target_store_value(
+        store = store_paps,
+        target_name = "data_m2_filtered",
+        runner = runner_data_preparation
+      )
+    }
   ),
-  # # - get the model configuration file
-  # targets::tar_target(
-  #   name = mod_config_file,
-  #   command = RUtilpol::get_latest_file(
-  #     file_name = "general_model_config_table",
-  #     dir = paste0(
-  #       data_storage_path,
-  #       "Temporal_models/"
-  #     )
-  #   )
-  # ),
+  targets::tar_target(
+    name = fingerprint_temporal_exports,
+    command = compute_target_store_fingerprint(
+      store = store_temporal_exports,
+      target_names = "data_temporal_model_predictions",
+      runner = runner_temporal
+    ),
+    cue = targets::tar_cue(mode = "always")
+  ),
   # - load all models
   targets::tar_target(
     name = mod_predicted_merged,
-    description = "Merged temporal-model predictions used as H2 predictors.",
-    command = predict_general_trends(
-      data_source = mod_config_file
-    )
+    command = {
+      fingerprint_temporal_exports
+
+      load_target_store_value(
+        store = store_temporal_exports,
+        target_name = "data_temporal_model_predictions",
+        runner = runner_temporal
+      )
+    }
   ),
   # - merge datasets for hvar analyses of multidimensional shifts
   targets::tar_target(
     name = data_for_hvar_h2,
-    description = "Combined shifts and predictors for H2 partitioning.",
     command = prepare_h2_hvarpart_data(
       data_m2 = data_m2_filtered,
       data_predictors = mod_predicted_merged
@@ -92,7 +111,6 @@ list(
   # - run hierarchical variation partitioning
   targets::tar_target(
     name = output_hvar_h2_spd,
-    description = "H2 partitioning with SPD and climate predictors.",
     command = fit_hvarpart_models(
       data_source = data_for_hvar_h2,
       response_vars = NULL,
@@ -115,7 +133,6 @@ list(
   # - preserve raw HVarPart components and diagnostics ----
   targets::tar_target(
     name = data_hvarpart_h2_importance,
-    description = "Raw signed importance from H2 models.",
     command = compute_hvarpart_importance(
       data_source = output_hvar_h2_spd |>
         dplyr::mutate(analysis = "h2_spd"),
@@ -128,7 +145,6 @@ list(
   ),
   targets::tar_target(
     name = table_hvarpart_h2_audit_overall,
-    description = "Overall model eligibility audit for H2.",
     command = summarise_hvarpart_audit(
       data_importance = data_hvarpart_h2_importance,
       group_vars = "analysis"
@@ -136,7 +152,6 @@ list(
   ),
   targets::tar_target(
     name = table_hvarpart_h2_profiles_overall,
-    description = "Overall H2 comparison of importance profiles.",
     command = diagnose_hvarpart_importance_profiles(
       data_importance = data_hvarpart_h2_importance,
       group_vars = "analysis"
@@ -144,7 +159,6 @@ list(
   ),
   targets::tar_target(
     name = table_hvarpart_h2_audit_strata,
-    description = "H2 eligibility audit by region and climate zone.",
     command = summarise_hvarpart_audit(
       data_importance = data_hvarpart_h2_importance,
       group_vars = c(
@@ -156,7 +170,6 @@ list(
   ),
   targets::tar_target(
     name = table_hvarpart_h2_profiles_strata,
-    description = "H2 profile comparison by region and climate zone.",
     command = diagnose_hvarpart_importance_profiles(
       data_importance = data_hvarpart_h2_importance,
       group_vars = c(

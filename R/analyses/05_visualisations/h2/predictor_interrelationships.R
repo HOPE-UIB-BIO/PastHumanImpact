@@ -14,14 +14,21 @@
 #----------------------------------------------------------#
 library(here)
 source(here::here("R/00_Config_file.R"))
-source(here::here("R/main_analysis/02_meta_data.R"))
+source(
+  here::here(
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
+  )
+)
 
 #----------------------------------------------------------#
 # 1. Load and extract fitted results -----
 #----------------------------------------------------------#
 output_h2 <- targets::tar_read(
   name = "output_hvar_h2_spd",
-  store = paste0(data_storage_path, "Targets_data/analyses_h2")
+  store = resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "analyses_h2/multidimensional_shifts"
+  )
 )
 
 data_h2_importance <- compute_hvarpart_importance(

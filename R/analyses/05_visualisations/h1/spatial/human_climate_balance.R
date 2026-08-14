@@ -16,7 +16,11 @@ library(here)
 
 source(here::here("R/00_Config_file.R"))
 
-source(here::here("R/main_analysis/02_meta_data.R"))
+source(
+  here::here(
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
+  )
+)
 
 #----------------------------------------------------------#
 # 1. Load and extract fitted results -----
@@ -24,38 +28,54 @@ source(here::here("R/main_analysis/02_meta_data.R"))
 output_spatial_spd <-
   targets::tar_read(
     name = "output_spatial_spd",
-    store = paste0(data_storage_path, "Targets_data/analyses_h1")
+    store = resolve_pipeline_store_path(
+      data_storage_path = data_storage_path,
+      store_relative_path = paste(
+        "analyses_h1/human_climate_only",
+        "within_dataset_spd",
+        sep = "/"
+      )
+    )
   )
 
-store_spatiotemporal_control <-
-  file.path(
-    data_storage_path,
-    "Targets_data",
-    "analyses_h1_reviewer_spatiotemporal_control"
+store_time_control <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "analyses_h1/time_control/spd"
+  )
+
+store_spatial_aggregation <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = paste(
+      "analyses_h1/spatial_aggregation",
+      "spd_human_climate_balance",
+      sep = "/"
+    )
   )
 
 data_time_space_controlled_records <-
   targets::tar_read(
     data_time_controlled_balance_records,
-    store = store_spatiotemporal_control
+    store = store_time_control
   )
 
 data_time_space_controlled_estimates <-
   targets::tar_read(
     table_spatiotemporal_balance_estimates,
-    store = store_spatiotemporal_control
+    store = store_spatial_aggregation
   )
 
 data_time_controlled_contributions <-
   targets::tar_read(
     table_time_control_hierarchical_contributions,
-    store = store_spatiotemporal_control
+    store = store_time_control
   )
 
 data_time_controlled_unique_adjusted_r2 <-
   targets::tar_read(
     table_time_control_unique_adjusted_r2,
-    store = store_spatiotemporal_control
+    store = store_time_control
   )
 
 data_importance <-

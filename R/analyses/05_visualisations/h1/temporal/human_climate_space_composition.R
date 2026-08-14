@@ -19,44 +19,84 @@ source(here::here("R/00_Config_file.R"))
 #----------------------------------------------------------#
 # 1. Load and extract fitted results -----
 #----------------------------------------------------------#
-store_h1 <-
-  paste0(data_storage_path, "Targets_data/analyses_h1")
+store_temporal_spd <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = paste(
+      "analyses_h1/human_climate_only",
+      "time_slice_spd",
+      sep = "/"
+    )
+  )
+
+store_temporal_events <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = paste(
+      "analyses_h1/human_climate_only",
+      "time_slice_events",
+      sep = "/"
+    )
+  )
 
 output_temporal_spd <-
   targets::tar_read(
     "output_temporal_spd",
-    store = store_h1
+    store = store_temporal_spd
   )
 
 output_temporal_events <-
   targets::tar_read(
     "output_temporal_events",
-    store = store_h1
+    store = store_temporal_events
   )
 
-store_spatiotemporal_control <-
-  file.path(
-    data_storage_path,
-    "Targets_data",
-    "analyses_h1_reviewer_spatiotemporal_control"
+store_spatial_control_spd <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "analyses_h1/spatial_control/spd"
+  )
+
+store_spatial_control_events <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "analyses_h1/spatial_control/events"
   )
 
 data_spatial_control_zero_truncated_composition <-
-  targets::tar_read(
-    table_spatial_control_zero_truncated_composition,
-    store = store_spatiotemporal_control
+  dplyr::bind_rows(
+    targets::tar_read(
+      table_spatial_control_zero_truncated_composition,
+      store = store_spatial_control_spd
+    ),
+    targets::tar_read(
+      table_spatial_control_zero_truncated_composition,
+      store = store_spatial_control_events
+    )
   )
 
 data_spatial_control_hierarchical_contributions <-
-  targets::tar_read(
-    table_spatial_control_hierarchical_contributions,
-    store = store_spatiotemporal_control
+  dplyr::bind_rows(
+    targets::tar_read(
+      table_spatial_control_hierarchical_contributions,
+      store = store_spatial_control_spd
+    ),
+    targets::tar_read(
+      table_spatial_control_hierarchical_contributions,
+      store = store_spatial_control_events
+    )
   )
 
 data_spatial_control_unique_adjusted_r2 <-
-  targets::tar_read(
-    table_spatial_control_unique_adjusted_r2,
-    store = store_spatiotemporal_control
+  dplyr::bind_rows(
+    targets::tar_read(
+      table_spatial_control_unique_adjusted_r2,
+      store = store_spatial_control_spd
+    ),
+    targets::tar_read(
+      table_spatial_control_unique_adjusted_r2,
+      store = store_spatial_control_events
+    )
   )
 
 data_importance <-
