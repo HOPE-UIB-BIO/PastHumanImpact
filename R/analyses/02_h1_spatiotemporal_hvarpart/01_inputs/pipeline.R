@@ -220,13 +220,9 @@ list(
   # Why: Prepare meta path so downstream targets share one canonical dataset.
   targets::tar_target(
     name = "data_meta_path",
-    command = file.path(
-      data_storage_path,
-      "Assembly",
-      RUtilpol::get_latest_file_name(
-        file_name = "data_meta",
-        dir = file.path(data_storage_path, "Assembly")
-      )
+    command = resolve_latest_file_path(
+      file_name = "data_meta",
+      dir = file.path(data_storage_path, "Assembly")
     ),
     format = "file"
   ),

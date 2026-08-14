@@ -46,7 +46,7 @@ list(
   #   downstream results.
   targets::tar_target(
     name = "file_assembly_path",
-    command = RUtilpol::get_latest_file_name(
+    command = resolve_latest_file_path(
       file_name = "data_assembly",
       dir = paste0(
         data_storage_path,

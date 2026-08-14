@@ -70,6 +70,7 @@ data_meta <-
 #---------------------------------------------------------------#
 
 RUtilpol::save_latest_file(
+  object_to_save = data_meta,
   file_name = "data_meta",
   dir = paste0(
     data_storage_path,
