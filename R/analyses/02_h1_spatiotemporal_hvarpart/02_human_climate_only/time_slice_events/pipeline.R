@@ -1,0 +1,115 @@
+#----------------------------------------------------------#
+# H1 human-climate-only time-slice event models
+#----------------------------------------------------------#
+
+library(here)
+
+source(here::here("R/00_Config_file.R"))
+
+store_inputs <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "analyses_h1/inputs"
+  )
+
+runner_inputs <-
+  "R/analyses/02_h1_spatiotemporal_hvarpart/00_run.R"
+
+list(
+  targets::tar_target(
+    name = fingerprint_h1_inputs,
+    command = compute_target_store_fingerprint(
+      store = store_inputs,
+      target_names = c(
+        "data_hvar_timebins_unique_age",
+        "h1_response_variables",
+        "h1_predictor_sets",
+        "data_analysis_profiles"
+      ),
+      runner = runner_inputs
+    ),
+    cue = targets::tar_cue(mode = "always")
+  ),
+  targets::tar_target(
+    name = data_hvar_timebins_unique_age,
+    command = {
+      fingerprint_h1_inputs
+
+      load_target_store_value(
+        store = store_inputs,
+        target_name = "data_hvar_timebins_unique_age",
+        runner = runner_inputs
+      )
+    }
+  ),
+  targets::tar_target(
+    name = h1_response_variables,
+    command = load_target_store_value(
+      store = store_inputs,
+      target_name = "h1_response_variables",
+      runner = runner_inputs
+    )
+  ),
+  targets::tar_target(
+    name = h1_predictor_sets,
+    command = load_target_store_value(
+      store = store_inputs,
+      target_name = "h1_predictor_sets",
+      runner = runner_inputs
+    )
+  ),
+  targets::tar_target(
+    name = h1_analysis_profile,
+    command = load_target_store_value(
+      store = store_inputs,
+      target_name = "data_analysis_profiles",
+      runner = runner_inputs
+    ) |>
+      dplyr::filter(
+        .data[["profile_id"]] ==
+          "time_slice_events_human_climate"
+      )
+  ),
+  targets::tar_target(
+    name = output_temporal_events,
+    command = fit_hvarpart_models(
+      data_source = data_hvar_timebins_unique_age,
+      response_vars = h1_response_variables,
+      predictor_vars = h1_predictor_sets[["all_event_groups"]],
+      response_dist = NULL,
+      data_response_dist = NULL,
+      run_all_predictors = FALSE,
+      time_series = FALSE,
+      get_significance = FALSE,
+      permutations = 999L,
+      fail_on_error = FALSE
+    )
+  ),
+  targets::tar_target(
+    name = data_hvarpart_temporal_events_importance,
+    command = compute_hvarpart_importance(
+      data_source = output_temporal_events |>
+        dplyr::mutate(analysis = "temporal_events"),
+      id_cols = c("analysis", "region", "age")
+    )
+  ),
+  targets::tar_target(
+    name = table_h1_result_records,
+    command = prepare_h1_result_records(
+      data_components = data_hvarpart_temporal_events_importance,
+      profile_id = h1_analysis_profile[["profile_id"]][1],
+      model_specification = "human_climate_only",
+      proxy = "events",
+      analytical_unit = "time_slice",
+      selected_control_dimensions = "none",
+      input_hash = fingerprint_h1_inputs,
+      profile_hash = rlang::hash(h1_analysis_profile),
+      configuration_hash = rlang::hash(
+        list(
+          h1_response_variables,
+          h1_predictor_sets[["all_event_groups"]]
+        )
+      )
+    )
+  )
+)
