@@ -268,6 +268,8 @@ Before running expensive targets, prefer `targets::tar_manifest()` or
 
 Follow `.ai/analysis-structure.md` for canonical visualisation-script and output paths. Organise generated figures by scientific analysis, never by their current manuscript number or by whether they are presently considered main, supplementary, extended, or extra material.
 
+Follow `.ai/visualisation-style.md` for semantic colours, legends, and the final figure review. Follow `.ai/visualisation-geographic-style.md` whenever a figure displays continents or climate zones.
+
 Use constants from `R/00_Config_file.R` for figure style and size:
 
 - `text_size`
