@@ -18,7 +18,21 @@ Note: See [Releases](https://github.com/HOPE-UIB-BIO/PastHumanImpact/releases/) 
 
 * `R/___Init_project___.R` - set up the project on each machine. [**EACH USER SHOULD RUN THIS SCRIPT FIRST**]
 * `R/00_Config_file` - The configuration file is the master file in terms of setting all criteria used throughout the repo, loading the required packages and saving settings throughout the repo.
-* `R/01_run_project.R` - is the main script to run the project. It will run all the scripts in the correct order.
+* `R/analyses/00_run_main.R` - runs canonical preparation, analyses, figures,
+  and reporting in dependency order.
+* `R/analyses/00_profiles/analysis_profiles.csv` - enumerates supported main
+  and sensitivity analysis variants.
+* Each target graph is named `pipeline.R` and lives beside the scientific
+  operation that owns it.
+
+### Temporal-model safety
+
+The main runner audits and reuses existing temporal fits and predictions.
+Expensive fitting requires both `need_to_run == TRUE` in lifecycle state and a
+valid, hash-matched, unconsumed row with `run_requested == TRUE` in
+`Temporal_models/general_model_run_requests.csv`. An absent or header-only
+request ledger authorizes zero fits. Changed inputs, invalidated targets, or
+missing predictions do not authorize model fitting.
 
 ## Data
 
@@ -40,6 +54,11 @@ Data/
 ├── Spatial/
 ├── SPD/
 └── Targets_data/
+    ├── data_preparation/
+    ├── analyses_h1/
+    ├── temporal_models/
+    ├── analyses_h2/
+    └── sensitivity_analyses/
 ```
 
 Then the `R/00_Config_file.R` (Section 4) should be updated with the correct path to the data.

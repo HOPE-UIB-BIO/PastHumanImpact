@@ -33,7 +33,7 @@ Before drafting the plan, read:
 - `R/01_run_project.R`
 
 If a target pipeline is affected, also read the relevant file under
-`R/target_pipelines/`.
+`R/analyses/`.
 
 ## Worktree Guidance
 
@@ -86,7 +86,7 @@ Validation should be specific to PastHumanImpact. Examples:
 
 - source `R/00_Config_file.R`
 - run a focused function check or test
-- run `targets::tar_manifest()` for an affected `R/target_pipelines/*.R`
+- run `targets::tar_manifest()` for each affected colocated `pipeline.R`
 - run one target store with `targets::tar_make()` only when necessary
 - run `R/01_run_project.R` only for end-to-end verification that justifies the
   runtime and data requirements

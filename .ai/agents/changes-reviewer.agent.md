@@ -32,8 +32,9 @@ For each changed file, identify which guidance applies:
 
 - all `.R` files: `.ai/r-coding.md`
 - functions under `R/functions/`: `.ai/r-functions.md`
-- target pipeline scripts under `R/target_pipelines/`: `.ai/r-coding.md`
-- visualisation scripts under `R/visualisations/`: `.ai/r-coding.md`
+- colocated pipeline scripts under `R/analyses/`: `.ai/r-coding.md`
+- visualisation scripts under `R/analyses/05_visualisations/`:
+  `.ai/r-coding.md`
 - manuscript or Quarto files under `Manuscript/`: `.ai/manuscript.md`
 - git/worktree/adapter changes: `.ai/git-workflow.md` and `AGENTS.md`
 

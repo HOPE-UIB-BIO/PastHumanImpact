@@ -10,13 +10,13 @@ Apply this file to all `.R` files. For functions and tests, also read
 
 Main project areas:
 
-- `R/main_analysis/` - ordered analysis scripts used by `R/01_run_project.R`
-- `R/target_pipelines/` - `{targets}` pipeline definitions
+- `R/analyses/` - ordered runners and colocated target pipelines
+- `R/analyses/00_profiles/` - validated analysis-profile registry
 - `R/functions/` - reusable project functions
-- `R/temporal_models/` - temporal model preparation, fitting, checks, and
-  prediction
-- `R/spd_calculation/` - radiocarbon SPD calculation scripts
-- `R/visualisations/` - manuscript and exploratory figures
+- `R/analyses/03_temporal_models/` - protected temporal-model lifecycle
+- `R/analyses/05_visualisations/` - manuscript and exploratory figures
+- `R/analyses/90_diagnostics/` - opt-in diagnostics
+- `R/analyses/91_sensitivity_analyses/` - opt-in sensitivities
 
 ## Project Setup
 
@@ -217,22 +217,31 @@ Use `.data[[column_name]]` when the column is stored as a character string.
 
 ## Targets Pipelines
 
-Pipeline scripts live in `R/target_pipelines/`. Keep target commands readable
-and deterministic.
+Each target pipeline lives beside its scientific operation and is named
+`pipeline.R`. Keep target commands readable and deterministic.
 
 When a target command becomes multi-step logic, move the logic into a function
 under `R/functions/` and call that function from the target.
 
-Use target stores consistently:
+Every pipeline owns one external store. Resolve stores with
+`resolve_pipeline_store_path()`, import only documented public targets, and
+include the upstream fingerprint as a formal target dependency. Never read a
+private target from another pipeline.
 
-| Script | Store |
-| --- | --- |
-| `01_pipeline_pollen_data.R` | `Targets_data/pipeline_pollen_data` |
-| `02_pipeline_paps.R` | `Targets_data/pipeline_paps` |
-| `03_pipeline_events.R` | `Targets_data/pipeline_events` |
-| `04_pipeline_predictors.R` | `Targets_data/pipeline_predictors` |
-| `05_pipeline_hvar_spatial_temporal.R` | `Targets_data/analyses_h1` |
-| `06_pipeline_multidimensional_shifts.R` | `Targets_data/analyses_h2` |
+Stable store roots are:
+
+- `Targets_data/data_preparation/`
+- `Targets_data/analyses_h1/`
+- `Targets_data/temporal_models/`
+- `Targets_data/analyses_h2/`
+- `Targets_data/sensitivity_analyses/`
+
+Analysis variants belong in `R/analyses/00_profiles/`; do not copy a pipeline
+to represent a radius, predictor set, or control variant.
+
+Temporal fitting additionally requires both `need_to_run == TRUE` and a valid,
+unconsumed request in `general_model_run_requests.csv`. No target invalidation
+or missing prediction may authorize an expensive fit.
 
 Before running expensive targets, prefer `targets::tar_manifest()` or
 `targets::tar_visnetwork()` to inspect the pipeline.

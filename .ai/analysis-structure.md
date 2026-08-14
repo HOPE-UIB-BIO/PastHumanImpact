@@ -63,7 +63,7 @@ Assign a function according to its primary responsibility, not according to the 
 Visualisation scripts mirror the analytical output tree:
 
 ```text
-R/visualisations/
+R/analyses/05_visualisations/
 ├── overview/
 ├── data/
 ├── h1/
@@ -75,6 +75,33 @@ R/visualisations/
 ```
 
 Script filenames describe their analytical product and do not contain manuscript figure numbers or publication-role abbreviations.
+
+## Analysis pipelines
+
+Pipelines represent stable scientific operations and live beside their
+analysis:
+
+```text
+R/analyses/
+├── 00_profiles/
+├── 01_data_preparation/
+├── 02_h1_spatiotemporal_hvarpart/
+├── 03_temporal_models/
+├── 04_h2_multidimensional_shifts/
+├── 05_visualisations/
+├── 06_reporting/
+├── 90_diagnostics/
+└── 91_sensitivity_analyses/
+```
+
+Use `pipeline.R` for a target graph and `00_run.R` for its ordered runner.
+Numeric prefixes indicate genuine dependency order only. A parameter,
+predictor, radius, or structural-control variant belongs in the validated
+profile registry rather than a copied pipeline.
+
+Temporal fitting is pipeline-managed but protected by the request ledger.
+Configuration reconciliation may identify required work, but it must never
+create an affirmative fitting request.
 
 ## Generated figures
 

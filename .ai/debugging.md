@@ -78,7 +78,7 @@ For target pipelines, verify the affected pipeline manifest:
 
 ```r
 targets::tar_manifest(
-  script = here::here("R/target_pipelines/<pipeline>.R"),
+  script = here::here("R/analyses/<analysis>/<operation>/pipeline.R"),
   store = file.path(data_storage_path, "Targets_data/<store_name>")
 )
 ```
@@ -88,14 +88,23 @@ pipeline contracts, or analysis outputs:
 
 ```r
 targets::tar_make(
-  script = here::here("R/target_pipelines/01_pipeline_pollen_data.R"),
-  store = file.path(data_storage_path, "Targets_data/pipeline_pollen_data")
+  script = here::here(
+    "R/analyses/01_data_preparation/04_pollen/pipeline.R"
+  ),
+  store = file.path(
+    data_storage_path,
+    "Targets_data/data_preparation/pollen"
+  )
 )
 ```
 
-The complete project workflow is `R/01_run_project.R`, but it is expensive and
-depends on external data. Do not run it casually; run it when the task requires
-end-to-end verification.
+The complete project workflow is `R/analyses/00_run_main.R`, but it is
+expensive and depends on external data. Do not run it casually; run it when the
+task requires end-to-end verification.
+
+Never debug temporal fitting by changing `need_to_run` alone. A real fit also
+requires an explicit, hash-matched, unconsumed request ledger row. Use mocked
+fitters for lifecycle tests.
 
 ## Common Pitfalls
 
