@@ -7,17 +7,33 @@
 #' with no data transformations
 #' @return For each sequence returns a vector of the zonation,
 #' a vector of the change points, and the total number of zones
+#' @details
+#' The underlying `mvpart` package requires the isolated old-R runtime
+#' documented in `R/analyses/01_data_preparation/05_paps/README.md`. Do not
+#' source the project-wide configuration from that runtime.
 
-compute_mrt <- function(data_pollen,
-                    n_rand = 999,
-                    transformation_coef = "chisq") {
+compute_mrt <- function(
+    data_pollen,
+    n_rand = 999,
+    transformation_coef = "chisq"
+) {
   assertthat::assert_that(
     is.data.frame(data_pollen),
     msg = "`data_pollen` must be a data frame."
   )
   assertthat::assert_that(
-    all(c("dataset_id", "percentages_harmonised", "levels") %in% names(data_pollen)),
-    msg = "`data_pollen` must contain `dataset_id`, `percentages_harmonised`, and `levels`."
+    all(
+      c(
+        "dataset_id",
+        "percentages_harmonised",
+        "levels"
+      ) %in% names(data_pollen)
+    ),
+    msg = stringr::str_c(
+      "`data_pollen` must contain `dataset_id`,",
+      " ",
+      "`percentages_harmonised`, and `levels`."
+    )
   )
   assertthat::assert_that(
     all(purrr::map_lgl(data_pollen$percentages_harmonised, is.data.frame)),

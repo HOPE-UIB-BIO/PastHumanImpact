@@ -1,0 +1,31 @@
+analysis,region,value,dataset_count,line_colour,figure_profile
+spatial_spd,North America,0.07252558611789889,536,#D2D2D2,climate_unique_adjusted_r2
+spatial_spd,Latin America,0.07829866500158733,70,#D3D3D3,climate_unique_adjusted_r2
+spatial_spd,Europe,0.08371072490324333,366,#D5D5D5,climate_unique_adjusted_r2
+spatial_spd,Asia,0.042623369065476924,94,#CACACA,climate_unique_adjusted_r2
+spatial_spd,Oceania,0.09770083672118185,32,#D8D8D8,climate_unique_adjusted_r2
+spatial_spd,North America,0.0027263210041479358,536,#C1C1C1,human_unique_adjusted_r2
+spatial_spd,Latin America,0.015010457033873492,70,#C4C4C4,human_unique_adjusted_r2
+spatial_spd,Europe,0.00831223253594543,366,#C2C2C2,human_unique_adjusted_r2
+spatial_spd,Asia,0.004849057027944248,94,#C1C1C1,human_unique_adjusted_r2
+spatial_spd,Oceania,0.014433439733135711,32,#C3C3C3,human_unique_adjusted_r2
+spatial_spd,North America,0.04667884665277783,536,#CBCBCB,time_unique_adjusted_r2
+spatial_spd,Latin America,0.0752984165097777,70,#D2D2D2,time_unique_adjusted_r2
+spatial_spd,Europe,0.08956957178567504,366,#D6D6D6,time_unique_adjusted_r2
+spatial_spd,Asia,0.04769140616237666,94,#CCCCCC,time_unique_adjusted_r2
+spatial_spd,Oceania,0.053596206599899,32,#CDCDCD,time_unique_adjusted_r2
+spatial_spd,North America,0.18075,536,#DBDBDB,climate_untruncated_hierarchical_contribution
+spatial_spd,Latin America,0.22325,70,#E9E9E9,climate_untruncated_hierarchical_contribution
+spatial_spd,Europe,0.18464999999999998,366,#DCDCDC,climate_untruncated_hierarchical_contribution
+spatial_spd,Asia,0.18225,94,#DBDBDB,climate_untruncated_hierarchical_contribution
+spatial_spd,Oceania,0.17495,32,#D9D9D9,climate_untruncated_hierarchical_contribution
+spatial_spd,North America,0.06315,536,#B4B4B4,human_untruncated_hierarchical_contribution
+spatial_spd,Latin America,0.0403,70,#ADADAD,human_untruncated_hierarchical_contribution
+spatial_spd,Europe,0.0376,366,#ACACAC,human_untruncated_hierarchical_contribution
+spatial_spd,Asia,0.0284,94,#A9A9A9,human_untruncated_hierarchical_contribution
+spatial_spd,Oceania,0.07780000000000001,32,#B9B9B9,human_untruncated_hierarchical_contribution
+spatial_spd,North America,0.17135,536,#D7D7D7,time_untruncated_hierarchical_contribution
+spatial_spd,Latin America,0.16785,70,#D6D6D6,time_untruncated_hierarchical_contribution
+spatial_spd,Europe,0.20365,366,#E2E2E2,time_untruncated_hierarchical_contribution
+spatial_spd,Asia,0.15510000000000002,94,#D2D2D2,time_untruncated_hierarchical_contribution
+spatial_spd,Oceania,0.15039999999999998,32,#D0D0D0,time_untruncated_hierarchical_contribution

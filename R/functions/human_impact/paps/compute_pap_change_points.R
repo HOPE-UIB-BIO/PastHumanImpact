@@ -1,8 +1,12 @@
 #' @title Estimate change points of input variables
 #' @description A function to get change points of all pap estimates
 #' using regression trees
-#' @data_source input data prepared for change point estimation
+#' @param data_source Input data prepared for change-point estimation.
 #' @return New variables of change points in pollen assemblage properties
+#' @details
+#' The underlying `mvpart` package requires the isolated old-R runtime
+#' documented in `R/analyses/01_data_preparation/05_paps/README.md`. Do not
+#' source the project-wide configuration from that runtime.
 #'
 compute_pap_change_points <- function(data_source) {
   assertthat::assert_that(
@@ -10,8 +14,21 @@ compute_pap_change_points <- function(data_source) {
     msg = "`data_source` must be a data frame."
   )
   assertthat::assert_that(
-    all(c("dataset_id", "mvrt_cp", "PAP_diversity", "levels", "PAP_roc", "dcca_scores") %in% names(data_source)),
-    msg = "`data_source` is missing required columns for change-point estimation."
+    all(
+      c(
+        "dataset_id",
+        "mvrt_cp",
+        "PAP_diversity",
+        "levels",
+        "PAP_roc",
+        "dcca_scores"
+      ) %in% names(data_source)
+    ),
+    msg = stringr::str_c(
+      "`data_source` is missing required columns for",
+      " ",
+      "change-point estimation."
+    )
   )
   assertthat::assert_that(
     all(purrr::map_lgl(data_source$PAP_diversity, is.data.frame)),
