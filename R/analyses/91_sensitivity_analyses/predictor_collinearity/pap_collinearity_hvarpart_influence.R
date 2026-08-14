@@ -33,7 +33,8 @@ data_hvar_spatial_spd_baseline <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "analyses_h1_reviewer_collinearity"
+      "sensitivity_analyses",
+      "predictor_collinearity"
     )
   )
 
@@ -43,7 +44,8 @@ data_hvar_spatial_spd_reduced <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "analyses_h1_reviewer_collinearity"
+      "sensitivity_analyses",
+      "predictor_collinearity"
     )
   )
 
@@ -166,7 +168,10 @@ plot_hvar_influence <-
 readr::write_csv(
   data_hvar_influence,
   here::here(
-    "Outputs/Tables/Collinearity/pap_collinearity_hvar_influence_by_dataset.csv"
+    "Outputs",
+    "Tables",
+    "Collinearity",
+    "pap_collinearity_hvar_influence_by_dataset.csv"
   )
 )
 

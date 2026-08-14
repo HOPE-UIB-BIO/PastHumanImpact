@@ -60,7 +60,10 @@ data_retention_by_region <-
 
 data_retention_by_region_climatezone <-
   readr::read_csv(
-    file.path(path_tables, "pollen_threshold_retention_by_region_climatezone.csv"),
+    file.path(
+      path_tables,
+      "pollen_threshold_retention_by_region_climatezone.csv"
+    ),
     show_col_types = FALSE
   ) |>
   prepare_region_factor() |>
@@ -117,7 +120,12 @@ data_retention_overall_plot <-
 
 data_retention_region_plot <-
   data_retention_by_region |>
-  dplyr::select(region, threshold, prop_region_samples_retained, prop_region_retained) |>
+  dplyr::select(
+    region,
+    threshold,
+    prop_region_samples_retained,
+    prop_region_retained
+  ) |>
   tidyr::pivot_longer(
     cols = c(prop_region_samples_retained, prop_region_retained),
     names_to = "metric",
@@ -216,7 +224,13 @@ data_retention_region_climatezone_plot <-
   dplyr::mutate(
     value = dplyr::if_else(threshold == 0, 1, value)
   ) |>
-  dplyr::distinct(region, climatezone_label, threshold, metric, .keep_all = TRUE) |>
+  dplyr::distinct(
+    region,
+    climatezone_label,
+    threshold,
+    metric,
+    .keep_all = TRUE
+  ) |>
   dplyr::arrange(region, climatezone_label, metric, threshold)
 
 #----------------------------------------------------------#
@@ -277,24 +291,36 @@ fig_retention_overall <-
     )
   ) +
   ggplot2::geom_line(
-    data = dplyr::filter(data_retention_overall_plot, metric == "Samples retained"),
+    data = dplyr::filter(
+      data_retention_overall_plot,
+      metric == "Samples retained"
+    ),
     linewidth = 1,
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_point(
-    data = dplyr::filter(data_retention_overall_plot, metric == "Samples retained"),
+    data = dplyr::filter(
+      data_retention_overall_plot,
+      metric == "Samples retained"
+    ),
     size = 2.5,
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_line(
-    data = dplyr::filter(data_retention_overall_plot, metric == "Datasets retained"),
+    data = dplyr::filter(
+      data_retention_overall_plot,
+      metric == "Datasets retained"
+    ),
     linewidth = 1,
     linetype = "dashed",
     alpha = 0.5,
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_point(
-    data = dplyr::filter(data_retention_overall_plot, metric == "Datasets retained"),
+    data = dplyr::filter(
+      data_retention_overall_plot,
+      metric == "Datasets retained"
+    ),
     size = 2.5,
     alpha = 0.5,
     color = unname(palette_predictors["climate"])
@@ -331,19 +357,28 @@ fig_retention_region_facets <-
     )
   ) +
   ggplot2::geom_line(
-    data = dplyr::filter(data_retention_region_plot, metric == "Samples retained"),
+    data = dplyr::filter(
+      data_retention_region_plot,
+      metric == "Samples retained"
+    ),
     mapping = ggplot2::aes(group = region),
     linewidth = 0.9,
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_point(
-    data = dplyr::filter(data_retention_region_plot, metric == "Samples retained"),
+    data = dplyr::filter(
+      data_retention_region_plot,
+      metric == "Samples retained"
+    ),
     mapping = ggplot2::aes(group = region),
     size = 2,
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_line(
-    data = dplyr::filter(data_retention_region_plot, metric == "Datasets retained"),
+    data = dplyr::filter(
+      data_retention_region_plot,
+      metric == "Datasets retained"
+    ),
     mapping = ggplot2::aes(group = region),
     linewidth = 0.9,
     linetype = "dashed",
@@ -351,7 +386,10 @@ fig_retention_region_facets <-
     color = unname(palette_predictors["climate"])
   ) +
   ggplot2::geom_point(
-    data = dplyr::filter(data_retention_region_plot, metric == "Datasets retained"),
+    data = dplyr::filter(
+      data_retention_region_plot,
+      metric == "Datasets retained"
+    ),
     mapping = ggplot2::aes(group = region),
     size = 2,
     alpha = 0.5,
@@ -474,23 +512,20 @@ fig_list <-
     supplement_density_rowsum_by_climatezone = fig_density_rowsum_climatezone,
     supplement_threshold_retention_overall = fig_retention_overall,
     supplement_threshold_retention_region_facets = fig_retention_region_facets,
-    supplement_threshold_retention_region_climatezone = fig_retention_region_climatezone
+    supplement_threshold_retention_region_climatezone =
+      fig_retention_region_climatezone
   )
 
-for (fig_name in names(fig_list)) {
-  fig_object <- fig_list[[fig_name]]
-
-  purrr::walk(
-    .x = c("png", "pdf"),
-    .f = ~ ggplot2::ggsave(
-      filename = file.path(path_figures, paste0(fig_name, ".", .x)),
-      plot = fig_object,
-      width = image_width_vec["2col"],
-      height = 170,
-      units = image_units,
-      bg = "white"
-    )
+purrr::iwalk(
+  .x = fig_list,
+  .f = ~ save_diagnostic_figure_formats(
+    fig_object = .x,
+    fig_name = .y,
+    path_figures = path_figures,
+    width = image_width_vec["2col"],
+    height = 170,
+    units = image_units
   )
-}
+)
 
 message("Selected supplementary figures exported successfully.")

@@ -25,7 +25,7 @@ source(
 
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
@@ -39,7 +39,8 @@ output_spatial_spd_reduced <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "analyses_h1_reviewer_collinearity"
+      "sensitivity_analyses",
+      "predictor_collinearity"
     )
   )
 
@@ -161,7 +162,10 @@ plot_reduced_simple <-
 readr::write_csv(
   data_spatial_reduced,
   here::here(
-    "Outputs/Tables/Collinearity/pap_collinearity_reduced_simple_fig2_table.csv"
+    "Outputs",
+    "Tables",
+    "Collinearity",
+    "pap_collinearity_reduced_simple_fig2_table.csv"
   )
 )
 

@@ -17,17 +17,35 @@ source(
   here::here("R/00_Config_file.R")
 )
 source(
-  here::here("R/main_analysis/02_meta_data.R")
+  here::here("R/analyses/01_data_preparation/01_metadata/02_metadata.R")
 )
 
 #----------------------------------------------------------#
 # 1. Load H1 model outputs -----
 #----------------------------------------------------------#
 
-path_store_h1 <-
-  stringr::str_c(
+store_within_spd <-
+  resolve_pipeline_store_path(
     data_storage_path,
-    "Targets_data/analyses_h1"
+    "analyses_h1/human_climate_only/within_dataset_spd"
+  )
+
+store_within_events <-
+  resolve_pipeline_store_path(
+    data_storage_path,
+    "analyses_h1/human_climate_only/within_dataset_events"
+  )
+
+store_slice_spd <-
+  resolve_pipeline_store_path(
+    data_storage_path,
+    "analyses_h1/human_climate_only/time_slice_spd"
+  )
+
+store_slice_events <-
+  resolve_pipeline_store_path(
+    data_storage_path,
+    "analyses_h1/human_climate_only/time_slice_events"
   )
 
 data_h1_importance <-
@@ -35,7 +53,7 @@ data_h1_importance <-
     compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_spd",
-        store = path_store_h1
+        store = store_within_spd
       ) |>
         dplyr::left_join(
           data_meta |>
@@ -57,7 +75,7 @@ data_h1_importance <-
     compute_hvarpart_importance(
       targets::tar_read(
         "output_spatial_events",
-        store = path_store_h1
+        store = store_within_events
       ) |>
         dplyr::left_join(
           data_meta |>
@@ -79,7 +97,7 @@ data_h1_importance <-
     compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_spd",
-        store = path_store_h1
+        store = store_slice_spd
       ) |>
         dplyr::filter(
           dplyr::between(
@@ -98,7 +116,7 @@ data_h1_importance <-
     compute_hvarpart_importance(
       targets::tar_read(
         "output_temporal_events",
-        store = path_store_h1
+        store = store_slice_events
       ) |>
         dplyr::mutate(analysis = "temporal_events"),
       id_cols = c(
@@ -114,9 +132,9 @@ data_h1_importance <-
 #----------------------------------------------------------#
 
 path_store_h2 <-
-  stringr::str_c(
+  resolve_pipeline_store_path(
     data_storage_path,
-    "Targets_data/analyses_h2"
+    "analyses_h2/multidimensional_shifts"
   )
 
 data_h2_importance <-

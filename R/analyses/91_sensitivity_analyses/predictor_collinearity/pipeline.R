@@ -3,7 +3,7 @@
 #
 #                     GlobalHumanImpact
 #
-#      Run reviewer sensitivity for Hypothesis I (H1)
+#          H1 predictor collinearity sensitivity
 #
 #                   O. Mottl, V.A. Felde
 #                         2026
@@ -28,48 +28,79 @@ source(
 # - Load meta data
 source(
   here::here(
-    "R/main_analysis/02_meta_data.R"
+    "R/analyses/01_data_preparation/01_metadata/02_metadata.R"
   )
 )
 
 
 #----------------------------------------------------------#
-# 1. Targets -----
+# 1. Upstream contracts -----
+#----------------------------------------------------------#
+
+store_paps <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/paps"
+  )
+
+store_predictors <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/predictors"
+  )
+
+runner_data_preparation <-
+  "R/analyses/01_data_preparation/00_run.R"
+
+#----------------------------------------------------------#
+# 2. Targets -----
 #----------------------------------------------------------#
 
 list(
   # load data_properties filtered range 2000-8500 ----
   targets::tar_target(
-    name = data_properties_filtered_path,
-    command = file.path(
-      data_storage_path,
-      "Targets_data",
-      "pipeline_paps",
-      "objects",
-      "data_properties_filtered"
+    name = fingerprint_paps,
+    command = compute_target_store_fingerprint(
+      store = store_paps,
+      target_names = "data_properties_filtered",
+      runner = runner_data_preparation
     ),
-    format = "file"
+    cue = targets::tar_cue(mode = "always")
   ),
   targets::tar_target(
     name = data_properties_filtered,
-    command = resolve_file_path(data_properties_filtered_path)
+    command = {
+      fingerprint_paps
+
+      load_target_store_value(
+        store = store_paps,
+        target_name = "data_properties_filtered",
+        runner = runner_data_preparation
+      )
+    }
   ),
 
   # load data_predictors ----
   targets::tar_target(
-    name = data_predictor_filtered_path,
-    command = file.path(
-      data_storage_path,
-      "Targets_data",
-      "pipeline_predictors",
-      "objects",
-      "data_predictors_filtered"
+    name = fingerprint_predictors,
+    command = compute_target_store_fingerprint(
+      store = store_predictors,
+      target_names = "data_predictors_filtered",
+      runner = runner_data_preparation
     ),
-    format = "file"
+    cue = targets::tar_cue(mode = "always")
   ),
   targets::tar_target(
     name = data_predictors_filtered,
-    command = resolve_file_path(data_predictor_filtered_path)
+    command = {
+      fingerprint_predictors
+
+      load_target_store_value(
+        store = store_predictors,
+        target_name = "data_predictors_filtered",
+        runner = runner_data_preparation
+      )
+    }
   ),
   # - combine properties and predictors for hvar spatial ----
   targets::tar_target(
@@ -79,7 +110,7 @@ list(
       data_source_predictors = data_predictors_filtered
     )
   ),
-  # - flatten nested hvar data for reviewer collinearity diagnostics ----
+  # - flatten nested hvar data for collinearity diagnostics ----
   targets::tar_target(
     name = data_hvar_filtered_flat,
     command = data_hvar_filtered %>%
@@ -87,7 +118,7 @@ list(
         cols = data_merge
       )
   ),
-  # - join spatial metadata for reviewer grouping ----
+  # - join spatial metadata for diagnostic grouping ----
   targets::tar_target(
     name = data_hvar_filtered_with_meta,
     command = dplyr::left_join(

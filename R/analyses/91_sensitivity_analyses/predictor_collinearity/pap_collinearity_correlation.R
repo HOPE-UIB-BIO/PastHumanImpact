@@ -33,7 +33,8 @@ data_collinearity <-
     store = file.path(
       data_storage_path,
       "Targets_data",
-      "analyses_h1_reviewer_collinearity"
+      "sensitivity_analyses",
+      "predictor_collinearity"
     )
   )
 
