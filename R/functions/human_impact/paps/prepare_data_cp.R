@@ -1,8 +1,10 @@
 #' @title Combine all variables that represent pollen assembly properties
 #' @description Combining the data of the different pollen assemblage properties
 #' @param data_pollen Data frame with `dataset_id` and list-column `levels`.
-#' @param data_diversity Data frame with `dataset_id` and list-column `PAP_diversity`.
-#' @param data_mrt Data frame with `dataset_id` and list-column `mvrt_partitions`.
+#' @param data_diversity Data frame with `dataset_id` and list-column
+#'   `PAP_diversity`.
+#' @param data_mrt Data frame with `dataset_id` and list-column
+#'   `mvrt_partitions`.
 #' @param data_roc Data frame with `dataset_id`.
 #' @param data_dcca Data frame with `dataset_id` and list-column `dcca_scores`.
 #' @return A new data set of the relevant PAP estimations
@@ -78,20 +80,6 @@ prepare_data_cp <- function(data_pollen,
       levels
     )
 
-  subset_by_vector <-
-    function(data_source, var_name, id_vec) {
-      data_source %>%
-        dplyr::mutate(
-          !!var_name := purrr::map2(
-            .x = get(var_name),
-            .y = get(id_vec),
-            .f = ~ .x %>%
-              dplyr::filter(.data$sample_id %in% .y)
-          )
-        ) %>%
-        return()
-    }
-
   data_for_cp <-
     data_levels %>%
     dplyr::inner_join(
@@ -136,21 +124,21 @@ prepare_data_cp <- function(data_pollen,
       )
     ) %>%
     # subset all data.frames by the list of common sample_id
-    subset_by_vector(
-      var_name = "PAP_diversity",
-      id_vec = "valid_sample_id"
+    filter_nested_tables_by_sample_id(
+      table_name = "PAP_diversity",
+      id_name = "valid_sample_id"
     ) %>%
-    subset_by_vector(
-      var_name = "mvrt_partitions",
-      id_vec = "valid_sample_id"
+    filter_nested_tables_by_sample_id(
+      table_name = "mvrt_partitions",
+      id_name = "valid_sample_id"
     ) %>%
-    subset_by_vector(
-      var_name = "dcca_scores",
-      id_vec = "valid_sample_id"
+    filter_nested_tables_by_sample_id(
+      table_name = "dcca_scores",
+      id_name = "valid_sample_id"
     ) %>%
-    subset_by_vector(
-      var_name = "levels",
-      id_vec = "valid_sample_id"
+    filter_nested_tables_by_sample_id(
+      table_name = "levels",
+      id_name = "valid_sample_id"
     ) %>%
     dplyr::select(-valid_sample_id)
 

@@ -1,27 +1,30 @@
-#' @title Compute multivariate regression trees (MRT)
-#' @description Use pollen assemblage data and age/time as constraint
-#' @param data_pollen Use pollen percentages
-#' @param n_rand number of randomisations
-#' @param transformation_coef which distance coefficient to use.
-#' Recommended for pollen data is chi-squared distances of pollen percentage
-#' with no data transformations
-#' @return For each sequence returns a vector of the zonation,
-#' a vector of the change points, and the total number of zones
+#' @title Compute multivariate regression trees
+#' @description
+#' Fit one legacy multivariate regression tree per pollen dataset and assemble
+#' stable plain-data summaries.
+#' @param data_pollen Data frame containing `dataset_id` and list-columns
+#'   `percentages_harmonised` and `levels`.
+#' @param n_rand Positive number of cross-validation repetitions.
+#' @param transformation_coef One of `chisq`, `hellinger`, or `none`.
+#' @param fit_dataset Function used to fit one pollen dataset.
+#' @return A data frame containing dataset partitions, change points, and group
+#'   counts.
 #' @details
 #' The underlying `mvpart` package requires the isolated old-R runtime
 #' documented in `R/analyses/01_data_preparation/05_paps/README.md`. Do not
 #' source the project-wide configuration from that runtime.
-
+#' @examples
+#' \dontrun{
+#' compute_mrt(data_pollen)
+#' }
 compute_mrt <- function(
     data_pollen,
     n_rand = 999,
-    transformation_coef = "chisq"
+    transformation_coef = "chisq",
+    fit_dataset = fit_mvpart_mrt
 ) {
   assertthat::assert_that(
     is.data.frame(data_pollen),
-    msg = "`data_pollen` must be a data frame."
-  )
-  assertthat::assert_that(
     all(
       c(
         "dataset_id",
@@ -29,68 +32,77 @@ compute_mrt <- function(
         "levels"
       ) %in% names(data_pollen)
     ),
-    msg = stringr::str_c(
+    msg = paste(
       "`data_pollen` must contain `dataset_id`,",
-      " ",
       "`percentages_harmonised`, and `levels`."
     )
   )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_pollen$percentages_harmonised, is.data.frame)),
-    msg = "`percentages_harmonised` entries must be data frames."
-  )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_pollen$levels, is.data.frame)),
-    msg = "`levels` entries must be data frames."
-  )
-  assertthat::assert_that(
-    is.numeric(n_rand) && length(n_rand) == 1 && n_rand > 0,
-    msg = "`n_rand` must be a single positive numeric value."
-  )
-  assertthat::assert_that(
-    is.character(transformation_coef) && length(transformation_coef) == 1,
-    msg = "`transformation_coef` must be a single character value."
-  )
 
-  data_work_mrt <-
-    data_pollen %>%
-    dplyr::mutate(
-      PAP_mrt = purrr::map2(
-        .x = percentages_harmonised,
-        .y = levels,
-        .f = ~ REcopol::mv_regression_partition(
-          data_source_counts = .x,
-          data_source_levels = .y,
-          rand = n_rand,
-          transformation = transformation_coef
-        )
+  assertthat::assert_that(
+    all(
+      purrr::map_lgl(
+        data_pollen[["percentages_harmonised"]],
+        is.data.frame
       )
+    ),
+    all(
+      purrr::map_lgl(
+        data_pollen[["levels"]],
+        is.data.frame
+      )
+    ),
+    is.numeric(n_rand),
+    length(n_rand) == 1L,
+    is.finite(n_rand),
+    n_rand > 0,
+    is.character(transformation_coef),
+    length(transformation_coef) == 1L,
+    is.function(fit_dataset),
+    msg = paste(
+      "MRT dataset inputs must be tables and `n_rand` must be",
+      "a positive scalar."
     )
+  )
 
-  data_mrt_proc <-
-    data_work_mrt %>%
-    dplyr::mutate(
-      mvrt_partitions = purrr::map(
-        .x = PAP_mrt,
-        .f = ~ .x %>%
-          purrr::pluck("partitions") %>%
-          dplyr::rename(MRT_partitions = partition)
-      ),
-      mvrt_cp = purrr::map(
-        .x = PAP_mrt,
-        .f = ~ .x %>%
-          purrr::pluck("change_points")
-      ),
-      mvrt_groups_n = purrr::map_dbl(
-        .x = PAP_mrt,
-        .f = ~ .x %>%
-          purrr::pluck("mrt_groups")
+  list_mrt <-
+    purrr::map2(
+      .x = data_pollen[["percentages_harmonised"]],
+      .y = data_pollen[["levels"]],
+      .f = ~ fit_dataset(
+        data_source_counts = .x,
+        data_source_levels = .y,
+        n_rand = n_rand,
+        transformation = transformation_coef
       )
     )
 
   data_mrt <-
-    data_mrt_proc %>%
-    dplyr::select(dataset_id, PAP_mrt, mvrt_partitions, mvrt_cp, mvrt_groups_n)
+    data.frame(
+      dataset_id = data_pollen[["dataset_id"]],
+      stringsAsFactors = FALSE
+    )
+
+  data_mrt[["mvrt_partitions"]] <-
+    I(
+      purrr::map(
+        list_mrt,
+        ~ .x[["partitions"]]
+      )
+    )
+
+  data_mrt[["mvrt_cp"]] <-
+    I(
+      purrr::map(
+        list_mrt,
+        ~ .x[["change_points"]]
+      )
+    )
+
+  data_mrt[["mvrt_groups_n"]] <-
+    purrr::map_dbl(
+      list_mrt,
+      ~ .x[["mrt_groups"]]
+    )
 
   return(data_mrt)
 }

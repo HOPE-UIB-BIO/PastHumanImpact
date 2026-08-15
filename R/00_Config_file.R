@@ -77,6 +77,7 @@ package_list <-
   c(
     "adespatial",
     "assertthat",
+    "cli",
     "collinear",
     "colorspace",
     "furrr",
@@ -92,6 +93,7 @@ package_list <-
     "knitr",
     "languageserver",
     "parallelly",
+    "processx",
     "rcarbon",
     "rdacca.hp",
     "dplyr",
@@ -153,7 +155,10 @@ load_package_safely <- function(package_name) {
 }
 
 invisible(
-  lapply(package_list, load_package_safely)
+  purrr::walk(
+    .x = package_list,
+    .f = load_package_safely
+  )
 )
 
 
