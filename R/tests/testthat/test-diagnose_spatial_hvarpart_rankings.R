@@ -10,7 +10,7 @@ testthat::test_that(
         predictor = c("human", "climate")
       ) |>
       dplyr::mutate(
-        Individual = dplyr::if_else(
+        individual = dplyr::if_else(
           .data[["predictor"]] == "human",
           0.6,
           0.4

@@ -17,7 +17,7 @@ testthat::test_that(
         analysis = "spatial_spd",
         model_profile = "human_climate_time",
         predictor = c("human", "climate", "time"),
-        Individual = c(0.2, 0.3, -0.1)
+        individual = c(0.2, 0.3, -0.1)
       )
     partial <-
       tibble::tibble(

@@ -1,7 +1,8 @@
 #' @title Prepare common H1 result records
 #' @description
 #' Convert hierarchical contribution output to the common H1 long schema.
-#' @param data_components HVarPart component table.
+#' @param data_components HVarPart component table containing `predictor` and
+#'   canonical lowercase `individual` columns.
 #' @param data_status Optional model-status table.
 #' @param profile_id Stable analysis profile identifier.
 #' @param model_specification Stable model specification label.
@@ -42,7 +43,7 @@ prepare_h1_result_records <- function(
 ) {
   assertthat::assert_that(
     is.data.frame(data_components),
-    all(c("predictor", "Individual") %in% names(data_components)),
+    all(c("predictor", "individual") %in% names(data_components)),
     is.null(data_status) || is.data.frame(data_status),
     is.character(profile_id),
     length(profile_id) == 1L,
@@ -62,8 +63,8 @@ prepare_h1_result_records <- function(
   data_values <-
     data_components |>
     dplyr::mutate(
-      untruncated_value = .data[["Individual"]],
-      zero_value = pmax(.data[["Individual"]], 0)
+      untruncated_value = .data[["individual"]],
+      zero_value = pmax(.data[["individual"]], 0)
     ) |>
     dplyr::group_by(
       dplyr::across(dplyr::all_of(key_columns))

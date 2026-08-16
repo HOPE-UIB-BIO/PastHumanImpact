@@ -15,12 +15,15 @@ plot_h1_temporal_control_profiles <- function(
 ) {
   keys <- c("analysis", "region", "age")
   required_components <-
-    c(keys, "model_profile", "predictor", "Individual")
+    c(keys, "model_profile", "predictor", "individual")
   required_partial <- c(keys, "fraction", "adjusted_r_squared")
   assertthat::assert_that(
     all(required_components %in% names(data_components)),
     all(required_partial %in% names(data_unique_adjusted_r2)),
-    msg = "spatially controlled temporal analysis diagnostic inputs are invalid."
+    msg = paste(
+      "Spatially controlled temporal-analysis diagnostic inputs are",
+      "invalid."
+    )
   )
 
   data_signed <-
@@ -29,7 +32,7 @@ plot_h1_temporal_control_profiles <- function(
       .data[["model_profile"]] == "human_climate_space",
       .data[["predictor"]] %in% c("human", "climate", "space")
     ) |>
-    dplyr::mutate(value = .data[["Individual"]])
+    dplyr::mutate(value = .data[["individual"]])
   data_unique <-
     data_unique_adjusted_r2 |>
     dplyr::filter(

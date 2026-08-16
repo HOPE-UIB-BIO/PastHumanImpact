@@ -54,40 +54,10 @@ summarise_temporal_hvarpart_results <- function(
     dplyr::mutate(
       components = purrr::map(
         .x = .data[["result"]],
-        .f = ~ {
-          data_human_climate_only <-
-            if (
-              is.null(.x[["human_climate_only_hvarpart"]])
-            ) {
-              tibble::tibble()
-            } else {
-              .x[["human_climate_only_hvarpart"]][["summary_table"]] |>
-                dplyr::mutate(
-                  model_profile = "human_climate",
-                  total_adjusted_r_squared =
-                    .x[["human_climate_only_hvarpart"]][["varhp_output"]][[
-                      "Total_explained_variation"
-                    ]]
-                )
-            }
-          data_temporal <-
-            if (
-              is.null(.x[["temporal_hvarpart"]])
-            ) {
-              tibble::tibble()
-            } else {
-              .x[["temporal_hvarpart"]][["summary_table"]] |>
-                dplyr::mutate(
-                  model_profile = "human_climate_time",
-                  total_adjusted_r_squared =
-                    .x[["temporal_hvarpart"]][["varhp_output"]][[
-                      "Total_explained_variation"
-                    ]]
-                )
-            }
-
-          return(dplyr::bind_rows(data_human_climate_only, data_temporal))
-        }
+        .f = prepare_hvarpart_control_components,
+        controlled_result_name = "temporal_hvarpart",
+        controlled_profile = "human_climate_time",
+        include_total = TRUE
       )
     ) |>
     dplyr::select(dplyr::all_of(c(id_col, "components"))) |>

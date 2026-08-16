@@ -22,7 +22,7 @@ prepare_h1_spatial_control_values <- function(
   assertthat::assert_that(
     all(spatial_columns %in% names(data_records)),
     all(
-      c(keys, "model_profile", "predictor", "Individual") %in%
+      c(keys, "model_profile", "predictor", "individual") %in%
         names(data_components)
     ),
     all(
@@ -60,7 +60,7 @@ prepare_h1_spatial_control_values <- function(
       dplyr::across(dplyr::all_of(keys)),
       measure = "untruncated_hierarchical_contribution",
       component = .data[["predictor"]],
-      value = .data[["Individual"]]
+      value = .data[["individual"]]
     )
 
   data_unique <-

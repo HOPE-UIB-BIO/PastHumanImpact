@@ -26,13 +26,16 @@ plot_h1_spatial_control_profiles <- function(
       "time_allocation"
     )
   required_components <-
-    c(keys, "model_profile", "predictor", "Individual")
+    c(keys, "model_profile", "predictor", "individual")
   required_partial <- c(keys, "fraction", "adjusted_r_squared")
   assertthat::assert_that(
     all(required_records %in% names(data_records)),
     all(required_components %in% names(data_components)),
     all(required_partial %in% names(data_unique_adjusted_r2)),
-    msg = "spatiotemporally controlled spatial analysis component inputs are invalid."
+    msg = paste(
+      "Spatiotemporally controlled spatial-analysis component inputs",
+      "are invalid."
+    )
   )
 
   data_coordinates <-
@@ -65,7 +68,7 @@ plot_h1_spatial_control_profiles <- function(
     dplyr::transmute(
       dplyr::across(dplyr::all_of(keys)),
       component = .data[["predictor"]],
-      value = .data[["Individual"]]
+      value = .data[["individual"]]
     ) |>
     dplyr::left_join(data_coordinates, by = keys)
   data_unique <-

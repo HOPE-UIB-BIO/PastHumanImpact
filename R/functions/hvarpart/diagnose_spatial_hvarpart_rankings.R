@@ -1,8 +1,9 @@
 #' @title Diagnose human_climate_only and spatially controlled HVarPart rankings
 #' @description
-#' Compare human-minus-climate hierarchical contributions for human_climate_only and
-#' spatially controlled region-age models. Explicit no-signal results retain
-#' the human_climate_only ranking, whereas non-estimable spatial models remain missing.
+#' Compare human-minus-climate hierarchical contributions for
+#' human_climate_only and spatially controlled region-age models. Explicit
+#' no-signal results retain the human_climate_only ranking, whereas
+#' non-estimable spatial models remain missing.
 #' @param data_components Extracted HVarPart component table.
 #' @param data_status Extracted spatial model status table.
 #' @return One row per analysis, region, and age with ranking diagnostics.
@@ -16,7 +17,7 @@ diagnose_spatial_hvarpart_rankings <- function(
 ) {
   keys <- c("analysis", "region", "age")
   required_components <-
-    c(keys, "model_profile", "predictor", "Individual")
+    c(keys, "model_profile", "predictor", "individual")
   required_status <- c(keys, "status", "n_selected")
   assertthat::assert_that(
     is.data.frame(data_components),
@@ -32,7 +33,7 @@ diagnose_spatial_hvarpart_rankings <- function(
     dplyr::select(dplyr::all_of(required_components)) |>
     tidyr::pivot_wider(
       names_from = c("model_profile", "predictor"),
-      values_from = "Individual"
+      values_from = "individual"
     )
   expected_value_columns <-
     c(

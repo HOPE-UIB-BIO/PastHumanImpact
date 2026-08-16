@@ -8,7 +8,7 @@ testthat::test_that(
         age = 2000,
         model_profile = "human_climate_space",
         predictor = c("human", "climate", "space"),
-        Individual = c(0.4, 0.3, -0.1)
+        individual = c(0.4, 0.3, -0.1)
       )
     partial <-
       tibble::tibble(

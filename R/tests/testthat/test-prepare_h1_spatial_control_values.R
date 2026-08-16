@@ -19,7 +19,7 @@ testthat::test_that(
       dplyr::mutate(
         analysis = "spatial_spd",
         model_profile = "human_climate_time",
-        Individual = seq(0.1, 0.6, length.out = dplyr::n())
+        individual = seq(0.1, 0.6, length.out = dplyr::n())
       )
 
     fractions <-
@@ -75,7 +75,7 @@ testthat::test_that(
           analysis = "spatial_spd",
           model_profile = "human_climate_time",
           predictor = "human",
-          Individual = 0.1
+          individual = 0.1
         ),
         data_unique_adjusted_r2 = tibble::tibble(
           dataset_id = "a",

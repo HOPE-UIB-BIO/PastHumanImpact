@@ -48,7 +48,7 @@ plot_spatial_sensitivity_results <- function(
     all(c("aggregation_level", "profile", "adjusted_balance") %in%
       names(data_estimates)),
     is.data.frame(data_temporal_components),
-    all(c("region", "age", "model_profile", "predictor", "Individual") %in%
+    all(c("region", "age", "model_profile", "predictor", "individual") %in%
       names(data_temporal_components)),
     is.data.frame(data_unique_adjusted_r2),
     all(c("region", "age", "fraction", "adjusted_r_squared") %in%
@@ -170,12 +170,12 @@ plot_spatial_sensitivity_results <- function(
         "age",
         "model_profile",
         "predictor",
-        "Individual"
+        "individual"
       ))
     ) |>
     tidyr::pivot_wider(
       names_from = "predictor",
-      values_from = "Individual"
+      values_from = "individual"
     ) |>
     dplyr::mutate(
       importance_difference = .data[["human"]] - .data[["climate"]]

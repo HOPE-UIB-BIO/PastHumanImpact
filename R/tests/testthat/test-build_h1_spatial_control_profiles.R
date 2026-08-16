@@ -19,7 +19,7 @@ testthat::test_that(
       dplyr::mutate(
         analysis = "spatial_spd",
         model_profile = "human_climate_time",
-        Individual = seq(-0.2, 0.6, length.out = dplyr::n())
+        individual = seq(-0.2, 0.6, length.out = dplyr::n())
       )
 
     fractions <-
