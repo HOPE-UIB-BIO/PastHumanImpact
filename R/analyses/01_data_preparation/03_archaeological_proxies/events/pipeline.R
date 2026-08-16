@@ -77,6 +77,27 @@ list(
       )
     }
   ),
+  # Why: Attach country metadata once so legacy event classifiers receive
+  #   their documented pollen input without changing the canonical pollen
+  #   store.
+  targets::tar_target(
+    name = "data_pollen_events",
+    command = data_pollen |>
+      dplyr::left_join(
+        data_meta |>
+          dplyr::select(
+            dplyr::all_of(c("dataset_id", "country"))
+          ),
+        by = "dataset_id"
+      )
+  ),
+  # Why: Remove the adapted country field from event metadata so classifier
+  #   joins retain one unambiguous country column.
+  targets::tar_target(
+    name = "data_meta_events",
+    command = data_meta |>
+      dplyr::select(-dplyr::all_of("country"))
+  ),
   # - a path for events from diagrams ----
   # Why: Define events diag path once so downstream targets use one reproducible
   #   value.
@@ -140,8 +161,8 @@ list(
     name = "events_indicators",
     command = classify_indicator_events(
       data_source_indicators = events_indicators_raw,
-      data_source_pollen = data_pollen,
-      data_source_meta = data_meta,
+      data_source_pollen = data_pollen_events,
+      data_source_meta = data_meta_events,
       sel_region = "Latin America",
       # filter out pinus in selected  countries where Pinus is native
       country_w_pinus = c(
@@ -181,8 +202,8 @@ list(
     name = "events_indices",
     command = classify_index_events(
       data_source_indices = events_indices_raw,
-      data_source_pollen = data_pollen,
-      data_source_meta = data_meta,
+      data_source_pollen = data_pollen_events,
+      data_source_meta = data_meta_events,
       sel_region = "Latin America"
     )
   ),
@@ -192,8 +213,16 @@ list(
   targets::tar_target(
     name = "events_code",
     command = aggregate_event_sources(
-      data_source_indices = events_indices,
-      data_source_indicators = events_indicators
+      data_source_indices = events_indices |>
+        dplyr::rename(
+          weak_indicies = "weak",
+          strong_indicies = "strong"
+        ),
+      data_source_indicators = events_indicators |>
+        dplyr::rename(
+          weak_indicators = "weak",
+          strong_indicators = "strong"
+        )
     )
   ),
   # - merge all events together ----
