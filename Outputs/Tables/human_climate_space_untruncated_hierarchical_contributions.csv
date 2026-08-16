@@ -1,4 +1,4 @@
-analysis,region,age,predictor,Unique,Average.share,Individual,I.perc(%),model_profile
+analysis,region,age,predictor,Unique,Average.share,individual,I.perc(%),model_profile
 temporal_spd,Europe,2000,human,0.0042,-0.0010999999999999998,0.0031,3.07,human_climate
 temporal_spd,Europe,2000,climate,0.0987,-0.0010999999999999899,0.0976,96.63,human_climate
 temporal_spd,Europe,2000,human,0.0029,0,0.0029,1.61,human_climate_space

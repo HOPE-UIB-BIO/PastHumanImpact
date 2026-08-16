@@ -1,4 +1,214 @@
-analysis,region,age,predictor,Unique,Average.share,Individual,I.perc(%),model_profile,zero_individual,zero_total,allocation,status,n_samples,selection_status,n_candidates,n_selected,global_p_value,spatial_adjusted_r_squared
+analysis,region,age,predictor,Unique,Average.share,individual,I.perc(%),model_profile,zero_individual,zero_total,allocation,status,n_samples,selection_status,n_candidates,n_selected,global_p_value,spatial_adjusted_r_squared
+temporal_spd,Asia,2000,human,0.0165,-0.002100000000000001,0.0144,11.16,human_climate_space,0.0144,0.129,0.11162790697674418,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
+temporal_spd,Asia,2000,climate,0.0898,-0.009900000000000006,0.0799,61.94,human_climate_space,0.0799,0.129,0.6193798449612403,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
+temporal_spd,Asia,2000,space,0.0309,0.0038000000000000013,0.0347,26.9,human_climate_space,0.0347,0.129,0.2689922480620155,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
+temporal_spd,Asia,2500,human,0.0036,-7.999999999999999e-4,0.0028,2.19,human_climate_space,0.0028,0.1278,0.02190923317683881,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
+temporal_spd,Asia,2500,climate,0.0953,-0.004900000000000002,0.0904,70.62,human_climate_space,0.0904,0.1278,0.7073552425665102,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
+temporal_spd,Asia,2500,space,0.0334,0.0011999999999999997,0.0346,27.03,human_climate_space,0.0346,0.1278,0.27073552425665104,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
+temporal_spd,Asia,3000,human,0.0044,-0.0014000000000000002,0.003,2.48,human_climate_space,0.003,0.12129999999999999,0.024732069249793903,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
+temporal_spd,Asia,3000,climate,0.0839,-3.000000000000086e-4,0.0836,69.09,human_climate_space,0.0836,0.12129999999999999,0.6892003297609234,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
+temporal_spd,Asia,3000,space,0.0297,0.005000000000000001,0.0347,28.68,human_climate_space,0.0347,0.12129999999999999,0.2860676009892828,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
+temporal_spd,Asia,3500,human,-2e-4,0.0059,0.0057,6.33,human_climate_space,0.0057,0.09,0.06333333333333334,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
+temporal_spd,Asia,3500,climate,0.0784,0.0059000000000000025,0.0843,93.67,human_climate_space,0.0843,0.09,0.9366666666666666,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
+temporal_spd,Asia,3500,space,NA,NA,0,NA,human_climate_space,0,0.09,0,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
+temporal_spd,Asia,4000,human,0.0042,0.0012000000000000005,0.0054,7.11,human_climate_space,0.0054,0.0759,0.07114624505928854,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
+temporal_spd,Asia,4000,climate,0.0693,0.0011999999999999927,0.0705,92.76,human_climate_space,0.0705,0.0759,0.9288537549407114,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
+temporal_spd,Asia,4000,space,NA,NA,0,NA,human_climate_space,0,0.0759,0,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
+temporal_spd,Asia,4500,human,0.0032,0.0117,0.0149,11.73,human_climate_space,0.0149,0.12739999999999999,0.11695447409733126,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
+temporal_spd,Asia,4500,climate,0.0617,0.0119,0.0736,57.95,human_climate_space,0.0736,0.12739999999999999,0.5777080062794349,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
+temporal_spd,Asia,4500,space,0.0407,-0.001800000000000003,0.0389,30.63,human_climate_space,0.0389,0.12739999999999999,0.3053375196232339,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
+temporal_spd,Asia,5000,human,0.0129,0.0112,0.0241,21.52,human_climate_space,0.0241,0.1121,0.2149866190900981,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
+temporal_spd,Asia,5000,climate,0.0524,0.014700000000000005,0.0671,59.91,human_climate_space,0.0671,0.1121,0.5985727029438002,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
+temporal_spd,Asia,5000,space,0.0256,-0.004700000000000003,0.0209,18.66,human_climate_space,0.0209,0.1121,0.18644067796610167,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
+temporal_spd,Asia,5500,human,-0.0029,0.007699999999999999,0.0048,3.87,human_climate_space,0.0048,0.1239,0.038740920096852295,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
+temporal_spd,Asia,5500,climate,0.0812,0.0063,0.0875,70.56,human_climate_space,0.0875,0.1239,0.7062146892655367,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
+temporal_spd,Asia,5500,space,0.0318,-1.999999999999988e-4,0.0316,25.48,human_climate_space,0.0316,0.1239,0.25504439063761103,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
+temporal_spd,Asia,6000,human,0.0103,0.0142,0.0245,22.9,human_climate_space,0.0245,0.10700000000000001,0.2289719626168224,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
+temporal_spd,Asia,6000,climate,0.0683,0.014200000000000004,0.0825,77.1,human_climate_space,0.0825,0.10700000000000001,0.7710280373831775,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
+temporal_spd,Asia,6000,space,NA,NA,0,NA,human_climate_space,0,0.10700000000000001,0,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
+temporal_spd,Asia,6500,human,-0.0024,0.009,0.0066,6.23,human_climate_space,0.0066,0.10619999999999999,0.062146892655367235,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
+temporal_spd,Asia,6500,climate,0.0905,0.009099999999999997,0.0996,93.96,human_climate_space,0.0996,0.10619999999999999,0.9378531073446328,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
+temporal_spd,Asia,6500,space,NA,NA,0,NA,human_climate_space,0,0.10619999999999999,0,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
+temporal_spd,Asia,7000,human,0.0031,0.0094,0.0125,10.25,human_climate_space,0.0125,0.12179999999999999,0.1026272577996716,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
+temporal_spd,Asia,7000,climate,0.0999,0.009399999999999992,0.1093,89.59,human_climate_space,0.1093,0.12179999999999999,0.8973727422003285,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
+temporal_spd,Asia,7000,space,NA,NA,0,NA,human_climate_space,0,0.12179999999999999,0,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
+temporal_spd,Asia,7500,human,0.0064,0.015700000000000002,0.0221,15.24,human_climate_space,0.0221,0.1454,0.15199449793672629,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
+temporal_spd,Asia,7500,climate,0.1077,0.015600000000000003,0.1233,85.03,human_climate_space,0.1233,0.1454,0.8480055020632737,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
+temporal_spd,Asia,7500,space,NA,NA,0,NA,human_climate_space,0,0.1454,0,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
+temporal_spd,Asia,8000,human,0.0011,0.008199999999999999,0.0093,5.22,human_climate_space,0.0093,0.17779999999999999,0.05230596175478065,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
+temporal_spd,Asia,8000,climate,0.1354,0.011800000000000005,0.1472,82.7,human_climate_space,0.1472,0.17779999999999999,0.8278965129358831,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
+temporal_spd,Asia,8000,space,0.0197,0.0016000000000000007,0.0213,11.97,human_climate_space,0.0213,0.17779999999999999,0.11979752530933634,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
+temporal_spd,Asia,8500,human,-5e-4,0.0052,0.0047,2.66,human_climate_space,0.0047,0.1774,0.02649379932356257,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
+temporal_spd,Asia,8500,climate,0.1579,0.0021999999999999797,0.1601,90.45,human_climate_space,0.1601,0.1774,0.9024802705749717,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
+temporal_spd,Asia,8500,space,0.0156,-0.002999999999999999,0.0126,7.12,human_climate_space,0.0126,0.1774,0.07102593010146561,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
+temporal_spd,Europe,2000,human,0.0029,0,0.0029,1.61,human_climate_space,0.0029,0.18030000000000002,0.016084303937881305,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
+temporal_spd,Europe,2000,climate,0.0536,0.021899999999999996,0.0755,41.94,human_climate_space,0.0755,0.18030000000000002,0.41874653355518576,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
+temporal_spd,Europe,2000,space,0.0796,0.0223,0.1019,56.61,human_climate_space,0.1019,0.18030000000000002,0.5651691625069328,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
+temporal_spd,Europe,2500,human,0.012,-0.0049,0.0071,4.06,human_climate_space,0.0071,0.175,0.04057142857142858,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
+temporal_spd,Europe,2500,climate,0.0441,0.0172,0.0613,35.03,human_climate_space,0.0613,0.175,0.3502857142857143,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
+temporal_spd,Europe,2500,space,0.09,0.016600000000000004,0.1066,60.91,human_climate_space,0.1066,0.175,0.6091428571428572,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
+temporal_spd,Europe,3000,human,0.0039,0.003,0.0069,4.79,human_climate_space,0.0069,0.1442,0.0478502080443828,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
+temporal_spd,Europe,3000,climate,0.0376,0.011699999999999995,0.0493,34.24,human_climate_space,0.0493,0.1442,0.3418862690707351,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
+temporal_spd,Europe,3000,space,0.0822,0.0058,0.088,61.11,human_climate_space,0.088,0.1442,0.6102635228848821,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
+temporal_spd,Europe,3500,human,0.0013,0.007200000000000001,0.0085,4.8,human_climate_space,0.0085,0.1774,0.047914317925591886,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
+temporal_spd,Europe,3500,climate,0.0545,0.004499999999999997,0.059,33.33,human_climate_space,0.059,0.1774,0.33258173618940245,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
+temporal_spd,Europe,3500,space,0.1122,-0.0022999999999999965,0.1099,62.09,human_climate_space,0.1099,0.1774,0.6195039458850056,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
+temporal_spd,Europe,4000,human,0.002,0.006,0.008,4.57,human_climate_space,0.008,0.1752,0.04566210045662101,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
+temporal_spd,Europe,4000,climate,0.0619,0.009599999999999997,0.0715,40.86,human_climate_space,0.0715,0.1752,0.4081050228310502,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
+temporal_spd,Europe,4000,space,0.0966,-9.000000000000119e-4,0.0957,54.69,human_climate_space,0.0957,0.1752,0.5462328767123288,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
+temporal_spd,Europe,4500,human,-0.0012,0.0027,0.0015,0.79,human_climate_space,0.0015,0.191,0.007853403141361256,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
+temporal_spd,Europe,4500,climate,0.0462,0.018900000000000007,0.0651,34.08,human_climate_space,0.0651,0.191,0.34083769633507854,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
+temporal_spd,Europe,4500,space,0.1069,0.0175,0.1244,65.13,human_climate_space,0.1244,0.191,0.6513089005235602,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
+temporal_spd,Europe,5000,human,-1e-4,0.0031,0.003,1.88,human_climate_space,0.003,0.1599,0.01876172607879925,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
+temporal_spd,Europe,5000,climate,0.0497,0.006999999999999999,0.0567,35.44,human_climate_space,0.0567,0.1599,0.3545966228893058,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
+temporal_spd,Europe,5000,space,0.0935,0.006699999999999998,0.1002,62.62,human_climate_space,0.1002,0.1599,0.626641651031895,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
+temporal_spd,Europe,5500,human,3e-4,2.0000000000000004e-4,5e-4,0.26,human_climate_space,5e-4,0.19569999999999999,0.002554931016862545,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
+temporal_spd,Europe,5500,climate,0.0595,0.012300000000000005,0.0718,36.63,human_climate_space,0.0718,0.19569999999999999,0.36688809402146144,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
+temporal_spd,Europe,5500,space,0.1109,0.012499999999999997,0.1234,62.96,human_climate_space,0.1234,0.19569999999999999,0.6305569749616761,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
+temporal_spd,Europe,6000,human,0.0154,7.999999999999986e-4,0.0162,9.64,human_climate_space,0.0162,0.1683,0.0962566844919786,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
+temporal_spd,Europe,6000,climate,0.0541,0.011199999999999995,0.0653,38.87,human_climate_space,0.0653,0.1683,0.3879976232917409,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
+temporal_spd,Europe,6000,space,0.0852,0.0016000000000000042,0.0868,51.67,human_climate_space,0.0868,0.1683,0.5157456922162804,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
+temporal_spd,Europe,6500,human,0.0242,0.008,0.0322,18.72,human_climate_space,0.0322,0.1721,0.1871005229517722,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
+temporal_spd,Europe,6500,climate,0.031,0.015100000000000002,0.0461,26.8,human_climate_space,0.0461,0.1721,0.26786751888436955,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
+temporal_spd,Europe,6500,space,0.0909,0.0029,0.0938,54.53,human_climate_space,0.0938,0.1721,0.5450319581638582,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
+temporal_spd,Europe,7000,human,0.0103,0.0068000000000000005,0.0171,11.03,human_climate_space,0.0171,0.1549,0.1103938024531956,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
+temporal_spd,Europe,7000,climate,0.0409,0.013900000000000003,0.0548,35.35,human_climate_space,0.0548,0.1549,0.3537766300839251,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
+temporal_spd,Europe,7000,space,0.075,0.008000000000000007,0.083,53.55,human_climate_space,0.083,0.1549,0.5358295674628792,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
+temporal_spd,Europe,7500,human,0.0394,0.009600000000000004,0.049,27.07,human_climate_space,0.049,0.18109999999999998,0.2705687465488681,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
+temporal_spd,Europe,7500,climate,0.0511,0.0104,0.0615,33.98,human_climate_space,0.0615,0.18109999999999998,0.3395913859745997,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
+temporal_spd,Europe,7500,space,0.0649,0.005699999999999997,0.0706,39.01,human_climate_space,0.0706,0.18109999999999998,0.3898398674765323,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
+temporal_spd,Europe,8000,human,0.008,0.003299999999999999,0.0113,6.98,human_climate_space,0.0113,0.1618,0.06983930778739184,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
+temporal_spd,Europe,8000,climate,0.0726,0.0020000000000000018,0.0746,46.05,human_climate_space,0.0746,0.1618,0.4610630407911001,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
+temporal_spd,Europe,8000,space,0.0674,0.008499999999999994,0.0759,46.85,human_climate_space,0.0759,0.1618,0.469097651421508,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
+temporal_spd,Europe,8500,human,0.0027,0.0061,0.0088,5.79,human_climate_space,0.0088,0.1515,0.058085808580858093,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
+temporal_spd,Europe,8500,climate,0.0625,0.0063,0.0688,45.26,human_climate_space,0.0688,0.1515,0.45412541254125416,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
+temporal_spd,Europe,8500,space,0.0743,-4.0000000000001146e-4,0.0739,48.62,human_climate_space,0.0739,0.1515,0.48778877887788774,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
+temporal_spd,Latin America,2000,human,8e-4,0.003999999999999999,0.0048,2.86,human_climate_space,0.0048,0.16820000000000002,0.028537455410225916,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
+temporal_spd,Latin America,2000,climate,0.1257,0.014899999999999997,0.1406,83.69,human_climate_space,0.1406,0.16820000000000002,0.8359096313912009,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
+temporal_spd,Latin America,2000,space,0.0156,0.0072000000000000015,0.0228,13.57,human_climate_space,0.0228,0.16820000000000002,0.13555291319857313,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
+temporal_spd,Latin America,2500,human,0.0054,0.0043,0.0097,5.36,human_climate_space,0.0097,0.1813,0.05350248207391065,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
+temporal_spd,Latin America,2500,climate,0.1261,0.014800000000000008,0.1409,77.85,human_climate_space,0.1409,0.1813,0.7771649200220629,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
+temporal_spd,Latin America,2500,space,0.0288,0.0019000000000000024,0.0307,16.96,human_climate_space,0.0307,0.1813,0.1693325979040265,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
+temporal_spd,Latin America,3000,human,0.0238,-0.010500000000000002,0.0133,6.65,human_climate_space,0.0133,0.2001,0.06646676661669165,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
+temporal_spd,Latin America,3000,climate,0.1729,-0.003599999999999992,0.1693,84.65,human_climate_space,0.1693,0.2001,0.8460769615192404,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
+temporal_spd,Latin America,3000,space,0.0201,-0.002599999999999998,0.0175,8.75,human_climate_space,0.0175,0.2001,0.08745627186406797,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
+temporal_spd,Latin America,3500,human,0.0246,-0.011600000000000001,0.013,6.37,human_climate_space,0.013,0.2041,0.06369426751592357,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
+temporal_spd,Latin America,3500,climate,0.2027,-0.0116,0.1911,93.68,human_climate_space,0.1911,0.2041,0.9363057324840763,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
+temporal_spd,Latin America,3500,space,NA,NA,0,NA,human_climate_space,0,0.2041,0,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
+temporal_spd,Latin America,4000,human,0.0407,-0.0133,0.0274,12.29,human_climate_space,0.0274,0.2228,0.1229802513464991,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
+temporal_spd,Latin America,4000,climate,0.2092,-0.015399999999999997,0.1938,86.91,human_climate_space,0.1938,0.2228,0.86983842010772,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
+temporal_spd,Latin America,4000,space,0.0044,-0.0028000000000000004,0.0016,0.72,human_climate_space,0.0016,0.2228,0.00718132854578097,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
+temporal_spd,Latin America,4500,human,0.0212,-0.005500000000000001,0.0157,7.97,human_climate_space,0.0157,0.1973,0.07957425240750125,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
+temporal_spd,Latin America,4500,climate,0.187,-0.005399999999999988,0.1816,92.18,human_climate_space,0.1816,0.1973,0.9204257475924987,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
+temporal_spd,Latin America,4500,space,NA,NA,0,NA,human_climate_space,0,0.1973,0,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
+temporal_spd,Latin America,5000,human,0.0213,-0.0022000000000000006,0.0191,8.13,human_climate_space,0.0191,0.2347,0.08138048572645931,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
+temporal_spd,Latin America,5000,climate,0.1125,0.029399999999999996,0.1419,60.38,human_climate_space,0.1419,0.2347,0.6046016190881978,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
+temporal_spd,Latin America,5000,space,0.0307,0.043,0.0737,31.36,human_climate_space,0.0737,0.2347,0.314017895185343,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
+temporal_spd,Latin America,5500,human,0.012,-0.0026,0.0094,5.7,human_climate_space,0.0094,0.16519999999999999,0.05690072639225182,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
+temporal_spd,Latin America,5500,climate,0.1583,-0.0025000000000000022,0.1558,94.42,human_climate_space,0.1558,0.16519999999999999,0.9430992736077483,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
+temporal_spd,Latin America,5500,space,NA,NA,0,NA,human_climate_space,0,0.16519999999999999,0,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
+temporal_spd,Latin America,6000,human,0.0151,-0.005600000000000001,0.0095,5.59,human_climate_space,0.0095,0.1698,0.05594817432273262,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
+temporal_spd,Latin America,6000,climate,0.1659,-0.005599999999999994,0.1603,94.29,human_climate_space,0.1603,0.1698,0.9440518256772673,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
+temporal_spd,Latin America,6000,space,NA,NA,0,NA,human_climate_space,0,0.1698,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
+temporal_spd,Latin America,6500,human,-0.0045,9.99999999999994e-5,-0.0044,-2.77,human_climate_space,0,0.163,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
+temporal_spd,Latin America,6500,climate,0.1629,1.0000000000001674e-4,0.163,102.52,human_climate_space,0.163,0.163,1,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
+temporal_spd,Latin America,6500,space,NA,NA,0,NA,human_climate_space,0,0.163,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
+temporal_spd,Latin America,7000,human,0.0025,0.0039000000000000003,0.0064,5,human_climate_space,0.0064,0.1284,0.049844236760124616,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
+temporal_spd,Latin America,7000,climate,0.1181,0.0039000000000000007,0.122,95.31,human_climate_space,0.122,0.1284,0.9501557632398755,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
+temporal_spd,Latin America,7000,space,NA,NA,0,NA,human_climate_space,0,0.1284,0,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
+temporal_spd,Latin America,7500,human,0.0019,-0.0022,-3e-4,-0.18,human_climate_space,0,0.16949999999999998,0,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
+temporal_spd,Latin America,7500,climate,0.1013,0.021199999999999997,0.1225,72.49,human_climate_space,0.1225,0.16949999999999998,0.7227138643067847,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
+temporal_spd,Latin America,7500,space,0.0243,0.0227,0.047,27.81,human_climate_space,0.047,0.16949999999999998,0.27728613569321536,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
+temporal_spd,Latin America,8000,human,0.0591,-0.007899999999999997,0.0512,29.6,human_climate_space,0.0512,0.1728,0.2962962962962963,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
+temporal_spd,Latin America,8000,climate,0.1295,-0.007900000000000004,0.1216,70.29,human_climate_space,0.1216,0.1728,0.7037037037037037,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
+temporal_spd,Latin America,8000,space,NA,NA,0,NA,human_climate_space,0,0.1728,0,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
+temporal_spd,Latin America,8500,human,0.0151,-0.005300000000000001,0.0098,5.66,human_climate_space,0.0098,0.17329999999999998,0.05654933641084824,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
+temporal_spd,Latin America,8500,climate,0.0683,0.026999999999999996,0.0953,55.09,human_climate_space,0.0953,0.17329999999999998,0.5499134448932488,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
+temporal_spd,Latin America,8500,space,0.0362,0.031999999999999994,0.0682,39.42,human_climate_space,0.0682,0.17329999999999998,0.3935372186959031,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
+temporal_spd,North America,2000,human,-2e-4,0.004,0.0038,1.9,human_climate_space,0.0038,0.20010000000000003,0.018990504747626185,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
+temporal_spd,North America,2000,climate,0.017,0.0398,0.0568,28.4,human_climate_space,0.0568,0.20010000000000003,0.2838580709645177,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
+temporal_spd,North America,2000,space,0.1001,0.03940000000000002,0.1395,69.75,human_climate_space,0.1395,0.20010000000000003,0.697151424287856,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
+temporal_spd,North America,2500,human,0.0051,0.0016999999999999993,0.0068,3.13,human_climate_space,0.0068,0.2171,0.03132197144173192,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
+temporal_spd,North America,2500,climate,0.0199,0.0399,0.0598,27.56,human_climate_space,0.0598,0.2171,0.2754491017964072,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
+temporal_spd,North America,2500,space,0.1096,0.04089999999999999,0.1505,69.35,human_climate_space,0.1505,0.2171,0.6932289267618609,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
+temporal_spd,North America,3000,human,0.0031,0.0026999999999999997,0.0058,2.82,human_climate_space,0.0058,0.206,0.02815533980582524,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
+temporal_spd,North America,3000,climate,0.0175,0.041499999999999995,0.059,28.64,human_climate_space,0.059,0.206,0.28640776699029125,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
+temporal_spd,North America,3000,space,0.0967,0.0445,0.1412,68.54,human_climate_space,0.1412,0.206,0.6854368932038835,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
+temporal_spd,North America,3500,human,0.0015,0.0015,0.003,1.53,human_climate_space,0.003,0.196,0.015306122448979591,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
+temporal_spd,North America,3500,climate,0.0193,0.040499999999999994,0.0598,30.51,human_climate_space,0.0598,0.196,0.3051020408163265,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
+temporal_spd,North America,3500,space,0.0928,0.04040000000000002,0.1332,67.96,human_climate_space,0.1332,0.196,0.6795918367346939,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
+temporal_spd,North America,4000,human,0.0043,0.0034999999999999996,0.0078,4.29,human_climate_space,0.0078,0.1824,0.042763157894736836,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
+temporal_spd,North America,4000,climate,0.0153,0.036699999999999997,0.052,28.57,human_climate_space,0.052,0.1824,0.2850877192982456,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
+temporal_spd,North America,4000,space,0.0844,0.0382,0.1226,67.36,human_climate_space,0.1226,0.1824,0.6721491228070176,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
+temporal_spd,North America,4500,human,0.0065,0.0015000000000000005,0.008,3.83,human_climate_space,0.008,0.20850000000000002,0.03836930455635491,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
+temporal_spd,North America,4500,climate,0.0157,0.0407,0.0564,26.99,human_climate_space,0.0564,0.20850000000000002,0.27050359712230215,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
+temporal_spd,North America,4500,space,0.102,0.04210000000000001,0.1441,68.95,human_climate_space,0.1441,0.20850000000000002,0.6911270983213429,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
+temporal_spd,North America,5000,human,0.0024,0.0020000000000000005,0.0044,2.42,human_climate_space,0.0044,0.1815,0.024242424242424246,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
+temporal_spd,North America,5000,climate,0.0185,0.0406,0.0591,32.47,human_climate_space,0.0591,0.1815,0.3256198347107438,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
+temporal_spd,North America,5000,space,0.0746,0.043399999999999994,0.118,64.84,human_climate_space,0.118,0.1815,0.650137741046832,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
+temporal_spd,North America,5500,human,0.0089,0.0011000000000000003,0.01,4.88,human_climate_space,0.01,0.2051,0.04875670404680644,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
+temporal_spd,North America,5500,climate,0.0194,0.0331,0.0525,25.61,human_climate_space,0.0525,0.2051,0.25597269624573377,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
+temporal_spd,North America,5500,space,0.10780000000000001,0.0348,0.1426,69.56,human_climate_space,0.1426,0.2051,0.6952705997074597,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
+temporal_spd,North America,6000,human,0.0121,5.000000000000004e-4,0.0126,6.18,human_climate_space,0.0126,0.2044,0.06164383561643836,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
+temporal_spd,North America,6000,climate,0.0237,0.0335,0.0572,28.04,human_climate_space,0.0572,0.2044,0.27984344422700586,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
+temporal_spd,North America,6000,space,0.1016,0.033,0.1346,65.98,human_climate_space,0.1346,0.2044,0.6585127201565558,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
+temporal_spd,North America,6500,human,0.0078,8.000000000000004e-4,0.0086,3.91,human_climate_space,0.0086,0.2198,0.039126478616924476,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
+temporal_spd,North America,6500,climate,0.0196,0.0396,0.0592,26.91,human_climate_space,0.0592,0.2198,0.26933575978161967,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
+temporal_spd,North America,6500,space,0.1116,0.04039999999999999,0.152,69.09,human_climate_space,0.152,0.2198,0.6915377616014559,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
+temporal_spd,North America,7000,human,0.0094,0.001599999999999999,0.011,5.02,human_climate_space,0.011,0.2186,0.05032021957913998,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
+temporal_spd,North America,7000,climate,0.0279,0.0342,0.0621,28.36,human_climate_space,0.0621,0.2186,0.28408051235132664,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
+temporal_spd,North America,7000,space,0.1108,0.034699999999999995,0.1455,66.44,human_climate_space,0.1455,0.2186,0.6655992680695334,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
+temporal_spd,North America,7500,human,0.0092,0.0017000000000000001,0.0109,6.09,human_climate_space,0.0109,0.17909999999999998,0.06085985482970408,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
+temporal_spd,North America,7500,climate,0.0304,0.028,0.0584,32.63,human_climate_space,0.0584,0.17909999999999998,0.3260748185371301,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
+temporal_spd,North America,7500,space,0.0802,0.0296,0.1098,61.34,human_climate_space,0.1098,0.17909999999999998,0.6130653266331658,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
+temporal_spd,North America,8000,human,0.0088,0,0.0088,4.51,human_climate_space,0.0088,0.1953,0.04505888376856119,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
+temporal_spd,North America,8000,climate,0.0383,0.0329,0.0712,36.51,human_climate_space,0.0712,0.1953,0.3645673323092678,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
+temporal_spd,North America,8000,space,0.0831,0.032200000000000006,0.1153,59.13,human_climate_space,0.1153,0.1953,0.590373783922171,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
+temporal_spd,North America,8500,human,0.001,0.0027,0.0037,1.81,human_climate_space,0.0037,0.20400000000000001,0.018137254901960782,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
+temporal_spd,North America,8500,climate,0.0254,0.03730000000000001,0.0627,30.74,human_climate_space,0.0627,0.20400000000000001,0.3073529411764706,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
+temporal_spd,North America,8500,space,0.1003,0.0373,0.1376,67.45,human_climate_space,0.1376,0.20400000000000001,0.6745098039215686,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
+temporal_spd,Oceania,2000,human,0.0088,0.014399999999999998,0.0232,72.5,human_climate_space,0.0232,0.0315,0.7365079365079364,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
+temporal_spd,Oceania,2000,climate,-0.006,0.0143,0.0083,25.94,human_climate_space,0.0083,0.0315,0.2634920634920635,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
+temporal_spd,Oceania,2000,space,NA,NA,0,NA,human_climate_space,0,0.0315,0,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
+temporal_spd,Oceania,2500,human,0.003,0.0064,0.0094,13.24,human_climate_space,0.0094,0.07050000000000001,0.13333333333333333,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
+temporal_spd,Oceania,2500,climate,0.0547,0.006400000000000003,0.0611,86.06,human_climate_space,0.0611,0.07050000000000001,0.8666666666666666,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
+temporal_spd,Oceania,2500,space,NA,NA,0,NA,human_climate_space,0,0.07050000000000001,0,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
+temporal_spd,Oceania,3000,human,0.0225,0.005000000000000001,0.0275,19.23,human_climate_space,0.0275,0.1429,0.19244226731980407,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
+temporal_spd,Oceania,3000,climate,0.1105,0.004900000000000002,0.1154,80.7,human_climate_space,0.1154,0.1429,0.8075577326801959,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
+temporal_spd,Oceania,3000,space,NA,NA,0,NA,human_climate_space,0,0.1429,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
+temporal_spd,Oceania,3500,human,0.0258,-5.999999999999998e-4,0.0252,15.09,human_climate_space,0.0252,0.1671,0.15080789946140036,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
+temporal_spd,Oceania,3500,climate,0.1573,-0.018699999999999994,0.1386,82.99,human_climate_space,0.1386,0.1671,0.829443447037702,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
+temporal_spd,Oceania,3500,space,0.0244,-0.0211,0.0033,1.98,human_climate_space,0.0033,0.1671,0.019748653500897665,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
+temporal_spd,Oceania,4000,human,-2e-4,0.0073999999999999995,0.0072,8.78,human_climate_space,0.0072,0.0822,0.08759124087591241,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
+temporal_spd,Oceania,4000,climate,0.0676,0.007400000000000004,0.075,91.46,human_climate_space,0.075,0.0822,0.9124087591240876,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
+temporal_spd,Oceania,4000,space,NA,NA,0,NA,human_climate_space,0,0.0822,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
+temporal_spd,Oceania,4500,human,4e-4,0.0052,0.0056,4.06,human_climate_space,0.0056,0.1377,0.040668119099491654,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
+temporal_spd,Oceania,4500,climate,0.1283,-0.001799999999999996,0.1265,91.67,human_climate_space,0.1265,0.1377,0.9186637618010168,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
+temporal_spd,Oceania,4500,space,0.0144,-0.008799999999999999,0.0056,4.06,human_climate_space,0.0056,0.1377,0.040668119099491654,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
+temporal_spd,Oceania,5000,human,-0.0093,0.0109,0.0016,2.46,human_climate_space,0.0016,0.065,0.024615384615384615,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
+temporal_spd,Oceania,5000,climate,0.0525,0.0109,0.0634,97.54,human_climate_space,0.0634,0.065,0.9753846153846153,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
+temporal_spd,Oceania,5000,space,NA,NA,0,NA,human_climate_space,0,0.065,0,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
+temporal_spd,Oceania,5500,human,-6e-4,0.0063999999999999994,0.0058,9.06,human_climate_space,0.0058,0.0643,0.09020217729393468,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
+temporal_spd,Oceania,5500,climate,0.052,0.006500000000000006,0.0585,91.41,human_climate_space,0.0585,0.0643,0.9097978227060655,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
+temporal_spd,Oceania,5500,space,NA,NA,0,NA,human_climate_space,0,0.0643,0,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
+temporal_spd,Oceania,6000,human,-0.0025,0.0012000000000000001,-0.0013,-1.91,human_climate_space,0,0.0688,0,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
+temporal_spd,Oceania,6000,climate,0.0676,0.0012000000000000066,0.0688,101.18,human_climate_space,0.0688,0.0688,1,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
+temporal_spd,Oceania,6000,space,NA,NA,0,NA,human_climate_space,0,0.0688,0,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
+temporal_spd,Oceania,6500,human,-0.0143,0.0019000000000000006,-0.0124,-16.76,human_climate_space,0,0.0866,0,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
+temporal_spd,Oceania,6500,climate,0.0847,0.001899999999999999,0.0866,117.03,human_climate_space,0.0866,0.0866,1,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
+temporal_spd,Oceania,6500,space,NA,NA,0,NA,human_climate_space,0,0.0866,0,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
+temporal_spd,Oceania,7000,human,-0.0166,0.0028000000000000004,-0.0138,197.14,human_climate_space,0,0.0066,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
+temporal_spd,Oceania,7000,climate,0.0038,0.0028,0.0066,-94.29,human_climate_space,0.0066,0.0066,1,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
+temporal_spd,Oceania,7000,space,NA,NA,0,NA,human_climate_space,0,0.0066,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
+temporal_spd,Oceania,7500,human,-0.0169,0.0019999999999999983,-0.0149,-53.21,human_climate_space,0,0.0432,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
+temporal_spd,Oceania,7500,climate,0.0412,0.0020000000000000018,0.0432,154.29,human_climate_space,0.0432,0.0432,1,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
+temporal_spd,Oceania,7500,space,NA,NA,0,NA,human_climate_space,0,0.0432,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
+temporal_spd,Oceania,8000,human,-0.0015,0.0023,8e-4,1.33,human_climate_space,8e-4,0.0601,0.013311148086522463,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
+temporal_spd,Oceania,8000,climate,0.057,0.0022999999999999965,0.0593,98.83,human_climate_space,0.0593,0.0601,0.9866888519134775,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
+temporal_spd,Oceania,8000,space,NA,NA,0,NA,human_climate_space,0,0.0601,0,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
+temporal_spd,Oceania,8500,human,-0.008,0.007,-0.001,-0.93,human_climate_space,0,0.1079,0,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
+temporal_spd,Oceania,8500,climate,0.0393,0.0167,0.056,52.34,human_climate_space,0.056,0.1079,0.5189990732159407,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
+temporal_spd,Oceania,8500,space,0.0381,0.0138,0.0519,48.5,human_climate_space,0.0519,0.1079,0.48100092678405937,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
 temporal_events,Asia,500,human,0.0419,0.022700000000000005,0.0646,47.5,human_climate_space,0.0646,0.13640000000000002,0.4736070381231671,no_spatial_terms_selected,110,no_terms_selected,25,0,0.015,0.08688583053723042
 temporal_events,Asia,500,climate,0.0491,0.022700000000000005,0.0718,52.79,human_climate_space,0.0718,0.13640000000000002,0.5263929618768328,no_spatial_terms_selected,110,no_terms_selected,25,0,0.015,0.08688583053723042
 temporal_events,Asia,500,space,NA,NA,0,NA,human_climate_space,0,0.13640000000000002,0,no_spatial_terms_selected,110,no_terms_selected,25,0,0.015,0.08688583053723042
@@ -227,213 +437,3 @@ temporal_events,Oceania,3500,space,0.0144,-0.0114,0.003,2.59,human_climate_space
 temporal_events,Oceania,4000,human,-0.0186,0.006199999999999999,-0.0124,-19.38,human_climate_space,0,0.0762,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.033,0.07201707269400937
 temporal_events,Oceania,4000,climate,0.07,0.006199999999999997,0.0762,119.06,human_climate_space,0.0762,0.0762,1,no_spatial_terms_selected,47,no_terms_selected,5,0,0.033,0.07201707269400937
 temporal_events,Oceania,4000,space,NA,NA,0,NA,human_climate_space,0,0.0762,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.033,0.07201707269400937
-temporal_spd,Asia,2000,human,0.0165,-0.002100000000000001,0.0144,11.16,human_climate_space,0.0144,0.129,0.11162790697674418,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
-temporal_spd,Asia,2000,climate,0.0898,-0.009900000000000006,0.0799,61.94,human_climate_space,0.0799,0.129,0.6193798449612403,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
-temporal_spd,Asia,2000,space,0.0309,0.0038000000000000013,0.0347,26.9,human_climate_space,0.0347,0.129,0.2689922480620155,spatial_model_estimated,174,selected,42,1,0.001,0.12075957282716465
-temporal_spd,Asia,2500,human,0.0036,-7.999999999999999e-4,0.0028,2.19,human_climate_space,0.0028,0.1278,0.02190923317683881,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
-temporal_spd,Asia,2500,climate,0.0953,-0.004900000000000002,0.0904,70.62,human_climate_space,0.0904,0.1278,0.7073552425665102,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
-temporal_spd,Asia,2500,space,0.0334,0.0011999999999999997,0.0346,27.03,human_climate_space,0.0346,0.1278,0.27073552425665104,spatial_model_estimated,171,selected,40,1,0.001,0.1380831151354629
-temporal_spd,Asia,3000,human,0.0044,-0.0014000000000000002,0.003,2.48,human_climate_space,0.003,0.12129999999999999,0.024732069249793903,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
-temporal_spd,Asia,3000,climate,0.0839,-3.000000000000086e-4,0.0836,69.09,human_climate_space,0.0836,0.12129999999999999,0.6892003297609234,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
-temporal_spd,Asia,3000,space,0.0297,0.005000000000000001,0.0347,28.68,human_climate_space,0.0347,0.12129999999999999,0.2860676009892828,spatial_model_estimated,174,selected,41,1,0.001,0.12461216974957345
-temporal_spd,Asia,3500,human,-2e-4,0.0059,0.0057,6.33,human_climate_space,0.0057,0.09,0.06333333333333334,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
-temporal_spd,Asia,3500,climate,0.0784,0.0059000000000000025,0.0843,93.67,human_climate_space,0.0843,0.09,0.9366666666666666,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
-temporal_spd,Asia,3500,space,NA,NA,0,NA,human_climate_space,0,0.09,0,no_spatial_terms_selected,172,no_terms_selected,40,0,0.006,0.0940699312956399
-temporal_spd,Asia,4000,human,0.0042,0.0012000000000000005,0.0054,7.11,human_climate_space,0.0054,0.0759,0.07114624505928854,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
-temporal_spd,Asia,4000,climate,0.0693,0.0011999999999999927,0.0705,92.76,human_climate_space,0.0705,0.0759,0.9288537549407114,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
-temporal_spd,Asia,4000,space,NA,NA,0,NA,human_climate_space,0,0.0759,0,no_spatial_terms_selected,174,no_terms_selected,41,0,0.001,0.11238031252806413
-temporal_spd,Asia,4500,human,0.0032,0.0117,0.0149,11.73,human_climate_space,0.0149,0.12739999999999999,0.11695447409733126,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
-temporal_spd,Asia,4500,climate,0.0617,0.0119,0.0736,57.95,human_climate_space,0.0736,0.12739999999999999,0.5777080062794349,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
-temporal_spd,Asia,4500,space,0.0407,-0.001800000000000003,0.0389,30.63,human_climate_space,0.0389,0.12739999999999999,0.3053375196232339,spatial_model_estimated,171,selected,40,1,0.001,0.13699780038930964
-temporal_spd,Asia,5000,human,0.0129,0.0112,0.0241,21.52,human_climate_space,0.0241,0.1121,0.2149866190900981,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
-temporal_spd,Asia,5000,climate,0.0524,0.014700000000000005,0.0671,59.91,human_climate_space,0.0671,0.1121,0.5985727029438002,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
-temporal_spd,Asia,5000,space,0.0256,-0.004700000000000003,0.0209,18.66,human_climate_space,0.0209,0.1121,0.18644067796610167,spatial_model_estimated,174,selected,40,1,0.001,0.11044248084865049
-temporal_spd,Asia,5500,human,-0.0029,0.007699999999999999,0.0048,3.87,human_climate_space,0.0048,0.1239,0.038740920096852295,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
-temporal_spd,Asia,5500,climate,0.0812,0.0063,0.0875,70.56,human_climate_space,0.0875,0.1239,0.7062146892655367,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
-temporal_spd,Asia,5500,space,0.0318,-1.999999999999988e-4,0.0316,25.48,human_climate_space,0.0316,0.1239,0.25504439063761103,spatial_model_estimated,173,selected,41,1,0.001,0.105741927393177
-temporal_spd,Asia,6000,human,0.0103,0.0142,0.0245,22.9,human_climate_space,0.0245,0.10700000000000001,0.2289719626168224,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
-temporal_spd,Asia,6000,climate,0.0683,0.014200000000000004,0.0825,77.1,human_climate_space,0.0825,0.10700000000000001,0.7710280373831775,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
-temporal_spd,Asia,6000,space,NA,NA,0,NA,human_climate_space,0,0.10700000000000001,0,no_spatial_terms_selected,175,no_terms_selected,41,0,0.005,0.08107982886993315
-temporal_spd,Asia,6500,human,-0.0024,0.009,0.0066,6.23,human_climate_space,0.0066,0.10619999999999999,0.062146892655367235,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
-temporal_spd,Asia,6500,climate,0.0905,0.009099999999999997,0.0996,93.96,human_climate_space,0.0996,0.10619999999999999,0.9378531073446328,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
-temporal_spd,Asia,6500,space,NA,NA,0,NA,human_climate_space,0,0.10619999999999999,0,no_spatial_terms_selected,163,no_spatial_signal,39,0,0.15,0.03080210964138419
-temporal_spd,Asia,7000,human,0.0031,0.0094,0.0125,10.25,human_climate_space,0.0125,0.12179999999999999,0.1026272577996716,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
-temporal_spd,Asia,7000,climate,0.0999,0.009399999999999992,0.1093,89.59,human_climate_space,0.1093,0.12179999999999999,0.8973727422003285,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
-temporal_spd,Asia,7000,space,NA,NA,0,NA,human_climate_space,0,0.12179999999999999,0,no_spatial_terms_selected,160,no_spatial_signal,38,0,0.142,0.03162853494230555
-temporal_spd,Asia,7500,human,0.0064,0.015700000000000002,0.0221,15.24,human_climate_space,0.0221,0.1454,0.15199449793672629,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
-temporal_spd,Asia,7500,climate,0.1077,0.015600000000000003,0.1233,85.03,human_climate_space,0.1233,0.1454,0.8480055020632737,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
-temporal_spd,Asia,7500,space,NA,NA,0,NA,human_climate_space,0,0.1454,0,no_spatial_terms_selected,153,no_spatial_signal,36,0,0.093,0.040278960109085826
-temporal_spd,Asia,8000,human,0.0011,0.008199999999999999,0.0093,5.22,human_climate_space,0.0093,0.17779999999999999,0.05230596175478065,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
-temporal_spd,Asia,8000,climate,0.1354,0.011800000000000005,0.1472,82.7,human_climate_space,0.1472,0.17779999999999999,0.8278965129358831,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
-temporal_spd,Asia,8000,space,0.0197,0.0016000000000000007,0.0213,11.97,human_climate_space,0.0213,0.17779999999999999,0.11979752530933634,spatial_model_estimated,150,selected,37,1,0.003,0.09188462368595773
-temporal_spd,Asia,8500,human,-5e-4,0.0052,0.0047,2.66,human_climate_space,0.0047,0.1774,0.02649379932356257,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
-temporal_spd,Asia,8500,climate,0.1579,0.0021999999999999797,0.1601,90.45,human_climate_space,0.1601,0.1774,0.9024802705749717,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
-temporal_spd,Asia,8500,space,0.0156,-0.002999999999999999,0.0126,7.12,human_climate_space,0.0126,0.1774,0.07102593010146561,spatial_model_estimated,138,selected,32,1,0.007,0.08408268531077878
-temporal_spd,Europe,2000,human,0.0029,0,0.0029,1.61,human_climate_space,0.0029,0.18030000000000002,0.016084303937881305,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
-temporal_spd,Europe,2000,climate,0.0536,0.021899999999999996,0.0755,41.94,human_climate_space,0.0755,0.18030000000000002,0.41874653355518576,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
-temporal_spd,Europe,2000,space,0.0796,0.0223,0.1019,56.61,human_climate_space,0.1019,0.18030000000000002,0.5651691625069328,spatial_model_estimated,389,selected,82,7,0.001,0.22063898842263452
-temporal_spd,Europe,2500,human,0.012,-0.0049,0.0071,4.06,human_climate_space,0.0071,0.175,0.04057142857142858,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
-temporal_spd,Europe,2500,climate,0.0441,0.0172,0.0613,35.03,human_climate_space,0.0613,0.175,0.3502857142857143,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
-temporal_spd,Europe,2500,space,0.09,0.016600000000000004,0.1066,60.91,human_climate_space,0.1066,0.175,0.6091428571428572,spatial_model_estimated,392,selected,83,8,0.001,0.22048401091807823
-temporal_spd,Europe,3000,human,0.0039,0.003,0.0069,4.79,human_climate_space,0.0069,0.1442,0.0478502080443828,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
-temporal_spd,Europe,3000,climate,0.0376,0.011699999999999995,0.0493,34.24,human_climate_space,0.0493,0.1442,0.3418862690707351,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
-temporal_spd,Europe,3000,space,0.0822,0.0058,0.088,61.11,human_climate_space,0.088,0.1442,0.6102635228848821,spatial_model_estimated,387,selected,81,7,0.001,0.21957886683704675
-temporal_spd,Europe,3500,human,0.0013,0.007200000000000001,0.0085,4.8,human_climate_space,0.0085,0.1774,0.047914317925591886,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
-temporal_spd,Europe,3500,climate,0.0545,0.004499999999999997,0.059,33.33,human_climate_space,0.059,0.1774,0.33258173618940245,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
-temporal_spd,Europe,3500,space,0.1122,-0.0022999999999999965,0.1099,62.09,human_climate_space,0.1099,0.1774,0.6195039458850056,spatial_model_estimated,382,selected,80,7,0.001,0.280140056687076
-temporal_spd,Europe,4000,human,0.002,0.006,0.008,4.57,human_climate_space,0.008,0.1752,0.04566210045662101,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
-temporal_spd,Europe,4000,climate,0.0619,0.009599999999999997,0.0715,40.86,human_climate_space,0.0715,0.1752,0.4081050228310502,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
-temporal_spd,Europe,4000,space,0.0966,-9.000000000000119e-4,0.0957,54.69,human_climate_space,0.0957,0.1752,0.5462328767123288,spatial_model_estimated,387,selected,81,10,0.001,0.2476169874237757
-temporal_spd,Europe,4500,human,-0.0012,0.0027,0.0015,0.79,human_climate_space,0.0015,0.191,0.007853403141361256,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
-temporal_spd,Europe,4500,climate,0.0462,0.018900000000000007,0.0651,34.08,human_climate_space,0.0651,0.191,0.34083769633507854,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
-temporal_spd,Europe,4500,space,0.1069,0.0175,0.1244,65.13,human_climate_space,0.1244,0.191,0.6513089005235602,spatial_model_estimated,388,selected,81,10,0.001,0.261419014700356
-temporal_spd,Europe,5000,human,-1e-4,0.0031,0.003,1.88,human_climate_space,0.003,0.1599,0.01876172607879925,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
-temporal_spd,Europe,5000,climate,0.0497,0.006999999999999999,0.0567,35.44,human_climate_space,0.0567,0.1599,0.3545966228893058,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
-temporal_spd,Europe,5000,space,0.0935,0.006699999999999998,0.1002,62.62,human_climate_space,0.1002,0.1599,0.626641651031895,spatial_model_estimated,382,selected,80,8,0.001,0.2535578495974502
-temporal_spd,Europe,5500,human,3e-4,2.0000000000000004e-4,5e-4,0.26,human_climate_space,5e-4,0.19569999999999999,0.002554931016862545,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
-temporal_spd,Europe,5500,climate,0.0595,0.012300000000000005,0.0718,36.63,human_climate_space,0.0718,0.19569999999999999,0.36688809402146144,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
-temporal_spd,Europe,5500,space,0.1109,0.012499999999999997,0.1234,62.96,human_climate_space,0.1234,0.19569999999999999,0.6305569749616761,spatial_model_estimated,385,selected,82,12,0.001,0.2732786145073963
-temporal_spd,Europe,6000,human,0.0154,7.999999999999986e-4,0.0162,9.64,human_climate_space,0.0162,0.1683,0.0962566844919786,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
-temporal_spd,Europe,6000,climate,0.0541,0.011199999999999995,0.0653,38.87,human_climate_space,0.0653,0.1683,0.3879976232917409,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
-temporal_spd,Europe,6000,space,0.0852,0.0016000000000000042,0.0868,51.67,human_climate_space,0.0868,0.1683,0.5157456922162804,spatial_model_estimated,387,selected,81,5,0.001,0.2302314591110951
-temporal_spd,Europe,6500,human,0.0242,0.008,0.0322,18.72,human_climate_space,0.0322,0.1721,0.1871005229517722,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
-temporal_spd,Europe,6500,climate,0.031,0.015100000000000002,0.0461,26.8,human_climate_space,0.0461,0.1721,0.26786751888436955,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
-temporal_spd,Europe,6500,space,0.0909,0.0029,0.0938,54.53,human_climate_space,0.0938,0.1721,0.5450319581638582,spatial_model_estimated,380,selected,80,7,0.001,0.2661693972724397
-temporal_spd,Europe,7000,human,0.0103,0.0068000000000000005,0.0171,11.03,human_climate_space,0.0171,0.1549,0.1103938024531956,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
-temporal_spd,Europe,7000,climate,0.0409,0.013900000000000003,0.0548,35.35,human_climate_space,0.0548,0.1549,0.3537766300839251,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
-temporal_spd,Europe,7000,space,0.075,0.008000000000000007,0.083,53.55,human_climate_space,0.083,0.1549,0.5358295674628792,spatial_model_estimated,388,selected,83,4,0.001,0.2467024395689177
-temporal_spd,Europe,7500,human,0.0394,0.009600000000000004,0.049,27.07,human_climate_space,0.049,0.18109999999999998,0.2705687465488681,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
-temporal_spd,Europe,7500,climate,0.0511,0.0104,0.0615,33.98,human_climate_space,0.0615,0.18109999999999998,0.3395913859745997,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
-temporal_spd,Europe,7500,space,0.0649,0.005699999999999997,0.0706,39.01,human_climate_space,0.0706,0.18109999999999998,0.3898398674765323,spatial_model_estimated,383,selected,80,6,0.001,0.2287295815518734
-temporal_spd,Europe,8000,human,0.008,0.003299999999999999,0.0113,6.98,human_climate_space,0.0113,0.1618,0.06983930778739184,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
-temporal_spd,Europe,8000,climate,0.0726,0.0020000000000000018,0.0746,46.05,human_climate_space,0.0746,0.1618,0.4610630407911001,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
-temporal_spd,Europe,8000,space,0.0674,0.008499999999999994,0.0759,46.85,human_climate_space,0.0759,0.1618,0.469097651421508,spatial_model_estimated,376,selected,78,6,0.001,0.19934820838210798
-temporal_spd,Europe,8500,human,0.0027,0.0061,0.0088,5.79,human_climate_space,0.0088,0.1515,0.058085808580858093,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
-temporal_spd,Europe,8500,climate,0.0625,0.0063,0.0688,45.26,human_climate_space,0.0688,0.1515,0.45412541254125416,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
-temporal_spd,Europe,8500,space,0.0743,-4.0000000000001146e-4,0.0739,48.62,human_climate_space,0.0739,0.1515,0.48778877887788774,spatial_model_estimated,359,selected,75,4,0.001,0.22154680844507613
-temporal_spd,Latin America,2000,human,8e-4,0.003999999999999999,0.0048,2.86,human_climate_space,0.0048,0.16820000000000002,0.028537455410225916,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
-temporal_spd,Latin America,2000,climate,0.1257,0.014899999999999997,0.1406,83.69,human_climate_space,0.1406,0.16820000000000002,0.8359096313912009,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
-temporal_spd,Latin America,2000,space,0.0156,0.0072000000000000015,0.0228,13.57,human_climate_space,0.0228,0.16820000000000002,0.13555291319857313,spatial_model_estimated,87,selected,11,1,0.005,0.09639641289073075
-temporal_spd,Latin America,2500,human,0.0054,0.0043,0.0097,5.36,human_climate_space,0.0097,0.1813,0.05350248207391065,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
-temporal_spd,Latin America,2500,climate,0.1261,0.014800000000000008,0.1409,77.85,human_climate_space,0.1409,0.1813,0.7771649200220629,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
-temporal_spd,Latin America,2500,space,0.0288,0.0019000000000000024,0.0307,16.96,human_climate_space,0.0307,0.1813,0.1693325979040265,spatial_model_estimated,87,selected,11,1,0.002,0.12634554493061922
-temporal_spd,Latin America,3000,human,0.0238,-0.010500000000000002,0.0133,6.65,human_climate_space,0.0133,0.2001,0.06646676661669165,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
-temporal_spd,Latin America,3000,climate,0.1729,-0.003599999999999992,0.1693,84.65,human_climate_space,0.1693,0.2001,0.8460769615192404,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
-temporal_spd,Latin America,3000,space,0.0201,-0.002599999999999998,0.0175,8.75,human_climate_space,0.0175,0.2001,0.08745627186406797,spatial_model_estimated,86,selected,11,1,0.002,0.11079776058083013
-temporal_spd,Latin America,3500,human,0.0246,-0.011600000000000001,0.013,6.37,human_climate_space,0.013,0.2041,0.06369426751592357,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
-temporal_spd,Latin America,3500,climate,0.2027,-0.0116,0.1911,93.68,human_climate_space,0.1911,0.2041,0.9363057324840763,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
-temporal_spd,Latin America,3500,space,NA,NA,0,NA,human_climate_space,0,0.2041,0,no_spatial_terms_selected,84,no_spatial_signal,13,0,0.064,0.05789044625668005
-temporal_spd,Latin America,4000,human,0.0407,-0.0133,0.0274,12.29,human_climate_space,0.0274,0.2228,0.1229802513464991,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
-temporal_spd,Latin America,4000,climate,0.2092,-0.015399999999999997,0.1938,86.91,human_climate_space,0.1938,0.2228,0.86983842010772,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
-temporal_spd,Latin America,4000,space,0.0044,-0.0028000000000000004,0.0016,0.72,human_climate_space,0.0016,0.2228,0.00718132854578097,spatial_model_estimated,85,selected,11,1,0.014,0.07525616368080223
-temporal_spd,Latin America,4500,human,0.0212,-0.005500000000000001,0.0157,7.97,human_climate_space,0.0157,0.1973,0.07957425240750125,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
-temporal_spd,Latin America,4500,climate,0.187,-0.005399999999999988,0.1816,92.18,human_climate_space,0.1816,0.1973,0.9204257475924987,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
-temporal_spd,Latin America,4500,space,NA,NA,0,NA,human_climate_space,0,0.1973,0,no_spatial_terms_selected,87,no_terms_selected,11,0,0.025,0.07198887476530846
-temporal_spd,Latin America,5000,human,0.0213,-0.0022000000000000006,0.0191,8.13,human_climate_space,0.0191,0.2347,0.08138048572645931,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
-temporal_spd,Latin America,5000,climate,0.1125,0.029399999999999996,0.1419,60.38,human_climate_space,0.1419,0.2347,0.6046016190881978,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
-temporal_spd,Latin America,5000,space,0.0307,0.043,0.0737,31.36,human_climate_space,0.0737,0.2347,0.314017895185343,spatial_model_estimated,84,selected,11,1,0.003,0.10861939138359433
-temporal_spd,Latin America,5500,human,0.012,-0.0026,0.0094,5.7,human_climate_space,0.0094,0.16519999999999999,0.05690072639225182,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
-temporal_spd,Latin America,5500,climate,0.1583,-0.0025000000000000022,0.1558,94.42,human_climate_space,0.1558,0.16519999999999999,0.9430992736077483,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
-temporal_spd,Latin America,5500,space,NA,NA,0,NA,human_climate_space,0,0.16519999999999999,0,no_spatial_terms_selected,86,no_terms_selected,11,0,0.001,0.11214519897940323
-temporal_spd,Latin America,6000,human,0.0151,-0.005600000000000001,0.0095,5.59,human_climate_space,0.0095,0.1698,0.05594817432273262,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
-temporal_spd,Latin America,6000,climate,0.1659,-0.005599999999999994,0.1603,94.29,human_climate_space,0.1603,0.1698,0.9440518256772673,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
-temporal_spd,Latin America,6000,space,NA,NA,0,NA,human_climate_space,0,0.1698,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.007,0.08983727834209443
-temporal_spd,Latin America,6500,human,-0.0045,9.99999999999994e-5,-0.0044,-2.77,human_climate_space,0,0.163,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
-temporal_spd,Latin America,6500,climate,0.1629,1.0000000000001674e-4,0.163,102.52,human_climate_space,0.163,0.163,1,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
-temporal_spd,Latin America,6500,space,NA,NA,0,NA,human_climate_space,0,0.163,0,no_spatial_terms_selected,82,no_terms_selected,11,0,0.037,0.05641703532903186
-temporal_spd,Latin America,7000,human,0.0025,0.0039000000000000003,0.0064,5,human_climate_space,0.0064,0.1284,0.049844236760124616,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
-temporal_spd,Latin America,7000,climate,0.1181,0.0039000000000000007,0.122,95.31,human_climate_space,0.122,0.1284,0.9501557632398755,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
-temporal_spd,Latin America,7000,space,NA,NA,0,NA,human_climate_space,0,0.1284,0,no_spatial_terms_selected,81,no_spatial_signal,11,0,0.051,0.06224299222130958
-temporal_spd,Latin America,7500,human,0.0019,-0.0022,-3e-4,-0.18,human_climate_space,0,0.16949999999999998,0,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
-temporal_spd,Latin America,7500,climate,0.1013,0.021199999999999997,0.1225,72.49,human_climate_space,0.1225,0.16949999999999998,0.7227138643067847,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
-temporal_spd,Latin America,7500,space,0.0243,0.0227,0.047,27.81,human_climate_space,0.047,0.16949999999999998,0.27728613569321536,spatial_model_estimated,81,selected,10,1,0.038,0.059329332049005035
-temporal_spd,Latin America,8000,human,0.0591,-0.007899999999999997,0.0512,29.6,human_climate_space,0.0512,0.1728,0.2962962962962963,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
-temporal_spd,Latin America,8000,climate,0.1295,-0.007900000000000004,0.1216,70.29,human_climate_space,0.1216,0.1728,0.7037037037037037,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
-temporal_spd,Latin America,8000,space,NA,NA,0,NA,human_climate_space,0,0.1728,0,no_spatial_terms_selected,74,no_spatial_signal,9,0,0.364,0.0068680733930570614
-temporal_spd,Latin America,8500,human,0.0151,-0.005300000000000001,0.0098,5.66,human_climate_space,0.0098,0.17329999999999998,0.05654933641084824,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
-temporal_spd,Latin America,8500,climate,0.0683,0.026999999999999996,0.0953,55.09,human_climate_space,0.0953,0.17329999999999998,0.5499134448932488,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
-temporal_spd,Latin America,8500,space,0.0362,0.031999999999999994,0.0682,39.42,human_climate_space,0.0682,0.17329999999999998,0.3935372186959031,spatial_model_estimated,71,selected,10,1,0.008,0.097570280731759
-temporal_spd,North America,2000,human,-2e-4,0.004,0.0038,1.9,human_climate_space,0.0038,0.20010000000000003,0.018990504747626185,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
-temporal_spd,North America,2000,climate,0.017,0.0398,0.0568,28.4,human_climate_space,0.0568,0.20010000000000003,0.2838580709645177,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
-temporal_spd,North America,2000,space,0.1001,0.03940000000000002,0.1395,69.75,human_climate_space,0.1395,0.20010000000000003,0.697151424287856,spatial_model_estimated,540,selected,133,6,0.001,0.2208455168826069
-temporal_spd,North America,2500,human,0.0051,0.0016999999999999993,0.0068,3.13,human_climate_space,0.0068,0.2171,0.03132197144173192,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
-temporal_spd,North America,2500,climate,0.0199,0.0399,0.0598,27.56,human_climate_space,0.0598,0.2171,0.2754491017964072,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
-temporal_spd,North America,2500,space,0.1096,0.04089999999999999,0.1505,69.35,human_climate_space,0.1505,0.2171,0.6932289267618609,spatial_model_estimated,534,selected,132,5,0.001,0.22730927402228984
-temporal_spd,North America,3000,human,0.0031,0.0026999999999999997,0.0058,2.82,human_climate_space,0.0058,0.206,0.02815533980582524,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
-temporal_spd,North America,3000,climate,0.0175,0.041499999999999995,0.059,28.64,human_climate_space,0.059,0.206,0.28640776699029125,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
-temporal_spd,North America,3000,space,0.0967,0.0445,0.1412,68.54,human_climate_space,0.1412,0.206,0.6854368932038835,spatial_model_estimated,533,selected,130,7,0.001,0.21828199622717637
-temporal_spd,North America,3500,human,0.0015,0.0015,0.003,1.53,human_climate_space,0.003,0.196,0.015306122448979591,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
-temporal_spd,North America,3500,climate,0.0193,0.040499999999999994,0.0598,30.51,human_climate_space,0.0598,0.196,0.3051020408163265,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
-temporal_spd,North America,3500,space,0.0928,0.04040000000000002,0.1332,67.96,human_climate_space,0.1332,0.196,0.6795918367346939,spatial_model_estimated,537,selected,132,4,0.001,0.2338355110874697
-temporal_spd,North America,4000,human,0.0043,0.0034999999999999996,0.0078,4.29,human_climate_space,0.0078,0.1824,0.042763157894736836,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
-temporal_spd,North America,4000,climate,0.0153,0.036699999999999997,0.052,28.57,human_climate_space,0.052,0.1824,0.2850877192982456,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
-temporal_spd,North America,4000,space,0.0844,0.0382,0.1226,67.36,human_climate_space,0.1226,0.1824,0.6721491228070176,spatial_model_estimated,545,selected,135,4,0.001,0.21964185606576692
-temporal_spd,North America,4500,human,0.0065,0.0015000000000000005,0.008,3.83,human_climate_space,0.008,0.20850000000000002,0.03836930455635491,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
-temporal_spd,North America,4500,climate,0.0157,0.0407,0.0564,26.99,human_climate_space,0.0564,0.20850000000000002,0.27050359712230215,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
-temporal_spd,North America,4500,space,0.102,0.04210000000000001,0.1441,68.95,human_climate_space,0.1441,0.20850000000000002,0.6911270983213429,spatial_model_estimated,541,selected,133,5,0.001,0.22562409408038864
-temporal_spd,North America,5000,human,0.0024,0.0020000000000000005,0.0044,2.42,human_climate_space,0.0044,0.1815,0.024242424242424246,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
-temporal_spd,North America,5000,climate,0.0185,0.0406,0.0591,32.47,human_climate_space,0.0591,0.1815,0.3256198347107438,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
-temporal_spd,North America,5000,space,0.0746,0.043399999999999994,0.118,64.84,human_climate_space,0.118,0.1815,0.650137741046832,spatial_model_estimated,539,selected,132,4,0.001,0.1994840112991525
-temporal_spd,North America,5500,human,0.0089,0.0011000000000000003,0.01,4.88,human_climate_space,0.01,0.2051,0.04875670404680644,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
-temporal_spd,North America,5500,climate,0.0194,0.0331,0.0525,25.61,human_climate_space,0.0525,0.2051,0.25597269624573377,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
-temporal_spd,North America,5500,space,0.10780000000000001,0.0348,0.1426,69.56,human_climate_space,0.1426,0.2051,0.6952705997074597,spatial_model_estimated,544,selected,135,7,0.001,0.2036895434659478
-temporal_spd,North America,6000,human,0.0121,5.000000000000004e-4,0.0126,6.18,human_climate_space,0.0126,0.2044,0.06164383561643836,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
-temporal_spd,North America,6000,climate,0.0237,0.0335,0.0572,28.04,human_climate_space,0.0572,0.2044,0.27984344422700586,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
-temporal_spd,North America,6000,space,0.1016,0.033,0.1346,65.98,human_climate_space,0.1346,0.2044,0.6585127201565558,spatial_model_estimated,535,selected,133,7,0.001,0.2204126235551338
-temporal_spd,North America,6500,human,0.0078,8.000000000000004e-4,0.0086,3.91,human_climate_space,0.0086,0.2198,0.039126478616924476,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
-temporal_spd,North America,6500,climate,0.0196,0.0396,0.0592,26.91,human_climate_space,0.0592,0.2198,0.26933575978161967,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
-temporal_spd,North America,6500,space,0.1116,0.04039999999999999,0.152,69.09,human_climate_space,0.152,0.2198,0.6915377616014559,spatial_model_estimated,543,selected,135,8,0.001,0.20844276610330803
-temporal_spd,North America,7000,human,0.0094,0.001599999999999999,0.011,5.02,human_climate_space,0.011,0.2186,0.05032021957913998,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
-temporal_spd,North America,7000,climate,0.0279,0.0342,0.0621,28.36,human_climate_space,0.0621,0.2186,0.28408051235132664,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
-temporal_spd,North America,7000,space,0.1108,0.034699999999999995,0.1455,66.44,human_climate_space,0.1455,0.2186,0.6655992680695334,spatial_model_estimated,540,selected,134,9,0.001,0.21951775490079084
-temporal_spd,North America,7500,human,0.0092,0.0017000000000000001,0.0109,6.09,human_climate_space,0.0109,0.17909999999999998,0.06085985482970408,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
-temporal_spd,North America,7500,climate,0.0304,0.028,0.0584,32.63,human_climate_space,0.0584,0.17909999999999998,0.3260748185371301,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
-temporal_spd,North America,7500,space,0.0802,0.0296,0.1098,61.34,human_climate_space,0.1098,0.17909999999999998,0.6130653266331658,spatial_model_estimated,542,selected,136,5,0.001,0.20425910525454116
-temporal_spd,North America,8000,human,0.0088,0,0.0088,4.51,human_climate_space,0.0088,0.1953,0.04505888376856119,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
-temporal_spd,North America,8000,climate,0.0383,0.0329,0.0712,36.51,human_climate_space,0.0712,0.1953,0.3645673323092678,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
-temporal_spd,North America,8000,space,0.0831,0.032200000000000006,0.1153,59.13,human_climate_space,0.1153,0.1953,0.590373783922171,spatial_model_estimated,532,selected,131,9,0.001,0.19508751765231414
-temporal_spd,North America,8500,human,0.001,0.0027,0.0037,1.81,human_climate_space,0.0037,0.20400000000000001,0.018137254901960782,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
-temporal_spd,North America,8500,climate,0.0254,0.03730000000000001,0.0627,30.74,human_climate_space,0.0627,0.20400000000000001,0.3073529411764706,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
-temporal_spd,North America,8500,space,0.1003,0.0373,0.1376,67.45,human_climate_space,0.1376,0.20400000000000001,0.6745098039215686,spatial_model_estimated,523,selected,129,7,0.001,0.20593013187773224
-temporal_spd,Oceania,2000,human,0.0088,0.014399999999999998,0.0232,72.5,human_climate_space,0.0232,0.0315,0.7365079365079364,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
-temporal_spd,Oceania,2000,climate,-0.006,0.0143,0.0083,25.94,human_climate_space,0.0083,0.0315,0.2634920634920635,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
-temporal_spd,Oceania,2000,space,NA,NA,0,NA,human_climate_space,0,0.0315,0,no_spatial_terms_selected,46,no_terms_selected,5,0,0.025,0.07916033199580763
-temporal_spd,Oceania,2500,human,0.003,0.0064,0.0094,13.24,human_climate_space,0.0094,0.07050000000000001,0.13333333333333333,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
-temporal_spd,Oceania,2500,climate,0.0547,0.006400000000000003,0.0611,86.06,human_climate_space,0.0611,0.07050000000000001,0.8666666666666666,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
-temporal_spd,Oceania,2500,space,NA,NA,0,NA,human_climate_space,0,0.07050000000000001,0,no_spatial_terms_selected,45,no_terms_selected,5,0,0.033,0.06808001731440505
-temporal_spd,Oceania,3000,human,0.0225,0.005000000000000001,0.0275,19.23,human_climate_space,0.0275,0.1429,0.19244226731980407,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
-temporal_spd,Oceania,3000,climate,0.1105,0.004900000000000002,0.1154,80.7,human_climate_space,0.1154,0.1429,0.8075577326801959,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
-temporal_spd,Oceania,3000,space,NA,NA,0,NA,human_climate_space,0,0.1429,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.035,0.06662111463053977
-temporal_spd,Oceania,3500,human,0.0258,-5.999999999999998e-4,0.0252,15.09,human_climate_space,0.0252,0.1671,0.15080789946140036,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
-temporal_spd,Oceania,3500,climate,0.1573,-0.018699999999999994,0.1386,82.99,human_climate_space,0.1386,0.1671,0.829443447037702,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
-temporal_spd,Oceania,3500,space,0.0244,-0.0211,0.0033,1.98,human_climate_space,0.0033,0.1671,0.019748653500897665,spatial_model_estimated,46,selected,5,1,0.01,0.09472077659435851
-temporal_spd,Oceania,4000,human,-2e-4,0.0073999999999999995,0.0072,8.78,human_climate_space,0.0072,0.0822,0.08759124087591241,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
-temporal_spd,Oceania,4000,climate,0.0676,0.007400000000000004,0.075,91.46,human_climate_space,0.075,0.0822,0.9124087591240876,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
-temporal_spd,Oceania,4000,space,NA,NA,0,NA,human_climate_space,0,0.0822,0,no_spatial_terms_selected,47,no_terms_selected,5,0,0.017,0.08438670241344126
-temporal_spd,Oceania,4500,human,4e-4,0.0052,0.0056,4.06,human_climate_space,0.0056,0.1377,0.040668119099491654,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
-temporal_spd,Oceania,4500,climate,0.1283,-0.001799999999999996,0.1265,91.67,human_climate_space,0.1265,0.1377,0.9186637618010168,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
-temporal_spd,Oceania,4500,space,0.0144,-0.008799999999999999,0.0056,4.06,human_climate_space,0.0056,0.1377,0.040668119099491654,spatial_model_estimated,47,selected,5,1,0.015,0.09034974818315511
-temporal_spd,Oceania,5000,human,-0.0093,0.0109,0.0016,2.46,human_climate_space,0.0016,0.065,0.024615384615384615,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
-temporal_spd,Oceania,5000,climate,0.0525,0.0109,0.0634,97.54,human_climate_space,0.0634,0.065,0.9753846153846153,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
-temporal_spd,Oceania,5000,space,NA,NA,0,NA,human_climate_space,0,0.065,0,no_spatial_terms_selected,47,no_spatial_signal,5,0,0.073,0.05164046461194194
-temporal_spd,Oceania,5500,human,-6e-4,0.0063999999999999994,0.0058,9.06,human_climate_space,0.0058,0.0643,0.09020217729393468,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
-temporal_spd,Oceania,5500,climate,0.052,0.006500000000000006,0.0585,91.41,human_climate_space,0.0585,0.0643,0.9097978227060655,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
-temporal_spd,Oceania,5500,space,NA,NA,0,NA,human_climate_space,0,0.0643,0,no_spatial_terms_selected,46,no_spatial_signal,5,0,0.157,0.03502088499984546
-temporal_spd,Oceania,6000,human,-0.0025,0.0012000000000000001,-0.0013,-1.91,human_climate_space,0,0.0688,0,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
-temporal_spd,Oceania,6000,climate,0.0676,0.0012000000000000066,0.0688,101.18,human_climate_space,0.0688,0.0688,1,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
-temporal_spd,Oceania,6000,space,NA,NA,0,NA,human_climate_space,0,0.0688,0,no_spatial_terms_selected,45,no_spatial_signal,5,0,0.098,0.05184354224025578
-temporal_spd,Oceania,6500,human,-0.0143,0.0019000000000000006,-0.0124,-16.76,human_climate_space,0,0.0866,0,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
-temporal_spd,Oceania,6500,climate,0.0847,0.001899999999999999,0.0866,117.03,human_climate_space,0.0866,0.0866,1,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
-temporal_spd,Oceania,6500,space,NA,NA,0,NA,human_climate_space,0,0.0866,0,no_spatial_terms_selected,43,no_spatial_signal,7,0,0.056,0.08401913166316233
-temporal_spd,Oceania,7000,human,-0.0166,0.0028000000000000004,-0.0138,197.14,human_climate_space,0,0.0066,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
-temporal_spd,Oceania,7000,climate,0.0038,0.0028,0.0066,-94.29,human_climate_space,0.0066,0.0066,1,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
-temporal_spd,Oceania,7000,space,NA,NA,0,NA,human_climate_space,0,0.0066,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.005,0.1167411825448168
-temporal_spd,Oceania,7500,human,-0.0169,0.0019999999999999983,-0.0149,-53.21,human_climate_space,0,0.0432,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
-temporal_spd,Oceania,7500,climate,0.0412,0.0020000000000000018,0.0432,154.29,human_climate_space,0.0432,0.0432,1,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
-temporal_spd,Oceania,7500,space,NA,NA,0,NA,human_climate_space,0,0.0432,0,no_spatial_terms_selected,42,no_terms_selected,5,0,0.015,0.100484507686732
-temporal_spd,Oceania,8000,human,-0.0015,0.0023,8e-4,1.33,human_climate_space,8e-4,0.0601,0.013311148086522463,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
-temporal_spd,Oceania,8000,climate,0.057,0.0022999999999999965,0.0593,98.83,human_climate_space,0.0593,0.0601,0.9866888519134775,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
-temporal_spd,Oceania,8000,space,NA,NA,0,NA,human_climate_space,0,0.0601,0,no_spatial_terms_selected,40,no_terms_selected,7,0,0.019,0.12824914481827188
-temporal_spd,Oceania,8500,human,-0.008,0.007,-0.001,-0.93,human_climate_space,0,0.1079,0,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
-temporal_spd,Oceania,8500,climate,0.0393,0.0167,0.056,52.34,human_climate_space,0.056,0.1079,0.5189990732159407,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
-temporal_spd,Oceania,8500,space,0.0381,0.0138,0.0519,48.5,human_climate_space,0.0519,0.1079,0.48100092678405937,spatial_model_estimated,39,selected,6,1,0.031,0.10378179454446046
