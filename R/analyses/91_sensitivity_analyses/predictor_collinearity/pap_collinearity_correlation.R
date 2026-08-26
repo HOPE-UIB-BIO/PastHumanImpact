@@ -121,11 +121,27 @@ plot_correlation <-
 #----------------------------------------------------------#
 # 4. Save outputs -----
 #----------------------------------------------------------#
+path_figure_directory <-
+  here::here(
+    "Outputs", "Figures", "H1", "Spatial",
+    "Predictor_collinearity"
+  )
+
+dir.create(
+  path_figure_directory,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 readr::write_csv(
   data_correlation_summary,
   here::here(
-    "Outputs/Tables/Collinearity/pap_collinearity_summary.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Spatial",
+    "Predictor_collinearity",
+    "pap_predictors__collinearity_summary.csv"
   )
 )
 
@@ -133,8 +149,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
-      here::here(
-        "Outputs/Figures/H1/Spatial/pap_collinearity_correlation"
+      file.path(
+        path_figure_directory,
+        "pap_predictors__collinearity_correlation"
       ),
       ".",
       .x
