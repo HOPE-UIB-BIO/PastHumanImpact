@@ -1,4 +1,4 @@
-dataset_id,analysis,predictor,Unique,Average.share,Individual,I.perc(%),model_profile,total_adjusted_r_squared
+dataset_id,analysis,predictor,Unique,Average.share,individual,I.perc(%),model_profile,total_adjusted_r_squared
 46516,spatial_spd,human,-0.0211,0.0379,0.0168,6.15,human_climate,0.273
 46516,spatial_spd,climate,0.2182,0.03789999999999999,0.2561,93.81,human_climate,0.273
 46516,spatial_spd,human,-0.0502,0.0411,-0.0091,-2,human_climate_time,0.456
