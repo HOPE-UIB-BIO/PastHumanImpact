@@ -130,7 +130,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     filename = file.path(
       path_figure_dir,
-      stringr::str_glue("event_trends.{.x}")
+      stringr::str_glue("events__temporal_trends.{.x}")
     ),
     plot = plot_event_temporal,
     width = image_width_vec[["3col"]],
