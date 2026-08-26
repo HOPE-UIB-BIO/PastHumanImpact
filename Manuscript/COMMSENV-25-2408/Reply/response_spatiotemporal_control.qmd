@@ -1,5 +1,5 @@
 ---
-title: "Reciprocal spatial and temporal control of the H1 analysis"
+title: "Response to Reviewer 2: temporal and spatial dependence in H1"
 format:
   html:
     embed-resources: true
@@ -13,188 +13,342 @@ execute:
 ```{r}
 #| include: false
 library(here)
+
 here::i_am(
   "Manuscript/COMMSENV-25-2408/Reply/response_spatiotemporal_control.qmd"
 )
-source(here::here("R/00_Config_file.R"))
 
-table_dir <-
+source(
+  here::here("R/00_Config_file.R")
+)
+
+diagnostic_table_dir <-
   here::here(
     "Outputs",
     "Tables",
     "Diagnostics",
     "Spatiotemporal_dependence"
   )
-spatial_figure_dir <- here::here(
-  "Outputs", "Figures", "H1", "Spatial", "SPD"
-)
 
-temporal_figure_dir <- here::here(
-  "Outputs", "Figures", "H1", "Temporal", "HVarPart"
-)
-robustness <- readr::read_csv(
-  file.path(
-    table_dir,
-    stringr::str_c(
-      "spd__human_climate_balance__robustness__",
-      "time_and_space_control.csv"
-    )
-  ),
-  show_col_types = FALSE
-)
-human_climate_only <- readr::read_csv(
-  file.path(
-    table_dir,
-    "human_climate_balance__matched_estimates__human_climate_only.csv"
-  ),
-  show_col_types = FALSE
-)
-controlled <- readr::read_csv(
-  file.path(
-    table_dir,
-    stringr::str_c(
-      "spd__human_climate_balance__estimates__",
-      "time_and_space_control.csv"
-    )
-  ),
-  show_col_types = FALSE
-)
-time_status <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd_events__human_climate_time__status__time_control.csv"
-  ),
-  show_col_types = FALSE
-)
-temporal_moran <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd_events__human_climate_time__residual_moran__time_control.csv"
-  ),
-  show_col_types = FALSE
-)
-space_status <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd_events__human_climate_space__status__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-spatial_moran <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd_events__human_climate_space__residual_moran__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-rankings <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd_events__human_climate_space__rankings__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-balance_summary <-
+event_table_dir <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "H1",
+    "Spatial",
+    "Events"
+  )
+
+spd_figure_dir <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "H1",
+    "Spatial",
+    "SPD"
+  )
+
+event_figure_dir <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "H1",
+    "Spatial",
+    "Events"
+  )
+
+temporal_figure_dir <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "H1",
+    "Temporal",
+    "HVarPart"
+  )
+
+robustness <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "spd__human_climate_balance__robustness__",
+        "time_and_space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+human_climate_only <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "human_climate_balance__matched_estimates__",
+        "human_climate_only.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+spd_controlled <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "spd__human_climate_balance__estimates__",
+        "time_and_space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+event_controlled <-
+  readr::read_csv(
+    file.path(
+      event_table_dir,
+      stringr::str_c(
+        "events__human_climate_balance__climate_zone_values__",
+        "time_and_space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+temporal_moran <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "spd_events__human_climate_time__residual_moran__",
+        "time_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+spatial_moran <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "spd_events__human_climate_space__residual_moran__",
+        "space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+rankings <-
+  readr::read_csv(
+    file.path(
+      diagnostic_table_dir,
+      stringr::str_c(
+        "spd_events__human_climate_space__rankings__",
+        "space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+spd_balance_summary <-
   human_climate_only |>
-  dplyr::filter(.data[["aggregation_level"]] == "overall") |>
+  dplyr::filter(
+    .data[["aggregation_level"]] == "overall"
+  ) |>
   dplyr::select(
     .data[["profile"]],
     original_balance = .data[["importance_balance"]]
   ) |>
   dplyr::left_join(
-    controlled |>
-      dplyr::filter(.data[["aggregation_level"]] == "overall") |>
+    spd_controlled |>
+      dplyr::filter(
+        .data[["aggregation_level"]] == "overall"
+      ) |>
       dplyr::select(
         .data[["profile"]],
         controlled_balance = .data[["adjusted_balance"]]
       ),
     by = "profile"
   ) |>
-  dplyr::left_join(robustness, by = "profile")
-diagnostic_summary <-
-  tibble::tibble(
-    diagnostic = c(
-      "Estimable time-controlled core-proxy models",
-      "Models with residual temporal dependence",
-      "Region-age models with selected spatial terms",
-      "Models with residual spatial dependence",
-      "Estimable human-climate ranking changes"
-    ),
-    count = c(
-      sum(stringr::str_starts(time_status[["status"]], "estimated")),
-      temporal_moran |>
-        dplyr::filter(
-          .data[["stage"]] == "time_controlled",
-          .data[["positive_autocorrelation"]]
-        ) |>
-        dplyr::distinct(
-          .data[["analysis"]],
-          .data[["dataset_id"]]
-        ) |>
-        nrow(),
-      sum(space_status[["status"]] == "spatial_model_estimated"),
-      spatial_moran |>
-        dplyr::filter(.data[["positive_autocorrelation"]]) |>
-        dplyr::distinct(
-          .data[["analysis"]],
-          .data[["region"]],
-          .data[["age"]]
-        ) |>
-        nrow(),
-      sum(rankings[["ranking_changed"]], na.rm = TRUE)
-    ),
-    denominator = c(
-      nrow(time_status),
-      sum(stringr::str_starts(time_status[["status"]], "estimated")),
-      nrow(space_status),
-      nrow(space_status),
-      sum(!is.na(rankings[["ranking_changed"]]))
-    )
+  dplyr::left_join(
+    robustness,
+    by = "profile"
   )
+
+event_balance_summary <-
+  event_controlled |>
+  dplyr::filter(
+    .data[["aggregation_level"]] == "overall"
+  ) |>
+  dplyr::select(
+    .data[["profile"]],
+    event_balance = .data[["adjusted_balance"]],
+    event_ranking = .data[["ranking"]],
+    event_spatial_selection = .data[["selection_status"]]
+  )
+
+event_signed_balance <-
+  event_balance_summary |>
+  dplyr::filter(
+    .data[["profile"]] == "signed"
+  ) |>
+  dplyr::pull(.data[["event_balance"]])
+
+event_zero_balance <-
+  event_balance_summary |>
+  dplyr::filter(
+    .data[["profile"]] == "zero_truncated"
+  ) |>
+  dplyr::pull(.data[["event_balance"]])
+
+ranking_summary <-
+  rankings |>
+  dplyr::filter(
+    .data[["status"]] == "spatial_model_estimated"
+  ) |>
+  dplyr::group_by(
+    .data[["analysis"]]
+  ) |>
+  dplyr::summarise(
+    comparisons = dplyr::n(),
+    reversals = sum(
+      .data[["ranking_changed"]],
+      na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
+
+n_spd_spatial_comparisons <-
+  ranking_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "temporal_spd"
+  ) |>
+  dplyr::pull(.data[["comparisons"]])
+
+n_event_spatial_comparisons <-
+  ranking_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "temporal_events"
+  ) |>
+  dplyr::pull(.data[["comparisons"]])
+
+n_spatial_ranking_reversals <-
+  sum(ranking_summary[["reversals"]])
+
+residual_spatial_summary <-
+  spatial_moran |>
+  dplyr::filter(
+    .data[["positive_autocorrelation"]]
+  ) |>
+  dplyr::distinct(
+    .data[["analysis"]],
+    .data[["region"]],
+    .data[["age"]]
+  ) |>
+  dplyr::count(
+    .data[["analysis"]],
+    name = "groups"
+  )
+
+residual_temporal_summary <-
+  temporal_moran |>
+  dplyr::filter(
+    .data[["stage"]] == "time_controlled",
+    .data[["positive_autocorrelation"]]
+  ) |>
+  dplyr::distinct(
+    .data[["analysis"]],
+    .data[["dataset_id"]]
+  ) |>
+  dplyr::count(
+    .data[["analysis"]],
+    name = "datasets"
+  )
+
+n_spd_temporal_residual <-
+  residual_temporal_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "spatial_spd"
+  ) |>
+  dplyr::pull(.data[["datasets"]])
+
+n_event_temporal_residual <-
+  residual_temporal_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "spatial_events"
+  ) |>
+  dplyr::pull(.data[["datasets"]])
+
+n_spd_spatial_residual <-
+  residual_spatial_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "temporal_spd"
+  ) |>
+  dplyr::pull(.data[["groups"]])
+
+n_event_spatial_residual <-
+  residual_spatial_summary |>
+  dplyr::filter(
+    .data[["analysis"]] == "temporal_events"
+  ) |>
+  dplyr::pull(.data[["groups"]])
 ```
 
 ## Response to the reviewer
 
-We agree that the H1 comparison must address both dimensions of dependence:
-repeated ages within a pollen core and nearby cores within a time slice. We
-therefore expanded the sensitivity analysis into reciprocal temporal and
-spatial control while retaining human impact and climate as the substantive
-drivers. Time and space are structural controls, not equivalent causal
-competitors.
+We thank the reviewer for raising the possibility that temporal trends within pollen records and spatial similarity among nearby records could influence the H1 comparison.
 
-### Figure 2: time within cores, space during aggregation
+We agree that this concern required more than a brief explanation or a residual diagnostic on a small subset.
 
-We first enforced one analytical row per core and 500-year age. Repeated PAP
-response estimates at the same age were averaged only after verifying that
-predictors were invariant. Conflicts and missing ages cause explicit failures.
-The human-plus-climate-only model is retained as a reference. The controlled
-model adds centred and scaled linear age as a third group. Linear age is used
-because cores contain at most 14 unique ages; temporal MEMs would consume too
-many residual degrees of freedom and require a separate detrending decision.
+In response, we revised the main H1 analyses themselves.
 
-The main Figure 2 value remains one bounded number per core:
+Time is now included as a separate control within pollen records, space is included as a separate control when records are compared within time slices, and the main spatial summaries are additionally filtered for broad geographical structure.
 
-$$
-\frac{\max(I_H,0)-\max(I_C,0)}
-     {\max(I_H,0)+\max(I_C,0)}.
-$$
+Human activity and climate remain the ecological predictors of interest.
 
-Cores for which both contributions are non-positive are reported and excluded
-from this presentation profile. Continent-specific positive dbMEMs are selected
-from the signed time-controlled human-minus-climate difference conditional on
-continent-by-climate-zone strata and reused for the bounded balance. Markers
-are predictions at dbMEM equal to zero; distributions show observed controlled
-core values.
+Time and space are structural controls that account for shared temporal and geographical patterns; we do not interpret them as additional causal drivers.
+
+## How the main H1 analyses were changed
+
+### Main spatial analysis: time within records and space among records
+
+The analysis underlying the main spatial figure is fitted separately within each pollen record.
+
+We now compare three predictor groups within every eligible record: human activity, climate, and time.
+
+Including time prevents a long-term trend through a sediment sequence from being attributed automatically to either the human or climate predictors.
+
+A pollen record has only one geographical location, so space cannot be estimated as a changing predictor within that record.
+
+We therefore apply spatial filtering when the time-controlled results from different records are combined into continental, climate-zone, and global summaries.
+
+The main figure retains one readily interpretable human-versus-climate balance for each record.
+
+Negative values indicate greater relative importance of climate, zero indicates equal importance, and positive values indicate greater relative importance of human activity.
+
+For the primary SPD analysis, the climate-dominated result was retained after adding time, after spatial filtering, in every 250-km and 500-km thinning repetition, and after omitting each continent and climate zone in turn.
+
+Both calculation profiles had 100% thinning agreement and met the predeclared robust criterion.
 
 ```{r}
 knitr::kable(
-  balance_summary |>
-    dplyr::select(
-      .data[["profile"]],
-      .data[["original_balance"]],
-      .data[["controlled_balance"]],
-      .data[["min_thinning_agreement"]],
-      .data[["robustness_class"]]
+  spd_balance_summary |>
+    dplyr::transmute(
+      Profile = dplyr::recode(
+        .data[["profile"]],
+        signed = "Signed contributions",
+        zero_truncated = "Bounded main-figure balance"
+      ),
+      `Before time and space controls` =
+        .data[["original_balance"]],
+      `After time and space controls` =
+        .data[["controlled_balance"]],
+      `Thinning agreement` =
+        scales::percent(
+          .data[["min_thinning_agreement"]],
+          accuracy = 1
+        ),
+      Classification = .data[["robustness_class"]]
     ),
   digits = 3
 )
@@ -202,10 +356,12 @@ knitr::kable(
 
 ```{r}
 #| fig-cap: >-
-#|   Time-controlled core balances and spatially filtered regional markers.
+#|   Main SPD result after controlling time within pollen records and
+#|   filtering spatial structure when records are combined. Negative values
+#|   indicate greater relative importance of climate.
 knitr::include_graphics(
   file.path(
-    spatial_figure_dir,
+    spd_figure_dir,
     stringr::str_c(
       "spd",
       "human_climate_balance",
@@ -217,22 +373,20 @@ knitr::include_graphics(
 )
 ```
 
-### Figure 3: space within time slices
+### Main temporal analysis: space within each time slice
 
-Each region-by-age model uses one row per core. Positive dbMEMs are selected
-against the multivariate PAP response conditional on the complete human and
-climate groups using a global test and Blanchet double stopping. When no
-conditional spatial signal is detected, human-climate-only contributions
-contributions are retained and space is set to exactly zero for the
-presentation stack. Non-estimable models remain missing.
+The temporal analysis compares many pollen records within each 500-year time slice.
 
-The revised main Figure 3 uses zero-truncated hierarchical contributions for
-human impact, climate, and space. Signed hierarchical contributions and pure
-partial adjusted-R-squared fractions are exported and plotted separately; they
-are related diagnostics, not interchangeable estimates.
+We now fit human activity, climate, and broad spatial pattern as three separate predictor groups.
+
+Spatial controls could be estimated in `r n_spd_spatial_comparisons` SPD and `r n_event_spatial_comparisons` event-based region-by-age comparisons, and adding space caused `r n_spatial_ranking_reversals` human-versus-climate ranking reversals.
+The revised main temporal figure shows human activity, climate, and space together; signed contributions and uniquely explained fractions remain available as supplementary diagnostics.
 
 ```{r}
-#| fig-cap: "Human, climate, and selected spatial contributions through time."
+#| fig-cap: >-
+#|   Main temporal analysis after adding space as a separate structural
+#|   predictor within each 500-year time slice. SPD is the primary
+#|   human-activity proxy; event-based bars are supplementary.
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,
@@ -244,20 +398,69 @@ knitr::include_graphics(
 )
 ```
 
+## Why SPD remains primary and events remain supplementary
+
+We agree with the reviewer that the pollen-derived human-impact events have important limitations.
+
+The event chronology is based on expert interpretation of changes recorded in pollen data.
+
+Using it to explain pollen assemblage properties therefore introduces circularity, and its broad categories cannot represent the full diversity, timing, or intensity of human activities within every region.
+
+We have made this limitation explicit and do not treat the event analysis as evidence equivalent to the SPD analysis.
+
+The SPD proxy is based on archaeological radiocarbon dates and is constructed independently of the pollen response.
+
+It therefore remains the primary human-activity proxy and receives the complete spatial thinning, geographical leave-out, and formal robustness assessment.
+
+We retain the events only as a supplementary comparison.
+
+The SPD and event chronologies are two separately assembled sources of information about human activity, and the event chronology is independent of the construction of the archaeological SPD.
+
+However, the event chronology is not independent of the pollen response itself.
+
+Agreement between the two analyses therefore shows that the broad human-versus-climate conclusion is reproduced with an alternative human-activity chronology, but it should not be interpreted as a fully independent replication.
+
+The supplementary event analysis nevertheless produced the same climate-dominated direction.
+
+Its overall signed balance was `r round(event_signed_balance, 3)`, and its bounded presentation balance was `r round(event_zero_balance, 3)`.
+
+No additional broad spatial terms were selected for the aggregated event balance.
+
 ```{r}
-knitr::kable(diagnostic_summary)
+#| fig-cap: >-
+#|   Supplementary event-based comparison after controlling time and testing
+#|   broad spatial structure. The events are derived partly from pollen and
+#|   are not independent of the pollen response.
+knitr::include_graphics(
+  file.path(
+    event_figure_dir,
+    stringr::str_c(
+      "events",
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control.png",
+      sep = "__"
+    )
+  )
+)
 ```
 
-Residual temporal or spatial dependence remains visible in the diagnostics
-rather than being treated as automatically removed. The original two-group
-analyses, signed contributions, pure fractions, actual permutation counts,
-selection details, thinning replicates, exclusions, and provenance are retained
-as supplementary machine-readable outputs. Negative adjusted fractions are
-never replaced with arbitrary positive values.
+\newpage
 
-## Interpretation boundary
+## What the remaining autocorrelation means
 
-The analysis tests whether the human-versus-climate conclusion is stable under
-explicit structural controls. It does not establish that time or space causes
-the PAP response, and it does not resolve finer-scale temporal autocorrelation
-within the original irregular pollen levels beyond the 500-year analysis units.
+Some temporal and spatial autocorrelation remains detectable after the controls.
+
+Residual temporal structure was detected in `r n_spd_temporal_residual` SPD and `r n_event_temporal_residual` event-based within-record models.
+
+Residual spatial structure was detected in `r n_spd_spatial_residual` SPD and `r n_event_spatial_residual` event-based region-by-age groups.
+
+The relevant question, however, is whether this remaining structure changes the scientific conclusion.
+
+It did not.
+
+The climate-dominated result was retained after time control, spatial filtering, explicit spatial predictors, two spatial-thinning distances, every geographical leave-out check, and use of the alternative event chronology.
+
+We therefore conclude that the greater relative importance of climate than human activity for broad-scale pollen assemblage dynamics is robust to temporal and spatial dependence at the scales evaluated here.
+
+The event analysis supports this conclusion only as a supplementary comparison; the primary evidence and formal robustness classification remain based on the archaeological SPD analysis.

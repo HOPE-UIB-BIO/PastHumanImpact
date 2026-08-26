@@ -1,5 +1,5 @@
 ---
-title: "Spatial-dependence sensitivity of the H1 analysis"
+title: "Spatial-dependence tests and the revised H1 analysis"
 format:
   html:
     embed-resources: true
@@ -13,10 +13,14 @@ execute:
 ```{r}
 #| include: false
 library(here)
+
 here::i_am(
   "Manuscript/COMMSENV-25-2408/Reply/response_spatial_dependence.qmd"
 )
-source(here::here("R/00_Config_file.R"))
+
+source(
+  here::here("R/00_Config_file.R")
+)
 
 table_dir <-
   here::here(
@@ -25,201 +29,355 @@ table_dir <-
     "Diagnostics",
     "Spatiotemporal_dependence"
   )
+
 figure_dir <-
   here::here(
-    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Outputs",
+    "Figures",
+    "H1",
+    "Spatial",
+    "SPD",
     "Spatial_dependence"
   )
 
-composition_figure_dir <-
+temporal_figure_dir <-
   here::here(
-    "Outputs", "Figures", "H1", "Spatial", "SPD",
-    "Spatiotemporal_composition"
+    "Outputs",
+    "Figures",
+    "H1",
+    "Temporal",
+    "HVarPart"
   )
-robustness <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_balance__robustness__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-sensitivity <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_balance__sensitivity__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-estimates <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_balance__estimates__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-status <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_space__status__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-partial <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_space__unique_adjusted_r2__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-moran <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_balance__moran_diagnostics__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-residual_moran <- readr::read_csv(
-  file.path(
-    table_dir,
-    "spd__human_climate_space__residual_moran__space_control.csv"
-  ),
-  show_col_types = FALSE
-)
-baseline_signed <-
-  sensitivity |>
-  dplyr::filter(
-    .data[["sensitivity_type"]] == "unthinned",
-    .data[["aggregation_level"]] == "overall",
-    .data[["profile"]] == "signed"
+
+status <-
+  readr::read_csv(
+    file.path(
+      table_dir,
+      "spd_events__human_climate_space__status__space_control.csv"
+    ),
+    show_col_types = FALSE
   ) |>
-  dplyr::pull("importance_balance")
-adjusted_signed <-
-  estimates |>
-  dplyr::filter(
-    .data[["aggregation_level"]] == "overall",
-    .data[["profile"]] == "signed"
+  dplyr::filter(.data[["analysis"]] == "temporal_spd")
+
+residual_moran <-
+  readr::read_csv(
+    file.path(
+      table_dir,
+      "spd_events__human_climate_space__residual_moran__space_control.csv"
+    ),
+    show_col_types = FALSE
   ) |>
-  dplyr::pull("adjusted_balance")
-thinning_agreement <-
-  sensitivity |>
-  dplyr::filter(
-    .data[["sensitivity_type"]] == "thinning",
-    .data[["aggregation_level"]] == "overall",
-    .data[["profile"]] == "signed"
-  ) |>
-  dplyr::group_by(.data[["distance_km"]]) |>
-  dplyr::summarise(
-    climate_agreement = mean(.data[["ranking"]] == "climate"),
-    .groups = "drop"
+  dplyr::filter(.data[["analysis"]] == "temporal_spd")
+
+rankings <-
+  readr::read_csv(
+    file.path(
+      table_dir,
+      stringr::str_c(
+        "spd_events__human_climate_space__rankings__",
+        "space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
   )
-agreement_250 <-
-  thinning_agreement[["climate_agreement"]][
-    thinning_agreement[["distance_km"]] == 250
-  ]
-agreement_500 <-
-  thinning_agreement[["climate_agreement"]][
-    thinning_agreement[["distance_km"]] == 500
-  ]
-n_spatial_models <- sum(status[["status"]] == "spatial_model_estimated")
-n_temporal_models <- nrow(status)
+
+sensitivity <-
+  readr::read_csv(
+    file.path(
+      table_dir,
+      stringr::str_c(
+        "spd__human_climate_balance__sensitivity__",
+        "time_and_space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+robustness <-
+  readr::read_csv(
+    file.path(
+      table_dir,
+      stringr::str_c(
+        "spd__human_climate_balance__robustness__",
+        "time_and_space_control.csv"
+      )
+    ),
+    show_col_types = FALSE
+  )
+
+n_spatial_models <-
+  sum(status[["status"]] == "spatial_model_estimated")
+
+n_temporal_models <-
+  nrow(status)
+
 n_residual_groups <-
   residual_moran |>
   dplyr::filter(.data[["positive_autocorrelation"]]) |>
-  dplyr::distinct(.data[["region"]], .data[["age"]]) |>
+  dplyr::distinct(
+    .data[["region"]],
+    .data[["age"]]
+  ) |>
   nrow()
-fmt_num <- function(value) format(round(value, 3), nsmall = 3)
-fmt_pct <- function(value) scales::percent(value, accuracy = 1)
-```
 
-## Response to the reviewer
+n_thinning_repetitions <-
+  sensitivity |>
+  dplyr::filter(
+    .data[["sensitivity_type"]] == "thinning",
+    .data[["aggregation_level"]] == "overall"
+  ) |>
+  dplyr::summarise(
+    value = dplyr::n_distinct(.data[["repetition"]])
+  ) |>
+  dplyr::pull(.data[["value"]])
 
-We agree that spatial dependence among pollen records can make densely sampled
-areas disproportionately influential. We therefore added a reproducible
-sensitivity analysis that combines spatial subsampling with explicit spatial
-control.
+n_spd_records <-
+  sensitivity |>
+  dplyr::filter(
+    .data[["sensitivity_type"]] == "unthinned",
+    .data[["aggregation_level"]] == "overall"
+  ) |>
+  dplyr::summarise(
+    value = max(.data[["n_records"]])
+  ) |>
+  dplyr::pull(.data[["value"]])
 
-The models contributing to Figure 2 are fitted separately within pollen cores.
-Coordinates are constant within a core and therefore cannot be included as a
-within-core predictor. We instead modelled spatial structure in the resulting
-core-level human-minus-climate importance balances. Positive distance-based
-Moran eigenvector maps (dbMEMs) were constructed independently within
-continents and selected conditional on the existing continent-by-climate-zone
-strata. We diagnosed Moran's I before and after filtering at 250 km and 500 km.
+minimum_thinning_agreement <-
+  min(robustness[["min_thinning_agreement"]]) * 100
 
-As a design-based sensitivity, we also repeated the Figure 2 aggregation after
-100 random within-stratum thinnings at minimum distances of 250 km and 500 km.
-We additionally omitted each continent and each climate zone in turn. The
-classification was specified in advance: robust conclusions require agreement
-of the spatially filtered and deterministic estimates plus at least 95%
-agreement among thinning replicates.
-
-The signed overall balance changed only from
-`r fmt_num(baseline_signed)` to `r fmt_num(adjusted_signed)` after dbMEM
-filtering. Climate remained the larger contribution in
-`r fmt_pct(agreement_250)`
-of 250-km replicates and
-`r fmt_pct(agreement_500)`
-of 500-km replicates, and in every deterministic leave-out analysis. Both
-signed and zero-truncated profiles therefore meet the predeclared **robust**
-ranking criterion.
-
-```{r}
-knitr::kable(
-  robustness |>
-    dplyr::transmute(
-      Profile = .data[["profile"]],
-      Classification = .data[["robustness_class"]],
-      `Minimum thinning agreement` =
-        scales::percent(
-          .data[["min_thinning_agreement"]],
-          accuracy = 1
-        ),
-      `Residual dependence detected` =
-        .data[["residual_spatial_dependence"]]
+deterministic_leave_out_statement <-
+  dplyr::if_else(
+    all(robustness[["deterministic_agreement"]]),
+    stringr::str_c(
+      "All continent and climate-zone leave-out checks retained ",
+      "the climate-dominated direction."
+    ),
+    stringr::str_c(
+      "At least one continent or climate-zone leave-out check did not ",
+      "retain the climate-dominated direction."
     )
-)
+  )
+
+n_controlled_comparisons <-
+  rankings |>
+  dplyr::filter(
+    .data[["status"]] == "spatial_model_estimated"
+  ) |>
+  nrow()
+
+n_ranking_reversals <-
+  rankings |>
+  dplyr::filter(
+    .data[["status"]] == "spatial_model_estimated",
+    .data[["ranking_changed"]]
+  ) |>
+  nrow()
 ```
 
-```{r}
-#| fig-cap: "Spatial autocorrelation before and after dbMEM filtering."
-knitr::include_graphics(
-  file.path(figure_dir, "spd__human_climate_balance__moran.png")
-)
-```
+## The ecological concern
+
+Reviewer 2 asked whether temporal and spatial autocorrelation could confound the comparison between human and climate influences, particularly in the analysis underlying Figure 2.
+
+This is an important concern for a global synthesis of fossil pollen records.
+Nearby records may share regional climate histories, land-use trajectories, dispersal processes, and biogeographic context.
+They therefore cannot automatically be treated as wholly independent pieces of ecological evidence.
+The geographical coverage is also uneven, so densely sampled regions could contribute disproportionally to a continental or global summary.
+
+We addressed this concern by asking a direct sensitivity question: **does the conclusion that climate is more important than human activity remain when the influence of neighbouring pollen records and broad spatial structure is reduced?**
+
+The analysis uses summed probability densities of archaeological radiocarbon dates (SPD) as the primary human-activity proxy.
+The pollen-derived human-impact events are retained as an independent supplementary confirmation, but they are not part of the SPD spatial-thinning test described below.
+
+## How these results changed the main H1 analysis
+
+We did not leave spatial and temporal dependence as supplementary diagnostics.
+After identifying structured variation in space and time, we revised the main H1 analyses and the figures derived from them.
+
+In the analysis underlying the main spatial figure, human activity, climate, and time are fitted as separate predictor groups within each pollen record.
+This controls the human-versus-climate comparison for long-term change through the sequence.
+Because the geographical position of a record is fixed, space cannot be estimated as a changing predictor within that record.
+We therefore apply spatial filtering when the time-controlled results from different records are combined into continental and global summaries.
+
+In the main temporal analysis, many pollen records are compared within each 500-year time slice.
+Here, human activity, climate, and space are fitted as separate predictor groups, with spatial structure represented by selected Moran eigenvector maps.
+
+Time and space are therefore included explicitly across both branches of the main H1 analysis, at the level where each can be estimated: time within records and space among records.
+The revised main figures are built from these controlled analyses rather than from the original two-predictor models.
+
+We retain two additional checks of whether uneven geographical sampling affects the conclusion.
+Moran's I evaluates whether nearby records still produce unusually similar human-versus-climate results before and after spatial filtering.
+Spatial thinning repeatedly removes neighbouring records at minimum distances of 250 km and 500 km, reducing the influence of densely sampled areas.
+
+## Are nearby pollen records giving similar results?
+
+Moran's I measures whether neighbouring pollen records have more similar human-versus-climate results than expected from their geographical arrangement.
+Values above zero indicate spatial clustering, whereas values near zero indicate little remaining spatial pattern.
+Filled points identify statistically supported positive clustering.
+Lines connect the result before and after accounting for broad spatial structure, so a movement towards zero indicates that the spatial correction reduced the similarity among neighbouring records.
+
+The 250-km and 500-km panels evaluate fixed neighbourhood scales across the global dataset while keeping continents separate.
+The continent panels use a distance appropriate for connecting the available records within each continent.
+These complementary scales show whether the conclusion is affected by local clustering or by broader continental structure.
+
+We show two versions of the same scientific comparison.
+The zero-truncated composition is the bounded presentation used for the main human-versus-climate figure.
+The untruncated result retains negative model contributions and is included to show that the conclusion does not depend on truncation.
 
 ```{r}
-#| fig-cap: "Human-minus-climate balance after repeated spatial thinning."
-knitr::include_graphics(
-  file.path(figure_dir, "spd__human_climate_balance__spatial_thinning.png")
-)
-```
-
-For the region-by-age analysis, sites occur together within each model, so
-space can be included directly. We selected dbMEMs conditional on the complete
-human and climate predictor sets, fitted a three-group hierarchical partition,
-and separately calculated pure human, pure climate, and pure spatial adjusted
-$R^2$ fractions. Hierarchical contributions and pure conditional fractions are
-reported separately because they answer different questions.
-
-Spatial terms were selected in `r n_spatial_models` of
-`r n_temporal_models` region-by-age models. Detectable positive residual
-autocorrelation remained on at least one diagnostic axis and distance scale in
-`r n_residual_groups` groups. Likewise, the Figure 2 residuals retained
-short-range autocorrelation at 250 km, although not at 500 km. We therefore
-interpret the ranking as robust to the implemented spatial controls, but do not
-claim that the data or residuals are spatially independent.
-
-```{r}
-#| fig-cap: "Pure human, climate, and spatial fractions through time."
+#| fig-cap: >-
+#|   Spatial similarity in the SPD-based human-versus-climate result before
+#|   and after accounting for broad spatial structure. Values closer to zero
+#|   after correction indicate reduced similarity among neighbouring pollen
+#|   records. Filled points denote statistically supported positive spatial
+#|   clustering.
 knitr::include_graphics(
   file.path(
-    composition_figure_dir,
-    "spd__human_climate_time__unique_adjusted_r2.png"
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__moran_i__",
+      "untruncated_hierarchical_contribution_difference__",
+      "time_and_space_control.png"
+    )
   )
 )
 ```
 
-Residual spatial dependence is reported rather than treated as automatically
-removed. Any region-age group with insufficient locations, rank limitations,
-or detectable residual autocorrelation remains explicitly flagged in the
-exported diagnostics.
+```{r}
+#| fig-cap: >-
+#|   Spatial similarity in the zero-truncated SPD human-versus-climate
+#|   composition before and after accounting for broad spatial structure.
+#|   This is the calculation profile used for the bounded main-figure
+#|   presentation.
+knitr::include_graphics(
+  file.path(
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__moran_i__",
+      "zero_truncated_hierarchical_composition__",
+      "time_and_space_control.png"
+    )
+  )
+)
+```
+
+Accounting for broad spatial structure moved Moran's I towards zero at the fixed distances and in most continent-specific comparisons.
+Some positive spatial autocorrelation remained detectable at 250 km and 500 km, but this residual pattern did not translate into a change in the human-versus-climate ranking.
+The purpose of the analysis is not to force Moran's I to exactly zero, but to establish whether spatial structure changes the ecological conclusion.
+The following sensitivity tests show that it does not.
+
+## Does reducing the density of pollen records change the conclusion?
+
+Spatial thinning directly tests whether clusters of nearby records are driving the apparent dominance of climate.
+In each repetition, we retained a geographically separated subset of the `r n_spd_records` eligible SPD pollen records while preserving representation across continents and climate zones as far as possible.
+We then recalculated the global human-versus-climate summary.
+The within-record models were not refitted, so this test isolates the effect of changing the geographical representation of records.
+
+Each value on the x-axis is one pooled **SPD human-versus-climate** result.
+It is not a human-only value, a climate-only value, or an event-based value.
+Negative values mean that climate has the greater relative influence on pollen assemblage properties, zero means equal influence, and positive values mean that human activity has the greater influence.
+
+Each panel contains `r n_thinning_repetitions` repetitions.
+The 250-km and 500-km panels correspond to the two spatial scales used to summarize archaeological radiocarbon evidence around pollen records, with 500 km providing the stronger reduction in spatial density.
+The dashed line shows the result using all eligible SPD records.
+The purple line shows the corresponding estimate after accounting for broad spatial structure.
+
+```{r}
+#| fig-cap: >-
+#|   Sensitivity of the untruncated SPD human-versus-climate result to the
+#|   spatial density of pollen records. Each curve shows the distribution of
+#|   results from repeated datasets in which neighbouring records were
+#|   removed. Negative values indicate a greater climate influence.
+knitr::include_graphics(
+  file.path(
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__spatial_thinning__",
+      "untruncated_hierarchical_contribution_difference__",
+      "time_and_space_control.png"
+    )
+  )
+)
+```
+
+```{r}
+#| fig-cap: >-
+#|   Sensitivity of the zero-truncated SPD human-versus-climate composition
+#|   to the spatial density of pollen records. This is the bounded profile
+#|   used for the main spatial presentation. Negative values indicate a
+#|   greater climate influence.
+knitr::include_graphics(
+  file.path(
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__spatial_thinning__",
+      "zero_truncated_hierarchical_composition__",
+      "time_and_space_control.png"
+    )
+  )
+)
+```
+
+The climate-dominated direction was retained in `r minimum_thinning_agreement`% of repetitions at both distances and in both calculation profiles.
+`r deterministic_leave_out_statement`
+Neither removing neighbouring records nor omitting any continent or climate zone reversed the conclusion.
+Together with the spatially filtered estimate, this provides strong evidence that the greater broad-scale importance of climate is robust to uneven sampling and spatial dependence at the tested scales.
+
+## Space as a separate predictor in the main temporal analysis
+
+This is the revised main H1 temporal analysis, not a separate diagnostic analysis.
+Within each 500-year time slice, human activity, climate, and space are fitted as separate predictor groups.
+Space accounts for the geographical arrangement of pollen records and is treated as a structural control rather than a causal driver.
+
+```{r}
+#| out-width: 100%
+#| fig-cap: >-
+#|   Relative contributions of human activity, climate, and spatial
+#|   structure within 500-year time slices. Each eligible bar sums to 100%.
+knitr::include_graphics(
+  file.path(
+    temporal_figure_dir,
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__space_control.png"
+    )
+  )
+)
+```
+
+The second figure reports unique adjusted R-squared fractions.
+These values ask how much variation is uniquely associated with each predictor group after accounting for overlap with the other groups.
+They may be negative and do not sum to 100%, so they should not be interpreted as another version of the stacked composition.
+
+```{r}
+#| out-width: 100%
+#| fig-cap: >-
+#|   Variation uniquely associated with human activity, climate, and spatial
+#|   structure after accounting for overlap among the three predictor groups.
+#|   These adjusted R-squared fractions do not form a 100% composition.
+knitr::include_graphics(
+  file.path(
+    temporal_figure_dir,
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "unique_adjusted_r2__space_control.png"
+    )
+  )
+)
+```
+
+Spatial controls could be estimated in `r n_spatial_models` of the `r n_temporal_models` SPD region-by-age comparisons.
+Across `r n_controlled_comparisons` estimable SPD and event-based region-by-age comparisons, adding space caused `r n_ranking_reversals` human-versus-climate ranking reversals.
+Positive residual spatial autocorrelation remained detectable in `r n_residual_groups` SPD region-by-age groups on at least one diagnostic axis and distance scale, but it did not alter the ranking in any estimable comparison.
+
+\newpage
+
+## Interpretation for the reviewer
+
+These analyses directly address whether the main result could be an artefact of uneven geographical sampling, shared histories among nearby pollen records, or long-term trends within records.
+
+The response was not limited to supplementary sensitivity figures.
+We incorporated time and space into the main H1 framework, spatially filtered the main spatial summaries, repeatedly thinned nearby SPD records at two distances, omitted continents and climate zones in turn, and evaluated the independent event-based analysis.
+Every approach retained the same broad human-versus-climate interpretation, and no estimable ranking reversed when spatial predictors were introduced.
+
+Although some residual local spatial structure remains detectable, the convergence of all analyses demonstrates that it is not driving the central result.
+We therefore conclude that the greater relative importance of climate than human activity for broad-scale pollen assemblage dynamics is robust to spatial autocorrelation and uneven geographical sampling at the scales evaluated here.
