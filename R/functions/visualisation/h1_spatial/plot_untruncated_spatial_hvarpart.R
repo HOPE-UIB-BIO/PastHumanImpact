@@ -162,7 +162,7 @@ plot_untruncated_spatial_hvarpart <- function(
     dplyr::group_split(.data[["region"]])
   data_density <-
     density_groups |>
-    purrr::map_dfr(
+    purrr::map(
       .f = ~ {
         density_values <-
           stats::density(
@@ -173,7 +173,7 @@ plot_untruncated_spatial_hvarpart <- function(
             cut = 0
           )
 
-        return(
+        res <-
           tibble::tibble(
             region = factor(
               unique(.x[["region"]]),
@@ -182,9 +182,11 @@ plot_untruncated_spatial_hvarpart <- function(
             signed_allocation = density_values[["x"]],
             density = density_values[["y"]]
           )
-        )
+
+        return(res)
       }
-    )
+    ) |>
+    dplyr::bind_rows()
   density_max <- max(data_density[["density"]], na.rm = TRUE)
   data_density <-
     data_density |>
@@ -494,7 +496,7 @@ plot_untruncated_spatial_hvarpart <- function(
     ) |>
     cowplot::ggdraw()
 
-  return(
+  res <-
     list(
       plot = combined_plot,
       statistical_plot = statistical_plot,
@@ -503,5 +505,6 @@ plot_untruncated_spatial_hvarpart <- function(
       region_values = data_region_summary,
       density_values = data_density
     )
-  )
+
+  return(res)
 }

@@ -13,6 +13,7 @@
 #' balances.
 #' @param data_region_summary_override Optional precomputed regional balances.
 #' @param show_intervals Logical. Draw dataset-level climate-zone intervals.
+#' @param y_axis_title Two-line label for the balance axis.
 #' @return
 #' A named list containing the combined plot, statistical panel, and the
 #' record-, climate-zone-, region-, and density-level source data.
@@ -20,7 +21,8 @@
 #' The density and climate-zone summaries are facets in one ggplot object.
 #' Consequently, each continental pooled line has exactly the same vertical
 #' coordinate in the density and every climate-zone panel. The equal-importance
-#' line is dashed, and climate-zone summary points use a dark outline.
+#' line is dashed, and each climate-zone panel contains one coloured summary
+#' point.
 #' @examples
 #' \dontrun{
 #' result <- plot_hvarpart_spatial_balance(
@@ -37,7 +39,11 @@ plot_hvarpart_spatial_balance <- function(
   data_records_override = NULL,
   data_climatezone_summary_override = NULL,
   data_region_summary_override = NULL,
-  show_intervals = TRUE
+  show_intervals = TRUE,
+  y_axis_title = paste0(
+    "Relative importance\n",
+    "(Zero-truncated human\u2212climate balance)"
+  )
 ) {
   required_importance <-
     c(
@@ -53,6 +59,7 @@ plot_hvarpart_spatial_balance <- function(
   assertthat::assert_that(
     is.data.frame(data_importance),
     all(required_importance %in% names(data_importance)),
+    assertthat::is.string(y_axis_title),
     msg = "`data_importance` does not satisfy the spatial balance contract."
   )
 
@@ -256,7 +263,7 @@ plot_hvarpart_spatial_balance <- function(
     dplyr::group_split(.data[["region"]])
   data_density <-
     density_groups |>
-    purrr::map_dfr(
+    purrr::map(
       .f = ~ {
         region_name <- unique(.x[["region"]])
 
@@ -269,7 +276,7 @@ plot_hvarpart_spatial_balance <- function(
             cut = 0
           )
 
-        return(
+        res <-
           tibble::tibble(
             region = factor(region_name, levels = region_levels),
             importance_balance = pmin(
@@ -278,9 +285,11 @@ plot_hvarpart_spatial_balance <- function(
             ),
             density = density_values[["y"]]
           )
-        )
+
+        return(res)
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   density_max <-
     max(data_density[["density"]], na.rm = TRUE)
@@ -482,15 +491,6 @@ plot_hvarpart_spatial_balance <- function(
       data = data_climatezone_summary,
       mapping = ggplot2::aes(
         x = .data[["panel_x"]],
-        y = .data[["importance_balance"]]
-      ),
-      colour = common_gray,
-      size = point_size * 4
-    ) +
-    ggplot2::geom_point(
-      data = data_climatezone_summary,
-      mapping = ggplot2::aes(
-        x = .data[["panel_x"]],
         y = .data[["importance_balance"]],
         colour = .data[["climate_colour"]]
       ),
@@ -528,10 +528,7 @@ plot_hvarpart_spatial_balance <- function(
     ) +
     ggplot2::labs(
       x = NULL,
-      y = paste0(
-        "Relative importance\n",
-        "(Zero-truncated human\u2212climate balance)"
-      )
+      y = y_axis_title
     ) +
     ggplot2::coord_cartesian(
       ylim = c(-1.12, 1.12),
@@ -686,7 +683,7 @@ plot_hvarpart_spatial_balance <- function(
     ) |>
     cowplot::ggdraw()
 
-  return(
+  res <-
     list(
       plot = combined_plot,
       statistical_plot = statistical_plot,
@@ -695,5 +692,6 @@ plot_hvarpart_spatial_balance <- function(
       region_values = data_region_summary,
       density_values = data_density
     )
-  )
+
+  return(res)
 }

@@ -83,72 +83,43 @@ plot_h1_spatial_control_profiles <- function(
       value = .data[["adjusted_r_squared"]]
     ) |>
     dplyr::left_join(data_coordinates, by = keys)
-  data_world <- ggplot2::map_data("world")
-  base_map <-
-    ggplot2::ggplot() +
-    ggplot2::geom_polygon(
-      data = data_world,
-      ggplot2::aes(
-        x = .data[["long"]],
-        y = .data[["lat"]],
-        group = .data[["group"]]
-      ),
-      fill = "grey95",
-      colour = "grey75",
-      linewidth = line_size
-    ) +
-    ggplot2::coord_quickmap() +
-    ggplot2::facet_wrap(ggplot2::vars(.data[["component"]]), ncol = 1) +
-    ggplot2::theme_void(base_size = text_size) +
-    ggplot2::theme(legend.position = "bottom")
+  component_palette <-
+    c(
+      human = palette_predictors[["human"]],
+      climate = palette_predictors[["climate"]],
+      time = paletete_age[["old"]]
+    )
   plot_allocation <-
-    base_map +
-    ggplot2::geom_point(
-      data = data_allocations,
-      ggplot2::aes(
-        x = .data[["long"]],
-        y = .data[["lat"]],
-        colour = .data[["value"]]
-      ),
-      size = point_size,
-      alpha = 0.7
-    ) +
-    ggplot2::scale_colour_viridis_c(limits = c(0, 1)) +
-    ggplot2::labs(colour = "Allocation")
+    plot_h1_spatial_control_profile(
+      data_values = data_allocations,
+      component_palette = component_palette,
+      scale_type = "allocation",
+      legend_title = paste(
+        "Zero-truncated hierarchical",
+        "contribution"
+      )
+    )
   plot_signed <-
-    base_map +
-    ggplot2::geom_point(
-      data = data_signed,
-      ggplot2::aes(
-        x = .data[["long"]],
-        y = .data[["lat"]],
-        colour = .data[["value"]]
-      ),
-      size = point_size,
-      alpha = 0.7
-    ) +
-    ggplot2::scale_colour_gradient2(midpoint = 0) +
-    ggplot2::labs(colour = "Signed")
+    plot_h1_spatial_control_profile(
+      data_values = data_signed,
+      component_palette = component_palette,
+      scale_type = "signed",
+      legend_title = "Untruncated hierarchical contribution"
+    )
   plot_unique <-
-    base_map +
-    ggplot2::geom_point(
-      data = data_unique,
-      ggplot2::aes(
-        x = .data[["long"]],
-        y = .data[["lat"]],
-        colour = .data[["value"]]
-      ),
-      size = point_size,
-      alpha = 0.7
-    ) +
-    ggplot2::scale_colour_gradient2(midpoint = 0) +
-    ggplot2::labs(colour = "Pure adjusted R2")
+    plot_h1_spatial_control_profile(
+      data_values = data_unique,
+      component_palette = component_palette,
+      scale_type = "signed",
+      legend_title = "Unique adjusted R\u00B2"
+    )
 
-  return(
+  res <-
     list(
       zero_truncated_hierarchical_composition = plot_allocation,
       untruncated_hierarchical_contributions = plot_signed,
       unique_adjusted_r2 = plot_unique
     )
-  )
+
+  return(res)
 }

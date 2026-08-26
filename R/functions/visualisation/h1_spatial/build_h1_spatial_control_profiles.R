@@ -120,11 +120,12 @@ build_h1_spatial_control_profiles <- function(
       )
     )
 
-  return(
+  res <-
     rlang::set_names(
       plot_results[["result"]],
       plot_results[["output_name"]]
     )
-  )
+
+  return(res)
 }
 

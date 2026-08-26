@@ -130,7 +130,7 @@ plot_h1_spatial_component_distribution <- function(
   data_density <-
     data_records |>
     dplyr::group_split(.data[["region"]]) |>
-    purrr::map_dfr(
+    purrr::map(
       ~ {
         density_values <-
           stats::density(
@@ -150,7 +150,8 @@ plot_h1_spatial_component_distribution <- function(
           density = density_values[["y"]]
         )
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   density_max <- max(data_density[["density"]], na.rm = TRUE)
 
@@ -494,7 +495,7 @@ plot_h1_spatial_component_distribution <- function(
     ) |>
     cowplot::ggdraw()
 
-  return(
+  res <-
     list(
       plot = combined_plot,
       statistical_plot = statistical_plot,
@@ -503,7 +504,8 @@ plot_h1_spatial_component_distribution <- function(
       region_values = data_region_summary,
       density_values = data_density
     )
-  )
+
+  return(res)
 }
 
 
