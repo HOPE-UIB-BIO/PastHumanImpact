@@ -38,15 +38,21 @@ list(
       "h1_spatial_controlled_balance",
       "Time-controlled and spatially aggregated H1 balance",
       "spd_spatiotemporal_balance",
-      paste(
+      stringr::str_c(
         "02_h1_spatiotemporal_hvarpart/05_spatial_aggregation",
         "spd_human_climate_balance/pipeline.R",
         sep = "/"
       ),
       "table_spatiotemporal_balance_estimates",
       here::here(
-        "Outputs/Figures/H1/Spatial",
-        "human_climate_balance_time_and_space_controlled.pdf"
+        "Outputs", "Figures", "H1", "Spatial", "SPD",
+        stringr::str_c(
+          "spd",
+          "human_climate_balance",
+          "zero_truncated_hierarchical_composition",
+          "time_and_space_control.pdf",
+          sep = "__"
+        )
       ),
       "h1_temporal_spatial_composition",
       "Spatially controlled temporal H1 composition",
@@ -55,9 +61,9 @@ list(
       "table_spatial_control_zero_truncated_composition",
       here::here(
         "Outputs/Figures/H1/Temporal/HVarPart",
-        paste0(
-          "human_climate_space_",
-          "zero_truncated_hierarchical_composition.pdf"
+        stringr::str_c(
+          "spd_events__human_climate_space__",
+          "zero_truncated_hierarchical_composition__space_control.pdf"
         )
       ),
       "pap_temporal_predictions",
@@ -66,8 +72,12 @@ list(
       "03_temporal_models/06_exports/pipeline.R",
       "file_pap_temporal_predictions",
       here::here(
-        "Outputs/Tables/Temporal_models",
-        "pap_temporal_predictions.csv"
+        "Outputs",
+        "Tables",
+        "H1",
+        "Temporal",
+        "PAP_trends",
+        "pap__temporal_predictions.csv"
       )
     )
   ),
@@ -89,7 +99,7 @@ list(
           "Outputs",
           "Tables",
           "Reporting",
-          "evidence_manifest.csv"
+          "evidence__manifest.csv"
         )
 
       dir.create(
