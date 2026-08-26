@@ -83,7 +83,7 @@ classify_binary_events <- function(data_source_events,
             dplyr::select(age)
 
           res_w <-
-            purrr::map2_dfc(
+            purrr::map2(
               .x = events_age,
               .y = names(events_age),
               .f = ~ {
@@ -102,7 +102,8 @@ classify_binary_events <- function(data_source_events,
                   rlang::set_names(nm = .y) %>%
                   return()
               }
-            )
+            ) |>
+            dplyr::bind_cols()
 
           data_to_test %>%
             dplyr::bind_cols(res_w) %>%

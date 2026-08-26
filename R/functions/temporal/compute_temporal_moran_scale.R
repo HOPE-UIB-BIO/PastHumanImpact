@@ -69,7 +69,7 @@ compute_temporal_moran_scale <- function(
       .default = "estimated"
     )
 
-  return(
+  res <-
     tibble::tibble(
       distance_years = distance_years,
       n_ages = length(values),
@@ -85,5 +85,6 @@ compute_temporal_moran_scale <- function(
       permutations = nrow(permutation_matrix),
       status = status
     )
-  )
+
+  return(res)
 }

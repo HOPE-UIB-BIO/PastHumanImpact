@@ -110,10 +110,11 @@ plot_h1_temporal_control_profiles <- function(
     ) +
     ggplot2::theme_bw(base_size = text_size)
 
-  return(
+  res <-
     list(
       untruncated_hierarchical_contributions = plot_signed,
       unique_adjusted_r2 = plot_unique
     )
-  )
+
+  return(res)
 }

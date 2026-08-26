@@ -42,6 +42,9 @@ fit_dbrda <- function(data_m2, data_pred) {
       )
     return(dbRDA_res)
   } else {
-    return(NULL)
+    res <-
+      NULL
+
+    return(res)
   }
 }

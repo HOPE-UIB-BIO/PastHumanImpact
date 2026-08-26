@@ -48,13 +48,14 @@ run_authorized_temporal_models <- function(
   if (
     nrow(data_authorized) == 0L
   ) {
-    return(
+    res <-
       tibble::tibble(
         model_id = character(),
         request_id = character(),
         attempted = logical()
       )
-    )
+
+    return(res)
   }
 
   purrr::pwalk(

@@ -86,12 +86,13 @@ summarise_temporal_hvarpart_results <- function(
     tidyr::unnest(cols = "moran") |>
     dplyr::mutate(analysis = analysis, .after = dplyr::all_of(id_col))
 
-  return(
+  res <-
     list(
       status = data_status,
       components = data_components,
       unique_adjusted_r2 = data_unique_adjusted_r2,
       residual_moran = data_moran
     )
-  )
+
+  return(res)
 }

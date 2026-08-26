@@ -39,8 +39,7 @@ compute_climate_indices <- function(data_source, time_ref) {
         purrr::pluck("data", "dataset_id")
     ) %>%
     # loop trough and make a new dataset at the end
-    purrr::map_dfr(
-      .id = "dataset_id",
+    purrr::map(
       .f = ~ .x %>%
         #  rename(time_id = time.id) %>%
         tidyr::pivot_wider(
@@ -75,7 +74,8 @@ compute_climate_indices <- function(data_source, time_ref) {
           prec_seasonality = bio15
         ) %>%
         return()
-    ) %>%
+    ) |>
+    dplyr::bind_rows(.id = "dataset_id") %>%
     tidyr::nest(climate_data = -dataset_id) %>%
     return()
 }

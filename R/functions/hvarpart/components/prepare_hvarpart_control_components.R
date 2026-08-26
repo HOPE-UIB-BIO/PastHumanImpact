@@ -72,5 +72,8 @@ prepare_hvarpart_control_components <- function(
       ]]
   }
 
-  return(dplyr::bind_rows(data_baseline, data_controlled))
+  res <-
+    dplyr::bind_rows(data_baseline, data_controlled)
+
+  return(res)
 }

@@ -98,7 +98,7 @@ select_spatial_thinning <- function(
     )
   res_thinning <-
     data_replicates |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ select_spatial_thinning_replicate(
         data_coordinates = data_coordinates,
         distance_matrix = mat_distance,
@@ -108,7 +108,8 @@ select_spatial_thinning <- function(
         id_col = id_col,
         strata = strata
       )
-    )
+    ) |>
+    dplyr::bind_rows()
 
   return(res_thinning)
 }

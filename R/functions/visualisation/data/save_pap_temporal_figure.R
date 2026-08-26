@@ -20,7 +20,7 @@
 #'   pap_variables = "n0",
 #'   layout = "strata",
 #'   output_dir = "Outputs/Figures/H1/Temporal/PAP_trends",
-#'   output_stem = "pap_trend_n0",
+#'   output_stem = "pap__temporal_trend__n0",
 #'   width = 270,
 #'   height = 240
 #' )

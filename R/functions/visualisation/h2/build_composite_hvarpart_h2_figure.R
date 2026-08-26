@@ -143,7 +143,7 @@ build_composite_hvarpart_h2_figure <- function(
             nrow = 1
           )
 
-        return(
+        res <-
           cowplot::plot_grid(
             make_label_plot(
               label = region_labels[[.x]],
@@ -154,7 +154,8 @@ build_composite_hvarpart_h2_figure <- function(
             nrow = 1,
             rel_widths = c(0.65, length(climatezone_labels))
           )
-        )
+
+        return(res)
       }
     )
   labelled_grid <-

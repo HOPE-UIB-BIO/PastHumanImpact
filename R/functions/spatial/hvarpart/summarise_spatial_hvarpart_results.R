@@ -133,7 +133,7 @@ summarise_spatial_hvarpart_results <- function(data_results) {
     ) |>
     tidyr::unnest(cols = "remaining")
 
-  return(
+  res <-
     list(
       status = data_status,
       selection = data_selection,
@@ -143,5 +143,6 @@ summarise_spatial_hvarpart_results <- function(data_results) {
       residual_moran = data_moran,
       remaining_spatial_test = data_remaining
     )
-  )
+
+  return(res)
 }

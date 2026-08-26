@@ -138,7 +138,10 @@ compute_hvarpart_importance <- function(
         !"varhp_output" %in% names(data_varhp) ||
         !is.list(data_varhp[["varhp_output"]])
     ) {
-      return(empty_result())
+      res <-
+        empty_result()
+
+      return(res)
     }
 
     data_output <- data_varhp[["varhp_output"]]
@@ -147,7 +150,10 @@ compute_hvarpart_importance <- function(
       !"Hier.part" %in% names(data_output) ||
         is.null(data_output[["Hier.part"]])
     ) {
-      return(empty_result())
+      res <-
+        empty_result()
+
+      return(res)
     }
 
     data_hier <-

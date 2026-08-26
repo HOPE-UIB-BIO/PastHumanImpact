@@ -30,7 +30,10 @@ compute_mvpart_change_points <- function(
   if (
     is.null(data_splits) || NROW(data_splits) == 0L
   ) {
-    return(numeric(0))
+    res <-
+      numeric(0)
+
+    return(res)
   }
 
   data_splits <-

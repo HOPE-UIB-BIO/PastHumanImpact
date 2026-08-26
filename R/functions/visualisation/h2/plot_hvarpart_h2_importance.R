@@ -55,7 +55,7 @@ plot_hvarpart_h2_importance <- function(
   )
 
   if (nrow(data_plot) == 0L) {
-    return(
+    res <-
       ggplot2::ggplot() +
         ggplot2::theme_void() +
         ggplot2::theme(
@@ -64,7 +64,8 @@ plot_hvarpart_h2_importance <- function(
             colour = NA
           )
         )
-    )
+
+    return(res)
   }
 
   if (identical(profile, "zero_truncated")) {

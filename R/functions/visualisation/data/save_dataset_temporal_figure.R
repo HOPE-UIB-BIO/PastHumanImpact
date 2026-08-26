@@ -18,7 +18,7 @@
 #'   data_observed = data_dataset_observed,
 #'   data_predictions = data_dataset_predictions,
 #'   data_metadata = data_dataset_metadata,
-#'   output_dir = "Outputs/Figures/H1/Dataset_trends"
+#'   output_dir = "Outputs/Figures/Dataset_trends"
 #' )
 #' }
 save_dataset_temporal_figure <- function(
@@ -80,7 +80,7 @@ save_dataset_temporal_figure <- function(
   path_output <-
     file.path(
       output_dir,
-      stringr::str_glue("dataset_{dataset_id}.png")
+      stringr::str_glue("dataset__{dataset_id}.png")
     )
 
   if (

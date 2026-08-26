@@ -109,7 +109,7 @@ compute_moran_diagnostics <- function(
     )
   res_diagnostics <-
     data_combinations |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ compute_moran_scale_diagnostic(
         data_source = data_source,
         value_col = ..2,
@@ -118,7 +118,8 @@ compute_moran_diagnostics <- function(
         blocks = vec_blocks,
         permutations = permutations
       )
-    )
+    ) |>
+    dplyr::bind_rows()
 
   return(res_diagnostics)
 }

@@ -98,7 +98,7 @@ filter_event_types <- function(data_source_events,
         ),
         .f = ~ {
           if (isTRUE(..1)) {
-            return(
+            res <-
               switch(
                 ..2,
                 "Asia" = dplyr::select(
@@ -125,10 +125,11 @@ filter_event_types <- function(data_source_events,
                   cli::cli_abort("Unsupported region: {.val {..2}}")
                 }
               )
-            )
+
+            return(res)
           }
 
-          return(
+          res <-
             switch(
               ..2,
               "Asia" = dplyr::mutate(
@@ -169,7 +170,8 @@ filter_event_types <- function(data_source_events,
                 cli::cli_abort("Unsupported region: {.val {..2}}")
               }
             )
-          )
+
+          return(res)
         }
       )
     ) %>%

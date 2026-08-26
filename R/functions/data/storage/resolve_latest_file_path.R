@@ -53,5 +53,8 @@ resolve_latest_file_path <- function(file_name, dir) {
     )
   }
 
-  return(normalizePath(latest_file_path, winslash = "/"))
+  res <-
+    normalizePath(latest_file_path, winslash = "/")
+
+  return(res)
 }

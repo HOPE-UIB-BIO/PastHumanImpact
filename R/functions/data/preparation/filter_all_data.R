@@ -434,7 +434,10 @@ filter_all_data <- function(data_source,
     if (
       nrow(data_subset) > 0
     ) {
-      return(data_subset$sample_id)
+      res <-
+        data_subset$sample_id
+
+      return(res)
     } else {
       return(NA)
     }

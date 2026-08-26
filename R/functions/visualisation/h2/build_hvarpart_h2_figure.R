@@ -77,12 +77,13 @@ build_hvarpart_h2_figure <- function(
 
   get_circle <- function(center = c(0, 0), radius = 1, npoints = 100) {
     angle <- seq(0, 2 * pi, length.out = npoints)
-    return(
+    res <-
       data.frame(
         x = center[[1L]] + radius * cos(angle),
         y = center[[2L]] + radius * sin(angle)
       )
-    )
+
+    return(res)
   }
 
   add_circle <- function(
@@ -92,7 +93,7 @@ build_hvarpart_h2_figure <- function(
     line_type = 3,
     line_width = line_size * 4
   ) {
-    return(
+    res <-
       plot +
         ggplot2::geom_path(
           data = get_circle(radius = radius),
@@ -104,7 +105,8 @@ build_hvarpart_h2_figure <- function(
           colour = line_colour,
           linewidth = line_width
         )
-    )
+
+    return(res)
   }
 
   get_empty_plot <- function(
@@ -181,7 +183,7 @@ build_hvarpart_h2_figure <- function(
       ) |>
       dplyr::mutate(age = as.numeric(.data[["label"]]) / 1000)
 
-    return(
+    res <-
       get_empty_plot(
         line_colour = "grey55",
         legend_position = legend_position,
@@ -225,7 +227,8 @@ build_hvarpart_h2_figure <- function(
           values = palette_predictors,
           drop = FALSE
         )
-    )
+
+    return(res)
   }
 
   get_combined_plot <- function(
@@ -234,7 +237,7 @@ build_hvarpart_h2_figure <- function(
     importance_summary,
     profile
   ) {
-    return(
+    res <-
       get_trajectory_plot(
         selected_region = selected_region,
         selected_climatezone = selected_climatezone
@@ -253,7 +256,8 @@ build_hvarpart_h2_figure <- function(
           ymin = -1.42,
           ymax = 1.42
         )
-    )
+
+    return(res)
   }
 
   build_grid_plots <- function(importance_summary, profile) {
@@ -281,7 +285,10 @@ build_hvarpart_h2_figure <- function(
     grid_data$plot[empty_positions] <-
       purrr::map(empty_positions, ~ get_empty_plot())
 
-    return(grid_data$plot)
+    res <-
+      grid_data$plot
+
+    return(res)
   }
 
   predictor_legend <-
@@ -403,10 +410,11 @@ build_hvarpart_h2_figure <- function(
       trajectory_guide = trajectory_guide
     )
 
-  return(
+  res <-
     list(
       main_plot = main_plot,
       signed_full_range_plot = signed_full_range_plot
     )
-  )
+
+  return(res)
 }
