@@ -115,7 +115,10 @@ predict_configured_temporal_model <- function(
       isTRUE(model_config_row[["need_to_run"]][1]) ||
       isTRUE(model_config_row[["need_to_be_evaluated"]][1])
   ) {
-    return(NULL)
+    res <-
+      NULL
+
+    return(res)
   }
 
   prediction_file_exists <-

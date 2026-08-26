@@ -35,7 +35,7 @@ compute_hvarpart_residual_axes <- function(
     ncol(mat_residuals) == 0L ||
       all(abs(mat_residuals) <= sqrt(.Machine[["double.eps"]]))
   ) {
-    return(
+    res <-
       tibble::as_tibble(
         matrix(
           numeric(),
@@ -43,7 +43,8 @@ compute_hvarpart_residual_axes <- function(
           ncol = 0L
         )
       )
-    )
+
+    return(res)
   }
 
   model_axes <- vegan::rda(X = mat_residuals, scale = TRUE)
@@ -58,7 +59,7 @@ compute_hvarpart_residual_axes <- function(
   if (
     n_axes < 1L
   ) {
-    return(
+    res <-
       tibble::as_tibble(
         matrix(
           numeric(),
@@ -66,7 +67,8 @@ compute_hvarpart_residual_axes <- function(
           ncol = 0L
         )
       )
-    )
+
+    return(res)
   }
 
   mat_axes <-
@@ -78,5 +80,8 @@ compute_hvarpart_residual_axes <- function(
   colnames(mat_axes) <-
     stringr::str_c("residual_axis_", seq_len(n_axes))
 
-  return(tibble::as_tibble(mat_axes))
+  res <-
+    tibble::as_tibble(mat_axes)
+
+  return(res)
 }

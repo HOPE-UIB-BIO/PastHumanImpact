@@ -71,10 +71,12 @@ aggregate_events_spd <- function(data_source_events,
           age_min, # ..2
           age_max # ..3
         ),
-        .f = ~ ifelse(
-          test = isTRUE(is.null(..1)),
-          yes = return(
-            data_source_dummy_time %>%
+        .f = ~ {
+          if (
+            isTRUE(is.null(..1))
+          ) {
+            res <-
+              data_source_dummy_time %>%
               dplyr::filter(
                 age >= ..2,
                 age <= ..3
@@ -82,9 +84,12 @@ aggregate_events_spd <- function(data_source_events,
               dplyr::mutate(
                 spd = 0
               )
-          ),
-          no = return(..1)
-        )
+          } else {
+            res <- ..1
+          }
+
+          return(res)
+        }
       )
     ) %>%
     dplyr::select(-c(age_min, age_max, data))
@@ -125,17 +130,22 @@ aggregate_events_spd <- function(data_source_events,
           age_min, # ..2
           age_max # ..3
         ),
-        .f = ~ ifelse(
-          test = isTRUE(is.na(..1)),
-          yes = return(
-            dummy_data_events %>%
+        .f = ~ {
+          if (
+            isTRUE(is.na(..1))
+          ) {
+            res <-
+              dummy_data_events %>%
               dplyr::filter(
                 age >= ..2,
                 age <= ..3
               )
-          ),
-          no = return(..1)
-        )
+          } else {
+            res <- ..1
+          }
+
+          return(res)
+        }
       )
     ) %>%
     dplyr::select(-c(age_min, age_max, have_events))

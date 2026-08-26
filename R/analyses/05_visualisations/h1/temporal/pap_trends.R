@@ -132,7 +132,7 @@ plot_pap_primary <-
     pap_variables = vec_primary_paps,
     layout = "primary",
     output_dir = path_figure_dir,
-    output_stem = "pap_trend_primary",
+    output_stem = "pap__temporal_trends__primary",
     width = 270,
     height = 70 + 28 * length(vec_primary_paps)
   )
@@ -150,7 +150,7 @@ purrr::walk(
     pap_variables = .x,
     layout = "strata",
     output_dir = path_figure_dir,
-    output_stem = paste0("pap_trend_", .x),
+    output_stem = stringr::str_c("pap__temporal_trend__", .x),
     width = 270,
     height = 200
   )

@@ -1,7 +1,8 @@
 #' @title Prepare time-controlled dataset-level importance records
 #' @description
-#' Convert three-group within-dataset HVarPart components into signed differences,
-#' conditional human-climate balances, and three-way presentation allocations.
+#' Convert three-group within-dataset HVarPart components into signed
+#' differences, conditional human-climate balances, and three-way presentation
+#' allocations.
 #' @param data_components Extracted temporal HVarPart component table.
 #' @param data_status Extracted temporal HVarPart status table.
 #' @param data_meta Core metadata with coordinates and spatial strata.
@@ -26,7 +27,7 @@ prepare_time_controlled_importance_records <- function(
       id_col,
       "analysis",
       "predictor",
-      "Individual",
+      "individual",
       "model_profile",
       "total_adjusted_r_squared"
     )
@@ -53,7 +54,7 @@ prepare_time_controlled_importance_records <- function(
         id_col,
         "analysis",
         "predictor",
-        "Individual",
+        "individual",
         "total_adjusted_r_squared"
       ))
     ) |>
@@ -64,7 +65,7 @@ prepare_time_controlled_importance_records <- function(
         "total_adjusted_r_squared"
       )),
       names_from = "predictor",
-      values_from = "Individual"
+      values_from = "individual"
     )
   data_human_climate_only <-
     data_components |>
@@ -77,7 +78,7 @@ prepare_time_controlled_importance_records <- function(
         id_col,
         "analysis",
         "predictor",
-        "Individual",
+        "individual",
         "total_adjusted_r_squared"
       ))
     ) |>
@@ -88,7 +89,7 @@ prepare_time_controlled_importance_records <- function(
         "total_adjusted_r_squared"
       )),
       names_from = "predictor",
-      values_from = "Individual",
+      values_from = "individual",
       names_prefix = "human_climate_only_"
     ) |>
     dplyr::rename(
@@ -150,10 +151,19 @@ prepare_time_controlled_importance_records <- function(
       human_climate_only_signed_weight =
         abs(.data[["human_climate_only_total_adjusted_r_squared"]]),
       human_climate_only_signed_balance =
-        (.data[["human_climate_only_human"]] - .data[["human_climate_only_climate"]]) /
+        (
+          .data[["human_climate_only_human"]] -
+            .data[["human_climate_only_climate"]]
+        ) /
           .data[["human_climate_only_total_adjusted_r_squared"]],
-      human_climate_only_zero_human = pmax(.data[["human_climate_only_human"]], 0),
-      human_climate_only_zero_climate = pmax(.data[["human_climate_only_climate"]], 0),
+      human_climate_only_zero_human = pmax(
+        .data[["human_climate_only_human"]],
+        0
+      ),
+      human_climate_only_zero_climate = pmax(
+        .data[["human_climate_only_climate"]],
+        0
+      ),
       human_climate_only_zero_weight =
         .data[["human_climate_only_zero_human"]] +
           .data[["human_climate_only_zero_climate"]],

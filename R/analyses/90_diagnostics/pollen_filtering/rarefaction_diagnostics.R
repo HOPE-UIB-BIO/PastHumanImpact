@@ -25,7 +25,7 @@ path_store_pollen <-
   )
 
 path_output_tables <-
-  here::here("Outputs", "Tables")
+  here::here("Outputs", "Tables", "Dataset_summaries", "Pollen")
 
 path_output_report <-
   here::here(
@@ -251,7 +251,12 @@ table_sample_rowsums_by_climatezone <-
 
 threshold_scenarios <-
   tibble::tibble(
-    scenario = c("baseline_25_150", "threshold_50_300", "threshold_84_500", "threshold_167_1000"),
+    scenario = c(
+      "baseline_25_150",
+      "threshold_50_300",
+      "threshold_84_500",
+      "threshold_167_1000"
+    ),
     threshold = c(150, 300, 500, 1000)
   )
 
@@ -295,7 +300,9 @@ n_baseline <- length(baseline_ids)
 n_samples_baseline <-
   retention_records |>
   dplyr::filter(scenario == "baseline_25_150") |>
-  dplyr::summarise(n_samples_baseline = sum(n_samples_retained, na.rm = TRUE)) |>
+  dplyr::summarise(
+    n_samples_baseline = sum(n_samples_retained, na.rm = TRUE)
+  ) |>
   dplyr::pull(n_samples_baseline)
 
 table_retention_overall <-
@@ -345,7 +352,8 @@ table_retention_by_region <-
   ) |>
   dplyr::mutate(
     n_region_lost = n_region_baseline - n_region_retained,
-    n_region_samples_lost = n_region_samples_baseline - n_region_samples_retained,
+    n_region_samples_lost =
+      n_region_samples_baseline - n_region_samples_retained,
     prop_region_retained = n_region_retained / n_region_baseline,
     prop_region_lost = n_region_lost / n_region_baseline,
     prop_region_samples_retained =
@@ -376,7 +384,8 @@ baseline_by_region_climatezone <-
   dplyr::group_by(region, climatezone) |>
   dplyr::summarise(
     n_region_climatezone_baseline = dplyr::n_distinct(dataset_id),
-    n_region_climatezone_samples_baseline = sum(n_samples_retained, na.rm = TRUE),
+    n_region_climatezone_samples_baseline =
+      sum(n_samples_retained, na.rm = TRUE),
     .groups = "drop"
   )
 
@@ -385,7 +394,8 @@ table_retention_by_region_climatezone <-
   dplyr::group_by(scenario, threshold, region, climatezone) |>
   dplyr::summarise(
     n_region_climatezone_retained = dplyr::n_distinct(dataset_id),
-    n_region_climatezone_samples_retained = sum(n_samples_retained, na.rm = TRUE),
+    n_region_climatezone_samples_retained =
+      sum(n_samples_retained, na.rm = TRUE),
     .groups = "drop"
   ) |>
   dplyr::left_join(
@@ -396,7 +406,8 @@ table_retention_by_region_climatezone <-
     n_region_climatezone_lost =
       n_region_climatezone_baseline - n_region_climatezone_retained,
     n_region_climatezone_samples_lost =
-      n_region_climatezone_samples_baseline - n_region_climatezone_samples_retained,
+      n_region_climatezone_samples_baseline -
+        n_region_climatezone_samples_retained,
     prop_region_climatezone_retained =
       dplyr::if_else(
         n_region_climatezone_baseline > 0,
@@ -412,13 +423,15 @@ table_retention_by_region_climatezone <-
     prop_region_climatezone_samples_retained =
       dplyr::if_else(
         n_region_climatezone_samples_baseline > 0,
-        n_region_climatezone_samples_retained / n_region_climatezone_samples_baseline,
+        n_region_climatezone_samples_retained /
+          n_region_climatezone_samples_baseline,
         NA_real_
       ),
     prop_region_climatezone_samples_lost =
       dplyr::if_else(
         n_region_climatezone_samples_baseline > 0,
-        n_region_climatezone_samples_lost / n_region_climatezone_samples_baseline,
+        n_region_climatezone_samples_lost /
+          n_region_climatezone_samples_baseline,
         NA_real_
       )
   ) |>
@@ -453,20 +466,32 @@ n_records_baseline_runtime <-
 
 readr::write_csv(
   table_sample_rowsums_by_climatezone,
-  file.path(path_output_tables, "pollen_sample_rowsums_by_climatezone.csv")
+  file.path(
+    path_output_tables,
+    "pollen__sample_rowsums__climate_zone.csv"
+  )
 )
 
 readr::write_csv(
   table_retention_overall,
-  file.path(path_output_tables, "pollen_threshold_retention_overall.csv")
+  file.path(
+    path_output_tables,
+    "pollen__threshold_retention__overall.csv"
+  )
 )
 
 readr::write_csv(
   table_retention_by_region,
-  file.path(path_output_tables, "pollen_threshold_retention_by_region.csv")
+  file.path(
+    path_output_tables,
+    "pollen__threshold_retention__region.csv"
+  )
 )
 
 readr::write_csv(
   table_retention_by_region_climatezone,
-  file.path(path_output_tables, "pollen_threshold_retention_by_region_climatezone.csv")
+  file.path(
+    path_output_tables,
+    "pollen__threshold_retention__region_and_climate_zone.csv"
+  )
 )

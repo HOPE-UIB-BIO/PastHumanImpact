@@ -137,7 +137,10 @@ readr::write_csv(
       dplyr::mutate(profile = "signed")
   ),
   here::here(
-    "Outputs/Tables/HVarPart/",
-    "predictor_interrelationships_importance_values.csv"
+    "Outputs",
+    "Tables",
+    "H2",
+    "Interrelationships",
+    "predictors__interrelationships__importance_values.csv"
   )
 )

@@ -62,7 +62,7 @@ validate_function_names <- function(
 
   validation <-
     function_files |>
-    purrr::map_dfr(
+    purrr::map(
       .f = ~ {
         function_file <- .x
 
@@ -101,7 +101,8 @@ validate_function_names <- function(
             paste0(public_name, ".R")
         )
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   invalid <-
     validation |>

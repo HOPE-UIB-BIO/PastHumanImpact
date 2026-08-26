@@ -14,6 +14,7 @@ vec_visualisation_scripts <-
     "h1/dataset_trends/all_dataset_trends.R",
     "h1/dataset_trends/example_datasets.R",
     "h1/spatial/human_climate_balance.R",
+    "h1/spatial/spatial_dependence.R",
     "h1/temporal/event_trends.R",
     "h1/temporal/human_climate_space_composition.R",
     "h1/temporal/pap_trends.R",

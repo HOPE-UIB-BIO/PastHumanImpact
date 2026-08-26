@@ -65,7 +65,6 @@ path_figure_dir <-
   here::here(
     "Outputs",
     "Figures",
-    "H1",
     "Dataset_trends"
   )
 
@@ -270,7 +269,7 @@ readr::write_csv(
   x = data_selected_examples,
   file = file.path(
     path_figure_dir,
-    "hvarpart_dataset_example_selection.csv"
+    "hvarpart__dataset_example_selection.csv"
   )
 )
 
@@ -482,7 +481,7 @@ purrr::walk(
     filename = file.path(
       path_figure_dir,
       stringr::str_glue(
-        "hvarpart_dataset_temporal_examples.{.x}"
+        "hvarpart__dataset_temporal_examples.{.x}"
       )
     ),
     plot = plot_examples,

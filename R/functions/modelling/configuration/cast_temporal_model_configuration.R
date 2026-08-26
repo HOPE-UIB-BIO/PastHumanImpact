@@ -20,11 +20,12 @@ cast_temporal_model_configuration <- function(
   )
 
   res_config <-
-    purrr::map2_dfc(
+    purrr::map2(
       .x = data_current[names(data_candidate)],
       .y = data_candidate,
       .f = cast_temporal_config_column
-    )
+    ) |>
+    dplyr::bind_cols()
 
   return(res_config)
 }

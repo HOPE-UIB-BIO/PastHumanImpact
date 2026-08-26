@@ -47,7 +47,7 @@ summarise_spatial_importance_subset <- function(
     tidyr::crossing(data_profiles, data_levels)
   res_summary <-
     data_combinations |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ summarise_spatial_importance_profile(
         data_subset = data_subset,
         profile_name = ..1,
@@ -60,7 +60,8 @@ summarise_spatial_importance_subset <- function(
         distance_value = distance_value,
         repetition_value = repetition_value
       )
-    )
+    ) |>
+    dplyr::bind_rows()
 
   return(res_summary)
 }

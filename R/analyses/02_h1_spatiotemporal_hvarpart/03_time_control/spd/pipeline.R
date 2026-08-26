@@ -188,7 +188,7 @@ list(
     name = "data_time_controlled_balance_records",
     command = data_time_controlled_balance_records_all |>
       dplyr::filter(
-        is.finite(.data[["signed_balance"]]),
+        is.finite(.data[["signed_difference"]]),
         .data[["signed_weight"]] > 0,
         is.finite(.data[["zero_balance"]]),
         .data[["zero_weight"]] > 0

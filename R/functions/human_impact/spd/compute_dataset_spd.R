@@ -38,7 +38,7 @@ compute_dataset_spd <- function(
 
   data_density <-
     data_source_dist_vec |>
-    purrr::map_dfc(
+    purrr::map(
       compute_spd_density,
       data_source = rc,
       sel_calcurve = calcurve,
@@ -47,7 +47,8 @@ compute_dataset_spd <- function(
       min_age = age_from,
       sel_smooth_size = sel_smooth_size,
       normalise_to_one = normalise_to_one
-    )
+    ) |>
+    dplyr::bind_cols()
 
   res_spd <-
     dplyr::bind_cols(dummy_age_table, data_density)

@@ -54,7 +54,10 @@ build_block_permutation_matrix <- function(
               if (
                 length(vec_rows) == 1L
               ) {
-                return(values[vec_rows])
+                res <-
+                  values[vec_rows]
+
+                return(res)
               }
 
               res_values <-

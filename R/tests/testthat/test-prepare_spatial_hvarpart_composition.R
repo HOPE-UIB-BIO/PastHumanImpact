@@ -8,7 +8,7 @@ testthat::test_that(
         age = 2000,
         model_profile = "human_climate",
         predictor = c("human", "climate"),
-        Individual = c(0.2, 0.8)
+        individual = c(0.2, 0.8)
       )
     status <-
       tibble::tibble(

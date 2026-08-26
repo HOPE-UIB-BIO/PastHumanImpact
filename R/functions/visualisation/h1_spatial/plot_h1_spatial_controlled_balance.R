@@ -1,11 +1,14 @@
 #' @title Plot spatiotemporally controlled spatial analysis
 #' @description
-#' Insert time-controlled dataset balances and spatially adjusted summaries into
-#' the canonical Figure 2 maps, densities, and climate-zone panels.
+#' Insert time-controlled dataset balances and spatially adjusted summaries
+#' into the canonical spatial maps, densities, and climate-zone panels.
 #' @param data_records Eligible time-controlled dataset records.
 #' @param data_estimates Spatially adjusted aggregation estimates.
 #' @param data_geo_koppen Spatial climate-zone data used by
 #'   `build_region_map()`.
+#' @param profile Balance profile. Use `"zero_truncated"` for the bounded
+#' presentation balance or `"signed"` for the untruncated hierarchical
+#' contribution difference.
 #' @return A ggplot object containing maps and statistical panels.
 #' @examples
 #' \dontrun{
@@ -14,8 +17,36 @@
 plot_h1_spatial_controlled_balance <- function(
   data_records,
   data_estimates,
-  data_geo_koppen
+  data_geo_koppen,
+  profile = c("zero_truncated", "signed")
 ) {
+  profile <-
+    match.arg(profile)
+
+  balance_column <-
+    if (
+      identical(profile, "zero_truncated")
+    ) {
+      "zero_balance"
+    } else {
+      "signed_difference"
+    }
+
+  y_axis_title <-
+    if (
+      identical(profile, "zero_truncated")
+    ) {
+      paste0(
+        "Relative importance\n",
+        "(Zero-truncated human\u2212climate balance)"
+      )
+    } else {
+      paste0(
+        "Relative importance\n",
+        "(Untruncated hierarchical contribution difference)"
+      )
+    }
+
   required_records <-
     c(
       "dataset_id",
@@ -24,7 +55,7 @@ plot_h1_spatial_controlled_balance <- function(
       "climatezone",
       "long",
       "lat",
-      "zero_balance"
+      balance_column
     )
 
   required_estimates <-
@@ -43,6 +74,8 @@ plot_h1_spatial_controlled_balance <- function(
     all(required_estimates %in% names(data_estimates)),
     is.data.frame(data_geo_koppen),
     all(c("x", "y", "climatezone") %in% names(data_geo_koppen)),
+    all(is.finite(data_records[[balance_column]])),
+    all(abs(data_records[[balance_column]]) <= 1 + 1e-10),
     msg = paste(
       "Spatiotemporally controlled spatial analysis inputs do not",
       "satisfy the contract."
@@ -67,14 +100,14 @@ plot_h1_spatial_controlled_balance <- function(
 
   data_balance_records <-
     data_records |>
-    dplyr::filter(is.finite(.data[["zero_balance"]])) |>
+    dplyr::filter(is.finite(.data[[balance_column]])) |>
     dplyr::mutate(
       model_id = stringr::str_c(
         .data[["analysis"]],
         .data[["dataset_id"]],
         sep = "__"
       ),
-      importance_balance = .data[["zero_balance"]],
+      importance_balance = .data[[balance_column]],
       region = factor(.data[["region"]], levels = region_levels)
     ) |>
     prepare_climatezone_factor()
@@ -106,11 +139,10 @@ plot_h1_spatial_controlled_balance <- function(
     )
 
   data_zone_summary <-
-    data_estimates |>
-    dplyr::filter(
-      .data[["aggregation_level"]] == "region_climatezone",
-      .data[["profile"]] == "zero_truncated",
-      is.finite(.data[["adjusted_balance"]])
+    select_spatial_balance_estimates(
+      data_estimates = data_estimates,
+      aggregation_level = "region_climatezone",
+      profile = profile
     ) |>
     dplyr::transmute(
       analysis = "spatial_spd",
@@ -125,11 +157,10 @@ plot_h1_spatial_controlled_balance <- function(
       )
     )
   data_region_summary <-
-    data_estimates |>
-    dplyr::filter(
-      .data[["aggregation_level"]] == "region",
-      .data[["profile"]] == "zero_truncated",
-      is.finite(.data[["adjusted_balance"]])
+    select_spatial_balance_estimates(
+      data_estimates = data_estimates,
+      aggregation_level = "region",
+      profile = profile
     ) |>
     dplyr::transmute(
       analysis = "spatial_spd",
@@ -154,8 +185,12 @@ plot_h1_spatial_controlled_balance <- function(
       data_records_override = data_balance_records,
       data_climatezone_summary_override = data_zone_summary,
       data_region_summary_override = data_region_summary,
-      show_intervals = TRUE
+      show_intervals = TRUE,
+      y_axis_title = y_axis_title
     )
 
-  return(result[["plot"]])
+  res <-
+    result[["plot"]]
+
+  return(res)
 }

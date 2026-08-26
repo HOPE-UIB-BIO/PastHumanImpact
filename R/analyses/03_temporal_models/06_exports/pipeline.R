@@ -33,7 +33,7 @@ runner_temporal <-
   "R/analyses/03_temporal_models/00_run.R"
 
 path_table_dir <-
-  here::here("Outputs", "Tables", "Temporal_models")
+  here::here("Outputs", "Tables", "H1", "Temporal", "PAP_trends")
 
 #----------------------------------------------------------#
 # 1. Define targets -----
@@ -69,7 +69,7 @@ list(
       )
 
       path_output <-
-        file.path(path_table_dir, "pap_temporal_predictions.csv")
+        file.path(path_table_dir, "pap__temporal_predictions.csv")
 
       readr::write_csv(table_pap_temporal_predictions, path_output)
 

@@ -67,7 +67,7 @@ compute_temporal_moran_diagnostics <- function(
     )
   res_diagnostics <-
     data_combinations |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ compute_temporal_moran_scale(
         values = data_ordered[[..1]],
         distance_matrix = mat_distances,
@@ -79,7 +79,8 @@ compute_temporal_moran_diagnostics <- function(
           temporal_scope = ..2,
           .before = 1L
         )
-    )
+    ) |>
+    dplyr::bind_rows()
 
   return(res_diagnostics)
 }

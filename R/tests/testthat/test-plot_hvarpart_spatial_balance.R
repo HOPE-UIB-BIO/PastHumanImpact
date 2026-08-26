@@ -1,15 +1,6 @@
 testthat::test_that(
   "plot_hvarpart_spatial_balance() creates the bounded balance",
   {
-    original_get_map_region <- build_region_map
-    assign(
-      "build_region_map",
-      function(...) {
-        ggplot2::ggplot() + ggplot2::theme_void()
-      },
-      envir = globalenv()
-    )
-
     data_importance <-
       tibble::tibble(
         analysis = "spatial_spd",
@@ -43,21 +34,24 @@ testthat::test_that(
         climatezone = c("Polar", "Temperate", "Polar", "Temperate")
       )
 
-    result <-
-      tryCatch(
-        plot_hvarpart_spatial_balance(
-          data_importance = data_importance,
-          data_meta = data_meta,
-          data_geo_koppen = tibble::tibble(),
-          show_intervals = TRUE
-        ),
-        finally = assign(
-          "build_region_map",
-          original_get_map_region,
-          envir = globalenv()
+    data_geo_koppen <-
+      tibble::tibble(
+        x = c(-100, -90, 10, 20),
+        y = c(50, 55, 50, 55),
+        climatezone = factor(
+          c("Polar", "Temperate", "Polar", "Temperate")
         )
       )
 
+    result <-
+      suppressWarnings(
+        plot_hvarpart_spatial_balance(
+          data_importance = data_importance,
+          data_meta = data_meta,
+          data_geo_koppen = data_geo_koppen,
+          show_intervals = TRUE
+        )
+      )
     testthat::expect_s3_class(result$plot, "ggplot")
     testthat::expect_s3_class(result$statistical_plot, "ggplot")
     testthat::expect_equal(
@@ -101,25 +95,16 @@ testthat::test_that(
       c(-1.12, 1.12)
     )
     dashed_zero_layers <-
-      result$statistical_plot$layers[vapply(
-        result$statistical_plot$layers,
-        function(layer) {
-          inherits(layer$geom, "GeomHline") &&
-            identical(layer$aes_params$linetype, 2)
-        },
-        logical(1)
-      )]
+      result[["statistical_plot"]][["layers"]] |>
+      purrr::keep(
+        ~ inherits(.x[["geom"]], "GeomHline") &&
+          identical(.x[["aes_params"]][["linetype"]], 2)
+      )
     testthat::expect_length(dashed_zero_layers, 1)
-    outlined_point_layers <-
-      result$statistical_plot$layers[vapply(
-        result$statistical_plot$layers,
-        function(layer) {
-          inherits(layer$geom, "GeomPoint") &&
-            identical(layer$aes_params$colour, common_gray)
-        },
-        logical(1)
-      )]
-    testthat::expect_length(outlined_point_layers, 1)
+    summary_point_layers <-
+      result[["statistical_plot"]][["layers"]] |>
+      purrr::keep(~ inherits(.x[["geom"]], "GeomPoint"))
+    testthat::expect_length(summary_point_layers, 1)
     interval_layers <-
       result[["statistical_plot"]][["layers"]] |>
       purrr::keep(~ inherits(.x[["geom"]], "GeomSegment"))
@@ -138,11 +123,11 @@ testthat::test_that(
     plot_theme <- result[["statistical_plot"]][["theme"]]
     legend_background <- plot_theme[["legend.box.background"]]
     testthat::expect_s3_class(legend_background, "element_rect")
-    rect_layers <- result$statistical_plot$layers[vapply(
-      result$statistical_plot$layers,
-      function(layer) "background_balance" %in% names(layer$data),
-      logical(1)
-    )]
+    rect_layers <-
+      result[["statistical_plot"]][["layers"]] |>
+      purrr::keep(
+        ~ "background_balance" %in% names(.x[["data"]])
+      )
     testthat::expect_length(rect_layers, 1)
     testthat::expect_false(
       "Continent" %in%

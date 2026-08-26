@@ -135,7 +135,10 @@ diagnose_pap_collinearity <- function(data_source,
       .y = data_nested[["is_eligible"]],
       .f = ~ {
         if (!isTRUE(.y)) {
-          return(tibble::tibble())
+          res <-
+            tibble::tibble()
+
+          return(res)
         }
 
         collinear::cor_df(
@@ -152,7 +155,10 @@ diagnose_pap_collinearity <- function(data_source,
       .y = data_nested[["is_eligible"]],
       .f = ~ {
         if (!isTRUE(.y)) {
-          return(character())
+          res <-
+            character()
+
+          return(res)
         }
 
         collinear::collinear_select(
@@ -168,7 +174,7 @@ diagnose_pap_collinearity <- function(data_source,
     )
 
   correlation_table <-
-    purrr::map_dfr(
+    purrr::map(
       .x = seq_len(nrow(data_nested)),
       .f = ~ {
         data_group_info <-
@@ -191,13 +197,14 @@ diagnose_pap_collinearity <- function(data_source,
           data_correlation
         )
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   correlation_table[["abs_correlation"]] <-
     abs(correlation_table[["correlation"]])
 
   selection_table <-
-    purrr::map_dfr(
+    purrr::map(
       .x = seq_len(nrow(data_nested)),
       .f = ~ {
         data_group_info <-
@@ -214,7 +221,8 @@ diagnose_pap_collinearity <- function(data_source,
           predictor = selected_vars
         )
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   high_collinearity_pairs <-
     correlation_table[

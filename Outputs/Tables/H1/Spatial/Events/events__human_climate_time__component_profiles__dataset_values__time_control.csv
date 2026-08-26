@@ -1,0 +1,1123 @@
+dataset_id,analysis,measure,component,value,region,climatezone,long,lat,climatezone_label,figure_profile
+48966,spatial_events,unique_adjusted_r2,climate,-0.016488545436628477,Europe,Temperate,5.75969,52.24479,TMP,climate_unique_adjusted_r2
+4042,spatial_events,unique_adjusted_r2,climate,0.24108064589111744,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,climate_unique_adjusted_r2
+2395,spatial_events,unique_adjusted_r2,climate,0.05003402985711414,Latin America,Tropical,-90.13333,20.86667,TRO,climate_unique_adjusted_r2
+4542,spatial_events,unique_adjusted_r2,climate,0.34983788457216136,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,climate_unique_adjusted_r2
+17689,spatial_events,unique_adjusted_r2,climate,0.08638931213145118,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,climate_unique_adjusted_r2
+25285,spatial_events,unique_adjusted_r2,climate,0.15597444157650797,Europe,Temperate,5.28333,45.79083,TMP,climate_unique_adjusted_r2
+45383,spatial_events,unique_adjusted_r2,climate,0.2537297927709766,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,climate_unique_adjusted_r2
+4197,spatial_events,unique_adjusted_r2,climate,-0.06285660383602776,Europe,Temperate,5.41667,45.47333,TMP,climate_unique_adjusted_r2
+42671,spatial_events,unique_adjusted_r2,climate,0.09468717208109856,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,climate_unique_adjusted_r2
+22842,spatial_events,unique_adjusted_r2,climate,0.10923454914947006,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,climate_unique_adjusted_r2
+24467,spatial_events,unique_adjusted_r2,climate,-0.011939696811354206,Europe,Temperate,3.13333,49.18333,TMP,climate_unique_adjusted_r2
+22711,spatial_events,unique_adjusted_r2,climate,0.09796229710528437,Europe,Temperate,-5.34361,57.55889,TMP,climate_unique_adjusted_r2
+40997,spatial_events,unique_adjusted_r2,climate,0.1562647095166343,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,climate_unique_adjusted_r2
+309,spatial_events,unique_adjusted_r2,climate,0.15090630749370315,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,climate_unique_adjusted_r2
+34553,spatial_events,unique_adjusted_r2,climate,0.13056133781221713,Oceania,Temperate,145.95589,-41.66993,TMP,climate_unique_adjusted_r2
+4198,spatial_events,unique_adjusted_r2,climate,0.03439933917005611,Europe,Temperate,5.41667,45.47333,TMP,climate_unique_adjusted_r2
+26608,spatial_events,unique_adjusted_r2,climate,-0.015534163942498402,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,climate_unique_adjusted_r2
+3879,spatial_events,unique_adjusted_r2,climate,0.12619623411776648,Europe,Temperate,-3.90841,57.31333,TMP,climate_unique_adjusted_r2
+518,spatial_events,unique_adjusted_r2,climate,0.15805203082663954,North America,Cold - Warm Summer,-80.28333,38.2,CWS,climate_unique_adjusted_r2
+21537,spatial_events,unique_adjusted_r2,climate,-0.08174761429997113,Latin America,Tropical,-67.92396,-14.43169,TRO,climate_unique_adjusted_r2
+4092,spatial_events,unique_adjusted_r2,climate,0.08664695076748052,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,climate_unique_adjusted_r2
+15103,spatial_events,unique_adjusted_r2,climate,0.03038958171343853,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,climate_unique_adjusted_r2
+20223,spatial_events,unique_adjusted_r2,climate,-0.0054721971272608805,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,climate_unique_adjusted_r2
+42649,spatial_events,unique_adjusted_r2,climate,0.2490806239857113,Europe,Temperate,9.00032,47.68985,TMP,climate_unique_adjusted_r2
+16217,spatial_events,unique_adjusted_r2,climate,0.09720856412654222,Europe,Temperate,-6.77814,53.81603,TMP,climate_unique_adjusted_r2
+21895,spatial_events,unique_adjusted_r2,climate,0.13127285956186663,Latin America,Tropical,-77.1432,2.0024,TRO,climate_unique_adjusted_r2
+47604,spatial_events,unique_adjusted_r2,climate,0.02829050812632017,Europe,Polar,7.35751,46.15006,POL,climate_unique_adjusted_r2
+48960,spatial_events,unique_adjusted_r2,climate,0.07786928337989585,Europe,Temperate,2.64556,45.33944,TMP,climate_unique_adjusted_r2
+2629,spatial_events,unique_adjusted_r2,climate,-0.02902162190599744,North America,Cold - Warm Summer,-70.05833,41.275,CWS,climate_unique_adjusted_r2
+3043,spatial_events,unique_adjusted_r2,climate,-0.028747159069083317,Oceania,Temperate,147.30056,-42.54361,TMP,climate_unique_adjusted_r2
+47110,spatial_events,unique_adjusted_r2,climate,-0.014599211894582242,Oceania,Temperate,145.95589,-41.66993,TMP,climate_unique_adjusted_r2
+21913,spatial_events,unique_adjusted_r2,climate,0.07281434122963637,Latin America,Tropical,-76.78055,2.43268,TRO,climate_unique_adjusted_r2
+1440,spatial_events,unique_adjusted_r2,climate,0.015983230680954086,Europe,Arid,32.61667,46.51667,ARD,climate_unique_adjusted_r2
+45320,spatial_events,unique_adjusted_r2,climate,0.025893119122350372,Europe,Arid,32.61667,46.51667,ARD,climate_unique_adjusted_r2
+24110,spatial_events,unique_adjusted_r2,climate,0.03920691338565119,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,climate_unique_adjusted_r2
+48624,spatial_events,unique_adjusted_r2,climate,0.006361724065594543,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,climate_unique_adjusted_r2
+23006,spatial_events,unique_adjusted_r2,climate,0.08434809592111536,Europe,Cold - Warm Summer,28,51.16061,CWS,climate_unique_adjusted_r2
+40582,spatial_events,unique_adjusted_r2,climate,0.12211312782223493,Europe,Polar,8.02556,46.38972,POL,climate_unique_adjusted_r2
+15130,spatial_events,unique_adjusted_r2,climate,0.1844829475866161,Latin America,Temperate,-71.56608,-43.44371,TMP,climate_unique_adjusted_r2
+4041,spatial_events,unique_adjusted_r2,climate,0.04510761172254485,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,climate_unique_adjusted_r2
+363,spatial_events,unique_adjusted_r2,climate,-0.001150560777734455,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,climate_unique_adjusted_r2
+26435,spatial_events,unique_adjusted_r2,climate,-0.011252173933306575,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,climate_unique_adjusted_r2
+42570,spatial_events,unique_adjusted_r2,climate,0.010551091121416167,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,climate_unique_adjusted_r2
+1763,spatial_events,unique_adjusted_r2,climate,-0.023408749174245513,North America,Cold - Warm Summer,-69.3,43.76667,CWS,climate_unique_adjusted_r2
+48837,spatial_events,unique_adjusted_r2,climate,0.022956065607687925,Latin America,Tropical,-66.67672,0.28602,TRO,climate_unique_adjusted_r2
+15247,spatial_events,unique_adjusted_r2,climate,0.003928510556065801,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,climate_unique_adjusted_r2
+48777,spatial_events,unique_adjusted_r2,climate,0.014598382417127853,Europe,Temperate,8.77929,53.65498,TMP,climate_unique_adjusted_r2
+48976,spatial_events,unique_adjusted_r2,climate,-0.028527308467592105,Europe,Temperate,2.62278,45.45194,TMP,climate_unique_adjusted_r2
+3482,spatial_events,unique_adjusted_r2,climate,0.38204720761436106,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,climate_unique_adjusted_r2
+21580,spatial_events,unique_adjusted_r2,climate,0.05729704812399872,Latin America,Tropical,-67.88893,-14.50063,TRO,climate_unique_adjusted_r2
+42681,spatial_events,unique_adjusted_r2,climate,0.01126687817558436,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,climate_unique_adjusted_r2
+24319,spatial_events,unique_adjusted_r2,climate,0.1519890587452426,Europe,Cold - Cold Summer,7.845,46.19556,CCS,climate_unique_adjusted_r2
+24321,spatial_events,unique_adjusted_r2,climate,0.22092804673271016,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,climate_unique_adjusted_r2
+21917,spatial_events,unique_adjusted_r2,climate,0.058360990082495845,Latin America,Polar,-74.16112,3.97973,POL,climate_unique_adjusted_r2
+48984,spatial_events,unique_adjusted_r2,climate,0.05099251223613277,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,climate_unique_adjusted_r2
+2645,spatial_events,unique_adjusted_r2,climate,0.07668891867977512,North America,Cold - Hot Summer,-71.03333,41.95,CHS,climate_unique_adjusted_r2
+22890,spatial_events,unique_adjusted_r2,climate,-0.016565438173401614,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,climate_unique_adjusted_r2
+15132,spatial_events,unique_adjusted_r2,climate,-0.19104113088462904,Latin America,Temperate,-71.49835,-41.07352,TMP,climate_unique_adjusted_r2
+15331,spatial_events,unique_adjusted_r2,climate,-0.1841981916350841,Latin America,Polar,-71.84655,-45.69413,POL,climate_unique_adjusted_r2
+1897,spatial_events,unique_adjusted_r2,climate,0.09083546992541547,North America,Cold - Hot Summer,-93.9,42.16,CHS,climate_unique_adjusted_r2
+48935,spatial_events,unique_adjusted_r2,climate,0.01854483025572029,Europe,Arid,-3.93936,41.95209,ARD,climate_unique_adjusted_r2
+48656,spatial_events,unique_adjusted_r2,climate,0.25238604514145235,Oceania,Tropical,140.58726,-2.54291,TRO,climate_unique_adjusted_r2
+15306,spatial_events,unique_adjusted_r2,climate,0.371934364662568,Latin America,Polar,-71.88616,-52.03906,POL,climate_unique_adjusted_r2
+21700,spatial_events,unique_adjusted_r2,climate,0.08315319811310162,Latin America,Temperate,-76.70941,2.36575,TMP,climate_unique_adjusted_r2
+24256,spatial_events,unique_adjusted_r2,climate,0.1839935975583762,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,climate_unique_adjusted_r2
+47011,spatial_events,unique_adjusted_r2,climate,0.16979401633528302,Latin America,Temperate,-79.15958,-4.04586,TMP,climate_unique_adjusted_r2
+22660,spatial_events,unique_adjusted_r2,climate,0.03679719350576849,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,climate_unique_adjusted_r2
+48072,spatial_events,unique_adjusted_r2,climate,-0.05108214023064506,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,climate_unique_adjusted_r2
+2265,spatial_events,unique_adjusted_r2,climate,0.05295921326408193,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,climate_unique_adjusted_r2
+4269,spatial_events,unique_adjusted_r2,climate,0.0013037871469550044,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,climate_unique_adjusted_r2
+40795,spatial_events,unique_adjusted_r2,climate,0.0174398825823342,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,climate_unique_adjusted_r2
+21915,spatial_events,unique_adjusted_r2,climate,0.18728192419058753,Latin America,Tropical,-76.52225,3.10116,TRO,climate_unique_adjusted_r2
+3452,spatial_events,unique_adjusted_r2,climate,0.1510957596835083,North America,Cold - Warm Summer,-90.35,45.3,CWS,climate_unique_adjusted_r2
+48735,spatial_events,unique_adjusted_r2,climate,0.03289608695504864,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,climate_unique_adjusted_r2
+48614,spatial_events,unique_adjusted_r2,climate,0.11906876046631709,Latin America,Temperate,-79.11153,-4.37461,TMP,climate_unique_adjusted_r2
+2318,spatial_events,unique_adjusted_r2,climate,-0.1443393748222156,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,climate_unique_adjusted_r2
+24097,spatial_events,unique_adjusted_r2,climate,0.03268802783788671,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,climate_unique_adjusted_r2
+45400,spatial_events,unique_adjusted_r2,climate,0.039112613001117014,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,climate_unique_adjusted_r2
+24250,spatial_events,unique_adjusted_r2,climate,0.1326691082811171,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,climate_unique_adjusted_r2
+2663,spatial_events,unique_adjusted_r2,climate,0.025903308099295863,North America,Temperate,-81.50634,27.58253,TMP,climate_unique_adjusted_r2
+40452,spatial_events,unique_adjusted_r2,climate,-0.16897432196326823,Europe,Cold - Warm Summer,7.05,47.24056,CWS,climate_unique_adjusted_r2
+22950,spatial_events,unique_adjusted_r2,climate,-0.04770748854845064,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,climate_unique_adjusted_r2
+26520,spatial_events,unique_adjusted_r2,climate,0.0014404381266477362,Europe,Polar,7.09361,46.17667,POL,climate_unique_adjusted_r2
+4524,spatial_events,unique_adjusted_r2,climate,0.09850180208791137,Europe,Temperate,1.75,48.41667,TMP,climate_unique_adjusted_r2
+26514,spatial_events,unique_adjusted_r2,climate,0.15398489530083226,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,climate_unique_adjusted_r2
+48950,spatial_events,unique_adjusted_r2,climate,0.21710618503452106,Europe,Cold - Warm Summer,5.99556,44.555,CWS,climate_unique_adjusted_r2
+4200,spatial_events,unique_adjusted_r2,climate,0.23810623401356856,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,climate_unique_adjusted_r2
+3488,spatial_events,unique_adjusted_r2,climate,0.09815978567749584,North America,Cold - Hot Summer,-89.41667,43.1,CHS,climate_unique_adjusted_r2
+4118,spatial_events,unique_adjusted_r2,climate,-0.09445245687017378,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,climate_unique_adjusted_r2
+4375,spatial_events,unique_adjusted_r2,climate,0.18854068878919683,Europe,Temperate,5.60833,45.425,TMP,climate_unique_adjusted_r2
+3972,spatial_events,unique_adjusted_r2,climate,0.20671280720606455,Europe,Temperate,-1.80028,47.25444,TMP,climate_unique_adjusted_r2
+285,spatial_events,unique_adjusted_r2,climate,0.02553067365886086,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,climate_unique_adjusted_r2
+22791,spatial_events,unique_adjusted_r2,climate,0.1338331407851886,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,climate_unique_adjusted_r2
+22344,spatial_events,unique_adjusted_r2,climate,0.20454380007502249,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,climate_unique_adjusted_r2
+45281,spatial_events,unique_adjusted_r2,climate,0.06095179708995735,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,climate_unique_adjusted_r2
+32426,spatial_events,unique_adjusted_r2,climate,0.21693316028186693,Oceania,Temperate,145.96036,-41.45226,TMP,climate_unique_adjusted_r2
+4393,spatial_events,unique_adjusted_r2,climate,-0.04940442006188639,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,climate_unique_adjusted_r2
+324,spatial_events,unique_adjusted_r2,climate,0.1536387740371008,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,climate_unique_adjusted_r2
+510,spatial_events,unique_adjusted_r2,climate,-0.028313330053534425,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,climate_unique_adjusted_r2
+14941,spatial_events,unique_adjusted_r2,climate,-0.06648464474869642,Oceania,Polar,137.21538,-4.02326,POL,climate_unique_adjusted_r2
+1661,spatial_events,unique_adjusted_r2,climate,0.1718734458156561,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,climate_unique_adjusted_r2
+48769,spatial_events,unique_adjusted_r2,climate,0.34873778337947525,Europe,Temperate,8.76777,53.65389,TMP,climate_unique_adjusted_r2
+21903,spatial_events,unique_adjusted_r2,climate,0.04160689469886858,Latin America,Tropical,-77.1432,2.0024,TRO,climate_unique_adjusted_r2
+22976,spatial_events,unique_adjusted_r2,climate,0.07471499475661025,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,climate_unique_adjusted_r2
+4192,spatial_events,unique_adjusted_r2,climate,-0.029284432103323543,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,climate_unique_adjusted_r2
+22049,spatial_events,unique_adjusted_r2,climate,0.00906123336124276,Latin America,Temperate,-74.15686,4.99445,TMP,climate_unique_adjusted_r2
+4213,spatial_events,unique_adjusted_r2,climate,0.0898035581538641,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,climate_unique_adjusted_r2
+18104,spatial_events,unique_adjusted_r2,climate,0.3924972534240416,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,climate_unique_adjusted_r2
+22101,spatial_events,unique_adjusted_r2,climate,0.1807196988465477,Latin America,Polar,-76.09258,6.47451,POL,climate_unique_adjusted_r2
+4479,spatial_events,unique_adjusted_r2,climate,0.12934861663856223,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,climate_unique_adjusted_r2
+21708,spatial_events,unique_adjusted_r2,climate,0.04982782831663124,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,climate_unique_adjusted_r2
+22047,spatial_events,unique_adjusted_r2,climate,0.013971689585404401,Latin America,Temperate,-74.15686,4.99445,TMP,climate_unique_adjusted_r2
+4555,spatial_events,unique_adjusted_r2,climate,-0.012828764344171129,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,climate_unique_adjusted_r2
+24048,spatial_events,unique_adjusted_r2,climate,-0.11989689722795893,Europe,Polar,8.25556,46.54722,POL,climate_unique_adjusted_r2
+24080,spatial_events,unique_adjusted_r2,climate,0.06081710962620346,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,climate_unique_adjusted_r2
+1771,spatial_events,unique_adjusted_r2,climate,0.15700021320188817,Latin America,Polar,-73,-50.46667,POL,climate_unique_adjusted_r2
+15061,spatial_events,unique_adjusted_r2,climate,0.19002190687997067,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,climate_unique_adjusted_r2
+24867,spatial_events,unique_adjusted_r2,climate,0.27501222383386714,Europe,Temperate,-1.50278,47.40278,TMP,climate_unique_adjusted_r2
+21926,spatial_events,unique_adjusted_r2,climate,0.18329301228882222,Latin America,Polar,-74.10008,5.07352,POL,climate_unique_adjusted_r2
+16193,spatial_events,unique_adjusted_r2,climate,0.3520085442484928,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,climate_unique_adjusted_r2
+42720,spatial_events,unique_adjusted_r2,climate,-0.019772575088643163,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,climate_unique_adjusted_r2
+3830,spatial_events,unique_adjusted_r2,climate,0.20967952300108494,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,climate_unique_adjusted_r2
+45101,spatial_events,unique_adjusted_r2,climate,0.11878327910570896,Europe,Arid,21.91667,40.81667,ARD,climate_unique_adjusted_r2
+4288,spatial_events,unique_adjusted_r2,climate,0.0938684216845912,Europe,Cold - Cold Summer,33.5,61.80556,CCS,climate_unique_adjusted_r2
+40454,spatial_events,unique_adjusted_r2,climate,-0.10163440345174979,Europe,Temperate,7.12361,46.935,TMP,climate_unique_adjusted_r2
+22817,spatial_events,unique_adjusted_r2,climate,-0.014316985767152235,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,climate_unique_adjusted_r2
+3928,spatial_events,unique_adjusted_r2,climate,0.2565052154344194,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,climate_unique_adjusted_r2
+48798,spatial_events,unique_adjusted_r2,climate,0.1302594682683197,Europe,Temperate,8.72184,53.67137,TMP,climate_unique_adjusted_r2
+21978,spatial_events,unique_adjusted_r2,climate,0.20055503409160413,Latin America,Temperate,-74.15686,4.99445,TMP,climate_unique_adjusted_r2
+22793,spatial_events,unique_adjusted_r2,climate,0.052102911015168174,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,climate_unique_adjusted_r2
+15766,spatial_events,unique_adjusted_r2,climate,-0.13176936007551643,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,climate_unique_adjusted_r2
+47520,spatial_events,unique_adjusted_r2,climate,0.03695396370714288,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,climate_unique_adjusted_r2
+4183,spatial_events,unique_adjusted_r2,climate,0.0510259846919896,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,climate_unique_adjusted_r2
+3468,spatial_events,unique_adjusted_r2,climate,0.1372270479200638,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,climate_unique_adjusted_r2
+22908,spatial_events,unique_adjusted_r2,climate,0.1119017792486352,Europe,Temperate,7.38985,45.05242,TMP,climate_unique_adjusted_r2
+15394,spatial_events,unique_adjusted_r2,climate,-0.02793828633393325,Latin America,Tropical,-78.69181,22.16,TRO,climate_unique_adjusted_r2
+1766,spatial_events,unique_adjusted_r2,climate,-0.06551563202269273,North America,Arid,-111.7528,34.6488,ARD,climate_unique_adjusted_r2
+48925,spatial_events,unique_adjusted_r2,climate,0.16091079059497848,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,climate_unique_adjusted_r2
+43295,spatial_events,unique_adjusted_r2,climate,-0.22923782052621167,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,climate_unique_adjusted_r2
+15682,spatial_events,unique_adjusted_r2,climate,0.15681397630694494,North America,Cold - Warm Summer,-87.923,46.83146,CWS,climate_unique_adjusted_r2
+48782,spatial_events,unique_adjusted_r2,climate,0.20673720297890075,Europe,Temperate,8.71572,53.67106,TMP,climate_unique_adjusted_r2
+369,spatial_events,unique_adjusted_r2,climate,0.06447705256926406,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,climate_unique_adjusted_r2
+21838,spatial_events,unique_adjusted_r2,climate,0.23461192152793686,Latin America,Polar,-72.34629,6.38712,POL,climate_unique_adjusted_r2
+PVT_Daihai_Lake_2004,spatial_events,unique_adjusted_r2,climate,0.09431868274297428,Asia,Arid,112.67,40.58,ARD,climate_unique_adjusted_r2
+PVT_Dalianhai_Lake,spatial_events,unique_adjusted_r2,climate,-0.17918800860577788,Asia,Arid,100.41,36.25,ARD,climate_unique_adjusted_r2
+PVT_Manas_Lake_LM1,spatial_events,unique_adjusted_r2,climate,0.06473892489695543,Asia,Arid,85.92,45.83,ARD,climate_unique_adjusted_r2
+PVT_Qidong,spatial_events,unique_adjusted_r2,climate,0.04411732003529745,Asia,Temperate,121.7,31.9,TMP,climate_unique_adjusted_r2
+PVT_Ximen_Co,spatial_events,unique_adjusted_r2,climate,0.07172376554109716,Asia,Polar,101.47,33.38,POL,climate_unique_adjusted_r2
+PVT_Ganhai_Lake,spatial_events,unique_adjusted_r2,climate,-0.006200821398682943,Asia,Cold - Dry Winter,112.19,38.89,CDW,climate_unique_adjusted_r2
+PVT_Gantang,spatial_events,unique_adjusted_r2,climate,-0.12022856230951873,Asia,Temperate,119.03,26.77,TMP,climate_unique_adjusted_r2
+PVT_Kuhai_Lake,spatial_events,unique_adjusted_r2,climate,0.22392125159242338,Asia,Polar,99.31,35.52,POL,climate_unique_adjusted_r2
+PVT_Qongjiamong_Co,spatial_events,unique_adjusted_r2,climate,0.05917808482316167,Asia,Polar,92.37,29.81,POL,climate_unique_adjusted_r2
+PVT_Sujiawan,spatial_events,unique_adjusted_r2,climate,0.05416558340389699,Asia,Cold - Dry Winter,104.52,35.54,CDW,climate_unique_adjusted_r2
+PVT_Zigetang_Co,spatial_events,unique_adjusted_r2,climate,-0.17423553208689324,Asia,Polar,90.9,32,POL,climate_unique_adjusted_r2
+cao_35,spatial_events,unique_adjusted_r2,climate,-0.13445656892750657,Asia,Cold - Cold Summer,151.89,60.73,CCS,climate_unique_adjusted_r2
+cao_39,spatial_events,unique_adjusted_r2,climate,0.15416769589645107,Asia,Cold - Cold Summer,78.333333,59,CCS,climate_unique_adjusted_r2
+cao_57,spatial_events,unique_adjusted_r2,climate,-0.03810707967954308,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,climate_unique_adjusted_r2
+cao_106,spatial_events,unique_adjusted_r2,climate,0.0038048479622778686,Asia,Polar,100.5333,74.5464,POL,climate_unique_adjusted_r2
+PANGAEA.884462,spatial_events,unique_adjusted_r2,climate,0.09744910931158834,Asia,Arid,84.38194,43.04583,ARD,climate_unique_adjusted_r2
+PANGAEA.717128,spatial_events,unique_adjusted_r2,climate,-0.06518440790983171,Asia,Polar,78,33.1667,POL,climate_unique_adjusted_r2
+PANGAEA.808952,spatial_events,unique_adjusted_r2,climate,-0.129156414550059,Asia,Arid,78.32333,32.92944,ARD,climate_unique_adjusted_r2
+PANGAEA.893308,spatial_events,unique_adjusted_r2,climate,-0.005873205162518991,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,climate_unique_adjusted_r2
+Lake_Moon,spatial_events,unique_adjusted_r2,climate,0.00889303171641298,Asia,Cold - Dry Winter,120.8665,47.506,CDW,climate_unique_adjusted_r2
+46483,spatial_events,unique_adjusted_r2,climate,0.006382022340507776,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,climate_unique_adjusted_r2
+2643,spatial_events,unique_adjusted_r2,climate,-0.01923356993897185,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,climate_unique_adjusted_r2
+1844,spatial_events,unique_adjusted_r2,climate,0.21030058365203752,Asia,Cold - Warm Summer,134.566667,43.25,CWS,climate_unique_adjusted_r2
+15624,spatial_events,unique_adjusted_r2,climate,0.06215671381042964,Asia,Temperate,134.133333333333,35.35,TMP,climate_unique_adjusted_r2
+15656,spatial_events,unique_adjusted_r2,climate,0.05659760745104203,Asia,Temperate,136.11934,35.54912,TMP,climate_unique_adjusted_r2
+22330,spatial_events,unique_adjusted_r2,climate,-0.03125948543213619,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,climate_unique_adjusted_r2
+15665,spatial_events,unique_adjusted_r2,climate,0.010230350846830216,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,climate_unique_adjusted_r2
+4509,spatial_events,unique_adjusted_r2,climate,-0.06630383342483426,Asia,Cold - Dry Summer,43,38.5,CDS,climate_unique_adjusted_r2
+24161,spatial_events,unique_adjusted_r2,climate,-0.09883867364967225,Asia,Cold - Dry Summer,31.283333,40.6,CDS,climate_unique_adjusted_r2
+24175,spatial_events,unique_adjusted_r2,climate,-0.08003122439746013,Asia,Arid,33.733333,37.5,ARD,climate_unique_adjusted_r2
+ippd_978,spatial_events,unique_adjusted_r2,climate,0.21371408646377898,Oceania,Temperate,150.1,-36.5833,TMP,climate_unique_adjusted_r2
+ippd_991,spatial_events,unique_adjusted_r2,climate,-0.05651796712930335,Oceania,Temperate,149.52,-34.75,TMP,climate_unique_adjusted_r2
+ippd_1070,spatial_events,unique_adjusted_r2,climate,-0.017089097214061044,Oceania,Tropical,142.95,-5.85,TRO,climate_unique_adjusted_r2
+ippd_2000,spatial_events,unique_adjusted_r2,climate,-0.03440300762192405,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,climate_unique_adjusted_r2
+ippd_2094,spatial_events,unique_adjusted_r2,climate,0.20424303050923032,Oceania,Temperate,151.3667,-31.9167,TMP,climate_unique_adjusted_r2
+ippd_2122,spatial_events,unique_adjusted_r2,climate,0.17125993076856116,Oceania,Temperate,150.38,-33.76,TMP,climate_unique_adjusted_r2
+ippd_2133,spatial_events,unique_adjusted_r2,climate,-0.009252796542281727,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,climate_unique_adjusted_r2
+ippd_2163,spatial_events,unique_adjusted_r2,climate,0.26254888844266944,Oceania,Temperate,149.5,-36.5167,TMP,climate_unique_adjusted_r2
+ippd_2216,spatial_events,unique_adjusted_r2,climate,-0.011691794857711213,Oceania,Temperate,153.167,-25.23,TMP,climate_unique_adjusted_r2
+ippd_2268,spatial_events,unique_adjusted_r2,climate,0.06758162909456078,Oceania,Temperate,153.0613,-25.2171,TMP,climate_unique_adjusted_r2
+ippd_2270,spatial_events,unique_adjusted_r2,climate,0.2324240784807342,Oceania,Temperate,150.22,-33.38,TMP,climate_unique_adjusted_r2
+ippd_2287,spatial_events,unique_adjusted_r2,climate,0.13574852310994012,Oceania,Arid,141.570299,-34.052551,ARD,climate_unique_adjusted_r2
+ippd_2313,spatial_events,unique_adjusted_r2,climate,-0.04101850676522878,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,climate_unique_adjusted_r2
+ippd_2357,spatial_events,unique_adjusted_r2,climate,-0.02820495103644516,Oceania,Temperate,149.1333,-37.1,TMP,climate_unique_adjusted_r2
+48966,spatial_events,unique_adjusted_r2,human,-0.06030418450581165,Europe,Temperate,5.75969,52.24479,TMP,human_unique_adjusted_r2
+4042,spatial_events,unique_adjusted_r2,human,0.1586835631191602,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,human_unique_adjusted_r2
+2395,spatial_events,unique_adjusted_r2,human,0.026156072213674997,Latin America,Tropical,-90.13333,20.86667,TRO,human_unique_adjusted_r2
+4542,spatial_events,unique_adjusted_r2,human,0.0015032789696532989,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,human_unique_adjusted_r2
+17689,spatial_events,unique_adjusted_r2,human,0.058860741074058365,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,human_unique_adjusted_r2
+25285,spatial_events,unique_adjusted_r2,human,0.05651701869348469,Europe,Temperate,5.28333,45.79083,TMP,human_unique_adjusted_r2
+45383,spatial_events,unique_adjusted_r2,human,0.020440557184580266,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,human_unique_adjusted_r2
+4197,spatial_events,unique_adjusted_r2,human,0.16089623094010996,Europe,Temperate,5.41667,45.47333,TMP,human_unique_adjusted_r2
+42671,spatial_events,unique_adjusted_r2,human,0.06711948467315354,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,human_unique_adjusted_r2
+22842,spatial_events,unique_adjusted_r2,human,-0.050752312503839936,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,human_unique_adjusted_r2
+24467,spatial_events,unique_adjusted_r2,human,-0.0010079468738131148,Europe,Temperate,3.13333,49.18333,TMP,human_unique_adjusted_r2
+22711,spatial_events,unique_adjusted_r2,human,0.056317862058778534,Europe,Temperate,-5.34361,57.55889,TMP,human_unique_adjusted_r2
+40997,spatial_events,unique_adjusted_r2,human,0.1463901512509026,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,human_unique_adjusted_r2
+309,spatial_events,unique_adjusted_r2,human,-0.009462681527804162,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,human_unique_adjusted_r2
+34553,spatial_events,unique_adjusted_r2,human,0.10053663553093961,Oceania,Temperate,145.95589,-41.66993,TMP,human_unique_adjusted_r2
+4198,spatial_events,unique_adjusted_r2,human,0.3607001924358413,Europe,Temperate,5.41667,45.47333,TMP,human_unique_adjusted_r2
+26608,spatial_events,unique_adjusted_r2,human,0.027840906323959635,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,human_unique_adjusted_r2
+3879,spatial_events,unique_adjusted_r2,human,-0.019737515918426207,Europe,Temperate,-3.90841,57.31333,TMP,human_unique_adjusted_r2
+518,spatial_events,unique_adjusted_r2,human,0.22368079436194155,North America,Cold - Warm Summer,-80.28333,38.2,CWS,human_unique_adjusted_r2
+21537,spatial_events,unique_adjusted_r2,human,-0.09954248972590762,Latin America,Tropical,-67.92396,-14.43169,TRO,human_unique_adjusted_r2
+4092,spatial_events,unique_adjusted_r2,human,0.003682835123726691,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,human_unique_adjusted_r2
+15103,spatial_events,unique_adjusted_r2,human,0.005163582148100199,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,human_unique_adjusted_r2
+20223,spatial_events,unique_adjusted_r2,human,-0.06163400797454277,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,human_unique_adjusted_r2
+42649,spatial_events,unique_adjusted_r2,human,0.2959085690535366,Europe,Temperate,9.00032,47.68985,TMP,human_unique_adjusted_r2
+16217,spatial_events,unique_adjusted_r2,human,0.14791524168189252,Europe,Temperate,-6.77814,53.81603,TMP,human_unique_adjusted_r2
+21895,spatial_events,unique_adjusted_r2,human,-0.039420574269122155,Latin America,Tropical,-77.1432,2.0024,TRO,human_unique_adjusted_r2
+47604,spatial_events,unique_adjusted_r2,human,0.05510784774015898,Europe,Polar,7.35751,46.15006,POL,human_unique_adjusted_r2
+48960,spatial_events,unique_adjusted_r2,human,0.019797569176189023,Europe,Temperate,2.64556,45.33944,TMP,human_unique_adjusted_r2
+2629,spatial_events,unique_adjusted_r2,human,0.09605714073410576,North America,Cold - Warm Summer,-70.05833,41.275,CWS,human_unique_adjusted_r2
+3043,spatial_events,unique_adjusted_r2,human,0.040006646691732595,Oceania,Temperate,147.30056,-42.54361,TMP,human_unique_adjusted_r2
+47110,spatial_events,unique_adjusted_r2,human,0.04075622833219561,Oceania,Temperate,145.95589,-41.66993,TMP,human_unique_adjusted_r2
+21913,spatial_events,unique_adjusted_r2,human,-0.01390921990737215,Latin America,Tropical,-76.78055,2.43268,TRO,human_unique_adjusted_r2
+1440,spatial_events,unique_adjusted_r2,human,0.23446621462579853,Europe,Arid,32.61667,46.51667,ARD,human_unique_adjusted_r2
+45320,spatial_events,unique_adjusted_r2,human,0.044262400462120044,Europe,Arid,32.61667,46.51667,ARD,human_unique_adjusted_r2
+24110,spatial_events,unique_adjusted_r2,human,0.2776369051566768,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,human_unique_adjusted_r2
+48624,spatial_events,unique_adjusted_r2,human,-0.07639639148035715,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,human_unique_adjusted_r2
+23006,spatial_events,unique_adjusted_r2,human,-0.028237723158898054,Europe,Cold - Warm Summer,28,51.16061,CWS,human_unique_adjusted_r2
+40582,spatial_events,unique_adjusted_r2,human,0.04126148879061464,Europe,Polar,8.02556,46.38972,POL,human_unique_adjusted_r2
+15130,spatial_events,unique_adjusted_r2,human,0.18241180447181526,Latin America,Temperate,-71.56608,-43.44371,TMP,human_unique_adjusted_r2
+4041,spatial_events,unique_adjusted_r2,human,-0.025392660395335387,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,human_unique_adjusted_r2
+363,spatial_events,unique_adjusted_r2,human,0.12009427979553866,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,human_unique_adjusted_r2
+26435,spatial_events,unique_adjusted_r2,human,0.06348772628149135,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,human_unique_adjusted_r2
+42570,spatial_events,unique_adjusted_r2,human,0.08491354323213218,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,human_unique_adjusted_r2
+1763,spatial_events,unique_adjusted_r2,human,0.012805693805151952,North America,Cold - Warm Summer,-69.3,43.76667,CWS,human_unique_adjusted_r2
+48837,spatial_events,unique_adjusted_r2,human,0.17336555847897694,Latin America,Tropical,-66.67672,0.28602,TRO,human_unique_adjusted_r2
+15247,spatial_events,unique_adjusted_r2,human,0.05711121858215307,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,human_unique_adjusted_r2
+48777,spatial_events,unique_adjusted_r2,human,0.0416524177997154,Europe,Temperate,8.77929,53.65498,TMP,human_unique_adjusted_r2
+48976,spatial_events,unique_adjusted_r2,human,-0.0415664388855147,Europe,Temperate,2.62278,45.45194,TMP,human_unique_adjusted_r2
+3482,spatial_events,unique_adjusted_r2,human,0.0314711558377464,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,human_unique_adjusted_r2
+21580,spatial_events,unique_adjusted_r2,human,0.03233936704756524,Latin America,Tropical,-67.88893,-14.50063,TRO,human_unique_adjusted_r2
+42681,spatial_events,unique_adjusted_r2,human,0.07524996378142401,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,human_unique_adjusted_r2
+24319,spatial_events,unique_adjusted_r2,human,0.20196410250927588,Europe,Cold - Cold Summer,7.845,46.19556,CCS,human_unique_adjusted_r2
+24321,spatial_events,unique_adjusted_r2,human,0.01688442163125725,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,human_unique_adjusted_r2
+21917,spatial_events,unique_adjusted_r2,human,0.2135798784800096,Latin America,Polar,-74.16112,3.97973,POL,human_unique_adjusted_r2
+48984,spatial_events,unique_adjusted_r2,human,0.09119586139504854,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,human_unique_adjusted_r2
+2645,spatial_events,unique_adjusted_r2,human,-0.006804207214952229,North America,Cold - Hot Summer,-71.03333,41.95,CHS,human_unique_adjusted_r2
+22890,spatial_events,unique_adjusted_r2,human,0.0925120417506049,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,human_unique_adjusted_r2
+15132,spatial_events,unique_adjusted_r2,human,-0.04642968838415884,Latin America,Temperate,-71.49835,-41.07352,TMP,human_unique_adjusted_r2
+15331,spatial_events,unique_adjusted_r2,human,0.27013701140843527,Latin America,Polar,-71.84655,-45.69413,POL,human_unique_adjusted_r2
+1897,spatial_events,unique_adjusted_r2,human,-0.021613214948136394,North America,Cold - Hot Summer,-93.9,42.16,CHS,human_unique_adjusted_r2
+48935,spatial_events,unique_adjusted_r2,human,0.07985218227252577,Europe,Arid,-3.93936,41.95209,ARD,human_unique_adjusted_r2
+48656,spatial_events,unique_adjusted_r2,human,-0.022555066134500645,Oceania,Tropical,140.58726,-2.54291,TRO,human_unique_adjusted_r2
+15306,spatial_events,unique_adjusted_r2,human,-0.01777806801118742,Latin America,Polar,-71.88616,-52.03906,POL,human_unique_adjusted_r2
+21700,spatial_events,unique_adjusted_r2,human,0.04347102880571552,Latin America,Temperate,-76.70941,2.36575,TMP,human_unique_adjusted_r2
+24256,spatial_events,unique_adjusted_r2,human,-0.09280702666118945,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,human_unique_adjusted_r2
+47011,spatial_events,unique_adjusted_r2,human,-0.031822261088197634,Latin America,Temperate,-79.15958,-4.04586,TMP,human_unique_adjusted_r2
+22660,spatial_events,unique_adjusted_r2,human,0.06610545379697685,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,human_unique_adjusted_r2
+48072,spatial_events,unique_adjusted_r2,human,0.08153342155658239,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,human_unique_adjusted_r2
+2265,spatial_events,unique_adjusted_r2,human,-0.030407392574611336,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,human_unique_adjusted_r2
+4269,spatial_events,unique_adjusted_r2,human,0.1327828810218079,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,human_unique_adjusted_r2
+40795,spatial_events,unique_adjusted_r2,human,0.05423176922643003,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,human_unique_adjusted_r2
+21915,spatial_events,unique_adjusted_r2,human,-0.008479741132084273,Latin America,Tropical,-76.52225,3.10116,TRO,human_unique_adjusted_r2
+3452,spatial_events,unique_adjusted_r2,human,0.14632264403603468,North America,Cold - Warm Summer,-90.35,45.3,CWS,human_unique_adjusted_r2
+48735,spatial_events,unique_adjusted_r2,human,-0.02850182600519735,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,human_unique_adjusted_r2
+48614,spatial_events,unique_adjusted_r2,human,-0.03258377682566882,Latin America,Temperate,-79.11153,-4.37461,TMP,human_unique_adjusted_r2
+2318,spatial_events,unique_adjusted_r2,human,-0.05666554968627613,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,human_unique_adjusted_r2
+24097,spatial_events,unique_adjusted_r2,human,0.29070291114213054,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,human_unique_adjusted_r2
+45400,spatial_events,unique_adjusted_r2,human,0.08360230824772774,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,human_unique_adjusted_r2
+24250,spatial_events,unique_adjusted_r2,human,0.16741337781466736,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,human_unique_adjusted_r2
+2663,spatial_events,unique_adjusted_r2,human,0.04025108626238183,North America,Temperate,-81.50634,27.58253,TMP,human_unique_adjusted_r2
+40452,spatial_events,unique_adjusted_r2,human,0.10278980865317144,Europe,Cold - Warm Summer,7.05,47.24056,CWS,human_unique_adjusted_r2
+22950,spatial_events,unique_adjusted_r2,human,0.09283233545221503,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,human_unique_adjusted_r2
+26520,spatial_events,unique_adjusted_r2,human,0.060421343437704,Europe,Polar,7.09361,46.17667,POL,human_unique_adjusted_r2
+4524,spatial_events,unique_adjusted_r2,human,-0.09125124389199424,Europe,Temperate,1.75,48.41667,TMP,human_unique_adjusted_r2
+26514,spatial_events,unique_adjusted_r2,human,0.07154823900021323,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,human_unique_adjusted_r2
+48950,spatial_events,unique_adjusted_r2,human,0.21274644723980873,Europe,Cold - Warm Summer,5.99556,44.555,CWS,human_unique_adjusted_r2
+4200,spatial_events,unique_adjusted_r2,human,-0.030566157217630008,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,human_unique_adjusted_r2
+3488,spatial_events,unique_adjusted_r2,human,-0.0030392177822513577,North America,Cold - Hot Summer,-89.41667,43.1,CHS,human_unique_adjusted_r2
+4118,spatial_events,unique_adjusted_r2,human,0.043684573022710005,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,human_unique_adjusted_r2
+4375,spatial_events,unique_adjusted_r2,human,0.04015372709074072,Europe,Temperate,5.60833,45.425,TMP,human_unique_adjusted_r2
+3972,spatial_events,unique_adjusted_r2,human,0.24656490590805225,Europe,Temperate,-1.80028,47.25444,TMP,human_unique_adjusted_r2
+285,spatial_events,unique_adjusted_r2,human,0.08920589635870824,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,human_unique_adjusted_r2
+22791,spatial_events,unique_adjusted_r2,human,0.01620674193232552,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,human_unique_adjusted_r2
+22344,spatial_events,unique_adjusted_r2,human,0.2466742606274005,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,human_unique_adjusted_r2
+45281,spatial_events,unique_adjusted_r2,human,0.20610651678224512,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,human_unique_adjusted_r2
+32426,spatial_events,unique_adjusted_r2,human,0.02600473621981514,Oceania,Temperate,145.96036,-41.45226,TMP,human_unique_adjusted_r2
+4393,spatial_events,unique_adjusted_r2,human,0.051252875312434165,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,human_unique_adjusted_r2
+324,spatial_events,unique_adjusted_r2,human,-0.03408251838287979,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,human_unique_adjusted_r2
+510,spatial_events,unique_adjusted_r2,human,-0.029320477121048016,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,human_unique_adjusted_r2
+14941,spatial_events,unique_adjusted_r2,human,-0.02055166018093968,Oceania,Polar,137.21538,-4.02326,POL,human_unique_adjusted_r2
+1661,spatial_events,unique_adjusted_r2,human,0.062376078005560776,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,human_unique_adjusted_r2
+48769,spatial_events,unique_adjusted_r2,human,-0.004812931360096084,Europe,Temperate,8.76777,53.65389,TMP,human_unique_adjusted_r2
+21903,spatial_events,unique_adjusted_r2,human,0.020964500395941443,Latin America,Tropical,-77.1432,2.0024,TRO,human_unique_adjusted_r2
+22976,spatial_events,unique_adjusted_r2,human,0.36750570708614194,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,human_unique_adjusted_r2
+4192,spatial_events,unique_adjusted_r2,human,0.20823676456764462,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,human_unique_adjusted_r2
+22049,spatial_events,unique_adjusted_r2,human,-0.01912484648961077,Latin America,Temperate,-74.15686,4.99445,TMP,human_unique_adjusted_r2
+4213,spatial_events,unique_adjusted_r2,human,0.22882372453671485,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,human_unique_adjusted_r2
+18104,spatial_events,unique_adjusted_r2,human,-2.44275384701953e-4,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,human_unique_adjusted_r2
+22101,spatial_events,unique_adjusted_r2,human,0.111383402142887,Latin America,Polar,-76.09258,6.47451,POL,human_unique_adjusted_r2
+4479,spatial_events,unique_adjusted_r2,human,0.0839998638582451,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,human_unique_adjusted_r2
+21708,spatial_events,unique_adjusted_r2,human,0.09947253307354731,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,human_unique_adjusted_r2
+22047,spatial_events,unique_adjusted_r2,human,-0.02215312348926579,Latin America,Temperate,-74.15686,4.99445,TMP,human_unique_adjusted_r2
+4555,spatial_events,unique_adjusted_r2,human,-0.047984137476604904,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,human_unique_adjusted_r2
+24048,spatial_events,unique_adjusted_r2,human,-0.019941998962976992,Europe,Polar,8.25556,46.54722,POL,human_unique_adjusted_r2
+24080,spatial_events,unique_adjusted_r2,human,-0.023119953738305776,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,human_unique_adjusted_r2
+1771,spatial_events,unique_adjusted_r2,human,-0.04093726464401859,Latin America,Polar,-73,-50.46667,POL,human_unique_adjusted_r2
+15061,spatial_events,unique_adjusted_r2,human,-0.02870541294504103,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,human_unique_adjusted_r2
+24867,spatial_events,unique_adjusted_r2,human,0.02199973267225197,Europe,Temperate,-1.50278,47.40278,TMP,human_unique_adjusted_r2
+21926,spatial_events,unique_adjusted_r2,human,-0.056611892077446435,Latin America,Polar,-74.10008,5.07352,POL,human_unique_adjusted_r2
+16193,spatial_events,unique_adjusted_r2,human,0.1498086131159052,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,human_unique_adjusted_r2
+42720,spatial_events,unique_adjusted_r2,human,0.09210736647650641,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,human_unique_adjusted_r2
+3830,spatial_events,unique_adjusted_r2,human,0.27760724163581063,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,human_unique_adjusted_r2
+45101,spatial_events,unique_adjusted_r2,human,0.23521687424985283,Europe,Arid,21.91667,40.81667,ARD,human_unique_adjusted_r2
+4288,spatial_events,unique_adjusted_r2,human,0.00806760577221255,Europe,Cold - Cold Summer,33.5,61.80556,CCS,human_unique_adjusted_r2
+40454,spatial_events,unique_adjusted_r2,human,0.04591737387893824,Europe,Temperate,7.12361,46.935,TMP,human_unique_adjusted_r2
+22817,spatial_events,unique_adjusted_r2,human,0.13509890899637744,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,human_unique_adjusted_r2
+3928,spatial_events,unique_adjusted_r2,human,0.13183894144794628,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,human_unique_adjusted_r2
+48798,spatial_events,unique_adjusted_r2,human,-0.028190803085800797,Europe,Temperate,8.72184,53.67137,TMP,human_unique_adjusted_r2
+21978,spatial_events,unique_adjusted_r2,human,0.17939911417812116,Latin America,Temperate,-74.15686,4.99445,TMP,human_unique_adjusted_r2
+22793,spatial_events,unique_adjusted_r2,human,-0.0193010838117319,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,human_unique_adjusted_r2
+15766,spatial_events,unique_adjusted_r2,human,0.009671068443463215,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,human_unique_adjusted_r2
+47520,spatial_events,unique_adjusted_r2,human,0.049785187101417216,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,human_unique_adjusted_r2
+4183,spatial_events,unique_adjusted_r2,human,0.107506950956606,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,human_unique_adjusted_r2
+3468,spatial_events,unique_adjusted_r2,human,0.03983123144861811,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,human_unique_adjusted_r2
+22908,spatial_events,unique_adjusted_r2,human,-0.04591571716781584,Europe,Temperate,7.38985,45.05242,TMP,human_unique_adjusted_r2
+15394,spatial_events,unique_adjusted_r2,human,-0.07674191777130401,Latin America,Tropical,-78.69181,22.16,TRO,human_unique_adjusted_r2
+1766,spatial_events,unique_adjusted_r2,human,-0.0790123503375012,North America,Arid,-111.7528,34.6488,ARD,human_unique_adjusted_r2
+48925,spatial_events,unique_adjusted_r2,human,0.04459352715466991,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,human_unique_adjusted_r2
+43295,spatial_events,unique_adjusted_r2,human,0.06137111296266695,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,human_unique_adjusted_r2
+15682,spatial_events,unique_adjusted_r2,human,0.1724261301610831,North America,Cold - Warm Summer,-87.923,46.83146,CWS,human_unique_adjusted_r2
+48782,spatial_events,unique_adjusted_r2,human,0.0347309438151312,Europe,Temperate,8.71572,53.67106,TMP,human_unique_adjusted_r2
+369,spatial_events,unique_adjusted_r2,human,0.03231087708865188,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,human_unique_adjusted_r2
+21838,spatial_events,unique_adjusted_r2,human,-0.03737796479107758,Latin America,Polar,-72.34629,6.38712,POL,human_unique_adjusted_r2
+PVT_Daihai_Lake_2004,spatial_events,unique_adjusted_r2,human,0.023896451469328617,Asia,Arid,112.67,40.58,ARD,human_unique_adjusted_r2
+PVT_Dalianhai_Lake,spatial_events,unique_adjusted_r2,human,0.03138151514937615,Asia,Arid,100.41,36.25,ARD,human_unique_adjusted_r2
+PVT_Manas_Lake_LM1,spatial_events,unique_adjusted_r2,human,-0.043823789511467814,Asia,Arid,85.92,45.83,ARD,human_unique_adjusted_r2
+PVT_Qidong,spatial_events,unique_adjusted_r2,human,0.0032558872264650818,Asia,Temperate,121.7,31.9,TMP,human_unique_adjusted_r2
+PVT_Ximen_Co,spatial_events,unique_adjusted_r2,human,0.11089275775033702,Asia,Polar,101.47,33.38,POL,human_unique_adjusted_r2
+PVT_Ganhai_Lake,spatial_events,unique_adjusted_r2,human,0.1253438295053122,Asia,Cold - Dry Winter,112.19,38.89,CDW,human_unique_adjusted_r2
+PVT_Gantang,spatial_events,unique_adjusted_r2,human,0.0012884420788089601,Asia,Temperate,119.03,26.77,TMP,human_unique_adjusted_r2
+PVT_Kuhai_Lake,spatial_events,unique_adjusted_r2,human,0.01886803458424835,Asia,Polar,99.31,35.52,POL,human_unique_adjusted_r2
+PVT_Qongjiamong_Co,spatial_events,unique_adjusted_r2,human,-0.014918984230696042,Asia,Polar,92.37,29.81,POL,human_unique_adjusted_r2
+PVT_Sujiawan,spatial_events,unique_adjusted_r2,human,0.045464281369270276,Asia,Cold - Dry Winter,104.52,35.54,CDW,human_unique_adjusted_r2
+PVT_Zigetang_Co,spatial_events,unique_adjusted_r2,human,0.0735832417713187,Asia,Polar,90.9,32,POL,human_unique_adjusted_r2
+cao_35,spatial_events,unique_adjusted_r2,human,-0.05185690119396724,Asia,Cold - Cold Summer,151.89,60.73,CCS,human_unique_adjusted_r2
+cao_39,spatial_events,unique_adjusted_r2,human,-0.01759830117841732,Asia,Cold - Cold Summer,78.333333,59,CCS,human_unique_adjusted_r2
+cao_57,spatial_events,unique_adjusted_r2,human,0.09655140126256934,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,human_unique_adjusted_r2
+cao_106,spatial_events,unique_adjusted_r2,human,-0.014304309487712663,Asia,Polar,100.5333,74.5464,POL,human_unique_adjusted_r2
+PANGAEA.884462,spatial_events,unique_adjusted_r2,human,0.0187538538859634,Asia,Arid,84.38194,43.04583,ARD,human_unique_adjusted_r2
+PANGAEA.717128,spatial_events,unique_adjusted_r2,human,0.38956618886711525,Asia,Polar,78,33.1667,POL,human_unique_adjusted_r2
+PANGAEA.808952,spatial_events,unique_adjusted_r2,human,0.01683557506011435,Asia,Arid,78.32333,32.92944,ARD,human_unique_adjusted_r2
+PANGAEA.893308,spatial_events,unique_adjusted_r2,human,0.10880753467124082,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,human_unique_adjusted_r2
+Lake_Moon,spatial_events,unique_adjusted_r2,human,-0.0679166625975186,Asia,Cold - Dry Winter,120.8665,47.506,CDW,human_unique_adjusted_r2
+46483,spatial_events,unique_adjusted_r2,human,0.10404387600233655,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,human_unique_adjusted_r2
+2643,spatial_events,unique_adjusted_r2,human,0.02892410888537389,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,human_unique_adjusted_r2
+1844,spatial_events,unique_adjusted_r2,human,0.21852582572193902,Asia,Cold - Warm Summer,134.566667,43.25,CWS,human_unique_adjusted_r2
+15624,spatial_events,unique_adjusted_r2,human,0.11700549804267812,Asia,Temperate,134.133333333333,35.35,TMP,human_unique_adjusted_r2
+15656,spatial_events,unique_adjusted_r2,human,0.016145929322464947,Asia,Temperate,136.11934,35.54912,TMP,human_unique_adjusted_r2
+22330,spatial_events,unique_adjusted_r2,human,-0.01749746997099544,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,human_unique_adjusted_r2
+15665,spatial_events,unique_adjusted_r2,human,-0.013763855317960538,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,human_unique_adjusted_r2
+4509,spatial_events,unique_adjusted_r2,human,0.07769048619415975,Asia,Cold - Dry Summer,43,38.5,CDS,human_unique_adjusted_r2
+24161,spatial_events,unique_adjusted_r2,human,0.18301296358593133,Asia,Cold - Dry Summer,31.283333,40.6,CDS,human_unique_adjusted_r2
+24175,spatial_events,unique_adjusted_r2,human,-0.033998283959839615,Asia,Arid,33.733333,37.5,ARD,human_unique_adjusted_r2
+ippd_978,spatial_events,unique_adjusted_r2,human,0.02173453855803298,Oceania,Temperate,150.1,-36.5833,TMP,human_unique_adjusted_r2
+ippd_991,spatial_events,unique_adjusted_r2,human,-0.04139485302610213,Oceania,Temperate,149.52,-34.75,TMP,human_unique_adjusted_r2
+ippd_1070,spatial_events,unique_adjusted_r2,human,0.18174283365290522,Oceania,Tropical,142.95,-5.85,TRO,human_unique_adjusted_r2
+ippd_2000,spatial_events,unique_adjusted_r2,human,0.0014120009797439215,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,human_unique_adjusted_r2
+ippd_2094,spatial_events,unique_adjusted_r2,human,-0.02841670527892126,Oceania,Temperate,151.3667,-31.9167,TMP,human_unique_adjusted_r2
+ippd_2122,spatial_events,unique_adjusted_r2,human,0.4980368378692819,Oceania,Temperate,150.38,-33.76,TMP,human_unique_adjusted_r2
+ippd_2133,spatial_events,unique_adjusted_r2,human,0.1129571421603085,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,human_unique_adjusted_r2
+ippd_2163,spatial_events,unique_adjusted_r2,human,0.17499918883789567,Oceania,Temperate,149.5,-36.5167,TMP,human_unique_adjusted_r2
+ippd_2216,spatial_events,unique_adjusted_r2,human,0.41654672946503934,Oceania,Temperate,153.167,-25.23,TMP,human_unique_adjusted_r2
+ippd_2268,spatial_events,unique_adjusted_r2,human,0.13792355945438783,Oceania,Temperate,153.0613,-25.2171,TMP,human_unique_adjusted_r2
+ippd_2270,spatial_events,unique_adjusted_r2,human,0.05561539841663976,Oceania,Temperate,150.22,-33.38,TMP,human_unique_adjusted_r2
+ippd_2287,spatial_events,unique_adjusted_r2,human,0.12262679166399293,Oceania,Arid,141.570299,-34.052551,ARD,human_unique_adjusted_r2
+ippd_2313,spatial_events,unique_adjusted_r2,human,-0.0440507266507304,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,human_unique_adjusted_r2
+ippd_2357,spatial_events,unique_adjusted_r2,human,0.06765363655695966,Oceania,Temperate,149.1333,-37.1,TMP,human_unique_adjusted_r2
+48966,spatial_events,unique_adjusted_r2,time,0.04256268900434934,Europe,Temperate,5.75969,52.24479,TMP,time_unique_adjusted_r2
+4042,spatial_events,unique_adjusted_r2,time,0.19754330445892776,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,time_unique_adjusted_r2
+2395,spatial_events,unique_adjusted_r2,time,0.23565122591963905,Latin America,Tropical,-90.13333,20.86667,TRO,time_unique_adjusted_r2
+4542,spatial_events,unique_adjusted_r2,time,-0.01518315545825133,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,time_unique_adjusted_r2
+17689,spatial_events,unique_adjusted_r2,time,-0.03602525495389375,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,time_unique_adjusted_r2
+25285,spatial_events,unique_adjusted_r2,time,-0.0388237572639879,Europe,Temperate,5.28333,45.79083,TMP,time_unique_adjusted_r2
+45383,spatial_events,unique_adjusted_r2,time,-0.012591630384795938,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,time_unique_adjusted_r2
+4197,spatial_events,unique_adjusted_r2,time,-0.062238158669924326,Europe,Temperate,5.41667,45.47333,TMP,time_unique_adjusted_r2
+42671,spatial_events,unique_adjusted_r2,time,0.15704340291986907,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,time_unique_adjusted_r2
+22842,spatial_events,unique_adjusted_r2,time,0.03154119138599987,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,time_unique_adjusted_r2
+24467,spatial_events,unique_adjusted_r2,time,0.09485202780957602,Europe,Temperate,3.13333,49.18333,TMP,time_unique_adjusted_r2
+22711,spatial_events,unique_adjusted_r2,time,0.01661693045755952,Europe,Temperate,-5.34361,57.55889,TMP,time_unique_adjusted_r2
+40997,spatial_events,unique_adjusted_r2,time,0.05187068670606987,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,time_unique_adjusted_r2
+309,spatial_events,unique_adjusted_r2,time,0.026848488647052582,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,time_unique_adjusted_r2
+34553,spatial_events,unique_adjusted_r2,time,-0.015888882184317832,Oceania,Temperate,145.95589,-41.66993,TMP,time_unique_adjusted_r2
+4198,spatial_events,unique_adjusted_r2,time,-0.025373012472899026,Europe,Temperate,5.41667,45.47333,TMP,time_unique_adjusted_r2
+26608,spatial_events,unique_adjusted_r2,time,-0.015060956454896357,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,time_unique_adjusted_r2
+3879,spatial_events,unique_adjusted_r2,time,0.05290440020978682,Europe,Temperate,-3.90841,57.31333,TMP,time_unique_adjusted_r2
+518,spatial_events,unique_adjusted_r2,time,0.08020425094686634,North America,Cold - Warm Summer,-80.28333,38.2,CWS,time_unique_adjusted_r2
+21537,spatial_events,unique_adjusted_r2,time,-0.05070355652793068,Latin America,Tropical,-67.92396,-14.43169,TRO,time_unique_adjusted_r2
+4092,spatial_events,unique_adjusted_r2,time,0.08054177712637889,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,time_unique_adjusted_r2
+15103,spatial_events,unique_adjusted_r2,time,0.07667686640620675,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,time_unique_adjusted_r2
+20223,spatial_events,unique_adjusted_r2,time,0.17543413482337655,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,time_unique_adjusted_r2
+42649,spatial_events,unique_adjusted_r2,time,0.08399371237625541,Europe,Temperate,9.00032,47.68985,TMP,time_unique_adjusted_r2
+16217,spatial_events,unique_adjusted_r2,time,0.30312063222081187,Europe,Temperate,-6.77814,53.81603,TMP,time_unique_adjusted_r2
+21895,spatial_events,unique_adjusted_r2,time,0.06056605649927915,Latin America,Tropical,-77.1432,2.0024,TRO,time_unique_adjusted_r2
+47604,spatial_events,unique_adjusted_r2,time,0.025550208187379853,Europe,Polar,7.35751,46.15006,POL,time_unique_adjusted_r2
+48960,spatial_events,unique_adjusted_r2,time,0.04342233557326158,Europe,Temperate,2.64556,45.33944,TMP,time_unique_adjusted_r2
+2629,spatial_events,unique_adjusted_r2,time,0.015695266546550957,North America,Cold - Warm Summer,-70.05833,41.275,CWS,time_unique_adjusted_r2
+3043,spatial_events,unique_adjusted_r2,time,-0.026818935220936146,Oceania,Temperate,147.30056,-42.54361,TMP,time_unique_adjusted_r2
+47110,spatial_events,unique_adjusted_r2,time,-0.019591880165315878,Oceania,Temperate,145.95589,-41.66993,TMP,time_unique_adjusted_r2
+21913,spatial_events,unique_adjusted_r2,time,-0.02415182921902337,Latin America,Tropical,-76.78055,2.43268,TRO,time_unique_adjusted_r2
+1440,spatial_events,unique_adjusted_r2,time,0.0434195409772814,Europe,Arid,32.61667,46.51667,ARD,time_unique_adjusted_r2
+45320,spatial_events,unique_adjusted_r2,time,0.01445862665959663,Europe,Arid,32.61667,46.51667,ARD,time_unique_adjusted_r2
+24110,spatial_events,unique_adjusted_r2,time,0.3098208126340213,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,time_unique_adjusted_r2
+48624,spatial_events,unique_adjusted_r2,time,0.05814115607506387,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,time_unique_adjusted_r2
+23006,spatial_events,unique_adjusted_r2,time,0.08886992612217093,Europe,Cold - Warm Summer,28,51.16061,CWS,time_unique_adjusted_r2
+40582,spatial_events,unique_adjusted_r2,time,0.6233016137326932,Europe,Polar,8.02556,46.38972,POL,time_unique_adjusted_r2
+15130,spatial_events,unique_adjusted_r2,time,0.10593069707209646,Latin America,Temperate,-71.56608,-43.44371,TMP,time_unique_adjusted_r2
+4041,spatial_events,unique_adjusted_r2,time,0.1040860419456141,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,time_unique_adjusted_r2
+363,spatial_events,unique_adjusted_r2,time,0.25580683548417804,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,time_unique_adjusted_r2
+26435,spatial_events,unique_adjusted_r2,time,0.04836884169381572,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,time_unique_adjusted_r2
+42570,spatial_events,unique_adjusted_r2,time,0.28618747635788166,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,time_unique_adjusted_r2
+1763,spatial_events,unique_adjusted_r2,time,-0.009035434980665058,North America,Cold - Warm Summer,-69.3,43.76667,CWS,time_unique_adjusted_r2
+48837,spatial_events,unique_adjusted_r2,time,0.04001649811986785,Latin America,Tropical,-66.67672,0.28602,TRO,time_unique_adjusted_r2
+15247,spatial_events,unique_adjusted_r2,time,-0.009810535148105815,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,time_unique_adjusted_r2
+48777,spatial_events,unique_adjusted_r2,time,0.22576884129747343,Europe,Temperate,8.77929,53.65498,TMP,time_unique_adjusted_r2
+48976,spatial_events,unique_adjusted_r2,time,-0.005519170437923049,Europe,Temperate,2.62278,45.45194,TMP,time_unique_adjusted_r2
+3482,spatial_events,unique_adjusted_r2,time,0.04760361882158981,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,time_unique_adjusted_r2
+21580,spatial_events,unique_adjusted_r2,time,-0.005325009799506564,Latin America,Tropical,-67.88893,-14.50063,TRO,time_unique_adjusted_r2
+42681,spatial_events,unique_adjusted_r2,time,0.061612317953696816,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,time_unique_adjusted_r2
+24319,spatial_events,unique_adjusted_r2,time,0.11441303921232338,Europe,Cold - Cold Summer,7.845,46.19556,CCS,time_unique_adjusted_r2
+24321,spatial_events,unique_adjusted_r2,time,0.016218011768881047,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,time_unique_adjusted_r2
+21917,spatial_events,unique_adjusted_r2,time,0.12866205421899224,Latin America,Polar,-74.16112,3.97973,POL,time_unique_adjusted_r2
+48984,spatial_events,unique_adjusted_r2,time,0.17444579220080803,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,time_unique_adjusted_r2
+2645,spatial_events,unique_adjusted_r2,time,0.007158438968178027,North America,Cold - Hot Summer,-71.03333,41.95,CHS,time_unique_adjusted_r2
+22890,spatial_events,unique_adjusted_r2,time,0.06244874875649975,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,time_unique_adjusted_r2
+15132,spatial_events,unique_adjusted_r2,time,-0.029958531695756685,Latin America,Temperate,-71.49835,-41.07352,TMP,time_unique_adjusted_r2
+15331,spatial_events,unique_adjusted_r2,time,-0.04849840980970743,Latin America,Polar,-71.84655,-45.69413,POL,time_unique_adjusted_r2
+1897,spatial_events,unique_adjusted_r2,time,0.01932816034491769,North America,Cold - Hot Summer,-93.9,42.16,CHS,time_unique_adjusted_r2
+48935,spatial_events,unique_adjusted_r2,time,-0.01097689448394279,Europe,Arid,-3.93936,41.95209,ARD,time_unique_adjusted_r2
+48656,spatial_events,unique_adjusted_r2,time,0.07364335006905498,Oceania,Tropical,140.58726,-2.54291,TRO,time_unique_adjusted_r2
+15306,spatial_events,unique_adjusted_r2,time,0.135459919835469,Latin America,Polar,-71.88616,-52.03906,POL,time_unique_adjusted_r2
+21700,spatial_events,unique_adjusted_r2,time,0.1379298762211162,Latin America,Temperate,-76.70941,2.36575,TMP,time_unique_adjusted_r2
+24256,spatial_events,unique_adjusted_r2,time,-0.03365363686708267,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,time_unique_adjusted_r2
+47011,spatial_events,unique_adjusted_r2,time,0.26430909296179217,Latin America,Temperate,-79.15958,-4.04586,TMP,time_unique_adjusted_r2
+22660,spatial_events,unique_adjusted_r2,time,-0.0032096329444788463,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,time_unique_adjusted_r2
+48072,spatial_events,unique_adjusted_r2,time,0.04449743918878257,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,time_unique_adjusted_r2
+2265,spatial_events,unique_adjusted_r2,time,0.006601685406495417,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,time_unique_adjusted_r2
+4269,spatial_events,unique_adjusted_r2,time,-0.04175160887159213,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,time_unique_adjusted_r2
+40795,spatial_events,unique_adjusted_r2,time,0.13421021865109406,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,time_unique_adjusted_r2
+21915,spatial_events,unique_adjusted_r2,time,-0.004965444820450138,Latin America,Tropical,-76.52225,3.10116,TRO,time_unique_adjusted_r2
+3452,spatial_events,unique_adjusted_r2,time,0.3970199979596627,North America,Cold - Warm Summer,-90.35,45.3,CWS,time_unique_adjusted_r2
+48735,spatial_events,unique_adjusted_r2,time,0.040451430993887594,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,time_unique_adjusted_r2
+48614,spatial_events,unique_adjusted_r2,time,0.0796906414480213,Latin America,Temperate,-79.11153,-4.37461,TMP,time_unique_adjusted_r2
+2318,spatial_events,unique_adjusted_r2,time,0.055363570384222904,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,time_unique_adjusted_r2
+24097,spatial_events,unique_adjusted_r2,time,0.2459171529626939,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,time_unique_adjusted_r2
+45400,spatial_events,unique_adjusted_r2,time,0.013651499982558213,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,time_unique_adjusted_r2
+24250,spatial_events,unique_adjusted_r2,time,0.042536507047056915,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,time_unique_adjusted_r2
+2663,spatial_events,unique_adjusted_r2,time,0.05247480844541963,North America,Temperate,-81.50634,27.58253,TMP,time_unique_adjusted_r2
+40452,spatial_events,unique_adjusted_r2,time,-0.01793820335770202,Europe,Cold - Warm Summer,7.05,47.24056,CWS,time_unique_adjusted_r2
+22950,spatial_events,unique_adjusted_r2,time,0.18609399297522566,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,time_unique_adjusted_r2
+26520,spatial_events,unique_adjusted_r2,time,0.02622089986632925,Europe,Polar,7.09361,46.17667,POL,time_unique_adjusted_r2
+4524,spatial_events,unique_adjusted_r2,time,-0.04302766913655898,Europe,Temperate,1.75,48.41667,TMP,time_unique_adjusted_r2
+26514,spatial_events,unique_adjusted_r2,time,0.0716172637322291,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,time_unique_adjusted_r2
+48950,spatial_events,unique_adjusted_r2,time,0.08578047176614445,Europe,Cold - Warm Summer,5.99556,44.555,CWS,time_unique_adjusted_r2
+4200,spatial_events,unique_adjusted_r2,time,0.17694818573968152,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,time_unique_adjusted_r2
+3488,spatial_events,unique_adjusted_r2,time,0.0890562171169349,North America,Cold - Hot Summer,-89.41667,43.1,CHS,time_unique_adjusted_r2
+4118,spatial_events,unique_adjusted_r2,time,0.03868439140508817,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,time_unique_adjusted_r2
+4375,spatial_events,unique_adjusted_r2,time,0.04568242402051503,Europe,Temperate,5.60833,45.425,TMP,time_unique_adjusted_r2
+3972,spatial_events,unique_adjusted_r2,time,0.13400260777716966,Europe,Temperate,-1.80028,47.25444,TMP,time_unique_adjusted_r2
+285,spatial_events,unique_adjusted_r2,time,0.025474711721281462,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,time_unique_adjusted_r2
+22791,spatial_events,unique_adjusted_r2,time,0.04106468742945546,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,time_unique_adjusted_r2
+22344,spatial_events,unique_adjusted_r2,time,0.05825096854018397,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,time_unique_adjusted_r2
+45281,spatial_events,unique_adjusted_r2,time,-0.01531554770808874,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,time_unique_adjusted_r2
+32426,spatial_events,unique_adjusted_r2,time,-0.012373138641089354,Oceania,Temperate,145.96036,-41.45226,TMP,time_unique_adjusted_r2
+4393,spatial_events,unique_adjusted_r2,time,0.12287112117487309,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,time_unique_adjusted_r2
+324,spatial_events,unique_adjusted_r2,time,0.11148245721975114,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,time_unique_adjusted_r2
+510,spatial_events,unique_adjusted_r2,time,0.0853251353357316,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,time_unique_adjusted_r2
+14941,spatial_events,unique_adjusted_r2,time,-0.027273874887227767,Oceania,Polar,137.21538,-4.02326,POL,time_unique_adjusted_r2
+1661,spatial_events,unique_adjusted_r2,time,0.022228216260692824,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,time_unique_adjusted_r2
+48769,spatial_events,unique_adjusted_r2,time,0.22957786653687728,Europe,Temperate,8.76777,53.65389,TMP,time_unique_adjusted_r2
+21903,spatial_events,unique_adjusted_r2,time,0.01177512704244632,Latin America,Tropical,-77.1432,2.0024,TRO,time_unique_adjusted_r2
+22976,spatial_events,unique_adjusted_r2,time,0.07025288552619635,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,time_unique_adjusted_r2
+4192,spatial_events,unique_adjusted_r2,time,0.21110693431323002,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,time_unique_adjusted_r2
+22049,spatial_events,unique_adjusted_r2,time,-0.040346427432012555,Latin America,Temperate,-74.15686,4.99445,TMP,time_unique_adjusted_r2
+4213,spatial_events,unique_adjusted_r2,time,0.15526163658183212,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,time_unique_adjusted_r2
+18104,spatial_events,unique_adjusted_r2,time,0.2674089449946129,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,time_unique_adjusted_r2
+22101,spatial_events,unique_adjusted_r2,time,0.13597670877974932,Latin America,Polar,-76.09258,6.47451,POL,time_unique_adjusted_r2
+4479,spatial_events,unique_adjusted_r2,time,0.043812119647489434,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,time_unique_adjusted_r2
+21708,spatial_events,unique_adjusted_r2,time,-0.0036436857840385084,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,time_unique_adjusted_r2
+22047,spatial_events,unique_adjusted_r2,time,0.20758352633832433,Latin America,Temperate,-74.15686,4.99445,TMP,time_unique_adjusted_r2
+4555,spatial_events,unique_adjusted_r2,time,0.13744427495666622,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,time_unique_adjusted_r2
+24048,spatial_events,unique_adjusted_r2,time,-0.05341995088108864,Europe,Polar,8.25556,46.54722,POL,time_unique_adjusted_r2
+24080,spatial_events,unique_adjusted_r2,time,0.058510651289657045,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,time_unique_adjusted_r2
+1771,spatial_events,unique_adjusted_r2,time,0.2689871881486653,Latin America,Polar,-73,-50.46667,POL,time_unique_adjusted_r2
+15061,spatial_events,unique_adjusted_r2,time,0.09063845451804109,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,time_unique_adjusted_r2
+24867,spatial_events,unique_adjusted_r2,time,0.05289108865992209,Europe,Temperate,-1.50278,47.40278,TMP,time_unique_adjusted_r2
+21926,spatial_events,unique_adjusted_r2,time,0.043127206495891746,Latin America,Polar,-74.10008,5.07352,POL,time_unique_adjusted_r2
+16193,spatial_events,unique_adjusted_r2,time,-0.02449307727770411,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,time_unique_adjusted_r2
+42720,spatial_events,unique_adjusted_r2,time,0.01139352498521562,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,time_unique_adjusted_r2
+3830,spatial_events,unique_adjusted_r2,time,0.14704384926735714,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,time_unique_adjusted_r2
+45101,spatial_events,unique_adjusted_r2,time,-0.05712956330520769,Europe,Arid,21.91667,40.81667,ARD,time_unique_adjusted_r2
+4288,spatial_events,unique_adjusted_r2,time,0.026766667529279586,Europe,Cold - Cold Summer,33.5,61.80556,CCS,time_unique_adjusted_r2
+40454,spatial_events,unique_adjusted_r2,time,0.008032589034149606,Europe,Temperate,7.12361,46.935,TMP,time_unique_adjusted_r2
+22817,spatial_events,unique_adjusted_r2,time,0.22718483696409353,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,time_unique_adjusted_r2
+3928,spatial_events,unique_adjusted_r2,time,0.009935899203652898,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,time_unique_adjusted_r2
+48798,spatial_events,unique_adjusted_r2,time,-0.0029974749202732465,Europe,Temperate,8.72184,53.67137,TMP,time_unique_adjusted_r2
+21978,spatial_events,unique_adjusted_r2,time,0.06480686621098819,Latin America,Temperate,-74.15686,4.99445,TMP,time_unique_adjusted_r2
+22793,spatial_events,unique_adjusted_r2,time,0.07242672247006499,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,time_unique_adjusted_r2
+15766,spatial_events,unique_adjusted_r2,time,-0.06822221197805745,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,time_unique_adjusted_r2
+47520,spatial_events,unique_adjusted_r2,time,0.041920708931168726,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,time_unique_adjusted_r2
+4183,spatial_events,unique_adjusted_r2,time,-0.014085685583052898,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,time_unique_adjusted_r2
+3468,spatial_events,unique_adjusted_r2,time,0.04168555789130368,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,time_unique_adjusted_r2
+22908,spatial_events,unique_adjusted_r2,time,0.12163544883730926,Europe,Temperate,7.38985,45.05242,TMP,time_unique_adjusted_r2
+15394,spatial_events,unique_adjusted_r2,time,-0.00516008630730358,Latin America,Tropical,-78.69181,22.16,TRO,time_unique_adjusted_r2
+1766,spatial_events,unique_adjusted_r2,time,0.058893801077607666,North America,Arid,-111.7528,34.6488,ARD,time_unique_adjusted_r2
+48925,spatial_events,unique_adjusted_r2,time,-0.042621182376416766,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,time_unique_adjusted_r2
+43295,spatial_events,unique_adjusted_r2,time,-0.02532461611801695,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,time_unique_adjusted_r2
+15682,spatial_events,unique_adjusted_r2,time,0.21196136696580214,North America,Cold - Warm Summer,-87.923,46.83146,CWS,time_unique_adjusted_r2
+48782,spatial_events,unique_adjusted_r2,time,0.23979595068468584,Europe,Temperate,8.71572,53.67106,TMP,time_unique_adjusted_r2
+369,spatial_events,unique_adjusted_r2,time,-0.014638095090160785,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,time_unique_adjusted_r2
+21838,spatial_events,unique_adjusted_r2,time,0.119979890584471,Latin America,Polar,-72.34629,6.38712,POL,time_unique_adjusted_r2
+PVT_Daihai_Lake_2004,spatial_events,unique_adjusted_r2,time,0.1717323605794563,Asia,Arid,112.67,40.58,ARD,time_unique_adjusted_r2
+PVT_Dalianhai_Lake,spatial_events,unique_adjusted_r2,time,-0.06193833691204709,Asia,Arid,100.41,36.25,ARD,time_unique_adjusted_r2
+PVT_Manas_Lake_LM1,spatial_events,unique_adjusted_r2,time,0.04991485041732613,Asia,Arid,85.92,45.83,ARD,time_unique_adjusted_r2
+PVT_Qidong,spatial_events,unique_adjusted_r2,time,-0.00690603640454035,Asia,Temperate,121.7,31.9,TMP,time_unique_adjusted_r2
+PVT_Ximen_Co,spatial_events,unique_adjusted_r2,time,-0.016980676607094236,Asia,Polar,101.47,33.38,POL,time_unique_adjusted_r2
+PVT_Ganhai_Lake,spatial_events,unique_adjusted_r2,time,-0.02073077148099356,Asia,Cold - Dry Winter,112.19,38.89,CDW,time_unique_adjusted_r2
+PVT_Gantang,spatial_events,unique_adjusted_r2,time,0.016442490055888936,Asia,Temperate,119.03,26.77,TMP,time_unique_adjusted_r2
+PVT_Kuhai_Lake,spatial_events,unique_adjusted_r2,time,0.14728107400000456,Asia,Polar,99.31,35.52,POL,time_unique_adjusted_r2
+PVT_Qongjiamong_Co,spatial_events,unique_adjusted_r2,time,0.03839379948743371,Asia,Polar,92.37,29.81,POL,time_unique_adjusted_r2
+PVT_Sujiawan,spatial_events,unique_adjusted_r2,time,0.008668392699731964,Asia,Cold - Dry Winter,104.52,35.54,CDW,time_unique_adjusted_r2
+PVT_Zigetang_Co,spatial_events,unique_adjusted_r2,time,-0.07013986045975773,Asia,Polar,90.9,32,POL,time_unique_adjusted_r2
+cao_35,spatial_events,unique_adjusted_r2,time,0.029345970616996397,Asia,Cold - Cold Summer,151.89,60.73,CCS,time_unique_adjusted_r2
+cao_39,spatial_events,unique_adjusted_r2,time,-0.05214150553083308,Asia,Cold - Cold Summer,78.333333,59,CCS,time_unique_adjusted_r2
+cao_57,spatial_events,unique_adjusted_r2,time,-0.01651473297119499,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,time_unique_adjusted_r2
+cao_106,spatial_events,unique_adjusted_r2,time,-0.009490132791915351,Asia,Polar,100.5333,74.5464,POL,time_unique_adjusted_r2
+PANGAEA.884462,spatial_events,unique_adjusted_r2,time,-0.03155731444557219,Asia,Arid,84.38194,43.04583,ARD,time_unique_adjusted_r2
+PANGAEA.717128,spatial_events,unique_adjusted_r2,time,-0.05369878419284213,Asia,Polar,78,33.1667,POL,time_unique_adjusted_r2
+PANGAEA.808952,spatial_events,unique_adjusted_r2,time,-0.018521881641917814,Asia,Arid,78.32333,32.92944,ARD,time_unique_adjusted_r2
+PANGAEA.893308,spatial_events,unique_adjusted_r2,time,0.0027198361153968342,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,time_unique_adjusted_r2
+Lake_Moon,spatial_events,unique_adjusted_r2,time,0.022197191908640113,Asia,Cold - Dry Winter,120.8665,47.506,CDW,time_unique_adjusted_r2
+46483,spatial_events,unique_adjusted_r2,time,0.03162298427426535,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,time_unique_adjusted_r2
+2643,spatial_events,unique_adjusted_r2,time,0.005063841533663793,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,time_unique_adjusted_r2
+1844,spatial_events,unique_adjusted_r2,time,0.08058134547464324,Asia,Cold - Warm Summer,134.566667,43.25,CWS,time_unique_adjusted_r2
+15624,spatial_events,unique_adjusted_r2,time,0.00662683812609699,Asia,Temperate,134.133333333333,35.35,TMP,time_unique_adjusted_r2
+15656,spatial_events,unique_adjusted_r2,time,-0.004117095999176201,Asia,Temperate,136.11934,35.54912,TMP,time_unique_adjusted_r2
+22330,spatial_events,unique_adjusted_r2,time,0.0718319226845664,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,time_unique_adjusted_r2
+15665,spatial_events,unique_adjusted_r2,time,-0.05912299304506541,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,time_unique_adjusted_r2
+4509,spatial_events,unique_adjusted_r2,time,0.12039848411833853,Asia,Cold - Dry Summer,43,38.5,CDS,time_unique_adjusted_r2
+24161,spatial_events,unique_adjusted_r2,time,-0.03608410415215402,Asia,Cold - Dry Summer,31.283333,40.6,CDS,time_unique_adjusted_r2
+24175,spatial_events,unique_adjusted_r2,time,0.043492895488185135,Asia,Arid,33.733333,37.5,ARD,time_unique_adjusted_r2
+ippd_978,spatial_events,unique_adjusted_r2,time,0.191100575450459,Oceania,Temperate,150.1,-36.5833,TMP,time_unique_adjusted_r2
+ippd_991,spatial_events,unique_adjusted_r2,time,0.09831930419217716,Oceania,Temperate,149.52,-34.75,TMP,time_unique_adjusted_r2
+ippd_1070,spatial_events,unique_adjusted_r2,time,0.05562532344999549,Oceania,Tropical,142.95,-5.85,TRO,time_unique_adjusted_r2
+ippd_2000,spatial_events,unique_adjusted_r2,time,0.0030432456750567605,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,time_unique_adjusted_r2
+ippd_2094,spatial_events,unique_adjusted_r2,time,-0.016072969508655666,Oceania,Temperate,151.3667,-31.9167,TMP,time_unique_adjusted_r2
+ippd_2122,spatial_events,unique_adjusted_r2,time,0.40231746152159087,Oceania,Temperate,150.38,-33.76,TMP,time_unique_adjusted_r2
+ippd_2133,spatial_events,unique_adjusted_r2,time,0.032448674521388,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,time_unique_adjusted_r2
+ippd_2163,spatial_events,unique_adjusted_r2,time,0.06030095259235435,Oceania,Temperate,149.5,-36.5167,TMP,time_unique_adjusted_r2
+ippd_2216,spatial_events,unique_adjusted_r2,time,0.015789653126587422,Oceania,Temperate,153.167,-25.23,TMP,time_unique_adjusted_r2
+ippd_2268,spatial_events,unique_adjusted_r2,time,-0.0038371538881333267,Oceania,Temperate,153.0613,-25.2171,TMP,time_unique_adjusted_r2
+ippd_2270,spatial_events,unique_adjusted_r2,time,0.02388800343432007,Oceania,Temperate,150.22,-33.38,TMP,time_unique_adjusted_r2
+ippd_2287,spatial_events,unique_adjusted_r2,time,0.10207592983532932,Oceania,Arid,141.570299,-34.052551,ARD,time_unique_adjusted_r2
+ippd_2313,spatial_events,unique_adjusted_r2,time,0.2660383527366519,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,time_unique_adjusted_r2
+ippd_2357,spatial_events,unique_adjusted_r2,time,0.02627427020071227,Oceania,Temperate,149.1333,-37.1,TMP,time_unique_adjusted_r2
+48966,spatial_events,untruncated_hierarchical_contribution,climate,0.2762,Europe,Temperate,5.75969,52.24479,TMP,climate_untruncated_hierarchical_contribution
+4042,spatial_events,untruncated_hierarchical_contribution,climate,0.2086,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,climate_untruncated_hierarchical_contribution
+2395,spatial_events,untruncated_hierarchical_contribution,climate,0.0827,Latin America,Tropical,-90.13333,20.86667,TRO,climate_untruncated_hierarchical_contribution
+4542,spatial_events,untruncated_hierarchical_contribution,climate,0.4753,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,climate_untruncated_hierarchical_contribution
+17689,spatial_events,untruncated_hierarchical_contribution,climate,0.2378,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,climate_untruncated_hierarchical_contribution
+25285,spatial_events,untruncated_hierarchical_contribution,climate,0.2484,Europe,Temperate,5.28333,45.79083,TMP,climate_untruncated_hierarchical_contribution
+45383,spatial_events,untruncated_hierarchical_contribution,climate,0.4771,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,climate_untruncated_hierarchical_contribution
+4197,spatial_events,untruncated_hierarchical_contribution,climate,-0.0684,Europe,Temperate,5.41667,45.47333,TMP,climate_untruncated_hierarchical_contribution
+42671,spatial_events,untruncated_hierarchical_contribution,climate,0.1897,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,climate_untruncated_hierarchical_contribution
+22842,spatial_events,untruncated_hierarchical_contribution,climate,0.1359,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,climate_untruncated_hierarchical_contribution
+24467,spatial_events,untruncated_hierarchical_contribution,climate,0.1033,Europe,Temperate,3.13333,49.18333,TMP,climate_untruncated_hierarchical_contribution
+22711,spatial_events,untruncated_hierarchical_contribution,climate,0.2267,Europe,Temperate,-5.34361,57.55889,TMP,climate_untruncated_hierarchical_contribution
+40997,spatial_events,untruncated_hierarchical_contribution,climate,0.1976,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,climate_untruncated_hierarchical_contribution
+309,spatial_events,untruncated_hierarchical_contribution,climate,0.2558,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,climate_untruncated_hierarchical_contribution
+34553,spatial_events,untruncated_hierarchical_contribution,climate,0.2909,Oceania,Temperate,145.95589,-41.66993,TMP,climate_untruncated_hierarchical_contribution
+4198,spatial_events,untruncated_hierarchical_contribution,climate,0.0099,Europe,Temperate,5.41667,45.47333,TMP,climate_untruncated_hierarchical_contribution
+26608,spatial_events,untruncated_hierarchical_contribution,climate,0.2342,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,climate_untruncated_hierarchical_contribution
+3879,spatial_events,untruncated_hierarchical_contribution,climate,0.2005,Europe,Temperate,-3.90841,57.31333,TMP,climate_untruncated_hierarchical_contribution
+518,spatial_events,untruncated_hierarchical_contribution,climate,0.0639,North America,Cold - Warm Summer,-80.28333,38.2,CWS,climate_untruncated_hierarchical_contribution
+21537,spatial_events,untruncated_hierarchical_contribution,climate,0.0317,Latin America,Tropical,-67.92396,-14.43169,TRO,climate_untruncated_hierarchical_contribution
+4092,spatial_events,untruncated_hierarchical_contribution,climate,0.2033,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,climate_untruncated_hierarchical_contribution
+15103,spatial_events,untruncated_hierarchical_contribution,climate,0.2265,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,climate_untruncated_hierarchical_contribution
+20223,spatial_events,untruncated_hierarchical_contribution,climate,0.0466,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,climate_untruncated_hierarchical_contribution
+42649,spatial_events,untruncated_hierarchical_contribution,climate,0.3443,Europe,Temperate,9.00032,47.68985,TMP,climate_untruncated_hierarchical_contribution
+16217,spatial_events,untruncated_hierarchical_contribution,climate,0.1421,Europe,Temperate,-6.77814,53.81603,TMP,climate_untruncated_hierarchical_contribution
+21895,spatial_events,untruncated_hierarchical_contribution,climate,0.1863,Latin America,Tropical,-77.1432,2.0024,TRO,climate_untruncated_hierarchical_contribution
+47604,spatial_events,untruncated_hierarchical_contribution,climate,0.1917,Europe,Polar,7.35751,46.15006,POL,climate_untruncated_hierarchical_contribution
+48960,spatial_events,untruncated_hierarchical_contribution,climate,0.1746,Europe,Temperate,2.64556,45.33944,TMP,climate_untruncated_hierarchical_contribution
+2629,spatial_events,untruncated_hierarchical_contribution,climate,0.0656,North America,Cold - Warm Summer,-70.05833,41.275,CWS,climate_untruncated_hierarchical_contribution
+3043,spatial_events,untruncated_hierarchical_contribution,climate,0.1694,Oceania,Temperate,147.30056,-42.54361,TMP,climate_untruncated_hierarchical_contribution
+47110,spatial_events,untruncated_hierarchical_contribution,climate,0.1313,Oceania,Temperate,145.95589,-41.66993,TMP,climate_untruncated_hierarchical_contribution
+21913,spatial_events,untruncated_hierarchical_contribution,climate,0.2162,Latin America,Tropical,-76.78055,2.43268,TRO,climate_untruncated_hierarchical_contribution
+1440,spatial_events,untruncated_hierarchical_contribution,climate,0.1576,Europe,Arid,32.61667,46.51667,ARD,climate_untruncated_hierarchical_contribution
+45320,spatial_events,untruncated_hierarchical_contribution,climate,0.2035,Europe,Arid,32.61667,46.51667,ARD,climate_untruncated_hierarchical_contribution
+24110,spatial_events,untruncated_hierarchical_contribution,climate,0.0352,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,climate_untruncated_hierarchical_contribution
+48624,spatial_events,untruncated_hierarchical_contribution,climate,0.1047,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,climate_untruncated_hierarchical_contribution
+23006,spatial_events,untruncated_hierarchical_contribution,climate,0.0611,Europe,Cold - Warm Summer,28,51.16061,CWS,climate_untruncated_hierarchical_contribution
+40582,spatial_events,untruncated_hierarchical_contribution,climate,0.0387,Europe,Polar,8.02556,46.38972,POL,climate_untruncated_hierarchical_contribution
+15130,spatial_events,untruncated_hierarchical_contribution,climate,0.2016,Latin America,Temperate,-71.56608,-43.44371,TMP,climate_untruncated_hierarchical_contribution
+4041,spatial_events,untruncated_hierarchical_contribution,climate,0.1547,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,climate_untruncated_hierarchical_contribution
+363,spatial_events,untruncated_hierarchical_contribution,climate,0.097,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,climate_untruncated_hierarchical_contribution
+26435,spatial_events,untruncated_hierarchical_contribution,climate,-0.0454,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,climate_untruncated_hierarchical_contribution
+42570,spatial_events,untruncated_hierarchical_contribution,climate,0.1334,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,climate_untruncated_hierarchical_contribution
+1763,spatial_events,untruncated_hierarchical_contribution,climate,0.0078,North America,Cold - Warm Summer,-69.3,43.76667,CWS,climate_untruncated_hierarchical_contribution
+48837,spatial_events,untruncated_hierarchical_contribution,climate,0.0813,Latin America,Tropical,-66.67672,0.28602,TRO,climate_untruncated_hierarchical_contribution
+15247,spatial_events,untruncated_hierarchical_contribution,climate,0.1652,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,climate_untruncated_hierarchical_contribution
+48777,spatial_events,untruncated_hierarchical_contribution,climate,0.1016,Europe,Temperate,8.77929,53.65498,TMP,climate_untruncated_hierarchical_contribution
+48976,spatial_events,untruncated_hierarchical_contribution,climate,0.2011,Europe,Temperate,2.62278,45.45194,TMP,climate_untruncated_hierarchical_contribution
+3482,spatial_events,untruncated_hierarchical_contribution,climate,0.4538,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,climate_untruncated_hierarchical_contribution
+21580,spatial_events,untruncated_hierarchical_contribution,climate,0.1124,Latin America,Tropical,-67.88893,-14.50063,TRO,climate_untruncated_hierarchical_contribution
+42681,spatial_events,untruncated_hierarchical_contribution,climate,0.1834,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,climate_untruncated_hierarchical_contribution
+24319,spatial_events,untruncated_hierarchical_contribution,climate,0.2143,Europe,Cold - Cold Summer,7.845,46.19556,CCS,climate_untruncated_hierarchical_contribution
+24321,spatial_events,untruncated_hierarchical_contribution,climate,0.3313,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,climate_untruncated_hierarchical_contribution
+21917,spatial_events,untruncated_hierarchical_contribution,climate,0.1465,Latin America,Polar,-74.16112,3.97973,POL,climate_untruncated_hierarchical_contribution
+48984,spatial_events,untruncated_hierarchical_contribution,climate,0.2656,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,climate_untruncated_hierarchical_contribution
+2645,spatial_events,untruncated_hierarchical_contribution,climate,0.2279,North America,Cold - Hot Summer,-71.03333,41.95,CHS,climate_untruncated_hierarchical_contribution
+22890,spatial_events,untruncated_hierarchical_contribution,climate,0.0789,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,climate_untruncated_hierarchical_contribution
+15132,spatial_events,untruncated_hierarchical_contribution,climate,-0.0794,Latin America,Temperate,-71.49835,-41.07352,TMP,climate_untruncated_hierarchical_contribution
+15331,spatial_events,untruncated_hierarchical_contribution,climate,-0.1404,Latin America,Polar,-71.84655,-45.69413,POL,climate_untruncated_hierarchical_contribution
+1897,spatial_events,untruncated_hierarchical_contribution,climate,0.2,North America,Cold - Hot Summer,-93.9,42.16,CHS,climate_untruncated_hierarchical_contribution
+48935,spatial_events,untruncated_hierarchical_contribution,climate,0.1824,Europe,Arid,-3.93936,41.95209,ARD,climate_untruncated_hierarchical_contribution
+48656,spatial_events,untruncated_hierarchical_contribution,climate,0.4347,Oceania,Tropical,140.58726,-2.54291,TRO,climate_untruncated_hierarchical_contribution
+15306,spatial_events,untruncated_hierarchical_contribution,climate,0.3823,Latin America,Polar,-71.88616,-52.03906,POL,climate_untruncated_hierarchical_contribution
+21700,spatial_events,untruncated_hierarchical_contribution,climate,0.3054,Latin America,Temperate,-76.70941,2.36575,TMP,climate_untruncated_hierarchical_contribution
+24256,spatial_events,untruncated_hierarchical_contribution,climate,0.3445,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,climate_untruncated_hierarchical_contribution
+47011,spatial_events,untruncated_hierarchical_contribution,climate,0.2381,Latin America,Temperate,-79.15958,-4.04586,TMP,climate_untruncated_hierarchical_contribution
+22660,spatial_events,untruncated_hierarchical_contribution,climate,0.1982,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,climate_untruncated_hierarchical_contribution
+48072,spatial_events,untruncated_hierarchical_contribution,climate,0.0372,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,climate_untruncated_hierarchical_contribution
+2265,spatial_events,untruncated_hierarchical_contribution,climate,0.3292,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,climate_untruncated_hierarchical_contribution
+4269,spatial_events,untruncated_hierarchical_contribution,climate,0.1353,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,climate_untruncated_hierarchical_contribution
+40795,spatial_events,untruncated_hierarchical_contribution,climate,0.1551,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,climate_untruncated_hierarchical_contribution
+21915,spatial_events,untruncated_hierarchical_contribution,climate,0.4173,Latin America,Tropical,-76.52225,3.10116,TRO,climate_untruncated_hierarchical_contribution
+3452,spatial_events,untruncated_hierarchical_contribution,climate,0.0256,North America,Cold - Warm Summer,-90.35,45.3,CWS,climate_untruncated_hierarchical_contribution
+48735,spatial_events,untruncated_hierarchical_contribution,climate,0.1721,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,climate_untruncated_hierarchical_contribution
+48614,spatial_events,untruncated_hierarchical_contribution,climate,0.1678,Latin America,Temperate,-79.11153,-4.37461,TMP,climate_untruncated_hierarchical_contribution
+2318,spatial_events,untruncated_hierarchical_contribution,climate,0.0658,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,climate_untruncated_hierarchical_contribution
+24097,spatial_events,untruncated_hierarchical_contribution,climate,0.0505,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,climate_untruncated_hierarchical_contribution
+45400,spatial_events,untruncated_hierarchical_contribution,climate,0.0486,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,climate_untruncated_hierarchical_contribution
+24250,spatial_events,untruncated_hierarchical_contribution,climate,0.2715,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,climate_untruncated_hierarchical_contribution
+2663,spatial_events,untruncated_hierarchical_contribution,climate,0.2725,North America,Temperate,-81.50634,27.58253,TMP,climate_untruncated_hierarchical_contribution
+40452,spatial_events,untruncated_hierarchical_contribution,climate,-0.0218,Europe,Cold - Warm Summer,7.05,47.24056,CWS,climate_untruncated_hierarchical_contribution
+22950,spatial_events,untruncated_hierarchical_contribution,climate,-0.0533,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,climate_untruncated_hierarchical_contribution
+26520,spatial_events,untruncated_hierarchical_contribution,climate,0.1317,Europe,Polar,7.09361,46.17667,POL,climate_untruncated_hierarchical_contribution
+4524,spatial_events,untruncated_hierarchical_contribution,climate,0.2688,Europe,Temperate,1.75,48.41667,TMP,climate_untruncated_hierarchical_contribution
+26514,spatial_events,untruncated_hierarchical_contribution,climate,0.1605,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,climate_untruncated_hierarchical_contribution
+48950,spatial_events,untruncated_hierarchical_contribution,climate,0.1952,Europe,Cold - Warm Summer,5.99556,44.555,CWS,climate_untruncated_hierarchical_contribution
+4200,spatial_events,untruncated_hierarchical_contribution,climate,0.2253,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,climate_untruncated_hierarchical_contribution
+3488,spatial_events,untruncated_hierarchical_contribution,climate,0.342,North America,Cold - Hot Summer,-89.41667,43.1,CHS,climate_untruncated_hierarchical_contribution
+4118,spatial_events,untruncated_hierarchical_contribution,climate,0.0786,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,climate_untruncated_hierarchical_contribution
+4375,spatial_events,untruncated_hierarchical_contribution,climate,0.3252,Europe,Temperate,5.60833,45.425,TMP,climate_untruncated_hierarchical_contribution
+3972,spatial_events,untruncated_hierarchical_contribution,climate,0.186,Europe,Temperate,-1.80028,47.25444,TMP,climate_untruncated_hierarchical_contribution
+285,spatial_events,untruncated_hierarchical_contribution,climate,0.0615,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,climate_untruncated_hierarchical_contribution
+22791,spatial_events,untruncated_hierarchical_contribution,climate,0.1646,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,climate_untruncated_hierarchical_contribution
+22344,spatial_events,untruncated_hierarchical_contribution,climate,0.1991,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,climate_untruncated_hierarchical_contribution
+45281,spatial_events,untruncated_hierarchical_contribution,climate,0.1164,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,climate_untruncated_hierarchical_contribution
+32426,spatial_events,untruncated_hierarchical_contribution,climate,0.3217,Oceania,Temperate,145.96036,-41.45226,TMP,climate_untruncated_hierarchical_contribution
+4393,spatial_events,untruncated_hierarchical_contribution,climate,0.0591,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,climate_untruncated_hierarchical_contribution
+324,spatial_events,untruncated_hierarchical_contribution,climate,0.1478,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,climate_untruncated_hierarchical_contribution
+510,spatial_events,untruncated_hierarchical_contribution,climate,0.2098,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,climate_untruncated_hierarchical_contribution
+14941,spatial_events,untruncated_hierarchical_contribution,climate,0.1675,Oceania,Polar,137.21538,-4.02326,POL,climate_untruncated_hierarchical_contribution
+1661,spatial_events,untruncated_hierarchical_contribution,climate,0.439,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,climate_untruncated_hierarchical_contribution
+48769,spatial_events,untruncated_hierarchical_contribution,climate,0.2318,Europe,Temperate,8.76777,53.65389,TMP,climate_untruncated_hierarchical_contribution
+21903,spatial_events,untruncated_hierarchical_contribution,climate,0.1699,Latin America,Tropical,-77.1432,2.0024,TRO,climate_untruncated_hierarchical_contribution
+22976,spatial_events,untruncated_hierarchical_contribution,climate,0.0103,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,climate_untruncated_hierarchical_contribution
+4192,spatial_events,untruncated_hierarchical_contribution,climate,-0.0521,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,climate_untruncated_hierarchical_contribution
+22049,spatial_events,untruncated_hierarchical_contribution,climate,0.0934,Latin America,Temperate,-74.15686,4.99445,TMP,climate_untruncated_hierarchical_contribution
+4213,spatial_events,untruncated_hierarchical_contribution,climate,0.0607,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,climate_untruncated_hierarchical_contribution
+18104,spatial_events,untruncated_hierarchical_contribution,climate,0.3379,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,climate_untruncated_hierarchical_contribution
+22101,spatial_events,untruncated_hierarchical_contribution,climate,0.249,Latin America,Polar,-76.09258,6.47451,POL,climate_untruncated_hierarchical_contribution
+4479,spatial_events,untruncated_hierarchical_contribution,climate,0.188,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,climate_untruncated_hierarchical_contribution
+21708,spatial_events,untruncated_hierarchical_contribution,climate,0.1596,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,climate_untruncated_hierarchical_contribution
+22047,spatial_events,untruncated_hierarchical_contribution,climate,0.144,Latin America,Temperate,-74.15686,4.99445,TMP,climate_untruncated_hierarchical_contribution
+4555,spatial_events,untruncated_hierarchical_contribution,climate,0.0875,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,climate_untruncated_hierarchical_contribution
+24048,spatial_events,untruncated_hierarchical_contribution,climate,0.0096,Europe,Polar,8.25556,46.54722,POL,climate_untruncated_hierarchical_contribution
+24080,spatial_events,untruncated_hierarchical_contribution,climate,0.2254,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,climate_untruncated_hierarchical_contribution
+1771,spatial_events,untruncated_hierarchical_contribution,climate,0.1037,Latin America,Polar,-73,-50.46667,POL,climate_untruncated_hierarchical_contribution
+15061,spatial_events,untruncated_hierarchical_contribution,climate,0.2692,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,climate_untruncated_hierarchical_contribution
+24867,spatial_events,untruncated_hierarchical_contribution,climate,0.2594,Europe,Temperate,-1.50278,47.40278,TMP,climate_untruncated_hierarchical_contribution
+21926,spatial_events,untruncated_hierarchical_contribution,climate,0.2182,Latin America,Polar,-74.10008,5.07352,POL,climate_untruncated_hierarchical_contribution
+16193,spatial_events,untruncated_hierarchical_contribution,climate,0.4238,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,climate_untruncated_hierarchical_contribution
+42720,spatial_events,untruncated_hierarchical_contribution,climate,0.101,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,climate_untruncated_hierarchical_contribution
+3830,spatial_events,untruncated_hierarchical_contribution,climate,0.2084,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,climate_untruncated_hierarchical_contribution
+45101,spatial_events,untruncated_hierarchical_contribution,climate,0.19,Europe,Arid,21.91667,40.81667,ARD,climate_untruncated_hierarchical_contribution
+4288,spatial_events,untruncated_hierarchical_contribution,climate,0.3354,Europe,Cold - Cold Summer,33.5,61.80556,CCS,climate_untruncated_hierarchical_contribution
+40454,spatial_events,untruncated_hierarchical_contribution,climate,0.0603,Europe,Temperate,7.12361,46.935,TMP,climate_untruncated_hierarchical_contribution
+22817,spatial_events,untruncated_hierarchical_contribution,climate,0.0514,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,climate_untruncated_hierarchical_contribution
+3928,spatial_events,untruncated_hierarchical_contribution,climate,0.2643,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,climate_untruncated_hierarchical_contribution
+48798,spatial_events,untruncated_hierarchical_contribution,climate,0.1867,Europe,Temperate,8.72184,53.67137,TMP,climate_untruncated_hierarchical_contribution
+21978,spatial_events,untruncated_hierarchical_contribution,climate,0.3207,Latin America,Temperate,-74.15686,4.99445,TMP,climate_untruncated_hierarchical_contribution
+22793,spatial_events,untruncated_hierarchical_contribution,climate,0.2429,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,climate_untruncated_hierarchical_contribution
+15766,spatial_events,untruncated_hierarchical_contribution,climate,-0.0131,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,climate_untruncated_hierarchical_contribution
+47520,spatial_events,untruncated_hierarchical_contribution,climate,0.2243,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,climate_untruncated_hierarchical_contribution
+4183,spatial_events,untruncated_hierarchical_contribution,climate,0.2101,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,climate_untruncated_hierarchical_contribution
+3468,spatial_events,untruncated_hierarchical_contribution,climate,0.2957,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,climate_untruncated_hierarchical_contribution
+22908,spatial_events,untruncated_hierarchical_contribution,climate,0.1291,Europe,Temperate,7.38985,45.05242,TMP,climate_untruncated_hierarchical_contribution
+15394,spatial_events,untruncated_hierarchical_contribution,climate,0.2233,Latin America,Tropical,-78.69181,22.16,TRO,climate_untruncated_hierarchical_contribution
+1766,spatial_events,untruncated_hierarchical_contribution,climate,0.045,North America,Arid,-111.7528,34.6488,ARD,climate_untruncated_hierarchical_contribution
+48925,spatial_events,untruncated_hierarchical_contribution,climate,0.3141,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,climate_untruncated_hierarchical_contribution
+43295,spatial_events,untruncated_hierarchical_contribution,climate,-0.059,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,climate_untruncated_hierarchical_contribution
+15682,spatial_events,untruncated_hierarchical_contribution,climate,0.1976,North America,Cold - Warm Summer,-87.923,46.83146,CWS,climate_untruncated_hierarchical_contribution
+48782,spatial_events,untruncated_hierarchical_contribution,climate,0.1398,Europe,Temperate,8.71572,53.67106,TMP,climate_untruncated_hierarchical_contribution
+369,spatial_events,untruncated_hierarchical_contribution,climate,0.154,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,climate_untruncated_hierarchical_contribution
+21838,spatial_events,untruncated_hierarchical_contribution,climate,0.2551,Latin America,Polar,-72.34629,6.38712,POL,climate_untruncated_hierarchical_contribution
+PVT_Daihai_Lake_2004,spatial_events,untruncated_hierarchical_contribution,climate,0.1934,Asia,Arid,112.67,40.58,ARD,climate_untruncated_hierarchical_contribution
+PVT_Dalianhai_Lake,spatial_events,untruncated_hierarchical_contribution,climate,-0.0361,Asia,Arid,100.41,36.25,ARD,climate_untruncated_hierarchical_contribution
+PVT_Manas_Lake_LM1,spatial_events,untruncated_hierarchical_contribution,climate,0.1165,Asia,Arid,85.92,45.83,ARD,climate_untruncated_hierarchical_contribution
+PVT_Qidong,spatial_events,untruncated_hierarchical_contribution,climate,0.1516,Asia,Temperate,121.7,31.9,TMP,climate_untruncated_hierarchical_contribution
+PVT_Ximen_Co,spatial_events,untruncated_hierarchical_contribution,climate,0.1984,Asia,Polar,101.47,33.38,POL,climate_untruncated_hierarchical_contribution
+PVT_Ganhai_Lake,spatial_events,untruncated_hierarchical_contribution,climate,0.1312,Asia,Cold - Dry Winter,112.19,38.89,CDW,climate_untruncated_hierarchical_contribution
+PVT_Gantang,spatial_events,untruncated_hierarchical_contribution,climate,-0.0068,Asia,Temperate,119.03,26.77,TMP,climate_untruncated_hierarchical_contribution
+PVT_Kuhai_Lake,spatial_events,untruncated_hierarchical_contribution,climate,0.2212,Asia,Polar,99.31,35.52,POL,climate_untruncated_hierarchical_contribution
+PVT_Qongjiamong_Co,spatial_events,untruncated_hierarchical_contribution,climate,0.1314,Asia,Polar,92.37,29.81,POL,climate_untruncated_hierarchical_contribution
+PVT_Sujiawan,spatial_events,untruncated_hierarchical_contribution,climate,0.2469,Asia,Cold - Dry Winter,104.52,35.54,CDW,climate_untruncated_hierarchical_contribution
+PVT_Zigetang_Co,spatial_events,untruncated_hierarchical_contribution,climate,-0.087,Asia,Polar,90.9,32,POL,climate_untruncated_hierarchical_contribution
+cao_35,spatial_events,untruncated_hierarchical_contribution,climate,0.0532,Asia,Cold - Cold Summer,151.89,60.73,CCS,climate_untruncated_hierarchical_contribution
+cao_39,spatial_events,untruncated_hierarchical_contribution,climate,0.2906,Asia,Cold - Cold Summer,78.333333,59,CCS,climate_untruncated_hierarchical_contribution
+cao_57,spatial_events,untruncated_hierarchical_contribution,climate,0.1295,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,climate_untruncated_hierarchical_contribution
+cao_106,spatial_events,untruncated_hierarchical_contribution,climate,0.2037,Asia,Polar,100.5333,74.5464,POL,climate_untruncated_hierarchical_contribution
+PANGAEA.884462,spatial_events,untruncated_hierarchical_contribution,climate,0.2541,Asia,Arid,84.38194,43.04583,ARD,climate_untruncated_hierarchical_contribution
+PANGAEA.717128,spatial_events,untruncated_hierarchical_contribution,climate,0.0036,Asia,Polar,78,33.1667,POL,climate_untruncated_hierarchical_contribution
+PANGAEA.808952,spatial_events,untruncated_hierarchical_contribution,climate,0.1419,Asia,Arid,78.32333,32.92944,ARD,climate_untruncated_hierarchical_contribution
+PANGAEA.893308,spatial_events,untruncated_hierarchical_contribution,climate,0.2956,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,climate_untruncated_hierarchical_contribution
+Lake_Moon,spatial_events,untruncated_hierarchical_contribution,climate,0.102,Asia,Cold - Dry Winter,120.8665,47.506,CDW,climate_untruncated_hierarchical_contribution
+46483,spatial_events,untruncated_hierarchical_contribution,climate,0.1754,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,climate_untruncated_hierarchical_contribution
+2643,spatial_events,untruncated_hierarchical_contribution,climate,0.0953,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,climate_untruncated_hierarchical_contribution
+1844,spatial_events,untruncated_hierarchical_contribution,climate,0.2914,Asia,Cold - Warm Summer,134.566667,43.25,CWS,climate_untruncated_hierarchical_contribution
+15624,spatial_events,untruncated_hierarchical_contribution,climate,0.3054,Asia,Temperate,134.133333333333,35.35,TMP,climate_untruncated_hierarchical_contribution
+15656,spatial_events,untruncated_hierarchical_contribution,climate,0.2239,Asia,Temperate,136.11934,35.54912,TMP,climate_untruncated_hierarchical_contribution
+22330,spatial_events,untruncated_hierarchical_contribution,climate,0.0302,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,climate_untruncated_hierarchical_contribution
+15665,spatial_events,untruncated_hierarchical_contribution,climate,0.1162,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,climate_untruncated_hierarchical_contribution
+4509,spatial_events,untruncated_hierarchical_contribution,climate,0.2436,Asia,Cold - Dry Summer,43,38.5,CDS,climate_untruncated_hierarchical_contribution
+24161,spatial_events,untruncated_hierarchical_contribution,climate,0.0288,Asia,Cold - Dry Summer,31.283333,40.6,CDS,climate_untruncated_hierarchical_contribution
+24175,spatial_events,untruncated_hierarchical_contribution,climate,0.1523,Asia,Arid,33.733333,37.5,ARD,climate_untruncated_hierarchical_contribution
+ippd_978,spatial_events,untruncated_hierarchical_contribution,climate,0.2987,Oceania,Temperate,150.1,-36.5833,TMP,climate_untruncated_hierarchical_contribution
+ippd_991,spatial_events,untruncated_hierarchical_contribution,climate,0.0333,Oceania,Temperate,149.52,-34.75,TMP,climate_untruncated_hierarchical_contribution
+ippd_1070,spatial_events,untruncated_hierarchical_contribution,climate,0.0967,Oceania,Tropical,142.95,-5.85,TRO,climate_untruncated_hierarchical_contribution
+ippd_2000,spatial_events,untruncated_hierarchical_contribution,climate,0.1019,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,climate_untruncated_hierarchical_contribution
+ippd_2094,spatial_events,untruncated_hierarchical_contribution,climate,0.4408,Oceania,Temperate,151.3667,-31.9167,TMP,climate_untruncated_hierarchical_contribution
+ippd_2122,spatial_events,untruncated_hierarchical_contribution,climate,0.0943,Oceania,Temperate,150.38,-33.76,TMP,climate_untruncated_hierarchical_contribution
+ippd_2133,spatial_events,untruncated_hierarchical_contribution,climate,0.0769,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,climate_untruncated_hierarchical_contribution
+ippd_2163,spatial_events,untruncated_hierarchical_contribution,climate,0.3152,Oceania,Temperate,149.5,-36.5167,TMP,climate_untruncated_hierarchical_contribution
+ippd_2216,spatial_events,untruncated_hierarchical_contribution,climate,0.1142,Oceania,Temperate,153.167,-25.23,TMP,climate_untruncated_hierarchical_contribution
+ippd_2268,spatial_events,untruncated_hierarchical_contribution,climate,0.3005,Oceania,Temperate,153.0613,-25.2171,TMP,climate_untruncated_hierarchical_contribution
+ippd_2270,spatial_events,untruncated_hierarchical_contribution,climate,0.331,Oceania,Temperate,150.22,-33.38,TMP,climate_untruncated_hierarchical_contribution
+ippd_2287,spatial_events,untruncated_hierarchical_contribution,climate,0.1873,Oceania,Arid,141.570299,-34.052551,ARD,climate_untruncated_hierarchical_contribution
+ippd_2313,spatial_events,untruncated_hierarchical_contribution,climate,0.1031,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,climate_untruncated_hierarchical_contribution
+ippd_2357,spatial_events,untruncated_hierarchical_contribution,climate,0.0633,Oceania,Temperate,149.1333,-37.1,TMP,climate_untruncated_hierarchical_contribution
+48966,spatial_events,untruncated_hierarchical_contribution,human,0.0675,Europe,Temperate,5.75969,52.24479,TMP,human_untruncated_hierarchical_contribution
+4042,spatial_events,untruncated_hierarchical_contribution,human,0.3298,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,human_untruncated_hierarchical_contribution
+2395,spatial_events,untruncated_hierarchical_contribution,human,0.0519,Latin America,Tropical,-90.13333,20.86667,TRO,human_untruncated_hierarchical_contribution
+4542,spatial_events,untruncated_hierarchical_contribution,human,0.0796,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,human_untruncated_hierarchical_contribution
+17689,spatial_events,untruncated_hierarchical_contribution,human,0.0785,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,human_untruncated_hierarchical_contribution
+25285,spatial_events,untruncated_hierarchical_contribution,human,0.2103,Europe,Temperate,5.28333,45.79083,TMP,human_untruncated_hierarchical_contribution
+45383,spatial_events,untruncated_hierarchical_contribution,human,0.1723,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,human_untruncated_hierarchical_contribution
+4197,spatial_events,untruncated_hierarchical_contribution,human,0.2214,Europe,Temperate,5.41667,45.47333,TMP,human_untruncated_hierarchical_contribution
+42671,spatial_events,untruncated_hierarchical_contribution,human,0.1789,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,human_untruncated_hierarchical_contribution
+22842,spatial_events,untruncated_hierarchical_contribution,human,0.0478,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,human_untruncated_hierarchical_contribution
+24467,spatial_events,untruncated_hierarchical_contribution,human,0.1964,Europe,Temperate,3.13333,49.18333,TMP,human_untruncated_hierarchical_contribution
+22711,spatial_events,untruncated_hierarchical_contribution,human,0.1598,Europe,Temperate,-5.34361,57.55889,TMP,human_untruncated_hierarchical_contribution
+40997,spatial_events,untruncated_hierarchical_contribution,human,0.2166,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,human_untruncated_hierarchical_contribution
+309,spatial_events,untruncated_hierarchical_contribution,human,-0.0169,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,human_untruncated_hierarchical_contribution
+34553,spatial_events,untruncated_hierarchical_contribution,human,0.2077,Oceania,Temperate,145.95589,-41.66993,TMP,human_untruncated_hierarchical_contribution
+4198,spatial_events,untruncated_hierarchical_contribution,human,0.3562,Europe,Temperate,5.41667,45.47333,TMP,human_untruncated_hierarchical_contribution
+26608,spatial_events,untruncated_hierarchical_contribution,human,0.2005,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,human_untruncated_hierarchical_contribution
+3879,spatial_events,untruncated_hierarchical_contribution,human,0.0281,Europe,Temperate,-3.90841,57.31333,TMP,human_untruncated_hierarchical_contribution
+518,spatial_events,untruncated_hierarchical_contribution,human,0.2267,North America,Cold - Warm Summer,-80.28333,38.2,CWS,human_untruncated_hierarchical_contribution
+21537,spatial_events,untruncated_hierarchical_contribution,human,-0.055,Latin America,Tropical,-67.92396,-14.43169,TRO,human_untruncated_hierarchical_contribution
+4092,spatial_events,untruncated_hierarchical_contribution,human,0.1189,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,human_untruncated_hierarchical_contribution
+15103,spatial_events,untruncated_hierarchical_contribution,human,0.0641,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,human_untruncated_hierarchical_contribution
+20223,spatial_events,untruncated_hierarchical_contribution,human,0.0305,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,human_untruncated_hierarchical_contribution
+42649,spatial_events,untruncated_hierarchical_contribution,human,0.1977,Europe,Temperate,9.00032,47.68985,TMP,human_untruncated_hierarchical_contribution
+16217,spatial_events,untruncated_hierarchical_contribution,human,0.2786,Europe,Temperate,-6.77814,53.81603,TMP,human_untruncated_hierarchical_contribution
+21895,spatial_events,untruncated_hierarchical_contribution,human,-0.0287,Latin America,Tropical,-77.1432,2.0024,TRO,human_untruncated_hierarchical_contribution
+47604,spatial_events,untruncated_hierarchical_contribution,human,0.30620000000000003,Europe,Polar,7.35751,46.15006,POL,human_untruncated_hierarchical_contribution
+48960,spatial_events,untruncated_hierarchical_contribution,human,0.0697,Europe,Temperate,2.64556,45.33944,TMP,human_untruncated_hierarchical_contribution
+2629,spatial_events,untruncated_hierarchical_contribution,human,0.1765,North America,Cold - Warm Summer,-70.05833,41.275,CWS,human_untruncated_hierarchical_contribution
+3043,spatial_events,untruncated_hierarchical_contribution,human,0.2668,Oceania,Temperate,147.30056,-42.54361,TMP,human_untruncated_hierarchical_contribution
+47110,spatial_events,untruncated_hierarchical_contribution,human,0.2072,Oceania,Temperate,145.95589,-41.66993,TMP,human_untruncated_hierarchical_contribution
+21913,spatial_events,untruncated_hierarchical_contribution,human,0.2769,Latin America,Tropical,-76.78055,2.43268,TRO,human_untruncated_hierarchical_contribution
+1440,spatial_events,untruncated_hierarchical_contribution,human,0.1763,Europe,Arid,32.61667,46.51667,ARD,human_untruncated_hierarchical_contribution
+45320,spatial_events,untruncated_hierarchical_contribution,human,0.0922,Europe,Arid,32.61667,46.51667,ARD,human_untruncated_hierarchical_contribution
+24110,spatial_events,untruncated_hierarchical_contribution,human,0.2444,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,human_untruncated_hierarchical_contribution
+48624,spatial_events,untruncated_hierarchical_contribution,human,-0.0473,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,human_untruncated_hierarchical_contribution
+23006,spatial_events,untruncated_hierarchical_contribution,human,0.0135,Europe,Cold - Warm Summer,28,51.16061,CWS,human_untruncated_hierarchical_contribution
+40582,spatial_events,untruncated_hierarchical_contribution,human,0.085,Europe,Polar,8.02556,46.38972,POL,human_untruncated_hierarchical_contribution
+15130,spatial_events,untruncated_hierarchical_contribution,human,0.1218,Latin America,Temperate,-71.56608,-43.44371,TMP,human_untruncated_hierarchical_contribution
+4041,spatial_events,untruncated_hierarchical_contribution,human,0.0678,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,human_untruncated_hierarchical_contribution
+363,spatial_events,untruncated_hierarchical_contribution,human,0.0553,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,human_untruncated_hierarchical_contribution
+26435,spatial_events,untruncated_hierarchical_contribution,human,0.2623,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,human_untruncated_hierarchical_contribution
+42570,spatial_events,untruncated_hierarchical_contribution,human,0.0985,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,human_untruncated_hierarchical_contribution
+1763,spatial_events,untruncated_hierarchical_contribution,human,0.0552,North America,Cold - Warm Summer,-69.3,43.76667,CWS,human_untruncated_hierarchical_contribution
+48837,spatial_events,untruncated_hierarchical_contribution,human,0.1413,Latin America,Tropical,-66.67672,0.28602,TRO,human_untruncated_hierarchical_contribution
+15247,spatial_events,untruncated_hierarchical_contribution,human,0.0324,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,human_untruncated_hierarchical_contribution
+48777,spatial_events,untruncated_hierarchical_contribution,human,0.1271,Europe,Temperate,8.77929,53.65498,TMP,human_untruncated_hierarchical_contribution
+48976,spatial_events,untruncated_hierarchical_contribution,human,0.0103,Europe,Temperate,2.62278,45.45194,TMP,human_untruncated_hierarchical_contribution
+3482,spatial_events,untruncated_hierarchical_contribution,human,4e-4,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,human_untruncated_hierarchical_contribution
+21580,spatial_events,untruncated_hierarchical_contribution,human,0.0813,Latin America,Tropical,-67.88893,-14.50063,TRO,human_untruncated_hierarchical_contribution
+42681,spatial_events,untruncated_hierarchical_contribution,human,0.2551,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,human_untruncated_hierarchical_contribution
+24319,spatial_events,untruncated_hierarchical_contribution,human,0.2466,Europe,Cold - Cold Summer,7.845,46.19556,CCS,human_untruncated_hierarchical_contribution
+24321,spatial_events,untruncated_hierarchical_contribution,human,0.1072,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,human_untruncated_hierarchical_contribution
+21917,spatial_events,untruncated_hierarchical_contribution,human,0.1414,Latin America,Polar,-74.16112,3.97973,POL,human_untruncated_hierarchical_contribution
+48984,spatial_events,untruncated_hierarchical_contribution,human,0.1472,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,human_untruncated_hierarchical_contribution
+2645,spatial_events,untruncated_hierarchical_contribution,human,-0.003,North America,Cold - Hot Summer,-71.03333,41.95,CHS,human_untruncated_hierarchical_contribution
+22890,spatial_events,untruncated_hierarchical_contribution,human,0.1734,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,human_untruncated_hierarchical_contribution
+15132,spatial_events,untruncated_hierarchical_contribution,human,0.0051,Latin America,Temperate,-71.49835,-41.07352,TMP,human_untruncated_hierarchical_contribution
+15331,spatial_events,untruncated_hierarchical_contribution,human,0.2102,Latin America,Polar,-71.84655,-45.69413,POL,human_untruncated_hierarchical_contribution
+1897,spatial_events,untruncated_hierarchical_contribution,human,0.1483,North America,Cold - Hot Summer,-93.9,42.16,CHS,human_untruncated_hierarchical_contribution
+48935,spatial_events,untruncated_hierarchical_contribution,human,0.3011,Europe,Arid,-3.93936,41.95209,ARD,human_untruncated_hierarchical_contribution
+48656,spatial_events,untruncated_hierarchical_contribution,human,0.0313,Oceania,Tropical,140.58726,-2.54291,TRO,human_untruncated_hierarchical_contribution
+15306,spatial_events,untruncated_hierarchical_contribution,human,-0.0385,Latin America,Polar,-71.88616,-52.03906,POL,human_untruncated_hierarchical_contribution
+21700,spatial_events,untruncated_hierarchical_contribution,human,0.0938,Latin America,Temperate,-76.70941,2.36575,TMP,human_untruncated_hierarchical_contribution
+24256,spatial_events,untruncated_hierarchical_contribution,human,-0.0391,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,human_untruncated_hierarchical_contribution
+47011,spatial_events,untruncated_hierarchical_contribution,human,-0.0241,Latin America,Temperate,-79.15958,-4.04586,TMP,human_untruncated_hierarchical_contribution
+22660,spatial_events,untruncated_hierarchical_contribution,human,0.0531,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,human_untruncated_hierarchical_contribution
+48072,spatial_events,untruncated_hierarchical_contribution,human,0.0565,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,human_untruncated_hierarchical_contribution
+2265,spatial_events,untruncated_hierarchical_contribution,human,0.0202,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,human_untruncated_hierarchical_contribution
+4269,spatial_events,untruncated_hierarchical_contribution,human,0.2588,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,human_untruncated_hierarchical_contribution
+40795,spatial_events,untruncated_hierarchical_contribution,human,0.1914,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,human_untruncated_hierarchical_contribution
+21915,spatial_events,untruncated_hierarchical_contribution,human,0.2009,Latin America,Tropical,-76.52225,3.10116,TRO,human_untruncated_hierarchical_contribution
+3452,spatial_events,untruncated_hierarchical_contribution,human,0.0932,North America,Cold - Warm Summer,-90.35,45.3,CWS,human_untruncated_hierarchical_contribution
+48735,spatial_events,untruncated_hierarchical_contribution,human,-8e-4,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,human_untruncated_hierarchical_contribution
+48614,spatial_events,untruncated_hierarchical_contribution,human,0.0061,Latin America,Temperate,-79.11153,-4.37461,TMP,human_untruncated_hierarchical_contribution
+2318,spatial_events,untruncated_hierarchical_contribution,human,0.0382,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,human_untruncated_hierarchical_contribution
+24097,spatial_events,untruncated_hierarchical_contribution,human,0.2167,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,human_untruncated_hierarchical_contribution
+45400,spatial_events,untruncated_hierarchical_contribution,human,0.3092,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,human_untruncated_hierarchical_contribution
+24250,spatial_events,untruncated_hierarchical_contribution,human,0.2839,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,human_untruncated_hierarchical_contribution
+2663,spatial_events,untruncated_hierarchical_contribution,human,0.075,North America,Temperate,-81.50634,27.58253,TMP,human_untruncated_hierarchical_contribution
+40452,spatial_events,untruncated_hierarchical_contribution,human,0.1537,Europe,Cold - Warm Summer,7.05,47.24056,CWS,human_untruncated_hierarchical_contribution
+22950,spatial_events,untruncated_hierarchical_contribution,human,0.1265,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,human_untruncated_hierarchical_contribution
+26520,spatial_events,untruncated_hierarchical_contribution,human,0.2518,Europe,Polar,7.09361,46.17667,POL,human_untruncated_hierarchical_contribution
+4524,spatial_events,untruncated_hierarchical_contribution,human,0.1035,Europe,Temperate,1.75,48.41667,TMP,human_untruncated_hierarchical_contribution
+26514,spatial_events,untruncated_hierarchical_contribution,human,0.1239,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,human_untruncated_hierarchical_contribution
+48950,spatial_events,untruncated_hierarchical_contribution,human,0.1952,Europe,Cold - Warm Summer,5.99556,44.555,CWS,human_untruncated_hierarchical_contribution
+4200,spatial_events,untruncated_hierarchical_contribution,human,0.0838,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,human_untruncated_hierarchical_contribution
+3488,spatial_events,untruncated_hierarchical_contribution,human,0.0344,North America,Cold - Hot Summer,-89.41667,43.1,CHS,human_untruncated_hierarchical_contribution
+4118,spatial_events,untruncated_hierarchical_contribution,human,0.1299,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,human_untruncated_hierarchical_contribution
+4375,spatial_events,untruncated_hierarchical_contribution,human,0.0653,Europe,Temperate,5.60833,45.425,TMP,human_untruncated_hierarchical_contribution
+3972,spatial_events,untruncated_hierarchical_contribution,human,0.2223,Europe,Temperate,-1.80028,47.25444,TMP,human_untruncated_hierarchical_contribution
+285,spatial_events,untruncated_hierarchical_contribution,human,0.1133,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,human_untruncated_hierarchical_contribution
+22791,spatial_events,untruncated_hierarchical_contribution,human,0.0204,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,human_untruncated_hierarchical_contribution
+22344,spatial_events,untruncated_hierarchical_contribution,human,0.1549,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,human_untruncated_hierarchical_contribution
+45281,spatial_events,untruncated_hierarchical_contribution,human,0.2738,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,human_untruncated_hierarchical_contribution
+32426,spatial_events,untruncated_hierarchical_contribution,human,0.0394,Oceania,Temperate,145.96036,-41.45226,TMP,human_untruncated_hierarchical_contribution
+4393,spatial_events,untruncated_hierarchical_contribution,human,0.1649,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,human_untruncated_hierarchical_contribution
+324,spatial_events,untruncated_hierarchical_contribution,human,0.0132,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,human_untruncated_hierarchical_contribution
+510,spatial_events,untruncated_hierarchical_contribution,human,0.0378,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,human_untruncated_hierarchical_contribution
+14941,spatial_events,untruncated_hierarchical_contribution,human,0.0158,Oceania,Polar,137.21538,-4.02326,POL,human_untruncated_hierarchical_contribution
+1661,spatial_events,untruncated_hierarchical_contribution,human,0.0704,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,human_untruncated_hierarchical_contribution
+48769,spatial_events,untruncated_hierarchical_contribution,human,0.0218,Europe,Temperate,8.76777,53.65389,TMP,human_untruncated_hierarchical_contribution
+21903,spatial_events,untruncated_hierarchical_contribution,human,0.0464,Latin America,Tropical,-77.1432,2.0024,TRO,human_untruncated_hierarchical_contribution
+22976,spatial_events,untruncated_hierarchical_contribution,human,0.2298,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,human_untruncated_hierarchical_contribution
+4192,spatial_events,untruncated_hierarchical_contribution,human,0.3246,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,human_untruncated_hierarchical_contribution
+22049,spatial_events,untruncated_hierarchical_contribution,human,0.0152,Latin America,Temperate,-74.15686,4.99445,TMP,human_untruncated_hierarchical_contribution
+4213,spatial_events,untruncated_hierarchical_contribution,human,0.4084,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,human_untruncated_hierarchical_contribution
+18104,spatial_events,untruncated_hierarchical_contribution,human,-0.0397,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,human_untruncated_hierarchical_contribution
+22101,spatial_events,untruncated_hierarchical_contribution,human,0.0432,Latin America,Polar,-76.09258,6.47451,POL,human_untruncated_hierarchical_contribution
+4479,spatial_events,untruncated_hierarchical_contribution,human,0.2136,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,human_untruncated_hierarchical_contribution
+21708,spatial_events,untruncated_hierarchical_contribution,human,0.1388,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,human_untruncated_hierarchical_contribution
+22047,spatial_events,untruncated_hierarchical_contribution,human,0.0305,Latin America,Temperate,-74.15686,4.99445,TMP,human_untruncated_hierarchical_contribution
+4555,spatial_events,untruncated_hierarchical_contribution,human,0.0569,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,human_untruncated_hierarchical_contribution
+24048,spatial_events,untruncated_hierarchical_contribution,human,0.0312,Europe,Polar,8.25556,46.54722,POL,human_untruncated_hierarchical_contribution
+24080,spatial_events,untruncated_hierarchical_contribution,human,0.0593,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,human_untruncated_hierarchical_contribution
+1771,spatial_events,untruncated_hierarchical_contribution,human,-0.0495,Latin America,Polar,-73,-50.46667,POL,human_untruncated_hierarchical_contribution
+15061,spatial_events,untruncated_hierarchical_contribution,human,-0.0389,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,human_untruncated_hierarchical_contribution
+24867,spatial_events,untruncated_hierarchical_contribution,human,0.1332,Europe,Temperate,-1.50278,47.40278,TMP,human_untruncated_hierarchical_contribution
+21926,spatial_events,untruncated_hierarchical_contribution,human,-0.0234,Latin America,Polar,-74.10008,5.07352,POL,human_untruncated_hierarchical_contribution
+16193,spatial_events,untruncated_hierarchical_contribution,human,0.1455,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,human_untruncated_hierarchical_contribution
+42720,spatial_events,untruncated_hierarchical_contribution,human,0.2584,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,human_untruncated_hierarchical_contribution
+3830,spatial_events,untruncated_hierarchical_contribution,human,0.1942,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,human_untruncated_hierarchical_contribution
+45101,spatial_events,untruncated_hierarchical_contribution,human,0.2896,Europe,Arid,21.91667,40.81667,ARD,human_untruncated_hierarchical_contribution
+4288,spatial_events,untruncated_hierarchical_contribution,human,0.0333,Europe,Cold - Cold Summer,33.5,61.80556,CCS,human_untruncated_hierarchical_contribution
+40454,spatial_events,untruncated_hierarchical_contribution,human,0.1936,Europe,Temperate,7.12361,46.935,TMP,human_untruncated_hierarchical_contribution
+22817,spatial_events,untruncated_hierarchical_contribution,human,0.2813,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,human_untruncated_hierarchical_contribution
+3928,spatial_events,untruncated_hierarchical_contribution,human,0.1633,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,human_untruncated_hierarchical_contribution
+48798,spatial_events,untruncated_hierarchical_contribution,human,0.1216,Europe,Temperate,8.72184,53.67137,TMP,human_untruncated_hierarchical_contribution
+21978,spatial_events,untruncated_hierarchical_contribution,human,0.1861,Latin America,Temperate,-74.15686,4.99445,TMP,human_untruncated_hierarchical_contribution
+22793,spatial_events,untruncated_hierarchical_contribution,human,0.095,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,human_untruncated_hierarchical_contribution
+15766,spatial_events,untruncated_hierarchical_contribution,human,0.0207,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,human_untruncated_hierarchical_contribution
+47520,spatial_events,untruncated_hierarchical_contribution,human,0.0585,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,human_untruncated_hierarchical_contribution
+4183,spatial_events,untruncated_hierarchical_contribution,human,0.1274,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,human_untruncated_hierarchical_contribution
+3468,spatial_events,untruncated_hierarchical_contribution,human,0.1203,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,human_untruncated_hierarchical_contribution
+22908,spatial_events,untruncated_hierarchical_contribution,human,0.0866,Europe,Temperate,7.38985,45.05242,TMP,human_untruncated_hierarchical_contribution
+15394,spatial_events,untruncated_hierarchical_contribution,human,0.0258,Latin America,Tropical,-78.69181,22.16,TRO,human_untruncated_hierarchical_contribution
+1766,spatial_events,untruncated_hierarchical_contribution,human,-0.0508,North America,Arid,-111.7528,34.6488,ARD,human_untruncated_hierarchical_contribution
+48925,spatial_events,untruncated_hierarchical_contribution,human,0.0272,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,human_untruncated_hierarchical_contribution
+43295,spatial_events,untruncated_hierarchical_contribution,human,0.157,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,human_untruncated_hierarchical_contribution
+15682,spatial_events,untruncated_hierarchical_contribution,human,0.1544,North America,Cold - Warm Summer,-87.923,46.83146,CWS,human_untruncated_hierarchical_contribution
+48782,spatial_events,untruncated_hierarchical_contribution,human,0.0588,Europe,Temperate,8.71572,53.67106,TMP,human_untruncated_hierarchical_contribution
+369,spatial_events,untruncated_hierarchical_contribution,human,0.1575,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,human_untruncated_hierarchical_contribution
+21838,spatial_events,untruncated_hierarchical_contribution,human,-0.0279,Latin America,Polar,-72.34629,6.38712,POL,human_untruncated_hierarchical_contribution
+PVT_Daihai_Lake_2004,spatial_events,untruncated_hierarchical_contribution,human,0.0627,Asia,Arid,112.67,40.58,ARD,human_untruncated_hierarchical_contribution
+PVT_Dalianhai_Lake,spatial_events,untruncated_hierarchical_contribution,human,0.0888,Asia,Arid,100.41,36.25,ARD,human_untruncated_hierarchical_contribution
+PVT_Manas_Lake_LM1,spatial_events,untruncated_hierarchical_contribution,human,0.0106,Asia,Arid,85.92,45.83,ARD,human_untruncated_hierarchical_contribution
+PVT_Qidong,spatial_events,untruncated_hierarchical_contribution,human,0.0938,Asia,Temperate,121.7,31.9,TMP,human_untruncated_hierarchical_contribution
+PVT_Ximen_Co,spatial_events,untruncated_hierarchical_contribution,human,0.0668,Asia,Polar,101.47,33.38,POL,human_untruncated_hierarchical_contribution
+PVT_Ganhai_Lake,spatial_events,untruncated_hierarchical_contribution,human,0.1934,Asia,Cold - Dry Winter,112.19,38.89,CDW,human_untruncated_hierarchical_contribution
+PVT_Gantang,spatial_events,untruncated_hierarchical_contribution,human,0.038,Asia,Temperate,119.03,26.77,TMP,human_untruncated_hierarchical_contribution
+PVT_Kuhai_Lake,spatial_events,untruncated_hierarchical_contribution,human,0.0647,Asia,Polar,99.31,35.52,POL,human_untruncated_hierarchical_contribution
+PVT_Qongjiamong_Co,spatial_events,untruncated_hierarchical_contribution,human,0.0849,Asia,Polar,92.37,29.81,POL,human_untruncated_hierarchical_contribution
+PVT_Sujiawan,spatial_events,untruncated_hierarchical_contribution,human,0.161,Asia,Cold - Dry Winter,104.52,35.54,CDW,human_untruncated_hierarchical_contribution
+PVT_Zigetang_Co,spatial_events,untruncated_hierarchical_contribution,human,0.0694,Asia,Polar,90.9,32,POL,human_untruncated_hierarchical_contribution
+cao_35,spatial_events,untruncated_hierarchical_contribution,human,0.0096,Asia,Cold - Cold Summer,151.89,60.73,CCS,human_untruncated_hierarchical_contribution
+cao_39,spatial_events,untruncated_hierarchical_contribution,human,0.0088,Asia,Cold - Cold Summer,78.333333,59,CCS,human_untruncated_hierarchical_contribution
+cao_57,spatial_events,untruncated_hierarchical_contribution,human,0.1981,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,human_untruncated_hierarchical_contribution
+cao_106,spatial_events,untruncated_hierarchical_contribution,human,0.1638,Asia,Polar,100.5333,74.5464,POL,human_untruncated_hierarchical_contribution
+PANGAEA.884462,spatial_events,untruncated_hierarchical_contribution,human,0.1179,Asia,Arid,84.38194,43.04583,ARD,human_untruncated_hierarchical_contribution
+PANGAEA.717128,spatial_events,untruncated_hierarchical_contribution,human,0.2971,Asia,Polar,78,33.1667,POL,human_untruncated_hierarchical_contribution
+PANGAEA.808952,spatial_events,untruncated_hierarchical_contribution,human,0.0958,Asia,Arid,78.32333,32.92944,ARD,human_untruncated_hierarchical_contribution
+PANGAEA.893308,spatial_events,untruncated_hierarchical_contribution,human,0.1156,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,human_untruncated_hierarchical_contribution
+Lake_Moon,spatial_events,untruncated_hierarchical_contribution,human,-0.0079,Asia,Cold - Dry Winter,120.8665,47.506,CDW,human_untruncated_hierarchical_contribution
+46483,spatial_events,untruncated_hierarchical_contribution,human,0.175,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,human_untruncated_hierarchical_contribution
+2643,spatial_events,untruncated_hierarchical_contribution,human,0.0264,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,human_untruncated_hierarchical_contribution
+1844,spatial_events,untruncated_hierarchical_contribution,human,0.1093,Asia,Cold - Warm Summer,134.566667,43.25,CWS,human_untruncated_hierarchical_contribution
+15624,spatial_events,untruncated_hierarchical_contribution,human,0.1615,Asia,Temperate,134.133333333333,35.35,TMP,human_untruncated_hierarchical_contribution
+15656,spatial_events,untruncated_hierarchical_contribution,human,0.0134,Asia,Temperate,136.11934,35.54912,TMP,human_untruncated_hierarchical_contribution
+22330,spatial_events,untruncated_hierarchical_contribution,human,0.0528,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,human_untruncated_hierarchical_contribution
+15665,spatial_events,untruncated_hierarchical_contribution,human,0.0536,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,human_untruncated_hierarchical_contribution
+4509,spatial_events,untruncated_hierarchical_contribution,human,0.1026,Asia,Cold - Dry Summer,43,38.5,CDS,human_untruncated_hierarchical_contribution
+24161,spatial_events,untruncated_hierarchical_contribution,human,0.358,Asia,Cold - Dry Summer,31.283333,40.6,CDS,human_untruncated_hierarchical_contribution
+24175,spatial_events,untruncated_hierarchical_contribution,human,0.1489,Asia,Arid,33.733333,37.5,ARD,human_untruncated_hierarchical_contribution
+ippd_978,spatial_events,untruncated_hierarchical_contribution,human,0.082,Oceania,Temperate,150.1,-36.5833,TMP,human_untruncated_hierarchical_contribution
+ippd_991,spatial_events,untruncated_hierarchical_contribution,human,0.0494,Oceania,Temperate,149.52,-34.75,TMP,human_untruncated_hierarchical_contribution
+ippd_1070,spatial_events,untruncated_hierarchical_contribution,human,0.2442,Oceania,Tropical,142.95,-5.85,TRO,human_untruncated_hierarchical_contribution
+ippd_2000,spatial_events,untruncated_hierarchical_contribution,human,0.0214,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,human_untruncated_hierarchical_contribution
+ippd_2094,spatial_events,untruncated_hierarchical_contribution,human,0.0184,Oceania,Temperate,151.3667,-31.9167,TMP,human_untruncated_hierarchical_contribution
+ippd_2122,spatial_events,untruncated_hierarchical_contribution,human,0.4005,Oceania,Temperate,150.38,-33.76,TMP,human_untruncated_hierarchical_contribution
+ippd_2133,spatial_events,untruncated_hierarchical_contribution,human,0.1723,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,human_untruncated_hierarchical_contribution
+ippd_2163,spatial_events,untruncated_hierarchical_contribution,human,0.1833,Oceania,Temperate,149.5,-36.5167,TMP,human_untruncated_hierarchical_contribution
+ippd_2216,spatial_events,untruncated_hierarchical_contribution,human,0.4904,Oceania,Temperate,153.167,-25.23,TMP,human_untruncated_hierarchical_contribution
+ippd_2268,spatial_events,untruncated_hierarchical_contribution,human,0.2429,Oceania,Temperate,153.0613,-25.2171,TMP,human_untruncated_hierarchical_contribution
+ippd_2270,spatial_events,untruncated_hierarchical_contribution,human,0.0987,Oceania,Temperate,150.22,-33.38,TMP,human_untruncated_hierarchical_contribution
+ippd_2287,spatial_events,untruncated_hierarchical_contribution,human,0.1297,Oceania,Arid,141.570299,-34.052551,ARD,human_untruncated_hierarchical_contribution
+ippd_2313,spatial_events,untruncated_hierarchical_contribution,human,-0.0179,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,human_untruncated_hierarchical_contribution
+ippd_2357,spatial_events,untruncated_hierarchical_contribution,human,0.1402,Oceania,Temperate,149.1333,-37.1,TMP,human_untruncated_hierarchical_contribution
+48966,spatial_events,untruncated_hierarchical_contribution,time,0.2477,Europe,Temperate,5.75969,52.24479,TMP,time_untruncated_hierarchical_contribution
+4042,spatial_events,untruncated_hierarchical_contribution,time,0.3552,Europe,Cold - Warm Summer,13.67319,58.55679,CWS,time_untruncated_hierarchical_contribution
+2395,spatial_events,untruncated_hierarchical_contribution,time,0.3124,Latin America,Tropical,-90.13333,20.86667,TRO,time_untruncated_hierarchical_contribution
+4542,spatial_events,untruncated_hierarchical_contribution,time,0.0933,Europe,Cold - Cold Summer,32.63333,65.11667,CCS,time_untruncated_hierarchical_contribution
+17689,spatial_events,untruncated_hierarchical_contribution,time,0.1299,North America,Cold - Warm Summer,-80.26015,43.26052,CWS,time_untruncated_hierarchical_contribution
+25285,spatial_events,untruncated_hierarchical_contribution,time,0.0844,Europe,Temperate,5.28333,45.79083,TMP,time_untruncated_hierarchical_contribution
+45383,spatial_events,untruncated_hierarchical_contribution,time,0.1445,Europe,Cold - Warm Summer,25.53861,59.48944,CWS,time_untruncated_hierarchical_contribution
+4197,spatial_events,untruncated_hierarchical_contribution,time,0.0764,Europe,Temperate,5.41667,45.47333,TMP,time_untruncated_hierarchical_contribution
+42671,spatial_events,untruncated_hierarchical_contribution,time,0.2619,Europe,Cold - Warm Summer,8.2395,48.56961,CWS,time_untruncated_hierarchical_contribution
+22842,spatial_events,untruncated_hierarchical_contribution,time,0.1301,Europe,Cold - Cold Summer,7.19861,46.35972,CCS,time_untruncated_hierarchical_contribution
+24467,spatial_events,untruncated_hierarchical_contribution,time,0.2163,Europe,Temperate,3.13333,49.18333,TMP,time_untruncated_hierarchical_contribution
+22711,spatial_events,untruncated_hierarchical_contribution,time,0.1662,Europe,Temperate,-5.34361,57.55889,TMP,time_untruncated_hierarchical_contribution
+40997,spatial_events,untruncated_hierarchical_contribution,time,0.163,Asia,Cold - Dry Winter,108.91361,53.95472,CDW,time_untruncated_hierarchical_contribution
+309,spatial_events,untruncated_hierarchical_contribution,time,0.1455,North America,Cold - Warm Summer,-74.68333,43.91667,CWS,time_untruncated_hierarchical_contribution
+34553,spatial_events,untruncated_hierarchical_contribution,time,0.1522,Oceania,Temperate,145.95589,-41.66993,TMP,time_untruncated_hierarchical_contribution
+4198,spatial_events,untruncated_hierarchical_contribution,time,0.0313,Europe,Temperate,5.41667,45.47333,TMP,time_untruncated_hierarchical_contribution
+26608,spatial_events,untruncated_hierarchical_contribution,time,0.1772,Europe,Temperate - Dry Summer,15.60075,40.92751,TDS,time_untruncated_hierarchical_contribution
+3879,spatial_events,untruncated_hierarchical_contribution,time,0.1263,Europe,Temperate,-3.90841,57.31333,TMP,time_untruncated_hierarchical_contribution
+518,spatial_events,untruncated_hierarchical_contribution,time,0.1296,North America,Cold - Warm Summer,-80.28333,38.2,CWS,time_untruncated_hierarchical_contribution
+21537,spatial_events,untruncated_hierarchical_contribution,time,0.0297,Latin America,Tropical,-67.92396,-14.43169,TRO,time_untruncated_hierarchical_contribution
+4092,spatial_events,untruncated_hierarchical_contribution,time,0.2112,Europe,Cold - Cold Summer,24.25122,60.62404,CCS,time_untruncated_hierarchical_contribution
+15103,spatial_events,untruncated_hierarchical_contribution,time,0.2853,Latin America,Temperate - Dry Summer,-71.51314,-41.5129,TDS,time_untruncated_hierarchical_contribution
+20223,spatial_events,untruncated_hierarchical_contribution,time,0.23,Europe,Cold - Warm Summer,13.92972,50.12944,CWS,time_untruncated_hierarchical_contribution
+42649,spatial_events,untruncated_hierarchical_contribution,time,0.1874,Europe,Temperate,9.00032,47.68985,TMP,time_untruncated_hierarchical_contribution
+16217,spatial_events,untruncated_hierarchical_contribution,time,0.3415,Europe,Temperate,-6.77814,53.81603,TMP,time_untruncated_hierarchical_contribution
+21895,spatial_events,untruncated_hierarchical_contribution,time,0.1015,Latin America,Tropical,-77.1432,2.0024,TRO,time_untruncated_hierarchical_contribution
+47604,spatial_events,untruncated_hierarchical_contribution,time,0.2913,Europe,Polar,7.35751,46.15006,POL,time_untruncated_hierarchical_contribution
+48960,spatial_events,untruncated_hierarchical_contribution,time,0.1939,Europe,Temperate,2.64556,45.33944,TMP,time_untruncated_hierarchical_contribution
+2629,spatial_events,untruncated_hierarchical_contribution,time,0.124,North America,Cold - Warm Summer,-70.05833,41.275,CWS,time_untruncated_hierarchical_contribution
+3043,spatial_events,untruncated_hierarchical_contribution,time,0.1656,Oceania,Temperate,147.30056,-42.54361,TMP,time_untruncated_hierarchical_contribution
+47110,spatial_events,untruncated_hierarchical_contribution,time,0.18,Oceania,Temperate,145.95589,-41.66993,TMP,time_untruncated_hierarchical_contribution
+21913,spatial_events,untruncated_hierarchical_contribution,time,0.2097,Latin America,Tropical,-76.78055,2.43268,TRO,time_untruncated_hierarchical_contribution
+1440,spatial_events,untruncated_hierarchical_contribution,time,0.1744,Europe,Arid,32.61667,46.51667,ARD,time_untruncated_hierarchical_contribution
+45320,spatial_events,untruncated_hierarchical_contribution,time,0.1814,Europe,Arid,32.61667,46.51667,ARD,time_untruncated_hierarchical_contribution
+24110,spatial_events,untruncated_hierarchical_contribution,time,0.2268,Europe,Cold - Warm Summer,16.05602,58.02114,CWS,time_untruncated_hierarchical_contribution
+48624,spatial_events,untruncated_hierarchical_contribution,time,0.1555,Latin America,Temperate - Dry Summer,-71.5233,-44.2797,TDS,time_untruncated_hierarchical_contribution
+23006,spatial_events,untruncated_hierarchical_contribution,time,0.0946,Europe,Cold - Warm Summer,28,51.16061,CWS,time_untruncated_hierarchical_contribution
+40582,spatial_events,untruncated_hierarchical_contribution,time,0.4372,Europe,Polar,8.02556,46.38972,POL,time_untruncated_hierarchical_contribution
+15130,spatial_events,untruncated_hierarchical_contribution,time,0.1121,Latin America,Temperate,-71.56608,-43.44371,TMP,time_untruncated_hierarchical_contribution
+4041,spatial_events,untruncated_hierarchical_contribution,time,0.2629,Europe,Cold - Cold Summer,6.16444,59.69702,CCS,time_untruncated_hierarchical_contribution
+363,spatial_events,untruncated_hierarchical_contribution,time,0.3898,Europe,Cold - Warm Summer,26.43333,53.41667,CWS,time_untruncated_hierarchical_contribution
+26435,spatial_events,untruncated_hierarchical_contribution,time,0.2591,Europe,Cold - Warm Summer,12.17047,47.61312,CWS,time_untruncated_hierarchical_contribution
+42570,spatial_events,untruncated_hierarchical_contribution,time,0.2797,Europe,Cold - Warm Summer,8.63721,48.72783,CWS,time_untruncated_hierarchical_contribution
+1763,spatial_events,untruncated_hierarchical_contribution,time,0.0157,North America,Cold - Warm Summer,-69.3,43.76667,CWS,time_untruncated_hierarchical_contribution
+48837,spatial_events,untruncated_hierarchical_contribution,time,0.1016,Latin America,Tropical,-66.67672,0.28602,TRO,time_untruncated_hierarchical_contribution
+15247,spatial_events,untruncated_hierarchical_contribution,time,0.1773,Latin America,Temperate - Dry Winter,-73.33754,-13.62495,TDW,time_untruncated_hierarchical_contribution
+48777,spatial_events,untruncated_hierarchical_contribution,time,0.2213,Europe,Temperate,8.77929,53.65498,TMP,time_untruncated_hierarchical_contribution
+48976,spatial_events,untruncated_hierarchical_contribution,time,0.2061,Europe,Temperate,2.62278,45.45194,TMP,time_untruncated_hierarchical_contribution
+3482,spatial_events,untruncated_hierarchical_contribution,time,0.1381,North America,Cold - Warm Summer,-91.11546,48.13873,CWS,time_untruncated_hierarchical_contribution
+21580,spatial_events,untruncated_hierarchical_contribution,time,0.0714,Latin America,Tropical,-67.88893,-14.50063,TRO,time_untruncated_hierarchical_contribution
+42681,spatial_events,untruncated_hierarchical_contribution,time,0.2465,Europe,Cold - Warm Summer,8.34727,48.57351,CWS,time_untruncated_hierarchical_contribution
+24319,spatial_events,untruncated_hierarchical_contribution,time,0.1741,Europe,Cold - Cold Summer,7.845,46.19556,CCS,time_untruncated_hierarchical_contribution
+24321,spatial_events,untruncated_hierarchical_contribution,time,0.1262,Europe,Cold - Warm Summer,7.99167,46.34111,CWS,time_untruncated_hierarchical_contribution
+21917,spatial_events,untruncated_hierarchical_contribution,time,0.2125,Latin America,Polar,-74.16112,3.97973,POL,time_untruncated_hierarchical_contribution
+48984,spatial_events,untruncated_hierarchical_contribution,time,0.3149,Europe,Cold - Warm Summer,6.59417,44.91889,CWS,time_untruncated_hierarchical_contribution
+2645,spatial_events,untruncated_hierarchical_contribution,time,0.1471,North America,Cold - Hot Summer,-71.03333,41.95,CHS,time_untruncated_hierarchical_contribution
+22890,spatial_events,untruncated_hierarchical_contribution,time,0.181,Europe,Cold - Warm Summer,7.68611,46.85083,CWS,time_untruncated_hierarchical_contribution
+15132,spatial_events,untruncated_hierarchical_contribution,time,0.0636,Latin America,Temperate,-71.49835,-41.07352,TMP,time_untruncated_hierarchical_contribution
+15331,spatial_events,untruncated_hierarchical_contribution,time,0.0076,Latin America,Polar,-71.84655,-45.69413,POL,time_untruncated_hierarchical_contribution
+1897,spatial_events,untruncated_hierarchical_contribution,time,0.2208,North America,Cold - Hot Summer,-93.9,42.16,CHS,time_untruncated_hierarchical_contribution
+48935,spatial_events,untruncated_hierarchical_contribution,time,0.2084,Europe,Arid,-3.93936,41.95209,ARD,time_untruncated_hierarchical_contribution
+48656,spatial_events,untruncated_hierarchical_contribution,time,0.2357,Oceania,Tropical,140.58726,-2.54291,TRO,time_untruncated_hierarchical_contribution
+15306,spatial_events,untruncated_hierarchical_contribution,time,0.152,Latin America,Polar,-71.88616,-52.03906,POL,time_untruncated_hierarchical_contribution
+21700,spatial_events,untruncated_hierarchical_contribution,time,0.3835,Latin America,Temperate,-76.70941,2.36575,TMP,time_untruncated_hierarchical_contribution
+24256,spatial_events,untruncated_hierarchical_contribution,time,0.0457,Europe,Cold - Warm Summer,14.60392,49.22231,CWS,time_untruncated_hierarchical_contribution
+47011,spatial_events,untruncated_hierarchical_contribution,time,0.2963,Latin America,Temperate,-79.15958,-4.04586,TMP,time_untruncated_hierarchical_contribution
+22660,spatial_events,untruncated_hierarchical_contribution,time,0.125,Europe,Cold - Cold Summer,10.27778,46.77611,CCS,time_untruncated_hierarchical_contribution
+48072,spatial_events,untruncated_hierarchical_contribution,time,0.1014,Europe,Cold - Warm Summer,15.86933,49.63707,CWS,time_untruncated_hierarchical_contribution
+2265,spatial_events,untruncated_hierarchical_contribution,time,0.292,North America,Cold - Warm Summer,-65.26694,48.05194,CWS,time_untruncated_hierarchical_contribution
+4269,spatial_events,untruncated_hierarchical_contribution,time,0.1121,Europe,Cold - Warm Summer,14.77529,48.99944,CWS,time_untruncated_hierarchical_contribution
+40795,spatial_events,untruncated_hierarchical_contribution,time,0.2234,North America,Cold - Warm Summer,-70.79309,41.32761,CWS,time_untruncated_hierarchical_contribution
+21915,spatial_events,untruncated_hierarchical_contribution,time,0.1685,Latin America,Tropical,-76.52225,3.10116,TRO,time_untruncated_hierarchical_contribution
+3452,spatial_events,untruncated_hierarchical_contribution,time,0.2328,North America,Cold - Warm Summer,-90.35,45.3,CWS,time_untruncated_hierarchical_contribution
+48735,spatial_events,untruncated_hierarchical_contribution,time,0.1674,Europe,Cold - Cold Summer,13.40649,49.01398,CCS,time_untruncated_hierarchical_contribution
+48614,spatial_events,untruncated_hierarchical_contribution,time,0.0777,Latin America,Temperate,-79.11153,-4.37461,TMP,time_untruncated_hierarchical_contribution
+2318,spatial_events,untruncated_hierarchical_contribution,time,0.2309,North America,Cold - Warm Summer,-85.17917,46.13194,CWS,time_untruncated_hierarchical_contribution
+24097,spatial_events,untruncated_hierarchical_contribution,time,0.2299,Europe,Cold - Warm Summer,17.19626,48.97602,CWS,time_untruncated_hierarchical_contribution
+45400,spatial_events,untruncated_hierarchical_contribution,time,0.2069,Europe,Cold - Warm Summer,27.46167,59.17528,CWS,time_untruncated_hierarchical_contribution
+24250,spatial_events,untruncated_hierarchical_contribution,time,0.1557,Europe,Cold - Warm Summer,14.02583,49.37639,CWS,time_untruncated_hierarchical_contribution
+2663,spatial_events,untruncated_hierarchical_contribution,time,0.2811,North America,Temperate,-81.50634,27.58253,TMP,time_untruncated_hierarchical_contribution
+40452,spatial_events,untruncated_hierarchical_contribution,time,0.0907,Europe,Cold - Warm Summer,7.05,47.24056,CWS,time_untruncated_hierarchical_contribution
+22950,spatial_events,untruncated_hierarchical_contribution,time,0.2311,Europe,Cold - Warm Summer,19.46271,54.10053,CWS,time_untruncated_hierarchical_contribution
+26520,spatial_events,untruncated_hierarchical_contribution,time,0.1609,Europe,Polar,7.09361,46.17667,POL,time_untruncated_hierarchical_contribution
+4524,spatial_events,untruncated_hierarchical_contribution,time,0.1244,Europe,Temperate,1.75,48.41667,TMP,time_untruncated_hierarchical_contribution
+26514,spatial_events,untruncated_hierarchical_contribution,time,0.1087,Europe,Cold - Warm Summer,12.29357,47.65663,CWS,time_untruncated_hierarchical_contribution
+48950,spatial_events,untruncated_hierarchical_contribution,time,0.0588,Europe,Cold - Warm Summer,5.99556,44.555,CWS,time_untruncated_hierarchical_contribution
+4200,spatial_events,untruncated_hierarchical_contribution,time,0.2516,Europe,Cold - Cold Summer,14.62333,59.80167,CCS,time_untruncated_hierarchical_contribution
+3488,spatial_events,untruncated_hierarchical_contribution,time,0.3414,North America,Cold - Hot Summer,-89.41667,43.1,CHS,time_untruncated_hierarchical_contribution
+4118,spatial_events,untruncated_hierarchical_contribution,time,0.0921,Europe,Cold - Warm Summer,19.67778,49.04167,CWS,time_untruncated_hierarchical_contribution
+4375,spatial_events,untruncated_hierarchical_contribution,time,0.1091,Europe,Temperate,5.60833,45.425,TMP,time_untruncated_hierarchical_contribution
+3972,spatial_events,untruncated_hierarchical_contribution,time,0.1783,Europe,Temperate,-1.80028,47.25444,TMP,time_untruncated_hierarchical_contribution
+285,spatial_events,untruncated_hierarchical_contribution,time,0.0664,Oceania,Cold - Cold Summer,148.31667,-36.41667,CCS,time_untruncated_hierarchical_contribution
+22791,spatial_events,untruncated_hierarchical_contribution,time,0.047,Europe,Cold - Warm Summer,8.06643,47.92904,CWS,time_untruncated_hierarchical_contribution
+22344,spatial_events,untruncated_hierarchical_contribution,time,0.0843,Europe,Cold - Warm Summer,13.32283,49.15026,CWS,time_untruncated_hierarchical_contribution
+45281,spatial_events,untruncated_hierarchical_contribution,time,0.0641,Europe,Cold - Cold Summer,25.27361,47.1125,CCS,time_untruncated_hierarchical_contribution
+32426,spatial_events,untruncated_hierarchical_contribution,time,0.0964,Oceania,Temperate,145.96036,-41.45226,TMP,time_untruncated_hierarchical_contribution
+4393,spatial_events,untruncated_hierarchical_contribution,time,0.1588,Europe,Cold - Cold Summer,24.17439,60.43763,CCS,time_untruncated_hierarchical_contribution
+324,spatial_events,untruncated_hierarchical_contribution,time,0.0557,North America,Cold - Warm Summer,-73.5711,42.5862,CWS,time_untruncated_hierarchical_contribution
+510,spatial_events,untruncated_hierarchical_contribution,time,0.2831,North America,Cold - Warm Summer,-73.34194,45.96083,CWS,time_untruncated_hierarchical_contribution
+14941,spatial_events,untruncated_hierarchical_contribution,time,0.1895,Oceania,Polar,137.21538,-4.02326,POL,time_untruncated_hierarchical_contribution
+1661,spatial_events,untruncated_hierarchical_contribution,time,0.1709,North America,Cold - Hot Summer,-75.66667,40.48333,CHS,time_untruncated_hierarchical_contribution
+48769,spatial_events,untruncated_hierarchical_contribution,time,0.1652,Europe,Temperate,8.76777,53.65389,TMP,time_untruncated_hierarchical_contribution
+21903,spatial_events,untruncated_hierarchical_contribution,time,0.0893,Latin America,Tropical,-77.1432,2.0024,TRO,time_untruncated_hierarchical_contribution
+22976,spatial_events,untruncated_hierarchical_contribution,time,0.0249,Europe,Temperate - Dry Summer,10.89211,42.98735,TDS,time_untruncated_hierarchical_contribution
+4192,spatial_events,untruncated_hierarchical_contribution,time,0.2985,Europe,Cold - Warm Summer,17.38084,52.54901,CWS,time_untruncated_hierarchical_contribution
+22049,spatial_events,untruncated_hierarchical_contribution,time,0.0097,Latin America,Temperate,-74.15686,4.99445,TMP,time_untruncated_hierarchical_contribution
+4213,spatial_events,untruncated_hierarchical_contribution,time,0.1963,Europe,Cold - Warm Summer,7.29917,47.03194,CWS,time_untruncated_hierarchical_contribution
+18104,spatial_events,untruncated_hierarchical_contribution,time,0.2084,Latin America,Temperate - Dry Summer,-71.05064,-36.86011,TDS,time_untruncated_hierarchical_contribution
+22101,spatial_events,untruncated_hierarchical_contribution,time,0.2179,Latin America,Polar,-76.09258,6.47451,POL,time_untruncated_hierarchical_contribution
+4479,spatial_events,untruncated_hierarchical_contribution,time,0.2064,Europe,Cold - Warm Summer,21.56259,49.73807,CWS,time_untruncated_hierarchical_contribution
+21708,spatial_events,untruncated_hierarchical_contribution,time,0.1146,Latin America,Temperate - Dry Summer,-73.77985,5.42453,TDS,time_untruncated_hierarchical_contribution
+22047,spatial_events,untruncated_hierarchical_contribution,time,0.3296,Latin America,Temperate,-74.15686,4.99445,TMP,time_untruncated_hierarchical_contribution
+4555,spatial_events,untruncated_hierarchical_contribution,time,0.1695,Europe,Cold - Cold Summer,6.74944,45.88472,CCS,time_untruncated_hierarchical_contribution
+24048,spatial_events,untruncated_hierarchical_contribution,time,0.0281,Europe,Polar,8.25556,46.54722,POL,time_untruncated_hierarchical_contribution
+24080,spatial_events,untruncated_hierarchical_contribution,time,0.1781,Europe,Cold - Cold Summer,10.33554,46.46957,CCS,time_untruncated_hierarchical_contribution
+1771,spatial_events,untruncated_hierarchical_contribution,time,0.2217,Latin America,Polar,-73,-50.46667,POL,time_untruncated_hierarchical_contribution
+15061,spatial_events,untruncated_hierarchical_contribution,time,0.1776,Latin America,Temperate - Dry Summer,-71.29522,-42.35994,TDS,time_untruncated_hierarchical_contribution
+24867,spatial_events,untruncated_hierarchical_contribution,time,0.1032,Europe,Temperate,-1.50278,47.40278,TMP,time_untruncated_hierarchical_contribution
+21926,spatial_events,untruncated_hierarchical_contribution,time,0.0624,Latin America,Polar,-74.10008,5.07352,POL,time_untruncated_hierarchical_contribution
+16193,spatial_events,untruncated_hierarchical_contribution,time,0.0883,North America,Cold - Warm Summer,-78.32909,44.08857,CWS,time_untruncated_hierarchical_contribution
+42720,spatial_events,untruncated_hierarchical_contribution,time,0.2178,Europe,Cold - Warm Summer,6.75027,50.0978,CWS,time_untruncated_hierarchical_contribution
+3830,spatial_events,untruncated_hierarchical_contribution,time,0.2013,North America,Cold - Warm Summer,-74.05822,44.14671,CWS,time_untruncated_hierarchical_contribution
+45101,spatial_events,untruncated_hierarchical_contribution,time,0.0517,Europe,Arid,21.91667,40.81667,ARD,time_untruncated_hierarchical_contribution
+4288,spatial_events,untruncated_hierarchical_contribution,time,0.222,Europe,Cold - Cold Summer,33.5,61.80556,CCS,time_untruncated_hierarchical_contribution
+40454,spatial_events,untruncated_hierarchical_contribution,time,0.2267,Europe,Temperate,7.12361,46.935,TMP,time_untruncated_hierarchical_contribution
+22817,spatial_events,untruncated_hierarchical_contribution,time,0.3957,Europe,Cold - Warm Summer,13.25694,52.58583,CWS,time_untruncated_hierarchical_contribution
+3928,spatial_events,untruncated_hierarchical_contribution,time,0.1249,Europe,Cold - Cold Summer,32.76667,62.03333,CCS,time_untruncated_hierarchical_contribution
+48798,spatial_events,untruncated_hierarchical_contribution,time,0.1619,Europe,Temperate,8.72184,53.67137,TMP,time_untruncated_hierarchical_contribution
+21978,spatial_events,untruncated_hierarchical_contribution,time,0.1674,Latin America,Temperate,-74.15686,4.99445,TMP,time_untruncated_hierarchical_contribution
+22793,spatial_events,untruncated_hierarchical_contribution,time,0.2849,Europe,Cold - Cold Summer,10.47806,46.86278,CCS,time_untruncated_hierarchical_contribution
+15766,spatial_events,untruncated_hierarchical_contribution,time,0.0338,North America,Temperate - Dry Summer,-118.99583,36.98158,TDS,time_untruncated_hierarchical_contribution
+47520,spatial_events,untruncated_hierarchical_contribution,time,0.1961,Europe,Cold - Cold Summer,13.39869,49.07402,CCS,time_untruncated_hierarchical_contribution
+4183,spatial_events,untruncated_hierarchical_contribution,time,0.1355,Europe,Cold - Cold Summer,30.53333,64.56667,CCS,time_untruncated_hierarchical_contribution
+3468,spatial_events,untruncated_hierarchical_contribution,time,0.2693,North America,Cold - Hot Summer,-93.69945,45.41613,CHS,time_untruncated_hierarchical_contribution
+22908,spatial_events,untruncated_hierarchical_contribution,time,0.1681,Europe,Temperate,7.38985,45.05242,TMP,time_untruncated_hierarchical_contribution
+15394,spatial_events,untruncated_hierarchical_contribution,time,0.2177,Latin America,Tropical,-78.69181,22.16,TRO,time_untruncated_hierarchical_contribution
+1766,spatial_events,untruncated_hierarchical_contribution,time,0.1604,North America,Arid,-111.7528,34.6488,ARD,time_untruncated_hierarchical_contribution
+48925,spatial_events,untruncated_hierarchical_contribution,time,0.1295,North America,Cold - Warm Summer,-69.04601,46.40468,CWS,time_untruncated_hierarchical_contribution
+43295,spatial_events,untruncated_hierarchical_contribution,time,0.1168,Latin America,Cold - Dry Summer,-71.56444,-44.90858,CDS,time_untruncated_hierarchical_contribution
+15682,spatial_events,untruncated_hierarchical_contribution,time,0.2325,North America,Cold - Warm Summer,-87.923,46.83146,CWS,time_untruncated_hierarchical_contribution
+48782,spatial_events,untruncated_hierarchical_contribution,time,0.226,Europe,Temperate,8.71572,53.67106,TMP,time_untruncated_hierarchical_contribution
+369,spatial_events,untruncated_hierarchical_contribution,time,0.0849,North America,Cold - Warm Summer,-83.24111,43.12389,CWS,time_untruncated_hierarchical_contribution
+21838,spatial_events,untruncated_hierarchical_contribution,time,0.1413,Latin America,Polar,-72.34629,6.38712,POL,time_untruncated_hierarchical_contribution
+PVT_Daihai_Lake_2004,spatial_events,untruncated_hierarchical_contribution,time,0.1948,Asia,Arid,112.67,40.58,ARD,time_untruncated_hierarchical_contribution
+PVT_Dalianhai_Lake,spatial_events,untruncated_hierarchical_contribution,time,0.0381,Asia,Arid,100.41,36.25,ARD,time_untruncated_hierarchical_contribution
+PVT_Manas_Lake_LM1,spatial_events,untruncated_hierarchical_contribution,time,0.0961,Asia,Arid,85.92,45.83,ARD,time_untruncated_hierarchical_contribution
+PVT_Qidong,spatial_events,untruncated_hierarchical_contribution,time,0.0921,Asia,Temperate,121.7,31.9,TMP,time_untruncated_hierarchical_contribution
+PVT_Ximen_Co,spatial_events,untruncated_hierarchical_contribution,time,0.1532,Asia,Polar,101.47,33.38,POL,time_untruncated_hierarchical_contribution
+PVT_Ganhai_Lake,spatial_events,untruncated_hierarchical_contribution,time,0.1102,Asia,Cold - Dry Winter,112.19,38.89,CDW,time_untruncated_hierarchical_contribution
+PVT_Gantang,spatial_events,untruncated_hierarchical_contribution,time,0.081,Asia,Temperate,119.03,26.77,TMP,time_untruncated_hierarchical_contribution
+PVT_Kuhai_Lake,spatial_events,untruncated_hierarchical_contribution,time,0.1614,Asia,Polar,99.31,35.52,POL,time_untruncated_hierarchical_contribution
+PVT_Qongjiamong_Co,spatial_events,untruncated_hierarchical_contribution,time,0.0897,Asia,Polar,92.37,29.81,POL,time_untruncated_hierarchical_contribution
+PVT_Sujiawan,spatial_events,untruncated_hierarchical_contribution,time,0.2288,Asia,Cold - Dry Winter,104.52,35.54,CDW,time_untruncated_hierarchical_contribution
+PVT_Zigetang_Co,spatial_events,untruncated_hierarchical_contribution,time,-4e-4,Asia,Polar,90.9,32,POL,time_untruncated_hierarchical_contribution
+cao_35,spatial_events,untruncated_hierarchical_contribution,time,0.1655,Asia,Cold - Cold Summer,151.89,60.73,CCS,time_untruncated_hierarchical_contribution
+cao_39,spatial_events,untruncated_hierarchical_contribution,time,0.0768,Asia,Cold - Cold Summer,78.333333,59,CCS,time_untruncated_hierarchical_contribution
+cao_57,spatial_events,untruncated_hierarchical_contribution,time,0.1279,Asia,Cold - Cold Summer,84.21666667,56.1,CCS,time_untruncated_hierarchical_contribution
+cao_106,spatial_events,untruncated_hierarchical_contribution,time,0.0954,Asia,Polar,100.5333,74.5464,POL,time_untruncated_hierarchical_contribution
+PANGAEA.884462,spatial_events,untruncated_hierarchical_contribution,time,0.1053,Asia,Arid,84.38194,43.04583,ARD,time_untruncated_hierarchical_contribution
+PANGAEA.717128,spatial_events,untruncated_hierarchical_contribution,time,0.0656,Asia,Polar,78,33.1667,POL,time_untruncated_hierarchical_contribution
+PANGAEA.808952,spatial_events,untruncated_hierarchical_contribution,time,0.1768,Asia,Arid,78.32333,32.92944,ARD,time_untruncated_hierarchical_contribution
+PANGAEA.893308,spatial_events,untruncated_hierarchical_contribution,time,0.3228,Asia,Temperate - Dry Winter,96.91667,20.56667,TDW,time_untruncated_hierarchical_contribution
+Lake_Moon,spatial_events,untruncated_hierarchical_contribution,time,0.1602,Asia,Cold - Dry Winter,120.8665,47.506,CDW,time_untruncated_hierarchical_contribution
+46483,spatial_events,untruncated_hierarchical_contribution,time,0.3035,Asia,Cold - Warm Summer,36.416667,55.166667,CWS,time_untruncated_hierarchical_contribution
+2643,spatial_events,untruncated_hierarchical_contribution,time,0.1008,Asia,Cold - Warm Summer,132.783333,42.833333,CWS,time_untruncated_hierarchical_contribution
+1844,spatial_events,untruncated_hierarchical_contribution,time,0.2502,Asia,Cold - Warm Summer,134.566667,43.25,CWS,time_untruncated_hierarchical_contribution
+15624,spatial_events,untruncated_hierarchical_contribution,time,0.232,Asia,Temperate,134.133333333333,35.35,TMP,time_untruncated_hierarchical_contribution
+15656,spatial_events,untruncated_hierarchical_contribution,time,0.1526,Asia,Temperate,136.11934,35.54912,TMP,time_untruncated_hierarchical_contribution
+22330,spatial_events,untruncated_hierarchical_contribution,time,0.1053,Asia,Cold - Warm Summer,42.4969444444444,41.6838888888889,CWS,time_untruncated_hierarchical_contribution
+15665,spatial_events,untruncated_hierarchical_contribution,time,0.0526,Asia,Cold - Hot Summer,132.3875,34.7305555555556,CHS,time_untruncated_hierarchical_contribution
+4509,spatial_events,untruncated_hierarchical_contribution,time,0.3659,Asia,Cold - Dry Summer,43,38.5,CDS,time_untruncated_hierarchical_contribution
+24161,spatial_events,untruncated_hierarchical_contribution,time,0.1633,Asia,Cold - Dry Summer,31.283333,40.6,CDS,time_untruncated_hierarchical_contribution
+24175,spatial_events,untruncated_hierarchical_contribution,time,0.2234,Asia,Arid,33.733333,37.5,ARD,time_untruncated_hierarchical_contribution
+ippd_978,spatial_events,untruncated_hierarchical_contribution,time,0.2405,Oceania,Temperate,150.1,-36.5833,TMP,time_untruncated_hierarchical_contribution
+ippd_991,spatial_events,untruncated_hierarchical_contribution,time,0.196,Oceania,Temperate,149.52,-34.75,TMP,time_untruncated_hierarchical_contribution
+ippd_1070,spatial_events,untruncated_hierarchical_contribution,time,0.2042,Oceania,Tropical,142.95,-5.85,TRO,time_untruncated_hierarchical_contribution
+ippd_2000,spatial_events,untruncated_hierarchical_contribution,time,0.1339,Oceania,Temperate - Dry Winter,145.633,-17.1667,TDW,time_untruncated_hierarchical_contribution
+ippd_2094,spatial_events,untruncated_hierarchical_contribution,time,0.1735,Oceania,Temperate,151.3667,-31.9167,TMP,time_untruncated_hierarchical_contribution
+ippd_2122,spatial_events,untruncated_hierarchical_contribution,time,0.2886,Oceania,Temperate,150.38,-33.76,TMP,time_untruncated_hierarchical_contribution
+ippd_2133,spatial_events,untruncated_hierarchical_contribution,time,0.0731,Oceania,Temperate - Dry Summer,140.581,-37.6094,TDS,time_untruncated_hierarchical_contribution
+ippd_2163,spatial_events,untruncated_hierarchical_contribution,time,0.1268,Oceania,Temperate,149.5,-36.5167,TMP,time_untruncated_hierarchical_contribution
+ippd_2216,spatial_events,untruncated_hierarchical_contribution,time,0.1354,Oceania,Temperate,153.167,-25.23,TMP,time_untruncated_hierarchical_contribution
+ippd_2268,spatial_events,untruncated_hierarchical_contribution,time,0.1133,Oceania,Temperate,153.0613,-25.2171,TMP,time_untruncated_hierarchical_contribution
+ippd_2270,spatial_events,untruncated_hierarchical_contribution,time,0.0937,Oceania,Temperate,150.22,-33.38,TMP,time_untruncated_hierarchical_contribution
+ippd_2287,spatial_events,untruncated_hierarchical_contribution,time,0.1868,Oceania,Arid,141.570299,-34.052551,ARD,time_untruncated_hierarchical_contribution
+ippd_2313,spatial_events,untruncated_hierarchical_contribution,time,0.3529,Oceania,Cold - Warm Summer,148.48333333333332,-36.38333333333333,CWS,time_untruncated_hierarchical_contribution
+ippd_2357,spatial_events,untruncated_hierarchical_contribution,time,0.1255,Oceania,Temperate,149.1333,-37.1,TMP,time_untruncated_hierarchical_contribution

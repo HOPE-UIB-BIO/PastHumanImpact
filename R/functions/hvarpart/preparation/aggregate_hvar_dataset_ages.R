@@ -117,7 +117,10 @@ aggregate_hvar_dataset_ages <- function(
                   return(NA_real_)
                 }
 
-                return(mean(.x, na.rm = TRUE))
+                res <-
+                  mean(.x, na.rm = TRUE)
+
+                return(res)
               }
             ),
             dplyr::across(
@@ -151,10 +154,11 @@ aggregate_hvar_dataset_ages <- function(
     dplyr::select(-dplyr::all_of(data_col)) |>
     dplyr::mutate(!!data_col := list_collapsed)
 
-  return(
+  res <-
     list(
       data = data_collapsed,
       audit = data_audit
     )
-  )
+
+  return(res)
 }

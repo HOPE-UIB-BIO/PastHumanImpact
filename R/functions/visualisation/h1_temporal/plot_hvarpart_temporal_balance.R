@@ -71,7 +71,10 @@ plot_hvarpart_temporal_balance <- function(
         return(default)
       }
 
-      return(value[[1]])
+      res <-
+        value[[1]]
+
+      return(res)
     }
     key_colour <- get_key_value("colour", common_gray)
     key_fill <- get_key_value("fill", "#F2F2F2")

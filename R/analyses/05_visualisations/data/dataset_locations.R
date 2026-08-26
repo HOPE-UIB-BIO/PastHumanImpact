@@ -120,7 +120,7 @@ c(1:3) %>%
         here::here(
           "Outputs/Figures/Data",
           paste0(
-            "dataset_locations_point_size_",
+            "datasets__locations__point_size_",
             .x,
             ".pdf"
           )

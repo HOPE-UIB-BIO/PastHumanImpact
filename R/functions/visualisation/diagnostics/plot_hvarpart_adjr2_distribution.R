@@ -309,7 +309,7 @@ plot_hvarpart_adjr2_distribution <- function(
       )
   }
 
-  return(
+  res <-
     list(
       plot = combined_grob,
       statistical_plot = statistical_plot,
@@ -317,5 +317,6 @@ plot_hvarpart_adjr2_distribution <- function(
       climatezone_values = data_climatezone,
       continent_values = data_continent
     )
-  )
+
+  return(res)
 }

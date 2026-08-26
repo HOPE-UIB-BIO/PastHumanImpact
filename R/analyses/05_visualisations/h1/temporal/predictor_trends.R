@@ -132,7 +132,7 @@ data_figures %>%
       filename = file.path(
         path_figure_dir,
         stringr::str_glue(
-          "predictor_trend_{..1}.{..4}"
+          "predictor__temporal_trend__{..1}.{..4}"
         )
       ),
       plot = ..3,

@@ -9,7 +9,8 @@ testthat::test_that(
         climatezone = rep(c("Polar", "Arid"), 4),
         long = c(10, 12, 14, 16, 80, 82, 84, 86),
         lat = c(50, 52, 54, 56, 40, 42, 44, 46),
-        zero_balance = seq(-0.8, 0.6, length.out = 8)
+        zero_balance = seq(-0.8, 0.6, length.out = 8),
+        signed_difference = seq(-0.4, 0.3, length.out = 8)
       )
     estimates <-
       dplyr::bind_rows(
@@ -26,6 +27,20 @@ testthat::test_that(
           region = rep(c("Europe", "Asia"), each = 2),
           climatezone = rep(c("Polar", "Arid"), 2),
           adjusted_balance = c(-0.4, 0.1, -0.2, 0.3)
+        ),
+        tibble::tibble(
+          aggregation_level = "region",
+          profile = "signed",
+          region = c("Europe", "Asia"),
+          climatezone = "All",
+          adjusted_balance = c(0.8, -0.8)
+        ),
+        tibble::tibble(
+          aggregation_level = "region_climatezone",
+          profile = "signed",
+          region = rep(c("Europe", "Asia"), each = 2),
+          climatezone = rep(c("Polar", "Arid"), 2),
+          adjusted_balance = c(0.9, 0.8, -0.9, -0.8)
         )
       )
     koppen <-
@@ -43,6 +58,16 @@ testthat::test_that(
 
     testthat::expect_s3_class(result, "ggplot")
     testthat::expect_true(length(result[["layers"]]) > 0L)
+
+    signed_result <-
+      plot_h1_spatial_controlled_balance(
+        data_records = records,
+        data_estimates = estimates,
+        data_geo_koppen = koppen,
+        profile = "signed"
+      )
+
+    testthat::expect_s3_class(signed_result, "ggplot")
   }
 )
 

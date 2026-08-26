@@ -123,5 +123,8 @@ classify_spatiotemporal_robustness <- function(
       }
     )
 
-  return(dplyr::bind_rows(list_results))
+  res <-
+    dplyr::bind_rows(list_results)
+
+  return(res)
 }

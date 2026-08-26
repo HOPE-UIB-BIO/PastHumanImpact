@@ -1,141 +1,132 @@
-#' @title Estimate change points of input variables
-#' @description A function to get change points of all pap estimates
-#' using regression trees
-#' @data_source input data prepared for change point estimation
-#' @return New variables of change points in pollen assemblage properties
-#'
-compute_pap_change_points <- function(data_source) {
+#' @title Compute pollen-property change points
+#' @description
+#' Fit the univariate legacy regression trees for every prepared pollen
+#' dataset and assemble their change-point summaries.
+#' @param data_source Data frame containing prepared pollen-property
+#'   list-columns.
+#' @param fit_dataset Function used to fit one prepared dataset.
+#' @return A data frame with dataset-level MRT, diversity, ROC, peak, and DCCA
+#'   change points.
+#' @details
+#' The underlying `mvpart` package requires the isolated old-R runtime
+#' documented in `R/analyses/01_data_preparation/05_paps/README.md`. Do not
+#' source the project-wide configuration from that runtime.
+#' @examples
+#' \dontrun{
+#' compute_pap_change_points(data_source)
+#' }
+compute_pap_change_points <- function(
+    data_source,
+    fit_dataset = fit_pap_change_point_dataset
+) {
+  vec_required_columns <-
+    c(
+      "dataset_id",
+      "mvrt_cp",
+      "PAP_diversity",
+      "levels",
+      "PAP_roc",
+      "dcca_scores"
+    )
+
   assertthat::assert_that(
     is.data.frame(data_source),
-    msg = "`data_source` must be a data frame."
-  )
-  assertthat::assert_that(
-    all(c("dataset_id", "mvrt_cp", "PAP_diversity", "levels", "PAP_roc", "dcca_scores") %in% names(data_source)),
-    msg = "`data_source` is missing required columns for change-point estimation."
-  )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_source$PAP_diversity, is.data.frame)),
-    msg = "`PAP_diversity` entries must be data frames."
-  )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_source$levels, is.data.frame)),
-    msg = "`levels` entries must be data frames."
-  )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_source$PAP_roc, is.data.frame)),
-    msg = "`PAP_roc` entries must be data frames."
-  )
-  assertthat::assert_that(
-    all(purrr::map_lgl(data_source$dcca_scores, is.data.frame)),
-    msg = "`dcca_scores` entries must be data frames."
+    all(vec_required_columns %in% names(data_source)),
+    is.function(fit_dataset),
+    msg = paste(
+      "`data_source` is missing required columns for",
+      "change-point estimation."
+    )
   )
 
-  data_diversity_cp <-
-    data_source %>%
-    dplyr::mutate(
-      diversity_cp = purrr::map2(
-        .x = PAP_diversity,
-        .y = levels,
-        .f = ~ {
-          var_list <-
-            dplyr::inner_join(
-              .x, .y %>%
-                dplyr::select(sample_id, age),
-              by = "sample_id"
-            ) %>%
-            tibble::column_to_rownames("sample_id") %>%
-            tidyr::pivot_longer(
-              cols = -age,
-              names_to = "var_name"
-            ) %>%
-            split(.$var_name)
+  vec_nested_columns <-
+    c(
+      "PAP_diversity",
+      "levels",
+      "PAP_roc",
+      "dcca_scores"
+    )
 
-          cp_list <-
-            purrr::map(
-              .x = var_list,
-              .f = ~ REcopol::regression_partition(
-                data_source = .x,
-                var = "value",
-                age_var = "age"
-              ) %>%
-                purrr::pluck("rpart_change_points")
-            )
-
-          purrr::map_dfr(
-            .x = cp_list,
-            .id = "var_name",
-            .f = ~ data.frame(
-              age = .x
-            )
-          ) %>%
-            tibble::as_tibble() %>%
-            return()
-        }
-      ),
-    ) %>%
-    dplyr::select(dataset_id, diversity_cp)
-
-  # roc
-  data_roc_cp <-
-    data_source %>%
-    dplyr::mutate(
-      roc_cp = purrr::map(
-        .x = PAP_roc,
-        .f = ~ REcopol::regression_partition(
-          data_source = .x,
-          var = "ROC",
-          age_var = "Age"
-        ) %>%
-          purrr::pluck("rpart_change_points")
-      ),
-      roc_pp = purrr::map(
-        .x = PAP_roc,
-        .f = ~ .x %>%
-          dplyr::filter(Peak == TRUE) %>%
-          purrr::pluck("Age")
+  assertthat::assert_that(
+    all(
+      purrr::map_lgl(
+        vec_nested_columns,
+        ~ all(
+          purrr::map_lgl(
+            data_source[[.x]],
+            is.data.frame
+          )
+        )
       )
-    ) %>%
-    dplyr::select(dataset_id, roc_cp, roc_pp)
+    ),
+    msg = paste(
+      "PAP_diversity, levels, PAP_roc, and dcca_scores",
+      "list-columns must contain data frames."
+    )
+  )
 
-  # turnover
-  data_dcca_cp <-
-    data_source %>%
-    dplyr::mutate(
-      dcca_cp = purrr::map2(
-        .x = dcca_scores,
-        .y = levels,
-        .f = ~ dplyr::inner_join(
-          .x, .y,
-          by = "sample_id"
-        ) %>%
-          REcopol::regression_partition(
-            data_source = .,
-            var = "axis_1",
-            age_var = "age"
-          ) %>%
-          purrr::pluck("rpart_change_points")
+  list_change_points <-
+    purrr::pmap(
+      .l = list(
+        data_source[["mvrt_cp"]],
+        data_source[["PAP_diversity"]],
+        data_source[["levels"]],
+        data_source[["PAP_roc"]],
+        data_source[["dcca_scores"]]
+      ),
+      .f = ~ fit_dataset(
+        mvrt_cp = ..1,
+        data_diversity = ..2,
+        data_levels = ..3,
+        data_roc = ..4,
+        data_dcca = ..5
       )
-    ) %>%
-    dplyr::select(dataset_id, dcca_cp)
-
+    )
 
   data_change_points <-
-    data_source %>%
-    dplyr::select(
-      dataset_id,
-      mvrt_cp
-    ) %>%
-    dplyr::inner_join(
-      data_diversity_cp,
-      by = "dataset_id"
-    ) %>%
-    dplyr::inner_join(
-      data_roc_cp,
-      by = "dataset_id"
-    ) %>%
-    dplyr::inner_join(
-      data_dcca_cp,
-      by = "dataset_id"
+    data.frame(
+      dataset_id = data_source[["dataset_id"]],
+      stringsAsFactors = FALSE
+    )
+
+  data_change_points[["mvrt_cp"]] <-
+    I(
+      purrr::map(
+        list_change_points,
+        ~ .x[["mvrt_cp"]]
+      )
+    )
+
+  data_change_points[["diversity_cp"]] <-
+    I(
+      purrr::map(
+        list_change_points,
+        ~ .x[["diversity_cp"]]
+      )
+    )
+
+  data_change_points[["roc_cp"]] <-
+    I(
+      purrr::map(
+        list_change_points,
+        ~ .x[["roc_cp"]]
+      )
+    )
+
+  data_change_points[["roc_pp"]] <-
+    I(
+      purrr::map(
+        list_change_points,
+        ~ .x[["roc_pp"]]
+      )
+    )
+
+  data_change_points[["dcca_cp"]] <-
+    I(
+      purrr::map(
+        list_change_points,
+        ~ .x[["dcca_cp"]]
+      )
     )
 
   return(data_change_points)

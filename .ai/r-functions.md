@@ -18,6 +18,11 @@ Use `dataset` rather than `core` in new function, argument, object, and director
 - Follow the function-name contract below. Treat it as an enforceable API contract, not a stylistic preference.
 - Always use explicit argument names in function calls where practical.
 - Always end project functions with an explicit `return(res_object)`.
+- Construct or transform the returned value before `return()`. Prefer `res`
+  or a descriptive `res_*` name, then pass only that final object to
+  `return()`. Do not wrap a constructor, pipeline, accessor, or other
+  substantial expression inside `return()`. Simple early returns such as
+  `return(NULL)` and `return(invisible(res))` remain acceptable.
 - Do not call `library()` or `require()` inside functions.
 - Avoid global side effects. A function should not source files, mutate global variables, or write files unless writing is its documented purpose.
 - Do not use `Sys.setenv()` or `Sys.getenv()` for internal function control flow. Use explicit arguments and documented defaults instead.

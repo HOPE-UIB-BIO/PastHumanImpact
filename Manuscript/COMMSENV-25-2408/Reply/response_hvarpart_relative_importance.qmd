@@ -18,9 +18,10 @@ here::i_am(
 )
 source(here::here("R/00_Config_file.R"))
 
-table_dir <- here::here("Outputs", "Tables", "HVarPart")
+table_dir <-
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
 spatial_figure_dir <-
-  here::here("Outputs", "Figures", "H1", "Spatial")
+  here::here("Outputs", "Figures", "H1", "Spatial", "SPD")
 
 temporal_figure_dir <-
   here::here("Outputs", "Figures", "H1", "Temporal", "HVarPart")
@@ -32,12 +33,12 @@ figure_dir <- here::here(
 )
 
 audit <- readr::read_csv(
-  file.path(table_dir, "hvarpart_model_audit.csv"),
+  file.path(table_dir, "hvarpart__model_audit.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
 profiles <- readr::read_csv(
-  file.path(table_dir, "hvarpart_profile_comparison.csv"),
+  file.path(table_dir, "hvarpart__profile_comparison.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
@@ -101,7 +102,7 @@ where $I_{p,m}$ is HVarPart's unmodified individual contribution. Models are
 otherwise excluded only when required predictors are absent, the denominator
 is non-finite or non-positive, or an individual contribution is non-finite.
 Every exclusion is recorded in
-`Outputs/Tables/HVarPart/hvarpart_model_audit.csv`.
+`Outputs/Tables/Diagnostics/HVarPart/hvarpart__model_audit.csv`.
 
 A negative signed allocation is an adjusted partitioning result. It is not
 evidence of a negative ecological effect.
@@ -173,8 +174,8 @@ balance. Densities use a continuous climate-to-neutral-to-human colour scale;
 the climate-zone panels use the same scale as a pale background while their
 summary points retain categorical climate-zone colours. Maps and continental
 density panels do not use the background gradient. The supplementary
-counterpart reports the unmodified signed human allocation on a focused -0.5
-to 1.5 display while retaining every value in its source table.
+counterpart reports the untruncated human-minus-climate hierarchical
+contribution difference with the same spatially filtered summaries.
 
 ```{r}
 #| label: embed-hvarpart-spatial-main
@@ -182,7 +183,13 @@ to 1.5 display while retaining every value in its source table.
 knitr::include_graphics(
   file.path(
     spatial_figure_dir,
-    "human_climate_balance_time_and_space_controlled.png"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control.png",
+      sep = "__"
+    )
   )
 )
 ```
@@ -195,15 +202,18 @@ knitr::include_graphics(
 knitr::include_graphics(
   file.path(
     spatial_figure_dir,
-    paste0(
-      "human_climate_balance_",
-      "untruncated_hierarchical_contributions.png"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "untruncated_hierarchical_contribution_difference",
+      "time_and_space_control.png",
+      sep = "__"
     )
   )
 )
 ```
 
-*Supplementary signed Figure 2. Unmodified signed human allocation, displayed from -0.5 to 1.5; all values are retained in the source table.*
+*Supplementary signed Figure 2. Untruncated human-minus-climate hierarchical contribution difference with time and space control.*
 
 The main temporal H1 figure shows the balance through time as lollipops drawn
 from equal importance to each estimate. Point shape distinguishes the SPD and
@@ -223,9 +233,9 @@ human and climate allocations.
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,
-    paste0(
-      "human_climate_space_",
-      "zero_truncated_hierarchical_composition.png"
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__space_control.png"
     )
   )
 )
@@ -239,7 +249,7 @@ knitr::include_graphics(
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,
-    paste0(
+    stringr::str_c(
       "human_climate_only_",
       "untruncated_hierarchical_contributions.png"
     )
@@ -268,7 +278,7 @@ knitr::include_graphics(
 knitr::include_graphics(
   file.path(
     interrelationships_figure_dir,
-    paste0(
+    stringr::str_c(
       "predictor_interrelationships_",
       "untruncated_hierarchical_contributions.png"
     )

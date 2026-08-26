@@ -132,7 +132,10 @@ predict_general_trends <- function(
         if (
           !is.data.frame(data_predicted)
         ) {
-          return(NULL)
+          res <-
+            NULL
+
+          return(res)
         }
 
         if (

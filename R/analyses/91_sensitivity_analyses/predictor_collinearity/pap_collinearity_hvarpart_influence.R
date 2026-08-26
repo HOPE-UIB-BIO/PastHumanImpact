@@ -164,21 +164,41 @@ plot_hvar_influence <-
 #----------------------------------------------------------#
 # 4. Save outputs -----
 #----------------------------------------------------------#
+path_figure_directory <-
+  here::here(
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Predictor_collinearity"
+  )
+
+dir.create(
+  path_figure_directory,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 readr::write_csv(
   data_hvar_influence,
   here::here(
     "Outputs",
     "Tables",
-    "Collinearity",
-    "pap_collinearity_hvar_influence_by_dataset.csv"
+    "H1",
+    "Spatial",
+    "SPD",
+    "Predictor_collinearity",
+    "spd__pap_collinearity__hvarpart_influence__dataset_values.csv"
   )
 )
 
 readr::write_csv(
   data_hvar_influence_summary,
   here::here(
-    "Outputs/Tables/Collinearity/pap_collinearity_hvar_influence_summary.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Spatial",
+    "SPD",
+    "Predictor_collinearity",
+    "spd__pap_collinearity__hvarpart_influence__summary.csv"
   )
 )
 
@@ -186,8 +206,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
-      here::here(
-        "Outputs/Figures/H1/Spatial/pap_collinearity_hvarpart_influence"
+      file.path(
+        path_figure_directory,
+        "spd__pap_collinearity__hvarpart_influence"
       ),
       ".",
       .x

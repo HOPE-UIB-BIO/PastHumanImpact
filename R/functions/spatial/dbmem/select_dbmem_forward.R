@@ -69,7 +69,10 @@ select_dbmem_forward <- function(
     if (
       stringr::str_detect(error_message, "No variables selected")
     ) {
-      return(tibble::tibble())
+      res <-
+        tibble::tibble()
+
+      return(res)
     }
 
     stop(result_selection[["error"]])

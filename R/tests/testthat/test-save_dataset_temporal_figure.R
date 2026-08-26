@@ -62,6 +62,10 @@ testthat::test_that("save_dataset_temporal_figure writes and reuses a PNG", {
     )
 
   testthat::expect_true(file.exists(path_first))
+  testthat::expect_identical(
+    basename(path_first),
+    "dataset__d1.png"
+  )
   testthat::expect_identical(path_second, path_first)
   testthat::expect_identical(
     file.info(path_second)[["mtime"]],

@@ -15,7 +15,7 @@ prepare_spatial_hvarpart_composition <- function(
 ) {
   component_keys <- c("analysis", "region", "age")
   required_components <-
-    c(component_keys, "model_profile", "predictor", "Individual")
+    c(component_keys, "model_profile", "predictor", "individual")
   required_status <- c(component_keys, "status", "selection_status")
   assertthat::assert_that(
     is.data.frame(data_components),
@@ -54,13 +54,13 @@ prepare_spatial_hvarpart_composition <- function(
         dplyr::mutate(
           model_profile = "human_climate_space",
           predictor = "space",
-          Individual = 0
+          individual = 0
         )
     )
   data_stack <-
     dplyr::bind_rows(data_controlled, data_no_signal) |>
     dplyr::filter(.data[["predictor"]] %in% c("human", "climate", "space")) |>
-    dplyr::mutate(zero_individual = pmax(.data[["Individual"]], 0)) |>
+    dplyr::mutate(zero_individual = pmax(.data[["individual"]], 0)) |>
     dplyr::group_by(dplyr::across(dplyr::all_of(component_keys))) |>
     dplyr::mutate(
       zero_total = sum(.data[["zero_individual"]]),

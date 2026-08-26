@@ -8,7 +8,7 @@ testthat::test_that(
         predictor = c("human", "climate", "time")
       ) |>
       dplyr::mutate(
-        Individual = c(0.2, 0.6, 0.2),
+        individual = c(0.2, 0.6, 0.2),
         model_profile = "human_climate_time",
         total_adjusted_r_squared = 1
       )
@@ -19,7 +19,7 @@ testthat::test_that(
         predictor = c("human", "climate")
       ) |>
       dplyr::mutate(
-        Individual = c(0.7, 0.3),
+        individual = c(0.7, 0.3),
         model_profile = "human_climate",
         total_adjusted_r_squared = 1
       )

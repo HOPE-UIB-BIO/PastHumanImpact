@@ -9,7 +9,7 @@ correct source documents.
 | Task | Read first |
 | --- | --- |
 | Any repository work | `AGENTS.md` |
-| R scripts, target pipelines, data processing, and visualisation | `.ai/r-coding.md` |
+| R scripts, target pipelines, data processing, and visualisation | `.ai/r-coding.md`; for figures also `.ai/visualisation-style.md` and `.ai/visualisation-geographic-style.md` |
 | R functions, roxygen2 docs, and function tests | `.ai/r-functions.md` |
 | Contract-first function and test work | `.ai/r-functions.md` |
 | Analysis folders, output paths, and analysis-profile names | `.ai/analysis-structure.md` |

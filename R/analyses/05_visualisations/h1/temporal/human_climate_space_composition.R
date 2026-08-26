@@ -178,12 +178,12 @@ purrr::walk(
     extension <- .x
 
     ggplot2::ggsave(
-      paste0(
+      stringr::str_c(
         here::here(
           "Outputs/Figures/H1/Temporal/HVarPart/",
-          paste0(
-            "human_climate_space_",
-            "zero_truncated_hierarchical_composition"
+          stringr::str_c(
+            "spd_events__human_climate_space__",
+            "zero_truncated_hierarchical_composition__space_control"
           )
         ),
         ".",
@@ -197,10 +197,13 @@ purrr::walk(
     )
 
     ggplot2::ggsave(
-      filename = paste0(
+      filename = stringr::str_c(
         here::here(
           "Outputs/Figures/H1/Temporal/HVarPart/",
-          "human_climate_composition_human_climate_only"
+          stringr::str_c(
+            "spd_events__human_climate__",
+            "zero_truncated_hierarchical_composition__human_climate_only"
+          )
         ),
         ".",
         .x
@@ -213,12 +216,12 @@ purrr::walk(
     )
 
     ggplot2::ggsave(
-      paste0(
+      stringr::str_c(
         here::here(
           "Outputs/Figures/H1/Temporal/HVarPart/",
-          paste0(
-            "human_climate_only_",
-            "untruncated_hierarchical_contributions"
+          stringr::str_c(
+            "spd_events__human_climate__",
+            "untruncated_hierarchical_contributions__human_climate_only"
           )
         ),
         ".",
@@ -239,8 +242,9 @@ purrr::walk(
             "Outputs/Figures/H1/Temporal/HVarPart"
           ),
           stringr::str_c(
-            "human_climate_space_",
+            "spd_events__human_climate_space__",
             .y,
+            "__space_control",
             ".",
             extension
           )
@@ -258,41 +262,90 @@ purrr::walk(
 readr::write_csv(
   data_temporal_zero_truncated,
   here::here(
-    "Outputs/Tables/",
-    "human_climate_temporal_zero_truncated_hierarchical_composition.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    stringr::str_c(
+      "spd_events__human_climate__",
+      "zero_truncated_hierarchical_composition__",
+      "human_climate_only.csv"
+    )
   )
 )
 
 readr::write_csv(
   data_temporal_untruncated,
   here::here(
-    "Outputs/Tables/",
-    "human_climate_temporal_untruncated_hierarchical_contributions.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    stringr::str_c(
+      "spd_events__human_climate__",
+      "untruncated_hierarchical_contributions__",
+      "human_climate_only.csv"
+    )
   )
 )
 
 readr::write_csv(
   data_temporal_balance,
-  here::here("Outputs/Tables/human_climate_temporal_balance.csv")
+  here::here(
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    "spd_events__human_climate_balance__human_climate_only.csv"
+  )
 )
 
 readr::write_csv(
   data_spatial_control_zero_truncated_composition,
   here::here(
-    "Outputs/Tables/",
-    "human_climate_space_zero_truncated_hierarchical_composition.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__",
+      "space_control.csv"
+    )
   )
 )
 
 readr::write_csv(
   data_spatial_control_hierarchical_contributions,
   here::here(
-    "Outputs/Tables/",
-    "human_climate_space_untruncated_hierarchical_contributions.csv"
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "untruncated_hierarchical_contributions__",
+      "space_control.csv"
+    )
   )
 )
 
 readr::write_csv(
   data_spatial_control_unique_adjusted_r2,
-  here::here("Outputs/Tables/human_climate_space_unique_adjusted_r2.csv")
+  here::here(
+    "Outputs",
+    "Tables",
+    "H1",
+    "Temporal",
+    "HVarPart",
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "unique_adjusted_r2__space_control.csv"
+    )
+  )
 )

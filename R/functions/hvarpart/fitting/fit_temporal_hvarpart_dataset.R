@@ -57,7 +57,7 @@ fit_temporal_hvarpart_dataset <- function(
   if (
     !is.na(initial_status)
   ) {
-    return(
+    res <-
       list(
         status = initial_status,
         n_samples = nrow(data_dataset),
@@ -70,7 +70,8 @@ fit_temporal_hvarpart_dataset <- function(
         unique_adjusted_r2 = tibble::tibble(),
         residual_moran = tibble::tibble()
       )
-    )
+
+    return(res)
   }
 
   data_time <-
@@ -97,7 +98,7 @@ fit_temporal_hvarpart_dataset <- function(
   if (
     design[["status"]] != "estimable"
   ) {
-    return(
+    res <-
       list(
         status = design[["status"]],
         n_samples = design[["n_rows"]],
@@ -110,7 +111,8 @@ fit_temporal_hvarpart_dataset <- function(
         unique_adjusted_r2 = tibble::tibble(),
         residual_moran = tibble::tibble()
       )
-    )
+
+    return(res)
   }
 
   data_model <- design[["data"]]
@@ -226,7 +228,7 @@ fit_temporal_hvarpart_dataset <- function(
       "estimated"
     }
 
-  return(
+  res <-
     list(
       status = status,
       n_samples = design[["n_rows"]],
@@ -239,5 +241,6 @@ fit_temporal_hvarpart_dataset <- function(
       unique_adjusted_r2 = data_unique_adjusted_r2,
       residual_moran = data_moran
     )
-  )
+
+  return(res)
 }

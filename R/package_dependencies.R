@@ -6,6 +6,7 @@ if (
 ) {
   library(adespatial)
   library(assertthat)
+  library(cli)
   library(collinear)
   library(colorspace)
   library(furrr)
@@ -21,6 +22,7 @@ if (
   library(knitr)
   library(languageserver)
   library(parallelly)
+  library(processx)
   library(rcarbon)
   library(rdacca.hp)
   library(dplyr)

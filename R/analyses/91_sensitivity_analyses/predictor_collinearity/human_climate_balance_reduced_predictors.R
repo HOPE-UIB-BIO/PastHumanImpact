@@ -158,14 +158,28 @@ plot_reduced_simple <-
 #----------------------------------------------------------#
 # 4. Save outputs -----
 #----------------------------------------------------------#
+path_figure_directory <-
+  here::here(
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Predictor_collinearity"
+  )
+
+dir.create(
+  path_figure_directory,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
 
 readr::write_csv(
   data_spatial_reduced,
   here::here(
     "Outputs",
     "Tables",
-    "Collinearity",
-    "pap_collinearity_reduced_simple_fig2_table.csv"
+    "H1",
+    "Spatial",
+    "SPD",
+    "Predictor_collinearity",
+    "spd__human_climate_balance__reduced_predictors.csv"
   )
 )
 
@@ -173,8 +187,9 @@ purrr::walk(
   .x = c("png", "pdf"),
   .f = ~ ggplot2::ggsave(
     filename = stringr::str_c(
-      here::here(
-        "Outputs/Figures/H1/Spatial/human_climate_balance_reduced_predictors"
+      file.path(
+        path_figure_directory,
+        "spd__human_climate_balance__reduced_predictors"
       ),
       ".",
       .x

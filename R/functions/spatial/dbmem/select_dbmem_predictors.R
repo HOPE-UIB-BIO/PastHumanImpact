@@ -85,13 +85,14 @@ select_dbmem_predictors <- function(
   if (
     ncol(mat_response) == 0L || ncol(mat_mem) == 0L
   ) {
-    return(
+    res <-
       build_empty_dbmem_selection(
         status_value = "rank_deficient",
         n_complete = nrow(mat_response),
         n_candidates = ncol(mat_mem)
       )
-    )
+
+    return(res)
   }
 
   rank_conditions <- qr(mat_conditions)[["rank"]]
@@ -100,13 +101,14 @@ select_dbmem_predictors <- function(
   if (
     max_selected < 1L
   ) {
-    return(
+    res <-
       build_empty_dbmem_selection(
         status_value = "insufficient_residual_df",
         n_complete = nrow(mat_response),
         n_candidates = ncol(mat_mem)
       )
-    )
+
+    return(res)
   }
   max_selected <- min(max_selected, ncol(mat_mem))
 
@@ -119,13 +121,14 @@ select_dbmem_predictors <- function(
   if (
     ncol(mat_mem_residual) == 0L
   ) {
-    return(
+    res <-
       build_empty_dbmem_selection(
         status_value = "rank_deficient",
         n_complete = nrow(mat_response),
         n_candidates = ncol(mat_mem)
       )
-    )
+
+    return(res)
   }
 
   old_seed_exists <- exists(".Random.seed", envir = .GlobalEnv)

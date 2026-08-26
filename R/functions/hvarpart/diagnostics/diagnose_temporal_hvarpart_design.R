@@ -99,7 +99,7 @@ diagnose_temporal_hvarpart_design <- function(
       .default = "estimable"
     )
 
-  return(
+  res <-
     list(
       status = status,
       data = data_model,
@@ -112,5 +112,6 @@ diagnose_temporal_hvarpart_design <- function(
       residual_df = residual_df,
       missing_groups = missing_groups
     )
-  )
+
+  return(res)
 }

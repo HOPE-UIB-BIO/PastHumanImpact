@@ -59,23 +59,22 @@ diagnose_function_contract_coverage <- function(
     ]
 
   if (length(function_files_non_testing) == 0) {
-    return(
-      invisible(
-        data.frame(
-          function_name = character(),
-          has_roxygen = logical(),
-          has_validation = logical(),
-          has_argument_assertion = logical(),
-          has_test_file = logical(),
-          stringsAsFactors = FALSE
-        )
+    res <-
+      data.frame(
+        function_name = character(),
+        has_roxygen = logical(),
+        has_validation = logical(),
+        has_argument_assertion = logical(),
+        has_test_file = logical(),
+        stringsAsFactors = FALSE
       )
-    )
+
+    return(invisible(res))
   }
 
   coverage_table <-
     function_files_non_testing |>
-    purrr::map_dfr(
+    purrr::map(
       .f = ~ {
         path_file <- .x
 
@@ -109,7 +108,8 @@ diagnose_function_contract_coverage <- function(
           stringsAsFactors = FALSE
         )
       }
-    )
+    ) |>
+    dplyr::bind_rows()
 
   coverage_table[["has_validation"]] <-
     coverage_table[["has_argument_assertion"]]
@@ -154,7 +154,10 @@ diagnose_function_contract_coverage <- function(
       )
     }
   } else {
-    message("Contract coverage review: all checked functions have roxygen, argument assertion, and tests.")
+    message(
+      "Contract coverage review: all checked functions have roxygen, ",
+      "argument assertion, and tests."
+    )
   }
 
   return(invisible(coverage_table))

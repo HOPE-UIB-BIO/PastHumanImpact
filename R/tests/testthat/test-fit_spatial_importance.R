@@ -10,7 +10,7 @@ testthat::test_that(
         lat = 45,
         region = rep(c("A", "B"), each = 15),
         climatezone = rep(c("cold", "warm", "cold"), each = 10),
-        signed_balance = scale(seq_len(n_records))[, 1],
+        signed_difference = scale(seq_len(n_records))[, 1] / 4,
         signed_weight = 1,
         zero_balance = stats::plogis(scale(seq_len(n_records))[, 1]) *
           2 - 1,
@@ -32,6 +32,7 @@ testthat::test_that(
       all(c("estimates", "moran_diagnostics", "selection") %in%
         names(result))
     )
+    testthat::expect_false("models" %in% names(result))
     testthat::expect_true(
       all(c("signed", "zero_truncated") %in%
         dplyr::pull(result[["estimates"]], "profile"))

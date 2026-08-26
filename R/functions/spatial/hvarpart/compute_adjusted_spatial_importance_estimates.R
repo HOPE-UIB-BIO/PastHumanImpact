@@ -58,7 +58,7 @@ compute_adjusted_spatial_importance_estimates <- function(
     )
   res_estimates <-
     data_levels |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ summarise_spatial_importance_level(
         data_adjusted = data_adjusted,
         weight_col = weight_col,
@@ -67,6 +67,7 @@ compute_adjusted_spatial_importance_estimates <- function(
         profile_name = profile_name
       )
     ) |>
+    dplyr::bind_rows() |>
     dplyr::mutate(
       region = dplyr::coalesce(as.character(.data[["region"]]), "All"),
       climatezone = dplyr::coalesce(

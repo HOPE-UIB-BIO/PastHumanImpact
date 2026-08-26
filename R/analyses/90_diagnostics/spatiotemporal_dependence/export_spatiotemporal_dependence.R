@@ -159,10 +159,61 @@ list_tables <-
     )
   )
 
+vec_output_names <-
+  c(
+    dataset_age_collapse_filtered =
+      "dataset_age__collapse_summary__filtered",
+    dataset_age_collapse_temporal =
+      "dataset_age__collapse_summary__temporal",
+    time_control_status =
+      "spd_events__human_climate_time__status__time_control",
+    time_control_hierarchical_contributions = stringr::str_c(
+      "spd_events__human_climate_time__",
+      "hierarchical_contributions__time_control"
+    ),
+    time_control_unique_adjusted_r2 = stringr::str_c(
+      "spd_events__human_climate_time__",
+      "unique_adjusted_r2__time_control"
+    ),
+    time_control_residual_moran = stringr::str_c(
+      "spd_events__human_climate_time__",
+      "residual_moran__time_control"
+    ),
+    spatiotemporal_balance_estimates = stringr::str_c(
+      "spd__human_climate_balance__estimates__",
+      "time_and_space_control"
+    ),
+    spatiotemporal_balance_moran = stringr::str_c(
+      "spd__human_climate_balance__moran_diagnostics__",
+      "time_and_space_control"
+    ),
+    spatial_control_status =
+      "spd_events__human_climate_space__status__space_control",
+    spatial_control_dbmem_selection = stringr::str_c(
+      "spd_events__human_climate_space__",
+      "dbmem_selection__space_control"
+    ),
+    spatial_control_residual_moran = stringr::str_c(
+      "spd_events__human_climate_space__",
+      "residual_moran__space_control"
+    ),
+    spatiotemporal_balance_sensitivity = stringr::str_c(
+      "spd__human_climate_balance__sensitivity__",
+      "time_and_space_control"
+    ),
+    spatiotemporal_balance_robustness = stringr::str_c(
+      "spd__human_climate_balance__robustness__",
+      "time_and_space_control"
+    )
+  )
+
 purrr::iwalk(
   .x = list_tables,
   .f = ~ readr::write_csv(
     x = .x,
-    file = file.path(path_tables, stringr::str_c(.y, ".csv"))
+    file = file.path(
+      path_tables,
+      stringr::str_c(vec_output_names[[.y]], ".csv")
+    )
   )
 )

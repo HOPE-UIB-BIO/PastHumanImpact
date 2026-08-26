@@ -64,7 +64,6 @@ path_figure_dir <-
   here::here(
     "Outputs",
     "Figures",
-    "H1",
     "Dataset_trends"
   )
 

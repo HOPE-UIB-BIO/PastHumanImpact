@@ -5,6 +5,7 @@ are prepared once, then proxy-specific scientific operations run in independent
 target stores. Downstream pipelines may read only the public targets documented
 by their upstream pipeline.
 
-Figure 2 uses the SPD time-control and spatial-aggregation stores. Figure 3
-combines the SPD and event spatial-control stores. Robustness analyses run
-separately under `91_sensitivity_analyses`.
+The spatial H1 figures use the matching SPD or event time-control and
+spatial-aggregation stores. The temporal H1 figures combine the SPD and event
+spatial-control stores. Robustness analyses run separately under
+`91_sensitivity_analyses`.

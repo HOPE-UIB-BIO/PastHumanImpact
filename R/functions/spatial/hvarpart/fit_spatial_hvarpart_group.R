@@ -87,12 +87,13 @@ fit_spatial_hvarpart_group <- function(
   if (
     any(purrr::map_int(active_predictors, length) == 0L)
   ) {
-    return(
+    res <-
       build_empty_spatial_hvarpart_result(
         status = "missing_predictor_group",
         n_samples = nrow(data_group)
       )
-    )
+
+    return(res)
   }
   predictor_vars <- active_predictors
   required_columns <-
@@ -186,7 +187,7 @@ fit_spatial_hvarpart_group <- function(
   if (
     result_selection[["status"]] == "spatial_not_estimable"
   ) {
-    return(
+    res <-
       list(
         status = "spatial_not_estimable",
         n_samples = nrow(data_complete),
@@ -198,7 +199,8 @@ fit_spatial_hvarpart_group <- function(
         residual_moran = tibble::tibble(),
         remaining_spatial_test = tibble::tibble()
       )
-    )
+
+    return(res)
   }
 
   vec_selected <- result_selection[["selected_names"]]

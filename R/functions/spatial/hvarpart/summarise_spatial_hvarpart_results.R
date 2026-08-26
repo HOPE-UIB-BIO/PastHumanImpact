@@ -95,28 +95,9 @@ summarise_spatial_hvarpart_results <- function(data_results) {
     dplyr::mutate(
       components = purrr::map(
         .x = .data[["result"]],
-        .f = ~ {
-          data_human_climate_only <-
-            if (
-              is.null(.x[["human_climate_only_hvarpart"]])
-            ) {
-              tibble::tibble()
-            } else {
-              .x[["human_climate_only_hvarpart"]][["summary_table"]] |>
-                dplyr::mutate(model_profile = "human_climate")
-            }
-          data_spatial <-
-            if (
-              is.null(.x[["spatial_hvarpart"]])
-            ) {
-              tibble::tibble()
-            } else {
-              .x[["spatial_hvarpart"]][["summary_table"]] |>
-                dplyr::mutate(model_profile = "human_climate_space")
-            }
-
-          return(dplyr::bind_rows(data_human_climate_only, data_spatial))
-        }
+        .f = prepare_hvarpart_control_components,
+        controlled_result_name = "spatial_hvarpart",
+        controlled_profile = "human_climate_space"
       )
     ) |>
     dplyr::select(dplyr::all_of(c(keys, "components"))) |>
@@ -152,7 +133,7 @@ summarise_spatial_hvarpart_results <- function(data_results) {
     ) |>
     tidyr::unnest(cols = "remaining")
 
-  return(
+  res <-
     list(
       status = data_status,
       selection = data_selection,
@@ -162,5 +143,6 @@ summarise_spatial_hvarpart_results <- function(data_results) {
       residual_moran = data_moran,
       remaining_spatial_test = data_remaining
     )
-  )
+
+  return(res)
 }

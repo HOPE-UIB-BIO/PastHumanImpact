@@ -17,37 +17,55 @@ cast_temporal_config_column <- function(
   if (
     is.character(candidate_column)
   ) {
-    return(as.character(current_column))
+    res <-
+      as.character(current_column)
+
+    return(res)
   }
 
   if (
     is.integer(candidate_column)
   ) {
-    return(as.integer(current_column))
+    res <-
+      as.integer(current_column)
+
+    return(res)
   }
 
   if (
     is.double(candidate_column)
   ) {
-    return(as.double(current_column))
+    res <-
+      as.double(current_column)
+
+    return(res)
   }
 
   if (
     is.logical(candidate_column)
   ) {
-    return(as.logical(current_column))
+    res <-
+      as.logical(current_column)
+
+    return(res)
   }
 
   if (
     inherits(candidate_column, "Date")
   ) {
-    return(as.Date(current_column))
+    res <-
+      as.Date(current_column)
+
+    return(res)
   }
 
   if (
     inherits(candidate_column, "POSIXct")
   ) {
-    return(as.POSIXct(current_column, tz = "UTC"))
+    res <-
+      as.POSIXct(current_column, tz = "UTC")
+
+    return(res)
   }
 
   res_column <-

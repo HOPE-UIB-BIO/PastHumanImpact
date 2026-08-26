@@ -124,7 +124,7 @@ summarise_prediction_draws <- function(
 
   data_summary <-
     seq_len(ncol(mat_marginal_draws)) %>%
-    purrr::map_dfr(
+    purrr::map(
       .f = ~ tibble::tibble(
         .prediction_group = .x,
         estimate = mean(mat_marginal_draws[, .x]),
@@ -140,7 +140,8 @@ summarise_prediction_draws <- function(
           names = FALSE
         )
       )
-    )
+    ) |>
+    dplyr::bind_rows()
 
   res_data <-
     data_groups %>%

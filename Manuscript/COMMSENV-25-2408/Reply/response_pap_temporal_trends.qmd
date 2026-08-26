@@ -39,7 +39,7 @@ path_pap_figure_dir <-
 path_pap_primary <-
   file.path(
     path_pap_figure_dir,
-    "pap_trend_primary.png"
+    "pap__temporal_trends__primary.png"
   )
 
 vec_pap_variables <-

@@ -201,15 +201,27 @@ compute_hvarpart_permutation_significance <- function(dv,
       nchar(permutations)
     )
     if (pval <= 0.001) {
-      return(noquote(paste(pval, "***", sep = " ")))
+      res <-
+        noquote(paste(pval, "***", sep = " "))
+
+      return(res)
     }
     if (pval <= 0.01) {
-      return(noquote(paste(pval, " **", sep = " ")))
+      res <-
+        noquote(paste(pval, " **", sep = " "))
+
+      return(res)
     }
     if (pval <= 0.05) {
-      return(noquote(paste(pval, "  *", sep = " ")))
+      res <-
+        noquote(paste(pval, "  *", sep = " "))
+
+      return(res)
     } else {
-      return(noquote(paste(pval, "   ", sep = " ")))
+      res <-
+        noquote(paste(pval, "   ", sep = " "))
+
+      return(res)
     }
   }
 

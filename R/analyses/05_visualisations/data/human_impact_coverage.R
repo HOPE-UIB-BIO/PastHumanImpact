@@ -311,7 +311,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/radiocarbon_dates_by_region"
+        "Outputs/Figures/Data/radiocarbon__dates__region"
       ),
       .x,
       sep = "."
@@ -489,7 +489,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/radiocarbon_dataset_coverage_250_km"
+        "Outputs/Figures/Data/radiocarbon__dataset_coverage__250_km"
       ),
       .x,
       sep = "."
@@ -597,7 +597,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/radiocarbon_dataset_coverage_500_km"
+        "Outputs/Figures/Data/radiocarbon__dataset_coverage__500_km"
       ),
       .x,
       sep = "."
@@ -730,7 +730,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/event_dataset_coverage"
+        "Outputs/Figures/Data/events__dataset_coverage"
       ),
       .x,
       sep = "."
@@ -865,7 +865,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/event_and_radiocarbon_coverage_status"
+        "Outputs/Figures/Data/events_radiocarbon__coverage_status"
       ),
       .x,
       sep = "."
@@ -890,7 +890,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/human_impact_data_coverage"
+        "Outputs/Figures/Data/human_impact__data_coverage"
       ),
       .x,
       sep = "."
@@ -1077,7 +1077,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/temporal_model_data_coverage"
+        "Outputs/Figures/Data/events__predicted_temporal_trends"
       ),
       .x,
       sep = "."

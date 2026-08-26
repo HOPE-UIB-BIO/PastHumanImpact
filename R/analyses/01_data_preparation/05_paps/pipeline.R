@@ -48,11 +48,56 @@ store_pollen <-
 runner_data_preparation <-
   "R/analyses/01_data_preparation/00_run.R"
 
+path_mvpart_runner <-
+  here::here(
+    "R/analyses/01_data_preparation/05_paps/run_mvpart_runtime.R"
+  )
+
+path_mvpart_installer <-
+  here::here(
+    "R/analyses/01_data_preparation/05_paps/install_mvpart_runtime.R"
+  )
+
+paths_mvpart_functions <-
+  here::here(
+    "R/functions/human_impact/paps",
+    c(
+      "prepare_pollen_percentages.R",
+      "compute_chi_square_standardisation.R",
+      "prepare_transformed_pollen_composition.R",
+      "normalise_partition_groups.R",
+      "compute_mvpart_change_points.R",
+      "fit_mvpart_mrt.R",
+      "fit_mvpart_regression_tree.R",
+      "fit_pap_change_point_dataset.R",
+      "compute_mrt.R",
+      "compute_pap_change_points.R"
+    )
+  )
+
 #----------------------------------------------------------#
 # 1. Define targets -----
 #----------------------------------------------------------#
 
 list(
+  # Why: Track the old-R runner so changes invalidate its dependent results.
+  targets::tar_target(
+    name = "file_mvpart_runner",
+    command = path_mvpart_runner,
+    format = "file"
+  ),
+  # Why: Track the pinned installer as part of runtime provenance.
+  targets::tar_target(
+    name = "file_mvpart_installer",
+    command = path_mvpart_installer,
+    format = "file"
+  ),
+  # Why: Track isolated functions so changes invalidate old-R calculations.
+  targets::tar_target(
+    name = "files_mvpart_functions",
+    command = paths_mvpart_functions,
+    format = "file"
+  ),
   # Why: Fingerprint pollen so upstream changes invalidate this pipeline store.
   targets::tar_target(
     name = "fingerprint_pollen",
@@ -125,14 +170,26 @@ list(
   ),
   # - run multivariate regression trees (MRT) to estimate compositional change
   # - use percentages without prior transformation
-  # Why: Prepare mrt so downstream targets share one canonical dataset.
+  # Why: Run MRT in isolated R 3.5 because mvpart cannot load in modern R.
+  targets::tar_target(
+    name = "result_mrt_runtime",
+    command = run_mvpart_runtime(
+      operation = "mrt",
+      data_input = data_pollen,
+      path_runner = file_mvpart_runner,
+      path_installer = file_mvpart_installer,
+      path_function_files = files_mvpart_functions
+    )
+  ),
+  # Why: Expose the stable MRT table under its existing public target name.
   targets::tar_target(
     name = "data_mrt",
-    command = compute_mrt(
-      data_pollen,
-      n_rand = 999,
-      transformation_coef = "chisq"
-    )
+    command = result_mrt_runtime[["data"]]
+  ),
+  # Why: Preserve the exact legacy runtime used for MRT reproducibility.
+  targets::tar_target(
+    name = "metadata_mrt_runtime",
+    command = result_mrt_runtime[["provenance"]]
   ),
   # - combine all PAP estimates into one tibble for get change-points
   # Why: Prepare prepared cp so downstream targets share one canonical dataset.
@@ -147,11 +204,26 @@ list(
     )
   ),
   # - calculate change points of all PAP variables by regression trees (RT)
-  # Why: Prepare change points so downstream targets share one canonical
-  #   dataset.
+  # Why: Run change-point trees in isolated R 3.5 for mvpart compatibility.
+  targets::tar_target(
+    name = "result_change_point_runtime",
+    command = run_mvpart_runtime(
+      operation = "change_points",
+      data_input = data_prepared_cp,
+      path_runner = file_mvpart_runner,
+      path_installer = file_mvpart_installer,
+      path_function_files = files_mvpart_functions
+    )
+  ),
+  # Why: Expose the stable change-point table under its existing target name.
   targets::tar_target(
     name = "data_change_points",
-    command = compute_pap_change_points(data_prepared_cp)
+    command = result_change_point_runtime[["data"]]
+  ),
+  # Why: Preserve the exact legacy runtime used for reproducibility.
+  targets::tar_target(
+    name = "metadata_change_point_runtime",
+    command = result_change_point_runtime[["provenance"]]
   ),
   # - calculate density of change points
   # Why: Prepare density estimate so downstream targets share one canonical

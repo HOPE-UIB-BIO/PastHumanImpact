@@ -452,17 +452,18 @@ plot_hvarpart_spatial_composition <- function(
         rel_heights = c(1, 0.075)
       )
 
-    return(
+    res <-
       cowplot::plot_grid(
         maps_with_spacer,
         statistical_panels,
         nrow = 1,
         rel_widths = c(0.5, 2)
       )
-    )
+
+    return(res)
   }
 
-  return(
+  res <-
     list(
       main_plot = build_plot("zero_truncated"),
       signed_full_range_plot = build_plot("signed"),
@@ -470,5 +471,6 @@ plot_hvarpart_spatial_composition <- function(
       summary_values = data_climatezone_summary,
       region_values = data_region_summary
     )
-  )
+
+  return(res)
 }

@@ -14,10 +14,19 @@
 library(here)
 source(here::here("R/00_Config_file.R"))
 
-table_dir <- here::here("Outputs/Tables/HVarPart")
-general_table_dir <- here::here("Outputs/Tables")
+table_dir <-
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
+
+spatial_data_dir <-
+  here::here("Outputs", "Tables", "H1", "Spatial", "SPD")
+
+temporal_data_dir <-
+  here::here("Outputs", "Tables", "H1", "Temporal", "HVarPart")
+
+interrelationships_data_dir <-
+  here::here("Outputs", "Tables", "H2", "Interrelationships")
 spatial_figure_dir <-
-  here::here("Outputs/Figures/H1/Spatial")
+  here::here("Outputs/Figures/H1/Spatial/SPD")
 
 temporal_figure_dir <-
   here::here("Outputs/Figures/H1/Temporal/HVarPart")
@@ -33,53 +42,77 @@ diagnostic_figure_dir <- here::here(
 # 1. Load exported data -----
 #----------------------------------------------------------#
 data_components <- readr::read_csv(
-  file.path(table_dir, "hvarpart_components.csv"),
+  file.path(table_dir, "hvarpart__components.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_components_default <- suppressWarnings(
   readr::read_csv(
-    file.path(table_dir, "hvarpart_components.csv"),
+    file.path(table_dir, "hvarpart__components.csv"),
     show_col_types = FALSE
   )
 )
 data_audit <- readr::read_csv(
-  file.path(table_dir, "hvarpart_model_audit.csv"),
+  file.path(table_dir, "hvarpart__model_audit.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_profiles <- readr::read_csv(
-  file.path(table_dir, "hvarpart_profile_comparison.csv"),
+  file.path(table_dir, "hvarpart__profile_comparison.csv"),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_untruncated_spatial_contributions <- readr::read_csv(
-  file.path(table_dir, "human_climate_balance_untruncated_dataset_values.csv"),
+  file.path(
+    spatial_data_dir,
+    "spd__human_climate_balance__untruncated_dataset_values.csv"
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_time_space_controlled_balance <- readr::read_csv(
-  file.path(table_dir, "human_climate_balance_time_space_controlled_dataset_values.csv"),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__dataset_values__",
+      "time_and_space_control.csv"
+    )
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_time_space_controlled_climate_zone <- readr::read_csv(
-  file.path(table_dir, "human_climate_balance_time_space_controlled_climate_zone_values.csv"),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__climate_zone_values__",
+      "time_and_space_control.csv"
+    )
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_time_space_controlled_region <- readr::read_csv(
-  file.path(table_dir, "human_climate_balance_region_values.csv"),
+  file.path(
+    spatial_data_dir,
+    "spd__human_climate_balance__region_values__human_climate_only.csv"
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_temporal_balance <- readr::read_csv(
-  file.path(general_table_dir, "human_climate_temporal_balance.csv"),
+  file.path(
+    temporal_data_dir,
+    "spd_events__human_climate_balance__human_climate_only.csv"
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
 data_interrelationships <- readr::read_csv(
-  file.path(table_dir, "predictor_interrelationships_importance_values.csv"),
+  file.path(
+    interrelationships_data_dir,
+    "predictors__interrelationships__importance_values.csv"
+  ),
   show_col_types = FALSE,
   guess_max = Inf
 )
@@ -133,7 +166,8 @@ audit_ok <- all(
 plot_untruncated_spatial_contributions_ok <- all(
   abs(
     data_untruncated_spatial_contributions$signed_allocation -
-      data_untruncated_spatial_contributions$individual / data_untruncated_spatial_contributions$total_adjusted_r_squared
+      data_untruncated_spatial_contributions$individual /
+        data_untruncated_spatial_contributions$total_adjusted_r_squared
   ) < 1e-12
 )
 spatial_zero_truncated_values_ok <- all(
@@ -242,37 +276,88 @@ profile_model_distribution_ok <-
 # 3. Reconcile main and supplementary artifacts -----
 #----------------------------------------------------------#
 artifact_paths <- c(
-  file.path(table_dir, "hvarpart_components.csv"),
-  file.path(table_dir, "hvarpart_model_audit.csv"),
-  file.path(table_dir, "hvarpart_profile_comparison.csv"),
-  file.path(table_dir, "human_climate_balance_untruncated_dataset_values.csv"),
-  file.path(table_dir, "human_climate_balance_untruncated_climate_zone_values.csv"),
-  file.path(table_dir, "human_climate_balance_untruncated_region_values.csv"),
-  file.path(table_dir, "human_climate_balance_time_space_controlled_dataset_values.csv"),
-  file.path(table_dir, "human_climate_balance_time_space_controlled_climate_zone_values.csv"),
-  file.path(table_dir, "human_climate_balance_region_values.csv"),
-  file.path(general_table_dir, "human_climate_temporal_balance.csv"),
-  file.path(table_dir, "predictor_interrelationships_importance_values.csv"),
+  file.path(table_dir, "hvarpart__components.csv"),
+  file.path(table_dir, "hvarpart__model_audit.csv"),
+  file.path(table_dir, "hvarpart__profile_comparison.csv"),
   file.path(
-    spatial_figure_dir,
-    "human_climate_balance_time_and_space_controlled.png"
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "dataset_values__time_control.csv"
+    )
+  ),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "climate_zone_values__time_control.csv"
+    )
+  ),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "region_values__time_control.csv"
+    )
+  ),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__dataset_values__",
+      "time_and_space_control.csv"
+    )
+  ),
+  file.path(
+    spatial_data_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__climate_zone_values__",
+      "time_and_space_control.csv"
+    )
+  ),
+  file.path(
+    spatial_data_dir,
+    "spd__human_climate_balance__region_values__human_climate_only.csv"
+  ),
+  file.path(
+    temporal_data_dir,
+    "spd_events__human_climate_balance__human_climate_only.csv"
+  ),
+  file.path(
+    interrelationships_data_dir,
+    "predictors__interrelationships__importance_values.csv"
   ),
   file.path(
     spatial_figure_dir,
-    "human_climate_balance_time_and_space_controlled.pdf"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control.png",
+      sep = "__"
+    )
   ),
   file.path(
-    temporal_figure_dir,
-    paste0(
-      "human_climate_space_",
-      "zero_truncated_hierarchical_composition.png"
+    spatial_figure_dir,
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control.pdf",
+      sep = "__"
     )
   ),
   file.path(
     temporal_figure_dir,
-    paste0(
-      "human_climate_space_",
-      "zero_truncated_hierarchical_composition.pdf"
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__space_control.png"
+    )
+  ),
+  file.path(
+    temporal_figure_dir,
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__space_control.pdf"
     )
   ),
   file.path(
@@ -285,53 +370,59 @@ artifact_paths <- c(
   ),
   file.path(
     spatial_figure_dir,
-    paste0(
-      "human_climate_balance_",
-      "untruncated_hierarchical_contributions.png"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "untruncated_hierarchical_contribution_difference",
+      "time_and_space_control.png",
+      sep = "__"
     )
   ),
   file.path(
     spatial_figure_dir,
-    paste0(
-      "human_climate_balance_",
-      "untruncated_hierarchical_contributions.pdf"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "untruncated_hierarchical_contribution_difference",
+      "time_and_space_control.pdf",
+      sep = "__"
     )
   ),
   file.path(
     temporal_figure_dir,
-    paste0(
-      "human_climate_only_",
-      "untruncated_hierarchical_contributions.png"
+    stringr::str_c(
+      "spd_events__human_climate__",
+      "untruncated_hierarchical_contributions__human_climate_only.png"
     )
   ),
   file.path(
     temporal_figure_dir,
-    paste0(
-      "human_climate_only_",
-      "untruncated_hierarchical_contributions.pdf"
+    stringr::str_c(
+      "spd_events__human_climate__",
+      "untruncated_hierarchical_contributions__human_climate_only.pdf"
     )
   ),
   file.path(
     interrelationships_figure_dir,
-    paste0(
+    stringr::str_c(
       "predictor_interrelationships_",
       "untruncated_hierarchical_contributions.png"
     )
   ),
   file.path(
     interrelationships_figure_dir,
-    paste0(
+    stringr::str_c(
       "predictor_interrelationships_",
       "untruncated_hierarchical_contributions.pdf"
     )
   ),
   file.path(
     diagnostic_figure_dir,
-    "hierarchical_profile_comparison.png"
+    "hvarpart__hierarchical_profile_comparison.png"
   ),
   file.path(
     diagnostic_figure_dir,
-    "hierarchical_profile_comparison.pdf"
+    "hvarpart__hierarchical_profile_comparison.pdf"
   )
 )
 
@@ -387,7 +478,7 @@ validation <- tibble::tibble(
 
 readr::write_csv(
   validation,
-  file.path(table_dir, "hvarpart_validation_provenance.csv")
+  file.path(table_dir, "hvarpart__validation_provenance.csv")
 )
 
 assertthat::assert_that(

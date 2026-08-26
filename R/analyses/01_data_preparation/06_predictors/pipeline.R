@@ -84,7 +84,7 @@ list(
   #   downstream results.
   targets::tar_target(
     name = "file_climate_path",
-    command = RUtilpol::get_latest_file_name(
+    command = resolve_latest_file_path(
       file_name = "data_climate",
       dir = paste0(
         data_storage_path,
@@ -139,7 +139,7 @@ list(
   #   results.
   targets::tar_target(
     name = "file_spd_path",
-    command = RUtilpol::get_latest_file_name(
+    command = resolve_latest_file_path(
       file_name = "data_spd_combine",
       dir = paste0(
         data_storage_path,

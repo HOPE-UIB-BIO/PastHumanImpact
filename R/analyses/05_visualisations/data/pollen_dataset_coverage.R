@@ -557,7 +557,7 @@ purrr::walk(
   .f = ~ ggplot2::ggsave(
     paste(
       here::here(
-        "Outputs/Figures/Data/pollen_dataset_coverage"
+        "Outputs/Figures/Data/pollen__dataset_coverage"
       ),
       .x,
       sep = "."

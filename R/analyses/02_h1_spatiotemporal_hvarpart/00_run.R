@@ -34,6 +34,16 @@ data_pipelines <-
       "analyses_h1/spatial_aggregation",
       "spd_human_climate_balance",
       sep = "/"
+    ),
+    paste(
+      "05_spatial_aggregation",
+      "events_human_climate_balance/pipeline.R",
+      sep = "/"
+    ),
+    paste(
+      "analyses_h1/spatial_aggregation",
+      "events_human_climate_balance",
+      sep = "/"
     )
   ) |>
   dplyr::mutate(

@@ -38,7 +38,7 @@ testthat::test_that(
         model_profile = c("human_climate", "human_climate_space"),
         predictor = c("human", "climate")
       ) |>
-      dplyr::mutate(Individual = seq(0.1, 0.8, length.out = dplyr::n()))
+      dplyr::mutate(individual = seq(0.1, 0.8, length.out = dplyr::n()))
     data_unique_adjusted_r2 <-
       tidyr::crossing(
         region = "Europe",
