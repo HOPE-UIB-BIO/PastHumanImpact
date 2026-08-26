@@ -301,7 +301,7 @@ plot_grid_signed <-
 #----------------------------------------------------------#
 
 path_output_tables <-
-  here::here("Outputs/Tables/HVarPart")
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
 
 path_output_figures <-
   here::here(
@@ -323,77 +323,77 @@ readr::write_csv(
   data_decomposition,
   file.path(
     path_output_tables,
-    "hvarpart_variance_decomposition_models.csv"
+    "hvarpart__variance_decomposition__models.csv"
   )
 )
 readr::write_csv(
   table_variance_overall,
   file.path(
     path_output_tables,
-    "hvarpart_variance_summary_overall.csv"
+    "hvarpart__variance_summary__overall.csv"
   )
 )
 readr::write_csv(
   table_variance_spatial,
   file.path(
     path_output_tables,
-    "hvarpart_variance_summary_spatial.csv"
+    "hvarpart__variance_summary__spatial.csv"
   )
 )
 readr::write_csv(
   table_variance_temporal,
   file.path(
     path_output_tables,
-    "hvarpart_variance_summary_temporal.csv"
+    "hvarpart__variance_summary__temporal.csv"
   )
 )
 readr::write_csv(
   table_variance_audit,
   file.path(
     path_output_tables,
-    "hvarpart_variance_missing_negative_audit.csv"
+    "hvarpart__variance_decomposition__missing_negative_audit.csv"
   )
 )
 readr::write_csv(
   plot_distribution[["record_values"]],
   file.path(
     path_output_tables,
-    "HVarPart_spatial_adjr2_distribution_records.csv"
+    "hvarpart__spatial__adjusted_r2_distribution__records.csv"
   )
 )
 readr::write_csv(
   plot_distribution[["climatezone_values"]],
   file.path(
     path_output_tables,
-    "HVarPart_spatial_adjr2_distribution_climatezones.csv"
+    "hvarpart__spatial__adjusted_r2_distribution__climate_zones.csv"
   )
 )
 readr::write_csv(
   plot_distribution[["continent_values"]],
   file.path(
     path_output_tables,
-    "HVarPart_spatial_adjr2_distribution_continents.csv"
+    "hvarpart__spatial__adjusted_r2_distribution__continents.csv"
   )
 )
 readr::write_csv(
   data_correlation |> prepare_climatezone_factor(),
   file.path(
     path_output_tables,
-    "HVarPart_adjr2_human_importance_model_values.csv"
+    "hvarpart__human_importance__adjusted_r2__model_values.csv"
   )
 )
 readr::write_csv(
   table_correlation_overall,
   file.path(
     path_output_tables,
-    "HVarPart_adjr2_human_importance_overall_statistics.csv"
+    "hvarpart__human_importance__adjusted_r2__overall_statistics.csv"
   )
 )
 readr::write_csv(
   table_correlation_grid,
   file.path(
     path_output_tables,
-    "HVarPart_adjr2_human_importance_grid_statistics.csv"
+    "hvarpart__human_importance__adjusted_r2__grid_statistics.csv"
   )
 )
 
@@ -411,7 +411,7 @@ purrr::walk(
       file.path(
         path_output_figures,
         stringr::str_c(
-          "HVarPart_spatial_adjr2_distribution.",
+          "hvarpart__spatial__adjusted_r2_distribution.",
           .x
         )
       ),
@@ -425,7 +425,7 @@ purrr::walk(
       file.path(
         path_output_figures,
         stringr::str_c(
-          "HVarPart_adjr2_human_importance_overall.",
+          "hvarpart__human_importance__adjusted_r2_overall.",
           .x
         )
       ),
@@ -439,7 +439,7 @@ purrr::walk(
       file.path(
         path_output_figures,
         stringr::str_c(
-          "HVarPart_adjr2_human_importance_grid.",
+          "hvarpart__human_importance__adjusted_r2_grid.",
           .x
         )
       ),

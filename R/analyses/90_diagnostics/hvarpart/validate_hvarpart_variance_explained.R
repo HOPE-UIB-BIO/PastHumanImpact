@@ -18,7 +18,7 @@ source(
 )
 
 path_output_tables <-
-  here::here("Outputs/Tables/HVarPart")
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
 
 path_output_figures <-
   here::here(
@@ -35,7 +35,7 @@ data_decomposition <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "hvarpart_variance_decomposition_models.csv"
+      "hvarpart__variance_decomposition__models.csv"
     ),
     show_col_types = FALSE
   )
@@ -44,7 +44,7 @@ data_records <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_spatial_adjr2_distribution_records.csv"
+      "hvarpart__spatial__adjusted_r2_distribution__records.csv"
     ),
     show_col_types = FALSE
   )
@@ -53,7 +53,7 @@ data_climatezone <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_spatial_adjr2_distribution_climatezones.csv"
+      "hvarpart__spatial__adjusted_r2_distribution__climate_zones.csv"
     ),
     show_col_types = FALSE
   )
@@ -62,7 +62,7 @@ data_continent <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_spatial_adjr2_distribution_continents.csv"
+      "hvarpart__spatial__adjusted_r2_distribution__continents.csv"
     ),
     show_col_types = FALSE
   )
@@ -71,7 +71,7 @@ data_correlation <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_adjr2_human_importance_model_values.csv"
+      "hvarpart__human_importance__adjusted_r2__model_values.csv"
     ),
     show_col_types = FALSE
   )
@@ -80,7 +80,7 @@ table_overall <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_adjr2_human_importance_overall_statistics.csv"
+      "hvarpart__human_importance__adjusted_r2__overall_statistics.csv"
     ),
     show_col_types = FALSE
   )
@@ -89,7 +89,7 @@ table_grid <-
   readr::read_csv(
     file.path(
       path_output_tables,
-      "HVarPart_adjr2_human_importance_grid_statistics.csv"
+      "hvarpart__human_importance__adjusted_r2__grid_statistics.csv"
     ),
     show_col_types = FALSE
   )

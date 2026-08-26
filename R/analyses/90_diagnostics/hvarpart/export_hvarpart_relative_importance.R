@@ -299,7 +299,7 @@ table_profiles <-
 #----------------------------------------------------------#
 
 path_output_tables <-
-  here::here("Outputs/Tables/HVarPart")
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
 
 path_output_figures <-
   here::here(
@@ -325,21 +325,21 @@ readr::write_csv(
   x = data_importance,
   file = file.path(
     path_output_tables,
-    "hvarpart_components.csv"
+    "hvarpart__components.csv"
   )
 )
 readr::write_csv(
   x = table_audit,
   file = file.path(
     path_output_tables,
-    "hvarpart_model_audit.csv"
+    "hvarpart__model_audit.csv"
   )
 )
 readr::write_csv(
   x = table_profiles,
   file = file.path(
     path_output_tables,
-    "hvarpart_profile_comparison.csv"
+    "hvarpart__profile_comparison.csv"
   )
 )
 
@@ -363,7 +363,7 @@ purrr::walk(
       file.path(
         path_output_figures,
         stringr::str_c(
-          "hvarpart_profile_comparison.",
+          "hvarpart__hierarchical_profile_comparison.",
           extension
         )
       )

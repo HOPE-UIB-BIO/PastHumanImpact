@@ -17,7 +17,7 @@ source(
 #----------------------------------------------------------#
 
 path_tables <-
-  here::here("Outputs", "Tables")
+  here::here("Outputs", "Tables", "Dataset_summaries", "Pollen")
 
 path_figures <-
   here::here("Outputs", "Figures", "Data")
@@ -44,7 +44,10 @@ format_threshold_axis <- function(x) {
 
 data_retention_overall <-
   readr::read_csv(
-    file.path(path_tables, "pollen_threshold_retention_overall.csv"),
+    file.path(
+      path_tables,
+      "pollen__threshold_retention__overall.csv"
+    ),
     show_col_types = FALSE
   )
 
@@ -53,7 +56,10 @@ vec_thresholds_plot <-
 
 data_retention_by_region <-
   readr::read_csv(
-    file.path(path_tables, "pollen_threshold_retention_by_region.csv"),
+    file.path(
+      path_tables,
+      "pollen__threshold_retention__region.csv"
+    ),
     show_col_types = FALSE
   ) |>
   prepare_region_factor()
@@ -62,7 +68,7 @@ data_retention_by_region_climatezone <-
   readr::read_csv(
     file.path(
       path_tables,
-      "pollen_threshold_retention_by_region_climatezone.csv"
+      "pollen__threshold_retention__region_and_climate_zone.csv"
     ),
     show_col_types = FALSE
   ) |>
@@ -75,7 +81,10 @@ data_retention_by_region_climatezone <-
 
 data_sample_rowsums_climatezone <-
   readr::read_csv(
-    file.path(path_tables, "pollen_sample_rowsums_by_climatezone.csv"),
+    file.path(
+      path_tables,
+      "pollen__sample_rowsums__climate_zone.csv"
+    ),
     show_col_types = FALSE
   ) |>
   prepare_region_factor() |>
@@ -509,10 +518,10 @@ fig_retention_region_climatezone <-
 
 fig_list <-
   list(
-    supplement_density_rowsum_by_climatezone = fig_density_rowsum_climatezone,
-    supplement_threshold_retention_overall = fig_retention_overall,
-    supplement_threshold_retention_region_facets = fig_retention_region_facets,
-    supplement_threshold_retention_region_climatezone =
+    pollen__sample_density__climate_zone = fig_density_rowsum_climatezone,
+    pollen__threshold_retention__overall = fig_retention_overall,
+    pollen__threshold_retention__region = fig_retention_region_facets,
+    pollen__threshold_retention__region_and_climate_zone =
       fig_retention_region_climatezone
   )
 
