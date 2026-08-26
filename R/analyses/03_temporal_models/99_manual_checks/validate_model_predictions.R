@@ -44,14 +44,17 @@ path_figure_dir <-
   )
 
 path_table_dir <-
-  here::here("Outputs", "Tables")
+  here::here("Outputs", "Tables", "Diagnostics", "Temporal_models")
 
 run_directory_setup(path_figure_dir)
 
 run_directory_setup(path_table_dir)
 
 output_stem <-
-  "spd_europe_temperate_without_dry_season_prediction_validation"
+  stringr::str_c(
+    "spd__europe__temperate_without_dry_season__",
+    "prediction_validation"
+  )
 
 
 #----------------------------------------------------------#
@@ -380,17 +383,26 @@ plot_general_prediction <-
 
 readr::write_csv(
   data_dataset_predictions,
-  file.path(path_table_dir, paste0(output_stem, "_dataset_predictions.csv"))
+  file.path(
+    path_table_dir,
+    stringr::str_c(output_stem, "__dataset_predictions.csv")
+  )
 )
 
 readr::write_csv(
   data_general_predictions,
-  file.path(path_table_dir, paste0(output_stem, "_general.csv"))
+  file.path(
+    path_table_dir,
+    stringr::str_c(output_stem, "__general.csv")
+  )
 )
 
 readr::write_csv(
   data_general_comparison,
-  file.path(path_table_dir, paste0(output_stem, "_comparison.csv"))
+  file.path(
+    path_table_dir,
+    stringr::str_c(output_stem, "__comparison.csv")
+  )
 )
 
 purrr::walk(
@@ -398,7 +410,11 @@ purrr::walk(
   ~ ggplot2::ggsave(
     filename = file.path(
       path_figure_dir,
-      paste0(output_stem, "_dataset_predictions.", .x)
+      stringr::str_c(
+        "spd__europe__temperate_without_dry_season__",
+        "dataset_predictions.",
+        .x
+      )
     ),
     plot = plot_dataset_predictions,
     width = 420,
@@ -415,7 +431,11 @@ purrr::walk(
   ~ ggplot2::ggsave(
     filename = file.path(
       path_figure_dir,
-      paste0(output_stem, "_general.", .x)
+      stringr::str_c(
+        "spd__europe__temperate_without_dry_season__",
+        "general_prediction.",
+        .x
+      )
     ),
     plot = plot_general_prediction,
     width = 180,
