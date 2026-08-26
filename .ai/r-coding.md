@@ -187,6 +187,9 @@ Prefer tidyverse tools when they make data manipulation clearer:
 Avoid:
 
 - `paste()` and `paste0()` for new string construction
+- superseded `{purrr}` shortcuts ending in `_dfr()` or `_dfc()`; use
+  `map()`/`imap()`/`map2()`/`pmap()` and then explicitly pipe the list into
+  `dplyr::bind_rows()` or `dplyr::bind_cols()`
 - `apply()`, `lapply()`, `sapply()`, `vapply()`, `mapply()` in new code
 - `$` for data-frame column extraction in new code; prefer
   `dplyr::pull()` or `.data[[column_name]]`
@@ -194,6 +197,17 @@ Avoid:
 
 Always `dplyr::ungroup()` after grouped summaries unless grouped output is
 intentional.
+
+Bind mapped outputs explicitly:
+
+```r
+res <-
+  vec_inputs |>
+  purrr::map(
+    .f = ~ summarise_input(.x)
+  ) |>
+  dplyr::bind_rows()
+```
 
 ## Data Masking
 

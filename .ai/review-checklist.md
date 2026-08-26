@@ -30,6 +30,9 @@ and assistants that need a compact validation target.
 - Assignment uses `<-`; the right-hand side starts on a new line except for a short direct alias or simple atomic literal.
 - Every top-level executable statement is separated from the next statement by exactly one blank line.
 - Non-base calls use explicit namespaces.
+- Mapped outputs use `map()`/`imap()`/`map2()`/`pmap()` followed by explicit
+  `dplyr::bind_rows()` or `dplyr::bind_cols()`; no superseded `_dfr()` or
+  `_dfc()` shortcuts remain.
 - No `library()` or `require()` inside functions.
 - Paths use `here::here()` where appropriate.
 - Names follow project naming conventions.
@@ -43,6 +46,8 @@ and assistants that need a compact validation target.
 - Function arguments are validated with project-approved patterns.
 - Errors and warnings use project-approved `cli` patterns.
 - Function files avoid side effects and keep one primary function per file.
+- Functions assign constructed or transformed outputs to `res` or a
+  descriptive `res_*` object before passing that object to `return()`.
 - Test files are named `test-<function_name>.R` and use `testthat` conventions.
 - Tests cover happy paths, edge cases, and error conditions without depending on implementation internals.
 - Relevant test runner or focused test file has been executed before the change

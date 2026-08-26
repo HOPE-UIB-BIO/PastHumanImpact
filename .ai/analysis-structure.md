@@ -110,18 +110,24 @@ Canonical generated figures use this shallow tree:
 ```text
 Outputs/Figures/
 ├── Overview/
-├── Data/
+├── Dataset_summaries/
+├── Dataset_trends/
 ├── H1/
 │   ├── Spatial/
-│   ├── Temporal/
-│   │   ├── Event_trends/
-│   │   ├── HVarPart/
-│   │   ├── PAP_trends/
-│   │   └── Predictor_trends/
-│   └── Dataset_trends/
+│   │   ├── Events/
+│   │   ├── Predictor_collinearity/
+│   │   └── SPD/
+│   │       ├── Predictor_collinearity/
+│   │       ├── Spatial_dependence/
+│   │       └── Spatiotemporal_composition/
+│   └── Temporal/
+│       ├── Event_trends/
+│       ├── HVarPart/
+│       ├── PAP_trends/
+│       └── Predictor_trends/
 ├── H2/
 │   └── Interrelationships/
-└── Diagnostics/
+├── Diagnostics/
     ├── HVarPart/
     └── Temporal_models/
 ```
@@ -129,6 +135,54 @@ Outputs/Figures/
 Do not use `Supplementary`, `Extended`, `Extra`, or similar publication-role names in this canonical tree. A separate manuscript-assembly script may copy and rename selected outputs to `Figure1`, `FigureS1`, or another publication-specific sequence.
 
 Manually edited comparison files are references rather than generated outputs. Keep them outside the canonical generated-output tree and never overwrite them from an analytical script.
+
+Separate semantic filename segments with a double underscore (`__`). Use a
+single underscore only within one segment. Order segments from the analysed
+subject to the reported quantity, calculation profile, and structural control
+or diagnostic variant, omitting segments that do not apply. For example:
+
+```text
+spd__human__unique_adjusted_r2__time_control.png
+hvarpart__human_importance__adjusted_r2_grid.png
+dataset__12345.png
+```
+
+Apply this convention to every canonical generated figure. The same stem must
+be used for all exported formats of one figure.
+
+## Generated tables
+
+Canonical tabular outputs live under `Outputs/Tables/` and mirror the
+scientific figure hierarchy where practical:
+
+```text
+Outputs/Tables/
+├── Dataset_summaries/
+│   └── Pollen/
+├── H1/
+│   ├── Spatial/
+│   │   ├── Events/
+│   │   ├── Predictor_collinearity/
+│   │   └── SPD/
+│   │       └── Predictor_collinearity/
+│   └── Temporal/
+│       ├── HVarPart/
+│       └── PAP_trends/
+├── H2/
+│   └── Interrelationships/
+├── Diagnostics/
+│   ├── HVarPart/
+│   ├── Spatiotemporal_dependence/
+│   └── Temporal_models/
+└── Reporting/
+```
+
+Use `Outputs/Tables` for generated CSV, compressed CSV, and similar tabular
+products. Reserve `Outputs/Data` for non-tabular generated data such as RDS
+objects and SQLite databases. Apply the same double-underscore filename
+segments used for figures. Keep a source table beside the figure family it
+supports; place cross-cutting validation, provenance, and residual-dependence
+products under `Diagnostics/`.
 
 ## Analysis-profile vocabulary
 
