@@ -25,49 +25,92 @@ source(
 #----------------------------------------------------------#
 # 1. Load controlled results -----
 #----------------------------------------------------------#
-store_time_control <-
+store_time_control_spd <-
   resolve_pipeline_store_path(
     data_storage_path = data_storage_path,
     store_relative_path = "analyses_h1/time_control/spd"
   )
 
-store_spatial_aggregation <-
+store_time_control_events <-
   resolve_pipeline_store_path(
     data_storage_path = data_storage_path,
-    store_relative_path = paste(
+    store_relative_path = "analyses_h1/time_control/events"
+  )
+
+store_spatial_aggregation_spd <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = stringr::str_c(
       "analyses_h1/spatial_aggregation",
       "spd_human_climate_balance",
       sep = "/"
     )
   )
 
-data_time_space_controlled_records <-
+store_spatial_aggregation_events <-
+  resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = stringr::str_c(
+      "analyses_h1/spatial_aggregation",
+      "events_human_climate_balance",
+      sep = "/"
+    )
+  )
+
+data_spd_records <-
   targets::tar_read(
     data_time_controlled_balance_records,
-    store = store_time_control
+    store = store_time_control_spd
   )
 
-data_time_space_controlled_estimates <-
+data_spd_estimates <-
   targets::tar_read(
     table_spatiotemporal_balance_estimates,
-    store = store_spatial_aggregation
+    store = store_spatial_aggregation_spd
   )
 
-data_time_controlled_contributions <-
+data_spd_contributions <-
   targets::tar_read(
     table_time_control_hierarchical_contributions,
-    store = store_time_control
+    store = store_time_control_spd
   )
 
-data_time_controlled_unique_adjusted_r2 <-
+data_spd_unique_adjusted_r2 <-
   targets::tar_read(
     table_time_control_unique_adjusted_r2,
-    store = store_time_control
+    store = store_time_control_spd
+  )
+
+data_events_records <-
+  targets::tar_read(
+    data_time_controlled_balance_records,
+    store = store_spatial_aggregation_events
+  )
+
+data_events_estimates <-
+  targets::tar_read(
+    table_spatiotemporal_balance_estimates,
+    store = store_spatial_aggregation_events
+  )
+
+data_events_contributions <-
+  targets::tar_read(
+    table_time_control_hierarchical_contributions,
+    store = store_time_control_events
+  )
+
+data_events_unique_adjusted_r2 <-
+  targets::tar_read(
+    table_time_control_unique_adjusted_r2,
+    store = store_time_control_events
   )
 
 data_geo_koppen <-
   readr::read_rds(
-    paste0(data_storage_path, "Spatial/Climatezones/data_geo_koppen.rds")
+    stringr::str_c(
+      data_storage_path,
+      "Spatial/Climatezones/data_geo_koppen.rds"
+    )
   ) |>
   tibble::as_tibble() |>
   dplyr::mutate(
@@ -80,69 +123,327 @@ data_geo_koppen <-
   prepare_climatezone_factor()
 
 #----------------------------------------------------------#
-# 2. Build the main balance and component figures -----
+# 2. Build balance and component figures -----
 #----------------------------------------------------------#
-plot_time_space_controlled_balance <-
+plot_spd_zero_truncated_balance <-
   plot_h1_spatial_controlled_balance(
-    data_records = data_time_space_controlled_records,
-    data_estimates = data_time_space_controlled_estimates,
-    data_geo_koppen = data_geo_koppen
+    data_records = data_spd_records,
+    data_estimates = data_spd_estimates,
+    data_geo_koppen = data_geo_koppen,
+    profile = "zero_truncated"
   )
 
-plots_time_control_profiles <-
+plot_spd_untruncated_balance <-
+  plot_h1_spatial_controlled_balance(
+    data_records = data_spd_records,
+    data_estimates = data_spd_estimates,
+    data_geo_koppen = data_geo_koppen,
+    profile = "signed"
+  )
+
+plot_events_zero_truncated_balance <-
+  plot_h1_spatial_controlled_balance(
+    data_records = data_events_records,
+    data_estimates = data_events_estimates,
+    data_geo_koppen = data_geo_koppen,
+    profile = "zero_truncated"
+  )
+
+plot_events_untruncated_balance <-
+  plot_h1_spatial_controlled_balance(
+    data_records = data_events_records,
+    data_estimates = data_events_estimates,
+    data_geo_koppen = data_geo_koppen,
+    profile = "signed"
+  )
+
+plots_spd_control_profiles <-
   build_h1_spatial_control_profiles(
-    data_records = data_time_space_controlled_records,
-    data_components = data_time_controlled_contributions,
-    data_unique_adjusted_r2 = data_time_controlled_unique_adjusted_r2,
+    data_records = data_spd_records,
+    data_components = data_spd_contributions,
+    data_unique_adjusted_r2 = data_spd_unique_adjusted_r2,
     data_geo_koppen = data_geo_koppen
   )
 
+plots_spd_spatiotemporal_composition <-
+  plot_h1_spatial_control_profiles(
+    data_records = data_spd_records,
+    data_components = data_spd_contributions,
+    data_unique_adjusted_r2 = data_spd_unique_adjusted_r2
+  )
+
+composition_profile_names <-
+  c(
+    "zero_truncated_hierarchical_composition",
+    "unique_adjusted_r2"
+  )
+
+plots_spd_spatiotemporal_composition <-
+  plots_spd_spatiotemporal_composition[composition_profile_names] |>
+  rlang::set_names(
+    stringr::str_c(
+      "spd",
+      "human_climate_time",
+      composition_profile_names,
+      sep = "__"
+    )
+  )
+
+plots_events_control_profiles <-
+  build_h1_spatial_control_profiles(
+    data_records = data_events_records,
+    data_components = data_events_contributions,
+    data_unique_adjusted_r2 = data_events_unique_adjusted_r2,
+    data_geo_koppen = data_geo_koppen
+  )
+
+component_output_names <-
+  c(
+    climate_unique_adjusted_r2 =
+      "climate__unique_adjusted_r2__time_control",
+    human_unique_adjusted_r2 =
+      "human__unique_adjusted_r2__time_control",
+    time_unique_adjusted_r2 =
+      "time__unique_adjusted_r2__time_control",
+    climate_untruncated_hierarchical_contribution =
+      stringr::str_c(
+        "climate",
+        "untruncated_hierarchical_contribution",
+        "time_control",
+        sep = "__"
+      ),
+    human_untruncated_hierarchical_contribution =
+      stringr::str_c(
+        "human",
+        "untruncated_hierarchical_contribution",
+        "time_control",
+        sep = "__"
+      ),
+    time_untruncated_hierarchical_contribution =
+      stringr::str_c(
+        "time",
+        "untruncated_hierarchical_contribution",
+        "time_control",
+        sep = "__"
+      )
+  )
+
+balance_output_names <-
+  c(
+    stringr::str_c(
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control",
+      sep = "__"
+    ),
+    stringr::str_c(
+      "human_climate_balance",
+      "untruncated_hierarchical_contribution_difference",
+      "time_and_space_control",
+      sep = "__"
+    )
+  )
+
+plots_spd_components <-
+  plots_spd_control_profiles |>
+  purrr::map(~ .x[["plot"]]) |>
+  rlang::set_names(
+    stringr::str_c(
+      "spd",
+      unname(component_output_names[names(plots_spd_control_profiles)]),
+      sep = "__"
+    )
+  )
+
+plots_events_components <-
+  plots_events_control_profiles |>
+  purrr::map(~ .x[["plot"]]) |>
+  rlang::set_names(
+    stringr::str_c(
+      "events",
+      unname(component_output_names[names(plots_events_control_profiles)]),
+      sep = "__"
+    )
+  )
+
+plots_spd <-
+  c(
+    list(
+      plot_spd_zero_truncated_balance,
+      plot_spd_untruncated_balance
+    ) |>
+      rlang::set_names(
+        stringr::str_c("spd", balance_output_names, sep = "__")
+      ),
+    plots_spd_components
+  )
+
+plots_events <-
+  c(
+    list(
+      plot_events_zero_truncated_balance,
+      plot_events_untruncated_balance
+    ) |>
+      rlang::set_names(
+        stringr::str_c("events", balance_output_names, sep = "__")
+      ),
+    plots_events_components
+  )
 #----------------------------------------------------------#
-# 3. Save figures and source tables -----
+# 3. Prepare source tables -----
 #----------------------------------------------------------#
+data_spd_profile_records <-
+  plots_spd_control_profiles |>
+  purrr::imap(
+    ~ .x[["record_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+data_spd_profile_climatezones <-
+  plots_spd_control_profiles |>
+  purrr::imap(
+    ~ .x[["climatezone_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+data_spd_profile_regions <-
+  plots_spd_control_profiles |>
+  purrr::imap(
+    ~ .x[["region_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+data_events_profile_records <-
+  plots_events_control_profiles |>
+  purrr::imap(
+    ~ .x[["record_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+data_events_profile_climatezones <-
+  plots_events_control_profiles |>
+  purrr::imap(
+    ~ .x[["climatezone_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+data_events_profile_regions <-
+  plots_events_control_profiles |>
+  purrr::imap(
+    ~ .x[["region_values"]] |>
+      dplyr::mutate(figure_profile = .y)
+  ) |>
+  dplyr::bind_rows()
+
+#----------------------------------------------------------#
+# 4. Save figures and source tables -----
+#----------------------------------------------------------#
+path_data_spd <-
+  here::here("Outputs", "Tables", "H1", "Spatial", "SPD")
+
+path_data_events <-
+  here::here("Outputs", "Tables", "H1", "Spatial", "Events")
+
 dir.create(
-  here::here("Outputs/Tables/HVarPart"),
+  path_data_spd,
   recursive = TRUE,
   showWarnings = FALSE
 )
 
 dir.create(
-  here::here("Outputs/Figures/H1/Spatial"),
+  path_data_events,
   recursive = TRUE,
   showWarnings = FALSE
+)
+
+path_figures_spd <-
+  here::here("Outputs/Figures/H1/Spatial/SPD")
+
+path_figures_events <-
+  here::here("Outputs/Figures/H1/Spatial/Events")
+
+path_figures_spd_composition <-
+  file.path(path_figures_spd, "Spatiotemporal_composition")
+
+dir.create(
+  path_figures_spd,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  path_figures_events,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+dir.create(
+  path_figures_spd_composition,
+  recursive = TRUE,
+  showWarnings = FALSE
+)
+
+plots_by_proxy <-
+  list(
+    SPD = plots_spd,
+    Events = plots_events
+  )
+
+paths_by_proxy <-
+  c(
+    SPD = path_figures_spd,
+    Events = path_figures_events
+  )
+
+purrr::iwalk(
+  .x = plots_by_proxy,
+  .f = ~ {
+    proxy_name <- .y
+
+    purrr::walk(
+      .x = c("png", "pdf"),
+      .f = ~ {
+        extension <- .x
+
+        purrr::iwalk(
+          .x = plots_by_proxy[[proxy_name]],
+          .f = ~ ggplot2::ggsave(
+            filename = file.path(
+              paths_by_proxy[[proxy_name]],
+              stringr::str_c(.y, ".", extension)
+            ),
+            plot = .x,
+            width = image_width_vec[["2col"]],
+            height = 130,
+            units = image_units,
+            bg = "white"
+          )
+        )
+      }
+    )
+  }
 )
 
 purrr::walk(
-  c("png", "pdf"),
-  ~ {
+  .x = c("png", "pdf"),
+  .f = ~ {
     extension <- .x
 
-    ggplot2::ggsave(
-      filename = paste0(
-        here::here(
-          "Outputs/Figures/H1/Spatial/",
-          "human_climate_balance_time_and_space_controlled"
-        ),
-        ".",
-        extension
-      ),
-      plot = plot_time_space_controlled_balance,
-      width = image_width_vec[["2col"]],
-      height = 130,
-      units = image_units,
-      bg = "white"
-    )
-
     purrr::iwalk(
-      plots_time_control_profiles,
-      ~ ggplot2::ggsave(
+      .x = plots_spd_spatiotemporal_composition,
+      .f = ~ ggplot2::ggsave(
         filename = file.path(
-          here::here("Outputs/Figures/H1/Spatial"),
-          paste0(.y, ".", extension)
+          path_figures_spd_composition,
+          stringr::str_c(.y, ".", extension)
         ),
-        plot = .x[["plot"]],
+        plot = .x,
         width = image_width_vec[["2col"]],
-        height = 130,
+        height = 190,
         units = image_units,
         bg = "white"
       )
@@ -150,63 +451,112 @@ purrr::walk(
   }
 )
 
-data_profile_records <-
-  plots_time_control_profiles |>
-  purrr::imap_dfr(
-    ~ .x[["record_values"]] |>
-      dplyr::mutate(figure_profile = .y)
-  )
-
-data_profile_climatezones <-
-  plots_time_control_profiles |>
-  purrr::imap_dfr(
-    ~ .x[["climatezone_values"]] |>
-      dplyr::mutate(figure_profile = .y)
-  )
-
-data_profile_regions <-
-  plots_time_control_profiles |>
-  purrr::imap_dfr(
-    ~ .x[["region_values"]] |>
-      dplyr::mutate(figure_profile = .y)
-  )
-
 readr::write_csv(
-  data_profile_records,
-  here::here(
-    "Outputs/Tables/HVarPart/",
-    "time_controlled_spatial_component_dataset_values.csv"
+  data_spd_profile_records,
+  file.path(
+    path_data_spd,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "dataset_values__time_control.csv"
+    )
   )
 )
 
 readr::write_csv(
-  data_profile_climatezones,
-  here::here(
-    "Outputs/Tables/HVarPart/",
-    "time_controlled_spatial_component_climate_zone_values.csv"
+  data_spd_profile_climatezones,
+  file.path(
+    path_data_spd,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "climate_zone_values__time_control.csv"
+    )
   )
 )
 
 readr::write_csv(
-  data_profile_regions,
-  here::here(
-    "Outputs/Tables/HVarPart/",
-    "time_controlled_spatial_component_region_values.csv"
+  data_spd_profile_regions,
+  file.path(
+    path_data_spd,
+    stringr::str_c(
+      "spd__human_climate_time__component_profiles__",
+      "region_values__time_control.csv"
+    )
   )
 )
 
 readr::write_csv(
-  data_time_space_controlled_records,
-  here::here(
-    "Outputs/Tables/HVarPart/",
-    "human_climate_balance_time_space_controlled_dataset_values.csv"
+  data_spd_records,
+  file.path(
+    path_data_spd,
+    stringr::str_c(
+      "spd__human_climate_balance__dataset_values__",
+      "time_and_space_control.csv"
+    )
   )
 )
 
 readr::write_csv(
-  data_time_space_controlled_estimates,
-  here::here(
-    "Outputs/Tables/HVarPart/",
-    "human_climate_balance_time_space_controlled_climate_zone_values.csv"
+  data_spd_estimates,
+  file.path(
+    path_data_spd,
+    stringr::str_c(
+      "spd__human_climate_balance__climate_zone_values__",
+      "time_and_space_control.csv"
+    )
+  )
+)
+
+readr::write_csv(
+  data_events_profile_records,
+  file.path(
+    path_data_events,
+    stringr::str_c(
+      "events__human_climate_time__component_profiles__",
+      "dataset_values__time_control.csv"
+    )
+  )
+)
+
+readr::write_csv(
+  data_events_profile_climatezones,
+  file.path(
+    path_data_events,
+    stringr::str_c(
+      "events__human_climate_time__component_profiles__",
+      "climate_zone_values__time_control.csv"
+    )
+  )
+)
+
+readr::write_csv(
+  data_events_profile_regions,
+  file.path(
+    path_data_events,
+    stringr::str_c(
+      "events__human_climate_time__component_profiles__",
+      "region_values__time_control.csv"
+    )
+  )
+)
+
+readr::write_csv(
+  data_events_records,
+  file.path(
+    path_data_events,
+    stringr::str_c(
+      "events__human_climate_balance__dataset_values__",
+      "time_and_space_control.csv"
+    )
+  )
+)
+
+readr::write_csv(
+  data_events_estimates,
+  file.path(
+    path_data_events,
+    stringr::str_c(
+      "events__human_climate_balance__climate_zone_values__",
+      "time_and_space_control.csv"
+    )
   )
 )

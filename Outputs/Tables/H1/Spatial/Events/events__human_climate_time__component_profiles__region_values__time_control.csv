@@ -1,0 +1,31 @@
+analysis,region,value,dataset_count,line_colour,figure_profile
+spatial_events,North America,0.09083546992541547,25,#D1D1D1,climate_unique_adjusted_r2
+spatial_events,Latin America,0.058360990082495845,31,#C7C7C7,climate_unique_adjusted_r2
+spatial_events,Europe,0.052102911015168174,79,#C5C5C5,climate_unique_adjusted_r2
+spatial_events,Asia,0.006382022340507776,31,#B8B8B8,climate_unique_adjusted_r2
+spatial_events,Oceania,0.02553067365886086,21,#BEBEBE,climate_unique_adjusted_r2
+spatial_events,North America,0.03231087708865188,25,#C0C0C0,human_unique_adjusted_r2
+spatial_events,Latin America,-0.008479741132084273,31,#B4B4B4,human_unique_adjusted_r2
+spatial_events,Europe,0.05651701869348469,79,#C7C7C7,human_unique_adjusted_r2
+spatial_events,Asia,0.023896451469328617,31,#BDBDBD,human_unique_adjusted_r2
+spatial_events,Oceania,0.05561539841663976,21,#C6C6C6,human_unique_adjusted_r2
+spatial_events,North America,0.04168555789130368,25,#C2C2C2,time_unique_adjusted_r2
+spatial_events,Latin America,0.06056605649927915,31,#C8C8C8,time_unique_adjusted_r2
+spatial_events,Europe,0.04568242402051503,79,#C3C3C3,time_unique_adjusted_r2
+spatial_events,Asia,0.005063841533663793,31,#B8B8B8,time_unique_adjusted_r2
+spatial_events,Oceania,0.025474711721281462,21,#BEBEBE,time_unique_adjusted_r2
+spatial_events,North America,0.2084,25,#D0DBDB,climate_untruncated_hierarchical_contribution
+spatial_events,Latin America,0.1699,31,#E6EAEA,climate_untruncated_hierarchical_contribution
+spatial_events,Europe,0.1746,79,#E4E8E8,climate_untruncated_hierarchical_contribution
+spatial_events,Asia,0.1516,31,#F1F1F1,climate_untruncated_hierarchical_contribution
+spatial_events,Oceania,0.1675,21,#E8EBEB,climate_untruncated_hierarchical_contribution
+spatial_events,North America,0.0704,25,#D0D0D0,human_untruncated_hierarchical_contribution
+spatial_events,Latin America,0.0324,31,#BFBFBF,human_untruncated_hierarchical_contribution
+spatial_events,Europe,0.1472,79,#F1F1F1,human_untruncated_hierarchical_contribution
+spatial_events,Asia,0.0938,31,#DADADA,human_untruncated_hierarchical_contribution
+spatial_events,Oceania,0.1297,21,#E9E9E9,human_untruncated_hierarchical_contribution
+spatial_events,North America,0.1604,25,#EDECF0,time_untruncated_hierarchical_contribution
+spatial_events,Latin America,0.1555,31,#EFEFF1,time_untruncated_hierarchical_contribution
+spatial_events,Europe,0.1772,79,#E4E2EC,time_untruncated_hierarchical_contribution
+spatial_events,Asia,0.1526,31,#F1F0F1,time_untruncated_hierarchical_contribution
+spatial_events,Oceania,0.1656,21,#EAE9EF,time_untruncated_hierarchical_contribution
