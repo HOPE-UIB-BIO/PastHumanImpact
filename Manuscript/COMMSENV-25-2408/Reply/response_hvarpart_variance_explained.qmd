@@ -14,24 +14,28 @@ execute:
 #| include: false
 library(here)
 here::i_am(
-  paste0(
+  stringr::str_c(
     "Manuscript/COMMSENV-25-2408/Reply/",
     "response_hvarpart_variance_explained.qmd"
   )
 )
 source(here::here("R/00_Config_file.R"))
-table_dir <- here::here("Outputs", "Tables", "HVarPart")
+table_dir <-
+  here::here("Outputs", "Tables", "Diagnostics", "HVarPart")
 figure_dir <- here::here(
   "Outputs", "Figures", "Diagnostics", "HVarPart"
 )
 audit <- readr::read_csv(
-  file.path(table_dir, "hvarpart_variance_missing_negative_audit.csv"),
+  file.path(
+    table_dir,
+    "hvarpart__variance_decomposition__missing_negative_audit.csv"
+  ),
   show_col_types = FALSE
 )
 distribution_records <- readr::read_csv(
   file.path(
     table_dir,
-    "HVarPart_spatial_adjr2_distribution_records.csv"
+    "hvarpart__spatial__adjusted_r2_distribution__records.csv"
   ),
   show_col_types = FALSE
 )
@@ -55,7 +59,7 @@ distribution_summary <-
 signed <- readr::read_csv(
   file.path(
     table_dir,
-    "HVarPart_adjr2_human_importance_overall_statistics.csv"
+    "hvarpart__human_importance__adjusted_r2__overall_statistics.csv"
   ),
   show_col_types = FALSE
 )
@@ -173,6 +177,6 @@ knitr::include_graphics(
 ```
 
 All model values, distribution summaries, audits, and signed correlation
-statistics are exported under `Outputs/Tables/HVarPart`.
+statistics are exported under `Outputs/Tables/Diagnostics/HVarPart`.
 The validation script independently reconstructs every distribution summary,
 model count, Spearman coefficient, and Pearson coefficient.

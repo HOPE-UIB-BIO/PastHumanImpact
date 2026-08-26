@@ -18,53 +18,54 @@ path_col_summary <-
   here::here(
     "Outputs",
     "Tables",
-    "Collinearity",
-    "pap_collinearity_hvar_influence_summary.csv"
+    "H1",
+    "Spatial",
+    "SPD",
+    "Predictor_collinearity",
+    "spd__pap_collinearity__hvarpart_influence__summary.csv"
   )
 
 path_col_by_dataset <-
   here::here(
     "Outputs",
     "Tables",
-    "Collinearity",
-    "pap_collinearity_hvar_influence_by_dataset.csv"
+    "H1",
+    "Spatial",
+    "SPD",
+    "Predictor_collinearity",
+    "spd__pap_collinearity__hvarpart_influence__dataset_values.csv"
   )
 
 path_col_corr <-
   here::here(
     "Outputs",
     "Tables",
-    "Collinearity",
-    "pap_collinearity_summary.csv"
+    "H1",
+    "Spatial",
+    "Predictor_collinearity",
+    "pap_predictors__collinearity_summary.csv"
   )
 
 fig_influence <-
   here::here(
-    "Outputs",
-    "Figures",
-    "H1",
-    "Spatial",
-    "pap_collinearity_hvarpart_influence.png"
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Predictor_collinearity",
+    "spd__pap_collinearity__hvarpart_influence.png"
   )
 
 fig_correlation <-
   here::here(
-    "Outputs",
-    "Figures",
-    "H1",
-    "Spatial",
-    "pap_collinearity_correlation.png"
+    "Outputs", "Figures", "H1", "Spatial",
+    "Predictor_collinearity",
+    "pap_predictors__collinearity_correlation.png"
   )
 
 fig_reduced_simple <-
   here::here(
-    "Outputs",
-    "Figures",
-    "H1",
-    "Spatial",
-    "human_climate_balance_reduced_predictors.png"
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Predictor_collinearity",
+    "spd__human_climate_balance__reduced_predictors.png"
   )
-
 required_paths <-
   c(
     path_col_summary,

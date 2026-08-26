@@ -18,36 +18,71 @@ here::i_am(
 )
 source(here::here("R/00_Config_file.R"))
 
-table_dir <- here::here("Outputs", "Tables", "Spatial_dependence")
-figure_dir <- here::here(
-  "Outputs", "Figures", "H1", "Spatial"
-)
+table_dir <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "Diagnostics",
+    "Spatiotemporal_dependence"
+  )
+figure_dir <-
+  here::here(
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Spatial_dependence"
+  )
+
+composition_figure_dir <-
+  here::here(
+    "Outputs", "Figures", "H1", "Spatial", "SPD",
+    "Spatiotemporal_composition"
+  )
 robustness <- readr::read_csv(
-  file.path(table_dir, "spatial_importance_robustness.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_balance__robustness__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 sensitivity <- readr::read_csv(
-  file.path(table_dir, "spatial_importance_sensitivity.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_balance__sensitivity__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 estimates <- readr::read_csv(
-  file.path(table_dir, "spatial_importance_estimates.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_balance__estimates__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 status <- readr::read_csv(
-  file.path(table_dir, "temporal_spatial_status.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_space__status__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 partial <- readr::read_csv(
-  file.path(table_dir, "temporal_unique_adjusted_r2.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_space__unique_adjusted_r2__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 moran <- readr::read_csv(
-  file.path(table_dir, "spatial_importance_moran_diagnostics.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_balance__moran_diagnostics__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 residual_moran <- readr::read_csv(
-  file.path(table_dir, "temporal_residual_moran.csv"),
+  file.path(
+    table_dir,
+    "spd__human_climate_space__residual_moran__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 baseline_signed <-
@@ -148,14 +183,14 @@ knitr::kable(
 ```{r}
 #| fig-cap: "Spatial autocorrelation before and after dbMEM filtering."
 knitr::include_graphics(
-  file.path(figure_dir, "human_climate_balance_moran.png")
+  file.path(figure_dir, "spd__human_climate_balance__moran.png")
 )
 ```
 
 ```{r}
 #| fig-cap: "Human-minus-climate balance after repeated spatial thinning."
 knitr::include_graphics(
-  file.path(figure_dir, "human_climate_balance_spatial_thinning.png")
+  file.path(figure_dir, "spd__human_climate_balance__spatial_thinning.png")
 )
 ```
 
@@ -177,7 +212,10 @@ claim that the data or residuals are spatially independent.
 ```{r}
 #| fig-cap: "Pure human, climate, and spatial fractions through time."
 knitr::include_graphics(
-  file.path(figure_dir, "time_control_unique_adjusted_r2.png")
+  file.path(
+    composition_figure_dir,
+    "spd__human_climate_time__unique_adjusted_r2.png"
+  )
 )
 ```
 

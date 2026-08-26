@@ -18,44 +18,80 @@ here::i_am(
 )
 source(here::here("R/00_Config_file.R"))
 
-table_dir <- here::here("Outputs", "Tables", "Spatial_dependence")
+table_dir <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "Diagnostics",
+    "Spatiotemporal_dependence"
+  )
 spatial_figure_dir <- here::here(
-  "Outputs", "Figures", "H1", "Spatial"
+  "Outputs", "Figures", "H1", "Spatial", "SPD"
 )
 
 temporal_figure_dir <- here::here(
   "Outputs", "Figures", "H1", "Temporal", "HVarPart"
 )
 robustness <- readr::read_csv(
-  file.path(table_dir, "spatiotemporal_balance_robustness.csv"),
+  file.path(
+    table_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__robustness__",
+      "time_and_space_control.csv"
+    )
+  ),
   show_col_types = FALSE
 )
 human_climate_only <- readr::read_csv(
-  file.path(table_dir, "human_climate_only_matched_estimates.csv"),
+  file.path(
+    table_dir,
+    "human_climate_balance__matched_estimates__human_climate_only.csv"
+  ),
   show_col_types = FALSE
 )
 controlled <- readr::read_csv(
-  file.path(table_dir, "spatiotemporal_balance_estimates.csv"),
+  file.path(
+    table_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__estimates__",
+      "time_and_space_control.csv"
+    )
+  ),
   show_col_types = FALSE
 )
 time_status <- readr::read_csv(
-  file.path(table_dir, "time_control_status.csv"),
+  file.path(
+    table_dir,
+    "spd_events__human_climate_time__status__time_control.csv"
+  ),
   show_col_types = FALSE
 )
 temporal_moran <- readr::read_csv(
-  file.path(table_dir, "time_control_residual_moran.csv"),
+  file.path(
+    table_dir,
+    "spd_events__human_climate_time__residual_moran__time_control.csv"
+  ),
   show_col_types = FALSE
 )
 space_status <- readr::read_csv(
-  file.path(table_dir, "spatial_control_status.csv"),
+  file.path(
+    table_dir,
+    "spd_events__human_climate_space__status__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 spatial_moran <- readr::read_csv(
-  file.path(table_dir, "spatial_control_residual_moran.csv"),
+  file.path(
+    table_dir,
+    "spd_events__human_climate_space__residual_moran__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 rankings <- readr::read_csv(
-  file.path(table_dir, "spatial_control_rankings.csv"),
+  file.path(
+    table_dir,
+    "spd_events__human_climate_space__rankings__space_control.csv"
+  ),
   show_col_types = FALSE
 )
 balance_summary <-
@@ -170,7 +206,13 @@ knitr::kable(
 knitr::include_graphics(
   file.path(
     spatial_figure_dir,
-    "human_climate_balance_time_and_space_controlled.png"
+    stringr::str_c(
+      "spd",
+      "human_climate_balance",
+      "zero_truncated_hierarchical_composition",
+      "time_and_space_control.png",
+      sep = "__"
+    )
   )
 )
 ```
@@ -194,7 +236,10 @@ are related diagnostics, not interchangeable estimates.
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,
-    "human_climate_space_zero_truncated_hierarchical_composition.png"
+    stringr::str_c(
+      "spd_events__human_climate_space__",
+      "zero_truncated_hierarchical_composition__space_control.png"
+    )
   )
 )
 ```

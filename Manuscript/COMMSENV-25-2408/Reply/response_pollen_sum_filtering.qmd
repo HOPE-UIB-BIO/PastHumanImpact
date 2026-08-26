@@ -30,9 +30,15 @@ fmt_pct <- function(x, digits = 1) {
 }
 
 path_rowsum <-
-  here::here("Outputs", "Tables", "pollen_sample_rowsums_by_climatezone.csv")
+  here::here(
+    "Outputs", "Tables", "Dataset_summaries", "Pollen",
+    "pollen__sample_rowsums__climate_zone.csv"
+  )
 path_ret_overall <-
-  here::here("Outputs", "Tables", "pollen_threshold_retention_overall.csv")
+  here::here(
+    "Outputs", "Tables", "Dataset_summaries", "Pollen",
+    "pollen__threshold_retention__overall.csv"
+  )
 
 required_paths <-
   c(
@@ -100,28 +106,28 @@ fig_rowsum <-
     "Outputs",
     "Figures",
     "Data",
-    "pollen_sample_density_by_climate_zone.png"
+    "pollen__sample_density__climate_zone.png"
   )
 fig_overall <-
   here::here(
     "Outputs",
     "Figures",
     "Data",
-    "pollen_threshold_retention_overall.png"
+    "pollen__threshold_retention__overall.png"
   )
 fig_region <-
   here::here(
     "Outputs",
     "Figures",
     "Data",
-    "pollen_threshold_retention_by_region.png"
+    "pollen__threshold_retention__region.png"
   )
 fig_region_clim <-
   here::here(
     "Outputs",
     "Figures",
     "Data",
-    "pollen_threshold_retention_by_region_and_climate_zone.png"
+    "pollen__threshold_retention__region_and_climate_zone.png"
   )
 
 figure_paths <- c(
@@ -259,7 +265,7 @@ knitr::include_graphics(fig_region_clim)
 
 ```{r}
 #| label: tbl-retention-overall
-#| tbl-cap: "Overall retention metrics by threshold (derived from pollen_threshold_retention_overall.csv)."
+#| tbl-cap: "Overall retention metrics by pollen-sum threshold."
 #| echo: false
 #| error: false
 #| warning: false

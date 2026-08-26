@@ -1,8 +1,8 @@
 # Insertion-ready manuscript patch: HVarPart relative importance
 
 All numerical statements below are traceable to
-`Outputs/Tables/HVarPart/hvarpart_profile_comparison.csv` and
-`Outputs/Tables/HVarPart/hvarpart_model_audit.csv`.
+`Outputs/Tables/Diagnostics/HVarPart/hvarpart__profile_comparison.csv` and
+`Outputs/Tables/Diagnostics/HVarPart/hvarpart__model_audit.csv`.
 
 ## Methods
 
@@ -34,7 +34,7 @@ corresponding signed allocations were 0.764 and 0.236. Climate allocation was
 models with any negative individual contribution. Climate remained larger
 than human impact for spatial events, temporal SPD, temporal events, and H2,
 and this ordering was unchanged across all three profiles. [Source:
-`Outputs/Tables/HVarPart/hvarpart_profile_comparison.csv`, rows with
+`Outputs/Tables/Diagnostics/HVarPart/hvarpart__profile_comparison.csv`, rows with
 `aggregation_level = analysis`.]
 
 ## Figure 2 caption
@@ -100,7 +100,7 @@ importance value is not a negative ecological effect. Although the sensitivity
 profiles changed the magnitude of some pooled allocations, they did not change
 the climate-versus-human ordering in any analysis. Model eligibility and all
 exclusion reasons are reported in
-`Outputs/Tables/HVarPart/hvarpart_model_audit.csv`.
+`Outputs/Tables/Diagnostics/HVarPart/hvarpart__model_audit.csv`.
 
 ## Additional analysis and correction
 

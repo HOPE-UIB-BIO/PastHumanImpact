@@ -78,14 +78,14 @@ variation; absent combinations remain explicit empty cells.
 
 ## Source files
 
-- `Outputs/Tables/HVarPart/hvarpart_variance_decomposition_models.csv`
-- `Outputs/Tables/HVarPart/hvarpart_variance_summary_overall.csv`
-- `Outputs/Tables/HVarPart/hvarpart_variance_summary_spatial.csv`
-- `Outputs/Tables/HVarPart/hvarpart_variance_summary_temporal.csv`
-- `Outputs/Tables/HVarPart/hvarpart_variance_missing_negative_audit.csv`
-- `Outputs/Tables/HVarPart/HVarPart_spatial_adjr2_distribution_records.csv`
-- `Outputs/Tables/HVarPart/HVarPart_spatial_adjr2_distribution_climatezones.csv`
-- `Outputs/Tables/HVarPart/HVarPart_spatial_adjr2_distribution_continents.csv`
-- `Outputs/Tables/HVarPart/HVarPart_adjr2_human_importance_model_values.csv`
-- `Outputs/Tables/HVarPart/HVarPart_adjr2_human_importance_overall_statistics.csv`
-- `Outputs/Tables/HVarPart/HVarPart_adjr2_human_importance_grid_statistics.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_decomposition__models.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_summary__overall.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_summary__spatial.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_summary__temporal.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_decomposition__missing_negative_audit.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__spatial__adjusted_r2_distribution__records.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__spatial__adjusted_r2_distribution__climate_zones.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__spatial__adjusted_r2_distribution__continents.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__human_importance__adjusted_r2__model_values.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__human_importance__adjusted_r2__overall_statistics.csv`
+- `Outputs/Tables/Diagnostics/HVarPart/hvarpart__human_importance__adjusted_r2__grid_statistics.csv`
