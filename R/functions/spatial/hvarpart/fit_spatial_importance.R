@@ -1,8 +1,9 @@
 #' @title Spatially filter dataset-level HVarPart importance
 #' @description
-#' Select continent-specific dbMEMs from signed dataset-level importance
-#' conditional on region-by-climate-zone strata, fit weighted aggregation
-#' models, and diagnose Moran autocorrelation before and after filtering.
+#' Select continent-specific dbMEMs from the untruncated human-minus-climate
+#' contribution difference conditional on region-by-climate-zone strata, fit
+#' weighted aggregation models, and diagnose Moran autocorrelation before and
+#' after filtering.
 #' @param data_records Output from `prepare_spatial_importance_records()`.
 #' @param permutations Number of permutations.
 #' @param alpha Significance threshold for dbMEM selection.
@@ -12,7 +13,7 @@
 #' @param seed Integer random seed.
 #' @return
 #' A list containing dbMEM diagnostics, selection, adjusted estimates, Moran
-#' diagnostics, and fitted weighted models.
+#' diagnostics without retaining fitted model environments.
 #' @examples
 #' \dontrun{
 #' fit_spatial_importance(data_records = spatial_balance_records)
@@ -33,7 +34,7 @@ fit_spatial_importance <- function(
       "lat",
       "region",
       "climatezone",
-      "signed_balance",
+      "signed_difference",
       "signed_weight",
       "zero_balance",
       "zero_weight"
@@ -41,7 +42,7 @@ fit_spatial_importance <- function(
   assertthat::assert_that(
     is.data.frame(data_records),
     all(required_columns %in% names(data_records)),
-    all(is.finite(data_records[["signed_balance"]])),
+    all(is.finite(data_records[["signed_difference"]])),
     all(data_records[["signed_weight"]] > 0),
     msg = "Spatial importance records do not satisfy the required contract."
   )
@@ -83,7 +84,7 @@ fit_spatial_importance <- function(
       )
     } else {
       select_dbmem_predictors(
-        response = data_analysis[["signed_balance"]],
+        response = data_analysis[["signed_difference"]],
         mem_basis = result_dbmem[["basis"]][vec_mem_names],
         conditions = mat_conditions,
         permutations = permutations,
@@ -100,7 +101,7 @@ fit_spatial_importance <- function(
   model_signed <-
     fit_spatial_importance_profile(
       data_model = data_model,
-      response_col = "signed_balance",
+      response_col = "signed_difference",
       weight_col = "signed_weight",
       selected_mem_names = vec_selected
     )
@@ -134,13 +135,13 @@ fit_spatial_importance <- function(
   data_moran_source <-
     data_model |>
     dplyr::mutate(
-      signed_residual = stats::residuals(model_signed),
+      signed_difference_residual = stats::residuals(model_signed),
       zero_residual = stats::residuals(model_zero)
     )
   value_columns <-
     c(
-      "signed_balance",
-      "signed_residual",
+      "signed_difference",
+      "signed_difference_residual",
       "zero_balance",
       "zero_residual"
     )
@@ -168,7 +169,7 @@ fit_spatial_importance <- function(
       spatial_group = .data[["spatial_group"]],
       threshold_km = .data[["threshold_km"]]
     ) |>
-    purrr::pmap_dfr(
+    purrr::pmap(
       .f = ~ compute_moran_diagnostics(
         data_source = data_moran_source |>
           dplyr::filter(.data[["region"]] == ..1),
@@ -182,7 +183,8 @@ fit_spatial_importance <- function(
           spatial_scope = "dbmem_connectivity",
           spatial_group = ..1
         )
-    )
+    ) |>
+    dplyr::bind_rows()
   data_diagnostics <-
     dplyr::bind_rows(
       data_diagnostics_fixed,
@@ -205,11 +207,7 @@ fit_spatial_importance <- function(
       dbmem = result_dbmem,
       selection = result_selection,
       estimates = data_estimates,
-      moran_diagnostics = data_diagnostics,
-      models = list(
-        signed = model_signed,
-        zero_truncated = model_zero
-      )
+      moran_diagnostics = data_diagnostics
     )
 
   return(res_analysis)
