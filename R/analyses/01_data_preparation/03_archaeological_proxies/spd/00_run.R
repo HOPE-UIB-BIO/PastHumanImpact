@@ -11,7 +11,7 @@
 #
 #----------------------------------------------------------#
 
-# Run all scripts for the SPD calculation
+# Run the pipeline-managed SPD calculation graph.
 
 #----------------------------------------------------------#
 # 0. Setup -----
@@ -26,67 +26,18 @@ source(
   )
 )
 
-rewrite <- FALSE
-
-
-#----------------------------------------------------------#
-# 1. Run individual scripts -----
-#----------------------------------------------------------#
-
-if (
-  isTRUE(rewrite) ||
-    isTRUE(
-      is.na(
-        RUtilpol::get_latest_file_name(
-          file_name = "data_spd_250",
-          dir = paste0(
-            data_storage_path,
-            "SPD/"
-          )
-        )
-      )
-    )
-) {
-  source(
-    here::here(
-      paste0(
-        "R/analyses/01_data_preparation/",
-        "03_archaeological_proxies/spd/01_calculate_spd_250.R"
-      )
-    )
-  )
-}
-
-if (
-  isTRUE(rewrite) ||
-    isTRUE(
-      is.na(
-        RUtilpol::get_latest_file_name(
-          file_name = "data_spd_500",
-          dir = paste0(
-            data_storage_path,
-            "SPD/"
-          )
-        )
-      )
-    )
-) {
-  source(
-    here::here(
-      paste0(
-        "R/analyses/01_data_preparation/",
-        "03_archaeological_proxies/spd/02_calculate_spd_500.R"
-      )
-    )
-  )
-}
-
-
-source(
-  here::here(
-    paste0(
-      "R/analyses/01_data_preparation/",
-      "03_archaeological_proxies/spd/03_combine_spd.R"
-    )
-  )
+run_target_pipeline(
+  script = here::here(
+    "R",
+    "analyses",
+    "01_data_preparation",
+    "03_archaeological_proxies",
+    "spd",
+    "pipeline.R"
+  ),
+  store = resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = "data_preparation/spd"
+  ),
+  visualise = FALSE
 )
