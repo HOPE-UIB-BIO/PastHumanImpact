@@ -137,29 +137,96 @@ plot_spatial_sensitivity_results <- function(
         "leave_climatezone_out"
       ),
       .data[["aggregation_level"]] == "overall"
+    ) |>
+    dplyr::mutate(
+      climatezone = .data[["omitted_group"]]
+    ) |>
+    prepare_climatezone_factor() |>
+    dplyr::mutate(
+      sensitivity_label = dplyr::recode(
+        .data[["sensitivity_type"]],
+        leave_region_out = "Region omitted",
+        leave_climatezone_out = "Climate zone omitted"
+      ),
+      omitted_group_label = dplyr::case_when(
+        .data[["sensitivity_type"]] == "leave_region_out" ~
+          dplyr::recode(
+            .data[["omitted_group"]],
+            !!!region_labeller
+          ),
+        TRUE ~ as.character(.data[["climatezone"]])
+      ),
+      sensitivity_label = factor(
+        .data[["sensitivity_label"]],
+        levels = c("Region omitted", "Climate zone omitted")
+      ),
+      omitted_group_label = factor(
+        .data[["omitted_group_label"]],
+        levels = rev(c(
+          unname(region_labeller),
+          data_climate_zones[["climatezone_label"]]
+        ))
+      ),
+      profile_label = dplyr::recode(
+        .data[["profile"]],
+        signed = "Untruncated contribution difference",
+        zero_truncated = "Zero-truncated balance"
+      ),
+      profile_label = factor(
+        .data[["profile_label"]],
+        levels = c(
+          "Untruncated contribution difference",
+          "Zero-truncated balance"
+        )
+      )
     )
   plot_leave_out <-
     data_leave_out |>
     ggplot2::ggplot(
       ggplot2::aes(
-        x = stats::reorder(
-          .data[["omitted_group"]],
-          .data[["importance_balance"]]
-        ),
+        x = .data[["omitted_group_label"]],
         y = .data[["importance_balance"]],
-        colour = .data[["profile"]]
+        shape = .data[["profile_label"]]
       )
     ) +
-    ggplot2::geom_hline(yintercept = 0, linewidth = 0.3) +
-    ggplot2::geom_point(size = 2) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      colour = common_gray,
+      linewidth = line_size
+    ) +
+    ggplot2::geom_point(
+      colour = common_gray,
+      fill = "white",
+      size = point_size * 2.5,
+      stroke = line_size * 3
+    ) +
     ggplot2::coord_flip() +
-    ggplot2::facet_wrap(~sensitivity_type, scales = "free_y") +
+    ggplot2::facet_wrap(
+      ggplot2::vars(.data[["sensitivity_label"]]),
+      scales = "free_y"
+    ) +
+    ggplot2::scale_shape_manual(
+      values = c(
+        "Untruncated contribution difference" = 21,
+        "Zero-truncated balance" = 22
+      ),
+      drop = FALSE
+    ) +
     ggplot2::labs(
       x = "Omitted group",
-      y = "Human minus climate importance",
-      colour = "Profile"
+      y = paste(
+        "Human-climate relative importance",
+        "(see calculation profile)",
+        sep = "\n"
+      ),
+      shape = "Calculation profile"
     ) +
-    ggplot2::theme_classic()
+    ggplot2::theme_bw(base_size = text_size) +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      legend.position = "bottom",
+      strip.background = ggplot2::element_blank()
+    )
 
   data_temporal_balance <-
     data_temporal_components |>

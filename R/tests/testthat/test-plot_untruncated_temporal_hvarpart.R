@@ -23,13 +23,13 @@ testthat::test_that("temporal plot accepts negative and above-one values", {
   testthat::expect_identical(
     levels(result$data[["predictor_proxy"]]),
     c(
-      "Climate (SPD)", "Climate (Events)",
-      "Humans (SPD)", "Humans (Events)"
+      "Human (SPD)", "Human (Events)",
+      "Climate (SPD)", "Climate (Events)"
     )
   )
   testthat::expect_identical(
     levels(result$data[["predictor"]]),
-    c("climate", "human")
+    c("human", "climate")
   )
   testthat::expect_length(
     result$scales$get_scales("fill")$palette(4),
@@ -47,6 +47,14 @@ testthat::test_that("temporal plot accepts negative and above-one values", {
   testthat::expect_equal(
     as.numeric(result$theme$plot.margin[[4]]),
     8
+  )
+  testthat::expect_identical(
+    result[["labels"]][["x"]],
+    "Age (cal ka BP)"
+  )
+  testthat::expect_identical(
+    result[["labels"]][["y"]],
+    "Relative importance\n(Untruncated hierarchical contribution)"
   )
   region_labels <-
     result$facet$params$labeller(

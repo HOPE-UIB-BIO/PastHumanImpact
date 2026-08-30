@@ -87,6 +87,24 @@ data_spatial_control_hierarchical_contributions <-
     )
   )
 
+data_spatial_control_status <-
+  dplyr::bind_rows(
+    targets::tar_read(
+      table_spatial_control_status,
+      store = store_spatial_control_spd
+    ),
+    targets::tar_read(
+      table_spatial_control_status,
+      store = store_spatial_control_events
+    )
+  )
+
+data_spatial_control_display_contributions <-
+  prepare_spatial_hvarpart_contributions(
+    data_components = data_spatial_control_hierarchical_contributions,
+    data_status = data_spatial_control_status
+  )
+
 data_spatial_control_unique_adjusted_r2 <-
   dplyr::bind_rows(
     targets::tar_read(
@@ -159,8 +177,9 @@ plot_untruncated_temporal_contributions <-
 
 plots_spatial_control_profiles <-
   plot_h1_temporal_control_profiles(
-    data_components = data_spatial_control_hierarchical_contributions,
-    data_unique_adjusted_r2 = data_spatial_control_unique_adjusted_r2
+    data_components = data_spatial_control_display_contributions,
+    data_unique_adjusted_r2 = data_spatial_control_unique_adjusted_r2,
+    data_status = data_spatial_control_status
   )
 
 #----------------------------------------------------------#
@@ -320,7 +339,7 @@ readr::write_csv(
 )
 
 readr::write_csv(
-  data_spatial_control_hierarchical_contributions,
+  data_spatial_control_display_contributions,
   here::here(
     "Outputs",
     "Tables",

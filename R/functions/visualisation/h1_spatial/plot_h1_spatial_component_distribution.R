@@ -58,11 +58,17 @@ plot_h1_spatial_component_distribution <- function(
 
   value_palette <- c(common_gray, "#F2F2F2", component_colour)
 
-  value_colour <-
-    scales::col_numeric(
-      palette = value_palette,
-      domain = value_limits
-    )
+  value_colour <- function(value) {
+    rescaled_value <-
+      scales::rescale_mid(
+        value,
+        to = c(0, 1),
+        from = value_limits,
+        mid = 0
+      )
+
+    return(scales::colour_ramp(value_palette)(rescaled_value))
+  }
 
   data_records <-
     data_values |>
@@ -320,7 +326,7 @@ plot_h1_spatial_component_distribution <- function(
         y = .data[["value"]]
       ),
       colour = common_gray,
-      size = point_size * 4
+      size = point_size * 3.2
     ) +
     ggplot2::geom_point(
       data = data_climatezone_summary,
@@ -438,8 +444,8 @@ plot_h1_spatial_component_distribution <- function(
           ),
           shape = 21,
           colour = common_gray,
-          stroke = line_size * 2,
-          size = point_size,
+          stroke = line_size * 0.25,
+          size = point_size * 2.2,
           show.legend = FALSE
         ) +
         ggplot2::scale_fill_gradient2(
@@ -507,5 +513,3 @@ plot_h1_spatial_component_distribution <- function(
 
   return(res)
 }
-
-

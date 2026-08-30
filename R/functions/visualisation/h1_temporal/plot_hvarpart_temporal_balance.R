@@ -248,7 +248,7 @@ plot_hvarpart_temporal_balance <- function(
       )
     ) +
     ggplot2::labs(
-      x = "Age (ka BP)",
+      x = "Age (cal ka BP)",
       y = "Relative importance balance\n(human impact \u2212 climate)"
     ) +
     ggplot2::coord_cartesian(

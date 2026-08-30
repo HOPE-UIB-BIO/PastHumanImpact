@@ -23,7 +23,7 @@ testthat::test_that(
         profile = "signed",
         importance_balance = c(-0.4, -0.3, -0.2, -0.1),
         distance_km = c(NA, 250, NA, NA),
-        omitted_group = c(NA, NA, "Europe", "cold")
+        omitted_group = c(NA, NA, "Latin America", "Temperate")
       )
     data_estimates <-
       tibble::tibble(
@@ -68,6 +68,37 @@ testthat::test_that(
     )
     testthat::expect_true(
       all(purrr::map_lgl(result, ~ inherits(.x, "ggplot")))
+    )
+    data_leave_out <-
+      result[["human_climate_balance_leave_out"]][["data"]]
+
+    testthat::expect_setequal(
+      as.character(data_leave_out[["omitted_group_label"]]),
+      c("Central & South America", "Temperate")
+    )
+
+    testthat::expect_identical(
+      levels(data_leave_out[["omitted_group_label"]]),
+      rev(c(
+        unname(region_labeller),
+        data_climate_zones[["climatezone_label"]]
+      ))
+    )
+
+    testthat::expect_identical(
+      levels(data_leave_out[["profile_label"]]),
+      c(
+        "Untruncated contribution difference",
+        "Zero-truncated balance"
+      )
+    )
+
+    testthat::expect_equal(
+      unname(
+        result[["human_climate_balance_leave_out"]]$scales$
+          get_scales("shape")$palette(2)
+      ),
+      c(21, 22)
     )
   }
 )

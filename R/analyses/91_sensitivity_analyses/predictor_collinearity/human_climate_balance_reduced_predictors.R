@@ -71,13 +71,13 @@ data_spatial_reduced <-
   dplyr::mutate(
     ratio = pooled_allocation,
     predictor = dplyr::case_when(
-      predictor == "human" ~ "Humans",
+      predictor == "human" ~ "Human",
       predictor == "climate" ~ "Climate",
       .default = predictor
     ),
     predictor = factor(
       predictor,
-      levels = c("Climate", "Humans")
+      levels = c("Human", "Climate")
     )
   ) |>
   prepare_region_factor() |>
@@ -119,9 +119,10 @@ plot_reduced_simple <-
   ) +
   ggplot2::scale_fill_manual(
     values = c(
-      "Humans" = palette_predictors[["human"]],
+      "Human" = palette_predictors[["human"]],
       "Climate" = palette_predictors[["climate"]]
-    )
+    ),
+    breaks = c("Human", "Climate")
   ) +
   ggplot2::geom_hline(yintercept = c(0, 1), colour = "grey70") +
   ggplot2::scale_y_continuous() +
@@ -151,8 +152,8 @@ plot_reduced_simple <-
     )
   ) +
   ggplot2::labs(
-    y = "Ratio of importance",
-    fill = "Predictors"
+    y = "Relative importance ratio",
+    fill = "Predictor"
   )
 
 #----------------------------------------------------------#
