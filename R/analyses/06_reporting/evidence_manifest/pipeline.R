@@ -78,6 +78,78 @@ list(
         "Temporal",
         "PAP_trends",
         "pap__temporal_predictions.csv"
+      ),
+      "spd_radius_spatial_paired_table",
+      "Matched dataset-level strict-radius H1 comparison",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "table_spd_radius_spatial_dataset_paired",
+      here::here(
+        "Outputs/Tables/H1/Spatial/SPD",
+        "spd__radius_comparison__dataset_paired.csv"
+      ),
+      "spd_radius_temporal_paired_table",
+      "Matched region-age strict-radius H1 comparison",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "table_spd_radius_temporal_region_age_paired",
+      here::here(
+        "Outputs/Tables/H1/Temporal/HVarPart",
+        "spd__radius_comparison__region_age_paired.csv"
+      ),
+      "spd_radius_spatial_figure",
+      "Spatial strict-radius H1 sensitivity figure",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "files_spd_radius_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Spatial/SPD",
+        "spd__radius_comparison__spatial_human_climate_balance.pdf"
+      ),
+      "spd_radius_temporal_profiles_figure",
+      paste(
+        "Temporal strict-radius untruncated human-contribution profile",
+        "figure"
+      ),
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "files_spd_radius_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Temporal/HVarPart",
+        stringr::str_c(
+          "spd__radius_comparison__temporal_human__",
+          "untruncated_hierarchical_contribution__space_control.pdf"
+        )
+      ),
+      "spd_radius_temporal_changes_figure",
+      "Temporal strict-radius paired human-contribution change figure",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "files_spd_radius_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Temporal/HVarPart",
+        stringr::str_c(
+          "spd__radius_comparison__temporal_human__",
+          "untruncated_hierarchical_contribution_change__space_control.pdf"
+        )
+      ),
+      "spd_radius_evidence_manifest",
+      "Hashes for all strict-radius source tables and figures",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "file_spd_radius_evidence_manifest",
+      here::here(
+        "Outputs/Tables/Reporting",
+        "spd__radius_comparison__evidence_manifest.csv"
+      ),
+      "spd_radius_sensitivity_response",
+      "Rendered reviewer response for strict SPD radius sensitivity",
+      "spd_radius",
+      "91_sensitivity_analyses/spd_radius/pipeline.R",
+      "response_spd_radius_sensitivity.qmd",
+      here::here(
+        "Manuscript/COMMSENV-25-2408/Reply",
+        "response_spd_radius_sensitivity.pdf"
       )
     )
   ),

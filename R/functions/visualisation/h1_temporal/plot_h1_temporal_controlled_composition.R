@@ -204,7 +204,7 @@ plot_h1_temporal_controlled_composition <- function(
       )
     ) +
     ggplot2::labs(
-      x = "Age (ka BP)",
+      x = "Age (cal ka BP)",
       y = paste0(
         "Relative importance\n",
         "(Zero-truncated hierarchical contribution)"

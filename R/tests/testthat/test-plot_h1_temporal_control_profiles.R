@@ -24,10 +24,19 @@ testthat::test_that(
         adjusted_r_squared = seq(-0.02, 0.21, length.out = dplyr::n())
       )
 
+    data_status <-
+      tibble::tibble(
+        analysis = "temporal_events",
+        region = "Europe",
+        age = 2500,
+        status = "missing_predictor_group"
+      )
+
     res <-
       plot_h1_temporal_control_profiles(
         data_components = data_components,
-        data_unique_adjusted_r2 = data_unique_adjusted_r2
+        data_unique_adjusted_r2 = data_unique_adjusted_r2,
+        data_status = data_status
       )
 
     testthat::expect_named(
@@ -53,6 +62,43 @@ testthat::test_that(
     testthat::expect_identical(
       levels(data_unique[["region_label"]]),
       unname(region_labeller)
+    )
+
+    testthat::expect_identical(
+      res[["untruncated_hierarchical_contributions"]][["labels"]][["x"]],
+      "Age (cal ka BP)"
+    )
+
+    testthat::expect_identical(
+      res[["unique_adjusted_r2"]][["labels"]][["y"]],
+      "Explained variation\n(Unique adjusted R-squared)"
+    )
+
+    testthat::expect_identical(
+      res[["unique_adjusted_r2"]][["labels"]][["x"]],
+      "Age (cal ka BP)"
+    )
+
+    signed_layers <-
+      res[["untruncated_hierarchical_contributions"]][["layers"]]
+    testthat::expect_true(
+      any(
+        vapply(
+          signed_layers,
+          function(layer) inherits(layer[["geom"]], "GeomRect"),
+          logical(1)
+        )
+      )
+    )
+
+    testthat::expect_true(
+      any(
+        vapply(
+          signed_layers,
+          function(layer) inherits(layer[["geom"]], "GeomText"),
+          logical(1)
+        )
+      )
     )
   }
 )

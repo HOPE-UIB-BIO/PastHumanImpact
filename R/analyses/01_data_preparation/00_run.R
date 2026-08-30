@@ -20,18 +20,10 @@ source(
   )
 )
 
-source(
-  here::here(
-    paste0(
-      "R/analyses/01_data_preparation/",
-      "03_archaeological_proxies/spd/00_run.R"
-    )
-  )
-)
-
 data_pipelines <-
   tibble::tribble(
     ~script_relative_path, ~store_relative_path,
+    "03_archaeological_proxies/spd/pipeline.R", "data_preparation/spd",
     "04_pollen/pipeline.R", "data_preparation/pollen",
     "05_paps/pipeline.R", "data_preparation/paps",
     "03_archaeological_proxies/events/pipeline.R",

@@ -50,5 +50,11 @@ testthat::test_that(
     )
     testthat::expect_s3_class(result[["plot"]], "ggplot")
     testthat::expect_equal(nrow(result[["record_values"]]), 8L)
+    testthat::expect_equal(
+      result[["climatezone_values"]] |>
+        dplyr::slice_min(abs(.data[["value"]]), n = 1) |>
+        dplyr::pull(.data[["summary_colour"]]),
+      "#F2F2F2"
+    )
   }
 )

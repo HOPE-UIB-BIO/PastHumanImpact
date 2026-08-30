@@ -41,7 +41,7 @@ testthat::test_that(
     testthat::expect_equal(length(res[["layers"]]), 2L)
     testthat::expect_match(
       res[["labels"]][["x"]],
-      "SPD human-climate relative importance"
+      "Untruncated human-climate contribution difference"
     )
     testthat::expect_match(
       res[["labels"]][["caption"]],

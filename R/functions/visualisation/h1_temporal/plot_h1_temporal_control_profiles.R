@@ -4,6 +4,8 @@
 #' values in distinct unstacked plots with canonical analysis and region order.
 #' @param data_components Extracted spatial HVarPart component table.
 #' @param data_unique_adjusted_r2 Extracted pure spatial fraction table.
+#' @param data_status Optional region-age model-status table used to mark
+#' non-estimable slices explicitly.
 #' @return A named list containing two explicitly labelled `ggplot` objects.
 #' @examples
 #' \dontrun{
@@ -14,7 +16,8 @@
 #' }
 plot_h1_temporal_control_profiles <- function(
   data_components,
-  data_unique_adjusted_r2
+  data_unique_adjusted_r2,
+  data_status = NULL
 ) {
   key_columns <-
     c("analysis", "region", "age")
@@ -39,6 +42,9 @@ plot_h1_temporal_control_profiles <- function(
     all(required_components %in% names(data_components)),
     is.data.frame(data_unique_adjusted_r2),
     all(required_unique %in% names(data_unique_adjusted_r2)),
+    is.null(data_status) || is.data.frame(data_status),
+    is.null(data_status) ||
+      all(c(key_columns, "status") %in% names(data_status)),
     msg = paste(
       "Spatially controlled temporal-analysis diagnostic inputs are",
       "invalid."
@@ -127,6 +133,70 @@ plot_h1_temporal_control_profiles <- function(
       space = "Space"
     )
 
+  signed_limits <- range(c(data_signed[["value"]], 0), finite = TRUE)
+  signed_background_values <-
+    seq(signed_limits[[1]], signed_limits[[2]], length.out = 201)
+  signed_background_step <-
+    signed_background_values[[2]] - signed_background_values[[1]]
+  data_signed_background <-
+    tidyr::crossing(
+      region_label = factor(
+        unname(region_labeller),
+        levels = unname(region_labeller)
+      ),
+      analysis_label = factor(
+        c("SPD", "Events"),
+        levels = c("SPD", "Events")
+      ),
+      background_value = signed_background_values
+    ) |>
+    dplyr::mutate(
+      ymin = .data[["background_value"]] - signed_background_step / 2,
+      ymax = .data[["background_value"]] + signed_background_step / 2
+    )
+
+  data_missing <-
+    if (is.null(data_status)) {
+      tibble::tibble(
+        region_label = factor(levels = unname(region_labeller)),
+        analysis_label = factor(levels = c("SPD", "Events")),
+        age_ka = numeric(),
+        xmin = numeric(),
+        xmax = numeric()
+      )
+    } else {
+      data_status |>
+        dplyr::filter(.data[["status"]] == "missing_predictor_group") |>
+        dplyr::mutate(
+          age_ka = .data[["age"]] / 1000,
+          xmin = .data[["age_ka"]] - 0.25,
+          xmax = .data[["age_ka"]] + 0.25,
+          analysis_label = factor(
+            .data[["analysis"]],
+            levels = c("temporal_spd", "temporal_events"),
+            labels = c("SPD", "Events")
+          ),
+          region_label = factor(
+            .data[["region"]],
+            levels = names(region_labeller),
+            labels = unname(region_labeller)
+          )
+        )
+    }
+
+  data_missing_labels <-
+    data_missing |>
+    dplyr::group_by(
+      .data[["region_label"]],
+      .data[["analysis_label"]]
+    ) |>
+    dplyr::summarise(
+      age_ka = mean(.data[["age_ka"]]),
+      value = signed_limits[[2]] - 0.06 * diff(signed_limits),
+      label = "Human proxy has no spatial variation",
+      .groups = "drop"
+    )
+
   plot_signed <-
     ggplot2::ggplot(
       data_signed,
@@ -148,8 +218,16 @@ plot_h1_temporal_control_profiles <- function(
       breaks = names(series_labels),
       labels = series_labels
     ) +
+    ggplot2::scale_fill_gradient2(
+      low = colorspace::lighten(common_gray, amount = 0.35),
+      mid = "white",
+      high = colorspace::lighten(common_gray, amount = 0.35),
+      midpoint = 0,
+      limits = signed_limits,
+      guide = "none"
+    ) +
     ggplot2::labs(
-      x = "Age (ka BP)",
+      x = "Age (cal ka BP)",
       y = paste(
         "Relative importance",
         "(Untruncated hierarchical contribution)",
@@ -164,6 +242,44 @@ plot_h1_temporal_control_profiles <- function(
       panel.grid.major.x = ggplot2::element_blank(),
       strip.placement = "outside",
       strip.background.y = ggplot2::element_blank()
+    ) +
+    ggplot2::geom_rect(
+      data = data_signed_background,
+      mapping = ggplot2::aes(
+        xmin = -Inf,
+        xmax = Inf,
+        ymin = .data[["ymin"]],
+        ymax = .data[["ymax"]],
+        fill = .data[["background_value"]]
+      ),
+      alpha = 0.16,
+      colour = NA,
+      inherit.aes = FALSE
+    ) +
+    ggplot2::geom_rect(
+      data = data_missing,
+      mapping = ggplot2::aes(
+        xmin = .data[["xmin"]],
+        xmax = .data[["xmax"]],
+        ymin = -Inf,
+        ymax = Inf
+      ),
+      fill = "grey82",
+      alpha = 0.65,
+      colour = NA,
+      inherit.aes = FALSE
+    ) +
+    ggplot2::geom_text(
+      data = data_missing_labels,
+      mapping = ggplot2::aes(
+        x = .data[["age_ka"]],
+        y = .data[["value"]],
+        label = .data[["label"]]
+      ),
+      colour = common_gray,
+      size = text_size * 0.25,
+      vjust = 1,
+      inherit.aes = FALSE
     ) +
     ggplot2::geom_hline(
       yintercept = 0,
@@ -196,10 +312,10 @@ plot_h1_temporal_control_profiles <- function(
       labels = series_labels
     ) +
     ggplot2::labs(
-      x = "Age (ka BP)",
+      x = "Age (cal ka BP)",
       y = paste(
-        "Unique adjusted R2",
-        "(Pure conditional fraction)",
+        "Explained variation",
+        "(Unique adjusted R-squared)",
         sep = "\n"
       ),
       colour = NULL

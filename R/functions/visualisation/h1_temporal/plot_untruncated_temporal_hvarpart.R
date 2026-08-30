@@ -19,12 +19,12 @@ plot_untruncated_temporal_hvarpart <- function(data_summary) {
 
   series_palette <-
     c(
+      "Human (SPD)" = palette_predictors[["human"]],
+      "Human (Events)" =
+        colorspace::lighten(palette_predictors[["human"]], amount = 0.5),
       "Climate (SPD)" = palette_predictors[["climate"]],
       "Climate (Events)" =
-        colorspace::lighten(palette_predictors[["climate"]], amount = 0.5),
-      "Humans (SPD)" = palette_predictors[["human"]],
-      "Humans (Events)" =
-        colorspace::lighten(palette_predictors[["human"]], amount = 0.5)
+        colorspace::lighten(palette_predictors[["climate"]], amount = 0.5)
     )
   signed_region_labeller <- region_labeller
   signed_region_labeller[["Latin America"]] <-
@@ -48,14 +48,16 @@ plot_untruncated_temporal_hvarpart <- function(data_summary) {
       ),
       predictor = factor(
         .data[["predictor"]],
-        levels = c("climate", "human")
+        levels = c("human", "climate")
       ),
       predictor_proxy = dplyr::case_when(
+        .data[["predictor"]] == "human" &
+          .data[["human_predictor"]] == "SPD" ~ "Human (SPD)",
+        .data[["predictor"]] == "human" ~ "Human (Events)",
         .data[["predictor"]] == "climate" &
           .data[["human_predictor"]] == "SPD" ~ "Climate (SPD)",
         .data[["predictor"]] == "climate" ~ "Climate (Events)",
-        .data[["human_predictor"]] == "SPD" ~ "Humans (SPD)",
-        .default = "Humans (Events)"
+        .default = NA_character_
       ),
       predictor_proxy = factor(
         .data[["predictor_proxy"]],
@@ -135,8 +137,12 @@ plot_untruncated_temporal_hvarpart <- function(data_summary) {
       )
     ) +
     ggplot2::labs(
-      x = "Age (ka BP)",
-      y = "Signed allocation of adjusted explained variation",
+      x = "Age (cal ka BP)",
+      y = paste(
+        "Relative importance",
+        "(Untruncated hierarchical contribution)",
+        sep = "\n"
+      ),
       fill = NULL
     ) +
     ggplot2::theme_bw(base_size = text_size) +

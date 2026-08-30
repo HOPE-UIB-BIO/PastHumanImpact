@@ -143,6 +143,18 @@ plot_hvar_influence <-
     linewidth = line_size
   ) +
   ggplot2::theme_classic() +
+  ggplot2::scale_fill_manual(
+    values = c(
+      human = palette_predictors[["human"]],
+      climate = palette_predictors[["climate"]]
+    ),
+    breaks = c("human", "climate"),
+    labels = c("Human", "Climate")
+  ) +
+  ggplot2::scale_x_discrete(
+    limits = c("human", "climate"),
+    labels = c("Human", "Climate")
+  ) +
   ggplot2::theme(
     axis.text.x = ggplot2::element_text(
       size = text_size
@@ -158,7 +170,11 @@ plot_hvar_influence <-
     )
   ) +
   ggplot2::labs(
-    y = "Delta Importance Ratio (Reduced - Baseline)"
+    y = paste(
+      "Change in relative importance ratio",
+      "(reduced predictors - baseline)",
+      sep = "\n"
+    )
   )
 
 #----------------------------------------------------------#
