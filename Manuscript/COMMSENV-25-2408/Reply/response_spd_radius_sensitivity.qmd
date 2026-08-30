@@ -1,0 +1,319 @@
+---
+title: "Response to Reviewer 2: sensitivity to archaeological search radius"
+format:
+  html:
+    embed-resources: true
+  pdf:
+    include-in-header:
+      text: |
+        \setlength{\abovecaptionskip}{14pt}
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_spd_radius_sensitivity.qmd"
+)
+
+source(here::here("R/00_Config_file.R"))
+
+path_spatial <-
+  here::here("Outputs", "Tables", "H1", "Spatial", "SPD")
+path_temporal <-
+  here::here("Outputs", "Tables", "H1", "Temporal", "HVarPart")
+path_spd <-
+  here::here("Outputs", "Tables", "Data_preparation", "SPD")
+
+coverage <-
+  readr::read_csv(
+    file.path(
+      path_spd,
+      "spd__radius_comparison__availability_by_geography.csv"
+    ),
+    show_col_types = FALSE
+  )
+spatial_summary <-
+  readr::read_csv(
+    file.path(
+      path_spatial,
+      "spd__radius_comparison__geographic_summary.csv"
+    ),
+    show_col_types = FALSE
+  )
+spatial_paired <-
+  readr::read_csv(
+    file.path(
+      path_spatial,
+      "spd__radius_comparison__dataset_paired.csv"
+    ),
+    show_col_types = FALSE
+  )
+temporal_summary <-
+  readr::read_csv(
+    file.path(
+      path_temporal,
+      "spd__radius_comparison__region_age_summary.csv"
+    ),
+    show_col_types = FALSE
+  )
+temporal_paired <-
+  readr::read_csv(
+    file.path(
+      path_temporal,
+      "spd__radius_comparison__region_age_paired.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+coverage_overall <-
+  coverage |>
+  dplyr::filter(.data[["summary_level"]] == "overall")
+spatial_overall <-
+  spatial_summary |>
+  dplyr::filter(.data[["summary_level"]] == "overall")
+temporal_overall <-
+  temporal_summary |>
+  dplyr::filter(.data[["summary_level"]] == "overall")
+temporal_human_change <-
+  temporal_paired |>
+  dplyr::filter(
+    .data[["matched_estimable"]],
+    is.finite(.data[["controlled_human_delta_500_minus_250"]])
+  ) |>
+  dplyr::summarise(
+    median_delta = stats::median(
+      .data[["controlled_human_delta_500_minus_250"]]
+    ),
+    delta_q25 = stats::quantile(
+      .data[["controlled_human_delta_500_minus_250"]],
+      0.25
+    ),
+    delta_q75 = stats::quantile(
+      .data[["controlled_human_delta_500_minus_250"]],
+      0.75
+    )
+  )
+fallback_n_datasets <-
+  coverage_overall$n_datasets[coverage_overall$radius_km == 250]
+fallback_n_250 <-
+  coverage_overall$n_available[coverage_overall$radius_km == 250]
+fallback_n_500 <-
+  fallback_n_datasets - fallback_n_250
+fallback_n_valid <-
+  coverage_overall$n_available[coverage_overall$radius_km == 500]
+fallback_n_rescued <-
+  fallback_n_valid - fallback_n_250
+
+fmt3 <- function(x) format(round(x, 3), nsmall = 3, trim = TRUE)
+```
+
+## Reviewer comment
+
+The reviewer questioned whether archaeological activity summarized within a
+fixed distance of each pollen record adequately represents the spatial scale
+of the vegetation record, and asked whether our conclusions are sensitive to
+the use of a 250 km rather than a 500 km search radius.
+
+## Response
+
+We agree that this spatial choice requires an explicit sensitivity test.
+Pollen records describe vegetation change from local to regional source areas,
+whereas radiocarbon-dated archaeological sites are discrete and unevenly
+distributed across the landscape.
+A smaller archaeological search radius gives greater weight to evidence closer
+to the pollen site, but in sparsely studied regions it may contain too few
+radiocarbon dates to describe human activity reliably.
+A larger radius increases the amount of archaeological evidence, but represents
+a broader human landscape around the pollen site.
+No single fixed radius can reproduce the pollen source area of every lake or
+bog; our aim was therefore to test whether this unavoidable spatial choice
+changes the ecological interpretation.
+
+We recalculated the archaeological SPD for every pollen record using two strict
+search radii, 250 km and 500 km, while keeping the radiocarbon data, calibration,
+time range, smoothing, climate data, and statistical analyses unchanged.
+We then compared the two radii for the same pollen records.
+This design isolates the effect of changing the archaeological neighbourhood,
+rather than confounding it with changes in the vegetation or climate data.
+
+The primary analysis uses 250 km wherever sufficient archaeological evidence
+is available and expands to 500 km only where the 250 km series is unavailable.
+This choice retains the most spatially local estimate that the data support.
+Of `r fallback_n_datasets` pollen records, `r fallback_n_250` have a usable
+250 km series.
+The 500 km fallback recovers a further `r fallback_n_rescued` records, giving
+usable archaeological information for `r fallback_n_valid` records in total.
+Thus, the fallback is a pragmatic compromise between spatial proximity and
+geographical coverage, rather than an assumption that 250 km or 500 km is the
+true pollen source area.
+
+Figure 1 asks whether widening the archaeological neighbourhood changes the
+relative importance of human activity and climate for individual pollen
+records.
+Values below zero indicate stronger climatic influence and values above zero
+indicate stronger human influence.
+In panel A, each line connects the result for the same pollen record at 250 km
+and 500 km; short lines therefore indicate little sensitivity to radius.
+Panel B summarizes the shift within continents and climate zones.
+The median change across `r spatial_overall$n_matched_estimable` comparable
+pollen records was only `r fmt3(spatial_overall$median_delta)` on the full
+-1 to 1 climate-human scale (interquartile range
+`r fmt3(spatial_overall$delta_q25)` to
+`r fmt3(spatial_overall$delta_q75)`).
+The regional and climatic-zone summaries are all concentrated close to zero,
+showing no systematic movement towards either stronger climatic or stronger
+human influence when the radius is enlarged.
+
+```{r}
+#| label: fig-spd-radius-spatial
+#| fig-cap: "Sensitivity of the climate-human balance to archaeological search radius. (A) Each line connects the same pollen record analysed with archaeological evidence from within 250 km and 500 km. Negative values (teal) indicate that climate explains more variation in vegetation than human activity, positive values (gold) indicate a stronger human contribution, and white marks equal contributions. (B) Median changes after increasing the radius from 250 km to 500 km are shown for continents and climate zones; points close to zero indicate little overall change."
+#| out-width: 100%
+knitr::include_graphics(
+  here::here(
+    "Outputs/Figures/H1/Spatial/SPD",
+    "spd__radius_comparison__spatial_human_climate_balance.png"
+  )
+)
+```
+
+Figure 2 examines the same question through time.
+It shows the contribution of human activity to vegetation patterns within each
+continent, with circles and squares representing the 250 km and 500 km radii.
+The two trajectories largely overlap through the Holocene.
+This indicates that the timing and relative magnitude of inferred human
+influence are not materially altered by the larger archaeological search area.
+Where the vegetation patterns showed little residual spatial structure, the
+human contribution remains a valid estimate and is retained rather than being
+treated as missing.
+
+```{r}
+#| label: fig-spd-radius-temporal-profiles
+#| fig-cap: "Human contribution to vegetation patterns through time under the two archaeological search radii. Circles show estimates based on archaeological evidence within 250 km and squares show estimates within 500 km. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. The close overlap of the two trajectories shows that widening the archaeological neighbourhood has little effect on the inferred temporal pattern of human influence."
+#| out-width: 100%
+knitr::include_graphics(
+  here::here(
+    "Outputs/Figures/H1/Temporal/HVarPart",
+    stringr::str_c(
+      "spd__radius_comparison__temporal_human__",
+      "untruncated_hierarchical_contribution__space_control.png"
+    )
+  ),
+  auto_pdf = FALSE
+)
+```
+
+Figure 3 makes these temporal differences directly visible by subtracting the
+250 km estimate from the 500 km estimate for each continent and time step.
+Positive values indicate a larger estimated human contribution at 500 km and
+negative values indicate a smaller contribution.
+The differences remain tightly centred on zero: the median change was
+`r fmt3(temporal_human_change$median_delta)` (interquartile range
+`r fmt3(temporal_human_change$delta_q25)` to
+`r fmt3(temporal_human_change$delta_q75)`).
+Only `r temporal_overall$n_ranking_reversals` of
+`r temporal_overall$n_matched_estimable` comparable continent-by-time results
+crossed from climate-dominated to human-dominated, or vice versa.
+The temporal conclusion is therefore stable across the two radii, although we
+retain these localized exceptions in the supporting tables.
+
+```{r}
+#| label: fig-spd-radius-temporal-changes
+#| fig-cap: "Change in the estimated human contribution after increasing the archaeological search radius from 250 km to 500 km. Positive values indicate a larger human contribution at 500 km, negative values indicate a smaller contribution, and zero indicates no change. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. Values clustered around zero show that the temporal pattern is only weakly sensitive to search radius."
+#| out-width: 100%
+knitr::include_graphics(
+  here::here(
+    "Outputs/Figures/H1/Temporal/HVarPart",
+    stringr::str_c(
+      "spd__radius_comparison__temporal_human__",
+      "untruncated_hierarchical_contribution_change__space_control.png"
+    )
+  ),
+  auto_pdf = FALSE
+)
+```
+
+At the level of individual pollen records,
+`r spatial_overall$n_ranking_reversals` of
+`r spatial_overall$n_matched_estimable` comparisons crossed the boundary
+between climate and human dominance.
+Such a reversal can arise from a small numerical change when the original
+estimate lies close to equal climate and human contributions.
+Importantly, these local reversals did not translate into a consistent shift
+at continental or climatic-zone scales, and the temporal analysis contained
+only the `r temporal_overall$n_ranking_reversals` exceptions reported above.
+
+Together, the three figures show that changing from a 250 km to a 500 km
+archaeological neighbourhood has only a small effect on the magnitude and
+history of the estimated human contribution.
+The sensitivity analysis therefore supports our methodology: using the 250 km
+SPD where possible preserves the closest available link between archaeological
+activity and the pollen record, while the 500 km fallback improves coverage in
+archaeologically sparse areas without changing the broad ecological patterns.
+Most importantly, the main large-scale result remains unchanged: climate is a
+stronger predictor than human activity of broad-scale vegetation patterns.
+
+## Methods insertion
+
+To test whether the spatial scale used to summarize archaeological evidence
+affected our conclusions, we recalculated the radiocarbon SPD for every pollen
+record using strict 250 km and 500 km search radii.
+Both calculations used the same radiocarbon dataset, calibration choices,
+0--12 ka time range, 100-year smoothing, and minimum requirement of more than
+50 radiocarbon dates.
+All vegetation, climate, and analytical settings were held constant, so the
+only difference between the two analyses was the archaeological search radius.
+We compared results for the same pollen records and for the same continental
+time steps at both radii.
+The primary analysis used the 250 km SPD whenever sufficient dates were
+available and the 500 km SPD otherwise, thereby favouring the most local
+archaeological context while retaining records from data-sparse regions.
+
+## Results insertion
+
+Usable archaeological SPDs were available for
+`r coverage_overall$n_available[coverage_overall$radius_km == 250]` of
+`r coverage_overall$n_datasets[coverage_overall$radius_km == 250]` pollen
+records at 250 km and
+`r coverage_overall$n_available[coverage_overall$radius_km == 500]` at 500 km.
+For the `r spatial_overall$n_matched_estimable` pollen records that could be
+compared at both radii, expanding the archaeological neighbourhood produced a
+median change of only `r fmt3(spatial_overall$median_delta)` in the
+human-minus-climate balance (IQR `r fmt3(spatial_overall$delta_q25)` to
+`r fmt3(spatial_overall$delta_q75)` on a -1 to 1 scale).
+Although `r spatial_overall$n_ranking_reversals` individual records crossed
+the boundary between climate and human dominance, the continent- and
+climate-zone summaries remained close to zero and showed no consistent
+directional shift.
+Across `r temporal_overall$n_matched_estimable` comparable continent-by-time
+results, the median change in the human contribution was
+`r fmt3(temporal_human_change$median_delta)` (IQR
+`r fmt3(temporal_human_change$delta_q25)` to
+`r fmt3(temporal_human_change$delta_q75)`), with only
+`r temporal_overall$n_ranking_reversals` reversals in the relative importance
+of climate and human activity.
+The broad spatial and temporal patterns were therefore insensitive to the
+tested archaeological search radius.
+
+## Discussion insertion
+
+The archaeological radius represents a trade-off between spatial proximity to
+the pollen record and the amount of available evidence.
+Neither tested radius should be interpreted as the pollen source area, which
+varies among sites according to basin size, pollen dispersal, and the
+surrounding vegetation.
+Nevertheless, expanding the archaeological neighbourhood from 250 km to
+500 km caused only small changes in the estimated climate-human balance and did
+not alter its broad spatial or temporal structure.
+We therefore retain the 250 km radius wherever it provides sufficient
+radiocarbon evidence and use 500 km only as a fallback in data-sparse settings.
+This approach preserves the most local archaeological context supported by the
+data while maximizing geographical coverage.
+The sensitivity analysis confirms that the main large-scale inference---that
+climate is a stronger predictor than human activity of broad-scale vegetation
+patterns---is robust to this choice.
