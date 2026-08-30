@@ -1,0 +1,231 @@
+analysis_scope,analytical_unit,region,climatezone,age,status_250_km,status_500_km,ranking_250_km,ranking_500_km,robustness_classification,balance_delta_500_minus_250
+spatial_dataset,22322,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.2927
+spatial_dataset,21675,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,1010,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,17402,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.024799999999999996
+spatial_dataset,1451,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0913
+spatial_dataset,46490,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15232,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.147
+spatial_dataset,15970,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2580,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.10519999999999999
+spatial_dataset,1635,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0331
+spatial_dataset,4056,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.4409
+spatial_dataset,15738,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.36150000000000004
+spatial_dataset,21762,Latin America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,48721,North America,Cold_Dry_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1450,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,23004,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1395
+spatial_dataset,15785,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,328,North America,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.09940000000000002
+spatial_dataset,40997,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,203,North America,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.057999999999999996
+spatial_dataset,17320,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.09789999999999999
+spatial_dataset,20188,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1445,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,532,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1469
+spatial_dataset,302,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1299
+spatial_dataset,1391,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,3149,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,41448,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.05089999999999999
+spatial_dataset,1571,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.094
+spatial_dataset,21895,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1617,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,346,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.022999999999999993
+spatial_dataset,17419,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.020699999999999996
+spatial_dataset,45391,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1154,Latin America,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,527,North America,Cold_Dry_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.01780000000000001
+spatial_dataset,21913,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,971,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.03950000000000001
+spatial_dataset,45343,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0417
+spatial_dataset,684,North America,Cold_Without_dry_season_Hot_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.1208
+spatial_dataset,45329,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0791
+spatial_dataset,26505,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.08549999999999999
+spatial_dataset,1590,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,298,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1259
+spatial_dataset,48624,Latin America,Temperate_Dry_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.09299999999999999
+spatial_dataset,4398,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0716
+spatial_dataset,1707,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.04780000000000001
+spatial_dataset,4154,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.029299999999999993
+spatial_dataset,363,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,3558,North America,Cold_Without_dry_season_Hot_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.20659999999999995
+spatial_dataset,14948,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,19901,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.08679999999999999
+spatial_dataset,3054,North America,Arid,NA,estimated,estimated,climate,human,ranking_reversal,0.030200000000000005
+spatial_dataset,15734,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0701
+spatial_dataset,24042,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0289
+spatial_dataset,15732,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1658
+spatial_dataset,22820,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0504
+spatial_dataset,253,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15789,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,24057,Europe,Polar,NA,estimated,estimated,human,climate,ranking_reversal,-0.0545
+spatial_dataset,20034,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.15410000000000001
+spatial_dataset,3031,North America,Cold_Without_dry_season_Hot_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1885
+spatial_dataset,39474,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.1352
+spatial_dataset,25767,Europe,Polar,NA,estimated,estimated,climate,human,ranking_reversal,0.04920000000000001
+spatial_dataset,22678,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.075
+spatial_dataset,16231,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1839
+spatial_dataset,2590,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.08860000000000001
+spatial_dataset,4397,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.017200000000000007
+spatial_dataset,21700,Latin America,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,20883,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.37010000000000004
+spatial_dataset,17296,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0939
+spatial_dataset,15420,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,206,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,48072,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0571
+spatial_dataset,2065,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.052099999999999994
+spatial_dataset,45188,Europe,Temperate_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0894
+spatial_dataset,41585,North America,Polar,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,12,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1286
+spatial_dataset,852,North America,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.06240000000000001
+spatial_dataset,25370,Europe,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.10389999999999999
+spatial_dataset,778,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,42566,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.02629999999999999
+spatial_dataset,3871,Europe,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.0697
+spatial_dataset,21915,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15719,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2610,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15740,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.021900000000000003
+spatial_dataset,16275,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2962,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1780,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,20758,North America,Temperate_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.06130000000000001
+spatial_dataset,2023,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.06910000000000002
+spatial_dataset,336,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,45400,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0549
+spatial_dataset,22992,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated_residual_temporal_dependence,human,climate,ranking_reversal,-0.049199999999999994
+spatial_dataset,41911,Europe,Temperate_Dry_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0163
+spatial_dataset,21606,Latin America,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1438,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.075
+spatial_dataset,974,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,40797,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.07070000000000001
+spatial_dataset,40452,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.009600000000000001
+spatial_dataset,1569,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.187
+spatial_dataset,15,Latin America,Arid,NA,estimated,estimated,climate,human,ranking_reversal,0.0818
+spatial_dataset,14549,North America,Cold_Dry_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.0685
+spatial_dataset,843,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.04239999999999999
+spatial_dataset,1434,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2335,Europe,Temperate_Dry_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.18819999999999998
+spatial_dataset,4466,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,4314,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,20397,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.035400000000000015
+spatial_dataset,525,North America,Polar,NA,estimated,estimated,climate,human,ranking_reversal,0.1098
+spatial_dataset,16269,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46477,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2954,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.16720000000000002
+spatial_dataset,531,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.13440000000000002
+spatial_dataset,45393,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,4410,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.117
+spatial_dataset,48986,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.1462
+spatial_dataset,41612,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,258,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2266,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,329,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.17240000000000003
+spatial_dataset,45395,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,4549,Europe,Polar,NA,estimated,estimated,climate,human,ranking_reversal,0.0676
+spatial_dataset,18100,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,14923,North America,Arid,NA,estimated,estimated,climate,human,ranking_reversal,0.1893
+spatial_dataset,17404,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.061200000000000004
+spatial_dataset,3471,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15392,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,22344,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.15469999999999998
+spatial_dataset,4393,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.1774
+spatial_dataset,3048,North America,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0942
+spatial_dataset,699,North America,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.22910000000000003
+spatial_dataset,15904,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0857
+spatial_dataset,1142,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,22407,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.0471
+spatial_dataset,21903,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,44723,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.09569999999999998
+spatial_dataset,678,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,3473,North America,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.09310000000000002
+spatial_dataset,19323,North America,Cold_Dry_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,41527,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.13929999999999998
+spatial_dataset,22757,Europe,Cold_Without_dry_season_Cold_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1004
+spatial_dataset,4017,Europe,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,19937,North America,Cold_Without_dry_season_Hot_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.023
+spatial_dataset,19913,Europe,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1890,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2004,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1771,Latin America,Polar,NA,estimated,estimated,climate,human,ranking_reversal,0.1373
+spatial_dataset,1607,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,3046,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,15417,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.09639999999999999
+spatial_dataset,519,North America,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,15715,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1131
+spatial_dataset,21603,Latin America,Arid,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,4362,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,41770,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.022799999999999987
+spatial_dataset,4288,Europe,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2314,North America,Cold_Without_dry_season_Hot_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.1408
+spatial_dataset,41606,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46481,Europe,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,4359,Europe,Temperate_Without_dry_season,NA,estimated,estimated,human,climate,ranking_reversal,-0.1255
+spatial_dataset,1788,North America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15586,North America,Cold_Dry_Summer,NA,estimated,estimated,climate,human,ranking_reversal,0.2588
+spatial_dataset,45381,Europe,Cold_Without_dry_season_Warm_Summer,NA,estimated,estimated,human,climate,ranking_reversal,-0.1124
+spatial_dataset,15394,Latin America,Tropical,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1001,North America,Cold_Dry_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,21838,Latin America,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1733,North America,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Dabsan_Lake,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Manas_Lake_LM1,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Ximen_Co,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Xingyun_Lake,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Akkol_Lake,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Ayongwama_Co,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Baikal_lake,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Dahaizi_Lake,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Dali_Nur_Liuzhouwan_Lake,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Daluoba_basin,Asia,Arid,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Erhai_Lake,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Gantang,Asia,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Huguangyan_Maer_LakeB,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Kendegelukol_Lake,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Koucha_Lake,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Lop_Nur_Luo4,Asia,Arid,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,PVT_Nantun,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Qigai_Nuur,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Qongjiamong_Co,Asia,Polar,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Sanjiaocheng_Section,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Sayram_Lake,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Shayema_Lake,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Tiancai_Lake,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PVT_Uzunkol_Lake,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_8,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_57,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_80,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_101,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_124,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_134,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,cao_158,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,PANGAEA.783359,Asia,Temperate_Dry_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,Lake_Moon,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,47817,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,876,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46462,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46466,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46483,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,3896,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46485,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,46447,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,2643,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,1844,Asia,Cold_Without_dry_season_Warm_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,4543,Asia,Cold_Without_dry_season_Cold_Summer,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,40990,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,14619,Asia,Cold_Dry_Winter,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,3861,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,41247,Asia,Temperate_Dry_Winter,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,15624,Asia,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,14612,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15649,Asia,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,14134,Asia,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15656,Asia,Temperate_Without_dry_season,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,15678,Asia,Cold_Without_dry_season_Hot_Summer,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,pg_711911,Asia,Arid,NA,missing_predictor_group,estimated,NA,climate,gained_estimability,NA
+spatial_dataset,ippd_1070,Oceania,Tropical,NA,missing_predictor_group,estimated,NA,human,gained_estimability,NA
+spatial_dataset,ippd_2113,Oceania,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.08360000000000001
+spatial_dataset,ippd_2264,Oceania,Temperate_Without_dry_season,NA,estimated,estimated,climate,human,ranking_reversal,0.1256
+temporal_region_age,Europe|7500,Europe,NA,7500,spatial_model_estimated,spatial_model_estimated,climate,human,ranking_reversal,0.024099999999999996
+temporal_region_age,Oceania|2000,Oceania,NA,2000,no_spatial_terms_selected,no_spatial_terms_selected,human,climate,ranking_reversal,-0.0164
+temporal_region_age,Oceania|7000,Oceania,NA,7000,no_spatial_terms_selected,spatial_model_estimated,climate,human,ranking_reversal,0.0203
