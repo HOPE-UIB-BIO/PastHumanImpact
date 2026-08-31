@@ -3,7 +3,8 @@
 #' nested dataset data set and retain failures as explicit result statuses.
 #' @param data_source Nested dataset data with identifier and data columns.
 #' @param response_vars Response variable names.
-#' @param predictor_vars Named human and climate predictor groups.
+#' @param predictor_vars Named human and climate predictor groups, or a
+#'   region-aware resolver function.
 #' @param id_col Core identifier column.
 #' @param data_col Nested data column.
 #' @param seed Base integer random seed.
@@ -30,6 +31,8 @@ fit_temporal_hvarpart_datasets <- function(
     is.data.frame(data_source),
     all(c(id_col, data_col) %in% names(data_source)),
     is.list(data_source[[data_col]]),
+    is.list(predictor_vars) || is.function(predictor_vars),
+    !is.function(predictor_vars) || "region" %in% names(data_source),
     is.numeric(seed),
     length(seed) == 1L,
     msg = "Temporal HVarPart dataset inputs do not satisfy the contract."
@@ -56,14 +59,29 @@ fit_temporal_hvarpart_datasets <- function(
   list_results <-
     seq_len(nrow(data_source)) |>
     purrr::map(
-      .f = ~ rlang::exec(
-        .fn = safe_analysis,
-        data_dataset = data_source[[data_col]][[.x]],
-        response_vars = response_vars,
-        predictor_vars = predictor_vars,
-        seed = as.integer(seed + .x),
-        !!!list_arguments
-      )
+      .f = function(index) {
+        data_dataset <- data_source[[data_col]][[index]]
+        region <-
+          if ("region" %in% names(data_source)) {
+            data_source[["region"]][[index]]
+          } else {
+            NA_character_
+          }
+        selected_predictors <- resolve_hvarpart_predictor_vars(
+          predictor_vars = predictor_vars,
+          region = region,
+          available_columns = names(data_dataset)
+        )
+
+        rlang::exec(
+          .fn = safe_analysis,
+          data_dataset = data_dataset,
+          response_vars = response_vars,
+          predictor_vars = selected_predictors,
+          seed = as.integer(seed + index),
+          !!!list_arguments
+        )
+      }
     )
   res_data <-
     tibble::tibble(

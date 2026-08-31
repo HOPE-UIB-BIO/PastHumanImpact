@@ -4,7 +4,8 @@
 #' @param data_source Region-age data with a nested data column.
 #' @param analysis Analysis identifier.
 #' @param response_vars Response variable names.
-#' @param predictor_vars Named human and climate predictor groups.
+#' @param predictor_vars Named human and climate predictor groups, or a
+#'   region-aware resolver function.
 #' @param data_col Nested data column.
 #' @param seed Base integer random seed.
 #' @param ... Arguments passed to `fit_spatial_hvarpart_group()`.
@@ -31,6 +32,7 @@ fit_spatial_hvarpart_dataset <- function(
     is.data.frame(data_source),
     all(c("region", "age", data_col) %in% names(data_source)),
     is.list(data_source[[data_col]]),
+    is.list(predictor_vars) || is.function(predictor_vars),
     assertthat::is.string(analysis),
     is.numeric(seed),
     length(seed) == 1L,
@@ -52,14 +54,25 @@ fit_spatial_hvarpart_dataset <- function(
   list_results <-
     seq_len(nrow(data_source)) |>
     purrr::map(
-      .f = ~ rlang::exec(
-        .fn = safe_analysis,
-        data_group = data_source[[data_col]][[.x]],
-        response_vars = response_vars,
-        predictor_vars = predictor_vars,
-        seed = as.integer(seed + data_source[["age"]][.x] + .x),
-        !!!list_arguments
-      )
+      .f = function(index) {
+        data_group <- data_source[[data_col]][[index]]
+        selected_predictors <- resolve_hvarpart_predictor_vars(
+          predictor_vars = predictor_vars,
+          region = data_source[["region"]][[index]],
+          available_columns = names(data_group)
+        )
+
+        rlang::exec(
+          .fn = safe_analysis,
+          data_group = data_group,
+          response_vars = response_vars,
+          predictor_vars = selected_predictors,
+          seed = as.integer(
+            seed + data_source[["age"]][index] + index
+          ),
+          !!!list_arguments
+        )
+      }
     )
   res_data <-
     data_source |>
