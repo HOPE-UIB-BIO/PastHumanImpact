@@ -1,11 +1,13 @@
 #' @title Plot temporal SPD-radius sensitivity
 #' @description
-#' Build separate region-row figures for selected-model untruncated human
-#' hierarchical contributions and their paired 500-minus-250 changes. When no
-#' spatial terms are selected, the valid human-climate-only contribution is
-#' retained. Both figures include the canonical blue age-direction arrow.
+#' Build separate region-row figures for selected-model human importance and
+#' paired 500-minus-250 changes. The main profile uses zero-truncated,
+#' renormalised shares; signed adjusted-R-squared fractions remain available
+#' as a supplementary diagnostic. Both figures include the canonical blue
+#' age-direction arrow.
 #' @param data_all_available Long region-age radius source table.
 #' @param data_paired Paired region-age comparison table.
+#' @param metric_profile HVAR presentation profile.
 #' @return A named list with `profiles` and `changes` ggplot objects.
 #' @examples
 #' \dontrun{
@@ -13,22 +15,36 @@
 #' }
 plot_spd_radius_temporal_comparison <- function(
   data_all_available,
-  data_paired
+  data_paired,
+  metric_profile = c("zero_truncated", "untruncated_signed")
 ) {
+  metric_profile <-
+    match.arg(metric_profile)
+
+  profile_column <-
+    if (metric_profile == "zero_truncated") {
+      "zero_allocation_human"
+    } else {
+      "controlled_human"
+    }
+
+  change_column <-
+    stringr::str_c(profile_column, "_delta_500_minus_250")
+
   required_all <-
     c(
       "radius_km",
       "region",
       "age",
       "status",
-      "controlled_human"
+      profile_column
     )
 
   required_paired <-
     c(
       "region",
       "age",
-      "controlled_human_delta_500_minus_250",
+      change_column,
       "matched_estimable"
     )
 
@@ -53,7 +69,7 @@ plot_spd_radius_temporal_comparison <- function(
     dplyr::filter(
       .data[["status"]] %in%
         c("spatial_model_estimated", "no_spatial_terms_selected"),
-      is.finite(.data[["controlled_human"]])
+      is.finite(.data[[profile_column]])
     ) |>
     dplyr::mutate(
       radius = factor(
@@ -64,16 +80,20 @@ plot_spd_radius_temporal_comparison <- function(
     )
 
   profile_data_limits <-
-    range(c(data_values[["controlled_human"]], 0), finite = TRUE)
+    range(c(data_values[[profile_column]], 0), finite = TRUE)
 
   profile_padding <-
     max(diff(profile_data_limits) * 0.12, 0.01)
 
   profile_limits <-
-    c(
-      profile_data_limits[[1]] - profile_padding,
-      max(profile_data_limits[[2]] + profile_padding, 0.2)
-    )
+    if (metric_profile == "zero_truncated") {
+      c(0, 1)
+    } else {
+      c(
+        profile_data_limits[[1]] - profile_padding,
+        max(profile_data_limits[[2]] + profile_padding, 0.2)
+      )
+    }
 
   profile_background_values <-
     seq(profile_limits[[1]], profile_limits[[2]], length.out = 201)
@@ -104,7 +124,7 @@ plot_spd_radius_temporal_comparison <- function(
     age_step_ka * 0.25
 
   profile_arrow_y <-
-    profile_limits[[1]] - diff(profile_limits) * 0.32
+    profile_limits[[1]] - diff(profile_limits) * 0.18
 
   data_profile_arrow <-
     tibble::tibble(
@@ -144,7 +164,7 @@ plot_spd_radius_temporal_comparison <- function(
       data_values,
       ggplot2::aes(
         x = .data[["age"]] / 1000,
-        y = .data[["controlled_human"]],
+        y = .data[[profile_column]],
         group = .data[["radius"]]
       )
     ) +
@@ -185,18 +205,22 @@ plot_spd_radius_temporal_comparison <- function(
     ggplot2::labs(
       tag = "A",
       title = paste(
-        "Sensitivity of temporal human contribution",
+        "Sensitivity of temporal human importance",
         "to SPD search radius"
       ),
       x = "Age (cal ka BP)",
-      y = paste(
-        "Relative importance",
-        "(Untruncated hierarchical contribution)",
-        sep = "\n"
-      ),
+      y = if (metric_profile == "zero_truncated") {
+        "Share of positive hierarchical contribution"
+      } else {
+        paste(
+          "Untruncated signed human hierarchical contribution",
+          "(adjusted-R-squared scale)",
+          sep = "\n"
+        )
+      },
       shape = "SPD radius",
       linetype = "SPD radius",
-      fill = "Human contribution"
+      fill = "Human importance"
     ) +
     ggplot2::guides(
       shape = ggplot2::guide_legend(order = 1),
@@ -214,7 +238,7 @@ plot_spd_radius_temporal_comparison <- function(
       expand = FALSE,
       clip = "off"
     ) +
-    ggplot2::theme_bw(base_size = text_size) +
+    ggplot2::theme_classic(base_size = text_size) +
     ggplot2::theme(
       plot.tag = ggplot2::element_text(size = text_size),
       plot.tag.position = c(0, 1),
@@ -258,7 +282,7 @@ plot_spd_radius_temporal_comparison <- function(
     ggplot2::geom_point(
       ggplot2::aes(
         shape = .data[["radius"]],
-        fill = .data[["controlled_human"]]
+        fill = .data[[profile_column]]
       ),
       colour = common_gray,
       size = point_size * 4,
@@ -298,14 +322,17 @@ plot_spd_radius_temporal_comparison <- function(
     data_paired |>
     dplyr::filter(
       .data[["matched_estimable"]],
-      is.finite(.data[["controlled_human_delta_500_minus_250"]])
+      is.finite(.data[[change_column]])
     ) |>
     dplyr::mutate(
       region = factor(.data[["region"]], levels = region_levels)
     )
 
+  change_extent <-
+    max(abs(data_delta[[change_column]]), 0.2, na.rm = TRUE)
+
   change_limits <-
-    c(-0.1, 0.1)
+    c(-change_extent, change_extent)
 
   change_background_values <-
     seq(change_limits[[1]], change_limits[[2]], length.out = 201)
@@ -345,7 +372,7 @@ plot_spd_radius_temporal_comparison <- function(
       data_delta,
       ggplot2::aes(
         x = .data[["age"]] / 1000,
-        y = .data[["controlled_human_delta_500_minus_250"]]
+        y = .data[[change_column]]
       )
     ) +
     ggplot2::facet_grid(
@@ -362,7 +389,7 @@ plot_spd_radius_temporal_comparison <- function(
     ) +
     ggplot2::scale_y_continuous(
       position = "right",
-      breaks = seq(-0.1, 0.1, by = 0.05),
+      breaks = scales::breaks_pretty(n = 5)(change_limits),
       expand = ggplot2::expansion(mult = 0)
     ) +
     ggplot2::scale_fill_gradient2(
@@ -379,19 +406,24 @@ plot_spd_radius_temporal_comparison <- function(
     ggplot2::labs(
       tag = "B",
       title = paste(
-        "Change in temporal human contribution",
+        "Change in temporal human importance",
         "between SPD search radii"
       ),
       x = "Age (cal ka BP)",
-      y = paste(
-        "Change in relative importance",
-        paste0(
-          "(Untruncated hierarchical human contribution; ",
-          "500 km - 250 km)"
-        ),
-        sep = "\n"
-      ),
-      fill = "Change in human contribution"
+      y = if (metric_profile == "zero_truncated") {
+        paste(
+          "Change in zero-truncated human share",
+          "(500 km - 250 km)",
+          sep = "\n"
+        )
+      } else {
+        paste(
+          "Change in untruncated signed human hierarchical contribution",
+          "(adjusted-R-squared scale; 500 km - 250 km)",
+          sep = "\n"
+        )
+      },
+      fill = "Change in human importance"
     ) +
     ggplot2::guides(
       fill = ggplot2::guide_colourbar(
@@ -407,7 +439,7 @@ plot_spd_radius_temporal_comparison <- function(
       expand = FALSE,
       clip = "off"
     ) +
-    ggplot2::theme_bw(base_size = text_size) +
+    ggplot2::theme_classic(base_size = text_size) +
     ggplot2::theme(
       plot.tag = ggplot2::element_text(size = text_size),
       plot.tag.position = c(0, 1),
@@ -449,7 +481,7 @@ plot_spd_radius_temporal_comparison <- function(
     ) +
     ggplot2::geom_point(
       ggplot2::aes(
-        fill = .data[["controlled_human_delta_500_minus_250"]]
+        fill = .data[[change_column]]
       ),
       shape = 21,
       colour = common_gray,

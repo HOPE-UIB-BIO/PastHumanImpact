@@ -4,6 +4,10 @@
 #' geographic summaries using canonical human-gold and climate-teal semantics.
 #' @param data_all_available Long dataset-radius source table.
 #' @param data_summary Matched geographic summary table.
+#' @param metric_profile HVAR presentation profile. The default
+#'   `"zero_truncated"` shows the renormalised balance of positive human and
+#'   climate contributions. `"untruncated_signed"` is a supplementary
+#'   adjusted-R-squared diagnostic.
 #' @return A two-panel patchwork figure.
 #' @examples
 #' \dontrun{
@@ -11,20 +15,41 @@
 #' }
 plot_spd_radius_spatial_comparison <- function(
   data_all_available,
-  data_summary
+  data_summary,
+  metric_profile = c("zero_truncated", "untruncated_signed")
 ) {
+  metric_profile <-
+    match.arg(metric_profile)
+
+  metric_column <-
+    if (metric_profile == "zero_truncated") {
+      "zero_balance"
+    } else {
+      "signed_difference"
+    }
+
+  balance_label <-
+    if (metric_profile == "zero_truncated") {
+      "Zero-truncated human-climate importance balance"
+    } else {
+      paste(
+        "Untruncated signed human-climate hierarchical contribution",
+        "(adjusted-R-squared scale)"
+      )
+    }
+
   required_all <-
     c(
       "dataset_id",
       "radius_km",
       "region",
-      "signed_difference",
-      "signed_ranking",
+      metric_column,
       "status"
     )
   required_summary <-
     c(
       "summary_level",
+      "metric",
       "region",
       "climatezone",
       "median_delta",
@@ -49,7 +74,7 @@ plot_spd_radius_spatial_comparison <- function(
     dplyr::filter(
       .data[["status"]] %in%
         c("estimated", "estimated_residual_temporal_dependence"),
-      is.finite(.data[["signed_difference"]])
+      is.finite(.data[[metric_column]])
     ) |>
     dplyr::group_by(.data[["dataset_id"]]) |>
     dplyr::filter(dplyr::n_distinct(.data[["radius_km"]]) == 2L) |>
@@ -59,18 +84,14 @@ plot_spd_radius_spatial_comparison <- function(
         stringr::str_c(.data[["radius_km"]], " km"),
         levels = c("250 km", "500 km")
       ),
-      region = factor(.data[["region"]], levels = region_levels),
-      signed_ranking = factor(
-        .data[["signed_ranking"]],
-        levels = c("climate", "tie", "human")
-      )
+      region = factor(.data[["region"]], levels = region_levels)
     )
   plot_pairs <-
     ggplot2::ggplot(
       data_plot,
       ggplot2::aes(
         x = .data[["radius"]],
-        y = .data[["signed_difference"]]
+        y = .data[[metric_column]]
       )
     ) +
     ggplot2::geom_hline(yintercept = 0, colour = "#6B6B6B") +
@@ -83,7 +104,7 @@ plot_spd_radius_spatial_comparison <- function(
     ggplot2::geom_point(
       ggplot2::aes(
         shape = .data[["radius"]],
-        fill = .data[["signed_difference"]]
+        fill = .data[[metric_column]]
       ),
       colour = "#333333",
       alpha = 0.70,
@@ -118,11 +139,8 @@ plot_spd_radius_spatial_comparison <- function(
     ) +
     ggplot2::labs(
       x = "SPD radius (km)",
-      y = paste0(
-        "Relative importance\n",
-        "(Untruncated human-climate contribution difference)"
-      ),
-      fill = "Human-climate\ncontribution difference"
+      y = balance_label,
+      fill = balance_label
     ) +
     ggplot2::guides(
       fill = ggplot2::guide_colourbar(
@@ -132,7 +150,7 @@ plot_spd_radius_spatial_comparison <- function(
         barheight = grid::unit(5, "pt")
       )
     ) +
-    ggplot2::theme_bw() +
+    ggplot2::theme_classic(base_size = text_size) +
     ggplot2::theme(
       panel.grid.minor = ggplot2::element_blank(),
       axis.title.y = ggplot2::element_text(
@@ -147,6 +165,7 @@ plot_spd_radius_spatial_comparison <- function(
     data_summary |>
     dplyr::filter(
       .data[["summary_level"]] %in% c("region", "climatezone"),
+      .data[["metric"]] == .env[["metric_column"]],
       is.finite(.data[["median_delta"]]),
       is.finite(.data[["delta_q25"]]),
       is.finite(.data[["delta_q75"]])
@@ -204,8 +223,8 @@ plot_spd_radius_spatial_comparison <- function(
       )
     ) +
     ggplot2::scale_x_continuous(
-      limits = c(-0.2, 0.2),
-      breaks = c(-0.2, -0.1, 0, 0.1, 0.2)
+      limits = c(-1, 1),
+      breaks = c(-1, -0.5, 0, 0.5, 1)
     ) +
     ggplot2::scale_fill_gradient2(
       low = palette_predictors[["climate"]],
@@ -219,15 +238,12 @@ plot_spd_radius_spatial_comparison <- function(
     ) +
     ggplot2::labs(
       x = paste(
-        "Median change in relative importance",
-        paste0(
-          "(Untruncated human-climate contribution difference; ",
-          "500 km - 250 km)"
-        ),
+        "Median change in human-climate importance balance",
+        stringr::str_c("(", balance_label, "; 500 km - 250 km)"),
         sep = "\n"
       ),
       y = NULL,
-      fill = "Median contribution-difference change"
+      fill = "Median balance change"
     ) +
     ggplot2::guides(
       fill = ggplot2::guide_colourbar(
@@ -237,7 +253,7 @@ plot_spd_radius_spatial_comparison <- function(
         barheight = grid::unit(5, "pt")
       )
     ) +
-    ggplot2::theme_bw() +
+    ggplot2::theme_classic(base_size = text_size) +
     ggplot2::theme(
       panel.grid.minor = ggplot2::element_blank(),
       legend.position = "bottom",
@@ -263,7 +279,7 @@ plot_spd_radius_spatial_comparison <- function(
     patchwork::plot_annotation(
       tag_levels = "A",
       title = paste(
-        "Sensitivity of spatial human - climate contribution difference",
+        "Sensitivity of spatial human-climate importance balance",
         "to SPD search radius"
       )
     )

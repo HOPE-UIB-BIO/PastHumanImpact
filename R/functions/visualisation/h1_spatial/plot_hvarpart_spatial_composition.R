@@ -215,9 +215,12 @@ plot_hvarpart_spatial_composition <- function(
     y_label <- if (
       is_zero_truncated
     ) {
-      "Zero-truncated allocation of adjusted explained variation"
+      "Share of positive hierarchical contribution"
     } else {
-      "Signed allocation of adjusted explained variation"
+      paste(
+        "Untruncated signed hierarchical contribution",
+        "(adjusted-R-squared scale)"
+      )
     }
     reference_values <- if (
       is_zero_truncated

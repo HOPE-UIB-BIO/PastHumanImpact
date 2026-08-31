@@ -8,6 +8,7 @@ testthat::test_that("plot_spd_radius_temporal_comparison() builds panels", {
       region = "Europe",
       status = "spatial_model_estimated",
       controlled_human = c(-0.2, -0.1, 0.1, 0.2),
+      zero_allocation_human = c(0.1, 0.2, 0.3, 0.4),
       controlled_ranking = dplyr::if_else(
         .data[["controlled_human"]] > 0,
         "human",
@@ -19,6 +20,8 @@ testthat::test_that("plot_spd_radius_temporal_comparison() builds panels", {
       region = "Europe",
       age = c(2000, 2500, 3000),
       controlled_human_delta_500_minus_250 = c(0.3, 0.3, NA_real_),
+      zero_allocation_human_delta_500_minus_250 =
+        c(0.1, 0.1, NA_real_),
       controlled_ranking_500_km = "human",
       material_change = c(TRUE, FALSE, TRUE),
       matched_estimable = c(TRUE, TRUE, FALSE)
@@ -54,7 +57,7 @@ testthat::test_that("plot_spd_radius_temporal_comparison() builds panels", {
   )
   testthat::expect_equal(
     result[["changes"]][["coordinates"]][["limits"]][["y"]],
-    c(-0.1, 0.1)
+    c(-0.2, 0.2)
   )
   testthat::expect_null(
     result[["changes"]]$scales$get_scales("shape")
@@ -64,23 +67,19 @@ testthat::test_that("plot_spd_radius_temporal_comparison() builds panels", {
   )
   testthat::expect_equal(
     result[["profiles"]][["labels"]][["y"]],
-    paste(
-      "Relative importance",
-      "(Untruncated hierarchical contribution)",
-      sep = "\n"
-    )
+    "Share of positive hierarchical contribution"
   )
   testthat::expect_equal(
     result[["changes"]][["labels"]][["y"]],
     paste(
-      "Change in relative importance",
-      "(Untruncated hierarchical human contribution; 500 km - 250 km)",
+      "Change in zero-truncated human share",
+      "(500 km - 250 km)",
       sep = "\n"
     )
   )
   testthat::expect_equal(
     result[["profiles"]][["labels"]][["fill"]],
-    "Human contribution"
+    "Human importance"
   )
   testthat::expect_identical(
     result[["profiles"]][["labels"]][["x"]],

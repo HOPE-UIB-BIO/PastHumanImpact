@@ -169,14 +169,14 @@ plot_spatial_sensitivity_results <- function(
       ),
       profile_label = dplyr::recode(
         .data[["profile"]],
-        signed = "Untruncated contribution difference",
-        zero_truncated = "Zero-truncated balance"
+        signed = "Untruncated signed contribution",
+        zero_truncated = "Zero-truncated importance balance"
       ),
       profile_label = factor(
         .data[["profile_label"]],
         levels = c(
-          "Untruncated contribution difference",
-          "Zero-truncated balance"
+          "Untruncated signed contribution",
+          "Zero-truncated importance balance"
         )
       )
     )
@@ -207,8 +207,8 @@ plot_spatial_sensitivity_results <- function(
     ) +
     ggplot2::scale_shape_manual(
       values = c(
-        "Untruncated contribution difference" = 21,
-        "Zero-truncated balance" = 22
+        "Untruncated signed contribution" = 21,
+        "Zero-truncated importance balance" = 22
       ),
       drop = FALSE
     ) +

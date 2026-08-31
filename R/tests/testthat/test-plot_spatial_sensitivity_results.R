@@ -88,8 +88,8 @@ testthat::test_that(
     testthat::expect_identical(
       levels(data_leave_out[["profile_label"]]),
       c(
-        "Untruncated contribution difference",
-        "Zero-truncated balance"
+        "Untruncated signed contribution",
+        "Zero-truncated importance balance"
       )
     )
 

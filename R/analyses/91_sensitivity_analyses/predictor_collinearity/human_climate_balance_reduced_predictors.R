@@ -66,7 +66,7 @@ data_spatial_reduced <-
   ) |>
   summarise_hvarpart_importance(
     group_vars = c("analysis", "region", "climatezone"),
-    profile = "signed"
+    profile = "zero_truncated"
   ) |>
   dplyr::mutate(
     ratio = pooled_allocation,
@@ -152,7 +152,7 @@ plot_reduced_simple <-
     )
   ) +
   ggplot2::labs(
-    y = "Relative importance ratio",
+    y = "Share of positive hierarchical contribution",
     fill = "Predictor"
   )
 

@@ -94,17 +94,17 @@ plot_h1_spatial_control_profiles <- function(
       data_values = data_allocations,
       component_palette = component_palette,
       scale_type = "allocation",
-      legend_title = paste(
-        "Zero-truncated hierarchical",
-        "contribution"
-      )
+      legend_title = "Share of positive hierarchical contribution"
     )
   plot_signed <-
     plot_h1_spatial_control_profile(
       data_values = data_signed,
       component_palette = component_palette,
       scale_type = "signed",
-      legend_title = "Untruncated hierarchical contribution"
+      legend_title = paste(
+        "Untruncated signed hierarchical contribution",
+        "(adjusted-R-squared scale)"
+      )
     )
   plot_unique <-
     plot_h1_spatial_control_profile(

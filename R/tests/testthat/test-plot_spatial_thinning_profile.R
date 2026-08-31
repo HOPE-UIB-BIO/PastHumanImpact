@@ -41,7 +41,7 @@ testthat::test_that(
     testthat::expect_equal(length(res[["layers"]]), 2L)
     testthat::expect_match(
       res[["labels"]][["x"]],
-      "Untruncated human-climate contribution difference"
+      "Untruncated signed human-climate hierarchical contribution"
     )
     testthat::expect_match(
       res[["labels"]][["caption"]],

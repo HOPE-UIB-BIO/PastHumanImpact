@@ -111,13 +111,13 @@ plot_spatial_thinning_profile <- function(
   x_axis_label <-
     dplyr::case_when(
       profile == "signed" ~ paste(
-        "Relative importance",
-        "(Untruncated human-climate contribution difference)",
+        "Untruncated signed human-climate hierarchical contribution",
+        "(adjusted-R-squared scale)",
         sep = "\n"
       ),
       TRUE ~ paste(
-        "Relative importance",
-        "(Zero-truncated human-climate balance)",
+        "Zero-truncated human-climate importance balance",
+        "(human share - climate share)",
         sep = "\n"
       )
     )

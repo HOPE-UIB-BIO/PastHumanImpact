@@ -8,7 +8,7 @@
 #'   `build_region_map()`.
 #' @param profile Balance profile. Use `"zero_truncated"` for the bounded
 #' presentation balance or `"signed"` for the untruncated hierarchical
-#' contribution difference.
+#' hierarchical contribution difference on the adjusted-R-squared scale.
 #' @return A ggplot object containing maps and statistical panels.
 #' @examples
 #' \dontrun{
@@ -36,14 +36,16 @@ plot_h1_spatial_controlled_balance <- function(
     if (
       identical(profile, "zero_truncated")
     ) {
-      paste0(
-        "Relative importance\n",
-        "(Zero-truncated human\u2212climate balance)"
+      paste(
+        "Zero-truncated human-climate importance balance",
+        "(human share \u2212 climate share)",
+        sep = "\n"
       )
     } else {
-      paste0(
-        "Relative importance\n",
-        "(Untruncated hierarchical contribution difference)"
+      paste(
+        "Untruncated signed human-climate hierarchical contribution",
+        "(adjusted-R-squared scale)",
+        sep = "\n"
       )
     }
 

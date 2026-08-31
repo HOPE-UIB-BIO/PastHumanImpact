@@ -22,10 +22,7 @@ testthat::test_that(
     testthat::expect_equal(result[["labels"]][["fill"]], "Driver")
     testthat::expect_equal(
       result[["labels"]][["y"]],
-      paste0(
-        "Relative importance\n",
-        "(Zero-truncated hierarchical contribution)"
-      )
+      "Share of positive hierarchical contribution"
     )
     testthat::expect_true(
       all(is.na(built[["data"]][[2]][["alpha"]]))

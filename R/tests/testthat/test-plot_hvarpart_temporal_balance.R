@@ -29,7 +29,11 @@ testthat::test_that("temporal balance plot uses lollipops", {
   )))
   testthat::expect_equal(
     result$labels$y,
-    "Relative importance balance\n(human impact \u2212 climate)"
+    paste(
+      "Zero-truncated human-climate importance balance",
+      "(human share \u2212 climate share)",
+      sep = "\n"
+    )
   )
   testthat::expect_equal(
     result$coordinates$limits$y,

@@ -229,8 +229,8 @@ plot_h1_temporal_control_profiles <- function(
     ggplot2::labs(
       x = "Age (cal ka BP)",
       y = paste(
-        "Relative importance",
-        "(Untruncated hierarchical contribution)",
+        "Untruncated signed hierarchical contribution",
+        "(adjusted-R-squared scale)",
         sep = "\n"
       ),
       colour = NULL
