@@ -66,7 +66,7 @@ For the primary SPD analysis, we additionally repeated the aggregation after
 and after omitting each continent and climate zone in turn. We classified the
 SPD result prospectively as robust, mixed, or spatiotemporally sensitive. The
 event analysis used the same temporal control and spatial aggregation as an
-independent-data confirmation but was not assigned the SPD thinning-based
+alternative supplementary comparison but was not assigned the SPD thinning-based
 robustness classification.
 
 ### Spatial control within time slices
@@ -103,11 +103,11 @@ treated as eliminated.
 `spd__human_climate_balance__moran_diagnostics__time_and_space_control.csv` in
 `Outputs/Tables/Diagnostics/Spatiotemporal_dependence/`.]
 
-The independent event analysis supported the same direction. The overall
+The alternative supplementary event analysis supported the same direction. The overall
 time-controlled balance was -0.059 for the signed profile and -0.174 for the
 zero-truncated profile. No conditional spatial signal was selected for the
 aggregated event balance, so no event dbMEM terms were added. These event
-results provide independent confirmation and are not described using the SPD
+results provide an alternative supplementary comparison and are not described using the SPD
 thinning-based robustness classification.
 
 [Source:
@@ -140,8 +140,8 @@ flagged in the supplementary diagnostics.
 
 **Relative human-versus-climate importance across pollen cores after temporal
 and spatial control.** Values are the bounded difference between
-zero-truncated human and climate hierarchical contributions from within-core
-models that include linear age as a structural control. Negative values
+zero-truncated and renormalised human and climate shares from within-core models
+that include linear age as a structural control. Negative values
 indicate greater climate importance, zero indicates equal importance, and
 positive values indicate greater human importance. Points and distributions
 show observed time-controlled core values. Continental and climate-zone
@@ -152,11 +152,12 @@ analysis.
 
 ## Figure 3 caption
 
-**Relative human, climate, and spatial contributions through time.** Paired
+**Composition of positive human, climate, and spatial hierarchical
+contributions through time.** Paired
 columns within each 500-year time slice show the primary SPD analysis and the
-independent event-proxy confirmation. Bars contain exact zero-truncated
-hierarchical contributions for human impact, climate, and selected spatial
-dbMEMs and sum to one for every estimable model. Space is shown as exactly zero
+supplementary event-proxy comparison. Bars contain zero-truncated and
+renormalised shares for human impact, climate, and selected spatial dbMEMs and
+sum to one for every estimable model. Space is shown as exactly zero
 only when no conditional spatial signal was selected; non-estimable models are
 missing. SPD is shown from 2 to 8.5 ka BP and events from 0.5 to 8.5 ka BP.
 Human impact and climate are the substantive predictors, whereas space is a
@@ -164,12 +165,12 @@ structural control.
 
 ## Supplementary figure captions
 
-### Independent event spatial confirmation
+### Supplementary event spatial comparison
 
 Time-controlled human-versus-climate balance using archaeological event data
 as the independent human-impact proxy. The layout and bounded balance follow
 Figure 2. No conditional spatial signal was selected for the aggregated event
-balance; this figure is an independent directional confirmation rather than a
+balance; this figure is an alternative directional comparison rather than a
 second thinning-based robustness analysis.
 
 ### Signed spatial component profiles

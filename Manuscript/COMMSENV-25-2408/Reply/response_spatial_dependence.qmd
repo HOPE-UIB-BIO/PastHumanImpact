@@ -186,7 +186,7 @@ The geographical coverage is also uneven, so densely sampled regions could contr
 We addressed this concern by asking a direct sensitivity question: **does the conclusion that climate is more important than human activity remain when the influence of neighbouring pollen records and broad spatial structure is reduced?**
 
 The analysis uses summed probability densities of archaeological radiocarbon dates (SPD) as the primary human-activity proxy.
-The pollen-derived human-impact events are retained as an independent supplementary confirmation, but they are not part of the SPD spatial-thinning test described below.
+The pollen-derived human-impact events are retained as an alternative supplementary comparison, but they are not part of the SPD spatial-thinning test described below.
 
 ## How these results changed the main H1 analysis
 
@@ -225,25 +225,6 @@ The untruncated result retains negative model contributions and is included to s
 
 ```{r}
 #| fig-cap: >-
-#|   Spatial similarity in the SPD-based human-versus-climate result before
-#|   and after accounting for broad spatial structure. Values closer to zero
-#|   after correction indicate reduced similarity among neighbouring pollen
-#|   records. Filled points denote statistically supported positive spatial
-#|   clustering.
-knitr::include_graphics(
-  file.path(
-    figure_dir,
-    stringr::str_c(
-      "spd__human_climate_balance__moran_i__",
-      "untruncated_hierarchical_contribution_difference__",
-      "time_and_space_control.png"
-    )
-  )
-)
-```
-
-```{r}
-#| fig-cap: >-
 #|   Spatial similarity in the zero-truncated SPD human-versus-climate
 #|   composition before and after accounting for broad spatial structure.
 #|   This is the calculation profile used for the bounded main-figure
@@ -254,6 +235,27 @@ knitr::include_graphics(
     stringr::str_c(
       "spd__human_climate_balance__moran_i__",
       "zero_truncated_hierarchical_composition__",
+      "time_and_space_control.png"
+    )
+  )
+)
+```
+
+**Supplementary untruncated signed diagnostic.**
+
+```{r}
+#| fig-cap: >-
+#|   Spatial similarity in the untruncated signed SPD human-versus-climate
+#|   hierarchical contribution before and after accounting for broad spatial
+#|   structure. Values closer to zero after correction indicate reduced
+#|   similarity among neighbouring pollen records. Filled points denote
+#|   statistically supported positive spatial clustering.
+knitr::include_graphics(
+  file.path(
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__moran_i__",
+      "untruncated_hierarchical_contribution_difference__",
       "time_and_space_control.png"
     )
   )
@@ -283,24 +285,6 @@ The purple line shows the corresponding estimate after accounting for broad spat
 
 ```{r}
 #| fig-cap: >-
-#|   Sensitivity of the untruncated SPD human-versus-climate result to the
-#|   spatial density of pollen records. Each curve shows the distribution of
-#|   results from repeated datasets in which neighbouring records were
-#|   removed. Negative values indicate a greater climate influence.
-knitr::include_graphics(
-  file.path(
-    figure_dir,
-    stringr::str_c(
-      "spd__human_climate_balance__spatial_thinning__",
-      "untruncated_hierarchical_contribution_difference__",
-      "time_and_space_control.png"
-    )
-  )
-)
-```
-
-```{r}
-#| fig-cap: >-
 #|   Sensitivity of the zero-truncated SPD human-versus-climate composition
 #|   to the spatial density of pollen records. This is the bounded profile
 #|   used for the main spatial presentation. Negative values indicate a
@@ -311,6 +295,27 @@ knitr::include_graphics(
     stringr::str_c(
       "spd__human_climate_balance__spatial_thinning__",
       "zero_truncated_hierarchical_composition__",
+      "time_and_space_control.png"
+    )
+  )
+)
+```
+
+**Supplementary untruncated signed diagnostic.**
+
+```{r}
+#| fig-cap: >-
+#|   Sensitivity of the untruncated signed SPD human-versus-climate
+#|   hierarchical contribution to the spatial density of pollen records.
+#|   Each curve shows the distribution of results from repeated datasets in
+#|   which neighbouring records were removed. Negative values indicate a
+#|   greater climate influence.
+knitr::include_graphics(
+  file.path(
+    figure_dir,
+    stringr::str_c(
+      "spd__human_climate_balance__spatial_thinning__",
+      "untruncated_hierarchical_contribution_difference__",
       "time_and_space_control.png"
     )
   )
@@ -331,8 +336,10 @@ Space accounts for the geographical arrangement of pollen records and is treated
 ```{r}
 #| out-width: 100%
 #| fig-cap: >-
-#|   Relative contributions of human activity, climate, and spatial
-#|   structure within 500-year time slices. Each eligible bar sums to 100%.
+#|   Shares of positive hierarchical contribution attributed to human
+#|   activity, climate, and spatial structure within 500-year time slices.
+#|   Negative fractions were set to zero and each eligible bar was
+#|   renormalised to sum to 100%.
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,
@@ -376,7 +383,7 @@ Positive residual spatial autocorrelation remained detectable in `r n_residual_g
 These analyses directly address whether the main result could be an artefact of uneven geographical sampling, shared histories among nearby pollen records, or long-term trends within records.
 
 The response was not limited to supplementary sensitivity figures.
-We incorporated time and space into the main H1 framework, spatially filtered the main spatial summaries, repeatedly thinned nearby SPD records at two distances, omitted continents and climate zones in turn, and evaluated the independent event-based analysis.
+We incorporated time and space into the main H1 framework, spatially filtered the main spatial summaries, repeatedly thinned nearby SPD records at two distances, omitted continents and climate zones in turn, and evaluated the supplementary event-based comparison.
 Every approach retained the same broad human-versus-climate interpretation, and no estimable ranking reversed when spatial predictors were introduced.
 
 Although some residual local spatial structure remains detectable, the convergence of all analyses demonstrates that it is not driving the central result.

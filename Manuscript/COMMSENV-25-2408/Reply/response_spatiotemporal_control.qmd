@@ -324,7 +324,9 @@ We therefore apply spatial filtering when the time-controlled results from diffe
 
 The main figure retains one readily interpretable human-versus-climate balance for each record.
 
-Negative values indicate greater relative importance of climate, zero indicates equal importance, and positive values indicate greater relative importance of human activity.
+For this main presentation, negative hierarchical fractions are set to zero and the remaining positive human, climate, and temporal components are renormalised to sum to one.
+
+The balance is the resulting human share minus climate share: negative values indicate greater relative importance of climate, zero indicates equal importance, and positive values indicate greater relative importance of human activity.
 
 For the primary SPD analysis, the climate-dominated result was retained after adding time, after spatial filtering, in every 250-km and 500-km thinning repetition, and after omitting each continent and climate zone in turn.
 
@@ -384,9 +386,11 @@ The revised main temporal figure shows human activity, climate, and space togeth
 
 ```{r}
 #| fig-cap: >-
-#|   Main temporal analysis after adding space as a separate structural
-#|   predictor within each 500-year time slice. SPD is the primary
-#|   human-activity proxy; event-based bars are supplementary.
+#|   Shares of positive hierarchical contribution after adding space as a
+#|   separate structural predictor within each 500-year time slice. Negative
+#|   fractions were set to zero and each eligible bar was renormalised to sum
+#|   to one. SPD is the primary human-activity proxy; event-based bars are
+#|   supplementary.
 knitr::include_graphics(
   file.path(
     temporal_figure_dir,

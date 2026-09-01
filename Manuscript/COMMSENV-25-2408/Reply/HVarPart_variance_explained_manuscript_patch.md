@@ -23,7 +23,8 @@ Hierarchical individual importance was extracted separately from `Hier.part`.
 For the fit-importance relationship, we retained signed human importance and
 divided it by total adjusted R².
 We did not zero-truncate individual importance.
-We tested association between adjusted R² and signed human relative importance
+We tested association between adjusted R² and the untruncated signed human
+hierarchical contribution
 using Spearman rank correlation, with Pearson correlation as a linear
 sensitivity.
 Panel correlations required at least three models and non-zero variation in
@@ -43,7 +44,8 @@ adjusted R² scales directly with the number of models in a group and therefore
 does not provide a sampling-independent comparison of model fit.
 
 Across 1,118 importance-eligible spatial SPD models, adjusted R² showed little
-association with signed human relative importance (Spearman ρ = 0.022,
+association with the untruncated signed human hierarchical contribution
+(Spearman ρ = 0.022,
 Pearson r = -0.021; Extended Data Fig. Y).
 Continent and climate-zone panels showed unequal sample sizes; correlations
 were unavailable with fewer than three models or no variation
@@ -60,7 +62,8 @@ Annotations report model counts.
 Finite negative adjusted R² values are retained.
 Maps show contributing records coloured by climate zone.
 
-**Extended Data Fig. Y | Adjusted R² and signed human relative importance
+**Extended Data Fig. Y | Adjusted R² and the untruncated signed human
+hierarchical contribution
 across spatial SPD models.**
 Each point is an importance-eligible joint ten-response model, coloured by
 climate zone.
@@ -68,7 +71,8 @@ The line and band show a linear fit and uncertainty.
 Annotations report n, Spearman ρ, and Pearson r.
 No zero-truncated importance values are shown.
 
-**Extended Data Fig. Z | Adjusted R² and signed human relative importance by
+**Extended Data Fig. Z | Adjusted R² and the untruncated signed human
+hierarchical contribution by
 continent and climate zone.**
 Five continent rows and eleven climate-zone columns use the same values and
 axis limits as Extended Data Fig. Y.

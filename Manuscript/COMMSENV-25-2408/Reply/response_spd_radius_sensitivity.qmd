@@ -84,18 +84,18 @@ temporal_human_change <-
   temporal_paired |>
   dplyr::filter(
     .data[["matched_estimable"]],
-    is.finite(.data[["controlled_human_delta_500_minus_250"]])
+    is.finite(.data[["zero_allocation_human_delta_500_minus_250"]])
   ) |>
   dplyr::summarise(
     median_delta = stats::median(
-      .data[["controlled_human_delta_500_minus_250"]]
+      .data[["zero_allocation_human_delta_500_minus_250"]]
     ),
     delta_q25 = stats::quantile(
-      .data[["controlled_human_delta_500_minus_250"]],
+      .data[["zero_allocation_human_delta_500_minus_250"]],
       0.25
     ),
     delta_q75 = stats::quantile(
-      .data[["controlled_human_delta_500_minus_250"]],
+      .data[["zero_allocation_human_delta_500_minus_250"]],
       0.75
     )
   )
@@ -154,54 +154,62 @@ geographical coverage, rather than an assumption that 250 km or 500 km is the
 true pollen source area.
 
 Figure 1 asks whether widening the archaeological neighbourhood changes the
-relative importance of human activity and climate for individual pollen
-records.
-Values below zero indicate stronger climatic influence and values above zero
-indicate stronger human influence.
+relative allocation of positive hierarchical contributions between human
+activity and climate for individual pollen records. Negative hierarchical
+fractions are set to zero and the remaining positive human, climate, and
+temporal components are renormalised to sum to one. The plotted balance is the
+human share minus the climate share. Values below zero therefore indicate
+greater relative climatic importance and values above zero greater relative
+human importance. This composition is distinct from the absolute amount of
+variation explained.
 In panel A, each line connects the result for the same pollen record at 250 km
 and 500 km; short lines therefore indicate little sensitivity to radius.
 Panel B summarizes the shift within continents and climate zones.
 The median change across `r spatial_overall$n_matched_estimable` comparable
-pollen records was only `r fmt3(spatial_overall$median_delta)` on the full
--1 to 1 climate-human scale (interquartile range
+pollen records was `r fmt3(spatial_overall$median_delta)` (interquartile range
 `r fmt3(spatial_overall$delta_q25)` to
 `r fmt3(spatial_overall$delta_q75)`).
-The regional and climatic-zone summaries are all concentrated close to zero,
-showing no systematic movement towards either stronger climatic or stronger
+The continent and climate-zone median shifts generally remain near zero,
+although some intervals are broad because responses differ among records.
+There is no consistent movement towards either stronger climatic or stronger
 human influence when the radius is enlarged.
 
 ```{r}
 #| label: fig-spd-radius-spatial
-#| fig-cap: "Sensitivity of the climate-human balance to archaeological search radius. (A) Each line connects the same pollen record analysed with archaeological evidence from within 250 km and 500 km. Negative values (teal) indicate that climate explains more variation in vegetation than human activity, positive values (gold) indicate a stronger human contribution, and white marks equal contributions. (B) Median changes after increasing the radius from 250 km to 500 km are shown for continents and climate zones; points close to zero indicate little overall change."
+#| fig-cap: "Sensitivity of the zero-truncated human--climate importance balance to archaeological search radius. Negative hierarchical fractions were set to zero and the positive human, climate, and temporal components were renormalised to sum to one. (A) Each line connects the same pollen record analysed with archaeological evidence from within 250 km and 500 km. Negative values (teal) indicate a greater climate share, positive values (gold) indicate a greater human share, and white marks equal shares. (B) Median changes after increasing the radius from 250 km to 500 km are shown for continents and climate zones; points close to zero indicate little overall change."
 #| out-width: 100%
 knitr::include_graphics(
   here::here(
     "Outputs/Figures/H1/Spatial/SPD",
-    "spd__radius_comparison__spatial_human_climate_balance.png"
+    paste0(
+      "spd__radius_comparison__spatial_",
+      "zero_truncated_human_climate_balance.png"
+    )
   )
 )
 ```
 
 Figure 2 examines the same question through time.
-It shows the contribution of human activity to vegetation patterns within each
-continent, with circles and squares representing the 250 km and 500 km radii.
+It shows the share of positive hierarchical contribution attributed to human
+predictors within each continent, with circles and squares representing the
+250 km and 500 km radii.
 The two trajectories largely overlap through the Holocene.
 This indicates that the timing and relative magnitude of inferred human
 influence are not materially altered by the larger archaeological search area.
 Where the vegetation patterns showed little residual spatial structure, the
-human contribution remains a valid estimate and is retained rather than being
+human share remains a valid estimate and is retained rather than being
 treated as missing.
 
 ```{r}
 #| label: fig-spd-radius-temporal-profiles
-#| fig-cap: "Human contribution to vegetation patterns through time under the two archaeological search radii. Circles show estimates based on archaeological evidence within 250 km and squares show estimates within 500 km. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. The close overlap of the two trajectories shows that widening the archaeological neighbourhood has little effect on the inferred temporal pattern of human influence."
+#| fig-cap: "Share of positive hierarchical contribution attributed to human predictors through time under the two archaeological search radii. Negative fractions were set to zero and the remaining positive human, climate, and spatial components were renormalised to sum to one. Circles show estimates based on archaeological evidence within 250 km and squares show estimates within 500 km. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. The close overlap of the two trajectories shows that widening the archaeological neighbourhood has little effect on the inferred temporal pattern of human influence."
 #| out-width: 100%
 knitr::include_graphics(
   here::here(
     "Outputs/Figures/H1/Temporal/HVarPart",
     stringr::str_c(
       "spd__radius_comparison__temporal_human__",
-      "untruncated_hierarchical_contribution__space_control.png"
+      "zero_truncated_hierarchical_composition__space_control.png"
     )
   ),
   auto_pdf = FALSE
@@ -210,8 +218,8 @@ knitr::include_graphics(
 
 Figure 3 makes these temporal differences directly visible by subtracting the
 250 km estimate from the 500 km estimate for each continent and time step.
-Positive values indicate a larger estimated human contribution at 500 km and
-negative values indicate a smaller contribution.
+Positive values indicate a larger zero-truncated human share at 500 km and
+negative values indicate a smaller share.
 The differences remain tightly centred on zero: the median change was
 `r fmt3(temporal_human_change$median_delta)` (interquartile range
 `r fmt3(temporal_human_change$delta_q25)` to
@@ -224,14 +232,14 @@ retain these localized exceptions in the supporting tables.
 
 ```{r}
 #| label: fig-spd-radius-temporal-changes
-#| fig-cap: "Change in the estimated human contribution after increasing the archaeological search radius from 250 km to 500 km. Positive values indicate a larger human contribution at 500 km, negative values indicate a smaller contribution, and zero indicates no change. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. Values clustered around zero show that the temporal pattern is only weakly sensitive to search radius."
+#| fig-cap: "Change in the zero-truncated human share after increasing the archaeological search radius from 250 km to 500 km. Positive values indicate a larger human share at 500 km, negative values indicate a smaller share, and zero indicates no change in the relative composition. Continents are displayed as separate rows and the blue arrow indicates the direction from older to younger ages. Values clustered around zero show that the temporal pattern is only weakly sensitive to search radius."
 #| out-width: 100%
 knitr::include_graphics(
   here::here(
     "Outputs/Figures/H1/Temporal/HVarPart",
     stringr::str_c(
       "spd__radius_comparison__temporal_human__",
-      "untruncated_hierarchical_contribution_change__space_control.png"
+      "zero_truncated_hierarchical_composition_change__space_control.png"
     )
   ),
   auto_pdf = FALSE
@@ -243,14 +251,14 @@ At the level of individual pollen records,
 `r spatial_overall$n_matched_estimable` comparisons crossed the boundary
 between climate and human dominance.
 Such a reversal can arise from a small numerical change when the original
-estimate lies close to equal climate and human contributions.
+estimate lies close to equal climate and human shares.
 Importantly, these local reversals did not translate into a consistent shift
 at continental or climatic-zone scales, and the temporal analysis contained
 only the `r temporal_overall$n_ranking_reversals` exceptions reported above.
 
 Together, the three figures show that changing from a 250 km to a 500 km
-archaeological neighbourhood has only a small effect on the magnitude and
-history of the estimated human contribution.
+archaeological neighbourhood has only a small effect on the relative
+composition and history of inferred human importance.
 The sensitivity analysis therefore supports our methodology: using the 250 km
 SPD where possible preserves the closest available link between archaeological
 activity and the pollen record, while the 500 km fallback improves coverage in
@@ -284,14 +292,16 @@ records at 250 km and
 For the `r spatial_overall$n_matched_estimable` pollen records that could be
 compared at both radii, expanding the archaeological neighbourhood produced a
 median change of only `r fmt3(spatial_overall$median_delta)` in the
-human-minus-climate balance (IQR `r fmt3(spatial_overall$delta_q25)` to
-`r fmt3(spatial_overall$delta_q75)` on a -1 to 1 scale).
+zero-truncated human-minus-climate importance balance (IQR
+`r fmt3(spatial_overall$delta_q25)` to
+`r fmt3(spatial_overall$delta_q75)`).
 Although `r spatial_overall$n_ranking_reversals` individual records crossed
 the boundary between climate and human dominance, the continent- and
-climate-zone summaries remained close to zero and showed no consistent
-directional shift.
+continent- and climate-zone medians generally remained near zero, although
+some subgroup intervals were broad; they showed no consistent directional
+shift.
 Across `r temporal_overall$n_matched_estimable` comparable continent-by-time
-results, the median change in the human contribution was
+results, the median change in the zero-truncated human share was
 `r fmt3(temporal_human_change$median_delta)` (IQR
 `r fmt3(temporal_human_change$delta_q25)` to
 `r fmt3(temporal_human_change$delta_q75)`), with only
@@ -308,8 +318,9 @@ Neither tested radius should be interpreted as the pollen source area, which
 varies among sites according to basin size, pollen dispersal, and the
 surrounding vegetation.
 Nevertheless, expanding the archaeological neighbourhood from 250 km to
-500 km caused only small changes in the estimated climate-human balance and did
-not alter its broad spatial or temporal structure.
+500 km produced a small overall median change in the zero-truncated
+human--climate importance balance, alongside heterogeneous local responses,
+and did not alter its broad spatial or temporal structure.
 We therefore retain the 250 km radius wherever it provides sufficient
 radiocarbon evidence and use 500 km only as a fallback in data-sparse settings.
 This approach preserves the most local archaeological context supported by the

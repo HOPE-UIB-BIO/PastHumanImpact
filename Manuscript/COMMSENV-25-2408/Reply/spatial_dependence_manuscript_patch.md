@@ -14,20 +14,22 @@ thinnings at minimum distances of 250 km and 500 km, and after omitting each
 continent or climate zone in turn.
 
 For cross-site region-by-age models, selected dbMEMs were added as a third
-predictor group alongside human and climate predictors. We report both
-hierarchical contributions and pure partial adjusted R-squared fractions;
-negative adjusted fractions were retained. Groups with fewer than 20 unique
+predictor group alongside human and climate predictors. Main ecological
+figures show zero-truncated and renormalised shares of positive hierarchical
+contributions. Untruncated signed hierarchical contributions and pure partial
+adjusted R-squared fractions are reported as separate diagnostics, with
+negative adjusted fractions retained. Groups with fewer than 20 unique
 locations or fewer than 10 residual degrees of freedom were marked as spatially
 non-estimable. Residual spatial autocorrelation was retained as a diagnostic and
 not assumed to have been removed.
 
 ## Results
 
-The signed Figure 2 ranking was classified as robust after spatial filtering
-and reduced-dependence checks. The spatially adjusted human-minus-climate
-balance was -0.527, compared with -0.529 in the unfiltered aggregation, and
-climate remained the larger contribution in all 100 replicates at both 250 km
-and 500 km and in every continent and climate-zone leave-out analysis. Spatial
+The zero-truncated main-figure ranking was classified as robust after spatial
+filtering and reduced-dependence checks, and the untruncated signed diagnostic
+gave the same qualitative result. Climate remained the larger contribution in
+all 100 replicates at both 250 km and 500 km and in every continent and
+climate-zone leave-out analysis under both calculation profiles. Spatial
 terms were selected in 53 of 70 region-by-age models. Detectable positive
 residual autocorrelation remained in 51 region-by-age groups and in the
 core-level synthesis at 250 km, although not at 500 km. The ranking is therefore
