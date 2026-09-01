@@ -1,0 +1,16 @@
+region,proxy_variant,requested_regional_events,retained_human_predictors,retained_climate_predictors,excluded_event_variables,reference_category
+North America,events,fc;es,fc;es,temp_annual;temp_cold;prec_summer;prec_win,fi;ei;ec;cc;weak;strong;medium;bi;no_impact,bi
+North America,spd,,spd,temp_annual;temp_cold;prec_summer;prec_win,fi;ei;ec;cc;weak;strong;medium;bi;no_impact,bi
+North America,spd_events,fc;es,spd;fc;es,temp_annual;temp_cold;prec_summer;prec_win,fi;ei;ec;cc;weak;strong;medium;bi;no_impact,bi
+Latin America,events,weak;strong,weak;strong,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;medium;bi;no_impact,no_impact
+Latin America,spd,,spd,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;medium;bi;no_impact,no_impact
+Latin America,spd_events,weak;strong,spd;weak;strong,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;medium;bi;no_impact,no_impact
+Europe,events,fi;fc;ec;cc,fi;fc;ec;cc,temp_annual;temp_cold;prec_summer;prec_win,ei;es;weak;strong;medium;bi;no_impact,bi
+Europe,spd,,spd,temp_annual;temp_cold;prec_summer;prec_win,ei;es;weak;strong;medium;bi;no_impact,bi
+Europe,spd_events,fi;fc;ec;cc,spd;fi;fc;ec;cc,temp_annual;temp_cold;prec_summer;prec_win,ei;es;weak;strong;medium;bi;no_impact,bi
+Asia,events,fi;fc;ei,fi;fc;ei,temp_annual;temp_cold;prec_summer;prec_win,ec;cc;es;weak;strong;medium;bi;no_impact,bi
+Asia,spd,,spd,temp_annual;temp_cold;prec_summer;prec_win,ec;cc;es;weak;strong;medium;bi;no_impact,bi
+Asia,spd_events,fi;fc;ei,spd;fi;fc;ei,temp_annual;temp_cold;prec_summer;prec_win,ec;cc;es;weak;strong;medium;bi;no_impact,bi
+Oceania,events,weak;medium;strong,weak;medium;strong,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;bi;no_impact,no_impact
+Oceania,spd,,spd,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;bi;no_impact,no_impact
+Oceania,spd_events,weak;medium;strong,spd;weak;medium;strong,temp_annual;temp_cold;prec_summer;prec_win,fi;fc;ei;ec;cc;es;bi;no_impact,no_impact
