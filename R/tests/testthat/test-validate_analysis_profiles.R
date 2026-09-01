@@ -114,3 +114,33 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "validate_analysis_profiles() accepts human-event sensitivity profiles",
+  {
+    data_profiles <-
+      tibble::tibble(
+        profile_id = c("combined", "event_aggregation"),
+        analysis_family = "h1",
+        analytical_unit = c("within_dataset", "spatial_aggregation"),
+        human_proxy = c("spd_events", "events"),
+        human_predictor_specification = c(
+          "spd_plus_region_events",
+          "region_specific_events"
+        ),
+        spd_radius_specification = c(
+          "250_km_with_500_km_fallback",
+          "not_applicable"
+        ),
+        structural_control = c("time", "time_and_space"),
+        profile_role = "sensitivity",
+        enabled = TRUE,
+        seed = 1234L,
+        configuration_reference = "human_event_inclusion_as_coded"
+      )
+
+    testthat::expect_silent(
+      validate_analysis_profiles(data_profiles = data_profiles)
+    )
+  }
+)

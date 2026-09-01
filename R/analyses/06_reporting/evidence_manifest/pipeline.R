@@ -150,6 +150,92 @@ list(
       here::here(
         "Manuscript/COMMSENV-25-2408/Reply",
         "response_spd_radius_sensitivity.pdf"
+      ),
+      "human_event_model_audit",
+      "Regional event predictor and chronology model audit",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_evidence_tables",
+      here::here(
+        "Outputs/Tables/H1/Sensitivity/Human_event_inclusion",
+        "events__inclusion_comparison__regional_model_audit.csv"
+      ),
+      "human_event_dataset_matched_table",
+      "Three-way matched dataset-level human-event comparison",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_evidence_tables",
+      here::here(
+        "Outputs/Tables/H1/Sensitivity/Human_event_inclusion",
+        "events__inclusion_comparison__dataset_matched.csv"
+      ),
+      "human_event_region_age_matched_table",
+      "Three-way matched continent-age human-event comparison",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_evidence_tables",
+      here::here(
+        "Outputs/Tables/H1/Sensitivity/Human_event_inclusion",
+        "events__inclusion_comparison__region_age_matched.csv"
+      ),
+      "human_event_spatial_zero_truncated_balance_figure",
+      paste(
+        "Spatial regional human-event inclusion sensitivity figure",
+        "using zero-truncated hierarchical composition"
+      ),
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Sensitivity/Human_event_inclusion",
+        paste0(
+          "events__inclusion_comparison__spatial_",
+          "zero_truncated_human_climate_balance.pdf"
+        )
+      ),
+      "human_event_temporal_zero_truncated_profiles_figure",
+      "Temporal zero-truncated human-event profile using all data",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Sensitivity/Human_event_inclusion",
+        paste0(
+          "events__inclusion_comparison__",
+          "temporal_zero_truncated_human_share__",
+          "space_control__all_data.pdf"
+        )
+      ),
+      "human_event_temporal_zero_truncated_changes_figure",
+      "Temporal zero-truncated human-event change using all data",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "files_human_event_sensitivity_figures",
+      here::here(
+        "Outputs/Figures/H1/Sensitivity/Human_event_inclusion",
+        paste0(
+          "events__inclusion_comparison__",
+          "temporal_zero_truncated_human_share_change__",
+          "space_control__all_data.pdf"
+        )
+      ),
+      "human_event_evidence_manifest",
+      "Hashes for all regional human-event source tables and figures",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "file_human_event_evidence_manifest",
+      here::here(
+        "Outputs/Tables/Reporting",
+        "events__inclusion_comparison__evidence_manifest.csv"
+      ),
+      "human_event_sensitivity_response",
+      "Rendered reviewer response for regional human-event sensitivity",
+      "human_event_inclusion",
+      "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
+      "response_human_event_sensitivity.qmd",
+      here::here(
+        "Manuscript/COMMSENV-25-2408/Reply",
+        "response_human_event_sensitivity.pdf"
       )
     )
   ),

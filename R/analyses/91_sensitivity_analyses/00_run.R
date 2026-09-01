@@ -40,6 +40,25 @@ run_target_pipeline(
     "R",
     "analyses",
     "91_sensitivity_analyses",
+    "human_event_inclusion",
+    "pipeline.R"
+  ),
+  store = resolve_pipeline_store_path(
+    data_storage_path = data_storage_path,
+    store_relative_path = paste(
+      "sensitivity_analyses",
+      "human_event_inclusion",
+      sep = "/"
+    )
+  ),
+  visualise = FALSE
+)
+
+run_target_pipeline(
+  script = here::here(
+    "R",
+    "analyses",
+    "91_sensitivity_analyses",
     "spd_radius",
     "pipeline.R"
   ),
