@@ -387,7 +387,11 @@ plot_untruncated_spatial_hvarpart <- function(
     ) +
     ggplot2::labs(
       x = NULL,
-      y = "Signed human allocation of adjusted explained variation"
+      y = paste(
+        "Untruncated signed human hierarchical contribution",
+        "(adjusted-R-squared scale)",
+        sep = "\n"
+      )
     ) +
     ggplot2::coord_cartesian(ylim = display_limits, expand = FALSE) +
     ggplot2::theme_bw(base_size = text_size) +

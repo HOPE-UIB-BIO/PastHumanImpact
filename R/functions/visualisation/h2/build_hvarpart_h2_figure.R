@@ -337,9 +337,10 @@ build_hvarpart_h2_figure <- function(
         selected_climatezone = "Polar",
         profile = "zero_truncated"
       ),
-      paste0(
-        "Relative importance balance\n",
-        "(human impact \u2212 climate)"
+      paste(
+        "Zero-truncated human-climate importance balance",
+        "(human share \u2212 climate share)",
+        sep = "\n"
       )
     ) +
     ggplot2::theme(
@@ -354,7 +355,10 @@ build_hvarpart_h2_figure <- function(
         selected_climatezone = "Polar",
         profile = "signed"
       ),
-      "Signed allocation of adjusted explained variation"
+      paste(
+        "Untruncated signed hierarchical contribution",
+        "(adjusted-R-squared scale)"
+      )
     )
 
   trajectory_guide <-
@@ -392,7 +396,7 @@ build_hvarpart_h2_figure <- function(
       climatezone_labels = climatezone_labels,
       climatezone_colours = climatezone_colours,
       importance_guide = main_composite_importance_guide,
-      importance_title = "Relative importance",
+      importance_title = "Zero-truncated human-climate importance balance",
       predictor_legend = predictor_legend,
       age_legend = age_legend,
       trajectory_guide = trajectory_guide
@@ -404,7 +408,7 @@ build_hvarpart_h2_figure <- function(
       climatezone_labels = climatezone_labels,
       climatezone_colours = climatezone_colours,
       importance_guide = signed_composite_importance_guide,
-      importance_title = "Signed allocation",
+      importance_title = "Untruncated signed hierarchical contribution",
       predictor_legend = predictor_legend,
       age_legend = age_legend,
       trajectory_guide = trajectory_guide

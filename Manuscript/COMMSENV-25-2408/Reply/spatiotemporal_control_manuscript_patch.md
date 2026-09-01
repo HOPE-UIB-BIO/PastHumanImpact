@@ -25,8 +25,8 @@ multivariate PAP response conditional on complete human and climate predictor
 groups. We retained the original two-group model, fitted a
 human-climate-space hierarchical partition when spatial terms were selected,
 and calculated pure human, climate, and spatial fractions using partial RDA.
-No-signal groups retain baseline human and climate contributions with a zero
-displayed spatial contribution; non-estimable groups remain missing.
+No-signal groups retain their baseline human and climate shares with a zero
+displayed spatial share; non-estimable groups remain missing.
 
 ## Results template
 
@@ -50,9 +50,10 @@ positive importance.
 
 ## Figure 3 caption
 
-Human, climate, and spatial contributions through time. Bars show
-zero-truncated hierarchical contributions from region-by-age models and sum to
-one. Space comprises conditionally selected positive dbMEMs. A zero spatial
+Shares of positive human, climate, and spatial hierarchical contribution
+through time. Bars show zero-truncated and renormalised shares from
+region-by-age models and sum to one. Space comprises conditionally
+selected positive dbMEMs. A zero spatial
 segment denotes no detected conditional spatial signal; non-estimable models
 are omitted and reported in the source table. Signed hierarchical and pure
 partial fractions are provided separately.

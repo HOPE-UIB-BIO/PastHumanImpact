@@ -1,0 +1,4 @@
+source_target,source_pipeline,chronology_availability,n_datasets
+events_temporal_subset,01_data_preparation/03_archaeological_proxies/events/pipeline.R,default_filled,246
+events_temporal_subset,01_data_preparation/03_archaeological_proxies/events/pipeline.R,observed_events,1024
+events_temporal_subset,01_data_preparation/03_archaeological_proxies/events/pipeline.R,total,1270

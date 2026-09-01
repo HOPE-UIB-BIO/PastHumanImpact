@@ -205,10 +205,7 @@ plot_h1_temporal_controlled_composition <- function(
     ) +
     ggplot2::labs(
       x = "Age (cal ka BP)",
-      y = paste0(
-        "Relative importance\n",
-        "(Zero-truncated hierarchical contribution)"
-      ),
+      y = "Share of positive hierarchical contribution",
       fill = "Driver"
     ) +
     ggplot2::coord_cartesian(

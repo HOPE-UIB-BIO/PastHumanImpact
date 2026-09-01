@@ -18,7 +18,7 @@ build_untruncated_importance_fill_scale <- function(
 
   res_scale <-
     ggplot2::scale_fill_gradientn(
-      "Untruncated human contribution",
+      "Untruncated signed human hierarchical contribution",
       colours = palette,
       values = c(0, 0.5, 1),
       limits = c(0, 1),

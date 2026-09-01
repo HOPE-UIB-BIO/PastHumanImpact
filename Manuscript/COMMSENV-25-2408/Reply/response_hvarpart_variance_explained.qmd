@@ -83,8 +83,10 @@ and [Lai et al. (2022)](https://doi.org/10.1111/2041-210X.13800).
 For each model, total adjusted R² equals unique human plus unique climate plus
 shared explained variation.
 Adding unexplained variation reconstructs one.
-Signed adjusted fractions are primary; the complete bounded decomposition
-sensitivity remains available in the source tables.
+Signed adjusted fractions are authoritative for decomposition accounting and
+for the correlation diagnostic below. The main ecological figures instead use
+zero-truncated and renormalised compositions of positive hierarchical
+contributions; these two presentations are not interchangeable.
 These are joint multivariate models of ten pollen-derived properties, not ten
 independent fits.
 
@@ -136,12 +138,13 @@ Finite negative adjusted R² values are retained.
 #| out-width: "100%"
 #| fig-pos: H
 knitr::include_graphics(
-  file.path(figure_dir, "HVarPart_spatial_adjr2_distribution.png")
+  file.path(figure_dir, "hvarpart__spatial__adjusted_r2_distribution.png")
 )
 ```
 
-The correlation figures use signed relative human importance only; no
-zero-truncated importance figure is shown.
+The correlation figures are supplementary diagnostics and use the untruncated
+signed human hierarchical contribution only; no zero-truncated composition is
+shown.
 Across `r signed[["n_models"]]` eligible spatial SPD models, Spearman ρ =
 `r formatC(signed[["spearman_rho"]], digits = 3, format = "f")`
 and Pearson r =
@@ -149,13 +152,13 @@ and Pearson r =
 
 ```{r}
 #| label: fig-overall-adjr2-importance
-#| fig-cap: "Adjusted R-squared and signed human relative importance across eligible spatial SPD models."
+#| fig-cap: "Adjusted R-squared and the untruncated signed human hierarchical contribution across eligible spatial SPD models. This is a supplementary decomposition diagnostic, not the zero-truncated composition used in the main ecological figures."
 #| out-width: "75%"
 #| fig-pos: H
 knitr::include_graphics(
   file.path(
     figure_dir,
-    "HVarPart_adjr2_human_importance_overall.png"
+    "hvarpart__human_importance__adjusted_r2_overall.png"
   )
 )
 ```
@@ -168,11 +171,11 @@ Absent combinations remain explicit empty cells.
 
 ```{r}
 #| label: fig-grid-adjr2-importance
-#| fig-cap: "Adjusted R-squared and signed human relative importance by continent and climate zone."
+#| fig-cap: "Adjusted R-squared and the untruncated signed human hierarchical contribution by continent and climate zone. This is a supplementary decomposition diagnostic."
 #| out-width: "100%"
 #| fig-pos: H
 knitr::include_graphics(
-  file.path(figure_dir, "HVarPart_adjr2_human_importance_grid.png")
+  file.path(figure_dir, "hvarpart__human_importance__adjusted_r2_grid.png")
 )
 ```
 

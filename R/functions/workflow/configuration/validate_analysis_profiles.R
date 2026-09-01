@@ -67,7 +67,11 @@ validate_analysis_profiles <- function(data_profiles) {
       "h1::time_slice::spd::space",
       "h1::time_slice::events::none",
       "h1::time_slice::events::space",
-      "h1::spatial_aggregation::spd::time_and_space"
+      "h1::spatial_aggregation::spd::time_and_space",
+      "h1::within_dataset::spd_events::time",
+      "h1::time_slice::spd_events::space",
+      "h1::spatial_aggregation::spd_events::time_and_space",
+      "h1::spatial_aggregation::events::time_and_space"
     )
 
   assertthat::assert_that(
@@ -77,7 +81,7 @@ validate_analysis_profiles <- function(data_profiles) {
         data_profiles[["spd_radius_specification"]] == "not_applicable"
     ),
     all(
-      data_profiles[["human_proxy"]] != "spd" |
+      !data_profiles[["human_proxy"]] %in% c("spd", "spd_events") |
         data_profiles[["spd_radius_specification"]] != "not_applicable"
     ),
     msg = "Analysis profiles contain an unsupported combination."

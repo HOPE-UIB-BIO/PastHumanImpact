@@ -32,7 +32,7 @@ testthat::test_that(
         value_breaks = c(-0.2, 0, 0.2, 0.4),
         y_axis_title = paste0(
           "Relative importance\n",
-          "(Untruncated hierarchical contribution)"
+          "(Untruncated signed hierarchical contribution)"
         ),
         legend_title = "Human"
       )

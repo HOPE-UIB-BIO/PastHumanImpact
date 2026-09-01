@@ -74,9 +74,10 @@ build_h1_spatial_control_profiles <- function(
       y_axis_title = dplyr::if_else(
         .data[["measure"]] ==
           "untruncated_hierarchical_contribution",
-        paste0(
-          "Relative importance\n",
-          "(Untruncated hierarchical contribution)"
+        paste(
+          "Untruncated signed hierarchical contribution",
+          "(adjusted-R-squared scale)",
+          sep = "\n"
         ),
         paste0(
           "Explained variation\n",
@@ -128,4 +129,3 @@ build_h1_spatial_control_profiles <- function(
 
   return(res)
 }
-

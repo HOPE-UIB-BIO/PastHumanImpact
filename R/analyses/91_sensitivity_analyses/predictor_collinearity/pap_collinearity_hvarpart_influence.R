@@ -171,8 +171,8 @@ plot_hvar_influence <-
   ) +
   ggplot2::labs(
     y = paste(
-      "Change in relative importance ratio",
-      "(reduced predictors - baseline)",
+      "Change in untruncated signed hierarchical contribution",
+      "(adjusted-R-squared scale; reduced predictors - baseline)",
       sep = "\n"
     )
   )

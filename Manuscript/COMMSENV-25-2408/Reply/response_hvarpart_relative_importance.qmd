@@ -92,7 +92,8 @@ We compared three reporting profiles:
 3. **Exclude-negative:** exclude the complete model if either predictor has a
    negative individual contribution.
 
-Within reporting group $g$, the signed allocation of predictor $p$ is
+Within reporting group $g$, the untruncated signed hierarchical contribution
+of predictor $p$ is
 
 $$
 A_{p,g} = \frac{\sum_m I_{p,m}}{\sum_m R^2_{\mathrm{adj},m}},
@@ -104,17 +105,18 @@ is non-finite or non-positive, or an individual contribution is non-finite.
 Every exclusion is recorded in
 `Outputs/Tables/Diagnostics/HVarPart/hvarpart__model_audit.csv`.
 
-A negative signed allocation is an adjusted partitioning result. It is not
+A negative signed hierarchical contribution is an adjusted partitioning
+result. It is not
 evidence of a negative ecological effect.
 
 ## Results and presentation
 
-For spatial SPD models, the zero-truncated allocations underlying the main
-balance figure are
+For spatial SPD models, the zero-truncated and renormalised shares underlying
+the main balance figure are
 `r fmt_pct(value_for(spatial_spd, "zero_truncated", "climate"))` for climate
 and
 `r fmt_pct(value_for(spatial_spd, "zero_truncated", "human"))` for human
-impact. The corresponding unmodified signed allocations are
+impact. The corresponding untruncated signed hierarchical contributions are
 `r fmt_pct(value_for(spatial_spd, "signed", "climate"))` and
 `r fmt_pct(value_for(spatial_spd, "signed", "human"))`. Excluding complete
 models with any negative contribution gives
@@ -125,11 +127,13 @@ three profiles:
 `r ifelse(all_conclusions_stable, "yes", "no")`.
 
 Because the profiles support the same overall interpretation, the main figures
-use the bounded difference between paired zero-truncated human and climate
-allocations. Figure 2 applies this balance spatially, Figure 3 through time,
-and Figure 4 within its importance insets. Signed versions of Figures 2--4 are
-provided in the Supplementary Information, and the
-exclude-negative analysis is reported as an additional sensitivity profile.
+use zero-truncated and renormalised shares of positive hierarchical
+contribution. Figure 2 presents the human-minus-climate balance spatially,
+Figure 3 shows the human, climate, and spatial shares through time, and Figure
+4 uses the human-minus-climate balance within its importance insets. Signed
+versions of Figures 2--4 are provided in the Supplementary Information, and
+the exclude-negative analysis is reported as an additional sensitivity
+profile.
 
 ```{r}
 #| label: tbl-hvarpart-audit
@@ -156,17 +160,17 @@ audit_overall |>
 
 ```{r}
 #| label: fig-hvarpart-profiles
-#| fig-cap: "Zero-truncated main-figure allocation and two sensitivity profiles, calculated from the preserved fitted HVarPart results."
+#| fig-cap: "Zero-truncated and renormalised main-figure composition and two sensitivity profiles, calculated from the preserved fitted HVarPart results."
 #| out-width: "100%"
 knitr::include_graphics(
-  file.path(figure_dir, "hvarpart_profile_comparison.png")
+  file.path(figure_dir, "hvarpart__hierarchical_profile_comparison.png")
 )
 ```
 
 ## Figure changes
 
-Figure 2 now expresses the complementary human and climate allocations as
-human minus climate importance. The bounded scale runs from -1 (climate
+Figure 2 now expresses the complementary zero-truncated human and climate
+shares as human minus climate importance. The bounded scale runs from -1 (climate
 impact) through 0 (equal importance) to 1 (human impact). For each continent,
 the figure combines the continent-wide distribution of record-level balances,
 pooled climate-zone balances, and a horizontal line for the pooled continental
@@ -194,7 +198,7 @@ knitr::include_graphics(
 )
 ```
 
-*Revised main manuscript Figure 2. Spatial balance between zero-truncated human and climate allocations.*
+*Revised main manuscript Figure 2. Spatial balance between zero-truncated and renormalised human and climate shares.*
 
 ```{r}
 #| label: embed-hvarpart-spatial-signed
@@ -215,17 +219,19 @@ knitr::include_graphics(
 
 *Supplementary signed Figure 2. Untruncated human-minus-climate hierarchical contribution difference with time and space control.*
 
-The main temporal H1 figure shows the balance through time as lollipops drawn
-from equal importance to each estimate. Point shape distinguishes the SPD and
-event human-impact proxies, while point colour uses the same
-climate-neutral-human scale as Figure 2 against a pale version of that
-gradient. SPD estimates are restricted to 2--8.5 ka BP, whereas event-based
-estimates span 0.5--8.5 ka BP. Its supplementary counterpart applies the same
-age domains and shows the unmodified signed allocations as grouped, unstacked
-bars with zero and one reference lines. The H2 main-figure insets
-likewise use one outlined balance lollipop per region and climate zone against
-the pale gradient; supplementary insets retain separate unmodified signed
-human and climate allocations.
+The main temporal H1 figure shows the zero-truncated and renormalised
+composition of positive human, climate, and spatial hierarchical
+contributions. Each eligible stacked bar sums to one. Gold denotes the SPD
+human proxy, orange denotes the event-based human proxy, teal denotes climate,
+and purple denotes the spatial control; bar outlines distinguish the two human
+proxies. SPD estimates are restricted to 2--8.5 ka BP, whereas event-based
+estimates span 0.5--8.5 ka BP, and the blue arrow points from older to younger
+ages. Its supplementary counterpart applies the same age domains and shows
+the untruncated signed hierarchical contributions as grouped, unstacked bars
+with zero and one reference lines. The H2 main-figure insets use one outlined
+human-minus-climate balance lollipop per region and climate zone against the
+pale gradient; supplementary insets retain separate untruncated signed human
+and climate hierarchical contributions.
 
 ```{r}
 #| label: embed-hvarpart-temporal-main
@@ -241,7 +247,7 @@ knitr::include_graphics(
 )
 ```
 
-*Revised main manuscript Figure 3. Temporal balance between zero-truncated human and climate allocations.*
+*Revised main manuscript Figure 3. Temporal composition of zero-truncated and renormalised human and climate shares.*
 
 ```{r}
 #| label: embed-hvarpart-temporal-signed
@@ -250,14 +256,14 @@ knitr::include_graphics(
   file.path(
     temporal_figure_dir,
     stringr::str_c(
-      "human_climate_only_",
-      "untruncated_hierarchical_contributions.png"
+      "spd_events__human_climate_space__",
+      "untruncated_hierarchical_contributions__space_control.png"
     )
   )
 )
 ```
 
-*Supplementary signed Figure 3. Unmodified signed climate and human allocations through time.*
+*Supplementary signed Figure 3. Untruncated signed climate and human hierarchical contributions through time.*
 
 ```{r}
 #| label: embed-hvarpart-h2-main
@@ -286,4 +292,4 @@ knitr::include_graphics(
 )
 ```
 
-*Supplementary signed Figure 4. Multidimensional community-change ordinations with separate unmodified signed human and climate allocations.*
+*Supplementary signed Figure 4. Multidimensional community-change ordinations with separate untruncated signed human and climate hierarchical contributions.*

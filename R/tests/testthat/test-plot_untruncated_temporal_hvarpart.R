@@ -54,7 +54,11 @@ testthat::test_that("temporal plot accepts negative and above-one values", {
   )
   testthat::expect_identical(
     result[["labels"]][["y"]],
-    "Relative importance\n(Untruncated hierarchical contribution)"
+    paste(
+      "Untruncated signed hierarchical contribution",
+      "(adjusted-R-squared scale)",
+      sep = "\n"
+    )
   )
   region_labels <-
     result$facet$params$labeller(

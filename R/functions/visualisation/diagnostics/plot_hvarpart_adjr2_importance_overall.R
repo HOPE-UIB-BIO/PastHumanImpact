@@ -153,9 +153,13 @@ plot_hvarpart_adjr2_importance_overall <- function(
     ggplot2::labs(
       x = "Adjusted R\u00b2",
       y = if (importance_column == "human_importance_bounded") {
-        "Human relative importance\n(zero-truncated allocation)"
+        "Human share\n(zero-truncated and renormalised)"
       } else {
-        "Human relative importance\n(signed allocation)"
+        paste(
+          "Untruncated signed human hierarchical contribution",
+          "(adjusted-R-squared scale)",
+          sep = "\n"
+        )
       }
     ) +
     ggplot2::theme_bw(base_size = text_size) +

@@ -7,6 +7,7 @@ testthat::test_that("plot_spd_radius_spatial_comparison() builds panels", {
     dplyr::mutate(
       region = "Europe",
       signed_difference = c(-0.2, -0.1, 0.1, 0.2),
+      zero_balance = c(-0.3, -0.1, 0.2, 0.4),
       signed_ranking = dplyr::if_else(
         .data[["signed_difference"]] > 0,
         "human",
@@ -17,6 +18,7 @@ testthat::test_that("plot_spd_radius_spatial_comparison() builds panels", {
   data_summary <-
     tibble::tibble(
       summary_level = c("region", "climatezone"),
+      metric = "zero_balance",
       region = c("Europe", NA_character_),
       climatezone = c(NA_character_, "Temperate"),
       median_delta = c(0.1, -0.1),
@@ -46,7 +48,7 @@ testthat::test_that("plot_spd_radius_spatial_comparison() builds panels", {
   testthat::expect_equal(scale_values$breaks, c(-1, 0, 1))
   testthat::expect_equal(scale_delta$breaks, c(-1, 0, 1))
   testthat::expect_equal(scale_y$limits, c(-1, 1))
-  testthat::expect_equal(scale_x_delta$limits, c(-0.2, 0.2))
+  testthat::expect_equal(scale_x_delta$limits, c(-1, 1))
   testthat::expect_identical(scale_shape_values$guide, "none")
   testthat::expect_equal(
     unname(scale_shape_values$palette(2)),
@@ -55,9 +57,6 @@ testthat::test_that("plot_spd_radius_spatial_comparison() builds panels", {
   testthat::expect_null(result[[2]]$scales$get_scales("shape"))
   testthat::expect_equal(
     result[[1]][["labels"]][["y"]],
-    paste0(
-      "Relative importance\n",
-      "(Untruncated human-climate contribution difference)"
-    )
+    "Zero-truncated human-climate importance balance"
   )
 })

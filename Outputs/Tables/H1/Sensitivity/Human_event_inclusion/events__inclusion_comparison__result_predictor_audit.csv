@@ -1,0 +1,16 @@
+region,proxy_variant,requested_regional_events,retained_human_predictors,reference_category
+Europe,events,fi;fc;ec;cc,fi;fc;ec;cc,bi
+North America,events,fc;es,fc;es,bi
+Latin America,events,weak;strong,weak;strong,no_impact
+Oceania,events,weak;medium;strong,weak;medium;strong,no_impact
+Asia,events,fi;fc;ei,fi;fc;ei,bi
+Europe,spd,,spd,bi
+North America,spd,,spd,bi
+Latin America,spd,,spd,no_impact
+Oceania,spd,,spd,no_impact
+Asia,spd,,spd,bi
+Europe,spd_events,fi;fc;ec;cc,spd;fi;fc;ec;cc,bi
+North America,spd_events,fc;es,spd;fc;es,bi
+Latin America,spd_events,weak;strong,spd;weak;strong,no_impact
+Oceania,spd_events,weak;medium;strong,spd;weak;medium;strong,no_impact
+Asia,spd_events,fi;fc;ei,spd;fi;fc;ei,bi

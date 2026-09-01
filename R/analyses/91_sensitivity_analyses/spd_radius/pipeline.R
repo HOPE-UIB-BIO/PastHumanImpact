@@ -567,7 +567,7 @@ list(
         "unique_adjusted_r2_pure_climate",
         "unique_adjusted_r2_pure_time"
       ),
-      ranking_cols = c("signed_ranking", "zero_ranking"),
+      ranking_cols = c("zero_ranking", "signed_ranking"),
       estimable_statuses = c(
         "estimated",
         "estimated_residual_temporal_dependence"
@@ -581,28 +581,29 @@ list(
     command = dplyr::bind_rows(
       summarise_spd_radius_paired_results(
         table_spd_radius_spatial_dataset_paired,
-        delta_col = "signed_difference_delta_500_minus_250",
+        delta_col = "zero_balance_delta_500_minus_250",
         summary_level = "overall"
       ),
       summarise_spd_radius_paired_results(
         table_spd_radius_spatial_dataset_paired,
-        delta_col = "signed_difference_delta_500_minus_250",
+        delta_col = "zero_balance_delta_500_minus_250",
         group_cols = "region",
         summary_level = "region"
       ),
       summarise_spd_radius_paired_results(
         table_spd_radius_spatial_dataset_paired,
-        delta_col = "signed_difference_delta_500_minus_250",
+        delta_col = "zero_balance_delta_500_minus_250",
         group_cols = "climatezone",
         summary_level = "climatezone"
       ),
       summarise_spd_radius_paired_results(
         table_spd_radius_spatial_dataset_paired,
-        delta_col = "signed_difference_delta_500_minus_250",
+        delta_col = "zero_balance_delta_500_minus_250",
         group_cols = c("region", "climatezone"),
         summary_level = "region_and_climatezone"
       )
-    )
+    ) |>
+      dplyr::mutate(metric = "zero_balance", .after = "summary_level")
   ),
   # Why: Assemble one all-available region-age table with signed,
   #   zero-truncated, and unique adjusted-R-squared source values.
@@ -679,6 +680,17 @@ list(
           data_unique,
           by = c("radius_km", "region", "age"),
           relationship = "one-to-one"
+        ) |>
+        dplyr::mutate(
+          zero_ranking = dplyr::case_when(
+            !is.finite(.data[["zero_allocation_human"]]) |
+              !is.finite(.data[["zero_allocation_climate"]]) ~ NA_character_,
+            .data[["zero_allocation_human"]] >
+              .data[["zero_allocation_climate"]] ~ "human",
+            .data[["zero_allocation_human"]] <
+              .data[["zero_allocation_climate"]] ~ "climate",
+            .default = "tie"
+          )
         )
     }
   ),
@@ -703,6 +715,7 @@ list(
         "unique_adjusted_r2_pure_space"
       ),
       ranking_cols = c(
+        "zero_ranking",
         "controlled_ranking",
         "human_climate_only_ranking"
       ),
@@ -719,22 +732,26 @@ list(
     command = dplyr::bind_rows(
       summarise_spd_radius_paired_results(
         table_spd_radius_temporal_region_age_paired,
-        delta_col = "controlled_balance_delta_500_minus_250",
+        delta_col = "zero_allocation_human_delta_500_minus_250",
         summary_level = "overall"
       ),
       summarise_spd_radius_paired_results(
         table_spd_radius_temporal_region_age_paired,
-        delta_col = "controlled_balance_delta_500_minus_250",
+        delta_col = "zero_allocation_human_delta_500_minus_250",
         group_cols = "region",
         summary_level = "region"
       ),
       summarise_spd_radius_paired_results(
         table_spd_radius_temporal_region_age_paired,
-        delta_col = "controlled_balance_delta_500_minus_250",
+        delta_col = "zero_allocation_human_delta_500_minus_250",
         group_cols = c("region", "age"),
         summary_level = "region_and_age"
       )
-    )
+    ) |>
+      dplyr::mutate(
+        metric = "zero_allocation_human",
+        .after = "summary_level"
+      )
   ),
   # Why: Independently reconstruct every published spatial summary value from
   #   the matched dataset source table.
@@ -743,7 +760,7 @@ list(
     command = diagnose_spd_radius_summary_reconciliation(
       data_comparison = table_spd_radius_spatial_dataset_paired,
       data_summary = table_spd_radius_spatial_dataset_summary,
-      delta_col = "signed_difference_delta_500_minus_250"
+      delta_col = "zero_balance_delta_500_minus_250"
     )
   ),
   # Why: Independently reconstruct every published temporal summary value from
@@ -753,7 +770,7 @@ list(
     command = diagnose_spd_radius_summary_reconciliation(
       data_comparison = table_spd_radius_temporal_region_age_paired,
       data_summary = table_spd_radius_temporal_region_age_summary,
-      delta_col = "controlled_balance_delta_500_minus_250"
+      delta_col = "zero_allocation_human_delta_500_minus_250"
     )
   ),
   # Why: Collect every qualitative ranking or status change in one reviewer-
@@ -771,12 +788,12 @@ list(
           age = NA_real_,
           status_250_km = .data[["status_250_km"]],
           status_500_km = .data[["status_500_km"]],
-          ranking_250_km = .data[["signed_ranking_250_km"]],
-          ranking_500_km = .data[["signed_ranking_500_km"]],
+          ranking_250_km = .data[["zero_ranking_250_km"]],
+          ranking_500_km = .data[["zero_ranking_500_km"]],
           robustness_classification =
             .data[["robustness_classification"]],
           balance_delta_500_minus_250 =
-            .data[["signed_difference_delta_500_minus_250"]]
+            .data[["zero_balance_delta_500_minus_250"]]
         ),
       table_spd_radius_temporal_region_age_paired |>
         dplyr::filter(.data[["material_change"]]) |>
@@ -792,17 +809,17 @@ list(
           age = .data[["age"]],
           status_250_km = .data[["status_250_km"]],
           status_500_km = .data[["status_500_km"]],
-          ranking_250_km = .data[["controlled_ranking_250_km"]],
-          ranking_500_km = .data[["controlled_ranking_500_km"]],
+          ranking_250_km = .data[["zero_ranking_250_km"]],
+          ranking_500_km = .data[["zero_ranking_500_km"]],
           robustness_classification =
             .data[["robustness_classification"]],
           balance_delta_500_minus_250 =
-            .data[["controlled_balance_delta_500_minus_250"]]
+            .data[["zero_allocation_human_delta_500_minus_250"]]
         )
     )
   ),
-  # Why: Build supplement-ready spatial and temporal figures directly from
-  #   public sensitivity source tables.
+  # Why: Build the main zero-truncated spatial figure directly from public
+  #   sensitivity source tables.
   targets::tar_target(
     name = "figure_spd_radius_spatial_comparison",
     command = plot_spd_radius_spatial_comparison(
@@ -811,7 +828,7 @@ list(
       data_summary = table_spd_radius_spatial_dataset_summary
     )
   ),
-  # Why: Build the supplement-ready paired region-age comparison figure.
+  # Why: Build the main zero-truncated paired region-age comparison figure.
   targets::tar_target(
     name = "figure_spd_radius_temporal_comparison",
     command = plot_spd_radius_temporal_comparison(
@@ -820,13 +837,12 @@ list(
       data_paired = table_spd_radius_temporal_region_age_paired
     )
   ),
-  # Why: Publish the selected-model human contribution profile as its own
-  #   supplement-ready figure rather than a combined patchwork panel.
+  # Why: Publish the zero-truncated human-share profile as its own figure.
   targets::tar_target(
     name = "figure_spd_radius_temporal_profiles",
     command = figure_spd_radius_temporal_comparison[["profiles"]]
   ),
-  # Why: Publish the paired human-contribution changes separately so small
+  # Why: Publish paired changes in zero-truncated human share separately so
   #   radius effects remain legible across region rows.
   targets::tar_target(
     name = "figure_spd_radius_temporal_changes",
@@ -919,20 +935,23 @@ list(
       plot_temporal_changes = figure_spd_radius_temporal_changes,
       path_spatial = here::here(
         "Outputs/Figures/H1/Spatial/SPD",
-        "spd__radius_comparison__spatial_human_climate_balance"
+        paste0(
+          "spd__radius_comparison__spatial_",
+          "zero_truncated_human_climate_balance"
+        )
       ),
       path_temporal_profiles = here::here(
         "Outputs/Figures/H1/Temporal/HVarPart",
         stringr::str_c(
           "spd__radius_comparison__temporal_human__",
-          "untruncated_hierarchical_contribution__space_control"
+          "zero_truncated_hierarchical_composition__space_control"
         )
       ),
       path_temporal_changes = here::here(
         "Outputs/Figures/H1/Temporal/HVarPart",
         stringr::str_c(
           "spd__radius_comparison__temporal_human__",
-          "untruncated_hierarchical_contribution_change__space_control"
+          "zero_truncated_hierarchical_composition_change__space_control"
         )
       )
     ),
