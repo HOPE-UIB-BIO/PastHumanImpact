@@ -1,0 +1,83 @@
+## Authors
+
+Vivian Astrup **Felde**<sup>1,2\*†</sup>, Ondřej **Mottl**<sup>1,2,3,4\*†</sup>, Suzette G. A. **Flantua**<sup>1,2\*†</sup>, Kuber P. **Bhatta**<sup>1</sup>, Hilary H. **Birks**<sup>1,2</sup>, John-Arvid **Grytnes**<sup>1</sup>, Henry **Hooghiemstra**<sup>5</sup>, Sandra **Nogué**<sup>6,7</sup>, Triin **Reitalu**<sup>8,9</sup>, Alistair W. R. **Seddon**<sup>1,2</sup>, Manuel J. **Steinbauer**<sup>10</sup>, Cajo J. F. ter **Braak**<sup>11</sup>, Thomas **Giesecke**<sup>12</sup>, Simon J. **Goring**<sup>13,14</sup>, Simon G. **Haberle**<sup>15,16</sup>, Annika V. **Herbert**<sup>15,16</sup>, Petr **Šmilauer**<sup>17</sup>, Willy **Tinner**<sup>18</sup>, John W. **Williams**<sup>13,14</sup>, Darcy **Bird**<sup>19,20</sup>, Jacob **Freeman**<sup>21,22</sup>, Eugenia **Gayo**<sup>23,24</sup>, Julie A. **Hoggarth**<sup>25</sup>, Claudio **Latorre**<sup>24,26</sup>, Lux **Miranda**<sup>27</sup>, Erick **Robinson**<sup>28,29,30</sup>, Xianyong **Cao**<sup>31</sup>, Fahu **Chen**<sup>31</sup>, H. John B. **Birks**<sup>1,2,32</sup>
+
+## Affiliations
+
+<sup>1</sup> Department of Biological Sciences, University of Bergen, Bergen, Norway.
+
+<sup>2</sup> Bjerknes Centre for Climate Research, Bergen, Norway.
+
+<sup>3</sup> Center for Theoretical Study, Charles University, Prague, Czech Republic.
+
+<sup>4</sup> Department of Botany, Faculty of Science, Charles University, Prague, Czech Republic.
+
+<sup>5</sup> Institute for Biodiversity and Ecosystem Dynamics, University of Amsterdam, Amsterdam, The Netherlands.
+
+<sup>6</sup> Department of Animal Biology, Plant Biology and Ecology, Universitat Autònoma de Barcelona; Bellaterra (Cerdanyola del Vallès), Catalonia, Spain.
+
+<sup>7</sup> CREAF, Campus de Bellaterra (UAB) Edifici G, Catalonia, Spain.
+
+<sup>8</sup> Institute of Ecology and Earth Sciences, University of Tartu, Tartu, Estonia.
+
+<sup>9</sup> Institute of Geology, Tallinn University of Technology, Tallinn, Estonia.
+
+<sup>10</sup> Bayreuth Center of Ecology and Environmental Research (BayCEER) & Bayreuth Center of Sport Science (BaySpo), University of Bayreuth, Bayreuth, Germany.
+
+<sup>11</sup> Biometris, Wageningen University & Research, Wageningen, The Netherlands.
+
+<sup>12</sup> Department of Physical Geography, Utrecht University, Utrecht, The Netherlands.
+
+<sup>13</sup> Department of Geography, University of Wisconsin-Madison, Madison, USA.
+
+<sup>14</sup> Nelson Institute Center for Climatic Research, University of Wisconsin-Madison, Madison, USA.
+
+<sup>15</sup> School of Culture, History and Language, ANU College of Asia and the Pacific, Australian National University, Canberra, Australian Capital Territory, Australia.
+
+<sup>16</sup> ARC Centre of Excellence for Indigenous and Environmental Histories and Futures, Australian National University, Canberra, Australian Capital Territory, Australia.
+
+<sup>17</sup> Department of Ecosystem Biology, University of South Bohemia, České Budějovice, Czech Republic.
+
+<sup>18</sup> Institute of Plant Sciences and Oeschger Centre for Climate Change Research, University of Bern, Bern, Switzerland.
+
+<sup>19</sup> Department of Anthropology, Washington State University, Pullman, USA.
+
+<sup>20</sup> Florida Museum of Natural History, University of Florida, Gainesville, Florida, USA.
+
+<sup>21</sup> Anthropology Program, Utah State University, Logan, USA.
+
+<sup>22</sup> The Ecology Center, Utah State University, Logan, USA.
+
+<sup>23</sup> Departamento de Geografía & Center for Climate and Resilence Research (CR)2, Universidad de Chile, Santiago, Chile.
+
+<sup>24</sup> Departamento de Ecologia, Pontificia Universidad Católica de Chile, Santiago, Chile.
+
+<sup>25</sup> Department of Anthropology, Baylor University, Waco, USA.
+
+<sup>26</sup> Institute of Ecology and Biodiversity (IEB), Pontificia Universidad Católica de Chile, Santiago, Chile.
+
+<sup>27</sup> Department of Information Technology, Uppsala University, Uppsala, Sweden.
+
+<sup>28</sup> Native Environment Solutions LLC, Boise, USA.
+
+<sup>29</sup> Division of Atmospheric Sciences, Desert Research Institute, USA.
+
+<sup>30</sup> School of Human Evolution and Social Change, Arizona State University, Tempe, USA.
+
+<sup>31</sup> Group of Alpine Paleoecology and Human Adaptation (ALPHA), State Key Laboratory of Tibetan Plateau Earth System, Environment and Resources (TPESER), Institute of Tibetan Plateau Research, Chinese Academy of Sciences, Beijing, China.
+
+<sup>32</sup> Environmental Change Research Centre, University College London, London, UK.
+
+\*Corresponding authors.
+
+Emails: vivian.felde@uib.no; ondrej.mottl@gmail.com; s.g.a.flantua@gmail.com
+
+†These authors contributed equally to this study.
+
+{{< pagebreak >}}
+
+# Abstract
+
+Although there is consensus that human impacts have shaped ecosystems and biodiversity for millennia, the relative roles of climate and human activity affecting the structure of Holocene ecosystems remain poorly understood. At present, there has been no systematic attempt to determine the relative strength of these two drivers at regional to continental scales. Here, we integrate palaeoecological, archaeological, and palaeoclimate data to quantify the relative importance of climate and human activity in shaping Holocene vegetation assemblage dynamics (8.5 – 2 ka BP). By analyzing 1262 fossil pollen sequences, we examine the responses of nine pollen assemblage properties (PAPs), serving as indirect vegetation assemblage changes and, for the first time, assess how relationships amongst these PAPs change over the study period. We then combine 150,000 radiocarbon dates from archaeological sites with palaeoclimate model output to establish that while human activities had localised impacts, climate was the predominant force influencing vegetation assemblage patterns across continental regions during this period. Whilst human impact during the mid-Holocene was present in some regions, the effects of this human impact was not uniform. Our results challenge the view that human actions were a major driver of changes in broad-scale ecological processes throughout the Holocene.
+
+{{< pagebreak >}}

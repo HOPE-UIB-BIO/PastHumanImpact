@@ -1,0 +1,55 @@
+## Extended Figures
+
+::: {#extfig-data-coverage}
+![](figures/extended-figure-01-data-coverage.png){width=100% fig-alt="Maps and plots summarising spatial, taxonomic, and temporal pollen-sequence coverage."}
+
+Overview of data coverage. (A) Spatial coverage and distribution of pollen sequences, (B) number of pollen sequences within climate zones (panels row 1), the number of taxa per sequence in each climate zone (panels row 2), and total number of taxa in each climate zone (panels row 3), and (C) temporal coverage of the pollen sequences.
+:::
+
+::: {#extfig-human-data-coverage}
+![](figures/extended-figure-02-human-data-coverage.png){width=100% fig-alt="Radiocarbon-date counts and human-presence proxy coverage by climate zone and continent."}
+
+The top panel shows the number of uncalibrated radiocarbon (RC) dates for each climate zone in the continental regions. The y-axis, scaled for each region, is the number of RC dates. The bottom panel shows a comparison of data coverage of human presence detected from pollen diagrams and radiocarbon dates ordered by climate zones (right to left) and geographical regions (top to bottom). Am = America
+:::
+
+::: {#extfig-site-examples}
+![](figures/extended-figure-03-site-examples.png){width=100% fig-alt="Two site examples showing PAP trajectories, predictors, and variation-partitioning results."}
+
+Two sequences and their temporal trends of PAPs and predictors (columns). The bar plots show results of the hierarchical variation partitioning. The two sequences were selected as examples of contrasting results: A) PAPs are mostly affected by trends of human population (SPD); B) PAPs are mostly explained by climate (MAT °C, Cold °C, Summer prec, Winter prec). The calculated metrics from each sequence of our full data compilation are subsequently used an input data in the analyses summarised in @fig-predictor-importance-spatial. SPD = summed probability densities, MAT °C = mean annual temperature, Cold °C = minimum temperature of the coldest month, Summer prec = mean precipitation of the warmest quarter, Winter prec = mean precipitation of the coldest quarter, N0–N2 = Hill’s diversity numbers, N2/N1 and N1/N0 = Hill’s evenness numbers, DCCA axis 1 = first axis of detrended canonical correspondence analysis, ROC = rate of compositional change, Density diversity = density of change points for diversity variables, Density turnover = density of change points of turnover variable. See **Methods** for more details about estimation of each variable.
+:::
+
+::: {#extfig-spd-trajectories}
+![](figures/extended-figure-04-spd-trajectories.png){width=100% fig-alt="Observed and modelled summed-probability-density trajectories by climate zone and continent."}
+
+General patterns of the summed probability density (SPD) curves based on all sequences within each climate zone for each continent. The thin lines represent the raw data, while thick lines represent the predictions from the hierarchical generalised additive models (HGAMs). Note that values have been normalised and centralised for this visualisation.
+:::
+
+::: {#extfig-annual-temperature}
+![](figures/extended-figure-05-annual-temperature.png){width=100% fig-alt="Observed and modelled mean annual temperature trajectories by climate zone and continent."}
+
+General patterns of mean annual temperatures ℃ (*bio1*) in each climate zone and continent, derived from CHELSA climate data[@main-ref-27]. Thin lines represent different trends in the raw data at the sequence level. Thick lines show the general prediction from the hierarchical generalised additive models (HGAMs).
+:::
+
+::: {#extfig-coldest-month-temperature}
+![](figures/extended-figure-06-coldest-month-temperature.png){width=100% fig-alt="Observed and modelled coldest-month temperature trajectories by climate zone and continent."}
+
+General patterns of minimum temperatures of the coldest month ℃ (*bio6*) in each climate zone and continent, derived CHELSA climate data[@main-ref-27]. Thin lines represent different trends in the raw data at the sequence level. Thick lines show the general prediction from the hierarchical generalised additive models (HGAMs).
+:::
+
+::: {#extfig-warmest-quarter-precipitation}
+![](figures/extended-figure-07-warmest-quarter-precipitation.png){width=100% fig-alt="Observed and modelled warmest-quarter precipitation trajectories by climate zone and continent."}
+
+General patterns of precipitation of the warmest quarter (*bio18*) in each climate zone and continent, derived from CHELSA climate data[@main-ref-27]. Thin lines represent different trends in the raw data at the sequence level. Thick lines show the general prediction from the hierarchical generalised additive models (HGAMs).
+:::
+
+::: {#extfig-coldest-quarter-precipitation}
+![](figures/extended-figure-08-coldest-quarter-precipitation.png){width=100% fig-alt="Observed and modelled coldest-quarter precipitation trajectories by climate zone and continent."}
+
+General patterns of precipitation of the coldest quarter (bio19) in each climate zone and continent, derived from CHELSA climate data[@main-ref-27]. Thin lines represent different trends in the raw data at the sequence level. Thick lines show the general prediction from the hierarchical generalised additive models (HGAMs).
+:::
+
+::: {#extfig-human-events}
+![](figures/extended-figure-09-human-events.png){width=100% fig-alt="Modelled detection of human-event categories by climate zone and continent."}
+
+General pattern of hierarchical generalised additive models (HGAMs) showing the detection of different human events from pollen sequences summarised by climate zone for each geographical region. Different events are detected in different regions (see @exttbl-human-events).
+:::

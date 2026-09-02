@@ -1,0 +1,38 @@
+---
+title: "Title: Climate outweighs human effects on vegetation assemblage dynamics in the Holocene"
+output-file: Felde_Mottl_Flantua_et_al_HumanImpact_ms
+lang: en-GB
+nocite: |
+  @*
+---
+
+{{< include _sections/01-title-authors-abstract.qmd >}}
+
+{{< include _sections/02-main-text.qmd >}}
+
+{{< include _sections/03-main-references.qmd >}}
+
+{{< include _sections/04-statements.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/05-main-figures.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/06-main-tables.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/07-methods.qmd >}}
+
+{{< include _sections/08-methods-references.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/09-extended-figures.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/10-extended-tables.qmd >}}
+

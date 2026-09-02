@@ -1,0 +1,25 @@
+# Tables
+
+| **Assemblage metrics** | **Description** |
+|----|----|
+| N0 | Number of pollen types |
+| N1 | Number of equally common pollen types |
+| N2 | Number of equally abundant pollen types |
+| N2/N1 | Ratio of the number of equally abundant pollen types divided by equally common pollen types |
+| N1/N0 | Ratio of the number of equally common pollen types divided by estimated number of pollen types |
+| DCCA1 | Compositional turnover constrained by time |
+| RoC | Rates of compositional change |
+| Density diversity | Density estimates of break-points in diversity variables N0, N1, N2, N2/N1, N1/N0 |
+| Density turnover | Density estimates of break-points in turnover variables estimated by multivariate regression trees (MRT), DCCA, and RoC values |
+
+: **Overview of metrics used to estimate PAPs.** {#tbl-pap-metrics}
+
+| **Continents** | **Number of fossil pollen sequences** | **Number of sequences with SPD 250 km** | **Number of sequences with SPD 500 km** | **Number of sequences with human-impact events detected** |
+|:---|:--:|:--:|:--:|:--:|
+| North America | 554 | 512 | 43 | 217 |
+| Central & South America | 87 | 65 | 15 | 87 |
+| Europe | 396 | 383 | 14 | 143 |
+| Asia | 177 | 47 | 64 | 95 |
+| Oceania | 48 | 37 | 1 | 28 |
+
+: **Data summary for each continental region.** Number of pollen sequences included in the analyses for the assessed period of 8.5–2.0 calibrated thousand years before present (ka BP), the number of sequences with summed probability densities (SPDs) within a 250 km or 500 km radius of the site, and the number of pollen sequences with human-impact events. {#tbl-regional-summary}
