@@ -1,0 +1,108 @@
+## Reviewer #3 (Remarks to the Author)
+
+I work on Quaternary paleoclimate reconstructions and with Earth system scientists, and can comment on the relevance and impact of this study. It is indeed assumed by many that humans have played a significant and increasing role in shaping Holocene vegetation assemblage dynamics for the 8.5 to 2 ka BP study interval. This assumption is relevant, for instance, to the vigorous debate about whether the Anthropocene should be viewed as having gradually unfolded over tens of millennia (the “Anthropocene event” of Gibbard et al., 2022; see also the gradualist depiction in fig. 1 of Ellis, 2023), or whether significant impacts are restricted to more recent times. The conclusion that humans were not responsible for broad-scale ecological processes during this interval of study is therefore important to this debate, and it sets a baseline for human-driven impacts that were to later overwhelm Earth system functioning.
+
+The study itself is based on the novel statistical analysis of two very large and independent data sets. The conclusions seem to be well supported by the data, and careful thought is given to explaining their limitations. There is one controversial aspect of Holocene climate that is not addressed but perhaps could be. It concerns claims by Ruddiman et al. (e.g. 2003, 2007, 2020) that the emergence of intensive rice cultivation in eastern Asia was responsible for the release of significant carbon dioxide and methane into the atmosphere, from 7 ka and 5 ka respectively. This would explain why global temperatures remain relatively flat even as summer insolation at 65°N declined from its peak in the Early Holocene. These claims have been questioned by Zalasiewicz et al. (2024) who noted that isotopic and modelling studies are consistent with oceanic outgassing rather than anthropogenic causes for these rises in greenhouse gases. Moreover, Summerhayes et al. (2024) noted that global average insolation may have in fact risen slightly over the past 7 kyr, potentially leading to the degassing of the global ocean which is by far the largest CO2 reservoir on the planet. The question then, as to whether there is evidence within the pollen record for substantial cultivation of rice in eastern Asia, becomes relevant in assessing the extent of human impacts on the Earth system.
+
+> **Response.** We thank the reviewer for identifying this broader context. We agree that the timing and magnitude of eastern-Asian rice cultivation is important to the early anthropogenic hypothesis. The present analyses, however, cannot test that hypothesis: the response variables are ten broad PAPs rather than harmonised rice-pollen occurrence or land-use reconstructions, and the predictor design does not estimate greenhouse-gas forcing. Adding such an analysis would require taxon-level harmonisation, eastern-Asian archaeological and cultivation predictors, and validation designed for that causal question. We have therefore not inferred the presence, extent, or climatic effect of rice cultivation from the PAP results, but have added the question explicitly as an inferential boundary and direction for future work.
+
+> **Changes in the revised article.** The final Discussion paragraph now explains that a taxon-specific reconstruction of eastern-Asian rice cultivation and early anthropogenic greenhouse-gas forcing would require a different response domain and inferential design and is not a sensitivity analysis of the present models.
+
+I consider the MS to be publishable after minor revision, and perhaps following consideration of the question of eastern Asia rice cultivation. The Holocene is crucial to our understanding of the rise of civilizations and the emergence of the modern world. This MS will have a profound impact on the way we approach these fundamental issues.
+
+Martin J. Head  
+5 July 2025
+
+> **Response.** We thank the reviewer for this encouraging assessment. We have considered the eastern-Asian rice-cultivation question and clarified why the present PAP-based analysis cannot resolve it, while ensuring that the revised article does not make a taxon-specific or greenhouse-gas attribution.
+
+### References
+
+Gibbard, P.L., Bauer, A.M., Edgeworth, M., Ruddiman, W.F., Gill, J.L., Merritts, D.J., Finney, S.C., Edwards, L.E., Walker, M.J.C., Maslin, M., and Ellis, E.C., 2022a, A practical solution: the Anthropocene is a geological event, not a formal epoch. Episodes, v. 45, pp. 349–357. doi:10.18814/epiiugs/2021/021029.
+
+Ellis, E.C., 2023. The Anthropocene condition: evolving through social–ecological transformations. Phil. Trans. R. Soc. B 379: 20220255. <https://doi.org/10.1098/rstb.2022.0255>
+
+Ruddiman, W.F., 2003, The anthropogenic greenhouse era began thousands of years ago, Climatic Change, v. 61, pp. 261–293. doi:10.1023/ B:CLIM.0000004577.17928.fa
+
+Ruddiman, W.F., 2007, The early anthropogenic hypothesis: Challenges and responses, Reviews of Geophysics, v. 45, RG4001. doi:10.1029/ 2006RG000207
+
+Ruddiman, W.F., He, F., Vavrus, S.J., and Kutzbach, J.E., 2020. The early anthropogenic hypothesis: A review. Quaternary Science Reviews, v. 240, 106386. doi:10.1016/j.quascirev.2020.106386
+
+Summerhayes, C.P., Zalasiewicz, J., Head, M.J., Syvitski, J., Barnosky, A.D., Cearreta, A., Fiałkiewicz-Koziel, B., Grinevald, J., Leinfelder, R., McCarthy, F.M.G., McNeill, J.R., Saito, Y., Wagreich, M., Waters, C.N., Williams, M., Zinke, J., 2024. The future extent of the Anthropocene epoch: A synthesis. Global and Planetary Change 242: 104568. <https://doi.org/10.1016/j.gloplacha.2024.104568>
+
+Zalasiewicz, J., Head, M.J., Waters, C.N., Turner, S.D., Haff, P.K., Summerhayes, C., Williams, M., Cearreta, A., Wagreich, M., Fairchild, I., Rose, N.L., Saito, Y., Leinfelder, R., Fiałkowicz-Kozieł, B., An, Z., Syvitski, J., Gałuszka, A., McCarthy, F.M.G., Ivar do Sul, J., Barnosky, A., Cundy, A.B., McNeill, J.R., and Zinke, J., 2024. The Anthropocene within the Geological Time Scale: analysis of fundamental questions. Episodes 47(1): 65–83.
+
+> **Response.** We thank the reviewer for providing this literature. The revised Discussion recognises the question but does not use these papers to imply that our PAP models test competing mechanisms of Holocene greenhouse-gas change.
+
+### Minor detailed comments on the MS
+
+Line 69. Should there be consistency here in the precision, i.e. 8.5–2.0 ka BP? See Line 336 where this consistency is maintained.
+
+> **Response.** Agreed. We now use 8.5–2.0 ka BP consistently when specifying the study interval.
+
+Line 82. For land use, reference to Our World in Data would be better: <https://ourworldindata.org/land-use>.
+
+> **Response.** Thank you for the suggestion. We revised the surrounding text and will make the final reference choice together with the co-authors, retaining this source only where it directly supports the statement made.
+
+Line 95. not “middle Holocene” but “Middle Holocene” if you are referring to the formal substage/subepoch (8.2–4.2 ka), or “mid-Holocene” if more loosely.
+
+> **Response.** Corrected. We use “Middle Holocene” for the formal subdivision and “mid-Holocene” for informal usage.
+
+Line 113. Pleistocene and Holocene epochs (not periods).
+
+> **Response.** Corrected to “epochs.”
+
+Line 116. “the term “period” not needed here because the Holocene can only refer to a unit of time.
+
+> **Response.** Corrected. We removed the unnecessary use of “period” with Holocene.
+
+Line 124. reflects, not reflect (“each” refers to the singular).
+
+> **Response.** Corrected to “reflects.”
+
+Line 134. “on the period between 8.5 and 2.0 ka BP” if the consistency in precision is justified.
+
+> **Response.** Corrected, with the study interval consistently expressed as 8.5–2.0 ka BP or “between 8.5 and 2.0 ka BP,” according to sentence structure.
+
+Line 147. we would expect an altered covariance between the PAPs within different climate zones on continental regions.
+
+> **Response.** Corrected and clarified. H2 is now framed as a prediction about changes in relationships among PAPs within continental and subcontinental groups, rather than as a taxon-specific vegetation response.
+
+Line 150. This subheading is a little confusing because while it references H1, it describes the result rather than the stated hypothesis. I realize that restating the hypothesis could be misleading here, so perhaps frame the hypothesis as “H1: Holocene palaeoclimate versus human impact”.
+
+> **Response.** Agreed. We revised the subheading to “H1: Holocene human impact secondary to palaeoclimate,” which identifies the hypothesis and the observed result while retaining the temporal context.
+
+Line 157. Middle to Late Holocene – you are referring to official subseries of the Holocene, so the first initial of the modifiers “middle” and “late” must be capitalized. If this is not done, you will need to define what will then be informal terms.
+
+> **Response.** Corrected to “Middle to Late Holocene” where the formal subdivisions are intended.
+
+Line 175. Again an issue of consistency in precision. In Asia 3.5 ka BP so for Europe should that be 3.0 ka BP?
+
+> **Response.** Corrected. Ages are now reported with consistent precision within each comparison.
+
+Line 218. palaeoclimate data between 8.5 and 2.0 ka BP to invesitgate … (then delete “8.5 and 2.0 ka BP” at the end of the sentence).
+
+> **Response.** Corrected and the duplicated interval was removed.
+
+Line 220. Our first hypothesis posited that …
+
+> **Response.** Corrected. The sentence now begins with an explicit formulation of the first hypothesis.
+
+Line 241. PAPs not PAPS.
+
+> **Response.** Corrected throughout to “PAPs.”
+
+Line 275. “mid” is not a stand-alone word in most dictionaries, so it would be “mid-Holocene” as an informal interval of time.
+
+> **Response.** Corrected to “mid-Holocene.”
+
+Line 326. “factors like” better as “such factors as”.
+
+> **Response.** Corrected to “such factors as.”
+
+Line 336. “from 8.5 to 2.0 ka BP”. Use an en-dash when referring to, but not specifying, a range, such as “over the range 8.5–2.0 ka BP”. I note here that “2.0 ka unlike elsewhere is states to two significant figures, which seems appropriate precision if supported by the dates themselves.
+
+> **Response.** Corrected. We use “from 8.5 to 2.0 ka BP” in prose and an en dash in the adjectival or compact range “8.5–2.0 ka BP.”
+
+Line 467. You do make it clear that Eric C Grimm is no longer with us, but are you perhaps dedicating this MS to the memory of the person rather than the person themselves? Remember to change “manuscript” to “article” when revising the MS.
+
+> **Response.** Corrected. The dedication now refers to the memory of Eric C. Grimm, and submission-facing prose uses “article” rather than “manuscript” where appropriate.

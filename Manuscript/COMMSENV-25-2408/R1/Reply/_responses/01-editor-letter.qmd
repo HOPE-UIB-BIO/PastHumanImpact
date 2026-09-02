@@ -1,0 +1,23 @@
+# EDITORS REQUESTS
+
+In particular the following editorial thresholds needs to be met,
+
+* Provide a compelling case that climate outweighs human effects on vegetation assemblage dynamics in the Holocene, including a thorough analysis of the results, clearly indicating the variance explained by models.
+
+> **Response.** We have revised both the analysis presentation and the interpretation of model fit. The revised article now reports total adjusted $R^2$ separately from the relative allocation of explained variation between human activity and palaeoclimate. It also presents the corrected hierarchical variation-partitioning extraction under signed, zero-truncated, and exclude-negative profiles. In the controlled spatial analysis, palaeoclimate had greater relative importance than human SPD in `r format(spatial_climate_dominant_n, big.mark = ",")` of `r format(spatial_controlled_n, big.mark = ",")` eligible records (`r sprintf("%.1f", spatial_climate_dominant_pct)`%). Across the `r format(spatial_available_n, big.mark = ",")` records with an estimable spatial SPD decomposition, mean total adjusted $R^2$ was `r sprintf("%.3f", spatial_mean_adjusted_r2)`. The controlled temporal analysis showed the same broad ordering in `r temporal_climate_dominant_n` of `r temporal_spd_n` estimable region-age comparisons.
+
+> **Changes in the revised article.** We report these results in the main Results section “H1: Holocene human impact secondary to palaeoclimate” and Figs. 3–4. Supplementary Result validation presents the distributions of adjusted $R^2$, fit–importance diagnostics, signed results, unique fractions, and the comparison of HVarPart reporting profiles. The Discussion now states explicitly that relative allocations partition the explained component of a fitted model and are not the proportion of total pollen variation explained.
+
+* Justify the usage of data from multiple scales and fully discuss the limitations of your methods, particularly as raised by reviewer #2.
+
+> **Response.** We have bounded the inference to continental and subcontinental patterns in pollen assemblage properties from 8.5 to 2.0 ka BP and now explain the spatial scales represented by each data source. Pollen source areas vary among sites; palaeoclimate is extracted at record coordinates; archaeological radiocarbon dates are collected within a 250 km neighbourhood with a 500 km fallback; and expert-derived human events are regional and record based. No single spatial support can make these sources equivalent. We therefore added explicit discussion of scale mismatch and matched sensitivity analyses for SPD radius and human-proxy definition. We also expanded the treatment of pollen-count and productivity biases, climate-model smoothing and point extraction, archaeological sampling bias, event coarseness and circularity, fixed modern climate zones, and residual spatial and temporal dependence.
+
+> **Changes in the revised article.** The relevant additions appear in Methods under “Data filtering,” “Spatial units for analysis,” “Detection of past human activities,” “Palaeoclimate,” and “Numerical analysis of hypothesis 1”; in the scale- and proxy-limitation paragraphs of the Discussion; and in “Supplementary Methods: Result-validation analyses” and “Supplementary Results: Result validation.”
+
+* Clearly explain your methods in detail.
+
+> **Response.** We substantially expanded the Methods while retaining the structure of the submitted article. The revised text now distinguishes the preparation pool, original H1 model inventory, and smaller analysis-specific cohorts; explains the 25-grain minimum, normal 150-grain rarefaction target, and record-specific lower counts; defines all ten PAPs and their expected correlations; describes the temporal PAP trajectories as equal-weighted averages of record-level posterior predictions over observed coverage; gives the construction and limitations of both human proxies and the palaeoclimate predictors; and distinguishes total model fit, signed hierarchical contributions, zero-truncated display compositions, unique fractions, and shared commonality. The time and spatial controls and all supplementary validation analyses are also described explicitly.
+
+> **Changes in the revised article.** These additions are incorporated throughout the revised Methods, with the detailed quality-control and sensitivity procedures grouped in “Supplementary Methods: Result-validation analyses.” The associated cohorts, model profiles, figures, and tables are identified in their captions and in the Supplementary Results.
+
+# REVIEWER COMMENTS

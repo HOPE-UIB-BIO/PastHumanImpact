@@ -1,0 +1,109 @@
+# Reviewer 1
+
+## R1.1 — title, temporal scope, and destructive-transformation wording
+
+> **Original comment:** The title implies the entire Holocene although the data end about 2,000 years ago, and the discussion should soften the statement about human transformation not always being destructive.
+
+**Response.** We agree and now state the 8.5–2.0 ka BP interval in the title, abstract, hypotheses, Results, Discussion, and Conclusion.
+
+**Analytical result.** All primary PAP and SPD comparisons are restricted to 8.5–2.0 ka BP.
+
+**Changes in the revised article.** Title; Abstract; Discussion, first four paragraphs; Conclusion.
+
+> “Climate outweighs human effects on pollen assemblage dynamics from 8.5 to 2.0 ka BP”
+
+> “This inference is explicitly scale-bounded.”
+
+## R1.2 — climate-model and human-proxy limitations
+
+> **Original comment:** Please discuss benefits and limitations of climate-model output, SPDs, and the circularity of expert-derived pollen events.
+
+**Response.** We now state why climate simulations are useful, where smoothing and point extraction limit them, why SPDs are retained as the primary human proxy, and why pollen events are only complementary sensitivity evidence.
+
+**Analytical result.** Human-event inclusion changed some individual estimates but did not provide an independent second test because the event predictor partly shares its pollen source with the response.
+
+**Changes in the revised article.** Methods, “Human activity proxies” and “Palaeoclimate predictors”; Discussion, proxy-limitation paragraphs.
+
+> “Climate simulations provide physically coherent, spatially complete covariates across the study interval, but their effective resolution and temporal smoothing can suppress local extremes.”
+
+> “Because event definitions and PAP responses may derive from the same pollen sequence, the event analysis is partly circular.”
+
+## R1.3 — context from related regional studies
+
+> **Original comment:** The introduction would benefit from prior European and regional studies using related data and variation-partitioning approaches.
+
+**Response.** We restored the methodological context while clarifying that our response layer is ten PAPs rather than a taxon-composition analysis and that our inference is broader in scale.
+
+**Analytical result.** This is a framing change and does not alter an analysis cohort.
+
+**Changes in the revised article.** Introduction, opening and PAP-proxy paragraphs; Discussion, scale-bounded interpretation.
+
+> “Because these metrics are derived from pollen assemblages, they provide indirect representations of vegetation assemblage change; we therefore refer to them as pollen assemblage properties (PAPs) [@main-ref-23] and do not interpret them as taxon-specific vegetation responses.”
+
+> **AUTHOR REVIEW TODO — optional references:** Confirm the final balanced subset of reviewer-suggested regional references before submission.
+
+## R1.4 — H1 wording and PAP-scale interpretation
+
+> **Original comment:** Use “major driver” when influence exceeds climate and acknowledge that PAPs may homogenise vegetation signals and amplify broad climatic patterns.
+
+**Response.** We rewrote H1 as a direct relative-importance question and explicitly delimit PAP inference.
+
+**Analytical result.** Climate exceeded human influence in `r format(spatial_climate_dominant_n, big.mark = ",")` controlled spatial records and `r temporal_climate_dominant_n` of `r temporal_spd_n` estimable temporal SPD comparisons.
+
+**Changes in the revised article.** Introduction, hypotheses; Results, H1; Discussion, pollen-domain and scale paragraphs.
+
+> “The first hypothesis (H1) proposed that human impact was the primary driver of changes in PAPs at continental and subcontinental scales between 8.5 and 2.0 ka BP.”
+
+> “The reduced-response sensitivity retained the broad climate-over-human ordering, but the analysis remains a community-summary assessment and cannot identify whether a particular tree, grass, crop, or weed responded to human activity or climate.”
+
+## R1.5 — request for taxon-specific vegetation discussion
+
+> **Original comment:** Add discussion of vegetation changes themselves and how specific taxa or assemblage types respond to climate or people.
+
+**Response.** We respectfully decline a new taxon-specific analysis because the response variables are PAPs, taxonomies are not harmonised for a global taxon model, and such an analysis would answer a different question.
+
+**Analytical result.** No taxon-specific result is inferred from the H1 or H2 models.
+
+**Changes in the revised article.** Discussion, final scope paragraph.
+
+> “Finally, a taxon-specific reconstruction, including the suggested analysis of eastern-Asian rice cultivation and early anthropogenic greenhouse-gas forcing, would require harmonised taxon-level response variables, region-specific archaeological predictors, and additional validation.”
+
+> **AUTHOR REVIEW TODO — co-author approval:** Confirm the wording of this taxon-specific scope response before submission.
+
+## R1.6 — record selection, pollen-source areas, and climate-zone stability
+
+> **Original comment:** Explain selection of the 1,262 sequences, site characteristics and pollen-source areas, and the assumption of stable climate zones.
+
+**Response.** We separate the `r format(preparation_pool_n, big.mark = ",")`-record preparation pool from the original H1 inventory and analysis-specific eligible cohorts, and we now discuss basin/source-area mismatch and fixed modern climate-zone limitations.
+
+**Analytical result.** The controlled spatial reporting cohort is `r format(spatial_controlled_n, big.mark = ",")`, rather than either headline preparation count.
+
+**Changes in the revised article.** Methods, “Study interval, spatial units, and record cohorts”; Discussion, local-scale and climate-zone paragraphs; Table 1.
+
+> “The original H1 model inventory contained 1,262 records after the baseline workflow, and each subsequent analysis used a smaller eligible cohort determined from the live predictor, response, temporal-control, spatial-control, and matching requirements.”
+
+> “However, the groupings are fixed from modern Köppen–Geiger boundaries and do not migrate with Holocene climate.”
+
+## R1.7 — low pollen-count threshold
+
+> **Original comment:** Explain the 25-grain minimum, its implications for PAP reliability, and why the 150-grain criterion was relaxed.
+
+**Response.** We clarify that 25 is a sample minimum, 150 is the normal rarefaction target, and lower record-specific counts are used only when supported by the record’s observed sample distribution.
+
+**Analytical result.** The strict profiles quantify the rapid coverage loss at 300, 500, and 1,000 grains; they are not H1 reruns.
+
+**Changes in the revised article.** Methods, “Pollen data preparation”; Discussion, pollen-bias paragraph; Supplementary Table “Pollen filtering and retention.”
+
+> “These scenarios are retention and bias–coverage diagnostics only: the complete H1 model inventory was not refitted under the stricter thresholds.”
+
+## R1.8 — figure readability
+
+> **Original comment:** Figure 4 contains too much small information, and panel labels in Figure 2 were misaligned.
+
+**Response.** We promoted the overview of PAP temporal trajectories to Fig. 2, placed the controlled spatial and temporal H1 results in Figs. 3 and 4, moved the former H2 main figure to Supplementary Fig. 1, and grouped the quality-control and sensitivity analyses in Supplementary Result validation.
+
+**Analytical result.** The main figures now share explicit profile, cohort, control, and missing/negative-value captions.
+
+**Changes in the revised article.** Figs. 2–4, Supplementary Fig. 1, and the grouped Supplementary Result validation figures.
+
+> “Negative signed individual contributions are set to zero only for this display; a zero or missing displayed component does not imply absence of an ecological effect, and signed counterparts are shown in Supplementary Fig. 25.”

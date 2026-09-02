@@ -1,0 +1,70 @@
+---
+title: "Climate outweighs human effects on pollen assemblage dynamics from 8.5 to 2.0 ka BP"
+output-file: Felde_Mottl_Flantua_et_al_HumanImpact_revised
+lang: en-GB
+format:
+  pdf:
+    documentclass: scrartcl
+    pdf-engine: xelatex
+    papersize: a4
+    fontsize: 12pt
+    geometry: [top=25mm, bottom=25mm, left=25mm, right=25mm]
+    linestretch: 1.5
+    colorlinks: false
+    fig-pos: H
+    tbl-cap-location: top
+    include-in-header: styles/submission.tex
+  docx:
+    reference-doc: reference/submitted-style-reference.docx
+    toc: false
+    number-sections: false
+    fig-width: 6.3
+    fig-height: 4.6
+    tbl-cap-location: top
+bibliography:
+  - references/main-references.bib
+  - references/methods-references.bib
+csl: references/submitted-numeric.csl
+citeproc: false
+filters:
+  - filters/split-bibliography.lua
+link-citations: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+{{< include _sections/00-evidence-setup.qmd >}}
+
+{{< include _sections/01-title-authors-abstract.qmd >}}
+
+{{< include _sections/02-main-text.qmd >}}
+
+{{< include _sections/03-main-references.qmd >}}
+
+{{< include _sections/04-statements.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/05-main-figures.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/07-supplementary-methods.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/09-supplementary-results.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/09-supplementary-figures.qmd >}}
+
+{{< pagebreak >}}
+
+{{< include _sections/10-supplementary-core-tables.qmd >}}
+
+{{< include _sections/10-supplementary-tables.qmd >}}
+
+{{< include _sections/08-supplementary-references.qmd >}}

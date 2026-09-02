@@ -1,0 +1,345 @@
+---
+title: "Response to Reviewer 2: the role of regional human-impact events"
+format:
+  html:
+    embed-resources: true
+  pdf:
+    include-in-header:
+      text: |
+        \setlength{\abovecaptionskip}{14pt}
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/Reply/response_human_event_sensitivity.qmd"
+)
+source(here::here("R/00_Config_file.R"))
+
+table_dir <- here::here(
+  "Outputs", "Tables", "H1", "Sensitivity", "Human_event_inclusion"
+)
+figure_dir <- here::here(
+  "Outputs", "Figures", "H1", "Sensitivity", "Human_event_inclusion"
+)
+availability <- readr::read_csv(
+  file.path(
+    table_dir,
+    "events__inclusion_comparison__chronology_availability.csv"
+  ),
+  show_col_types = FALSE
+)
+model_audit <- readr::read_csv(
+  file.path(
+    table_dir,
+    "events__inclusion_comparison__regional_model_audit.csv"
+  ),
+  show_col_types = FALSE
+)
+dataset_summary <- readr::read_csv(
+  file.path(
+    table_dir,
+    "events__inclusion_comparison__dataset_summary.csv"
+  ),
+  show_col_types = FALSE
+)
+region_age_summary <- readr::read_csv(
+  file.path(
+    table_dir,
+    "events__inclusion_comparison__region_age_summary.csv"
+  ),
+  show_col_types = FALSE
+)
+
+availability_value <- function(category) {
+  availability |>
+    dplyr::filter(.data[["chronology_availability"]] == category) |>
+    dplyr::pull(.data[["n_datasets"]])
+}
+fmt3 <- function(x) format(round(x, 3), nsmall = 3, trim = TRUE)
+format_summary <- function(data_source, cohort, contrast, metric) {
+  data_source |>
+    dplyr::filter(
+      .data[["summary_level"]] == "overall",
+      .data[["cohort"]] == .env[["cohort"]],
+      .data[["contrast"]] == .env[["contrast"]],
+      .data[["metric"]] == .env[["metric"]]
+    ) |>
+    dplyr::slice_head(n = 1L)
+}
+
+dataset_combined_all <- format_summary(
+  dataset_summary, "as_coded", "spd_events_minus_spd", "zero_balance"
+)
+dataset_events_all <- format_summary(
+  dataset_summary, "as_coded", "events_minus_spd", "zero_balance"
+)
+temporal_combined_all <- format_summary(
+  region_age_summary,
+  "as_coded",
+  "spd_events_minus_spd",
+  "zero_allocation_human"
+)
+temporal_events_all <- format_summary(
+  region_age_summary,
+  "as_coded",
+  "events_minus_spd",
+  "zero_allocation_human"
+)
+regional_event_table <-
+  model_audit |>
+  dplyr::filter(
+    .data[["cohort"]] == "as_coded",
+    .data[["proxy_variant"]] == "events"
+  ) |>
+  dplyr::distinct(
+    .data[["region"]],
+    .data[["requested_regional_events"]],
+    .data[["reference_category"]]
+  ) |>
+  dplyr::mutate(
+    region = factor(
+      .data[["region"]],
+      levels = c(
+        "North America", "Latin America", "Europe", "Asia", "Oceania"
+      )
+    )
+  ) |>
+  dplyr::arrange(.data[["region"]]) |>
+  dplyr::rename(
+    Continent = "region",
+    `Regional event categories (data codes)` = "requested_regional_events",
+    `Reference state` = "reference_category"
+  )
+```
+
+## Reviewer comment
+
+The reviewer questioned whether the expert-derived human-impact event variable
+is too coarse to represent local ecological change, whether its derivation
+from pollen creates circular reasoning, and whether it adds useful information
+beyond the archaeological summed probability density (SPD).
+
+## Response
+
+We thank the reviewer for raising this important issue. We agree with the
+central caution: the event chronology should not be treated as a precise or
+independent measure of local human pressure. It was compiled from pollen-based
+expert assessments of major land-use transitions. Consequently, it is coarser
+than the vegetation responses analysed here and is partly informed by the same
+palaeoecological archive. Using it as the principal human predictor would risk
+circular reasoning.
+
+We nevertheless do not think that the appropriate response is to discard this
+source of evidence. Archaeological radiocarbon SPDs also have well-known
+limitations: their coverage is spatially uneven, sparse records can
+underrepresent human presence, and our SPD series does not extend into the
+last two millennia. The event chronology supplies different information. It
+identifies broad, regionally interpreted transitions in land use and continues
+into the younger period for which an SPD comparison is unavailable. The two
+sources are therefore imperfect in different ways. Our methodological choice
+is to retain SPD as the primary, archaeologically based proxy and use the event
+chronology as a complementary sensitivity test. This is a stronger and more
+transparent test than either presenting the event chronology as independent
+confirmation or excluding it altogether.
+
+To test whether the main inference depends on this choice, we repeated the
+analysis with three descriptions of human influence:
+
+1. **SPD** -- the archaeological proxy used in the primary analysis;
+2. **Combined** -- SPD together with the event categories relevant to that
+   continent; and
+3. **Events only** -- the regional event chronology without SPD.
+
+The event classifications are continent-specific because they describe
+regionally distinct land-use histories. We did not pool them into a single
+global classification. Each fit included only the event categories defined for
+its continent, and the regional reference state was omitted (Table 1).
+
+```{r}
+#| label: tbl-regional-events
+#| tbl-cap: "Continent-specific event categories used in the sensitivity analysis. The codes follow the event chronology supplied with the study; the reference state is the regional baseline against which the listed categories are compared."
+knitr::kable(regional_event_table)
+```
+
+The **all-data cohort** starts from all `r availability_value("total")` pollen records, each of which was screened by an expert for the regionally defined pollen indicators of human impact.
+Experts identified at least one qualifying event in `r availability_value("observed_events")` records.
+In the remaining `r availability_value("default_filled")` records, the expert assessment did not detect a human-impact indication that met the predefined regional criteria; these records therefore remain in the regional reference state.
+They are not missing, unexamined, or assumed to lack human presence.
+Rather, they represent records in which this deliberately conservative, pollen-based method did not identify one of the specified land-use transitions. All records remained candidates for analysis; individual comparisons then applied the same response-availability and model-estimability requirements to every proxy formulation.
+
+All other variables and controls were unchanged.
+
+The accompanying coverage summary (@fig-human-event-coverage) shows the geographical distribution of detected pollen-based events together with the availability of archaeological radiocarbon dates.
+In that established figure, "no human presence" means that no qualifying human-impact indication was detected by the pollen-event method; it must not be interpreted as evidence that people were absent from the region.
+
+### What the spatial comparison shows
+
+Figure 1 asks whether changing the human proxy alters the relative allocation
+of positive hierarchical contributions between human and climatic predictors
+within the same pollen record. Negative hierarchical fractions are set to zero
+and the remaining positive human, climate, and temporal components are
+renormalised to sum to one. The plotted balance is the human share minus the
+climate share: positive values indicate greater relative human importance and
+negative values greater relative climatic importance. This is a comparison of
+the composition of positive contributions, not the absolute amount of
+variation explained.
+
+Panel B summarises the matched changes by continent. Positive values indicate
+a shift toward humans and negative values a shift toward climate. Combined
+minus SPD produced a median shift of
+`r fmt3(dataset_combined_all$median)` (interquartile range
+`r fmt3(dataset_combined_all$lower_quartile)` to
+`r fmt3(dataset_combined_all$upper_quartile)`); Events only minus SPD shifted by
+`r fmt3(dataset_events_all$median)` (`r fmt3(dataset_events_all$lower_quartile)`
+to `r fmt3(dataset_events_all$upper_quartile)`). The event chronology therefore
+does not weaken the inferred role of human activity. If anything, adding the
+regional event information reallocates a larger share of the positive
+hierarchical contribution toward human predictors. Within this bounded
+composition, the sensitivity analysis therefore provides no indication that
+the primary SPD analysis exaggerates human importance.
+
+```{r}
+#| label: fig-human-event-spatial
+#| fig-cap: "Sensitivity of the zero-truncated human--climate importance balance to the regional event chronology. Negative hierarchical fractions were set to zero and the positive human, climate, and temporal components were renormalised to sum to one. (A) Estimates for SPD, Combined, and Events only; grey lines connect the same pollen record. Positive values indicate a greater human share and negative values a greater climatic share. (B) Median change relative to SPD by continent, with interquartile ranges. Positive changes shift the composition toward human predictors; negative changes shift it toward climate."
+#| out-width: 100%
+#| fig-pos: H
+knitr::include_graphics(file.path(
+  figure_dir,
+  paste0(
+    "events__inclusion_comparison__spatial_",
+    "zero_truncated_human_climate_balance.png"
+  )
+))
+```
+
+### What the temporal comparisons show
+
+Figure 2 shows the share of positive hierarchical contribution attributed to
+human predictors through time. The same
+wide vertical scale (up to 1) is used for every continent so that small
+fluctuations are not visually exaggerated. SPD and Combined can be compared
+from 8.5 to 2 ka BP. Events only continues through the shaded younger interval
+toward the present, where no archaeological SPD series is available in this
+study. The blue arrow follows the established direction from older to younger
+ages.
+
+Across continents, SPD, Combined, and Events only follow very similar
+trajectories during their shared period. The direct Combined minus SPD
+comparison has a median change in human share of
+`r fmt3(temporal_combined_all$median)` using all data. Events only minus SPD is
+centred even closer to zero (`r fmt3(temporal_events_all$median)`). These values support
+the methodological conclusion: incorporating the regional event chronology
+does not materially alter the temporal pattern or the relative importance of
+human influence during the period in which the proxies overlap.
+
+```{r}
+#| label: fig-human-event-temporal-all
+#| fig-cap: "Share of positive hierarchical contribution attributed to human predictors through time using all pollen records. Negative hierarchical fractions were set to zero and the positive human, climate, and spatial components were renormalised to sum to one. SPD and Combined overlap over 8.5--2 ka BP; Events only continues into the shaded younger interval, where SPD is unavailable. The fixed vertical scale extends to 1, and the blue arrow points from older to younger ages."
+#| out-width: 100%
+#| fig-pos: H
+knitr::include_graphics(file.path(
+  figure_dir,
+  paste0(
+    "events__inclusion_comparison__",
+    "temporal_zero_truncated_human_share__",
+    "space_control__all_data.png"
+  )
+))
+```
+
+Figure 3 shows the same result more directly by subtracting the SPD human
+share. Zero means that changing the proxy has no effect on the composition;
+positive values indicate a larger zero-truncated human share and negative
+values a smaller one. The deliberately broad range shows that most temporal
+differences are small rather than magnifying them through a narrow plotting
+window.
+
+```{r}
+#| label: fig-human-event-change-all
+#| fig-cap: "Change in the zero-truncated human share relative to SPD using all data. Combined minus SPD and Events only minus SPD remain close to zero across most continents and ages. The blue arrow points from older to younger ages."
+#| out-width: 100%
+#| fig-pos: H
+knitr::include_graphics(file.path(
+  figure_dir,
+  paste0(
+    "events__inclusion_comparison__",
+    "temporal_zero_truncated_human_share_change__",
+    "space_control__all_data.png"
+  )
+))
+```
+
+We have therefore revised our wording but retain the event chronology as a
+complementary source, not independent confirmation. It tests dependence on
+SPD, represents regional land-use transitions, and covers the younger period
+not reached by SPD. Agreement among the three formulations supports the
+robustness of our methodology while retaining the necessary caveats about
+circularity and ecological resolution. Continent-specific exceptions remain
+reported in the supplementary evidence tables.
+
+## Proposed Methods insertion
+
+We used archaeological summed probability densities (SPDs) as the primary
+proxy for human activity because they are assembled independently of the
+pollen responses analysed here. SPDs nevertheless have uneven archaeological
+coverage and may underestimate activity where dated material is sparse. We
+therefore used a pollen-derived expert chronology of major land-use events as
+a complementary sensitivity test. This chronology is not independent of the
+palaeoecological record and is too coarse to represent local human presence or
+land-use intensity; it was not treated as the primary human predictor.
+
+We compared SPD, Combined (SPD plus continent-specific event categories), and
+Events only. Event categories were selected separately for each continent and
+the corresponding regional reference state was excluded. Climate predictors,
+vegetation-response variables, age bins, and temporal and spatial controls were
+held constant. All 1,270 pollen records were screened by experts using the
+predefined regional event criteria. At least one qualifying event was detected
+in 1,024 records, whereas 246 remained in the regional reference state because
+the screening detected no qualifying human-impact indication. All records
+remained candidates for analysis, after which the same response-availability
+and model-estimability requirements were applied to all three proxy
+formulations. Event-only trajectories were additionally shown for the younger
+interval not covered by SPD.
+
+## Proposed Results insertion
+
+Adding regional events to SPD shifted the zero-truncated human--climate
+importance balance toward human predictors. Across matched pollen records,
+Combined minus SPD had a
+median change of `r fmt3(dataset_combined_all$median)` (interquartile range
+`r fmt3(dataset_combined_all$lower_quartile)` to
+`r fmt3(dataset_combined_all$upper_quartile)`). At continent-by-age resolution,
+the median change in the zero-truncated human share was
+`r fmt3(temporal_combined_all$median)` using all data. Events only minus SPD was
+centred near zero (`r fmt3(temporal_events_all$median)`). Thus, the principal
+temporal and spatial conclusions were retained when the regional event
+chronology was added to, or substituted for, SPD.
+
+## Proposed Discussion insertion
+
+The archaeological SPD and the pollen-derived event chronology provide
+complementary rather than equivalent evidence of past human activity. SPD is
+independent of the pollen response but is affected by uneven archaeological
+sampling and is unavailable here after 2 ka BP. The event chronology captures
+broad, region-specific land-use transitions and extends into this younger
+period, but its pollen basis introduces circularity and its classes cannot
+represent the full intensity or ecological effects of human activity. We therefore retain SPD as the primary proxy and treat agreement with events
+as sensitivity evidence, not independent confirmation.
+
+```{r}
+#| label: fig-human-event-coverage
+#| fig-cap: "Coverage of the two complementary human-activity proxies. Each square represents a pollen record. Event status records whether expert screening detected a qualifying pollen-based indication under the regional methodology; radiocarbon status records whether sufficient archaeological dates were available around that record. In the established figure legend, 'no human presence' means that no qualifying pollen indication was detected. The record was nevertheless assessed, and this classification does not imply an absence of people or human influence."
+#| fig-alt: "Coverage of expert-detected pollen event indicators and archaeological radiocarbon dates across continents and climate zones."
+#| out-width: 100%
+#| fig-pos: H
+knitr::include_graphics(here::here(
+  "Outputs", "Figures", "Data", "events_radiocarbon__coverage_status.png"
+))
+```

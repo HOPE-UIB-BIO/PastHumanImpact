@@ -1,0 +1,33 @@
+# Reviewer 3
+
+## R3.1 — eastern-Asian rice cultivation and the early anthropogenic hypothesis
+
+> **Original comment:** Consider whether the pollen record provides evidence for substantial eastern-Asian rice cultivation relevant to claims about early anthropogenic greenhouse-gas forcing.
+
+**Response.** We agree that this is an important question, but respectfully decline a new analysis because the present response variables are broad PAPs, not harmonised rice-pollen occurrence or land-use reconstructions, and the predictor design cannot attribute greenhouse-gas forcing.
+
+**Analytical result.** No taxon-specific or greenhouse-gas attribution is supported by H1 or H2.
+
+**Changes in the revised article.** Discussion, final scope paragraph.
+
+> “Finally, a taxon-specific reconstruction, including the suggested analysis of eastern-Asian rice cultivation and early anthropogenic greenhouse-gas forcing, would require harmonised taxon-level response variables, region-specific archaeological predictors, and additional validation.”
+
+> “These are important questions, but they are not tests of the PAP-based hypotheses examined here.”
+
+> **AUTHOR REVIEW TODO — co-author approval:** Confirm the final wording of this rice-cultivation scope response and the optional references associated with it.
+
+## R3.2 — terminology, precision, grammar, and line-level edits
+
+> **Original comment:** Standardise 8.5–2.0 ka BP precision, PAPs, mid-Holocene and formal Middle/Late Holocene terminology, epochs rather than periods, grammar, range syntax, and related line edits.
+
+**Response.** We implemented these edits throughout and rewrote affected sentences rather than preserving obsolete line-number references.
+
+**Analytical result.** This is a textual consistency change and does not alter cohorts or estimates.
+
+**Changes in the revised article.** Title, Abstract, Introduction, Results, Discussion, Methods, captions, and tables.
+
+> “We focused on 8.5–2.0 ka BP because archaeological radiocarbon coverage declines during the last two millennia in Europe and Asia [@main-ref-24].”
+
+> “These limitations are why we consistently describe the response domain as pollen assemblage dynamics rather than direct vegetation abundance or taxon-specific change.”
+
+We also use “mid-Holocene” for informal usage, capitalise Middle and Late Holocene when referring to formal subdivisions, use Pleistocene and Holocene as epochs, use “article” in submission-facing prose, and avoid categorical language that equates an undetected event with human absence.

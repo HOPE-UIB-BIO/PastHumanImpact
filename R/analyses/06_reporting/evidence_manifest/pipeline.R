@@ -148,7 +148,7 @@ list(
       "91_sensitivity_analyses/spd_radius/pipeline.R",
       "response_spd_radius_sensitivity.qmd",
       here::here(
-        "Manuscript/COMMSENV-25-2408/Reply",
+        "Manuscript/COMMSENV-25-2408/R1/Reply",
         "response_spd_radius_sensitivity.pdf"
       ),
       "human_event_model_audit",
@@ -234,17 +234,60 @@ list(
       "91_sensitivity_analyses/human_event_inclusion/pipeline.R",
       "response_human_event_sensitivity.qmd",
       here::here(
-        "Manuscript/COMMSENV-25-2408/Reply",
+        "Manuscript/COMMSENV-25-2408/R1/Reply",
         "response_human_event_sensitivity.pdf"
       )
     )
+  ),
+  # Why: Track the revision-local claim registry as the source of truth for
+  #   every artifact consumed by the revised manuscript and response letter.
+  targets::tar_target(
+    name = "file_revision_evidence_registry",
+    command = here::here(
+      "Manuscript",
+      "COMMSENV-25-2408",
+      "R1",
+      "evidence",
+      "claim-evidence-registry.csv"
+    ),
+    format = "file"
+  ),
+  # Why: Convert repository-relative registry paths to stable absolute paths
+  #   while retaining claim filters and publication destinations for audit.
+  targets::tar_target(
+    name = "data_revision_evidence_artifacts",
+    command = {
+      data_registry <-
+        readr::read_csv(
+          file_revision_evidence_registry,
+          show_col_types = FALSE
+        )
+
+      assertthat::assert_that(
+        !anyDuplicated(data_registry[["artifact_id"]]),
+        all(data_registry[["validation_status"]] == "registered"),
+        all(!fs::is_absolute_path(data_registry[["path"]])),
+        msg = "Revision evidence registry is invalid."
+      )
+
+      data_registry |>
+        dplyr::mutate(
+          path = purrr::map_chr(
+            .data[["path"]],
+            ~ here::here(.x)
+          )
+        )
+    }
   ),
   # Why: Materialize evidence manifest so downstream reporting uses an auditable
   #   result.
   targets::tar_target(
     name = "table_evidence_manifest",
     command = build_evidence_manifest(
-      data_artifacts = data_evidence_artifacts
+      data_artifacts = dplyr::bind_rows(
+        data_evidence_artifacts,
+        data_revision_evidence_artifacts
+      )
     )
   ),
   # Why: Track evidence manifest as a file target so file changes invalidate

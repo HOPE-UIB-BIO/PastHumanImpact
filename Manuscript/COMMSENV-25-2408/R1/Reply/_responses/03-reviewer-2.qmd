@@ -1,0 +1,127 @@
+# Reviewer 2
+
+## R2.1 — data presentation: show the PAP responses
+
+> **Original comment:** A key missing figure is the full set of PAPs through time for each region; presenting predictors without the responses makes the analyses difficult to interpret.
+
+**Response.** We agree and now present the PAP trajectories before predictor interpretation, including the added $N_1-N_2$ metric and all ten individual trajectories.
+
+**Analytical result.** The regenerated export contains ten PAP variables over observed coverage and was produced from existing posterior predictions without refitting.
+
+**Changes in the revised article.** Results, “Temporal patterns in pollen assemblage properties”; Fig. 2 and the ten individual PAP trajectories in Supplementary Figures; Table 2.
+
+> “The ten PAPs showed heterogeneous trajectories among regions and fixed modern climate zones across their observed 8.5–2.0 ka BP coverage.”
+
+## R2.2 — pollen productivity, count size, and inferred domain
+
+> **Original comment:** Differential pollen productivity and very low counts may bias richness, evenness, and turnover, weakening inference to parent vegetation assemblages.
+
+**Response.** We agree with the bias mechanism and have changed the inferential wording throughout from vegetation composition to pollen assemblage properties or pollen assemblage dynamics.
+
+**Analytical result.** Stricter thresholds reduce both sample and record coverage substantially, as shown in the live retention table.
+
+**Changes in the revised article.** Title; Introduction; Methods, “Pollen data preparation”; Discussion, pollen-bias paragraph; Supplementary retention figure and table.
+
+> “Pollen productivity and dispersal differ among taxa, taxonomic resolution varies among records, and vegetation density, basin characteristics, laboratory processing, and finite count size all influence observed assemblages [@main-ref-50].”
+
+## R2.3 — request for 300–500-grain sensitivity models
+
+> **Original comment:** At minimum, rerun a subset with a substantially higher pollen count, and exclude samples below 150 grains.
+
+**Response.** We quantified the proposed thresholds but did not rerun the full H1 models because progressively stricter profiles change the geographic and temporal cohort so severely that model differences would be confounded with coverage differences.
+
+**Analytical result.** At 300 grains, `r pollen_retention |> filter(.data[["threshold"]] == 300) |> pull(.data[["n_records_retained"]])` records remain; at 500 grains, `r pollen_retention |> filter(.data[["threshold"]] == 500) |> pull(.data[["n_records_retained"]])` remain; and at 1,000 grains, `r pollen_retention |> filter(.data[["threshold"]] == 1000) |> pull(.data[["n_records_retained"]])` remain.
+
+**Changes in the revised article.** Methods, pollen-threshold paragraph; Results, “Result validation,” and Supplementary Result validation; Discussion, threshold limitation; Supplementary Table “Pollen filtering and retention.”
+
+> “The stricter-threshold analysis quantifies this retention and bias–coverage trade-off; because the full H1 inventory was not rerun at 300, 500, or 1,000 grains, it does not demonstrate that the fitted H1 estimates are invariant to pollen-count thresholds.”
+
+## R2.4 — correlated PAPs
+
+> **Original comment:** The Hill-number PAPs are strongly correlated, raising concern that the multivariate response duplicates the same assemblage information.
+
+**Response.** We now state that these correlations are expected by construction and add correlation, HVarPart-influence, and reduced-response diagnostics.
+
+**Analytical result.** Among `r format(pap_collinearity[["n_with_complete_pairs"]][1], big.mark = ",")` complete paired records, median climate allocation changed from `r sprintf("%.3f", pap_collinearity[["median_baseline"]][pap_collinearity[["predictor"]] == "climate"])` to `r sprintf("%.3f", pap_collinearity[["median_reduced"]][pap_collinearity[["predictor"]] == "climate"])`.
+
+**Changes in the revised article.** Introduction, PAP hypothesis paragraph; Methods, “Pollen assemblage properties”; Results, “Result validation,” and Supplementary Result validation; Supplementary PAP-collinearity figure and table.
+
+> “Because several PAPs describe overlapping aspects of the same pollen assemblages, we expected them to be correlated and evaluated a reduced-response sensitivity rather than treating the ten PAPs as independent replicates.”
+
+## R2.5 — SPD bias and temporal cutoff
+
+> **Original comment:** SPDs are non-random products of archaeological interest, preservation, dating practice, and calibration, and the 2 ka BP cutoff needs stronger justification.
+
+**Response.** We now present SPD as a proxy for dated archaeological activity rather than a direct population curve, enumerate its biases, and explicitly bound the analysis at 2.0 ka BP.
+
+**Analytical result.** SPD remains primary only within the common 8.5–2.0 ka BP evidence window.
+
+**Changes in the revised article.** Methods, “Human activity proxies”; Discussion, temporal-cutoff and SPD paragraphs.
+
+> “The SPD remains the primary proxy because it is independent of the pollen response and broadly available, but it is affected by preservation, calibration-curve structure, archaeological research intensity, and the spatial mismatch between dated sites and pollen-source areas.”
+
+> **AUTHOR REVIEW TODO — optional references:** Select the final subset of suggested SPD-method references for the article bibliography.
+
+## R2.6 — spatial mismatch and SPD radius
+
+> **Original comment:** Pollen-source areas can be much smaller than the 250 or 500 km archaeological neighbourhoods, so the spatial-scale mismatch requires sensitivity analysis.
+
+**Response.** We agree that no universal radius resolves record-specific pollen-source areas and therefore compare strict 250 km and 500 km predictors on identical matched cohorts.
+
+**Analytical result.** Among `r format(radius_spatial_n, big.mark = ",")` paired spatial records, `r format(radius_spatial_defined_n, big.mark = ",")` had two defined zero-truncated balances, with median change `r sprintf("%.3f", radius_spatial_delta_median)`; `r radius_spatial_reversals` rankings reversed. Among `r radius_temporal_n` region-age comparisons, `r radius_temporal_reversals` rankings reversed.
+
+**Changes in the revised article.** Methods, SPD-radius paragraph; Results, “Result validation,” and Supplementary Result validation; Discussion, scale-mismatch paragraph; Supplementary SPD-radius figure and table.
+
+> “The 250 km neighbourhood prioritises proximity, whereas the 500 km fallback increases radiocarbon coverage.”
+
+## R2.7 — regional pollen-event proxy
+
+> **Original comment:** The event variable is reductive, insufficiently described, and cannot capture diverse local human activities; the reviewer recommends removing it.
+
+**Response.** We retain events only as a secondary sensitivity because they encode evidence not present in archaeological SPDs, but we agree that they are coarse, incomplete, region-specific, and partly circular.
+
+**Analytical result.** In the matched observed-event cohort, combined and event-only results differ from SPD-only in both directions; they are reported as sensitivity to proxy definition rather than corroboration.
+
+**Changes in the revised article.** Methods, event-proxy paragraphs and event-criteria table; Results, “Result validation,” and Supplementary Result validation; Discussion, event limitation; Supplementary event-sensitivity figure and table.
+
+> “We therefore interpret the event chronologies as a complementary sensitivity analysis of proxy choice, not as independent validation of the SPD result.”
+
+> **AUTHOR REVIEW TODO — expert provenance:** Confirm named experts and regional roles, the selection rationale, and complete source attribution for every event chronology.
+
+## R2.8 — total variance explained and HVarPart correction
+
+> **Original comment:** Summarise total variance explained because relative human/climate shares are difficult to interpret if overall model fit is small.
+
+**Response.** We agree and now report total adjusted $R^2$, its distribution, and fit–importance diagnostics separately from hierarchical allocations.
+
+**Analytical result.** For spatial SPD, `r format(spatial_available_n, big.mark = ",")` decompositions had mean total adjusted $R^2$ `r sprintf("%.3f", spatial_mean_adjusted_r2)`; the controlled reporting cohort had median `r sprintf("%.3f", spatial_median_adjusted_r2)`.
+
+**Changes in the revised article.** Supplementary Result validation, “Model fit and extraction profile”; Discussion, fit-interpretation paragraph; Supplementary model-fit figure and variance table.
+
+> “HVarPart allocations divide the variation attributed to the predictor groups under a fitted model, whereas total adjusted $R^2$ measures how much multivariate response variation the complete model explains.”
+
+## R2.9 — temporal and spatial dependence
+
+> **Original comment:** Temporal and spatial autocorrelation were not clearly accounted for or checked and may confound model inference.
+
+**Response.** The primary figures now use time control within records and spatial dbMEM control among records, with residual Moran tests, temporal residual diagnostics, thinning, leave-out checks, and unique-fraction summaries.
+
+**Analytical result.** The broad climate-over-human ordering remains in aggregate, while residual structure and individual instability remain visible rather than being suppressed.
+
+**Changes in the revised article.** Methods, “Temporal and spatial controls”; Results, controlled H1 and “Result validation”; Supplementary Result validation; Discussion, residual-dependence paragraph; Figs. 3–4; Supplementary Result validation and the associated dependence figures and table.
+
+> “Time is controlled within records in the spatial analysis, and spatial structure is represented by dbMEM variables among records in the temporal analysis.”
+
+## R2.10 — reviewer-suggested references
+
+> **Original comment:** Consider the cited literature on SPD inference, pollen diversity, and recent pollen-diversity change.
+
+**Response.** We have used these suggestions to revise the limitations and temporal framing; the final reference subset requires author agreement so that regional and methodological coverage remains balanced.
+
+**Analytical result.** This is a literature and framing disposition; it does not change fitted results.
+
+**Changes in the revised article.** Introduction and Discussion paragraphs on pollen bias, SPD inference, and the 2.0 ka BP boundary.
+
+> “The temporal cutoff is an additional inferential boundary.”
+
+> **AUTHOR REVIEW TODO — optional references:** Approve the final reviewer-suggested citations before submission.

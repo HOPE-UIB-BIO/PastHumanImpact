@@ -1,0 +1,21 @@
+\usepackage[most]{tcolorbox}
+
+% Reviewer text is ordinary prose; blockquotes are reserved for author replies.
+% Give replies a print-safe visual identity that remains clear beside list items.
+\renewenvironment{quote}
+  {\begin{tcolorbox}[
+    enhanced,
+    breakable,
+    sharp corners,
+    colback=black!4,
+    colframe=black!55,
+    boxrule=0pt,
+    borderline west={2pt}{0pt}{black!55},
+    left=8pt,
+    right=8pt,
+    top=5pt,
+    bottom=5pt,
+    before skip=8pt,
+    after skip=8pt
+  ]}
+  {\end{tcolorbox}}
