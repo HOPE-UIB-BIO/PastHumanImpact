@@ -207,8 +207,8 @@ fig_n_c14 <-
   ggplot2::labs(
     x = "Age (uncal ka BP)",
     y = "Number of RC dates",
-    col = "Climate zone",
-    fill = "Climate zone",
+    col = "Region",
+    fill = "Region",
     caption = "The Y-axis is scaled for each region"
   ) +
   ggplot2::geom_area(

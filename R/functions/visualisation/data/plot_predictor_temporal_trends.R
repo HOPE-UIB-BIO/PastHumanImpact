@@ -1,12 +1,12 @@
 #' @title Plot temporal predictor trajectories
 #' @description
 #' Plot observed dataset trajectories and modelled general trends for one temporal
-#' predictor across region and climate-zone strata.
+#' predictor across regions nested in continental groups.
 #' @param data_observed Long-format observed temporal data.
 #' @param data_predictions General model predictions with uncertainty bounds.
 #' @param variable Character scalar naming the variable to plot.
 #' @param y_limits Numeric vector containing lower and upper response limits.
-#' @param climate_palette Named character vector of climate-zone colours.
+#' @param climate_palette Named character vector of region colours.
 #' @return A `ggplot` object.
 #' @examples
 #' \dontrun{
@@ -85,7 +85,7 @@ plot_predictor_temporal_trends <- function(
 
   assertthat::assert_that(
     all(vec_climatezones %in% names(climate_palette)),
-    msg = "Every plotted climate zone must have a configured colour."
+    msg = "Every plotted region must have a configured colour."
   )
 
   res_plot <-

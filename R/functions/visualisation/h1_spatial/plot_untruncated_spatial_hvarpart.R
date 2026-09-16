@@ -369,7 +369,7 @@ plot_untruncated_spatial_hvarpart <- function(
       size = point_size * 3
     ) +
     ggplot2::scale_fill_manual(
-      "Climate zone",
+      "Region",
       values = palette_ecozones,
       drop = FALSE,
       guide = ggplot2::guide_legend(

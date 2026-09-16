@@ -1,11 +1,11 @@
 #' @title Build a labelled H2 HVarPart figure
 #' @description
-#' Arranges region-by-climate-zone panels with row and column labels, then adds
+#' Arranges continental-group-by-region panels with row and column labels, then adds
 #' a framed guide row for importance, predictors, age, and ordination.
-#' @param plot_list List of cell plots ordered by region and then climate zone.
-#' @param region_labels Character vector of region labels.
-#' @param climatezone_labels Character vector of climate-zone labels.
-#' @param climatezone_colours Character vector of climate-zone band colours.
+#' @param plot_list List of cell plots ordered by continental group and then region.
+#' @param region_labels Character vector of continental-group labels.
+#' @param climatezone_labels Character vector of region labels.
+#' @param climatezone_colours Character vector of region-band colours.
 #' @param importance_guide Plot or grob explaining the importance inset.
 #' @param importance_title Character heading for the importance guide.
 #' @param predictor_legend Plot or grob containing the predictor legend.
@@ -16,7 +16,7 @@
 #' \dontrun{
 #' result <- build_composite_hvarpart_h2_figure(
 #'   plot_list = rep(list(ggplot2::ggplot()), 4),
-#'   region_labels = c("Region A", "Region B"),
+#'   region_labels = c("Continental group A", "Continental group B"),
 #'   climatezone_labels = c("Zone A", "Zone B"),
 #'   climatezone_colours = c("#8C4418", "#562FB1"),
 #'   importance_guide = ggplot2::ggplot(),

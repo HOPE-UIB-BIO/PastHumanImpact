@@ -5,7 +5,7 @@
 #' supplementary figure.
 #' @param output_h2 Fitted H2 output containing response, predictor, and HVarPart
 #'   data.
-#' @param data_meta Dataset metadata with region and climate-zone fields.
+#' @param data_meta Dataset metadata with continental-group and region fields.
 #' @param summary_zero_truncated Zero-truncated H2 pooled allocations.
 #' @param summary_signed Signed H2 pooled allocations.
 #' @return A named list containing the main and signed supplementary figures.

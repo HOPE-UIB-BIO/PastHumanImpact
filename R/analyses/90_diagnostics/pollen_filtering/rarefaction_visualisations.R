@@ -269,7 +269,7 @@ fig_density_rowsum_climatezone <-
   ) +
   ggplot2::scale_fill_manual(
     values = palette_ecozones_labels,
-    name = "Climate zone"
+    name = "Region"
   ) +
   ggplot2::scale_x_continuous(
     trans = "log10",
@@ -287,7 +287,7 @@ fig_density_rowsum_climatezone <-
   ggplot2::labs(
     x = "Pollen grains per sample",
     y = "Number of samples",
-    title = "Stacked sample-count distribution by climate zone and continent"
+    title = "Sample-count distribution by region and continental group"
   )
 
 fig_retention_overall <-
@@ -508,7 +508,7 @@ fig_retention_region_climatezone <-
   ggplot2::labs(
     x = "Applied grain threshold",
     y = "Proportion retained relative to region-climatezone baseline",
-    title = "Retention by climate zone within each region",
+    title = "Retention by region within each continental group",
     subtitle = "Solid = samples retained; dashed = datasets retained"
   )
 
