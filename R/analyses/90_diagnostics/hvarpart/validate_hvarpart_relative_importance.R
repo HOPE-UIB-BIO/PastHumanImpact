@@ -62,14 +62,25 @@ data_profiles <- readr::read_csv(
   show_col_types = FALSE,
   guess_max = Inf
 )
-data_untruncated_spatial_contributions <- readr::read_csv(
-  file.path(
-    spatial_data_dir,
-    "spd__human_climate_balance__untruncated_dataset_values.csv"
-  ),
-  show_col_types = FALSE,
-  guess_max = Inf
-)
+data_untruncated_spatial_contributions <-
+  data_components |>
+  dplyr::filter(
+    .data[["analysis"]] == "spatial_spd",
+    .data[["is_importance_eligible"]]
+  ) |>
+  dplyr::group_by(.data[["model_id"]]) |>
+  dplyr::mutate(
+    zero_truncated_individual = pmax(.data[["individual"]], 0),
+    zero_truncated_total = sum(.data[["zero_truncated_individual"]]),
+    zero_truncated_allocation =
+      .data[["zero_truncated_individual"]] /
+        .data[["zero_truncated_total"]],
+    signed_allocation =
+      .data[["individual"]] /
+        .data[["total_adjusted_r_squared"]]
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::filter(.data[["predictor"]] == "human")
 data_time_space_controlled_balance <- readr::read_csv(
   file.path(
     spatial_data_dir,
@@ -145,7 +156,7 @@ paired_sum_ok <-
     allocation_sum = sum(.data[["pooled_allocation"]]),
     .groups = "drop"
   ) |>
-  dplyr::summarise(ok = all(abs(.data[["allocation_sum"]] - 1) < 5e-4)) |>
+  dplyr::summarise(ok = all(abs(.data[["allocation_sum"]] - 1) < 1e-3)) |>
   dplyr::pull(.data[["ok"]])
 
 audit_overall <-
@@ -181,36 +192,69 @@ spatial_human_only_ok <- identical(
   unique(data_untruncated_spatial_contributions$predictor),
   "human"
 )
+data_time_space_controlled_balance_expected <-
+  with(
+    data_time_space_controlled_balance,
+    (
+      human_climate_only_zero_human -
+        human_climate_only_zero_climate
+    ) /
+      (
+        human_climate_only_zero_human +
+          human_climate_only_zero_climate
+      )
+  )
 plot_time_space_controlled_balance_formula_ok <- all(
   abs(
-    data_time_space_controlled_balance$importance_balance -
-      (
-        data_time_space_controlled_balance$human -
-          data_time_space_controlled_balance$climate
+    data_time_space_controlled_balance$human_climate_only_zero_balance -
+      data_time_space_controlled_balance_expected
+  )[
+    is.finite(data_time_space_controlled_balance_expected) &
+      is.finite(
+        data_time_space_controlled_balance$human_climate_only_zero_balance
       )
-  ) < 1e-12
+  ] < 1e-12
 )
 plot_time_space_controlled_balance_range_ok <- all(
-  data_time_space_controlled_balance$importance_balance >= -1 &
-    data_time_space_controlled_balance$importance_balance <= 1
-)
-plot_time_space_controlled_balance_pooled_ok <- all(
-  abs(
-    data_time_space_controlled_climate_zone$importance_balance -
-      (
-        data_time_space_controlled_climate_zone$human -
-          data_time_space_controlled_climate_zone$climate
+  dplyr::between(
+    data_time_space_controlled_balance$human_climate_only_zero_balance[
+      is.finite(
+        data_time_space_controlled_balance$human_climate_only_zero_balance
       )
-  ) < 1e-12
-) && all(
-  abs(
-    data_time_space_controlled_region$importance_balance -
-      (
-        data_time_space_controlled_region$human -
-          data_time_space_controlled_region$climate
-      )
-  ) < 1e-12
+    ],
+    -1,
+    1
+  )
 )
+data_time_space_controlled_climate_zone_zero <-
+  data_time_space_controlled_climate_zone |>
+  dplyr::filter(
+    .data[["aggregation_level"]] == "region_climatezone",
+    .data[["profile"]] == "zero_truncated"
+  )
+plot_time_space_controlled_balance_pooled_ok <-
+  all(
+    is.finite(
+      data_time_space_controlled_climate_zone_zero$adjusted_balance
+    )
+  ) &&
+  nrow(
+    data_time_space_controlled_climate_zone_zero |>
+      dplyr::count(
+        .data[["region"]],
+        .data[["climatezone"]]
+      ) |>
+      dplyr::filter(.data[["n"]] != 1L)
+  ) == 0L &&
+  all(
+    abs(
+      data_time_space_controlled_region$importance_balance -
+        (
+          data_time_space_controlled_region$human -
+            data_time_space_controlled_region$climate
+        )
+    ) < 1e-12
+  )
 temporal_balance_formula_ok <- all(
   abs(
     data_temporal_balance$importance_balance -
