@@ -1,9 +1,9 @@
 analysis,aggregation_level,n_models,n_eligible,n_excluded,n_missing_result,n_missing_predictor,n_non_finite_total,n_non_positive_total,n_non_finite_individual,n_negative_unique,n_negative_individual,region,climatezone,age
-h2_spd,analysis,31,31,0,0,0,0,0,0,1,0,NA,NA,NA
+h2_spd,analysis,31,31,0,0,0,0,0,0,10,3,NA,NA,NA
 spatial_events,analysis,1262,257,1005,998,0,1,6,0,75,34,NA,NA,NA
 spatial_spd,analysis,1262,1118,144,104,0,2,38,0,481,265,NA,NA,NA
-temporal_events,analysis,85,76,9,9,0,0,0,0,13,10,NA,NA,NA
-temporal_spd,analysis,70,69,1,0,0,0,1,0,14,6,NA,NA,NA
+temporal_events,analysis,85,76,9,9,0,0,0,0,11,10,NA,NA,NA
+temporal_spd,analysis,70,69,1,0,0,0,1,0,19,6,NA,NA,NA
 spatial_events,region_climatezone,32,9,23,22,0,0,1,0,4,1,Asia,Arid,NA
 spatial_events,region_climatezone,8,3,5,5,0,0,0,0,0,0,Asia,Cold_Dry_Summer,NA
 spatial_events,region_climatezone,35,5,30,30,0,0,0,0,0,0,Asia,Cold_Dry_Winter,NA
@@ -125,11 +125,11 @@ temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,7500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,8000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,8500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,500
-temporal_events,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,1000
+temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,1000
 temporal_events,region_age,1,1,0,0,0,0,0,0,1,0,Latin America,NA,1500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,2000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,2500
-temporal_events,region_age,1,1,0,0,0,0,0,0,1,0,Latin America,NA,3000
+temporal_events,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,3000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,3500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,4000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,4500
@@ -144,7 +144,7 @@ temporal_events,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,8500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,1000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,1500
-temporal_events,region_age,1,1,0,0,0,0,0,0,1,0,North America,NA,2000
+temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,2000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,2500
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,3000
 temporal_events,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,3500
@@ -178,7 +178,7 @@ temporal_events,region_age,1,0,1,1,0,0,0,0,0,0,Oceania,NA,8500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,3000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,3500
+temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Asia,NA,3500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,4000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,4500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,5000
@@ -187,8 +187,8 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,6000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Asia,NA,6500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,7500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,8000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Asia,NA,8500
+temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Asia,NA,8000
+temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Asia,NA,8500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Europe,NA,3000
@@ -214,7 +214,7 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,5500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,6000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Latin America,NA,6500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,7000
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,7500
+temporal_spd,region_age,1,1,0,0,0,0,0,0,0,1,Latin America,NA,7500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Latin America,NA,8500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,North America,NA,2000
@@ -235,7 +235,7 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,2000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,2500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,3000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,3500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,4000
+temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,4000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,4500
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,5000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,5500
@@ -243,13 +243,13 @@ temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Oceania,NA,6000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Oceania,NA,6500
 temporal_spd,region_age,1,0,1,0,0,0,1,0,1,1,Oceania,NA,7000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,1,1,Oceania,NA,7500
-temporal_spd,region_age,1,1,0,0,0,0,0,0,0,1,Oceania,NA,8000
+temporal_spd,region_age,1,1,0,0,0,0,0,0,1,0,Oceania,NA,8000
 temporal_spd,region_age,1,1,0,0,0,0,0,0,0,0,Oceania,NA,8500
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Arid,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Cold_Dry_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Cold_Dry_Winter,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Cold_Without_dry_season_Cold_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Asia,Cold_Without_dry_season_Warm_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Asia,Cold_Without_dry_season_Cold_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Cold_Without_dry_season_Warm_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Polar,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Temperate_Dry_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Temperate_Dry_Winter,NA
@@ -257,20 +257,20 @@ h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Asia,Temperate_Without_dry_season,
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Arid,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Cold_Without_dry_season_Cold_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Cold_Without_dry_season_Warm_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Polar,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,1,Europe,Polar,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Temperate_Dry_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Europe,Temperate_Without_dry_season,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Arid,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Polar,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Temperate_Dry_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Temperate_Dry_Winter,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Europe,Temperate_Without_dry_season,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Latin America,Arid,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Latin America,Polar,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,1,Latin America,Temperate_Dry_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,1,Latin America,Temperate_Dry_Winter,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Temperate_Without_dry_season,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,Latin America,Tropical,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,Latin America,Tropical,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Arid,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Cold_Dry_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,North America,Cold_Dry_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Cold_Without_dry_season_Cold_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Cold_Without_dry_season_Hot_Summer,NA
-h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Cold_Without_dry_season_Warm_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,North America,Cold_Without_dry_season_Hot_Summer,NA
+h2_spd,region_climatezone,1,1,0,0,0,0,0,0,1,0,North America,Cold_Without_dry_season_Warm_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Polar,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Temperate_Dry_Summer,NA
 h2_spd,region_climatezone,1,1,0,0,0,0,0,0,0,0,North America,Temperate_Without_dry_season,NA
