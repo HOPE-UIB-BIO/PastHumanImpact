@@ -200,6 +200,21 @@ spatial_climate_dominant_pct <-
 spatial_median_adjusted_r2 <-
   median(spatial_h1[["total_adjusted_r_squared"]])
 
+spatial_mean_adjusted_r2_controlled <-
+  mean(spatial_h1[["total_adjusted_r_squared"]])
+
+spatial_q1_adjusted_r2_controlled <-
+  unname(stats::quantile(
+    spatial_h1[["total_adjusted_r_squared"]],
+    probs = 0.25
+  ))
+
+spatial_q3_adjusted_r2_controlled <-
+  unname(stats::quantile(
+    spatial_h1[["total_adjusted_r_squared"]],
+    probs = 0.75
+  ))
+
 spatial_inventory <-
   hvarpart_variance |>
   filter(.data[["analysis"]] == "spatial_spd")
@@ -383,7 +398,7 @@ table_pap_collinearity <-
 
 table_radius <-
   tibble::tibble(
-    Scale = c("Spatial record", "Temporal region-age"),
+    Scale = c("Spatial record", "Temporal continental-group–age"),
     `Matched comparisons` = c(radius_spatial_n, radius_temporal_n),
     `Defined primary values` = c(radius_spatial_defined_n, radius_temporal_n),
     `Primary median change` = round(c(
@@ -398,7 +413,7 @@ table_radius <-
 
 table_event_sensitivity <-
   tibble::tibble(
-    Scale = c("Spatial record", "Temporal region-age"),
+    Scale = c("Spatial record", "Temporal continental-group–age"),
     `Matched comparisons` = c(event_spatial_n, event_temporal_n),
     `Combined values defined` = c(event_spatial_combined_defined_n, event_temporal_n),
     `Event-only values defined` = c(event_spatial_events_defined_n, event_temporal_n),

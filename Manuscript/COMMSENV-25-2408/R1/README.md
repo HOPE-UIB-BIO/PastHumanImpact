@@ -50,6 +50,4 @@ results, Supplementary Figs. S1–S40, Supplementary Tables S1–S10, and Supple
 References. The journal calls this material “Supplementary Information”; the
 revision therefore does not use “Extended Data” terminology.
 
-Author-only review callouts use the literal label `AUTHOR REVIEW TODO` and are
-restricted to expert provenance, optional references, and final co-author
-approval of the two scope-decline responses.
+Author decisions on expert provenance, reviewer-suggested references, and the two scope-boundary responses are recorded in the response modules. No `AUTHOR REVIEW TODO` callouts remain in the current revision package.

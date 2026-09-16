@@ -2,11 +2,11 @@
 
 We thank the Editor and Reviewers for their careful and constructive assessments.
 
-We have revised the title and inferential scope to focus explicitly on pollen assemblage dynamics from 8.5 to 2.0 ka BP at continental and subcontinental scales.
+We have revised the title and inferential scope to focus explicitly on pollen assemblage dynamics from 8.5 to 2.0 ka BP at continental-group and regional scales.
 
 The revised article distinguishes the `r format(preparation_pool_n, big.mark = ",")`-record preparation and expert-screening pool, the `r format(original_h1_inventory_n, big.mark = ",")`-record original H1 model inventory, and smaller analysis-specific cohorts.
 
-We promoted the overview of all ten PAP trajectories to Fig. 2, placed the controlled spatial and temporal H1 results in Figs. 3 and 4, moved the H2 ordination to Supplementary Fig. 1, and grouped model fit, HVarPart profiles, pollen retention, PAP collinearity, reciprocal controls, SPD radius, and event sensitivity under Supplementary Result validation.
+We promoted six representative PAP trajectories to Fig. 2 and show all ten in Supplementary Figs. S6–S15, placed the controlled spatial and temporal H1 results in Figs. 3 and 4, moved the H2 ordination to Supplementary Fig. 1, and grouped model fit, HVarPart profiles, pollen retention, PAP collinearity, reciprocal controls, SPD radius, and event sensitivity under Supplementary Result validation.
 
 All numerical statements below are evaluated from the registered current exports during rendering.
 

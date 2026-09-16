@@ -39,7 +39,7 @@
 ::: {#suppfig-predictor-trajectories}
 ![](figures/supplementary-figure-16-predictor-spd.png){width=90% fig-alt="SPD temporal trajectories."}
 
-**SPD temporal trajectories.** The `predictor_temporal` profile shows observed and HGAM-smoothed archaeological SPD within 8.5–2.0 ka BP regional and climate-zone coverage. Missing segments indicate insufficient dates, not human absence; negative centred values are relative model-scale deviations.
+**SPD temporal trajectories.** The `predictor_temporal` profile shows observed and HGAM-smoothed archaeological SPD within 8.5–2.0 ka BP continental-group and regional coverage. Missing segments indicate insufficient dates, not human absence; negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-spd-radius}
@@ -55,9 +55,9 @@
 :::
 
 ::: {#suppfig-h2}
-![](figures/supplementary-figure-01-h2-interrelationships.png){width=90% fig-alt="PAP ordination trajectories and zero-truncated human and climate allocations by region and climate zone."}
+![](figures/supplementary-figure-01-h2-interrelationships.png){width=90% fig-alt="PAP ordination trajectories and zero-truncated human and climate allocations by continental group and region."}
 
-**H2 PAP-interrelationship result.** Rows represent North America, Central and South America, Europe, Asia, and Oceania, and columns represent eligible fixed modern Köppen-Geiger climate zones. Within each panel, grey circles show the distribution of pairwise Procrustes sum-of-squares distances among 500-year time slices, and the blue trajectory shows sample scores from the distance-based redundancy analysis from 8.5 ka BP (dark blue) towards 2.0 ka BP (light blue). Gold and teal arrows show the direction and relative strength of associations with human SPD and palaeoclimate, respectively. The adjacent bars show the zero-truncated human-climate composition for changes in relationships among all ten PAPs; negative signed contributions were set to zero before rescaling. Missing panels are non-estimable rather than evidence of stable PAP relationships or no driver effect. Signed contributions are shown in @suppfig-h2-signed.
+**H2 PAP-interrelationship result.** Rows represent North America, Central and South America, Europe, Asia, and Oceania, and columns represent eligible regions defined from present-day Köppen–Geiger classes. Within each panel, grey circles show the distribution of pairwise Procrustes sum-of-squares distances among 500-year time slices, and the blue trajectory shows sample scores from the distance-based redundancy analysis from 8.5 ka BP (dark blue) towards 2.0 ka BP (light blue). Gold and teal arrows show the direction and relative strength of associations with human SPD and palaeoclimate, respectively. The adjacent bars show the zero-truncated human-climate composition for changes in relationships among all ten PAPs; negative signed contributions were set to zero before rescaling. Missing panels are non-estimable rather than evidence of stable PAP relationships or no driver effect. Signed contributions are shown in @suppfig-h2-signed.
 :::
 
 ::: {#suppfig-record-examples}
@@ -129,13 +129,13 @@
 ::: {#suppfig-temporal-signed}
 ![](figures/supplementary-figure-26-h1-temporal-signed.png){width=90% fig-alt="Signed controlled temporal H1 contributions."}
 
-**Signed controlled temporal H1 counterpart.** The `time_slice_spd_spatial_control` cohort and spatial dbMEM controls match Fig. 3. Negative contributions retain suppressor/commonality meaning; missing region-age combinations are non-estimable.
+**Signed controlled temporal H1 counterpart.** The `time_slice_spd_spatial_control` cohort and spatial dbMEM controls match Fig. 3. Negative contributions retain suppressor/commonality meaning; missing continental-group–age combinations are non-estimable.
 :::
 
 ::: {#suppfig-pollen-retention}
 ![](figures/supplementary-figure-28-pollen-retention.png){width=85% fig-alt="Pollen-count threshold retention diagnostic."}
 
-**Pollen retention and bias–coverage diagnostic.** The `pollen_threshold_diagnostic` profile compares 300-, 500-, and 1,000-grain thresholds with the baseline preparation pool. This is not an H1 refit; missing strata have no retained records, and negative values are not applicable.
+**Pollen retention and bias–coverage diagnostic.** The `pollen_threshold_diagnostic` profile compares rarefaction targets of 300, 500, and 1,000 grains, with associated sample minima of 50, about 83, and about 167 grains, against the 150-grain target and 25-grain sample-minimum baseline. It does not impose a 300- or 500-grain minimum on every sample and is not an H1 refit; missing strata have no retained records, and negative values are not applicable.
 :::
 
 ::: {#suppfig-pap-collinearity}
@@ -171,7 +171,7 @@
 ::: {#suppfig-event-trajectories}
 ![](figures/supplementary-figure-21-event-trajectories.png){width=90% fig-alt="Regional pollen-event trajectories."}
 
-**Regional pollen-event trajectories.** The `event_temporal` profile shows HGAM-smoothed expert-screened event evidence by region and fixed modern climate zone. Events are complementary and partly circular; missing segments are unavailable, and negative centred values are relative model-scale deviations.
+**Regional pollen-event trajectories.** The `event_temporal` profile shows HGAM-smoothed expert-screened event evidence by continental group and region. Events are complementary and partly circular; missing segments are unavailable, and negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-pap-reduced}
@@ -183,7 +183,7 @@
 ::: {#suppfig-adjusted-r2}
 ![](figures/supplementary-figure-23-adjusted-r2.png){width=90% fig-alt="Adjusted R-squared distribution."}
 
-**Adjusted $R^2$ distributions.** The `hvarpart_diagnostics` profile reports total model fit for available spatial H1 decompositions by region and climate zone. Negative adjusted $R^2$ values denote fits worse than the adjusted null benchmark; missing models are unavailable.
+**Adjusted $R^2$ distributions.** The `hvarpart_diagnostics` profile reports total model fit for available spatial H1 decompositions by continental group and region. Negative adjusted $R^2$ values denote fits worse than the adjusted null benchmark; missing models are unavailable.
 :::
 
 ::: {#suppfig-fit-importance}
@@ -195,7 +195,7 @@
 ::: {#suppfig-h2-signed}
 ![](figures/supplementary-figure-27-h2-signed.png){width=90% fig-alt="Signed H2 contributions."}
 
-**Signed H2 counterpart.** The `h2_interrelationships` cohort and region/climate-zone grouping match Fig. 4. Negative contributions retain suppressor/commonality meaning; missing panels are non-estimable.
+**Signed H2 counterpart.** The `h2_interrelationships` cohort and continental-group/region grouping match Fig. 4. Negative contributions retain suppressor/commonality meaning; missing panels are non-estimable.
 :::
 
 ::: {#suppfig-thinning}
@@ -207,35 +207,35 @@
 ::: {#suppfig-leave-out}
 ![](figures/supplementary-figure-33-leave-out.png){width=90% fig-alt="Leave-one-group-out sensitivity."}
 
-**Leave-one-group-out sensitivity.** The controlled SPD H1 profile omits each region or climate zone in turn from its eligible cohort. Negative balance values indicate greater climate allocation; missing exclusions lack an estimable comparison.
+**Leave-one-group-out sensitivity.** The controlled SPD H1 profile omits each continental group or region in turn from its eligible cohort. Negative balance values indicate greater climate allocation; missing exclusions lack an estimable comparison.
 :::
 
 ::: {#suppfig-unique-fractions}
 ![](figures/supplementary-figure-34-unique-r2.png){width=90% fig-alt="Unique adjusted R-squared fractions."}
 
-**Unique adjusted-$R^2$ fractions.** The `spd_events_spatial_control` profile isolates non-shared human, climate, and spatial contributions in eligible region-age cohorts. Fractions do not form a composition; negative values are valid adjusted estimates, and missing fractions are non-estimable.
+**Unique adjusted-$R^2$ fractions.** The `spd_events_spatial_control` profile isolates non-shared human, climate, and spatial contributions in eligible continental-group–age sets. Fractions do not form a composition; negative values are valid adjusted estimates, and missing fractions are non-estimable.
 :::
 
 ::: {#suppfig-radius-temporal}
 ![](figures/supplementary-figure-36-spd-radius-temporal.png){width=90% fig-alt="Temporal SPD-radius profiles."}
 
-**Temporal SPD-radius profiles.** The spatially controlled `spd_radius` profile compares strict radii across `r radius_temporal_n` matched region-age combinations. Negative signed contributions are truncated only for this display; missing combinations are non-estimable.
+**Temporal SPD-radius profiles.** The spatially controlled `spd_radius` profile compares strict radii across `r radius_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for this display; missing combinations are non-estimable.
 :::
 
 ::: {#suppfig-radius-change}
 ![](figures/supplementary-figure-37-spd-radius-change.png){width=90% fig-alt="Temporal SPD-radius changes."}
 
-**Temporal SPD-radius changes.** The spatially controlled `spd_radius` profile reports 500-minus-250 km change in zero-truncated human allocation for matched region-age combinations. Negative values shift toward climate; missing changes are non-estimable.
+**Temporal SPD-radius changes.** The spatially controlled `spd_radius` profile reports 500-minus-250 km change in zero-truncated human allocation for matched continental-group–age combinations. Negative values shift toward climate; missing changes are non-estimable.
 :::
 
 ::: {#suppfig-event-temporal}
 ![](figures/supplementary-figure-39-event-temporal.png){width=90% fig-alt="Temporal event inclusion profiles."}
 
-**Temporal human-event profiles.** The spatially controlled `human_event_inclusion` profile compares the three human-predictor definitions in `r event_temporal_n` matched region-age combinations. Negative signed contributions are truncated only for display; missing combinations are non-estimable.
+**Temporal human-event profiles.** The spatially controlled `human_event_inclusion` profile compares the three human-predictor definitions in `r event_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for display; missing combinations are non-estimable.
 :::
 
 ::: {#suppfig-event-change}
 ![](figures/supplementary-figure-40-event-change.png){width=90% fig-alt="Temporal event inclusion changes."}
 
-**Temporal human-event changes.** The spatially controlled `human_event_inclusion` profile reports changes from SPD-only in matched region-age combinations. Negative values shift the zero-truncated human allocation downward; missing changes are non-estimable, and event evidence is not independent validation.
+**Temporal human-event changes.** The spatially controlled `human_event_inclusion` profile reports changes from SPD-only in matched continental-group–age combinations. Negative values shift the zero-truncated human allocation downward; missing changes are non-estimable, and event evidence is not independent validation.
 :::

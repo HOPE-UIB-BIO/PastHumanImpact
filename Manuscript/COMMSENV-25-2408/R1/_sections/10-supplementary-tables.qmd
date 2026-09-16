@@ -1,5 +1,5 @@
 ::: {#supptbl-pollen-retention}
-**Pollen filtering and retention.** Percentages are relative to the live 25-grain minimum and 150-grain target baseline. These scenarios quantify coverage loss and were not used to refit the complete H1 model inventory.
+**Pollen filtering and retention.** Percentages are relative to the 25-grain sample minimum and 150-grain rarefaction-target baseline. Higher target scenarios also raise the sample minimum to one-sixth of the target (50, about 83, and about 167 grains); the 300- and 500-grain labels are rarefaction targets, not strict minima for every sample. These scenarios quantify coverage loss and were not used to refit the complete H1 model inventory.
 
 ```{r}
 table_pollen_retention |>
@@ -22,7 +22,7 @@ tibble::tribble(
   kable(booktabs = TRUE)
 ```
 
-**AUTHOR REVIEW TODO:** Verify expert names, roles, selection rationale, and complete source attribution for these regional criteria.
+The regional event chronologies were assessed by authors with regional palaeoecological expertise and direct familiarity with the pollen compilations: John Birks and Hilary Birks for Europe and North America, John Birks and Kuber Bhatta for Asia, and Simon Haberle and Annika Herbert for Oceania. Central and South American indicators followed the published regional synthesis cited in Supplementary Methods. The author experts were selected for their regional and pollen-analytical expertise. These assignments identify who assessed the diagrams; they do not make the event categories independent of the pollen response.
 :::
 
 ::: {#supptbl-variance-decomposition}

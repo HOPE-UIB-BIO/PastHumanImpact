@@ -28,7 +28,7 @@
 
 > **Original comment:** At minimum, rerun a subset with a substantially higher pollen count, and exclude samples below 150 grains.
 
-**Response.** We quantified the proposed thresholds but did not rerun the full H1 models because progressively stricter profiles change the geographic and temporal cohort so severely that model differences would be confounded with coverage differences.
+**Response.** We quantified coverage loss when raising the rarefaction target and associated sample minimum, but did not impose a strict 300–500-grain sample minimum or rerun H1. Progressively stricter filtering also changes the geographic and temporal cohort, complicating model comparisons.
 
 **Analytical result.** At 300 grains, `r pollen_retention |> filter(.data[["threshold"]] == 300) |> pull(.data[["n_records_retained"]])` records remain; at 500 grains, `r pollen_retention |> filter(.data[["threshold"]] == 500) |> pull(.data[["n_records_retained"]])` remain; and at 1,000 grains, `r pollen_retention |> filter(.data[["threshold"]] == 1000) |> pull(.data[["n_records_retained"]])` remain.
 
@@ -60,7 +60,7 @@
 
 > “The SPD remains the primary proxy because it is independent of the pollen response and broadly available, but it is affected by preservation, calibration-curve structure, archaeological research intensity, and the spatial mismatch between dated sites and pollen-source areas.”
 
-> **AUTHOR REVIEW TODO — optional references:** Select the final subset of suggested SPD-method references for the article bibliography.
+> **Author decision recorded.** Chaput and Gajewski (2016), Crema (2022), and Crema and Bevan (2021) are retained for the SPD-method discussion.
 
 ## R2.6 — spatial mismatch and SPD radius
 
@@ -86,7 +86,7 @@
 
 > “We therefore interpret the event chronologies as a complementary sensitivity analysis of proxy choice, not as independent validation of the SPD result.”
 
-> **AUTHOR REVIEW TODO — expert provenance:** Confirm named experts and regional roles, the selection rationale, and complete source attribution for every event chronology.
+> **Author decision recorded.** John and Hilary Birks assessed Europe and North America; John Birks and Kuber Bhatta assessed Asia; Simon Haberle and Annika Herbert assessed Oceania. Central and South American indicators follow the cited published synthesis.
 
 ## R2.8 — total variance explained and HVarPart correction
 
@@ -124,4 +124,4 @@
 
 > “The temporal cutoff is an additional inferential boundary.”
 
-> **AUTHOR REVIEW TODO — optional references:** Approve the final reviewer-suggested citations before submission.
+> **Author decision recorded.** Reviewer-suggested references are retained where they directly support the revised SPD, pollen-diversity, and temporal-scope statements.

@@ -4,16 +4,16 @@ I work on Quaternary paleoclimate reconstructions and with Earth system scientis
 
 The study itself is based on the novel statistical analysis of two very large and independent data sets. The conclusions seem to be well supported by the data, and careful thought is given to explaining their limitations. There is one controversial aspect of Holocene climate that is not addressed but perhaps could be. It concerns claims by Ruddiman et al. (e.g. 2003, 2007, 2020) that the emergence of intensive rice cultivation in eastern Asia was responsible for the release of significant carbon dioxide and methane into the atmosphere, from 7 ka and 5 ka respectively. This would explain why global temperatures remain relatively flat even as summer insolation at 65°N declined from its peak in the Early Holocene. These claims have been questioned by Zalasiewicz et al. (2024) who noted that isotopic and modelling studies are consistent with oceanic outgassing rather than anthropogenic causes for these rises in greenhouse gases. Moreover, Summerhayes et al. (2024) noted that global average insolation may have in fact risen slightly over the past 7 kyr, potentially leading to the degassing of the global ocean which is by far the largest CO2 reservoir on the planet. The question then, as to whether there is evidence within the pollen record for substantial cultivation of rice in eastern Asia, becomes relevant in assessing the extent of human impacts on the Earth system.
 
-> **Response.** We thank the reviewer for identifying this broader context. We agree that the timing and magnitude of eastern-Asian rice cultivation is important to the early anthropogenic hypothesis. The present analyses, however, cannot test that hypothesis: the response variables are ten broad PAPs rather than harmonised rice-pollen occurrence or land-use reconstructions, and the predictor design does not estimate greenhouse-gas forcing. Adding such an analysis would require taxon-level harmonisation, eastern-Asian archaeological and cultivation predictors, and validation designed for that causal question. We have therefore not inferred the presence, extent, or climatic effect of rice cultivation from the PAP results, but have added the question explicitly as an inferential boundary and direction for future work.
+> **Response.** We thank the reviewer for placing the study within the debate over early human influence on the Earth system. The history of rice cultivation in eastern Asia is clearly relevant to the early anthropogenic hypothesis. Our evidence, however, cannot resolve that question. The ten pollen assemblage properties describe broad changes in richness, evenness, and compositional reorganisation; they do not identify rice pollen or reconstruct the extent and intensity of cultivation. Nor do the present models examine greenhouse-gas sources. Consequently, the larger estimated climatic contribution in our analyses neither supports nor refutes the proposal that early rice agriculture affected atmospheric carbon dioxide or methane. A direct test would require harmonised taxon-level rice evidence, regional histories of cultivation and land use, and an analytical design linking those histories to greenhouse-gas change.
 
-> **Changes in the revised article.** The final Discussion paragraph now explains that a taxon-specific reconstruction of eastern-Asian rice cultivation and early anthropogenic greenhouse-gas forcing would require a different response domain and inferential design and is not a sensitivity analysis of the present models.
+> **Changes in the revised article.** The final Discussion paragraph now locates the result within the early anthropogenic debate while defining its evidential boundary. It explains why broad pollen assemblage properties cannot substitute for rice-pollen records, archaeological histories of cultivation, or evidence concerning the sources of Holocene greenhouse gases.
 
 I consider the MS to be publishable after minor revision, and perhaps following consideration of the question of eastern Asia rice cultivation. The Holocene is crucial to our understanding of the rise of civilizations and the emergence of the modern world. This MS will have a profound impact on the way we approach these fundamental issues.
 
 Martin J. Head  
 5 July 2025
 
-> **Response.** We thank the reviewer for this encouraging assessment. We have considered the eastern-Asian rice-cultivation question and clarified why the present PAP-based analysis cannot resolve it, while ensuring that the revised article does not make a taxon-specific or greenhouse-gas attribution.
+> **Response.** We thank the reviewer for this assessment. The revised article now discusses eastern-Asian rice cultivation as an important historical and Earth-system question while making clear that the present broad-scale pollen analysis cannot adjudicate between competing explanations of Holocene greenhouse-gas change.
 
 ### References
 
@@ -31,7 +31,7 @@ Summerhayes, C.P., Zalasiewicz, J., Head, M.J., Syvitski, J., Barnosky, A.D., Ce
 
 Zalasiewicz, J., Head, M.J., Waters, C.N., Turner, S.D., Haff, P.K., Summerhayes, C., Williams, M., Cearreta, A., Wagreich, M., Fairchild, I., Rose, N.L., Saito, Y., Leinfelder, R., Fiałkowicz-Kozieł, B., An, Z., Syvitski, J., Gałuszka, A., McCarthy, F.M.G., Ivar do Sul, J., Barnosky, A., Cundy, A.B., McNeill, J.R., and Zinke, J., 2024. The Anthropocene within the Geological Time Scale: analysis of fundamental questions. Episodes 47(1): 65–83.
 
-> **Response.** We thank the reviewer for providing this literature. The revised Discussion recognises the question but does not use these papers to imply that our PAP models test competing mechanisms of Holocene greenhouse-gas change.
+> **Response.** We thank the reviewer for this literature. It is now used to frame the early anthropogenic debate and the alternative anthropogenic and oceanic explanations for Holocene greenhouse-gas change. We state explicitly that the evidence analysed here does not distinguish between those mechanisms.
 
 ### Minor detailed comments on the MS
 
@@ -41,7 +41,7 @@ Line 69. Should there be consistency here in the precision, i.e. 8.5–2.0 ka BP
 
 Line 82. For land use, reference to Our World in Data would be better: <https://ourworldindata.org/land-use>.
 
-> **Response.** Thank you for the suggestion. We revised the surrounding text and will make the final reference choice together with the co-authors, retaining this source only where it directly supports the statement made.
+> **Response.** Thank you for the suggestion. We added the Our World in Data synthesis to document the long-term expansion of cropland, grazing land, and settlements. Peer-reviewed studies remain the basis for causal interpretations and for the geological discussion of the Anthropocene.
 
 Line 95. not “middle Holocene” but “Middle Holocene” if you are referring to the formal substage/subepoch (8.2–4.2 ka), or “mid-Holocene” if more loosely.
 
@@ -65,11 +65,11 @@ Line 134. “on the period between 8.5 and 2.0 ka BP” if the consistency in pr
 
 Line 147. we would expect an altered covariance between the PAPs within different climate zones on continental regions.
 
-> **Response.** Corrected and clarified. H2 is now framed as a prediction about changes in relationships among PAPs within continental and subcontinental groups, rather than as a taxon-specific vegetation response.
+> **Response.** Corrected and clarified. H2 is now expressed as a prediction about historical changes in the relationships among pollen assemblage properties within continental groups and their regions, rather than as a claim about the response of particular plant taxa.
 
 Line 150. This subheading is a little confusing because while it references H1, it describes the result rather than the stated hypothesis. I realize that restating the hypothesis could be misleading here, so perhaps frame the hypothesis as “H1: Holocene palaeoclimate versus human impact”.
 
-> **Response.** Agreed. We revised the subheading to “H1: Holocene human impact secondary to palaeoclimate,” which identifies the hypothesis and the observed result while retaining the temporal context.
+> **Response.** Agreed. We revised the subheading to “H1: Holocene human impact secondary to palaeoclimate,” thereby linking the hypothesis to its ecological and temporal setting while indicating the observed direction of the result.
 
 Line 157. Middle to Late Holocene – you are referring to official subseries of the Holocene, so the first initial of the modifiers “middle” and “late” must be capitalized. If this is not done, you will need to define what will then be informal terms.
 
@@ -105,4 +105,4 @@ Line 336. “from 8.5 to 2.0 ka BP”. Use an en-dash when referring to, but not
 
 Line 467. You do make it clear that Eric C Grimm is no longer with us, but are you perhaps dedicating this MS to the memory of the person rather than the person themselves? Remember to change “manuscript” to “article” when revising the MS.
 
-> **Response.** Corrected. The dedication now refers to the memory of Eric C. Grimm, and submission-facing prose uses “article” rather than “manuscript” where appropriate.
+> **Response.** Corrected. The article is now dedicated to the memory of Eric C. Grimm, and submission-facing prose refers to the revised work as an article.

@@ -10,17 +10,38 @@ tibble::tibble(
   Stage = c(
     "Preparation and expert-screening pool",
     "Original H1 spatial model inventory",
-    "Controlled spatial SPD H1 cohort"
+    "Available original spatial decomposition",
+    "Controlled spatial SPD H1 cohort",
+    "Controlled temporal SPD H1 cohort",
+    "Observed-event matched spatial cohort",
+    "Observed-event matched temporal cohort"
   ),
-  Records = c(
+  Count = c(
     preparation_pool_n,
     original_h1_inventory_n,
-    spatial_controlled_n
+    spatial_available_n,
+    spatial_controlled_n,
+    temporal_spd_n,
+    event_spatial_n,
+    event_temporal_n
+  ),
+  Unit = c(
+    "pollen records",
+    "pollen records",
+    "pollen records",
+    "pollen records",
+    "continental-group–age comparisons",
+    "pollen records",
+    "continental-group–age comparisons"
   ),
   Meaning = c(
     "Records retained by the baseline pollen preparation profile",
     "Records represented in the original H1 model inventory",
-    "Records eligible for time- and space-controlled spatial reporting"
+    "Original spatial models with an estimable HVarPart decomposition",
+    "Records eligible for time-controlled spatial reporting",
+    "Continental-group time slices eligible after spatial control",
+    "Records with observed events and three estimable proxy formulations",
+    "Continental-group time slices with observed events and three estimable proxy formulations"
   )
 ) |>
   kable(booktabs = TRUE)

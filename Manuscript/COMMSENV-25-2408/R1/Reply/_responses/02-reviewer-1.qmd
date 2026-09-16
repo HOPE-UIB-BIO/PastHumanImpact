@@ -40,7 +40,7 @@
 
 > “Because these metrics are derived from pollen assemblages, they provide indirect representations of vegetation assemblage change; we therefore refer to them as pollen assemblage properties (PAPs) [@main-ref-23] and do not interpret them as taxon-specific vegetation responses.”
 
-> **AUTHOR REVIEW TODO — optional references:** Confirm the final balanced subset of reviewer-suggested regional references before submission.
+> **Author decision recorded.** Kuosmanen et al. (2018), Marquer et al. (2017), Reitalu et al. (2013), and the reviewer-suggested Reitalu et al. (2015) are retained for their distinct regional and response-domain contributions.
 
 ## R1.4 — H1 wording and PAP-scale interpretation
 
@@ -68,7 +68,7 @@
 
 > “Finally, a taxon-specific reconstruction, including the suggested analysis of eastern-Asian rice cultivation and early anthropogenic greenhouse-gas forcing, would require harmonised taxon-level response variables, region-specific archaeological predictors, and additional validation.”
 
-> **AUTHOR REVIEW TODO — co-author approval:** Confirm the wording of this taxon-specific scope response before submission.
+> **Author decision recorded.** The response now gives an ecological interpretation of PAP families while retaining the boundary against taxon-specific attribution.
 
 ## R1.6 — record selection, pollen-source areas, and climate-zone stability
 
