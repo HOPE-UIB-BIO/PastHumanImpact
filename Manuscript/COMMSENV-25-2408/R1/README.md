@@ -43,11 +43,10 @@ Expected outputs are written to `rendered/`:
 - `Reply/response-to-reviewers.pdf`
 - `Reply/response-to-reviewers.docx`
 
-The manuscript is assembled in two consecutive parts: Main Text, containing
-only Figs. 1–4, followed by Supplementary Information.
-Supplementary Information contains the full Methods, validation methods and
-results, Supplementary Figs. S1–S40, Supplementary Tables S1–S10, and Supplementary
-References. The journal calls this material “Supplementary Information”; the
+The manuscript presents the Main Text and Figs. 1–4, followed by the
+full Methods section. A separately labelled Supplementary Information section
+contains supplementary results, Supplementary Figs. S1–S40, Supplementary
+Tables S1–S10, and the relevant references. The journal calls this material “Supplementary Information”; the
 revision therefore does not use “Extended Data” terminology.
 
 Author decisions on expert provenance, reviewer-suggested references, and the two scope-boundary responses are recorded in the response modules. No `AUTHOR REVIEW TODO` callouts remain in the current revision package.

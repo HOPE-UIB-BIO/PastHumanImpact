@@ -1,6 +1,6 @@
 ## Supplementary Tables
 
-@supptbl-cohorts distinguishes the preparation pool, original H1 inventory, and controlled analysis cohort.
+@supptbl-cohorts distinguishes the preparation pool, sequences considered for the initial spatial analysis, and smaller analysis subsets.
 
 ::: {#supptbl-cohorts}
 
@@ -9,12 +9,12 @@
 tibble::tibble(
   Stage = c(
     "Preparation and expert-screening pool",
-    "Original H1 spatial model inventory",
+    "Sequences considered for initial spatial analysis",
     "Available original spatial decomposition",
-    "Controlled spatial SPD H1 cohort",
-    "Controlled temporal SPD H1 cohort",
-    "Observed-event matched spatial cohort",
-    "Observed-event matched temporal cohort"
+    "Time-controlled spatial SPD analysis",
+    "Spatially controlled temporal SPD analysis",
+    "Matched spatial comparison with observed events",
+    "Matched temporal comparison with observed events"
   ),
   Count = c(
     preparation_pool_n,
@@ -26,28 +26,28 @@ tibble::tibble(
     event_temporal_n
   ),
   Unit = c(
-    "pollen records",
-    "pollen records",
-    "pollen records",
-    "pollen records",
+    "pollen sequences",
+    "pollen sequences",
+    "pollen sequences",
+    "pollen sequences",
     "continental-group–age comparisons",
-    "pollen records",
+    "pollen sequences",
     "continental-group–age comparisons"
   ),
   Meaning = c(
-    "Records retained by the baseline pollen preparation profile",
-    "Records represented in the original H1 model inventory",
+    "Sequences retained by the baseline pollen preparation profile",
+    "Sequences considered for the initial spatial analysis",
     "Original spatial models with an estimable HVarPart decomposition",
-    "Records eligible for time-controlled spatial reporting",
+    "Sequences eligible for time-controlled spatial reporting",
     "Continental-group time slices eligible after spatial control",
-    "Records with observed events and three estimable proxy formulations",
+    "Sequences with observed events and three estimable proxy formulations",
     "Continental-group time slices with observed events and three estimable proxy formulations"
   )
 ) |>
   kable(booktabs = TRUE)
 ```
 
-**Cohorts used at different stages of the study.** Analysis-specific eligibility is determined from the registered live tables and should not be substituted for the preparation pool or original model inventory.
+**Subsets used at different stages of the study.** Analysis-specific eligibility is determined from the registered live tables and should not be substituted for the preparation pool or initial spatial analysis set.
 :::
 
 @supptbl-pap-metrics defines the ten PAPs used in the revised article.

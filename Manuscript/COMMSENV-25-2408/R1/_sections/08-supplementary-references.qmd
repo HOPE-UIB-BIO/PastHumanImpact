@@ -1,4 +1,4 @@
-## Supplementary References
+## Methods References
 
 ::: {#methods-bibliography}
 :::

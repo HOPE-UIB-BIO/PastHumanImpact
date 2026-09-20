@@ -1,5 +1,5 @@
 ::: {#supptbl-pollen-retention}
-**Pollen filtering and retention.** Percentages are relative to the 25-grain sample minimum and 150-grain rarefaction-target baseline. Higher target scenarios also raise the sample minimum to one-sixth of the target (50, about 83, and about 167 grains); the 300- and 500-grain labels are rarefaction targets, not strict minima for every sample. These scenarios quantify coverage loss and were not used to refit the complete H1 model inventory.
+**Pollen filtering and retention.** Percentages are relative to the 25-grain sample minimum and 150-grain rarefaction-target baseline. Higher target scenarios also raise the sample minimum to one-sixth of the target (50, about 83, and about 167 grains); the 300- and 500-grain labels are rarefaction targets, not strict minima for every sample. These scenarios quantify coverage loss and were not used to refit the complete initial spatial analysis.
 
 ```{r}
 table_pollen_retention |>
@@ -22,11 +22,11 @@ tibble::tribble(
   kable(booktabs = TRUE)
 ```
 
-The regional event chronologies were assessed by authors with regional palaeoecological expertise and direct familiarity with the pollen compilations: John Birks and Hilary Birks for Europe and North America, John Birks and Kuber Bhatta for Asia, and Simon Haberle and Annika Herbert for Oceania. Central and South American indicators followed the published regional synthesis cited in Supplementary Methods. The author experts were selected for their regional and pollen-analytical expertise. These assignments identify who assessed the diagrams; they do not make the event categories independent of the pollen response.
+The regional event chronologies were assessed by authors with regional palaeoecological expertise and direct familiarity with the pollen compilations: John Birks and Hilary Birks for Europe and North America, John Birks and Kuber Bhatta for Asia, and Simon Haberle and Annika Herbert for Oceania. Central and South American indicators followed the published regional synthesis cited in Methods. The author experts were selected for their regional and pollen-analytical expertise. These assignments identify who assessed the diagrams; they do not make the event categories independent of the pollen response.
 :::
 
 ::: {#supptbl-variance-decomposition}
-**HVarPart model inventory, available decompositions, total fit, and commonality components.** Total adjusted $R^2$ is overall fitted variation. Unique human, unique climate, and shared fractions are adjusted-$R^2$ commonality components and are not zero-truncated predictor compositions.
+**HVarPart models considered, available decompositions, total fit, and commonality components.** Total adjusted $R^2$ is overall fitted variation. Unique human, unique climate, and shared fractions are adjusted-$R^2$ commonality components and are not zero-truncated predictor compositions.
 
 ```{r}
 table_variance |>
@@ -44,7 +44,7 @@ table_hvarpart_profiles |>
 :::
 
 ::: {#supptbl-pap-collinearity}
-**PAP-collinearity and reduced-response sensitivity.** Baseline and reduced shares are paired within records with complete results and are not independent samples.
+**PAP-collinearity and reduced-response sensitivity.** Baseline and reduced shares are paired within sequences with complete results and are not independent samples.
 
 ```{r}
 table_pap_collinearity |>
@@ -53,7 +53,7 @@ table_pap_collinearity |>
 :::
 
 ::: {#supptbl-reciprocal-controls}
-**Residual spatial dependence and thinning coverage.** Moran rows aggregate the number of diagnostics with positive autocorrelation by control stage and report the observed Moran I range. Thinning rows report replicate count and the median number of retained record models. These diagnostics do not replace signed or unique-fraction results.
+**Residual spatial dependence and thinning coverage.** Moran rows aggregate the number of diagnostics with positive autocorrelation by control stage and report the observed Moran I range. Thinning rows report replicate count and the median number of retained sequence models. These diagnostics do not replace signed or unique-fraction results.
 
 ```{r}
 moran_table <-
@@ -101,7 +101,7 @@ thinning_table <-
     Scope = paste0(round(.data[["distance_km"]]), " km"),
     Result = paste0(
       .data[["replicates"]],
-      " replicates; median records = ",
+      " replicates; median sequences = ",
       round(.data[["median_records"]])
     )
   )
@@ -121,7 +121,7 @@ table_radius |>
 :::
 
 ::: {#supptbl-event-sensitivity}
-**Human-event inclusion sensitivity in the observed-event matched cohort.** Spatial values are median human-minus-climate balances. Temporal values are median changes in human allocation relative to SPD-only. Events are complementary and partly circular, not independent validation.
+**Human-event inclusion sensitivity in the observed-event matched subset.** Spatial values are median human-minus-climate balances. Temporal values are median changes in human allocation relative to SPD-only. Events are complementary and partly circular, not independent validation.
 
 ```{r}
 table_event_sensitivity |>

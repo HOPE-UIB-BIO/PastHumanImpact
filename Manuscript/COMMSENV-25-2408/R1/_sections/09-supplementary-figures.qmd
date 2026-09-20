@@ -1,57 +1,57 @@
 ## Supplementary Figures
 
 ::: {#suppfig-pollen-coverage}
-![](figures/supplementary-figure-02-pollen-coverage.png){width=90% fig-alt="Pollen-record coverage."}
+![](figures/supplementary-figure-02-pollen-coverage.png){width=90% fig-alt="Pollen-sequence coverage."}
 
-**Pollen-record coverage.** The `pollen_coverage` profile describes the `r format(preparation_pool_n, big.mark = ",")`-record preparation pool before analysis-specific predictor and control eligibility. Missing locations or intervals denote unavailable records, not absence of pollen-producing vegetation; negative values are not applicable.
+**Pollen-sequence coverage.** This figure describes the `r format(preparation_pool_n, big.mark = ",")`-sequence preparation pool before analysis-specific predictor and control eligibility. Missing locations or intervals denote unavailable sequences, not absence of pollen-producing vegetation.
 :::
 
 ::: {#suppfig-human-coverage}
 ![](figures/supplementary-figure-03-human-coverage.png){width=90% fig-alt="Human-proxy coverage."}
 
-**Human-proxy coverage.** The `human_coverage` profile shows SPD availability around the preparation pool under the 250 km neighbourhood with 500 km fallback. Missing coverage denotes insufficient dated evidence, not absence of people; negative values are not applicable.
+**Human-proxy coverage.** This figure shows SPD availability around the preparation pool under the 250 km neighbourhood with 500 km fallback. Missing coverage denotes insufficient dated evidence, not absence of people.
 :::
 
 ::: {#suppfig-event-coverage}
 ![](figures/supplementary-figure-04-event-coverage.png){width=90% fig-alt="Regional pollen-event coverage."}
 
-**Regional pollen-event coverage.** The `event_coverage` profile distinguishes observed expert-screened chronologies from default-filled records in the preparation pool. An undetected or missing event does not imply human absence; negative values are not applicable.
+**Regional pollen-event coverage.** This figure distinguishes observed expert-screened chronologies from default-filled sequences in the preparation pool. An undetected or missing event does not imply human absence.
 :::
 
 ::: {#suppfig-model-fit}
 ![](figures/supplementary-figure-22-hvarpart-profiles.png){width=90% fig-alt="HVarPart extraction-profile comparison."}
 
-**HVarPart extraction-profile comparison.** The `hvarpart_diagnostics` profile compares signed, zero-truncated, and exclude-negative allocations for each analysis-specific available cohort. Negative signed components retain suppressor/commonality meaning; missing decompositions are unavailable.
+**HVarPart extraction-profile comparison.** This analysis compares signed, zero-truncated, and exclude-negative allocations for each analysis-specific available subset. Negative signed components retain suppressor/commonality meaning; missing decompositions are unavailable.
 :::
 
 ::: {#suppfig-signed-results}
 ![](figures/supplementary-figure-25-h1-spatial-signed.png){width=90% fig-alt="Signed controlled spatial H1 contributions."}
 
-**Signed controlled spatial H1 counterpart.** The `spd_spatiotemporal_balance` cohort and time/space controls match Fig. 2. Negative values are signed human-minus-climate contribution differences, not negative explained variance; missing records are non-estimable.
+**Signed controlled spatial H1 counterpart.** The controlled spatial H1 subset and time/space controls match @fig-h1-spatial. Negative values are signed human-minus-climate contribution differences, not negative explained variance; missing sequences are non-estimable.
 :::
 
 ::: {#suppfig-dependence-controls}
 ![](figures/supplementary-figure-31-moran.png){width=90% fig-alt="Residual Moran diagnostic."}
 
-**Residual Moran diagnostic.** The `spd_spatiotemporal_balance` profile tests spatial dependence before and after controls in the eligible spatial cohort. Positive or negative Moran values indicate clustering direction; missing tests are non-estimable.
+**Residual Moran diagnostic.** This analysis tests spatial dependence before and after controls in the eligible spatial subset. Positive or negative Moran values indicate clustering direction; missing tests are non-estimable.
 :::
 
 ::: {#suppfig-predictor-trajectories}
 ![](figures/supplementary-figure-16-predictor-spd.png){width=90% fig-alt="SPD temporal trajectories."}
 
-**SPD temporal trajectories.** The `predictor_temporal` profile shows observed and HGAM-smoothed archaeological SPD within 8.5–2.0 ka BP continental-group and regional coverage. Missing segments indicate insufficient dates, not human absence; negative centred values are relative model-scale deviations.
+**SPD temporal trajectories.** These trajectories show observed and HGAM-smoothed archaeological SPD within 8.5–2.0 ka BP continental-group and regional coverage. Missing segments indicate insufficient dates, not human absence; negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-spd-radius}
 ![](figures/supplementary-figure-35-spd-radius-spatial.png){width=90% fig-alt="Spatial SPD-radius comparison."}
 
-**Spatial SPD-radius sensitivity.** The `spd_radius` profile compares strict 250 and 500 km predictors in `r format(radius_spatial_n, big.mark = ",")` matched records, with `r format(radius_spatial_defined_n, big.mark = ",")` defined zero-truncated pairs. Negative balances indicate greater climate allocation; missing pairs are not assigned zero.
+**Spatial SPD-radius sensitivity.** This analysis compares strict 250 and 500 km predictors in `r format(radius_spatial_n, big.mark = ",")` matched sequences, with `r format(radius_spatial_defined_n, big.mark = ",")` defined zero-truncated pairs. Negative balances indicate greater climate allocation; missing pairs are not assigned zero.
 :::
 
 ::: {#suppfig-event-sensitivity}
 ![](figures/supplementary-figure-38-event-spatial.png){width=90% fig-alt="Spatial event inclusion sensitivity."}
 
-**Spatial human-event sensitivity.** The `human_event_inclusion` profile compares SPD-only, event-only, and combined predictors in `r event_spatial_n` matched observed-event records. Negative balances indicate greater climate allocation; missing zero-truncated balances are retained as missing.
+**Spatial human-event sensitivity.** This analysis compares SPD-only, event-only, and combined predictors in `r event_spatial_n` matched observed-event sequences. Negative balances indicate greater climate allocation; missing zero-truncated balances are retained as missing.
 :::
 
 ::: {#suppfig-h2}
@@ -61,141 +61,141 @@
 :::
 
 ::: {#suppfig-record-examples}
-![](figures/supplementary-figure-05-record-examples.png){width=90% fig-alt="Two updated pollen-record examples."}
+![](figures/supplementary-figure-05-record-examples.png){width=90% fig-alt="Two updated pollen-sequence examples."}
 
-**Updated record examples.** The `predictor_temporal` profile shows record-level PAP and predictor inputs for two illustrative records, without spatial aggregation. Negative signed HVarPart components retain suppressor/commonality meaning; missing values are unavailable, and examples are not representative cohort summaries.
+**Updated sequence examples.** These trajectories show sequence-level PAP and predictor inputs for two illustrative sequences, without spatial aggregation. Negative signed HVarPart components retain suppressor/commonality meaning; missing values are unavailable, and examples are not representative subset summaries.
 :::
 
 ::: {#suppfig-pap-n0}
 ![](figures/supplementary-figure-06-pap-n0.png){width=90% fig-alt="N0 PAP trajectory."}
 
-**$N_0$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe taxonomic richness over observed record coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities, not negative taxon counts.
+**$N_0$ trajectory.** Equal-weighted posterior averages describe taxonomic richness over observed sequence coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities, not negative taxon counts.
 :::
 
 ::: {#suppfig-pap-n1}
 ![](figures/supplementary-figure-07-pap-n1.png){width=90% fig-alt="N1 PAP trajectory."}
 
-**$N_1$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe Shannon-effective diversity over observed record coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
+**$N_1$ trajectory.** Equal-weighted posterior averages describe Shannon-effective diversity over observed sequence coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-pap-n2}
 ![](figures/supplementary-figure-08-pap-n2.png){width=90% fig-alt="N2 PAP trajectory."}
 
-**$N_2$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe Simpson-effective diversity over observed record coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
+**$N_2$ trajectory.** Equal-weighted posterior averages describe Simpson-effective diversity over observed sequence coverage from 8.5 to 2.0 ka BP. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-pap-n1-minus-n2}
 ![](figures/supplementary-figure-09-pap-n1-minus-n2.png){width=90% fig-alt="N1 minus N2 PAP trajectory."}
 
-**$N_1-N_2$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe the separation of Shannon- and Simpson-effective diversity over observed coverage. Missing segments are unavailable, and signed transformed values retain their model-scale meaning.
+**$N_1-N_2$ trajectory.** Equal-weighted posterior averages describe the separation of Shannon- and Simpson-effective diversity over observed coverage. Missing segments are unavailable, and signed transformed values retain their model-scale meaning.
 :::
 
 ::: {#suppfig-pap-n2-n1}
 ![](figures/supplementary-figure-10-pap-n2-n1.png){width=90% fig-alt="N2 divided by N1 PAP trajectory."}
 
-**$N_2/N_1$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe dominance-sensitive evenness over observed 8.5–2.0 ka BP coverage. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
+**$N_2/N_1$ trajectory.** Equal-weighted posterior averages describe dominance-sensitive evenness over observed 8.5–2.0 ka BP coverage. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-pap-n1-n0}
 ![](figures/supplementary-figure-11-pap-n1-n0.png){width=90% fig-alt="N1 divided by N0 PAP trajectory."}
 
-**$N_1/N_0$ trajectory.** Equal-weighted `pap_temporal` posterior averages describe richness-sensitive evenness over observed 8.5–2.0 ka BP coverage. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
+**$N_1/N_0$ trajectory.** Equal-weighted posterior averages describe richness-sensitive evenness over observed 8.5–2.0 ka BP coverage. Missing segments are unavailable; negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-pap-roc}
 ![](figures/supplementary-figure-12-pap-roc.png){width=90% fig-alt="Rate-of-change PAP trajectory."}
 
-**Rate-of-change trajectory.** Equal-weighted `pap_temporal` posterior averages describe pollen compositional change over observed record coverage. Missing segments are unavailable, and negative transformed predictions do not denote a negative ecological rate.
+**Rate-of-change trajectory.** Equal-weighted posterior averages describe pollen compositional change over observed sequence coverage. Missing segments are unavailable, and negative transformed predictions do not denote a negative ecological rate.
 :::
 
 ::: {#suppfig-pap-dcca}
 ![](figures/supplementary-figure-13-pap-dcca.png){width=90% fig-alt="DCCA axis 1 PAP trajectory."}
 
-**DCCA axis 1 trajectory.** Equal-weighted `pap_temporal` posterior averages describe the primary compositional gradient over observed record coverage. The axis sign is arbitrary; missing segments are unavailable rather than zero change.
+**DCCA axis 1 trajectory.** Equal-weighted posterior averages describe the primary compositional gradient over observed sequence coverage. The axis sign is arbitrary; missing segments are unavailable rather than zero change.
 :::
 
 ::: {#suppfig-pap-density-diversity}
 ![](figures/supplementary-figure-14-pap-density-diversity.png){width=90% fig-alt="Density-diversity PAP trajectory."}
 
-**Density-diversity trajectory.** Equal-weighted `pap_temporal` posterior averages describe diversity change-point density over observed record coverage. Missing segments are unavailable, and negative transformed predictions are model-scale quantities.
+**Density-diversity trajectory.** Equal-weighted posterior averages describe diversity change-point density over observed sequence coverage. Missing segments are unavailable, and negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-pap-density-turnover}
 ![](figures/supplementary-figure-15-pap-density-turnover.png){width=90% fig-alt="Density-turnover PAP trajectory."}
 
-**Density-turnover trajectory.** Equal-weighted `pap_temporal` posterior averages describe turnover change-point density over observed record coverage. Missing segments are unavailable, and negative transformed predictions are model-scale quantities.
+**Density-turnover trajectory.** Equal-weighted posterior averages describe turnover change-point density over observed sequence coverage. Missing segments are unavailable, and negative transformed predictions are model-scale quantities.
 :::
 
 ::: {#suppfig-temporal-signed}
 ![](figures/supplementary-figure-26-h1-temporal-signed.png){width=90% fig-alt="Signed controlled temporal H1 contributions."}
 
-**Signed controlled temporal H1 counterpart.** The `time_slice_spd_spatial_control` cohort and spatial dbMEM controls match Fig. 3. Negative contributions retain suppressor/commonality meaning; missing continental-group–age combinations are non-estimable.
+**Signed controlled temporal H1 counterpart.** The controlled temporal H1 subset and spatial dbMEM controls match @fig-h1-temporal. Negative contributions retain suppressor/commonality meaning; missing continental-group–age combinations are non-estimable.
 :::
 
 ::: {#suppfig-pollen-retention}
 ![](figures/supplementary-figure-28-pollen-retention.png){width=85% fig-alt="Pollen-count threshold retention diagnostic."}
 
-**Pollen retention and bias–coverage diagnostic.** The `pollen_threshold_diagnostic` profile compares rarefaction targets of 300, 500, and 1,000 grains, with associated sample minima of 50, about 83, and about 167 grains, against the 150-grain target and 25-grain sample-minimum baseline. It does not impose a 300- or 500-grain minimum on every sample and is not an H1 refit; missing strata have no retained records, and negative values are not applicable.
+**Pollen retention and bias–coverage diagnostic.** The retention analysis compares rarefaction targets of 300, 500, and 1,000 grains, with associated sample minima of 50, about 83, and about 167 grains, against the 150-grain target and 25-grain sample-minimum baseline. It does not impose a 300- or 500-grain minimum on every sample and is not an H1 refit; missing strata have no retained sequences.
 :::
 
 ::: {#suppfig-pap-collinearity}
 ![](figures/supplementary-figure-29-pap-collinearity.png){width=90% fig-alt="PAP correlation and HVarPart influence diagnostic."}
 
-**PAP correlation and influence diagnostic.** The `pap_collinearity` profile uses paired records from the original H1 inventory to evaluate response redundancy and contribution changes. Negative signed changes retain direction; missing pairs are excluded rather than assigned zero.
+**PAP correlation and influence diagnostic.** The collinearity analysis uses paired sequences from the initial spatial analysis to evaluate response redundancy and contribution changes. Negative signed changes retain direction; missing pairs are excluded rather than assigned zero.
 :::
 
 ::: {#suppfig-predictor-temp-annual}
 ![](figures/supplementary-figure-17-predictor-temp-annual.png){width=90% fig-alt="Annual temperature trajectories."}
 
-**Annual-temperature trajectories.** The `predictor_temporal` profile uses point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values indicate relative model-scale deviations rather than invalid temperatures.
+**Annual-temperature trajectories.** These trajectories use point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values indicate relative model-scale deviations rather than invalid temperatures.
 :::
 
 ::: {#suppfig-predictor-temp-cold}
 ![](figures/supplementary-figure-18-predictor-temp-cold.png){width=90% fig-alt="Coldest-month temperature trajectories."}
 
-**Coldest-month temperature trajectories.** The `predictor_temporal` profile uses point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative values retain their temperature or centred model-scale interpretation.
+**Coldest-month temperature trajectories.** These trajectories use point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative values retain their temperature or centred model-scale interpretation.
 :::
 
 ::: {#suppfig-predictor-prec-summer}
 ![](figures/supplementary-figure-19-predictor-prec-summer.png){width=90% fig-alt="Summer precipitation trajectories."}
 
-**Warm-season precipitation trajectories.** The `predictor_temporal` profile uses point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values are relative model-scale deviations.
+**Warm-season precipitation trajectories.** These trajectories use point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-predictor-prec-winter}
 ![](figures/supplementary-figure-20-predictor-prec-winter.png){width=90% fig-alt="Winter precipitation trajectories."}
 
-**Cold-season precipitation trajectories.** The `predictor_temporal` profile uses point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values are relative model-scale deviations.
+**Cold-season precipitation trajectories.** These trajectories use point-extracted transient-climate values within the eligible pollen coverage. Missing segments are unavailable; negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-event-trajectories}
 ![](figures/supplementary-figure-21-event-trajectories.png){width=90% fig-alt="Regional pollen-event trajectories."}
 
-**Regional pollen-event trajectories.** The `event_temporal` profile shows HGAM-smoothed expert-screened event evidence by continental group and region. Events are complementary and partly circular; missing segments are unavailable, and negative centred values are relative model-scale deviations.
+**Regional pollen-event trajectories.** These trajectories show HGAM-smoothed expert-screened event evidence by continental group and region. Events are complementary and partly circular; missing segments are unavailable, and negative centred values are relative model-scale deviations.
 :::
 
 ::: {#suppfig-pap-reduced}
 ![](figures/supplementary-figure-30-pap-reduced.png){width=90% fig-alt="Reduced-PAP response sensitivity."}
 
-**Reduced-PAP response sensitivity.** The `pap_collinearity` profile compares complete and reduced PAP responses within paired H1 records. Zero-truncated displays omit negative signed components; missing pairs are non-estimable.
+**Reduced-PAP response sensitivity.** The reduced-response analysis compares complete and reduced PAP responses within paired H1 sequences. Zero-truncated displays omit negative signed components; missing pairs are non-estimable.
 :::
 
 ::: {#suppfig-adjusted-r2}
 ![](figures/supplementary-figure-23-adjusted-r2.png){width=90% fig-alt="Adjusted R-squared distribution."}
 
-**Adjusted $R^2$ distributions.** The `hvarpart_diagnostics` profile reports total model fit for available spatial H1 decompositions by continental group and region. Negative adjusted $R^2$ values denote fits worse than the adjusted null benchmark; missing models are unavailable.
+**Adjusted $R^2$ distributions.** This analysis reports total model fit for available spatial H1 decompositions by continental group and region. Negative adjusted $R^2$ values denote fits worse than the adjusted null benchmark; missing models are unavailable.
 :::
 
 ::: {#suppfig-fit-importance}
 ![](figures/supplementary-figure-24-fit-importance.png){width=90% fig-alt="Model fit versus human importance."}
 
-**Model fit versus human importance.** The `hvarpart_diagnostics` profile compares total adjusted $R^2$ with signed human hierarchical contribution in available spatial SPD models. Negative contributions retain suppressor/commonality meaning, and missing models are excluded rather than assigned zero.
+**Model fit versus human importance.** This analysis compares total adjusted $R^2$ with signed human hierarchical contribution in available spatial SPD models. Negative contributions retain suppressor/commonality meaning, and missing models are excluded rather than assigned zero.
 :::
 
 ::: {#suppfig-h2-signed}
 ![](figures/supplementary-figure-27-h2-signed.png){width=90% fig-alt="Signed H2 contributions."}
 
-**Signed H2 counterpart.** The `h2_interrelationships` cohort and continental-group/region grouping match Fig. 4. Negative contributions retain suppressor/commonality meaning; missing panels are non-estimable.
+**Signed H2 counterpart.** The H2 analysis subset and continental-group/region grouping match @suppfig-h2. Negative contributions retain suppressor/commonality meaning; missing panels are non-estimable.
 :::
 
 ::: {#suppfig-thinning}
@@ -207,35 +207,35 @@
 ::: {#suppfig-leave-out}
 ![](figures/supplementary-figure-33-leave-out.png){width=90% fig-alt="Leave-one-group-out sensitivity."}
 
-**Leave-one-group-out sensitivity.** The controlled SPD H1 profile omits each continental group or region in turn from its eligible cohort. Negative balance values indicate greater climate allocation; missing exclusions lack an estimable comparison.
+**Leave-one-group-out sensitivity.** The controlled SPD H1 profile omits each continental group or region in turn from its eligible subset. Negative balance values indicate greater climate allocation; missing exclusions lack an estimable comparison.
 :::
 
 ::: {#suppfig-unique-fractions}
 ![](figures/supplementary-figure-34-unique-r2.png){width=90% fig-alt="Unique adjusted R-squared fractions."}
 
-**Unique adjusted-$R^2$ fractions.** The `spd_events_spatial_control` profile isolates non-shared human, climate, and spatial contributions in eligible continental-group–age sets. Fractions do not form a composition; negative values are valid adjusted estimates, and missing fractions are non-estimable.
+**Unique adjusted-$R^2$ fractions.** The controlled temporal comparison isolates non-shared human, climate, and spatial contributions in eligible continental-group–age sets. Fractions do not form a composition; negative values are valid adjusted estimates, and missing fractions are non-estimable.
 :::
 
 ::: {#suppfig-radius-temporal}
 ![](figures/supplementary-figure-36-spd-radius-temporal.png){width=90% fig-alt="Temporal SPD-radius profiles."}
 
-**Temporal SPD-radius profiles.** The spatially controlled `spd_radius` profile compares strict radii across `r radius_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for this display; missing combinations are non-estimable.
+**Temporal SPD-radius profiles.** The spatially controlled analysis compares strict radii across `r radius_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for this display; missing combinations are non-estimable.
 :::
 
 ::: {#suppfig-radius-change}
 ![](figures/supplementary-figure-37-spd-radius-change.png){width=90% fig-alt="Temporal SPD-radius changes."}
 
-**Temporal SPD-radius changes.** The spatially controlled `spd_radius` profile reports 500-minus-250 km change in zero-truncated human allocation for matched continental-group–age combinations. Negative values shift toward climate; missing changes are non-estimable.
+**Temporal SPD-radius changes.** The spatially controlled analysis reports 500-minus-250 km change in zero-truncated human allocation for matched continental-group–age combinations. Negative values shift toward climate; missing changes are non-estimable.
 :::
 
 ::: {#suppfig-event-temporal}
 ![](figures/supplementary-figure-39-event-temporal.png){width=90% fig-alt="Temporal event inclusion profiles."}
 
-**Temporal human-event profiles.** The spatially controlled `human_event_inclusion` profile compares the three human-predictor definitions in `r event_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for display; missing combinations are non-estimable.
+**Temporal human-event profiles.** The spatially controlled analysis compares the three human-predictor definitions in `r event_temporal_n` matched continental-group–age combinations. Negative signed contributions are truncated only for display; missing combinations are non-estimable.
 :::
 
 ::: {#suppfig-event-change}
 ![](figures/supplementary-figure-40-event-change.png){width=90% fig-alt="Temporal event inclusion changes."}
 
-**Temporal human-event changes.** The spatially controlled `human_event_inclusion` profile reports changes from SPD-only in matched continental-group–age combinations. Negative values shift the zero-truncated human allocation downward; missing changes are non-estimable, and event evidence is not independent validation.
+**Temporal human-event changes.** The spatially controlled analysis reports changes from SPD-only in matched continental-group–age combinations. Negative values shift the zero-truncated human allocation downward; missing changes are non-estimable, and event evidence is not independent validation.
 :::

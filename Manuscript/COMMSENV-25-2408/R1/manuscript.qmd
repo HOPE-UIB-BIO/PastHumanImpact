@@ -53,6 +53,8 @@ execute:
 
 {{< include _sections/07-supplementary-methods.qmd >}}
 
+{{< include _sections/08-supplementary-references.qmd >}}
+
 {{< pagebreak >}}
 
 {{< include _sections/09-supplementary-results.qmd >}}
@@ -66,5 +68,3 @@ execute:
 {{< include _sections/10-supplementary-core-tables.qmd >}}
 
 {{< include _sections/10-supplementary-tables.qmd >}}
-
-{{< include _sections/08-supplementary-references.qmd >}}
