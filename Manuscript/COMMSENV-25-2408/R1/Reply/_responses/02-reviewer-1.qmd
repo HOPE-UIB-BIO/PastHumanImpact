@@ -38,7 +38,7 @@
 
 **Changes in the revised article.** Introduction, opening and PAP-proxy paragraphs; Discussion, scale-bounded interpretation.
 
-> “Because these metrics are derived from pollen assemblages, they provide indirect representations of vegetation assemblage change; we therefore refer to them as pollen assemblage properties (PAPs) [@main-ref-23] and do not interpret them as taxon-specific vegetation responses.”
+> “These pollen-derived metrics summarise aspects of assemblage diversity, composition, and change, and are referred to here as pollen assemblage properties (PAPs) [@main-ref-23].”
 
 > **Author decision recorded.** Kuosmanen et al. (2018), Marquer et al. (2017), Reitalu et al. (2013), and the reviewer-suggested Reitalu et al. (2015) are retained for their distinct regional and response-domain contributions.
 
@@ -100,10 +100,10 @@
 
 > **Original comment:** Figure 4 contains too much small information, and panel labels in Figure 2 were misaligned.
 
-**Response.** We promoted the overview of PAP temporal trajectories to Fig. 2, placed the controlled spatial and temporal H1 results in Figs. 3 and 4, moved the former H2 main figure to Supplementary Fig. 1, and grouped the quality-control and sensitivity analyses in Supplementary Result validation.
+**Response.** We promoted the overview of PAP temporal trajectories to Fig. 2, placed the controlled spatial and temporal H1 results in Figs. 3 and 4, moved the former H2 main figure to Supplementary Fig. S10, and grouped the quality-control and sensitivity analyses in Supplementary Result validation.
 
 **Analytical result.** The main figures now share explicit profile, cohort, control, and missing/negative-value captions.
 
-**Changes in the revised article.** Figs. 2–4, Supplementary Fig. 1, and the grouped Supplementary Result validation figures.
+**Changes in the revised article.** Figs. 2–4, Supplementary Fig. S10, and the grouped Supplementary Result validation figures.
 
-> “Negative signed individual contributions are set to zero only for this display; a zero or missing displayed component does not imply absence of an ecological effect, and signed counterparts are shown in Supplementary Fig. 25.”
+> “Negative signed individual contributions are set to zero only for this display; a zero or missing displayed component does not imply absence of an ecological effect, and signed counterparts are shown in Supplementary Fig. S5.”

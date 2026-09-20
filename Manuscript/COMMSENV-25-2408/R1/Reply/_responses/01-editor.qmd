@@ -6,7 +6,7 @@
 
 **Response.** We rebuilt the H1 presentation around time- and space-controlled analyses, added the corrected HVarPart extraction profiles, and report total adjusted $R^2$ separately from predictor allocation.
 
-**Analytical result.** Climate exceeded human influence in `r format(spatial_climate_dominant_n, big.mark = ",")` of `r format(spatial_controlled_n, big.mark = ",")` controlled records (`r sprintf("%.1f", spatial_climate_dominant_pct)`%), while mean total adjusted $R^2$ across `r format(spatial_available_n, big.mark = ",")` available spatial SPD decompositions was `r sprintf("%.3f", spatial_mean_adjusted_r2)`.
+**Analytical result.** Climate exceeded human influence in `r format(spatial_climate_dominant_n, big.mark = ",")` of `r format(spatial_controlled_n, big.mark = ",")` controlled records (`r sprintf("%.1f", spatial_climate_dominant_pct)`%), while total adjusted $R^2$ across `r format(spatial_available_n, big.mark = ",")` available spatial SPD decompositions was `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2, spatial_original_fit_ci[1], spatial_original_fit_ci[2])` (mean, 95% CI).
 
 **Changes in the revised article.** Results, “H1: Holocene human impact secondary to palaeoclimate” and “Result validation”; Fig. 3; Supplementary Figs. “HVarPart profiles, total fit, and fit–importance diagnostics” and “Signed counterparts”; Supplementary Tables “HVarPart model inventory” and “Analysis-level HVarPart profile comparison.”
 

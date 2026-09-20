@@ -4,7 +4,7 @@
 
 > **Original comment:** A key missing figure is the full set of PAPs through time for each region; presenting predictors without the responses makes the analyses difficult to interpret.
 
-**Response.** We agree and now present the PAP trajectories before predictor interpretation, including the added $N_1-N_2$ metric and all ten individual trajectories.
+**Response.** We agree and now present the PAP trajectories before predictor interpretation, with all ten PAP trajectories shown individually.
 
 **Analytical result.** The regenerated export contains ten PAP variables over observed coverage and was produced from existing posterior predictions without refitting.
 
@@ -94,7 +94,7 @@
 
 **Response.** We agree and now report total adjusted $R^2$, its distribution, and fit–importance diagnostics separately from hierarchical allocations.
 
-**Analytical result.** For spatial SPD, `r format(spatial_available_n, big.mark = ",")` decompositions had mean total adjusted $R^2$ `r sprintf("%.3f", spatial_mean_adjusted_r2)`; the controlled reporting cohort had median `r sprintf("%.3f", spatial_median_adjusted_r2)`.
+**Analytical result.** For spatial SPD, `r format(spatial_available_n, big.mark = ",")` decompositions had total adjusted $R^2$ `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2, spatial_original_fit_ci[1], spatial_original_fit_ci[2])` (mean, 95% CI); the controlled analysis subset had `r sprintf("%.3f [%.3f, %.3f]", spatial_median_adjusted_r2, spatial_q1_adjusted_r2_controlled, spatial_q3_adjusted_r2_controlled)` (median, interquartile range).
 
 **Changes in the revised article.** Supplementary Result validation, “Model fit and extraction profile”; Discussion, fit-interpretation paragraph; Supplementary model-fit figure and variance table.
 
