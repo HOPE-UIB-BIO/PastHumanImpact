@@ -44,7 +44,7 @@ table_hvarpart_profiles |>
 :::
 
 ::: {#supptbl-pap-collinearity}
-**PAP-collinearity and reduced-response sensitivity.** Baseline and reduced shares are paired within sequences with complete results and are not independent samples.
+**PAP-collinearity and reduced-response sensitivity.** The baseline and reduced signed contribution ratios are summarised for the same sequences; median change is the median within-sequence difference. @suppfig-pap-reduced separately shows the zero-truncated display.
 
 ```{r}
 table_pap_collinearity |>

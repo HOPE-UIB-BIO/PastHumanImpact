@@ -113,6 +113,55 @@ pap_collinearity <-
     show_col_types = FALSE
   )
 
+pap_response_correlations <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/Predictor_collinearity/pap_predictors__collinearity_summary.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+pap_correlation_pairs_n <-
+  nrow(pap_response_correlations)
+
+pap_correlation_strong_n <-
+  sum(pap_response_correlations[["median_abs_correlation"]] >= 0.8)
+
+pap_correlation_max <-
+  max(pap_response_correlations[["median_abs_correlation"]])
+
+pap_collinearity_paired <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/SPD/Predictor_collinearity/spd__pap_collinearity__hvarpart_influence__dataset_values.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  filter(
+    !is.na(.data[["baseline"]]),
+    !is.na(.data[["reduced_collinear_v1"]])
+  ) |>
+  group_by(.data[["predictor"]]) |>
+  summarise(
+    n_pairs = n(),
+    median_baseline = median(.data[["baseline"]]),
+    median_reduced = median(.data[["reduced_collinear_v1"]]),
+    median_delta = median(
+      .data[["reduced_collinear_v1"]] - .data[["baseline"]]
+    ),
+    .groups = "drop"
+  )
+
+pap_paired_climate <-
+  pap_collinearity_paired |>
+  filter(.data[["predictor"]] == "climate")
+
+pap_paired_human <-
+  pap_collinearity_paired |>
+  filter(.data[["predictor"]] == "human")
+
 spd_radius_spatial <-
   read_csv(
     file.path(
@@ -150,6 +199,12 @@ event_temporal <-
   )
 
 stopifnot(
+  nrow(pap_collinearity_paired) == 2L,
+  pap_paired_climate[["n_pairs"]] == pap_paired_human[["n_pairs"]],
+  pap_paired_climate[["n_pairs"]] ==
+    pap_collinearity[["n_with_complete_pairs"]][
+      pap_collinearity[["predictor"]] == "climate"
+    ],
   nrow(registry) > 0L,
   !anyDuplicated(registry[["artifact_id"]]),
   all(registry[["validation_status"]] == "registered"),
@@ -461,14 +516,19 @@ table_variance <-
   )
 
 table_pap_collinearity <-
-  pap_collinearity |>
+  pap_collinearity_paired |>
+  left_join(
+    pap_collinearity |>
+      select(.data[["predictor"]], .data[["n_datasets"]]),
+    by = "predictor"
+  ) |>
   transmute(
     Predictor = .data[["predictor"]],
     `Sequences considered` = .data[["n_datasets"]],
-    `Complete paired sequences` = .data[["n_with_complete_pairs"]],
+    `Complete paired sequences` = .data[["n_pairs"]],
     `Median baseline share` = round(.data[["median_baseline"]], 3),
     `Median reduced share` = round(.data[["median_reduced"]], 3),
-    `Median change` = round(.data[["median_delta_ratio"]], 3)
+    `Median change` = round(.data[["median_delta"]], 3)
   )
 
 table_radius <-

@@ -141,9 +141,9 @@
 :::
 
 ::: {#suppfig-pap-collinearity}
-![](figures/supplementary-figure-29-pap-collinearity.png){width=90% fig-alt="PAP correlation and HVarPart influence diagnostic."}
+![](figures/supplementary-figure-29-pap-collinearity.png){width=100% fig-alt="Heat map of median absolute pairwise correlations among ten pollen assemblage properties."}
 
-**PAP correlation and influence diagnostic.** The collinearity analysis uses paired sequences from the initial spatial analysis to evaluate response redundancy and contribution changes. Negative signed changes retain direction; missing pairs are excluded rather than assigned zero.
+**Correlations among pollen assemblage properties.** Each tile shows the median absolute pairwise correlation across eligible continental-group–region subsets of the initial spatial analysis. The colour and number describe the strength, not the direction, of association. Strong overlap is expected for measures that share abundance information or mathematical components; @suppfig-pap-reduced shows the H1 result after using a less redundant PAP response.
 :::
 
 ::: {#suppfig-predictor-temp-annual}

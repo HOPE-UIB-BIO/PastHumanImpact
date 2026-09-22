@@ -205,7 +205,7 @@ The baseline preparation profile required at least 25 terrestrial pollen grains 
 
 ### PAP collinearity and reduced response
 
-Several PAPs share taxa, abundance information, or mathematical components, so correlations are expected by construction. We first summarised the observed correlation structure among PAPs. We then compared the complete ten-PAP H1 response with a reduced response that removed redundant metrics. Comparisons were restricted to sequences with estimable results under both configurations. We evaluated changes in signed hierarchical contributions and in the zero-truncated human and climate display composition; the paired sequences are not independent samples.
+Several PAPs share taxa, abundance information, or mathematical components, so correlations are expected by construction. Multivariate responses need not have independent components, but redundancy may give shared assemblage properties disproportionate weight. We first summarised the observed correlation structure among PAPs. We then compared the complete ten-PAP H1 response with a reduced response that removed redundant metrics. Comparisons were restricted to sequences with estimable results under both configurations. We evaluated changes in signed hierarchical contributions and in the zero-truncated human and climate display composition; the paired sequences are not independent samples.
 
 ### Model fit and HVarPart extraction profiles
 
