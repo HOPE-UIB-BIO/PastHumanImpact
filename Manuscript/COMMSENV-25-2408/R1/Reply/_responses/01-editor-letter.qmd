@@ -1,6 +1,20 @@
-# EDITORS REQUESTS
+# EDITOR'S REQUESTS
 
-In particular the following editorial thresholds needs to be met,
+## OVERVIEW OF THE REVISION
+
+> **Authors** We thank the Editor and reviewers for their careful assessment of our manuscript.
+> Since receiving their comments, we have undertaken a substantial analytical and textual revision.
+> We strengthened the central H1 comparison at both scales: the spatial analysis now accounts for time within each pollen sequence, while the temporal analysis accounts for spatial structure among sequences within each continental-group time slice.
+> Following revisions to the model specifications, we refitted the complete set of hierarchical generalised additive models (hGAMs) used to describe temporal trajectories of pollen assemblage properties and predictor histories, then regenerated their predictions and figures.
+> We corrected the extraction of hierarchical variation-partitioning contributions and now report overall model fit separately from the relative contributions of climate and human activity.
+
+> **Authors** We added quality-control and sensitivity analyses of pollen-count coverage, correlations among pollen assemblage properties, shared and negative contributions, residual spatial dependence, spatial thinning, omission of geographic groups, the archaeological radiocarbon neighbourhood, and the definition of the human-activity proxy.
+> After adding these checks and sensitivity analyses, we continue to find the same general pattern as in the original H1 analysis: climate had the larger estimated contribution than human activity at the broad spatial and temporal scales examined.
+
+> **Authors** We have revised the Methods, Results, Discussion, figures, and Supplementary Information to make these changes and their limitations clear.
+> The responses below address the editorial requirements and each reviewer comment in detail.
+
+In particular, the following editorial requirements need to be met:
 
 * Provide a compelling case that climate outweighs human effects on vegetation assemblage dynamics in the Holocene, including a thorough analysis of the results, clearly indicating the variance explained by models.
 
@@ -20,18 +34,18 @@ In particular the following editorial thresholds needs to be met,
 
 > **Changes in the revised article.** These explanations are integrated throughout the Methods. More specialised checks are described under “Result-validation analyses” in Methods, and each figure and table now states the sequences, regions, or time intervals on which it is based.
 
-### Analysis subset guide
-
-The rows below refer to different bodies of evidence and, in two cases, different units of observation. They are therefore not successive losses from a single dataset. Full definitions are provided in Supplementary Table S1.
-
-| Evidence used | Count | Sequences or comparisons represented |
-| --- | ---: | --- |
-| Prepared pollen collection | `r format(preparation_pool_n, big.mark = ",")` | Pollen sequences after baseline preparation |
-| Sequences considered for the initial spatial analysis | `r format(original_h1_inventory_n, big.mark = ",")` | Initial set before model eligibility checks |
-| Sequences with an estimable initial comparison | `r format(spatial_available_n, big.mark = ",")` | Sequences for which climate and human contributions could be estimated |
-| Principal spatial analysis | `r format(spatial_controlled_n, big.mark = ",")` | Pollen sequences analysed after accounting for time within each sequence |
-| Principal regional analysis through time | `r temporal_spd_n` | Regional time intervals analysed after accounting for geographical pattern |
-| Spatial comparison of archaeological and expert evidence | `r event_spatial_n` | Sequences with both archaeological and expert evidence available for comparison |
-| Temporal comparison of archaeological and expert evidence | `r event_temporal_n` | Regional time intervals with both forms of human evidence available |
+> **Analysis subset guide (authors' summary).**
+>
+> The rows below refer to different bodies of evidence and, in two cases, different units of observation. They are therefore not successive losses from a single dataset. Full definitions are provided in Supplementary Table S1.
+>
+> | Evidence used | Count | Sequences or comparisons represented |
+> | --- | ---: | --- |
+> | Prepared pollen collection | `r format(preparation_pool_n, big.mark = ",")` | Pollen sequences after baseline preparation |
+> | Sequences considered for the initial spatial analysis | `r format(original_h1_inventory_n, big.mark = ",")` | Initial set before model eligibility checks |
+> | Sequences with an estimable initial comparison | `r format(spatial_available_n, big.mark = ",")` | Sequences for which climate and human contributions could be estimated |
+> | Principal spatial analysis | `r format(spatial_controlled_n, big.mark = ",")` | Pollen sequences analysed after accounting for time within each sequence |
+> | Principal regional analysis through time | `r temporal_spd_n` | Regional time intervals analysed after accounting for geographical pattern |
+> | Spatial comparison of archaeological and expert evidence | `r event_spatial_n` | Sequences with both archaeological and expert evidence available for comparison |
+> | Temporal comparison of archaeological and expert evidence | `r event_temporal_n` | Regional time intervals with both forms of human evidence available |
 
 # REVIEWER COMMENTS
