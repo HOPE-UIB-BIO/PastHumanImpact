@@ -110,25 +110,26 @@ These concerns can be at least partly mitigated against by performing some trans
 
 **Supplementary Fig. S23B (reproduced).** Proportions of sequences (dashed) and samples (solid) retained within each continental group. The 300-, 500-, and 1,000-grain labels denote rarefaction targets with associated sample minima of 50, about 83, and about 167 grains, relative to the 150-grain target and 25-grain sample-minimum baseline. This is a coverage diagnostic, not an H1 model refit.
 
-> Richness, evenness, and the Hill-number measures are necessarily related because they describe different aspects of the same assemblage. We now show these relationships directly and repeat the comparison after removing the most closely related response measures. Across `r format(pap_collinearity[["n_with_complete_pairs"]][1], big.mark = ",")` sequences represented in both analyses, the median climatic contribution changed from `r sprintf("%.3f", pap_collinearity[["median_baseline"]][pap_collinearity[["predictor"]] == "climate"])` to `r sprintf("%.3f", pap_collinearity[["median_reduced"]][pap_collinearity[["predictor"]] == "climate"])`. The broad climatic predominance remained, although the contribution estimated for individual pollen sequences sometimes changed.
+> Correlation among the PAP responses does not itself invalidate the multivariate H1 analysis. Ecological community analyses routinely consider species whose abundances covary; their response variables need not be mutually independent. Richness, evenness, and the Hill-number measures likewise describe related aspects of the same pollen assemblages. Their overlap could give some dimensions of assemblage change greater weight, so we measured it rather than assuming it was inconsequential. Supplementary Fig. S24 shows the actual PAP correlations: `r pap_correlation_strong_n` of `r pap_correlation_pairs_n` pairs have a median absolute correlation of at least 0.8 across eligible groups.
 
+> We then repeated the spatial SPD H1 analysis with a reduced, less redundant PAP response. Among `r format(pap_paired_climate[["n_pairs"]], big.mark = ",")` sequences estimable in both configurations, the median signed climate contribution ratio changed from `r sprintf("%.3f", pap_paired_climate[["median_baseline"]])` to `r sprintf("%.3f", pap_paired_climate[["median_reduced"]])`, and the median signed human contribution ratio changed from `r sprintf("%.3f", pap_paired_human[["median_baseline"]])` to `r sprintf("%.3f", pap_paired_human[["median_reduced"]])`. Supplementary Fig. S30 shows the reduced-response climate–human pattern. Climate retains the larger estimated contribution in the aggregate; changes for individual sequences remain visible and should not be described as identical results.
 > We did not apply REVEALS because the pollen-productivity estimates, dispersal parameters, basin descriptions, and taxonomic resolution needed for a comparable analysis are not available across all regions. Restricting that correction to Europe or other well-studied regions would make the ecological meaning of the response differ among continental groups. The revised article therefore treats productivity and dispersal as unresolved limitations and does not imply that rarefaction corrects them.
 
-> **Changes in the revised article.** The count procedure and the relationships among pollen assemblage properties are now explained in the Methods. The Supplementary Information shows the loss of geographical and temporal coverage under stricter targets, the observed correlations among properties, and the reduced-response comparison. The Discussion contains a dedicated account of how pollen production, dispersal, and finite counts constrain ecological interpretation.
+> **Changes in the revised article.** The count procedure and the relationships among pollen assemblage properties are now explained in the Methods. The Supplementary Information shows the loss of geographical and temporal coverage under stricter targets, the observed correlations among properties in Fig. S24, and the reduced-response climate–human result in Fig. S30. The Discussion contains a dedicated account of how pollen production, dispersal, and finite counts constrain ecological interpretation.
 
-For direct comparison, we reproduce the supplementary diagnostics of PAP correlation and the reduced-response analysis.
+For direct assessment, we reproduce the observed PAP correlations and the climate–human result obtained with a less redundant response set.
 
 {{< pagebreak >}}
 
-![](../figures/supplementary-figure-29-pap-collinearity.png){width=90% fig-alt="Supplementary Fig. S24: PAP correlation and influence diagnostic."}
+![](../figures/supplementary-figure-29-pap-collinearity.png){width=85% fig-alt="Supplementary Fig. S24: median absolute pairwise correlations among pollen assemblage properties."}
 
-**Supplementary Fig. S24 (reproduced). PAP correlation and influence.** Correlation among assemblage properties is assessed across the available paired sequences; negative signed changes retain their direction.
+**Supplementary Fig. S24 (reproduced). Correlations among pollen assemblage properties.** Tiles give the median absolute pairwise correlation across eligible continental-group–region subsets. They show the strength, not the direction, of association.
 
 {{< pagebreak >}}
 
 ![](../figures/supplementary-figure-30-pap-reduced.png){width=90% fig-alt="Supplementary Fig. S30: reduced-PAP response sensitivity."}
 
-**Supplementary Fig. S30 (reproduced). Reduced-PAP response sensitivity.** The climate–human comparison is repeated with the correlated response measures reduced within the same eligible sequences; missing pairs are non-estimable.
+**Supplementary Fig. S30 (reproduced). Climate–human allocation with a reduced PAP response.** The spatial H1 analysis was repeated with a less redundant set of PAPs. This zero-truncated display favours climate in most regional groups; the matched signed comparison is reported above and in Supplementary Table S7.
 
 {{< pagebreak >}}
 
