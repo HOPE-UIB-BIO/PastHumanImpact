@@ -242,6 +242,7 @@ table_sample_rowsums_by_climatezone <-
     sample_id,
     region,
     climatezone,
+    pollen_percentage,
     rowsum
   )
 

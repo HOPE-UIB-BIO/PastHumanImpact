@@ -1,10 +1,10 @@
 #' @title Plot an H2 HVarPart inset
 #' @description
 #' Draws either a zero-truncated human-minus-climate balance lollipop or an
-#' unstacked signed supplementary inset for one region and climate zone.
+#' unstacked signed supplementary inset for one continental group and region.
 #' @param data_summary Pooled H2 importance summary.
-#' @param selected_region Region to display.
-#' @param selected_climatezone Climate zone to display.
+#' @param selected_region Continental group to display.
+#' @param selected_climatezone Region to display.
 #' @param profile One of `"zero_truncated"` or `"signed"`.
 #' @param legend_position ggplot2 legend position.
 #' @return A ggplot object.

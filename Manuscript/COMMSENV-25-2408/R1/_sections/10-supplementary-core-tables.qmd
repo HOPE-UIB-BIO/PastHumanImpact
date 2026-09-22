@@ -1,0 +1,64 @@
+## Supplementary Tables
+
+@supptbl-cohorts distinguishes the preparation pool, sequences considered for the initial spatial analysis, and smaller analysis subsets.
+
+::: {#supptbl-cohorts}
+
+```{r}
+#| label: cohorts-table-data
+tibble::tibble(
+  Stage = c(
+    "Preparation and expert-screening pool",
+    "Sequences considered for initial spatial analysis",
+    "Available original spatial decomposition",
+    "Time-controlled spatial SPD analysis",
+    "Spatially controlled temporal SPD analysis",
+    "Matched spatial comparison with observed events",
+    "Matched temporal comparison with observed events"
+  ),
+  Count = c(
+    preparation_pool_n,
+    original_h1_inventory_n,
+    spatial_available_n,
+    spatial_controlled_n,
+    temporal_spd_n,
+    event_spatial_n,
+    event_temporal_n
+  ),
+  Unit = c(
+    "pollen sequences",
+    "pollen sequences",
+    "pollen sequences",
+    "pollen sequences",
+    "continental-group–age comparisons",
+    "pollen sequences",
+    "continental-group–age comparisons"
+  ),
+  Meaning = c(
+    "Sequences retained by the baseline pollen preparation profile",
+    "Sequences considered for the initial spatial analysis",
+    "Original spatial models with an estimable HVarPart decomposition",
+    "Sequences eligible for time-controlled spatial reporting",
+    "Continental-group time slices eligible after spatial control",
+    "Sequences with observed events and three estimable proxy formulations",
+    "Continental-group time slices with observed events and three estimable proxy formulations"
+  )
+) |>
+  kable(booktabs = TRUE)
+```
+
+**Subsets used at different stages of the study.** Analysis-specific eligibility is determined from the registered live tables and should not be substituted for the preparation pool or initial spatial analysis set.
+:::
+
+@supptbl-pap-metrics defines the ten PAPs used in the revised article.
+
+::: {#supptbl-pap-metrics}
+
+```{r}
+#| label: pap-metrics-table-data
+table_pap_definitions |>
+  kable(booktabs = TRUE)
+```
+
+**Pollen assemblage properties (PAPs).** Correlation among these summaries is expected because they describe overlapping features of the same assemblages.
+:::

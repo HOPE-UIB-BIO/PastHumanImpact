@@ -1,0 +1,36 @@
+# Supplementary Information
+
+## Supplementary Results
+
+### H2: changes in PAP interrelationships
+
+The H2 ordination shows how relationships among PAPs changed across time within regions nested in continental groups. Palaeoclimate explained more of the broad-scale change in these relationships than human SPD in most estimable groups, with a zero-truncated analysis-level climate allocation of `r sprintf("%.3f", profile_analysis |> filter(.data[["analysis"]] == "h2_spd", .data[["profile"]] == "zero_truncated", .data[["predictor"]] == "climate") |> pull(.data[["pooled_allocation"]]))`. Missing panels indicate non-estimable combinations rather than ecological stability or absence of an effect. The ordination represents collective PAP covariance and cannot identify a response of any individual pollen taxon.
+
+
+### Result validation
+
+#### Pollen coverage and PAP representation
+
+Increasing the rarefaction target and its associated sample minimum reduced both sequence and sample coverage sharply (@supptbl-pollen-retention; @suppfig-pollen-retention). Relative to the 1,270-sequence baseline, 1,105 sequences remained at 300 grains, 616 at 500 grains, and 246 at 1,000 grains. Fig. S23A shows the observed count distribution in count-based samples, and Fig. S23B shows that these losses differed substantially among continental groups. Together, these diagnostics support retaining the baseline rule while explicitly acknowledging its precision limitation. They do not constitute H1 sensitivity-model results.
+
+The PAP correlation matrix shows that `r pap_correlation_strong_n` of `r pap_correlation_pairs_n` response pairs have a median absolute correlation of at least 0.8 across eligible groups (@suppfig-pap-collinearity). Correlation among these assemblage properties is expected and does not invalidate a multivariate response, although redundancy could increase the weight of shared information. The reduced-response comparison contained `r format(pap_paired_climate[["n_pairs"]], big.mark = ",")` sequences estimable under both configurations. Within this matched set, the median signed climate contribution ratio changed from `r sprintf("%.3f", pap_paired_climate[["median_baseline"]])` to `r sprintf("%.3f", pap_paired_climate[["median_reduced"]])`, and the median signed human contribution ratio changed from `r sprintf("%.3f", pap_paired_human[["median_baseline"]])` to `r sprintf("%.3f", pap_paired_human[["median_reduced"]])` (@supptbl-pap-collinearity; @suppfig-pap-reduced). The broad climate-over-human ordering was retained, although allocations for individual sequences changed; this comparison establishes robustness of the aggregate ordering, not identical results for every sequence.
+
+#### Model fit and extraction profile
+
+Of the 1,262 sequences in the initial spatial analysis, `r format(spatial_available_n, big.mark = ",")` had an available HVarPart decomposition.
+Total adjusted $R^2$ in those models was `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2, spatial_original_fit_ci[1], spatial_original_fit_ci[2])` (mean, 95% CI).
+In the separate controlled spatial subset of `r format(spatial_controlled_n, big.mark = ",")` sequences, total adjusted $R^2$ was `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2_controlled, spatial_controlled_fit_ci[1], spatial_controlled_fit_ci[2])` (mean, 95% CI) and `r sprintf("%.3f [%.3f, %.3f]", spatial_median_adjusted_r2, spatial_q1_adjusted_r2_controlled, spatial_q3_adjusted_r2_controlled)` (median, interquartile range; @supptbl-variance-decomposition; @suppfig-adjusted-r2; @suppfig-fit-importance).
+Model fit varied substantially among sequences and was only weakly associated with signed human allocation.
+
+The spatial analysis-level climate allocation was `r sprintf("%.3f", spatial_signed_climate)` in the signed profile, `r sprintf("%.3f", spatial_zero_climate)` in the zero-truncated profile, and `r sprintf("%.3f", spatial_exclude_climate)` after excluding models with negative individual components (@supptbl-hvarpart-profiles; @suppfig-model-fit). Thus, numerical allocation depends on the treatment of negative components, but the broad ordering remains unchanged. Signed counterparts to the main H1 figures and H2 result retain suppressor and commonality information (@suppfig-signed-results; @suppfig-temporal-signed; @suppfig-h2-signed).
+
+#### Dependence, thinning, and leave-out checks
+
+Residual Moran diagnostics detected positive spatial autocorrelation in 9 of 14 unfiltered comparisons and 4 of 14 residual comparisons after spatial control; observed Moran's $I$ ranged from -0.068 to 0.131 before control and from -0.061 to 0.054 afterwards (@supptbl-reciprocal-controls; @suppfig-dependence-controls). Spatial thinning retained a median of 361 sequence models across 100 replicates at 250 km and 216 models across 100 replicates at 500 km (@suppfig-thinning). Leave-one-continental-group and leave-one-region estimates generally retained a negative human-minus-climate balance, while identifying individual omitted groups with greater uncertainty (@suppfig-leave-out). Unique-fraction trajectories likewise show where shared variation or weak non-shared contributions qualify a visually stable zero-truncated composition (@suppfig-unique-fractions).
+
+#### SPD radius and human-proxy definition
+
+The spatial radius comparison contained `r format(radius_spatial_n, big.mark = ",")` matched sequences, of which `r format(radius_spatial_defined_n, big.mark = ",")` had defined zero-truncated balances under both radii. The median 500-km-minus-250-km balance change was `r sprintf("%.3f", radius_spatial_delta_median)`, and `r radius_spatial_reversals` sequences reversed their human-versus-climate ranking. At the temporal scale, `r radius_temporal_reversals` of `r radius_temporal_n` matched continental-group–age comparisons reversed ranking and median human allocation changed by `r sprintf("%.3f", radius_temporal_human_delta_median)` (@supptbl-spd-radius; @suppfig-spd-radius; @suppfig-radius-temporal; @suppfig-radius-change). The fallback therefore improves coverage but can affect individual estimates. Both tested radii can be much larger than a pollen source area; this is a radius-choice diagnostic, not a source-area-matched sensitivity analysis.
+
+The observed-event subset contained `r event_spatial_n` matched spatial sequences and `r event_temporal_n` matched temporal continental-group–age comparisons. Among defined spatial results, median human-minus-climate balance was `r sprintf("%.3f", event_combined_spatial_median)` for combined SPD-plus-event models and `r sprintf("%.3f", event_only_spatial_median)` for event-only models. Temporally, adding events to SPD changed median human allocation by `r sprintf("%.3f", event_combined_temporal_delta)`, whereas replacing SPD with events changed it by `r sprintf("%.3f", event_only_temporal_delta)` (@supptbl-event-sensitivity; @suppfig-event-sensitivity; @suppfig-event-temporal; @suppfig-event-change). Variation in both directions shows that human attribution depends partly on proxy definition; the event chronology remains complementary, coarse, and partly circular. Younger event-only profiles lie outside the primary 8.5–2.0 ka BP SPD comparison and are interpreted separately.
+

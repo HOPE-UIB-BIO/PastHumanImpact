@@ -42,8 +42,8 @@ vec_all_paps <-
 vec_primary_paps <-
   vec_all_paps[
     !vec_all_paps %in% c(
-      "n1",
       "n2",
+      "n1_minus_n2",
       "n2_divided_by_n1",
       "n1_divided_by_n0"
     )

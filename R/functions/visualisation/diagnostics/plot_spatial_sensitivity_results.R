@@ -145,8 +145,8 @@ plot_spatial_sensitivity_results <- function(
     dplyr::mutate(
       sensitivity_label = dplyr::recode(
         .data[["sensitivity_type"]],
-        leave_region_out = "Region omitted",
-        leave_climatezone_out = "Climate zone omitted"
+        leave_region_out = "Continental group omitted",
+        leave_climatezone_out = "Region omitted"
       ),
       omitted_group_label = dplyr::case_when(
         .data[["sensitivity_type"]] == "leave_region_out" ~
@@ -158,7 +158,7 @@ plot_spatial_sensitivity_results <- function(
       ),
       sensitivity_label = factor(
         .data[["sensitivity_label"]],
-        levels = c("Region omitted", "Climate zone omitted")
+        levels = c("Continental group omitted", "Region omitted")
       ),
       omitted_group_label = factor(
         .data[["omitted_group_label"]],

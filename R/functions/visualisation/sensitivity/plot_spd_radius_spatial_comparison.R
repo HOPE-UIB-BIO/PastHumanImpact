@@ -219,7 +219,7 @@ plot_spd_radius_spatial_comparison <- function(
       ggplot2::vars(.data[["summary_level"]]),
       scales = "free_y",
       labeller = ggplot2::as_labeller(
-        c(region = "Region", climatezone = "Climate zone")
+        c(region = "Continental group", climatezone = "Region")
       )
     ) +
     ggplot2::scale_x_continuous(

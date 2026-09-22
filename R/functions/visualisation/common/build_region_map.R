@@ -1,15 +1,15 @@
 # function to get regional maps
 # input is raster data for ecozones
 
-#' @title Build a regional climate-zone map
+#' @title Build a continental-group map of regions
 #' @description
-#' Creates a ggplot map for a selected region using rasterized climate-zone
+#' Creates a ggplot map for a selected continental group using rasterized region
 #' data and configured regional boundaries.
 #' @param rasterdata Data frame containing `x`, `y`, and `climatezone` columns.
-#' @param select_region Region name used to subset configured map limits.
+#' @param select_region Continental-group name used to subset configured map limits.
 #' @param sel_alpha Alpha transparency for raster layer.
 #' @param base_col Base color used for borders.
-#' @param sel_palette Named palette for climate-zone fills.
+#' @param sel_palette Named palette for region fills.
 #' @return A `ggplot` object.
 
 build_region_map <- function(rasterdata,

@@ -1,0 +1,213 @@
+## Reviewer #1 (Remarks to the Author)
+
+### Review of the manuscript
+
+“Climate outweighs human effects on vegetation assemblage dynamics in the Holocene” by Felde et al.
+
+The manuscript submitted by Felde et al. presents a substantial contribution to the field of paleoecology. The study is based on a large dataset of pollen records spanning all continents to investigate the relative influence of climate and human activity on vegetation compositional changes throughout the Holocene. The authors use modelled climate data and archaeological radiocarbon dates, along with expert knowledge on human activities derived from pollen records, to disentangle the effects of climate and human activities on vegetation/pollen composition and diversity. The analytical framework is well developed, employing state-of-the-art statistical methods to explore large-scale pollen composition and diversity changes. The use of Pollen Assemblage Properties (PAPs) to assess compositional changes is innovative and adds a new dimension to paleoecological interpretation. Overall, this is an important and ambitious manuscript that I highly recommend for publication.
+
+My major comments on the manuscript are listed below.
+
+> **Response.** We thank the reviewer for the constructive assessment. The revision defines more carefully the ecological meaning of the pollen assemblage properties, the historical interval and spatial scales to which the conclusions apply, and the strengths and limitations of the climate and archaeological evidence.
+
+### Scope and framing of the study period
+
+The title suggests an analysis of the entire Holocene, yet the dataset ends approximately 2000 years ago. This period excludes the last two millennia, during which anthropogenic impacts on vegetation intensified, including major deforestation events and agricultural expansion. The title should be revised to more accurately reflect the temporal scope of the data and findings.
+Furthermore, some statements in the discussion, such as the caution against the narrative that human transformation is always destructive, may appear strong given the temporal cut-off at 2 ka BP. I suggest to soften or contextualize this statement to avoid misinterpretation.
+
+> **Response.** We agree. The title now specifies the interval 8.5–2.0 ka BP and refers to pollen assemblage dynamics. This is the period for which the archaeological SPD evidence supports the principal comparison. Some expert-identified events occur after 2.0 ka BP, but these younger observations are shown separately and do not extend the principal conclusion into the last two millennia. We have also removed the broad statement that human transformation was not destructive. The revised Discussion instead emphasises that our result concerns the spatially aggregated ecological patterns represented in this study and does not diminish the extensive historical and palaeoecological evidence for substantial local human transformation.
+
+> **Changes in the revised article.** The title is now “Climate outweighs human effects on pollen assemblage dynamics from 8.5 to 2.0 ka BP.” The same temporal and ecological scope is maintained in the Abstract, hypotheses, Results, Discussion, and Conclusion. Younger event observations are identified separately in Fig. 4.
+
+### Use and justification of climate model outputs and human activity proxies
+
+While the use of paleoclimate model data is justified by the limited spatial coverage of proxy-based climate reconstructions, a brief discussion of the benefits and limitations of using model outputs (e.g., smoothed trends and difficulties to simulate climate in some regions) should be included. This will help the readers to better understand the implications using climate model outputs.
+
+> **Response.** We agree and have added a fuller discussion. CHELSA-TraCE21k provides a spatially continuous and internally consistent description of climatic change across regions where proxy reconstructions remain uneven. This is valuable for a global comparison, but the simulations smooth short-lived and local climatic variation, depend on model assumptions, and may not reproduce conditions within the actual pollen source area, especially where elevation or topography changes over short distances. We therefore interpret the climate variables as broad representations of climatic history rather than exact reconstructions of the environments surrounding individual sites.
+
+> **Changes in the revised article.** The advantages and limitations of the simulated climate histories are now explained under “Palaeoclimate” and revisited in the Discussion when comparing local ecological change with broad climatic patterns.
+
+In a same way, the use of summed probability densities (SPDs) from archaeological radiocarbon dates is appropriate but should be more critically discussed, although the authors already mention some of the issues. These can underestimate human presence, especially in regions or periods with sparse data. Furthermore, the expert-derived “human-impact events” from pollen data introduce a degree of circular reasoning as it is based on pollen information. The authors should mention the pros and cons of using such approach.
+
+> **Response.** We agree. We retain archaeological SPDs as validated proxies for regional human population changes, while making clear that they are histories of dated archaeological activity rather than direct censuses of past populations. Their form is influenced by preservation, calibration, archaeological research traditions, and uneven knowledge among regions and periods. SPD remains the principal human-history proxy because it is independent of the pollen response and can be compared across much of the study area. The expert-derived events contribute a different kind of evidence: regionally informed indications of land use and vegetation disturbance within pollen diagrams. They can reveal changes not represented by a regional SPD, but they are unevenly available and partly circular because both the event and the ecological response may be inferred from the same pollen sequence. We therefore use them to examine sensitivity to the choice of historical evidence, not as independent confirmation.
+
+> We also repeated H1 within the subset with observed event chronologies, representing human activity in turn by the archaeological SPD alone, the expert-derived events alone, and both together.
+> Across `r event_spatial_n` spatial sequences and `r event_temporal_n` continental-group–age comparisons, climate retained the larger median estimated contribution under each definition (Supplementary Figs. S9 and S39).
+> This preserves the broad direction of the principal SPD analysis, although the combined spatial balance was close to parity and estimates for individual sequences and time intervals changed.
+> Supplementary Fig. S40 shows the temporal changes relative to SPD alone.
+> Because the events are partly inferred from pollen diagrams, these repetitions test sensitivity to the human-activity proxy rather than provide independent confirmation.
+
+> **Changes in the revised article.** These complementary strengths and limitations are now explained in the Methods and Discussion. Supplementary Figs. S9, S39, and S40 show the SPD-only, event-only, and combined comparisons and the temporal changes relative to SPD alone.
+
+> For direct comparison, we reproduce the spatial and temporal proxy profiles and the matched temporal changes below.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-38-event-spatial.png){width=100% fig-alt="Supplementary Fig. S9: spatial human-climate balance for SPD-only, event-only, and combined human proxies."}
+
+**Supplementary Fig. S9 (reproduced). Spatial human-event sensitivity.** The three human-proxy definitions are compared among sequences with observed event chronologies. Negative balances favour climate; the combined estimate moves closer to parity for some sequences.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-39-event-temporal.png){width=100% fig-alt="Supplementary Fig. S39: temporal human allocation under SPD-only, event-only, and combined proxies."}
+
+**Supplementary Fig. S39 (reproduced). Temporal human-event profiles.** The spatially controlled analysis shows all available continental-group time slices. Event-only profiles extend into younger intervals where the archaeological SPD is unavailable; those intervals are outside the matched three-way comparison.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-40-event-change.png){width=100% fig-alt="Supplementary Fig. S40: temporal changes in human allocation for event-only and combined proxies relative to SPD-only."}
+
+**Supplementary Fig. S40 (reproduced). Temporal human-event changes.** Within matched continental-group–age comparisons, the lines show changes in the human allocation relative to SPD-only. Positive values shift toward greater human allocation; negative values shift toward climate.
+
+{{< pagebreak >}}
+
+### Background information and previous studies
+
+The introduction would benefit from presenting a bit more prior studies that used similar approaches, e.g., Kuosmanen et al. (2018), Marquer et al. (2017), and Reitalu et al. (2015). These studies provide an important context for methods, data types, and interpretations of vegetation change drivers, although for Europe and regional scales only. Their inclusion would strengthen the rationale for the current study.
+
+> **Response.** We agree that the regional literature is essential context. The Discussion now relates our study to European and other regional attempts to separate climatic and human influences on past vegetation. We also clarify an important ecological distinction: our response variables describe richness, evenness, turnover, and other properties of pollen assemblages, whereas several earlier studies reconstructed changes in particular taxa or vegetation composition.
+
+> **Changes in the revised article.** The revised text discusses Kuosmanen et al. (2018), Marquer et al. (2017), Reitalu et al. (2013) on climatic and human influences on forest composition, and Reitalu et al. (2015) on functional and phylogenetic diversity inferred from pollen.
+
+### Interpretation of hypotheses and results
+
+Hypothesis 1 states that if human impact is an important driver, its influence should match or exceed that of climate. I would say “the major driver” rather than “important driver” in the case it exceeds climate.
+
+> **Response.** We agree and now describe human activity as the proposed “primary driver” in H1. This wording reflects the intended comparison with climate without implying that a smaller estimated contribution would make human influence ecologically unimportant.
+
+> **Changes in the revised article.** H1 now reads: “The first hypothesis (H1) proposed that human impact was the primary driver of changes in PAPs at continental-group and regional scales between 8.5 and 2.0 ka BP.”
+
+The authors conclude that climate dominates vegetation change at large spatial scales rather than local scales. This aligns with prior studies. I agree with the authors and clearly support the fact that at finer spatial resolutions, human impacts become more visible and potentially dominant.
+It is important to mention that the use of PAPs may homogenize vegetation signals and amplify climate-related patterns. This should be acknowledged.
+
+> **Response.** We appreciate this concern, but do not assume that using PAPs inherently amplifies climatic patterns.
+> PAPs describe different properties of the pollen assemblage in each individual sequence; calculating them does not average sequences across a region.
+> Richness, evenness, turnover, and rate of change can reveal assemblage reorganisation without relying on the response of a single pollen type, although a change confined to particular taxa may leave some of these properties largely unchanged.
+> In the spatial H1 analysis, climatic and human contributions are estimated within each sequence, with time controlled, before those estimates are summarised across continental groups and regions.
+> The human proxy had the larger estimated contribution in `r format(spatial_controlled_n - spatial_climate_dominant_n, big.mark = ",")` of `r format(spatial_controlled_n, big.mark = ",")` controlled sequences (Fig. 3).
+> This minority of human-favoured sequences shows that the sequence-level analysis does not impose a uniform climatic result, although neither the PAPs nor the human proxies identify which local practice caused a particular change.
+> A broad geographical summary can give less prominence to heterogeneous local histories, and we now make that limitation explicit.
+> The reduced-PAP sensitivity retains the aggregate climate-over-human ordering (Supplementary Fig. S30), but a taxon-level comparison would be needed to test whether response choice systematically favours either predictor.
+
+> **Changes in the revised article.** The Discussion now distinguishes sequence-level fitting from geographical summaries, explains which aspects of an assemblage the PAPs capture, and cautions against using the broad climatic pattern to discount well-supported local histories of human transformation.
+
+> For direct assessment, we reproduce Fig. 3 and the reduced-PAP sensitivity shown in Supplementary Fig. S30.
+
+{{< pagebreak >}}
+
+![](../figures/figure-03-h1-spatial-controlled.png){width=100% fig-alt="Fig. 3: spatial H1 balance for individual pollen sequences and summaries by region and continental group."}
+
+**Fig. 3 (reproduced). Spatial H1 after controlling for time.** Sequence-level human-minus-climate balances are shown alongside regional and continental-group summaries. Positive balances favour the human proxy; negative balances favour climate. Displayed balances are zero-truncated, so a value of zero does not establish that a driver had no ecological effect.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-30-pap-reduced.png){width=90% fig-alt="Supplementary Fig. S30: spatial climate-human balance after reducing the PAP response set."}
+
+**Supplementary Fig. S30 (reproduced). Reduced-PAP response sensitivity.** The spatial H1 analysis was repeated with a less redundant set of PAPs. The broad climate-over-human ordering persists in this zero-truncated display, although estimates for individual sequences can change.
+
+{{< pagebreak >}}
+
+The manuscript would be greatly improved if the authors provide a discussion of vegetation changes themselves, and how specific taxa or assemblage types respond to climatic or anthropogenic drivers. Such discussion would help ecological interpretations.
+
+> **Response.** We agree that the ecological context of the PAPs is important.
+> Our question, however, is how strongly palaeoclimate and validated proxies for regional human population changes are associated with multiple properties of pollen assemblages, rather than how particular taxa or vegetation types changed through time.
+> Richness, evenness, turnover, and rate of change describe different dimensions of assemblage change, but they cannot establish which taxa produced that change or attribute a taxon's response to a specific driver.
+> A discussion of such responses based on our results would therefore go beyond what the analyses can support.
+> Complementary large-scale pollen studies examine European floristic patterns [@main-ref-31; @main-ref-56], North American woody pollen diversity [@main-ref-55], Asian assemblage properties [@main-ref-23], and Holocene floristic diversity across continents [@main-ref-14].
+> The more recent European study also examines changes in human-associated pollen taxa [@main-ref-56].
+> We now point readers to this literature while retaining the distinction between the ecological properties estimated here and taxon-specific vegetation histories.
+
+> **Changes in the revised article.** The Discussion explains the ecological meaning of the PAPs, cites the complementary regional and cross-continental syntheses, and states that attribution of changes in individual taxa would require a separate analysis.
+
+### Data representativeness and site characteristics
+
+The choice of 1262 pollen sequences is impressive, but more information is needed about the selection criteria. I would have assumed that much more sites would be available at such spatial scales.
+
+> **Response.** We have expanded the account of how the pollen archive was assembled. Duplicate sequences were removed; samples outside the study interval or lacking adequate chronological control were excluded; each retained sample contained at least 25 terrestrial pollen grains; and each sequence contained at least five usable samples. Taxonomic names were harmonised before the assemblage properties were calculated. Africa was not included because, at the time the compilation was assembled, the available sequences were too sparse when the compilation was assembled to support comparable regional analyses. This procedure yielded `r format(preparation_pool_n, big.mark = ",")` prepared sequences, of which `r format(original_h1_inventory_n, big.mark = ",")` entered the original H1 spatial analysis. Particular analyses use fewer sequences where the necessary climate, archaeological, ecological, or control information is absent.
+
+> **Changes in the revised article.** The full selection criteria are now listed under “Data filtering.” Supplementary Table S1 and the guide at the beginning of this letter identify the sequences or regional comparisons represented in each analysis. Because the original search did not retain a complete count of every potentially available public sequence, we do not present the prepared collection as a fully quantified global census of pollen sequences.
+
+Site characteristics (e.g., basin size, proximity to human settlements) can significantly influence pollen source area and the sensitivity to land use signals. This aspect, although mentioned by the authors, should be discussed a bit more in details, especially when interpreting local vs regional patterns.
+
+> **Response.** We agree. Basin size and depositional setting determine how much of the surrounding vegetation contributes pollen to a sequence, while distance from settlements or cultivated land affects the likelihood that local land use will be recorded. These differences are ecologically important when a site-scale pollen signal is compared with an archaeological history assembled over hundreds of kilometres. However, consistent information on basin geometry, depositional environment, and settlement proximity is unavailable for much of the global compilation, so these factors could not be represented uniformly in the models. We consequently restrict the interpretation to broad spatial patterns and discuss why individual sites may depart from them.
+
+> **Changes in the revised article.** The Methods and Discussion now give greater attention to basin setting, pollen source area, and the contrast between local land-use histories and broad archaeological neighbourhoods. A separate comparison shows how the results change when dates are drawn from 250 rather than 500 km around a pollen site.
+
+The analysis assumes stable spatial climate zones. However, climate zones have shifted over the Holocene, which could affect interpretations of vegetation-climate relationships. A brief discussion of this dynamic would be valuable.
+
+> **Response.** We agree that climatic boundaries shifted during the Holocene, but our H1 analyses do not assume that present-day Köppen–Geiger classes persisted through time.
+> The classes were used to assign sequences to smaller *regions* within the five *continental groups*, making heterogeneous results easier to present and compare; they were not used as reconstructions of past climate.
+> In spatial H1, human and climate contributions were estimated within each individual pollen sequence before the estimates were summarised by region or continental group.
+> In temporal H1, the models compare sequences within 500-year continental-group time slices, with spatial structure controlled, rather than treating regions as fixed climate zones.
+> The palaeoclimate predictors vary through time at the locations of the sequences.
+> Regions do serve as analysis units in H2, so its regional comparisons are conditional on this pragmatic grouping.
+> Fig. 2 displays distinct PAP trajectories among the regional groups, based on sequence-level predictions; these descriptive summaries are not inputs to H1.
+> Fig. 3, reproduced above, maps the eligible sequences and shows the distribution of their individual spatial H1 balances.
+> Neither figure requires the region assigned from modern Köppen–Geiger classes to have retained the same climate throughout the Holocene.
+
+> **Changes in the revised article.** The Methods now state where regional assignments enter the analyses and distinguish them from the time-varying palaeoclimate predictors. The Discussion retains the caution that regional trajectories are summaries for practical groups, not histories of fixed ecological units.
+
+> For direct assessment, we reproduce Fig. 2 below; Fig. 3 is reproduced above with the preceding response.
+
+![](../figures/figure-02-pap-trajectories.png){width=100% fig-alt="Fig. 2: descriptive PAP trajectories by continental group and region."}
+
+**Fig. 2 (reproduced). Temporal trajectories of six PAPs.** Each regional curve is an equal-weighted average of sequence-level posterior predictions within the observed coverage of its sequences. These descriptive trajectories display differences among the practical regional groups and do not enter the H1 models.
+
+{{< pagebreak >}}
+
+### Thresholds for pollen counts
+
+The decision to lower the minimum pollen count threshold from 150 to 25 grains per sample raises some questions about data quality. A threshold as low as 25 may introduce significant noise and reduce the reliability of PAPs. The rationale for this decision should be clearly explained and its implications discussed.
+
+> **Response.** We agree that assemblage properties estimated from very small pollen counts are less precise, but 25 grains is the lower limit for retaining an individual sample, not a representative count in the analysis.
+> In the retained count-based archive, only `r format(pollen_count_25_to_49_n, big.mark = ",")` of `r format(pollen_count_based_n, big.mark = ",")` samples (`r sprintf("%.2f", 100 * pollen_count_25_to_49_n / pollen_count_based_n)`%) had 25–49 terrestrial pollen grains; `r sprintf("%.1f", 100 * pollen_count_ge_150_n / pollen_count_based_n)`% had at least 150 grains (Supplementary Fig. S23A).
+> A retained count-based sequence must have more than half of its samples at or above 150 grains, the usual rarefaction target; a lower sequence-specific target can be used when some of its retained samples fall below that count.
+> Supplementary Fig. S23B shows the cost of stricter thresholds: a 300-grain target retains `r pollen_retention[["n_records_retained"]][pollen_retention[["threshold"]] == 300]` of `r preparation_pool_n` sequences, a 500-grain target retains `r pollen_retention[["n_records_retained"]][pollen_retention[["threshold"]] == 500]`, and a 1,000-grain target retains `r pollen_retention[["n_records_retained"]][pollen_retention[["threshold"]] == 1000]`.
+> Losses differ among continental groups and periods, so demanding larger counts would reduce the geographical and temporal breadth of the evidence.
+> These comparisons increase the rarefaction target and its associated sample minimum; they measure coverage, not the effect of refitting H1 at those thresholds.
+> We retain the lower bound to preserve sparsely represented sequences while acknowledging that estimates based on small samples carry greater uncertainty.
+
+> **Changes in the revised article.** The Methods now distinguish the rare 25–49-grain samples from the usual counts, explain the sequence-retention and rarefaction rules, and point to the count distribution and retention diagnostics in Supplementary Fig. S23. Supplementary Table S3 reports the losses under stricter thresholds, and the Discussion addresses finite counts and pollen production as limits on ecological interpretation.
+
+> For direct assessment, we reproduce both panels of Supplementary Fig. S23.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-28-pollen-count-distribution.png){width=80% fig-alt="Supplementary Fig. S23A: distribution of terrestrial pollen counts among retained count-based samples."}
+
+**Supplementary Fig. S23A (reproduced). Sample-count distribution.** Terrestrial pollen grains per retained count-based sample, displayed by continental group and region. Percentage-only sequences are excluded. Very few count-based samples lie near the 25-grain lower limit.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-28-pollen-retention.png){width=85% fig-alt="Supplementary Fig. S23B: sequence and sample retention under stricter pollen-count targets."}
+
+**Supplementary Fig. S23B (reproduced). Retention under stricter targets.** Dashed lines show retained sequences and solid lines retained samples as rarefaction targets rise. These are coverage diagnostics, not H1 refits.
+
+{{< pagebreak >}}
+
+### Figures
+
+Figure 4 shows a lot of information, and the plots are
+too small. It is difficult to see the major patterns. Furthermore, the panel labels in Figure 2 appear to be misaligned (E and D).
+
+> **Response.** We agree that the submitted figures were crowded and that the panel labels were difficult to follow.
+> We reorganised the main figures so that the study design, descriptive PAP trajectories, spatial predictor comparison, and temporal predictor comparison are presented separately (Figs. 1–4).
+> The misaligned panel lettering of the submitted Fig. 2 is absent from the revised display; the current figures use labelled rows and columns.
+> We also redesigned the former Fig. 4, now Supplementary Fig. S10, rather than simply moving it: its ordination panels have more space, the human–climate balance is shown beside each panel, and the explanatory key distinguishes the age trajectory from the predictor arrows and balance.
+> All ten PAP trajectories and the additional robustness displays remain available in the Supplementary Information.
+
+> **Changes in the revised article.** The main figures now separate the principal questions, and the redesigned Supplementary Fig. S10 presents the H2 interrelationships at a larger, more readable scale with a clearer key and caption.
+
+> For direct assessment of the former Fig. 4, we reproduce its revised version below.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-01-h2-interrelationships.png){width=100% fig-alt="Supplementary Fig. S10: redesigned H2 PAP-interrelationship ordinations and human–climate balances."}
+
+**Supplementary Fig. S10 (reproduced). H2 PAP interrelationships.** Revised ordinations and adjacent human–climate balances by continental group and region. Blue trajectories run from older to younger time slices; gold and teal arrows indicate associations with the human and climate predictors. Blank panels lack an estimable result.
+
+{{< pagebreak >}}
+
+This manuscript provides a novel and valuable analysis of Holocene vegetation dynamics at broad spatial scales. The conclusions are well supported, and my major comments focus on some aspects of the methods and interpretation that require clarification and additional nuance. By addressing these issues, the manuscript will be greatly improved. Again, I recommend publication after these revisions are done.
+
+> **Response.** We thank the reviewer again. The revised article now places the statistical comparison within a clearer account of the pollen archive, the historical proxies, the spatial scale of ecological change, and the limits of broad-scale inference.

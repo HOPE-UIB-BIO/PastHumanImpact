@@ -20,8 +20,8 @@
 #' @details
 #' The density and climate-zone summaries are facets in one ggplot object.
 #' Consequently, each continental pooled line has exactly the same vertical
-#' coordinate in the density and every climate-zone panel. The equal-importance
-#' line is dashed, and each climate-zone panel contains one coloured summary
+#' coordinate in the density and every regional panel. The equal-importance
+#' line is dashed, and each regional panel contains one coloured summary
 #' point.
 #' @examples
 #' \dontrun{
@@ -298,7 +298,7 @@ plot_hvarpart_spatial_balance <- function(
     data_density |>
     dplyr::mutate(
       density_scaled = 3 * .data[["density"]] / density_max,
-      panel_label = "Continent"
+      panel_label = "Continental group"
     )
 
   density_x <-
@@ -314,7 +314,7 @@ plot_hvarpart_spatial_balance <- function(
     )
 
   panel_levels <- c(
-    "Continent",
+    "Continental group",
     levels(data_records[["climatezone_label"]])
   )
 
@@ -369,7 +369,7 @@ plot_hvarpart_spatial_balance <- function(
     ) |>
     dplyr::mutate(
       panel_x = dplyr::if_else(
-        .data[["panel_label"]] == "Continent",
+        .data[["panel_label"]] == "Continental group",
         3 * .data[["panel_edge"]],
         .data[["panel_edge"]]
       )
@@ -390,7 +390,7 @@ plot_hvarpart_spatial_balance <- function(
   data_climatezone_background <-
     tidyr::crossing(
       region = factor(displayed_regions, levels = region_levels),
-      panel_label = panel_levels[panel_levels != "Continent"],
+      panel_label = panel_levels[panel_levels != "Continental group"],
       background_balance = background_values
     ) |>
     dplyr::mutate(
@@ -662,7 +662,7 @@ plot_hvarpart_spatial_balance <- function(
     cli::cli_abort(
       c(
         "The number of map rows must equal the number of statistical rows.",
-        "i" = "Could not match every displayed continent to a facet row."
+        "i" = "Could not match every displayed continental group to a facet row."
       )
     )
   }

@@ -77,6 +77,20 @@ data_correlation_summary <-
 # 3. Plot -----
 #----------------------------------------------------------#
 
+vec_pap_labels <-
+  c(
+    dcca_axis_1 = "DCCA axis 1",
+    density_diversity = "Diversity change-point density",
+    density_turnover = "Turnover change-point density",
+    n0 = "N0",
+    n1 = "N1",
+    n2 = "N2",
+    n1_minus_n2 = "N1 - N2",
+    n1_divided_by_n0 = "N1 / N0",
+    n2_divided_by_n1 = "N2 / N1",
+    roc = "Rate of change"
+  )
+
 plot_correlation <-
   data_correlation_summary |>
   ggplot2::ggplot(
@@ -89,14 +103,22 @@ plot_correlation <-
   ggplot2::geom_tile() +
   ggplot2::geom_text(
     ggplot2::aes(
-      label = sprintf("%.2f", median_abs_correlation)
+      label = sprintf("%.2f", median_abs_correlation),
+      color = median_abs_correlation >= 0.6
     ),
-    size = 2
+    size = 3
   ) +
-  ggplot2::scale_fill_viridis_c(
-    limits = c(0, 1),
-    option = "C"
+  ggplot2::scale_fill_gradient(
+    low = "grey92",
+    high = "grey25",
+    limits = c(0, 1)
   ) +
+  ggplot2::scale_color_manual(
+    values = c("FALSE" = "black", "TRUE" = "white"),
+    guide = "none"
+  ) +
+  ggplot2::scale_x_discrete(labels = vec_pap_labels) +
+  ggplot2::scale_y_discrete(labels = vec_pap_labels) +
   ggplot2::theme_classic() +
   ggplot2::theme(
     axis.text.x = ggplot2::element_text(

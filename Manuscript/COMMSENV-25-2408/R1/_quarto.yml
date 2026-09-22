@@ -1,0 +1,26 @@
+project:
+  type: default
+  output-dir: rendered
+  render:
+    - manuscript.qmd
+    - Reply/response-to-reviewers.qmd
+
+crossref:
+  fig-title: Fig.
+  fig-prefix: Fig.
+  tbl-title: Table
+  tbl-prefix: Table
+  custom:
+    - kind: float
+      key: suppfig
+      latex-env: suppfigure
+      reference-prefix: Supplementary Fig. S
+      caption-prefix: Supplementary Fig. S
+      space-before-numbering: false
+    - kind: float
+      key: supptbl
+      latex-env: supptable
+      caption-location: top
+      reference-prefix: Supplementary Table S
+      caption-prefix: Supplementary Table S
+      space-before-numbering: false

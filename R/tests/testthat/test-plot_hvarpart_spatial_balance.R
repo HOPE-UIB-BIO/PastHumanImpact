@@ -83,7 +83,7 @@ testthat::test_that(
       )
     )
     testthat::expect_true(
-      "Continent" %in%
+      "Continental group" %in%
         as.character(result[["density_values"]][["panel_label"]])
     )
     testthat::expect_equal(
@@ -130,7 +130,7 @@ testthat::test_that(
       )
     testthat::expect_length(rect_layers, 1)
     testthat::expect_false(
-      "Continent" %in%
+      "Continental group" %in%
         as.character(rect_layers[[1]]$data[["panel_label"]])
     )
   }

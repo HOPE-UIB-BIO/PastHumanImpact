@@ -1,0 +1,151 @@
+---
+format:
+  html:
+    embed-resources: true
+  pdf:
+    keep-tex: false
+---
+
+## Response Draft: Correlated PAP Responses
+
+```{r}
+#| label: setup-pap-correlation-response
+#| include: false
+#| warning: false
+#| message: false
+
+repository_root <-
+  normalizePath(getwd(), winslash = "/")
+
+while (!file.exists(file.path(repository_root, "R", "00_Config_file.R"))) {
+  repository_parent <- dirname(repository_root)
+  if (identical(repository_parent, repository_root)) {
+    stop("Could not locate repository root.")
+  }
+  repository_root <- repository_parent
+}
+
+path_col_corr <-
+  file.path(
+    repository_root,
+    "Outputs/Tables/H1/Spatial/Predictor_collinearity/pap_predictors__collinearity_summary.csv"
+  )
+
+path_col_by_sequence <-
+  file.path(
+    repository_root,
+    "Outputs/Tables/H1/Spatial/SPD/Predictor_collinearity/spd__pap_collinearity__hvarpart_influence__dataset_values.csv"
+  )
+
+fig_correlation <-
+  file.path(
+    repository_root,
+    "Outputs/Figures/H1/Spatial/Predictor_collinearity/pap_predictors__collinearity_correlation.png"
+  )
+
+fig_reduced <-
+  file.path(
+    repository_root,
+    "Outputs/Figures/H1/Spatial/SPD/Predictor_collinearity/spd__human_climate_balance__reduced_predictors.png"
+  )
+
+required_paths <-
+  c(path_col_corr, path_col_by_sequence, fig_correlation, fig_reduced)
+
+missing_paths <- required_paths[!file.exists(required_paths)]
+if (length(missing_paths) > 0) {
+  stop(
+    paste("Missing required inputs:", paste(missing_paths, collapse = "; ")),
+    call. = FALSE
+  )
+}
+
+pap_correlations <-
+  readr::read_csv(path_col_corr, show_col_types = FALSE)
+
+pap_pairs <-
+  readr::read_csv(path_col_by_sequence, show_col_types = FALSE) |>
+  dplyr::filter(.data[["predictor"]] %in% c("climate", "human")) |>
+  dplyr::select(
+    .data[["dataset_id"]],
+    .data[["predictor"]],
+    .data[["baseline"]],
+    .data[["reduced_collinear_v1"]]
+  ) |>
+  tidyr::pivot_wider(
+    names_from = .data[["predictor"]],
+    values_from = c(.data[["baseline"]], .data[["reduced_collinear_v1"]])
+  ) |>
+  dplyr::filter(
+    !is.na(.data[["baseline_climate"]]),
+    !is.na(.data[["baseline_human"]]),
+    !is.na(.data[["reduced_collinear_v1_climate"]]),
+    !is.na(.data[["reduced_collinear_v1_human"]])
+  )
+
+n_pairs_total <- nrow(pap_correlations)
+n_pairs_high_cor <-
+  sum(pap_correlations[["median_abs_correlation"]] >= 0.8)
+max_median_abs_correlation <-
+  max(pap_correlations[["median_abs_correlation"]])
+
+n_complete_pairs <- nrow(pap_pairs)
+
+median_climate_baseline <-
+  stats::median(pap_pairs[["baseline_climate"]])
+median_climate_reduced <-
+  stats::median(pap_pairs[["reduced_collinear_v1_climate"]])
+median_human_baseline <-
+  stats::median(pap_pairs[["baseline_human"]])
+median_human_reduced <-
+  stats::median(pap_pairs[["reduced_collinear_v1_human"]])
+
+climate_dominant_baseline <-
+  pap_pairs[["baseline_climate"]] > pap_pairs[["baseline_human"]]
+climate_dominant_reduced <-
+  pap_pairs[["reduced_collinear_v1_climate"]] >
+  pap_pairs[["reduced_collinear_v1_human"]]
+
+n_climate_dominant_baseline <- sum(climate_dominant_baseline)
+n_climate_dominant_reduced <- sum(climate_dominant_reduced)
+n_dominance_switch <-
+  sum(climate_dominant_baseline != climate_dominant_reduced)
+
+fmt_int <- function(x) {
+  format(round(x), big.mark = ",", scientific = FALSE, trim = TRUE)
+}
+
+fmt_num <- function(x, digits = 3) {
+  format(round(x, digits), nsmall = digits, trim = TRUE, scientific = FALSE)
+}
+```
+
+We thank the reviewer for raising the possibility that relationships among pollen assemblage properties (PAPs) could affect the comparison of climate and human activity.
+
+### Correlation among the PAP responses
+
+Correlation among responses does not itself invalidate a multivariate ecological analysis. Community analyses routinely consider species whose abundances covary, and the PAPs likewise describe related features of the same pollen assemblages. Some PAPs share taxa, abundances, or mathematical components, so their correlation is expected. The relevant concern is whether that overlap gives certain aspects of assemblage change disproportionate weight in the climate–human comparison.
+
+Across `r fmt_int(n_pairs_total)` PAP pairs, `r fmt_int(n_pairs_high_cor)` had a median absolute correlation of at least 0.8 across eligible groups. The strongest median absolute correlation was `r fmt_num(max_median_abs_correlation)`, between $N_1$ and $N_2$. The heat map shows the strength of association, not whether it is positive or negative.
+
+```{r}
+#| label: fig-pap-collinearity-correlation
+#| fig-cap: "Median absolute pairwise correlations among pollen assemblage properties across eligible continental-group–region subsets."
+#| out-width: "100%"
+#| echo: false
+knitr::include_graphics(fig_correlation)
+```
+
+### H1 after reducing response redundancy
+
+We repeated the spatial SPD H1 analysis with a reduced set of less redundant PAPs. Among `r fmt_int(n_complete_pairs)` pollen sequences with estimable results in both configurations, the median signed climate contribution ratio changed from `r fmt_num(median_climate_baseline)` to `r fmt_num(median_climate_reduced)`; the corresponding human ratio changed from `r fmt_num(median_human_baseline)` to `r fmt_num(median_human_reduced)`. Climate had the larger estimated contribution in `r fmt_int(n_climate_dominant_baseline)` of these sequences under the complete response and `r fmt_int(n_climate_dominant_reduced)` under the reduced response. The ordering changed for `r fmt_int(n_dominance_switch)` individual sequences.
+
+The reduced-response figure shows the corresponding zero-truncated climate–human allocations across continental groups and regions. Together, the paired comparison and the figure support the same broad conclusion: climate has the larger estimated contribution. The changes for individual sequences and regional groups remain relevant and do not imply numerical equivalence of the two responses.
+
+```{r}
+#| label: fig-pap-collinearity-reduced
+#| fig-cap: "Zero-truncated climate–human allocation after reducing overlap among PAP responses."
+#| out-width: "100%"
+#| echo: false
+knitr::include_graphics(fig_reduced)
+```

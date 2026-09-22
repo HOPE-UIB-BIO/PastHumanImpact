@@ -1,0 +1,4 @@
+## References methods
+
+::: {#methods-bibliography}
+:::

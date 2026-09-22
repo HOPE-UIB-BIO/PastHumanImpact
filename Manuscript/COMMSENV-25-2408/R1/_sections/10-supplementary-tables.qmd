@@ -1,0 +1,130 @@
+::: {#supptbl-pollen-retention}
+**Pollen filtering and retention.** Percentages are relative to the 25-grain sample minimum and 150-grain rarefaction-target baseline. Higher target scenarios also raise the sample minimum to one-sixth of the target (50, about 83, and about 167 grains); the 300- and 500-grain labels are rarefaction targets, not strict minima for every sample. These scenarios quantify coverage loss and were not used to refit the complete initial spatial analysis.
+
+```{r}
+table_pollen_retention |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-event-criteria}
+**Regional pollen-event criteria represented in the sensitivity proxy.** Categories were harmonised into coarse ordered evidence of regional impact; not every category occurs in every region, and absence of a detected event is not absence of people or land use.
+
+```{r}
+tibble::tribble(
+  ~Event_family, ~Operational_interpretation, ~Limitation,
+  "No detected event", "No event meeting the regional pollen criterion", "Cannot be interpreted as evidence that people were absent or ecologically inconsequential",
+  "First indication", "First unambiguous regional palynological indication of human influence", "Detection thresholds and indicators differ among regions",
+  "First cultivation", "First unambiguous crop or cultivation-pollen evidence", "Does not capture foraging, burning, or non-cultivation land management",
+  "Clearance or extensive impact", "Regional threshold for major opening or compositional change", "Thresholds are coarse and pollen-source areas differ",
+  "Settlement or strong impact", "Marked pollen change associated with settlement or intensive regional transformation", "Timing and indicators are region-specific and may post-date earlier impacts"
+) |>
+  kable(booktabs = TRUE)
+```
+
+The regional event chronologies were assessed by authors with regional palaeoecological expertise and direct familiarity with the pollen compilations: John Birks and Hilary Birks for Europe and North America, John Birks and Kuber Bhatta for Asia, and Simon Haberle and Annika Herbert for Oceania. Central and South American indicators followed the published regional synthesis cited in Methods. The author experts were selected for their regional and pollen-analytical expertise. These assignments identify who assessed the diagrams; they do not make the event categories independent of the pollen response.
+:::
+
+::: {#supptbl-variance-decomposition}
+**HVarPart models considered, available decompositions, total fit, and commonality components.** Total adjusted $R^2$ is overall fitted variation. Unique human, unique climate, and shared fractions are adjusted-$R^2$ commonality components and are not zero-truncated predictor compositions.
+
+```{r}
+table_variance |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-hvarpart-profiles}
+**Analysis-level HVarPart profile comparison.** Signed profiles retain negative individual components, zero-truncated profiles recompose non-negative display shares, and exclude-negative profiles omit models with negative components. `Models included` is therefore profile-specific.
+
+```{r}
+table_hvarpart_profiles |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-pap-collinearity}
+**PAP-collinearity and reduced-response sensitivity.** The baseline and reduced signed contribution ratios are summarised for the same sequences; median change is the median within-sequence difference. @suppfig-pap-reduced separately shows the zero-truncated display.
+
+```{r}
+table_pap_collinearity |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-reciprocal-controls}
+**Residual spatial dependence and thinning coverage.** Moran rows aggregate the number of diagnostics with positive autocorrelation by control stage and report the observed Moran I range. Thinning rows report replicate count and the median number of retained sequence models. These diagnostics do not replace signed or unique-fraction results.
+
+```{r}
+moran_table <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Diagnostics/Spatiotemporal_dependence/spd__human_climate_balance__moran_diagnostics__time_and_space_control.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  summarise(
+    diagnostics = n(),
+    positive = sum(.data[["positive_autocorrelation"]], na.rm = TRUE),
+    min_moran_i = min(.data[["moran_i"]], na.rm = TRUE),
+    max_moran_i = max(.data[["moran_i"]], na.rm = TRUE),
+    .by = .data[["stage"]]
+  ) |>
+  transmute(
+    Control = "Residual Moran diagnostic",
+    Scope = .data[["stage"]],
+    Result = paste0(
+      .data[["positive"]], " of ", .data[["diagnostics"]],
+      " positive; Moran I range ",
+      sprintf("%.3f", .data[["min_moran_i"]]), " to ",
+      sprintf("%.3f", .data[["max_moran_i"]])
+    )
+  )
+
+thinning_table <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Diagnostics/Spatiotemporal_dependence/spd__human_climate_balance__thinning__time_and_space_control.csv.gz"
+    ),
+    show_col_types = FALSE
+  ) |>
+  count(.data[["distance_km"]], .data[["repetition"]]) |>
+  summarise(
+    replicates = n_distinct(.data[["repetition"]]),
+    median_records = median(.data[["n"]]),
+    .by = .data[["distance_km"]]
+  ) |>
+  transmute(
+    Control = "Spatial thinning",
+    Scope = paste0(round(.data[["distance_km"]]), " km"),
+    Result = paste0(
+      .data[["replicates"]],
+      " replicates; median sequences = ",
+      round(.data[["median_records"]])
+    )
+  )
+
+bind_rows(moran_table, thinning_table) |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-spd-radius}
+**Strict-radius SPD sensitivity.** Spatial change is the 500-minus-250 km zero-truncated human-minus-climate balance. Temporal change is the 500-minus-250 km zero-truncated human allocation. Ranking reversals use the corresponding zero-truncated profile.
+
+```{r}
+table_radius |>
+  kable(booktabs = TRUE)
+```
+:::
+
+::: {#supptbl-event-sensitivity}
+**Human-event inclusion sensitivity in the observed-event matched subset.** Spatial values are median human-minus-climate balances. Temporal values are median changes in human allocation relative to SPD-only. Events are complementary and partly circular, not independent validation.
+
+```{r}
+table_event_sensitivity |>
+  kable(booktabs = TRUE)
+```
+:::

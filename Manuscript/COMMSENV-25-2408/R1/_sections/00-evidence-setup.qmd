@@ -1,0 +1,597 @@
+```{r}
+library(dplyr)
+library(tidyr)
+library(readr)
+library(knitr)
+
+repository_root <-
+  normalizePath(getwd(), winslash = "/")
+
+while (
+  !file.exists(file.path(repository_root, "R", "00_Config_file.R"))
+) {
+  repository_parent <-
+    dirname(repository_root)
+
+  if (
+    identical(repository_parent, repository_root)
+  ) {
+    stop("Could not locate the repository root from the render directory.")
+  }
+
+  repository_root <- repository_parent
+}
+
+registry <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Manuscript/COMMSENV-25-2408/R1/evidence/claim-evidence-registry.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+reporting_manifest <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Reporting/evidence__manifest.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+pollen_retention <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Dataset_summaries/Pollen/pollen__threshold_retention__overall.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  arrange(.data[["threshold"]])
+
+pollen_count_based_samples <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs",
+      "Tables",
+      "Dataset_summaries",
+      "Pollen",
+      "pollen__sample_rowsums__climate_zone.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  filter(
+    .data[["pollen_percentage"]] == FALSE,
+    !is.na(.data[["rowsum"]])
+  )
+
+pollen_count_based_n <-
+  nrow(pollen_count_based_samples)
+
+pollen_count_25_to_49_n <-
+  sum(
+    pollen_count_based_samples[["rowsum"]] >= 25 &
+      pollen_count_based_samples[["rowsum"]] < 50
+  )
+
+pollen_count_ge_150_n <-
+  sum(pollen_count_based_samples[["rowsum"]] >= 150)
+
+pap_predictions <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Temporal/PAP_trends/pap__temporal_predictions.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+hvarpart_profiles <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Diagnostics/HVarPart/hvarpart__profile_comparison.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+hvarpart_variance <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Diagnostics/HVarPart/hvarpart__variance_summary__overall.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+spatial_h1 <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/SPD/spd__human_climate_balance__dataset_values__time_and_space_control.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+spatial_original_fit <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/Diagnostics/HVarPart/hvarpart__spatial__adjusted_r2_distribution__records.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+temporal_h1 <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Temporal/HVarPart/spd_events__human_climate_space__zero_truncated_hierarchical_composition__space_control.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+pap_collinearity <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/SPD/Predictor_collinearity/spd__pap_collinearity__hvarpart_influence__summary.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+pap_response_correlations <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/Predictor_collinearity/pap_predictors__collinearity_summary.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+pap_correlation_pairs_n <-
+  nrow(pap_response_correlations)
+
+pap_correlation_strong_n <-
+  sum(pap_response_correlations[["median_abs_correlation"]] >= 0.8)
+
+pap_correlation_max <-
+  max(pap_response_correlations[["median_abs_correlation"]])
+
+pap_collinearity_paired <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/SPD/Predictor_collinearity/spd__pap_collinearity__hvarpart_influence__dataset_values.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  filter(
+    !is.na(.data[["baseline"]]),
+    !is.na(.data[["reduced_collinear_v1"]])
+  ) |>
+  group_by(.data[["predictor"]]) |>
+  summarise(
+    n_pairs = n(),
+    median_baseline = median(.data[["baseline"]]),
+    median_reduced = median(.data[["reduced_collinear_v1"]]),
+    median_delta = median(
+      .data[["reduced_collinear_v1"]] - .data[["baseline"]]
+    ),
+    .groups = "drop"
+  )
+
+pap_paired_climate <-
+  pap_collinearity_paired |>
+  filter(.data[["predictor"]] == "climate")
+
+pap_paired_human <-
+  pap_collinearity_paired |>
+  filter(.data[["predictor"]] == "human")
+
+spd_radius_spatial <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Spatial/SPD/spd__radius_comparison__dataset_paired.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+spd_radius_temporal <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Temporal/HVarPart/spd__radius_comparison__region_age_paired.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+event_spatial <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Sensitivity/Human_event_inclusion/events__inclusion_comparison__dataset_matched.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+event_temporal <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs/Tables/H1/Sensitivity/Human_event_inclusion/events__inclusion_comparison__region_age_matched.csv"
+    ),
+    show_col_types = FALSE
+  )
+
+stopifnot(
+  nrow(pap_collinearity_paired) == 2L,
+  pap_paired_climate[["n_pairs"]] == pap_paired_human[["n_pairs"]],
+  pap_paired_climate[["n_pairs"]] ==
+    pap_collinearity[["n_with_complete_pairs"]][
+      pap_collinearity[["predictor"]] == "climate"
+    ],
+  nrow(registry) > 0L,
+  !anyDuplicated(registry[["artifact_id"]]),
+  all(registry[["validation_status"]] == "registered"),
+  all(reporting_manifest[["validation_status"]] == "available"),
+  all(!is.na(reporting_manifest[["file_hash"]])),
+  all(c(
+    "scenario", "threshold", "n_records_retained", "n_samples_retained"
+  ) %in% names(pollen_retention)),
+  all(c(
+    "analysis", "variable", "age", "estimate", "n_datasets_marginalised"
+  ) %in% names(pap_predictions)),
+  identical(sort(unique(pap_predictions[["variable"]])), sort(c(
+    "n0", "n1", "n2", "n1_minus_n2", "n2_divided_by_n1",
+    "n1_divided_by_n0", "roc", "dcca_axis_1",
+    "density_diversity", "density_turnover"
+  ))),
+  all(c("signed", "zero_truncated", "exclude_negative") %in%
+    unique(hvarpart_profiles[["profile"]])),
+  all(c("spatial_spd", "temporal_spd") %in%
+    unique(hvarpart_profiles[["analysis"]])),
+  all(complete.cases(spatial_h1[, c(
+    "dataset_id", "total_adjusted_r_squared", "zero_balance"
+  )])),
+  all(complete.cases(spatial_original_fit[, c(
+    "region", "climatezone", "adjusted_r_squared"
+  )])),
+  any(spd_radius_spatial[["matched_estimable"]]),
+  sum(complete.cases(
+    spd_radius_spatial[which(spd_radius_spatial[["matched_estimable"]] %in% TRUE), c(
+      "zero_balance_250_km", "zero_balance_500_km"
+    )]
+  )) > 0L,
+  any(spd_radius_temporal[["matched_estimable"]]),
+  sum(complete.cases(
+    spd_radius_temporal[which(spd_radius_temporal[["matched_estimable"]] %in% TRUE), c(
+      "zero_allocation_human_250_km", "zero_allocation_human_500_km"
+    )]
+  )) > 0L
+)
+
+preparation_pool_n <-
+  pollen_retention |>
+  filter(.data[["scenario"]] == "baseline_25_150") |>
+  pull(.data[["n_records_retained"]])
+
+original_h1_inventory_n <-
+  hvarpart_variance |>
+  filter(.data[["analysis"]] == "spatial_spd") |>
+  pull(.data[["n_models"]])
+
+spatial_controlled_n <-
+  nrow(spatial_h1)
+
+spatial_climate_dominant_n <-
+  sum(spatial_h1[["zero_balance"]] < 0)
+
+spatial_climate_dominant_pct <-
+  100 * spatial_climate_dominant_n / spatial_controlled_n
+
+spatial_median_adjusted_r2 <-
+  median(spatial_h1[["total_adjusted_r_squared"]])
+
+spatial_mean_adjusted_r2_controlled <-
+  mean(spatial_h1[["total_adjusted_r_squared"]])
+
+spatial_q1_adjusted_r2_controlled <-
+  unname(stats::quantile(
+    spatial_h1[["total_adjusted_r_squared"]],
+    probs = 0.25
+  ))
+
+spatial_q3_adjusted_r2_controlled <-
+  unname(stats::quantile(
+    spatial_h1[["total_adjusted_r_squared"]],
+    probs = 0.75
+  ))
+
+spatial_inventory <-
+  hvarpart_variance |>
+  filter(.data[["analysis"]] == "spatial_spd")
+
+spatial_available_n <-
+  spatial_inventory[["n_available"]]
+
+spatial_mean_adjusted_r2 <-
+  spatial_inventory[["total_adjusted_r_squared_mean"]]
+
+stopifnot(
+  nrow(spatial_original_fit) == spatial_available_n,
+  isTRUE(all.equal(
+    mean(spatial_original_fit[["adjusted_r_squared"]]),
+    spatial_mean_adjusted_r2
+  ))
+)
+
+spatial_fit_bootstrap_input <-
+  bind_rows(
+    spatial_original_fit |>
+      transmute(
+        subset = "original",
+        continent = .data[["region"]],
+        region = .data[["climatezone"]],
+        adjusted_r2 = .data[["adjusted_r_squared"]]
+      ),
+    spatial_h1 |>
+      transmute(
+        subset = "controlled",
+        continent = .data[["region"]],
+        region = .data[["climatezone"]],
+        adjusted_r2 = .data[["total_adjusted_r_squared"]]
+      )
+  ) |>
+  group_by(.data[["subset"]], .data[["continent"]], .data[["region"]]) |>
+  summarise(
+    adjusted_r2_sum = sum(.data[["adjusted_r2"]]),
+    n_sequences = n(),
+    .groups = "drop"
+  )
+
+set.seed(20260918L)
+
+spatial_fit_bootstrap_means <-
+  lapply(
+    split(spatial_fit_bootstrap_input, spatial_fit_bootstrap_input[["subset"]]),
+    function(blocks) {
+      block_indices <-
+        split(seq_len(nrow(blocks)), blocks[["continent"]])
+
+      replicate(10000L, {
+        sampled_indices <-
+          unlist(lapply(block_indices, function(indices) {
+            indices[sample.int(length(indices), length(indices), replace = TRUE)]
+          }), use.names = FALSE)
+
+        sum(blocks[["adjusted_r2_sum"]][sampled_indices]) /
+          sum(blocks[["n_sequences"]][sampled_indices])
+      })
+    }
+  )
+
+spatial_original_fit_ci <-
+  unname(stats::quantile(
+    spatial_fit_bootstrap_means[["original"]], c(0.025, 0.975)
+  ))
+
+spatial_controlled_fit_ci <-
+  unname(stats::quantile(
+    spatial_fit_bootstrap_means[["controlled"]], c(0.025, 0.975)
+  ))
+
+temporal_spd_wide <-
+  temporal_h1 |>
+  filter(.data[["analysis"]] == "temporal_spd") |>
+  select(.data[["region"]], .data[["age"]], .data[["predictor"]],
+    .data[["allocation"]]) |>
+  pivot_wider(names_from = .data[["predictor"]], values_from = .data[["allocation"]])
+
+temporal_spd_n <-
+  nrow(temporal_spd_wide)
+
+temporal_climate_dominant_n <-
+  sum(temporal_spd_wide[["climate"]] > temporal_spd_wide[["human"]])
+
+profile_analysis <-
+  hvarpart_profiles |>
+  filter(.data[["aggregation_level"]] == "analysis")
+
+profile_spatial <-
+  profile_analysis |>
+  filter(.data[["analysis"]] == "spatial_spd") |>
+  select(.data[["profile"]], .data[["predictor"]],
+    share = .data[["pooled_allocation"]], .data[["n_models"]])
+
+spatial_signed_climate <-
+  profile_spatial |>
+  filter(.data[["profile"]] == "signed", .data[["predictor"]] == "climate") |>
+  pull(.data[["share"]])
+
+spatial_zero_climate <-
+  profile_spatial |>
+  filter(.data[["profile"]] == "zero_truncated", .data[["predictor"]] == "climate") |>
+  pull(.data[["share"]])
+
+spatial_exclude_climate <-
+  profile_spatial |>
+  filter(.data[["profile"]] == "exclude_negative", .data[["predictor"]] == "climate") |>
+  pull(.data[["share"]])
+
+radius_spatial_n <-
+  sum(spd_radius_spatial[["matched_estimable"]], na.rm = TRUE)
+
+radius_spatial_defined_n <-
+  sum(!is.na(
+    spd_radius_spatial[["zero_balance_delta_500_minus_250"]]
+  ))
+
+radius_spatial_reversals <-
+  sum(spd_radius_spatial[["zero_ranking_reversal"]], na.rm = TRUE)
+
+radius_spatial_delta_median <-
+  median(spd_radius_spatial[["zero_balance_delta_500_minus_250"]], na.rm = TRUE)
+
+radius_spatial_delta_iqr <-
+  quantile(
+    spd_radius_spatial[["zero_balance_delta_500_minus_250"]],
+    c(0.25, 0.75),
+    na.rm = TRUE
+  )
+
+radius_temporal_n <-
+  sum(spd_radius_temporal[["matched_estimable"]], na.rm = TRUE)
+
+radius_temporal_reversals <-
+  sum(spd_radius_temporal[["zero_ranking_reversal"]], na.rm = TRUE)
+
+radius_temporal_human_delta_median <-
+  median(spd_radius_temporal[["zero_allocation_human_delta_500_minus_250"]], na.rm = TRUE)
+
+event_spatial_reference <-
+  event_spatial |>
+  filter(
+    .data[["cohort"]] == "observed_events_only",
+    .data[["three_way_estimable"]]
+  )
+
+event_temporal_reference <-
+  event_temporal |>
+  filter(
+    .data[["cohort"]] == "observed_events_only",
+    .data[["three_way_estimable"]]
+  )
+
+event_spatial_n <-
+  nrow(event_spatial_reference)
+
+event_spatial_combined_defined_n <-
+  sum(!is.na(event_spatial_reference[["zero_balance__spd_events"]]))
+
+event_spatial_events_defined_n <-
+  sum(!is.na(event_spatial_reference[["zero_balance__events"]]))
+
+event_temporal_n <-
+  nrow(event_temporal_reference)
+
+event_combined_spatial_median <-
+  median(event_spatial_reference[["zero_balance__spd_events"]], na.rm = TRUE)
+
+event_only_spatial_median <-
+  median(event_spatial_reference[["zero_balance__events"]], na.rm = TRUE)
+
+event_combined_temporal_delta <-
+  median(event_temporal_reference[["zero_allocation_human__spd_events_minus_spd"]], na.rm = TRUE)
+
+event_only_temporal_delta <-
+  median(event_temporal_reference[["zero_allocation_human__events_minus_spd"]], na.rm = TRUE)
+
+table_pollen_retention <-
+  pollen_retention |>
+  transmute(
+    Profile = .data[["scenario"]],
+    `Threshold (grains)` = .data[["threshold"]],
+    `Sequences retained` = .data[["n_records_retained"]],
+    `Sequences retained (%)` = round(100 * .data[["prop_retained"]], 1),
+    `Samples retained` = .data[["n_samples_retained"]],
+    `Samples retained (%)` = round(100 * .data[["prop_samples_retained"]], 1)
+  )
+
+table_pap_definitions <-
+  tibble::tribble(
+    ~PAP, ~Definition,
+    "N0", "Hill richness: effective number of taxa",
+    "N1", "Exponentiated Shannon diversity",
+    "N2", "Inverse-Simpson diversity",
+    "N1-N2", "Difference between N1 and N2",
+    "N2/N1", "Dominance-sensitive evenness",
+    "N1/N0", "Richness-sensitive evenness",
+    "ROC", "Rate of compositional change",
+    "DCCA axis 1", "Primary gradient of compositional change",
+    "Density diversity", "Density of diversity change points",
+    "Density turnover", "Density of turnover change points"
+  )
+
+table_hvarpart_profiles <-
+  profile_analysis |>
+  filter(.data[["analysis"]] %in% c(
+    "spatial_spd", "temporal_spd", "spatial_events", "temporal_events"
+  )) |>
+  transmute(
+    Analysis = .data[["analysis"]],
+    Profile = .data[["profile"]],
+    Predictor = .data[["predictor"]],
+    `Pooled allocation` = round(.data[["pooled_allocation"]], 3),
+    `Models included` = .data[["n_models"]]
+  )
+
+table_variance <-
+  hvarpart_variance |>
+  transmute(
+    Analysis = .data[["analysis"]],
+    `Models considered` = .data[["n_models"]],
+    `Available decomposition` = .data[["n_available"]],
+    `Mean total adjusted R2` = round(
+      .data[["total_adjusted_r_squared_mean"]],
+      3
+    ),
+    `Mean unique human` = round(.data[["unique_human_mean"]], 3),
+    `Mean unique climate` = round(.data[["unique_climate_mean"]], 3),
+    `Mean shared` = round(.data[["shared_mean"]], 3)
+  )
+
+table_pap_collinearity <-
+  pap_collinearity_paired |>
+  left_join(
+    pap_collinearity |>
+      select(.data[["predictor"]], .data[["n_datasets"]]),
+    by = "predictor"
+  ) |>
+  transmute(
+    Predictor = .data[["predictor"]],
+    `Sequences considered` = .data[["n_datasets"]],
+    `Complete paired sequences` = .data[["n_pairs"]],
+    `Median baseline share` = round(.data[["median_baseline"]], 3),
+    `Median reduced share` = round(.data[["median_reduced"]], 3),
+    `Median change` = round(.data[["median_delta"]], 3)
+  )
+
+table_radius <-
+  tibble::tibble(
+    Scale = c("Spatial sequence", "Temporal continental-group–age"),
+    `Matched comparisons` = c(radius_spatial_n, radius_temporal_n),
+    `Defined primary values` = c(radius_spatial_defined_n, radius_temporal_n),
+    `Primary median change` = round(c(
+      radius_spatial_delta_median,
+      radius_temporal_human_delta_median
+    ), 3),
+    `Zero-truncated ranking reversals` = c(
+      radius_spatial_reversals,
+      radius_temporal_reversals
+    )
+  )
+
+table_event_sensitivity <-
+  tibble::tibble(
+    Scale = c("Spatial sequence", "Temporal continental-group–age"),
+    `Matched comparisons` = c(event_spatial_n, event_temporal_n),
+    `Combined values defined` = c(event_spatial_combined_defined_n, event_temporal_n),
+    `Event-only values defined` = c(event_spatial_events_defined_n, event_temporal_n),
+    `Combined SPD plus events` = round(c(
+      event_combined_spatial_median,
+      event_combined_temporal_delta
+    ), 3),
+    `Events only` = round(c(
+      event_only_spatial_median,
+      event_only_temporal_delta
+    ), 3),
+    Quantity = c(
+      "median zero-truncated human-minus-climate balance",
+      "median change in zero-truncated human allocation from SPD-only"
+    )
+  )
+```

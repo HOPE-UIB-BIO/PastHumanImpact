@@ -35,7 +35,7 @@ Purple is reserved for space. Blue is reserved for time. In particular, do not u
 - A legend must name the scientific role, not only the variable code.
 - Do not rely on colour alone when a figure contrasts proxy types. Use the established SPD/event labels and, where appropriate, line type or the paired-bar layout as a second cue.
 - Use neutral greys for frames, basemaps, zero lines, and unavailable data so they do not compete with the scientific palette.
-- Climate-zone colours come only from `palette_ecozones`; do not reuse a human, climate, time, or space colour for climate zones.
+- Region colours come only from `palette_ecozones`; do not reuse a human, climate, time, or space colour for regions.
 
 ## Figure review checklist
 

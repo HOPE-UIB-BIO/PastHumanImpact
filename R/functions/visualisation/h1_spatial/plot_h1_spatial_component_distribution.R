@@ -1,6 +1,6 @@
 #' @title Plot one time-controlled H1 spatial component
 #' @description
-#' Combine continent maps, continent densities, and climate-zone summaries for
+#' Combine continental-group maps, densities, and regional summaries for
 #' one signed time-controlled HVarPart component on one continuous scale.
 #' @param data_values Dataset-level spatial values for one measure and
 #' component.
@@ -165,7 +165,7 @@ plot_h1_spatial_component_distribution <- function(
     data_density |>
     dplyr::mutate(
       density_scaled = 3 * .data[["density"]] / density_max,
-      panel_label = "Continent"
+      panel_label = "Continental group"
     )
 
   density_x <- seq(0, 3, length.out = 90)
@@ -175,7 +175,7 @@ plot_h1_spatial_component_distribution <- function(
     dplyr::filter(.data[["density_x"]] <= .data[["density_scaled"]])
 
   panel_levels <-
-    c("Continent", levels(data_records[["climatezone_label"]]))
+    c("Continental group", levels(data_records[["climatezone_label"]]))
 
   data_climatezone_summary <-
     data_climatezone_summary |>
@@ -220,7 +220,7 @@ plot_h1_spatial_component_distribution <- function(
     ) |>
     dplyr::mutate(
       panel_x = dplyr::if_else(
-        .data[["panel_label"]] == "Continent",
+        .data[["panel_label"]] == "Continental group",
         3 * .data[["panel_edge"]],
         .data[["panel_edge"]]
       )
@@ -240,7 +240,7 @@ plot_h1_spatial_component_distribution <- function(
   data_background <-
     tidyr::crossing(
       region = factor(displayed_regions, levels = region_levels),
-      panel_label = panel_levels[panel_levels != "Continent"],
+      panel_label = panel_levels[panel_levels != "Continental group"],
       value = background_values
     ) |>
     dplyr::mutate(
@@ -482,7 +482,7 @@ plot_h1_spatial_component_distribution <- function(
     length(map_panel_rows) != length(map_list) ||
       anyNA(map_panel_rows)
   ) {
-    cli::cli_abort("Could not align every component map to a continent row.")
+    cli::cli_abort("Could not align every component map to a continental-group row.")
   }
 
   combined_grob <-

@@ -143,7 +143,7 @@ plot_hvarpart_adjr2_importance_overall <- function(
     ggplot2::scale_colour_manual(
       values = palette_ecozones,
       drop = FALSE,
-      name = "Climate zone"
+      name = "Region"
     ) +
     ggplot2::coord_cartesian(
       xlim = x_limits,

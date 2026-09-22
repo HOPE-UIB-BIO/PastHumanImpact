@@ -1,12 +1,12 @@
 #' @title Plot modelled PAP trajectories
 #' @description
-#' Plot modelled region-climate PAP trajectories. The primary layout shows
+#' Plot modelled PAP trajectories for regions within continental groups. The primary layout shows
 #' general trends only, while the stratum layout also shows observed dataset
 #' trajectories.
-#' @param data_observed PAP observations with region and climate-zone metadata.
+#' @param data_observed PAP observations with continental-group and region metadata.
 #' @param data_predictions Modelled PAP trajectories and credible intervals.
 #' @param layout Character scalar, either `"primary"` or `"strata"`.
-#' @param climate_palette Named character vector of climate-zone colours.
+#' @param climate_palette Named character vector of region colours.
 #' @return A `ggplot` object.
 #' @examples
 #' \dontrun{

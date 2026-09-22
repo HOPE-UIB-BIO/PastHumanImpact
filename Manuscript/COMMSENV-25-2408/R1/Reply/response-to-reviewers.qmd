@@ -1,0 +1,44 @@
+---
+title: "Response to the Editor and Reviewers"
+subtitle: "Climate outweighs human effects on pollen assemblage dynamics from 8.5 to 2.0 ka BP"
+output-file: response-to-reviewers
+lang: en-GB
+format:
+  pdf:
+    documentclass: scrartcl
+    pdf-engine: xelatex
+    papersize: a4
+    fontsize: 11pt
+    geometry: [top=25mm, bottom=25mm, left=25mm, right=25mm]
+    linestretch: 1.25
+    colorlinks: true
+    include-in-header: ../styles/response-blockquotes.tex
+    tbl-cap-location: top
+  docx:
+    reference-doc: ../reference/submitted-style-reference.docx
+    toc: false
+    number-sections: false
+    fig-width: 6.3
+    fig-height: 4.6
+    tbl-cap-location: top
+bibliography:
+  - ../references/main-references.bib
+  - ../references/methods-references.bib
+csl: ../references/submitted-numeric.csl
+citeproc: true
+link-citations: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+{{< include ../_sections/00-evidence-setup.qmd >}}
+
+{{< include _responses/01-editor-letter.qmd >}}
+
+{{< include _responses/02-reviewer-1-letter.qmd >}}
+
+{{< include _responses/03-reviewer-2-letter.qmd >}}
+
+{{< include _responses/04-reviewer-3-letter.qmd >}}

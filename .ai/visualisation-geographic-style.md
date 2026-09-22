@@ -1,8 +1,8 @@
 # Geographical Visualisation Style
 
-This companion to `.ai/visualisation-style.md` defines the geographical ordering, climate-zone tones, and short labels for PastHumanImpact figures. It applies whenever a figure shows continents or Köppen climate zones.
+This companion to `.ai/visualisation-style.md` defines the geographical ordering, region colours, and short labels for PastHumanImpact figures. It applies whenever a figure shows continental groups or Köppen-derived regions.
 
-## Continent order
+## Continental-group order
 
 Use this order for rows, panels, legends, and grouped summaries:
 
@@ -12,13 +12,13 @@ Use this order for rows, panels, legends, and grouped summaries:
 4. Asia
 5. Oceania
 
-Use `region_labeller` for displayed names. Do not alphabetise regions or use the data name `Latin America` in a publication-facing label.
+Use `region_labeller` for displayed names. Do not alphabetise continental groups or use the data name `Latin America` in a publication-facing label. The internal `region` column stores continental-group membership.
 
-## Climate-zone order, labels, and colours
+## Region order, labels, and colours
 
-Use the display order in `data_climate_zones`, not alphabetical order, whenever climate zones form figure columns, x-axis labels, or legends. Use `resolve_climatezone_label()` for the short labels and `palette_ecozones` for the colours.
+Use the display order in `data_climate_zones`, not alphabetical order, whenever regions form figure columns, x-axis labels, or legends. Use `resolve_climatezone_label()` for the short labels and `palette_ecozones` for the colours.
 
-| Order | Climate-zone label | Short label | Colour |
+| Order | Region class label | Short label | Colour |
 | --- | --- | --- | --- |
 | 1 | Polar | POL | `#907A8E` |
 | 2 | Cold - Cold Summer | CCS | `#8C4418` |
@@ -32,10 +32,10 @@ Use the display order in `data_climate_zones`, not alphabetical order, whenever 
 | 10 | Tropical | TRO | `#D68FD6` |
 | 11 | Arid | ARD | `#DDDF78` |
 
-Climate-zone tones are categorical colours. They must not be repurposed for human, climate, time, space, zero, or missing-data encodings.
+Region colours are categorical colours. The internal `climatezone` column stores the present-day Köppen–Geiger class used to define each region within a continental group. They must not be repurposed for human, climate, time, space, zero, or missing-data encodings.
 
 ## Applying the geographical system
 
-- Keep the configured continent and climate-zone order even if a subset of categories is absent; drop only categories that have no relevant data.
-- Use short labels where panel width is constrained. Use the full climate-zone label in legends or where space permits.
-- Ensure that a climate-zone colour, its full label, and its abbreviation agree wherever they appear in the same figure.
+- Keep the configured continental-group and region order even if a subset of categories is absent; drop only categories that have no relevant data.
+- Use short labels where panel width is constrained. Use the full region label in legends or where space permits.
+- Ensure that a region colour, its full label, and its abbreviation agree wherever they appear in the same figure.

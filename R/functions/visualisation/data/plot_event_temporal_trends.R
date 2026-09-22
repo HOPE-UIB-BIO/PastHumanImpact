@@ -1,6 +1,6 @@
 #' @title Plot temporal human-event trajectories
 #' @description
-#' Plot modelled event probabilities and credible intervals across region and
+#' Plot modelled event probabilities and credible intervals across regions nested in continental groups and
 #' climate-zone strata. Constant-response strata can be supplied with equal
 #' estimates and interval bounds.
 #' @param data_predictions Event predictions with uncertainty bounds.
