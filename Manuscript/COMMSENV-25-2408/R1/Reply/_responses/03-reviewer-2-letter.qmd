@@ -14,9 +14,75 @@ I do, however, have a number of data presentation and methodological concerns th
 
 Though two records are presented in Extended Fig. 3, a key figure missing from this work is a presentation of the full set of PAPs through time for each region. The authors have presented the set of predictor variables, rather than the response variables, which, in my view, are of substantially less importance than the response variables themselves. I find it difficult to make sense of and interpret statistical analyses for which at least some abstraction of the response variables (here, PAPs) are not presented in a paper and thus, for me, these need to be included.
 
-> **Response.** We agree. Readers should first see how the pollen assemblages changed before considering why they changed. Fig. 2 therefore presents six representative histories of richness, evenness, turnover, and related properties, while Supplementary Figs. S12–S21 show all ten properties individually. Each curve gives equal weight to the contributing pollen sequences and is evaluated only across the portion of time actually represented by each sequence, preventing long or densely sampled sequences from dominating the regional history.
+> **Response.** We agree that the histories of the pollen assemblage properties should be visible before their possible drivers are considered. We have therefore moved the descriptive trajectories ahead of the H1 results. Fig. 2 brings together six properties spanning richness, diversity, compositional change, and change-point density; Supplementary Figs. S12–S21 show all ten properties individually for each region within the continental groups. The shaded intervals convey uncertainty in the modelled trajectories, and gaps indicate where the contributing sequences do not provide sufficient temporal coverage. Each sequence contributes equally over its observed interval, so a long or densely sampled sequence does not dominate a regional curve. Together, these figures show both broad temporal tendencies and substantial variation among regions, providing ecological context for the subsequent comparison of climate and human activity.
 
-> **Changes in the revised article.** The Results now begin with “Temporal patterns in pollen assemblage properties.” Fig. 2 presents the principal ecological trajectories, and the full set is shown in the Supplementary Information.
+> The regional curves are not response data for either H1 analysis. In the spatial analysis, HVarPart is fitted to PAP values within each individual fossil pollen sequence, and the resulting contributions are summarised across sequences only afterward. In the temporal analysis, PAP values from individual sequences enter 500-year continental-group time slices, with spatial structure among those sequences represented in the model. Neither analysis uses the plotted regional summary curves as its response. The [full collection of figures for eligible individual sequences](https://github.com/HOPE-UIB-BIO/PastHumanImpact/tree/f16590d7d6c68fdfae99e5286af01ab2f7a6e807/Outputs/Figures/Dataset_trends) is available on GitHub for inspection; the number of figures makes their inclusion in the Supplementary Information impractical.
+
+> **Changes in the revised article.** The Results now begin with “Temporal patterns in pollen assemblage properties.” Fig. 2 and Supplementary Figs. S12–S21 present descriptive regional trajectories. The Methods explicitly distinguish these displays from the sequence-level PAP values used in H1.
+
+For ease of assessment, we reproduce the ten supplementary PAP figures below. They are descriptive summaries of sequence-level trajectories; the H1 models use PAP values from individual sequences, as explained above.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-06-pap-n0.png){width=90% fig-alt="Supplementary Fig. S12: regional taxonomic-richness trajectories."}
+
+**Supplementary Fig. S12 (reproduced). Taxonomic richness ($N_0$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-07-pap-n1.png){width=90% fig-alt="Supplementary Fig. S13: regional Shannon-effective diversity trajectories."}
+
+**Supplementary Fig. S13 (reproduced). Shannon-effective diversity ($N_1$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-08-pap-n2.png){width=90% fig-alt="Supplementary Fig. S14: regional Simpson-effective diversity trajectories."}
+
+**Supplementary Fig. S14 (reproduced). Simpson-effective diversity ($N_2$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-09-pap-n1-minus-n2.png){width=90% fig-alt="Supplementary Fig. S15: regional Shannon–Simpson diversity-difference trajectories."}
+
+**Supplementary Fig. S15 (reproduced). Shannon–Simpson diversity difference ($N_1-N_2$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-10-pap-n2-n1.png){width=90% fig-alt="Supplementary Fig. S16: regional Simpson-to-Shannon diversity-ratio trajectories."}
+
+**Supplementary Fig. S16 (reproduced). Simpson-to-Shannon diversity ratio ($N_2/N_1$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-11-pap-n1-n0.png){width=90% fig-alt="Supplementary Fig. S17: regional Shannon-diversity-to-richness ratio trajectories."}
+
+**Supplementary Fig. S17 (reproduced). Shannon-diversity-to-richness ratio ($N_1/N_0$).** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-12-pap-roc.png){width=90% fig-alt="Supplementary Fig. S18: regional rate-of-change trajectories."}
+
+**Supplementary Fig. S18 (reproduced). Rate of compositional change.** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-13-pap-dcca.png){width=90% fig-alt="Supplementary Fig. S19: regional DCCA axis 1 trajectories."}
+
+**Supplementary Fig. S19 (reproduced). DCCA axis 1.** Regional trajectories along the primary compositional gradient; the axis sign is arbitrary.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-14-pap-density-diversity.png){width=90% fig-alt="Supplementary Fig. S20: regional diversity change-point-density trajectories."}
+
+**Supplementary Fig. S20 (reproduced). Diversity change-point density.** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-15-pap-density-turnover.png){width=90% fig-alt="Supplementary Fig. S21: regional turnover change-point-density trajectories."}
+
+**Supplementary Fig. S21 (reproduced). Turnover change-point density.** Regional trajectories over the observed sequence coverage.
+
+{{< pagebreak >}}
 
 ### Pollen diversity biases
 
@@ -26,15 +92,45 @@ There is substantial variation in pollen productivity among pollen producing pla
 
 These concerns can be at least partly mitigated against by performing some transformation of pollen counts based on relative pollen production and dispersal (etc). There are a number of methods to achieve this, the most notable of which is the REVEALS model, for which there are the requisite datasets for many of the regions used here. However, this is not implemented in these analyses. At the very minimum, I would expect to see a supplementary analysis that considers only the subset of samples and records with a substantially higher minimum pollen grain N (300-500 grains), to check that results are not driven by those issues relating to relative differences in pollen production and dispersal described above. I am of the view that all samples with <150 grains should be excluded from these analyses.
 
-> **Response.** We agree that pollen productivity, dispersal, taxonomic resolution, basin setting, and count size all influence the ecological meaning of pollen assemblage properties. The article now refers to pollen assemblage dynamics rather than treating the measurements as direct estimates of plant abundance or vegetation diversity. We also clarify that 25 grains is the minimum for retaining an individual sample, not the count to which all samples are reduced. The usual rarefaction target is 150 grains; only sequences that cannot consistently support this target are analysed at a lower, sequence-specific count.
+> **Response.** We agree that pollen productivity, dispersal, taxonomic resolution, basin setting, and count size all influence the ecological meaning of pollen assemblage properties. Low counts can make uncommon pollen types less likely to be detected and can affect estimates of richness, evenness, and compositional change. These properties are therefore interpreted as features of the recovered pollen assemblage rather than direct estimates of plant abundance or vegetation diversity. A minimum of 25 terrestrial grains determines whether an individual count-based sample can be retained; it is not a common rarefaction target imposed on every sample. A count-based sequence is retained only when more than half of its samples in the study interval have at least 150 grains. The usual rarefaction target is 150 grains, with a lower sequence-specific target where a retained sequence cannot consistently support 150. This rule limits the contribution of low-count samples while preserving sequences from less well represented regions; it does not remove the uncertainty associated with smaller counts.
 
-> We examined how stronger count requirements would alter the geographical and temporal evidence available to the study. A 300-grain target, with a 50-grain sample minimum, retains `r pollen_retention |> filter(.data[["threshold"]] == 300) |> pull(.data[["n_records_retained"]])` sequences. A 500-grain target, with a sample minimum of about 83 grains, retains `r pollen_retention |> filter(.data[["threshold"]] == 500) |> pull(.data[["n_records_retained"]])`; a 1,000-grain target, with a sample minimum of about 167 grains, retains only `r pollen_retention |> filter(.data[["threshold"]] == 1000) |> pull(.data[["n_records_retained"]])`. Thus the 500-grain target removes `r sprintf("%.1f", 100 * pollen_retention[["prop_lost"]][pollen_retention[["threshold"]] == 500])`% of the baseline sequences and the 1,000-grain target removes `r sprintf("%.1f", 100 * pollen_retention[["prop_lost"]][pollen_retention[["threshold"]] == 1000])`%. These losses are not geographically or historically neutral: they disproportionately remove evidence from particular continental groups, regions, and periods (Supplementary Fig. S23; Supplementary Table S3). We therefore retain the baseline rule to preserve the broadest defensible coverage. This analysis does not answer the reviewer’s proposed robustness test in full: we did not refit H1 after requiring 300–500 grains in every sample, and we do not claim that the estimated contributions would be unchanged under that restriction.
+> We examined what would be lost if more demanding count criteria were applied to the `r format(preparation_pool_n, big.mark = ",")` prepared sequences. A 300-grain rarefaction target, paired with a 50-grain sample minimum, retains `r pollen_retention |> filter(.data[["threshold"]] == 300) |> pull(.data[["n_records_retained"]])` sequences. A 500-grain target, paired with a sample minimum of about 83 grains, retains `r pollen_retention |> filter(.data[["threshold"]] == 500) |> pull(.data[["n_records_retained"]])`; a 1,000-grain target, paired with a minimum of about 167 grains, retains only `r pollen_retention |> filter(.data[["threshold"]] == 1000) |> pull(.data[["n_records_retained"]])`. The 500-grain scenario therefore removes `r sprintf("%.1f", 100 * pollen_retention[["prop_lost"]][pollen_retention[["threshold"]] == 500])`% of baseline sequences and `r sprintf("%.1f", 100 * pollen_retention[["prop_samples_lost"]][pollen_retention[["threshold"]] == 500])`% of their samples; the 1,000-grain scenario removes `r sprintf("%.1f", 100 * pollen_retention[["prop_lost"]][pollen_retention[["threshold"]] == 1000])`% of sequences. The losses differ among continental groups, so higher count requirements would come at the cost of a narrower and less geographically representative historical archive. Supplementary Fig. S23A shows the observed count distribution in count-based samples, while Fig. S23B shows that the loss of sequences and samples differs markedly among continental groups. We retain the baseline rule on that basis while acknowledging the greater uncertainty of PAP estimates from smaller counts.
+
+> This diagnostic concerns the availability of pollen evidence under different thresholds. It does not meet the reviewer’s proposed robustness test in full: we did not refit H1 after requiring every sample to contain 300–500 grains, and the figure does not show that the estimated climate and human contributions would remain unchanged under such a restriction. The response to pollen-production and dispersal differences also remains incomplete without a comparable correction across regions.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-28-pollen-count-distribution.png){width=85% fig-alt="Supplementary Fig. S23A: distribution of terrestrial pollen counts in count-based samples by continental group and region."}
+
+**Supplementary Fig. S23A (reproduced).** Terrestrial pollen counts in individual count-based samples, grouped by continental group and region. Percentage-only sequences are excluded because their values are not grain counts.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-28-pollen-retention.png){width=85% fig-alt="Supplementary Fig. S23B: proportions of sequences and samples retained under stricter count requirements in each continental group."}
+
+**Supplementary Fig. S23B (reproduced).** Proportions of sequences (dashed) and samples (solid) retained within each continental group. The 300-, 500-, and 1,000-grain labels denote rarefaction targets with associated sample minima of 50, about 83, and about 167 grains, relative to the 150-grain target and 25-grain sample-minimum baseline. This is a coverage diagnostic, not an H1 model refit.
 
 > Richness, evenness, and the Hill-number measures are necessarily related because they describe different aspects of the same assemblage. We now show these relationships directly and repeat the comparison after removing the most closely related response measures. Across `r format(pap_collinearity[["n_with_complete_pairs"]][1], big.mark = ",")` sequences represented in both analyses, the median climatic contribution changed from `r sprintf("%.3f", pap_collinearity[["median_baseline"]][pap_collinearity[["predictor"]] == "climate"])` to `r sprintf("%.3f", pap_collinearity[["median_reduced"]][pap_collinearity[["predictor"]] == "climate"])`. The broad climatic predominance remained, although the contribution estimated for individual pollen sequences sometimes changed.
 
 > We did not apply REVEALS because the pollen-productivity estimates, dispersal parameters, basin descriptions, and taxonomic resolution needed for a comparable analysis are not available across all regions. Restricting that correction to Europe or other well-studied regions would make the ecological meaning of the response differ among continental groups. The revised article therefore treats productivity and dispersal as unresolved limitations and does not imply that rarefaction corrects them.
 
 > **Changes in the revised article.** The count procedure and the relationships among pollen assemblage properties are now explained in the Methods. The Supplementary Information shows the loss of geographical and temporal coverage under stricter targets, the observed correlations among properties, and the reduced-response comparison. The Discussion contains a dedicated account of how pollen production, dispersal, and finite counts constrain ecological interpretation.
+
+For direct comparison, we reproduce the supplementary diagnostics of PAP correlation and the reduced-response analysis.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-29-pap-collinearity.png){width=90% fig-alt="Supplementary Fig. S24: PAP correlation and influence diagnostic."}
+
+**Supplementary Fig. S24 (reproduced). PAP correlation and influence.** Correlation among assemblage properties is assessed across the available paired sequences; negative signed changes retain their direction.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-30-pap-reduced.png){width=90% fig-alt="Supplementary Fig. S30: reduced-PAP response sensitivity."}
+
+**Supplementary Fig. S30 (reproduced). Reduced-PAP response sensitivity.** The climate–human comparison is repeated with the correlated response measures reduced within the same eligible sequences; missing pairs are non-estimable.
+
+{{< pagebreak >}}
 
 ### SPD biases
 
@@ -50,6 +146,16 @@ Notwithstanding these comments, of most concern to me is the different spatial s
 
 > **Changes in the revised article.** The Methods now explain why proximity to a pollen site must be balanced against the number of archaeological dates available. Supplementary Figs. S8 and S37–S38 and Supplementary Table S9 present the 250 and 500 km comparison. The Discussion explains why it cannot substitute for site-specific pollen-source estimates.
 
+The matched spatial comparison of archaeological search radii is reproduced below. It tests the operational radius choice; neither radius represents a measured pollen-source area.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-35-spd-radius-spatial.png){width=90% fig-alt="Supplementary Fig. S8: spatial SPD-radius sensitivity for matched pollen sequences."}
+
+**Supplementary Fig. S8 (reproduced). Spatial SPD-radius sensitivity.** The same eligible pollen sequences are compared using strict 250 and 500 km archaeological neighbourhoods; a negative balance indicates the larger estimated climatic contribution.
+
+{{< pagebreak >}}
+
 ### Human events variable
 
 Even by itself, the development of this variable represents a major undertaking and whilst I appreciate the substantial effort, I find the decomposition of continuous human change into categorical events represented by a binary variable overly simplistic and almost certain not to capture diverse changes across the PAPs considered here. I also find there to be a lack of description and justification of the method. Which experts were asked? Why were these experts asked? Who do they represent? Why and how were these events chosen? By whom? What were the exact criteria used for each event * region considered? Indeed, for Central and South America, the authors use an established index from the literature, which underlines the extent of the work required for the development of indices such as these for individual continents, let alone for all continents as is attempted here.
@@ -62,6 +168,16 @@ The reductive nature of the index is exemplified best for North America, for whi
 
 > **Changes in the revised article.** The event chronology is now presented as a complementary historical perspective rather than evidence equal to the archaeological SPD. The Methods identify the experts and regional indicators, the Discussion addresses the incompleteness and partial circularity of the evidence, and the Supplementary Information compares results based on SPDs, events, and both sources together.
 
+We reproduce the matched comparison of human-activity proxies so that the effect of retaining the event chronology can be assessed directly. These results use observed event chronologies and do not treat an undetected event as absence of human activity.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-38-event-spatial.png){width=90% fig-alt="Supplementary Fig. S9: SPD-only, event-only, and combined human-proxy sensitivity."}
+
+**Supplementary Fig. S9 (reproduced). Human-event sensitivity.** SPD-only, event-only, and combined predictors are compared within matched sequences with observed event histories; the event evidence remains partly dependent on the pollen response.
+
+{{< pagebreak >}}
+
 ### Statistical analyses
 
 Firstly, I cannot see a summary of the total variance explained by the models here. This is of crucial importance because if the models explain a very small amount of the total variation in the data, then it would be difficult to say that humans/climate are most/not important drivers of the PAPs, in my view. These should be added as a Supplementary table and summarised in some way - perhaps across records, by region - as an Extended Data Figure.
@@ -72,11 +188,43 @@ Firstly, I cannot see a summary of the total variance explained by the models he
 
 > **Changes in the revised article.** The Results now report overall model fit alongside the comparison of climate and human activity. Supplementary figures and tables show its geographical distribution, its relationship to the estimated contributions, and the effect of alternative treatments of shared or negative explanatory variation.
 
+The model-fit distribution and the comparison of extraction profiles are reproduced below. Total adjusted $R^2$ describes complete-model fit, whereas the profiles show alternative allocations of the fitted component.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-23-adjusted-r2.png){width=90% fig-alt="Supplementary Fig. S31: adjusted R-squared distributions among pollen sequences."}
+
+**Supplementary Fig. S31 (reproduced). Total adjusted $R^2$ among pollen sequences.** The distribution shows variation in complete-model fit across continental groups and regions; negative adjusted values remain visible.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-22-hvarpart-profiles.png){width=90% fig-alt="Supplementary Fig. S4: signed, zero-truncated, and exclude-negative HVarPart profiles."}
+
+**Supplementary Fig. S4 (reproduced). HVarPart extraction profiles.** Signed, zero-truncated, and exclude-negative summaries are compared for their respective eligible analysis subsets; these allocations are distinct from total adjusted $R^2$.
+
+{{< pagebreak >}}
+
 Secondly, temporal and spatial autocorrelation do not seem to be accounted for in these models, and their effects not checked for. These effects potentially confound model inferences and thus either an explanation as to why they were not included needs to be added to the methods, or some additional variables need to be added to the models. This is likely of most importance to those analyses in Fig 2 where there will undoubtedly be a substantial trend component to the PAPs over the long period considered.
 
 > **Response.** We agree that ecological observations close together in time or space are not independent. Long-term succession and directional change can make neighbouring levels within a pollen sequence resemble one another, while shared geography can produce similar assemblages among nearby sites. The principal analysis of individual sequences now accounts for temporal structure, and the continental-group analysis through time accounts for spatial structure among sites. We also examine remaining spatial pattern in the residuals, repeat analyses using more widely spaced sequences, and test whether the broad result depends on any single continental group or region. These checks retain the general predominance of climate, while showing that some individual estimates remain uncertain or sensitive to analytical choices.
 
 > **Changes in the revised article.** Figs. 3 and 4 now present the analyses that account for temporal or spatial structure. The Methods describe these controls, and the Supplementary Information reports checks for remaining geographical pattern, the influence of closely spaced sites, and the effect of excluding individual continental groups or regions.
+
+We reproduce the residual spatial-dependence and thinning diagnostics because they show what the controls changed and what geographical structure remains.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-31-moran.png){width=90% fig-alt="Supplementary Fig. S6: residual spatial autocorrelation before and after control."}
+
+**Supplementary Fig. S6 (reproduced). Residual spatial dependence.** Moran diagnostics compare spatial pattern before and after control in eligible spatial subsets; residual clustering is not assumed to disappear completely.
+
+{{< pagebreak >}}
+
+![](../figures/supplementary-figure-32-thinning.png){width=90% fig-alt="Supplementary Fig. S34: spatial thinning at 250 and 500 km."}
+
+**Supplementary Fig. S34 (reproduced). Spatial thinning.** Repeatedly retaining more widely separated sequences tests whether densely sampled places determine the aggregate climate–human balance.
+
+{{< pagebreak >}}
 
 ### References
 

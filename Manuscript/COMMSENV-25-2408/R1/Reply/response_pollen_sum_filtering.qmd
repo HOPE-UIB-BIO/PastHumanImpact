@@ -14,9 +14,20 @@ format:
 #| warning: false
 #| message: false
 
-source(
-  here::here("R/00_Config_file.R")
-)
+repository_root <- normalizePath(getwd(), winslash = "/")
+while (!file.exists(file.path(repository_root, "R", "00_Config_file.R"))) {
+  repository_parent <- dirname(repository_root)
+  if (identical(repository_parent, repository_root)) {
+    stop("Could not locate repository root.")
+  }
+  repository_root <- repository_parent
+}
+
+library(dplyr)
+library(readr)
+library(stringr)
+library(purrr)
+library(knitr)
 
 fmt_int <- function(x) {
   format(round(x), big.mark = ",", scientific = FALSE, trim = TRUE)
@@ -30,12 +41,12 @@ fmt_pct <- function(x, digits = 1) {
 }
 
 path_rowsum <-
-  here::here(
+  file.path(repository_root,
     "Outputs", "Tables", "Dataset_summaries", "Pollen",
     "pollen__sample_rowsums__climate_zone.csv"
   )
 path_ret_overall <-
-  here::here(
+  file.path(repository_root,
     "Outputs", "Tables", "Dataset_summaries", "Pollen",
     "pollen__threshold_retention__overall.csv"
   )
@@ -87,8 +98,12 @@ thresholds <-
 
 thresholds_nonbaseline <- thresholds[thresholds > baseline_threshold]
 
-rowsum_values <-
+rowsum_count_based <-
   rowsum |>
+  dplyr::filter(.data$pollen_percentage == FALSE)
+
+rowsum_values <-
+  rowsum_count_based |>
   dplyr::pull(.data$rowsum)
 
 share_samples_ge <-
@@ -99,42 +114,25 @@ share_samples_ge <-
 
 names(share_samples_ge) <- as.character(thresholds)
 
-n_samples_baseline <- nrow(rowsum)
+n_samples_baseline <- nrow(rowsum_count_based)
 
 fig_rowsum <-
-  here::here(
+  file.path(repository_root,
     "Outputs",
     "Figures",
     "Data",
     "pollen__sample_density__climate_zone.png"
   )
-fig_overall <-
-  here::here(
-    "Outputs",
-    "Figures",
-    "Data",
-    "pollen__threshold_retention__overall.png"
-  )
 fig_region <-
-  here::here(
+  file.path(repository_root,
     "Outputs",
     "Figures",
     "Data",
     "pollen__threshold_retention__region.png"
   )
-fig_region_clim <-
-  here::here(
-    "Outputs",
-    "Figures",
-    "Data",
-    "pollen__threshold_retention__region_and_climate_zone.png"
-  )
-
 figure_paths <- c(
   fig_rowsum,
-  fig_overall,
-  fig_region,
-  fig_region_clim
+  fig_region
 )
 
 missing_figures <- figure_paths[!file.exists(figure_paths)]
@@ -155,9 +153,9 @@ if (
 
 We appreciate the reviewer's concern regarding low pollen-count samples and potential impacts on PAP estimates.
 
-We agree that this point requires explicit quantification and clarification in both the manuscript and response letter. We have now added targeted diagnostics that directly evaluate retained sample-count distributions and the consequences of stricter pollen-count thresholds for record and sample retention.
+We agree that this point requires explicit quantification and clarification in both the manuscript and response letter. We have now added targeted diagnostics that directly evaluate retained sample-count distributions and the consequences of stricter pollen-count thresholds for sequence and sample retention.
 
-First, we clarify that the low-count values are used as filtering thresholds in preprocessing, not as a blanket forcing of all samples to one fixed count in the diagnostics presented here. To evaluate whether low-count samples dominate the retained dataset, we quantified the empirical sample-count distribution in the baseline filtered data ($N = `r fmt_int(n_samples_baseline)`$ samples).
+First, we clarify that the low-count values are used as filtering thresholds in preprocessing, not as a blanket forcing of all samples to one fixed count in the diagnostics presented here. To evaluate whether low-count samples dominate, we quantified the empirical pollen-count distribution among count-based samples in the baseline filtered data ($N = `r fmt_int(n_samples_baseline)`$ samples).
 
 ```{r}
 #| label: text-sample-shares
@@ -178,11 +176,11 @@ cat(
 )
 ```
 
-Thus, the retained dataset is not dominated by very low-count samples.
+Thus, the retained count-based samples are not dominated by very low pollen counts. Percentage-only sequences are excluded from this distribution because their values are not grain counts.
 
 ```{r}
 #| label: fig-density-rowsum-climatezone
-#| fig-cap: "Distribution of retained sample pollen sums by continent and climate zone."
+#| fig-cap: "Terrestrial pollen counts in count-based samples by continental group and region."
 #| out-width: "100%"
 #| echo: false
 knitr::include_graphics(fig_rowsum)
@@ -224,41 +222,25 @@ if (
     dplyr::pull(.data$summary) |>
     stringr::str_c(collapse = ", ")
 
-  cat(stringr::str_glue("Record retention is {rec_txt}.\n\n"))
+  cat(stringr::str_glue("Sequence retention is {rec_txt}.\n\n"))
   cat(stringr::str_glue("Sample retention is {samp_txt}.\n"))
 } else {
   cat("No stricter-than-baseline thresholds were found in the retention table.\n")
 }
 ```
 
-These results show the expected trade-off: stricter thresholds reduce potential low-count bias but also remove substantial fractions of records and samples, particularly in data-sparse regions.
+These results show the expected trade-off: stricter thresholds reduce potential low-count bias but also remove substantial fractions of sequences and samples, particularly in data-sparse regions.
 
-Third, we now present retention summaries globally, by continent, and by continent-climatezone combinations to show where losses occur under stricter filtering. This makes the representational trade-off transparent rather than implicit.
+Third, we present retention by continental group to show where losses occur under stricter filtering. This makes the representational trade-off transparent rather than implicit.
 
 In response to the reviewer, we have therefore strengthened both the methods text and supplementary evidence by adding: (i) explicit reporting of retained pollen-sum distributions, (ii) explicit retention sensitivity analyses at higher thresholds, and (iii) clearer framing that PAP-based analyses are in the pollen domain and remain subject to known compositional and production biases.
 
 ```{r}
-#| label: fig-threshold-retention-overall
-#| fig-cap: "Overall retention sensitivity under stricter pollen-sum thresholds."
-#| out-width: "100%"
-#| echo: false
-knitr::include_graphics(fig_overall)
-```
-
-```{r}
 #| label: fig-threshold-retention-region
-#| fig-cap: "Continent-level retention sensitivity under stricter pollen-sum thresholds."
+#| fig-cap: "Sequence and sample retention under stricter pollen-count thresholds by continental group."
 #| out-width: "100%"
 #| echo: false
 knitr::include_graphics(fig_region)
-```
-
-```{r}
-#| label: fig-threshold-retention-region-climatezone
-#| fig-cap: "Continent x climate zone retention sensitivity under stricter pollen-sum thresholds."
-#| out-width: "100%"
-#| echo: false
-knitr::include_graphics(fig_region_clim)
 ```
 
 ### Data-derived summary table
@@ -288,9 +270,9 @@ ret_table <-
   ) |>
   dplyr::rename(
     "Threshold" = .data$threshold,
-    "Records retained" = .data$n_records_retained,
+    "Sequences retained" = .data$n_records_retained,
     "Samples retained" = .data$n_samples_retained,
-    "Record retention" = .data$prop_retained,
+    "Sequence retention" = .data$prop_retained,
     "Sample retention" = .data$prop_samples_retained
   )
 
