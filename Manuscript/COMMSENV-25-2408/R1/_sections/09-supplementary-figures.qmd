@@ -133,9 +133,11 @@
 :::
 
 ::: {#suppfig-pollen-retention}
-![](figures/supplementary-figure-28-pollen-retention.png){width=85% fig-alt="Pollen-count threshold retention diagnostic."}
+![](figures/supplementary-figure-28-pollen-count-distribution.png){width=68% fig-alt="Distribution of terrestrial pollen counts in count-based samples by continental group and region."}
 
-**Pollen retention and bias–coverage diagnostic.** The retention analysis compares rarefaction targets of 300, 500, and 1,000 grains, with associated sample minima of 50, about 83, and about 167 grains, against the 150-grain target and 25-grain sample-minimum baseline. It does not impose a 300- or 500-grain minimum on every sample and is not an H1 refit; missing strata have no retained sequences.
+![](figures/supplementary-figure-28-pollen-retention.png){width=68% fig-alt="Proportion of sequences and samples retained under higher count thresholds within each continental group."}
+
+**Pollen counts and retention under stricter filtering.** (A) Terrestrial pollen counts in count-based samples by continental group and region; percentage-only sequences are excluded. (B) Proportions of sequences (dashed) and samples (solid) retained within each continental group as the rarefaction target rises from 150 to 300, 500, and 1,000 grains. The associated sample minima are 25, 50, about 83, and about 167 grains. These are coverage diagnostics, not H1 refits.
 :::
 
 ::: {#suppfig-pap-collinearity}

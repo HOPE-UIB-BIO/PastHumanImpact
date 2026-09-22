@@ -90,7 +90,7 @@ We ensured equal temporal spacing of samples across all response variables, as t
 
 After all data-processing steps, 1,262 sequences were considered for the initial spatial analysis. Analysis-specific eligibility subsequently produced smaller subsets; the controlled spatial SPD analysis, for example, contained 1,098 sequences. For an overview of the preparation pool and analysis coverage, see @suppfig-pollen-coverage and @supptbl-cohorts.
 
-For descriptive presentation of PAP change through time, we modelled each PAP using hierarchical generalised additive models (HGAMs) with sequence-level smooth structure. Posterior predictions were generated only within the temporal coverage observed for each sequence. Continental-group and regional trajectories are equal-weighted averages of those sequence-level posterior predictions, rather than averages of every sample or prediction row; longer or more densely sampled sequences therefore do not dominate the summaries (@fig-pap-trajectories).
+For descriptive presentation of PAP change through time, we modelled each PAP using hierarchical generalised additive models (HGAMs) with sequence-level smooth structure. Posterior predictions were generated only within the temporal coverage observed for each sequence. Continental-group and regional trajectories are equal-weighted averages of those sequence-level posterior predictions, rather than averages of every sample or prediction row; longer or more densely sampled sequences therefore do not dominate the summaries (@fig-pap-trajectories). The HGAM-derived regional trajectories are descriptive summaries only and do not enter the H1 models, which use PAP values from individual pollen sequences.
 
 ## Spatial units for analysis
 
