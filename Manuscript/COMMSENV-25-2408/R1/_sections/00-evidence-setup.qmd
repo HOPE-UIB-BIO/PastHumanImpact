@@ -50,6 +50,35 @@ pollen_retention <-
   ) |>
   arrange(.data[["threshold"]])
 
+pollen_count_based_samples <-
+  read_csv(
+    file.path(
+      repository_root,
+      "Outputs",
+      "Tables",
+      "Dataset_summaries",
+      "Pollen",
+      "pollen__sample_rowsums__climate_zone.csv"
+    ),
+    show_col_types = FALSE
+  ) |>
+  filter(
+    .data[["pollen_percentage"]] == FALSE,
+    !is.na(.data[["rowsum"]])
+  )
+
+pollen_count_based_n <-
+  nrow(pollen_count_based_samples)
+
+pollen_count_25_to_49_n <-
+  sum(
+    pollen_count_based_samples[["rowsum"]] >= 25 &
+      pollen_count_based_samples[["rowsum"]] < 50
+  )
+
+pollen_count_ge_150_n <-
+  sum(pollen_count_based_samples[["rowsum"]] >= 150)
+
 pap_predictions <-
   read_csv(
     file.path(
