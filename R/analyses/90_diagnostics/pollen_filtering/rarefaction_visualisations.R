@@ -92,6 +92,7 @@ data_sample_rowsums_climatezone <-
   dplyr::filter(
     is.na(region) == FALSE,
     is.na(climatezone) == FALSE,
+    pollen_percentage == FALSE,
     is.na(rowsum) == FALSE
   )
 
@@ -111,15 +112,15 @@ data_retention_overall_plot <-
     metric = factor(
       metric,
       levels = c("prop_samples_retained", "prop_retained"),
-      labels = c("Samples retained", "Datasets retained")
+      labels = c("Samples retained", "Sequences retained")
     )
   ) |>
   dplyr::bind_rows(
     tibble::tibble(
       threshold = 0,
       metric = factor(
-        c("Samples retained", "Datasets retained"),
-        levels = c("Samples retained", "Datasets retained")
+        c("Samples retained", "Sequences retained"),
+        levels = c("Samples retained", "Sequences retained")
       ),
       value = 1
     )
@@ -144,7 +145,7 @@ data_retention_region_plot <-
     metric = factor(
       metric,
       levels = c("prop_region_samples_retained", "prop_region_retained"),
-      labels = c("Samples retained", "Datasets retained")
+      labels = c("Samples retained", "Sequences retained")
     )
   ) |>
   dplyr::bind_rows(
@@ -152,8 +153,8 @@ data_retention_region_plot <-
       dplyr::distinct(region) |>
       tidyr::crossing(
         metric = factor(
-          c("Samples retained", "Datasets retained"),
-          levels = c("Samples retained", "Datasets retained")
+          c("Samples retained", "Sequences retained"),
+          levels = c("Samples retained", "Sequences retained")
         )
       ) |>
       dplyr::mutate(
@@ -173,15 +174,15 @@ data_retention_region_plot <-
       region_facet,
       levels = c(
         "North America",
+        "Central & South America",
         "Europe",
         "Asia",
-        "Central & South America",
-        " ",
         "Oceania"
       )
     )
   ) |>
   dplyr::distinct(region, threshold, metric, .keep_all = TRUE) |>
+  dplyr::filter(threshold > 0) |>
   dplyr::arrange(region, metric, threshold)
 
 data_retention_region_climatezone_plot <-
@@ -208,7 +209,7 @@ data_retention_region_climatezone_plot <-
         "prop_region_climatezone_samples_retained",
         "prop_region_climatezone_retained"
       ),
-      labels = c("Samples retained", "Datasets retained")
+      labels = c("Samples retained", "Sequences retained")
     )
   ) |>
   dplyr::bind_rows(
@@ -216,8 +217,8 @@ data_retention_region_climatezone_plot <-
       dplyr::distinct(region, climatezone_label) |>
       tidyr::crossing(
         metric = factor(
-          c("Samples retained", "Datasets retained"),
-          levels = c("Samples retained", "Datasets retained")
+          c("Samples retained", "Sequences retained"),
+          levels = c("Samples retained", "Sequences retained")
         )
       ) |>
       dplyr::mutate(
@@ -318,7 +319,7 @@ fig_retention_overall <-
   ggplot2::geom_line(
     data = dplyr::filter(
       data_retention_overall_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     linewidth = 1,
     linetype = "dashed",
@@ -328,7 +329,7 @@ fig_retention_overall <-
   ggplot2::geom_point(
     data = dplyr::filter(
       data_retention_overall_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     size = 2.5,
     alpha = 0.5,
@@ -354,7 +355,7 @@ fig_retention_overall <-
     x = "Applied grain threshold",
     y = "Proportion retained",
     title = "Overall retention under stricter thresholds",
-    subtitle = "Solid = samples retained; dashed = datasets retained"
+    subtitle = "Solid = samples retained; dashed = sequences retained"
   )
 
 fig_retention_region_facets <-
@@ -386,7 +387,7 @@ fig_retention_region_facets <-
   ggplot2::geom_line(
     data = dplyr::filter(
       data_retention_region_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     mapping = ggplot2::aes(group = region),
     linewidth = 0.9,
@@ -397,7 +398,7 @@ fig_retention_region_facets <-
   ggplot2::geom_point(
     data = dplyr::filter(
       data_retention_region_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     mapping = ggplot2::aes(group = region),
     size = 2,
@@ -432,9 +433,9 @@ fig_retention_region_facets <-
   ) +
   ggplot2::labs(
     x = "Applied grain threshold",
-    y = "Proportion retained relative to regional baseline",
-    title = "Retention by region (each relative to its own baseline)",
-    subtitle = "Solid = samples retained; dashed = datasets retained"
+    y = "Proportion retained within continental group",
+    title = "Retention by continental group",
+    subtitle = "Solid = samples retained; dashed = sequences retained"
   )
 
 fig_retention_region_climatezone <-
@@ -464,7 +465,7 @@ fig_retention_region_climatezone <-
   ggplot2::geom_line(
     data = dplyr::filter(
       data_retention_region_climatezone_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     linewidth = 0.8,
     linetype = "dashed",
@@ -473,7 +474,7 @@ fig_retention_region_climatezone <-
   ggplot2::geom_point(
     data = dplyr::filter(
       data_retention_region_climatezone_plot,
-      metric == "Datasets retained"
+      metric == "Sequences retained"
     ),
     size = 1.6,
     alpha = 0.5
@@ -509,7 +510,7 @@ fig_retention_region_climatezone <-
     x = "Applied grain threshold",
     y = "Proportion retained relative to region-climatezone baseline",
     title = "Retention by region within each continental group",
-    subtitle = "Solid = samples retained; dashed = datasets retained"
+    subtitle = "Solid = samples retained; dashed = sequences retained"
   )
 
 #----------------------------------------------------------#
