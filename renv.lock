@@ -7503,6 +7503,11 @@
       "Maintainer": "Charlie Gao <charlie.gao@posit.co>",
       "Repository": "CRAN"
     },
+    "ncdf4": {
+      "Package": "ncdf4",
+      "Version": "1.24",
+      "Source": "Repository"
+    },
     "nleqslv": {
       "Package": "nleqslv",
       "Version": "3.3.7",

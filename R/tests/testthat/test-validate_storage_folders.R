@@ -8,6 +8,10 @@ testthat::test_that("validate_storage_folders() accepts expected tree", {
       "C14",
       "Climate",
       "Events",
+      "Human_impact",
+      "Human_impact/External_proxies",
+      "Human_impact/External_proxies/KK10",
+      "Human_impact/External_proxies/HYDE_3_2",
       "Temporal_models",
       "Temporal_models/General_trends",
       "Spatial",
@@ -75,6 +79,11 @@ testthat::test_that(
 
   testthat::expect_true(
     dir.exists(file.path(root_dir, "Temporal_models", "General_trends"))
+  )
+  testthat::expect_true(
+    dir.exists(
+      file.path(root_dir, "Human_impact", "External_proxies", "KK10")
+    )
   )
   }
 )

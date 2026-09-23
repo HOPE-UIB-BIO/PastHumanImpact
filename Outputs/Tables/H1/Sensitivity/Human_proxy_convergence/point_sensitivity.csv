@@ -1,0 +1,13 @@
+scope_type,scope,comparison_proxy,bin_count_requested,matched_bins,minimum_bin_datasets,minimum_bin_ages,eligible,kendall_tau
+overall,Overall,hyde,10,10,326,13,TRUE,0.6444444444444445
+overall,Overall,kk10,10,10,326,13,TRUE,0.4944132324730442
+region,Asia,hyde,10,9,22,7,TRUE,0.7777777777777779
+region,Asia,kk10,10,9,22,7,TRUE,0.1143323900950059
+region,Europe,hyde,10,10,181,11,TRUE,0.7333333333333333
+region,Europe,kk10,10,10,181,11,TRUE,0.4222222222222222
+region,Latin America,hyde,10,10,32,8,TRUE,0.37777777777777777
+region,Latin America,kk10,10,10,32,8,TRUE,-0.06666666666666667
+region,North America,hyde,10,10,151,13,TRUE,0.7333333333333333
+region,North America,kk10,10,10,151,13,TRUE,-0.1797866299901979
+region,Oceania,hyde,10,10,13,5,TRUE,-0.674199862463242
+region,Oceania,kk10,10,10,13,5,TRUE,0.15555555555555556

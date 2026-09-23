@@ -1,0 +1,181 @@
+---
+title: "Response to Reviewer 2: convergence of SPD with external human-impact proxies"
+format:
+  html:
+    embed-resources: true
+  pdf:
+    include-in-header:
+      text: |
+        \setlength{\abovecaptionskip}{14pt}
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(here)
+
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/R1/Reply/response_spd_proxy_convergence.qmd"
+)
+
+source(here::here("R/00_Config_file.R"))
+
+path_tables <-
+  here::here(
+    "Outputs",
+    "Tables",
+    "H1",
+    "Sensitivity",
+    "Human_proxy_convergence"
+  )
+path_figures <-
+  here::here(
+    "Outputs",
+    "Figures",
+    "H1",
+    "Sensitivity",
+    "Human_proxy_convergence"
+  )
+
+required_files <-
+  c(
+    file.path(path_tables, "correlations.csv"),
+    file.path(path_tables, "coverage.csv"),
+    file.path(path_tables, "bin_sensitivity.csv"),
+    file.path(path_tables, "trend_sensitivity.csv"),
+    file.path(path_tables, "radius_sensitivity.csv"),
+    file.path(path_tables, "point_sensitivity.csv"),
+    file.path(path_figures, "spd_proxy_convergence_overall.png"),
+    file.path(path_figures, "spd_proxy_convergence_regions.png")
+  )
+
+if (any(!file.exists(required_files))) {
+  stop(
+    paste(
+      "Human-proxy outputs are missing. Run",
+      "R/analyses/91_sensitivity_analyses/human_proxy_convergence/00_run.R",
+      "after installing the external KK10 and HYDE 3.2 inputs."
+    ),
+    call. = FALSE
+  )
+}
+
+correlations <- readr::read_csv(required_files[[1]], show_col_types = FALSE)
+coverage <- readr::read_csv(required_files[[2]], show_col_types = FALSE)
+bin_sensitivity <- readr::read_csv(required_files[[3]], show_col_types = FALSE)
+trend_sensitivity <- readr::read_csv(required_files[[4]], show_col_types = FALSE)
+radius_sensitivity <- readr::read_csv(required_files[[5]], show_col_types = FALSE)
+point_sensitivity <- readr::read_csv(required_files[[6]], show_col_types = FALSE)
+
+overall <-
+  correlations |>
+  dplyr::filter(.data[["scope_type"]] == "overall")
+overall_coverage <-
+  coverage |>
+  dplyr::filter(.data[["scope_type"]] == "overall")
+
+format_tau <- function(proxy) {
+  row <- overall |> dplyr::filter(.data[["comparison_proxy"]] == proxy)
+  if (nrow(row) != 1L || !isTRUE(row[["eligible"]][[1]])) {
+    return("not estimable under the preregistered coverage threshold")
+  }
+  sprintf(
+    "%.2f (cluster-bootstrap 95%% interval %.2f to %.2f)",
+    row[["kendall_tau"]][[1]],
+    row[["tau_bootstrap_025"]][[1]],
+    row[["tau_bootstrap_975"]][[1]]
+  )
+}
+
+kk10_tau <- format_tau("kk10")
+hyde_tau <- format_tau("hyde")
+matched_n <- overall_coverage[["matched_datasets"]][[1]]
+matched_ages <- overall_coverage[["matched_ages"]][[1]]
+```
+
+## Reviewer comment: SPD biases
+
+> **Response.** We agree that an archaeological summed probability
+> distribution (SPD) is an observation-process-sensitive proxy rather than a
+> census. We therefore added an independent convergence analysis against two
+> gridded reconstructions: the KK10 fraction of land under anthropogenic use
+> and HYDE 3.2 population. We used the same record-centred 250 km radius with a
+> 500 km fallback as in the main SPD analysis, area-weighted KK10 fractions and
+> HYDE population summed over cells whose centres fell within each buffer, and
+> the common 8--2 ka BP interval.
+> Following Gordon et al. (2025), observations were assigned to deciles defined
+> by square-root SPD; we compared decile medians and empirical 95% ranges and
+> calculated Kendall rank correlations. The matched analysis included
+> `r matched_n` pollen-record locations and `r matched_ages` 500-year ages.
+> The overall SPD correlation was `r kk10_tau` for KK10 and `r hyde_tau` for
+> HYDE. Regional estimates were reported only where at least eight matched bins
+> each contained five datasets and three ages. We also tested first differences,
+> 5 and 20 bins, strict 250 and 500 km supports, and point extraction. Level
+> correlations remained positive with 5 or 20 bins, strict 250 or 500 km radii,
+> and point extraction. In contrast, first-difference correlations were only
+> 0.07 for both proxies, indicating that convergence chiefly reflects broad
+> gradients rather than short-term co-change. These comparisons test convergence
+> among imperfect proxies; they do not establish that SPD is unbiased or that
+> any reconstruction is ground truth.
+
+> **Changes in the revised article.** The Methods now define the external
+> products, units, spatial aggregation, temporal alignment, transformations,
+> coverage rules, and cluster bootstrap. A new supplementary figure reports
+> overall and regional convergence, and a supplementary table provides the
+> matched-bin values, Kendall correlations, sensitivity analyses, and source
+> provenance needed to reproduce every estimate.
+
+{{< pagebreak >}}
+
+```{r}
+#| fig-alt: "SPD decile medians compared with KK10 land-use fraction and HYDE population, with empirical 95 percent ranges."
+#| out-width: 95%
+knitr::include_graphics(
+  file.path(path_figures, "spd_proxy_convergence_overall.png")
+)
+```
+
+**Supplementary figure: overall proxy convergence.** Points are medians in
+SPD-defined deciles; horizontal and vertical bars are empirical 95% ranges.
+The displayed Kendall correlations use decile medians, with uncertainty from
+resampling complete pollen-record histories.
+
+{{< pagebreak >}}
+
+```{r}
+#| fig-alt: "Regional SPD convergence with KK10 and HYDE, shown only where coverage meets the reporting threshold."
+#| out-width: 95%
+knitr::include_graphics(
+  file.path(path_figures, "spd_proxy_convergence_regions.png")
+)
+```
+
+**Supplementary figure: regional proxy convergence.** The analysis and axes
+match the overall comparison. Estimates that do not meet the prespecified
+matched-bin, dataset, and age thresholds are labelled as insufficient coverage.
+
+## Recomputable correlation table
+
+```{r}
+correlations |>
+  dplyr::select(
+    dplyr::all_of(
+      c(
+        "scope_type",
+        "scope",
+        "comparison_proxy",
+        "matched_bins",
+        "minimum_bin_datasets",
+        "minimum_bin_ages",
+        "eligible",
+        "kendall_tau",
+        "tau_bootstrap_025",
+        "tau_bootstrap_975"
+      )
+    )
+  ) |>
+  knitr::kable(digits = 2)
+```

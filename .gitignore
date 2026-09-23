@@ -20,3 +20,5 @@ Data/Temp/
 # VSCode settings
 .vscode/settings.json
 
+# Large external human-impact rasters
+Data/Human_impact/External_proxies/
