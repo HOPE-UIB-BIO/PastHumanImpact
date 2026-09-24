@@ -1,0 +1,66 @@
+analysis,region,age,n_unselected_mem,p_value,status
+temporal_joint_human_proxies,Europe,2000,74,0.001,estimated
+temporal_joint_human_proxies,Europe,2500,75,0.001,estimated
+temporal_joint_human_proxies,Europe,3000,71,0.001,estimated
+temporal_joint_human_proxies,Europe,3500,71,0.001,estimated
+temporal_joint_human_proxies,Europe,4000,71,0.001,estimated
+temporal_joint_human_proxies,Europe,4500,73,0.001,estimated
+temporal_joint_human_proxies,Europe,5000,74,0.001,estimated
+temporal_joint_human_proxies,Europe,5500,71,0.001,estimated
+temporal_joint_human_proxies,Europe,6000,75,0.001,estimated
+temporal_joint_human_proxies,Europe,6500,72,0.001,estimated
+temporal_joint_human_proxies,Europe,7000,78,0.001,estimated
+temporal_joint_human_proxies,Europe,7500,74,0.001,estimated
+temporal_joint_human_proxies,Europe,8000,73,0.001,estimated
+temporal_joint_human_proxies,North America,2000,123,0.001,estimated
+temporal_joint_human_proxies,North America,2500,122,0.001,estimated
+temporal_joint_human_proxies,North America,3000,123,0.001,estimated
+temporal_joint_human_proxies,North America,3500,125,0.001,estimated
+temporal_joint_human_proxies,North America,4000,125,0.001,estimated
+temporal_joint_human_proxies,North America,4500,126,0.001,estimated
+temporal_joint_human_proxies,North America,5000,124,0.001,estimated
+temporal_joint_human_proxies,North America,5500,126,0.001,estimated
+temporal_joint_human_proxies,North America,6000,125,0.001,estimated
+temporal_joint_human_proxies,North America,6500,125,0.001,estimated
+temporal_joint_human_proxies,North America,7000,122,0.001,estimated
+temporal_joint_human_proxies,North America,7500,124,0.001,estimated
+temporal_joint_human_proxies,North America,8000,118,0.001,estimated
+temporal_joint_human_proxies,Latin America,2000,10,0.074,estimated
+temporal_joint_human_proxies,Latin America,2500,10,0.05,estimated
+temporal_joint_human_proxies,Latin America,3000,10,0.04,estimated
+temporal_joint_human_proxies,Latin America,4000,10,0.148,estimated
+temporal_joint_human_proxies,Latin America,4500,9,0.052,estimated
+temporal_joint_human_proxies,Latin America,5000,9,0.213,estimated
+temporal_joint_human_proxies,Latin America,5500,9,0.011,estimated
+temporal_joint_human_proxies,Latin America,6000,9,0.01,estimated
+temporal_joint_human_proxies,Latin America,6500,10,0.035,estimated
+temporal_joint_human_proxies,Latin America,7000,10,0.199,estimated
+temporal_joint_human_proxies,Latin America,7500,9,0.251,estimated
+temporal_joint_human_proxies,Latin America,8000,8,0.366,estimated
+temporal_joint_human_proxies,Latin America,3500,9,0.131,estimated
+temporal_joint_human_proxies,Oceania,2000,4,0.401,estimated
+temporal_joint_human_proxies,Oceania,2500,4,0.183,estimated
+temporal_joint_human_proxies,Oceania,3000,5,0.596,estimated
+temporal_joint_human_proxies,Oceania,3500,5,0.308,estimated
+temporal_joint_human_proxies,Oceania,4000,5,0.609,estimated
+temporal_joint_human_proxies,Oceania,4500,5,0.547,estimated
+temporal_joint_human_proxies,Oceania,5000,5,0.388,estimated
+temporal_joint_human_proxies,Oceania,5500,5,0.161,estimated
+temporal_joint_human_proxies,Oceania,6000,5,0.599,estimated
+temporal_joint_human_proxies,Oceania,7000,5,0.189,estimated
+temporal_joint_human_proxies,Oceania,7500,5,0.06,estimated
+temporal_joint_human_proxies,Asia,2000,26,0.266,estimated
+temporal_joint_human_proxies,Asia,2500,26,0.198,estimated
+temporal_joint_human_proxies,Asia,3000,27,0.638,estimated
+temporal_joint_human_proxies,Asia,3500,26,0.774,estimated
+temporal_joint_human_proxies,Asia,4000,24,0.05,estimated
+temporal_joint_human_proxies,Asia,4500,25,0.08,estimated
+temporal_joint_human_proxies,Asia,5000,25,0.142,estimated
+temporal_joint_human_proxies,Asia,5500,26,0.13,estimated
+temporal_joint_human_proxies,Asia,6000,26,0.163,estimated
+temporal_joint_human_proxies,Asia,6500,23,0.438,estimated
+temporal_joint_human_proxies,Asia,7000,24,0.138,estimated
+temporal_joint_human_proxies,Asia,7500,22,0.462,estimated
+temporal_joint_human_proxies,Asia,8000,22,0.444,estimated
+temporal_joint_human_proxies,Oceania,6500,5,0.419,estimated
+temporal_joint_human_proxies,Oceania,8000,4,0.177,estimated

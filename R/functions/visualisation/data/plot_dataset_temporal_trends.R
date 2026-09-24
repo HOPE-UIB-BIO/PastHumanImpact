@@ -153,7 +153,7 @@ plot_dataset_temporal_trends <- function(
     dplyr::distinct() %>%
     dplyr::mutate(
       colour_group = dplyr::case_when(
-        variable == "spd" ~ "Human",
+        variable %in% c("spd", "kk10", "hyde") ~ "Human",
         variable %in% c(
           "temp_annual",
           "temp_cold",
@@ -170,7 +170,8 @@ plot_dataset_temporal_trends <- function(
   data_raw_plot <-
     data_raw %>%
     dplyr::filter(
-      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+      !.data[["variable"]] %in% c("spd", "kk10", "hyde") |
+        .data[["age"]] >= 2000
     ) %>%
     dplyr::left_join(
       data_colour_groups,
@@ -179,7 +180,8 @@ plot_dataset_temporal_trends <- function(
   data_observed_plot <-
     data_observed %>%
     dplyr::filter(
-      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+      !.data[["variable"]] %in% c("spd", "kk10", "hyde") |
+        .data[["age"]] >= 2000
     ) %>%
     dplyr::left_join(
       data_colour_groups,
@@ -188,7 +190,8 @@ plot_dataset_temporal_trends <- function(
   data_predictions_plot <-
     data_predictions %>%
     dplyr::filter(
-      .data[["variable"]] != "spd" | .data[["age"]] >= 2000
+      !.data[["variable"]] %in% c("spd", "kk10", "hyde") |
+        .data[["age"]] >= 2000
     ) %>%
     dplyr::left_join(
       data_colour_groups,

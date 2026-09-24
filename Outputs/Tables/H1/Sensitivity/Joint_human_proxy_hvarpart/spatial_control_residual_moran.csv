@@ -1,0 +1,586 @@
+analysis,region,age,value,distance_km,n_records,n_connected,n_edges,moran_i,expected_i,p_greater,positive_autocorrelation,permutations,status,spatial_scope
+temporal_joint_human_proxies,Europe,2000,residual_axis_1,250,389,384,4807,0.015078920559786662,-0.002577319587628866,0.095,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2000,residual_axis_2,250,389,384,4807,0.08942958906660851,-0.002577319587628866,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2000,residual_axis_3,250,389,384,4807,-0.00977871634202242,-0.002577319587628866,0.694,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2000,residual_axis_1,500,389,389,11586,-0.0013212942889528874,-0.002577319587628866,0.336,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2000,residual_axis_2,500,389,389,11586,0.01427537625910357,-0.002577319587628866,0.025,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2000,residual_axis_3,500,389,389,11586,-0.006320045857261889,-0.002577319587628866,0.666,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2000,residual_axis_1,411.41119655714897,389,389,9138,-0.00428297243289309,-0.002577319587628866,0.516,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,2000,residual_axis_2,411.41119655714897,389,389,9138,0.03354070863501211,-0.002577319587628866,0.002,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,2000,residual_axis_3,411.41119655714897,389,389,9138,-0.002880699790705376,-0.002577319587628866,0.46,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,2500,residual_axis_1,250,392,387,4861,0.0014134891506650833,-0.0025575447570332483,0.351,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2500,residual_axis_2,250,392,387,4861,0.07049394768595406,-0.0025575447570332483,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2500,residual_axis_3,250,392,387,4861,0.010999303410218162,-0.0025575447570332483,0.137,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,2500,residual_axis_1,500,392,392,11742,-0.0059838861451291655,-0.0025575447570332483,0.645,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2500,residual_axis_2,500,392,392,11742,0.01523824080408422,-0.0025575447570332483,0.021,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2500,residual_axis_3,500,392,392,11742,-0.0046593562222811925,-0.0025575447570332483,0.568,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,2500,residual_axis_1,411.41119655714897,392,392,9241,-0.011813756406020458,-0.0025575447570332483,0.883,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,2500,residual_axis_2,411.41119655714897,392,392,9241,0.02470058278733943,-0.0025575447570332483,0.006,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,2500,residual_axis_3,411.41119655714897,392,392,9241,8.880999879754429e-4,-0.0025575447570332483,0.297,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3000,residual_axis_1,250,387,382,4822,-0.012988934354092074,-0.0025906735751295338,0.779,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3000,residual_axis_2,250,387,382,4822,0.009706735931402602,-0.0025906735751295338,0.155,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3000,residual_axis_3,250,387,382,4822,-0.0011295139309096727,-0.0025906735751295338,0.391,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3000,residual_axis_1,500,387,387,11506,-0.013875520991133795,-0.0025906735751295338,0.973,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3000,residual_axis_2,500,387,387,11506,-0.010053782706694391,-0.0025906735751295338,0.859,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3000,residual_axis_3,500,387,387,11506,-0.013515335809407168,-0.0025906735751295338,0.957,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3000,residual_axis_1,412.1709840477786,387,387,9080,-0.0117009678343771,-0.0025906735751295338,0.869,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3000,residual_axis_2,412.1709840477786,387,387,9080,-0.01404520511428121,-0.0025906735751295338,0.942,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3000,residual_axis_3,412.1709840477786,387,387,9080,-0.010625392817159013,-0.0025906735751295338,0.82,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3500,residual_axis_1,250,382,376,4557,0.009082861421769462,-0.0026246719160104987,0.171,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3500,residual_axis_2,250,382,376,4557,0.05024183199437066,-0.0026246719160104987,0.002,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3500,residual_axis_3,250,382,376,4557,0.01029310285818355,-0.0026246719160104987,0.166,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,3500,residual_axis_1,500,382,382,11111,0.0027212436254197233,-0.0026246719160104987,0.214,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3500,residual_axis_2,500,382,382,11111,0.011857018580526077,-0.0026246719160104987,0.045,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3500,residual_axis_3,500,382,382,11111,3.800062069700101e-4,-0.0026246719160104987,0.297,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,3500,residual_axis_1,411.41119655714897,382,382,8704,-0.005917756316949303,-0.0026246719160104987,0.583,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3500,residual_axis_2,411.41119655714897,382,382,8704,0.02522116241096249,-0.0026246719160104987,0.009,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,3500,residual_axis_3,411.41119655714897,382,382,8704,0.006547512953952877,-0.0026246719160104987,0.162,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4000,residual_axis_1,250,387,382,4699,-0.014498124298984009,-0.0025906735751295338,0.839,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4000,residual_axis_2,250,387,382,4699,0.03129120546010669,-0.0025906735751295338,0.017,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4000,residual_axis_3,250,387,382,4699,-0.015863933484544117,-0.0025906735751295338,0.88,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4000,residual_axis_1,500,387,387,11382,2.6392120493960564e-5,-0.0025906735751295338,0.302,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4000,residual_axis_2,500,387,387,11382,-0.00551852306896788,-0.0025906735751295338,0.583,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4000,residual_axis_3,500,387,387,11382,-0.0015895722195492542,-0.0025906735751295338,0.399,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4000,residual_axis_1,411.41119655714897,387,387,8962,-0.010714967746290825,-0.0025906735751295338,0.836,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4000,residual_axis_2,411.41119655714897,387,387,8962,-7.04908311648553e-4,-0.0025906735751295338,0.364,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4000,residual_axis_3,411.41119655714897,387,387,8962,0.002192281018910483,-0.0025906735751295338,0.245,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4500,residual_axis_1,250,388,383,4799,0.0020592976403585182,-0.002583979328165375,0.322,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4500,residual_axis_2,250,388,383,4799,0.05110965755728188,-0.002583979328165375,0.005,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4500,residual_axis_3,250,388,383,4799,-0.03356358501883638,-0.002583979328165375,0.998,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,4500,residual_axis_1,500,388,388,11536,-8.964265067329462e-5,-0.002583979328165375,0.337,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4500,residual_axis_2,500,388,388,11536,0.0021200167817384606,-0.002583979328165375,0.227,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4500,residual_axis_3,500,388,388,11536,-0.01167986131084505,-0.002583979328165375,0.923,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,4500,residual_axis_1,411.41119655714897,388,388,9077,0.001124198978505029,-0.002583979328165375,0.308,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4500,residual_axis_2,411.41119655714897,388,388,9077,7.257332938381619e-4,-0.002583979328165375,0.294,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,4500,residual_axis_3,411.41119655714897,388,388,9077,-0.006317477886966305,-0.002583979328165375,0.641,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5000,residual_axis_1,250,382,378,4668,-8.076029901050499e-4,-0.0026246719160104987,0.38,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5000,residual_axis_2,250,382,378,4668,0.005328211335690143,-0.0026246719160104987,0.231,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5000,residual_axis_3,250,382,378,4668,-0.015495818501523491,-0.0026246719160104987,0.836,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5000,residual_axis_1,500,382,382,11342,0.004722870714335763,-0.0026246719160104987,0.17,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5000,residual_axis_2,500,382,382,11342,0.008261456511552386,-0.0026246719160104987,0.091,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5000,residual_axis_3,500,382,382,11342,-0.014033959652602424,-0.0026246719160104987,0.972,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5000,residual_axis_1,411.41119655714897,382,382,8905,0.0031823874885751665,-0.0026246719160104987,0.197,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5000,residual_axis_2,411.41119655714897,382,382,8905,0.008809920093951042,-0.0026246719160104987,0.097,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5000,residual_axis_3,411.41119655714897,382,382,8905,-0.011068393781454236,-0.0026246719160104987,0.842,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5500,residual_axis_1,250,385,379,4742,-0.004183880876735912,-0.0026041666666666665,0.517,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5500,residual_axis_2,250,385,379,4742,0.029003189021309737,-0.0026041666666666665,0.021,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5500,residual_axis_3,250,385,379,4742,0.015677309216626863,-0.0026041666666666665,0.108,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,5500,residual_axis_1,500,385,385,11283,0.0012787172469972167,-0.0026041666666666665,0.266,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5500,residual_axis_2,500,385,385,11283,-0.004147291090859027,-0.0026041666666666665,0.521,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5500,residual_axis_3,500,385,385,11283,-0.0025120107979413023,-0.0026041666666666665,0.444,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,5500,residual_axis_1,411.41119655714897,385,385,8874,-0.00444615960324406,-0.0026041666666666665,0.56,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5500,residual_axis_2,411.41119655714897,385,385,8874,0.0023852540214106756,-0.0026041666666666665,0.232,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,5500,residual_axis_3,411.41119655714897,385,385,8874,1.7570047255991523e-4,-0.0026041666666666665,0.318,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6000,residual_axis_1,250,387,383,4761,0.008458044561316946,-0.0025906735751295338,0.191,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6000,residual_axis_2,250,387,383,4761,0.012125673582856425,-0.0025906735751295338,0.121,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6000,residual_axis_3,250,387,383,4761,0.022433798656492598,-0.0025906735751295338,0.034,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6000,residual_axis_1,500,387,387,11494,0.006038792355865232,-0.0025906735751295338,0.115,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6000,residual_axis_2,500,387,387,11494,0.007555657993166649,-0.0025906735751295338,0.095,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6000,residual_axis_3,500,387,387,11494,0.0029581254591401697,-0.0025906735751295338,0.214,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6000,residual_axis_1,411.41119655714897,387,387,9043,0.0011333578960328354,-0.0025906735751295338,0.293,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6000,residual_axis_2,411.41119655714897,387,387,9043,0.019382674166241634,-0.0025906735751295338,0.018,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6000,residual_axis_3,411.41119655714897,387,387,9043,0.003631217246619674,-0.0025906735751295338,0.201,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6500,residual_axis_1,250,380,375,4471,0.024642517000399853,-0.002638522427440633,0.044,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6500,residual_axis_2,250,380,375,4471,0.004837768384399479,-0.002638522427440633,0.255,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6500,residual_axis_3,250,380,375,4471,0.026521777953194353,-0.002638522427440633,0.041,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,6500,residual_axis_1,500,380,380,10834,0.015041849009070895,-0.002638522427440633,0.025,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6500,residual_axis_2,500,380,380,10834,0.010215190015981401,-0.002638522427440633,0.064,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6500,residual_axis_3,500,380,380,10834,0.011726674586128027,-0.002638522427440633,0.047,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,6500,residual_axis_1,411.41119655714897,380,380,8519,0.01580916348804446,-0.002638522427440633,0.041,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6500,residual_axis_2,411.41119655714897,380,380,8519,0.015831713079025676,-0.002638522427440633,0.035,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,6500,residual_axis_3,411.41119655714897,380,380,8519,0.012815284150519387,-0.002638522427440633,0.07,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7000,residual_axis_1,250,388,383,4666,0.029916112770270908,-0.002583979328165375,0.017,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7000,residual_axis_2,250,388,383,4666,0.05873929978765155,-0.002583979328165375,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7000,residual_axis_3,250,388,383,4666,0.01565256880699449,-0.002583979328165375,0.092,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7000,residual_axis_1,500,388,388,11242,0.016884181334853608,-0.002583979328165375,0.02,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7000,residual_axis_2,500,388,388,11242,0.01904498633367802,-0.002583979328165375,0.015,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7000,residual_axis_3,500,388,388,11242,0.008436592046780976,-0.002583979328165375,0.084,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7000,residual_axis_1,411.41119655714897,388,388,8862,0.024981915251869918,-0.002583979328165375,0.012,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7000,residual_axis_2,411.41119655714897,388,388,8862,0.03887106712717202,-0.002583979328165375,0.001,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7000,residual_axis_3,411.41119655714897,388,388,8862,0.004756129234438325,-0.002583979328165375,0.211,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7500,residual_axis_1,250,383,377,4622,0.030821662174413695,-0.002617801047120419,0.019,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7500,residual_axis_2,250,383,377,4622,0.07716975941147404,-0.002617801047120419,0.002,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7500,residual_axis_3,250,383,377,4622,0.02951740377739441,-0.002617801047120419,0.016,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,7500,residual_axis_1,500,383,383,11044,0.004387812777540654,-0.002617801047120419,0.163,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7500,residual_axis_2,500,383,383,11044,0.037265234176247684,-0.002617801047120419,0.002,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7500,residual_axis_3,500,383,383,11044,0.004371197384991631,-0.002617801047120419,0.167,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,7500,residual_axis_1,411.41119655714897,383,383,8713,0.02146661353292789,-0.002617801047120419,0.016,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7500,residual_axis_2,411.41119655714897,383,383,8713,0.054027585684761716,-0.002617801047120419,0.002,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,7500,residual_axis_3,411.41119655714897,383,383,8713,0.008997674646287538,-0.002617801047120419,0.088,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,8000,residual_axis_1,250,376,371,4669,0.011646422006061563,-0.0026666666666666666,0.128,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,8000,residual_axis_2,250,376,371,4669,0.013646505433517843,-0.0026666666666666666,0.108,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,8000,residual_axis_3,250,376,371,4669,-0.00838417219462142,-0.0026666666666666666,0.62,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Europe,8000,residual_axis_1,500,376,376,10824,0.0031675282543020943,-0.0026666666666666666,0.188,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,8000,residual_axis_2,500,376,376,10824,0.0010680853070556748,-0.0026666666666666666,0.256,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,8000,residual_axis_3,500,376,376,10824,-0.006083713229183647,-0.0026666666666666666,0.629,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Europe,8000,residual_axis_1,411.41119655714897,376,376,8607,0.01923957973670516,-0.0026666666666666666,0.02,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,8000,residual_axis_2,411.41119655714897,376,376,8607,0.010468306363713787,-0.0026666666666666666,0.076,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Europe,8000,residual_axis_3,411.41119655714897,376,376,8607,-0.011406405608531593,-0.0026666666666666666,0.856,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2000,residual_axis_1,250,537,520,3429,0.2602451615767069,-0.0018656716417910447,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2000,residual_axis_2,250,537,520,3429,0.046623384439548395,-0.0018656716417910447,0.011,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2000,residual_axis_3,250,537,520,3429,-0.004420117692503087,-0.0018656716417910447,0.535,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2000,residual_axis_1,500,537,536,9931,0.13615787655806366,-0.0018656716417910447,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2000,residual_axis_2,500,537,536,9931,-0.013968155303201979,-0.0018656716417910447,0.916,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2000,residual_axis_3,500,537,536,9931,3.5644009384050126e-4,-0.0018656716417910447,0.368,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2000,residual_axis_1,890.1172404285654,537,537,22591,0.005752366588265108,-0.0018656716417910447,0.098,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2000,residual_axis_2,890.1172404285654,537,537,22591,-0.0037598260520053735,-0.0018656716417910447,0.546,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2000,residual_axis_3,890.1172404285654,537,537,22591,-0.00956767151242766,-0.0018656716417910447,0.954,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2500,residual_axis_1,250,531,514,3377,0.28327272495363565,-0.0018867924528301887,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2500,residual_axis_2,250,531,514,3377,0.05987115538547392,-0.0018867924528301887,0.004,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2500,residual_axis_3,250,531,514,3377,-9.611569612316537e-4,-0.0018867924528301887,0.45,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,2500,residual_axis_1,500,531,530,9774,0.12532712989044056,-0.0018867924528301887,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2500,residual_axis_2,500,531,530,9774,-0.007422258829552212,-0.0018867924528301887,0.714,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2500,residual_axis_3,500,531,530,9774,0.005025123141045831,-0.0018867924528301887,0.225,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,2500,residual_axis_1,890.1172404285654,531,531,22239,0.00856764372689434,-0.0018867924528301887,0.045,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2500,residual_axis_2,890.1172404285654,531,531,22239,-2.527672048251045e-4,-0.0018867924528301887,0.339,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,2500,residual_axis_3,890.1172404285654,531,531,22239,-0.004376545488677281,-0.0018867924528301887,0.647,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3000,residual_axis_1,250,530,514,3418,0.2668104951374104,-0.001890359168241966,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3000,residual_axis_2,250,530,514,3418,0.061935781316288116,-0.001890359168241966,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3000,residual_axis_3,250,530,514,3418,0.022079297814395774,-0.001890359168241966,0.08,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3000,residual_axis_1,500,530,529,9870,0.11280310885029443,-0.001890359168241966,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3000,residual_axis_2,500,530,529,9870,-8.319571984028377e-5,-0.001890359168241966,0.36,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3000,residual_axis_3,500,530,529,9870,4.595882575786815e-4,-0.001890359168241966,0.351,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3000,residual_axis_1,890.1172404285654,530,530,22356,0.0017040925545909968,-0.001890359168241966,0.238,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3000,residual_axis_2,890.1172404285654,530,530,22356,0.0033123878345335377,-0.001890359168241966,0.148,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3000,residual_axis_3,890.1172404285654,530,530,22356,-0.00834262641238409,-0.001890359168241966,0.912,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3500,residual_axis_1,250,534,517,3480,0.3613199701923337,-0.001876172607879925,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3500,residual_axis_2,250,534,517,3480,0.06711180724922634,-0.001876172607879925,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3500,residual_axis_3,250,534,517,3480,0.041838710969878075,-0.001876172607879925,0.014,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,3500,residual_axis_1,500,534,533,10120,0.1543985497548232,-0.001876172607879925,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3500,residual_axis_2,500,534,533,10120,0.017020471436732288,-0.001876172607879925,0.044,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3500,residual_axis_3,500,534,533,10120,-0.0034146521988168968,-0.001876172607879925,0.551,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,3500,residual_axis_1,890.1172404285654,534,534,22803,0.007908767861080931,-0.001876172607879925,0.059,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3500,residual_axis_2,890.1172404285654,534,534,22803,0.003249315174109668,-0.001876172607879925,0.145,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,3500,residual_axis_3,890.1172404285654,534,534,22803,-0.007133650883216262,-0.001876172607879925,0.853,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4000,residual_axis_1,250,542,526,3538,0.3356528875511849,-0.0018484288354898336,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4000,residual_axis_2,250,542,526,3538,0.042563786471044335,-0.0018484288354898336,0.019,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4000,residual_axis_3,250,542,526,3538,0.039687281998087555,-0.0018484288354898336,0.011,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4000,residual_axis_1,500,542,541,10235,0.15025185612723696,-0.0018484288354898336,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4000,residual_axis_2,500,542,541,10235,0.007626600984069098,-0.0018484288354898336,0.16,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4000,residual_axis_3,500,542,541,10235,-0.007118173090742274,-0.0018484288354898336,0.731,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4000,residual_axis_1,890.1172404285654,542,542,23202,0.0067710583341131225,-0.0018484288354898336,0.065,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4000,residual_axis_2,890.1172404285654,542,542,23202,0.002425513402372497,-0.0018484288354898336,0.204,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4000,residual_axis_3,890.1172404285654,542,542,23202,-0.00902239131424216,-0.0018484288354898336,0.933,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4500,residual_axis_1,250,538,521,3508,0.3686254035543116,-0.00186219739292365,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4500,residual_axis_2,250,538,521,3508,0.03854421931975999,-0.00186219739292365,0.021,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4500,residual_axis_3,250,538,521,3508,0.05758295435477022,-0.00186219739292365,0.003,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,4500,residual_axis_1,500,538,537,10124,0.1463884616347089,-0.00186219739292365,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4500,residual_axis_2,500,538,537,10124,0.007048821887348036,-0.00186219739292365,0.169,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4500,residual_axis_3,500,538,537,10124,-0.004456226136383995,-0.00186219739292365,0.591,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,4500,residual_axis_1,890.1172404285654,538,538,22842,5.503347272545071e-4,-0.00186219739292365,0.286,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4500,residual_axis_2,890.1172404285654,538,538,22842,0.003630134309332146,-0.00186219739292365,0.158,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,4500,residual_axis_3,890.1172404285654,538,538,22842,-0.011801823817509369,-0.00186219739292365,0.99,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5000,residual_axis_1,250,536,519,3516,0.36409705722329394,-0.001869158878504673,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5000,residual_axis_2,250,536,519,3516,0.028359928778874863,-0.001869158878504673,0.037,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5000,residual_axis_3,250,536,519,3516,0.01670717036790364,-0.001869158878504673,0.136,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5000,residual_axis_1,500,536,535,10177,0.1177984764960713,-0.001869158878504673,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5000,residual_axis_2,500,536,535,10177,-0.004376706533708543,-0.001869158878504673,0.587,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5000,residual_axis_3,500,536,535,10177,-0.017066512768888674,-0.001869158878504673,0.974,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5000,residual_axis_1,890.1172404285654,536,536,22954,5.662031711650273e-4,-0.001869158878504673,0.295,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5000,residual_axis_2,890.1172404285654,536,536,22954,-6.328541299929805e-5,-0.001869158878504673,0.292,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5000,residual_axis_3,890.1172404285654,536,536,22954,-0.012789875862249438,-0.001869158878504673,0.994,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5500,residual_axis_1,250,541,524,3556,0.32404862030856274,-0.001851851851851852,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5500,residual_axis_2,250,541,524,3556,0.05232020889007285,-0.001851851851851852,0.004,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5500,residual_axis_3,250,541,524,3556,0.04075396197588452,-0.001851851851851852,0.01,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,5500,residual_axis_1,500,541,540,10326,0.09754019737800257,-0.001851851851851852,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5500,residual_axis_2,500,541,540,10326,0.006913132677127513,-0.001851851851851852,0.165,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5500,residual_axis_3,500,541,540,10326,-0.013574033343596774,-0.001851851851851852,0.909,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,5500,residual_axis_1,890.1172404285654,541,541,23293,-0.006284148123135342,-0.001851851851851852,0.777,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5500,residual_axis_2,890.1172404285654,541,541,23293,4.0835077452604625e-4,-0.001851851851851852,0.275,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,5500,residual_axis_3,890.1172404285654,541,541,23293,-0.012973550596662527,-0.001851851851851852,0.998,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6000,residual_axis_1,250,532,515,3412,0.3101330970811852,-0.0018832391713747645,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6000,residual_axis_2,250,532,515,3412,0.07098307588494202,-0.0018832391713747645,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6000,residual_axis_3,250,532,515,3412,0.06146350030002271,-0.0018832391713747645,0.003,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6000,residual_axis_1,500,532,531,9801,0.09879771995470962,-0.0018832391713747645,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6000,residual_axis_2,500,532,531,9801,-0.001256758819477427,-0.0018832391713747645,0.417,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6000,residual_axis_3,500,532,531,9801,-0.007557176187391068,-0.0018832391713747645,0.711,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6000,residual_axis_1,890.1172404285654,532,532,22358,-0.00638869555099368,-0.0018832391713747645,0.777,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6000,residual_axis_2,890.1172404285654,532,532,22358,5.030313719529489e-4,-0.0018832391713747645,0.304,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6000,residual_axis_3,890.1172404285654,532,532,22358,-0.01687483291623222,-0.0018832391713747645,1,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6500,residual_axis_1,250,540,522,3486,0.26605070902063144,-0.0018552875695732839,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6500,residual_axis_2,250,540,522,3486,0.056586766431628834,-0.0018552875695732839,0.003,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6500,residual_axis_3,250,540,522,3486,0.07038030778202266,-0.0018552875695732839,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,6500,residual_axis_1,500,540,539,10159,0.07661800802510137,-0.0018552875695732839,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6500,residual_axis_2,500,540,539,10159,-0.007000928653238321,-0.0018552875695732839,0.684,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6500,residual_axis_3,500,540,539,10159,0.007459346333291047,-0.0018552875695732839,0.143,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,6500,residual_axis_1,890.1172404285654,540,540,23035,-0.008830339112709737,-0.0018552875695732839,0.907,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6500,residual_axis_2,890.1172404285654,540,540,23035,-0.005985400617984319,-0.0018552875695732839,0.779,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,6500,residual_axis_3,890.1172404285654,540,540,23035,-0.005919077188058923,-0.0018552875695732839,0.758,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7000,residual_axis_1,250,537,520,3458,0.26337469667505925,-0.0018656716417910447,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7000,residual_axis_2,250,537,520,3458,0.042595504628182415,-0.0018656716417910447,0.015,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7000,residual_axis_3,250,537,520,3458,0.03851895186305573,-0.0018656716417910447,0.017,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7000,residual_axis_1,500,537,536,9981,0.06439998518723118,-0.0018656716417910447,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7000,residual_axis_2,500,537,536,9981,-0.008044061978484666,-0.0018656716417910447,0.721,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7000,residual_axis_3,500,537,536,9981,0.009097440939216682,-0.0018656716417910447,0.117,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7000,residual_axis_1,890.1172404285654,537,537,22586,-0.007598410757437722,-0.0018656716417910447,0.856,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7000,residual_axis_2,890.1172404285654,537,537,22586,-0.009039057706107188,-0.0018656716417910447,0.924,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7000,residual_axis_3,890.1172404285654,537,537,22586,0.00600662844615112,-0.0018656716417910447,0.081,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7500,residual_axis_1,250,539,522,3483,0.3449098143367173,-0.0018587360594795538,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7500,residual_axis_2,250,539,522,3483,0.04807077317483719,-0.0018587360594795538,0.006,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7500,residual_axis_3,250,539,522,3483,0.031829484723901846,-0.0018587360594795538,0.036,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,7500,residual_axis_1,500,539,538,10156,0.057058658516497475,-0.0018587360594795538,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7500,residual_axis_2,500,539,538,10156,-0.009805385339771112,-0.0018587360594795538,0.828,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7500,residual_axis_3,500,539,538,10156,0.009143053919213606,-0.0018587360594795538,0.116,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,7500,residual_axis_1,890.1172404285654,539,539,23089,-0.0034294174714611094,-0.0018587360594795538,0.574,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7500,residual_axis_2,890.1172404285654,539,539,23089,-0.008728148121967559,-0.0018587360594795538,0.92,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,7500,residual_axis_3,890.1172404285654,539,539,23089,0.008631453447583695,-0.0018587360594795538,0.039,TRUE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,8000,residual_axis_1,250,529,513,3389,0.2657715995560369,-0.001893939393939394,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,8000,residual_axis_2,250,529,513,3389,-0.006972076124213554,-0.001893939393939394,0.587,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,8000,residual_axis_3,250,529,513,3389,0.007394833712335169,-0.001893939393939394,0.3,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,North America,8000,residual_axis_1,500,529,527,9842,0.04556311371745681,-0.001893939393939394,0.001,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,8000,residual_axis_2,500,529,527,9842,-0.015181273298027756,-0.001893939393939394,0.942,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,8000,residual_axis_3,500,529,527,9842,2.0516064860926888e-4,-0.001893939393939394,0.37,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,North America,8000,residual_axis_1,890.1172404285654,529,529,22343,-0.013760806236724448,-0.001893939393939394,0.999,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,8000,residual_axis_2,890.1172404285654,529,529,22343,-0.007459111760122477,-0.001893939393939394,0.854,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,North America,8000,residual_axis_3,890.1172404285654,529,529,22343,-6.785466363336853e-4,-0.001893939393939394,0.372,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2000,residual_axis_1,250,79,68,162,0.294087078975428,-0.01282051282051282,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_2,250,79,68,162,0.14462947201148735,-0.01282051282051282,0.042,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_3,250,79,68,162,-0.04349096228307705,-0.01282051282051282,0.651,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_1,500,79,73,333,0.0027229757786865635,-0.01282051282051282,0.307,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_2,500,79,73,333,0.07420278955232779,-0.01282051282051282,0.051,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_3,500,79,73,333,-0.02131398735964267,-0.01282051282051282,0.512,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2000,residual_axis_1,1757.9132308461055,79,79,924,-0.03768264434306114,-0.01282051282051282,0.875,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2000,residual_axis_2,1757.9132308461055,79,79,924,-0.019105163944436513,-0.01282051282051282,0.528,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2000,residual_axis_3,1757.9132308461055,79,79,924,-0.04873053324243158,-0.01282051282051282,0.979,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2500,residual_axis_1,250,79,68,162,0.10420257122394863,-0.01282051282051282,0.085,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_2,250,79,68,162,0.07706375093046011,-0.01282051282051282,0.139,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_3,250,79,68,162,0.020675258302590444,-0.01282051282051282,0.301,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_1,500,79,73,333,0.01308295577481656,-0.01282051282051282,0.261,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_2,500,79,73,333,0.018207996373030718,-0.01282051282051282,0.235,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_3,500,79,73,333,0.0032194163474877882,-0.01282051282051282,0.309,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,2500,residual_axis_1,1757.9132308461055,79,79,924,-0.037350925369322524,-0.01282051282051282,0.882,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2500,residual_axis_2,1757.9132308461055,79,79,924,-0.006367065643051727,-0.01282051282051282,0.334,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,2500,residual_axis_3,1757.9132308461055,79,79,924,-0.05425036737914804,-0.01282051282051282,0.995,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3000,residual_axis_1,250,78,67,156,-0.06862470780251857,-0.012987012987012988,0.782,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_2,250,78,67,156,0.3553606936400854,-0.012987012987012988,0.001,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_3,250,78,67,156,-0.02523101333695597,-0.012987012987012988,0.513,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_1,500,78,72,317,-0.07469014210865264,-0.012987012987012988,0.919,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_2,500,78,72,317,0.11629439176402656,-0.012987012987012988,0.022,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_3,500,78,72,317,-0.06471495230129165,-0.012987012987012988,0.854,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3000,residual_axis_1,1757.9132308461055,78,78,893,-0.031207031117041588,-0.012987012987012988,0.755,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3000,residual_axis_2,1757.9132308461055,78,78,893,-0.025301063146472975,-0.012987012987012988,0.608,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3000,residual_axis_3,1757.9132308461055,78,78,893,-0.04489782703367664,-0.012987012987012988,0.958,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4000,residual_axis_1,250,77,67,160,0.05558651768107046,-0.013157894736842105,0.16,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_2,250,77,67,160,0.10120855705291139,-0.013157894736842105,0.084,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_3,250,77,67,160,-0.11873264272898135,-0.013157894736842105,0.949,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_1,500,77,71,313,-0.07086867776475364,-0.013157894736842105,0.925,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_2,500,77,71,313,-0.03770137629225986,-0.013157894736842105,0.672,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_3,500,77,71,313,-0.058757522454747656,-0.013157894736842105,0.83,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4000,residual_axis_1,1757.9132308461055,77,77,865,-0.020450237775651817,-0.013157894736842105,0.55,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4000,residual_axis_2,1757.9132308461055,77,77,865,-0.02929118882562672,-0.013157894736842105,0.714,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4000,residual_axis_3,1757.9132308461055,77,77,865,-0.03296178108595672,-0.013157894736842105,0.791,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4500,residual_axis_1,250,79,68,162,-0.05412309802076843,-0.01282051282051282,0.694,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_2,250,79,68,162,0.1597776433373744,-0.01282051282051282,0.025,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_3,250,79,68,162,-0.09160839849151894,-0.01282051282051282,0.87,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_1,500,79,73,333,-0.04368076162934766,-0.01282051282051282,0.7,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_2,500,79,73,333,0.0032216493426258552,-0.01282051282051282,0.334,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_3,500,79,73,333,-0.02539337251824047,-0.01282051282051282,0.563,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,4500,residual_axis_1,1757.9132308461055,79,79,924,-0.027266672151991432,-0.01282051282051282,0.7,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4500,residual_axis_2,1757.9132308461055,79,79,924,-0.04916127698901398,-0.01282051282051282,0.978,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,4500,residual_axis_3,1757.9132308461055,79,79,924,-0.007242217126777276,-0.01282051282051282,0.335,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5000,residual_axis_1,250,76,65,148,-0.1175716391578329,-0.013333333333333334,0.932,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_2,250,76,65,148,0.10114797365182591,-0.013333333333333334,0.085,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_3,250,76,65,148,-0.11846432858049757,-0.013333333333333334,0.942,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_1,500,76,70,294,-0.019362903951715586,-0.013333333333333334,0.478,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_2,500,76,70,294,-0.052472495285706515,-0.013333333333333334,0.765,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_3,500,76,70,294,-0.09274562869799677,-0.013333333333333334,0.961,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5000,residual_axis_1,1757.9132308461055,76,76,840,-0.014892601089977165,-0.013333333333333334,0.432,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5000,residual_axis_2,1757.9132308461055,76,76,840,-0.05334541979195443,-0.013333333333333334,0.985,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5000,residual_axis_3,1757.9132308461055,76,76,840,-0.039643214165131016,-0.013333333333333334,0.886,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5500,residual_axis_1,250,78,67,156,-0.05542953781015709,-0.012987012987012988,0.698,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_2,250,78,67,156,0.08237830154038292,-0.012987012987012988,0.091,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_3,250,78,67,156,-0.125288013910132,-0.012987012987012988,0.961,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_1,500,78,72,317,0.03039297342359066,-0.012987012987012988,0.183,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_2,500,78,72,317,-0.05432287699665596,-0.012987012987012988,0.782,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_3,500,78,72,317,-0.00735333765393402,-0.012987012987012988,0.415,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,5500,residual_axis_1,1757.9132308461055,78,78,893,-0.024690610423773105,-0.012987012987012988,0.599,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5500,residual_axis_2,1757.9132308461055,78,78,893,-0.03932977923323043,-0.012987012987012988,0.901,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,5500,residual_axis_3,1757.9132308461055,78,78,893,-0.008220484440519048,-0.012987012987012988,0.338,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6000,residual_axis_1,250,74,63,140,0.0029445307599936087,-0.0136986301369863,0.377,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_2,250,74,63,140,0.1879729652163483,-0.0136986301369863,0.014,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_3,250,74,63,140,-0.16759857382048962,-0.0136986301369863,0.995,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_1,500,74,68,292,0.038335438754582986,-0.0136986301369863,0.155,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_2,500,74,68,292,0.039998491106521476,-0.0136986301369863,0.14,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_3,500,74,68,292,-0.06461065253182675,-0.0136986301369863,0.827,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6000,residual_axis_1,1757.9132308461055,74,74,800,-0.02686721449951025,-0.0136986301369863,0.639,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6000,residual_axis_2,1757.9132308461055,74,74,800,-0.01877627757967567,-0.0136986301369863,0.489,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6000,residual_axis_3,1757.9132308461055,74,74,800,-0.04522524473880317,-0.0136986301369863,0.938,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6500,residual_axis_1,250,74,62,141,0.09229820314469453,-0.0136986301369863,0.097,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_2,250,74,62,141,-0.0013693787298833283,-0.0136986301369863,0.392,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_3,250,74,62,141,-0.17139256898564306,-0.0136986301369863,0.992,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_1,500,74,68,290,0.028640496298923068,-0.0136986301369863,0.2,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_2,500,74,68,290,0.0194720960309776,-0.0136986301369863,0.259,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_3,500,74,68,290,-0.05479953783692174,-0.0136986301369863,0.773,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,6500,residual_axis_1,1757.9132308461055,74,74,815,-0.034322415821645344,-0.0136986301369863,0.766,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6500,residual_axis_2,1757.9132308461055,74,74,815,-0.02728986867903794,-0.0136986301369863,0.654,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,6500,residual_axis_3,1757.9132308461055,74,74,815,-0.03224968300594475,-0.0136986301369863,0.738,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7000,residual_axis_1,250,73,61,133,0.09547839701409445,-0.013888888888888888,0.097,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_2,250,73,61,133,0.04079322817004153,-0.013888888888888888,0.249,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_3,250,73,61,133,-0.16250965952578325,-0.013888888888888888,0.989,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_1,500,73,67,278,0.012614446497124001,-0.013888888888888888,0.278,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_2,500,73,67,278,0.0026690640164295327,-0.013888888888888888,0.305,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_3,500,73,67,278,-0.05380091492045417,-0.013888888888888888,0.77,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7000,residual_axis_1,1757.9132308461055,73,73,791,-0.0400682980167969,-0.013888888888888888,0.888,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7000,residual_axis_2,1757.9132308461055,73,73,791,-0.029621318776430372,-0.013888888888888888,0.688,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7000,residual_axis_3,1757.9132308461055,73,73,791,-0.027304016969220423,-0.013888888888888888,0.648,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7500,residual_axis_1,250,73,62,140,-0.045068830718497856,-0.013888888888888888,0.625,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_2,250,73,62,140,0.09155491835343738,-0.013888888888888888,0.105,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_3,250,73,62,140,-0.15593740550442717,-0.013888888888888888,0.983,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_1,500,73,68,290,-0.03038073989884132,-0.013888888888888888,0.584,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_2,500,73,68,290,0.017619770382050173,-0.013888888888888888,0.236,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_3,500,73,68,290,-0.07852827430770715,-0.013888888888888888,0.91,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,7500,residual_axis_1,1757.9132308461055,73,73,794,-0.02866620497318986,-0.013888888888888888,0.671,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7500,residual_axis_2,1757.9132308461055,73,73,794,-0.039676559991497384,-0.013888888888888888,0.893,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,7500,residual_axis_3,1757.9132308461055,73,73,794,-0.03380583847211063,-0.013888888888888888,0.766,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,8000,residual_axis_1,250,67,60,133,-0.010604647795521638,-0.015151515151515152,0.403,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_2,250,67,60,133,-0.04526898702931869,-0.015151515151515152,0.619,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_3,250,67,60,133,-0.07420501942185015,-0.015151515151515152,0.75,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_1,500,67,63,255,-0.07066673715420049,-0.015151515151515152,0.859,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_2,500,67,63,255,-0.01847452360709514,-0.015151515151515152,0.481,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_3,500,67,63,255,-0.053799346456053665,-0.015151515151515152,0.75,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,8000,residual_axis_1,2088.890382773922,67,67,817,-0.03041815537889727,-0.015151515151515152,0.724,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,8000,residual_axis_2,2088.890382773922,67,67,817,-0.030955648263956102,-0.015151515151515152,0.721,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,8000,residual_axis_3,2088.890382773922,67,67,817,-0.028858656040343145,-0.015151515151515152,0.654,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3500,residual_axis_1,250,77,67,160,-0.08973412555114024,-0.013157894736842105,0.864,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_2,250,77,67,160,0.254301962313529,-0.013157894736842105,0.003,TRUE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_3,250,77,67,160,-0.09957478421304228,-0.013157894736842105,0.901,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_1,500,77,72,328,-0.08113641040369234,-0.013157894736842105,0.947,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_2,500,77,72,328,-0.004305589844736355,-0.013157894736842105,0.38,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_3,500,77,72,328,-0.03773019350640785,-0.013157894736842105,0.645,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Latin America,3500,residual_axis_1,1757.9132308461055,77,77,900,-0.04083611628314685,-0.013157894736842105,0.927,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3500,residual_axis_2,1757.9132308461055,77,77,900,-0.038219834240028346,-0.013157894736842105,0.893,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Latin America,3500,residual_axis_3,1757.9132308461055,77,77,900,-0.025840488717970282,-0.013157894736842105,0.65,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2000,residual_axis_1,250,37,32,102,-0.12547697693894427,-0.027777777777777776,0.927,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_2,250,37,32,102,-0.026036590192319825,-0.027777777777777776,0.436,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_3,250,37,32,102,-0.11050985485979647,-0.027777777777777776,0.881,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_1,500,37,36,158,-0.0754886580357908,-0.027777777777777776,0.808,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_2,500,37,36,158,-0.036616478939359196,-0.027777777777777776,0.494,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_3,500,37,36,158,-0.06827709927412672,-0.027777777777777776,0.732,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2000,residual_axis_1,1178.1024675848141,37,37,408,-0.04705548230435893,-0.027777777777777776,0.806,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2000,residual_axis_2,1178.1024675848141,37,37,408,-0.042583012925134243,-0.027777777777777776,0.74,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2000,residual_axis_3,1178.1024675848141,37,37,408,-0.014918801490396824,-0.027777777777777776,0.209,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2500,residual_axis_1,250,36,31,104,-0.10836256625486337,-0.02857142857142857,0.863,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_2,250,36,31,104,0.05627935756333964,-0.02857142857142857,0.141,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_3,250,36,31,104,-0.16951009687418378,-0.02857142857142857,0.997,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_1,500,36,35,158,-0.07745436097104832,-0.02857142857142857,0.814,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_2,500,36,35,158,0.015428493894077603,-0.02857142857142857,0.177,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_3,500,36,35,158,-0.1167623192248957,-0.02857142857142857,0.988,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,2500,residual_axis_1,1186.3481645965644,36,36,404,-0.030841289263429814,-0.02857142857142857,0.477,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2500,residual_axis_2,1186.3481645965644,36,36,404,-0.05090438892793973,-0.02857142857142857,0.917,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,2500,residual_axis_3,1186.3481645965644,36,36,404,-0.041626135376097294,-0.02857142857142857,0.73,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3000,residual_axis_1,250,38,33,108,-0.06754020270259325,-0.02702702702702703,0.648,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_2,250,38,33,108,-0.02710785303042701,-0.02702702702702703,0.479,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_3,250,38,33,108,-0.09059472649903189,-0.02702702702702703,0.776,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_1,500,38,37,165,-0.07707202641442104,-0.02702702702702703,0.833,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_2,500,38,37,165,0.020479009052795847,-0.02702702702702703,0.18,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_3,500,38,37,165,-0.06225939145858651,-0.02702702702702703,0.695,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3000,residual_axis_1,1178.1024675848141,38,38,433,-0.03408987355404564,-0.02702702702702703,0.604,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3000,residual_axis_2,1178.1024675848141,38,38,433,-0.04324408103743142,-0.02702702702702703,0.793,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3000,residual_axis_3,1178.1024675848141,38,38,433,-0.041199282622347906,-0.02702702702702703,0.742,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3500,residual_axis_1,250,38,33,108,-0.07329640107542748,-0.02702702702702703,0.69,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_2,250,38,33,108,-0.08348208174356687,-0.02702702702702703,0.754,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_3,250,38,33,108,-0.08829755965855306,-0.02702702702702703,0.79,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_1,500,38,37,165,-0.057272836080705304,-0.02702702702702703,0.666,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_2,500,38,37,165,-0.02500945087100126,-0.02702702702702703,0.407,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_3,500,38,37,165,-0.047476211336747724,-0.02702702702702703,0.606,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,3500,residual_axis_1,1178.1024675848141,38,38,433,-0.02319160931501574,-0.02702702702702703,0.33,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3500,residual_axis_2,1178.1024675848141,38,38,433,-0.030783662756665577,-0.02702702702702703,0.506,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,3500,residual_axis_3,1178.1024675848141,38,38,433,-0.03355805547421893,-0.02702702702702703,0.582,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4000,residual_axis_1,250,38,33,108,-0.06475062454304277,-0.02702702702702703,0.664,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_2,250,38,33,108,-0.07914491374658161,-0.02702702702702703,0.72,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_3,250,38,33,108,-0.13511786786414562,-0.02702702702702703,0.932,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_1,500,38,37,165,-0.09167687548863734,-0.02702702702702703,0.91,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_2,500,38,37,165,-0.023060266355171912,-0.02702702702702703,0.378,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_3,500,38,37,165,-0.06483508257979011,-0.02702702702702703,0.757,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4000,residual_axis_1,1178.1024675848141,38,38,433,-0.03178310087951768,-0.02702702702702703,0.516,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4000,residual_axis_2,1178.1024675848141,38,38,433,-0.032141403570204764,-0.02702702702702703,0.509,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4000,residual_axis_3,1178.1024675848141,38,38,433,-0.03361101291151399,-0.02702702702702703,0.552,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4500,residual_axis_1,250,38,33,108,-0.07270189103675136,-0.02702702702702703,0.709,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_2,250,38,33,108,-0.08316914615570016,-0.02702702702702703,0.769,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_3,250,38,33,108,-0.1406800190436231,-0.02702702702702703,0.97,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_1,500,38,37,165,-0.09872706709527662,-0.02702702702702703,0.937,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_2,500,38,37,165,-0.021285923332471157,-0.02702702702702703,0.395,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_3,500,38,37,165,-0.09482261432972063,-0.02702702702702703,0.931,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,4500,residual_axis_1,1178.1024675848141,38,38,433,-0.03685903672910524,-0.02702702702702703,0.646,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4500,residual_axis_2,1178.1024675848141,38,38,433,-0.03373950775278326,-0.02702702702702703,0.562,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,4500,residual_axis_3,1178.1024675848141,38,38,433,-0.035138009945022336,-0.02702702702702703,0.58,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5000,residual_axis_1,250,38,33,108,-0.017094199490164285,-0.02702702702702703,0.376,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_2,250,38,33,108,-0.04203615169941038,-0.02702702702702703,0.522,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_3,250,38,33,108,-0.15298891421431235,-0.02702702702702703,0.982,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_1,500,38,37,165,-0.093690297619864,-0.02702702702702703,0.926,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_2,500,38,37,165,0.010182718028882527,-0.02702702702702703,0.201,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_3,500,38,37,165,-0.08787740978332806,-0.02702702702702703,0.881,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5000,residual_axis_1,1178.1024675848141,38,38,433,-0.03436805209940412,-0.02702702702702703,0.606,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5000,residual_axis_2,1178.1024675848141,38,38,433,-0.047597989469624936,-0.02702702702702703,0.894,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5000,residual_axis_3,1178.1024675848141,38,38,433,-0.04086578912857548,-0.02702702702702703,0.73,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5500,residual_axis_1,250,37,32,98,-0.10997375054200768,-0.027777777777777776,0.864,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_2,250,37,32,98,-0.08347444772326512,-0.027777777777777776,0.724,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_3,250,37,32,98,-0.12434679770997917,-0.027777777777777776,0.881,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_1,500,37,36,151,-0.11405002828541369,-0.027777777777777776,0.964,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_2,500,37,36,151,-0.038152861828271434,-0.027777777777777776,0.5,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_3,500,37,36,151,-0.09049536818062479,-0.027777777777777776,0.888,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,5500,residual_axis_1,1178.1024675848141,37,37,404,-0.026708849004947834,-0.027777777777777776,0.393,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5500,residual_axis_2,1178.1024675848141,37,37,404,-0.0512372261331837,-0.027777777777777776,0.88,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,5500,residual_axis_3,1178.1024675848141,37,37,404,-0.043189772951997794,-0.027777777777777776,0.745,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6000,residual_axis_1,250,36,31,89,-0.10544558542179616,-0.02857142857142857,0.814,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_2,250,36,31,89,-0.13345013652749407,-0.02857142857142857,0.928,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_3,250,36,31,89,-0.0828688268896102,-0.02857142857142857,0.725,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_1,500,36,35,134,-0.09858083842491525,-0.02857142857142857,0.881,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_2,500,36,35,134,-0.07550383321333695,-0.02857142857142857,0.732,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_3,500,36,35,134,-0.05283128382924931,-0.02857142857142857,0.551,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6000,residual_axis_1,1178.1024675848141,36,36,374,-0.030432916397213683,-0.02857142857142857,0.411,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6000,residual_axis_2,1178.1024675848141,36,36,374,-0.05546343383247319,-0.02857142857142857,0.912,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6000,residual_axis_3,1178.1024675848141,36,36,374,-0.044857373560622,-0.02857142857142857,0.758,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7000,residual_axis_1,250,33,27,73,-0.18881781042905887,-0.03125,0.985,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_2,250,33,27,73,-0.01658932644356653,-0.03125,0.376,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_3,250,33,27,73,-0.22157837811317196,-0.03125,0.995,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_1,500,33,32,106,-0.1278222497392278,-0.03125,0.931,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_2,500,33,32,106,-0.07354657849183659,-0.03125,0.663,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_3,500,33,32,106,-0.09840152965617979,-0.03125,0.825,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7000,residual_axis_1,1178.1024675848141,33,33,314,-0.03142072924365276,-0.03125,0.432,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7000,residual_axis_2,1178.1024675848141,33,33,314,-0.02874506807544124,-0.03125,0.388,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7000,residual_axis_3,1178.1024675848141,33,33,314,-0.051138872862858786,-0.03125,0.793,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7500,residual_axis_1,250,33,27,73,-0.1892991837852762,-0.03125,0.982,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_2,250,33,27,73,0.02234701915308258,-0.03125,0.262,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_3,250,33,27,73,-0.1409134598456485,-0.03125,0.885,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_1,500,33,32,106,-0.1408706651819955,-0.03125,0.978,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_2,500,33,32,106,0.0045987757563559,-0.03125,0.255,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_3,500,33,32,106,-0.10176856002271056,-0.03125,0.809,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,7500,residual_axis_1,1178.1024675848141,33,33,314,-0.03043795534512151,-0.03125,0.388,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7500,residual_axis_2,1178.1024675848141,33,33,314,-0.035161747692274974,-0.03125,0.487,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,7500,residual_axis_3,1178.1024675848141,33,33,314,-0.05186005264179187,-0.03125,0.792,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2000,residual_axis_1,250,109,86,94,0.0470959899053729,-0.009259259259259259,0.274,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2000,residual_axis_2,250,109,86,94,0.07328480787372339,-0.009259259259259259,0.197,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2000,residual_axis_3,250,109,86,94,-0.05883750957246423,-0.009259259259259259,0.662,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2000,residual_axis_1,500,109,103,253,0.06428340900918315,-0.009259259259259259,0.133,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2000,residual_axis_2,500,109,103,253,-0.021065419783994826,-0.009259259259259259,0.541,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2000,residual_axis_3,500,109,103,253,0.024538310240003348,-0.009259259259259259,0.264,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2000,residual_axis_1,1277.5777531996366,109,109,907,-0.00691361678319612,-0.009259259259259259,0.415,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2000,residual_axis_2,1277.5777531996366,109,109,907,-0.032341641380945536,-0.009259259259259259,0.777,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2000,residual_axis_3,1277.5777531996366,109,109,907,-0.040043278965958724,-0.009259259259259259,0.883,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2500,residual_axis_1,250,108,82,95,0.08918637083931888,-0.009345794392523364,0.133,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2500,residual_axis_2,250,108,82,95,-0.09585632229286675,-0.009345794392523364,0.8,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2500,residual_axis_3,250,108,82,95,0.008292493321389392,-0.009345794392523364,0.404,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,2500,residual_axis_1,500,108,102,246,0.050695331000554525,-0.009345794392523364,0.163,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2500,residual_axis_2,500,108,102,246,-0.0788119201450496,-0.009345794392523364,0.886,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2500,residual_axis_3,500,108,102,246,0.0937981119626925,-0.009345794392523364,0.059,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,2500,residual_axis_1,1277.5777531996366,108,108,869,-0.006433195701175011,-0.009345794392523364,0.418,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2500,residual_axis_2,1277.5777531996366,108,108,869,-0.03989266784960335,-0.009345794392523364,0.846,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,2500,residual_axis_3,1277.5777531996366,108,108,869,-1.1127353523851898e-5,-0.009345794392523364,0.307,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3000,residual_axis_1,250,110,88,99,-0.071067169746246,-0.009174311926605505,0.732,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3000,residual_axis_2,250,110,88,99,0.04831540192232729,-0.009174311926605505,0.256,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3000,residual_axis_3,250,110,88,99,-0.023893623902399717,-0.009174311926605505,0.566,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3000,residual_axis_1,500,110,104,261,-0.0010922756197519884,-0.009174311926605505,0.416,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3000,residual_axis_2,500,110,104,261,-0.056606899004844155,-0.009174311926605505,0.784,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3000,residual_axis_3,500,110,104,261,0.10177490754724021,-0.009174311926605505,0.059,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3000,residual_axis_1,1277.5777531996366,110,110,922,-0.01598289225532544,-0.009174311926605505,0.534,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3000,residual_axis_2,1277.5777531996366,110,110,922,-0.0519709458336443,-0.009174311926605505,0.966,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3000,residual_axis_3,1277.5777531996366,110,110,922,-0.02273479016002611,-0.009174311926605505,0.697,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3500,residual_axis_1,250,107,85,97,-0.15201770994034638,-0.009433962264150943,0.935,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3500,residual_axis_2,250,107,85,97,0.038533103556011555,-0.009433962264150943,0.301,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3500,residual_axis_3,250,107,85,97,-0.17522661583619095,-0.009433962264150943,0.961,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,3500,residual_axis_1,500,107,101,248,-0.041177968059100865,-0.009433962264150943,0.685,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3500,residual_axis_2,500,107,101,248,-0.06706333009131465,-0.009433962264150943,0.849,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3500,residual_axis_3,500,107,101,248,0.004833010304303582,-0.009433962264150943,0.376,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,3500,residual_axis_1,1277.5777531996366,107,107,885,-0.030376811193955945,-0.009433962264150943,0.752,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3500,residual_axis_2,1277.5777531996366,107,107,885,-0.04816029000780454,-0.009433962264150943,0.935,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,3500,residual_axis_3,1277.5777531996366,107,107,885,-0.042281040191771535,-0.009433962264150943,0.882,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4000,residual_axis_1,250,108,85,97,-0.028091075582692276,-0.009345794392523364,0.565,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4000,residual_axis_2,250,108,85,97,0.1247549235676731,-0.009345794392523364,0.079,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4000,residual_axis_3,250,108,85,97,0.04662437128630306,-0.009345794392523364,0.27,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4000,residual_axis_1,500,108,102,253,0.023823745185393933,-0.009345794392523364,0.274,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4000,residual_axis_2,500,108,102,253,0.0045177473183788865,-0.009345794392523364,0.377,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4000,residual_axis_3,500,108,102,253,0.11400239611692026,-0.009345794392523364,0.032,TRUE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4000,residual_axis_1,1277.5777531996366,108,108,890,-0.05274867498916589,-0.009345794392523364,0.961,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4000,residual_axis_2,1277.5777531996366,108,108,890,-0.028861315660212328,-0.009345794392523364,0.737,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4000,residual_axis_3,1277.5777531996366,108,108,890,-0.02134629597818721,-0.009345794392523364,0.632,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4500,residual_axis_1,250,108,82,94,0.04326547903234355,-0.009345794392523364,0.284,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4500,residual_axis_2,250,108,82,94,0.056419567164217733,-0.009345794392523364,0.267,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4500,residual_axis_3,250,108,82,94,0.013646228764850703,-0.009345794392523364,0.392,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,4500,residual_axis_1,500,108,102,248,0.034399287193250964,-0.009345794392523364,0.206,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4500,residual_axis_2,500,108,102,248,-0.04747811586861474,-0.009345794392523364,0.71,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4500,residual_axis_3,500,108,102,248,0.05922397395936457,-0.009345794392523364,0.133,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,4500,residual_axis_1,1277.5777531996366,108,108,878,-0.03243638984572669,-0.009345794392523364,0.763,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4500,residual_axis_2,1277.5777531996366,108,108,878,-0.03316721084115139,-0.009345794392523364,0.796,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,4500,residual_axis_3,1277.5777531996366,108,108,878,-0.011218562970565726,-0.009345794392523364,0.462,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5000,residual_axis_1,250,109,89,101,-0.02540962224191964,-0.009259259259259259,0.532,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5000,residual_axis_2,250,109,89,101,0.02341882281345307,-0.009259259259259259,0.363,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5000,residual_axis_3,250,109,89,101,-0.07500638158411743,-0.009259259259259259,0.77,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5000,residual_axis_1,500,109,103,264,0.013130053261124193,-0.009259259259259259,0.326,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5000,residual_axis_2,500,109,103,264,-0.015240262525729265,-0.009259259259259259,0.51,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5000,residual_axis_3,500,109,103,264,-0.003423040792706409,-0.009259259259259259,0.424,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5000,residual_axis_1,1277.5777531996366,109,109,910,-0.028702945063713254,-0.009259259259259259,0.717,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5000,residual_axis_2,1277.5777531996366,109,109,910,-0.034024151641319784,-0.009259259259259259,0.79,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5000,residual_axis_3,1277.5777531996366,109,109,910,-0.018643660421685554,-0.009259259259259259,0.579,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5500,residual_axis_1,250,108,84,93,-0.003083277923285092,-0.009345794392523364,0.444,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5500,residual_axis_2,250,108,84,93,-0.1314751882109793,-0.009345794392523364,0.881,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5500,residual_axis_3,250,108,84,93,0.04691183654833328,-0.009345794392523364,0.284,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,5500,residual_axis_1,500,108,101,253,-0.009620761118733945,-0.009345794392523364,0.465,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5500,residual_axis_2,500,108,101,253,-0.07324556944814752,-0.009345794392523364,0.855,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5500,residual_axis_3,500,108,101,253,0.050480981683772234,-0.009345794392523364,0.143,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,5500,residual_axis_1,1277.5777531996366,108,108,872,-0.01682109536232942,-0.009345794392523364,0.539,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5500,residual_axis_2,1277.5777531996366,108,108,872,-0.037984535453559405,-0.009345794392523364,0.843,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,5500,residual_axis_3,1277.5777531996366,108,108,872,-0.018565462339518904,-0.009345794392523364,0.6,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6000,residual_axis_1,250,110,89,101,-0.037352501358798904,-0.009174311926605505,0.602,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6000,residual_axis_2,250,110,89,101,-0.047224094780791655,-0.009174311926605505,0.637,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6000,residual_axis_3,250,110,89,101,-0.07806739639218176,-0.009174311926605505,0.76,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6000,residual_axis_1,500,110,105,269,-0.0013889164228915404,-0.009174311926605505,0.422,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6000,residual_axis_2,500,110,105,269,-0.014996742334044475,-0.009174311926605505,0.516,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6000,residual_axis_3,500,110,105,269,0.0029138902342879277,-0.009174311926605505,0.372,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6000,residual_axis_1,1277.5777531996366,110,110,938,-0.03571728196684934,-0.009174311926605505,0.811,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6000,residual_axis_2,1277.5777531996366,110,110,938,-0.031585018810990774,-0.009174311926605505,0.779,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6000,residual_axis_3,1277.5777531996366,110,110,938,-0.0390682546972238,-0.009174311926605505,0.87,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6500,residual_axis_1,250,103,82,88,-0.07304054531441558,-0.00980392156862745,0.731,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6500,residual_axis_2,250,103,82,88,-0.16759762056878333,-0.00980392156862745,0.937,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6500,residual_axis_3,250,103,82,88,-0.004127253398143932,-0.00980392156862745,0.468,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,6500,residual_axis_1,500,103,97,237,-0.02169210011975462,-0.00980392156862745,0.541,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6500,residual_axis_2,500,103,97,237,-0.05387270969998649,-0.00980392156862745,0.768,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6500,residual_axis_3,500,103,97,237,-0.009624913287692525,-0.00980392156862745,0.474,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,6500,residual_axis_1,1277.5777531996366,103,103,852,-0.05714310699462518,-0.00980392156862745,0.967,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6500,residual_axis_2,1277.5777531996366,103,103,852,-0.03266789304870415,-0.00980392156862745,0.783,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,6500,residual_axis_3,1277.5777531996366,103,103,852,-0.04613243698808745,-0.00980392156862745,0.913,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7000,residual_axis_1,250,102,82,86,0.04434909583584912,-0.009900990099009901,0.291,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7000,residual_axis_2,250,102,82,86,-0.21598057453591765,-0.009900990099009901,0.985,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7000,residual_axis_3,250,102,82,86,0.02684938233760887,-0.009900990099009901,0.362,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7000,residual_axis_1,500,102,96,238,0.03497116020555893,-0.009900990099009901,0.224,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7000,residual_axis_2,500,102,96,238,-0.06298169535769775,-0.009900990099009901,0.815,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7000,residual_axis_3,500,102,96,238,0.02591921077775183,-0.009900990099009901,0.268,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7000,residual_axis_1,1599.3272958494965,102,102,1216,-0.04054167947533647,-0.009900990099009901,0.936,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7000,residual_axis_2,1599.3272958494965,102,102,1216,-0.030022464132600568,-0.009900990099009901,0.822,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7000,residual_axis_3,1599.3272958494965,102,102,1216,-0.004053963612368556,-0.009900990099009901,0.361,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7500,residual_axis_1,250,99,77,77,-0.02903647947714616,-0.01020408163265306,0.564,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7500,residual_axis_2,250,99,77,77,-0.33497992222621537,-0.01020408163265306,0.999,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7500,residual_axis_3,250,99,77,77,-0.025670659961584925,-0.01020408163265306,0.555,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,7500,residual_axis_1,500,99,93,223,0.005033074340296484,-0.01020408163265306,0.385,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7500,residual_axis_2,500,99,93,223,-0.10005976502625652,-0.01020408163265306,0.923,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7500,residual_axis_3,500,99,93,223,0.023895109151884593,-0.01020408163265306,0.281,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,7500,residual_axis_1,1599.3272958494965,99,99,1126,-0.03375352754435995,-0.01020408163265306,0.866,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7500,residual_axis_2,1599.3272958494965,99,99,1126,-0.03054773083045667,-0.01020408163265306,0.792,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,7500,residual_axis_3,1599.3272958494965,99,99,1126,0.0031763191703814853,-0.01020408163265306,0.261,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,8000,residual_axis_1,250,97,74,72,-0.07776290779452211,-0.010416666666666666,0.71,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,8000,residual_axis_2,250,97,74,72,-0.23539616248772144,-0.010416666666666666,0.98,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,8000,residual_axis_3,250,97,74,72,-0.37153374436017955,-0.010416666666666666,0.998,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Asia,8000,residual_axis_1,500,97,91,208,0.02799227452307187,-0.010416666666666666,0.261,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,8000,residual_axis_2,500,97,91,208,-0.07640766126592438,-0.010416666666666666,0.828,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,8000,residual_axis_3,500,97,91,208,-0.10566145029654062,-0.010416666666666666,0.94,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Asia,8000,residual_axis_1,1599.3272958494965,97,97,1118,-0.0373576599235652,-0.010416666666666666,0.901,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,8000,residual_axis_2,1599.3272958494965,97,97,1118,-0.019138231329562567,-0.010416666666666666,0.626,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Asia,8000,residual_axis_3,1599.3272958494965,97,97,1118,-0.0379370659505494,-0.010416666666666666,0.885,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6500,residual_axis_1,250,35,30,83,-0.10881248057541566,-0.029411764705882353,0.812,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_2,250,35,30,83,-0.00647467905528025,-0.029411764705882353,0.323,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_3,250,35,30,83,-0.24407476319760452,-0.029411764705882353,0.999,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_1,500,35,34,120,-0.09908604246871829,-0.029411764705882353,0.823,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_2,500,35,34,120,-0.041819470574034866,-0.029411764705882353,0.508,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_3,500,35,34,120,-0.09166145491698557,-0.029411764705882353,0.801,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,6500,residual_axis_1,1178.1024675848141,35,35,345,-0.03382696867947541,-0.029411764705882353,0.482,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6500,residual_axis_2,1178.1024675848141,35,35,345,-0.046973954268172816,-0.029411764705882353,0.736,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,6500,residual_axis_3,1178.1024675848141,35,35,345,-0.051309463396529496,-0.029411764705882353,0.847,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,8000,residual_axis_1,250,31,26,71,-0.13201394096022742,-0.03333333333333333,0.875,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_2,250,31,26,71,-0.03794284562647058,-0.03333333333333333,0.479,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_3,250,31,26,71,-0.1564499433297005,-0.03333333333333333,0.922,FALSE,999,estimated,fixed_250km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_1,500,31,29,101,-0.11050778463451504,-0.03333333333333333,0.885,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_2,500,31,29,101,-0.11938559434636212,-0.03333333333333333,0.913,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_3,500,31,29,101,-0.12355437397697076,-0.03333333333333333,0.926,FALSE,999,estimated,fixed_500km
+temporal_joint_human_proxies,Oceania,8000,residual_axis_1,1178.1024675848141,31,31,293,-0.04688160627646807,-0.03333333333333333,0.678,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,8000,residual_axis_2,1178.1024675848141,31,31,293,-0.05357483258766582,-0.03333333333333333,0.803,FALSE,999,estimated,dbmem_connectivity
+temporal_joint_human_proxies,Oceania,8000,residual_axis_3,1178.1024675848141,31,31,293,-0.049353784596724064,-0.03333333333333333,0.745,FALSE,999,estimated,dbmem_connectivity

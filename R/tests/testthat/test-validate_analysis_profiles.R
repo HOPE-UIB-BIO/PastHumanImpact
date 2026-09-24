@@ -144,3 +144,37 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "validate_analysis_profiles() accepts joint human-proxy sensitivities",
+  {
+    data_profiles <-
+      tibble::tibble(
+        profile_id = c("joint_time", "joint_space"),
+        analysis_family = "h1",
+        analytical_unit = c("within_dataset", "time_slice"),
+        human_proxy = "spd_kk10_hyde",
+        human_predictor_specification = "sqrt_spd_kk10_sqrt_hyde",
+        spd_radius_specification = "250_km_with_500_km_fallback",
+        structural_control = c("time", "space"),
+        profile_role = "sensitivity",
+        enabled = TRUE,
+        seed = 1234L,
+        configuration_reference = "joint_human_proxy_8ka_2ka"
+      )
+
+    testthat::expect_silent(
+      validate_analysis_profiles(data_profiles = data_profiles)
+    )
+
+    testthat::expect_error(
+      validate_analysis_profiles(
+        dplyr::mutate(
+          data_profiles,
+          spd_radius_specification = "not_applicable"
+        )
+      ),
+      regexp = "unsupported combination"
+    )
+  }
+)
