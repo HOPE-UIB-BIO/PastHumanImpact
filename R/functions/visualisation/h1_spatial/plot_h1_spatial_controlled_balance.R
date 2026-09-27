@@ -114,6 +114,19 @@ plot_h1_spatial_controlled_balance <- function(
     ) |>
     prepare_climatezone_factor()
 
+  if (
+    anyNA(data_balance_records[["climatezone"]]) ||
+      anyNA(data_balance_records[["climatezone_label"]])
+  ) {
+    cli::cli_abort(c(
+      "Spatial balance plotting requires recognised region classes.",
+      "i" = paste(
+        "Check that `climatezone` contains Köppen-derived region values,",
+        "not continental-region values."
+      )
+    ))
+  }
+
   data_importance_stub <-
     data_balance_records |>
     dplyr::select(
@@ -158,6 +171,14 @@ plot_h1_spatial_controlled_balance <- function(
         palette_ecozones[as.character(.data[["climatezone"]])]
       )
     )
+  if (
+    anyNA(data_zone_summary[["climatezone"]]) ||
+      anyNA(data_zone_summary[["climatezone_label"]])
+  ) {
+    cli::cli_abort(
+      "Spatial balance summaries contain unrecognised region classes."
+    )
+  }
   data_region_summary <-
     select_spatial_balance_estimates(
       data_estimates = data_estimates,

@@ -68,6 +68,16 @@ testthat::test_that(
       )
 
     testthat::expect_s3_class(signed_result, "ggplot")
+
+    testthat::expect_error(
+      plot_h1_spatial_controlled_balance(
+        data_records = records |>
+          dplyr::mutate(climatezone = as.character(.data[["region"]])),
+        data_estimates = estimates,
+        data_geo_koppen = koppen
+      ),
+      "recognised region classes"
+    )
   }
 )
 

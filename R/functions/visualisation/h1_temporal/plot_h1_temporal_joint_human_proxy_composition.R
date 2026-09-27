@@ -6,6 +6,7 @@
 #' @param age_min Youngest displayed age in years BP.
 #' @param age_max Oldest displayed age in years BP.
 #' @param space_colour Colour assigned to structural spatial variation.
+#' @param human_label Legend label for the joint human predictor block.
 #' @return A ggplot object.
 #' @examples
 #' \dontrun{
@@ -15,7 +16,8 @@ plot_h1_temporal_joint_human_proxy_composition <- function(
   data_stack,
   age_min = 2000,
   age_max = 8000,
-  space_colour = "#A79BB8"
+  space_colour = "#A79BB8",
+  human_label = "Human (SPD + KK10 + HYDE)"
 ) {
   required_columns <-
     c("analysis", "region", "age", "predictor", "allocation")
@@ -26,6 +28,7 @@ plot_h1_temporal_joint_human_proxy_composition <- function(
     is.numeric(age_max),
     age_min < age_max,
     assertthat::is.string(space_colour),
+    assertthat::is.string(human_label),
     msg = "Joint human-proxy temporal plot inputs do not satisfy the contract."
   )
 
@@ -144,7 +147,7 @@ plot_h1_temporal_joint_human_proxy_composition <- function(
       ),
       breaks = c("human", "climate", "space"),
       labels = c(
-        "Human (SPD + KK10 + HYDE)",
+        human_label,
         "Climate",
         "Space"
       )
