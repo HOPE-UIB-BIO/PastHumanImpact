@@ -1,0 +1,10 @@
+contrast,from,to,n_sequences
+Canonical SPD to filtered joint,Climate,Climate,364
+Canonical SPD to filtered joint,Climate,Human,504
+Canonical SPD to filtered joint,Climate,Tie,1
+Canonical SPD to filtered joint,Human,Climate,12
+Canonical SPD to filtered joint,Human,Human,188
+Matched SPD bridge to filtered joint,Climate,Climate,376
+Matched SPD bridge to filtered joint,Climate,Human,387
+Matched SPD bridge to filtered joint,Climate,Tie,1
+Matched SPD bridge to filtered joint,Human,Human,305

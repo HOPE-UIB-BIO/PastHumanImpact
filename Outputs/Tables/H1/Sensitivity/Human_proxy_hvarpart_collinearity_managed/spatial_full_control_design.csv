@@ -1,0 +1,131 @@
+region,age,model_id,stage,n_complete,n_columns,design_rank,residual_df,full_rank
+Europe,2000,joint_filtered,after_selection_with_controls,389,14,15,374,TRUE
+Europe,2000,spd_matched_bridge,after_selection_with_controls,389,11,12,377,TRUE
+Europe,2500,joint_filtered,after_selection_with_controls,392,16,17,375,TRUE
+Europe,2500,spd_matched_bridge,after_selection_with_controls,392,11,12,380,TRUE
+Europe,3000,joint_filtered,after_selection_with_controls,387,16,17,370,TRUE
+Europe,3000,spd_matched_bridge,after_selection_with_controls,387,11,12,375,TRUE
+Europe,3500,joint_filtered,after_selection_with_controls,382,15,16,366,TRUE
+Europe,3500,spd_matched_bridge,after_selection_with_controls,382,11,12,370,TRUE
+Europe,4000,joint_filtered,after_selection_with_controls,387,18,19,368,TRUE
+Europe,4000,spd_matched_bridge,after_selection_with_controls,387,15,16,371,TRUE
+Europe,4500,joint_filtered,after_selection_with_controls,388,15,16,372,TRUE
+Europe,4500,spd_matched_bridge,after_selection_with_controls,388,14,15,373,TRUE
+Europe,5000,joint_filtered,after_selection_with_controls,382,17,18,364,TRUE
+Europe,5000,spd_matched_bridge,after_selection_with_controls,382,14,15,367,TRUE
+Europe,5500,joint_filtered,after_selection_with_controls,385,18,19,366,TRUE
+Europe,5500,spd_matched_bridge,after_selection_with_controls,385,16,17,368,TRUE
+Europe,6000,joint_filtered,after_selection_with_controls,387,14,15,372,TRUE
+Europe,6000,spd_matched_bridge,after_selection_with_controls,387,10,11,376,TRUE
+Europe,6500,joint_filtered,after_selection_with_controls,380,14,15,365,TRUE
+Europe,6500,spd_matched_bridge,after_selection_with_controls,380,11,12,368,TRUE
+Europe,7000,joint_filtered,after_selection_with_controls,388,11,12,376,TRUE
+Europe,7000,spd_matched_bridge,after_selection_with_controls,388,8,9,379,TRUE
+Europe,7500,joint_filtered,after_selection_with_controls,383,12,13,370,TRUE
+Europe,7500,spd_matched_bridge,after_selection_with_controls,383,10,11,372,TRUE
+Europe,8000,joint_filtered,after_selection_with_controls,376,11,12,364,TRUE
+Europe,8000,spd_matched_bridge,after_selection_with_controls,376,9,10,366,TRUE
+North America,2000,joint_filtered,after_selection_with_controls,537,10,11,526,TRUE
+North America,2000,spd_matched_bridge,after_selection_with_controls,537,8,9,528,TRUE
+North America,2500,joint_filtered,after_selection_with_controls,531,10,11,520,TRUE
+North America,2500,spd_matched_bridge,after_selection_with_controls,531,7,8,523,TRUE
+North America,3000,joint_filtered,after_selection_with_controls,530,10,11,519,TRUE
+North America,3000,spd_matched_bridge,after_selection_with_controls,530,7,8,522,TRUE
+North America,3500,joint_filtered,after_selection_with_controls,534,8,9,525,TRUE
+North America,3500,spd_matched_bridge,after_selection_with_controls,534,7,8,526,TRUE
+North America,4000,joint_filtered,after_selection_with_controls,542,10,11,531,TRUE
+North America,4000,spd_matched_bridge,after_selection_with_controls,542,8,9,533,TRUE
+North America,4500,joint_filtered,after_selection_with_controls,538,9,10,528,TRUE
+North America,4500,spd_matched_bridge,after_selection_with_controls,538,7,8,530,TRUE
+North America,5000,joint_filtered,after_selection_with_controls,536,9,10,526,TRUE
+North America,5000,spd_matched_bridge,after_selection_with_controls,536,7,8,528,TRUE
+North America,5500,joint_filtered,after_selection_with_controls,541,9,10,531,TRUE
+North America,5500,spd_matched_bridge,after_selection_with_controls,541,7,8,533,TRUE
+North America,6000,joint_filtered,after_selection_with_controls,532,9,10,522,TRUE
+North America,6000,spd_matched_bridge,after_selection_with_controls,532,7,8,524,TRUE
+North America,6500,joint_filtered,after_selection_with_controls,540,10,11,529,TRUE
+North America,6500,spd_matched_bridge,after_selection_with_controls,540,8,9,531,TRUE
+North America,7000,joint_filtered,after_selection_with_controls,537,11,12,525,TRUE
+North America,7000,spd_matched_bridge,after_selection_with_controls,537,9,10,527,TRUE
+North America,7500,joint_filtered,after_selection_with_controls,539,10,11,528,TRUE
+North America,7500,spd_matched_bridge,after_selection_with_controls,539,8,9,530,TRUE
+North America,8000,joint_filtered,after_selection_with_controls,529,10,11,518,TRUE
+North America,8000,spd_matched_bridge,after_selection_with_controls,529,8,9,520,TRUE
+Latin America,2000,joint_filtered,after_selection_with_controls,79,6,7,72,TRUE
+Latin America,2000,spd_matched_bridge,after_selection_with_controls,79,5,6,73,TRUE
+Latin America,2500,joint_filtered,after_selection_with_controls,79,7,8,71,TRUE
+Latin America,2500,spd_matched_bridge,after_selection_with_controls,79,5,6,73,TRUE
+Latin America,3000,joint_filtered,after_selection_with_controls,78,6,7,71,TRUE
+Latin America,3000,spd_matched_bridge,after_selection_with_controls,78,5,6,72,TRUE
+Latin America,4000,joint_filtered,after_selection_with_controls,77,6,7,70,TRUE
+Latin America,4000,spd_matched_bridge,after_selection_with_controls,77,5,6,71,TRUE
+Latin America,4500,joint_filtered,after_selection_with_controls,79,7,8,71,TRUE
+Latin America,4500,spd_matched_bridge,after_selection_with_controls,79,4,5,74,TRUE
+Latin America,5000,joint_filtered,after_selection_with_controls,76,7,8,68,TRUE
+Latin America,5000,spd_matched_bridge,after_selection_with_controls,76,4,5,71,TRUE
+Latin America,5500,joint_filtered,after_selection_with_controls,78,7,8,70,TRUE
+Latin America,5500,spd_matched_bridge,after_selection_with_controls,78,4,5,73,TRUE
+Latin America,6000,joint_filtered,after_selection_with_controls,74,8,9,65,TRUE
+Latin America,6000,spd_matched_bridge,after_selection_with_controls,74,4,5,69,TRUE
+Latin America,6500,joint_filtered,after_selection_with_controls,74,6,7,67,TRUE
+Latin America,6500,spd_matched_bridge,after_selection_with_controls,74,5,6,68,TRUE
+Latin America,7000,joint_filtered,after_selection_with_controls,73,6,7,66,TRUE
+Latin America,7000,spd_matched_bridge,after_selection_with_controls,73,4,5,68,TRUE
+Latin America,7500,joint_filtered,after_selection_with_controls,73,6,7,66,TRUE
+Latin America,7500,spd_matched_bridge,after_selection_with_controls,73,5,6,67,TRUE
+Latin America,8000,joint_filtered,after_selection_with_controls,67,6,7,60,TRUE
+Latin America,8000,spd_matched_bridge,after_selection_with_controls,67,4,5,62,TRUE
+Latin America,3500,joint_filtered,after_selection_with_controls,77,6,7,70,TRUE
+Latin America,3500,spd_matched_bridge,after_selection_with_controls,77,4,5,72,TRUE
+Oceania,2000,joint_filtered,after_selection_with_controls,37,5,6,31,TRUE
+Oceania,2000,spd_matched_bridge,after_selection_with_controls,37,4,5,32,TRUE
+Oceania,2500,joint_filtered,after_selection_with_controls,36,5,6,30,TRUE
+Oceania,2500,spd_matched_bridge,after_selection_with_controls,36,4,5,31,TRUE
+Oceania,3000,joint_filtered,after_selection_with_controls,38,5,6,32,TRUE
+Oceania,3000,spd_matched_bridge,after_selection_with_controls,38,4,5,33,TRUE
+Oceania,3500,joint_filtered,after_selection_with_controls,38,5,6,32,TRUE
+Oceania,3500,spd_matched_bridge,after_selection_with_controls,38,4,5,33,TRUE
+Oceania,4000,joint_filtered,after_selection_with_controls,38,5,6,32,TRUE
+Oceania,4000,spd_matched_bridge,after_selection_with_controls,38,4,5,33,TRUE
+Oceania,4500,joint_filtered,after_selection_with_controls,38,5,6,32,TRUE
+Oceania,4500,spd_matched_bridge,after_selection_with_controls,38,4,5,33,TRUE
+Oceania,5000,joint_filtered,after_selection_with_controls,38,5,6,32,TRUE
+Oceania,5000,spd_matched_bridge,after_selection_with_controls,38,4,5,33,TRUE
+Oceania,5500,joint_filtered,after_selection_with_controls,37,5,6,31,TRUE
+Oceania,5500,spd_matched_bridge,after_selection_with_controls,37,4,5,32,TRUE
+Oceania,6000,joint_filtered,after_selection_with_controls,36,5,6,30,TRUE
+Oceania,6000,spd_matched_bridge,after_selection_with_controls,36,4,5,31,TRUE
+Oceania,7000,joint_filtered,after_selection_with_controls,33,5,6,27,TRUE
+Oceania,7000,spd_matched_bridge,after_selection_with_controls,33,4,5,28,TRUE
+Oceania,7500,joint_filtered,after_selection_with_controls,33,6,7,26,TRUE
+Oceania,7500,spd_matched_bridge,after_selection_with_controls,33,5,6,27,TRUE
+Asia,2000,joint_filtered,after_selection_with_controls,109,6,7,102,TRUE
+Asia,2000,spd_matched_bridge,after_selection_with_controls,109,4,5,104,TRUE
+Asia,2500,joint_filtered,after_selection_with_controls,108,6,7,101,TRUE
+Asia,2500,spd_matched_bridge,after_selection_with_controls,108,4,5,103,TRUE
+Asia,3000,joint_filtered,after_selection_with_controls,110,6,7,103,TRUE
+Asia,3000,spd_matched_bridge,after_selection_with_controls,110,4,5,105,TRUE
+Asia,3500,joint_filtered,after_selection_with_controls,107,6,7,100,TRUE
+Asia,3500,spd_matched_bridge,after_selection_with_controls,107,4,5,102,TRUE
+Asia,4000,joint_filtered,after_selection_with_controls,108,7,8,100,TRUE
+Asia,4000,spd_matched_bridge,after_selection_with_controls,108,4,5,103,TRUE
+Asia,4500,joint_filtered,after_selection_with_controls,108,6,7,101,TRUE
+Asia,4500,spd_matched_bridge,after_selection_with_controls,108,4,5,103,TRUE
+Asia,5000,joint_filtered,after_selection_with_controls,109,6,7,102,TRUE
+Asia,5000,spd_matched_bridge,after_selection_with_controls,109,4,5,104,TRUE
+Asia,5500,joint_filtered,after_selection_with_controls,108,6,7,101,TRUE
+Asia,5500,spd_matched_bridge,after_selection_with_controls,108,4,5,103,TRUE
+Asia,6000,joint_filtered,after_selection_with_controls,110,6,7,103,TRUE
+Asia,6000,spd_matched_bridge,after_selection_with_controls,110,4,5,105,TRUE
+Asia,6500,joint_filtered,after_selection_with_controls,103,6,7,96,TRUE
+Asia,6500,spd_matched_bridge,after_selection_with_controls,103,4,5,98,TRUE
+Asia,7000,joint_filtered,after_selection_with_controls,102,6,7,95,TRUE
+Asia,7000,spd_matched_bridge,after_selection_with_controls,102,4,5,97,TRUE
+Asia,7500,joint_filtered,after_selection_with_controls,99,6,7,92,TRUE
+Asia,7500,spd_matched_bridge,after_selection_with_controls,99,4,5,94,TRUE
+Asia,8000,joint_filtered,after_selection_with_controls,97,6,7,90,TRUE
+Asia,8000,spd_matched_bridge,after_selection_with_controls,97,4,5,92,TRUE
+Oceania,6500,joint_filtered,after_selection_with_controls,35,5,6,29,TRUE
+Oceania,6500,spd_matched_bridge,after_selection_with_controls,35,4,5,30,TRUE
+Oceania,8000,joint_filtered,after_selection_with_controls,31,5,6,25,TRUE
+Oceania,8000,spd_matched_bridge,after_selection_with_controls,31,4,5,26,TRUE

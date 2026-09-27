@@ -1,0 +1,131 @@
+model_id,analysis,region,age,spatial_group,n_records,n_unique_locations,n_colocated_records,n_positive_mem,threshold_km,warning_message,status
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,2000,all,389,365,46,82,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,2500,all,392,368,46,83,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,3000,all,387,362,48,81,412.1709840477786,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,3500,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,4000,all,387,363,46,81,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,4500,all,388,364,46,81,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,5000,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,5500,all,385,360,48,82,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,6000,all,387,362,48,81,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,6500,all,380,357,44,80,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,7000,all,388,366,42,83,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,7500,all,383,358,48,80,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Europe,8000,all,376,352,46,78,411.41119655714897,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,2000,all,537,532,10,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,2500,all,531,526,10,126,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,3000,all,530,525,10,127,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,3500,all,534,529,10,127,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,4000,all,542,537,10,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,4500,all,538,534,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,5000,all,536,532,8,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,5500,all,541,536,10,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,6000,all,532,528,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,6500,all,540,535,10,130,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,7000,all,537,532,10,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,7500,all,539,535,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,North America,8000,all,529,524,10,126,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,2000,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,2500,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,3000,all,78,72,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,4000,all,77,71,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,4500,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,5000,all,76,70,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,5500,all,78,72,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,6000,all,74,68,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,6500,all,74,68,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,7000,all,73,67,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,7500,all,73,68,9,9,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,8000,all,67,62,9,8,2088.890382773922,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Latin America,3500,all,77,72,9,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,2000,all,37,37,0,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,2500,all,36,35,2,4,1186.3481645965644,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,3000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,3500,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,4000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,4500,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,5000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,5500,all,37,36,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,6000,all,36,35,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,7000,all,33,32,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,7500,all,33,32,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,2000,all,109,109,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,2500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,3000,all,110,110,0,27,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,3500,all,107,107,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,4000,all,108,108,0,25,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,4500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,5000,all,109,109,0,25,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,5500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,6000,all,110,110,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,6500,all,103,103,0,23,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,7000,all,102,102,0,24,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,7500,all,99,99,0,22,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Asia,8000,all,97,97,0,22,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,6500,all,35,34,2,5,1178.1024675848141,Non euclidean distance,eligible
+joint_filtered,temporal_human_proxy_collinearity_managed__joint_filtered,Oceania,8000,all,31,30,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,2000,all,389,365,46,82,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,2500,all,392,368,46,83,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,3000,all,387,362,48,81,412.1709840477786,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,3500,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,4000,all,387,363,46,81,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,4500,all,388,364,46,81,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,5000,all,382,357,48,80,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,5500,all,385,360,48,82,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,6000,all,387,362,48,81,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,6500,all,380,357,44,80,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,7000,all,388,366,42,83,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,7500,all,383,358,48,80,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Europe,8000,all,376,352,46,78,411.41119655714897,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,2000,all,537,532,10,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,2500,all,531,526,10,126,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,3000,all,530,525,10,127,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,3500,all,534,529,10,127,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,4000,all,542,537,10,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,4500,all,538,534,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,5000,all,536,532,8,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,5500,all,541,536,10,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,6000,all,532,528,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,6500,all,540,535,10,130,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,7000,all,537,532,10,128,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,7500,all,539,535,8,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,North America,8000,all,529,524,10,126,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,2000,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,2500,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,3000,all,78,72,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,4000,all,77,71,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,4500,all,79,73,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,5000,all,76,70,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,5500,all,78,72,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,6000,all,74,68,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,6500,all,74,68,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,7000,all,73,67,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,7500,all,73,68,9,9,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,8000,all,67,62,9,8,2088.890382773922,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Latin America,3500,all,77,72,9,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,2000,all,37,37,0,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,2500,all,36,35,2,4,1186.3481645965644,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,3000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,3500,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,4000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,4500,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,5000,all,38,37,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,5500,all,37,36,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,6000,all,36,35,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,7000,all,33,32,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,7500,all,33,32,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,2000,all,109,109,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,2500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,3000,all,110,110,0,27,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,3500,all,107,107,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,4000,all,108,108,0,25,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,4500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,5000,all,109,109,0,25,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,5500,all,108,108,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,6000,all,110,110,0,26,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,6500,all,103,103,0,23,1277.5777531996366,Non euclidean distance | neighbour object has 3 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,7000,all,102,102,0,24,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,7500,all,99,99,0,22,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Asia,8000,all,97,97,0,22,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,6500,all,35,34,2,5,1178.1024675848141,Non euclidean distance,eligible
+spd_matched_bridge,temporal_human_proxy_collinearity_managed__spd_matched_bridge,Oceania,8000,all,31,30,2,5,1178.1024675848141,Non euclidean distance,eligible

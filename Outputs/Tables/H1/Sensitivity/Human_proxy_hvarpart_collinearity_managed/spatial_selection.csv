@@ -1,0 +1,781 @@
+region,age,model_id,group,predictor,preference_rank,preselection_status,selected,reason
+Europe,2000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,2000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,2000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,2000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,2000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,2000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,2000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,2000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,2000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,2000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,2000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,2000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,2500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,2500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,2500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,2500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,2500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,2500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,2500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,2500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,2500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,2500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,2500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,2500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,3000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,3000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,3000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,3000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,3000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,3000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,3000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,3000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,3000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,3000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,3000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,3000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,3500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,3500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,3500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,3500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,3500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,3500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,3500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,3500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,3500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,3500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,3500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,3500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,4000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,4000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,4000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,4000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,4000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,4000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,4000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,4000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,4000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,4000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,4000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,4000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,4500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,4500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,4500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,4500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,4500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,4500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,4500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,4500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,4500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,4500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,4500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,4500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,5000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,5000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,5000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,5000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,5000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,5000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,5000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,5000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,5000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,5000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,5000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,5000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,5500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,5500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,5500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,5500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,5500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,5500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,5500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,5500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,5500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,5500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,5500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,5500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,6000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,6000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,6000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,6000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,6000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,6000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,6000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,6000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,6000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,6000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,6000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,6000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,6500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,6500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,6500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,6500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,6500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,6500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,6500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,6500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,6500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,6500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,6500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,6500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,7000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,7000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,7000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,7000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,7000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,7000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,7000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,7000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,7000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,7000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,7000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,7000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,7500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,7500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,7500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,7500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,7500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,7500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,7500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,7500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,7500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,7500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,7500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,7500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,8000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Europe,8000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,8000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Europe,8000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Europe,8000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Europe,8000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Europe,8000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Europe,8000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Europe,8000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Europe,8000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Europe,8000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Europe,8000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,2000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,2000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,2000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,2000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,2000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,2000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,2000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,2000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,2000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,2000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,2000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,2000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,2500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,2500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,2500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,2500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,2500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,2500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,2500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,2500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,2500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,2500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,2500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,2500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,3000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,3000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,3000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,3000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,3000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,3000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,3000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,3000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,3000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,3000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,3000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,3000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,3500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,3500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,3500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,3500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,3500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,3500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,3500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,3500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,3500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,3500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,3500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,3500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,4000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,4000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,4000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,4000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,4000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,4000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,4000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,4000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,4000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,4000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,4000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,4000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,4500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,4500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,4500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,4500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,4500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,4500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,4500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,4500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,4500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,4500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,4500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,4500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,5000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,5000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,5000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,5000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,5000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,5000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,5000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,5000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,5000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,5000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,5000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,5000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,5500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,5500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,5500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,5500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,5500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,5500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,5500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,5500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,5500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,5500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,5500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,5500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,6000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,6000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,6000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,6000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,6000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,6000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,6000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,6000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,6000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,6000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,6000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,6000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,6500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,6500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,6500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,6500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,6500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,6500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,6500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,6500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,6500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,6500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,6500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,6500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,7000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,7000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,7000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,7000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,7000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,7000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,7000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,7000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,7000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,7000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,7000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,7000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,7500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,7500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,7500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,7500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,7500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,7500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,7500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,7500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,7500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,7500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,7500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,7500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+North America,8000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+North America,8000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,8000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+North America,8000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+North America,8000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+North America,8000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+North America,8000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+North America,8000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+North America,8000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+North America,8000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+North America,8000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+North America,8000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,2000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,2000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,2000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,2000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,2000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,2000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,2000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,2000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,2000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,2000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,2000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,2000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,2500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,2500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,2500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,2500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,2500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,2500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,2500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,2500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,2500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,2500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,2500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,2500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,3000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,3000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,3000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,3000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,3000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,3000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,3000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,3000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,3000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,3000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,3000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,3000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,4000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,4000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,4000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,4000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,4000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,4000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,4000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,4000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,4000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,4000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,4000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,4000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,4500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,4500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,4500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,4500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,4500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,4500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,4500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,4500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,4500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,4500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,4500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,4500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,5000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,5000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,5000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,5000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,5000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,5000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,5000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,5000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,5000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,5000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,5000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,5000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,5500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,5500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,5500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,5500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,5500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,5500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,5500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,5500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,5500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,5500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,5500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,5500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,6000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,6000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,6000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,6000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,6000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,6000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,6000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,6000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,6000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,6000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,6000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,6000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,6500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,6500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,6500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,6500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,6500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,6500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,6500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,6500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,6500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,6500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,6500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,6500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,7000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,7000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,7000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,7000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,7000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,7000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,7000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,7000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,7000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,7000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,7000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,7000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,7500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,7500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,7500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,7500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,7500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,7500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,7500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,7500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,7500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,7500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,7500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,7500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,8000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,8000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,8000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,8000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,8000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,8000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,8000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,8000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,8000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,8000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,8000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,8000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,3500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,3500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,3500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,3500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Latin America,3500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Latin America,3500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Latin America,3500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Latin America,3500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Latin America,3500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Latin America,3500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Latin America,3500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Latin America,3500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,2000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,2000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,2000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,2000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,2000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,2000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,2000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,2000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,2000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,2000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,2000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,2000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,2500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,2500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,2500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,2500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,2500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,2500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,2500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,2500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,2500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,2500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,2500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,2500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,3000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,3000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,3000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,3000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,3000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,3000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,3000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,3000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,3000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,3000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,3000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,3000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,3500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,3500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,3500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,3500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,3500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,3500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,3500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,3500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,3500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,3500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,3500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,3500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,4000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,4000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,4000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,4000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,4000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,4000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,4000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,4000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,4000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,4000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,4000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,4000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,4500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,4500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,4500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,4500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,4500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,4500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,4500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,4500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,4500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,4500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,4500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,4500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,5000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,5000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,5000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,5000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,5000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,5000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,5000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,5000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,5000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,5000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,5000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,5000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,5500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,5500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,5500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,5500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,5500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,5500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,5500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,5500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,5500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,5500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,5500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,5500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,6000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,6000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,6000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,6000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,6000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,6000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,6000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,6000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,6000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,6000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,6000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,6000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,7000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,7000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,7000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,7000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,7000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,7000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,7000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,7000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,7000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,7000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,7000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,7000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,7500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,7500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,7500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,7500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,7500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,7500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,7500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,7500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,7500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,7500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,7500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,7500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,2000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,2000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,2000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,2000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,2000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,2000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,2000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,2000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,2000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,2000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,2000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,2000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,2500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,2500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,2500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,2500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,2500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,2500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,2500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,2500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,2500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,2500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,2500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,2500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,3000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,3000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,3000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,3000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,3000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,3000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,3000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,3000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,3000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,3000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,3000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,3000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,3500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,3500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,3500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,3500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,3500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,3500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,3500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,3500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,3500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,3500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,3500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,3500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,4000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,4000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,4000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,4000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,4000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,4000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,4000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,4000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,4000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,4000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,4000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,4000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,4500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,4500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,4500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,4500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,4500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,4500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,4500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,4500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,4500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,4500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,4500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,4500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,5000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,5000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,5000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,5000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,5000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,5000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,5000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,5000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,5000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,5000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,5000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,5000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,5500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,5500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,5500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,5500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,5500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,5500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,5500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,5500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,5500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,5500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,5500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,5500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,6000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,6000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,6000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,6000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,6000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,6000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,6000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,6000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,6000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,6000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,6000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,6000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,6500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,6500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,6500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,6500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,6500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,6500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,6500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,6500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,6500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,6500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,6500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,6500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,7000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,7000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,7000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,7000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,7000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,7000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,7000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,7000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,7000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,7000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,7000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,7000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,7500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,7500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,7500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,7500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,7500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,7500,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,7500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,7500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,7500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,7500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,7500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,7500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,8000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Asia,8000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,8000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Asia,8000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Asia,8000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Asia,8000,joint_filtered,human,kk10_fraction,2,candidate,TRUE,retained
+Asia,8000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Asia,8000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Asia,8000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Asia,8000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Asia,8000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Asia,8000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,6500,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,6500,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,6500,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,6500,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,6500,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,6500,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,6500,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,6500,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,6500,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,6500,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,6500,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,6500,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,8000,joint_filtered,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,8000,joint_filtered,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,8000,joint_filtered,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,8000,joint_filtered,climate,prec_win,4,candidate,TRUE,retained
+Oceania,8000,joint_filtered,human,spd_sqrt,1,candidate,TRUE,retained
+Oceania,8000,joint_filtered,human,kk10_fraction,2,candidate,FALSE,within_group_collinearity
+Oceania,8000,joint_filtered,human,hyde_sqrt,3,candidate,TRUE,retained
+Oceania,8000,spd_matched_bridge,climate,temp_annual,1,candidate,TRUE,retained
+Oceania,8000,spd_matched_bridge,climate,temp_cold,2,candidate,FALSE,within_group_collinearity
+Oceania,8000,spd_matched_bridge,climate,prec_summer,3,candidate,TRUE,retained
+Oceania,8000,spd_matched_bridge,climate,prec_win,4,candidate,TRUE,retained
+Oceania,8000,spd_matched_bridge,human,spd_sqrt,1,candidate,TRUE,retained

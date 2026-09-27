@@ -1,0 +1,40 @@
+age,proxy,proxy_label,observations,datasets,capped_observations
+8000,spd_sqrt,sqrt(SPD),1100,1100,0
+8000,kk10_fraction,KK10 land-use fraction,1100,1100,0
+8000,hyde_sqrt,sqrt(HYDE population),1100,1100,0
+7500,spd_sqrt,sqrt(SPD),1127,1127,0
+7500,kk10_fraction,KK10 land-use fraction,1127,1127,0
+7500,hyde_sqrt,sqrt(HYDE population),1127,1127,0
+7000,spd_sqrt,sqrt(SPD),1133,1133,0
+7000,kk10_fraction,KK10 land-use fraction,1133,1133,0
+7000,hyde_sqrt,sqrt(HYDE population),1133,1133,0
+6500,spd_sqrt,sqrt(SPD),1132,1132,0
+6500,kk10_fraction,KK10 land-use fraction,1132,1132,1
+6500,hyde_sqrt,sqrt(HYDE population),1132,1132,0
+6000,spd_sqrt,sqrt(SPD),1139,1139,0
+6000,kk10_fraction,KK10 land-use fraction,1139,1139,2
+6000,hyde_sqrt,sqrt(HYDE population),1139,1139,0
+5500,spd_sqrt,sqrt(SPD),1149,1149,23
+5500,kk10_fraction,KK10 land-use fraction,1149,1149,3
+5500,hyde_sqrt,sqrt(HYDE population),1149,1149,0
+5000,spd_sqrt,sqrt(SPD),1141,1141,1
+5000,kk10_fraction,KK10 land-use fraction,1141,1141,2
+5000,hyde_sqrt,sqrt(HYDE population),1141,1141,0
+4500,spd_sqrt,sqrt(SPD),1151,1151,6
+4500,kk10_fraction,KK10 land-use fraction,1151,1151,3
+4500,hyde_sqrt,sqrt(HYDE population),1151,1151,0
+4000,spd_sqrt,sqrt(SPD),1152,1152,30
+4000,kk10_fraction,KK10 land-use fraction,1152,1152,4
+4000,hyde_sqrt,sqrt(HYDE population),1152,1152,0
+3500,spd_sqrt,sqrt(SPD),1138,1138,25
+3500,kk10_fraction,KK10 land-use fraction,1138,1138,4
+3500,hyde_sqrt,sqrt(HYDE population),1138,1138,1
+3000,spd_sqrt,sqrt(SPD),1143,1143,23
+3000,kk10_fraction,KK10 land-use fraction,1143,1143,4
+3000,hyde_sqrt,sqrt(HYDE population),1143,1143,2
+2500,spd_sqrt,sqrt(SPD),1146,1146,3
+2500,kk10_fraction,KK10 land-use fraction,1146,1146,17
+2500,hyde_sqrt,sqrt(HYDE population),1146,1146,37
+2000,spd_sqrt,sqrt(SPD),1151,1151,38
+2000,kk10_fraction,KK10 land-use fraction,1151,1151,109
+2000,hyde_sqrt,sqrt(HYDE population),1151,1151,109

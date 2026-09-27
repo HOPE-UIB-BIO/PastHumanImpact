@@ -1,0 +1,61 @@
+region,model_id,group,predictor,selected,reason,n_units
+Asia,joint_filtered,climate,prec_summer,TRUE,retained,13
+Asia,joint_filtered,climate,prec_win,TRUE,retained,13
+Asia,joint_filtered,climate,temp_annual,TRUE,retained,13
+Asia,joint_filtered,climate,temp_cold,FALSE,within_group_collinearity,13
+Asia,joint_filtered,human,hyde_sqrt,TRUE,retained,13
+Asia,joint_filtered,human,kk10_fraction,TRUE,retained,13
+Asia,joint_filtered,human,spd_sqrt,TRUE,retained,13
+Asia,spd_matched_bridge,climate,prec_summer,TRUE,retained,13
+Asia,spd_matched_bridge,climate,prec_win,TRUE,retained,13
+Asia,spd_matched_bridge,climate,temp_annual,TRUE,retained,13
+Asia,spd_matched_bridge,climate,temp_cold,FALSE,within_group_collinearity,13
+Asia,spd_matched_bridge,human,spd_sqrt,TRUE,retained,13
+Europe,joint_filtered,climate,prec_summer,TRUE,retained,13
+Europe,joint_filtered,climate,prec_win,TRUE,retained,13
+Europe,joint_filtered,climate,temp_annual,TRUE,retained,13
+Europe,joint_filtered,climate,temp_cold,FALSE,within_group_collinearity,13
+Europe,joint_filtered,human,hyde_sqrt,TRUE,retained,13
+Europe,joint_filtered,human,kk10_fraction,TRUE,retained,13
+Europe,joint_filtered,human,spd_sqrt,TRUE,retained,13
+Europe,spd_matched_bridge,climate,prec_summer,TRUE,retained,13
+Europe,spd_matched_bridge,climate,prec_win,TRUE,retained,13
+Europe,spd_matched_bridge,climate,temp_annual,TRUE,retained,13
+Europe,spd_matched_bridge,climate,temp_cold,FALSE,within_group_collinearity,13
+Europe,spd_matched_bridge,human,spd_sqrt,TRUE,retained,13
+Latin America,joint_filtered,climate,prec_summer,TRUE,retained,13
+Latin America,joint_filtered,climate,prec_win,TRUE,retained,13
+Latin America,joint_filtered,climate,temp_annual,TRUE,retained,13
+Latin America,joint_filtered,climate,temp_cold,FALSE,within_group_collinearity,13
+Latin America,joint_filtered,human,hyde_sqrt,TRUE,retained,13
+Latin America,joint_filtered,human,kk10_fraction,TRUE,retained,13
+Latin America,joint_filtered,human,spd_sqrt,TRUE,retained,13
+Latin America,spd_matched_bridge,climate,prec_summer,TRUE,retained,13
+Latin America,spd_matched_bridge,climate,prec_win,TRUE,retained,13
+Latin America,spd_matched_bridge,climate,temp_annual,TRUE,retained,13
+Latin America,spd_matched_bridge,climate,temp_cold,FALSE,within_group_collinearity,13
+Latin America,spd_matched_bridge,human,spd_sqrt,TRUE,retained,13
+North America,joint_filtered,climate,prec_summer,TRUE,retained,13
+North America,joint_filtered,climate,prec_win,TRUE,retained,13
+North America,joint_filtered,climate,temp_annual,TRUE,retained,13
+North America,joint_filtered,climate,temp_cold,FALSE,within_group_collinearity,13
+North America,joint_filtered,human,hyde_sqrt,TRUE,retained,13
+North America,joint_filtered,human,kk10_fraction,TRUE,retained,13
+North America,joint_filtered,human,spd_sqrt,TRUE,retained,13
+North America,spd_matched_bridge,climate,prec_summer,TRUE,retained,13
+North America,spd_matched_bridge,climate,prec_win,TRUE,retained,13
+North America,spd_matched_bridge,climate,temp_annual,TRUE,retained,13
+North America,spd_matched_bridge,climate,temp_cold,FALSE,within_group_collinearity,13
+North America,spd_matched_bridge,human,spd_sqrt,TRUE,retained,13
+Oceania,joint_filtered,climate,prec_summer,TRUE,retained,13
+Oceania,joint_filtered,climate,prec_win,TRUE,retained,13
+Oceania,joint_filtered,climate,temp_annual,TRUE,retained,13
+Oceania,joint_filtered,climate,temp_cold,FALSE,within_group_collinearity,13
+Oceania,joint_filtered,human,hyde_sqrt,TRUE,retained,13
+Oceania,joint_filtered,human,kk10_fraction,FALSE,within_group_collinearity,13
+Oceania,joint_filtered,human,spd_sqrt,TRUE,retained,13
+Oceania,spd_matched_bridge,climate,prec_summer,TRUE,retained,13
+Oceania,spd_matched_bridge,climate,prec_win,TRUE,retained,13
+Oceania,spd_matched_bridge,climate,temp_annual,TRUE,retained,13
+Oceania,spd_matched_bridge,climate,temp_cold,FALSE,within_group_collinearity,13
+Oceania,spd_matched_bridge,human,spd_sqrt,TRUE,retained,13
