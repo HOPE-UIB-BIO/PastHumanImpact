@@ -1,0 +1,607 @@
+---
+title: "Decision memo: implications of the multi-proxy human-impact model for H1"
+subtitle: "Internal discussion document for Suzette, Vivian, and Ondřej"
+date: "26 September 2026"
+lang: en-GB
+format:
+  pdf:
+    pdf-engine: xelatex
+    papersize: a4
+    documentclass: scrartcl
+    fontsize: 10pt
+    geometry:
+      - top=17mm
+      - bottom=18mm
+      - left=18mm
+      - right=18mm
+    colorlinks: true
+    linkcolor: "#245A70"
+    urlcolor: "#245A70"
+    number-sections: true
+    toc: false
+    keep-tex: false
+execute:
+  echo: false
+  warning: false
+  message: false
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{array}
+  - \usepackage{microtype}
+  - \usepackage{enumitem}
+  - \usepackage{pdflscape}
+  - \setlist{nosep,leftmargin=*}
+  - \setlength{\parindent}{0pt}
+  - \setlength{\parskip}{4pt}
+  - \definecolor{memoBlue}{HTML}{245A70}
+  - \definecolor{memoGold}{HTML}{C77C11}
+  - \definecolor{memoGrey}{HTML}{F1F3F4}
+  - \addtokomafont{section}{\color{memoBlue}}
+  - \addtokomafont{subsection}{\color{memoBlue}}
+---
+
+```{r}
+#| label: setup
+#| include: false
+here::i_am(
+  "Manuscript/COMMSENV-25-2408/R1/Internal/human_proxy_hvarpart_decision_memo.qmd"
+)
+
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(scales)
+library(tidyr)
+
+table_dir <- here::here(
+  "Outputs", "Tables", "H1", "Sensitivity",
+  "Human_proxy_hvarpart_collinearity_managed"
+)
+figure_dir <- here::here(
+  "Outputs", "Figures", "H1", "Sensitivity",
+  "Human_proxy_hvarpart_collinearity_managed"
+)
+variant_figure_dir <- file.path(figure_dir, "Decision_memo_variants")
+files <- c(
+  spatial_summary = file.path(table_dir, "decision_spatial_summary.csv"),
+  spatial_transitions = file.path(table_dir, "decision_spatial_transitions.csv"),
+  spatial_common = file.path(table_dir, "decision_spatial_common_cohort.csv"),
+  temporal_summary = file.path(table_dir, "decision_temporal_summary.csv"),
+  temporal_transitions = file.path(table_dir, "decision_temporal_transitions.csv"),
+  temporal_common = file.path(table_dir, "decision_temporal_common_cohort.csv"),
+  r2_summary = file.path(table_dir, "sequence_r2_summary.csv"),
+  selection_continental = file.path(
+    table_dir, "predictor_selection_frequency_by_continental_region.csv"
+  ),
+  selection_region = file.path(
+    table_dir, "predictor_selection_frequency_by_region.csv"
+  ),
+  shared_climate = file.path(table_dir, "shared_climate_selection.csv"),
+  temporal_status = file.path(table_dir, "temporal_status.csv"),
+  spatial_status = file.path(table_dir, "spatial_status.csv"),
+  figure3_canonical = file.path(
+    variant_figure_dir,
+    "fig3_canonical_spd_common.png"
+  ),
+  figure3_bridge = file.path(
+    variant_figure_dir,
+    "fig3_matched_spd_bridge_common.png"
+  ),
+  figure3_joint = file.path(
+    variant_figure_dir,
+    "fig3_filtered_joint_common.png"
+  ),
+  figure4_canonical = file.path(
+    variant_figure_dir,
+    "fig4_canonical_spd_common.png"
+  ),
+  figure4_bridge = file.path(
+    variant_figure_dir,
+    "fig4_matched_spd_bridge_common.png"
+  ),
+  figure4_joint = file.path(
+    variant_figure_dir,
+    "fig4_filtered_joint_common.png"
+  ),
+  figure4_comparison = file.path(
+    variant_figure_dir,
+    "fig4_three_model_comparison_common.png"
+  ),
+  r2_figure = file.path(
+    figure_dir, "Diagnostics",
+    "sequence_adjusted_r2__filtered_joint_vs_spd_only.png"
+  ),
+  selection_figure = file.path(
+    figure_dir, "Diagnostics",
+    "predictor_selection__continental_region_and_region.png"
+  )
+)
+missing_files <- files[!file.exists(files)]
+if (length(missing_files) > 0L) {
+  stop(
+    paste0(
+      "Decision-memo evidence is missing:\n",
+      paste("-", missing_files, collapse = "\n"),
+      "\nRun: Rscript R/analyses/91_sensitivity_analyses/human_proxy_hvarpart_collinearity_managed/00_run.R"
+    ),
+    call. = FALSE
+  )
+}
+
+spatial_summary <- read_csv(files[["spatial_summary"]], show_col_types = FALSE)
+spatial_transitions <- read_csv(
+  files[["spatial_transitions"]], show_col_types = FALSE
+)
+spatial_common <- read_csv(files[["spatial_common"]], show_col_types = FALSE)
+temporal_summary <- read_csv(files[["temporal_summary"]], show_col_types = FALSE)
+temporal_transitions <- read_csv(
+  files[["temporal_transitions"]], show_col_types = FALSE
+)
+temporal_common <- read_csv(files[["temporal_common"]], show_col_types = FALSE)
+r2_summary <- read_csv(files[["r2_summary"]], show_col_types = FALSE)
+selection_continental <- read_csv(
+  files[["selection_continental"]], show_col_types = FALSE
+)
+selection_region <- read_csv(files[["selection_region"]], show_col_types = FALSE)
+shared_climate <- read_csv(files[["shared_climate"]], show_col_types = FALSE)
+temporal_status <- read_csv(files[["temporal_status"]], show_col_types = FALSE)
+spatial_status <- read_csv(files[["spatial_status"]], show_col_types = FALSE)
+
+stack_check <- temporal_common |>
+  summarise(total = sum(.data[["allocation"]]), .by = c(
+    "model_id", "continental_region", "age"
+  ))
+stopifnot(all(abs(stack_check$total - 1) < 1e-10))
+stopifnot(all(shared_climate$identical_climate_set))
+stopifnot(!any(!is.na(temporal_status$error_message)))
+stopifnot(!any(!is.na(spatial_status$error_message)))
+
+s_can <- spatial_summary |> filter(.data[["model_id"]] == "canonical_spd")
+s_bridge <- spatial_summary |>
+  filter(.data[["model_id"]] == "spd_matched_bridge")
+s_joint <- spatial_summary |> filter(.data[["model_id"]] == "joint_filtered")
+t_can <- temporal_summary |> filter(.data[["model_id"]] == "canonical_spd")
+t_bridge <- temporal_summary |>
+  filter(.data[["model_id"]] == "spd_matched_bridge")
+t_joint <- temporal_summary |> filter(.data[["model_id"]] == "joint_filtered")
+
+s_bridge_reversals <- spatial_transitions |>
+  filter(
+    .data[["contrast"]] == "Matched SPD bridge to filtered joint",
+    .data[["from"]] == "Climate", .data[["to"]] == "Human"
+  ) |>
+  pull(.data[["n_sequences"]])
+t_bridge_reversals <- temporal_transitions |>
+  filter(
+    .data[["contrast"]] == "Matched SPD bridge to filtered joint",
+    .data[["from"]] == "Climate", .data[["to"]] == "Human"
+  ) |>
+  pull(.data[["n_units"]])
+
+retention_human <- selection_continental |>
+  filter(.data[["group"]] == "human")
+kk10_min <- min(
+  retention_human$retention_rate[
+    retention_human$predictor == "kk10_fraction"
+  ]
+)
+kk10_max <- max(
+  retention_human$retention_rate[
+    retention_human$predictor == "kk10_fraction"
+  ]
+)
+hyde_min <- min(
+  retention_human$retention_rate[
+    retention_human$predictor == "hyde_sqrt"
+  ]
+)
+hyde_max <- max(
+  retention_human$retention_rate[
+    retention_human$predictor == "hyde_sqrt"
+  ]
+)
+
+model_order <- c(
+  "Canonical SPD", "Matched SPD bridge", "Filtered joint human block"
+)
+```
+
+\begin{center}
+\colorbox{memoGrey}{\parbox{0.92\linewidth}{\textbf{Decision requested.} Pause the current paper-wide statement that climate outweighs human impact. Review the harmonised H1 comparison below, agree what construct should represent human impact, and decide whether H2 must be refitted before the manuscript narrative is revised.}}
+\end{center}
+
+# Executive summary
+
+The new result is consequential, but it is interpretable rather than chaotic.
+In the spatial H1 analysis, the canonical SPD model is climate-dominant for `r comma(s_can$climate_dominant)` of `r comma(s_can$n_sequences)` common sequences, whereas the filtered joint-human model is human-dominant for `r comma(s_joint$human_dominant)` sequences and climate-dominant for `r comma(s_joint$climate_dominant)`.
+The median zero-truncated human-minus-climate balance moves from `r number(s_can$median_zero_balance, accuracy = 0.01)` to `r number(s_joint$median_zero_balance, accuracy = 0.01)`.
+This is a spatial reversal.
+
+The temporal result weakens rather than fully reverses.
+Climate exceeds humans in `r t_joint$climate_dominant` of `r t_joint$n_units` continental-region--age units under the joint model, compared with `r t_can$climate_dominant` of `r t_can$n_units` canonically.
+Median human allocation rises from `r percent(t_can$median_human_allocation, accuracy = 1)` to `r percent(t_joint$median_human_allocation, accuracy = 1)`, while median climate allocation falls from `r percent(t_can$median_climate_allocation, accuracy = 1)` to `r percent(t_joint$median_climate_allocation, accuracy = 1)`.
+
+The matched SPD bridge is decisive for interpretation.
+It uses the same 8--2 ka observations and exactly the same locally retained climate variables as the joint model, but retains square-root SPD as the only human predictor.
+The bridge remains climate-dominant spatially (`r comma(s_bridge$climate_dominant)` versus `r comma(s_bridge$human_dominant)`) and in all `r t_bridge$n_units` temporal units.
+Moving from the bridge to the joint human block changes `r comma(s_bridge_reversals)` spatial sequences and `r t_bridge_reversals` temporal units from climate- to human-dominant, with no corresponding human-to-climate reversals.
+The expanded human representation is therefore the main source of the changed conclusion on the harmonised cohort.
+
+H2 has not been harmonised: it remains SPD-only.
+Consequently, neither the canonical climate-dominance headline nor a new paper-wide human-dominance headline is currently supported across both hypotheses.
+
+\newpage
+
+# What changed methodologically
+
+The revised analysis treats human impact as a multivariate construct, closer in structure to the multivariate climate block.
+Square-root SPD represents archaeological activity or demography; KK10 represents land-use fraction; and square-root HYDE represents population.
+Square-root transformations reduce the leverage of the long right tails of SPD and HYDE without changing their ordering.
+
+Within each pollen sequence or continental-region--age unit, redundant variables are removed *within* the human and climate blocks at $|r| = 0.8$ and VIF = 5.
+Selection has no access to the response.
+Time and selected dbMEM variables remain protected controls, and cross-block correlations are diagnosed rather than used for automatic removal because their shared variation is the object being partitioned.
+
+```{r}
+#| label: specification-table
+specification_table <- tibble::tribble(
+  ~Specification, ~Human_block, ~Climate_block, ~Interval_and_cohort, ~Purpose,
+  "Canonical paper", "sqrt(SPD)",
+  "Four fixed climate predictors", "8.5--2 ka; canonical cohort",
+  "Current manuscript result",
+  "Matched SPD bridge", "sqrt(SPD)",
+  "Locally filtered; identical to joint", "8--2 ka; matched cohort",
+  "Separates interval, cohort, and climate-filter changes",
+  "Filtered joint", "sqrt(SPD) + KK10 + sqrt(HYDE), locally filtered",
+  "Locally filtered; identical to bridge", "8--2 ka; matched cohort",
+  "Tests the expanded human construct"
+)
+knitr::kable(
+  specification_table,
+  booktabs = TRUE,
+  col.names = c(
+    "Specification", "Human block", "Climate block",
+    "Interval / cohort", "Interpretive role"
+  ),
+  caption = "The bridge-to-joint contrast changes only the human block."
+)
+```
+
+The climate-set equality assertion passed for all `r sum(shared_climate$analysis_path == "time_control")` sequence-level units and all `r sum(shared_climate$analysis_path == "spatial_control")` continental-region--age units.
+The pipeline reported no unclassified model errors.
+All comparisons below use the exact three-model common cohort: `r comma(s_joint$n_sequences)` sequences for the spatial pattern and `r t_joint$n_units` continental-region--age units for the temporal pattern.
+
+The canonical-to-joint contrast remains useful as a manuscript sensitivity comparison, but it combines changes in interval, cohort, climate selection, and human representation.
+Only the bridge-to-joint contrast isolates expansion of the human block.
+
+\newpage
+
+# Figure 3 comparison: spatial pattern
+
+These are direct Figure-3-style outputs using the same `r comma(s_joint$n_sequences)` sequences, map limits, balance scale, region ordering, spatial-control workflow, and zero-truncated composition.
+The only intended differences are those shown in the specification table.
+
+**A. Canonical SPD model.** Climate dominates most sequence-level balances and regional distributions.
+
+```{r}
+#| label: figure3-canonical
+#| fig-cap: "Figure 3 variant A. Canonical square-root SPD model on the exact three-model common cohort."
+#| out-width: "74%"
+#| fig-align: center
+knitr::include_graphics(files[["figure3_canonical"]])
+```
+
+**B. Matched SPD bridge.** Matching the interval and cohort and filtering climate moves the distribution towards zero, but the overall pattern remains climate-dominant.
+
+```{r}
+#| label: figure3-bridge
+#| fig-cap: "Figure 3 variant B. Matched square-root SPD bridge with the joint model's locally selected climate predictors."
+#| out-width: "74%"
+#| fig-align: center
+knitr::include_graphics(files[["figure3_bridge"]])
+```
+
+\newpage
+
+# Figure 3 comparison: joint human block
+
+**C. Filtered joint-human model.** The spatial pattern changes direction when the human block can retain square-root SPD, KK10, and square-root HYDE.
+
+```{r}
+#| label: figure3-joint
+#| fig-cap: "Figure 3 variant C. Filtered joint-human model on the same exact common cohort."
+#| out-width: "88%"
+#| fig-align: center
+knitr::include_graphics(files[["figure3_joint"]])
+```
+
+```{r}
+#| label: result-summary-table
+spatial_display <- spatial_summary |>
+  mutate(model_label = factor(model_label, levels = model_order)) |>
+  arrange(model_label) |>
+  transmute(
+    Model = as.character(model_label),
+    `Human larger` = human_dominant,
+    `Climate larger` = climate_dominant,
+    `Median balance` = number(median_zero_balance, accuracy = 0.01),
+    `Median total adj. R2` = number(
+      median_total_adjusted_r_squared, accuracy = 0.001
+    )
+  )
+knitr::kable(
+  spatial_display, booktabs = TRUE,
+  caption = "Spatial H1 summary on the exact common cohort."
+)
+```
+
+The bridge remains climate-dominant, whereas adding the filtered KK10 and HYDE information creates `r comma(s_bridge_reversals)` climate-to-human reversals and moves the median balance from `r number(s_bridge$median_zero_balance, accuracy = 0.01)` to `r number(s_joint$median_zero_balance, accuracy = 0.01)`.
+
+\newpage
+
+```{=latex}
+\begin{landscape}
+```
+
+# Figure 4 comparison: temporal pattern
+
+```{r}
+#| label: figure4-variants
+#| fig-cap: "Figure 4 variants on the same 65 continental-region--age units: canonical SPD, matched SPD bridge, and the filtered joint-human block."
+#| out-width: "76%"
+#| fig-align: center
+#| fig-pos: H
+knitr::include_graphics(files[["figure4_comparison"]])
+```
+
+Climate exceeds humans in `r t_can$climate_dominant`, `r t_bridge$climate_dominant`, and `r t_joint$climate_dominant` of `r t_joint$n_units` for the canonical, bridge, and joint variants, respectively.
+Thus the temporal result weakens substantially under the joint block but does not reverse overall.
+
+```{=latex}
+\end{landscape}
+```
+
+\newpage
+
+```{=latex}
+\iffalse
+```
+
+# How the results changed
+
+```{r}
+#| label: dominance-overview
+#| fig-cap: "Before / bridge / after comparison on exact three-model common cohorts. Bars show the fraction of analytical units in which the zero-truncated human or climate contribution is larger; grey denotes a tie."
+#| fig-width: 7.2
+#| fig-height: 3.5
+dominance_plot <- bind_rows(
+  spatial_summary |>
+    transmute(
+      scale = "Spatial: pollen sequences", model_label,
+      Human = human_dominant, Climate = climate_dominant, Tie = ties
+    ),
+  temporal_summary |>
+    transmute(
+      scale = "Temporal: continental-region--age units", model_label,
+      Human = human_dominant, Climate = climate_dominant, Tie = ties
+    )
+) |>
+  pivot_longer(
+    cols = c("Human", "Climate", "Tie"),
+    names_to = "dominance", values_to = "count"
+  ) |>
+  mutate(
+    model_label = factor(model_label, levels = model_order),
+    dominance = factor(dominance, levels = c("Climate", "Tie", "Human"))
+  ) |>
+  group_by(scale, model_label) |>
+  mutate(proportion = count / sum(count)) |>
+  ungroup()
+
+ggplot(dominance_plot, aes(model_label, proportion, fill = dominance)) +
+  geom_col(width = 0.72, colour = "white", linewidth = 0.25) +
+  geom_text(
+    aes(label = if_else(count > 0, as.character(count), "")),
+    position = position_stack(vjust = 0.5), size = 3.0, colour = "white"
+  ) +
+  facet_wrap(vars(scale), ncol = 2) +
+  scale_fill_manual(
+    values = c(Climate = "#245A70", Tie = "#808080", Human = "#C77C11")
+  ) +
+  scale_y_continuous(labels = label_percent(), expand = expansion(mult = c(0, 0.02))) +
+  labs(x = NULL, y = "Share of common cohort", fill = "Larger allocation") +
+  theme_minimal(base_size = 9) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(angle = 18, hjust = 1),
+    legend.position = "bottom",
+    strip.text = element_text(face = "bold")
+  )
+```
+
+```{r}
+#| label: result-summary-tables
+spatial_display <- spatial_summary |>
+  mutate(model_label = factor(model_label, levels = model_order)) |>
+  arrange(model_label) |>
+  transmute(
+    Model = as.character(model_label),
+    `Human larger` = human_dominant,
+    `Climate larger` = climate_dominant,
+    `Median balance` = number(median_zero_balance, accuracy = 0.01),
+    `Median total adj. R2` = number(
+      median_total_adjusted_r_squared, accuracy = 0.001
+    )
+  )
+knitr::kable(
+  spatial_display, booktabs = TRUE,
+  caption = "Spatial H1 summary on the exact common cohort."
+)
+```
+
+The spatial bridge shifts the median balance towards zero relative to the canonical model (`r number(s_bridge$median_zero_balance, accuracy = 0.01)` versus `r number(s_can$median_zero_balance, accuracy = 0.01)`) but does not change the qualitative conclusion.
+Adding the filtered KK10 and HYDE information is what moves the median above zero and creates the reversal.
+
+For temporal H1, the joint model remains climate-dominant overall, but `r t_joint$human_dominant` units become human-dominant.
+This is materially weaker and more heterogeneous evidence for climate dominance than the canonical result.
+
+\newpage
+
+# Adjusted R-squared consequences
+
+On the exact three-model spatial cohort, median total adjusted $R^2$ is `r number(s_can$median_total_adjusted_r_squared, accuracy = 0.001)` for the canonical model, `r number(s_bridge$median_total_adjusted_r_squared, accuracy = 0.001)` for the matched SPD bridge, and `r number(s_joint$median_total_adjusted_r_squared, accuracy = 0.001)` for the filtered joint model.
+Median unique human adjusted $R^2$ increases from `r number(s_bridge$median_unique_human, accuracy = 0.001)` in the bridge to `r number(s_joint$median_unique_human, accuracy = 0.001)` in the joint model; median unique climate adjusted $R^2$ decreases from `r number(s_bridge$median_unique_climate, accuracy = 0.001)` to `r number(s_joint$median_unique_climate, accuracy = 0.001)`.
+
+The existing canonical-to-joint diagnostic below shows that this is not a uniform translation of every sequence.
+Across its pairwise cohort of `r comma(r2_summary$n_sequences[[1]])` sequences, the median change in total adjusted $R^2$ is `r number(r2_summary$median_difference[r2_summary$metric == "Total adjusted R²"], accuracy = 0.001)`, while the median pure-human component rises and the pure-climate component falls.
+The scatter and difference distributions also reveal substantial sequence-level heterogeneity.
+
+```{r}
+#| label: existing-r2-diagnostic
+#| fig-cap: "Existing sequence-level adjusted R-squared diagnostic for the canonical SPD and filtered joint models. The comparison combines all methodological changes and should not be read as the isolated effect of adding human predictors."
+#| out-width: "92%"
+#| fig-align: center
+knitr::include_graphics(files[["r2_figure"]])
+```
+
+Negative unique components and suppression are retained in the audit tables rather than silently truncated.
+The dominance counts instead use the established zero-truncated composition, which aids visual comparison but cannot represent antagonistic or suppression components.
+
+\newpage
+
+# Which predictors survive, and where?
+
+The locally retained predictors differ among sequences and geographically.
+Square-root SPD is nearly universal because it is first in the human preference order, while KK10 retention varies from `r percent(kk10_min, accuracy = 1)` to `r percent(kk10_max, accuracy = 1)` across continental regions and square-root HYDE from `r percent(hyde_min, accuracy = 1)` to `r percent(hyde_max, accuracy = 1)`.
+This variation is substantively informative, but it also means that the aggregated joint estimate is assembled from locally different human and climate blocks.
+
+```{r}
+#| label: existing-selection-diagnostic
+#| fig-cap: "Retention of human and climate predictors by continental region and Köppen-derived region. Public terminology follows the project convention: broad geographic groups are continental regions; Köppen-derived categories are regions."
+#| out-width: "96%"
+#| fig-align: center
+knitr::include_graphics(files[["selection_figure"]])
+```
+
+The selection is deterministic, response-independent, and restricted to redundancy *within* conceptual blocks.
+It reduces obvious duplication, but it does not create a single universal predictor set or prove that the retained variables identify causal human or climate effects.
+
+## Interpretation and limitations
+
+A multivariate human block is conceptually more symmetric with the four-variable climate block than a single SPD series.
+That symmetry matters because HVarPart allocates variation to blocks as represented in the design matrix; a broad climate construct compared with one noisy archaeological proxy is not the same estimand as a broad climate construct compared with demography, land use, and population.
+
+\newpage
+
+```{=latex}
+\fi
+```
+
+# Interpretation and manuscript choices
+
+The joint model should not automatically be called “correct”.
+Important limitations remain:
+
+- block dimensionality can affect how much variation a block can capture, even after filtering;
+- local selection makes the meaning of the human and climate blocks vary among units;
+- cross-block shared variation is scientifically relevant but prevents simple causal attribution;
+- time and space controls can themselves be strongly related to focal predictors;
+- negative adjusted components and suppression make individual fractions unstable in some units; and
+- zero truncation produces an interpretable composition but conceals negative fractions.
+
+The robust statement is therefore narrower: **the claim that climate generally outweighs humans in H1 is not robust to defensible representation of human impact.**
+Spatial H1 reverses; temporal H1 remains climate-dominant overall but becomes substantially less uniform.
+
+## Three manuscript options
+
+```{r}
+#| label: manuscript-options
+options_table <- tibble::tribble(
+  ~Option, ~Title_and_abstract, ~H1_results_and_figures, ~Discussion_and_review, ~H2_consequence,
+  "1. Keep SPD primary; soften headline",
+  "Remove broad climate-dominance claim; frame SPD explicitly as archaeological activity.",
+  "Keep current main figures; add joint sensitivity prominently and report non-robustness.",
+  "Lowest structural cost, but must explain why a narrower human construct remains primary.",
+  "Internally consistent with current SPD-only H2, but construct remains narrow.",
+  "2. Replace primary H1 with joint model",
+  "Reframe human impact as a multivariate construct; spatial and temporal conclusions must be separated.",
+  "Replace main H1 figures and rewrite results around spatial reversal and temporal weakening.",
+  "Strong methodological symmetry, but largest revision and strongest need for additional validation.",
+  "Requires a joint-proxy H2 refit before any paper-wide conclusion.",
+  "3. Treat SPD and joint models as co-primary",
+  "Lead with representation sensitivity or scale dependence rather than one dominant driver.",
+  "Present matched SPD bridge and joint model together; distinguish robust from specification-dependent patterns.",
+  "Most transparent about uncertainty, but increases narrative and figure complexity.",
+  "H2 should be harmonised to avoid asymmetric evidence across hypotheses."
+)
+knitr::kable(
+  options_table, booktabs = TRUE,
+  caption = "Consequences of the three defensible manuscript strategies."
+)
+```
+
+My process recommendation is not to select an option in this memo.
+It is to suspend the existing headline, discuss what construct the team intends “human impact” to mean, and decide whether the H2 refit is required before manuscript restructuring.
+
+\newpage
+
+# Proposed H2 refit
+
+Before adopting a paper-wide joint-proxy narrative, H2 should be brought onto the same evidential footing:
+
+1. construct regional KK10 and HYDE trajectories on the same age grid and spatial units used by the existing H2 analysis;
+2. preserve square-root SPD, KK10 as a fraction, and square-root HYDE;
+3. apply response-independent local correlation/VIF filtering within the human and climate blocks;
+4. fit a harmonised SPD-only bridge and a filtered joint-human model on an exact common cohort;
+5. preserve the existing H2 response, controls, HVarPart logic, thresholds, and diagnostics; and
+6. report exclusions, selected predictors, total and unique adjusted $R^2$, negative components, and residual dependence for both models.
+
+This is not a request to make H2 agree with H1.
+It is a request to remove the current asymmetry in how “human impact” is represented before drawing a paper-wide conclusion.
+
+# Questions for the co-author meeting
+
+1. Which construct best represents “human impact” for the primary hypothesis: archaeological activity alone, or a combined demography--land-use--population construct?
+2. Is a scale-dependent conclusion --- spatial reversal but temporal weakening --- scientifically preferable to any single dominant-driver claim?
+3. Should H2 be rerun before we choose a manuscript structure, or can we first agree the conceptual model?
+4. Which of the three manuscript options is most defensible to readers and reviewers, even if it requires the most rewriting?
+5. What additional robustness check would materially change our decision, rather than only add another sensitivity panel?
+
+\begin{center}
+\colorbox{memoGrey}{\parbox{0.92\linewidth}{\textbf{Suggested meeting outcome.} Agree the intended human-impact construct, select a provisional manuscript option, and decide whether to commission the harmonised H2 refit before changing the title, abstract, or main figures.}}
+\end{center}
+
+\newpage
+
+# Technical appendix: scope and provenance
+
+This memo is an internal decision aid, not a reviewer response and not manuscript text.
+It does not modify the canonical H1 or H2 pipelines, their target stores, the manuscript, or the submitted figures.
+The matched bridge and joint models run in the isolated target store `sensitivity_analyses/human_proxy_hvarpart_collinearity_managed`.
+
+The evidence covers matched observations between 8,000 and 2,000 cal yr BP without extrapolation.
+The spatial comparison is restricted to the `r comma(s_joint$n_sequences)` sequences eligible under all three specifications.
+The temporal comparison includes all `r t_joint$n_units` common continental-region--age units.
+Every temporal composition was checked to sum to one after zero truncation, the bridge and joint climate selections were asserted to be identical within every analytical unit, and no caught model error remained unclassified.
+
+```{r}
+#| label: technical-summary
+technical_table <- tibble::tribble(
+  ~Check, ~Result,
+  "Spatial common cohort", paste(comma(s_joint$n_sequences), "sequences"),
+  "Temporal common cohort", paste(t_joint$n_units, "continental-region--age units"),
+  "Bridge/joint climate selections", "Identical in every unit",
+  "Temporal stack reconstruction", "All sums equal one within numerical tolerance",
+  "Unclassified model errors", "None",
+  "Primary interpretation", "Bridge-to-joint isolates expansion of the human block",
+  "Scope restriction", "H1 only; H2 remains SPD-only"
+)
+knitr::kable(technical_table, booktabs = TRUE)
+```
+
+Primary evidence files are the exported `decision_spatial_*`, `decision_temporal_*`, `shared_climate_selection.csv`, adjusted-$R^2$, and predictor-selection tables under `Outputs/Tables/H1/Sensitivity/Human_proxy_hvarpart_collinearity_managed/`.
+The QMD stops with the exact pipeline command if these files are missing, and all analytical numbers in this memo are computed from those public CSVs at render time.
+
+**Bottom line:** the original headline is no longer safe as a general conclusion.
+The strongest next step is a team decision about the human-impact construct, followed by a harmonised H2 refit if the joint construct is to shape the paper-wide narrative.
