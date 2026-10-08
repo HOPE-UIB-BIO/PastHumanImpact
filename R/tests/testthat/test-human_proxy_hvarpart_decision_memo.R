@@ -12,20 +12,20 @@ testthat::test_that("co-author memo covers the full revision before the proxy de
 
   required_sections <-
     c(
-      "# What changed since May 2026",
-      "# Data scope, analytical populations, and the study interval",
-      "# Pollen counts and coverage",
-      "# Temporal patterns in the ten pollen assemblage properties",
-      "# PAP correlation and the reduced response",
-      "# What was corrected in HVarPart",
-      "# Model fit is separate from predictor allocation",
-      "# Canonical H1 spatial result",
-      "# Canonical H1 temporal result",
-      "# Canonical H2",
-      "# Dependence, thinning, and omission checks",
-      "# SPD-radius sensitivity",
-      "# Expert-event proxy sensitivity",
-      "# Consequences for the manuscript narrative",
+      "# How the revision developed",
+      "# First, clarifying which data enter each analysis",
+      "# Checking pollen counts and the cost of stricter thresholds",
+      "# Refitting the pollen assemblage trajectories",
+      "# Checking whether overlapping PAPs drive the result",
+      "# Correcting how I extract and interpret HVarPart results",
+      "# Showing model fit alongside predictor allocation",
+      "# Adding time control to spatial H1",
+      "# Adding spatial control to temporal H1",
+      "# Revisiting what H2 tells us",
+      "# Checking dependence and uneven sampling",
+      "# Testing the archaeological neighbourhood radius",
+      "# Comparing SPD with the expert-event histories",
+      "# Bringing these changes back into the manuscript",
       "# Final decision: should human impact include SPD, KK10, and HYDE?"
     )
 
@@ -34,25 +34,29 @@ testthat::test_that("co-author memo covers the full revision before the proxy de
     .f = ~ testthat::expect_match(text, .x, fixed = TRUE)
   )
 
-  testthat::expect_match(text, "**Canonical R1**", fixed = TRUE)
-  testthat::expect_match(text, "**Registered validation**", fixed = TRUE)
-  testthat::expect_match(text, "**Exploratory proxy decision**", fixed = TRUE)
+  testthat::expect_match(
+    text,
+    "**The revised manuscript analyses:**",
+    fixed = TRUE
+  )
+  testthat::expect_match(text, "**The supporting checks:**", fixed = TRUE)
+  testthat::expect_match(text, "**The later exploratory work:**", fixed = TRUE)
 
   canonical_position <-
-    regexpr("# Canonical H1 spatial result", text, fixed = TRUE)[[1]]
+    regexpr("# Adding time control to spatial H1", text, fixed = TRUE)[[1]]
 
   h2_position <-
-    regexpr("# Canonical H2", text, fixed = TRUE)[[1]]
+    regexpr("# Revisiting what H2 tells us", text, fixed = TRUE)[[1]]
 
   validation_position <-
-    regexpr("# Dependence, thinning, and omission checks", text, fixed = TRUE)[[1]]
+    regexpr("# Checking dependence and uneven sampling", text, fixed = TRUE)[[1]]
 
   decision_position <-
     regexpr("# Final decision:", text, fixed = TRUE)[[1]]
 
-  decision_box_position <-
+  decision_input_position <-
     regexpr(
-      "\\textbf{Decision requested.}",
+      "## Where I need your input",
       text,
       fixed = TRUE
     )[[1]]
@@ -60,7 +64,7 @@ testthat::test_that("co-author memo covers the full revision before the proxy de
   testthat::expect_gt(decision_position, canonical_position)
   testthat::expect_gt(decision_position, h2_position)
   testthat::expect_gt(decision_position, validation_position)
-  testthat::expect_gt(decision_box_position, decision_position)
+  testthat::expect_gt(decision_input_position, decision_position)
 })
 
 testthat::test_that("co-author memo reads public evidence and fails actionably", {

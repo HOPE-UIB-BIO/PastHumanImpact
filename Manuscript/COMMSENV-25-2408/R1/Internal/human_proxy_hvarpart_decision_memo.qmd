@@ -1,6 +1,6 @@
 ---
 title: "Co-author update: May-September 2026 revision and the human-impact proxy decision"
-subtitle: "Internal discussion document for Suzette, Vivian, and Ondrej"
+subtitle: "An update from Ondrej to Vivian and Suzette"
 date: "27 September 2026"
 lang: en-GB
 format:
@@ -120,7 +120,7 @@ revision_timeline <-
     "August", "Time and spatial controls added to H1", "Made the spatial and temporal comparisons reciprocal and explicit about dependence.",
     "August-September", "Dependence, thinning, omission, radius, and event checks", "Tested sampling structure and alternative definitions on matched subsets.",
     "September", "R1 manuscript and evidence registry rebuilt", "Aligned scope, terminology, figures, replies, and reproducible public evidence.",
-    "Late September", "KK10 and HYDE added as exploratory human proxies", "Exposed sensitivity to the representation of human impact; this is not yet in R1."
+    "Late September", "Exploratory follow-up on human-impact proxies", "Raised the question of how to represent human impact; discussed at the end and not yet in R1."
   ) |>
   dplyr::rename(`Why it matters` = .data[["Why_it_matters"]])
 
@@ -161,9 +161,9 @@ validation_summary <-
     "Spatial dependence", "Controls reduce residual spatial structure.", "Some residual dependence remains and limits causal interpretation.",
     "Thinning and leave-out", "Aggregate balance is generally retained.", "Fewer sequences and particular omissions increase uncertainty.",
     "SPD radius", "Aggregate result is less sensitive than individual estimates.", "Some sequences and time slices reverse ranking.",
-    "Expert events", "SPD remains the canonical primary analysis.", "Attribution varies with proxy definition; events are incomplete and partly circular."
+    "Expert events", "SPD remains the primary analysis in R1.", "Attribution varies with proxy definition; events are incomplete and partly circular."
   ) |>
-  dplyr::rename(`Canonical finding` = .data[["Canonical_finding"]])
+  dplyr::rename(`SPD-based finding` = .data[["Canonical_finding"]])
 
 narrative_changes <-
   tibble::tribble(
@@ -354,43 +354,30 @@ r2_total <-
   dplyr::filter(stringr::str_starts(.data[["metric"]], "Total"))
 ```
 
-\begin{center}
-\colorbox{memoGrey}{\parbox{0.92\linewidth}{\textbf{Purpose and status.} This memo brings Suzette and Vivian up to date on the scientific revision completed since May 2026. Sections 1--11 describe canonical R1 and its registered validation evidence. Section 12 introduces a later exploratory analysis using KK10 and HYDE that is not yet part of the manuscript or reviewer response. The manuscript itself is unchanged by this memo.}}
-\end{center}
+Vivian and Suzette,
 
-# Executive summary
+I have been working through the reviewers' comments and revising the analyses and manuscript since May.
+There is quite a lot to catch up on, so I wanted to walk you through what I changed, why I changed it, and what the results now allow us to say.
+I will follow the order of the revision, starting with the pollen data and response trajectories, then the variation partitioning and sensitivity checks, and finally the changes to the manuscript.
 
-The revision since May is a substantial analytical reconstruction rather than a cosmetic rewrite.
-The current R1 package now exposes the response trajectories, distinguishes analysis-specific subsets, corrects the extraction and interpretation of HVarPart components, controls time and spatial structure reciprocally, and reports coordinated sensitivity checks.
-
-Under the **canonical R1 specification**, square-root SPD is the primary human predictor and four palaeoclimate variables form the climate block.
-After controlling time within sequences, climate has the larger zero-truncated contribution in `r scales::comma(spatial_climate_dominant_n)` of `r scales::comma(spatial_controlled_n)` spatial sequence models (`r scales::percent(spatial_climate_dominant_n / spatial_controlled_n, accuracy = 0.1)`).
-After controlling spatial structure, climate is larger in `r temporal_climate_dominant_n` of `r temporal_spd_n` estimable continental-region-age comparisons.
-H2 similarly attributes more of the broad change in PAP interrelationships to climate than to SPD in most estimable groups.
-
-The revision also narrows what this result means.
-The HVarPart allocations divide variation attributed to predictors within fitted models; they are not percentages of all ecological change.
-The result concerns pollen assemblage properties, broad analytical regions, and 8.5--2.0 ka BP.
-It does not establish that people were absent, locally unimportant, or ecologically benign.
-
-The registered validation analyses generally retain the canonical aggregate ordering, but identify important qualifications: model fit varies widely, several PAPs are redundant, residual dependence remains in some subsets, and individual results can change with spatial thinning, SPD radius, or proxy definition.
-
-A later exploratory analysis adds KK10 land use and HYDE population to the human block after local collinearity filtering.
-That evidence materially challenges the robustness of the paper-wide climate-dominance headline.
-Because Suzette and Vivian have not yet seen the canonical revision, the exploratory result and the manuscript decision are deliberately deferred to the final section.
+Most of this work is already incorporated in the revised manuscript and reviewer response, which I refer to here as R1.
+The main analyses still use the summed probability distribution of archaeological radiocarbon dates (SPD) as the human predictor.
+Towards the end, I will show you a later analysis that raises a question we need to resolve together before I go further with the paper.
+I have kept that exploratory work separate from R1.
 
 \newpage
 
-# What changed since May 2026
+# How the revision developed
 
-The table below is a scientific map of the revision, not a list of software commits.
-Each step either answered a reviewer concern, corrected an analytical interpretation, or made the evidential chain reproducible.
+The table below gives you a map of the work from May to September.
+Some steps address the reviewers' concerns; others came from checking our analyses more closely and finding things I needed to correct or explain better.
 
 ```{r}
 #| label: revision-timeline
 knitr::kable(
   revision_timeline,
   format = "latex",
+  position = "H",
   booktabs = TRUE,
   align = c(
     "p{0.13\\linewidth}",
@@ -401,36 +388,39 @@ knitr::kable(
 )
 ```
 
-Three evidence states must remain separate throughout this memo:
+As you read, it helps to keep three parts of the work in mind:
 
-1. **Canonical R1**: analyses and figures already incorporated in the revised manuscript and response.
-2. **Registered validation**: supplementary checks that qualify, but do not silently redefine, the canonical specification.
-3. **Exploratory proxy decision**: the later KK10/HYDE comparison, not yet incorporated in R1.
+1. **The revised manuscript analyses:** the results and figures I have already incorporated in R1.
+2. **The supporting checks:** sensitivity and validation analyses that help us understand the limits of those results.
+3. **The later exploratory work:** the additional human-proxy comparison at the end, which I have not yet incorporated in the manuscript or response.
 
-The project also moved from loosely connected scripts to registered, restartable pipelines with public outputs, analysis profiles, source hashes, and a claim-evidence registry.
-That workflow change does not itself alter a scientific conclusion, but it now makes every value and figure in R1 traceable to a stable source.
+Alongside the scientific work, I reorganised the scripts into registered, restartable pipelines.
+The outputs now have defined analysis profiles, source hashes, and a registry linking manuscript claims to their evidence.
+This does not change the results by itself, but it makes it much easier to trace each value and figure back to its source.
 
 \newpage
 
-# Data scope, analytical populations, and the study interval
+# First, clarifying which data enter each analysis
 
+Before getting into the individual changes, I want to clarify which sequences actually contribute to the results.
 The preparation pool contains `r scales::comma(preparation_pool_n)` pollen sequences.
-The initial spatial inventory contains `r scales::comma(original_h1_inventory_n)`, but eligibility differs among analyses because responses, predictors, temporal coverage, controls, and rank requirements differ.
-The revised manuscript therefore no longer implies that every sequence contributes to every result.
+The initial spatial inventory contains `r scales::comma(original_h1_inventory_n)`, but the usable subset differs among analyses because of response availability, predictors, temporal coverage, controls, and rank requirements.
+I made these differences explicit in the manuscript so that we no longer give the impression that every sequence contributes to every result.
 
 ```{r}
 #| label: analytical-populations
 knitr::kable(
   analysis_populations,
   format = "latex",
+  position = "H",
   booktabs = TRUE,
   caption = "Analysis-specific populations used by the revised evidence."
 )
 ```
 
-The principal SPD comparison is restricted to 8.5--2.0 ka BP.
-The younger boundary is a practical common boundary arising from archaeological coverage, not a universal statement that SPD becomes invalid after 2 ka BP.
-Expert-event histories extend later in some regions, but are interpreted separately.
+I also clarified why the main SPD comparison covers 8.5--2.0 ka BP.
+The younger boundary gives us a practical common interval given the archaeological coverage; it does not mean that SPD is universally invalid after 2 ka BP.
+The expert-event histories extend later in some regions, so I interpret those separately.
 
 ```{r}
 #| label: study-overview
@@ -443,14 +433,16 @@ knitr::include_graphics(canonical_figures[["revision_study_overview"]])
 
 \newpage
 
-# Pollen counts and coverage
+# Checking pollen counts and the cost of stricter thresholds
 
+One of the first things I checked was how much data we would lose by requiring higher pollen counts.
 The baseline profile retained `r scales::comma(preparation_pool_n)` sequences.
 Increasing the nominal count target leaves `r scales::comma(table_pollen_retention[["n_records_retained"]][table_pollen_retention[["threshold"]] == 300])` sequences at 300 grains, `r scales::comma(table_pollen_retention[["n_records_retained"]][table_pollen_retention[["threshold"]] == 500])` at 500 grains, and `r scales::comma(table_pollen_retention[["n_records_retained"]][table_pollen_retention[["threshold"]] == 1000])` at 1,000 grains.
-Losses are uneven among continental regions.
+Those losses are uneven among continental regions, so a stricter threshold also changes the geographical coverage.
 
-This analysis supports retaining the baseline rule while acknowledging a precision-coverage trade-off.
-It is a **coverage diagnostic**, not a rerun of H1, and therefore cannot establish that H1 estimates are invariant to stricter pollen thresholds.
+On that basis, I retained the baseline rule and made the precision-coverage trade-off explicit.
+There is an important limit to this check: I examined coverage, but did not refit H1 under the higher thresholds.
+We can therefore describe the data loss, but cannot claim that the H1 estimates would be unchanged.
 
 ```{r}
 #| label: pollen-retention-figure
@@ -465,19 +457,21 @@ knitr::include_graphics(
 
 \newpage
 
-# Temporal patterns in the ten pollen assemblage properties
+# Refitting the pollen assemblage trajectories
 
-The revised response framework contains ten PAPs rather than nine, including the difference between Shannon- and Simpson-weighted diversity.
-All temporal hGAMs were refitted through a reproducible request-and-export workflow.
-The displayed trajectories are equal-weighted summaries of sequence-level posterior predictions within observed temporal coverage, so long or densely sampled sequences do not dominate the regional curves.
+I then revisited the response trajectories so that we could show how the pollen assemblage properties (PAPs) change before trying to attribute those changes to human activity or climate.
+The revised framework contains ten PAPs rather than nine, including the difference between Shannon- and Simpson-weighted diversity.
+I refitted all temporal hierarchical generalised additive models (hGAMs) through a reproducible request-and-export workflow.
+The plotted trajectories are equal-weighted summaries of sequence-level posterior predictions within observed temporal coverage, so long or densely sampled sequences do not dominate the regional curves.
 
-The main message is heterogeneity rather than one global temporal trajectory.
+What stands out to me is the heterogeneity.
 Richness, diversity, evenness, turnover, rates of change, and change-point densities do not move synchronously in every region.
-Missing segments indicate inadequate observed coverage, not an absence of ecological change.
+I have also made clear that gaps in the curves indicate inadequate observed coverage, rather than an absence of ecological change.
+The main figure shows selected trajectories, and all ten PAPs are available in the Supplementary Information.
 
 ```{r}
 #| label: pap-trajectories
-#| fig-cap: "Canonical R1 Figure 2: selected temporal trajectories of pollen assemblage properties. The Supplementary Information shows all ten PAPs."
+#| fig-cap: "Revised manuscript Figure 2: selected temporal trajectories of pollen assemblage properties. The Supplementary Information shows all ten PAPs."
 #| out-width: "96%"
 #| fig-align: center
 #| fig-pos: H
@@ -486,14 +480,15 @@ knitr::include_graphics(canonical_figures[["revision_pap_primary"]])
 
 \newpage
 
-# PAP correlation and the reduced response
+# Checking whether overlapping PAPs drive the result
 
-Correlation among PAPs is expected because several properties share taxa, abundance information, or mathematical components.
+With those trajectories in place, I checked how much the PAPs overlap.
+We expect some correlation because several properties share taxa, abundance information, or mathematical components.
 Of `r pap_correlation_pairs_n` PAP pairs, `r pap_correlation_strong_n` have a median absolute correlation of at least 0.8 across eligible groups; the maximum median absolute correlation is `r sprintf("%.2f", pap_correlation_max)`.
 
-The reduced-response sensitivity removes redundant PAPs and compares only sequences estimable under both configurations.
+I therefore ran a reduced-response sensitivity that removes redundant PAPs, comparing only sequences for which both configurations can be estimated.
 Across `r scales::comma(pap_paired_climate[["n_pairs"]])` matched sequences, the aggregate climate-over-human ordering persists, although individual allocations change.
-This supports the broad canonical ordering; it does not make the ten PAPs independent replicates or imply identical estimates for every sequence.
+This reassures me about the broad ordering in the SPD-based analysis, but it does not make the ten PAPs independent replicates or imply that every sequence gives the same estimate.
 
 ```{r}
 #| label: pap-collinearity-figures
@@ -515,23 +510,25 @@ knitr::include_graphics(
 
 \newpage
 
-# What was corrected in HVarPart
+# Correcting how I extract and interpret HVarPart results
 
-The original extraction treated relative importance too simply.
-The revised workflow starts from the complete commonality decomposition and keeps four concepts separate:
+The next substantial change concerned the variation partitioning.
+When I revisited the original HVarPart extraction, I found that it treated relative importance too simply.
+I corrected the workflow to use the complete commonality decomposition, which separates unique and shared components of explained variation, and kept four quantities distinct:
 
-- **Total adjusted (R^2)**: how much multivariate response variation the full model explains.
-- **Unique adjusted (R^2)**: non-shared variation associated with one predictor group after the others are controlled.
-- **Signed hierarchical contributions**: complete contributions that retain negative components arising from suppression or collinearity.
-- **Zero-truncated composition**: a display transformation that sets negative components to zero and recomposes the remaining contributions to sum to one.
+- **Total adjusted \(R^2\):** how much multivariate response variation the full model explains.
+- **Unique adjusted \(R^2\):** non-shared variation associated with one predictor group after the others are controlled.
+- **Signed hierarchical contributions:** complete contributions that retain negative components arising from suppression or collinearity.
+- **Zero-truncated composition:** a display transformation that sets negative components to zero and recomposes the remaining contributions to sum to one.
 
-The zero-truncated bars in the main figures are therefore not percentages of all ecological change and are not estimates of pure unique variation.
-An additional profile excludes models containing negative individual components.
-The numerical allocations differ among profiles, but the canonical aggregate ordering is retained.
+This matters for how we describe the main figures.
+The zero-truncated bars divide the variation attributed to predictors within the fitted models; they are not percentages of all ecological change or estimates of pure unique variation.
+I also compared these summaries with a profile that excludes models containing negative individual components.
+The numerical allocations differ among profiles, but the aggregate ordering in the SPD-based analysis is retained.
 
 ```{r}
 #| label: hvarpart-profile-figure
-#| fig-cap: "Registered comparison of signed, zero-truncated, and exclude-negative HVarPart profiles. These are alternative summaries of the same decompositions, not interchangeable effect estimates."
+#| fig-cap: "Comparison of signed, zero-truncated, and exclude-negative HVarPart profiles. These are alternative summaries of the same decompositions, not interchangeable effect estimates."
 #| out-width: "90%"
 #| fig-align: center
 #| fig-pos: H
@@ -542,16 +539,18 @@ knitr::include_graphics(
 
 \newpage
 
-# Model fit is separate from predictor allocation
+# Showing model fit alongside predictor allocation
 
+Once I had corrected the extraction, I also separated the question of model fit from the question of how the fitted variation is allocated.
 Of the `r scales::comma(original_h1_inventory_n)` sequences considered for the initial spatial analysis, `r scales::comma(spatial_available_n)` have an estimable decomposition.
-Their mean total adjusted (R^2) is `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2, spatial_original_fit_ci[1], spatial_original_fit_ci[2])` (mean and region-block bootstrap 95% confidence interval).
+Their mean total adjusted \(R^2\) is `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2, spatial_original_fit_ci[1], spatial_original_fit_ci[2])` (mean and region-block bootstrap 95% confidence interval).
 
 The controlled spatial subset contains `r scales::comma(spatial_controlled_n)` sequences.
-Its mean adjusted (R^2) is `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2_controlled, spatial_controlled_fit_ci[1], spatial_controlled_fit_ci[2])`, while its median and interquartile range are `r sprintf("%.3f [%.3f, %.3f]", spatial_median_adjusted_r2, spatial_q1_adjusted_r2_controlled, spatial_q3_adjusted_r2_controlled)`.
+Its mean adjusted \(R^2\) is `r sprintf("%.3f [%.3f, %.3f]", spatial_mean_adjusted_r2_controlled, spatial_controlled_fit_ci[1], spatial_controlled_fit_ci[2])`, while its median and interquartile range are `r sprintf("%.3f [%.3f, %.3f]", spatial_median_adjusted_r2, spatial_q1_adjusted_r2_controlled, spatial_q3_adjusted_r2_controlled)`.
 
 Fit varies substantially among sequences and is only weakly related to signed human allocation.
 A model can allocate most of its explained component to one predictor group while explaining little response variation overall; the reverse is also possible.
+I now report both quantities so that we do not read a large relative allocation as evidence of a strong overall fit.
 
 ```{r}
 #| label: hvarpart-fit-figure
@@ -564,18 +563,20 @@ knitr::include_graphics(canonical_figures[["revision_hvar_r2_figure"]])
 
 \newpage
 
-# Canonical H1 spatial result: time controlled within sequences
+# Adding time control to spatial H1
 
-The revised spatial H1 is fitted within each pollen sequence with time included as a protected control group.
-Human and climate contributions are then aggregated spatially with the existing dbMEM procedure.
-This prevents temporal structure within a sequence from being silently attributed to either focal predictor group.
+I next made the controls in the two H1 comparisons reciprocal: time is controlled within sequences for spatial H1, and spatial structure is controlled within time slices for temporal H1.
+For spatial H1, I fitted the model within each pollen sequence with time included as a protected control group.
+Human and climate contributions are then aggregated spatially using the existing distance-based Moran's eigenvector maps (dbMEM) procedure.
+This keeps temporal structure within a sequence from being silently attributed to either human activity or climate.
 
-Climate has the larger zero-truncated contribution in `r scales::comma(spatial_climate_dominant_n)` of `r scales::comma(spatial_controlled_n)` eligible sequences (`r scales::percent(spatial_climate_dominant_pct / 100, accuracy = 0.1)`).
-The result is heterogeneous: some sequences and regions show stronger human allocations, but the canonical distribution is climate-dominant overall.
+In this SPD-based analysis, climate has the larger zero-truncated contribution in `r scales::comma(spatial_climate_dominant_n)` of `r scales::comma(spatial_controlled_n)` eligible sequences (`r scales::percent(spatial_climate_dominant_pct / 100, accuracy = 0.1)`).
+Some sequences and regions show stronger human allocations, but the overall distribution remains climate-dominant.
+This is the analysis behind Figure 3 in the revised manuscript.
 
 ```{r}
 #| label: canonical-figure-3
-#| fig-cap: "Canonical R1 Figure 3. Sequence-level human-minus-climate balance after controlling time within sequences and aggregating spatial pattern. Gold denotes greater human allocation and teal denotes greater climate allocation."
+#| fig-cap: "Revised manuscript Figure 3. Sequence-level human-minus-climate balance after controlling time within sequences and aggregating spatial pattern. Gold denotes greater human allocation and teal denotes greater climate allocation."
 #| out-width: "94%"
 #| fig-align: center
 #| fig-pos: H
@@ -586,18 +587,19 @@ knitr::include_graphics(
 
 \newpage
 
-# Canonical H1 temporal result: spatial structure controlled within time slices
+# Adding spatial control to temporal H1
 
-The revised temporal H1 groups sequences within 500-year continental-region time slices.
-Selected dbMEM variables represent spatial structure among the eligible sequences before contributions from SPD and climate are interpreted.
-Non-estimable combinations remain missing rather than being assigned zero effect.
+For temporal H1, I grouped sequences within 500-year continental-region time slices.
+Selected dbMEM variables represent spatial structure among the eligible sequences before I interpret the SPD and climate contributions.
+Where a combination cannot be estimated, I leave it missing rather than assign it a zero effect.
 
 Climate has the larger zero-truncated contribution in `r temporal_climate_dominant_n` of `r temporal_spd_n` estimable continental-region-age comparisons.
-Signed and unique-fraction counterparts identify time slices where negative components, shared variation, or weak unique signals make the display composition incomplete.
+I also retained the signed and unique-fraction summaries, because negative components, shared variation, or weak unique signals can make the display composition incomplete.
+The figure below is the revised manuscript's Figure 4.
 
 ```{r}
 #| label: canonical-figure-4
-#| fig-cap: "Canonical R1 Figure 4. Human, climate, and spatial allocations through time after spatial control within each continental-region time slice. Missing combinations are non-estimable."
+#| fig-cap: "Revised manuscript Figure 4. Human, climate, and spatial allocations through time after spatial control within each continental-region time slice. Missing combinations are non-estimable."
 #| out-width: "76%"
 #| fig-align: center
 #| fig-pos: H
@@ -608,22 +610,23 @@ knitr::include_graphics(
 
 \newpage
 
-# Canonical H2: changing interrelationships among PAPs
+# Revisiting what H2 tells us
 
-H2 asks whether human activity is the predominant predictor of changes in relationships among PAPs.
-PCA and symmetric Procrustes distances summarise changes in collective PAP covariance between time slices within regions.
+I also clarified the interpretation of H2, which asks whether human activity is the predominant predictor of changes in relationships among PAPs.
+Principal component analysis (PCA) and symmetric Procrustes distances summarise changes in collective PAP covariance between time slices within regions.
 Regional SPD and climate trajectories then enter a second HVarPart analysis.
 
-The canonical analysis attributes more of the broad change in PAP interrelationships to climate than to SPD in most estimable groups.
+The SPD-based H2 analysis attributes more of the broad change in PAP interrelationships to climate than to SPD in most estimable groups.
 The zero-truncated analysis-level climate allocation is `r sprintf("%.3f", profile_analysis |> dplyr::filter(.data[["analysis"]] == "h2_spd", .data[["profile"]] == "zero_truncated", .data[["predictor"]] == "climate") |> dplyr::pull(.data[["pooled_allocation"]]))`.
 
-This ordination is collective and multivariate.
-It cannot identify which pollen taxon changed, and missing or short trajectories can reflect incomplete estimability rather than ecological stability.
-H2 remains based on SPD alone; it has not been harmonised with KK10 and HYDE.
+I have been more careful about what we can infer from this ordination.
+It describes collective, multivariate change; it cannot identify which pollen taxon changed.
+Missing or short trajectories can also reflect incomplete estimability rather than ecological stability.
+H2 remains based on SPD alone, a point I will return to when we get to the final decision.
 
 ```{r}
 #| label: canonical-h2
-#| fig-cap: "Canonical R1 H2 figure. Ordination trajectories describe changes in collective relationships among PAPs; predictor arrows are not taxon-level effects."
+#| fig-cap: "Revised manuscript H2 figure. Ordination trajectories describe changes in collective relationships among PAPs; predictor arrows are not taxon-level effects."
 #| out-width: "92%"
 #| fig-align: center
 #| fig-pos: H
@@ -632,14 +635,17 @@ knitr::include_graphics(canonical_figures[["revision_h2_figure"]])
 
 \newpage
 
-# Dependence, thinning, and omission checks
+# Checking dependence and uneven sampling
 
-Residual Moran diagnostics find positive spatial autocorrelation in 9 of 14 unfiltered comparisons and 4 of 14 residual comparisons after spatial control.
-Observed Moran's (I) ranges from -0.068 to 0.131 before control and from -0.061 to 0.054 afterwards.
+After adding the controls, I checked whether residual spatial structure, dense sampling, or particular geographical groups could still determine the result.
+The residual Moran diagnostics find positive spatial autocorrelation in 9 of 14 unfiltered comparisons and 4 of 14 residual comparisons after spatial control.
+Observed Moran's \(I\) ranges from -0.068 to 0.131 before control and from -0.061 to 0.054 afterwards.
 
-Spatial thinning retains a median of 361 sequence models at 250 km and 216 at 500 km across 100 replicates.
-Leave-one-continental-region and leave-one-region comparisons generally retain a climate-dominant aggregate balance, while showing which omissions increase uncertainty.
-These diagnostics reduce the risk that dense sampling or one geographical group determines the result; they do not remove all dependence or establish causality.
+I also ran spatial thinning and leave-one-group-out comparisons.
+Thinning retains a median of 361 sequence models at 250 km and 216 at 500 km across 100 replicates.
+Leaving out individual continental regions or regions generally retains a climate-dominant aggregate balance, while showing which omissions increase uncertainty.
+Together, these checks reduce the risk that dense sampling or one geographical group determines the result.
+They do not remove all dependence or establish causality, and I have kept that qualification in the manuscript.
 
 ```{r}
 #| label: dependence-figures
@@ -661,22 +667,24 @@ knitr::include_graphics(
 
 \newpage
 
-# SPD-radius sensitivity
+# Testing the archaeological neighbourhood radius
 
-The primary SPD workflow uses archaeological dates within 250 km and a 500 km fallback where the strict neighbourhood has insufficient dates.
-The matched sensitivity compares strict 250 km and 500 km predictors on identical analytical units.
+Another choice I checked was the radius used to construct SPD around each pollen sequence.
+The main workflow uses archaeological dates within 250 km, with a 500 km fallback where the strict neighbourhood has insufficient dates.
+To separate the radius effect from differences in coverage, I compared strict 250 km and 500 km predictors on identical analytical units.
 
 Among `r scales::comma(radius_spatial_n)` matched spatial sequences, `r scales::comma(radius_spatial_defined_n)` have defined balances under both radii.
 The median 500-km-minus-250-km balance change is `r sprintf("%.3f", radius_spatial_delta_median)`, and `r radius_spatial_reversals` sequences reverse their human-versus-climate ranking.
 At the temporal scale, `r radius_temporal_reversals` of `r radius_temporal_n` matched comparisons reverse ranking.
 
-The fallback improves coverage and does not overturn the aggregate canonical conclusion, but it changes some individual estimates.
-Neither radius is equivalent to the pollen-source area, so this is a neighbourhood-choice sensitivity rather than a scale-matched archaeological comparison.
+The fallback improves coverage without overturning the aggregate SPD-based conclusion, but it does change some individual estimates.
+I therefore describe this as a sensitivity to our archaeological neighbourhood choice.
+Neither radius is equivalent to the pollen-source area, so we cannot present it as a scale-matched archaeological comparison.
 
 ```{r}
 #| label: radius-spatial-figure
 #| fig-cap: "Matched SPD-radius sensitivity across spatial sequence models."
-#| out-width: "44%"
+#| out-width: "40%"
 #| fig-align: center
 #| fig-pos: H
 knitr::include_graphics(canonical_figures[["revision_radius_spatial_figure"]])
@@ -685,7 +693,7 @@ knitr::include_graphics(canonical_figures[["revision_radius_spatial_figure"]])
 ```{r}
 #| label: radius-temporal-figure
 #| fig-cap: "Matched SPD-radius sensitivity across continental-region time slices."
-#| out-width: "44%"
+#| out-width: "40%"
 #| fig-align: center
 #| fig-pos: H
 knitr::include_graphics(canonical_figures[["revision_radius_temporal_figure"]])
@@ -693,17 +701,20 @@ knitr::include_graphics(canonical_figures[["revision_radius_temporal_figure"]])
 
 \newpage
 
-# Expert-event proxy sensitivity
+# Comparing SPD with the expert-event histories
 
-Expert-screened pollen events contain locally informed evidence that SPD may miss, but they are coarser, geographically uneven, incomplete, and partly circular because event definition and PAP responses can derive from the same pollen sequence.
-The sensitivity therefore uses matched observed-event subsets rather than default-filled histories.
+I then looked at the expert-screened pollen events as another source of evidence about human activity.
+These histories contain local information that SPD may miss, but they are coarser, geographically uneven, and incomplete.
+They are also partly circular: the event definitions and PAP responses can come from the same pollen sequence.
+For that reason, I used matched subsets with observed events rather than histories filled with default values.
 
 The matched analysis contains `r event_spatial_n` spatial sequences and `r event_temporal_n` continental-region-age comparisons.
 Median spatial human-minus-climate balance is `r sprintf("%.3f", event_combined_spatial_median)` for the combined SPD-plus-event model and `r sprintf("%.3f", event_only_spatial_median)` for the event-only model.
 Temporally, adding events changes median human allocation by `r sprintf("%.3f", event_combined_temporal_delta)`, while substituting events changes it by `r sprintf("%.3f", event_only_temporal_delta)`.
 
-Variation in both directions shows that human attribution depends partly on proxy definition.
-The expert chronologies are therefore complementary sensitivity evidence, not independent validation of SPD.
+The changes go in both directions, which tells us that human attribution depends partly on how we represent human activity.
+I have therefore kept the expert chronologies as complementary sensitivity evidence, rather than treating them as independent validation of SPD.
+SPD remains the primary human predictor in the revised manuscript.
 
 ```{r}
 #| label: event-spatial-figure
@@ -725,23 +736,26 @@ knitr::include_graphics(canonical_figures[["revision_event_temporal_figure"]])
 
 \newpage
 
-# Consequences for the manuscript narrative
+# Bringing these changes back into the manuscript
 
-The canonical revision supports a more precise paper, but not the broadest wording used in the submitted version.
-The principal changes are analytical scope and inferential discipline rather than a claim that local human transformation did not occur.
+By this point, I had a clearer basis for revising the manuscript and reviewer response.
+The SPD-based results support a more precise paper, but they do not support the broadest wording in the submitted version.
+I narrowed the scope and interpretation while keeping room for local human histories.
+The table below summarises how the framing changed.
 
 ```{r}
 #| label: narrative-change-table
 knitr::kable(
   narrative_changes,
   format = "latex",
+  position = "H",
   booktabs = TRUE,
   align = c(
     "p{0.12\\linewidth}",
     "p{0.36\\linewidth}",
     "p{0.42\\linewidth}"
   ),
-  caption = "How the submitted narrative changed in canonical R1."
+  caption = "How I revised the framing of the submitted manuscript."
 )
 ```
 
@@ -750,38 +764,45 @@ knitr::kable(
 knitr::kable(
   validation_summary,
   format = "latex",
+  position = "H",
   booktabs = TRUE,
   align = c(
     "p{0.18\\linewidth}",
     "p{0.32\\linewidth}",
     "p{0.40\\linewidth}"
   ),
-  caption = "Canonical finding and the qualification contributed by each validation analysis."
+  caption = "What the supporting checks tell us about the SPD-based results and their limits."
 )
 ```
 
-The title now names pollen assemblage dynamics and the 8.5--2.0 ka BP interval.
-The abstract and Results use analysis-specific denominators rather than presenting the whole collection as one model population.
-The Discussion distinguishes broad-scale predominance from local human histories, removes unsupported tipping-point and uniformly destructive-impact claims, and states limits arising from pollen counts, spatial mismatch, climate simulations, and proxy construction.
+I changed the title to name pollen assemblage dynamics and the 8.5--2.0 ka BP interval.
+In the abstract and Results, I now use the denominator appropriate to each analysis rather than treating the whole collection as one model population.
+In the Discussion, I distinguish broad-scale predominance from local human histories, remove unsupported tipping-point and uniformly destructive-impact claims, and spell out the limits arising from pollen counts, spatial mismatch, climate simulations, and proxy construction.
+The results do not establish that people were absent, locally unimportant, or ecologically benign.
 
-The reviewer response now has a defensible chain from concern to analysis to evidence.
-However, its current headline still depends on SPD being an adequate primary representation of the human construct.
-The final section addresses that unresolved point.
+I also rebuilt the reviewer response so that each concern can be followed through to the analysis and supporting evidence.
+That is where the SPD-based revision currently stands.
+There is still a central question, though: how well does SPD alone represent the human impact we want to discuss?
+The later work below is why I would like us to resolve that together before I take the manuscript further.
 
 \newpage
 
 # Final decision: should human impact include SPD, KK10, and HYDE?
 
-## What the additional proxies represent
+## Why I looked beyond SPD
+
+After completing the SPD-based revision, I explored what happens if we represent human activity more broadly.
+I added KK10 land use and HYDE population as candidate predictors alongside SPD.
+This is exploratory work: I have not incorporated it in R1 or the reviewer response.
 
 SPD primarily represents archaeological activity and demography inferred from radiocarbon-date densities.
-KK10 represents land-use fraction.
-HYDE represents modelled population.
-Together they represent a broader human-impact construct than SPD alone, but they remain proxies with different assumptions, resolutions, and uncertainties.
+KK10 represents land-use fraction, while HYDE represents modelled population.
+Together they cover a broader human-impact construct than SPD alone, but they still have different assumptions, resolutions, and uncertainties.
 
-Across the matched 2--8 ka comparison, the convergence dataset contains `r scales::comma(convergence_overall_coverage[["matched_rows"]])` observations from `r scales::comma(convergence_overall_coverage[["matched_datasets"]])` pollen sequences and `r convergence_overall_coverage[["matched_ages"]]` ages.
+I first checked how closely these proxies agree on the matched 2--8 ka comparison.
+The convergence dataset contains `r scales::comma(convergence_overall_coverage[["matched_rows"]])` observations from `r scales::comma(convergence_overall_coverage[["matched_datasets"]])` pollen sequences and `r convergence_overall_coverage[["matched_ages"]]` ages.
 Rank agreement is positive overall: Kendall's tau is `r sprintf("%.2f", convergence_overall[["kendall_tau"]][convergence_overall[["proxy"]] == "KK10"])` for SPD versus KK10 and `r sprintf("%.2f", convergence_overall[["kendall_tau"]][convergence_overall[["proxy"]] == "HYDE"])` for SPD versus HYDE.
-Regional agreement is less uniform, which is one reason the model performs selection locally.
+Agreement is less uniform among regions, which is one reason I used local predictor selection in the model comparison.
 
 ```{r}
 #| label: proxy-convergence-figures
@@ -801,32 +822,34 @@ knitr::include_graphics(
 \captionof{figure}{Agreement between SPD and the additional human proxies overall (left) and by continental region (right).}
 \end{center}
 
-The separate exported spatial atlas shows SPD, KK10, and HYDE for the world and Europe at all thirteen matched time slices.
-It should be consulted when discussing differences in spatial support, but is not reproduced here because the convergence summaries already establish the evidence needed for this decision.
+I also exported a separate spatial atlas showing SPD, KK10, and HYDE for the world and Europe at all thirteen matched time slices.
+I have not reproduced it here, but we can use it alongside these summaries when discussing differences in spatial support.
 
 \newpage
 
-## Harmonised model design
+## Making the model comparison fair
 
+Simply adding predictors would mix several changes together, so I set up a matched comparison.
 The exploratory model uses square-root SPD, KK10 fraction, and square-root HYDE as candidate human predictors.
 The square-root transformations reduce extreme right-skew while retaining ordering; KK10 remains on its natural fractional scale.
 
-Within each sequence or continental-region-age unit, redundant predictors are removed separately within the human and climate blocks using \,\(|r| = 0.8\) and VIF = 5.
+Within each sequence or continental-region-age unit, I removed redundant predictors separately within the human and climate blocks using \,\(|r| = 0.8\) and a variance inflation factor (VIF) threshold of 5.
 The human preference order is square-root SPD, KK10, then square-root HYDE; the climate order remains annual temperature, coldest-month temperature, warm-season precipitation, then cold-season precipitation.
-Time and dbMEM controls are protected and added after focal selection.
-Cross-block correlation is diagnosed but not used for automatic removal because shared human-climate variation is part of the partitioning question.
+I protected the time and dbMEM controls and added them after selecting the human and climate predictors.
+I diagnosed cross-block correlation without using it for automatic removal, because shared human-climate variation is part of the partitioning question.
 
-The retained set can therefore differ among analytical units.
-Selection reduces within-block redundancy, but it does not prove that a retained variable is causal or that the resulting multivariate human block is uniquely correct.
+The retained predictors can therefore differ among analytical units.
+This reduces redundancy within each block, but does not establish that a retained variable is causal or that this is the uniquely correct way to represent human impact.
 
-Three specifications clarify what changes:
+I compared three models:
 
-1. **Canonical SPD**: square-root SPD, all four canonical climate predictors, 8.5--2.0 ka BP.
-2. **Matched SPD bridge**: square-root SPD, the joint model's locally selected climate set, and the same matched 8--2 ka observations as the joint model.
-3. **Filtered joint human block**: square-root SPD, KK10, and square-root HYDE after local human filtering, with the same climate selection and cohort as the bridge.
+1. **The current SPD model:** square-root SPD, all four climate predictors used in R1, and the 8.5--2.0 ka BP interval.
+2. **The matched SPD bridge:** square-root SPD, the joint model's locally selected climate set, and the same matched 8--2 ka observations as the joint model.
+3. **The filtered joint human block:** square-root SPD, KK10, and square-root HYDE after local human filtering, with the same climate selection and cohort as the bridge.
 
-Canonical-to-joint differences combine interval, matched observations, climate selection, and human representation.
-Bridge-to-joint is the cleaner contrast for the effect of expanding the human block.
+Comparing the current SPD model directly with the joint model combines changes in interval, observations, climate selection, and human representation.
+The bridge-to-joint comparison is cleaner: the observations and climate predictors stay the same, so it isolates the change in the human block.
+The figure below shows the spatial result for that matched SPD bridge.
 
 ```{r}
 #| label: bridge-spatial-figure
@@ -839,14 +862,19 @@ knitr::include_graphics(proxy_files[["figure3_bridge"]])
 
 \newpage
 
-## Spatial H1 reverses under the filtered joint block
+## What changed in spatial H1
 
+This is where the additional proxies make a substantial difference.
 The exact three-model common spatial subset contains `r scales::comma(s_joint[["n_sequences"]])` sequences.
-The canonical model is climate-dominant in `r scales::comma(s_can[["climate_dominant"]])` sequences, and the matched SPD bridge remains climate-dominant in `r scales::comma(s_bridge[["climate_dominant"]])`.
+On that subset, the current SPD model is climate-dominant in `r scales::comma(s_can[["climate_dominant"]])` sequences, and the matched SPD bridge remains climate-dominant in `r scales::comma(s_bridge[["climate_dominant"]])`.
 
 The filtered joint model is instead human-dominant in `r scales::comma(s_joint[["human_dominant"]])` sequences and climate-dominant in `r scales::comma(s_joint[["climate_dominant"]])`, with `r scales::comma(s_joint[["ties"]])` tie.
 The median zero-truncated human-minus-climate balance moves from `r scales::number(s_bridge[["median_zero_balance"]], accuracy = 0.01)` in the bridge to `r scales::number(s_joint[["median_zero_balance"]], accuracy = 0.01)` in the joint model.
 Moving from bridge to joint changes `r scales::comma(s_bridge_reversals)` sequences from climate- to human-dominant, with no corresponding human-to-climate reversal.
+
+So the spatial ordering reverses even when I hold the matched observations and climate selection fixed.
+This is not just a consequence of comparing different subsets.
+The figure below is the joint-model counterpart to Figure 3, but it is not yet the manuscript figure.
 
 ```{r}
 #| label: joint-spatial-figure
@@ -859,19 +887,21 @@ knitr::include_graphics(proxy_files[["figure3_joint"]])
 
 \newpage
 
-## Temporal H1 weakens but does not fully reverse
+## What changed in temporal H1
 
-All three temporal specifications are compared across the same `r t_joint[["n_units"]]` continental-region-age units.
-The canonical model is climate-dominant in `r t_can[["climate_dominant"]]` units and the matched SPD bridge in `r t_bridge[["climate_dominant"]]`.
+I then made the same three-model comparison for temporal H1.
+All three models are compared across the same `r t_joint[["n_units"]]` continental-region-age units.
+The current SPD model is climate-dominant in `r t_can[["climate_dominant"]]` units and the matched SPD bridge in `r t_bridge[["climate_dominant"]]`.
 Under the filtered joint model, climate remains larger in `r t_joint[["climate_dominant"]]` units and humans are larger in `r t_joint[["human_dominant"]]`.
 
 Median human allocation increases from `r scales::percent(t_bridge[["median_human_allocation"]], accuracy = 1)` in the bridge to `r scales::percent(t_joint[["median_human_allocation"]], accuracy = 1)` in the joint model.
 The bridge-to-joint contrast produces `r t_bridge_reversals` climate-to-human reversals.
-Thus the temporal conclusion weakens substantially but remains climate-dominant overall.
+Here the conclusion weakens substantially, but climate remains dominant overall.
+The spatial and temporal results therefore do not support one simple replacement headline.
 
 ```{r}
 #| label: temporal-model-comparison
-#| fig-cap: "Figure 4 comparison on the exact common subset: canonical SPD, matched SPD bridge, and filtered joint human block. Every displayed stack sums to one after zero truncation."
+#| fig-cap: "Figure 4 comparison on the exact common subset: current SPD model, matched SPD bridge, and filtered joint human block. Every displayed stack sums to one after zero truncation."
 #| out-width: "91%"
 #| fig-align: center
 #| fig-pos: H
@@ -880,14 +910,15 @@ knitr::include_graphics(proxy_files[["figure4_comparison"]])
 
 \newpage
 
-## Model fit, retained predictors, and the decision
+## Checking fit and what each local model retains
 
-Adding the filtered joint human block changes both allocation and model fit.
-Across the matched sequence comparison, median total adjusted (R^2) changes from `r sprintf("%.3f", r2_total[["median_spd_only"]])` to `r sprintf("%.3f", r2_total[["median_filtered_joint"]])`.
-Pure human adjusted (R^2) generally increases, while the pure climate and time fractions often decrease, reflecting both the broader human block and changes in shared variation.
+Before drawing a manuscript conclusion from those changes, I also checked model fit and which predictors survive the filtering.
+Adding the filtered joint human block changes both allocation and fit.
+Across the matched sequence comparison, median total adjusted \(R^2\) changes from `r sprintf("%.3f", r2_total[["median_spd_only"]])` to `r sprintf("%.3f", r2_total[["median_filtered_joint"]])`.
+Pure human adjusted \(R^2\) generally increases, while the pure climate and time fractions often decrease, reflecting both the broader human block and changes in shared variation.
 
 Predictor-retention frequencies vary among continental regions and regions.
-That variation is scientifically informative but complicates a simple statement that every local model represents exactly the same human construct.
+I think that variation is useful to show, but it also means we need to be careful about saying that every local model represents exactly the same human construct.
 
 ```{r}
 #| label: proxy-decision-diagnostics
@@ -907,24 +938,36 @@ knitr::include_graphics(
 \captionof{figure}{Sequence-level adjusted R-squared comparison (left) and local predictor retention by continental region and region (right).}
 \end{center}
 
-\begin{center}
-\colorbox{memoGrey}{\parbox{0.92\linewidth}{\textbf{Decision requested.} The existing claim that climate generally outweighs human impact is not robust to a defensible expansion of the human predictor block. We need to agree what construct should represent human impact, how prominently both specifications should be shown, and whether H2 must be harmonised before the paper-wide narrative is revised.}}
-\end{center}
+\newpage
 
-### Three defensible manuscript options
+## Where I need your input
 
-1. **Retain SPD as primary.** Keep canonical Figures 3--4, add the joint sensitivity, and substantially soften the climate-dominance headline. This fits current SPD-only H2 but retains a narrow construct.
-2. **Replace primary H1 with the joint model.** Spatial H1 becomes human-dominant and temporal H1 remains mixed. A harmonised joint-proxy H2 refit is required.
-3. **Treat both as co-primary.** Make sensitivity to the human construct the central finding and harmonise H2 across specifications.
+Taken together, these results mean that our claim that climate generally outweighs human impact is not robust to this defensible expansion of the human predictor block.
+That does not establish that the joint model is the only correct specification.
+It does mean that we need to agree what we want to represent by human impact and how openly we show the dependence of the result on that choice.
 
-### Questions for the co-author meeting
+Including KK10 and HYDE would require a substantial rewrite of the manuscript, rather than simply adding another sensitivity figure.
+I would need to revisit the framing, Results, title, abstract, Discussion, conclusions, and reviewer response.
+There is also unfinished analytical work: H2 still uses SPD alone, and I have not refitted it with KK10 and HYDE.
+If we make the joint model primary, or treat both specifications as co-primary, we would need a harmonised H2 comparison before revising the paper-wide conclusions.
 
-1. Which construct best represents human impact: SPD alone or archaeological activity, land use, and modelled population together?
-2. Is a scale- and specification-dependent conclusion preferable to one apparently definitive model?
-3. Must H2 be harmonised before restructuring the title, abstract, and Discussion?
-4. Which option is most transparent to reviewers and faithful to the evidence?
+### The three options I see
 
-**Requested meeting outcome:** agree the human-impact construct, choose a provisional manuscript option, and decide whether to commission the H2 refit before changing the manuscript or reviewer response.
+1. **Keep SPD as the primary analysis.**
+   Retain the current Figures 3--4, show the joint model as a sensitivity, and substantially soften the climate-dominance headline.
+   This keeps the primary H1 analysis aligned with the current SPD-only H2, but leaves us with a narrower representation of human activity.
+2. **Make the joint model the primary H1 analysis.**
+   The spatial result becomes human-dominant, while the temporal result remains mixed and climate-dominant overall.
+   I would need to refit H2 with the harmonised human proxies before rewriting the overall interpretation.
+3. **Present both specifications as co-primary.**
+   We would make the dependence on our representation of human impact central to the paper, and harmonise H2 across the two specifications.
 
-The memo intentionally makes no recommendation among the three options.
-Its purpose is to put the canonical revision and the new proxy sensitivity on the same evidential footing before the team decides.
+### What I would like us to agree on
+
+The first question is whether SPD alone is the human-impact construct we want to defend, or whether archaeological activity, land use, and modelled population together are closer to what we mean.
+From there, we can decide how prominently to present both specifications and whether the resulting scale- and specification-dependent conclusion should become the main message.
+We also need to settle the extent of the H2 work before I restructure the manuscript and reviewer response.
+
+I have not chosen between these options.
+Vivian and Suzette, I would really value your thoughts on which approach best reflects the evidence and gives us the clearest, most transparent response to the reviewers.
+What I would like us to come away with is an agreed representation of human impact, a provisional direction for the manuscript, and a decision on the H2 refit before I take on the larger rewrite.
