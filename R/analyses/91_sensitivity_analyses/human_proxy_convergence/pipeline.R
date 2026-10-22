@@ -364,7 +364,8 @@ list(
         )
       )
   ),
-  # Why: Select KK10 values at each focal record support.
+  # Why: Publish KK10 at each focal record support for convergence and
+  #   KK10-only HVarPart without requiring SPD/HYDE complete-case matches.
   targets::tar_target(
     name = "data_human_proxy_kk10_primary",
     data_human_proxy_kk10_buffer_all |>
@@ -376,7 +377,8 @@ list(
       dplyr::mutate(dataset_id = .data[["original_dataset_id"]]) |>
       dplyr::select(-dplyr::all_of("original_dataset_id"))
   ),
-  # Why: Select HYDE values at each focal record support.
+  # Why: Publish HYDE at each focal record support for convergence and
+  #   HYDE-only HVarPart without requiring SPD/KK10 complete-case matches.
   targets::tar_target(
     name = "data_human_proxy_hyde_primary",
     data_human_proxy_hyde_buffer_all |>

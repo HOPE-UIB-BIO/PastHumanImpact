@@ -69,6 +69,8 @@ validate_analysis_profiles <- function(data_profiles) {
       "h1::time_slice::events::space",
       "h1::within_dataset::spd_kk10_hyde::time",
       "h1::time_slice::spd_kk10_hyde::space",
+      "h1::within_dataset::spd_kk10::time",
+      "h1::time_slice::spd_kk10::space",
       "h1::within_dataset::kk10::time",
       "h1::time_slice::kk10::space",
       "h1::within_dataset::hyde::time",
@@ -88,7 +90,7 @@ validate_analysis_profiles <- function(data_profiles) {
     ),
     all(
       !data_profiles[["human_proxy"]] %in%
-        c("spd", "spd_events", "spd_kk10_hyde") |
+        c("spd", "spd_events", "spd_kk10_hyde", "spd_kk10") |
         data_profiles[["spd_radius_specification"]] != "not_applicable"
     ),
     msg = "Analysis profiles contain an unsupported combination."

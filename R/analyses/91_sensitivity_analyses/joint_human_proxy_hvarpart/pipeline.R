@@ -2,7 +2,7 @@
 #
 #                     GlobalHumanImpact
 #
-#         Joint SPD, KK10, and HYDE H1 HVarPart
+#         Profile-selected human-proxy H1 HVarPart
 #
 #                   O. Mottl, V.A. Felde
 #                         2026
@@ -11,8 +11,13 @@
 # Defines an optional sensitivity target graph.
 # Run with:
 #   R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/00_run.R
+#   R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/run_kk10.R
+#   R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/run_hyde.R
+#   R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/run_spd_kk10.R
 # Sourcing this script only declares targets; it does not execute them.
 # Canonical H1 stores and outputs are never modified.
+# Profile runners supply human_proxy_hvarpart_profile explicitly via
+# tar_make(envir = ..., callr_function = NULL); the default is the joint block.
 
 #----------------------------------------------------------#
 # 0. Configure pipeline -----
@@ -21,6 +26,61 @@
 library(here)
 
 source(here::here("R/00_Config_file.R"))
+
+human_proxy_hvarpart_profile <-
+  if (
+    exists("human_proxy_hvarpart_profile", inherits = TRUE)
+  ) {
+    human_proxy_hvarpart_profile
+  } else {
+    "spd_kk10_hyde"
+  }
+
+assertthat::assert_that(
+  length(human_proxy_hvarpart_profile) == 1L,
+  human_proxy_hvarpart_profile %in%
+    c("spd_kk10_hyde", "spd_kk10", "kk10", "hyde"),
+  msg = paste(
+    "Select the joint human-proxy block, SPD with KK10, KK10 alone,",
+    "or HYDE alone."
+  )
+)
+
+flag_kk10_only <-
+  identical(human_proxy_hvarpart_profile, "kk10")
+
+flag_hyde_only <-
+  identical(human_proxy_hvarpart_profile, "hyde")
+
+flag_single_proxy <-
+  flag_kk10_only || flag_hyde_only
+
+# Every profile except the original joint block writes to its own
+#   prefixed output directories and profile identifiers.
+flag_profile_outputs <-
+  !identical(human_proxy_hvarpart_profile, "spd_kk10_hyde")
+
+# Why: SPD with KK10 reuses the fully matched convergence product. Its
+#   coverage equals the KK10-only and HYDE-only products (all 1,181
+#   datasets and 13 ages), so the HYDE match removes no observations,
+#   and HYDE never enters the human predictor group.
+proxy_input_target <-
+  switch(
+    human_proxy_hvarpart_profile,
+    kk10 = "data_human_proxy_kk10_primary",
+    hyde = "data_human_proxy_hyde_primary",
+    spd_kk10 = "data_human_proxy_matches",
+    spd_kk10_hyde = "data_human_proxy_matches"
+  )
+
+h1_time_slice_target <-
+  if (
+    flag_single_proxy
+  ) {
+    "data_hvar_timebins_unique_age"
+  } else {
+    "data_hvar_timebins_spd_unique_age"
+  }
 
 runner_h1 <- "R/analyses/02_h1_spatiotemporal_hvarpart/00_run.R"
 runner_proxy <-
@@ -67,6 +127,29 @@ path_figures <-
     "Joint_human_proxy_hvarpart"
   )
 
+if (
+  flag_profile_outputs
+) {
+  # Name each sensitivity output directory after its target store.
+  dir_profile_outputs <-
+    switch(
+      human_proxy_hvarpart_profile,
+      kk10 = "KK10_only_hvarpart",
+      hyde = "HYDE_only_hvarpart",
+      spd_kk10 = "SPD_KK10_hvarpart"
+    )
+
+  path_tables <-
+    here::here(
+      "Outputs", "Tables", "H1", "Sensitivity", dir_profile_outputs
+    )
+
+  path_figures <-
+    here::here(
+      "Outputs", "Figures", "H1", "Sensitivity", dir_profile_outputs
+    )
+}
+
 joint_config <-
   list(
     age_min = 2000,
@@ -80,9 +163,56 @@ joint_config <-
   )
 
 joint_profile_ids <-
-  c(
-    "within_dataset_joint_human_proxies_time_control",
-    "time_slice_joint_human_proxies_spatial_control"
+  if (
+    flag_profile_outputs
+  ) {
+    c(
+      stringr::str_glue(
+        "within_dataset_{human_proxy_hvarpart_profile}_time_control"
+      ),
+      stringr::str_glue(
+        "time_slice_{human_proxy_hvarpart_profile}_spatial_control"
+      )
+    )
+  } else {
+    c(
+      "within_dataset_joint_human_proxies_time_control",
+      "time_slice_joint_human_proxies_spatial_control"
+    )
+  }
+
+if (
+  flag_profile_outputs
+) {
+  joint_config[["human_predictors"]] <-
+    switch(
+      human_proxy_hvarpart_profile,
+      spd_kk10 = c("spd_transformed", "kk10_transformed"),
+      stringr::str_c(human_proxy_hvarpart_profile, "_transformed")
+    )
+
+  joint_config[["analysis_time_control"]] <-
+    stringr::str_c("spatial_", human_proxy_hvarpart_profile)
+
+  joint_config[["analysis_spatial_control"]] <-
+    stringr::str_c("temporal_", human_proxy_hvarpart_profile)
+}
+
+output_prefix <-
+  if (
+    flag_profile_outputs
+  ) {
+    human_proxy_hvarpart_profile
+  } else {
+    "joint_human_proxies"
+  }
+
+human_label <-
+  switch(
+    human_proxy_hvarpart_profile,
+    spd_kk10_hyde = "Human (SPD + KK10 + HYDE)",
+    spd_kk10 = "Human (SPD + KK10)",
+    stringr::str_glue("Human ({toupper(human_proxy_hvarpart_profile)})")
   )
 
 #----------------------------------------------------------#
@@ -97,7 +227,7 @@ list(
       store = store_h1_inputs,
       target_names = c(
         "data_hvar_filtered_unique_age",
-        "data_hvar_timebins_spd_unique_age",
+        h1_time_slice_target,
         "data_meta",
         "h1_response_variables",
         "h1_predictor_sets",
@@ -113,15 +243,15 @@ list(
     tryCatch(
       compute_target_store_fingerprint(
         store = store_human_proxy,
-        target_names = "data_human_proxy_matches",
+        target_names = proxy_input_target,
         runner = runner_proxy
       ),
       error = function(err) {
         cli::cli_abort(
           c(
-            "Matched SPD, KK10, and HYDE inputs are unavailable.",
+            "Requested human-proxy inputs are unavailable.",
             "i" = "Acquire missing sources with: {.code {runner_proxy_download}}",
-            "i" = "Then build the matched target with: {.code {runner_proxy_analysis}}",
+            "i" = "Then build the proxy target with: {.code {runner_proxy_analysis}}",
             "x" = conditionMessage(err)
           )
         )
@@ -160,7 +290,7 @@ list(
       fingerprint_joint_h1_inputs
       load_target_store_value(
         store = store_h1_inputs,
-        target_name = "data_hvar_timebins_spd_unique_age",
+        target_name = h1_time_slice_target,
         runner = runner_h1
       )
     }
@@ -213,16 +343,41 @@ list(
       )
     }
   ),
-  # Why: Materialize this dependency or result reproducibly.
+  # Why: Import the selected proxy product so excluded proxies cannot filter
+  #   single-proxy observations or enter its human predictor group.
   targets::tar_target(
     name = "data_joint_human_proxy_matches",
     {
       fingerprint_joint_human_proxy
-      load_target_store_value(
-        store = store_human_proxy,
-        target_name = "data_human_proxy_matches",
-        runner = runner_proxy
-      )
+      if (
+        flag_kk10_only
+      ) {
+        prepare_kk10_hvarpart_matches(
+          data_kk10 = load_target_store_value(
+            store = store_human_proxy,
+            target_name = proxy_input_target,
+            runner = runner_proxy
+          ),
+          data_metadata = data_joint_metadata
+        )
+      } else if (
+        flag_hyde_only
+      ) {
+        prepare_hyde_hvarpart_matches(
+          data_hyde = load_target_store_value(
+            store = store_human_proxy,
+            target_name = proxy_input_target,
+            runner = runner_proxy
+          ),
+          data_metadata = data_joint_metadata
+        )
+      } else {
+        load_target_store_value(
+          store = store_human_proxy,
+          target_name = proxy_input_target,
+          runner = runner_proxy
+        )
+      }
     }
   ),
   # Why: Materialize this dependency or result reproducibly.
@@ -248,7 +403,8 @@ list(
       data_proxy_matches = data_joint_human_proxy_matches,
       data_metadata = data_joint_metadata,
       age_min = joint_config[["age_min"]],
-      age_max = joint_config[["age_max"]]
+      age_max = joint_config[["age_max"]],
+      human_columns = joint_config[["human_predictors"]]
     )
   ),
   # Why: Materialize this dependency or result reproducibly.
@@ -327,7 +483,9 @@ list(
         "age_max_bp",
         "human_predictors",
         "climate_predictors",
-        "spd_radius",
+        "buffer_support",
+        "human_proxy",
+        "proxy_input_target",
         "temporal_min_unique_ages",
         "temporal_min_residual_df",
         "scaling",
@@ -340,6 +498,8 @@ list(
         stringr::str_c(joint_predictor_vars[["human"]], collapse = ";"),
         stringr::str_c(joint_predictor_vars[["climate"]], collapse = ";"),
         "250_km_with_500_km_fallback",
+        human_proxy_hvarpart_profile,
+        proxy_input_target,
         as.character(joint_config[["min_unique_ages"]]),
         as.character(joint_config[["min_temporal_residual_df"]]),
         "predictor groups scaled by fit_varhp",
@@ -349,7 +509,7 @@ list(
     )
   ),
 
-  # Figure 3 analogue: time control followed by spatial aggregation.
+  # Within-dataset time control followed by spatial aggregation.
   # Why: Materialize this dependency or result reproducibly.
   targets::tar_target(
     name = "output_joint_time_control",
@@ -457,7 +617,7 @@ list(
     )
   ),
 
-  # Figure 4 analogue: spatial control within every region-age group.
+  # Spatial control within every continental-region age group.
   # Why: Materialize this dependency or result reproducibly.
   targets::tar_target(
     name = "output_joint_spatial_control",
@@ -531,7 +691,7 @@ list(
         data_status = table_joint_time_control_status,
         profile_id = joint_profile_ids[[1]],
         model_specification = "human_climate_time",
-        proxy = "spd_kk10_hyde",
+        proxy = human_proxy_hvarpart_profile,
         analytical_unit = "within_dataset",
         selected_control_dimensions = "time",
         input_hash = stringr::str_c(
@@ -550,7 +710,7 @@ list(
         data_status = table_joint_spatial_control_status,
         profile_id = joint_profile_ids[[2]],
         model_specification = "human_climate_space",
-        proxy = "spd_kk10_hyde",
+        proxy = human_proxy_hvarpart_profile,
         analytical_unit = "time_slice",
         selected_control_dimensions = "space",
         input_hash = stringr::str_c(
@@ -598,7 +758,8 @@ list(
     plot_h1_temporal_joint_human_proxy_composition(
       data_stack = table_joint_spatial_control_composition,
       age_min = joint_config[["age_min"]],
-      age_max = joint_config[["age_max"]]
+      age_max = joint_config[["age_max"]],
+      human_label = human_label
     )
   ),
   # Why: Materialize this dependency or result reproducibly.
@@ -610,14 +771,16 @@ list(
       path_spatial = file.path(
         path_figures,
         paste0(
-          "joint_human_proxies__human_climate_balance__",
+          output_prefix,
+          "__human_climate_balance__",
           "zero_truncated__time_and_space_control"
         )
       ),
       path_temporal = file.path(
         path_figures,
         paste0(
-          "joint_human_proxies__human_climate_space__",
+          output_prefix,
+          "__human_climate_space__",
           "zero_truncated_hierarchical_composition__space_control"
         )
       )
@@ -700,7 +863,19 @@ list(
         spatial_control_composition =
           file.path(path_tables, "spatial_control_composition.csv"),
         h1_result_records = file.path(path_tables, "h1_result_records.csv")
-      )
+      ) |>
+        purrr::map_chr(
+          .f = ~ if (
+            flag_profile_outputs
+          ) {
+            file.path(
+              dirname(.x),
+              stringr::str_c(output_prefix, "__", basename(.x))
+            )
+          } else {
+            .x
+          }
+        )
     ),
     format = "file"
   )

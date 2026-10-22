@@ -98,3 +98,75 @@ testthat::test_that("joint human-proxy inputs reject invalid keys and regions", 
     regexp = "agree with canonical"
   )
 })
+
+testthat::test_that("selected KK10 inputs do not require SPD or HYDE", {
+  data_within <-
+    tibble::tibble(
+      dataset_id = "a",
+      data_merge = list(tibble::tibble(age = c(2000, 2500), response = 1:2))
+    )
+
+  data_slices <-
+    tibble::tibble(
+      region = "Europe",
+      age = 2000,
+      data_merge = list(tibble::tibble(dataset_id = "a", response = 1))
+    )
+
+  data_proxy <-
+    tibble::tibble(
+      dataset_id = "a",
+      age_bp = c(2000, 2500),
+      region = "Europe",
+      kk10_transformed = c(0, 0.3)
+    )
+
+  data_metadata <-
+    tibble::tibble(dataset_id = "a", region = "Europe")
+
+  res <-
+    prepare_joint_human_proxy_hvarpart_inputs(
+      data_within_dataset = data_within,
+      data_time_slices = data_slices,
+      data_proxy_matches = data_proxy,
+      data_metadata = data_metadata,
+      human_columns = "kk10_transformed"
+    )
+
+  testthat::expect_identical(
+    res[["within_dataset"]][["data_merge"]][[1]][["kk10_transformed"]],
+    c(0, 0.3)
+  )
+
+  testthat::expect_identical(res[["time_slices"]][["n_samples"]], 1L)
+
+  testthat::expect_false(
+    any(c("spd_transformed", "hyde_transformed") %in%
+      names(res[["matched_values"]]))
+  )
+
+  testthat::expect_error(
+    prepare_joint_human_proxy_hvarpart_inputs(
+      data_within, data_slices, data_proxy, data_metadata,
+      human_columns = character()
+    ),
+    regexp = "human_columns"
+  )
+
+  testthat::expect_error(
+    prepare_joint_human_proxy_hvarpart_inputs(
+      data_within, data_slices,
+      dplyr::mutate(data_proxy, kk10_transformed = Inf), data_metadata,
+      human_columns = "kk10_transformed"
+    ),
+    regexp = "finite"
+  )
+
+  testthat::expect_error(
+    prepare_joint_human_proxy_hvarpart_inputs(
+      data_within, data_slices, data_proxy, data_metadata,
+      human_columns = c("kk10_transformed", "kk10_transformed")
+    ),
+    regexp = "human_columns"
+  )
+})

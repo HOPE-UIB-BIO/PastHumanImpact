@@ -1,7 +1,8 @@
 #' @title Prepare joint human-proxy HVarPart inputs
 #' @description
-#' Join transformed SPD, KK10, and HYDE values to the canonical within-dataset
+#' Join selected transformed human proxies to the canonical within-dataset
 #' and region-by-age H1 input structures over their common age interval.
+#' Only selected human columns are required and checked for finite values.
 #' @param data_within_dataset Nested H1 data with `dataset_id` and `data_merge`.
 #' @param data_time_slices Nested H1 data with `region`, `age`, and `data_merge`.
 #' @param data_proxy_matches Fully matched proxy data from the convergence
@@ -9,6 +10,9 @@
 #' @param data_metadata Dataset metadata containing `dataset_id` and `region`.
 #' @param age_min Youngest retained age in years BP.
 #' @param age_max Oldest retained age in years BP.
+#' @param human_columns Non-empty unique character vector of transformed human
+#'   predictor columns. Defaults to all three proxies; use `kk10_transformed`
+#'   alone for single-proxy inputs without matching the excluded proxies.
 #' @return A list with `within_dataset`, `time_slices`, and `matched_values`.
 #' @examples
 #' \dontrun{
@@ -20,10 +24,21 @@ prepare_joint_human_proxy_hvarpart_inputs <- function(
   data_proxy_matches,
   data_metadata,
   age_min = 2000,
-  age_max = 8000
+  age_max = 8000,
+  human_columns = c(
+    "spd_transformed", "kk10_transformed", "hyde_transformed"
+  )
 ) {
-  human_columns <-
-    c("spd_transformed", "kk10_transformed", "hyde_transformed")
+  assertthat::assert_that(
+    is.character(human_columns),
+    length(human_columns) > 0L,
+    !anyNA(human_columns),
+    all(nzchar(human_columns)),
+    !anyDuplicated(human_columns),
+    !any(human_columns %in% c("dataset_id", "age_bp", "region")),
+    msg = "human_columns must name unique transformed human predictors."
+  )
+
   proxy_columns <-
     c("dataset_id", "age_bp", "region", human_columns)
 
@@ -65,9 +80,7 @@ prepare_joint_human_proxy_hvarpart_inputs <- function(
       dataset_id = as.character(.data[["dataset_id"]]),
       age = as.numeric(.data[["age_bp"]]),
       proxy_region = as.character(.data[["region"]]),
-      spd_transformed = as.numeric(.data[["spd_transformed"]]),
-      kk10_transformed = as.numeric(.data[["kk10_transformed"]]),
-      hyde_transformed = as.numeric(.data[["hyde_transformed"]])
+      dplyr::across(dplyr::all_of(human_columns), as.numeric)
     ) |>
     dplyr::filter(dplyr::between(.data[["age"]], age_min, age_max)) |>
     dplyr::left_join(
