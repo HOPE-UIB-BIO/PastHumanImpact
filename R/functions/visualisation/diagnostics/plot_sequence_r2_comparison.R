@@ -28,7 +28,7 @@ plot_sequence_r2_comparison <- function(comparison_long, r2_summary) {
   annotations <- r2_summary |>
     dplyr::mutate(
       label = sprintf(
-        "n = %s\nr = %.2f\nmedian Δ = %+.3f",
+        "n = %s\nr = %.2f\nmedian \u0394 = %+.3f",
         .data[["n_sequences"]], .data[["correlation"]],
         .data[["median_difference"]]
       ),
@@ -62,7 +62,7 @@ plot_sequence_r2_comparison <- function(comparison_long, r2_summary) {
     ggplot2::labs(
       x = "Canonical SPD-only model",
       y = "Filtered joint-human model",
-      title = "Sequence-level adjusted R² comparison",
+      title = "Sequence-level adjusted R\u00b2 comparison",
       subtitle = paste(
         "Each point is one sequence estimated in both analyses;",
         "the dashed line marks identical values"

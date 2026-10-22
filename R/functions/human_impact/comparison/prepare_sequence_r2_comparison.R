@@ -100,10 +100,10 @@ prepare_sequence_r2_comparison <- function(
     ) |>
     dplyr::arrange(.data[["continental_region"]], .data[["dataset_id"]])
   metric_labels <- c(
-    total = "Total adjusted R²",
-    human = "Pure human adjusted R²",
-    climate = "Pure climate adjusted R²",
-    time = "Pure time adjusted R²"
+    total = "Total adjusted R\u00b2",
+    human = "Pure human adjusted R\u00b2",
+    climate = "Pure climate adjusted R\u00b2",
+    time = "Pure time adjusted R\u00b2"
   )
   comparison_long <- purrr::map_dfr(
     names(metric_labels),

@@ -121,7 +121,7 @@ plot_h1_spatial_controlled_balance <- function(
     cli::cli_abort(c(
       "Spatial balance plotting requires recognised region classes.",
       "i" = paste(
-        "Check that `climatezone` contains Köppen-derived region values,",
+        "Check that `climatezone` contains K\u00f6ppen-derived region values,",
         "not continental-region values."
       )
     ))

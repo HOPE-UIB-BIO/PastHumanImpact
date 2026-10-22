@@ -128,7 +128,7 @@ list(
     command = path_profiles,
     format = "file"
   ),
-  # Why: Track the canonical Köppen spatial layer used by Figure 3.
+  # Why: Track the canonical Koppen spatial layer used by Figure 3.
   targets::tar_target(
     name = "file_colmanaged_geo",
     command = path_geo,
@@ -530,7 +530,7 @@ list(
       distance_km = colmanaged_h1_config$spatial_distances_km
     )
   ),
-  # Why: Prepare the canonical Köppen-derived region plotting layer.
+  # Why: Prepare the canonical Koppen-derived region plotting layer.
   targets::tar_target(
     name = "data_colmanaged_geo",
     command =     readr::read_rds(file_colmanaged_geo) |>

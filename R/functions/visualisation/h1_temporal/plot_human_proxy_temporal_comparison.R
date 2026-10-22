@@ -28,7 +28,7 @@ plot_human_proxy_temporal_comparison <- function(
     age_min = age_min,
     age_max = age_max,
     space_colour = space_colour,
-    human_label = "Human (√SPD + KK10 + √HYDE)"
+    human_label = "Human (\u221aSPD + KK10 + \u221aHYDE)"
   )
 
   return(res)

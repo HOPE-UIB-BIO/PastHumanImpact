@@ -51,9 +51,9 @@ plot_predictor_selection_overview <- function(
     Arid = "ARD"
   )
   predictor_labels <- c(
-    spd_sqrt = "√SPD",
+    spd_sqrt = "\u221aSPD",
     kk10_fraction = "KK10",
-    hyde_sqrt = "√HYDE",
+    hyde_sqrt = "\u221aHYDE",
     temp_annual = "Annual\ntemperature",
     temp_cold = "Cold-month\ntemperature",
     prec_summer = "Summer\nprecipitation",

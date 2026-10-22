@@ -2,8 +2,8 @@ testthat::test_that("plot_sequence_r2_comparison() returns four facets", {
   comparison <- tidyr::expand_grid(
     dataset_id = c("a", "b"),
     metric = factor(c(
-      "Total adjusted R²", "Pure human adjusted R²",
-      "Pure climate adjusted R²", "Pure time adjusted R²"
+      "Total adjusted R\u00b2", "Pure human adjusted R\u00b2",
+      "Pure climate adjusted R\u00b2", "Pure time adjusted R\u00b2"
     ))
   ) |>
     dplyr::mutate(spd_only = 0.1, filtered_joint = 0.2, difference = 0.1)

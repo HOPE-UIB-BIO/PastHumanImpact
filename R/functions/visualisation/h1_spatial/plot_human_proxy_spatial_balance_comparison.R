@@ -3,7 +3,7 @@
 #' climate-zone layout for the single locally filtered joint-human model.
 #' @param data_records Eligible dataset-level spatial balance records.
 #' @param data_aggregations Spatial aggregation result for the joint model.
-#' @param data_geo_koppen Köppen spatial layer.
+#' @param data_geo_koppen Koppen spatial layer.
 #' @param model_specifications The one-row joint-model specification.
 #' @return The canonical spatial balance figure without extra annotations.
 #' @examples
