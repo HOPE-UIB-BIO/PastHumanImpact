@@ -22,7 +22,8 @@
 #' Consequently, each continental pooled line has exactly the same vertical
 #' coordinate in the density and every regional panel. The equal-importance
 #' line is dashed, and each regional panel contains one coloured summary
-#' point.
+#' point. Display labels follow the canonical geographical terminology, and
+#' outer margins retain axis text and the region legend during export.
 #' @examples
 #' \dontrun{
 #' result <- plot_hvarpart_spatial_balance(
@@ -73,6 +74,10 @@ plot_hvarpart_spatial_balance <- function(
     c(
       "North America", "Latin America", "Europe", "Asia", "Oceania"
     )
+
+  region_labels <- region_labeller
+
+  region_labels[["Latin America"]] <- "Central &\nSouth America"
 
   balance_palette <-
     c(
@@ -434,7 +439,16 @@ plot_hvarpart_spatial_balance <- function(
       scales = "free_x",
       space = "free_x",
       switch = "both",
-      drop = TRUE
+      drop = TRUE,
+      labeller = ggplot2::labeller(
+        region = ggplot2::as_labeller(region_labels),
+        panel_label = ggplot2::as_labeller(
+          stats::setNames(
+            c("Continental region", panel_levels[-1]),
+            panel_levels
+          )
+        )
+      )
     ) +
     ggplot2::geom_blank(
       data = data_panel_scaffold,
@@ -517,8 +531,10 @@ plot_hvarpart_spatial_balance <- function(
       guide = "none"
     ) +
     ggplot2::scale_colour_identity(
-      breaks = unname(palette_ecozones),
-      labels = names(palette_ecozones),
+      breaks = unname(
+        palette_ecozones[data_climate_zones[["climatezone_label"]]]
+      ),
+      labels = data_climate_zones[["climatezone_label"]],
       guide = ggplot2::guide_legend(
         title = NULL,
         nrow = 2,
@@ -536,7 +552,7 @@ plot_hvarpart_spatial_balance <- function(
     ) +
     ggplot2::theme_bw(base_size = text_size) +
     ggplot2::theme(
-      plot.margin = grid::unit(c(0, 0, 0, 0), "mm"),
+      plot.margin = grid::unit(c(2, 3, 2, 1), "mm"),
       panel.spacing.x = grid::unit(0, "mm"),
       panel.spacing.y = grid::unit(2, "mm"),
       strip.background = ggplot2::element_blank(),
