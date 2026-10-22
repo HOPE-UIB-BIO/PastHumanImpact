@@ -1,0 +1,66 @@
+analysis,region,age,status,n_samples,selection_status,n_candidates,n_selected,global_p_value,spatial_adjusted_r_squared
+temporal_hyde,Europe,2000,spatial_model_estimated,389,selected,82,8,0.001,0.19373983849187904
+temporal_hyde,Europe,2500,spatial_model_estimated,392,selected,83,8,0.001,0.19499953590626673
+temporal_hyde,Europe,3000,spatial_model_estimated,387,selected,81,10,0.001,0.19497908409447384
+temporal_hyde,Europe,3500,spatial_model_estimated,382,selected,80,10,0.001,0.2614696539984279
+temporal_hyde,Europe,4000,spatial_model_estimated,387,selected,81,10,0.001,0.22696113303769883
+temporal_hyde,Europe,4500,spatial_model_estimated,388,selected,81,8,0.001,0.2371566582627438
+temporal_hyde,Europe,5000,spatial_model_estimated,382,selected,80,7,0.001,0.23240052567045166
+temporal_hyde,Europe,5500,spatial_model_estimated,385,selected,82,11,0.001,0.2600484625381747
+temporal_hyde,Europe,6000,spatial_model_estimated,387,selected,81,6,0.001,0.2176967349189145
+temporal_hyde,Europe,6500,spatial_model_estimated,380,selected,80,8,0.001,0.26130067905750776
+temporal_hyde,Europe,7000,spatial_model_estimated,388,selected,83,6,0.001,0.23174774625587935
+temporal_hyde,Europe,7500,spatial_model_estimated,383,selected,80,6,0.001,0.24090265301766567
+temporal_hyde,Europe,8000,spatial_model_estimated,376,selected,78,6,0.001,0.20218329858317108
+temporal_hyde,North America,2000,spatial_model_estimated,537,selected,128,6,0.001,0.1914194973414124
+temporal_hyde,North America,2500,spatial_model_estimated,531,selected,126,5,0.001,0.20957003696540955
+temporal_hyde,North America,3000,spatial_model_estimated,530,selected,127,5,0.001,0.18056080382193662
+temporal_hyde,North America,3500,spatial_model_estimated,534,selected,127,2,0.001,0.18501497934716227
+temporal_hyde,North America,4000,spatial_model_estimated,542,selected,129,4,0.001,0.2064527460528699
+temporal_hyde,North America,4500,spatial_model_estimated,538,selected,129,5,0.001,0.19792507113649882
+temporal_hyde,North America,5000,spatial_model_estimated,536,selected,128,5,0.001,0.18880933396575394
+temporal_hyde,North America,5500,spatial_model_estimated,541,selected,129,5,0.001,0.1623498994962801
+temporal_hyde,North America,6000,spatial_model_estimated,532,selected,129,4,0.001,0.18260743289565406
+temporal_hyde,North America,6500,spatial_model_estimated,540,selected,130,5,0.001,0.17504447130437517
+temporal_hyde,North America,7000,spatial_model_estimated,537,selected,128,7,0.001,0.18883205609367926
+temporal_hyde,North America,7500,spatial_model_estimated,539,selected,129,6,0.001,0.19373843078042163
+temporal_hyde,North America,8000,spatial_model_estimated,529,selected,126,8,0.001,0.17673233837728985
+temporal_hyde,Latin America,2000,spatial_model_estimated,79,selected,10,1,0.014,0.070149559611281
+temporal_hyde,Latin America,2500,spatial_model_estimated,79,selected,10,1,0.008,0.0819189708096042
+temporal_hyde,Latin America,3000,no_spatial_terms_selected,78,no_spatial_signal,10,0,0.054,0.05149223752809107
+temporal_hyde,Latin America,4000,spatial_model_estimated,77,selected,10,1,0.009,0.07312411605327762
+temporal_hyde,Latin America,4500,spatial_model_estimated,79,selected,10,1,0.005,0.08633321871369726
+temporal_hyde,Latin America,5000,spatial_model_estimated,76,selected,10,1,0.005,0.08167853398561198
+temporal_hyde,Latin America,5500,spatial_model_estimated,78,selected,10,2,0.001,0.12631838246026628
+temporal_hyde,Latin America,6000,spatial_model_estimated,74,selected,10,1,0.003,0.1092546690518631
+temporal_hyde,Latin America,6500,no_spatial_terms_selected,74,no_terms_selected,10,0,0.008,0.08123569311753231
+temporal_hyde,Latin America,7000,no_spatial_terms_selected,73,no_spatial_signal,10,0,0.065,0.04825736290778326
+temporal_hyde,Latin America,7500,no_spatial_terms_selected,73,no_spatial_signal,9,0,0.103,0.039513160211759435
+temporal_hyde,Latin America,8000,no_spatial_terms_selected,67,no_spatial_signal,8,0,0.368,0.008347267846110062
+temporal_hyde,Latin America,3500,no_spatial_terms_selected,77,no_terms_selected,10,0,0.024,0.06412778291506205
+temporal_hyde,Oceania,2000,no_spatial_terms_selected,37,no_terms_selected,5,0,0.028,0.08542421373494635
+temporal_hyde,Oceania,2500,no_spatial_terms_selected,36,no_terms_selected,4,0,0.022,0.08763724837898346
+temporal_hyde,Oceania,3000,no_spatial_terms_selected,38,no_spatial_signal,5,0,0.125,0.046306379216509486
+temporal_hyde,Oceania,3500,no_spatial_terms_selected,38,no_spatial_signal,5,0,0.068,0.06626829477344187
+temporal_hyde,Oceania,4000,no_spatial_terms_selected,38,no_spatial_signal,5,0,0.397,0.007158952921084261
+temporal_hyde,Oceania,4500,no_spatial_terms_selected,38,no_spatial_signal,5,0,0.232,0.03021959149593656
+temporal_hyde,Oceania,5000,no_spatial_terms_selected,38,no_spatial_signal,5,0,0.128,0.050222820135321644
+temporal_hyde,Oceania,5500,no_spatial_terms_selected,37,no_spatial_signal,5,0,0.183,0.03910139258839418
+temporal_hyde,Oceania,6000,no_spatial_terms_selected,36,no_spatial_signal,5,0,0.128,0.05212567356259268
+temporal_hyde,Oceania,7000,no_spatial_terms_selected,33,no_terms_selected,5,0,0.041,0.09585547339239098
+temporal_hyde,Oceania,7500,spatial_model_estimated,33,selected,5,1,0.015,0.13322964337469967
+temporal_hyde,Asia,2000,no_spatial_terms_selected,109,no_spatial_signal,26,0,0.102,0.049691256501842695
+temporal_hyde,Asia,2500,no_spatial_terms_selected,108,no_spatial_signal,26,0,0.109,0.04566265441755968
+temporal_hyde,Asia,3000,no_spatial_terms_selected,110,no_spatial_signal,27,0,0.488,-0.0012780153831053465
+temporal_hyde,Asia,3500,no_spatial_terms_selected,107,no_spatial_signal,26,0,0.498,-8.777485553990161e-5
+temporal_hyde,Asia,4000,spatial_model_estimated,108,selected,25,1,0.008,0.10361791988629432
+temporal_hyde,Asia,4500,no_spatial_terms_selected,108,no_terms_selected,26,0,0.047,0.0647280115860136
+temporal_hyde,Asia,5000,no_spatial_terms_selected,109,no_spatial_signal,25,0,0.098,0.046559833533717954
+temporal_hyde,Asia,5500,no_spatial_terms_selected,108,no_spatial_signal,26,0,0.097,0.05434796721253421
+temporal_hyde,Asia,6000,no_spatial_terms_selected,110,no_spatial_signal,26,0,0.16,0.034949243667469765
+temporal_hyde,Asia,6500,no_spatial_terms_selected,103,no_spatial_signal,23,0,0.307,0.01478184396174076
+temporal_hyde,Asia,7000,no_spatial_terms_selected,102,no_spatial_signal,24,0,0.151,0.03902372582546332
+temporal_hyde,Asia,7500,no_spatial_terms_selected,99,no_spatial_signal,22,0,0.202,0.029315170740887297
+temporal_hyde,Asia,8000,no_spatial_terms_selected,97,no_spatial_signal,22,0,0.287,0.020201835972777582
+temporal_hyde,Oceania,6500,no_spatial_terms_selected,35,no_spatial_signal,5,0,0.14,0.046351868840575405
+temporal_hyde,Oceania,8000,no_spatial_terms_selected,31,no_terms_selected,5,0,0.021,0.135955429165584

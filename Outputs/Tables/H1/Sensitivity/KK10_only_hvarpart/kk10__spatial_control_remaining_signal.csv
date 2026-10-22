@@ -1,0 +1,66 @@
+analysis,region,age,n_unselected_mem,p_value,status
+temporal_kk10,Europe,2000,73,0.001,estimated
+temporal_kk10,Europe,2500,73,0.001,estimated
+temporal_kk10,Europe,3000,71,0.001,estimated
+temporal_kk10,Europe,3500,71,0.001,estimated
+temporal_kk10,Europe,4000,68,0.001,estimated
+temporal_kk10,Europe,4500,70,0.001,estimated
+temporal_kk10,Europe,5000,71,0.001,estimated
+temporal_kk10,Europe,5500,70,0.001,estimated
+temporal_kk10,Europe,6000,75,0.001,estimated
+temporal_kk10,Europe,6500,73,0.001,estimated
+temporal_kk10,Europe,7000,79,0.001,estimated
+temporal_kk10,Europe,7500,75,0.001,estimated
+temporal_kk10,Europe,8000,73,0.001,estimated
+temporal_kk10,North America,2000,124,0.001,estimated
+temporal_kk10,North America,2500,121,0.001,estimated
+temporal_kk10,North America,3000,124,0.001,estimated
+temporal_kk10,North America,3500,124,0.001,estimated
+temporal_kk10,North America,4000,125,0.001,estimated
+temporal_kk10,North America,4500,126,0.001,estimated
+temporal_kk10,North America,5000,124,0.001,estimated
+temporal_kk10,North America,5500,126,0.001,estimated
+temporal_kk10,North America,6000,125,0.001,estimated
+temporal_kk10,North America,6500,125,0.001,estimated
+temporal_kk10,North America,7000,122,0.001,estimated
+temporal_kk10,North America,7500,124,0.001,estimated
+temporal_kk10,North America,8000,121,0.001,estimated
+temporal_kk10,Latin America,2000,10,0.006,estimated
+temporal_kk10,Latin America,2500,10,0.004,estimated
+temporal_kk10,Latin America,3000,10,0.004,estimated
+temporal_kk10,Latin America,4000,10,0.001,estimated
+temporal_kk10,Latin America,4500,10,0.001,estimated
+temporal_kk10,Latin America,5000,10,0.001,estimated
+temporal_kk10,Latin America,5500,10,0.001,estimated
+temporal_kk10,Latin America,6000,10,0.001,estimated
+temporal_kk10,Latin America,6500,9,0.039,estimated
+temporal_kk10,Latin America,7000,10,0.017,estimated
+temporal_kk10,Latin America,7500,9,0.041,estimated
+temporal_kk10,Latin America,8000,8,0.051,estimated
+temporal_kk10,Latin America,3500,10,0.001,estimated
+temporal_kk10,Oceania,2000,5,0.057,estimated
+temporal_kk10,Oceania,2500,4,0.55,estimated
+temporal_kk10,Oceania,3000,5,0.505,estimated
+temporal_kk10,Oceania,3500,5,0.272,estimated
+temporal_kk10,Oceania,4000,5,0.689,estimated
+temporal_kk10,Oceania,4500,5,0.334,estimated
+temporal_kk10,Oceania,5000,5,0.37,estimated
+temporal_kk10,Oceania,5500,5,0.533,estimated
+temporal_kk10,Oceania,6000,5,0.475,estimated
+temporal_kk10,Oceania,7000,5,0.059,estimated
+temporal_kk10,Oceania,7500,4,0.061,estimated
+temporal_kk10,Asia,2000,26,0.189,estimated
+temporal_kk10,Asia,2500,26,0.256,estimated
+temporal_kk10,Asia,3000,27,0.473,estimated
+temporal_kk10,Asia,3500,26,0.559,estimated
+temporal_kk10,Asia,4000,25,0.027,estimated
+temporal_kk10,Asia,4500,26,0.118,estimated
+temporal_kk10,Asia,5000,25,0.189,estimated
+temporal_kk10,Asia,5500,26,0.134,estimated
+temporal_kk10,Asia,6000,26,0.199,estimated
+temporal_kk10,Asia,6500,23,0.435,estimated
+temporal_kk10,Asia,7000,24,0.386,estimated
+temporal_kk10,Asia,7500,22,0.547,estimated
+temporal_kk10,Asia,8000,22,0.453,estimated
+temporal_kk10,Oceania,6500,5,0.268,estimated
+temporal_kk10,Oceania,8000,4,0.038,estimated

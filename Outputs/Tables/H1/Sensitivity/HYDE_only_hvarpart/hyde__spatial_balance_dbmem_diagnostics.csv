@@ -1,0 +1,6 @@
+spatial_group,n_records,n_unique_locations,n_colocated_records,n_positive_mem,threshold_km,warning_message,status
+Europe,380,355,48,81,411.41119655714897,Non euclidean distance,eligible
+North America,543,538,10,129,890.1172404285654,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+Latin America,75,69,11,10,1757.9132308461055,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+Asia,101,101,0,23,1599.3272958494965,Non euclidean distance | neighbour object has 2 sub-graphs,eligible
+Oceania,9,8,2,0,NA,NA,insufficient_locations
