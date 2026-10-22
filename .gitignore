@@ -16,6 +16,7 @@ Manuscript/_internal/
 
 # Temporary analysis outputs
 Data/Temp/
+Rplots.pdf
 
 # VSCode settings
 .vscode/settings.json

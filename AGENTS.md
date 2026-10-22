@@ -16,6 +16,7 @@ correct source documents.
 | Manuscript, Markdown, and Quarto-style narrative work | `.ai/manuscript.md` |
 | Git workflow, branch safety, worktrees, and review workflow | `.ai/git-workflow.md` |
 | Debugging and bug fixes | `.ai/debugging.md` |
+| Running R or tests locally, R console and VS Code setup, encoding issues | On Ondřej's machine: `C:\Users\ondre\.claude\R_environment_setup.md` (if present) |
 | Reviewing changed files | `.ai/review-checklist.md` |
 | Reusable agent prompts | `.ai/agents/changes-reviewer.agent.md`, `.ai/agents/plan-large-changes.agent.md` |
 
