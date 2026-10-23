@@ -28,6 +28,7 @@ if (
   library(dplyr)
   library(magrittr)
   library(maps)
+  library(ncdf4)
   library(purrr)
   library(readr)
   library(REcopol)

@@ -3,7 +3,7 @@
 #' @param data_pollen Data frame with `dataset_id` and list-column `counts_harmonised`.
 #' @param n_rand Number of randomisations.
 #' @param sel_method Method passed to `REcopol::diversity_estimate()`.
-#' @return For each site dataset the rarefied estimates of Hill´s effective
+#' @return For each site dataset the rarefied estimates of Hill's effective
 #' species numbers (which are the estimated number of taxa (N0), estimated
 #' number of equally common taxa (N1), estimated number of equally abundant
 #' taxa (N2)), and the associated evenness ratios N1/N0 and N2/N1

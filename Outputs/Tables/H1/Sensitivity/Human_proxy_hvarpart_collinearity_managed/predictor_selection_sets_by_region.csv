@@ -1,0 +1,107 @@
+region,group,selected_predictors,n_datasets,proportion
+Arid,climate,temp_annual + temp_cold + prec_summer + prec_win,16,0.3137254901960784
+Arid,climate,temp_annual + prec_summer + prec_win,15,0.29411764705882354
+Arid,climate,temp_annual + prec_summer,8,0.1568627450980392
+Arid,climate,temp_annual + prec_win,7,0.13725490196078433
+Arid,climate,temp_annual,3,0.058823529411764705
+Arid,climate,temp_annual + temp_cold + prec_win,2,0.0392156862745098
+Arid,human,spd_sqrt + kk10_fraction,23,0.45098039215686275
+Arid,human,spd_sqrt + hyde_sqrt,22,0.43137254901960786
+Arid,human,spd_sqrt,4,0.0784313725490196
+Arid,human,spd_sqrt + kk10_fraction + hyde_sqrt,2,0.0392156862745098
+Cold_Dry_Summer,climate,temp_annual + temp_cold + prec_summer + prec_win,29,0.5087719298245614
+Cold_Dry_Summer,climate,temp_annual + prec_summer + prec_win,16,0.2807017543859649
+Cold_Dry_Summer,climate,temp_annual + prec_win,7,0.12280701754385964
+Cold_Dry_Summer,climate,temp_annual + temp_cold + prec_summer,3,0.05263157894736842
+Cold_Dry_Summer,climate,temp_annual + temp_cold + prec_win,2,0.03508771929824561
+Cold_Dry_Summer,human,spd_sqrt + kk10_fraction,22,0.38596491228070173
+Cold_Dry_Summer,human,spd_sqrt + hyde_sqrt,21,0.3684210526315789
+Cold_Dry_Summer,human,spd_sqrt,12,0.21052631578947367
+Cold_Dry_Summer,human,spd_sqrt + kk10_fraction + hyde_sqrt,2,0.03508771929824561
+Cold_Dry_Winter,climate,temp_annual + prec_summer + prec_win,12,0.5217391304347826
+Cold_Dry_Winter,climate,temp_annual + temp_cold + prec_summer + prec_win,6,0.2608695652173913
+Cold_Dry_Winter,climate,temp_annual + prec_summer,2,0.08695652173913043
+Cold_Dry_Winter,climate,temp_annual + temp_cold,1,0.043478260869565216
+Cold_Dry_Winter,climate,temp_annual,1,0.043478260869565216
+Cold_Dry_Winter,climate,temp_annual + temp_cold + prec_win,1,0.043478260869565216
+Cold_Dry_Winter,human,spd_sqrt + kk10_fraction,13,0.5652173913043478
+Cold_Dry_Winter,human,spd_sqrt + hyde_sqrt,5,0.21739130434782608
+Cold_Dry_Winter,human,spd_sqrt + kk10_fraction + hyde_sqrt,2,0.08695652173913043
+Cold_Dry_Winter,human,spd_sqrt,2,0.08695652173913043
+Cold_Dry_Winter,human,kk10_fraction,1,0.043478260869565216
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + temp_cold + prec_summer + prec_win,116,0.4978540772532189
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + prec_summer + prec_win,85,0.3648068669527897
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + prec_summer,18,0.07725321888412018
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + prec_win,7,0.030042918454935622
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual,3,0.012875536480686695
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + temp_cold + prec_win,3,0.012875536480686695
+Cold_Without_dry_season_Cold_Summer,climate,temp_annual + temp_cold + prec_summer,1,0.004291845493562232
+Cold_Without_dry_season_Cold_Summer,human,spd_sqrt + kk10_fraction,108,0.463519313304721
+Cold_Without_dry_season_Cold_Summer,human,spd_sqrt + hyde_sqrt,96,0.41201716738197425
+Cold_Without_dry_season_Cold_Summer,human,spd_sqrt,27,0.11587982832618025
+Cold_Without_dry_season_Cold_Summer,human,spd_sqrt + kk10_fraction + hyde_sqrt,2,0.008583690987124463
+Cold_Without_dry_season_Hot_Summer,climate,temp_annual + prec_summer + prec_win,47,0.8867924528301887
+Cold_Without_dry_season_Hot_Summer,climate,temp_annual + temp_cold + prec_summer,2,0.03773584905660377
+Cold_Without_dry_season_Hot_Summer,climate,temp_annual + temp_cold + prec_summer + prec_win,2,0.03773584905660377
+Cold_Without_dry_season_Hot_Summer,climate,temp_annual + prec_win,1,0.018867924528301886
+Cold_Without_dry_season_Hot_Summer,climate,temp_annual + temp_cold + prec_win,1,0.018867924528301886
+Cold_Without_dry_season_Hot_Summer,human,spd_sqrt + hyde_sqrt,23,0.4339622641509434
+Cold_Without_dry_season_Hot_Summer,human,spd_sqrt,16,0.3018867924528302
+Cold_Without_dry_season_Hot_Summer,human,spd_sqrt + kk10_fraction,14,0.2641509433962264
+Cold_Without_dry_season_Warm_Summer,climate,temp_annual + prec_summer + prec_win,279,0.7903682719546742
+Cold_Without_dry_season_Warm_Summer,climate,temp_annual + prec_win,29,0.0821529745042493
+Cold_Without_dry_season_Warm_Summer,climate,temp_annual + temp_cold + prec_summer + prec_win,23,0.06515580736543909
+Cold_Without_dry_season_Warm_Summer,climate,temp_annual + prec_summer,18,0.05099150141643059
+Cold_Without_dry_season_Warm_Summer,climate,temp_annual,4,0.0113314447592068
+Cold_Without_dry_season_Warm_Summer,human,spd_sqrt + kk10_fraction,231,0.6543909348441926
+Cold_Without_dry_season_Warm_Summer,human,spd_sqrt,88,0.24929178470254956
+Cold_Without_dry_season_Warm_Summer,human,spd_sqrt + hyde_sqrt,33,0.09348441926345609
+Cold_Without_dry_season_Warm_Summer,human,spd_sqrt + kk10_fraction + hyde_sqrt,1,0.0028328611898017
+Polar,climate,temp_annual + temp_cold + prec_summer + prec_win,41,0.41836734693877553
+Polar,climate,temp_annual + prec_summer + prec_win,34,0.3469387755102041
+Polar,climate,temp_annual + prec_summer,11,0.11224489795918367
+Polar,climate,temp_annual + temp_cold + prec_summer,6,0.061224489795918366
+Polar,climate,temp_annual + prec_win,3,0.030612244897959183
+Polar,climate,temp_annual,2,0.02040816326530612
+Polar,climate,temp_annual + temp_cold + prec_win,1,0.01020408163265306
+Polar,human,spd_sqrt + kk10_fraction,53,0.5408163265306123
+Polar,human,spd_sqrt + hyde_sqrt,37,0.37755102040816324
+Polar,human,spd_sqrt,7,0.07142857142857142
+Polar,human,spd_sqrt + kk10_fraction + hyde_sqrt,1,0.01020408163265306
+Temperate_Dry_Summer,climate,temp_annual + temp_cold + prec_summer + prec_win,18,0.4
+Temperate_Dry_Summer,climate,temp_annual + prec_summer + prec_win,15,0.3333333333333333
+Temperate_Dry_Summer,climate,temp_annual + prec_win,8,0.17777777777777778
+Temperate_Dry_Summer,climate,temp_annual + temp_cold + prec_win,2,0.044444444444444446
+Temperate_Dry_Summer,climate,temp_annual + temp_cold + prec_summer,2,0.044444444444444446
+Temperate_Dry_Summer,human,spd_sqrt + kk10_fraction,23,0.5111111111111111
+Temperate_Dry_Summer,human,spd_sqrt,13,0.28888888888888886
+Temperate_Dry_Summer,human,spd_sqrt + kk10_fraction + hyde_sqrt,7,0.15555555555555556
+Temperate_Dry_Summer,human,spd_sqrt + hyde_sqrt,2,0.044444444444444446
+Temperate_Dry_Winter,climate,temp_annual + temp_cold + prec_summer + prec_win,4,0.4
+Temperate_Dry_Winter,climate,temp_annual + temp_cold + prec_win,2,0.2
+Temperate_Dry_Winter,climate,temp_annual + prec_summer + prec_win,2,0.2
+Temperate_Dry_Winter,climate,temp_annual + prec_win,1,0.1
+Temperate_Dry_Winter,climate,temp_annual + temp_cold + prec_summer,1,0.1
+Temperate_Dry_Winter,human,spd_sqrt + kk10_fraction,7,0.7
+Temperate_Dry_Winter,human,spd_sqrt,2,0.2
+Temperate_Dry_Winter,human,spd_sqrt + hyde_sqrt,1,0.1
+Temperate_Without_dry_season,climate,temp_annual + prec_summer + prec_win,74,0.4180790960451977
+Temperate_Without_dry_season,climate,temp_annual + temp_cold + prec_summer + prec_win,40,0.22598870056497175
+Temperate_Without_dry_season,climate,temp_annual,27,0.15254237288135594
+Temperate_Without_dry_season,climate,temp_annual + prec_win,23,0.12994350282485875
+Temperate_Without_dry_season,climate,temp_annual + temp_cold + prec_win,8,0.04519774011299435
+Temperate_Without_dry_season,climate,temp_annual + temp_cold + prec_summer,4,0.022598870056497175
+Temperate_Without_dry_season,climate,temp_annual + prec_summer,1,0.005649717514124294
+Temperate_Without_dry_season,human,spd_sqrt + kk10_fraction,82,0.4632768361581921
+Temperate_Without_dry_season,human,spd_sqrt + hyde_sqrt,48,0.2711864406779661
+Temperate_Without_dry_season,human,spd_sqrt,43,0.24293785310734464
+Temperate_Without_dry_season,human,spd_sqrt + kk10_fraction + hyde_sqrt,4,0.022598870056497175
+Tropical,climate,temp_annual + temp_cold + prec_summer + prec_win,11,0.55
+Tropical,climate,temp_annual + temp_cold + prec_win,2,0.1
+Tropical,climate,temp_annual + prec_win,2,0.1
+Tropical,climate,temp_annual + prec_summer + prec_win,2,0.1
+Tropical,climate,temp_annual + temp_cold + prec_summer,1,0.05
+Tropical,climate,temp_annual,1,0.05
+Tropical,climate,temp_annual + prec_summer,1,0.05
+Tropical,human,spd_sqrt + kk10_fraction,13,0.65
+Tropical,human,spd_sqrt,7,0.35

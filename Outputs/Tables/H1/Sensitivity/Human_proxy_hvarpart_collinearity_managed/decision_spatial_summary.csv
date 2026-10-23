@@ -1,0 +1,4 @@
+model_id,model_label,n_sequences,human_dominant,climate_dominant,ties,median_zero_balance,median_total_adjusted_r_squared,median_unique_human,median_unique_climate,median_unique_control
+canonical_spd,Canonical SPD,1069,200,869,0,-0.5312439166828888,0.453,0.00688495983568093,0.07852515126415127,0.06198791706587581
+joint_filtered,Filtered joint human block,1069,692,376,1,0.17962466487935658,0.483,0.058839603471343094,0.025366862437689486,0.0477238569552777
+spd_matched_bridge,Matched SPD bridge,1069,305,764,0,-0.3497267759562842,0.429,0.0107420815696323,0.04255842453811631,0.0698781045302177

@@ -50,6 +50,10 @@ Data/
 ├── C14/
 ├── Climate/
 ├── Events/
+├── Human_impact/
+│   └── External_proxies/
+│       ├── KK10/
+│       └── HYDE_3_2/
 ├── Temporal_models/
 ├── Spatial/
 ├── SPD/

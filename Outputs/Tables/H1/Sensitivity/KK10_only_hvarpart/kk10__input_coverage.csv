@@ -1,0 +1,4 @@
+input,rows,datasets,ages,groups
+matched_proxy_product,15353,1181,13,NA
+within_dataset_join,14802,1175,13,NA
+region_age_join,14802,1175,13,65

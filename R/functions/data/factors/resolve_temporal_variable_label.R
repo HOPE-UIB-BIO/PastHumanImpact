@@ -3,7 +3,7 @@
 #' @param x Character vector of temporal variable names.
 #' @return Character vector with mapped labels. Unknown names are unchanged.
 #' @examples
-#' resolve_temporal_variable_label(c("n0", "temp_annual", "spd"))
+#' resolve_temporal_variable_label(c("n0", "temp_annual", "spd", "kk10"))
 resolve_temporal_variable_label <- function(x) {
   assertthat::assert_that(
     is.character(x),
@@ -13,6 +13,8 @@ resolve_temporal_variable_label <- function(x) {
   res_label <-
     dplyr::case_when(
       x == "spd" ~ "SPD",
+      x == "kk10" ~ "KK10",
+      x == "hyde" ~ "HYDE",
       x == "temp_annual" ~ "Mean annual temperature",
       x == "temp_cold" ~ "Cold-month temperature",
       x == "prec_summer" ~ "Summer precipitation",

@@ -1,0 +1,36 @@
+continental_region,group,predictor,n_datasets,n_selected,retention_rate
+Asia,climate,prec_summer,101,74,0.7326732673267327
+Asia,climate,prec_win,101,81,0.801980198019802
+Asia,climate,temp_annual,101,101,1
+Asia,climate,temp_cold,101,22,0.21782178217821782
+Asia,human,hyde_sqrt,101,34,0.33663366336633666
+Asia,human,kk10_fraction,101,66,0.6534653465346535
+Asia,human,spd_sqrt,101,100,0.9900990099009901
+Europe,climate,prec_summer,378,287,0.7592592592592593
+Europe,climate,prec_win,378,320,0.8465608465608465
+Europe,climate,temp_annual,378,378,1
+Europe,climate,temp_cold,378,37,0.09788359788359788
+Europe,human,hyde_sqrt,378,56,0.14814814814814814
+Europe,human,kk10_fraction,378,311,0.8227513227513228
+Europe,human,spd_sqrt,378,378,1
+Latin America,climate,prec_summer,69,66,0.9565217391304348
+Latin America,climate,prec_win,69,60,0.8695652173913043
+Latin America,climate,temp_annual,69,69,1
+Latin America,climate,temp_cold,69,50,0.7246376811594203
+Latin America,human,hyde_sqrt,69,23,0.3333333333333333
+Latin America,human,kk10_fraction,69,54,0.782608695652174
+Latin America,human,spd_sqrt,69,69,1
+North America,climate,prec_summer,538,510,0.9479553903345725
+North America,climate,prec_win,538,508,0.9442379182156134
+North America,climate,temp_annual,538,538,1
+North America,climate,temp_cold,538,221,0.4107806691449814
+North America,human,hyde_sqrt,538,192,0.35687732342007433
+North America,human,kk10_fraction,538,180,0.3345724907063197
+North America,human,spd_sqrt,538,538,1
+Oceania,climate,prec_summer,34,29,0.8529411764705882
+Oceania,climate,prec_win,34,30,0.8823529411764706
+Oceania,climate,temp_annual,34,34,1
+Oceania,climate,temp_cold,34,21,0.6176470588235294
+Oceania,human,hyde_sqrt,34,4,0.11764705882352941
+Oceania,human,kk10_fraction,34,0,0
+Oceania,human,spd_sqrt,34,34,1

@@ -1,0 +1,66 @@
+region,age,status,n_rows,n_predictors_requested,n_predictors_active,design_rank,design_columns,design_full_rank,residual_df
+Europe,2000,estimable,389,7,7,8,8,TRUE,381
+Europe,2500,estimable,392,7,7,8,8,TRUE,384
+Europe,3000,estimable,387,7,7,8,8,TRUE,379
+Europe,3500,estimable,382,7,7,8,8,TRUE,374
+Europe,4000,estimable,387,7,7,8,8,TRUE,379
+Europe,4500,estimable,388,7,7,8,8,TRUE,380
+Europe,5000,estimable,382,7,7,8,8,TRUE,374
+Europe,5500,estimable,385,7,7,8,8,TRUE,377
+Europe,6000,estimable,387,7,7,8,8,TRUE,379
+Europe,6500,estimable,380,7,7,8,8,TRUE,372
+Europe,7000,estimable,388,7,7,8,8,TRUE,380
+Europe,7500,estimable,383,7,7,8,8,TRUE,375
+Europe,8000,estimable,376,7,7,8,8,TRUE,368
+North America,2000,estimable,537,7,7,8,8,TRUE,529
+North America,2500,estimable,531,7,7,8,8,TRUE,523
+North America,3000,estimable,530,7,7,8,8,TRUE,522
+North America,3500,estimable,534,7,7,8,8,TRUE,526
+North America,4000,estimable,542,7,7,8,8,TRUE,534
+North America,4500,estimable,538,7,7,8,8,TRUE,530
+North America,5000,estimable,536,7,7,8,8,TRUE,528
+North America,5500,estimable,541,7,7,8,8,TRUE,533
+North America,6000,estimable,532,7,7,8,8,TRUE,524
+North America,6500,estimable,540,7,7,8,8,TRUE,532
+North America,7000,estimable,537,7,7,8,8,TRUE,529
+North America,7500,estimable,539,7,7,8,8,TRUE,531
+North America,8000,estimable,529,7,7,8,8,TRUE,521
+Latin America,2000,estimable,79,7,7,8,8,TRUE,71
+Latin America,2500,estimable,79,7,7,8,8,TRUE,71
+Latin America,3000,estimable,78,7,7,8,8,TRUE,70
+Latin America,4000,estimable,77,7,7,8,8,TRUE,69
+Latin America,4500,estimable,79,7,7,8,8,TRUE,71
+Latin America,5000,estimable,76,7,7,8,8,TRUE,68
+Latin America,5500,estimable,78,7,7,8,8,TRUE,70
+Latin America,6000,estimable,74,7,7,8,8,TRUE,66
+Latin America,6500,estimable,74,7,7,8,8,TRUE,66
+Latin America,7000,estimable,73,7,7,8,8,TRUE,65
+Latin America,7500,estimable,73,7,7,8,8,TRUE,65
+Latin America,8000,estimable,67,7,7,8,8,TRUE,59
+Latin America,3500,estimable,77,7,7,8,8,TRUE,69
+Oceania,2000,estimable,37,7,7,8,8,TRUE,29
+Oceania,2500,estimable,36,7,7,8,8,TRUE,28
+Oceania,3000,estimable,38,7,7,8,8,TRUE,30
+Oceania,3500,estimable,38,7,7,8,8,TRUE,30
+Oceania,4000,estimable,38,7,7,8,8,TRUE,30
+Oceania,4500,estimable,38,7,7,8,8,TRUE,30
+Oceania,5000,estimable,38,7,7,8,8,TRUE,30
+Oceania,5500,estimable,37,7,7,8,8,TRUE,29
+Oceania,6000,estimable,36,7,7,8,8,TRUE,28
+Oceania,7000,estimable,33,7,7,8,8,TRUE,25
+Oceania,7500,estimable,33,7,7,8,8,TRUE,25
+Asia,2000,estimable,109,7,7,8,8,TRUE,101
+Asia,2500,estimable,108,7,7,8,8,TRUE,100
+Asia,3000,estimable,110,7,7,8,8,TRUE,102
+Asia,3500,estimable,107,7,7,8,8,TRUE,99
+Asia,4000,estimable,108,7,7,8,8,TRUE,100
+Asia,4500,estimable,108,7,7,8,8,TRUE,100
+Asia,5000,estimable,109,7,7,8,8,TRUE,101
+Asia,5500,estimable,108,7,7,8,8,TRUE,100
+Asia,6000,estimable,110,7,7,8,8,TRUE,102
+Asia,6500,estimable,103,7,7,8,8,TRUE,95
+Asia,7000,estimable,102,7,7,8,8,TRUE,94
+Asia,7500,estimable,99,7,7,8,8,TRUE,91
+Asia,8000,estimable,97,7,7,8,8,TRUE,89
+Oceania,6500,estimable,35,7,7,8,8,TRUE,27
+Oceania,8000,estimable,31,7,7,8,8,TRUE,23

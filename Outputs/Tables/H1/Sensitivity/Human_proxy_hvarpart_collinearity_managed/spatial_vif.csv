@@ -1,0 +1,1808 @@
+region,age,model_id,stage,predictor,vif,high_vif
+Europe,2000,joint_filtered,before_selection,spd_raw,24.53365358407015,TRUE
+Europe,2000,joint_filtered,before_selection,spd_sqrt,28.293948003245955,TRUE
+Europe,2000,joint_filtered,before_selection,kk10_fraction,5.044896039225161,TRUE
+Europe,2000,joint_filtered,before_selection,hyde_raw,31.518755363637883,TRUE
+Europe,2000,joint_filtered,before_selection,hyde_sqrt,44.92010148279554,TRUE
+Europe,2000,joint_filtered,before_selection,temp_annual,9.023145315829058,TRUE
+Europe,2000,joint_filtered,before_selection,temp_cold,10.773197907360444,TRUE
+Europe,2000,joint_filtered,before_selection,prec_summer,1.8699893966886811,FALSE
+Europe,2000,joint_filtered,before_selection,prec_win,2.642067663193838,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,spd_sqrt,1.5758364738863577,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,kk10_fraction,4.392718049281743,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,hyde_sqrt,4.582136643919336,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,temp_annual,1.9089099388143136,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,prec_summer,1.5001066388904487,FALSE
+Europe,2000,joint_filtered,after_selection_with_controls,prec_win,1.3518353115610557,FALSE
+Europe,2000,spd_matched_bridge,before_selection,spd_raw,24.53365358407015,TRUE
+Europe,2000,spd_matched_bridge,before_selection,spd_sqrt,28.293948003245955,TRUE
+Europe,2000,spd_matched_bridge,before_selection,kk10_fraction,5.044896039225161,TRUE
+Europe,2000,spd_matched_bridge,before_selection,hyde_raw,31.518755363637883,TRUE
+Europe,2000,spd_matched_bridge,before_selection,hyde_sqrt,44.92010148279554,TRUE
+Europe,2000,spd_matched_bridge,before_selection,temp_annual,9.023145315829058,TRUE
+Europe,2000,spd_matched_bridge,before_selection,temp_cold,10.773197907360444,TRUE
+Europe,2000,spd_matched_bridge,before_selection,prec_summer,1.8699893966886811,FALSE
+Europe,2000,spd_matched_bridge,before_selection,prec_win,2.642067663193838,FALSE
+Europe,2000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0276781994205704,FALSE
+Europe,2000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2971014420266307,FALSE
+Europe,2000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3296180300057094,FALSE
+Europe,2000,spd_matched_bridge,after_selection_with_controls,prec_win,1.1873277160574938,FALSE
+Europe,2500,joint_filtered,before_selection,spd_raw,17.336105566441592,TRUE
+Europe,2500,joint_filtered,before_selection,spd_sqrt,17.7181279432093,TRUE
+Europe,2500,joint_filtered,before_selection,kk10_fraction,2.996732747768686,FALSE
+Europe,2500,joint_filtered,before_selection,hyde_raw,33.033482769420985,TRUE
+Europe,2500,joint_filtered,before_selection,hyde_sqrt,37.39033329894802,TRUE
+Europe,2500,joint_filtered,before_selection,temp_annual,8.259135610329828,TRUE
+Europe,2500,joint_filtered,before_selection,temp_cold,9.617340968619683,TRUE
+Europe,2500,joint_filtered,before_selection,prec_summer,1.7445376383542426,FALSE
+Europe,2500,joint_filtered,before_selection,prec_win,2.324485978649694,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,spd_sqrt,1.4843732884327534,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,kk10_fraction,2.5573190501338576,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.5050305570857807,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,temp_annual,1.6513051304158033,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,prec_summer,1.4863221479463178,FALSE
+Europe,2500,joint_filtered,after_selection_with_controls,prec_win,1.327576852075614,FALSE
+Europe,2500,spd_matched_bridge,before_selection,spd_raw,17.336105566441592,TRUE
+Europe,2500,spd_matched_bridge,before_selection,spd_sqrt,17.7181279432093,TRUE
+Europe,2500,spd_matched_bridge,before_selection,kk10_fraction,2.996732747768686,FALSE
+Europe,2500,spd_matched_bridge,before_selection,hyde_raw,33.033482769420985,TRUE
+Europe,2500,spd_matched_bridge,before_selection,hyde_sqrt,37.39033329894802,TRUE
+Europe,2500,spd_matched_bridge,before_selection,temp_annual,8.259135610329828,TRUE
+Europe,2500,spd_matched_bridge,before_selection,temp_cold,9.617340968619683,TRUE
+Europe,2500,spd_matched_bridge,before_selection,prec_summer,1.7445376383542426,FALSE
+Europe,2500,spd_matched_bridge,before_selection,prec_win,2.324485978649694,FALSE
+Europe,2500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1003275880767824,FALSE
+Europe,2500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2886582311158166,FALSE
+Europe,2500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.382177491419912,FALSE
+Europe,2500,spd_matched_bridge,after_selection_with_controls,prec_win,1.1949980306718082,FALSE
+Europe,3000,joint_filtered,before_selection,spd_raw,13.397315062531154,TRUE
+Europe,3000,joint_filtered,before_selection,spd_sqrt,15.060139917119388,TRUE
+Europe,3000,joint_filtered,before_selection,kk10_fraction,2.3426227884797526,FALSE
+Europe,3000,joint_filtered,before_selection,hyde_raw,39.07472495119242,TRUE
+Europe,3000,joint_filtered,before_selection,hyde_sqrt,40.540248569853404,TRUE
+Europe,3000,joint_filtered,before_selection,temp_annual,9.657052138521431,TRUE
+Europe,3000,joint_filtered,before_selection,temp_cold,12.720175361345671,TRUE
+Europe,3000,joint_filtered,before_selection,prec_summer,2.2701236554060187,FALSE
+Europe,3000,joint_filtered,before_selection,prec_win,2.820129627011318,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,spd_sqrt,1.7690123433833755,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,kk10_fraction,2.167374671962504,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.4442644865514742,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,temp_annual,1.5870276671829473,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,prec_summer,1.6671274051577942,FALSE
+Europe,3000,joint_filtered,after_selection_with_controls,prec_win,1.3376024453944027,FALSE
+Europe,3000,spd_matched_bridge,before_selection,spd_raw,13.397315062531154,TRUE
+Europe,3000,spd_matched_bridge,before_selection,spd_sqrt,15.060139917119388,TRUE
+Europe,3000,spd_matched_bridge,before_selection,kk10_fraction,2.3426227884797526,FALSE
+Europe,3000,spd_matched_bridge,before_selection,hyde_raw,39.07472495119242,TRUE
+Europe,3000,spd_matched_bridge,before_selection,hyde_sqrt,40.540248569853404,TRUE
+Europe,3000,spd_matched_bridge,before_selection,temp_annual,9.657052138521431,TRUE
+Europe,3000,spd_matched_bridge,before_selection,temp_cold,12.720175361345671,TRUE
+Europe,3000,spd_matched_bridge,before_selection,prec_summer,2.2701236554060187,FALSE
+Europe,3000,spd_matched_bridge,before_selection,prec_win,2.820129627011318,FALSE
+Europe,3000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4158692437486746,FALSE
+Europe,3000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3655423428426188,FALSE
+Europe,3000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.6208669568833032,FALSE
+Europe,3000,spd_matched_bridge,after_selection_with_controls,prec_win,1.3073185350765444,FALSE
+Europe,3500,joint_filtered,before_selection,spd_raw,13.904792003771608,TRUE
+Europe,3500,joint_filtered,before_selection,spd_sqrt,16.60883980307388,TRUE
+Europe,3500,joint_filtered,before_selection,kk10_fraction,1.9256756709249034,FALSE
+Europe,3500,joint_filtered,before_selection,hyde_raw,34.926974355659944,TRUE
+Europe,3500,joint_filtered,before_selection,hyde_sqrt,36.04583166159607,TRUE
+Europe,3500,joint_filtered,before_selection,temp_annual,10.690261374036213,TRUE
+Europe,3500,joint_filtered,before_selection,temp_cold,12.998418905046949,TRUE
+Europe,3500,joint_filtered,before_selection,prec_summer,2.2782581143387413,FALSE
+Europe,3500,joint_filtered,before_selection,prec_win,2.3877660721369534,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,spd_sqrt,1.7279820212257835,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,kk10_fraction,1.8589339371320952,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.3048360468898301,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,temp_annual,1.6099259561395804,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,prec_summer,1.6865718726048082,FALSE
+Europe,3500,joint_filtered,after_selection_with_controls,prec_win,1.290632100469229,FALSE
+Europe,3500,spd_matched_bridge,before_selection,spd_raw,13.904792003771608,TRUE
+Europe,3500,spd_matched_bridge,before_selection,spd_sqrt,16.60883980307388,TRUE
+Europe,3500,spd_matched_bridge,before_selection,kk10_fraction,1.9256756709249034,FALSE
+Europe,3500,spd_matched_bridge,before_selection,hyde_raw,34.926974355659944,TRUE
+Europe,3500,spd_matched_bridge,before_selection,hyde_sqrt,36.04583166159607,TRUE
+Europe,3500,spd_matched_bridge,before_selection,temp_annual,10.690261374036213,TRUE
+Europe,3500,spd_matched_bridge,before_selection,temp_cold,12.998418905046949,TRUE
+Europe,3500,spd_matched_bridge,before_selection,prec_summer,2.2782581143387413,FALSE
+Europe,3500,spd_matched_bridge,before_selection,prec_win,2.3877660721369534,FALSE
+Europe,3500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4909914499479542,FALSE
+Europe,3500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3143190934605178,FALSE
+Europe,3500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.633542085371716,FALSE
+Europe,3500,spd_matched_bridge,after_selection_with_controls,prec_win,1.268166647907286,FALSE
+Europe,4000,joint_filtered,before_selection,spd_raw,14.443931741226404,TRUE
+Europe,4000,joint_filtered,before_selection,spd_sqrt,15.144362283071066,TRUE
+Europe,4000,joint_filtered,before_selection,kk10_fraction,1.8545895636101946,FALSE
+Europe,4000,joint_filtered,before_selection,hyde_raw,38.08819422578211,TRUE
+Europe,4000,joint_filtered,before_selection,hyde_sqrt,39.227350737272594,TRUE
+Europe,4000,joint_filtered,before_selection,temp_annual,11.7086553891521,TRUE
+Europe,4000,joint_filtered,before_selection,temp_cold,15.048210806202993,TRUE
+Europe,4000,joint_filtered,before_selection,prec_summer,1.87578546063668,FALSE
+Europe,4000,joint_filtered,before_selection,prec_win,2.8979818503186516,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4397893092075957,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,kk10_fraction,1.7324957806617336,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2115021610066614,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,temp_annual,1.6137495091683656,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,prec_summer,1.571298385758755,FALSE
+Europe,4000,joint_filtered,after_selection_with_controls,prec_win,1.2694492842219096,FALSE
+Europe,4000,spd_matched_bridge,before_selection,spd_raw,14.443931741226404,TRUE
+Europe,4000,spd_matched_bridge,before_selection,spd_sqrt,15.144362283071066,TRUE
+Europe,4000,spd_matched_bridge,before_selection,kk10_fraction,1.8545895636101946,FALSE
+Europe,4000,spd_matched_bridge,before_selection,hyde_raw,38.08819422578211,TRUE
+Europe,4000,spd_matched_bridge,before_selection,hyde_sqrt,39.227350737272594,TRUE
+Europe,4000,spd_matched_bridge,before_selection,temp_annual,11.7086553891521,TRUE
+Europe,4000,spd_matched_bridge,before_selection,temp_cold,15.048210806202993,TRUE
+Europe,4000,spd_matched_bridge,before_selection,prec_summer,1.87578546063668,FALSE
+Europe,4000,spd_matched_bridge,before_selection,prec_win,2.8979818503186516,FALSE
+Europe,4000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2867852519829828,FALSE
+Europe,4000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4041398386892416,FALSE
+Europe,4000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5263399205273023,FALSE
+Europe,4000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2146627236198762,FALSE
+Europe,4500,joint_filtered,before_selection,spd_raw,12.736224575231091,TRUE
+Europe,4500,joint_filtered,before_selection,spd_sqrt,13.970705086539388,TRUE
+Europe,4500,joint_filtered,before_selection,kk10_fraction,1.641863627815659,FALSE
+Europe,4500,joint_filtered,before_selection,hyde_raw,36.63052368404969,TRUE
+Europe,4500,joint_filtered,before_selection,hyde_sqrt,37.75362614903635,TRUE
+Europe,4500,joint_filtered,before_selection,temp_annual,9.227548872190141,TRUE
+Europe,4500,joint_filtered,before_selection,temp_cold,12.900695634993207,TRUE
+Europe,4500,joint_filtered,before_selection,prec_summer,1.872815129991624,FALSE
+Europe,4500,joint_filtered,before_selection,prec_win,2.8090184934536935,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,spd_sqrt,1.3386901020979403,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,kk10_fraction,1.4972202092134603,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.1485862991272078,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,temp_annual,1.6146245468328193,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,prec_summer,1.518492234378068,FALSE
+Europe,4500,joint_filtered,after_selection_with_controls,prec_win,1.250311754297294,FALSE
+Europe,4500,spd_matched_bridge,before_selection,spd_raw,12.736224575231091,TRUE
+Europe,4500,spd_matched_bridge,before_selection,spd_sqrt,13.970705086539388,TRUE
+Europe,4500,spd_matched_bridge,before_selection,kk10_fraction,1.641863627815659,FALSE
+Europe,4500,spd_matched_bridge,before_selection,hyde_raw,36.63052368404969,TRUE
+Europe,4500,spd_matched_bridge,before_selection,hyde_sqrt,37.75362614903635,TRUE
+Europe,4500,spd_matched_bridge,before_selection,temp_annual,9.227548872190141,TRUE
+Europe,4500,spd_matched_bridge,before_selection,temp_cold,12.900695634993207,TRUE
+Europe,4500,spd_matched_bridge,before_selection,prec_summer,1.872815129991624,FALSE
+Europe,4500,spd_matched_bridge,before_selection,prec_win,2.8090184934536935,FALSE
+Europe,4500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2553459876208366,FALSE
+Europe,4500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.37839148907721,FALSE
+Europe,4500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4058400044278778,FALSE
+Europe,4500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2314829311192508,FALSE
+Europe,5000,joint_filtered,before_selection,spd_raw,16.16644462944796,TRUE
+Europe,5000,joint_filtered,before_selection,spd_sqrt,16.72870534446571,TRUE
+Europe,5000,joint_filtered,before_selection,kk10_fraction,1.6121355569138536,FALSE
+Europe,5000,joint_filtered,before_selection,hyde_raw,27.372832119989848,TRUE
+Europe,5000,joint_filtered,before_selection,hyde_sqrt,27.926248840191764,TRUE
+Europe,5000,joint_filtered,before_selection,temp_annual,9.724342269097102,TRUE
+Europe,5000,joint_filtered,before_selection,temp_cold,13.155439172415866,TRUE
+Europe,5000,joint_filtered,before_selection,prec_summer,1.8949225718858451,FALSE
+Europe,5000,joint_filtered,before_selection,prec_win,2.5786400589719043,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,spd_sqrt,1.3687891119830369,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4995166960596564,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.0983675798251065,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,temp_annual,1.5648802480348944,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,prec_summer,1.6247171362706059,FALSE
+Europe,5000,joint_filtered,after_selection_with_controls,prec_win,1.2503836740542358,FALSE
+Europe,5000,spd_matched_bridge,before_selection,spd_raw,16.16644462944796,TRUE
+Europe,5000,spd_matched_bridge,before_selection,spd_sqrt,16.72870534446571,TRUE
+Europe,5000,spd_matched_bridge,before_selection,kk10_fraction,1.6121355569138536,FALSE
+Europe,5000,spd_matched_bridge,before_selection,hyde_raw,27.372832119989848,TRUE
+Europe,5000,spd_matched_bridge,before_selection,hyde_sqrt,27.926248840191764,TRUE
+Europe,5000,spd_matched_bridge,before_selection,temp_annual,9.724342269097102,TRUE
+Europe,5000,spd_matched_bridge,before_selection,temp_cold,13.155439172415866,TRUE
+Europe,5000,spd_matched_bridge,before_selection,prec_summer,1.8949225718858451,FALSE
+Europe,5000,spd_matched_bridge,before_selection,prec_win,2.5786400589719043,FALSE
+Europe,5000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2925776026095455,FALSE
+Europe,5000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3087842458821817,FALSE
+Europe,5000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5113794913686165,FALSE
+Europe,5000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2105560487465667,FALSE
+Europe,5500,joint_filtered,before_selection,spd_raw,9.370495677447945,TRUE
+Europe,5500,joint_filtered,before_selection,spd_sqrt,10.533110324048089,TRUE
+Europe,5500,joint_filtered,before_selection,kk10_fraction,1.5826623052459141,FALSE
+Europe,5500,joint_filtered,before_selection,hyde_raw,25.118035966912764,TRUE
+Europe,5500,joint_filtered,before_selection,hyde_sqrt,25.84996369577456,TRUE
+Europe,5500,joint_filtered,before_selection,temp_annual,7.587365752078315,TRUE
+Europe,5500,joint_filtered,before_selection,temp_cold,10.700438709980592,TRUE
+Europe,5500,joint_filtered,before_selection,prec_summer,2.115501138234348,FALSE
+Europe,5500,joint_filtered,before_selection,prec_win,2.5392357931044764,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,spd_sqrt,1.3735000706301532,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3615212736078737,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2236214527166536,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,temp_annual,1.6806540356122455,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,prec_summer,1.6646666227153688,FALSE
+Europe,5500,joint_filtered,after_selection_with_controls,prec_win,1.2530617357792253,FALSE
+Europe,5500,spd_matched_bridge,before_selection,spd_raw,9.370495677447945,TRUE
+Europe,5500,spd_matched_bridge,before_selection,spd_sqrt,10.533110324048089,TRUE
+Europe,5500,spd_matched_bridge,before_selection,kk10_fraction,1.5826623052459141,FALSE
+Europe,5500,spd_matched_bridge,before_selection,hyde_raw,25.118035966912764,TRUE
+Europe,5500,spd_matched_bridge,before_selection,hyde_sqrt,25.84996369577456,TRUE
+Europe,5500,spd_matched_bridge,before_selection,temp_annual,7.587365752078315,TRUE
+Europe,5500,spd_matched_bridge,before_selection,temp_cold,10.700438709980592,TRUE
+Europe,5500,spd_matched_bridge,before_selection,prec_summer,2.115501138234348,FALSE
+Europe,5500,spd_matched_bridge,before_selection,prec_win,2.5392357931044764,FALSE
+Europe,5500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2348645142141477,FALSE
+Europe,5500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3721676781000096,FALSE
+Europe,5500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.427922108728608,FALSE
+Europe,5500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2205201056777233,FALSE
+Europe,6000,joint_filtered,before_selection,spd_raw,25.739817221227824,TRUE
+Europe,6000,joint_filtered,before_selection,spd_sqrt,26.84355095654243,TRUE
+Europe,6000,joint_filtered,before_selection,kk10_fraction,1.3756886503404162,FALSE
+Europe,6000,joint_filtered,before_selection,hyde_raw,16.36176761062115,TRUE
+Europe,6000,joint_filtered,before_selection,hyde_sqrt,18.207129441491332,TRUE
+Europe,6000,joint_filtered,before_selection,temp_annual,8.932502670651136,TRUE
+Europe,6000,joint_filtered,before_selection,temp_cold,11.475646079946904,TRUE
+Europe,6000,joint_filtered,before_selection,prec_summer,1.56681908960156,FALSE
+Europe,6000,joint_filtered,before_selection,prec_win,2.2269531922002894,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,spd_sqrt,1.3272546919517336,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2918409527251802,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.1110464835568503,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,temp_annual,1.4407542222132543,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,prec_summer,1.4770603595562446,FALSE
+Europe,6000,joint_filtered,after_selection_with_controls,prec_win,1.2306984018572649,FALSE
+Europe,6000,spd_matched_bridge,before_selection,spd_raw,25.739817221227824,TRUE
+Europe,6000,spd_matched_bridge,before_selection,spd_sqrt,26.84355095654243,TRUE
+Europe,6000,spd_matched_bridge,before_selection,kk10_fraction,1.3756886503404162,FALSE
+Europe,6000,spd_matched_bridge,before_selection,hyde_raw,16.36176761062115,TRUE
+Europe,6000,spd_matched_bridge,before_selection,hyde_sqrt,18.207129441491332,TRUE
+Europe,6000,spd_matched_bridge,before_selection,temp_annual,8.932502670651136,TRUE
+Europe,6000,spd_matched_bridge,before_selection,temp_cold,11.475646079946904,TRUE
+Europe,6000,spd_matched_bridge,before_selection,prec_summer,1.56681908960156,FALSE
+Europe,6000,spd_matched_bridge,before_selection,prec_win,2.2269531922002894,FALSE
+Europe,6000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2248605005583968,FALSE
+Europe,6000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2503476067980688,FALSE
+Europe,6000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3508271168020844,FALSE
+Europe,6000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2119947433743647,FALSE
+Europe,6500,joint_filtered,before_selection,spd_raw,18.1518597293495,TRUE
+Europe,6500,joint_filtered,before_selection,spd_sqrt,18.079816852908586,TRUE
+Europe,6500,joint_filtered,before_selection,kk10_fraction,1.3197353400536298,FALSE
+Europe,6500,joint_filtered,before_selection,hyde_raw,13.066902385265612,TRUE
+Europe,6500,joint_filtered,before_selection,hyde_sqrt,14.840368388882155,TRUE
+Europe,6500,joint_filtered,before_selection,temp_annual,8.762268705948607,TRUE
+Europe,6500,joint_filtered,before_selection,temp_cold,11.118415954257175,TRUE
+Europe,6500,joint_filtered,before_selection,prec_summer,1.8565438047022118,FALSE
+Europe,6500,joint_filtered,before_selection,prec_win,2.3591112835388803,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,spd_sqrt,1.699862081300853,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2887974016419914,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.3422341850971153,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,temp_annual,1.5098194742195292,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,prec_summer,1.7505893790377258,FALSE
+Europe,6500,joint_filtered,after_selection_with_controls,prec_win,1.1552458152266365,FALSE
+Europe,6500,spd_matched_bridge,before_selection,spd_raw,18.1518597293495,TRUE
+Europe,6500,spd_matched_bridge,before_selection,spd_sqrt,18.079816852908586,TRUE
+Europe,6500,spd_matched_bridge,before_selection,kk10_fraction,1.3197353400536298,FALSE
+Europe,6500,spd_matched_bridge,before_selection,hyde_raw,13.066902385265612,TRUE
+Europe,6500,spd_matched_bridge,before_selection,hyde_sqrt,14.840368388882155,TRUE
+Europe,6500,spd_matched_bridge,before_selection,temp_annual,8.762268705948607,TRUE
+Europe,6500,spd_matched_bridge,before_selection,temp_cold,11.118415954257175,TRUE
+Europe,6500,spd_matched_bridge,before_selection,prec_summer,1.8565438047022118,FALSE
+Europe,6500,spd_matched_bridge,before_selection,prec_win,2.3591112835388803,FALSE
+Europe,6500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4102634428234362,FALSE
+Europe,6500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2990926043316142,FALSE
+Europe,6500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.643712138934847,FALSE
+Europe,6500,spd_matched_bridge,after_selection_with_controls,prec_win,1.1326184604326208,FALSE
+Europe,7000,joint_filtered,before_selection,spd_raw,13.129421116043499,TRUE
+Europe,7000,joint_filtered,before_selection,spd_sqrt,13.056976986432723,TRUE
+Europe,7000,joint_filtered,before_selection,kk10_fraction,1.214506553161033,FALSE
+Europe,7000,joint_filtered,before_selection,hyde_raw,10.97884529563547,TRUE
+Europe,7000,joint_filtered,before_selection,hyde_sqrt,12.523421072901085,TRUE
+Europe,7000,joint_filtered,before_selection,temp_annual,7.440533373624957,TRUE
+Europe,7000,joint_filtered,before_selection,temp_cold,8.675828471661212,TRUE
+Europe,7000,joint_filtered,before_selection,prec_summer,1.7235983302923206,FALSE
+Europe,7000,joint_filtered,before_selection,prec_win,2.063200444179008,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4161324319563922,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2053450953521285,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.3217975751364788,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,temp_annual,1.498494899326207,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,prec_summer,1.6349428409723392,FALSE
+Europe,7000,joint_filtered,after_selection_with_controls,prec_win,1.0877715687654528,FALSE
+Europe,7000,spd_matched_bridge,before_selection,spd_raw,13.129421116043499,TRUE
+Europe,7000,spd_matched_bridge,before_selection,spd_sqrt,13.056976986432723,TRUE
+Europe,7000,spd_matched_bridge,before_selection,kk10_fraction,1.214506553161033,FALSE
+Europe,7000,spd_matched_bridge,before_selection,hyde_raw,10.97884529563547,TRUE
+Europe,7000,spd_matched_bridge,before_selection,hyde_sqrt,12.523421072901085,TRUE
+Europe,7000,spd_matched_bridge,before_selection,temp_annual,7.440533373624957,TRUE
+Europe,7000,spd_matched_bridge,before_selection,temp_cold,8.675828471661212,TRUE
+Europe,7000,spd_matched_bridge,before_selection,prec_summer,1.7235983302923206,FALSE
+Europe,7000,spd_matched_bridge,before_selection,prec_win,2.063200444179008,FALSE
+Europe,7000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2402812340466924,FALSE
+Europe,7000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.346776480901563,FALSE
+Europe,7000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5175813797799245,FALSE
+Europe,7000,spd_matched_bridge,after_selection_with_controls,prec_win,1.0805678313796663,FALSE
+Europe,7500,joint_filtered,before_selection,spd_raw,15.648071129689901,TRUE
+Europe,7500,joint_filtered,before_selection,spd_sqrt,16.158847184366177,TRUE
+Europe,7500,joint_filtered,before_selection,kk10_fraction,1.283908737011745,FALSE
+Europe,7500,joint_filtered,before_selection,hyde_raw,10.406931011481168,TRUE
+Europe,7500,joint_filtered,before_selection,hyde_sqrt,12.390611195147796,TRUE
+Europe,7500,joint_filtered,before_selection,temp_annual,6.259549485672121,TRUE
+Europe,7500,joint_filtered,before_selection,temp_cold,8.116604441363524,TRUE
+Europe,7500,joint_filtered,before_selection,prec_summer,1.7547681835632445,FALSE
+Europe,7500,joint_filtered,before_selection,prec_win,2.2953663324064286,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,spd_sqrt,1.2411391572988018,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2083721113152346,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.4182762200772996,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,temp_annual,1.4066923078506743,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,prec_summer,1.3966156243815273,FALSE
+Europe,7500,joint_filtered,after_selection_with_controls,prec_win,1.1909026452253961,FALSE
+Europe,7500,spd_matched_bridge,before_selection,spd_raw,15.648071129689901,TRUE
+Europe,7500,spd_matched_bridge,before_selection,spd_sqrt,16.158847184366177,TRUE
+Europe,7500,spd_matched_bridge,before_selection,kk10_fraction,1.283908737011745,FALSE
+Europe,7500,spd_matched_bridge,before_selection,hyde_raw,10.406931011481168,TRUE
+Europe,7500,spd_matched_bridge,before_selection,hyde_sqrt,12.390611195147796,TRUE
+Europe,7500,spd_matched_bridge,before_selection,temp_annual,6.259549485672121,TRUE
+Europe,7500,spd_matched_bridge,before_selection,temp_cold,8.116604441363524,TRUE
+Europe,7500,spd_matched_bridge,before_selection,prec_summer,1.7547681835632445,FALSE
+Europe,7500,spd_matched_bridge,before_selection,prec_win,2.2953663324064286,FALSE
+Europe,7500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1395179451988944,FALSE
+Europe,7500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2540221615328377,FALSE
+Europe,7500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2586019178456693,FALSE
+Europe,7500,spd_matched_bridge,after_selection_with_controls,prec_win,1.1811029709986722,FALSE
+Europe,8000,joint_filtered,before_selection,spd_raw,10.156667432752862,TRUE
+Europe,8000,joint_filtered,before_selection,spd_sqrt,10.713976504324998,TRUE
+Europe,8000,joint_filtered,before_selection,kk10_fraction,1.3922770821005224,FALSE
+Europe,8000,joint_filtered,before_selection,hyde_raw,8.562569436450472,TRUE
+Europe,8000,joint_filtered,before_selection,hyde_sqrt,9.929688336139844,TRUE
+Europe,8000,joint_filtered,before_selection,temp_annual,4.7888879474686,FALSE
+Europe,8000,joint_filtered,before_selection,temp_cold,6.240179127020465,TRUE
+Europe,8000,joint_filtered,before_selection,prec_summer,1.9276825362967256,FALSE
+Europe,8000,joint_filtered,before_selection,prec_win,2.1659500842466795,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,spd_sqrt,1.2677339198049788,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2334516565139733,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.340511401189977,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,temp_annual,1.4722544577964094,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,prec_summer,1.5546332131697724,FALSE
+Europe,8000,joint_filtered,after_selection_with_controls,prec_win,1.281469960447126,FALSE
+Europe,8000,spd_matched_bridge,before_selection,spd_raw,10.156667432752862,TRUE
+Europe,8000,spd_matched_bridge,before_selection,spd_sqrt,10.713976504324998,TRUE
+Europe,8000,spd_matched_bridge,before_selection,kk10_fraction,1.3922770821005224,FALSE
+Europe,8000,spd_matched_bridge,before_selection,hyde_raw,8.562569436450472,TRUE
+Europe,8000,spd_matched_bridge,before_selection,hyde_sqrt,9.929688336139844,TRUE
+Europe,8000,spd_matched_bridge,before_selection,temp_annual,4.7888879474686,FALSE
+Europe,8000,spd_matched_bridge,before_selection,temp_cold,6.240179127020465,TRUE
+Europe,8000,spd_matched_bridge,before_selection,prec_summer,1.9276825362967256,FALSE
+Europe,8000,spd_matched_bridge,before_selection,prec_win,2.1659500842466795,FALSE
+Europe,8000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2058851458951843,FALSE
+Europe,8000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.303874649948075,FALSE
+Europe,8000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.390972971777029,FALSE
+Europe,8000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2779688867297336,FALSE
+North America,2000,joint_filtered,before_selection,spd_raw,17.52886589724197,TRUE
+North America,2000,joint_filtered,before_selection,spd_sqrt,20.995381078120342,TRUE
+North America,2000,joint_filtered,before_selection,kk10_fraction,1.782147648997249,FALSE
+North America,2000,joint_filtered,before_selection,hyde_raw,20.96143509409233,TRUE
+North America,2000,joint_filtered,before_selection,hyde_sqrt,28.97734371130543,TRUE
+North America,2000,joint_filtered,before_selection,temp_annual,12.250163321848932,TRUE
+North America,2000,joint_filtered,before_selection,temp_cold,12.557574870351676,TRUE
+North America,2000,joint_filtered,before_selection,prec_summer,1.6212107447686195,FALSE
+North America,2000,joint_filtered,before_selection,prec_win,1.971392615779148,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,spd_sqrt,1.6362414247058625,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,kk10_fraction,1.5060781829939627,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.038182499104916,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,temp_annual,1.9719187879024278,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,prec_summer,1.5446782752477264,FALSE
+North America,2000,joint_filtered,after_selection_with_controls,prec_win,1.2306656494278052,FALSE
+North America,2000,spd_matched_bridge,before_selection,spd_raw,17.52886589724197,TRUE
+North America,2000,spd_matched_bridge,before_selection,spd_sqrt,20.995381078120342,TRUE
+North America,2000,spd_matched_bridge,before_selection,kk10_fraction,1.782147648997249,FALSE
+North America,2000,spd_matched_bridge,before_selection,hyde_raw,20.96143509409233,TRUE
+North America,2000,spd_matched_bridge,before_selection,hyde_sqrt,28.97734371130543,TRUE
+North America,2000,spd_matched_bridge,before_selection,temp_annual,12.250163321848932,TRUE
+North America,2000,spd_matched_bridge,before_selection,temp_cold,12.557574870351676,TRUE
+North America,2000,spd_matched_bridge,before_selection,prec_summer,1.6212107447686195,FALSE
+North America,2000,spd_matched_bridge,before_selection,prec_win,1.971392615779148,FALSE
+North America,2000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4731755621963316,FALSE
+North America,2000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.8365966310462203,FALSE
+North America,2000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3420624669553953,FALSE
+North America,2000,spd_matched_bridge,after_selection_with_controls,prec_win,1.1969576480022739,FALSE
+North America,2500,joint_filtered,before_selection,spd_raw,18.701220009474138,TRUE
+North America,2500,joint_filtered,before_selection,spd_sqrt,20.979853718817555,TRUE
+North America,2500,joint_filtered,before_selection,kk10_fraction,1.7598488040631235,FALSE
+North America,2500,joint_filtered,before_selection,hyde_raw,20.46721491916524,TRUE
+North America,2500,joint_filtered,before_selection,hyde_sqrt,28.349323110157002,TRUE
+North America,2500,joint_filtered,before_selection,temp_annual,12.670872173869075,TRUE
+North America,2500,joint_filtered,before_selection,temp_cold,12.612703197437085,TRUE
+North America,2500,joint_filtered,before_selection,prec_summer,1.6778371153903802,FALSE
+North America,2500,joint_filtered,before_selection,prec_win,2.003781584593723,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,spd_sqrt,1.769597056988629,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,kk10_fraction,1.5168162506099165,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.253809378756735,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,temp_annual,1.8863123043867056,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,prec_summer,1.6339397294695723,FALSE
+North America,2500,joint_filtered,after_selection_with_controls,prec_win,1.2979958702051957,FALSE
+North America,2500,spd_matched_bridge,before_selection,spd_raw,18.701220009474138,TRUE
+North America,2500,spd_matched_bridge,before_selection,spd_sqrt,20.979853718817555,TRUE
+North America,2500,spd_matched_bridge,before_selection,kk10_fraction,1.7598488040631235,FALSE
+North America,2500,spd_matched_bridge,before_selection,hyde_raw,20.46721491916524,TRUE
+North America,2500,spd_matched_bridge,before_selection,hyde_sqrt,28.349323110157002,TRUE
+North America,2500,spd_matched_bridge,before_selection,temp_annual,12.670872173869075,TRUE
+North America,2500,spd_matched_bridge,before_selection,temp_cold,12.612703197437085,TRUE
+North America,2500,spd_matched_bridge,before_selection,prec_summer,1.6778371153903802,FALSE
+North America,2500,spd_matched_bridge,before_selection,prec_win,2.003781584593723,FALSE
+North America,2500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4416446907548228,FALSE
+North America,2500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.7861783564950329,FALSE
+North America,2500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3230225120037842,FALSE
+North America,2500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2448871808474529,FALSE
+North America,3000,joint_filtered,before_selection,spd_raw,16.824160017254083,TRUE
+North America,3000,joint_filtered,before_selection,spd_sqrt,19.780365042843677,TRUE
+North America,3000,joint_filtered,before_selection,kk10_fraction,1.823063956657963,FALSE
+North America,3000,joint_filtered,before_selection,hyde_raw,20.89741217784734,TRUE
+North America,3000,joint_filtered,before_selection,hyde_sqrt,30.26328493299346,TRUE
+North America,3000,joint_filtered,before_selection,temp_annual,11.4515709158428,TRUE
+North America,3000,joint_filtered,before_selection,temp_cold,11.083969127911338,TRUE
+North America,3000,joint_filtered,before_selection,prec_summer,1.803154521944671,FALSE
+North America,3000,joint_filtered,before_selection,prec_win,1.824918646865889,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,spd_sqrt,1.7194464595839798,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,kk10_fraction,1.5332067457905811,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.3976191183382274,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,temp_annual,1.8999392836041469,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,prec_summer,1.756569545221131,FALSE
+North America,3000,joint_filtered,after_selection_with_controls,prec_win,1.2587390930047544,FALSE
+North America,3000,spd_matched_bridge,before_selection,spd_raw,16.824160017254083,TRUE
+North America,3000,spd_matched_bridge,before_selection,spd_sqrt,19.780365042843677,TRUE
+North America,3000,spd_matched_bridge,before_selection,kk10_fraction,1.823063956657963,FALSE
+North America,3000,spd_matched_bridge,before_selection,hyde_raw,20.89741217784734,TRUE
+North America,3000,spd_matched_bridge,before_selection,hyde_sqrt,30.26328493299346,TRUE
+North America,3000,spd_matched_bridge,before_selection,temp_annual,11.4515709158428,TRUE
+North America,3000,spd_matched_bridge,before_selection,temp_cold,11.083969127911338,TRUE
+North America,3000,spd_matched_bridge,before_selection,prec_summer,1.803154521944671,FALSE
+North America,3000,spd_matched_bridge,before_selection,prec_win,1.824918646865889,FALSE
+North America,3000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3372986617976401,FALSE
+North America,3000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.8461948387058025,FALSE
+North America,3000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3200798310732353,FALSE
+North America,3000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2358656822290228,FALSE
+North America,3500,joint_filtered,before_selection,spd_raw,18.705478364845835,TRUE
+North America,3500,joint_filtered,before_selection,spd_sqrt,20.737407595683074,TRUE
+North America,3500,joint_filtered,before_selection,kk10_fraction,1.919783350653548,FALSE
+North America,3500,joint_filtered,before_selection,hyde_raw,19.998939988829047,TRUE
+North America,3500,joint_filtered,before_selection,hyde_sqrt,28.30570302534403,TRUE
+North America,3500,joint_filtered,before_selection,temp_annual,14.119561727730105,TRUE
+North America,3500,joint_filtered,before_selection,temp_cold,13.938298647214687,TRUE
+North America,3500,joint_filtered,before_selection,prec_summer,1.7243965558322838,FALSE
+North America,3500,joint_filtered,before_selection,prec_win,1.9990089858254578,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,spd_sqrt,1.7112448731384955,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,kk10_fraction,1.6254525378324303,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.385550430102373,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,temp_annual,1.7554526595062134,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,prec_summer,1.6828636529904648,FALSE
+North America,3500,joint_filtered,after_selection_with_controls,prec_win,1.2411970388655584,FALSE
+North America,3500,spd_matched_bridge,before_selection,spd_raw,18.705478364845835,TRUE
+North America,3500,spd_matched_bridge,before_selection,spd_sqrt,20.737407595683074,TRUE
+North America,3500,spd_matched_bridge,before_selection,kk10_fraction,1.919783350653548,FALSE
+North America,3500,spd_matched_bridge,before_selection,hyde_raw,19.998939988829047,TRUE
+North America,3500,spd_matched_bridge,before_selection,hyde_sqrt,28.30570302534403,TRUE
+North America,3500,spd_matched_bridge,before_selection,temp_annual,14.119561727730105,TRUE
+North America,3500,spd_matched_bridge,before_selection,temp_cold,13.938298647214687,TRUE
+North America,3500,spd_matched_bridge,before_selection,prec_summer,1.7243965558322838,FALSE
+North America,3500,spd_matched_bridge,before_selection,prec_win,1.9990089858254578,FALSE
+North America,3500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3138998395664143,FALSE
+North America,3500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.625460867430273,FALSE
+North America,3500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3586198701737284,FALSE
+North America,3500,spd_matched_bridge,after_selection_with_controls,prec_win,1.1946786766746407,FALSE
+North America,4000,joint_filtered,before_selection,spd_raw,18.53258314848135,TRUE
+North America,4000,joint_filtered,before_selection,spd_sqrt,20.783315318773525,TRUE
+North America,4000,joint_filtered,before_selection,kk10_fraction,1.727409693715034,FALSE
+North America,4000,joint_filtered,before_selection,hyde_raw,20.047020915663804,TRUE
+North America,4000,joint_filtered,before_selection,hyde_sqrt,27.880841688870184,TRUE
+North America,4000,joint_filtered,before_selection,temp_annual,13.321723661406315,TRUE
+North America,4000,joint_filtered,before_selection,temp_cold,12.961749587423228,TRUE
+North America,4000,joint_filtered,before_selection,prec_summer,1.6901885429891992,FALSE
+North America,4000,joint_filtered,before_selection,prec_win,1.8517971423072512,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,spd_sqrt,1.9903495828718478,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4823247696550765,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.9302767772364273,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,temp_annual,1.6684839308460107,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,prec_summer,1.653312773657735,FALSE
+North America,4000,joint_filtered,after_selection_with_controls,prec_win,1.2247762114624048,FALSE
+North America,4000,spd_matched_bridge,before_selection,spd_raw,18.53258314848135,TRUE
+North America,4000,spd_matched_bridge,before_selection,spd_sqrt,20.783315318773525,TRUE
+North America,4000,spd_matched_bridge,before_selection,kk10_fraction,1.727409693715034,FALSE
+North America,4000,spd_matched_bridge,before_selection,hyde_raw,20.047020915663804,TRUE
+North America,4000,spd_matched_bridge,before_selection,hyde_sqrt,27.880841688870184,TRUE
+North America,4000,spd_matched_bridge,before_selection,temp_annual,13.321723661406315,TRUE
+North America,4000,spd_matched_bridge,before_selection,temp_cold,12.961749587423228,TRUE
+North America,4000,spd_matched_bridge,before_selection,prec_summer,1.6901885429891992,FALSE
+North America,4000,spd_matched_bridge,before_selection,prec_win,1.8517971423072512,FALSE
+North America,4000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1980315307372194,FALSE
+North America,4000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.5639722118252464,FALSE
+North America,4000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2004300102966823,FALSE
+North America,4000,spd_matched_bridge,after_selection_with_controls,prec_win,1.1937568099047997,FALSE
+North America,4500,joint_filtered,before_selection,spd_raw,14.679194702037762,TRUE
+North America,4500,joint_filtered,before_selection,spd_sqrt,18.789935235018778,TRUE
+North America,4500,joint_filtered,before_selection,kk10_fraction,1.8066906375139333,FALSE
+North America,4500,joint_filtered,before_selection,hyde_raw,19.60665050031375,TRUE
+North America,4500,joint_filtered,before_selection,hyde_sqrt,28.500958005131512,TRUE
+North America,4500,joint_filtered,before_selection,temp_annual,14.044641291785547,TRUE
+North America,4500,joint_filtered,before_selection,temp_cold,14.352785705513924,TRUE
+North America,4500,joint_filtered,before_selection,prec_summer,1.9084393999992486,FALSE
+North America,4500,joint_filtered,before_selection,prec_win,2.0258802661418778,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,spd_sqrt,1.9287966667594667,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,kk10_fraction,1.553236048284581,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.901816876620034,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,temp_annual,1.6812624874710445,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,prec_summer,1.7772813831445733,FALSE
+North America,4500,joint_filtered,after_selection_with_controls,prec_win,1.2045433342676257,FALSE
+North America,4500,spd_matched_bridge,before_selection,spd_raw,14.679194702037762,TRUE
+North America,4500,spd_matched_bridge,before_selection,spd_sqrt,18.789935235018778,TRUE
+North America,4500,spd_matched_bridge,before_selection,kk10_fraction,1.8066906375139333,FALSE
+North America,4500,spd_matched_bridge,before_selection,hyde_raw,19.60665050031375,TRUE
+North America,4500,spd_matched_bridge,before_selection,hyde_sqrt,28.500958005131512,TRUE
+North America,4500,spd_matched_bridge,before_selection,temp_annual,14.044641291785547,TRUE
+North America,4500,spd_matched_bridge,before_selection,temp_cold,14.352785705513924,TRUE
+North America,4500,spd_matched_bridge,before_selection,prec_summer,1.9084393999992486,FALSE
+North America,4500,spd_matched_bridge,before_selection,prec_win,2.0258802661418778,FALSE
+North America,4500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2100968198158775,FALSE
+North America,4500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.594644582231862,FALSE
+North America,4500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2609688649911843,FALSE
+North America,4500,spd_matched_bridge,after_selection_with_controls,prec_win,1.184533527702174,FALSE
+North America,5000,joint_filtered,before_selection,spd_raw,12.006101275307516,TRUE
+North America,5000,joint_filtered,before_selection,spd_sqrt,14.943293054604117,TRUE
+North America,5000,joint_filtered,before_selection,kk10_fraction,1.7777572489564664,FALSE
+North America,5000,joint_filtered,before_selection,hyde_raw,19.170263385434392,TRUE
+North America,5000,joint_filtered,before_selection,hyde_sqrt,26.438691551683434,TRUE
+North America,5000,joint_filtered,before_selection,temp_annual,13.387297745586565,TRUE
+North America,5000,joint_filtered,before_selection,temp_cold,13.242142181593541,TRUE
+North America,5000,joint_filtered,before_selection,prec_summer,1.745831147499514,FALSE
+North America,5000,joint_filtered,before_selection,prec_win,1.9159679392432694,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,spd_sqrt,1.5556404484488258,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4912171656698394,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.2898215176596537,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,temp_annual,1.675285385949924,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,prec_summer,1.6183949540848994,FALSE
+North America,5000,joint_filtered,after_selection_with_controls,prec_win,1.209364145766568,FALSE
+North America,5000,spd_matched_bridge,before_selection,spd_raw,12.006101275307516,TRUE
+North America,5000,spd_matched_bridge,before_selection,spd_sqrt,14.943293054604117,TRUE
+North America,5000,spd_matched_bridge,before_selection,kk10_fraction,1.7777572489564664,FALSE
+North America,5000,spd_matched_bridge,before_selection,hyde_raw,19.170263385434392,TRUE
+North America,5000,spd_matched_bridge,before_selection,hyde_sqrt,26.438691551683434,TRUE
+North America,5000,spd_matched_bridge,before_selection,temp_annual,13.387297745586565,TRUE
+North America,5000,spd_matched_bridge,before_selection,temp_cold,13.242142181593541,TRUE
+North America,5000,spd_matched_bridge,before_selection,prec_summer,1.745831147499514,FALSE
+North America,5000,spd_matched_bridge,before_selection,prec_win,1.9159679392432694,FALSE
+North America,5000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1956255762412955,FALSE
+North America,5000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4983705258516014,FALSE
+North America,5000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2991861011122121,FALSE
+North America,5000,spd_matched_bridge,after_selection_with_controls,prec_win,1.192115933974869,FALSE
+North America,5500,joint_filtered,before_selection,spd_raw,12.786014989149152,TRUE
+North America,5500,joint_filtered,before_selection,spd_sqrt,15.866157073875216,TRUE
+North America,5500,joint_filtered,before_selection,kk10_fraction,1.7877057781036487,FALSE
+North America,5500,joint_filtered,before_selection,hyde_raw,20.062260362254694,TRUE
+North America,5500,joint_filtered,before_selection,hyde_sqrt,28.227447506794352,TRUE
+North America,5500,joint_filtered,before_selection,temp_annual,14.31354216516808,TRUE
+North America,5500,joint_filtered,before_selection,temp_cold,14.691347552150484,TRUE
+North America,5500,joint_filtered,before_selection,prec_summer,1.8150917109716482,FALSE
+North America,5500,joint_filtered,before_selection,prec_win,2.2203807937807483,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,spd_sqrt,1.7094123848638094,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,kk10_fraction,1.4751550017590498,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.4245009042860506,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,temp_annual,1.6796746343658275,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,prec_summer,1.6565813861287635,FALSE
+North America,5500,joint_filtered,after_selection_with_controls,prec_win,1.219518508901782,FALSE
+North America,5500,spd_matched_bridge,before_selection,spd_raw,12.786014989149152,TRUE
+North America,5500,spd_matched_bridge,before_selection,spd_sqrt,15.866157073875216,TRUE
+North America,5500,spd_matched_bridge,before_selection,kk10_fraction,1.7877057781036487,FALSE
+North America,5500,spd_matched_bridge,before_selection,hyde_raw,20.062260362254694,TRUE
+North America,5500,spd_matched_bridge,before_selection,hyde_sqrt,28.227447506794352,TRUE
+North America,5500,spd_matched_bridge,before_selection,temp_annual,14.31354216516808,TRUE
+North America,5500,spd_matched_bridge,before_selection,temp_cold,14.691347552150484,TRUE
+North America,5500,spd_matched_bridge,before_selection,prec_summer,1.8150917109716482,FALSE
+North America,5500,spd_matched_bridge,before_selection,prec_win,2.2203807937807483,FALSE
+North America,5500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2210516613165534,FALSE
+North America,5500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.5456909653631026,FALSE
+North America,5500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2864967975497483,FALSE
+North America,5500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2073661023466995,FALSE
+North America,6000,joint_filtered,before_selection,spd_raw,11.121139043917248,TRUE
+North America,6000,joint_filtered,before_selection,spd_sqrt,13.10701530089777,TRUE
+North America,6000,joint_filtered,before_selection,kk10_fraction,1.8196826406102415,FALSE
+North America,6000,joint_filtered,before_selection,hyde_raw,20.03613376481664,TRUE
+North America,6000,joint_filtered,before_selection,hyde_sqrt,27.47774763621475,TRUE
+North America,6000,joint_filtered,before_selection,temp_annual,13.913526449679505,TRUE
+North America,6000,joint_filtered,before_selection,temp_cold,13.808241221663698,TRUE
+North America,6000,joint_filtered,before_selection,prec_summer,1.739679910166189,FALSE
+North America,6000,joint_filtered,before_selection,prec_win,1.9860823363109767,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,spd_sqrt,1.3838511363922406,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4325710643078309,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.9785188983211,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,temp_annual,1.6645468265008883,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,prec_summer,1.6182211720642747,FALSE
+North America,6000,joint_filtered,after_selection_with_controls,prec_win,1.220812261198726,FALSE
+North America,6000,spd_matched_bridge,before_selection,spd_raw,11.121139043917248,TRUE
+North America,6000,spd_matched_bridge,before_selection,spd_sqrt,13.10701530089777,TRUE
+North America,6000,spd_matched_bridge,before_selection,kk10_fraction,1.8196826406102415,FALSE
+North America,6000,spd_matched_bridge,before_selection,hyde_raw,20.03613376481664,TRUE
+North America,6000,spd_matched_bridge,before_selection,hyde_sqrt,27.47774763621475,TRUE
+North America,6000,spd_matched_bridge,before_selection,temp_annual,13.913526449679505,TRUE
+North America,6000,spd_matched_bridge,before_selection,temp_cold,13.808241221663698,TRUE
+North America,6000,spd_matched_bridge,before_selection,prec_summer,1.739679910166189,FALSE
+North America,6000,spd_matched_bridge,before_selection,prec_win,1.9860823363109767,FALSE
+North America,6000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1752402155993202,FALSE
+North America,6000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4778049510131241,FALSE
+North America,6000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3357052048915197,FALSE
+North America,6000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2111807839169348,FALSE
+North America,6500,joint_filtered,before_selection,spd_raw,9.134881314950174,TRUE
+North America,6500,joint_filtered,before_selection,spd_sqrt,10.211546318075447,TRUE
+North America,6500,joint_filtered,before_selection,kk10_fraction,1.6790836574302508,FALSE
+North America,6500,joint_filtered,before_selection,hyde_raw,20.849273562991613,TRUE
+North America,6500,joint_filtered,before_selection,hyde_sqrt,27.277791712544172,TRUE
+North America,6500,joint_filtered,before_selection,temp_annual,12.889688952836536,TRUE
+North America,6500,joint_filtered,before_selection,temp_cold,12.437747181225799,TRUE
+North America,6500,joint_filtered,before_selection,prec_summer,1.7574515358185459,FALSE
+North America,6500,joint_filtered,before_selection,prec_win,1.9879490047740684,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,spd_sqrt,1.2789929928888217,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3933495524910633,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8047243867791265,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,temp_annual,1.699650445610096,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,prec_summer,1.6593749620933484,FALSE
+North America,6500,joint_filtered,after_selection_with_controls,prec_win,1.2385470043947413,FALSE
+North America,6500,spd_matched_bridge,before_selection,spd_raw,9.134881314950174,TRUE
+North America,6500,spd_matched_bridge,before_selection,spd_sqrt,10.211546318075447,TRUE
+North America,6500,spd_matched_bridge,before_selection,kk10_fraction,1.6790836574302508,FALSE
+North America,6500,spd_matched_bridge,before_selection,hyde_raw,20.849273562991613,TRUE
+North America,6500,spd_matched_bridge,before_selection,hyde_sqrt,27.277791712544172,TRUE
+North America,6500,spd_matched_bridge,before_selection,temp_annual,12.889688952836536,TRUE
+North America,6500,spd_matched_bridge,before_selection,temp_cold,12.437747181225799,TRUE
+North America,6500,spd_matched_bridge,before_selection,prec_summer,1.7574515358185459,FALSE
+North America,6500,spd_matched_bridge,before_selection,prec_win,1.9879490047740684,FALSE
+North America,6500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2007608598121131,FALSE
+North America,6500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4867103776007666,FALSE
+North America,6500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3602047024423167,FALSE
+North America,6500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2306328087876157,FALSE
+North America,7000,joint_filtered,before_selection,spd_raw,8.21756356859204,TRUE
+North America,7000,joint_filtered,before_selection,spd_sqrt,9.168179491757405,TRUE
+North America,7000,joint_filtered,before_selection,kk10_fraction,1.771117548357326,FALSE
+North America,7000,joint_filtered,before_selection,hyde_raw,20.429537407655218,TRUE
+North America,7000,joint_filtered,before_selection,hyde_sqrt,26.87895266269165,TRUE
+North America,7000,joint_filtered,before_selection,temp_annual,11.619200619858589,TRUE
+North America,7000,joint_filtered,before_selection,temp_cold,11.875985115257846,TRUE
+North America,7000,joint_filtered,before_selection,prec_summer,1.7713732213289988,FALSE
+North America,7000,joint_filtered,before_selection,prec_win,2.0595162277994206,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4048925435963295,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4522328907448168,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8591518955818973,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,temp_annual,1.73300892355077,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,prec_summer,1.6705605607496528,FALSE
+North America,7000,joint_filtered,after_selection_with_controls,prec_win,1.2366557888409384,FALSE
+North America,7000,spd_matched_bridge,before_selection,spd_raw,8.21756356859204,TRUE
+North America,7000,spd_matched_bridge,before_selection,spd_sqrt,9.168179491757405,TRUE
+North America,7000,spd_matched_bridge,before_selection,kk10_fraction,1.771117548357326,FALSE
+North America,7000,spd_matched_bridge,before_selection,hyde_raw,20.429537407655218,TRUE
+North America,7000,spd_matched_bridge,before_selection,hyde_sqrt,26.87895266269165,TRUE
+North America,7000,spd_matched_bridge,before_selection,temp_annual,11.619200619858589,TRUE
+North America,7000,spd_matched_bridge,before_selection,temp_cold,11.875985115257846,TRUE
+North America,7000,spd_matched_bridge,before_selection,prec_summer,1.7713732213289988,FALSE
+North America,7000,spd_matched_bridge,before_selection,prec_win,2.0595162277994206,FALSE
+North America,7000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2803497391285357,FALSE
+North America,7000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.5320401090492377,FALSE
+North America,7000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3625898937445737,FALSE
+North America,7000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2271798367881817,FALSE
+North America,7500,joint_filtered,before_selection,spd_raw,7.436979474236671,TRUE
+North America,7500,joint_filtered,before_selection,spd_sqrt,8.43619508281622,TRUE
+North America,7500,joint_filtered,before_selection,kk10_fraction,1.6870436164419327,FALSE
+North America,7500,joint_filtered,before_selection,hyde_raw,21.512900266806597,TRUE
+North America,7500,joint_filtered,before_selection,hyde_sqrt,28.239667941490797,TRUE
+North America,7500,joint_filtered,before_selection,temp_annual,11.233429545026512,TRUE
+North America,7500,joint_filtered,before_selection,temp_cold,10.871370547326116,TRUE
+North America,7500,joint_filtered,before_selection,prec_summer,1.7184486013743603,FALSE
+North America,7500,joint_filtered,before_selection,prec_win,1.9505341555377356,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,spd_sqrt,1.3954538268053587,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,kk10_fraction,1.379359134450648,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.811419173743497,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,temp_annual,1.6632276659575331,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,prec_summer,1.6964595546541348,FALSE
+North America,7500,joint_filtered,after_selection_with_controls,prec_win,1.232682002207114,FALSE
+North America,7500,spd_matched_bridge,before_selection,spd_raw,7.436979474236671,TRUE
+North America,7500,spd_matched_bridge,before_selection,spd_sqrt,8.43619508281622,TRUE
+North America,7500,spd_matched_bridge,before_selection,kk10_fraction,1.6870436164419327,FALSE
+North America,7500,spd_matched_bridge,before_selection,hyde_raw,21.512900266806597,TRUE
+North America,7500,spd_matched_bridge,before_selection,hyde_sqrt,28.239667941490797,TRUE
+North America,7500,spd_matched_bridge,before_selection,temp_annual,11.233429545026512,TRUE
+North America,7500,spd_matched_bridge,before_selection,temp_cold,10.871370547326116,TRUE
+North America,7500,spd_matched_bridge,before_selection,prec_summer,1.7184486013743603,FALSE
+North America,7500,spd_matched_bridge,before_selection,prec_win,1.9505341555377356,FALSE
+North America,7500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2722394866785405,FALSE
+North America,7500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4563666224272933,FALSE
+North America,7500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3623378082113713,FALSE
+North America,7500,spd_matched_bridge,after_selection_with_controls,prec_win,1.2183613759914078,FALSE
+North America,8000,joint_filtered,before_selection,spd_raw,9.280063185719628,TRUE
+North America,8000,joint_filtered,before_selection,spd_sqrt,10.022282737180552,TRUE
+North America,8000,joint_filtered,before_selection,kk10_fraction,1.7435166720197546,FALSE
+North America,8000,joint_filtered,before_selection,hyde_raw,21.89811328332255,TRUE
+North America,8000,joint_filtered,before_selection,hyde_sqrt,28.398987653094274,TRUE
+North America,8000,joint_filtered,before_selection,temp_annual,11.442367048511253,TRUE
+North America,8000,joint_filtered,before_selection,temp_cold,11.267555010260468,TRUE
+North America,8000,joint_filtered,before_selection,prec_summer,1.7210797284776267,FALSE
+North America,8000,joint_filtered,before_selection,prec_win,2.018445407879897,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4749846519754632,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4167427816999603,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.040750278046245,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,temp_annual,1.6958948025386271,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,prec_summer,1.6693502233658422,FALSE
+North America,8000,joint_filtered,after_selection_with_controls,prec_win,1.2535299874270405,FALSE
+North America,8000,spd_matched_bridge,before_selection,spd_raw,9.280063185719628,TRUE
+North America,8000,spd_matched_bridge,before_selection,spd_sqrt,10.022282737180552,TRUE
+North America,8000,spd_matched_bridge,before_selection,kk10_fraction,1.7435166720197546,FALSE
+North America,8000,spd_matched_bridge,before_selection,hyde_raw,21.89811328332255,TRUE
+North America,8000,spd_matched_bridge,before_selection,hyde_sqrt,28.398987653094274,TRUE
+North America,8000,spd_matched_bridge,before_selection,temp_annual,11.442367048511253,TRUE
+North America,8000,spd_matched_bridge,before_selection,temp_cold,11.267555010260468,TRUE
+North America,8000,spd_matched_bridge,before_selection,prec_summer,1.7210797284776267,FALSE
+North America,8000,spd_matched_bridge,before_selection,prec_win,2.018445407879897,FALSE
+North America,8000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2054281571978824,FALSE
+North America,8000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.5060346151664519,FALSE
+North America,8000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2813738816838418,FALSE
+North America,8000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2446714136664285,FALSE
+Latin America,2000,joint_filtered,before_selection,spd_raw,7.598178337620759,TRUE
+Latin America,2000,joint_filtered,before_selection,spd_sqrt,8.052609190362515,TRUE
+Latin America,2000,joint_filtered,before_selection,kk10_fraction,1.8973135433030575,FALSE
+Latin America,2000,joint_filtered,before_selection,hyde_raw,19.56260152681895,TRUE
+Latin America,2000,joint_filtered,before_selection,hyde_sqrt,23.619231845559373,TRUE
+Latin America,2000,joint_filtered,before_selection,temp_annual,29.250022806996263,TRUE
+Latin America,2000,joint_filtered,before_selection,temp_cold,31.268539482200858,TRUE
+Latin America,2000,joint_filtered,before_selection,prec_summer,2.863942580988785,FALSE
+Latin America,2000,joint_filtered,before_selection,prec_win,1.4122252330457863,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4180444857030607,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,kk10_fraction,1.3281413763636927,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.0018237671287222,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,temp_annual,1.2387467004112562,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,prec_summer,2.229674733580128,FALSE
+Latin America,2000,joint_filtered,after_selection_with_controls,prec_win,1.3659463347240361,FALSE
+Latin America,2000,spd_matched_bridge,before_selection,spd_raw,7.598178337620759,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,spd_sqrt,8.052609190362515,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,kk10_fraction,1.8973135433030575,FALSE
+Latin America,2000,spd_matched_bridge,before_selection,hyde_raw,19.56260152681895,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,hyde_sqrt,23.619231845559373,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,temp_annual,29.250022806996263,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,temp_cold,31.268539482200858,TRUE
+Latin America,2000,spd_matched_bridge,before_selection,prec_summer,2.863942580988785,FALSE
+Latin America,2000,spd_matched_bridge,before_selection,prec_win,1.4122252330457863,FALSE
+Latin America,2000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.190331443702251,FALSE
+Latin America,2000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2369873431230847,FALSE
+Latin America,2000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3017813217833691,FALSE
+Latin America,2000,spd_matched_bridge,after_selection_with_controls,prec_win,1.35225610283868,FALSE
+Latin America,2500,joint_filtered,before_selection,spd_raw,8.201534030409839,TRUE
+Latin America,2500,joint_filtered,before_selection,spd_sqrt,7.912268473875629,TRUE
+Latin America,2500,joint_filtered,before_selection,kk10_fraction,2.1758895370874933,FALSE
+Latin America,2500,joint_filtered,before_selection,hyde_raw,21.040353570354885,TRUE
+Latin America,2500,joint_filtered,before_selection,hyde_sqrt,24.426514422374368,TRUE
+Latin America,2500,joint_filtered,before_selection,temp_annual,26.468740364764294,TRUE
+Latin America,2500,joint_filtered,before_selection,temp_cold,28.461035480800394,TRUE
+Latin America,2500,joint_filtered,before_selection,prec_summer,2.3807105161899536,FALSE
+Latin America,2500,joint_filtered,before_selection,prec_win,1.5338295164429847,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,spd_sqrt,1.4785206358406706,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3925670526541376,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.935923147335296,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,temp_annual,1.2595614959657653,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,prec_summer,2.060399675313377,FALSE
+Latin America,2500,joint_filtered,after_selection_with_controls,prec_win,1.3462622312865067,FALSE
+Latin America,2500,spd_matched_bridge,before_selection,spd_raw,8.201534030409839,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,spd_sqrt,7.912268473875629,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,kk10_fraction,2.1758895370874933,FALSE
+Latin America,2500,spd_matched_bridge,before_selection,hyde_raw,21.040353570354885,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,hyde_sqrt,24.426514422374368,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,temp_annual,26.468740364764294,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,temp_cold,28.461035480800394,TRUE
+Latin America,2500,spd_matched_bridge,before_selection,prec_summer,2.3807105161899536,FALSE
+Latin America,2500,spd_matched_bridge,before_selection,prec_win,1.5338295164429847,FALSE
+Latin America,2500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.223120293254274,FALSE
+Latin America,2500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2576870937141935,FALSE
+Latin America,2500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.3067256696708442,FALSE
+Latin America,2500,spd_matched_bridge,after_selection_with_controls,prec_win,1.3441081566812494,FALSE
+Latin America,3000,joint_filtered,before_selection,spd_raw,16.1689735667942,TRUE
+Latin America,3000,joint_filtered,before_selection,spd_sqrt,14.344110966966316,TRUE
+Latin America,3000,joint_filtered,before_selection,kk10_fraction,1.800988155548053,FALSE
+Latin America,3000,joint_filtered,before_selection,hyde_raw,19.18870011159377,TRUE
+Latin America,3000,joint_filtered,before_selection,hyde_sqrt,22.026660122206987,TRUE
+Latin America,3000,joint_filtered,before_selection,temp_annual,26.666541378627972,TRUE
+Latin America,3000,joint_filtered,before_selection,temp_cold,28.940481425024934,TRUE
+Latin America,3000,joint_filtered,before_selection,prec_summer,2.4804578992771478,FALSE
+Latin America,3000,joint_filtered,before_selection,prec_win,2.0538207915761073,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,spd_sqrt,1.5295648837461906,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2064677550133194,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.887270847757228,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,temp_annual,1.1616489276559259,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,prec_summer,2.182105207621764,FALSE
+Latin America,3000,joint_filtered,after_selection_with_controls,prec_win,1.7870477402082894,FALSE
+Latin America,3000,spd_matched_bridge,before_selection,spd_raw,16.1689735667942,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,spd_sqrt,14.344110966966316,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,kk10_fraction,1.800988155548053,FALSE
+Latin America,3000,spd_matched_bridge,before_selection,hyde_raw,19.18870011159377,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,hyde_sqrt,22.026660122206987,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,temp_annual,26.666541378627972,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,temp_cold,28.940481425024934,TRUE
+Latin America,3000,spd_matched_bridge,before_selection,prec_summer,2.4804578992771478,FALSE
+Latin America,3000,spd_matched_bridge,before_selection,prec_win,2.0538207915761073,FALSE
+Latin America,3000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3230570426882793,FALSE
+Latin America,3000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.1457861761193344,FALSE
+Latin America,3000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5383410247849922,FALSE
+Latin America,3000,spd_matched_bridge,after_selection_with_controls,prec_win,1.7670022696087642,FALSE
+Latin America,4000,joint_filtered,before_selection,spd_raw,13.28556758457764,TRUE
+Latin America,4000,joint_filtered,before_selection,spd_sqrt,13.009487097008035,TRUE
+Latin America,4000,joint_filtered,before_selection,kk10_fraction,1.5991634747407384,FALSE
+Latin America,4000,joint_filtered,before_selection,hyde_raw,18.854773236887123,TRUE
+Latin America,4000,joint_filtered,before_selection,hyde_sqrt,21.16606734718264,TRUE
+Latin America,4000,joint_filtered,before_selection,temp_annual,31.49946242472368,TRUE
+Latin America,4000,joint_filtered,before_selection,temp_cold,34.13664773777351,TRUE
+Latin America,4000,joint_filtered,before_selection,prec_summer,2.233524951574315,FALSE
+Latin America,4000,joint_filtered,before_selection,prec_win,1.5799463106574343,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,spd_sqrt,1.398166276751129,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,kk10_fraction,1.168293987677717,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.0477816389794286,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,temp_annual,1.2729680035516702,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,prec_summer,2.187642846622237,FALSE
+Latin America,4000,joint_filtered,after_selection_with_controls,prec_win,1.3661824601560348,FALSE
+Latin America,4000,spd_matched_bridge,before_selection,spd_raw,13.28556758457764,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,spd_sqrt,13.009487097008035,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,kk10_fraction,1.5991634747407384,FALSE
+Latin America,4000,spd_matched_bridge,before_selection,hyde_raw,18.854773236887123,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,hyde_sqrt,21.16606734718264,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,temp_annual,31.49946242472368,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,temp_cold,34.13664773777351,TRUE
+Latin America,4000,spd_matched_bridge,before_selection,prec_summer,2.233524951574315,FALSE
+Latin America,4000,spd_matched_bridge,before_selection,prec_win,1.5799463106574343,FALSE
+Latin America,4000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0767284156909287,FALSE
+Latin America,4000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2417625164834438,FALSE
+Latin America,4000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5108289842268494,FALSE
+Latin America,4000,spd_matched_bridge,after_selection_with_controls,prec_win,1.3349767411270053,FALSE
+Latin America,4500,joint_filtered,before_selection,spd_raw,14.158455539886823,TRUE
+Latin America,4500,joint_filtered,before_selection,spd_sqrt,13.468701581954376,TRUE
+Latin America,4500,joint_filtered,before_selection,kk10_fraction,1.8657843425274214,FALSE
+Latin America,4500,joint_filtered,before_selection,hyde_raw,23.228219334242798,TRUE
+Latin America,4500,joint_filtered,before_selection,hyde_sqrt,28.235839589191613,TRUE
+Latin America,4500,joint_filtered,before_selection,temp_annual,32.48521442732222,TRUE
+Latin America,4500,joint_filtered,before_selection,temp_cold,35.44787313881916,TRUE
+Latin America,4500,joint_filtered,before_selection,prec_summer,2.8606724425845305,FALSE
+Latin America,4500,joint_filtered,before_selection,prec_win,1.7586669512854338,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,spd_sqrt,1.1312883032337822,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,kk10_fraction,1.1544018852310383,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.9141080550403697,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,temp_annual,1.1700630891337274,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,prec_summer,2.41546294075196,FALSE
+Latin America,4500,joint_filtered,after_selection_with_controls,prec_win,1.5345124404880628,FALSE
+Latin America,4500,spd_matched_bridge,before_selection,spd_raw,14.158455539886823,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,spd_sqrt,13.468701581954376,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,kk10_fraction,1.8657843425274214,FALSE
+Latin America,4500,spd_matched_bridge,before_selection,hyde_raw,23.228219334242798,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,hyde_sqrt,28.235839589191613,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,temp_annual,32.48521442732222,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,temp_cold,35.44787313881916,TRUE
+Latin America,4500,spd_matched_bridge,before_selection,prec_summer,2.8606724425845305,FALSE
+Latin America,4500,spd_matched_bridge,before_selection,prec_win,1.7586669512854338,FALSE
+Latin America,4500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1011688578741001,FALSE
+Latin America,4500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.1484116726318438,FALSE
+Latin America,4500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4900765131459441,FALSE
+Latin America,4500,spd_matched_bridge,after_selection_with_controls,prec_win,1.5101815971013783,FALSE
+Latin America,5000,joint_filtered,before_selection,spd_raw,10.369220916504807,TRUE
+Latin America,5000,joint_filtered,before_selection,spd_sqrt,10.907714337812635,TRUE
+Latin America,5000,joint_filtered,before_selection,kk10_fraction,1.7765927121131975,FALSE
+Latin America,5000,joint_filtered,before_selection,hyde_raw,17.549653510689414,TRUE
+Latin America,5000,joint_filtered,before_selection,hyde_sqrt,20.74789313062969,TRUE
+Latin America,5000,joint_filtered,before_selection,temp_annual,29.51836513068095,TRUE
+Latin America,5000,joint_filtered,before_selection,temp_cold,31.528451705448813,TRUE
+Latin America,5000,joint_filtered,before_selection,prec_summer,2.8167399339920327,FALSE
+Latin America,5000,joint_filtered,before_selection,prec_win,1.4239416593234804,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,spd_sqrt,1.1736711408224143,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,kk10_fraction,1.1926012561789336,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.7463979747733018,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,temp_annual,1.3347901382457188,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,prec_summer,2.508448597968559,FALSE
+Latin America,5000,joint_filtered,after_selection_with_controls,prec_win,1.3405572985127552,FALSE
+Latin America,5000,spd_matched_bridge,before_selection,spd_raw,10.369220916504807,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,spd_sqrt,10.907714337812635,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,kk10_fraction,1.7765927121131975,FALSE
+Latin America,5000,spd_matched_bridge,before_selection,hyde_raw,17.549653510689414,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,hyde_sqrt,20.74789313062969,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,temp_annual,29.51836513068095,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,temp_cold,31.528451705448813,TRUE
+Latin America,5000,spd_matched_bridge,before_selection,prec_summer,2.8167399339920327,FALSE
+Latin America,5000,spd_matched_bridge,before_selection,prec_win,1.4239416593234804,FALSE
+Latin America,5000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.104125050882256,FALSE
+Latin America,5000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2795693482330757,FALSE
+Latin America,5000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5602615906740847,FALSE
+Latin America,5000,spd_matched_bridge,after_selection_with_controls,prec_win,1.2369702629357113,FALSE
+Latin America,5500,joint_filtered,before_selection,spd_raw,9.252157869449396,TRUE
+Latin America,5500,joint_filtered,before_selection,spd_sqrt,10.239376340508572,TRUE
+Latin America,5500,joint_filtered,before_selection,kk10_fraction,1.8019636581757597,FALSE
+Latin America,5500,joint_filtered,before_selection,hyde_raw,20.980652812092007,TRUE
+Latin America,5500,joint_filtered,before_selection,hyde_sqrt,23.835050234630767,TRUE
+Latin America,5500,joint_filtered,before_selection,temp_annual,33.129175634790286,TRUE
+Latin America,5500,joint_filtered,before_selection,temp_cold,35.680997522892326,TRUE
+Latin America,5500,joint_filtered,before_selection,prec_summer,3.6141330572552497,FALSE
+Latin America,5500,joint_filtered,before_selection,prec_win,2.0162854133851282,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,spd_sqrt,1.539618877139924,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2168377114884341,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.7434848520865307,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,temp_annual,1.3738657214650671,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,prec_summer,3.385642055247247,FALSE
+Latin America,5500,joint_filtered,after_selection_with_controls,prec_win,1.8813280668594394,FALSE
+Latin America,5500,spd_matched_bridge,before_selection,spd_raw,9.252157869449396,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,spd_sqrt,10.239376340508572,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,kk10_fraction,1.8019636581757597,FALSE
+Latin America,5500,spd_matched_bridge,before_selection,hyde_raw,20.980652812092007,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,hyde_sqrt,23.835050234630767,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,temp_annual,33.129175634790286,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,temp_cold,35.680997522892326,TRUE
+Latin America,5500,spd_matched_bridge,before_selection,prec_summer,3.6141330572552497,FALSE
+Latin America,5500,spd_matched_bridge,before_selection,prec_win,2.0162854133851282,FALSE
+Latin America,5500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.389681205792647,FALSE
+Latin America,5500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3410299155833183,FALSE
+Latin America,5500,spd_matched_bridge,after_selection_with_controls,prec_summer,2.1263133490164687,FALSE
+Latin America,5500,spd_matched_bridge,after_selection_with_controls,prec_win,1.637482872740609,FALSE
+Latin America,6000,joint_filtered,before_selection,spd_raw,12.356684357663388,TRUE
+Latin America,6000,joint_filtered,before_selection,spd_sqrt,12.010017594508026,TRUE
+Latin America,6000,joint_filtered,before_selection,kk10_fraction,2.056957072084479,FALSE
+Latin America,6000,joint_filtered,before_selection,hyde_raw,21.300474251951787,TRUE
+Latin America,6000,joint_filtered,before_selection,hyde_sqrt,25.246490215873582,TRUE
+Latin America,6000,joint_filtered,before_selection,temp_annual,45.26713788713958,TRUE
+Latin America,6000,joint_filtered,before_selection,temp_cold,50.38977694429528,TRUE
+Latin America,6000,joint_filtered,before_selection,prec_summer,3.1504424857093194,FALSE
+Latin America,6000,joint_filtered,before_selection,prec_win,1.7215018316759352,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,spd_sqrt,1.153022921350329,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2769462959178415,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.646758072171613,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,temp_annual,1.2640884148046294,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,prec_summer,2.566561933918135,FALSE
+Latin America,6000,joint_filtered,after_selection_with_controls,prec_win,1.4648783100428258,FALSE
+Latin America,6000,spd_matched_bridge,before_selection,spd_raw,12.356684357663388,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,spd_sqrt,12.010017594508026,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,kk10_fraction,2.056957072084479,FALSE
+Latin America,6000,spd_matched_bridge,before_selection,hyde_raw,21.300474251951787,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,hyde_sqrt,25.246490215873582,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,temp_annual,45.26713788713958,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,temp_cold,50.38977694429528,TRUE
+Latin America,6000,spd_matched_bridge,before_selection,prec_summer,3.1504424857093194,FALSE
+Latin America,6000,spd_matched_bridge,before_selection,prec_win,1.7215018316759352,FALSE
+Latin America,6000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0974959016738952,FALSE
+Latin America,6000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2209525150805118,FALSE
+Latin America,6000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.6089205229835553,FALSE
+Latin America,6000,spd_matched_bridge,after_selection_with_controls,prec_win,1.3272495334518548,FALSE
+Latin America,6500,joint_filtered,before_selection,spd_raw,13.011369631887941,TRUE
+Latin America,6500,joint_filtered,before_selection,spd_sqrt,13.092233604554453,TRUE
+Latin America,6500,joint_filtered,before_selection,kk10_fraction,2.01815804196567,FALSE
+Latin America,6500,joint_filtered,before_selection,hyde_raw,19.464024899562098,TRUE
+Latin America,6500,joint_filtered,before_selection,hyde_sqrt,24.219780965596563,TRUE
+Latin America,6500,joint_filtered,before_selection,temp_annual,38.780963886499364,TRUE
+Latin America,6500,joint_filtered,before_selection,temp_cold,41.485252081693446,TRUE
+Latin America,6500,joint_filtered,before_selection,prec_summer,2.888642305112347,FALSE
+Latin America,6500,joint_filtered,before_selection,prec_win,1.9367703313485072,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,spd_sqrt,1.2426718146273135,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3858831989723264,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8098844998390264,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,temp_annual,1.3002791099070257,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,prec_summer,2.3960795984618555,FALSE
+Latin America,6500,joint_filtered,after_selection_with_controls,prec_win,1.375793443365305,FALSE
+Latin America,6500,spd_matched_bridge,before_selection,spd_raw,13.011369631887941,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,spd_sqrt,13.092233604554453,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,kk10_fraction,2.01815804196567,FALSE
+Latin America,6500,spd_matched_bridge,before_selection,hyde_raw,19.464024899562098,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,hyde_sqrt,24.219780965596563,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,temp_annual,38.780963886499364,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,temp_cold,41.485252081693446,TRUE
+Latin America,6500,spd_matched_bridge,before_selection,prec_summer,2.888642305112347,FALSE
+Latin America,6500,spd_matched_bridge,before_selection,prec_win,1.9367703313485072,FALSE
+Latin America,6500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0110476638358246,FALSE
+Latin America,6500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.275224003883252,FALSE
+Latin America,6500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.6097070100278856,FALSE
+Latin America,6500,spd_matched_bridge,after_selection_with_controls,prec_win,1.3062830720860115,FALSE
+Latin America,7000,joint_filtered,before_selection,spd_raw,13.992080792303407,TRUE
+Latin America,7000,joint_filtered,before_selection,spd_sqrt,14.03569797948075,TRUE
+Latin America,7000,joint_filtered,before_selection,kk10_fraction,1.8922471179679696,FALSE
+Latin America,7000,joint_filtered,before_selection,hyde_raw,20.755305035739976,TRUE
+Latin America,7000,joint_filtered,before_selection,hyde_sqrt,24.755070153119508,TRUE
+Latin America,7000,joint_filtered,before_selection,temp_annual,28.717706316066682,TRUE
+Latin America,7000,joint_filtered,before_selection,temp_cold,31.60950022612605,TRUE
+Latin America,7000,joint_filtered,before_selection,prec_summer,2.2876868142394007,FALSE
+Latin America,7000,joint_filtered,before_selection,prec_win,1.4999099885038258,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,spd_sqrt,1.419247620437961,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,kk10_fraction,1.3464394279308467,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.544016319021121,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,temp_annual,1.2926766066877646,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,prec_summer,1.9275363072465646,FALSE
+Latin America,7000,joint_filtered,after_selection_with_controls,prec_win,1.143427212505081,FALSE
+Latin America,7000,spd_matched_bridge,before_selection,spd_raw,13.992080792303407,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,spd_sqrt,14.03569797948075,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,kk10_fraction,1.8922471179679696,FALSE
+Latin America,7000,spd_matched_bridge,before_selection,hyde_raw,20.755305035739976,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,hyde_sqrt,24.755070153119508,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,temp_annual,28.717706316066682,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,temp_cold,31.60950022612605,TRUE
+Latin America,7000,spd_matched_bridge,before_selection,prec_summer,2.2876868142394007,FALSE
+Latin America,7000,spd_matched_bridge,before_selection,prec_win,1.4999099885038258,FALSE
+Latin America,7000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2193461850037095,FALSE
+Latin America,7000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2771876495698276,FALSE
+Latin America,7000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2604069357849397,FALSE
+Latin America,7000,spd_matched_bridge,after_selection_with_controls,prec_win,1.06151639555907,FALSE
+Latin America,7500,joint_filtered,before_selection,spd_raw,9.738637488857973,TRUE
+Latin America,7500,joint_filtered,before_selection,spd_sqrt,10.035568871028886,TRUE
+Latin America,7500,joint_filtered,before_selection,kk10_fraction,1.770068709944256,FALSE
+Latin America,7500,joint_filtered,before_selection,hyde_raw,18.55119062315895,TRUE
+Latin America,7500,joint_filtered,before_selection,hyde_sqrt,21.36531113054155,TRUE
+Latin America,7500,joint_filtered,before_selection,temp_annual,41.792929251542994,TRUE
+Latin America,7500,joint_filtered,before_selection,temp_cold,44.51923469196886,TRUE
+Latin America,7500,joint_filtered,before_selection,prec_summer,2.0980640310926213,FALSE
+Latin America,7500,joint_filtered,before_selection,prec_win,1.4085494834101906,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,spd_sqrt,1.4911068186666885,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2186733012394595,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.6869935082256047,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,temp_annual,1.3674645371811687,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,prec_summer,1.7745492890473955,FALSE
+Latin America,7500,joint_filtered,after_selection_with_controls,prec_win,1.2167450145700662,FALSE
+Latin America,7500,spd_matched_bridge,before_selection,spd_raw,9.738637488857973,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,spd_sqrt,10.035568871028886,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,kk10_fraction,1.770068709944256,FALSE
+Latin America,7500,spd_matched_bridge,before_selection,hyde_raw,18.55119062315895,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,hyde_sqrt,21.36531113054155,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,temp_annual,41.792929251542994,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,temp_cold,44.51923469196886,TRUE
+Latin America,7500,spd_matched_bridge,before_selection,prec_summer,2.0980640310926213,FALSE
+Latin America,7500,spd_matched_bridge,before_selection,prec_win,1.4085494834101906,FALSE
+Latin America,7500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2820104989097152,FALSE
+Latin America,7500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3357244517595213,FALSE
+Latin America,7500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2446049655314968,FALSE
+Latin America,7500,spd_matched_bridge,after_selection_with_controls,prec_win,1.1967765220475919,FALSE
+Latin America,8000,joint_filtered,before_selection,spd_raw,11.153033413988465,TRUE
+Latin America,8000,joint_filtered,before_selection,spd_sqrt,13.113197574443356,TRUE
+Latin America,8000,joint_filtered,before_selection,kk10_fraction,1.8513733531989423,FALSE
+Latin America,8000,joint_filtered,before_selection,hyde_raw,19.25516902469368,TRUE
+Latin America,8000,joint_filtered,before_selection,hyde_sqrt,23.703991052978925,TRUE
+Latin America,8000,joint_filtered,before_selection,temp_annual,33.796176497389915,TRUE
+Latin America,8000,joint_filtered,before_selection,temp_cold,35.91756206879011,TRUE
+Latin America,8000,joint_filtered,before_selection,prec_summer,1.9227125639202007,FALSE
+Latin America,8000,joint_filtered,before_selection,prec_win,1.3647405438037665,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,spd_sqrt,2.326749273652436,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,kk10_fraction,1.1858772398193325,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,hyde_sqrt,3.0950549814912005,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,temp_annual,1.5722618744838945,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,prec_summer,1.7075247190638985,FALSE
+Latin America,8000,joint_filtered,after_selection_with_controls,prec_win,1.2431149518224485,FALSE
+Latin America,8000,spd_matched_bridge,before_selection,spd_raw,11.153033413988465,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,spd_sqrt,13.113197574443356,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,kk10_fraction,1.8513733531989423,FALSE
+Latin America,8000,spd_matched_bridge,before_selection,hyde_raw,19.25516902469368,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,hyde_sqrt,23.703991052978925,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,temp_annual,33.796176497389915,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,temp_cold,35.91756206879011,TRUE
+Latin America,8000,spd_matched_bridge,before_selection,prec_summer,1.9227125639202007,FALSE
+Latin America,8000,spd_matched_bridge,before_selection,prec_win,1.3647405438037665,FALSE
+Latin America,8000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0322848991019882,FALSE
+Latin America,8000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.2983536901465678,FALSE
+Latin America,8000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.2529751463415437,FALSE
+Latin America,8000,spd_matched_bridge,after_selection_with_controls,prec_win,1.0332895189177698,FALSE
+Latin America,3500,joint_filtered,before_selection,spd_raw,9.141823256352396,TRUE
+Latin America,3500,joint_filtered,before_selection,spd_sqrt,9.070988690243258,TRUE
+Latin America,3500,joint_filtered,before_selection,kk10_fraction,1.7637237050717325,FALSE
+Latin America,3500,joint_filtered,before_selection,hyde_raw,20.838517290921377,TRUE
+Latin America,3500,joint_filtered,before_selection,hyde_sqrt,24.883935732273418,TRUE
+Latin America,3500,joint_filtered,before_selection,temp_annual,34.03108563194026,TRUE
+Latin America,3500,joint_filtered,before_selection,temp_cold,36.48022942166654,TRUE
+Latin America,3500,joint_filtered,before_selection,prec_summer,2.5899394483386478,FALSE
+Latin America,3500,joint_filtered,before_selection,prec_win,1.909405748946981,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,spd_sqrt,1.5313883652903033,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2059821388879801,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.0939242814876153,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,temp_annual,1.2197236165617464,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,prec_summer,2.3444395758770624,FALSE
+Latin America,3500,joint_filtered,after_selection_with_controls,prec_win,1.7717026116216485,FALSE
+Latin America,3500,spd_matched_bridge,before_selection,spd_raw,9.141823256352396,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,spd_sqrt,9.070988690243258,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,kk10_fraction,1.7637237050717325,FALSE
+Latin America,3500,spd_matched_bridge,before_selection,hyde_raw,20.838517290921377,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,hyde_sqrt,24.883935732273418,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,temp_annual,34.03108563194026,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,temp_cold,36.48022942166654,TRUE
+Latin America,3500,spd_matched_bridge,before_selection,prec_summer,2.5899394483386478,FALSE
+Latin America,3500,spd_matched_bridge,before_selection,prec_win,1.909405748946981,FALSE
+Latin America,3500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.368983408727489,FALSE
+Latin America,3500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.1879290144178944,FALSE
+Latin America,3500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4994164432833679,FALSE
+Latin America,3500,spd_matched_bridge,after_selection_with_controls,prec_win,1.6922937513658178,FALSE
+Oceania,2000,joint_filtered,before_selection,spd_raw,120.49644394801682,TRUE
+Oceania,2000,joint_filtered,before_selection,spd_sqrt,136.21885762047958,TRUE
+Oceania,2000,joint_filtered,before_selection,kk10_fraction,4.591464483487383,FALSE
+Oceania,2000,joint_filtered,before_selection,hyde_raw,104.80215663920679,TRUE
+Oceania,2000,joint_filtered,before_selection,hyde_sqrt,108.46214644335771,TRUE
+Oceania,2000,joint_filtered,before_selection,temp_annual,43.594748902565385,TRUE
+Oceania,2000,joint_filtered,before_selection,temp_cold,39.70001843534487,TRUE
+Oceania,2000,joint_filtered,before_selection,prec_summer,3.306553600068764,FALSE
+Oceania,2000,joint_filtered,before_selection,prec_win,4.301454074648537,FALSE
+Oceania,2000,joint_filtered,after_selection_with_controls,spd_sqrt,1.5778136287890379,FALSE
+Oceania,2000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2310345579015922,FALSE
+Oceania,2000,joint_filtered,after_selection_with_controls,temp_annual,2.535261048629197,FALSE
+Oceania,2000,joint_filtered,after_selection_with_controls,prec_summer,1.7843538149055507,FALSE
+Oceania,2000,joint_filtered,after_selection_with_controls,prec_win,2.694360581494331,FALSE
+Oceania,2000,spd_matched_bridge,before_selection,spd_raw,120.49644394801682,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,spd_sqrt,136.21885762047958,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,kk10_fraction,4.591464483487383,FALSE
+Oceania,2000,spd_matched_bridge,before_selection,hyde_raw,104.80215663920679,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,hyde_sqrt,108.46214644335771,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,temp_annual,43.594748902565385,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,temp_cold,39.70001843534487,TRUE
+Oceania,2000,spd_matched_bridge,before_selection,prec_summer,3.306553600068764,FALSE
+Oceania,2000,spd_matched_bridge,before_selection,prec_win,4.301454074648537,FALSE
+Oceania,2000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.5765655781520822,FALSE
+Oceania,2000,spd_matched_bridge,after_selection_with_controls,temp_annual,2.534876296547973,FALSE
+Oceania,2000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.6725777269615394,FALSE
+Oceania,2000,spd_matched_bridge,after_selection_with_controls,prec_win,2.573560182726137,FALSE
+Oceania,2500,joint_filtered,before_selection,spd_raw,84.84442848803938,TRUE
+Oceania,2500,joint_filtered,before_selection,spd_sqrt,86.94837493108324,TRUE
+Oceania,2500,joint_filtered,before_selection,kk10_fraction,2.728988062000383,FALSE
+Oceania,2500,joint_filtered,before_selection,hyde_raw,82.16539311054214,TRUE
+Oceania,2500,joint_filtered,before_selection,hyde_sqrt,83.09927065393455,TRUE
+Oceania,2500,joint_filtered,before_selection,temp_annual,43.779072875549474,TRUE
+Oceania,2500,joint_filtered,before_selection,temp_cold,36.50171138038277,TRUE
+Oceania,2500,joint_filtered,before_selection,prec_summer,3.248250056565154,FALSE
+Oceania,2500,joint_filtered,before_selection,prec_win,4.361830546767242,FALSE
+Oceania,2500,joint_filtered,after_selection_with_controls,spd_sqrt,1.4081658673315458,FALSE
+Oceania,2500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.21611405081849,FALSE
+Oceania,2500,joint_filtered,after_selection_with_controls,temp_annual,2.9493528296022133,FALSE
+Oceania,2500,joint_filtered,after_selection_with_controls,prec_summer,1.9903207332144466,FALSE
+Oceania,2500,joint_filtered,after_selection_with_controls,prec_win,2.460067717972491,FALSE
+Oceania,2500,spd_matched_bridge,before_selection,spd_raw,84.84442848803938,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,spd_sqrt,86.94837493108324,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,kk10_fraction,2.728988062000383,FALSE
+Oceania,2500,spd_matched_bridge,before_selection,hyde_raw,82.16539311054214,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,hyde_sqrt,83.09927065393455,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,temp_annual,43.779072875549474,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,temp_cold,36.50171138038277,TRUE
+Oceania,2500,spd_matched_bridge,before_selection,prec_summer,3.248250056565154,FALSE
+Oceania,2500,spd_matched_bridge,before_selection,prec_win,4.361830546767242,FALSE
+Oceania,2500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3880392441442362,FALSE
+Oceania,2500,spd_matched_bridge,after_selection_with_controls,temp_annual,2.9451977013917032,FALSE
+Oceania,2500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.8505654756815892,FALSE
+Oceania,2500,spd_matched_bridge,after_selection_with_controls,prec_win,2.409651297740789,FALSE
+Oceania,3000,joint_filtered,before_selection,spd_raw,39.043059553508115,TRUE
+Oceania,3000,joint_filtered,before_selection,spd_sqrt,43.7227951495005,TRUE
+Oceania,3000,joint_filtered,before_selection,kk10_fraction,3.0340719153906766,FALSE
+Oceania,3000,joint_filtered,before_selection,hyde_raw,80.42438977594834,TRUE
+Oceania,3000,joint_filtered,before_selection,hyde_sqrt,80.64631888265926,TRUE
+Oceania,3000,joint_filtered,before_selection,temp_annual,38.840702121305554,TRUE
+Oceania,3000,joint_filtered,before_selection,temp_cold,31.820144657752536,TRUE
+Oceania,3000,joint_filtered,before_selection,prec_summer,4.273577014157285,FALSE
+Oceania,3000,joint_filtered,before_selection,prec_win,4.149332071378712,FALSE
+Oceania,3000,joint_filtered,after_selection_with_controls,spd_sqrt,1.823185900421516,FALSE
+Oceania,3000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2216314731692153,FALSE
+Oceania,3000,joint_filtered,after_selection_with_controls,temp_annual,2.726520625976815,FALSE
+Oceania,3000,joint_filtered,after_selection_with_controls,prec_summer,1.9642127043588853,FALSE
+Oceania,3000,joint_filtered,after_selection_with_controls,prec_win,3.0973028285206268,FALSE
+Oceania,3000,spd_matched_bridge,before_selection,spd_raw,39.043059553508115,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,spd_sqrt,43.7227951495005,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,kk10_fraction,3.0340719153906766,FALSE
+Oceania,3000,spd_matched_bridge,before_selection,hyde_raw,80.42438977594834,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,hyde_sqrt,80.64631888265926,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,temp_annual,38.840702121305554,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,temp_cold,31.820144657752536,TRUE
+Oceania,3000,spd_matched_bridge,before_selection,prec_summer,4.273577014157285,FALSE
+Oceania,3000,spd_matched_bridge,before_selection,prec_win,4.149332071378712,FALSE
+Oceania,3000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.794881653756036,FALSE
+Oceania,3000,spd_matched_bridge,after_selection_with_controls,temp_annual,2.7250590991410872,FALSE
+Oceania,3000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.9002473125982153,FALSE
+Oceania,3000,spd_matched_bridge,after_selection_with_controls,prec_win,2.8915589929794994,FALSE
+Oceania,3500,joint_filtered,before_selection,spd_raw,126.75175701992829,TRUE
+Oceania,3500,joint_filtered,before_selection,spd_sqrt,140.2056336398437,TRUE
+Oceania,3500,joint_filtered,before_selection,kk10_fraction,3.218769035938416,FALSE
+Oceania,3500,joint_filtered,before_selection,hyde_raw,87.65461438060636,TRUE
+Oceania,3500,joint_filtered,before_selection,hyde_sqrt,88.00934922934583,TRUE
+Oceania,3500,joint_filtered,before_selection,temp_annual,50.74329959563573,TRUE
+Oceania,3500,joint_filtered,before_selection,temp_cold,49.789301307595075,TRUE
+Oceania,3500,joint_filtered,before_selection,prec_summer,3.254699517156494,FALSE
+Oceania,3500,joint_filtered,before_selection,prec_win,3.834047523544287,FALSE
+Oceania,3500,joint_filtered,after_selection_with_controls,spd_sqrt,1.6056758481705036,FALSE
+Oceania,3500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.210530815722854,FALSE
+Oceania,3500,joint_filtered,after_selection_with_controls,temp_annual,3.0984850931086196,FALSE
+Oceania,3500,joint_filtered,after_selection_with_controls,prec_summer,1.696121484835205,FALSE
+Oceania,3500,joint_filtered,after_selection_with_controls,prec_win,2.408372621344497,FALSE
+Oceania,3500,spd_matched_bridge,before_selection,spd_raw,126.75175701992829,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,spd_sqrt,140.2056336398437,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,kk10_fraction,3.218769035938416,FALSE
+Oceania,3500,spd_matched_bridge,before_selection,hyde_raw,87.65461438060636,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,hyde_sqrt,88.00934922934583,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,temp_annual,50.74329959563573,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,temp_cold,49.789301307595075,TRUE
+Oceania,3500,spd_matched_bridge,before_selection,prec_summer,3.254699517156494,FALSE
+Oceania,3500,spd_matched_bridge,before_selection,prec_win,3.834047523544287,FALSE
+Oceania,3500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.5923830199351021,FALSE
+Oceania,3500,spd_matched_bridge,after_selection_with_controls,temp_annual,3.075680635935585,FALSE
+Oceania,3500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5931466575684372,FALSE
+Oceania,3500,spd_matched_bridge,after_selection_with_controls,prec_win,2.3508583449792244,FALSE
+Oceania,4000,joint_filtered,before_selection,spd_raw,65.84099638160882,TRUE
+Oceania,4000,joint_filtered,before_selection,spd_sqrt,90.25296421825924,TRUE
+Oceania,4000,joint_filtered,before_selection,kk10_fraction,3.7958784590576866,FALSE
+Oceania,4000,joint_filtered,before_selection,hyde_raw,132.08977357237924,TRUE
+Oceania,4000,joint_filtered,before_selection,hyde_sqrt,142.79012065007234,TRUE
+Oceania,4000,joint_filtered,before_selection,temp_annual,49.13031406074749,TRUE
+Oceania,4000,joint_filtered,before_selection,temp_cold,55.15206129086245,TRUE
+Oceania,4000,joint_filtered,before_selection,prec_summer,2.970151290946577,FALSE
+Oceania,4000,joint_filtered,before_selection,prec_win,4.17225293160716,FALSE
+Oceania,4000,joint_filtered,after_selection_with_controls,spd_sqrt,1.729171826883238,FALSE
+Oceania,4000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2629815634485348,FALSE
+Oceania,4000,joint_filtered,after_selection_with_controls,temp_annual,3.024678576376463,FALSE
+Oceania,4000,joint_filtered,after_selection_with_controls,prec_summer,1.6792641396179784,FALSE
+Oceania,4000,joint_filtered,after_selection_with_controls,prec_win,2.58890040898965,FALSE
+Oceania,4000,spd_matched_bridge,before_selection,spd_raw,65.84099638160882,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,spd_sqrt,90.25296421825924,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,kk10_fraction,3.7958784590576866,FALSE
+Oceania,4000,spd_matched_bridge,before_selection,hyde_raw,132.08977357237924,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,hyde_sqrt,142.79012065007234,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,temp_annual,49.13031406074749,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,temp_cold,55.15206129086245,TRUE
+Oceania,4000,spd_matched_bridge,before_selection,prec_summer,2.970151290946577,FALSE
+Oceania,4000,spd_matched_bridge,before_selection,prec_win,4.17225293160716,FALSE
+Oceania,4000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.637306139538988,FALSE
+Oceania,4000,spd_matched_bridge,after_selection_with_controls,temp_annual,2.9632322110695513,FALSE
+Oceania,4000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.602134666169089,FALSE
+Oceania,4000,spd_matched_bridge,after_selection_with_controls,prec_win,2.5671899958813644,FALSE
+Oceania,4500,joint_filtered,before_selection,spd_raw,101.83724129403204,TRUE
+Oceania,4500,joint_filtered,before_selection,spd_sqrt,110.14016409906273,TRUE
+Oceania,4500,joint_filtered,before_selection,kk10_fraction,2.2886985767467753,FALSE
+Oceania,4500,joint_filtered,before_selection,hyde_raw,109.71478174642135,TRUE
+Oceania,4500,joint_filtered,before_selection,hyde_sqrt,108.84974618146884,TRUE
+Oceania,4500,joint_filtered,before_selection,temp_annual,41.687745806409616,TRUE
+Oceania,4500,joint_filtered,before_selection,temp_cold,35.26718256898326,TRUE
+Oceania,4500,joint_filtered,before_selection,prec_summer,3.8316363841769423,FALSE
+Oceania,4500,joint_filtered,before_selection,prec_win,4.534026265583577,FALSE
+Oceania,4500,joint_filtered,after_selection_with_controls,spd_sqrt,1.4971208261004714,FALSE
+Oceania,4500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.266599337661482,FALSE
+Oceania,4500,joint_filtered,after_selection_with_controls,temp_annual,2.429576469428627,FALSE
+Oceania,4500,joint_filtered,after_selection_with_controls,prec_summer,1.5286844685511336,FALSE
+Oceania,4500,joint_filtered,after_selection_with_controls,prec_win,2.305113379979299,FALSE
+Oceania,4500,spd_matched_bridge,before_selection,spd_raw,101.83724129403204,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,spd_sqrt,110.14016409906273,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,kk10_fraction,2.2886985767467753,FALSE
+Oceania,4500,spd_matched_bridge,before_selection,hyde_raw,109.71478174642135,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,hyde_sqrt,108.84974618146884,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,temp_annual,41.687745806409616,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,temp_cold,35.26718256898326,TRUE
+Oceania,4500,spd_matched_bridge,before_selection,prec_summer,3.8316363841769423,FALSE
+Oceania,4500,spd_matched_bridge,before_selection,prec_win,4.534026265583577,FALSE
+Oceania,4500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4338864057039644,FALSE
+Oceania,4500,spd_matched_bridge,after_selection_with_controls,temp_annual,2.391539584810551,FALSE
+Oceania,4500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4308847001621265,FALSE
+Oceania,4500,spd_matched_bridge,after_selection_with_controls,prec_win,2.2612007502870743,FALSE
+Oceania,5000,joint_filtered,before_selection,spd_raw,29.82083447514102,TRUE
+Oceania,5000,joint_filtered,before_selection,spd_sqrt,31.44453452547813,TRUE
+Oceania,5000,joint_filtered,before_selection,kk10_fraction,2.0847546739079474,FALSE
+Oceania,5000,joint_filtered,before_selection,hyde_raw,87.54209245260284,TRUE
+Oceania,5000,joint_filtered,before_selection,hyde_sqrt,90.411057184682,TRUE
+Oceania,5000,joint_filtered,before_selection,temp_annual,55.90262577472651,TRUE
+Oceania,5000,joint_filtered,before_selection,temp_cold,49.655778437753455,TRUE
+Oceania,5000,joint_filtered,before_selection,prec_summer,2.725137374863545,FALSE
+Oceania,5000,joint_filtered,before_selection,prec_win,4.381746383424118,FALSE
+Oceania,5000,joint_filtered,after_selection_with_controls,spd_sqrt,1.3382010312983414,FALSE
+Oceania,5000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.2504363456902339,FALSE
+Oceania,5000,joint_filtered,after_selection_with_controls,temp_annual,2.28954556922604,FALSE
+Oceania,5000,joint_filtered,after_selection_with_controls,prec_summer,1.5822446996929005,FALSE
+Oceania,5000,joint_filtered,after_selection_with_controls,prec_win,2.4017311407302624,FALSE
+Oceania,5000,spd_matched_bridge,before_selection,spd_raw,29.82083447514102,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,spd_sqrt,31.44453452547813,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,kk10_fraction,2.0847546739079474,FALSE
+Oceania,5000,spd_matched_bridge,before_selection,hyde_raw,87.54209245260284,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,hyde_sqrt,90.411057184682,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,temp_annual,55.90262577472651,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,temp_cold,49.655778437753455,TRUE
+Oceania,5000,spd_matched_bridge,before_selection,prec_summer,2.725137374863545,FALSE
+Oceania,5000,spd_matched_bridge,before_selection,prec_win,4.381746383424118,FALSE
+Oceania,5000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3240480374111305,FALSE
+Oceania,5000,spd_matched_bridge,after_selection_with_controls,temp_annual,2.25189848854754,FALSE
+Oceania,5000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4840079137700692,FALSE
+Oceania,5000,spd_matched_bridge,after_selection_with_controls,prec_win,2.3501133813678994,FALSE
+Oceania,5500,joint_filtered,before_selection,spd_raw,33.32546661472462,TRUE
+Oceania,5500,joint_filtered,before_selection,spd_sqrt,41.043067596927536,TRUE
+Oceania,5500,joint_filtered,before_selection,kk10_fraction,2.47001859728722,FALSE
+Oceania,5500,joint_filtered,before_selection,hyde_raw,177.25028981565282,TRUE
+Oceania,5500,joint_filtered,before_selection,hyde_sqrt,169.38084329101613,TRUE
+Oceania,5500,joint_filtered,before_selection,temp_annual,70.16679385870485,TRUE
+Oceania,5500,joint_filtered,before_selection,temp_cold,56.22102004964738,TRUE
+Oceania,5500,joint_filtered,before_selection,prec_summer,5.753092327358143,TRUE
+Oceania,5500,joint_filtered,before_selection,prec_win,8.297407053333895,TRUE
+Oceania,5500,joint_filtered,after_selection_with_controls,spd_sqrt,1.6708755005801184,FALSE
+Oceania,5500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8029565757739348,FALSE
+Oceania,5500,joint_filtered,after_selection_with_controls,temp_annual,2.104028894405894,FALSE
+Oceania,5500,joint_filtered,after_selection_with_controls,prec_summer,1.874788027427403,FALSE
+Oceania,5500,joint_filtered,after_selection_with_controls,prec_win,2.19670967001615,FALSE
+Oceania,5500,spd_matched_bridge,before_selection,spd_raw,33.32546661472462,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,spd_sqrt,41.043067596927536,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,kk10_fraction,2.47001859728722,FALSE
+Oceania,5500,spd_matched_bridge,before_selection,hyde_raw,177.25028981565282,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,hyde_sqrt,169.38084329101613,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,temp_annual,70.16679385870485,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,temp_cold,56.22102004964738,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,prec_summer,5.753092327358143,TRUE
+Oceania,5500,spd_matched_bridge,before_selection,prec_win,8.297407053333895,TRUE
+Oceania,5500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2820302554323788,FALSE
+Oceania,5500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.8848521808215093,FALSE
+Oceania,5500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4901553398401453,FALSE
+Oceania,5500,spd_matched_bridge,after_selection_with_controls,prec_win,2.0940926756575053,FALSE
+Oceania,6000,joint_filtered,before_selection,spd_raw,40.52820162484551,TRUE
+Oceania,6000,joint_filtered,before_selection,spd_sqrt,33.33583773841124,TRUE
+Oceania,6000,joint_filtered,before_selection,kk10_fraction,3.4785181024536884,FALSE
+Oceania,6000,joint_filtered,before_selection,hyde_raw,101.89693488229692,TRUE
+Oceania,6000,joint_filtered,before_selection,hyde_sqrt,104.30963972490912,TRUE
+Oceania,6000,joint_filtered,before_selection,temp_annual,50.55815074500734,TRUE
+Oceania,6000,joint_filtered,before_selection,temp_cold,42.817053868615886,TRUE
+Oceania,6000,joint_filtered,before_selection,prec_summer,4.807107216751251,FALSE
+Oceania,6000,joint_filtered,before_selection,prec_win,10.011959728912117,TRUE
+Oceania,6000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4513603328207954,FALSE
+Oceania,6000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.4356571448360136,FALSE
+Oceania,6000,joint_filtered,after_selection_with_controls,temp_annual,2.10149098633338,FALSE
+Oceania,6000,joint_filtered,after_selection_with_controls,prec_summer,1.6275362100057849,FALSE
+Oceania,6000,joint_filtered,after_selection_with_controls,prec_win,2.258564185413753,FALSE
+Oceania,6000,spd_matched_bridge,before_selection,spd_raw,40.52820162484551,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,spd_sqrt,33.33583773841124,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,kk10_fraction,3.4785181024536884,FALSE
+Oceania,6000,spd_matched_bridge,before_selection,hyde_raw,101.89693488229692,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,hyde_sqrt,104.30963972490912,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,temp_annual,50.55815074500734,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,temp_cold,42.817053868615886,TRUE
+Oceania,6000,spd_matched_bridge,before_selection,prec_summer,4.807107216751251,FALSE
+Oceania,6000,spd_matched_bridge,before_selection,prec_win,10.011959728912117,TRUE
+Oceania,6000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4399983443601285,FALSE
+Oceania,6000,spd_matched_bridge,after_selection_with_controls,temp_annual,2.0007625963485833,FALSE
+Oceania,6000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.4641809523707916,FALSE
+Oceania,6000,spd_matched_bridge,after_selection_with_controls,prec_win,2.170161636199848,FALSE
+Oceania,7000,joint_filtered,before_selection,spd_raw,21.970115937789657,TRUE
+Oceania,7000,joint_filtered,before_selection,spd_sqrt,22.252236303317616,TRUE
+Oceania,7000,joint_filtered,before_selection,kk10_fraction,2.3781882359570847,FALSE
+Oceania,7000,joint_filtered,before_selection,hyde_raw,85.09871918034233,TRUE
+Oceania,7000,joint_filtered,before_selection,hyde_sqrt,95.25387272671443,TRUE
+Oceania,7000,joint_filtered,before_selection,temp_annual,48.66274374411578,TRUE
+Oceania,7000,joint_filtered,before_selection,temp_cold,44.59656579984769,TRUE
+Oceania,7000,joint_filtered,before_selection,prec_summer,3.3487449320343017,FALSE
+Oceania,7000,joint_filtered,before_selection,prec_win,7.6375860004094855,TRUE
+Oceania,7000,joint_filtered,after_selection_with_controls,spd_sqrt,1.1022243116608534,FALSE
+Oceania,7000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8182522405931,FALSE
+Oceania,7000,joint_filtered,after_selection_with_controls,temp_annual,2.0497834475924246,FALSE
+Oceania,7000,joint_filtered,after_selection_with_controls,prec_summer,1.6359955366155634,FALSE
+Oceania,7000,joint_filtered,after_selection_with_controls,prec_win,2.3671245495677495,FALSE
+Oceania,7000,spd_matched_bridge,before_selection,spd_raw,21.970115937789657,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,spd_sqrt,22.252236303317616,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,kk10_fraction,2.3781882359570847,FALSE
+Oceania,7000,spd_matched_bridge,before_selection,hyde_raw,85.09871918034233,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,hyde_sqrt,95.25387272671443,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,temp_annual,48.66274374411578,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,temp_cold,44.59656579984769,TRUE
+Oceania,7000,spd_matched_bridge,before_selection,prec_summer,3.3487449320343017,FALSE
+Oceania,7000,spd_matched_bridge,before_selection,prec_win,7.6375860004094855,TRUE
+Oceania,7000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1007166393434717,FALSE
+Oceania,7000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.95884059490562,FALSE
+Oceania,7000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5332394181859152,FALSE
+Oceania,7000,spd_matched_bridge,after_selection_with_controls,prec_win,2.0103786435619555,FALSE
+Oceania,7500,joint_filtered,before_selection,spd_raw,35.504662760002404,TRUE
+Oceania,7500,joint_filtered,before_selection,spd_sqrt,34.76617956455221,TRUE
+Oceania,7500,joint_filtered,before_selection,kk10_fraction,2.6710104299040207,FALSE
+Oceania,7500,joint_filtered,before_selection,hyde_raw,78.07561419268065,TRUE
+Oceania,7500,joint_filtered,before_selection,hyde_sqrt,91.52213563590175,TRUE
+Oceania,7500,joint_filtered,before_selection,temp_annual,45.53652604191811,TRUE
+Oceania,7500,joint_filtered,before_selection,temp_cold,41.4163749321511,TRUE
+Oceania,7500,joint_filtered,before_selection,prec_summer,3.6108249286643312,FALSE
+Oceania,7500,joint_filtered,before_selection,prec_win,8.243416198928275,TRUE
+Oceania,7500,joint_filtered,after_selection_with_controls,spd_sqrt,1.1051881014613296,FALSE
+Oceania,7500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.0613315504783847,FALSE
+Oceania,7500,joint_filtered,after_selection_with_controls,temp_annual,1.948716090260707,FALSE
+Oceania,7500,joint_filtered,after_selection_with_controls,prec_summer,1.6603760191432357,FALSE
+Oceania,7500,joint_filtered,after_selection_with_controls,prec_win,2.492708508719493,FALSE
+Oceania,7500,spd_matched_bridge,before_selection,spd_raw,35.504662760002404,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,spd_sqrt,34.76617956455221,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,kk10_fraction,2.6710104299040207,FALSE
+Oceania,7500,spd_matched_bridge,before_selection,hyde_raw,78.07561419268065,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,hyde_sqrt,91.52213563590175,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,temp_annual,45.53652604191811,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,temp_cold,41.4163749321511,TRUE
+Oceania,7500,spd_matched_bridge,before_selection,prec_summer,3.6108249286643312,FALSE
+Oceania,7500,spd_matched_bridge,before_selection,prec_win,8.243416198928275,TRUE
+Oceania,7500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.0529366681254435,FALSE
+Oceania,7500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.7821253509435906,FALSE
+Oceania,7500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.5884956667023509,FALSE
+Oceania,7500,spd_matched_bridge,after_selection_with_controls,prec_win,2.0091016298811026,FALSE
+Asia,2000,joint_filtered,before_selection,spd_raw,14.04238591304876,TRUE
+Asia,2000,joint_filtered,before_selection,spd_sqrt,15.697283320252206,TRUE
+Asia,2000,joint_filtered,before_selection,kk10_fraction,2.3124677446170208,FALSE
+Asia,2000,joint_filtered,before_selection,hyde_raw,16.878824970299945,TRUE
+Asia,2000,joint_filtered,before_selection,hyde_sqrt,20.248793295522482,TRUE
+Asia,2000,joint_filtered,before_selection,temp_annual,10.548433520586016,TRUE
+Asia,2000,joint_filtered,before_selection,temp_cold,11.749650872367257,TRUE
+Asia,2000,joint_filtered,before_selection,prec_summer,1.795592387474897,FALSE
+Asia,2000,joint_filtered,before_selection,prec_win,2.6448298148641225,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,spd_sqrt,1.5880391025533553,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,kk10_fraction,1.874719900118883,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.875842117237612,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,temp_annual,2.5840550117407144,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,prec_summer,1.692443146474377,FALSE
+Asia,2000,joint_filtered,after_selection_with_controls,prec_win,2.3289942319141446,FALSE
+Asia,2000,spd_matched_bridge,before_selection,spd_raw,14.04238591304876,TRUE
+Asia,2000,spd_matched_bridge,before_selection,spd_sqrt,15.697283320252206,TRUE
+Asia,2000,spd_matched_bridge,before_selection,kk10_fraction,2.3124677446170208,FALSE
+Asia,2000,spd_matched_bridge,before_selection,hyde_raw,16.878824970299945,TRUE
+Asia,2000,spd_matched_bridge,before_selection,hyde_sqrt,20.248793295522482,TRUE
+Asia,2000,spd_matched_bridge,before_selection,temp_annual,10.548433520586016,TRUE
+Asia,2000,spd_matched_bridge,before_selection,temp_cold,11.749650872367257,TRUE
+Asia,2000,spd_matched_bridge,before_selection,prec_summer,1.795592387474897,FALSE
+Asia,2000,spd_matched_bridge,before_selection,prec_win,2.6448298148641225,FALSE
+Asia,2000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.551127030802122,FALSE
+Asia,2000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.554503557068899,FALSE
+Asia,2000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.1226182039889079,FALSE
+Asia,2000,spd_matched_bridge,after_selection_with_controls,prec_win,1.9945374208684148,FALSE
+Asia,2500,joint_filtered,before_selection,spd_raw,13.778420676958099,TRUE
+Asia,2500,joint_filtered,before_selection,spd_sqrt,13.861496145378302,TRUE
+Asia,2500,joint_filtered,before_selection,kk10_fraction,2.047507835349414,FALSE
+Asia,2500,joint_filtered,before_selection,hyde_raw,17.365900315290638,TRUE
+Asia,2500,joint_filtered,before_selection,hyde_sqrt,20.554954201324577,TRUE
+Asia,2500,joint_filtered,before_selection,temp_annual,11.538486594013607,TRUE
+Asia,2500,joint_filtered,before_selection,temp_cold,13.300127915189943,TRUE
+Asia,2500,joint_filtered,before_selection,prec_summer,1.4390424667307626,FALSE
+Asia,2500,joint_filtered,before_selection,prec_win,2.2404216338648673,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,spd_sqrt,1.363345420573838,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,kk10_fraction,1.6819450041853186,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.6749834452759966,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,temp_annual,2.6956566113604628,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,prec_summer,1.4017466415047806,FALSE
+Asia,2500,joint_filtered,after_selection_with_controls,prec_win,1.8008657192409474,FALSE
+Asia,2500,spd_matched_bridge,before_selection,spd_raw,13.778420676958099,TRUE
+Asia,2500,spd_matched_bridge,before_selection,spd_sqrt,13.861496145378302,TRUE
+Asia,2500,spd_matched_bridge,before_selection,kk10_fraction,2.047507835349414,FALSE
+Asia,2500,spd_matched_bridge,before_selection,hyde_raw,17.365900315290638,TRUE
+Asia,2500,spd_matched_bridge,before_selection,hyde_sqrt,20.554954201324577,TRUE
+Asia,2500,spd_matched_bridge,before_selection,temp_annual,11.538486594013607,TRUE
+Asia,2500,spd_matched_bridge,before_selection,temp_cold,13.300127915189943,TRUE
+Asia,2500,spd_matched_bridge,before_selection,prec_summer,1.4390424667307626,FALSE
+Asia,2500,spd_matched_bridge,before_selection,prec_win,2.2404216338648673,FALSE
+Asia,2500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2827676655771536,FALSE
+Asia,2500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.5937402200879203,FALSE
+Asia,2500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0661723885985224,FALSE
+Asia,2500,spd_matched_bridge,after_selection_with_controls,prec_win,1.5774781903148514,FALSE
+Asia,3000,joint_filtered,before_selection,spd_raw,11.597562558834765,TRUE
+Asia,3000,joint_filtered,before_selection,spd_sqrt,12.33479637541753,TRUE
+Asia,3000,joint_filtered,before_selection,kk10_fraction,1.682119846183807,FALSE
+Asia,3000,joint_filtered,before_selection,hyde_raw,15.049800111390924,TRUE
+Asia,3000,joint_filtered,before_selection,hyde_sqrt,17.467141213320456,TRUE
+Asia,3000,joint_filtered,before_selection,temp_annual,10.78251283021178,TRUE
+Asia,3000,joint_filtered,before_selection,temp_cold,13.702202976323306,TRUE
+Asia,3000,joint_filtered,before_selection,prec_summer,1.3183502439199635,FALSE
+Asia,3000,joint_filtered,before_selection,prec_win,1.895307230317397,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,spd_sqrt,1.2248602645326636,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4769653196505497,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.865637615730722,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,temp_annual,2.27963329498056,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,prec_summer,1.1570722610565582,FALSE
+Asia,3000,joint_filtered,after_selection_with_controls,prec_win,1.481145509286657,FALSE
+Asia,3000,spd_matched_bridge,before_selection,spd_raw,11.597562558834765,TRUE
+Asia,3000,spd_matched_bridge,before_selection,spd_sqrt,12.33479637541753,TRUE
+Asia,3000,spd_matched_bridge,before_selection,kk10_fraction,1.682119846183807,FALSE
+Asia,3000,spd_matched_bridge,before_selection,hyde_raw,15.049800111390924,TRUE
+Asia,3000,spd_matched_bridge,before_selection,hyde_sqrt,17.467141213320456,TRUE
+Asia,3000,spd_matched_bridge,before_selection,temp_annual,10.78251283021178,TRUE
+Asia,3000,spd_matched_bridge,before_selection,temp_cold,13.702202976323306,TRUE
+Asia,3000,spd_matched_bridge,before_selection,prec_summer,1.3183502439199635,FALSE
+Asia,3000,spd_matched_bridge,before_selection,prec_win,1.895307230317397,FALSE
+Asia,3000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2035333176867171,FALSE
+Asia,3000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4998572974634905,FALSE
+Asia,3000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0740545172571372,FALSE
+Asia,3000,spd_matched_bridge,after_selection_with_controls,prec_win,1.4279525956389842,FALSE
+Asia,3500,joint_filtered,before_selection,spd_raw,11.86831284445351,TRUE
+Asia,3500,joint_filtered,before_selection,spd_sqrt,9.80388661326224,TRUE
+Asia,3500,joint_filtered,before_selection,kk10_fraction,1.7987835756761532,FALSE
+Asia,3500,joint_filtered,before_selection,hyde_raw,16.347420335875018,TRUE
+Asia,3500,joint_filtered,before_selection,hyde_sqrt,18.511537650250453,TRUE
+Asia,3500,joint_filtered,before_selection,temp_annual,9.80626053005483,TRUE
+Asia,3500,joint_filtered,before_selection,temp_cold,12.831281010039255,TRUE
+Asia,3500,joint_filtered,before_selection,prec_summer,1.265972243548935,FALSE
+Asia,3500,joint_filtered,before_selection,prec_win,3.0690913808412104,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,spd_sqrt,1.360311581974092,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,kk10_fraction,1.4849174443458464,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8872817269471738,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,temp_annual,2.2604020710210535,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,prec_summer,1.1679096832773146,FALSE
+Asia,3500,joint_filtered,after_selection_with_controls,prec_win,1.7920357846539818,FALSE
+Asia,3500,spd_matched_bridge,before_selection,spd_raw,11.86831284445351,TRUE
+Asia,3500,spd_matched_bridge,before_selection,spd_sqrt,9.80388661326224,TRUE
+Asia,3500,spd_matched_bridge,before_selection,kk10_fraction,1.7987835756761532,FALSE
+Asia,3500,spd_matched_bridge,before_selection,hyde_raw,16.347420335875018,TRUE
+Asia,3500,spd_matched_bridge,before_selection,hyde_sqrt,18.511537650250453,TRUE
+Asia,3500,spd_matched_bridge,before_selection,temp_annual,9.80626053005483,TRUE
+Asia,3500,spd_matched_bridge,before_selection,temp_cold,12.831281010039255,TRUE
+Asia,3500,spd_matched_bridge,before_selection,prec_summer,1.265972243548935,FALSE
+Asia,3500,spd_matched_bridge,before_selection,prec_win,3.0690913808412104,FALSE
+Asia,3500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.3443312023860572,FALSE
+Asia,3500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3572934966927719,FALSE
+Asia,3500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0422474940545396,FALSE
+Asia,3500,spd_matched_bridge,after_selection_with_controls,prec_win,1.6079881196189212,FALSE
+Asia,4000,joint_filtered,before_selection,spd_raw,14.705761408995356,TRUE
+Asia,4000,joint_filtered,before_selection,spd_sqrt,15.065184472618245,TRUE
+Asia,4000,joint_filtered,before_selection,kk10_fraction,1.7204158825476026,FALSE
+Asia,4000,joint_filtered,before_selection,hyde_raw,16.139554152452003,TRUE
+Asia,4000,joint_filtered,before_selection,hyde_sqrt,17.754591528125054,TRUE
+Asia,4000,joint_filtered,before_selection,temp_annual,9.593295030305194,TRUE
+Asia,4000,joint_filtered,before_selection,temp_cold,12.653638229444391,TRUE
+Asia,4000,joint_filtered,before_selection,prec_summer,1.2696395133813612,FALSE
+Asia,4000,joint_filtered,before_selection,prec_win,2.3240764771867344,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,spd_sqrt,1.1712557100175567,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,kk10_fraction,1.466864528392158,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.9558563283889892,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,temp_annual,2.370743017029113,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,prec_summer,1.2365931136524762,FALSE
+Asia,4000,joint_filtered,after_selection_with_controls,prec_win,1.6368096776743577,FALSE
+Asia,4000,spd_matched_bridge,before_selection,spd_raw,14.705761408995356,TRUE
+Asia,4000,spd_matched_bridge,before_selection,spd_sqrt,15.065184472618245,TRUE
+Asia,4000,spd_matched_bridge,before_selection,kk10_fraction,1.7204158825476026,FALSE
+Asia,4000,spd_matched_bridge,before_selection,hyde_raw,16.139554152452003,TRUE
+Asia,4000,spd_matched_bridge,before_selection,hyde_sqrt,17.754591528125054,TRUE
+Asia,4000,spd_matched_bridge,before_selection,temp_annual,9.593295030305194,TRUE
+Asia,4000,spd_matched_bridge,before_selection,temp_cold,12.653638229444391,TRUE
+Asia,4000,spd_matched_bridge,before_selection,prec_summer,1.2696395133813612,FALSE
+Asia,4000,spd_matched_bridge,before_selection,prec_win,2.3240764771867344,FALSE
+Asia,4000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1529379749550135,FALSE
+Asia,4000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.413885564143581,FALSE
+Asia,4000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0797897023878542,FALSE
+Asia,4000,spd_matched_bridge,after_selection_with_controls,prec_win,1.4803713156989435,FALSE
+Asia,4500,joint_filtered,before_selection,spd_raw,7.838606508944386,TRUE
+Asia,4500,joint_filtered,before_selection,spd_sqrt,8.950268328274001,TRUE
+Asia,4500,joint_filtered,before_selection,kk10_fraction,1.5731731447032444,FALSE
+Asia,4500,joint_filtered,before_selection,hyde_raw,16.655223312745743,TRUE
+Asia,4500,joint_filtered,before_selection,hyde_sqrt,17.57312931135627,TRUE
+Asia,4500,joint_filtered,before_selection,temp_annual,12.393359299877913,TRUE
+Asia,4500,joint_filtered,before_selection,temp_cold,15.147526992135894,TRUE
+Asia,4500,joint_filtered,before_selection,prec_summer,1.215323293256781,FALSE
+Asia,4500,joint_filtered,before_selection,prec_win,2.1312913648748237,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,spd_sqrt,1.3758161319638156,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,kk10_fraction,1.4004425531463809,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.2257762706208464,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,temp_annual,2.5394639413251823,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,prec_summer,1.1595063216128312,FALSE
+Asia,4500,joint_filtered,after_selection_with_controls,prec_win,1.822534953800872,FALSE
+Asia,4500,spd_matched_bridge,before_selection,spd_raw,7.838606508944386,TRUE
+Asia,4500,spd_matched_bridge,before_selection,spd_sqrt,8.950268328274001,TRUE
+Asia,4500,spd_matched_bridge,before_selection,kk10_fraction,1.5731731447032444,FALSE
+Asia,4500,spd_matched_bridge,before_selection,hyde_raw,16.655223312745743,TRUE
+Asia,4500,spd_matched_bridge,before_selection,hyde_sqrt,17.57312931135627,TRUE
+Asia,4500,spd_matched_bridge,before_selection,temp_annual,12.393359299877913,TRUE
+Asia,4500,spd_matched_bridge,before_selection,temp_cold,15.147526992135894,TRUE
+Asia,4500,spd_matched_bridge,before_selection,prec_summer,1.215323293256781,FALSE
+Asia,4500,spd_matched_bridge,before_selection,prec_win,2.1312913648748237,FALSE
+Asia,4500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.2062649529778655,FALSE
+Asia,4500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4069904022090063,FALSE
+Asia,4500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0382646283036578,FALSE
+Asia,4500,spd_matched_bridge,after_selection_with_controls,prec_win,1.5052330785058716,FALSE
+Asia,5000,joint_filtered,before_selection,spd_raw,12.489839030434911,TRUE
+Asia,5000,joint_filtered,before_selection,spd_sqrt,11.139228104468417,TRUE
+Asia,5000,joint_filtered,before_selection,kk10_fraction,1.836215108548921,FALSE
+Asia,5000,joint_filtered,before_selection,hyde_raw,17.45226681580578,TRUE
+Asia,5000,joint_filtered,before_selection,hyde_sqrt,18.69647425695458,TRUE
+Asia,5000,joint_filtered,before_selection,temp_annual,11.812248105399128,TRUE
+Asia,5000,joint_filtered,before_selection,temp_cold,15.33473255797498,TRUE
+Asia,5000,joint_filtered,before_selection,prec_summer,1.3037166596156942,FALSE
+Asia,5000,joint_filtered,before_selection,prec_win,2.981912163041472,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4434667825937966,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4403642471856657,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,hyde_sqrt,2.050618975441886,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,temp_annual,2.355026693629563,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,prec_summer,1.2521775903593886,FALSE
+Asia,5000,joint_filtered,after_selection_with_controls,prec_win,1.9359602736964925,FALSE
+Asia,5000,spd_matched_bridge,before_selection,spd_raw,12.489839030434911,TRUE
+Asia,5000,spd_matched_bridge,before_selection,spd_sqrt,11.139228104468417,TRUE
+Asia,5000,spd_matched_bridge,before_selection,kk10_fraction,1.836215108548921,FALSE
+Asia,5000,spd_matched_bridge,before_selection,hyde_raw,17.45226681580578,TRUE
+Asia,5000,spd_matched_bridge,before_selection,hyde_sqrt,18.69647425695458,TRUE
+Asia,5000,spd_matched_bridge,before_selection,temp_annual,11.812248105399128,TRUE
+Asia,5000,spd_matched_bridge,before_selection,temp_cold,15.33473255797498,TRUE
+Asia,5000,spd_matched_bridge,before_selection,prec_summer,1.3037166596156942,FALSE
+Asia,5000,spd_matched_bridge,before_selection,prec_win,2.981912163041472,FALSE
+Asia,5000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4325812244599938,FALSE
+Asia,5000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.3950589492406908,FALSE
+Asia,5000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0408455431802448,FALSE
+Asia,5000,spd_matched_bridge,after_selection_with_controls,prec_win,1.7546469067095816,FALSE
+Asia,5500,joint_filtered,before_selection,spd_raw,6.302364275983705,TRUE
+Asia,5500,joint_filtered,before_selection,spd_sqrt,7.4996021349842446,TRUE
+Asia,5500,joint_filtered,before_selection,kk10_fraction,1.6562507207243855,FALSE
+Asia,5500,joint_filtered,before_selection,hyde_raw,18.109694004370745,TRUE
+Asia,5500,joint_filtered,before_selection,hyde_sqrt,18.52281980929626,TRUE
+Asia,5500,joint_filtered,before_selection,temp_annual,10.0608700784315,TRUE
+Asia,5500,joint_filtered,before_selection,temp_cold,12.900343251210256,TRUE
+Asia,5500,joint_filtered,before_selection,prec_summer,1.2346045239384964,FALSE
+Asia,5500,joint_filtered,before_selection,prec_win,1.9346543877076445,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,spd_sqrt,1.2758129281926966,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3679026316835463,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8519646820456737,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,temp_annual,2.2869778015143156,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,prec_summer,1.1313108834451744,FALSE
+Asia,5500,joint_filtered,after_selection_with_controls,prec_win,1.5428900510981671,FALSE
+Asia,5500,spd_matched_bridge,before_selection,spd_raw,6.302364275983705,TRUE
+Asia,5500,spd_matched_bridge,before_selection,spd_sqrt,7.4996021349842446,TRUE
+Asia,5500,spd_matched_bridge,before_selection,kk10_fraction,1.6562507207243855,FALSE
+Asia,5500,spd_matched_bridge,before_selection,hyde_raw,18.109694004370745,TRUE
+Asia,5500,spd_matched_bridge,before_selection,hyde_sqrt,18.52281980929626,TRUE
+Asia,5500,spd_matched_bridge,before_selection,temp_annual,10.0608700784315,TRUE
+Asia,5500,spd_matched_bridge,before_selection,temp_cold,12.900343251210256,TRUE
+Asia,5500,spd_matched_bridge,before_selection,prec_summer,1.2346045239384964,FALSE
+Asia,5500,spd_matched_bridge,before_selection,prec_win,1.9346543877076445,FALSE
+Asia,5500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.18286877376922,FALSE
+Asia,5500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.4352199002079118,FALSE
+Asia,5500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0122803226971613,FALSE
+Asia,5500,spd_matched_bridge,after_selection_with_controls,prec_win,1.3856228916296176,FALSE
+Asia,6000,joint_filtered,before_selection,spd_raw,7.227025901130324,TRUE
+Asia,6000,joint_filtered,before_selection,spd_sqrt,8.68425671446631,TRUE
+Asia,6000,joint_filtered,before_selection,kk10_fraction,1.7098237844287754,FALSE
+Asia,6000,joint_filtered,before_selection,hyde_raw,18.41545846447063,TRUE
+Asia,6000,joint_filtered,before_selection,hyde_sqrt,18.889215647705228,TRUE
+Asia,6000,joint_filtered,before_selection,temp_annual,10.591541276338742,TRUE
+Asia,6000,joint_filtered,before_selection,temp_cold,13.00657942294939,TRUE
+Asia,6000,joint_filtered,before_selection,prec_summer,1.2132183765279387,FALSE
+Asia,6000,joint_filtered,before_selection,prec_win,2.3491333055202115,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,spd_sqrt,1.9756888328987963,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,kk10_fraction,1.4161001777182776,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.6922819060297816,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,temp_annual,2.405940446376741,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,prec_summer,1.1156497918004955,FALSE
+Asia,6000,joint_filtered,after_selection_with_controls,prec_win,1.874606712522723,FALSE
+Asia,6000,spd_matched_bridge,before_selection,spd_raw,7.227025901130324,TRUE
+Asia,6000,spd_matched_bridge,before_selection,spd_sqrt,8.68425671446631,TRUE
+Asia,6000,spd_matched_bridge,before_selection,kk10_fraction,1.7098237844287754,FALSE
+Asia,6000,spd_matched_bridge,before_selection,hyde_raw,18.41545846447063,TRUE
+Asia,6000,spd_matched_bridge,before_selection,hyde_sqrt,18.889215647705228,TRUE
+Asia,6000,spd_matched_bridge,before_selection,temp_annual,10.591541276338742,TRUE
+Asia,6000,spd_matched_bridge,before_selection,temp_cold,13.00657942294939,TRUE
+Asia,6000,spd_matched_bridge,before_selection,prec_summer,1.2132183765279387,FALSE
+Asia,6000,spd_matched_bridge,before_selection,prec_win,2.3491333055202115,FALSE
+Asia,6000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.800006091044327,FALSE
+Asia,6000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.6505725178405057,FALSE
+Asia,6000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.02131521126367,FALSE
+Asia,6000,spd_matched_bridge,after_selection_with_controls,prec_win,1.6549244269941108,FALSE
+Asia,6500,joint_filtered,before_selection,spd_raw,5.430371156605792,TRUE
+Asia,6500,joint_filtered,before_selection,spd_sqrt,6.325763007683707,TRUE
+Asia,6500,joint_filtered,before_selection,kk10_fraction,1.6356117107847417,FALSE
+Asia,6500,joint_filtered,before_selection,hyde_raw,20.189863800702177,TRUE
+Asia,6500,joint_filtered,before_selection,hyde_sqrt,19.797436630750813,TRUE
+Asia,6500,joint_filtered,before_selection,temp_annual,9.527240138574868,TRUE
+Asia,6500,joint_filtered,before_selection,temp_cold,11.89498294001888,TRUE
+Asia,6500,joint_filtered,before_selection,prec_summer,1.2475513928199446,FALSE
+Asia,6500,joint_filtered,before_selection,prec_win,2.3660303381745003,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,spd_sqrt,1.8369755764840194,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,kk10_fraction,1.3404138666328353,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.6650313082614612,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,temp_annual,2.3447435618973507,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,prec_summer,1.1048271772381248,FALSE
+Asia,6500,joint_filtered,after_selection_with_controls,prec_win,1.997888679365903,FALSE
+Asia,6500,spd_matched_bridge,before_selection,spd_raw,5.430371156605792,TRUE
+Asia,6500,spd_matched_bridge,before_selection,spd_sqrt,6.325763007683707,TRUE
+Asia,6500,spd_matched_bridge,before_selection,kk10_fraction,1.6356117107847417,FALSE
+Asia,6500,spd_matched_bridge,before_selection,hyde_raw,20.189863800702177,TRUE
+Asia,6500,spd_matched_bridge,before_selection,hyde_sqrt,19.797436630750813,TRUE
+Asia,6500,spd_matched_bridge,before_selection,temp_annual,9.527240138574868,TRUE
+Asia,6500,spd_matched_bridge,before_selection,temp_cold,11.89498294001888,TRUE
+Asia,6500,spd_matched_bridge,before_selection,prec_summer,1.2475513928199446,FALSE
+Asia,6500,spd_matched_bridge,before_selection,prec_win,2.3660303381745003,FALSE
+Asia,6500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.64946126693021,FALSE
+Asia,6500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.6059257308261379,FALSE
+Asia,6500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0382518187498428,FALSE
+Asia,6500,spd_matched_bridge,after_selection_with_controls,prec_win,1.7375168231073996,FALSE
+Asia,7000,joint_filtered,before_selection,spd_raw,10.899804151425057,TRUE
+Asia,7000,joint_filtered,before_selection,spd_sqrt,12.43228255805086,TRUE
+Asia,7000,joint_filtered,before_selection,kk10_fraction,1.5082800628217177,FALSE
+Asia,7000,joint_filtered,before_selection,hyde_raw,20.568736659086564,TRUE
+Asia,7000,joint_filtered,before_selection,hyde_sqrt,19.61831842536007,TRUE
+Asia,7000,joint_filtered,before_selection,temp_annual,9.689186355159812,TRUE
+Asia,7000,joint_filtered,before_selection,temp_cold,13.00319511400906,TRUE
+Asia,7000,joint_filtered,before_selection,prec_summer,1.5359695744484492,FALSE
+Asia,7000,joint_filtered,before_selection,prec_win,2.135786471600996,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,spd_sqrt,1.9671917713830385,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2955576907235093,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.8581380550210453,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,temp_annual,2.5356139144476875,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,prec_summer,1.2201027943925093,FALSE
+Asia,7000,joint_filtered,after_selection_with_controls,prec_win,1.6503900253346153,FALSE
+Asia,7000,spd_matched_bridge,before_selection,spd_raw,10.899804151425057,TRUE
+Asia,7000,spd_matched_bridge,before_selection,spd_sqrt,12.43228255805086,TRUE
+Asia,7000,spd_matched_bridge,before_selection,kk10_fraction,1.5082800628217177,FALSE
+Asia,7000,spd_matched_bridge,before_selection,hyde_raw,20.568736659086564,TRUE
+Asia,7000,spd_matched_bridge,before_selection,hyde_sqrt,19.61831842536007,TRUE
+Asia,7000,spd_matched_bridge,before_selection,temp_annual,9.689186355159812,TRUE
+Asia,7000,spd_matched_bridge,before_selection,temp_cold,13.00319511400906,TRUE
+Asia,7000,spd_matched_bridge,before_selection,prec_summer,1.5359695744484492,FALSE
+Asia,7000,spd_matched_bridge,before_selection,prec_win,2.135786471600996,FALSE
+Asia,7000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.697384864036457,FALSE
+Asia,7000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.920615874702925,FALSE
+Asia,7000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.0681601704160537,FALSE
+Asia,7000,spd_matched_bridge,after_selection_with_controls,prec_win,1.4339468583961879,FALSE
+Asia,7500,joint_filtered,before_selection,spd_raw,11.899466858402262,TRUE
+Asia,7500,joint_filtered,before_selection,spd_sqrt,13.508847502071289,TRUE
+Asia,7500,joint_filtered,before_selection,kk10_fraction,1.377220869759875,FALSE
+Asia,7500,joint_filtered,before_selection,hyde_raw,18.402050261652736,TRUE
+Asia,7500,joint_filtered,before_selection,hyde_sqrt,18.82597677457732,TRUE
+Asia,7500,joint_filtered,before_selection,temp_annual,10.663184066203698,TRUE
+Asia,7500,joint_filtered,before_selection,temp_cold,12.873788536394745,TRUE
+Asia,7500,joint_filtered,before_selection,prec_summer,1.6294663717066626,FALSE
+Asia,7500,joint_filtered,before_selection,prec_win,1.859615872036242,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,spd_sqrt,1.873221508039299,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,kk10_fraction,1.2456797489148204,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,hyde_sqrt,2.126705401326842,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,temp_annual,2.2634265807541656,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,prec_summer,1.3634347985285142,FALSE
+Asia,7500,joint_filtered,after_selection_with_controls,prec_win,1.5593265009638457,FALSE
+Asia,7500,spd_matched_bridge,before_selection,spd_raw,11.899466858402262,TRUE
+Asia,7500,spd_matched_bridge,before_selection,spd_sqrt,13.508847502071289,TRUE
+Asia,7500,spd_matched_bridge,before_selection,kk10_fraction,1.377220869759875,FALSE
+Asia,7500,spd_matched_bridge,before_selection,hyde_raw,18.402050261652736,TRUE
+Asia,7500,spd_matched_bridge,before_selection,hyde_sqrt,18.82597677457732,TRUE
+Asia,7500,spd_matched_bridge,before_selection,temp_annual,10.663184066203698,TRUE
+Asia,7500,spd_matched_bridge,before_selection,temp_cold,12.873788536394745,TRUE
+Asia,7500,spd_matched_bridge,before_selection,prec_summer,1.6294663717066626,FALSE
+Asia,7500,spd_matched_bridge,before_selection,prec_win,1.859615872036242,FALSE
+Asia,7500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.371115066670804,FALSE
+Asia,7500,spd_matched_bridge,after_selection_with_controls,temp_annual,1.7064631260378726,FALSE
+Asia,7500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.101329292429131,FALSE
+Asia,7500,spd_matched_bridge,after_selection_with_controls,prec_win,1.4152005952722897,FALSE
+Asia,8000,joint_filtered,before_selection,spd_raw,8.504633766788128,TRUE
+Asia,8000,joint_filtered,before_selection,spd_sqrt,10.268932718480704,TRUE
+Asia,8000,joint_filtered,before_selection,kk10_fraction,1.4735431513554016,FALSE
+Asia,8000,joint_filtered,before_selection,hyde_raw,18.787284782689106,TRUE
+Asia,8000,joint_filtered,before_selection,hyde_sqrt,18.706519164865767,TRUE
+Asia,8000,joint_filtered,before_selection,temp_annual,11.452462957770434,TRUE
+Asia,8000,joint_filtered,before_selection,temp_cold,13.75057939801308,TRUE
+Asia,8000,joint_filtered,before_selection,prec_summer,1.6059591967433982,FALSE
+Asia,8000,joint_filtered,before_selection,prec_win,2.0374330129397045,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,spd_sqrt,1.4834851611631903,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,kk10_fraction,1.2038004791376131,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.600185306540087,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,temp_annual,2.2232814133804295,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,prec_summer,1.338584967090945,FALSE
+Asia,8000,joint_filtered,after_selection_with_controls,prec_win,1.545539684116845,FALSE
+Asia,8000,spd_matched_bridge,before_selection,spd_raw,8.504633766788128,TRUE
+Asia,8000,spd_matched_bridge,before_selection,spd_sqrt,10.268932718480704,TRUE
+Asia,8000,spd_matched_bridge,before_selection,kk10_fraction,1.4735431513554016,FALSE
+Asia,8000,spd_matched_bridge,before_selection,hyde_raw,18.787284782689106,TRUE
+Asia,8000,spd_matched_bridge,before_selection,hyde_sqrt,18.706519164865767,TRUE
+Asia,8000,spd_matched_bridge,before_selection,temp_annual,11.452462957770434,TRUE
+Asia,8000,spd_matched_bridge,before_selection,temp_cold,13.75057939801308,TRUE
+Asia,8000,spd_matched_bridge,before_selection,prec_summer,1.6059591967433982,FALSE
+Asia,8000,spd_matched_bridge,before_selection,prec_win,2.0374330129397045,FALSE
+Asia,8000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.4259637074026867,FALSE
+Asia,8000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.6018225784140772,FALSE
+Asia,8000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.182763149096316,FALSE
+Asia,8000,spd_matched_bridge,after_selection_with_controls,prec_win,1.4282822241815418,FALSE
+Oceania,6500,joint_filtered,before_selection,spd_raw,18.908611706025212,TRUE
+Oceania,6500,joint_filtered,before_selection,spd_sqrt,20.175132039389453,TRUE
+Oceania,6500,joint_filtered,before_selection,kk10_fraction,2.407022873467847,FALSE
+Oceania,6500,joint_filtered,before_selection,hyde_raw,100.28230686357621,TRUE
+Oceania,6500,joint_filtered,before_selection,hyde_sqrt,102.18867995916477,TRUE
+Oceania,6500,joint_filtered,before_selection,temp_annual,45.024311581503184,TRUE
+Oceania,6500,joint_filtered,before_selection,temp_cold,37.33194211109292,TRUE
+Oceania,6500,joint_filtered,before_selection,prec_summer,3.842553487374002,FALSE
+Oceania,6500,joint_filtered,before_selection,prec_win,6.553671018863115,TRUE
+Oceania,6500,joint_filtered,after_selection_with_controls,spd_sqrt,1.1642470911268652,FALSE
+Oceania,6500,joint_filtered,after_selection_with_controls,hyde_sqrt,1.6402240400324435,FALSE
+Oceania,6500,joint_filtered,after_selection_with_controls,temp_annual,2.401248590519877,FALSE
+Oceania,6500,joint_filtered,after_selection_with_controls,prec_summer,1.7821038644701606,FALSE
+Oceania,6500,joint_filtered,after_selection_with_controls,prec_win,1.977731396113919,FALSE
+Oceania,6500,spd_matched_bridge,before_selection,spd_raw,18.908611706025212,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,spd_sqrt,20.175132039389453,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,kk10_fraction,2.407022873467847,FALSE
+Oceania,6500,spd_matched_bridge,before_selection,hyde_raw,100.28230686357621,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,hyde_sqrt,102.18867995916477,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,temp_annual,45.024311581503184,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,temp_cold,37.33194211109292,TRUE
+Oceania,6500,spd_matched_bridge,before_selection,prec_summer,3.842553487374002,FALSE
+Oceania,6500,spd_matched_bridge,before_selection,prec_win,6.553671018863115,TRUE
+Oceania,6500,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.1470808692991952,FALSE
+Oceania,6500,spd_matched_bridge,after_selection_with_controls,temp_annual,2.105386422188659,FALSE
+Oceania,6500,spd_matched_bridge,after_selection_with_controls,prec_summer,1.506345685545472,FALSE
+Oceania,6500,spd_matched_bridge,after_selection_with_controls,prec_win,1.9101864030866627,FALSE
+Oceania,8000,joint_filtered,before_selection,spd_raw,22.93525542957698,TRUE
+Oceania,8000,joint_filtered,before_selection,spd_sqrt,21.025793274453772,TRUE
+Oceania,8000,joint_filtered,before_selection,kk10_fraction,3.5742599852755,FALSE
+Oceania,8000,joint_filtered,before_selection,hyde_raw,90.34949969266702,TRUE
+Oceania,8000,joint_filtered,before_selection,hyde_sqrt,113.03925651764968,TRUE
+Oceania,8000,joint_filtered,before_selection,temp_annual,44.51703402232508,TRUE
+Oceania,8000,joint_filtered,before_selection,temp_cold,35.41310101544925,TRUE
+Oceania,8000,joint_filtered,before_selection,prec_summer,4.772390504618625,FALSE
+Oceania,8000,joint_filtered,before_selection,prec_win,8.386900746165061,TRUE
+Oceania,8000,joint_filtered,after_selection_with_controls,spd_sqrt,1.1744366842602818,FALSE
+Oceania,8000,joint_filtered,after_selection_with_controls,hyde_sqrt,1.9199796027233478,FALSE
+Oceania,8000,joint_filtered,after_selection_with_controls,temp_annual,2.02589122099611,FALSE
+Oceania,8000,joint_filtered,after_selection_with_controls,prec_summer,1.942673015208893,FALSE
+Oceania,8000,joint_filtered,after_selection_with_controls,prec_win,2.648296266098295,FALSE
+Oceania,8000,spd_matched_bridge,before_selection,spd_raw,22.93525542957698,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,spd_sqrt,21.025793274453772,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,kk10_fraction,3.5742599852755,FALSE
+Oceania,8000,spd_matched_bridge,before_selection,hyde_raw,90.34949969266702,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,hyde_sqrt,113.03925651764968,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,temp_annual,44.51703402232508,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,temp_cold,35.41310101544925,TRUE
+Oceania,8000,spd_matched_bridge,before_selection,prec_summer,4.772390504618625,FALSE
+Oceania,8000,spd_matched_bridge,before_selection,prec_win,8.386900746165061,TRUE
+Oceania,8000,spd_matched_bridge,after_selection_with_controls,spd_sqrt,1.174177594347236,FALSE
+Oceania,8000,spd_matched_bridge,after_selection_with_controls,temp_annual,1.8842353150614461,FALSE
+Oceania,8000,spd_matched_bridge,after_selection_with_controls,prec_summer,1.8975337301775561,FALSE
+Oceania,8000,spd_matched_bridge,after_selection_with_controls,prec_win,2.2260146038002624,FALSE

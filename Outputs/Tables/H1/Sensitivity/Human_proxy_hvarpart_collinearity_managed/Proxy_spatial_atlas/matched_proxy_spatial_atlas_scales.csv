@@ -1,0 +1,4 @@
+proxy,proxy_label,value_min,value_max,colour_max,colour_quantile
+spd_sqrt,sqrt(SPD),0,1.9951602199534786,1.0958813540217287,0.99
+kk10_fraction,KK10 land-use fraction,8.337375404931054e-5,0.7759979091142633,0.42578766649849564,0.99
+hyde_sqrt,sqrt(HYDE population),0,2589.9913221833745,1322.7051641418127,0.99

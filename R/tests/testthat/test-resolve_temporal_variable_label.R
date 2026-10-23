@@ -1,13 +1,15 @@
 testthat::test_that("resolve_temporal_variable_label maps temporal names", {
   result <-
     resolve_temporal_variable_label(
-      c("spd", "temp_annual", "n0", "density_turnover")
+      c("spd", "kk10", "hyde", "temp_annual", "n0", "density_turnover")
     )
 
   testthat::expect_identical(
     result,
     c(
       "SPD",
+      "KK10",
+      "HYDE",
       "Mean annual temperature",
       "Taxonomic richness",
       "Turnover density"

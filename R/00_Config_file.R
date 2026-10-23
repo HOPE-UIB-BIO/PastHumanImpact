@@ -99,6 +99,7 @@ package_list <-
     "dplyr",
     "magrittr",
     "maps",
+    "ncdf4",
     "purrr",
     "readr",
     "REcopol",

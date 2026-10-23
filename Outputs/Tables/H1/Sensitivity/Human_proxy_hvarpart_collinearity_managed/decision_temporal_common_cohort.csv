@@ -1,0 +1,586 @@
+model_id,model_label,continental_region,age,predictor,allocation,unique_adjusted_r_squared,total_adjusted_r_squared
+canonical_spd,Canonical SPD,Asia,2000,climate,0.6193798449612403,0.0898,0.12075957282716464
+canonical_spd,Canonical SPD,Asia,2000,human,0.11162790697674418,0.0165,0.12075957282716464
+canonical_spd,Canonical SPD,Asia,2000,space,0.2689922480620155,0.0309,0.12075957282716464
+canonical_spd,Canonical SPD,Asia,2500,climate,0.7073552425665102,0.0953,0.1380831151354629
+canonical_spd,Canonical SPD,Asia,2500,human,0.02190923317683881,0.0036,0.1380831151354629
+canonical_spd,Canonical SPD,Asia,2500,space,0.27073552425665104,0.0334,0.1380831151354629
+canonical_spd,Canonical SPD,Asia,3000,climate,0.6892003297609234,0.0839,0.12461216974957344
+canonical_spd,Canonical SPD,Asia,3000,human,0.0247320692497939,0.0044,0.12461216974957344
+canonical_spd,Canonical SPD,Asia,3000,space,0.2860676009892828,0.0297,0.12461216974957344
+canonical_spd,Canonical SPD,Asia,3500,climate,0.9366666666666666,0.0784,0.0940699312956399
+canonical_spd,Canonical SPD,Asia,3500,human,0.06333333333333334,-2e-4,0.0940699312956399
+canonical_spd,Canonical SPD,Asia,3500,space,0,,0.0940699312956399
+canonical_spd,Canonical SPD,Asia,4000,climate,0.9288537549407114,0.0693,0.11238031252806412
+canonical_spd,Canonical SPD,Asia,4000,human,0.07114624505928854,0.0042,0.11238031252806412
+canonical_spd,Canonical SPD,Asia,4000,space,0,,0.11238031252806412
+canonical_spd,Canonical SPD,Asia,4500,climate,0.5777080062794349,0.0617,0.13699780038930964
+canonical_spd,Canonical SPD,Asia,4500,human,0.11695447409733126,0.0032,0.13699780038930964
+canonical_spd,Canonical SPD,Asia,4500,space,0.3053375196232339,0.0407,0.13699780038930964
+canonical_spd,Canonical SPD,Asia,5000,climate,0.5985727029438002,0.0524,0.11044248084865048
+canonical_spd,Canonical SPD,Asia,5000,human,0.2149866190900981,0.0129,0.11044248084865048
+canonical_spd,Canonical SPD,Asia,5000,space,0.18644067796610167,0.0256,0.11044248084865048
+canonical_spd,Canonical SPD,Asia,5500,climate,0.7062146892655367,0.0812,0.105741927393177
+canonical_spd,Canonical SPD,Asia,5500,human,0.03874092009685229,-0.0029,0.105741927393177
+canonical_spd,Canonical SPD,Asia,5500,space,0.25504439063761103,0.0318,0.105741927393177
+canonical_spd,Canonical SPD,Asia,6000,climate,0.7710280373831775,0.0683,0.08107982886993315
+canonical_spd,Canonical SPD,Asia,6000,human,0.2289719626168224,0.0103,0.08107982886993315
+canonical_spd,Canonical SPD,Asia,6000,space,0,,0.08107982886993315
+canonical_spd,Canonical SPD,Asia,6500,climate,0.9378531073446328,0.0905,0.03080210964138419
+canonical_spd,Canonical SPD,Asia,6500,human,0.06214689265536723,-0.0024,0.03080210964138419
+canonical_spd,Canonical SPD,Asia,6500,space,0,,0.03080210964138419
+canonical_spd,Canonical SPD,Asia,7000,climate,0.8973727422003285,0.0999,0.03162853494230555
+canonical_spd,Canonical SPD,Asia,7000,human,0.1026272577996716,0.0031,0.03162853494230555
+canonical_spd,Canonical SPD,Asia,7000,space,0,,0.03162853494230555
+canonical_spd,Canonical SPD,Asia,7500,climate,0.8480055020632737,0.1077,0.04027896010908582
+canonical_spd,Canonical SPD,Asia,7500,human,0.15199449793672629,0.0064,0.04027896010908582
+canonical_spd,Canonical SPD,Asia,7500,space,0,,0.04027896010908582
+canonical_spd,Canonical SPD,Asia,8000,climate,0.8278965129358831,0.1354,0.09188462368595772
+canonical_spd,Canonical SPD,Asia,8000,human,0.05230596175478065,0.0011,0.09188462368595772
+canonical_spd,Canonical SPD,Asia,8000,space,0.11979752530933634,0.0197,0.09188462368595772
+canonical_spd,Canonical SPD,Europe,2000,climate,0.41874653355518576,0.0536,0.22063898842263452
+canonical_spd,Canonical SPD,Europe,2000,human,0.0160843039378813,0.0029,0.22063898842263452
+canonical_spd,Canonical SPD,Europe,2000,space,0.5651691625069328,0.0796,0.22063898842263452
+canonical_spd,Canonical SPD,Europe,2500,climate,0.3502857142857143,0.0441,0.22048401091807823
+canonical_spd,Canonical SPD,Europe,2500,human,0.04057142857142858,0.012,0.22048401091807823
+canonical_spd,Canonical SPD,Europe,2500,space,0.6091428571428572,0.09,0.22048401091807823
+canonical_spd,Canonical SPD,Europe,3000,climate,0.3418862690707351,0.0376,0.21957886683704675
+canonical_spd,Canonical SPD,Europe,3000,human,0.0478502080443828,0.0039,0.21957886683704675
+canonical_spd,Canonical SPD,Europe,3000,space,0.6102635228848821,0.0822,0.21957886683704675
+canonical_spd,Canonical SPD,Europe,3500,climate,0.33258173618940245,0.0545,0.280140056687076
+canonical_spd,Canonical SPD,Europe,3500,human,0.04791431792559188,0.0013,0.280140056687076
+canonical_spd,Canonical SPD,Europe,3500,space,0.6195039458850056,0.1122,0.280140056687076
+canonical_spd,Canonical SPD,Europe,4000,climate,0.4081050228310502,0.0619,0.2476169874237757
+canonical_spd,Canonical SPD,Europe,4000,human,0.04566210045662101,0.002,0.2476169874237757
+canonical_spd,Canonical SPD,Europe,4000,space,0.5462328767123288,0.0966,0.2476169874237757
+canonical_spd,Canonical SPD,Europe,4500,climate,0.34083769633507854,0.0462,0.261419014700356
+canonical_spd,Canonical SPD,Europe,4500,human,0.00785340314136125,-0.0012,0.261419014700356
+canonical_spd,Canonical SPD,Europe,4500,space,0.6513089005235602,0.1069,0.261419014700356
+canonical_spd,Canonical SPD,Europe,5000,climate,0.3545966228893058,0.0497,0.2535578495974502
+canonical_spd,Canonical SPD,Europe,5000,human,0.01876172607879925,-1e-4,0.2535578495974502
+canonical_spd,Canonical SPD,Europe,5000,space,0.626641651031895,0.0935,0.2535578495974502
+canonical_spd,Canonical SPD,Europe,5500,climate,0.36688809402146144,0.0595,0.2732786145073963
+canonical_spd,Canonical SPD,Europe,5500,human,0.00255493101686254,3e-4,0.2732786145073963
+canonical_spd,Canonical SPD,Europe,5500,space,0.6305569749616761,0.1109,0.2732786145073963
+canonical_spd,Canonical SPD,Europe,6000,climate,0.3879976232917409,0.0541,0.2302314591110951
+canonical_spd,Canonical SPD,Europe,6000,human,0.0962566844919786,0.0154,0.2302314591110951
+canonical_spd,Canonical SPD,Europe,6000,space,0.5157456922162804,0.0852,0.2302314591110951
+canonical_spd,Canonical SPD,Europe,6500,climate,0.26786751888436955,0.031,0.2661693972724397
+canonical_spd,Canonical SPD,Europe,6500,human,0.1871005229517722,0.0242,0.2661693972724397
+canonical_spd,Canonical SPD,Europe,6500,space,0.5450319581638582,0.0909,0.2661693972724397
+canonical_spd,Canonical SPD,Europe,7000,climate,0.3537766300839251,0.0409,0.2467024395689177
+canonical_spd,Canonical SPD,Europe,7000,human,0.1103938024531956,0.0103,0.2467024395689177
+canonical_spd,Canonical SPD,Europe,7000,space,0.5358295674628792,0.075,0.2467024395689177
+canonical_spd,Canonical SPD,Europe,7500,climate,0.3395913859745997,0.0511,0.2287295815518734
+canonical_spd,Canonical SPD,Europe,7500,human,0.2705687465488681,0.0394,0.2287295815518734
+canonical_spd,Canonical SPD,Europe,7500,space,0.3898398674765323,0.0649,0.2287295815518734
+canonical_spd,Canonical SPD,Europe,8000,climate,0.4610630407911001,0.0726,0.199348208382108
+canonical_spd,Canonical SPD,Europe,8000,human,0.06983930778739184,0.008,0.199348208382108
+canonical_spd,Canonical SPD,Europe,8000,space,0.469097651421508,0.0674,0.199348208382108
+canonical_spd,Canonical SPD,Latin America,2000,climate,0.8359096313912009,0.1257,0.09639641289073075
+canonical_spd,Canonical SPD,Latin America,2000,human,0.02853745541022591,8e-4,0.09639641289073075
+canonical_spd,Canonical SPD,Latin America,2000,space,0.13555291319857313,0.0156,0.09639641289073075
+canonical_spd,Canonical SPD,Latin America,2500,climate,0.7771649200220629,0.1261,0.12634554493061922
+canonical_spd,Canonical SPD,Latin America,2500,human,0.05350248207391065,0.0054,0.12634554493061922
+canonical_spd,Canonical SPD,Latin America,2500,space,0.1693325979040265,0.0288,0.12634554493061922
+canonical_spd,Canonical SPD,Latin America,3000,climate,0.8460769615192404,0.1729,0.11079776058083012
+canonical_spd,Canonical SPD,Latin America,3000,human,0.06646676661669165,0.0238,0.11079776058083012
+canonical_spd,Canonical SPD,Latin America,3000,space,0.08745627186406797,0.0201,0.11079776058083012
+canonical_spd,Canonical SPD,Latin America,3500,climate,0.9363057324840764,0.2027,0.05789044625668005
+canonical_spd,Canonical SPD,Latin America,3500,human,0.06369426751592357,0.0246,0.05789044625668005
+canonical_spd,Canonical SPD,Latin America,3500,space,0,,0.05789044625668005
+canonical_spd,Canonical SPD,Latin America,4000,climate,0.86983842010772,0.2092,0.07525616368080223
+canonical_spd,Canonical SPD,Latin America,4000,human,0.1229802513464991,0.0407,0.07525616368080223
+canonical_spd,Canonical SPD,Latin America,4000,space,0.00718132854578097,0.0044,0.07525616368080223
+canonical_spd,Canonical SPD,Latin America,4500,climate,0.9204257475924988,0.187,0.07198887476530846
+canonical_spd,Canonical SPD,Latin America,4500,human,0.07957425240750125,0.0212,0.07198887476530846
+canonical_spd,Canonical SPD,Latin America,4500,space,0,,0.07198887476530846
+canonical_spd,Canonical SPD,Latin America,5000,climate,0.6046016190881978,0.1125,0.10861939138359432
+canonical_spd,Canonical SPD,Latin America,5000,human,0.08138048572645931,0.0213,0.10861939138359432
+canonical_spd,Canonical SPD,Latin America,5000,space,0.314017895185343,0.0307,0.10861939138359432
+canonical_spd,Canonical SPD,Latin America,5500,climate,0.9430992736077484,0.1583,0.11214519897940324
+canonical_spd,Canonical SPD,Latin America,5500,human,0.05690072639225182,0.012,0.11214519897940324
+canonical_spd,Canonical SPD,Latin America,5500,space,0,,0.11214519897940324
+canonical_spd,Canonical SPD,Latin America,6000,climate,0.9440518256772672,0.1659,0.08983727834209443
+canonical_spd,Canonical SPD,Latin America,6000,human,0.05594817432273262,0.0151,0.08983727834209443
+canonical_spd,Canonical SPD,Latin America,6000,space,0,,0.08983727834209443
+canonical_spd,Canonical SPD,Latin America,6500,climate,1,0.1629,0.05641703532903186
+canonical_spd,Canonical SPD,Latin America,6500,human,0,-0.0045,0.05641703532903186
+canonical_spd,Canonical SPD,Latin America,6500,space,0,,0.05641703532903186
+canonical_spd,Canonical SPD,Latin America,7000,climate,0.9501557632398756,0.1181,0.06224299222130958
+canonical_spd,Canonical SPD,Latin America,7000,human,0.04984423676012461,0.0025,0.06224299222130958
+canonical_spd,Canonical SPD,Latin America,7000,space,0,,0.06224299222130958
+canonical_spd,Canonical SPD,Latin America,7500,climate,0.7227138643067847,0.1013,0.05932933204900503
+canonical_spd,Canonical SPD,Latin America,7500,human,0,0.0019,0.05932933204900503
+canonical_spd,Canonical SPD,Latin America,7500,space,0.27728613569321536,0.0243,0.05932933204900503
+canonical_spd,Canonical SPD,Latin America,8000,climate,0.7037037037037037,0.1295,0.00686807339305706
+canonical_spd,Canonical SPD,Latin America,8000,human,0.2962962962962963,0.0591,0.00686807339305706
+canonical_spd,Canonical SPD,Latin America,8000,space,0,,0.00686807339305706
+canonical_spd,Canonical SPD,North America,2000,climate,0.2838580709645177,0.017,0.2208455168826069
+canonical_spd,Canonical SPD,North America,2000,human,0.01899050474762618,-2e-4,0.2208455168826069
+canonical_spd,Canonical SPD,North America,2000,space,0.697151424287856,0.1001,0.2208455168826069
+canonical_spd,Canonical SPD,North America,2500,climate,0.2754491017964072,0.0199,0.22730927402228984
+canonical_spd,Canonical SPD,North America,2500,human,0.03132197144173192,0.0051,0.22730927402228984
+canonical_spd,Canonical SPD,North America,2500,space,0.6932289267618609,0.1096,0.22730927402228984
+canonical_spd,Canonical SPD,North America,3000,climate,0.28640776699029125,0.0175,0.21828199622717637
+canonical_spd,Canonical SPD,North America,3000,human,0.02815533980582524,0.0031,0.21828199622717637
+canonical_spd,Canonical SPD,North America,3000,space,0.6854368932038835,0.0967,0.21828199622717637
+canonical_spd,Canonical SPD,North America,3500,climate,0.3051020408163265,0.0193,0.2338355110874697
+canonical_spd,Canonical SPD,North America,3500,human,0.01530612244897959,0.0015,0.2338355110874697
+canonical_spd,Canonical SPD,North America,3500,space,0.6795918367346939,0.0928,0.2338355110874697
+canonical_spd,Canonical SPD,North America,4000,climate,0.2850877192982456,0.0153,0.21964185606576692
+canonical_spd,Canonical SPD,North America,4000,human,0.04276315789473683,0.0043,0.21964185606576692
+canonical_spd,Canonical SPD,North America,4000,space,0.6721491228070176,0.0844,0.21964185606576692
+canonical_spd,Canonical SPD,North America,4500,climate,0.27050359712230215,0.0157,0.22562409408038864
+canonical_spd,Canonical SPD,North America,4500,human,0.03836930455635491,0.0065,0.22562409408038864
+canonical_spd,Canonical SPD,North America,4500,space,0.6911270983213429,0.102,0.22562409408038864
+canonical_spd,Canonical SPD,North America,5000,climate,0.3256198347107438,0.0185,0.1994840112991525
+canonical_spd,Canonical SPD,North America,5000,human,0.02424242424242424,0.0024,0.1994840112991525
+canonical_spd,Canonical SPD,North America,5000,space,0.650137741046832,0.0746,0.1994840112991525
+canonical_spd,Canonical SPD,North America,5500,climate,0.25597269624573377,0.0194,0.2036895434659478
+canonical_spd,Canonical SPD,North America,5500,human,0.04875670404680644,0.0089,0.2036895434659478
+canonical_spd,Canonical SPD,North America,5500,space,0.6952705997074597,0.10780000000000001,0.2036895434659478
+canonical_spd,Canonical SPD,North America,6000,climate,0.27984344422700586,0.0237,0.2204126235551338
+canonical_spd,Canonical SPD,North America,6000,human,0.06164383561643836,0.0121,0.2204126235551338
+canonical_spd,Canonical SPD,North America,6000,space,0.6585127201565558,0.1016,0.2204126235551338
+canonical_spd,Canonical SPD,North America,6500,climate,0.26933575978161967,0.0196,0.20844276610330803
+canonical_spd,Canonical SPD,North America,6500,human,0.03912647861692447,0.0078,0.20844276610330803
+canonical_spd,Canonical SPD,North America,6500,space,0.6915377616014559,0.1116,0.20844276610330803
+canonical_spd,Canonical SPD,North America,7000,climate,0.28408051235132664,0.0279,0.21951775490079084
+canonical_spd,Canonical SPD,North America,7000,human,0.05032021957913998,0.0094,0.21951775490079084
+canonical_spd,Canonical SPD,North America,7000,space,0.6655992680695334,0.1108,0.21951775490079084
+canonical_spd,Canonical SPD,North America,7500,climate,0.3260748185371301,0.0304,0.20425910525454116
+canonical_spd,Canonical SPD,North America,7500,human,0.06085985482970408,0.0092,0.20425910525454116
+canonical_spd,Canonical SPD,North America,7500,space,0.6130653266331658,0.0802,0.20425910525454116
+canonical_spd,Canonical SPD,North America,8000,climate,0.3645673323092678,0.0383,0.19508751765231416
+canonical_spd,Canonical SPD,North America,8000,human,0.04505888376856119,0.0088,0.19508751765231416
+canonical_spd,Canonical SPD,North America,8000,space,0.590373783922171,0.0831,0.19508751765231416
+canonical_spd,Canonical SPD,Oceania,2000,climate,0.2634920634920635,-0.006,0.07916033199580763
+canonical_spd,Canonical SPD,Oceania,2000,human,0.7365079365079364,0.0088,0.07916033199580763
+canonical_spd,Canonical SPD,Oceania,2000,space,0,,0.07916033199580763
+canonical_spd,Canonical SPD,Oceania,2500,climate,0.8666666666666666,0.0547,0.06808001731440505
+canonical_spd,Canonical SPD,Oceania,2500,human,0.13333333333333333,0.003,0.06808001731440505
+canonical_spd,Canonical SPD,Oceania,2500,space,0,,0.06808001731440505
+canonical_spd,Canonical SPD,Oceania,3000,climate,0.8075577326801959,0.1105,0.06662111463053977
+canonical_spd,Canonical SPD,Oceania,3000,human,0.19244226731980407,0.0225,0.06662111463053977
+canonical_spd,Canonical SPD,Oceania,3000,space,0,,0.06662111463053977
+canonical_spd,Canonical SPD,Oceania,3500,climate,0.829443447037702,0.1573,0.09472077659435851
+canonical_spd,Canonical SPD,Oceania,3500,human,0.15080789946140036,0.0258,0.09472077659435851
+canonical_spd,Canonical SPD,Oceania,3500,space,0.01974865350089766,0.0244,0.09472077659435851
+canonical_spd,Canonical SPD,Oceania,4000,climate,0.9124087591240876,0.0676,0.08438670241344126
+canonical_spd,Canonical SPD,Oceania,4000,human,0.08759124087591241,-2e-4,0.08438670241344126
+canonical_spd,Canonical SPD,Oceania,4000,space,0,,0.08438670241344126
+canonical_spd,Canonical SPD,Oceania,4500,climate,0.9186637618010168,0.1283,0.09034974818315512
+canonical_spd,Canonical SPD,Oceania,4500,human,0.04066811909949165,4e-4,0.09034974818315512
+canonical_spd,Canonical SPD,Oceania,4500,space,0.04066811909949165,0.0144,0.09034974818315512
+canonical_spd,Canonical SPD,Oceania,5000,climate,0.9753846153846152,0.0525,0.05164046461194194
+canonical_spd,Canonical SPD,Oceania,5000,human,0.02461538461538461,-0.0093,0.05164046461194194
+canonical_spd,Canonical SPD,Oceania,5000,space,0,,0.05164046461194194
+canonical_spd,Canonical SPD,Oceania,5500,climate,0.9097978227060656,0.052,0.03502088499984546
+canonical_spd,Canonical SPD,Oceania,5500,human,0.09020217729393468,-6e-4,0.03502088499984546
+canonical_spd,Canonical SPD,Oceania,5500,space,0,,0.03502088499984546
+canonical_spd,Canonical SPD,Oceania,6000,climate,1,0.0676,0.05184354224025578
+canonical_spd,Canonical SPD,Oceania,6000,human,0,-0.0025,0.05184354224025578
+canonical_spd,Canonical SPD,Oceania,6000,space,0,,0.05184354224025578
+canonical_spd,Canonical SPD,Oceania,6500,climate,1,0.0847,0.08401913166316233
+canonical_spd,Canonical SPD,Oceania,6500,human,0,-0.0143,0.08401913166316233
+canonical_spd,Canonical SPD,Oceania,6500,space,0,,0.08401913166316233
+canonical_spd,Canonical SPD,Oceania,7000,climate,1,0.0038,0.1167411825448168
+canonical_spd,Canonical SPD,Oceania,7000,human,0,-0.0166,0.1167411825448168
+canonical_spd,Canonical SPD,Oceania,7000,space,0,,0.1167411825448168
+canonical_spd,Canonical SPD,Oceania,7500,climate,1,0.0412,0.100484507686732
+canonical_spd,Canonical SPD,Oceania,7500,human,0,-0.0169,0.100484507686732
+canonical_spd,Canonical SPD,Oceania,7500,space,0,,0.100484507686732
+canonical_spd,Canonical SPD,Oceania,8000,climate,0.9866888519134775,0.057,0.12824914481827188
+canonical_spd,Canonical SPD,Oceania,8000,human,0.01331114808652246,-0.0015,0.12824914481827188
+canonical_spd,Canonical SPD,Oceania,8000,space,0,,0.12824914481827188
+joint_filtered,Filtered joint human block,Asia,2000,climate,0.7525562372188139,0.0926,0.05877705389228749
+joint_filtered,Filtered joint human block,Asia,2000,human,0.2474437627811861,0.0185,0.05877705389228749
+joint_filtered,Filtered joint human block,Asia,2000,space,0,,0.05877705389228749
+joint_filtered,Filtered joint human block,Asia,2500,climate,0.9107249850209707,0.1457,0.06516795435777989
+joint_filtered,Filtered joint human block,Asia,2500,human,0.08927501497902936,0.0086,0.06516795435777989
+joint_filtered,Filtered joint human block,Asia,2500,space,0,,0.06516795435777989
+joint_filtered,Filtered joint human block,Asia,3000,climate,0.7829896907216495,0.1339,0.010297416142200588
+joint_filtered,Filtered joint human block,Asia,3000,human,0.2170103092783505,0.0241,0.010297416142200588
+joint_filtered,Filtered joint human block,Asia,3000,space,0,,0.010297416142200588
+joint_filtered,Filtered joint human block,Asia,3500,climate,0.8562355658198614,0.1396,0.008371074141902413
+joint_filtered,Filtered joint human block,Asia,3500,human,0.14376443418013857,0.0162,0.008371074141902413
+joint_filtered,Filtered joint human block,Asia,3500,space,0,,0.008371074141902413
+joint_filtered,Filtered joint human block,Asia,4000,climate,0.6823049464558899,0.1171,0.11604118868550506
+joint_filtered,Filtered joint human block,Asia,4000,human,0.09943906170321265,0.0148,0.11604118868550506
+joint_filtered,Filtered joint human block,Asia,4000,space,0.2182559918408975,0.0278,0.11604118868550506
+joint_filtered,Filtered joint human block,Asia,4500,climate,0.8419689119170984,0.1139,0.08534831256073483
+joint_filtered,Filtered joint human block,Asia,4500,human,0.15803108808290156,0.0083,0.08534831256073483
+joint_filtered,Filtered joint human block,Asia,4500,space,0,,0.08534831256073483
+joint_filtered,Filtered joint human block,Asia,5000,climate,0.8739867354458365,0.0957,0.0621062875151861
+joint_filtered,Filtered joint human block,Asia,5000,human,0.12601326455416362,-0.0057,0.0621062875151861
+joint_filtered,Filtered joint human block,Asia,5000,space,0,,0.0621062875151861
+joint_filtered,Filtered joint human block,Asia,5500,climate,0.8498194945848374,0.0984,0.05426124345809846
+joint_filtered,Filtered joint human block,Asia,5500,human,0.15018050541516242,0.0015,0.05426124345809846
+joint_filtered,Filtered joint human block,Asia,5500,space,0,,0.05426124345809846
+joint_filtered,Filtered joint human block,Asia,6000,climate,0.7283276450511945,0.0677,0.05689293525619199
+joint_filtered,Filtered joint human block,Asia,6000,human,0.27167235494880543,8e-4,0.05689293525619199
+joint_filtered,Filtered joint human block,Asia,6000,space,0,,0.05689293525619199
+joint_filtered,Filtered joint human block,Asia,6500,climate,0.839549002601908,0.0739,0.01991580666833348
+joint_filtered,Filtered joint human block,Asia,6500,human,0.16045099739809193,-0.0044,0.01991580666833348
+joint_filtered,Filtered joint human block,Asia,6500,space,0,,0.01991580666833348
+joint_filtered,Filtered joint human block,Asia,7000,climate,0.7113943028485757,0.0704,0.0612429633324002
+joint_filtered,Filtered joint human block,Asia,7000,human,0.2886056971514243,0.014,0.0612429633324002
+joint_filtered,Filtered joint human block,Asia,7000,space,0,,0.0612429633324002
+joint_filtered,Filtered joint human block,Asia,7500,climate,0.827127659574468,0.1067,0.027131655835483937
+joint_filtered,Filtered joint human block,Asia,7500,human,0.1728723404255319,0.0083,0.027131655835483937
+joint_filtered,Filtered joint human block,Asia,7500,space,0,,0.027131655835483937
+joint_filtered,Filtered joint human block,Asia,8000,climate,0.8646517739816031,0.1122,0.03736012222860452
+joint_filtered,Filtered joint human block,Asia,8000,human,0.13534822601839686,0.0011,0.03736012222860452
+joint_filtered,Filtered joint human block,Asia,8000,space,0,,0.03736012222860452
+joint_filtered,Filtered joint human block,Europe,2000,climate,0.34577501296008295,0.046,0.19135438108679215
+joint_filtered,Filtered joint human block,Europe,2000,human,0.26749611197511663,0.0255,0.19135438108679215
+joint_filtered,Filtered joint human block,Europe,2000,space,0.3867288750648004,0.0573,0.19135438108679215
+joint_filtered,Filtered joint human block,Europe,2500,climate,0.28486486486486484,0.0315,0.1936661669930344
+joint_filtered,Filtered joint human block,Europe,2500,human,0.2864864864864865,0.0334,0.1936661669930344
+joint_filtered,Filtered joint human block,Europe,2500,space,0.42864864864864866,0.0636,0.1936661669930344
+joint_filtered,Filtered joint human block,Europe,3000,climate,0.22672064777327935,0.0249,0.2004212370606423
+joint_filtered,Filtered joint human block,Europe,3000,human,0.2087912087912088,0.0129,0.2004212370606423
+joint_filtered,Filtered joint human block,Europe,3000,space,0.5644881434355119,0.0733,0.2004212370606423
+joint_filtered,Filtered joint human block,Europe,3500,climate,0.2777227722772277,0.0501,0.25705373853079927
+joint_filtered,Filtered joint human block,Europe,3500,human,0.18762376237623762,0.0104,0.25705373853079927
+joint_filtered,Filtered joint human block,Europe,3500,space,0.5346534653465346,0.099,0.25705373853079927
+joint_filtered,Filtered joint human block,Europe,4000,climate,0.24791359842906238,0.034,0.22467871446915788
+joint_filtered,Filtered joint human block,Europe,4000,human,0.24005891016200295,0.0295,0.22467871446915788
+joint_filtered,Filtered joint human block,Europe,4000,space,0.5120274914089348,0.0935,0.22467871446915788
+joint_filtered,Filtered joint human block,Europe,4500,climate,0.2456935630099728,0.0348,0.24094912280901626
+joint_filtered,Filtered joint human block,Europe,4500,human,0.2647325475974615,0.0409,0.24094912280901626
+joint_filtered,Filtered joint human block,Europe,4500,space,0.48957388939256574,0.1032,0.24094912280901626
+joint_filtered,Filtered joint human block,Europe,5000,climate,0.1986444212721585,0.0215,0.2301634633894667
+joint_filtered,Filtered joint human block,Europe,5000,human,0.23514077163712202,0.0273,0.2301634633894667
+joint_filtered,Filtered joint human block,Europe,5000,space,0.5662148070907195,0.0969,0.2301634633894667
+joint_filtered,Filtered joint human block,Europe,5500,climate,0.299412915851272,0.0544,0.2625120309289194
+joint_filtered,Filtered joint human block,Europe,5500,human,0.18639921722113503,0.0225,0.2625120309289194
+joint_filtered,Filtered joint human block,Europe,5500,space,0.514187866927593,0.1026,0.2625120309289194
+joint_filtered,Filtered joint human block,Europe,6000,climate,0.27608695652173915,0.0453,0.21789095001784264
+joint_filtered,Filtered joint human block,Europe,6000,human,0.23695652173913043,0.0253,0.21789095001784264
+joint_filtered,Filtered joint human block,Europe,6000,space,0.48695652173913045,0.0809,0.21789095001784264
+joint_filtered,Filtered joint human block,Europe,6500,climate,0.21750663129973474,0.0292,0.2547064027057815
+joint_filtered,Filtered joint human block,Europe,6500,human,0.26312997347480105,0.0337,0.2547064027057815
+joint_filtered,Filtered joint human block,Europe,6500,space,0.5193633952254642,0.0923,0.2547064027057815
+joint_filtered,Filtered joint human block,Europe,7000,climate,0.3065355696934644,0.0408,0.22784527307824198
+joint_filtered,Filtered joint human block,Europe,7000,human,0.24291497975708504,0.0242,0.22784527307824198
+joint_filtered,Filtered joint human block,Europe,7000,space,0.45054945054945056,0.0675,0.22784527307824198
+joint_filtered,Filtered joint human block,Europe,7500,climate,0.2824146981627297,0.0404,0.22544809232282537
+joint_filtered,Filtered joint human block,Europe,7500,human,0.24934383202099739,0.0207,0.22544809232282537
+joint_filtered,Filtered joint human block,Europe,7500,space,0.46824146981627296,0.0704,0.22544809232282537
+joint_filtered,Filtered joint human block,Europe,8000,climate,0.3982244768547875,0.0562,0.19098074590795822
+joint_filtered,Filtered joint human block,Europe,8000,human,0.18389346861128725,0.0166,0.19098074590795822
+joint_filtered,Filtered joint human block,Europe,8000,space,0.4178820545339252,0.0567,0.19098074590795822
+joint_filtered,Filtered joint human block,Latin America,2000,climate,0.6358635863586358,0.08,0.0848625422688537
+joint_filtered,Filtered joint human block,Latin America,2000,human,0.3641364136413641,0.0306,0.0848625422688537
+joint_filtered,Filtered joint human block,Latin America,2000,space,0,,0.0848625422688537
+joint_filtered,Filtered joint human block,Latin America,2500,climate,0.5487865279841505,0.0864,0.08845711761692565
+joint_filtered,Filtered joint human block,Latin America,2500,human,0.4026745913818722,0.053900000000000003,0.08845711761692565
+joint_filtered,Filtered joint human block,Latin America,2500,space,0.04853888063397722,0.0125,0.08845711761692565
+joint_filtered,Filtered joint human block,Latin America,3000,climate,0.5335289186923722,0.0987,0.045871149891649865
+joint_filtered,Filtered joint human block,Latin America,3000,human,0.4664710813076279,0.0827,0.045871149891649865
+joint_filtered,Filtered joint human block,Latin America,3000,space,0,,0.045871149891649865
+joint_filtered,Filtered joint human block,Latin America,3500,climate,0.48698720776356413,0.0703,0.05444294062232269
+joint_filtered,Filtered joint human block,Latin America,3500,human,0.5130127922364358,0.0762,0.05444294062232269
+joint_filtered,Filtered joint human block,Latin America,3500,space,0,,0.05444294062232269
+joint_filtered,Filtered joint human block,Latin America,4000,climate,0.5008880994671403,0.0761,0.042558392210071516
+joint_filtered,Filtered joint human block,Latin America,4000,human,0.49911190053285964,0.0757,0.042558392210071516
+joint_filtered,Filtered joint human block,Latin America,4000,space,0,,0.042558392210071516
+joint_filtered,Filtered joint human block,Latin America,4500,climate,0.4387191755612808,0.0784,0.07213848316223226
+joint_filtered,Filtered joint human block,Latin America,4500,human,0.4622745675377254,0.0812,0.07213848316223226
+joint_filtered,Filtered joint human block,Latin America,4500,space,0.09900625690099374,0.0169,0.07213848316223226
+joint_filtered,Filtered joint human block,Latin America,5000,climate,0.5048885412592883,0.1116,0.05199596856081945
+joint_filtered,Filtered joint human block,Latin America,5000,human,0.4689088775909269,0.0967,0.05199596856081945
+joint_filtered,Filtered joint human block,Latin America,5000,space,0.026202581149784906,0.0038,0.05199596856081945
+joint_filtered,Filtered joint human block,Latin America,5500,climate,0.4841046277665996,0.1023,0.10525177757808302
+joint_filtered,Filtered joint human block,Latin America,5500,human,0.44386317907444667,0.0895,0.10525177757808302
+joint_filtered,Filtered joint human block,Latin America,5500,space,0.07203219315895372,0.023,0.10525177757808302
+joint_filtered,Filtered joint human block,Latin America,6000,climate,0.47708779443254823,0.089,0.11201750682710043
+joint_filtered,Filtered joint human block,Latin America,6000,human,0.3828693790149893,0.0683,0.11201750682710043
+joint_filtered,Filtered joint human block,Latin America,6000,space,0.14004282655246253,0.0408,0.11201750682710043
+joint_filtered,Filtered joint human block,Latin America,6500,climate,0.5014628437682855,0.0555,0.07102682342286604
+joint_filtered,Filtered joint human block,Latin America,6500,human,0.49853715623171446,0.0549,0.07102682342286604
+joint_filtered,Filtered joint human block,Latin America,6500,space,0,,0.07102682342286604
+joint_filtered,Filtered joint human block,Latin America,7000,climate,0.4319045035268584,0.0661,0.04010018298742046
+joint_filtered,Filtered joint human block,Latin America,7000,human,0.5680954964731416,0.0913,0.04010018298742046
+joint_filtered,Filtered joint human block,Latin America,7000,space,0,,0.04010018298742046
+joint_filtered,Filtered joint human block,Latin America,7500,climate,0.4124567474048442,0.0543,0.05059943907855524
+joint_filtered,Filtered joint human block,Latin America,7500,human,0.5875432525951556,0.0796,0.05059943907855524
+joint_filtered,Filtered joint human block,Latin America,7500,space,0,,0.05059943907855524
+joint_filtered,Filtered joint human block,Latin America,8000,climate,0.583710407239819,0.0779,0.023526767978886087
+joint_filtered,Filtered joint human block,Latin America,8000,human,0.41628959276018096,0.0521,0.023526767978886087
+joint_filtered,Filtered joint human block,Latin America,8000,space,0,,0.023526767978886087
+joint_filtered,Filtered joint human block,North America,2000,climate,0.25715720743345055,0.0144,0.1928603637236468
+joint_filtered,Filtered joint human block,North America,2000,human,0.31893520843797085,0.0419,0.1928603637236468
+joint_filtered,Filtered joint human block,North America,2000,space,0.4239075841285786,0.0672,0.1928603637236468
+joint_filtered,Filtered joint human block,North America,2500,climate,0.2623879188296366,0.0231,0.2131647983303494
+joint_filtered,Filtered joint human block,North America,2500,human,0.3114676734308636,0.0503,0.2131647983303494
+joint_filtered,Filtered joint human block,North America,2500,space,0.4261444077394998,0.0771,0.2131647983303494
+joint_filtered,Filtered joint human block,North America,3000,climate,0.2577800829875519,0.0152,0.18791379601496083
+joint_filtered,Filtered joint human block,North America,3000,human,0.2800829875518672,0.0337,0.18791379601496083
+joint_filtered,Filtered joint human block,North America,3000,space,0.4621369294605809,0.0713,0.18791379601496083
+joint_filtered,Filtered joint human block,North America,3500,climate,0.31881533101045295,0.0142,0.1912015160723689
+joint_filtered,Filtered joint human block,North America,3500,human,0.39663182346109177,0.0525,0.1912015160723689
+joint_filtered,Filtered joint human block,North America,3500,space,0.28455284552845533,0.0439,0.1912015160723689
+joint_filtered,Filtered joint human block,North America,4000,climate,0.24206755373592628,0.0101,0.21036008126970207
+joint_filtered,Filtered joint human block,North America,4000,human,0.3085977482088024,0.0414,0.21036008126970207
+joint_filtered,Filtered joint human block,North America,4000,space,0.4493346980552712,0.0727,0.21036008126970207
+joint_filtered,Filtered joint human block,North America,4500,climate,0.2733776188042923,0.0136,0.19860038122769097
+joint_filtered,Filtered joint human block,North America,4500,human,0.2938170669391927,0.0319,0.19860038122769097
+joint_filtered,Filtered joint human block,North America,4500,space,0.4328053142565151,0.0698,0.19860038122769097
+joint_filtered,Filtered joint human block,North America,5000,climate,0.28195876288659794,0.0156,0.19652154670122224
+joint_filtered,Filtered joint human block,North America,5000,human,0.2958762886597938,0.035,0.19652154670122224
+joint_filtered,Filtered joint human block,North America,5000,space,0.42216494845360825,0.0655,0.19652154670122224
+joint_filtered,Filtered joint human block,North America,5500,climate,0.26970033296337403,0.0167,0.16485082750515012
+joint_filtered,Filtered joint human block,North America,5500,human,0.30022197558268593,0.0358,0.16485082750515012
+joint_filtered,Filtered joint human block,North America,5500,space,0.4300776914539401,0.0623,0.16485082750515012
+joint_filtered,Filtered joint human block,North America,6000,climate,0.26184140500266095,0.0168,0.18683956237454724
+joint_filtered,Filtered joint human block,North America,6000,human,0.2990952634379989,0.0361,0.18683956237454724
+joint_filtered,Filtered joint human block,North America,6000,space,0.4390633315593401,0.0639,0.18683956237454724
+joint_filtered,Filtered joint human block,North America,6500,climate,0.27384123601491744,0.0185,0.18159543498233888
+joint_filtered,Filtered joint human block,North America,6500,human,0.24294086307938198,0.0237,0.18159543498233888
+joint_filtered,Filtered joint human block,North America,6500,space,0.4832179009057006,0.0724,0.18159543498233888
+joint_filtered,Filtered joint human block,North America,7000,climate,0.2535211267605634,0.0159,0.1917612881970252
+joint_filtered,Filtered joint human block,North America,7000,human,0.22952529994783516,0.0304,0.1917612881970252
+joint_filtered,Filtered joint human block,North America,7000,space,0.5169535732916015,0.0787,0.1917612881970252
+joint_filtered,Filtered joint human block,North America,7500,climate,0.2490051165434906,0.0161,0.18763149515161215
+joint_filtered,Filtered joint human block,North America,7500,human,0.22171688459351904,0.0234,0.18763149515161215
+joint_filtered,Filtered joint human block,North America,7500,space,0.5292779988629903,0.074,0.18763149515161215
+joint_filtered,Filtered joint human block,North America,8000,climate,0.2797583081570997,0.0173,0.19264557122134773
+joint_filtered,Filtered joint human block,North America,8000,human,0.23685800604229607,0.0235,0.19264557122134773
+joint_filtered,Filtered joint human block,North America,8000,space,0.4833836858006042,0.0638,0.19264557122134773
+joint_filtered,Filtered joint human block,Oceania,2000,climate,0.4799713876967096,0.0685,0.08640700708550819
+joint_filtered,Filtered joint human block,Oceania,2000,human,0.5200286123032903,0.0741,0.08640700708550819
+joint_filtered,Filtered joint human block,Oceania,2000,space,0,,0.08640700708550819
+joint_filtered,Filtered joint human block,Oceania,2500,climate,0.8516336368505624,0.1693,0.09551501237825588
+joint_filtered,Filtered joint human block,Oceania,2500,human,0.1483663631494376,0.0379,0.09551501237825588
+joint_filtered,Filtered joint human block,Oceania,2500,space,0,,0.09551501237825588
+joint_filtered,Filtered joint human block,Oceania,3000,climate,0.8509719222462203,0.1383,0.08203679625069105
+joint_filtered,Filtered joint human block,Oceania,3000,human,0.14902807775377971,0.0082,0.08203679625069105
+joint_filtered,Filtered joint human block,Oceania,3000,space,0,,0.08203679625069105
+joint_filtered,Filtered joint human block,Oceania,3500,climate,0.9674620390455532,0.2215,0.11242166186157432
+joint_filtered,Filtered joint human block,Oceania,3500,human,0.03253796095444685,0.006,0.11242166186157432
+joint_filtered,Filtered joint human block,Oceania,3500,space,0,,0.11242166186157432
+joint_filtered,Filtered joint human block,Oceania,4000,climate,0.9414634146341464,0.1464,0.042748289323151334
+joint_filtered,Filtered joint human block,Oceania,4000,human,0.05853658536585365,0.0016,0.042748289323151334
+joint_filtered,Filtered joint human block,Oceania,4000,space,0,,0.042748289323151334
+joint_filtered,Filtered joint human block,Oceania,4500,climate,0.932639920752848,0.1745,0.04066162788387728
+joint_filtered,Filtered joint human block,Oceania,4500,human,0.06736007924715205,-2e-4,0.04066162788387728
+joint_filtered,Filtered joint human block,Oceania,4500,space,0,,0.04066162788387728
+joint_filtered,Filtered joint human block,Oceania,5000,climate,0.8828016643550625,0.1176,0.05188574457995576
+joint_filtered,Filtered joint human block,Oceania,5000,human,0.11719833564493758,0.0071,0.05188574457995576
+joint_filtered,Filtered joint human block,Oceania,5000,space,0,,0.05188574457995576
+joint_filtered,Filtered joint human block,Oceania,5500,climate,0.7244501940491591,0.077,0.06763826470974876
+joint_filtered,Filtered joint human block,Oceania,5500,human,0.27554980595084083,0.0076,0.06763826470974876
+joint_filtered,Filtered joint human block,Oceania,5500,space,0,,0.06763826470974876
+joint_filtered,Filtered joint human block,Oceania,6000,climate,0.7791798107255521,0.087,0.05678287873686416
+joint_filtered,Filtered joint human block,Oceania,6000,human,0.22082018927444796,0.0162,0.05678287873686416
+joint_filtered,Filtered joint human block,Oceania,6000,space,0,,0.05678287873686416
+joint_filtered,Filtered joint human block,Oceania,6500,climate,0.8657770800627944,0.0816,0.051038215634970685
+joint_filtered,Filtered joint human block,Oceania,6500,human,0.13422291993720567,-0.0116,0.051038215634970685
+joint_filtered,Filtered joint human block,Oceania,6500,space,0,,0.051038215634970685
+joint_filtered,Filtered joint human block,Oceania,7000,climate,0.6053412462908012,0.0052,0.09625725162514087
+joint_filtered,Filtered joint human block,Oceania,7000,human,0.3946587537091988,-0.009,0.09625725162514087
+joint_filtered,Filtered joint human block,Oceania,7000,space,0,,0.09625725162514087
+joint_filtered,Filtered joint human block,Oceania,7500,climate,0.5308537616229924,0.0579,0.16557278650072715
+joint_filtered,Filtered joint human block,Oceania,7500,human,0.3355874894336433,0.0073,0.16557278650072715
+joint_filtered,Filtered joint human block,Oceania,7500,space,0.13355874894336436,0.0458,0.16557278650072715
+joint_filtered,Filtered joint human block,Oceania,8000,climate,0.6593406593406593,0.0176,0.17110465590591106
+joint_filtered,Filtered joint human block,Oceania,8000,human,0.3406593406593406,-0.0027,0.17110465590591106
+joint_filtered,Filtered joint human block,Oceania,8000,space,0,,0.17110465590591106
+spd_matched_bridge,Matched SPD bridge,Asia,2000,climate,0.8042752171008684,0.1128,0.05089459776505456
+spd_matched_bridge,Matched SPD bridge,Asia,2000,human,0.1957247828991316,0.0216,0.05089459776505456
+spd_matched_bridge,Matched SPD bridge,Asia,2000,space,0,,0.05089459776505456
+spd_matched_bridge,Matched SPD bridge,Asia,2500,climate,0.9712538226299694,0.1593,0.04831770343646902
+spd_matched_bridge,Matched SPD bridge,Asia,2500,human,0.02874617737003058,0.0051,0.04831770343646902
+spd_matched_bridge,Matched SPD bridge,Asia,2500,space,0,,0.04831770343646902
+spd_matched_bridge,Matched SPD bridge,Asia,3000,climate,0.9752947782144863,0.1776,0.031698844874159304
+spd_matched_bridge,Matched SPD bridge,Asia,3000,human,0.02470522178551376,0.0082,0.031698844874159304
+spd_matched_bridge,Matched SPD bridge,Asia,3000,space,0,,0.031698844874159304
+spd_matched_bridge,Matched SPD bridge,Asia,3500,climate,0.9651957737725295,0.1536,0.013714843893182005
+spd_matched_bridge,Matched SPD bridge,Asia,3500,human,0.03480422622747048,0.0039,0.013714843893182005
+spd_matched_bridge,Matched SPD bridge,Asia,3500,space,0,,0.013714843893182005
+spd_matched_bridge,Matched SPD bridge,Asia,4000,climate,0.9722222222222223,0.1524,0.11353914557423839
+spd_matched_bridge,Matched SPD bridge,Asia,4000,human,0.027777777777777783,0.0029,0.11353914557423839
+spd_matched_bridge,Matched SPD bridge,Asia,4000,space,0,,0.11353914557423839
+spd_matched_bridge,Matched SPD bridge,Asia,4500,climate,0.9133473095737247,0.1153,0.06313862148912164
+spd_matched_bridge,Matched SPD bridge,Asia,4500,human,0.08665269042627533,-0.003,0.06313862148912164
+spd_matched_bridge,Matched SPD bridge,Asia,4500,space,0,,0.06313862148912164
+spd_matched_bridge,Matched SPD bridge,Asia,5000,climate,0.9049034175334324,0.1022,0.052254989906146854
+spd_matched_bridge,Matched SPD bridge,Asia,5000,human,0.09509658246656762,-0.0068,0.052254989906146854
+spd_matched_bridge,Matched SPD bridge,Asia,5000,space,0,,0.052254989906146854
+spd_matched_bridge,Matched SPD bridge,Asia,5500,climate,0.929811320754717,0.1093,0.04782614923293471
+spd_matched_bridge,Matched SPD bridge,Asia,5500,human,0.070188679245283,-0.0046,0.04782614923293471
+spd_matched_bridge,Matched SPD bridge,Asia,5500,space,0,,0.04782614923293471
+spd_matched_bridge,Matched SPD bridge,Asia,6000,climate,0.824113475177305,0.0867,0.04863710991633674
+spd_matched_bridge,Matched SPD bridge,Asia,6000,human,0.17588652482269504,-0.0047,0.04863710991633674
+spd_matched_bridge,Matched SPD bridge,Asia,6000,space,0,,0.04863710991633674
+spd_matched_bridge,Matched SPD bridge,Asia,6500,climate,0.9343389529724934,0.0908,0.023821597057691934
+spd_matched_bridge,Matched SPD bridge,Asia,6500,human,0.06566104702750665,-0.007,0.023821597057691934
+spd_matched_bridge,Matched SPD bridge,Asia,6500,space,0,,0.023821597057691934
+spd_matched_bridge,Matched SPD bridge,Asia,7000,climate,0.7949326999208235,0.0815,0.0590670587688269
+spd_matched_bridge,Matched SPD bridge,Asia,7000,human,0.20506730007917656,0.0069,0.0590670587688269
+spd_matched_bridge,Matched SPD bridge,Asia,7000,space,0,,0.0590670587688269
+spd_matched_bridge,Matched SPD bridge,Asia,7500,climate,0.852054794520548,0.1066,0.021077814976068976
+spd_matched_bridge,Matched SPD bridge,Asia,7500,human,0.14794520547945209,0.0038,0.021077814976068976
+spd_matched_bridge,Matched SPD bridge,Asia,7500,space,0,,0.021077814976068976
+spd_matched_bridge,Matched SPD bridge,Asia,8000,climate,0.8767213114754098,0.1164,0.03201395096806281
+spd_matched_bridge,Matched SPD bridge,Asia,8000,human,0.12327868852459015,0.0014,0.03201395096806281
+spd_matched_bridge,Matched SPD bridge,Asia,8000,space,0,,0.03201395096806281
+spd_matched_bridge,Matched SPD bridge,Europe,2000,climate,0.41923076923076924,0.0555,0.21624775386818718
+spd_matched_bridge,Matched SPD bridge,Europe,2000,human,0.028571428571428567,0.004,0.21624775386818718
+spd_matched_bridge,Matched SPD bridge,Europe,2000,space,0.5521978021978021,0.077,0.21624775386818718
+spd_matched_bridge,Matched SPD bridge,Europe,2500,climate,0.43936507936507935,0.0579,0.21615432167590876
+spd_matched_bridge,Matched SPD bridge,Europe,2500,human,0.03428571428571429,0.0061,0.21615432167590876
+spd_matched_bridge,Matched SPD bridge,Europe,2500,space,0.5263492063492063,0.0723,0.21615432167590876
+spd_matched_bridge,Matched SPD bridge,Europe,3000,climate,0.33007676203768316,0.0373,0.22005738784498463
+spd_matched_bridge,Matched SPD bridge,Europe,3000,human,0.06350314026517795,0.0019,0.22005738784498463
+spd_matched_bridge,Matched SPD bridge,Europe,3000,space,0.6064200976971389,0.0821,0.22005738784498463
+spd_matched_bridge,Matched SPD bridge,Europe,3500,climate,0.331830985915493,0.0541,0.27764246625387057
+spd_matched_bridge,Matched SPD bridge,Europe,3500,human,0.05802816901408451,0.0013,0.27764246625387057
+spd_matched_bridge,Matched SPD bridge,Europe,3500,space,0.6101408450704225,0.1103,0.27764246625387057
+spd_matched_bridge,Matched SPD bridge,Europe,4000,climate,0.3599773242630386,0.0556,0.2507420356408334
+spd_matched_bridge,Matched SPD bridge,Europe,4000,human,0.07993197278911564,0.0067,0.2507420356408334
+spd_matched_bridge,Matched SPD bridge,Europe,4000,space,0.5600907029478458,0.1039,0.2507420356408334
+spd_matched_bridge,Matched SPD bridge,Europe,4500,climate,0.3015625,0.0439,0.2684082640380937
+spd_matched_bridge,Matched SPD bridge,Europe,4500,human,0.02395833333333333,-9e-4,0.2684082640380937
+spd_matched_bridge,Matched SPD bridge,Europe,4500,space,0.6744791666666666,0.1185,0.2684082640380937
+spd_matched_bridge,Matched SPD bridge,Europe,5000,climate,0.2461443553362122,0.0229,0.25669845009936565
+spd_matched_bridge,Matched SPD bridge,Europe,5000,human,0.057988895743368296,0.0069,0.25669845009936565
+spd_matched_bridge,Matched SPD bridge,Europe,5000,space,0.6958667489204196,0.1032,0.25669845009936565
+spd_matched_bridge,Matched SPD bridge,Europe,5500,climate,0.3789189189189189,0.0637,0.2763118551782937
+spd_matched_bridge,Matched SPD bridge,Europe,5500,human,0.015135135135135135,0.001,0.2763118551782937
+spd_matched_bridge,Matched SPD bridge,Europe,5500,space,0.605945945945946,0.1064,0.2763118551782937
+spd_matched_bridge,Matched SPD bridge,Europe,6000,climate,0.3276699029126213,0.0479,0.24490239654151358
+spd_matched_bridge,Matched SPD bridge,Europe,6000,human,0.095873786407767,0.0146,0.24490239654151358
+spd_matched_bridge,Matched SPD bridge,Europe,6000,space,0.5764563106796117,0.0993,0.24490239654151358
+spd_matched_bridge,Matched SPD bridge,Europe,6500,climate,0.24871355060034303,0.0323,0.26712154093326257
+spd_matched_bridge,Matched SPD bridge,Europe,6500,human,0.19839908519153804,0.0279,0.26712154093326257
+spd_matched_bridge,Matched SPD bridge,Europe,6500,space,0.5528873642081189,0.0963,0.26712154093326257
+spd_matched_bridge,Matched SPD bridge,Europe,7000,climate,0.34495878249841466,0.0403,0.2428025029876798
+spd_matched_bridge,Matched SPD bridge,Europe,7000,human,0.13316423589093215,0.0134,0.2428025029876798
+spd_matched_bridge,Matched SPD bridge,Europe,7000,space,0.5218769816106531,0.073,0.2428025029876798
+spd_matched_bridge,Matched SPD bridge,Europe,7500,climate,0.3279445727482679,0.0416,0.23528177595235789
+spd_matched_bridge,Matched SPD bridge,Europe,7500,human,0.22113163972286373,0.0214,0.23528177595235789
+spd_matched_bridge,Matched SPD bridge,Europe,7500,space,0.4509237875288683,0.0667,0.23528177595235789
+spd_matched_bridge,Matched SPD bridge,Europe,8000,climate,0.460455764075067,0.0639,0.20301061781153096
+spd_matched_bridge,Matched SPD bridge,Europe,8000,human,0.0596514745308311,0.0082,0.20301061781153096
+spd_matched_bridge,Matched SPD bridge,Europe,8000,space,0.47989276139410186,0.0638,0.20301061781153096
+spd_matched_bridge,Matched SPD bridge,Latin America,2000,climate,0.9428216283405843,0.1538,0.10460514967448586
+spd_matched_bridge,Matched SPD bridge,Latin America,2000,human,0,-0.0028,0.10460514967448586
+spd_matched_bridge,Matched SPD bridge,Latin America,2000,space,0.05717837165941579,0.0146,0.10460514967448586
+spd_matched_bridge,Matched SPD bridge,Latin America,2500,climate,0.9047619047619047,0.1332,0.1452487862972156
+spd_matched_bridge,Matched SPD bridge,Latin America,2500,human,0.021768707482993196,-0.0011,0.1452487862972156
+spd_matched_bridge,Matched SPD bridge,Latin America,2500,space,0.07346938775510203,0.017,0.1452487862972156
+spd_matched_bridge,Matched SPD bridge,Latin America,3000,climate,0.6032210834553441,0.091,0.11982614530625046
+spd_matched_bridge,Matched SPD bridge,Latin America,3000,human,0,-0.0067,0.11982614530625046
+spd_matched_bridge,Matched SPD bridge,Latin America,3000,space,0.3967789165446559,0.0454,0.11982614530625046
+spd_matched_bridge,Matched SPD bridge,Latin America,3500,climate,0.9450613676212741,0.173,0.10391683482917247
+spd_matched_bridge,Matched SPD bridge,Latin America,3500,human,0.05493863237872589,0.0207,0.10391683482917247
+spd_matched_bridge,Matched SPD bridge,Latin America,3500,space,0,,0.10391683482917247
+spd_matched_bridge,Matched SPD bridge,Latin America,4000,climate,0.7666820064427059,0.1855,0.08340707568669026
+spd_matched_bridge,Matched SPD bridge,Latin America,4000,human,0.20662678324896458,0.0636,0.08340707568669026
+spd_matched_bridge,Matched SPD bridge,Latin America,4000,space,0.026691210308329497,0.0114,0.08340707568669026
+spd_matched_bridge,Matched SPD bridge,Latin America,4500,climate,0.8912591050988553,0.1761,0.1497953522481682
+spd_matched_bridge,Matched SPD bridge,Latin America,4500,human,0.10874089490114462,0.0257,0.1497953522481682
+spd_matched_bridge,Matched SPD bridge,Latin America,4500,space,0,,0.1497953522481682
+spd_matched_bridge,Matched SPD bridge,Latin America,5000,climate,0.8280123583934089,0.1768,0.12227136589943655
+spd_matched_bridge,Matched SPD bridge,Latin America,5000,human,0.17198764160659116,0.0493,0.12227136589943655
+spd_matched_bridge,Matched SPD bridge,Latin America,5000,space,0,,0.12227136589943655
+spd_matched_bridge,Matched SPD bridge,Latin America,5500,climate,0.8948012232415903,0.1535,0.1651284466712034
+spd_matched_bridge,Matched SPD bridge,Latin America,5500,human,0.10519877675840979,0.0244,0.1651284466712034
+spd_matched_bridge,Matched SPD bridge,Latin America,5500,space,0,,0.1651284466712034
+spd_matched_bridge,Matched SPD bridge,Latin America,6000,climate,0.9744338933528123,0.1335,0.15745038383127208
+spd_matched_bridge,Matched SPD bridge,Latin America,6000,human,0.02556610664718773,0.0036,0.15745038383127208
+spd_matched_bridge,Matched SPD bridge,Latin America,6000,space,0,,0.15745038383127208
+spd_matched_bridge,Matched SPD bridge,Latin America,6500,climate,0.4548672566371681,0.0393,0.1225711042062343
+spd_matched_bridge,Matched SPD bridge,Latin America,6500,human,0.04188790560471976,0.0066,0.1225711042062343
+spd_matched_bridge,Matched SPD bridge,Latin America,6500,space,0.503244837758112,0.0459,0.1225711042062343
+spd_matched_bridge,Matched SPD bridge,Latin America,7000,climate,0.987963891675025,0.1039,0.12074586840424961
+spd_matched_bridge,Matched SPD bridge,Latin America,7000,human,0.012036108324974922,0.0066,0.12074586840424961
+spd_matched_bridge,Matched SPD bridge,Latin America,7000,space,0,,0.12074586840424961
+spd_matched_bridge,Matched SPD bridge,Latin America,7500,climate,0.4713083397092579,0.0541,0.10382019936686082
+spd_matched_bridge,Matched SPD bridge,Latin America,7500,human,0,0.0038,0.10382019936686082
+spd_matched_bridge,Matched SPD bridge,Latin America,7500,space,0.5286916602907422,0.0471,0.10382019936686082
+spd_matched_bridge,Matched SPD bridge,Latin America,8000,climate,0.7236503856041131,0.1227,0.002516359309462035
+spd_matched_bridge,Matched SPD bridge,Latin America,8000,human,0.27634961439588684,0.0531,0.002516359309462035
+spd_matched_bridge,Matched SPD bridge,Latin America,8000,space,0,,0.002516359309462035
+spd_matched_bridge,Matched SPD bridge,North America,2000,climate,0.29336188436830835,0.0184,0.21451529563641225
+spd_matched_bridge,Matched SPD bridge,North America,2000,human,0.04336188436830835,0.001,0.21451529563641225
+spd_matched_bridge,Matched SPD bridge,North America,2000,space,0.6632762312633833,0.0877,0.21451529563641225
+spd_matched_bridge,Matched SPD bridge,North America,2500,climate,0.31516095534787125,0.0282,0.22608523867697428
+spd_matched_bridge,Matched SPD bridge,North America,2500,human,0.05347871235721703,0.0065,0.22608523867697428
+spd_matched_bridge,Matched SPD bridge,North America,2500,space,0.6313603322949117,0.0899,0.22608523867697428
+spd_matched_bridge,Matched SPD bridge,North America,3000,climate,0.3611809045226131,0.0222,0.19666287429295148
+spd_matched_bridge,Matched SPD bridge,North America,3000,human,0.0829145728643216,0.0084,0.19666287429295148
+spd_matched_bridge,Matched SPD bridge,North America,3000,space,0.5559045226130652,0.0612,0.19666287429295148
+spd_matched_bridge,Matched SPD bridge,North America,3500,climate,0.3731707317073171,0.0208,0.20039823166797044
+spd_matched_bridge,Matched SPD bridge,North America,3500,human,0.06402439024390245,0.0096,0.20039823166797044
+spd_matched_bridge,Matched SPD bridge,North America,3500,space,0.5628048780487805,0.0639,0.20039823166797044
+spd_matched_bridge,Matched SPD bridge,North America,4000,climate,0.29162132752992387,0.0186,0.21790778387165022
+spd_matched_bridge,Matched SPD bridge,North America,4000,human,0.04896626768226333,0.0058,0.21790778387165022
+spd_matched_bridge,Matched SPD bridge,North America,4000,space,0.6594124047878129,0.0876,0.21790778387165022
+spd_matched_bridge,Matched SPD bridge,North America,4500,climate,0.33294730746960044,0.0192,0.20680699938751734
+spd_matched_bridge,Matched SPD bridge,North America,4500,human,0.034742327735958305,0.0019,0.20680699938751734
+spd_matched_bridge,Matched SPD bridge,North America,4500,space,0.6323103647944411,0.0696,0.20680699938751734
+spd_matched_bridge,Matched SPD bridge,North America,5000,climate,0.48057644110275693,0.0544,0.19603987255827315
+spd_matched_bridge,Matched SPD bridge,North America,5000,human,0.019423558897243107,7e-4,0.19603987255827315
+spd_matched_bridge,Matched SPD bridge,North America,5000,space,0.5,0.056,0.19603987255827315
+spd_matched_bridge,Matched SPD bridge,North America,5500,climate,0.35769728331177236,0.0261,0.16769593584393294
+spd_matched_bridge,Matched SPD bridge,North America,5500,human,0.05692108667529108,0.0065,0.16769593584393294
+spd_matched_bridge,Matched SPD bridge,North America,5500,space,0.5853816300129366,0.0604,0.16769593584393294
+spd_matched_bridge,Matched SPD bridge,North America,6000,climate,0.39840881272949813,0.041,0.1911703701513604
+spd_matched_bridge,Matched SPD bridge,North America,6000,human,0.06731946144430843,0.0117,0.1911703701513604
+spd_matched_bridge,Matched SPD bridge,North America,6000,space,0.5342717258261933,0.0661,0.1911703701513604
+spd_matched_bridge,Matched SPD bridge,North America,6500,climate,0.4052132701421801,0.0463,0.18231585201448786
+spd_matched_bridge,Matched SPD bridge,North America,6500,human,0.030805687203791468,0.0049,0.18231585201448786
+spd_matched_bridge,Matched SPD bridge,North America,6500,space,0.5639810426540285,0.0752,0.18231585201448786
+spd_matched_bridge,Matched SPD bridge,North America,7000,climate,0.32476763258611263,0.0288,0.19354452788179732
+spd_matched_bridge,Matched SPD bridge,North America,7000,human,0.034991798797156914,0.0048,0.19354452788179732
+spd_matched_bridge,Matched SPD bridge,North America,7000,space,0.6402405686167304,0.086,0.19354452788179732
+spd_matched_bridge,Matched SPD bridge,North America,7500,climate,0.3323057953144266,0.0272,0.19853238791194783
+spd_matched_bridge,Matched SPD bridge,North America,7500,human,0.056103575832305796,0.0098,0.19853238791194783
+spd_matched_bridge,Matched SPD bridge,North America,7500,space,0.6115906288532675,0.077,0.19853238791194783
+spd_matched_bridge,Matched SPD bridge,North America,8000,climate,0.32347388294524865,0.0199,0.19735042231306887
+spd_matched_bridge,Matched SPD bridge,North America,8000,human,0.037130270610446825,0.0037,0.19735042231306887
+spd_matched_bridge,Matched SPD bridge,North America,8000,space,0.6393958464443046,0.0692,0.19735042231306887
+spd_matched_bridge,Matched SPD bridge,Oceania,2000,climate,0.6505312868949233,0.0445,0.11999630376061443
+spd_matched_bridge,Matched SPD bridge,Oceania,2000,human,0.34946871310507677,0.019,0.11999630376061443
+spd_matched_bridge,Matched SPD bridge,Oceania,2000,space,0,,0.11999630376061443
+spd_matched_bridge,Matched SPD bridge,Oceania,2500,climate,0.9425000000000001,0.1529,0.07937263854479792
+spd_matched_bridge,Matched SPD bridge,Oceania,2500,human,0.05750000000000001,0.0112,0.07937263854479792
+spd_matched_bridge,Matched SPD bridge,Oceania,2500,space,0,,0.07937263854479792
+spd_matched_bridge,Matched SPD bridge,Oceania,3000,climate,0.9031700288184438,0.1365,0.1044240447721917
+spd_matched_bridge,Matched SPD bridge,Oceania,3000,human,0.09682997118155619,-0.0034,0.1044240447721917
+spd_matched_bridge,Matched SPD bridge,Oceania,3000,space,0,,0.1044240447721917
+spd_matched_bridge,Matched SPD bridge,Oceania,3500,climate,0.9785370127025844,0.2224,0.12603410023473294
+spd_matched_bridge,Matched SPD bridge,Oceania,3500,human,0.02146298729741568,0.0039,0.12603410023473294
+spd_matched_bridge,Matched SPD bridge,Oceania,3500,space,0,,0.12603410023473294
+spd_matched_bridge,Matched SPD bridge,Oceania,4000,climate,0.9811090798293723,0.1596,0.04491198991659118
+spd_matched_bridge,Matched SPD bridge,Oceania,4000,human,0.018890920170627667,0.0018,0.04491198991659118
+spd_matched_bridge,Matched SPD bridge,Oceania,4000,space,0,,0.04491198991659118
+spd_matched_bridge,Matched SPD bridge,Oceania,4500,climate,1,0.2055,0.04772902005902624
+spd_matched_bridge,Matched SPD bridge,Oceania,4500,human,0,-0.0025,0.04772902005902624
+spd_matched_bridge,Matched SPD bridge,Oceania,4500,space,0,,0.04772902005902624
+spd_matched_bridge,Matched SPD bridge,Oceania,5000,climate,1,0.1452,0.030576359054742208
+spd_matched_bridge,Matched SPD bridge,Oceania,5000,human,0,0.0032,0.030576359054742208
+spd_matched_bridge,Matched SPD bridge,Oceania,5000,space,0,,0.030576359054742208
+spd_matched_bridge,Matched SPD bridge,Oceania,5500,climate,0.8842975206611571,0.1311,0.04762196934780194
+spd_matched_bridge,Matched SPD bridge,Oceania,5500,human,0.11570247933884298,0.0103,0.04762196934780194
+spd_matched_bridge,Matched SPD bridge,Oceania,5500,space,0,,0.04762196934780194
+spd_matched_bridge,Matched SPD bridge,Oceania,6000,climate,0.8931962025316454,0.1152,0.06432165046263061
+spd_matched_bridge,Matched SPD bridge,Oceania,6000,human,0.10680379746835442,0.0158,0.06432165046263061
+spd_matched_bridge,Matched SPD bridge,Oceania,6000,space,0,,0.06432165046263061
+spd_matched_bridge,Matched SPD bridge,Oceania,6500,climate,1,0.1422,0.05659399172416735
+spd_matched_bridge,Matched SPD bridge,Oceania,6500,human,0,-0.0093,0.05659399172416735
+spd_matched_bridge,Matched SPD bridge,Oceania,6500,space,0,,0.05659399172416735
+spd_matched_bridge,Matched SPD bridge,Oceania,7000,climate,1,0.0659,0.1023848459899277
+spd_matched_bridge,Matched SPD bridge,Oceania,7000,human,0,-0.0084,0.1023848459899277
+spd_matched_bridge,Matched SPD bridge,Oceania,7000,space,0,,0.1023848459899277
+spd_matched_bridge,Matched SPD bridge,Oceania,7500,climate,0.8706422018348624,0.117,0.1584328661448331
+spd_matched_bridge,Matched SPD bridge,Oceania,7500,human,0,-0.011,0.1584328661448331
+spd_matched_bridge,Matched SPD bridge,Oceania,7500,space,0.12935779816513762,0.0374,0.1584328661448331
+spd_matched_bridge,Matched SPD bridge,Oceania,8000,climate,0.9074585635359116,0.0649,0.15636706166300895
+spd_matched_bridge,Matched SPD bridge,Oceania,8000,human,0.09254143646408841,0.0059,0.15636706166300895
+spd_matched_bridge,Matched SPD bridge,Oceania,8000,space,0,,0.15636706166300895

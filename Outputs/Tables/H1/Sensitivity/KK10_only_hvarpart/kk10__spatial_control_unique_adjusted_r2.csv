@@ -1,0 +1,391 @@
+analysis,region,age,fraction,adjusted_r_squared
+temporal_kk10,Europe,2000,pure_human,0.01512481470300353
+temporal_kk10,Europe,2000,pure_climate,0.05315950075449116
+temporal_kk10,Europe,2000,pure_space,0.07332173276346576
+temporal_kk10,Europe,2000,shared,0.05070126987714085
+temporal_kk10,Europe,2000,total_explained,0.1923073180981013
+temporal_kk10,Europe,2000,unexplained,0.8076926819018987
+temporal_kk10,Europe,2500,pure_human,0.015341540206626592
+temporal_kk10,Europe,2500,pure_climate,0.04422415802754531
+temporal_kk10,Europe,2500,pure_space,0.07168239062156301
+temporal_kk10,Europe,2500,shared,0.037550591359865715
+temporal_kk10,Europe,2500,total_explained,0.16879868021560063
+temporal_kk10,Europe,2500,unexplained,0.8312013197843994
+temporal_kk10,Europe,3000,pure_human,0.0038805270192686647
+temporal_kk10,Europe,3000,pure_climate,0.03774608851647754
+temporal_kk10,Europe,3000,pure_space,0.091994399983512
+temporal_kk10,Europe,3000,shared,0.026714043662039777
+temporal_kk10,Europe,3000,total_explained,0.16033505918129798
+temporal_kk10,Europe,3000,unexplained,0.839664940818702
+temporal_kk10,Europe,3500,pure_human,-3.396792296690432e-4
+temporal_kk10,Europe,3500,pure_climate,0.058551316718085666
+temporal_kk10,Europe,3500,pure_space,0.1148746150334281
+temporal_kk10,Europe,3500,shared,0.008826529442367503
+temporal_kk10,Europe,3500,total_explained,0.18191278196421223
+temporal_kk10,Europe,3500,unexplained,0.8180872180357878
+temporal_kk10,Europe,4000,pure_human,1.0322296330966818e-4
+temporal_kk10,Europe,4000,pure_climate,0.04572973630560018
+temporal_kk10,Europe,4000,pure_space,0.11519250123185387
+temporal_kk10,Europe,4000,shared,0.03630941453899206
+temporal_kk10,Europe,4000,total_explained,0.19733487503975577
+temporal_kk10,Europe,4000,unexplained,0.8026651249602442
+temporal_kk10,Europe,4500,pure_human,0.003204273051620743
+temporal_kk10,Europe,4500,pure_climate,0.039063478855504874
+temporal_kk10,Europe,4500,pure_space,0.1093609858133252
+temporal_kk10,Europe,4500,shared,0.045308575804823725
+temporal_kk10,Europe,4500,total_explained,0.19693731352527455
+temporal_kk10,Europe,4500,unexplained,0.8030626864747255
+temporal_kk10,Europe,5000,pure_human,0.0014819785693457321
+temporal_kk10,Europe,5000,pure_climate,0.04743335071939847
+temporal_kk10,Europe,5000,pure_space,0.10362222243696195
+temporal_kk10,Europe,5000,shared,0.017868728530369027
+temporal_kk10,Europe,5000,total_explained,0.17040628025607518
+temporal_kk10,Europe,5000,unexplained,0.8295937197439248
+temporal_kk10,Europe,5500,pure_human,0.005494542023534499
+temporal_kk10,Europe,5500,pure_climate,0.059372072864692704
+temporal_kk10,Europe,5500,pure_space,0.11598053214208859
+temporal_kk10,Europe,5500,shared,0.01756747711986284
+temporal_kk10,Europe,5500,total_explained,0.19841462415017863
+temporal_kk10,Europe,5500,unexplained,0.8015853758498214
+temporal_kk10,Europe,6000,pure_human,0.006988159305374553
+temporal_kk10,Europe,6000,pure_climate,0.05913006363335149
+temporal_kk10,Europe,6000,pure_space,0.10539078935673674
+temporal_kk10,Europe,6000,shared,0.009266217092643525
+temporal_kk10,Europe,6000,total_explained,0.1807752293881063
+temporal_kk10,Europe,6000,unexplained,0.8192247706118937
+temporal_kk10,Europe,6500,pure_human,0.003603653254863448
+temporal_kk10,Europe,6500,pure_climate,0.04081796097320589
+temporal_kk10,Europe,6500,pure_space,0.11220029816298005
+temporal_kk10,Europe,6500,shared,0.01912845512706285
+temporal_kk10,Europe,6500,total_explained,0.17575036751811224
+temporal_kk10,Europe,6500,unexplained,0.8242496324818878
+temporal_kk10,Europe,7000,pure_human,0.006485536650654322
+temporal_kk10,Europe,7000,pure_climate,0.03992771049913835
+temporal_kk10,Europe,7000,pure_space,0.08493861715867712
+temporal_kk10,Europe,7000,shared,0.02696422339692739
+temporal_kk10,Europe,7000,total_explained,0.15831608770539718
+temporal_kk10,Europe,7000,unexplained,0.8416839122946028
+temporal_kk10,Europe,7500,pure_human,0.008578918927873436
+temporal_kk10,Europe,7500,pure_climate,0.055614256045695476
+temporal_kk10,Europe,7500,pure_space,0.09317882457651983
+temporal_kk10,Europe,7500,shared,0.013237320702403577
+temporal_kk10,Europe,7500,total_explained,0.1706093202524923
+temporal_kk10,Europe,7500,unexplained,0.8293906797475077
+temporal_kk10,Europe,8000,pure_human,0.011003916767583277
+temporal_kk10,Europe,8000,pure_climate,0.07582085609601963
+temporal_kk10,Europe,8000,pure_space,0.06951257225790408
+temporal_kk10,Europe,8000,shared,-0.007266458413094368
+temporal_kk10,Europe,8000,total_explained,0.14907088670841262
+temporal_kk10,Europe,8000,unexplained,0.8509291132915874
+temporal_kk10,North America,2000,pure_human,0.024505393740339776
+temporal_kk10,North America,2000,pure_climate,0.03531786316687524
+temporal_kk10,North America,2000,pure_space,0.07472242434017684
+temporal_kk10,North America,2000,shared,0.06273592165520336
+temporal_kk10,North America,2000,total_explained,0.19728160290259522
+temporal_kk10,North America,2000,unexplained,0.8027183970974048
+temporal_kk10,North America,2500,pure_human,0.030684033988168435
+temporal_kk10,North America,2500,pure_climate,0.03207101175681015
+temporal_kk10,North America,2500,pure_space,0.0895895984276498
+temporal_kk10,North America,2500,shared,0.0635882673631869
+temporal_kk10,North America,2500,total_explained,0.2159329115358153
+temporal_kk10,North America,2500,unexplained,0.7840670884641847
+temporal_kk10,North America,3000,pure_human,0.013980358038234164
+temporal_kk10,North America,3000,pure_climate,0.06623152446817704
+temporal_kk10,North America,3000,pure_space,0.06681006497974185
+temporal_kk10,North America,3000,shared,0.03960179973895772
+temporal_kk10,North America,3000,total_explained,0.18662374722511077
+temporal_kk10,North America,3000,unexplained,0.8133762527748892
+temporal_kk10,North America,3500,pure_human,0.0275851736768834
+temporal_kk10,North America,3500,pure_climate,0.01976810372759208
+temporal_kk10,North America,3500,pure_space,0.060496895537168416
+temporal_kk10,North America,3500,shared,0.0744653092580202
+temporal_kk10,North America,3500,total_explained,0.1823154821996641
+temporal_kk10,North America,3500,unexplained,0.8176845178003359
+temporal_kk10,North America,4000,pure_human,0.025929688588304356
+temporal_kk10,North America,4000,pure_climate,0.019838113623025566
+temporal_kk10,North America,4000,pure_space,0.08168816022009473
+temporal_kk10,North America,4000,shared,0.06208696113460621
+temporal_kk10,North America,4000,total_explained,0.18954292356603086
+temporal_kk10,North America,4000,unexplained,0.8104570764339691
+temporal_kk10,North America,4500,pure_human,0.017977742238242445
+temporal_kk10,North America,4500,pure_climate,0.03410751589329142
+temporal_kk10,North America,4500,pure_space,0.06944230161970266
+temporal_kk10,North America,4500,shared,0.06350392107853875
+temporal_kk10,North America,4500,total_explained,0.18503148082977527
+temporal_kk10,North America,4500,unexplained,0.8149685191702247
+temporal_kk10,North America,5000,pure_human,0.027635289395018803
+temporal_kk10,North America,5000,pure_climate,0.020073860760228435
+temporal_kk10,North America,5000,pure_space,0.07299535957127179
+temporal_kk10,North America,5000,shared,0.07103129701268607
+temporal_kk10,North America,5000,total_explained,0.1917358067392051
+temporal_kk10,North America,5000,unexplained,0.8082641932607949
+temporal_kk10,North America,5500,pure_human,0.016490938571202873
+temporal_kk10,North America,5500,pure_climate,0.032998500751725945
+temporal_kk10,North America,5500,pure_space,0.060820206066284244
+temporal_kk10,North America,5500,shared,0.05515186458297339
+temporal_kk10,North America,5500,total_explained,0.16546150997218645
+temporal_kk10,North America,5500,unexplained,0.8345384900278136
+temporal_kk10,North America,6000,pure_human,0.014976342217975502
+temporal_kk10,North America,6000,pure_climate,0.03469566096978971
+temporal_kk10,North America,6000,pure_space,0.07640908833311677
+temporal_kk10,North America,6000,shared,0.058239319970010084
+temporal_kk10,North America,6000,total_explained,0.18432041149089207
+temporal_kk10,North America,6000,unexplained,0.8156795885091079
+temporal_kk10,North America,6500,pure_human,0.013392252138307636
+temporal_kk10,North America,6500,pure_climate,0.02810582724574162
+temporal_kk10,North America,6500,pure_space,0.08077148132971712
+temporal_kk10,North America,6500,shared,0.06917264910917786
+temporal_kk10,North America,6500,total_explained,0.19144220982294424
+temporal_kk10,North America,6500,unexplained,0.8085577901770558
+temporal_kk10,North America,7000,pure_human,0.010918837509038215
+temporal_kk10,North America,7000,pure_climate,0.03078032768076633
+temporal_kk10,North America,7000,pure_space,0.08575889030242867
+temporal_kk10,North America,7000,shared,0.06443854819205741
+temporal_kk10,North America,7000,total_explained,0.19189660368429062
+temporal_kk10,North America,7000,unexplained,0.8081033963157094
+temporal_kk10,North America,7500,pure_human,8.825414704614065e-4
+temporal_kk10,North America,7500,pure_climate,0.02349943631361906
+temporal_kk10,North America,7500,pure_space,0.08048853385499932
+temporal_kk10,North America,7500,shared,0.06798665102934054
+temporal_kk10,North America,7500,total_explained,0.17285716266842033
+temporal_kk10,North America,7500,unexplained,0.8271428373315797
+temporal_kk10,North America,8000,pure_human,0.005452242356012049
+temporal_kk10,North America,8000,pure_climate,0.03855345591332249
+temporal_kk10,North America,8000,pure_space,0.07953041255357718
+temporal_kk10,North America,8000,shared,0.06355804040825108
+temporal_kk10,North America,8000,total_explained,0.1870941512311628
+temporal_kk10,North America,8000,unexplained,0.8129058487688372
+temporal_kk10,Latin America,2000,pure_human,0.0040323913629923824
+temporal_kk10,Latin America,2000,pure_climate,0.13804010558731372
+temporal_kk10,Latin America,2000,pure_space,0
+temporal_kk10,Latin America,2000,shared,0.01776056651667679
+temporal_kk10,Latin America,2000,total_explained,0.1598330634669829
+temporal_kk10,Latin America,2000,unexplained,0.8401669365330171
+temporal_kk10,Latin America,2500,pure_human,0.013152100125783939
+temporal_kk10,Latin America,2500,pure_climate,0.1353891682619348
+temporal_kk10,Latin America,2500,pure_space,0
+temporal_kk10,Latin America,2500,shared,0.011593114421196482
+temporal_kk10,Latin America,2500,total_explained,0.16013438280891523
+temporal_kk10,Latin America,2500,unexplained,0.8398656171910848
+temporal_kk10,Latin America,3000,pure_human,0.0050228502884683834
+temporal_kk10,Latin America,3000,pure_climate,0.15870901386583625
+temporal_kk10,Latin America,3000,pure_space,0
+temporal_kk10,Latin America,3000,shared,0.011890397131525399
+temporal_kk10,Latin America,3000,total_explained,0.17562226128583003
+temporal_kk10,Latin America,3000,unexplained,0.82437773871417
+temporal_kk10,Latin America,4000,pure_human,7.957579646030721e-4
+temporal_kk10,Latin America,4000,pure_climate,0.14259214389569408
+temporal_kk10,Latin America,4000,pure_space,0
+temporal_kk10,Latin America,4000,shared,0.01397119076301545
+temporal_kk10,Latin America,4000,total_explained,0.1573590926233126
+temporal_kk10,Latin America,4000,unexplained,0.8426409073766874
+temporal_kk10,Latin America,4500,pure_human,0.013568088625123043
+temporal_kk10,Latin America,4500,pure_climate,0.17681392456284784
+temporal_kk10,Latin America,4500,pure_space,0
+temporal_kk10,Latin America,4500,shared,0.00681008263914562
+temporal_kk10,Latin America,4500,total_explained,0.1971920958271165
+temporal_kk10,Latin America,4500,unexplained,0.8028079041728835
+temporal_kk10,Latin America,5000,pure_human,0.015771097432462744
+temporal_kk10,Latin America,5000,pure_climate,0.14645858232782794
+temporal_kk10,Latin America,5000,pure_space,0
+temporal_kk10,Latin America,5000,shared,0.003451640674139944
+temporal_kk10,Latin America,5000,total_explained,0.16568132043443062
+temporal_kk10,Latin America,5000,unexplained,0.8343186795655694
+temporal_kk10,Latin America,5500,pure_human,0.006421478438763728
+temporal_kk10,Latin America,5500,pure_climate,0.13703079759351633
+temporal_kk10,Latin America,5500,pure_space,0
+temporal_kk10,Latin America,5500,shared,0.006762437322150983
+temporal_kk10,Latin America,5500,total_explained,0.15021471335443104
+temporal_kk10,Latin America,5500,unexplained,0.849785286645569
+temporal_kk10,Latin America,6000,pure_human,0.007484781571417742
+temporal_kk10,Latin America,6000,pure_climate,0.14463992496045097
+temporal_kk10,Latin America,6000,pure_space,0
+temporal_kk10,Latin America,6000,shared,-0.001729771207142461
+temporal_kk10,Latin America,6000,total_explained,0.15039493532472625
+temporal_kk10,Latin America,6000,unexplained,0.8496050646752737
+temporal_kk10,Latin America,6500,pure_human,0.023597896765592652
+temporal_kk10,Latin America,6500,pure_climate,0.15517355199518257
+temporal_kk10,Latin America,6500,pure_space,0.034075091539643276
+temporal_kk10,Latin America,6500,shared,-0.04601670832918492
+temporal_kk10,Latin America,6500,total_explained,0.16682983197123358
+temporal_kk10,Latin America,6500,unexplained,0.8331701680287664
+temporal_kk10,Latin America,7000,pure_human,0.009090459904981363
+temporal_kk10,Latin America,7000,pure_climate,0.11242127110670874
+temporal_kk10,Latin America,7000,pure_space,0
+temporal_kk10,Latin America,7000,shared,-0.008214322473630742
+temporal_kk10,Latin America,7000,total_explained,0.11329740853805936
+temporal_kk10,Latin America,7000,unexplained,0.8867025914619406
+temporal_kk10,Latin America,7500,pure_human,0.006140343815656757
+temporal_kk10,Latin America,7500,pure_climate,0.10512210901559094
+temporal_kk10,Latin America,7500,pure_space,0
+temporal_kk10,Latin America,7500,shared,-0.006849459810533642
+temporal_kk10,Latin America,7500,total_explained,0.10441299302071405
+temporal_kk10,Latin America,7500,unexplained,0.895587006979286
+temporal_kk10,Latin America,8000,pure_human,0.020420002346108856
+temporal_kk10,Latin America,8000,pure_climate,0.13915683320427275
+temporal_kk10,Latin America,8000,pure_space,0
+temporal_kk10,Latin America,8000,shared,-0.0180850798743456
+temporal_kk10,Latin America,8000,total_explained,0.141491755676036
+temporal_kk10,Latin America,8000,unexplained,0.858508244323964
+temporal_kk10,Latin America,3500,pure_human,0.008722891567264024
+temporal_kk10,Latin America,3500,pure_climate,0.14851694411035354
+temporal_kk10,Latin America,3500,pure_space,0
+temporal_kk10,Latin America,3500,shared,0.014788105805223495
+temporal_kk10,Latin America,3500,total_explained,0.17202794148284106
+temporal_kk10,Latin America,3500,unexplained,0.8279720585171589
+temporal_kk10,Oceania,2000,pure_human,0.015586921368497597
+temporal_kk10,Oceania,2000,pure_climate,0.05196156828815213
+temporal_kk10,Oceania,2000,pure_space,0
+temporal_kk10,Oceania,2000,shared,0.023400891435438997
+temporal_kk10,Oceania,2000,total_explained,0.09094938109208872
+temporal_kk10,Oceania,2000,unexplained,0.9090506189079113
+temporal_kk10,Oceania,2500,pure_human,0.0077029448430075975
+temporal_kk10,Oceania,2500,pure_climate,0.15610530063383787
+temporal_kk10,Oceania,2500,pure_space,0
+temporal_kk10,Oceania,2500,shared,0.021511235575921273
+temporal_kk10,Oceania,2500,total_explained,0.18531948105276674
+temporal_kk10,Oceania,2500,unexplained,0.8146805189472333
+temporal_kk10,Oceania,3000,pure_human,0.0177082588412536
+temporal_kk10,Oceania,3000,pure_climate,0.23711149241345164
+temporal_kk10,Oceania,3000,pure_space,0
+temporal_kk10,Oceania,3000,shared,-0.01149252290228886
+temporal_kk10,Oceania,3000,total_explained,0.24332722835241638
+temporal_kk10,Oceania,3000,unexplained,0.7566727716475836
+temporal_kk10,Oceania,3500,pure_human,-0.003528463368351664
+temporal_kk10,Oceania,3500,pure_climate,0.25875557560204365
+temporal_kk10,Oceania,3500,pure_space,0
+temporal_kk10,Oceania,3500,shared,0.0052749289481650585
+temporal_kk10,Oceania,3500,total_explained,0.26050204118185705
+temporal_kk10,Oceania,3500,unexplained,0.739497958818143
+temporal_kk10,Oceania,4000,pure_human,-0.0011850207371367771
+temporal_kk10,Oceania,4000,pure_climate,0.21201783106875782
+temporal_kk10,Oceania,4000,pure_space,0
+temporal_kk10,Oceania,4000,shared,-0.01583828096172224
+temporal_kk10,Oceania,4000,total_explained,0.1949945293698988
+temporal_kk10,Oceania,4000,unexplained,0.8050054706301012
+temporal_kk10,Oceania,4500,pure_human,-0.014087874048301918
+temporal_kk10,Oceania,4500,pure_climate,0.2105211475682479
+temporal_kk10,Oceania,4500,pure_space,0
+temporal_kk10,Oceania,4500,shared,0.013305623446965176
+temporal_kk10,Oceania,4500,total_explained,0.20973889696691117
+temporal_kk10,Oceania,4500,unexplained,0.7902611030330888
+temporal_kk10,Oceania,5000,pure_human,-0.0026789172286298957
+temporal_kk10,Oceania,5000,pure_climate,0.17286087579239295
+temporal_kk10,Oceania,5000,pure_space,0
+temporal_kk10,Oceania,5000,shared,-0.007523478036073228
+temporal_kk10,Oceania,5000,total_explained,0.16265848052768983
+temporal_kk10,Oceania,5000,unexplained,0.8373415194723102
+temporal_kk10,Oceania,5500,pure_human,0.014956660513731901
+temporal_kk10,Oceania,5500,pure_climate,0.2007367835338122
+temporal_kk10,Oceania,5500,pure_space,0
+temporal_kk10,Oceania,5500,shared,-0.021809938190433975
+temporal_kk10,Oceania,5500,total_explained,0.19388350585711012
+temporal_kk10,Oceania,5500,unexplained,0.8061164941428899
+temporal_kk10,Oceania,6000,pure_human,0.00118832892818177
+temporal_kk10,Oceania,6000,pure_climate,0.1511143129904038
+temporal_kk10,Oceania,6000,pure_space,0
+temporal_kk10,Oceania,6000,shared,-0.009202231541741268
+temporal_kk10,Oceania,6000,total_explained,0.1431004103768443
+temporal_kk10,Oceania,6000,unexplained,0.8568995896231557
+temporal_kk10,Oceania,7000,pure_human,-0.011451811526737354
+temporal_kk10,Oceania,7000,pure_climate,0.07044719778860897
+temporal_kk10,Oceania,7000,pure_space,0
+temporal_kk10,Oceania,7000,shared,0.012077773716472229
+temporal_kk10,Oceania,7000,total_explained,0.07107315997834385
+temporal_kk10,Oceania,7000,unexplained,0.9289268400216562
+temporal_kk10,Oceania,7500,pure_human,0.0166062569484412
+temporal_kk10,Oceania,7500,pure_climate,0.1800815434279166
+temporal_kk10,Oceania,7500,pure_space,0.06768256876118717
+temporal_kk10,Oceania,7500,shared,-0.10398882451499436
+temporal_kk10,Oceania,7500,total_explained,0.1603815446225506
+temporal_kk10,Oceania,7500,unexplained,0.8396184553774494
+temporal_kk10,Asia,2000,pure_human,-0.0034937411821803765
+temporal_kk10,Asia,2000,pure_climate,0.13326503084627872
+temporal_kk10,Asia,2000,pure_space,0
+temporal_kk10,Asia,2000,shared,0.015186376877168395
+temporal_kk10,Asia,2000,total_explained,0.14495766654126674
+temporal_kk10,Asia,2000,unexplained,0.8550423334587333
+temporal_kk10,Asia,2500,pure_human,-0.003991720613399363
+temporal_kk10,Asia,2500,pure_climate,0.16750897398893416
+temporal_kk10,Asia,2500,pure_space,0
+temporal_kk10,Asia,2500,shared,0.0036769356683460375
+temporal_kk10,Asia,2500,total_explained,0.16719418904388084
+temporal_kk10,Asia,2500,unexplained,0.8328058109561192
+temporal_kk10,Asia,3000,pure_human,-0.003560913117853781
+temporal_kk10,Asia,3000,pure_climate,0.17971410444071223
+temporal_kk10,Asia,3000,pure_space,0
+temporal_kk10,Asia,3000,shared,0.003972761516489509
+temporal_kk10,Asia,3000,total_explained,0.18012595283934796
+temporal_kk10,Asia,3000,unexplained,0.819874047160652
+temporal_kk10,Asia,3500,pure_human,0.0020107446080995794
+temporal_kk10,Asia,3500,pure_climate,0.17435679883025468
+temporal_kk10,Asia,3500,pure_space,0
+temporal_kk10,Asia,3500,shared,-4.3083813977395913e-4
+temporal_kk10,Asia,3500,total_explained,0.1759367052985803
+temporal_kk10,Asia,3500,unexplained,0.8240632947014197
+temporal_kk10,Asia,4000,pure_human,0.005164861734279436
+temporal_kk10,Asia,4000,pure_climate,0.16457479725251445
+temporal_kk10,Asia,4000,pure_space,0
+temporal_kk10,Asia,4000,shared,-0.0014956006194932758
+temporal_kk10,Asia,4000,total_explained,0.1682440583673006
+temporal_kk10,Asia,4000,unexplained,0.8317559416326994
+temporal_kk10,Asia,4500,pure_human,0.006464926041552244
+temporal_kk10,Asia,4500,pure_climate,0.15934082484998002
+temporal_kk10,Asia,4500,pure_space,0
+temporal_kk10,Asia,4500,shared,-0.0019261581465382926
+temporal_kk10,Asia,4500,total_explained,0.16387959274499397
+temporal_kk10,Asia,4500,unexplained,0.836120407255006
+temporal_kk10,Asia,5000,pure_human,-0.002482765990474034
+temporal_kk10,Asia,5000,pure_climate,0.15566683463316588
+temporal_kk10,Asia,5000,pure_space,0
+temporal_kk10,Asia,5000,shared,-2.3458603625969854e-4
+temporal_kk10,Asia,5000,total_explained,0.15294948260643215
+temporal_kk10,Asia,5000,unexplained,0.8470505173935678
+temporal_kk10,Asia,5500,pure_human,0.0021569323882336677
+temporal_kk10,Asia,5500,pure_climate,0.1408014562783021
+temporal_kk10,Asia,5500,pure_space,0
+temporal_kk10,Asia,5500,shared,0.0013138184639259753
+temporal_kk10,Asia,5500,total_explained,0.14427220713046174
+temporal_kk10,Asia,5500,unexplained,0.8557277928695383
+temporal_kk10,Asia,6000,pure_human,0.0014320643717344872
+temporal_kk10,Asia,6000,pure_climate,0.1498326296523167
+temporal_kk10,Asia,6000,pure_space,0
+temporal_kk10,Asia,6000,shared,0.0012568242996570111
+temporal_kk10,Asia,6000,total_explained,0.1525215183237082
+temporal_kk10,Asia,6000,unexplained,0.8474784816762918
+temporal_kk10,Asia,6500,pure_human,-5.189353357371029e-4
+temporal_kk10,Asia,6500,pure_climate,0.12172261220475022
+temporal_kk10,Asia,6500,pure_space,0
+temporal_kk10,Asia,6500,shared,0.0013522264644414417
+temporal_kk10,Asia,6500,total_explained,0.12255590333345456
+temporal_kk10,Asia,6500,unexplained,0.8774440966665454
+temporal_kk10,Asia,7000,pure_human,9.850842966497853e-4
+temporal_kk10,Asia,7000,pure_climate,0.12493339920408164
+temporal_kk10,Asia,7000,pure_space,0
+temporal_kk10,Asia,7000,shared,8.564198273085522e-4
+temporal_kk10,Asia,7000,total_explained,0.12677490332803998
+temporal_kk10,Asia,7000,unexplained,0.87322509667196
+temporal_kk10,Asia,7500,pure_human,2.0007495729901237e-4
+temporal_kk10,Asia,7500,pure_climate,0.14014743700357135
+temporal_kk10,Asia,7500,pure_space,0
+temporal_kk10,Asia,7500,shared,0.0028780543063879893
+temporal_kk10,Asia,7500,total_explained,0.14322556626725835
+temporal_kk10,Asia,7500,unexplained,0.8567744337327416
+temporal_kk10,Asia,8000,pure_human,-3.6987521582665384e-4
+temporal_kk10,Asia,8000,pure_climate,0.15728605521177474
+temporal_kk10,Asia,8000,pure_space,0
+temporal_kk10,Asia,8000,shared,6.271877862999986e-4
+temporal_kk10,Asia,8000,total_explained,0.1575433677822481
+temporal_kk10,Asia,8000,unexplained,0.8424566322177519
+temporal_kk10,Oceania,6500,pure_human,0.004008502798223512
+temporal_kk10,Oceania,6500,pure_climate,0.13308660232221348
+temporal_kk10,Oceania,6500,pure_space,0
+temporal_kk10,Oceania,6500,shared,0.0072967689669842795
+temporal_kk10,Oceania,6500,total_explained,0.14439187408742127
+temporal_kk10,Oceania,6500,unexplained,0.8556081259125787
+temporal_kk10,Oceania,8000,pure_human,0.024178076688991745
+temporal_kk10,Oceania,8000,pure_climate,0.1685593233409488
+temporal_kk10,Oceania,8000,pure_space,0.022619921143860133
+temporal_kk10,Oceania,8000,shared,-0.07586116343890092
+temporal_kk10,Oceania,8000,total_explained,0.13949615773489976
+temporal_kk10,Oceania,8000,unexplained,0.8605038422651002

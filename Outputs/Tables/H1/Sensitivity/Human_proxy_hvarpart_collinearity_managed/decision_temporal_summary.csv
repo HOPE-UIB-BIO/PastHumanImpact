@@ -1,0 +1,4 @@
+model_id,model_label,n_units,human_dominant,climate_dominant,ties,median_human_allocation,median_climate_allocation,median_space_allocation
+canonical_spd,Canonical SPD,65,1,64,0,0.05032021957913998,0.7037037037037037,0.25504439063761103
+joint_filtered,Filtered joint human block,65,18,47,0,0.26312997347480105,0.48698720776356413,0.026202581149784906
+spd_matched_bridge,Matched SPD bridge,65,0,65,0,0.05692108667529108,0.7949326999208235,0.026691210308329497

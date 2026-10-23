@@ -48,7 +48,7 @@ data_c14 <-
 data_polygons <-
   build_spatial_polygons(
     data_source = data_meta,
-    distance_buffer = 10 # 10° away from site
+    distance_buffer = 10 # 10 degrees away from site
   )
 
 # - subset C14 data for each dataset_id and calculate distance to it

@@ -1,0 +1,6 @@
+contrast,from,to,n_units
+Canonical SPD to filtered joint,Climate,Climate,47
+Canonical SPD to filtered joint,Climate,Human,17
+Canonical SPD to filtered joint,Human,Human,1
+Matched SPD bridge to filtered joint,Climate,Climate,47
+Matched SPD bridge to filtered joint,Climate,Human,18

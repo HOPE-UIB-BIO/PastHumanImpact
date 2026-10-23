@@ -1,0 +1,66 @@
+analysis,region,age,n_unselected_mem,p_value,status
+temporal_hyde,Europe,2000,74,0.001,estimated
+temporal_hyde,Europe,2500,75,0.001,estimated
+temporal_hyde,Europe,3000,71,0.001,estimated
+temporal_hyde,Europe,3500,70,0.001,estimated
+temporal_hyde,Europe,4000,71,0.001,estimated
+temporal_hyde,Europe,4500,73,0.001,estimated
+temporal_hyde,Europe,5000,73,0.001,estimated
+temporal_hyde,Europe,5500,71,0.001,estimated
+temporal_hyde,Europe,6000,75,0.001,estimated
+temporal_hyde,Europe,6500,72,0.001,estimated
+temporal_hyde,Europe,7000,77,0.001,estimated
+temporal_hyde,Europe,7500,74,0.001,estimated
+temporal_hyde,Europe,8000,72,0.001,estimated
+temporal_hyde,North America,2000,122,0.001,estimated
+temporal_hyde,North America,2500,121,0.001,estimated
+temporal_hyde,North America,3000,122,0.001,estimated
+temporal_hyde,North America,3500,125,0.001,estimated
+temporal_hyde,North America,4000,125,0.001,estimated
+temporal_hyde,North America,4500,124,0.001,estimated
+temporal_hyde,North America,5000,123,0.001,estimated
+temporal_hyde,North America,5500,124,0.001,estimated
+temporal_hyde,North America,6000,125,0.001,estimated
+temporal_hyde,North America,6500,125,0.001,estimated
+temporal_hyde,North America,7000,121,0.001,estimated
+temporal_hyde,North America,7500,123,0.001,estimated
+temporal_hyde,North America,8000,118,0.001,estimated
+temporal_hyde,Latin America,2000,9,0.049,estimated
+temporal_hyde,Latin America,2500,9,0.035,estimated
+temporal_hyde,Latin America,3000,10,0.055,estimated
+temporal_hyde,Latin America,4000,9,0.031,estimated
+temporal_hyde,Latin America,4500,9,0.025,estimated
+temporal_hyde,Latin America,5000,9,0.067,estimated
+temporal_hyde,Latin America,5500,8,0.01,estimated
+temporal_hyde,Latin America,6000,9,0.012,estimated
+temporal_hyde,Latin America,6500,10,0.023,estimated
+temporal_hyde,Latin America,7000,10,0.143,estimated
+temporal_hyde,Latin America,7500,9,0.208,estimated
+temporal_hyde,Latin America,8000,8,0.574,estimated
+temporal_hyde,Latin America,3500,10,0.029,estimated
+temporal_hyde,Oceania,2000,5,0.107,estimated
+temporal_hyde,Oceania,2500,4,0.09,estimated
+temporal_hyde,Oceania,3000,5,0.35,estimated
+temporal_hyde,Oceania,3500,5,0.264,estimated
+temporal_hyde,Oceania,4000,5,0.623,estimated
+temporal_hyde,Oceania,4500,5,0.413,estimated
+temporal_hyde,Oceania,5000,5,0.343,estimated
+temporal_hyde,Oceania,5500,5,0.412,estimated
+temporal_hyde,Oceania,6000,5,0.333,estimated
+temporal_hyde,Oceania,7000,5,0.158,estimated
+temporal_hyde,Oceania,7500,4,0.178,estimated
+temporal_hyde,Asia,2000,26,0.155,estimated
+temporal_hyde,Asia,2500,26,0.242,estimated
+temporal_hyde,Asia,3000,27,0.614,estimated
+temporal_hyde,Asia,3500,26,0.63,estimated
+temporal_hyde,Asia,4000,24,0.032,estimated
+temporal_hyde,Asia,4500,26,0.078,estimated
+temporal_hyde,Asia,5000,25,0.14,estimated
+temporal_hyde,Asia,5500,26,0.087,estimated
+temporal_hyde,Asia,6000,26,0.205,estimated
+temporal_hyde,Asia,6500,23,0.387,estimated
+temporal_hyde,Asia,7000,24,0.209,estimated
+temporal_hyde,Asia,7500,22,0.358,estimated
+temporal_hyde,Asia,8000,22,0.444,estimated
+temporal_hyde,Oceania,6500,5,0.382,estimated
+temporal_hyde,Oceania,8000,5,0.057,estimated
