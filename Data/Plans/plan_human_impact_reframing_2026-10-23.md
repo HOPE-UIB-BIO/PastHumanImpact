@@ -1,5 +1,7 @@
 # Human-impact reframing after the human-proxy results
 
+> **Updated 2026-11-16.** Gate G1 is closed and the venue decision (G3) is brought forward; see `Data/Plans/decision_record_human_impact_reframing_2026-11-16.md`, which takes precedence where an older statement in this plan disagrees. The sections below are amended to match.
+
 ## Objective
 
 Re-plan the remaining revision work now that the representation of human impact, rather than the climate–human comparison itself, has become the decisive analytical choice.
@@ -8,8 +10,8 @@ PR #343 showed that adding KK10 land use (and HYDE population) to the archaeolog
 On 2026-10-22 the co-authors provisionally chose SPD + KK10 over 8.0–2.0 ka (`Manuscript/_internal/Paper_direction_after_proxy_decision.md`, gitignored).
 That choice is reopened here:
 
-- No single primary human proxy: each model contains one proxy, and every analysis is repeated for SPD (demography), KK10 (land use), and HYDE 3.5 land use (working direction, to confirm at G2).
-- The analysis window is a design factor: a common 8.0–2.0 ka window for the controlled comparison, plus each proxy's native window towards the whole Holocene, which would be a much stronger argument than 8.0–2.0 ka alone.
+- No single primary human proxy: each model contains one proxy, and every analysis is repeated for SPD (demography), KK10 (land use), and HYDE 3.5 land use (decided 2026-11-16).
+- The analysis window is a design factor: a common 8.0–2.0 ka window on a common cohort gives the main results, and each proxy's native window extends the inference towards the whole Holocene.
 - H2 must be fully refitted with the same human proxies as H1.
 - All reviewer requests still stand, including #341 (300-grain refit) and the R1 validation suite, which must be rerun for each human proxy.
 
@@ -63,9 +65,9 @@ SPD-based models stop at 2 ka because radiocarbon dating declines once written s
 No single non-circular proxy covers the whole Holocene at useful resolution: SPD ends at 2 ka, KK10 starts at 8 ka, and HYDE is coarse and, in 3.2, near zero before about 3 ka (verify for 3.5).
 The window is therefore treated as a design factor with nested windows:
 
-- Proxy-native windows with each proxy's full data: SPD about 11.7–2.0 ka; KK10 8.0–0.5 ka; HYDE 3.5 about 11.7–0.5 ka. These are the main temporal H1 results and extend the inference towards the whole Holocene.
-- Core window, 8.0–2.0 ka, on a common cohort: every proxy is compared on identical units, as a check that differences between proxies are not caused by sample composition or window length.
-- The HYDE 3.5 native run is the whole-Holocene run; it counts as evidence only if its early-Holocene values carry information rather than near-zero constants.
+- Core window, 8.0–2.0 ka, on a common cohort: every proxy is compared on identical units. These are the main results (decided 2026-11-16), because this is the only comparison in which the proxy is the only thing that varies.
+- Proxy-native windows with each proxy's full data: SPD about 11.7–2.0 ka; KK10 8.0–0.5 ka; HYDE 3.5 about 11.7–0.5 ka. These are the extension towards the whole Holocene.
+- The HYDE 3.5 native run is the whole-Holocene run; it is promoted to a main result only if its land-use values carry information before about 6 ka rather than near-zero constants.
 
 The response and climate data already cover 0–12 ka (`min_age` and `max_age` in `R/00_Config_file.R`), so only the human proxy limits the window.
 Longer windows also give the within-sequence models more ages; the 8.0–2.0 ka models have 13 ages and needed the residual-df minimum relaxed to four.
@@ -79,26 +81,28 @@ Choose after the single-proxy runs:
 2. Necessary but not sufficient: people mattered, but climate remained a major, often leading, driver of assemblage-level change for every proxy.
 3. Representation dependence: attribution depends on how human impact is represented at both scales, and the paper reports the results per construct.
 
-An optional H3 (single property versus whole assemblage; analysis D) can support scenario 1 or 2.
+The optional H3 (single property versus whole assemblage; analysis D) was dropped on 2026-11-16.
 
 ### Decision gates
 
-- G1, after Phase 1: candidate proxies that pass the independence and coverage checks, and the per-construct hypotheses, decision metric, and headline rule recorded before any Phase 3 run.
-- G2, after Phase 3: confirm the single-proxy design (section 8 of the conceptual assessment), the proxy set, the window, the headline rule, the framing, and the roles of HYDE population and the expert events.
-- G3, before Phase 6: resubmission as R1 of COMMSENV-25-2408 or as a new manuscript.
+- G1, closed 2026-11-16: the single-proxy design, proxy set, per-construct hypotheses, decision metric, and headline rule are recorded in the decision record. The Phase 1 independence and coverage checks continue and can still remove a proxy.
+- G1b, before the Phase 3 build: the climate-reduction test (A) and the trend-sharing test (B) set the size of the rewrite.
+- G2, after Phase 3: confirm the framing and whether the native-window runs are promoted to main results.
+- G3, decided 2026-11-16: resubmission as R1 of COMMSENV-25-2408, subject to the editor agreeing the timeline.
 
 ## Analysis contract
 
 - Canonical R1 stores, figures, and temporal-model fits are not overwritten; new runs get their own stores.
 - Each model contains exactly one human proxy; there are no joint human blocks (degrees of freedom, block-size asymmetry, mixed constructs; see section 8 of the conceptual assessment).
 - Climate predictors are selected once per analytical unit without the response (`collinear`, `max_cor = 0.8`, `max_vif = 5`) and shared by every proxy's model in that unit; time and dbMEM controls are protected and added after selection.
-- Temporal H1 main results use each proxy's full data over its native window, as in the current SPD-versus-events figure; the common-cohort, common-window version is a supplementary check of sample composition. Spatial H1 comparisons that pair proxies record by record (the agreement map) use the common cohort by construction.
-- The headline rule is fixed before results are seen: a conclusion is stated generally only if it holds for every main-comparison proxy in the main results and is not overturned in the common-cohort check; otherwise it is stated per construct.
+- Main results use the common cohort in the common 8.0–2.0 ka window; each proxy's full data over its native window is the extension. Spatial H1 comparisons that pair proxies record by record (the agreement map) use the common cohort by construction.
+- The headline rule is fixed before the confirmatory runs (the exploratory previews had been seen, which the Methods must disclose): a conclusion is stated generally only if it holds for every main-comparison proxy in the main results and is not overturned in the native-window extension; otherwise it is stated per construct.
+- "Holds" is judged by the decision metric in the decision record: the sign of the overall human-minus-climate balance and its 95 % interval, with "no clear dominance" when the interval includes zero.
 - H1 and H2 are restated per construct (demography, land use) with predictions and the decision metric written down before Phase 3 runs (issue 1 in `Data/Plans/single_proxy_strategy_review_2026-10-23.md`).
 - KK10 and HYDE count as one evidence family (shared population basis) and serve as a land-use scenario bracket, not as independent replicates.
 - Shares are reported as variation associated with a representation, not as causal effects.
 - Signed, zero-truncated, and exclude-negative profiles are all reported.
-- One SPD scale (raw or square-root) and one residual-df minimum are used across canonical and sensitivity runs, or the difference is documented.
+- Square-root SPD and a residual-df minimum of five (provisional, pending the record-loss count) are used across all runs.
 - No new temporal-model fit runs without an authorised row in `general_model_run_requests.csv`.
 - Raw KK10 and HYDE rasters and target stores stay in configured external storage.
 
@@ -109,7 +113,7 @@ An optional H3 (single property versus whole assemblage; analysis D) can support
 - `R/analyses/00_profiles/pipeline_contracts.csv`: four profiles share `joint_human_proxy_hvarpart/pipeline.R`, which fails `validate_pipeline_contract_registry()` and makes `R/analyses/00_run_main.R` abort. Give each profile its own runner or allow shared scripts that differ by profile.
 - `R/analyses/00_profiles/analysis_profiles.csv`: the KK10 and HYDE rows record the support as `not_applicable`, although extraction uses the SPD buffer.
 - `R/analyses/03_temporal_models/01_inputs/prepare_data.R` reads the stale stores `pipeline_predictors` and `pipeline_paps`; repoint it to the `data_preparation/...` stores.
-- Choose the SPD scale (canonical H1/H2 use raw SPD; all sensitivities use square-root SPD) and the residual-df minimum (5 canonical, 4 in sensitivities).
+- Apply the chosen SPD scale (square-root; canonical H1/H2 currently use raw SPD) and count the records lost under a residual-df minimum of five against four (5 canonical, 4 in sensitivities).
 - Correct stale `source_pipeline` values in `Manuscript/COMMSENV-25-2408/R1/evidence/claim-evidence-registry.csv`.
 
 Validation: `validate_pipeline_contract_registry()` and `validate_analysis_profiles()` pass, `00_run_main.R` passes validation, and the full test suite passes in a fresh subprocess.
@@ -123,7 +127,8 @@ Validation: `validate_pipeline_contract_registry()` and `validate_analysis_profi
 - KK10: whether any release extends beyond 8 ka.
 - HYDE: the source of the pollen-circularity claim raised on 2026-10-22, and the coverage and steps of HYDE 3.3 and 3.5 against 3.2.
 - ArchaeoGLOBE (optional, H2 only): coverage, resolution, access, and whether it can serve as a regional predictor or stratifier.
-- Write the per-construct hypotheses (H1a/H2a demography versus climate; H1b/H2b land use versus climate), the decision metric, and the headline rule.
+- Done 2026-11-16: the per-construct hypotheses (H1a/H2a demography versus climate; H1b/H2b land use versus climate), the decision metric, and the headline rule are in the decision record.
+- ArchaeoGLOBE was dropped from scope on 2026-11-16; its bullet above is kept for the record only.
 
 Validation: every cell of the construct table cites a source; G1 is recorded with the candidates retained and the hypotheses written down.
 
@@ -142,6 +147,8 @@ Validation: synthetic-raster tests for each support, unique dataset-age keys, no
 
 ### Phase 3 - Single-proxy H1 across proxies and windows
 
+Before the build, run the two gating tests from the decision record on existing outputs: test A (SPD with all four climate variables against the filtered selection on identical units) and test B (human ∩ time and detrended KK10 and HYDE in spatial H1). Their results set the scope of Phases 5 and 6, not whether the engine is built.
+
 Replace the per-proxy sensitivity pipelines with one parameterised H1 under `R/analyses/02_h1_spatiotemporal_hvarpart/`, run once per human proxy.
 
 - Drive the human proxy, window, and support from `analysis_profiles.csv` rows instead of the global set by the `run_*.R` scripts with `tar_make(callr_function = NULL)`.
@@ -155,7 +162,7 @@ Replace the per-proxy sensitivity pipelines with one parameterised H1 under `R/a
 
 #### Figure design
 
-- **Temporal H1 (Figure 4):** one column per proxy (SPD, KK10, HYDE 3.5 land use) and one row per continental region, with the existing human/climate/space stacked bars through time. This extends the current SPD-versus-events layout of `plot_h1_temporal_controlled_composition()` and `plot_human_proxy_temporal_comparison()`. Main version: each proxy with its full data over its native window, so columns differ in time span and records, exactly as SPD and events do in the current figure. Supplementary version: the common cohort in the common 8.0–2.0 ka window, to show that the pattern across proxies does not come from sample composition. Events go in a supplementary column, visually flagged as circular.
+- **Temporal H1 (Figure 4):** one column per proxy (SPD, KK10, HYDE 3.5 land use) and one row per continental region, with the existing human/climate/space stacked bars through time. This extends the current SPD-versus-events layout of `plot_h1_temporal_controlled_composition()` and `plot_human_proxy_temporal_comparison()`. Main version (decided 2026-11-16): the common cohort in the common 8.0–2.0 ka window. Extension version: each proxy with its full data over its native window, so columns differ in time span and records, exactly as SPD and events do in the current figure. Events go in a supplementary column, visually flagged as circular.
 - **Spatial H1 (Figure 3), new main figure in two panels:**
   - *Agreement map:* one point per record on the common cohort, coloured by how many of the three main proxies give a human-dominant balance (0 to 3). This shows directly where the conclusion is robust (0 or 3) and where it depends on the proxy (1 or 2).
   - *Regional forest plot:* the dbMEM-adjusted balance with its interval for each continental region (and overall), one point per proxy side by side, with sequence-level distributions as small ridgelines per proxy.
@@ -176,7 +183,7 @@ Validation: new brms fits run only from authorised ledger rows, model diagnostic
 
 ### Phase 5 - Reviewer-driven validation for each proxy
 
-All R1 checks were run with SPD and all four climate predictors. Rerun them for the three main-comparison proxies with the shared climate selection; the H1 fits are cheap compared with the brms models, so the whole suite can run per proxy:
+All R1 checks were run with SPD and all four climate predictors. Rerun them for the three main-comparison proxies with the shared climate selection; supplementary proxies get the core H1 run only. Scope reductions decided on 2026-11-16 are marked in the list:
 
 - SPD radius 250 versus 500 km (SPD only), and extraction-radius sensitivity for KK10 and HYDE 3.5.
 - Spatial thinning and leave-one-group-out.
@@ -187,18 +194,18 @@ All R1 checks were run with SPD and all four climate predictors. Rerun them for 
 - Scale-matched sensitivity: KK10 and HYDE 3.5 averaged over the SPD buffer, from the Phase 2 extraction (review, issue 6).
 - Native-step sensitivity: only ages with exact proxy layers, so no interpolated values (review, issue 7).
 - Transformation sensitivity: rank or log-type transforms for every proxy (review, issue 8).
-- If feasible, SPD resampling sensitivity with bootstrapped date sets for one scale (review, issue 9).
+- Not run (2026-11-16): SPD resampling sensitivity with bootstrapped date sets; stated as a limitation (review, issue 9).
 - Expert events as a supplementary, visually flagged sensitivity (as in R1), including expert-confirmed zeros rather than only records with events.
-- Circularity-reduced event sensitivity: recompute PAPs without the event indicator taxa before using events as predictors.
+- Not run (2026-11-16): circularity-reduced event sensitivity (PAPs recomputed without the event indicator taxa).
 - Total variance explained (editor's request).
-- #341: H1 refit with at least 300 counted grains, in separate stores.
-- Optional, if agreed: analysis D, single PAP versus whole assemblage (`response_vars_h1`).
+- #341: H1 refit with at least 300 counted grains, in separate stores; once, for H1 only, not per proxy and not for H2.
+- Dropped (2026-11-16): analysis D, single PAP versus whole assemblage (`response_vars_h1`).
 
 Validation: each check exports its comparison table and figure from its own store, and every conclusion statement reconciles with those tables.
 
 ### Phase 6 - Manuscript and reviewer response
 
-Start after G3.
+G3 is decided (R1); start after G2.
 
 - Restructure `Manuscript/COMMSENV-25-2408/R1/_sections/` around the multi-proxy design and framing.
 - Add registry rows for the proxy data layer, the proxy runs, H2, and validation outputs; the registry currently has none for KK10 or HYDE.
@@ -210,8 +217,8 @@ Validation: manuscript and reply render, revision assets assemble, and every num
 
 ## Order of work
 
-Phase 0 and Phase 1 run in parallel, then G1 (hypotheses fixed), then Phase 2, then Phase 3 with the H2 preview, then G2.
-Phase 4 and Phase 5 then run in parallel, followed by G3 and Phase 6.
+G1 is closed (hypotheses fixed, 2026-11-16). Phase 0 comes first, then the gating tests A and B (G1b) alongside the remaining Phase 1 checks, then Phase 2, then Phase 3 with the H2 preview, then G2.
+Phase 4 and Phase 5 then run in parallel, followed by Phase 6.
 
 ## Reproducibility boundaries
 

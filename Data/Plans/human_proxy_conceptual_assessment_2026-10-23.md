@@ -2,7 +2,7 @@
 
 Companion to `Data/Plans/plan_human_impact_reframing_2026-10-23.md`.
 The working direction (section 8) is stress-tested in `Data/Plans/single_proxy_strategy_review_2026-10-23.md`; its findings are folded into sections 4, 5, 8 and 9 here.
-Status: draft for discussion with the co-authors; it informs decision gate G2 and does not decide it.
+Status: draft for discussion with the co-authors. The decisions taken from it on 2026-11-16 (single-proxy design, proxy set, hypotheses, headline rule and metric, common-cohort main window) are in `Data/Plans/decision_record_human_impact_reframing_2026-11-16.md`, which takes precedence where this document disagrees.
 Statements marked "verify" are checked in Phase 1 of the plan.
 
 ## 1. Why the construct matters more than the model

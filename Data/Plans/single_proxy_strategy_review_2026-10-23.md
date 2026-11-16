@@ -1,7 +1,7 @@
 # Stress test of the one-model-per-proxy strategy
 
 Companion to `Data/Plans/human_proxy_conceptual_assessment_2026-10-23.md` (section 8, working direction) and `Data/Plans/plan_human_impact_reframing_2026-10-23.md`.
-Status: internal pre-review, written as a critical reviewer would, before any of the new runs.
+Status: internal pre-review, written as a critical reviewer would, before any of the new runs. Decisions of 2026-11-16 that change the actions below (the decision metric under issue 1, no SPD resampling under issue 9, the common cohort as the main result under issue 11) are in `Data/Plans/decision_record_human_impact_reframing_2026-11-16.md`.
 
 The strategy under review: every model contains exactly one human proxy (SPD, KK10, or HYDE 3.5 land use in the main comparison), climate is reduced by a response-free collinearity filter shared by all proxies in a unit, and the spatial and temporal H1 (and H2) analyses are repeated for each proxy.
 The issues are ranked by how damaging each could be. Each gives the reviewer's objection, our best answer, and the action taken in the plan.

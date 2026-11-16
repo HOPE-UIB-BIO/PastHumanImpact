@@ -1,5 +1,7 @@
 # Issue plan: human-impact reframing
 
+> **Updated 2026-11-16.** The issues below were created on GitHub on 2026-10-23. Decisions taken since (gate G1 closed, venue, main window, scope reductions) are in `Data/Plans/decision_record_human_impact_reframing_2026-11-16.md`. They are not reflected in the bodies below. On GitHub, #317, #341, #344, #345, #346, #347, #348, #350, #351, #352, #353, and #354 carry an "Update (2026-11-16)" section, which takes precedence over the original text; test A and the residual-df record-loss count were added to #348, and #356 (editor timeline) was created.
+
 Status: created on GitHub on 2026-10-23. New issues: A = #344, B = #345, C = #346, D = #347, E = #348, F = #349, G = #350, H = #351, I = #352, J = #353, K = #354, all sub-issues of #317 in the milestone "🐦‍🔥Resubmit the paper". #317 body replaced; update sections appended to #323, #341, and #342. The optional single-PAP issue was not created. The bodies below keep the letter placeholders; GitHub holds the filled versions.
 Based on the GitHub state on 2026-10-23 and written to `C:\Users\ondre\.claude\Git_workflow.md` section 7: every body is self-contained (context with numbers, definitions and thresholds in full, code paths and targets checked against the code on 2026-10-23), uses the layout Context, Goal, Scope, Tests and validation, Acceptance criteria, Relationships, and does not depend on any planning file.
 
