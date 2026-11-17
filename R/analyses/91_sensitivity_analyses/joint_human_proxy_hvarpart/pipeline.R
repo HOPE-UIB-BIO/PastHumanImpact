@@ -16,8 +16,10 @@
 #   R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/run_spd_kk10.R
 # Sourcing this script only declares targets; it does not execute them.
 # Canonical H1 stores and outputs are never modified.
-# Profile runners supply human_proxy_hvarpart_profile explicitly via
-# tar_make(envir = ..., callr_function = NULL); the default is the joint block.
+# The profile is declared per store in the `script_profile` column of
+# R/analyses/00_profiles/pipeline_contracts.csv; each runner selects it by
+# passing its registered store. Calls without a registered store, such as
+# targets::tar_manifest(), see the default joint block.
 
 #----------------------------------------------------------#
 # 0. Configure pipeline -----
@@ -27,14 +29,23 @@ library(here)
 
 source(here::here("R/00_Config_file.R"))
 
+data_pipeline_contracts <-
+  readr::read_csv(
+    here::here("R", "analyses", "00_profiles", "pipeline_contracts.csv"),
+    show_col_types = FALSE
+  )
+
 human_proxy_hvarpart_profile <-
-  if (
-    exists("human_proxy_hvarpart_profile", inherits = TRUE)
-  ) {
-    human_proxy_hvarpart_profile
-  } else {
-    "spd_kk10_hyde"
-  }
+  resolve_pipeline_profile(
+    data_contracts = data_pipeline_contracts,
+    script = file.path(
+      "R", "analyses", "91_sensitivity_analyses",
+      "joint_human_proxy_hvarpart", "pipeline.R"
+    ),
+    store = targets::tar_path_store(),
+    data_storage_path = data_storage_path,
+    default_profile = "spd_kk10_hyde"
+  )
 
 assertthat::assert_that(
   length(human_proxy_hvarpart_profile) == 1L,
