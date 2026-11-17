@@ -63,7 +63,11 @@
 ::: {#suppfig-record-examples}
 ![](figures/supplementary-figure-05-record-examples.png){width=90% fig-alt="Two updated pollen-sequence examples."}
 
-**Updated sequence examples.** These trajectories show sequence-level PAP and predictor inputs for two illustrative sequences, without spatial aggregation. Negative signed HVarPart components retain suppressor/commonality meaning; missing values are unavailable, and examples are not representative subset summaries.
+**Updated sequence examples.** Panel A shows a sequence in which HVarPart assigns greater individual importance to human activity, and panel B one in which climate dominates.
+The bars give the individual importance of the human and climate predictor groups, and the panel heading gives the total adjusted R² of the sequence model.
+The trajectories show the SPD, the four climate predictors, and the ten PAPs for each sequence, without spatial aggregation.
+Solid lines with shaded bands are model predictions, dashed lines are values interpolated to the common age grid, and dotted lines are raw values where a pre-interpolation series exists.
+The examples illustrate individual sequences and are not summaries of any subset.
 :::
 
 ::: {#suppfig-pap-n0}
