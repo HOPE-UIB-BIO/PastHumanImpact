@@ -53,7 +53,7 @@ The single-proxy H1 engine is built in either case.
 
 - SPD bootstrap resampling: not run; stated as a limitation.
 - Circularity-reduced event sensitivity (PAPs recomputed without indicator taxa): not run.
-- The 300-grain refit (#341): once, for H1 only, not per proxy and not for H2.
+- The 300-grain refit (#341): once, for H1 only, not per proxy and not for H2. Decided later on 2026-11-16: rarefaction target 300 grains with a sample minimum of 150 (following Reviewer 2; not one of the Supplementary Fig. S23 scenarios, so retention must be computed before the rebuild), SPD only, 2.0–8.0 ka, baseline and 300-grain runs compared on the records retained under both. The 62 percentage-only sequences, which the count filters cannot apply to, stay in the main 300-grain run; its result is also reported without them.
 - The full validation suite runs for the three main-comparison proxies only; supplementary proxies get the core H1 run without the suite.
 - Kept: the H2 refit for the three main-comparison proxies, the climate-representation, scale-matched, native-step, and transformation sensitivities, the human ∩ space and human ∩ time diagnostics, and the supplementary overlap analysis (S3).
 
