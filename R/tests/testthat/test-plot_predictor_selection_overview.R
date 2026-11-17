@@ -24,7 +24,7 @@ testthat::test_that("plot_predictor_selection_overview() returns a heatmap", {
   testthat::expect_false(any(is.na(dplyr::pull(result[["data"]], area))))
   testthat::expect_setequal(
     as.character(unique(dplyr::pull(result[["data"]], geography))),
-    c("Continental region", "Region")
+    c("Continental group", "Region")
   )
   testthat::expect_false(
     any(grepl(

@@ -1,7 +1,7 @@
 #' @title Plot local predictor retention across geographic groups
 #' @description
 #' Display the percentage of eligible filtered joint-human datasets retaining
-#' each human and climate predictor by continental region and region.
+#' each human and climate predictor by continental group and region.
 #' @param selection_frequency_by_continental_region Predictor-retention
 #' summary with a public `continental_region` field.
 #' @param selection_frequency_by_region Predictor-retention summary with a
@@ -63,7 +63,7 @@ plot_predictor_selection_overview <- function(
   plot_data <- dplyr::bind_rows(
     selection_frequency_by_continental_region |>
       dplyr::transmute(
-        geography = "Continental region",
+        geography = "Continental group",
         area = dplyr::recode(
           .data[["continental_region"]], !!!region_labeller
         ),
@@ -89,7 +89,7 @@ plot_predictor_selection_overview <- function(
     dplyr::mutate(
       geography = factor(
         .data[["geography"]],
-        levels = c("Continental region", "Region")
+        levels = c("Continental group", "Region")
       ),
       group = factor(
         stringr::str_to_title(.data[["group"]]),

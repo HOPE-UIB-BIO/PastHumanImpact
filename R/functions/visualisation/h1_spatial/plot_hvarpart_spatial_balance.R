@@ -444,7 +444,7 @@ plot_hvarpart_spatial_balance <- function(
         region = ggplot2::as_labeller(region_labels),
         panel_label = ggplot2::as_labeller(
           stats::setNames(
-            c("Continental region", panel_levels[-1]),
+            c("Continental group", panel_levels[-1]),
             panel_levels
           )
         )

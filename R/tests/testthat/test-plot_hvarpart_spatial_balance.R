@@ -86,6 +86,14 @@ testthat::test_that(
       "Continental group" %in%
         as.character(result[["density_values"]][["panel_label"]])
     )
+    facet_labeller <-
+      result[["statistical_plot"]][["facet"]][["params"]][["labeller"]]
+    testthat::expect_equal(
+      facet_labeller(
+        data.frame(panel_label = "Continental group")
+      )[[1]][[1]],
+      "Continental group"
+    )
     testthat::expect_equal(
       result$region_values[["importance_balance"]],
       c(-10 / 11, 0.5)
