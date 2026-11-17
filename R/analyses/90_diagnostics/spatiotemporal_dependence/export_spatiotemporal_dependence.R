@@ -156,6 +156,10 @@ list_tables <-
     spatiotemporal_balance_robustness = targets::tar_read_raw(
       "table_spatiotemporal_balance_robustness",
       store = store_robustness
+    ),
+    spatiotemporal_balance_thinning = targets::tar_read_raw(
+      "data_spatiotemporal_balance_thinning",
+      store = store_robustness
     )
   )
 
@@ -204,8 +208,16 @@ vec_output_names <-
     spatiotemporal_balance_robustness = stringr::str_c(
       "spd__human_climate_balance__robustness__",
       "time_and_space_control"
+    ),
+    spatiotemporal_balance_thinning = stringr::str_c(
+      "spd__human_climate_balance__thinning__",
+      "time_and_space_control"
     )
   )
+
+# The replicate-level thinning table is large, so it is written compressed.
+vec_compressed_outputs <-
+  c("spatiotemporal_balance_thinning")
 
 purrr::iwalk(
   .x = list_tables,
@@ -213,7 +225,14 @@ purrr::iwalk(
     x = .x,
     file = file.path(
       path_tables,
-      stringr::str_c(vec_output_names[[.y]], ".csv")
+      stringr::str_c(
+        vec_output_names[[.y]],
+        dplyr::if_else(
+          .y %in% vec_compressed_outputs,
+          ".csv.gz",
+          ".csv"
+        )
+      )
     )
   )
 )
