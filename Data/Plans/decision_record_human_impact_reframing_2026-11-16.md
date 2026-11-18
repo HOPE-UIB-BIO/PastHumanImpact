@@ -17,7 +17,7 @@ The hypotheses and the headline rule are therefore fixed before the confirmatory
 | D2 | Proxy set | Main comparison: SPD, KK10, HYDE 3.5 land use. Supplementary: HYDE 3.5 population, expert events | KK10 and HYDE count as one evidence family and act as a high versus low early land-use bracket |
 | D3 | Dropped from scope | ArchaeoGLOBE and the optional single-PAP analysis (H3, analysis D) | Scope |
 | D4 | Hypotheses | H1a/H2a: demography explains more PAP variation than climate. H1b/H2b: land use explains more PAP variation than climate. Each H1 hypothesis is tested at both scales | Keeps the direction of the submitted hypotheses and makes each one a well-posed question |
-| D5 | Headline rule | A conclusion is stated generally only if it holds for every main-comparison proxy in the main results and is not overturned in the extension runs; otherwise it is stated per construct | Prevents choosing the convenient proxy |
+| D5 | Headline rule (amended 2026-11-18) | The primary result is the outcome table: one outcome class per main-comparison proxy and per window (main and extension), for each analysis. Differences between proxies and between windows are expected and are reported as findings. A conclusion is stated generally only if every cell of the table has the same outcome class; otherwise it is stated per construct and, where it applies, per window. See "Reporting the outcome table" below | Prevents choosing the convenient proxy or window; the exploratory previews already differ by proxy at the spatial scale |
 | D6 | Decision metric | See "Decision metric" below, including a "no clear dominance" outcome | The rule cannot be applied without a definition of "holds" |
 | D7 | Venue | Stay R1 of COMMSENV-25-2408, subject to the editor agreeing the timeline | The design answers Reviewer 2 (what SPD represents) and Reviewer 3 (early land use) directly |
 | D8 | Window | Main results: common cohort in the common 8.0–2.0 ka window. Extension: each proxy's full data over its native window | The common cohort is the only comparison in which the proxy is the only thing that varies. This reverses the plan's original order |
@@ -34,6 +34,16 @@ The hypotheses and the headline rule are therefore fixed before the confirmatory
 - **H2:** the analysis-level human-minus-climate allocation across estimable groups, read the same way.
 - "Holds for every proxy" means the same outcome class (human, climate, or no clear dominance) for SPD, KK10, and HYDE 3.5 land use. Because KK10 and HYDE are one evidence family, agreement among all three is agreement between two families, and is described as such.
 - The zero-truncated profile is the headline profile; signed and exclude-negative profiles are reported next to it, and a conclusion that changes outcome class between profiles is flagged.
+
+## Reporting the outcome table
+
+Added 2026-11-18, before any confirmatory run, with the amendment of D5.
+
+- For each analysis (spatial H1, temporal H1, H2) the results are reported as a table of outcome classes: rows are SPD, KK10, and HYDE 3.5 land use; columns are the main window (common cohort, 8.0–2.0 ka) and the extension (each proxy's native window).
+- A general statement requires every cell to share one outcome class. This is not the expected outcome; the per-construct and per-window statements are the default.
+- When proxies differ, the comparison is reported by construct: demography (SPD) against land use (KK10 and HYDE). If KK10 and HYDE differ from each other, land use is reported as dependent on the early land-use scenario, not as one class.
+- When the main window and the extension differ for a proxy, the difference is reported as a difference between the two windows. The extension differs from the main window in both time span and record set, so it is not interpreted as a change in the balance through time.
+- A claim that the balance changes through time is made only from comparisons on the same records: the age units of temporal H1, or the common cohort split into periods if that is needed.
 
 ## Gating tests, run before the Phase 3 build
 
