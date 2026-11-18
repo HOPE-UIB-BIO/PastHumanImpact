@@ -177,19 +177,22 @@ testthat::test_that("fit_hvarpart_models() can continue when one group fails", {
     envir = .GlobalEnv
   )
 
-  res_data <-
-    fit_hvarpart_models(
-      data_source = data_source,
-      response_vars = c("roc"),
-      response_dist = NULL,
-      data_response_dist = NULL,
-      predictor_vars = list(human = c("spd")),
-      run_all_predictors = FALSE,
-      time_series = FALSE,
-      get_significance = FALSE,
-      permutations = 9,
-      fail_on_error = FALSE
-    )
+  testthat::expect_warning(
+    res_data <-
+      fit_hvarpart_models(
+        data_source = data_source,
+        response_vars = c("roc"),
+        response_dist = NULL,
+        data_response_dist = NULL,
+        predictor_vars = list(human = c("spd")),
+        run_all_predictors = FALSE,
+        time_series = FALSE,
+        get_significance = FALSE,
+        permutations = 9,
+        fail_on_error = FALSE
+      ),
+    regexp = "Some hvar groups failed"
+  )
 
   varhp_col <-
     dplyr::pull(res_data, varhp)

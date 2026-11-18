@@ -26,3 +26,20 @@ testthat::test_that("build_region_map() validates alpha type", {
     regexp = "single numeric"
   )
 })
+
+testthat::test_that("build_region_map() draws borders without deprecation", {
+  raster <-
+    data.frame(
+      x = c(10, 20),
+      y = c(50, 55),
+      climatezone = factor(c("Polar", "Temperate")),
+      stringsAsFactors = FALSE
+    )
+
+  # Deprecations are signalled once per session, so turn them into errors.
+  withr::local_options(lifecycle_verbosity = "error")
+
+  result <- build_region_map(rasterdata = raster)
+
+  testthat::expect_s3_class(result, "ggplot")
+})

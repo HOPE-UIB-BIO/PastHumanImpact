@@ -46,9 +46,9 @@ build_region_map <- function(rasterdata,
   map_region <-
     rasterdata %>%
     ggplot2::ggplot() +
-    ggplot2::borders(
+    ggplot2::annotation_borders(
       fill = base_col,
-      colour = base_col,
+      colour = base_col
     ) +
     ggplot2::geom_raster(
       mapping = ggplot2::aes(

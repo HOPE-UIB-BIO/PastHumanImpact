@@ -940,7 +940,6 @@ data_general_tredns_events <-
     data_general_tredns_constant,
     data_general_tredns_events_raw
   ) %>%
-  reorder_region_and_climate_zone() %>%
   dplyr::select(
     dplyr::all_of(
       c(
@@ -1014,10 +1013,8 @@ fig_event_temporal_trends <-
   ggplot2::facet_grid(
     region ~ climatezone,
     labeller = ggplot2::labeller(
-      region = as_labeller(
-        region_labeller,
-        default = label_wrap_gen(15)
-      ), # [config criteria]
+      # Regions already carry display names from prepare_region_factor().
+      region = ggplot2::label_wrap_gen(15),
       climatezone = ggplot2::label_wrap_gen(7)
     )
   ) +

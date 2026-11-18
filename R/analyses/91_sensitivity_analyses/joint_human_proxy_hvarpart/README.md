@@ -16,9 +16,10 @@ Run from the repository root:
 source("R/analyses/91_sensitivity_analyses/joint_human_proxy_hvarpart/run_kk10.R")
 ```
 
-Each single-proxy runner explicitly passes its `human_proxy_hvarpart_profile` to the shared graph in the same R process.
-It uses the global environment where project configuration sources the functions, allowing targets to fingerprint changes to shared helpers, and removes the profile input after execution.
-The default graph and original runner select the joint proxy block.
+Each profile is declared in the `script_profile` column of `R/analyses/00_profiles/pipeline_contracts.csv`, one row per store.
+Every runner calls `run_target_pipeline()` with the shared `pipeline.R` and its own registered store, and the graph resolves its profile from the active store with `resolve_pipeline_profile()`.
+No global variable is set, and the pipeline runs in a separate process like every other pipeline.
+Calls without a registered store, such as `targets::tar_manifest()`, see the default joint proxy block.
 
 ## KK10-only design
 

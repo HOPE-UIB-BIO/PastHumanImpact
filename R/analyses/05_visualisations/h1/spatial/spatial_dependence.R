@@ -90,6 +90,11 @@ list_thinning_plots <-
   ) |>
   rlang::set_names(vec_profiles)
 
+plot_leave_out <-
+  plot_spatial_leave_out(
+    data_sensitivity = data_sensitivity
+  )
+
 vec_profile_names <-
   c(
     signed = "untruncated_hierarchical_contribution_difference",
@@ -158,6 +163,21 @@ purrr::walk(
         units = image_units,
         bg = "white"
       )
+    )
+
+    ggplot2::ggsave(
+      filename = file.path(
+        path_figure_dir,
+        stringr::str_c(
+          "spd__human_climate_balance__leave_out.",
+          extension
+        )
+      ),
+      plot = plot_leave_out,
+      width = image_width_vec[["2col"]],
+      height = 120,
+      units = image_units,
+      bg = "white"
     )
   }
 )

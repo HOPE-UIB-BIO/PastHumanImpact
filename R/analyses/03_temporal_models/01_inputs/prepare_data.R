@@ -36,18 +36,18 @@ source(
 data_predictors <-
   targets::tar_read(
     name = "data_predictors",
-    store = paste0(
-      data_storage_path,
-      "Targets_data/pipeline_predictors"
+    store = resolve_pipeline_store_path(
+      data_storage_path = data_storage_path,
+      store_relative_path = "data_preparation/predictors"
     )
   )
 
 data_properties <-
   targets::tar_read(
     name = "data_properties",
-    store = paste0(
-      data_storage_path,
-      "Targets_data/pipeline_paps"
+    store = resolve_pipeline_store_path(
+      data_storage_path = data_storage_path,
+      store_relative_path = "data_preparation/paps"
     )
   )
 
