@@ -1,0 +1,5 @@
+test,proxy,cohort,min_residual_df,n_records,reference_n_human,reference_n_climate,comparison_n_human,comparison_n_climate,n_ranking_changed,reference_model_id,comparison_model_id,profile
+climate_reduction,spd,pair,4,1093,294,799,316,777,106,spd__full_climate,spd__filtered_climate,signed
+climate_reduction,spd,pair,4,1093,294,799,316,777,106,spd__full_climate,spd__filtered_climate,zero_truncated
+climate_reduction,spd,pair,5,1056,283,773,301,755,98,spd__full_climate,spd__filtered_climate,signed
+climate_reduction,spd,pair,5,1056,283,773,301,755,98,spd__full_climate,spd__filtered_climate,zero_truncated

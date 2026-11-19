@@ -1,0 +1,71 @@
+model_id,min_residual_df,region,n_records,n_estimable,n_lost,n_lost_insufficient_residual_df,n_lost_insufficient_unique_ages,n_lost_missing_predictor,n_lost_other,n_lost_relative_to_lowest_threshold
+hyde__filtered_climate,4,Asia,111,103,8,2,6,0,0,0
+hyde__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+hyde__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+hyde__filtered_climate,4,North America,551,546,5,0,4,1,0,0
+hyde__filtered_climate,4,Oceania,38,10,28,0,0,27,1,0
+hyde__filtered_climate,5,Asia,111,102,9,3,6,0,0,1
+hyde__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+hyde__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+hyde__filtered_climate,5,North America,551,538,13,8,4,1,0,8
+hyde__filtered_climate,5,Oceania,38,10,28,0,0,27,1,0
+hyde_age_detrended__filtered_climate,4,Asia,111,103,8,2,6,0,0,0
+hyde_age_detrended__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+hyde_age_detrended__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+hyde_age_detrended__filtered_climate,4,North America,551,546,5,0,2,3,0,0
+hyde_age_detrended__filtered_climate,4,Oceania,38,11,27,0,0,27,0,0
+hyde_age_detrended__filtered_climate,5,Asia,111,102,9,3,6,0,0,1
+hyde_age_detrended__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+hyde_age_detrended__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+hyde_age_detrended__filtered_climate,5,North America,551,538,13,8,2,3,0,8
+hyde_age_detrended__filtered_climate,5,Oceania,38,11,27,0,0,27,0,0
+kk10__filtered_climate,4,Asia,111,103,8,2,6,0,0,0
+kk10__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+kk10__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+kk10__filtered_climate,4,North America,551,546,5,0,4,1,0,0
+kk10__filtered_climate,4,Oceania,38,35,3,0,3,0,0,0
+kk10__filtered_climate,5,Asia,111,102,9,3,6,0,0,1
+kk10__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+kk10__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+kk10__filtered_climate,5,North America,551,538,13,8,4,1,0,8
+kk10__filtered_climate,5,Oceania,38,33,5,2,3,0,0,2
+kk10_age_detrended__filtered_climate,4,Asia,111,103,8,2,6,0,0,0
+kk10_age_detrended__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+kk10_age_detrended__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+kk10_age_detrended__filtered_climate,4,North America,551,546,5,0,2,3,0,0
+kk10_age_detrended__filtered_climate,4,Oceania,38,35,3,0,3,0,0,0
+kk10_age_detrended__filtered_climate,5,Asia,111,102,9,3,6,0,0,1
+kk10_age_detrended__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+kk10_age_detrended__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+kk10_age_detrended__filtered_climate,5,North America,551,538,13,8,2,3,0,8
+kk10_age_detrended__filtered_climate,5,Oceania,38,33,5,2,3,0,0,2
+spd__filtered_climate,4,Asia,111,102,9,2,5,2,0,0
+spd__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+spd__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+spd__filtered_climate,4,North America,551,546,5,0,4,1,0,0
+spd__filtered_climate,4,Oceania,38,35,3,0,3,0,0,0
+spd__filtered_climate,5,Asia,111,101,10,3,5,2,0,1
+spd__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+spd__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+spd__filtered_climate,5,North America,551,538,13,8,4,1,0,8
+spd__filtered_climate,5,Oceania,38,33,5,2,3,0,0,2
+spd__full_climate,4,Asia,111,101,10,3,5,2,0,0
+spd__full_climate,4,Europe,396,385,11,6,5,0,0,0
+spd__full_climate,4,Latin America,79,75,4,0,4,0,0,0
+spd__full_climate,4,North America,551,544,7,2,4,1,0,0
+spd__full_climate,4,Oceania,38,33,5,2,3,0,0,0
+spd__full_climate,5,Asia,111,97,14,7,5,2,0,4
+spd__full_climate,5,Europe,396,371,25,20,5,0,0,14
+spd__full_climate,5,Latin America,79,72,7,3,4,0,0,3
+spd__full_climate,5,North America,551,527,24,19,4,1,0,17
+spd__full_climate,5,Oceania,38,32,6,3,3,0,0,1
+spd_age_detrended__filtered_climate,4,Asia,111,102,9,2,5,2,0,0
+spd_age_detrended__filtered_climate,4,Europe,396,389,7,2,5,0,0,0
+spd_age_detrended__filtered_climate,4,Latin America,79,75,4,0,4,0,0,0
+spd_age_detrended__filtered_climate,4,North America,551,546,5,0,2,3,0,0
+spd_age_detrended__filtered_climate,4,Oceania,38,35,3,0,3,0,0,0
+spd_age_detrended__filtered_climate,5,Asia,111,101,10,3,5,2,0,1
+spd_age_detrended__filtered_climate,5,Europe,396,385,11,6,5,0,0,4
+spd_age_detrended__filtered_climate,5,Latin America,79,72,7,3,4,0,0,3
+spd_age_detrended__filtered_climate,5,North America,551,538,13,8,2,3,0,8
+spd_age_detrended__filtered_climate,5,Oceania,38,33,5,2,3,0,0,2

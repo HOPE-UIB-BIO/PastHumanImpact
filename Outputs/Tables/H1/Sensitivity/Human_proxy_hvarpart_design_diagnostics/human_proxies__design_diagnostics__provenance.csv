@@ -1,0 +1,16 @@
+field,value
+age_window_bp,2000-8000
+min_unique_ages,10
+fit_min_temporal_residual_df,4
+reported_temporal_residual_df,4;5
+min_spatial_residual_df,10
+climate_candidates,temp_annual;temp_cold;prec_summer;prec_win
+climate_filter,max_cor=0.8;max_vif=5
+spd,spd_sqrt: square root of matched SPD
+kk10,"kk10_fraction: KK10 land_use fraction, identity"
+hyde,hyde_sqrt: square root of HYDE 3.2 popc population
+age_detrending,residuals of proxy ~ 1 + age within each record
+permutations,999
+seed,1234
+fingerprint_h1_inputs,data_hvar_filtered_unique_age=6031c41a47615b24|data_hvar_timebins_spd_unique_age=bc1b0b40aec24578|data_meta=1614b11ee7dc08e7|h1_analysis_config=4f0a5adadcc5ad15|h1_response_variables=58b98a55830fbd54
+fingerprint_proxy_matches,data_human_proxy_matches=2d4bcd5a32d13d38

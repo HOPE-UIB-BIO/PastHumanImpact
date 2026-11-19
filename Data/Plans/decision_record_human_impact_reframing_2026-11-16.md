@@ -22,9 +22,9 @@ The hypotheses and the headline rule are therefore fixed before the confirmatory
 | D7 | Venue | Stay R1 of COMMSENV-25-2408, subject to the editor agreeing the timeline | The design answers Reviewer 2 (what SPD represents) and Reviewer 3 (early land use) directly |
 | D8 | Window | Main results: common cohort in the common 8.0–2.0 ka window. Extension: each proxy's full data over its native window | The common cohort is the only comparison in which the proxy is the only thing that varies. This reverses the plan's original order |
 | D9 | Whole-Holocene claim | Promoted to a main result only if HYDE 3.5 land use carries information before about 6 ka rather than near-zero constants | HYDE 3.2 was near zero before about 3 ka |
-| D10 | Climate representation | Main: shared, response-free filtered selection (`max_cor = 0.8`, `max_vif = 5`). Sensitivities: all four variables where residual df allow, and climate principal components | Needed for degrees of freedom; its effect on the balance must be measured (test A) |
+| D10 | Climate representation (amended 2026-11-19) | Main: shared, response-free filtered selection (`max_cor = 0.8`, `max_vif = 5`), in every run. Sensitivity: climate principal components only. The all-four-variables sensitivity is dropped | Needed for degrees of freedom. Test A measured the effect of the reduction: it moves the balance slightly towards human but climate leads in both arms at both scales (`results_human_proxy_design_diagnostics_2026-11-19.md`) |
 | D11 | SPD scale | Square-root SPD in every run | All existing sensitivity runs already use it |
-| D12 | Residual-df minimum | Five, provisional | Matches canonical R1. Confirm after counting the records lost under the filtered climate selection; if the loss is large, document a move to four |
+| D12 | Residual-df minimum (confirmed 2026-11-19) | Five | Matches canonical R1. Under the filtered climate selection, five loses 18 of 1175 records of the 2.0–8.0 ka common cohort compared with four, and every region keeps at least 33 records (`results_human_proxy_design_diagnostics_2026-11-19.md`) |
 | D13 | Co-author sign-off | Proceed on the agreement received; remaining co-authors get a dated window in the gate issue, after which silence counts as consent | The work cannot wait indefinitely |
 
 ## Decision metric
@@ -59,6 +59,12 @@ How test B sets the scope:
 
 The single-proxy H1 engine is built in either case.
 
+Outcome, decided by Ondřej on 2026-11-19 (results: `results_human_proxy_design_diagnostics_2026-11-19.md`; reading rule posted in #348 before the run):
+
+- Under the posted rule, the KK10 human share collapses after detrending, HYDE 3.2 population is partial, and SPD loses a larger share than KK10, so the trend sharing is common to all proxies.
+- Scope: the manuscript stays close to the current R1, with the single-proxy runs as a robustness section.
+- The main analysis uses the original, not detrended, proxies. The detrended refits are reported as a supplementary analysis. Detrending on linear age leaves the fitted model unchanged, because time is already a linear term in age; it only moves the variation that the proxy shares with time from human to time. It therefore shows how much of the human share overlaps with the time trend, not that this part is non-human.
+
 ## Scope reductions
 
 - SPD bootstrap resampling: not run; stated as a limitation.
@@ -77,6 +83,5 @@ The single-proxy H1 engine is built in either case.
 
 ## Open items
 
-- D12: record loss under a residual-df minimum of five.
 - D7: the editor's answer on the timeline; no revision deadline is recorded in the repository.
 - Phase 1 "verify" items in the conceptual assessment (GLUES share in KK10 before 3 ka, the Bradshaw 2004 series, HYDE 3.5 prehistoric population and time steps).
