@@ -1,0 +1,3 @@
+reference_model_id,comparison_model_id,profile,n_units,reference_mean,reference_median,comparison_mean,comparison_median,change_mean,change_median,reference_n_human,comparison_n_human,n_ranking_changed
+spd__full_climate,spd__filtered_climate,zero_truncated,65,-0.6057673687728365,-0.660300136425648,-0.5901514453521566,-0.6032210834553441,0.015615923420679977,0.009578158455723518,0,0,0
+spd__full_climate,spd__filtered_climate,signed,65,-0.10329538461538461,-0.0968,-0.09147538461538461,-0.07450000000000001,0.011819999999999997,0.0077999999999999875,0,0,0

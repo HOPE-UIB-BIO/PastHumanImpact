@@ -1,0 +1,13 @@
+test,proxy,cohort,min_residual_df,n_candidates,n_matched,n_excluded
+age_detrending,spd,common,4,1175,1029,146
+age_detrending,spd,common,5,1175,1016,159
+age_detrending,spd,proxy,4,1175,1087,88
+age_detrending,spd,proxy,5,1175,1070,105
+age_detrending,kk10,common,4,1175,1029,146
+age_detrending,kk10,common,5,1175,1016,159
+age_detrending,kk10,proxy,4,1175,1103,72
+age_detrending,kk10,proxy,5,1175,1088,87
+age_detrending,hyde,common,4,1175,1029,146
+age_detrending,hyde,common,5,1175,1016,159
+age_detrending,hyde,proxy,4,1175,1100,75
+age_detrending,hyde,proxy,5,1175,1084,91
