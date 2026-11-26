@@ -48,7 +48,7 @@ path_tables <-
   here::here(
     "Outputs",
     "Tables",
-    "Data",
+    "Data_preparation",
     "Human_proxies"
   )
 

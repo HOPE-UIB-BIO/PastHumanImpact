@@ -14,8 +14,9 @@ This pipeline publishes the main human-proxy data layer: SPD, KK10 land use, and
 - `cell` is the value of the grid cell that contains the record. The buffer supports are area-weighted means of the cells whose centre lies within a geodesic buffer. `spd_buffer` uses each record's SPD radius (250 km, or 500 km when fewer than 50 radiocarbon dates fall within 250 km).
 - `is_native_layer` is `TRUE` when the value comes from an exact source layer and `FALSE` when it is linearly interpolated between the two neighbouring source layers. Values are never extrapolated beyond a proxy's coverage. HYDE 3.5 has 1000-year steps from 10000 BCE to 1000 BCE, a year-0 step, and 100-year steps after it (11950, 10950, ..., 2950, 1950, 1850, ... years BP), so no 500-year target age falls on a HYDE layer and every HYDE value is interpolated. Before 2000 BP their effective resolution is therefore 1000 years.
 - HYDE 3.5 land use is (cropland + grazing land) / total cell area. HYDE 3.5 population is the population density (people per km²).
+- The main analyses use `spd_buffer` for every proxy, so all proxies share one spatial scale. `radius_50km` is the sensitivity at a scale closer to the pollen-source area. The `cell`, `radius_10km`, and `radius_25km` supports are kept for diagnostics.
 
-The settings used are exported with every run in `Outputs/Tables/Data/Human_proxies/human_proxies__settings.csv`, and the source files, checksums, and source time layers in `human_proxies__provenance.csv`.
+The settings used are exported with every run in `Outputs/Tables/Data_preparation/Human_proxies/human_proxies__settings.csv`, and the source files, checksums, and source time layers in `human_proxies__provenance.csv`.
 
 ## External sources
 

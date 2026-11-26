@@ -21,11 +21,12 @@ The hypotheses and the headline rule are therefore fixed before the confirmatory
 | D6 | Decision metric | See "Decision metric" below, including a "no clear dominance" outcome | The rule cannot be applied without a definition of "holds" |
 | D7 | Venue | Stay R1 of COMMSENV-25-2408, subject to the editor agreeing the timeline | The design answers Reviewer 2 (what SPD represents) and Reviewer 3 (early land use) directly |
 | D8 | Window | Main results: common cohort in the common 8.0–2.0 ka window. Extension: each proxy's full data over its native window | The common cohort is the only comparison in which the proxy is the only thing that varies. This reverses the plan's original order |
-| D9 | Whole-Holocene claim | Promoted to a main result only if HYDE 3.5 land use carries information before about 6 ka rather than near-zero constants | HYDE 3.2 was near zero before about 3 ka |
+| D9 | Whole-Holocene claim (amended 2026-11-26) | Promoted to a main result: HYDE 3.5 land use over its native window, 0.5–11.5 ka. Its zero values before the onset of agriculture are reported as estimates, not missing data. See "Early-Holocene HYDE 3.5 land use" below | HYDE 3.5 models the whole period: it places population in every layer from 10,000 BCE and dates the onset of agriculture from radiocarbon data (Eurasia) and ArchaeoGLOBE (elsewhere), so zero land use is an estimate of absence. No human land use is consistent with unchanged vegetation |
 | D10 | Climate representation (amended 2026-11-19) | Main: shared, response-free filtered selection (`max_cor = 0.8`, `max_vif = 5`), in every run. Sensitivity: climate principal components only. The all-four-variables sensitivity is dropped | Needed for degrees of freedom. Test A measured the effect of the reduction: it moves the balance slightly towards human but climate leads in both arms at both scales (`results_human_proxy_design_diagnostics_2026-11-19.md`) |
 | D11 | SPD scale | Square-root SPD in every run | All existing sensitivity runs already use it |
 | D12 | Residual-df minimum (confirmed 2026-11-19) | Five | Matches canonical R1. Under the filtered climate selection, five loses 18 of 1175 records of the 2.0–8.0 ka common cohort compared with four, and every region keeps at least 33 records (`results_human_proxy_design_diagnostics_2026-11-19.md`) |
 | D13 | Co-author sign-off | Proceed on the agreement received; remaining co-authors get a dated window in the gate issue, after which silence counts as consent | The work cannot wait indefinitely |
+| D14 | Spatial support of the gridded proxies (added 2026-11-26) | Main: KK10 and HYDE 3.5 averaged over each record's SPD buffer, the same area as SPD. Sensitivity: a 50 km radius around the record. This replaces the plan's design, in which the record's cell and small radii were the main extraction and the SPD buffer was the scale-matched sensitivity | Every proxy then shares one spatial scale, so the proxy is the only thing that varies between models. The 50 km radius is closer to the pollen-source area, and few records lack a value there (4 for KK10, 6 for HYDE 3.5, against 78 and 34 at the record's cell) |
 
 ## Decision metric
 
@@ -64,6 +65,15 @@ Outcome, decided by Ondřej on 2026-11-19 (results: `results_human_proxy_design_
 - Under the posted rule, the KK10 human share collapses after detrending, HYDE 3.2 population is partial, and SPD loses a larger share than KK10, so the trend sharing is common to all proxies.
 - Scope: the manuscript stays close to the current R1, with the single-proxy runs as a robustness section.
 - The main analysis uses the original, not detrended, proxies. The detrended refits are reported as a supplementary analysis. Detrending on linear age leaves the fitted model unchanged, because time is already a linear term in age; it only moves the variation that the proxy shares with time from human to time. It therefore shows how much of the human share overlaps with the time trend, not that this part is non-human.
+
+## Early-Holocene HYDE 3.5 land use
+
+Added 2026-11-26, with the amendment of D9, from the human-proxy data layer (#346; `Outputs/Tables/Data_preparation/Human_proxies/human_proxies__early_holocene_check.csv`).
+
+- Globally, HYDE 3.5 has no land use at 11,950 BP (10,000 BCE) although it places 4.6 million people there. Land use first appears at 10,950 BP in 1,238 grid cells and grows in every later layer.
+- At the SPD buffer, the fraction of the area under land use is above zero for 4 of 1,268 records at 11.0–11.5 ka, 26–30 records at 9.0–10.5 ka, 389 records at 8.0–8.5 ka, and 568 records at 6.0–6.5 ka. It exceeds 1 % for at most 3 records before 8.0 ka and for 64 records at 6.0 ka; the median is zero at every age from 11.5 to 6.0 ka.
+- HYDE 3.5 has 1000-year steps before 1 CE, so all values on the 500-year grid are interpolated and their effective resolution before 2 ka is 1000 years.
+- Consequence for spatial H1: at 9.0 ka and earlier, the HYDE 3.5 predictor is zero for at least 1,238 of 1,268 records at each age, so it can explain little variation among records at those ages by construction.
 
 ## Scope reductions
 
