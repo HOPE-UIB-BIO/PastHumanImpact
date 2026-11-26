@@ -6,7 +6,7 @@ This pipeline publishes the main human-proxy data layer: SPD, KK10 land use, and
 
 | Proxy | Ages (years BP, 500-year steps) | Supports | Transformation |
 | --- | --- | --- | --- |
-| `spd` | 2000 to 8500 | `spd_buffer` | square root |
+| `spd` | 2000 to 11500 | `spd_buffer` | square root |
 | `kk10` | 500 to 8000 | `cell`, `radius_10km`, `radius_25km`, `radius_50km`, `spd_buffer` | none |
 | `hyde_3_5_land_use` | 500 to 11500 | as KK10 | none |
 | `hyde_3_5_population` | 500 to 11500 | as KK10 | square root |

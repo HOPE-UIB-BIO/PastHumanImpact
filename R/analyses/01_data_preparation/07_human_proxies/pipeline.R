@@ -66,7 +66,7 @@ path_raster_cache <-
 config_human_proxies <-
   list(
     support_radii_km = c(10, 25, 50),
-    ages_spd_bp = seq(from = 2000, to = 8500, by = 500),
+    ages_spd_bp = seq(from = 2000, to = 11500, by = 500),
     ages_kk10_bp = seq(from = 500, to = 8000, by = 500),
     ages_hyde_bp = seq(from = 500, to = 11500, by = 500),
     hyde_source_ids = c(

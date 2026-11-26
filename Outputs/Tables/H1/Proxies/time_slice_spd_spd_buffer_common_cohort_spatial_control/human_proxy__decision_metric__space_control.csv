@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
+time_slice_spd_spd_buffer_common_cohort_spatial_control,temporal_h1,spd,spd_buffer,common_cohort,common_cohort_2000_8000,zero_truncated,-0.5688936387356421,-0.6133027167137499,-0.5416767967982938,-0.5853307858635681,65,0,1999,0
+time_slice_spd_spd_buffer_common_cohort_spatial_control,temporal_h1,spd,spd_buffer,common_cohort,common_cohort_2000_8000,signed,-0.5740463471885475,-0.6176829733659605,-0.5478431387230722,-0.5937978503539821,65,0,1999,0
+time_slice_spd_spd_buffer_common_cohort_spatial_control,temporal_h1,spd,spd_buffer,common_cohort,common_cohort_2000_8000,exclude_negative,-0.5342952467611248,-0.5882239881517104,-0.4974508640268107,-0.5468749445258392,57,0,1999,0

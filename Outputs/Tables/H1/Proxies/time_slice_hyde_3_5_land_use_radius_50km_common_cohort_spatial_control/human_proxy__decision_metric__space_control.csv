@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
+time_slice_hyde_3_5_land_use_radius_50km_common_cohort_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,common_cohort,common_cohort_2000_8000,zero_truncated,-0.6189364773820981,-0.6541260118858867,-0.5949460388324742,-0.6384967818903601,51,0,1999,0
+time_slice_hyde_3_5_land_use_radius_50km_common_cohort_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,common_cohort,common_cohort_2000_8000,signed,-0.6190338687360886,-0.654371290081644,-0.595040165126058,-0.6385836960886635,51,0,1999,0
+time_slice_hyde_3_5_land_use_radius_50km_common_cohort_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,common_cohort,common_cohort_2000_8000,exclude_negative,-0.6082810818832782,-0.6375824230477106,-0.5850910376194619,-0.6312667175281673,50,0,1999,0

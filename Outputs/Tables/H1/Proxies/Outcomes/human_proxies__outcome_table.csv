@@ -1,0 +1,11 @@
+analysis,comparison,human_proxy,radius_50km__common_cohort__all_records,radius_50km__common_cohort__shared_records,radius_50km__native__all_records,radius_50km__native__shared_records,spd_buffer__common_cohort__all_records,spd_buffer__common_cohort__shared_records,spd_buffer__native__all_records,spd_buffer__native__shared_records,not_applicable__common_cohort__all_records,not_applicable__native__all_records,all_cells_same_class
+spatial_h1,main_proxies,hyde_3_5_land_use,human,human,climate,climate,human,human,climate,climate,,,FALSE
+spatial_h1,main_proxies,kk10,human,human,no_clear_dominance,human,human,human,human,human,,,FALSE
+spatial_h1,main_proxies,spd,climate,climate,climate,climate,climate,climate,climate,climate,,,FALSE
+spatial_h1,supplementary,events,,,,,,,,,no_clear_dominance,climate,FALSE
+spatial_h1,supplementary,hyde_3_5_population,,,,,human,,climate,,,,FALSE
+temporal_h1,main_proxies,hyde_3_5_land_use,climate,climate,climate,climate,climate,climate,climate,climate,,,TRUE
+temporal_h1,main_proxies,kk10,climate,climate,climate,climate,climate,climate,climate,climate,,,TRUE
+temporal_h1,main_proxies,spd,climate,climate,climate,climate,climate,climate,climate,climate,,,TRUE
+temporal_h1,supplementary,events,,,,,,,,,climate,climate,TRUE
+temporal_h1,supplementary,hyde_3_5_population,,,,,climate,,climate,,,,TRUE

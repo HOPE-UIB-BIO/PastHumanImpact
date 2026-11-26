@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
+within_dataset_events_native_time_control,spatial_h1,events,not_applicable,native,native_500_11500,zero_truncated,-0.17197390695214554,-0.20968876337139258,-0.13269651603046562,385,141,1999,0,estimated,
+within_dataset_events_native_time_control,spatial_h1,events,not_applicable,native,native_500_11500,signed,-0.05234576649725828,-0.06612311410406939,-0.038431105138527516,385,141,1999,0,estimated,
+within_dataset_events_native_time_control,spatial_h1,events,not_applicable,native,native_500_11500,exclude_negative,-0.15446490499547122,-0.19507304375526394,-0.11414832872318463,354,134,1999,0,estimated,

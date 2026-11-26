@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
+time_slice_events_common_cohort_spatial_control,temporal_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,zero_truncated,-0.5173598998625162,-0.5540387218662641,-0.4886844762764816,-0.5303936532067641,57,0,1999,0
+time_slice_events_common_cohort_spatial_control,temporal_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,signed,-0.5269162467993723,-0.5677732119394578,-0.49347539264724105,-0.5436531422499393,57,0,1999,0
+time_slice_events_common_cohort_spatial_control,temporal_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,exclude_negative,-0.453108757155076,-0.49519278611663325,-0.4368573475206379,-0.45714979386005283,44,0,1999,0

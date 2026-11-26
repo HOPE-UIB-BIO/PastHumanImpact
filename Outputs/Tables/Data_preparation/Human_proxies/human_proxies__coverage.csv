@@ -1859,6 +1859,12 @@ kk10,spd_buffer,Oceania,2000,49,48,1,48,0
 kk10,spd_buffer,Oceania,1500,49,48,1,48,0
 kk10,spd_buffer,Oceania,1000,49,48,1,48,0
 kk10,spd_buffer,Oceania,500,49,48,1,48,0
+spd,spd_buffer,All regions,11500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,11000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,10500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,10000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,9500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,9000,1270,1270,0,1270,0
 spd,spd_buffer,All regions,8500,1270,1270,0,1270,0
 spd,spd_buffer,All regions,8000,1270,1270,0,1270,0
 spd,spd_buffer,All regions,7500,1270,1270,0,1270,0
@@ -1873,6 +1879,12 @@ spd,spd_buffer,All regions,3500,1270,1270,0,1270,0
 spd,spd_buffer,All regions,3000,1270,1270,0,1270,0
 spd,spd_buffer,All regions,2500,1270,1270,0,1270,0
 spd,spd_buffer,All regions,2000,1270,1270,0,1270,0
+spd,spd_buffer,Asia,11500,178,178,0,178,0
+spd,spd_buffer,Asia,11000,178,178,0,178,0
+spd,spd_buffer,Asia,10500,178,178,0,178,0
+spd,spd_buffer,Asia,10000,178,178,0,178,0
+spd,spd_buffer,Asia,9500,178,178,0,178,0
+spd,spd_buffer,Asia,9000,178,178,0,178,0
 spd,spd_buffer,Asia,8500,178,178,0,178,0
 spd,spd_buffer,Asia,8000,178,178,0,178,0
 spd,spd_buffer,Asia,7500,178,178,0,178,0
@@ -1887,6 +1899,12 @@ spd,spd_buffer,Asia,3500,178,178,0,178,0
 spd,spd_buffer,Asia,3000,178,178,0,178,0
 spd,spd_buffer,Asia,2500,178,178,0,178,0
 spd,spd_buffer,Asia,2000,178,178,0,178,0
+spd,spd_buffer,Europe,11500,397,397,0,397,0
+spd,spd_buffer,Europe,11000,397,397,0,397,0
+spd,spd_buffer,Europe,10500,397,397,0,397,0
+spd,spd_buffer,Europe,10000,397,397,0,397,0
+spd,spd_buffer,Europe,9500,397,397,0,397,0
+spd,spd_buffer,Europe,9000,397,397,0,397,0
 spd,spd_buffer,Europe,8500,397,397,0,397,0
 spd,spd_buffer,Europe,8000,397,397,0,397,0
 spd,spd_buffer,Europe,7500,397,397,0,397,0
@@ -1901,6 +1919,12 @@ spd,spd_buffer,Europe,3500,397,397,0,397,0
 spd,spd_buffer,Europe,3000,397,397,0,397,0
 spd,spd_buffer,Europe,2500,397,397,0,397,0
 spd,spd_buffer,Europe,2000,397,397,0,397,0
+spd,spd_buffer,Latin America,11500,88,88,0,88,0
+spd,spd_buffer,Latin America,11000,88,88,0,88,0
+spd,spd_buffer,Latin America,10500,88,88,0,88,0
+spd,spd_buffer,Latin America,10000,88,88,0,88,0
+spd,spd_buffer,Latin America,9500,88,88,0,88,0
+spd,spd_buffer,Latin America,9000,88,88,0,88,0
 spd,spd_buffer,Latin America,8500,88,88,0,88,0
 spd,spd_buffer,Latin America,8000,88,88,0,88,0
 spd,spd_buffer,Latin America,7500,88,88,0,88,0
@@ -1915,6 +1939,12 @@ spd,spd_buffer,Latin America,3500,88,88,0,88,0
 spd,spd_buffer,Latin America,3000,88,88,0,88,0
 spd,spd_buffer,Latin America,2500,88,88,0,88,0
 spd,spd_buffer,Latin America,2000,88,88,0,88,0
+spd,spd_buffer,North America,11500,558,558,0,558,0
+spd,spd_buffer,North America,11000,558,558,0,558,0
+spd,spd_buffer,North America,10500,558,558,0,558,0
+spd,spd_buffer,North America,10000,558,558,0,558,0
+spd,spd_buffer,North America,9500,558,558,0,558,0
+spd,spd_buffer,North America,9000,558,558,0,558,0
 spd,spd_buffer,North America,8500,558,558,0,558,0
 spd,spd_buffer,North America,8000,558,558,0,558,0
 spd,spd_buffer,North America,7500,558,558,0,558,0
@@ -1929,6 +1959,12 @@ spd,spd_buffer,North America,3500,558,558,0,558,0
 spd,spd_buffer,North America,3000,558,558,0,558,0
 spd,spd_buffer,North America,2500,558,558,0,558,0
 spd,spd_buffer,North America,2000,558,558,0,558,0
+spd,spd_buffer,Oceania,11500,49,49,0,49,0
+spd,spd_buffer,Oceania,11000,49,49,0,49,0
+spd,spd_buffer,Oceania,10500,49,49,0,49,0
+spd,spd_buffer,Oceania,10000,49,49,0,49,0
+spd,spd_buffer,Oceania,9500,49,49,0,49,0
+spd,spd_buffer,Oceania,9000,49,49,0,49,0
 spd,spd_buffer,Oceania,8500,49,49,0,49,0
 spd,spd_buffer,Oceania,8000,49,49,0,49,0
 spd,spd_buffer,Oceania,7500,49,49,0,49,0

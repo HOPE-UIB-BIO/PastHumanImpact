@@ -4,6 +4,13 @@
 #' pipelines.
 #' @param data_profiles Data frame containing analysis profiles.
 #' @return Invisibly returns `data_profiles` when the contract is satisfied.
+#' @details
+#' The optional columns `age_window` (`common_cohort`, `native`, or
+#' `not_applicable`) and `proxy_support` (`spd_buffer`, `radius_50km`, or
+#' `not_applicable`) describe single-proxy runs. When present, they must be
+#' complete and use these values, and they are part of the scientific
+#' operation, so main (`canonical`) profiles may differ only in window or
+#' support.
 #' @examples
 #' \dontrun{
 #' validate_analysis_profiles(data_profiles = profiles)
@@ -75,6 +82,10 @@ validate_analysis_profiles <- function(data_profiles) {
       "h1::time_slice::kk10::space",
       "h1::within_dataset::hyde::time",
       "h1::time_slice::hyde::space",
+      "h1::within_dataset::hyde_3_5_land_use::time",
+      "h1::time_slice::hyde_3_5_land_use::space",
+      "h1::within_dataset::hyde_3_5_population::time",
+      "h1::time_slice::hyde_3_5_population::space",
       "h1::spatial_aggregation::spd::time_and_space",
       "h1::within_dataset::spd_events::time",
       "h1::time_slice::spd_events::space",
@@ -96,14 +107,39 @@ validate_analysis_profiles <- function(data_profiles) {
     msg = "Analysis profiles contain an unsupported combination."
   )
 
+  vec_run_columns <-
+    intersect(c("age_window", "proxy_support"), names(data_profiles))
+
+  vec_allowed_windows <-
+    c("not_applicable", "common_cohort", "native")
+
+  vec_allowed_supports <-
+    c("not_applicable", "spd_buffer", "radius_50km")
+
+  assertthat::assert_that(
+    !"age_window" %in% vec_run_columns ||
+      all(data_profiles[["age_window"]] %in% vec_allowed_windows),
+    !"proxy_support" %in% vec_run_columns ||
+      all(data_profiles[["proxy_support"]] %in% vec_allowed_supports),
+    msg = paste(
+      "Analysis profiles contain an unknown or missing window and support",
+      "value."
+    )
+  )
+
   canonical_scenarios <-
     data_profiles |>
     dplyr::filter(.data[["profile_role"]] == "canonical") |>
     dplyr::count(
-      .data[["analysis_family"]],
-      .data[["analytical_unit"]],
-      .data[["human_proxy"]],
-      .data[["structural_control"]]
+      dplyr::across(
+        dplyr::all_of(c(
+          "analysis_family",
+          "analytical_unit",
+          "human_proxy",
+          "structural_control",
+          vec_run_columns
+        ))
+      )
     )
 
   assertthat::assert_that(

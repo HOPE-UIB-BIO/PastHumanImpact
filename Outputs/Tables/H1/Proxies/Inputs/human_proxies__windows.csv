@@ -1,0 +1,11 @@
+human_proxy,age_window,window_id,age_min_bp,age_max_bp
+events,common_cohort,common_cohort_2000_8000,2000,8000
+events,native,native_500_11500,500,11500
+hyde_3_5_land_use,common_cohort,common_cohort_2000_8000,2000,8000
+hyde_3_5_land_use,native,native_500_11500,500,11500
+hyde_3_5_population,common_cohort,common_cohort_2000_8000,2000,8000
+hyde_3_5_population,native,native_500_11500,500,11500
+kk10,common_cohort,common_cohort_2000_8000,2000,8000
+kk10,native,native_500_8000,500,8000
+spd,common_cohort,common_cohort_2000_8000,2000,8000
+spd,native,native_2000_11500,2000,11500

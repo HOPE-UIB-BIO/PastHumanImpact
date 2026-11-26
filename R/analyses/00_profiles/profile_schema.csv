@@ -10,3 +10,5 @@ profile_role,character,TRUE,Canonical or sensitivity role
 enabled,logical,TRUE,Whether the profile is intentionally active
 seed,integer,TRUE,Profile-specific reproducibility seed
 configuration_reference,character,TRUE,Stable configuration family reference
+age_window,character,FALSE,Age window of a single-proxy run: common_cohort native or not_applicable
+proxy_support,character,FALSE,Spatial support of a gridded human proxy: spd_buffer radius_50km or not_applicable

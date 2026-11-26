@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
+time_slice_kk10_spd_buffer_native_spatial_control,temporal_h1,kk10,spd_buffer,native,native_500_8000,zero_truncated,-0.4380118072748047,-0.48576971122848467,-0.4009732345497246,-0.4662750629681773,79,2,1999,0
+time_slice_kk10_spd_buffer_native_spatial_control,temporal_h1,kk10,spd_buffer,native,native_500_8000,signed,-0.44824159154708565,-0.4975095820134728,-0.41015193446241055,-0.48252647164592216,79,2,1999,0
+time_slice_kk10_spd_buffer_native_spatial_control,temporal_h1,kk10,spd_buffer,native,native_500_8000,exclude_negative,-0.32726286674982374,-0.3822856402216675,-0.27878082124740483,-0.3555551516879947,63,2,1999,0

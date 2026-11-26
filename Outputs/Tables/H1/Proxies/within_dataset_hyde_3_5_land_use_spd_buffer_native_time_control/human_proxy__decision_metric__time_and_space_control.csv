@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
+within_dataset_hyde_3_5_land_use_spd_buffer_native_time_control,spatial_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,zero_truncated,-0.28390022806473697,-0.30926597807463585,-0.26007373889008506,892,242,1999,0,estimated,
+within_dataset_hyde_3_5_land_use_spd_buffer_native_time_control,spatial_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,signed,-0.09314378544573619,-0.10180160407254212,-0.08444735287072168,892,242,1999,0,estimated,
+within_dataset_hyde_3_5_land_use_spd_buffer_native_time_control,spatial_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,exclude_negative,-0.26319887247405016,-0.2876150602877974,-0.23975074892431353,833,223,1999,0,estimated,

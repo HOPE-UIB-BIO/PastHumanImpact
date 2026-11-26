@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
+within_dataset_events_common_cohort_time_control,spatial_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,zero_truncated,0.017887912960785846,-0.0490652101678982,0.08460833907452707,232,120,1999,0,estimated,
+within_dataset_events_common_cohort_time_control,spatial_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,signed,0.00859091950421962,-0.014798338592530415,0.03203420686326191,232,120,1999,0,estimated,
+within_dataset_events_common_cohort_time_control,spatial_h1,events,not_applicable,common_cohort,common_cohort_2000_8000,exclude_negative,7.884921669797976e-4,-0.06308992129418081,0.06115433998998312,191,97,1999,0,estimated,

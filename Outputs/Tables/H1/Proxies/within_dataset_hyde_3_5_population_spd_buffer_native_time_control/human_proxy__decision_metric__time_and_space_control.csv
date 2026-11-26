@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
+within_dataset_hyde_3_5_population_spd_buffer_native_time_control,spatial_h1,hyde_3_5_population,spd_buffer,native,native_500_11500,zero_truncated,-0.2045326103555584,-0.22182806946957442,-0.18633920084559205,1225,362,1999,0,estimated,
+within_dataset_hyde_3_5_population_spd_buffer_native_time_control,spatial_h1,hyde_3_5_population,spd_buffer,native,native_500_11500,signed,-0.07016644733680698,-0.07684237742023685,-0.06368000970735894,1225,362,1999,0,estimated,
+within_dataset_hyde_3_5_population_spd_buffer_native_time_control,spatial_h1,hyde_3_5_population,spd_buffer,native,native_500_11500,exclude_negative,-0.2126184495597565,-0.230626344098727,-0.19435265124141687,1192,337,1999,0,estimated,
