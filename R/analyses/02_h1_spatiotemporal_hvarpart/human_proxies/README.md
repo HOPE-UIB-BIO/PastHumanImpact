@@ -45,6 +45,14 @@ Each run is one row of `R/analyses/00_profiles/analysis_profiles.csv` with `conf
 - checks the code: the reference matched-SPD model of the collinearity-managed sensitivity is refitted with this code from its own inputs and must reproduce every reference record within 1e-8, or the pipeline stops;
 - reports, without a threshold, how the SPD common-cohort run on the current PAPs differs from that reference. The reference used the PAPs held in the reference H1 inputs store (`analyses_h1/inputs`, built 2026-08-14), an older version than the PAP store used here.
 
+## Figures
+
+Three scripts in `R/analyses/05_visualisations/h1/human_proxies/` read the stores and write to `Outputs/Figures/H1/Proxies/`:
+
+- `outcome_table.R` (`Outcomes/`): the zero-truncated balance and 95 % interval of every main-proxy cell of the outcome table, coloured by outcome class (`plot_human_proxy_outcome_table()`).
+- `spatial_balance.R` (`Spatial/`): the reference spatial-balance layout (`plot_h1_spatial_controlled_balance()`) for each main proxy in the two decision-record cells: common cohort with shared records, and native window with all records. A few records in a Koppen class outside the project's eleven regions cannot be mapped; the title counts them.
+- `temporal_composition.R` (`Temporal/`): the human, climate, and space composition of every region-by-age unit (`plot_h1_temporal_joint_human_proxy_composition()`) for the same cells.
+
 ## Run
 
 ```r

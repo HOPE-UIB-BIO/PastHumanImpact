@@ -525,6 +525,26 @@ list(
         )
       )
   ),
+  # Why: Publish the overall, regional, and stratum estimates of the
+  #   shared-record spatial comparisons, used by the balance maps.
+  targets::tar_target(
+    name = "table_h1_proxy_comparison_balance_estimates",
+    command = data_h1_proxy_comparison_metrics_spatial |>
+      dplyr::mutate(
+        metric = purrr::map(.data[["metric"]], "estimates")
+      ) |>
+      tidyr::unnest(cols = dplyr::all_of("metric"))
+  ),
+  # Why: Publish the units shared by the three main proxies in each
+  #   comparison set, window, and scale (records or region-by-age units).
+  targets::tar_target(
+    name = "table_h1_proxy_comparison_units",
+    command = data_h1_proxy_comparison_units |>
+      dplyr::select(
+        dplyr::all_of(c("gridded_support", "age_window", "analysis", "units"))
+      ) |>
+      tidyr::unnest(cols = dplyr::all_of("units"))
+  ),
   # Why: Assemble every decision metric in one long table over window,
   #   record set (shared by the three main proxies, or all records of the
   #   run), and support of the gridded proxies.
@@ -838,11 +858,7 @@ list(
                 ))
               ),
           human_proxies__comparison_balance_estimates__time_and_space_control =
-            data_h1_proxy_comparison_metrics_spatial |>
-              dplyr::mutate(
-                metric = purrr::map(.data[["metric"]], "estimates")
-              ) |>
-              tidyr::unnest(cols = dplyr::all_of("metric")),
+            table_h1_proxy_comparison_balance_estimates,
           human_proxies__shared_climate_check__time_control =
             table_h1_proxy_shared_climate_check_records,
           human_proxies__shared_climate_check__space_control =
