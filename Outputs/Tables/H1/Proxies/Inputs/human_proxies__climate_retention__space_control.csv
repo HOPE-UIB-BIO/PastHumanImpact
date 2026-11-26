@@ -1,0 +1,49 @@
+slice_set,region,predictor,n_units,n_retained,share_retained
+all_records_500_11500,All,prec_summer,115,115,1
+all_records_500_11500,All,prec_win,115,115,1
+all_records_500_11500,All,temp_annual,115,115,1
+all_records_500_11500,All,temp_cold,115,6,0.05217391304347826
+all_records_500_11500,Asia,prec_summer,23,23,1
+all_records_500_11500,Asia,prec_win,23,23,1
+all_records_500_11500,Asia,temp_annual,23,23,1
+all_records_500_11500,Asia,temp_cold,23,0,0
+all_records_500_11500,Europe,prec_summer,23,23,1
+all_records_500_11500,Europe,prec_win,23,23,1
+all_records_500_11500,Europe,temp_annual,23,23,1
+all_records_500_11500,Europe,temp_cold,23,6,0.2608695652173913
+all_records_500_11500,Latin America,prec_summer,23,23,1
+all_records_500_11500,Latin America,prec_win,23,23,1
+all_records_500_11500,Latin America,temp_annual,23,23,1
+all_records_500_11500,Latin America,temp_cold,23,0,0
+all_records_500_11500,North America,prec_summer,23,23,1
+all_records_500_11500,North America,prec_win,23,23,1
+all_records_500_11500,North America,temp_annual,23,23,1
+all_records_500_11500,North America,temp_cold,23,0,0
+all_records_500_11500,Oceania,prec_summer,23,23,1
+all_records_500_11500,Oceania,prec_win,23,23,1
+all_records_500_11500,Oceania,temp_annual,23,23,1
+all_records_500_11500,Oceania,temp_cold,23,0,0
+common_cohort_2000_8000,All,prec_summer,65,65,1
+common_cohort_2000_8000,All,prec_win,65,65,1
+common_cohort_2000_8000,All,temp_annual,65,65,1
+common_cohort_2000_8000,All,temp_cold,65,0,0
+common_cohort_2000_8000,Asia,prec_summer,13,13,1
+common_cohort_2000_8000,Asia,prec_win,13,13,1
+common_cohort_2000_8000,Asia,temp_annual,13,13,1
+common_cohort_2000_8000,Asia,temp_cold,13,0,0
+common_cohort_2000_8000,Europe,prec_summer,13,13,1
+common_cohort_2000_8000,Europe,prec_win,13,13,1
+common_cohort_2000_8000,Europe,temp_annual,13,13,1
+common_cohort_2000_8000,Europe,temp_cold,13,0,0
+common_cohort_2000_8000,Latin America,prec_summer,13,13,1
+common_cohort_2000_8000,Latin America,prec_win,13,13,1
+common_cohort_2000_8000,Latin America,temp_annual,13,13,1
+common_cohort_2000_8000,Latin America,temp_cold,13,0,0
+common_cohort_2000_8000,North America,prec_summer,13,13,1
+common_cohort_2000_8000,North America,prec_win,13,13,1
+common_cohort_2000_8000,North America,temp_annual,13,13,1
+common_cohort_2000_8000,North America,temp_cold,13,0,0
+common_cohort_2000_8000,Oceania,prec_summer,13,13,1
+common_cohort_2000_8000,Oceania,prec_win,13,13,1
+common_cohort_2000_8000,Oceania,temp_annual,13,13,1
+common_cohort_2000_8000,Oceania,temp_cold,13,0,0

@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
+within_dataset_kk10_spd_buffer_common_cohort_time_control,spatial_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,zero_truncated,0.09659011552937523,0.07543991642577459,0.12070033422870746,1142,723,1999,0,estimated,
+within_dataset_kk10_spd_buffer_common_cohort_time_control,spatial_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,signed,0.02796329825088322,0.021112580728789087,0.03528706074694285,1142,723,1999,0,estimated,
+within_dataset_kk10_spd_buffer_common_cohort_time_control,spatial_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,exclude_negative,0.054470709129171305,0.03525096848992042,0.07609293417553985,996,588,1999,0,estimated,

@@ -1,0 +1,4 @@
+profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
+time_slice_hyde_3_5_land_use_radius_50km_native_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,zero_truncated,-0.5513599849673511,-0.5976637847411682,-0.5018761364692699,-0.5888782286364196,73,0,1999,0
+time_slice_hyde_3_5_land_use_radius_50km_native_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,signed,-0.5611580171509072,-0.6092891179580738,-0.5103997508692741,-0.6083175948582744,73,0,1999,0
+time_slice_hyde_3_5_land_use_radius_50km_native_spatial_control,temporal_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,exclude_negative,-0.5222131931658044,-0.5734928404444329,-0.46557128830597677,-0.549896323397141,64,0,1999,0

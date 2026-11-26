@@ -1,0 +1,11 @@
+field,value
+common_window_bp,2000-8000
+events_window_bp,500-11500
+climate_candidates,temp_annual;temp_cold;prec_summer;prec_win
+climate_filter,max_cor=0.8;max_vif=5
+common_cohort_columns,spd__spd_buffer;kk10__spd_buffer;hyde_3_5_land_use__spd_buffer;kk10__radius_50km;hyde_3_5_land_use__radius_50km
+records_without_spd,89
+fingerprint_paps,data_properties=e34b8ae8f15608e8
+fingerprint_predictors,data_predictors=1ef4791d6a0e67a0
+fingerprint_human_proxy_layer,data_human_proxy_values=68065eb9863f20fc|table_human_proxy_layer_settings=2f1fe7169a2bcb43
+fingerprint_spd,data_spd_by_radius=7d2dd65a7c127e86

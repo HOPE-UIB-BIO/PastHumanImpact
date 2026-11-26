@@ -212,3 +212,112 @@ testthat::test_that(
     )
   }
 )
+
+testthat::test_that(
+  "validate_analysis_profiles() accepts HYDE 3.5 single-proxy profiles",
+  {
+    data_profiles <-
+      tibble::tibble(
+        profile_id = c("hyde_land_use_time", "hyde_population_space"),
+        analysis_family = "h1",
+        analytical_unit = c("within_dataset", "time_slice"),
+        human_proxy = c("hyde_3_5_land_use", "hyde_3_5_population"),
+        human_predictor_specification = c(
+          "hyde_3_5_land_use_fraction",
+          "sqrt_hyde_3_5_population_density"
+        ),
+        spd_radius_specification = "250_km_with_500_km_fallback",
+        structural_control = c("time", "space"),
+        profile_role = "sensitivity",
+        enabled = TRUE,
+        seed = 1234L,
+        configuration_reference = "human_proxy_h1",
+        age_window = c("common_cohort", "native"),
+        proxy_support = "spd_buffer"
+      )
+
+    testthat::expect_silent(
+      validate_analysis_profiles(data_profiles = data_profiles)
+    )
+  }
+)
+
+testthat::test_that(
+  "validate_analysis_profiles() separates main profiles by window",
+  {
+    data_profiles <-
+      tibble::tibble(
+        profile_id = c("spd_reference", "spd_common", "spd_native"),
+        analysis_family = "h1",
+        analytical_unit = "within_dataset",
+        human_proxy = "spd",
+        human_predictor_specification = "sqrt_spd",
+        spd_radius_specification = "250_km_with_500_km_fallback",
+        structural_control = "time",
+        profile_role = "canonical",
+        enabled = TRUE,
+        seed = 1234L,
+        configuration_reference = c("main", "human_proxy_h1", "human_proxy_h1"),
+        age_window = c("not_applicable", "common_cohort", "native"),
+        proxy_support = c("not_applicable", "spd_buffer", "spd_buffer")
+      )
+
+    testthat::expect_silent(
+      validate_analysis_profiles(data_profiles = data_profiles)
+    )
+
+    testthat::expect_error(
+      validate_analysis_profiles(
+        dplyr::mutate(data_profiles, age_window = "native")
+      ),
+      regexp = "Only one canonical profile"
+    )
+  }
+)
+
+testthat::test_that(
+  "validate_analysis_profiles() rejects unknown windows and supports",
+  {
+    data_profiles <-
+      tibble::tibble(
+        profile_id = "kk10_common",
+        analysis_family = "h1",
+        analytical_unit = "within_dataset",
+        human_proxy = "kk10",
+        human_predictor_specification = "kk10_land_use_fraction",
+        spd_radius_specification = "not_applicable",
+        structural_control = "time",
+        profile_role = "sensitivity",
+        enabled = TRUE,
+        seed = 1234L,
+        configuration_reference = "human_proxy_h1",
+        age_window = "common_cohort",
+        proxy_support = "radius_50km"
+      )
+
+    testthat::expect_silent(
+      validate_analysis_profiles(data_profiles = data_profiles)
+    )
+
+    testthat::expect_error(
+      validate_analysis_profiles(
+        dplyr::mutate(data_profiles, age_window = "early")
+      ),
+      regexp = "window and support"
+    )
+
+    testthat::expect_error(
+      validate_analysis_profiles(
+        dplyr::mutate(data_profiles, proxy_support = "radius_75km")
+      ),
+      regexp = "window and support"
+    )
+
+    testthat::expect_error(
+      validate_analysis_profiles(
+        dplyr::mutate(data_profiles, age_window = NA_character_)
+      ),
+      regexp = "window and support"
+    )
+  }
+)
