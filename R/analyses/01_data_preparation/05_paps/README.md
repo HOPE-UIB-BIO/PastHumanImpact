@@ -25,6 +25,8 @@ Both operations prune their trees by cross-validation, which assigns samples to 
 
 Results are reproducible only within the pinned R 3.5.0 runtime. R 3.6.0 changed the default algorithm of `sample()`, so the same seed gives different cross-validation folds in later R versions.
 
+The rate of change (`data_roc`) is also random: in each of its 1,000 randomisations, RRatepol draws ages within their uncertainty, selects one level per time bin, and subsamples 150 individuals. RRatepol's own parallelisation (`use_parallel = TRUE`) runs these randomisations on worker processes that it never seeds. `compute_roc()` therefore calls RRatepol with `use_parallel = FALSE` and spreads the datasets over its own worker processes (`n_cores`). For each dataset, `compute_roc_dataset()` resets the generator to the project seed before the estimation. The result for a dataset therefore does not depend on the number of cores or on the other datasets.
+
 ## Minimal production design
 
 Keep the old-R process at a serialized-data boundary:

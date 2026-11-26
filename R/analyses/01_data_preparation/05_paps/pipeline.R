@@ -149,6 +149,8 @@ list(
   ),
   # - calculate Rate-of-change (RoC)
   # Why: Prepare roc so downstream targets share one canonical dataset.
+  #   The project seed is reset before each dataset, so the randomisations
+  #   are reproducible whatever the number of cores.
   targets::tar_target(
     name = "data_roc",
     command = compute_roc(
@@ -165,7 +167,9 @@ list(
       n_individuals_to_standardise = 150,
       transformation_coef = "chisq",
       peak_point_method = "trend_non_linear",
-      sd_for_peak_detection = 2
+      sd_for_peak_detection = 2,
+      seed = as.integer(set_seed),
+      n_cores = max(1L, parallel::detectCores() - 1L)
     )
   ),
   # - run multivariate regression trees (MRT) to estimate compositional change
