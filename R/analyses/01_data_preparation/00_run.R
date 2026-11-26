@@ -28,7 +28,8 @@ data_pipelines <-
     "05_paps/pipeline.R", "data_preparation/paps",
     "03_archaeological_proxies/events/pipeline.R",
     "data_preparation/events",
-    "06_predictors/pipeline.R", "data_preparation/predictors"
+    "06_predictors/pipeline.R", "data_preparation/predictors",
+    "07_human_proxies/pipeline.R", "data_preparation/human_proxies"
   ) |>
   dplyr::mutate(
     script = purrr::map_chr(

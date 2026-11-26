@@ -1,0 +1,1945 @@
+proxy,support,region,age_bp,n_datasets,n_with_value,n_missing,n_native_layer,n_interpolated
+hyde_3_5_land_use,cell,All regions,11500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,11000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,10500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,10000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,9500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,9000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,8500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,8000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,7500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,7000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,6500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,6000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,5500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,5000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,4500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,4000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,3500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,3000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,2500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,2000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,1500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,1000,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,All regions,500,1270,1236,34,0,1236
+hyde_3_5_land_use,cell,Asia,11500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,11000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,10500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,10000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,9500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,9000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,8500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,8000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,7500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,7000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,6500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,6000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,5500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,5000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,4500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,4000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,3500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,3000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,2500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,2000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,1500,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,1000,178,167,11,0,167
+hyde_3_5_land_use,cell,Asia,500,178,167,11,0,167
+hyde_3_5_land_use,cell,Europe,11500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,11000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,10500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,10000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,9500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,9000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,8500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,8000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,7500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,7000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,6500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,6000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,5500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,5000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,4500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,4000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,3500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,3000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,2500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,2000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,1500,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,1000,397,397,0,0,397
+hyde_3_5_land_use,cell,Europe,500,397,397,0,0,397
+hyde_3_5_land_use,cell,Latin America,11500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,11000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,10500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,10000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,9500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,9000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,8500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,8000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,7500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,7000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,6500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,6000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,5500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,5000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,4500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,4000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,3500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,3000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,2500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,2000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,1500,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,1000,88,87,1,0,87
+hyde_3_5_land_use,cell,Latin America,500,88,87,1,0,87
+hyde_3_5_land_use,cell,North America,11500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,11000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,10500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,10000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,9500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,9000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,8500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,8000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,7500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,7000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,6500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,6000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,5500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,5000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,4500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,4000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,3500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,3000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,2500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,2000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,1500,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,1000,558,539,19,0,539
+hyde_3_5_land_use,cell,North America,500,558,539,19,0,539
+hyde_3_5_land_use,cell,Oceania,11500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,11000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,10500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,10000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,9500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,9000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,8500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,8000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,7500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,7000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,6500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,6000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,5500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,5000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,4500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,4000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,3500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,3000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,2500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,2000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,1500,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,1000,49,46,3,0,46
+hyde_3_5_land_use,cell,Oceania,500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,All regions,11500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,11000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,10500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,10000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,9500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,9000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,8500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,8000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,7500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,7000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,6500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,6000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,5500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,5000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,4500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,4000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,3500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,3000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,2500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,2000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,1500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,1000,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,All regions,500,1270,1255,15,0,1255
+hyde_3_5_land_use,radius_10km,Asia,11500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,11000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,10500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,10000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,9500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,9000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,8500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,8000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,7500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,7000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,6500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,6000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,5500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,5000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,4500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,4000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,3500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,3000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,2500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,2000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,1500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,1000,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Asia,500,178,173,5,0,173
+hyde_3_5_land_use,radius_10km,Europe,11500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,11000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,10500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,10000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,9500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,9000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,8500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,8000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,7500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,7000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,6500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,6000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,5500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,5000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,4500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,4000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,3500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,3000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,2500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,2000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,1500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,1000,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Europe,500,397,397,0,0,397
+hyde_3_5_land_use,radius_10km,Latin America,11500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,11000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,10500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,10000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,9500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,9000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,8500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,8000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,7500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,7000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,6500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,6000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,5500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,5000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,4500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,4000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,3500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,3000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,2500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,2000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,1500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,1000,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,Latin America,500,88,87,1,0,87
+hyde_3_5_land_use,radius_10km,North America,11500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,11000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,10500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,10000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,9500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,9000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,8500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,8000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,7500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,7000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,6500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,6000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,5500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,5000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,4500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,4000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,3500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,3000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,2500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,2000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,1500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,1000,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,North America,500,558,552,6,0,552
+hyde_3_5_land_use,radius_10km,Oceania,11500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,11000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,10500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,10000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,9500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,9000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,8500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,8000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,7500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,7000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,6500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,6000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,5500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,5000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,4500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,4000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,3500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,3000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,2500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,2000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,1500,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,1000,49,46,3,0,46
+hyde_3_5_land_use,radius_10km,Oceania,500,49,46,3,0,46
+hyde_3_5_land_use,radius_25km,All regions,11500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,11000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,10500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,10000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,9500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,9000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,8500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,8000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,7500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,7000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,6500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,6000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,5500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,5000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,4500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,4000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,3500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,3000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,2500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,2000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,1500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,1000,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,All regions,500,1270,1263,7,0,1263
+hyde_3_5_land_use,radius_25km,Asia,11500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,11000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,10500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,10000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,9500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,9000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,8500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,8000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,7500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,7000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,6500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,6000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,5500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,5000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,4500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,4000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,3500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,3000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,2500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,2000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,1500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,1000,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Asia,500,178,175,3,0,175
+hyde_3_5_land_use,radius_25km,Europe,11500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,11000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,10500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,10000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,9500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,9000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,8500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,8000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,7500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,7000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,6500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,6000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,5500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,5000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,4500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,4000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,3500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,3000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,2500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,2000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,1500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,1000,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Europe,500,397,397,0,0,397
+hyde_3_5_land_use,radius_25km,Latin America,11500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,11000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,10500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,10000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,9500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,9000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,8500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,8000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,7500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,7000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,6500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,6000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,5500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,5000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,4500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,4000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,3500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,3000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,2500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,2000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,1500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,1000,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,Latin America,500,88,88,0,0,88
+hyde_3_5_land_use,radius_25km,North America,11500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,11000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,10500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,10000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,9500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,9000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,8500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,8000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,7500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,7000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,6500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,6000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,5500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,5000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,4500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,4000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,3500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,3000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,2500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,2000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,1500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,1000,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,North America,500,558,556,2,0,556
+hyde_3_5_land_use,radius_25km,Oceania,11500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,11000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,10500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,10000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,9500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,9000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,8500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,8000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,7500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,7000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,6500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,6000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,5500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,5000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,4500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,4000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,3500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,3000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,2500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,2000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,1500,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,1000,49,47,2,0,47
+hyde_3_5_land_use,radius_25km,Oceania,500,49,47,2,0,47
+hyde_3_5_land_use,radius_50km,All regions,11500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,11000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,10500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,10000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,9500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,9000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,8500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,8000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,7500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,7000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,6500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,6000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,5500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,5000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,4500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,4000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,3500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,3000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,2500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,2000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,1500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,1000,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,All regions,500,1270,1264,6,0,1264
+hyde_3_5_land_use,radius_50km,Asia,11500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,11000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,10500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,10000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,9500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,9000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,8500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,8000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,7500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,7000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,6500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,6000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,5500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,5000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,4500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,4000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,3500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,3000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,2500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,2000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,1500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,1000,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Asia,500,178,175,3,0,175
+hyde_3_5_land_use,radius_50km,Europe,11500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,11000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,10500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,10000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,9500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,9000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,8500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,8000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,7500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,7000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,6500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,6000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,5500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,5000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,4500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,4000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,3500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,3000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,2500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,2000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,1500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,1000,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Europe,500,397,397,0,0,397
+hyde_3_5_land_use,radius_50km,Latin America,11500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,11000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,10500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,10000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,9500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,9000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,8500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,8000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,7500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,7000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,6500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,6000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,5500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,5000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,4500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,4000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,3500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,3000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,2500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,2000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,1500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,1000,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,Latin America,500,88,88,0,0,88
+hyde_3_5_land_use,radius_50km,North America,11500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,11000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,10500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,10000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,9500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,9000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,8500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,8000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,7500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,7000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,6500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,6000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,5500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,5000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,4500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,4000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,3500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,3000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,2500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,2000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,1500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,1000,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,North America,500,558,556,2,0,556
+hyde_3_5_land_use,radius_50km,Oceania,11500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,11000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,10500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,10000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,9500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,9000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,8500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,8000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,7500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,7000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,6500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,6000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,5500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,5000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,4500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,4000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,3500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,3000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,2500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,2000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,1500,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,1000,49,48,1,0,48
+hyde_3_5_land_use,radius_50km,Oceania,500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,All regions,11500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,11000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,10500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,10000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,9500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,9000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,8500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,8000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,7500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,7000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,6500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,6000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,5500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,5000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,4500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,4000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,3500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,3000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,2500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,2000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,1500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,1000,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,All regions,500,1270,1268,2,0,1268
+hyde_3_5_land_use,spd_buffer,Asia,11500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,11000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,10500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,10000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,9500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,9000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,8500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,8000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,7500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,7000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,6500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,6000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,5500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,5000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,4500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,4000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,3500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,3000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,2500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,2000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,1500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,1000,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Asia,500,178,178,0,0,178
+hyde_3_5_land_use,spd_buffer,Europe,11500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,11000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,10500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,10000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,9500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,9000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,8500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,8000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,7500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,7000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,6500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,6000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,5500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,5000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,4500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,4000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,3500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,3000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,2500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,2000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,1500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,1000,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Europe,500,397,397,0,0,397
+hyde_3_5_land_use,spd_buffer,Latin America,11500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,11000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,10500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,10000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,9500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,9000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,8500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,8000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,7500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,7000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,6500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,6000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,5500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,5000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,4500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,4000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,3500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,3000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,2500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,2000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,1500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,1000,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,Latin America,500,88,88,0,0,88
+hyde_3_5_land_use,spd_buffer,North America,11500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,11000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,10500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,10000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,9500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,9000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,8500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,8000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,7500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,7000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,6500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,6000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,5500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,5000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,4500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,4000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,3500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,3000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,2500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,2000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,1500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,1000,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,North America,500,558,557,1,0,557
+hyde_3_5_land_use,spd_buffer,Oceania,11500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,11000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,10500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,10000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,9500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,9000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,8500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,8000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,7500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,7000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,6500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,6000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,5500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,5000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,4500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,4000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,3500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,3000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,2500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,2000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,1500,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,1000,49,48,1,0,48
+hyde_3_5_land_use,spd_buffer,Oceania,500,49,48,1,0,48
+hyde_3_5_population,cell,All regions,11500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,11000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,10500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,10000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,9500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,9000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,8500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,8000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,7500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,7000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,6500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,6000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,5500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,5000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,4500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,4000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,3500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,3000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,2500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,2000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,1500,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,1000,1270,1236,34,0,1236
+hyde_3_5_population,cell,All regions,500,1270,1236,34,0,1236
+hyde_3_5_population,cell,Asia,11500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,11000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,10500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,10000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,9500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,9000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,8500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,8000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,7500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,7000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,6500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,6000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,5500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,5000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,4500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,4000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,3500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,3000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,2500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,2000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,1500,178,167,11,0,167
+hyde_3_5_population,cell,Asia,1000,178,167,11,0,167
+hyde_3_5_population,cell,Asia,500,178,167,11,0,167
+hyde_3_5_population,cell,Europe,11500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,11000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,10500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,10000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,9500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,9000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,8500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,8000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,7500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,7000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,6500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,6000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,5500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,5000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,4500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,4000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,3500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,3000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,2500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,2000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,1500,397,397,0,0,397
+hyde_3_5_population,cell,Europe,1000,397,397,0,0,397
+hyde_3_5_population,cell,Europe,500,397,397,0,0,397
+hyde_3_5_population,cell,Latin America,11500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,11000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,10500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,10000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,9500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,9000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,8500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,8000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,7500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,7000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,6500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,6000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,5500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,5000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,4500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,4000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,3500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,3000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,2500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,2000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,1500,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,1000,88,87,1,0,87
+hyde_3_5_population,cell,Latin America,500,88,87,1,0,87
+hyde_3_5_population,cell,North America,11500,558,539,19,0,539
+hyde_3_5_population,cell,North America,11000,558,539,19,0,539
+hyde_3_5_population,cell,North America,10500,558,539,19,0,539
+hyde_3_5_population,cell,North America,10000,558,539,19,0,539
+hyde_3_5_population,cell,North America,9500,558,539,19,0,539
+hyde_3_5_population,cell,North America,9000,558,539,19,0,539
+hyde_3_5_population,cell,North America,8500,558,539,19,0,539
+hyde_3_5_population,cell,North America,8000,558,539,19,0,539
+hyde_3_5_population,cell,North America,7500,558,539,19,0,539
+hyde_3_5_population,cell,North America,7000,558,539,19,0,539
+hyde_3_5_population,cell,North America,6500,558,539,19,0,539
+hyde_3_5_population,cell,North America,6000,558,539,19,0,539
+hyde_3_5_population,cell,North America,5500,558,539,19,0,539
+hyde_3_5_population,cell,North America,5000,558,539,19,0,539
+hyde_3_5_population,cell,North America,4500,558,539,19,0,539
+hyde_3_5_population,cell,North America,4000,558,539,19,0,539
+hyde_3_5_population,cell,North America,3500,558,539,19,0,539
+hyde_3_5_population,cell,North America,3000,558,539,19,0,539
+hyde_3_5_population,cell,North America,2500,558,539,19,0,539
+hyde_3_5_population,cell,North America,2000,558,539,19,0,539
+hyde_3_5_population,cell,North America,1500,558,539,19,0,539
+hyde_3_5_population,cell,North America,1000,558,539,19,0,539
+hyde_3_5_population,cell,North America,500,558,539,19,0,539
+hyde_3_5_population,cell,Oceania,11500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,11000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,10500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,10000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,9500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,9000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,8500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,8000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,7500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,7000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,6500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,6000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,5500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,5000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,4500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,4000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,3500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,3000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,2500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,2000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,1500,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,1000,49,46,3,0,46
+hyde_3_5_population,cell,Oceania,500,49,46,3,0,46
+hyde_3_5_population,radius_10km,All regions,11500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,11000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,10500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,10000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,9500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,9000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,8500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,8000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,7500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,7000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,6500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,6000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,5500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,5000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,4500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,4000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,3500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,3000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,2500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,2000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,1500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,1000,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,All regions,500,1270,1255,15,0,1255
+hyde_3_5_population,radius_10km,Asia,11500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,11000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,10500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,10000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,9500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,9000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,8500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,8000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,7500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,7000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,6500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,6000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,5500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,5000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,4500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,4000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,3500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,3000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,2500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,2000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,1500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,1000,178,173,5,0,173
+hyde_3_5_population,radius_10km,Asia,500,178,173,5,0,173
+hyde_3_5_population,radius_10km,Europe,11500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,11000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,10500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,10000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,9500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,9000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,8500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,8000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,7500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,7000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,6500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,6000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,5500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,5000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,4500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,4000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,3500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,3000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,2500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,2000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,1500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,1000,397,397,0,0,397
+hyde_3_5_population,radius_10km,Europe,500,397,397,0,0,397
+hyde_3_5_population,radius_10km,Latin America,11500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,11000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,10500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,10000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,9500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,9000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,8500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,8000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,7500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,7000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,6500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,6000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,5500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,5000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,4500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,4000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,3500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,3000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,2500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,2000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,1500,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,1000,88,87,1,0,87
+hyde_3_5_population,radius_10km,Latin America,500,88,87,1,0,87
+hyde_3_5_population,radius_10km,North America,11500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,11000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,10500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,10000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,9500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,9000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,8500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,8000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,7500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,7000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,6500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,6000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,5500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,5000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,4500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,4000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,3500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,3000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,2500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,2000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,1500,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,1000,558,552,6,0,552
+hyde_3_5_population,radius_10km,North America,500,558,552,6,0,552
+hyde_3_5_population,radius_10km,Oceania,11500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,11000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,10500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,10000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,9500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,9000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,8500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,8000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,7500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,7000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,6500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,6000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,5500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,5000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,4500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,4000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,3500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,3000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,2500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,2000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,1500,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,1000,49,46,3,0,46
+hyde_3_5_population,radius_10km,Oceania,500,49,46,3,0,46
+hyde_3_5_population,radius_25km,All regions,11500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,11000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,10500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,10000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,9500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,9000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,8500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,8000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,7500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,7000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,6500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,6000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,5500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,5000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,4500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,4000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,3500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,3000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,2500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,2000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,1500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,1000,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,All regions,500,1270,1263,7,0,1263
+hyde_3_5_population,radius_25km,Asia,11500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,11000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,10500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,10000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,9500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,9000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,8500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,8000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,7500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,7000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,6500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,6000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,5500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,5000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,4500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,4000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,3500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,3000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,2500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,2000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,1500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,1000,178,175,3,0,175
+hyde_3_5_population,radius_25km,Asia,500,178,175,3,0,175
+hyde_3_5_population,radius_25km,Europe,11500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,11000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,10500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,10000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,9500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,9000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,8500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,8000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,7500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,7000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,6500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,6000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,5500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,5000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,4500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,4000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,3500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,3000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,2500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,2000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,1500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,1000,397,397,0,0,397
+hyde_3_5_population,radius_25km,Europe,500,397,397,0,0,397
+hyde_3_5_population,radius_25km,Latin America,11500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,11000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,10500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,10000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,9500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,9000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,8500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,8000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,7500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,7000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,6500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,6000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,5500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,5000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,4500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,4000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,3500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,3000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,2500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,2000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,1500,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,1000,88,88,0,0,88
+hyde_3_5_population,radius_25km,Latin America,500,88,88,0,0,88
+hyde_3_5_population,radius_25km,North America,11500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,11000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,10500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,10000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,9500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,9000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,8500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,8000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,7500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,7000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,6500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,6000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,5500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,5000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,4500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,4000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,3500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,3000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,2500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,2000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,1500,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,1000,558,556,2,0,556
+hyde_3_5_population,radius_25km,North America,500,558,556,2,0,556
+hyde_3_5_population,radius_25km,Oceania,11500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,11000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,10500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,10000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,9500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,9000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,8500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,8000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,7500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,7000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,6500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,6000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,5500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,5000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,4500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,4000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,3500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,3000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,2500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,2000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,1500,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,1000,49,47,2,0,47
+hyde_3_5_population,radius_25km,Oceania,500,49,47,2,0,47
+hyde_3_5_population,radius_50km,All regions,11500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,11000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,10500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,10000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,9500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,9000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,8500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,8000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,7500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,7000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,6500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,6000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,5500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,5000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,4500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,4000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,3500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,3000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,2500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,2000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,1500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,1000,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,All regions,500,1270,1264,6,0,1264
+hyde_3_5_population,radius_50km,Asia,11500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,11000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,10500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,10000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,9500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,9000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,8500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,8000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,7500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,7000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,6500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,6000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,5500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,5000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,4500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,4000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,3500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,3000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,2500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,2000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,1500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,1000,178,175,3,0,175
+hyde_3_5_population,radius_50km,Asia,500,178,175,3,0,175
+hyde_3_5_population,radius_50km,Europe,11500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,11000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,10500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,10000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,9500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,9000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,8500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,8000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,7500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,7000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,6500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,6000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,5500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,5000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,4500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,4000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,3500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,3000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,2500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,2000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,1500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,1000,397,397,0,0,397
+hyde_3_5_population,radius_50km,Europe,500,397,397,0,0,397
+hyde_3_5_population,radius_50km,Latin America,11500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,11000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,10500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,10000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,9500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,9000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,8500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,8000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,7500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,7000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,6500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,6000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,5500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,5000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,4500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,4000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,3500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,3000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,2500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,2000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,1500,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,1000,88,88,0,0,88
+hyde_3_5_population,radius_50km,Latin America,500,88,88,0,0,88
+hyde_3_5_population,radius_50km,North America,11500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,11000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,10500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,10000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,9500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,9000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,8500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,8000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,7500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,7000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,6500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,6000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,5500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,5000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,4500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,4000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,3500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,3000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,2500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,2000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,1500,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,1000,558,556,2,0,556
+hyde_3_5_population,radius_50km,North America,500,558,556,2,0,556
+hyde_3_5_population,radius_50km,Oceania,11500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,11000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,10500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,10000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,9500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,9000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,8500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,8000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,7500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,7000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,6500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,6000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,5500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,5000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,4500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,4000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,3500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,3000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,2500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,2000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,1500,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,1000,49,48,1,0,48
+hyde_3_5_population,radius_50km,Oceania,500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,All regions,11500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,11000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,10500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,10000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,9500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,9000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,8500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,8000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,7500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,7000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,6500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,6000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,5500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,5000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,4500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,4000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,3500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,3000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,2500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,2000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,1500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,1000,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,All regions,500,1270,1268,2,0,1268
+hyde_3_5_population,spd_buffer,Asia,11500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,11000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,10500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,10000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,9500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,9000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,8500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,8000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,7500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,7000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,6500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,6000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,5500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,5000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,4500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,4000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,3500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,3000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,2500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,2000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,1500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,1000,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Asia,500,178,178,0,0,178
+hyde_3_5_population,spd_buffer,Europe,11500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,11000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,10500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,10000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,9500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,9000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,8500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,8000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,7500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,7000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,6500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,6000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,5500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,5000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,4500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,4000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,3500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,3000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,2500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,2000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,1500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,1000,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Europe,500,397,397,0,0,397
+hyde_3_5_population,spd_buffer,Latin America,11500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,11000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,10500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,10000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,9500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,9000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,8500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,8000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,7500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,7000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,6500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,6000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,5500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,5000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,4500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,4000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,3500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,3000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,2500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,2000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,1500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,1000,88,88,0,0,88
+hyde_3_5_population,spd_buffer,Latin America,500,88,88,0,0,88
+hyde_3_5_population,spd_buffer,North America,11500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,11000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,10500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,10000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,9500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,9000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,8500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,8000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,7500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,7000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,6500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,6000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,5500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,5000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,4500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,4000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,3500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,3000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,2500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,2000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,1500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,1000,558,557,1,0,557
+hyde_3_5_population,spd_buffer,North America,500,558,557,1,0,557
+hyde_3_5_population,spd_buffer,Oceania,11500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,11000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,10500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,10000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,9500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,9000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,8500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,8000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,7500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,7000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,6500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,6000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,5500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,5000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,4500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,4000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,3500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,3000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,2500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,2000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,1500,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,1000,49,48,1,0,48
+hyde_3_5_population,spd_buffer,Oceania,500,49,48,1,0,48
+kk10,cell,All regions,8000,1270,1192,78,1192,0
+kk10,cell,All regions,7500,1270,1192,78,1192,0
+kk10,cell,All regions,7000,1270,1192,78,1192,0
+kk10,cell,All regions,6500,1270,1192,78,1192,0
+kk10,cell,All regions,6000,1270,1192,78,1192,0
+kk10,cell,All regions,5500,1270,1192,78,1192,0
+kk10,cell,All regions,5000,1270,1192,78,1192,0
+kk10,cell,All regions,4500,1270,1192,78,1192,0
+kk10,cell,All regions,4000,1270,1192,78,1192,0
+kk10,cell,All regions,3500,1270,1192,78,1192,0
+kk10,cell,All regions,3000,1270,1192,78,1192,0
+kk10,cell,All regions,2500,1270,1192,78,1192,0
+kk10,cell,All regions,2000,1270,1192,78,1192,0
+kk10,cell,All regions,1500,1270,1192,78,1192,0
+kk10,cell,All regions,1000,1270,1192,78,1192,0
+kk10,cell,All regions,500,1270,1192,78,1192,0
+kk10,cell,Asia,8000,178,161,17,161,0
+kk10,cell,Asia,7500,178,161,17,161,0
+kk10,cell,Asia,7000,178,161,17,161,0
+kk10,cell,Asia,6500,178,161,17,161,0
+kk10,cell,Asia,6000,178,161,17,161,0
+kk10,cell,Asia,5500,178,161,17,161,0
+kk10,cell,Asia,5000,178,161,17,161,0
+kk10,cell,Asia,4500,178,161,17,161,0
+kk10,cell,Asia,4000,178,161,17,161,0
+kk10,cell,Asia,3500,178,161,17,161,0
+kk10,cell,Asia,3000,178,161,17,161,0
+kk10,cell,Asia,2500,178,161,17,161,0
+kk10,cell,Asia,2000,178,161,17,161,0
+kk10,cell,Asia,1500,178,161,17,161,0
+kk10,cell,Asia,1000,178,161,17,161,0
+kk10,cell,Asia,500,178,161,17,161,0
+kk10,cell,Europe,8000,397,384,13,384,0
+kk10,cell,Europe,7500,397,384,13,384,0
+kk10,cell,Europe,7000,397,384,13,384,0
+kk10,cell,Europe,6500,397,384,13,384,0
+kk10,cell,Europe,6000,397,384,13,384,0
+kk10,cell,Europe,5500,397,384,13,384,0
+kk10,cell,Europe,5000,397,384,13,384,0
+kk10,cell,Europe,4500,397,384,13,384,0
+kk10,cell,Europe,4000,397,384,13,384,0
+kk10,cell,Europe,3500,397,384,13,384,0
+kk10,cell,Europe,3000,397,384,13,384,0
+kk10,cell,Europe,2500,397,384,13,384,0
+kk10,cell,Europe,2000,397,384,13,384,0
+kk10,cell,Europe,1500,397,384,13,384,0
+kk10,cell,Europe,1000,397,384,13,384,0
+kk10,cell,Europe,500,397,384,13,384,0
+kk10,cell,Latin America,8000,88,86,2,86,0
+kk10,cell,Latin America,7500,88,86,2,86,0
+kk10,cell,Latin America,7000,88,86,2,86,0
+kk10,cell,Latin America,6500,88,86,2,86,0
+kk10,cell,Latin America,6000,88,86,2,86,0
+kk10,cell,Latin America,5500,88,86,2,86,0
+kk10,cell,Latin America,5000,88,86,2,86,0
+kk10,cell,Latin America,4500,88,86,2,86,0
+kk10,cell,Latin America,4000,88,86,2,86,0
+kk10,cell,Latin America,3500,88,86,2,86,0
+kk10,cell,Latin America,3000,88,86,2,86,0
+kk10,cell,Latin America,2500,88,86,2,86,0
+kk10,cell,Latin America,2000,88,86,2,86,0
+kk10,cell,Latin America,1500,88,86,2,86,0
+kk10,cell,Latin America,1000,88,86,2,86,0
+kk10,cell,Latin America,500,88,86,2,86,0
+kk10,cell,North America,8000,558,521,37,521,0
+kk10,cell,North America,7500,558,521,37,521,0
+kk10,cell,North America,7000,558,521,37,521,0
+kk10,cell,North America,6500,558,521,37,521,0
+kk10,cell,North America,6000,558,521,37,521,0
+kk10,cell,North America,5500,558,521,37,521,0
+kk10,cell,North America,5000,558,521,37,521,0
+kk10,cell,North America,4500,558,521,37,521,0
+kk10,cell,North America,4000,558,521,37,521,0
+kk10,cell,North America,3500,558,521,37,521,0
+kk10,cell,North America,3000,558,521,37,521,0
+kk10,cell,North America,2500,558,521,37,521,0
+kk10,cell,North America,2000,558,521,37,521,0
+kk10,cell,North America,1500,558,521,37,521,0
+kk10,cell,North America,1000,558,521,37,521,0
+kk10,cell,North America,500,558,521,37,521,0
+kk10,cell,Oceania,8000,49,40,9,40,0
+kk10,cell,Oceania,7500,49,40,9,40,0
+kk10,cell,Oceania,7000,49,40,9,40,0
+kk10,cell,Oceania,6500,49,40,9,40,0
+kk10,cell,Oceania,6000,49,40,9,40,0
+kk10,cell,Oceania,5500,49,40,9,40,0
+kk10,cell,Oceania,5000,49,40,9,40,0
+kk10,cell,Oceania,4500,49,40,9,40,0
+kk10,cell,Oceania,4000,49,40,9,40,0
+kk10,cell,Oceania,3500,49,40,9,40,0
+kk10,cell,Oceania,3000,49,40,9,40,0
+kk10,cell,Oceania,2500,49,40,9,40,0
+kk10,cell,Oceania,2000,49,40,9,40,0
+kk10,cell,Oceania,1500,49,40,9,40,0
+kk10,cell,Oceania,1000,49,40,9,40,0
+kk10,cell,Oceania,500,49,40,9,40,0
+kk10,radius_10km,All regions,8000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,7500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,7000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,6500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,6000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,5500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,5000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,4500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,4000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,3500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,3000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,2500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,2000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,1500,1270,1251,19,1251,0
+kk10,radius_10km,All regions,1000,1270,1251,19,1251,0
+kk10,radius_10km,All regions,500,1270,1251,19,1251,0
+kk10,radius_10km,Asia,8000,178,173,5,173,0
+kk10,radius_10km,Asia,7500,178,173,5,173,0
+kk10,radius_10km,Asia,7000,178,173,5,173,0
+kk10,radius_10km,Asia,6500,178,173,5,173,0
+kk10,radius_10km,Asia,6000,178,173,5,173,0
+kk10,radius_10km,Asia,5500,178,173,5,173,0
+kk10,radius_10km,Asia,5000,178,173,5,173,0
+kk10,radius_10km,Asia,4500,178,173,5,173,0
+kk10,radius_10km,Asia,4000,178,173,5,173,0
+kk10,radius_10km,Asia,3500,178,173,5,173,0
+kk10,radius_10km,Asia,3000,178,173,5,173,0
+kk10,radius_10km,Asia,2500,178,173,5,173,0
+kk10,radius_10km,Asia,2000,178,173,5,173,0
+kk10,radius_10km,Asia,1500,178,173,5,173,0
+kk10,radius_10km,Asia,1000,178,173,5,173,0
+kk10,radius_10km,Asia,500,178,173,5,173,0
+kk10,radius_10km,Europe,8000,397,396,1,396,0
+kk10,radius_10km,Europe,7500,397,396,1,396,0
+kk10,radius_10km,Europe,7000,397,396,1,396,0
+kk10,radius_10km,Europe,6500,397,396,1,396,0
+kk10,radius_10km,Europe,6000,397,396,1,396,0
+kk10,radius_10km,Europe,5500,397,396,1,396,0
+kk10,radius_10km,Europe,5000,397,396,1,396,0
+kk10,radius_10km,Europe,4500,397,396,1,396,0
+kk10,radius_10km,Europe,4000,397,396,1,396,0
+kk10,radius_10km,Europe,3500,397,396,1,396,0
+kk10,radius_10km,Europe,3000,397,396,1,396,0
+kk10,radius_10km,Europe,2500,397,396,1,396,0
+kk10,radius_10km,Europe,2000,397,396,1,396,0
+kk10,radius_10km,Europe,1500,397,396,1,396,0
+kk10,radius_10km,Europe,1000,397,396,1,396,0
+kk10,radius_10km,Europe,500,397,396,1,396,0
+kk10,radius_10km,Latin America,8000,88,87,1,87,0
+kk10,radius_10km,Latin America,7500,88,87,1,87,0
+kk10,radius_10km,Latin America,7000,88,87,1,87,0
+kk10,radius_10km,Latin America,6500,88,87,1,87,0
+kk10,radius_10km,Latin America,6000,88,87,1,87,0
+kk10,radius_10km,Latin America,5500,88,87,1,87,0
+kk10,radius_10km,Latin America,5000,88,87,1,87,0
+kk10,radius_10km,Latin America,4500,88,87,1,87,0
+kk10,radius_10km,Latin America,4000,88,87,1,87,0
+kk10,radius_10km,Latin America,3500,88,87,1,87,0
+kk10,radius_10km,Latin America,3000,88,87,1,87,0
+kk10,radius_10km,Latin America,2500,88,87,1,87,0
+kk10,radius_10km,Latin America,2000,88,87,1,87,0
+kk10,radius_10km,Latin America,1500,88,87,1,87,0
+kk10,radius_10km,Latin America,1000,88,87,1,87,0
+kk10,radius_10km,Latin America,500,88,87,1,87,0
+kk10,radius_10km,North America,8000,558,550,8,550,0
+kk10,radius_10km,North America,7500,558,550,8,550,0
+kk10,radius_10km,North America,7000,558,550,8,550,0
+kk10,radius_10km,North America,6500,558,550,8,550,0
+kk10,radius_10km,North America,6000,558,550,8,550,0
+kk10,radius_10km,North America,5500,558,550,8,550,0
+kk10,radius_10km,North America,5000,558,550,8,550,0
+kk10,radius_10km,North America,4500,558,550,8,550,0
+kk10,radius_10km,North America,4000,558,550,8,550,0
+kk10,radius_10km,North America,3500,558,550,8,550,0
+kk10,radius_10km,North America,3000,558,550,8,550,0
+kk10,radius_10km,North America,2500,558,550,8,550,0
+kk10,radius_10km,North America,2000,558,550,8,550,0
+kk10,radius_10km,North America,1500,558,550,8,550,0
+kk10,radius_10km,North America,1000,558,550,8,550,0
+kk10,radius_10km,North America,500,558,550,8,550,0
+kk10,radius_10km,Oceania,8000,49,45,4,45,0
+kk10,radius_10km,Oceania,7500,49,45,4,45,0
+kk10,radius_10km,Oceania,7000,49,45,4,45,0
+kk10,radius_10km,Oceania,6500,49,45,4,45,0
+kk10,radius_10km,Oceania,6000,49,45,4,45,0
+kk10,radius_10km,Oceania,5500,49,45,4,45,0
+kk10,radius_10km,Oceania,5000,49,45,4,45,0
+kk10,radius_10km,Oceania,4500,49,45,4,45,0
+kk10,radius_10km,Oceania,4000,49,45,4,45,0
+kk10,radius_10km,Oceania,3500,49,45,4,45,0
+kk10,radius_10km,Oceania,3000,49,45,4,45,0
+kk10,radius_10km,Oceania,2500,49,45,4,45,0
+kk10,radius_10km,Oceania,2000,49,45,4,45,0
+kk10,radius_10km,Oceania,1500,49,45,4,45,0
+kk10,radius_10km,Oceania,1000,49,45,4,45,0
+kk10,radius_10km,Oceania,500,49,45,4,45,0
+kk10,radius_25km,All regions,8000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,7500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,7000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,6500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,6000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,5500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,5000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,4500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,4000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,3500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,3000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,2500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,2000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,1500,1270,1263,7,1263,0
+kk10,radius_25km,All regions,1000,1270,1263,7,1263,0
+kk10,radius_25km,All regions,500,1270,1263,7,1263,0
+kk10,radius_25km,Asia,8000,178,175,3,175,0
+kk10,radius_25km,Asia,7500,178,175,3,175,0
+kk10,radius_25km,Asia,7000,178,175,3,175,0
+kk10,radius_25km,Asia,6500,178,175,3,175,0
+kk10,radius_25km,Asia,6000,178,175,3,175,0
+kk10,radius_25km,Asia,5500,178,175,3,175,0
+kk10,radius_25km,Asia,5000,178,175,3,175,0
+kk10,radius_25km,Asia,4500,178,175,3,175,0
+kk10,radius_25km,Asia,4000,178,175,3,175,0
+kk10,radius_25km,Asia,3500,178,175,3,175,0
+kk10,radius_25km,Asia,3000,178,175,3,175,0
+kk10,radius_25km,Asia,2500,178,175,3,175,0
+kk10,radius_25km,Asia,2000,178,175,3,175,0
+kk10,radius_25km,Asia,1500,178,175,3,175,0
+kk10,radius_25km,Asia,1000,178,175,3,175,0
+kk10,radius_25km,Asia,500,178,175,3,175,0
+kk10,radius_25km,Europe,8000,397,397,0,397,0
+kk10,radius_25km,Europe,7500,397,397,0,397,0
+kk10,radius_25km,Europe,7000,397,397,0,397,0
+kk10,radius_25km,Europe,6500,397,397,0,397,0
+kk10,radius_25km,Europe,6000,397,397,0,397,0
+kk10,radius_25km,Europe,5500,397,397,0,397,0
+kk10,radius_25km,Europe,5000,397,397,0,397,0
+kk10,radius_25km,Europe,4500,397,397,0,397,0
+kk10,radius_25km,Europe,4000,397,397,0,397,0
+kk10,radius_25km,Europe,3500,397,397,0,397,0
+kk10,radius_25km,Europe,3000,397,397,0,397,0
+kk10,radius_25km,Europe,2500,397,397,0,397,0
+kk10,radius_25km,Europe,2000,397,397,0,397,0
+kk10,radius_25km,Europe,1500,397,397,0,397,0
+kk10,radius_25km,Europe,1000,397,397,0,397,0
+kk10,radius_25km,Europe,500,397,397,0,397,0
+kk10,radius_25km,Latin America,8000,88,88,0,88,0
+kk10,radius_25km,Latin America,7500,88,88,0,88,0
+kk10,radius_25km,Latin America,7000,88,88,0,88,0
+kk10,radius_25km,Latin America,6500,88,88,0,88,0
+kk10,radius_25km,Latin America,6000,88,88,0,88,0
+kk10,radius_25km,Latin America,5500,88,88,0,88,0
+kk10,radius_25km,Latin America,5000,88,88,0,88,0
+kk10,radius_25km,Latin America,4500,88,88,0,88,0
+kk10,radius_25km,Latin America,4000,88,88,0,88,0
+kk10,radius_25km,Latin America,3500,88,88,0,88,0
+kk10,radius_25km,Latin America,3000,88,88,0,88,0
+kk10,radius_25km,Latin America,2500,88,88,0,88,0
+kk10,radius_25km,Latin America,2000,88,88,0,88,0
+kk10,radius_25km,Latin America,1500,88,88,0,88,0
+kk10,radius_25km,Latin America,1000,88,88,0,88,0
+kk10,radius_25km,Latin America,500,88,88,0,88,0
+kk10,radius_25km,North America,8000,558,556,2,556,0
+kk10,radius_25km,North America,7500,558,556,2,556,0
+kk10,radius_25km,North America,7000,558,556,2,556,0
+kk10,radius_25km,North America,6500,558,556,2,556,0
+kk10,radius_25km,North America,6000,558,556,2,556,0
+kk10,radius_25km,North America,5500,558,556,2,556,0
+kk10,radius_25km,North America,5000,558,556,2,556,0
+kk10,radius_25km,North America,4500,558,556,2,556,0
+kk10,radius_25km,North America,4000,558,556,2,556,0
+kk10,radius_25km,North America,3500,558,556,2,556,0
+kk10,radius_25km,North America,3000,558,556,2,556,0
+kk10,radius_25km,North America,2500,558,556,2,556,0
+kk10,radius_25km,North America,2000,558,556,2,556,0
+kk10,radius_25km,North America,1500,558,556,2,556,0
+kk10,radius_25km,North America,1000,558,556,2,556,0
+kk10,radius_25km,North America,500,558,556,2,556,0
+kk10,radius_25km,Oceania,8000,49,47,2,47,0
+kk10,radius_25km,Oceania,7500,49,47,2,47,0
+kk10,radius_25km,Oceania,7000,49,47,2,47,0
+kk10,radius_25km,Oceania,6500,49,47,2,47,0
+kk10,radius_25km,Oceania,6000,49,47,2,47,0
+kk10,radius_25km,Oceania,5500,49,47,2,47,0
+kk10,radius_25km,Oceania,5000,49,47,2,47,0
+kk10,radius_25km,Oceania,4500,49,47,2,47,0
+kk10,radius_25km,Oceania,4000,49,47,2,47,0
+kk10,radius_25km,Oceania,3500,49,47,2,47,0
+kk10,radius_25km,Oceania,3000,49,47,2,47,0
+kk10,radius_25km,Oceania,2500,49,47,2,47,0
+kk10,radius_25km,Oceania,2000,49,47,2,47,0
+kk10,radius_25km,Oceania,1500,49,47,2,47,0
+kk10,radius_25km,Oceania,1000,49,47,2,47,0
+kk10,radius_25km,Oceania,500,49,47,2,47,0
+kk10,radius_50km,All regions,8000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,7500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,7000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,6500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,6000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,5500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,5000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,4500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,4000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,3500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,3000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,2500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,2000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,1500,1270,1266,4,1266,0
+kk10,radius_50km,All regions,1000,1270,1266,4,1266,0
+kk10,radius_50km,All regions,500,1270,1266,4,1266,0
+kk10,radius_50km,Asia,8000,178,176,2,176,0
+kk10,radius_50km,Asia,7500,178,176,2,176,0
+kk10,radius_50km,Asia,7000,178,176,2,176,0
+kk10,radius_50km,Asia,6500,178,176,2,176,0
+kk10,radius_50km,Asia,6000,178,176,2,176,0
+kk10,radius_50km,Asia,5500,178,176,2,176,0
+kk10,radius_50km,Asia,5000,178,176,2,176,0
+kk10,radius_50km,Asia,4500,178,176,2,176,0
+kk10,radius_50km,Asia,4000,178,176,2,176,0
+kk10,radius_50km,Asia,3500,178,176,2,176,0
+kk10,radius_50km,Asia,3000,178,176,2,176,0
+kk10,radius_50km,Asia,2500,178,176,2,176,0
+kk10,radius_50km,Asia,2000,178,176,2,176,0
+kk10,radius_50km,Asia,1500,178,176,2,176,0
+kk10,radius_50km,Asia,1000,178,176,2,176,0
+kk10,radius_50km,Asia,500,178,176,2,176,0
+kk10,radius_50km,Europe,8000,397,397,0,397,0
+kk10,radius_50km,Europe,7500,397,397,0,397,0
+kk10,radius_50km,Europe,7000,397,397,0,397,0
+kk10,radius_50km,Europe,6500,397,397,0,397,0
+kk10,radius_50km,Europe,6000,397,397,0,397,0
+kk10,radius_50km,Europe,5500,397,397,0,397,0
+kk10,radius_50km,Europe,5000,397,397,0,397,0
+kk10,radius_50km,Europe,4500,397,397,0,397,0
+kk10,radius_50km,Europe,4000,397,397,0,397,0
+kk10,radius_50km,Europe,3500,397,397,0,397,0
+kk10,radius_50km,Europe,3000,397,397,0,397,0
+kk10,radius_50km,Europe,2500,397,397,0,397,0
+kk10,radius_50km,Europe,2000,397,397,0,397,0
+kk10,radius_50km,Europe,1500,397,397,0,397,0
+kk10,radius_50km,Europe,1000,397,397,0,397,0
+kk10,radius_50km,Europe,500,397,397,0,397,0
+kk10,radius_50km,Latin America,8000,88,88,0,88,0
+kk10,radius_50km,Latin America,7500,88,88,0,88,0
+kk10,radius_50km,Latin America,7000,88,88,0,88,0
+kk10,radius_50km,Latin America,6500,88,88,0,88,0
+kk10,radius_50km,Latin America,6000,88,88,0,88,0
+kk10,radius_50km,Latin America,5500,88,88,0,88,0
+kk10,radius_50km,Latin America,5000,88,88,0,88,0
+kk10,radius_50km,Latin America,4500,88,88,0,88,0
+kk10,radius_50km,Latin America,4000,88,88,0,88,0
+kk10,radius_50km,Latin America,3500,88,88,0,88,0
+kk10,radius_50km,Latin America,3000,88,88,0,88,0
+kk10,radius_50km,Latin America,2500,88,88,0,88,0
+kk10,radius_50km,Latin America,2000,88,88,0,88,0
+kk10,radius_50km,Latin America,1500,88,88,0,88,0
+kk10,radius_50km,Latin America,1000,88,88,0,88,0
+kk10,radius_50km,Latin America,500,88,88,0,88,0
+kk10,radius_50km,North America,8000,558,557,1,557,0
+kk10,radius_50km,North America,7500,558,557,1,557,0
+kk10,radius_50km,North America,7000,558,557,1,557,0
+kk10,radius_50km,North America,6500,558,557,1,557,0
+kk10,radius_50km,North America,6000,558,557,1,557,0
+kk10,radius_50km,North America,5500,558,557,1,557,0
+kk10,radius_50km,North America,5000,558,557,1,557,0
+kk10,radius_50km,North America,4500,558,557,1,557,0
+kk10,radius_50km,North America,4000,558,557,1,557,0
+kk10,radius_50km,North America,3500,558,557,1,557,0
+kk10,radius_50km,North America,3000,558,557,1,557,0
+kk10,radius_50km,North America,2500,558,557,1,557,0
+kk10,radius_50km,North America,2000,558,557,1,557,0
+kk10,radius_50km,North America,1500,558,557,1,557,0
+kk10,radius_50km,North America,1000,558,557,1,557,0
+kk10,radius_50km,North America,500,558,557,1,557,0
+kk10,radius_50km,Oceania,8000,49,48,1,48,0
+kk10,radius_50km,Oceania,7500,49,48,1,48,0
+kk10,radius_50km,Oceania,7000,49,48,1,48,0
+kk10,radius_50km,Oceania,6500,49,48,1,48,0
+kk10,radius_50km,Oceania,6000,49,48,1,48,0
+kk10,radius_50km,Oceania,5500,49,48,1,48,0
+kk10,radius_50km,Oceania,5000,49,48,1,48,0
+kk10,radius_50km,Oceania,4500,49,48,1,48,0
+kk10,radius_50km,Oceania,4000,49,48,1,48,0
+kk10,radius_50km,Oceania,3500,49,48,1,48,0
+kk10,radius_50km,Oceania,3000,49,48,1,48,0
+kk10,radius_50km,Oceania,2500,49,48,1,48,0
+kk10,radius_50km,Oceania,2000,49,48,1,48,0
+kk10,radius_50km,Oceania,1500,49,48,1,48,0
+kk10,radius_50km,Oceania,1000,49,48,1,48,0
+kk10,radius_50km,Oceania,500,49,48,1,48,0
+kk10,spd_buffer,All regions,8000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,7500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,7000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,6500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,6000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,5500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,5000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,4500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,4000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,3500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,3000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,2500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,2000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,1500,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,1000,1270,1268,2,1268,0
+kk10,spd_buffer,All regions,500,1270,1268,2,1268,0
+kk10,spd_buffer,Asia,8000,178,178,0,178,0
+kk10,spd_buffer,Asia,7500,178,178,0,178,0
+kk10,spd_buffer,Asia,7000,178,178,0,178,0
+kk10,spd_buffer,Asia,6500,178,178,0,178,0
+kk10,spd_buffer,Asia,6000,178,178,0,178,0
+kk10,spd_buffer,Asia,5500,178,178,0,178,0
+kk10,spd_buffer,Asia,5000,178,178,0,178,0
+kk10,spd_buffer,Asia,4500,178,178,0,178,0
+kk10,spd_buffer,Asia,4000,178,178,0,178,0
+kk10,spd_buffer,Asia,3500,178,178,0,178,0
+kk10,spd_buffer,Asia,3000,178,178,0,178,0
+kk10,spd_buffer,Asia,2500,178,178,0,178,0
+kk10,spd_buffer,Asia,2000,178,178,0,178,0
+kk10,spd_buffer,Asia,1500,178,178,0,178,0
+kk10,spd_buffer,Asia,1000,178,178,0,178,0
+kk10,spd_buffer,Asia,500,178,178,0,178,0
+kk10,spd_buffer,Europe,8000,397,397,0,397,0
+kk10,spd_buffer,Europe,7500,397,397,0,397,0
+kk10,spd_buffer,Europe,7000,397,397,0,397,0
+kk10,spd_buffer,Europe,6500,397,397,0,397,0
+kk10,spd_buffer,Europe,6000,397,397,0,397,0
+kk10,spd_buffer,Europe,5500,397,397,0,397,0
+kk10,spd_buffer,Europe,5000,397,397,0,397,0
+kk10,spd_buffer,Europe,4500,397,397,0,397,0
+kk10,spd_buffer,Europe,4000,397,397,0,397,0
+kk10,spd_buffer,Europe,3500,397,397,0,397,0
+kk10,spd_buffer,Europe,3000,397,397,0,397,0
+kk10,spd_buffer,Europe,2500,397,397,0,397,0
+kk10,spd_buffer,Europe,2000,397,397,0,397,0
+kk10,spd_buffer,Europe,1500,397,397,0,397,0
+kk10,spd_buffer,Europe,1000,397,397,0,397,0
+kk10,spd_buffer,Europe,500,397,397,0,397,0
+kk10,spd_buffer,Latin America,8000,88,88,0,88,0
+kk10,spd_buffer,Latin America,7500,88,88,0,88,0
+kk10,spd_buffer,Latin America,7000,88,88,0,88,0
+kk10,spd_buffer,Latin America,6500,88,88,0,88,0
+kk10,spd_buffer,Latin America,6000,88,88,0,88,0
+kk10,spd_buffer,Latin America,5500,88,88,0,88,0
+kk10,spd_buffer,Latin America,5000,88,88,0,88,0
+kk10,spd_buffer,Latin America,4500,88,88,0,88,0
+kk10,spd_buffer,Latin America,4000,88,88,0,88,0
+kk10,spd_buffer,Latin America,3500,88,88,0,88,0
+kk10,spd_buffer,Latin America,3000,88,88,0,88,0
+kk10,spd_buffer,Latin America,2500,88,88,0,88,0
+kk10,spd_buffer,Latin America,2000,88,88,0,88,0
+kk10,spd_buffer,Latin America,1500,88,88,0,88,0
+kk10,spd_buffer,Latin America,1000,88,88,0,88,0
+kk10,spd_buffer,Latin America,500,88,88,0,88,0
+kk10,spd_buffer,North America,8000,558,557,1,557,0
+kk10,spd_buffer,North America,7500,558,557,1,557,0
+kk10,spd_buffer,North America,7000,558,557,1,557,0
+kk10,spd_buffer,North America,6500,558,557,1,557,0
+kk10,spd_buffer,North America,6000,558,557,1,557,0
+kk10,spd_buffer,North America,5500,558,557,1,557,0
+kk10,spd_buffer,North America,5000,558,557,1,557,0
+kk10,spd_buffer,North America,4500,558,557,1,557,0
+kk10,spd_buffer,North America,4000,558,557,1,557,0
+kk10,spd_buffer,North America,3500,558,557,1,557,0
+kk10,spd_buffer,North America,3000,558,557,1,557,0
+kk10,spd_buffer,North America,2500,558,557,1,557,0
+kk10,spd_buffer,North America,2000,558,557,1,557,0
+kk10,spd_buffer,North America,1500,558,557,1,557,0
+kk10,spd_buffer,North America,1000,558,557,1,557,0
+kk10,spd_buffer,North America,500,558,557,1,557,0
+kk10,spd_buffer,Oceania,8000,49,48,1,48,0
+kk10,spd_buffer,Oceania,7500,49,48,1,48,0
+kk10,spd_buffer,Oceania,7000,49,48,1,48,0
+kk10,spd_buffer,Oceania,6500,49,48,1,48,0
+kk10,spd_buffer,Oceania,6000,49,48,1,48,0
+kk10,spd_buffer,Oceania,5500,49,48,1,48,0
+kk10,spd_buffer,Oceania,5000,49,48,1,48,0
+kk10,spd_buffer,Oceania,4500,49,48,1,48,0
+kk10,spd_buffer,Oceania,4000,49,48,1,48,0
+kk10,spd_buffer,Oceania,3500,49,48,1,48,0
+kk10,spd_buffer,Oceania,3000,49,48,1,48,0
+kk10,spd_buffer,Oceania,2500,49,48,1,48,0
+kk10,spd_buffer,Oceania,2000,49,48,1,48,0
+kk10,spd_buffer,Oceania,1500,49,48,1,48,0
+kk10,spd_buffer,Oceania,1000,49,48,1,48,0
+kk10,spd_buffer,Oceania,500,49,48,1,48,0
+spd,spd_buffer,All regions,8500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,8000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,7500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,7000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,6500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,6000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,5500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,5000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,4500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,4000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,3500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,3000,1270,1270,0,1270,0
+spd,spd_buffer,All regions,2500,1270,1270,0,1270,0
+spd,spd_buffer,All regions,2000,1270,1270,0,1270,0
+spd,spd_buffer,Asia,8500,178,178,0,178,0
+spd,spd_buffer,Asia,8000,178,178,0,178,0
+spd,spd_buffer,Asia,7500,178,178,0,178,0
+spd,spd_buffer,Asia,7000,178,178,0,178,0
+spd,spd_buffer,Asia,6500,178,178,0,178,0
+spd,spd_buffer,Asia,6000,178,178,0,178,0
+spd,spd_buffer,Asia,5500,178,178,0,178,0
+spd,spd_buffer,Asia,5000,178,178,0,178,0
+spd,spd_buffer,Asia,4500,178,178,0,178,0
+spd,spd_buffer,Asia,4000,178,178,0,178,0
+spd,spd_buffer,Asia,3500,178,178,0,178,0
+spd,spd_buffer,Asia,3000,178,178,0,178,0
+spd,spd_buffer,Asia,2500,178,178,0,178,0
+spd,spd_buffer,Asia,2000,178,178,0,178,0
+spd,spd_buffer,Europe,8500,397,397,0,397,0
+spd,spd_buffer,Europe,8000,397,397,0,397,0
+spd,spd_buffer,Europe,7500,397,397,0,397,0
+spd,spd_buffer,Europe,7000,397,397,0,397,0
+spd,spd_buffer,Europe,6500,397,397,0,397,0
+spd,spd_buffer,Europe,6000,397,397,0,397,0
+spd,spd_buffer,Europe,5500,397,397,0,397,0
+spd,spd_buffer,Europe,5000,397,397,0,397,0
+spd,spd_buffer,Europe,4500,397,397,0,397,0
+spd,spd_buffer,Europe,4000,397,397,0,397,0
+spd,spd_buffer,Europe,3500,397,397,0,397,0
+spd,spd_buffer,Europe,3000,397,397,0,397,0
+spd,spd_buffer,Europe,2500,397,397,0,397,0
+spd,spd_buffer,Europe,2000,397,397,0,397,0
+spd,spd_buffer,Latin America,8500,88,88,0,88,0
+spd,spd_buffer,Latin America,8000,88,88,0,88,0
+spd,spd_buffer,Latin America,7500,88,88,0,88,0
+spd,spd_buffer,Latin America,7000,88,88,0,88,0
+spd,spd_buffer,Latin America,6500,88,88,0,88,0
+spd,spd_buffer,Latin America,6000,88,88,0,88,0
+spd,spd_buffer,Latin America,5500,88,88,0,88,0
+spd,spd_buffer,Latin America,5000,88,88,0,88,0
+spd,spd_buffer,Latin America,4500,88,88,0,88,0
+spd,spd_buffer,Latin America,4000,88,88,0,88,0
+spd,spd_buffer,Latin America,3500,88,88,0,88,0
+spd,spd_buffer,Latin America,3000,88,88,0,88,0
+spd,spd_buffer,Latin America,2500,88,88,0,88,0
+spd,spd_buffer,Latin America,2000,88,88,0,88,0
+spd,spd_buffer,North America,8500,558,558,0,558,0
+spd,spd_buffer,North America,8000,558,558,0,558,0
+spd,spd_buffer,North America,7500,558,558,0,558,0
+spd,spd_buffer,North America,7000,558,558,0,558,0
+spd,spd_buffer,North America,6500,558,558,0,558,0
+spd,spd_buffer,North America,6000,558,558,0,558,0
+spd,spd_buffer,North America,5500,558,558,0,558,0
+spd,spd_buffer,North America,5000,558,558,0,558,0
+spd,spd_buffer,North America,4500,558,558,0,558,0
+spd,spd_buffer,North America,4000,558,558,0,558,0
+spd,spd_buffer,North America,3500,558,558,0,558,0
+spd,spd_buffer,North America,3000,558,558,0,558,0
+spd,spd_buffer,North America,2500,558,558,0,558,0
+spd,spd_buffer,North America,2000,558,558,0,558,0
+spd,spd_buffer,Oceania,8500,49,49,0,49,0
+spd,spd_buffer,Oceania,8000,49,49,0,49,0
+spd,spd_buffer,Oceania,7500,49,49,0,49,0
+spd,spd_buffer,Oceania,7000,49,49,0,49,0
+spd,spd_buffer,Oceania,6500,49,49,0,49,0
+spd,spd_buffer,Oceania,6000,49,49,0,49,0
+spd,spd_buffer,Oceania,5500,49,49,0,49,0
+spd,spd_buffer,Oceania,5000,49,49,0,49,0
+spd,spd_buffer,Oceania,4500,49,49,0,49,0
+spd,spd_buffer,Oceania,4000,49,49,0,49,0
+spd,spd_buffer,Oceania,3500,49,49,0,49,0
+spd,spd_buffer,Oceania,3000,49,49,0,49,0
+spd,spd_buffer,Oceania,2500,49,49,0,49,0
+spd,spd_buffer,Oceania,2000,49,49,0,49,0
