@@ -19,6 +19,12 @@ On Windows, source installation also requires the Rtools toolchain compatible wi
 
 The old-R runner uses `{purrr}` to satisfy the project iteration rules. Its only contributed runtime packages are `mvpart`, `purrr`, the two direct `purrr` dependencies `rlang` and `magrittr`, and `assertthat` for function contracts. `survival` is suggested by `mvpart` but is not loaded by the multivariate or univariate operations used here.
 
+## Random seed
+
+Both operations prune their trees by cross-validation, which assigns samples to folds at random, so the change points depend on the state of the random-number generator. The `{targets}` seed does not reach the R 3.5 subprocess. The pipeline therefore passes the project seed (`set_seed` in `R/00_Config_file.R`) to `run_mvpart_runtime()`, which writes it into the request. The runner passes it to `compute_mrt()` and `compute_pap_change_points()`, which reset the generator to that seed before each dataset. The result for a dataset therefore depends only on its own data and the seed, not on the order or number of datasets in the run. The seed is recorded in `metadata_mrt_runtime` and `metadata_change_point_runtime`, and `validate_mvpart_runtime_result()` rejects a result that does not record the requested seed.
+
+Results are reproducible only within the pinned R 3.5.0 runtime. R 3.6.0 changed the default algorithm of `sample()`, so the same seed gives different cross-validation folds in later R versions.
+
 ## Minimal production design
 
 Keep the old-R process at a serialized-data boundary:

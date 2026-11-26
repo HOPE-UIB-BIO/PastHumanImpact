@@ -102,6 +102,10 @@ operation <-
 data_input <-
   res_request[["data"]]
 
+# The seed is reset before each dataset inside the compute functions.
+seed <-
+  res_request[["seed"]]
+
 #----------------------------------------------------------#
 # 2. Execute the requested operation -----
 #----------------------------------------------------------#
@@ -110,12 +114,18 @@ if (
   identical(operation, "mrt")
 ) {
   data_result <-
-    compute_mrt(data_pollen = data_input)
+    compute_mrt(
+      data_pollen = data_input,
+      seed = seed
+    )
 } else if (
   identical(operation, "change_points")
 ) {
   data_result <-
-    compute_pap_change_points(data_source = data_input)
+    compute_pap_change_points(
+      data_source = data_input,
+      seed = seed
+    )
 } else {
   stop("Unsupported isolated mvpart operation.")
 }
@@ -129,6 +139,7 @@ res_output <-
     data = data_result,
     provenance = list(
       operation = operation,
+      seed = seed,
       r_version = as.character(getRversion()),
       mvpart_version = as.character(
         utils::packageVersion("mvpart")

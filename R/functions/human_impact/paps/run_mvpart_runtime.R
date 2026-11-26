@@ -7,6 +7,8 @@
 #' @param path_runner Path to the isolated runtime script.
 #' @param path_installer Path to the pinned runtime installer.
 #' @param path_function_files Paths to functions sourced by the old-R runner.
+#' @param seed Whole number passed to the isolated operation, which resets the
+#'   random-number generator to it before each dataset.
 #' @param path_library Path to the isolated R 3.5 package library.
 #' @param r_version Character scalar R version managed by `rig`.
 #' @param rig_executable Path to the `rig` executable.
@@ -20,6 +22,7 @@
 #'   path_runner = "run_mvpart_runtime.R",
 #'   path_installer = "install_mvpart_runtime.R",
 #'   path_function_files = character(),
+#'   seed = 1234L,
 #'   path_library = "~/R/legacy-library/mvpart-r35"
 #' )
 #' }
@@ -29,6 +32,7 @@ run_mvpart_runtime <- function(
     path_runner,
     path_installer,
     path_function_files,
+    seed = 1234L,
     path_library = path.expand("~/R/legacy-library/mvpart-r35"),
     r_version = "3.5.0",
     rig_executable = Sys.which("rig"),
@@ -48,6 +52,11 @@ run_mvpart_runtime <- function(
     is.character(path_function_files),
     length(path_function_files) > 0L,
     all(file.exists(path_function_files)),
+    is.numeric(seed),
+    length(seed) == 1L,
+    is.finite(seed),
+    seed == round(seed),
+    abs(seed) <= .Machine[["integer.max"]],
     is.character(path_library),
     length(path_library) == 1L,
     dir.exists(path_library),
@@ -90,6 +99,7 @@ run_mvpart_runtime <- function(
     object = list(
       operation = operation,
       data = data_input,
+      seed = as.integer(seed),
       function_files = normalizePath(
         path_function_files,
         winslash = "/",
@@ -154,7 +164,8 @@ run_mvpart_runtime <- function(
   res_validated <-
     validate_mvpart_runtime_result(
       result = res_runtime,
-      operation = operation
+      operation = operation,
+      seed = seed
     )
 
   return(res_validated)

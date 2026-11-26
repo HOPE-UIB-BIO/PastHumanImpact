@@ -3,18 +3,26 @@
 #' Enforce the data and provenance contract returned by the old-R subprocess.
 #' @param result Result list returned by the isolated runtime.
 #' @param operation One of `mrt` or `change_points`.
+#' @param seed Whole number that the isolated runtime was asked to use.
 #' @return The validated result, unchanged.
+#' @details
+#' The provenance must record the requested seed, which shows that the runner
+#' passed it to the tree-fitting functions.
 #' @examples
 #' \dontrun{
-#' validate_mvpart_runtime_result(result, operation = "mrt")
+#' validate_mvpart_runtime_result(result, operation = "mrt", seed = 1234L)
 #' }
-validate_mvpart_runtime_result <- function(result, operation) {
+validate_mvpart_runtime_result <- function(result, operation, seed) {
   assertthat::assert_that(
     is.list(result),
     all(c("data", "provenance") %in% names(result)),
     is.character(operation),
     length(operation) == 1L,
     operation %in% c("mrt", "change_points"),
+    is.numeric(seed),
+    length(seed) == 1L,
+    is.finite(seed),
+    seed == round(seed),
     msg = "The isolated mvpart result contract is invalid."
   )
 
@@ -47,6 +55,15 @@ validate_mvpart_runtime_result <- function(result, operation) {
     all(vec_required_columns %in% names(data_result)),
     identical(result[["provenance"]][["operation"]], operation),
     msg = "The isolated mvpart output has an invalid operation schema."
+  )
+
+  assertthat::assert_that(
+    is.numeric(result[["provenance"]][["seed"]]),
+    identical(
+      as.integer(result[["provenance"]][["seed"]]),
+      as.integer(seed)
+    ),
+    msg = "The isolated mvpart result did not use the requested seed."
   )
 
   return(result)

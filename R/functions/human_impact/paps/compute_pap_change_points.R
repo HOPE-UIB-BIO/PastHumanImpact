@@ -5,19 +5,28 @@
 #' @param data_source Data frame containing prepared pollen-property
 #'   list-columns.
 #' @param fit_dataset Function used to fit one prepared dataset.
+#' @param seed Whole number used to reset the random-number generator before
+#'   each dataset.
 #' @return A data frame with dataset-level MRT, diversity, ROC, peak, and DCCA
 #'   change points.
 #' @details
 #' The underlying `mvpart` package requires the isolated old-R runtime
 #' documented in `R/analyses/01_data_preparation/05_paps/README.md`. Do not
 #' source the project-wide configuration from that runtime.
+#'
+#' Each regression tree is pruned by cross-validation, which assigns samples
+#' to folds at random. The random-number generator is reset to `seed` before
+#' each dataset, so the change points of a dataset depend only on its own data
+#' and the seed, not on the order or number of datasets. The function changes
+#' the global random-number state.
 #' @examples
 #' \dontrun{
 #' compute_pap_change_points(data_source)
 #' }
 compute_pap_change_points <- function(
     data_source,
-    fit_dataset = fit_pap_change_point_dataset
+    fit_dataset = fit_pap_change_point_dataset,
+    seed = 1234L
 ) {
   vec_required_columns <-
     c(
@@ -37,6 +46,15 @@ compute_pap_change_points <- function(
       "`data_source` is missing required columns for",
       "change-point estimation."
     )
+  )
+
+  assertthat::assert_that(
+    is.numeric(seed),
+    length(seed) == 1L,
+    is.finite(seed),
+    seed == round(seed),
+    abs(seed) <= .Machine[["integer.max"]],
+    msg = "`seed` must be a single whole number."
   )
 
   vec_nested_columns <-
@@ -74,13 +92,17 @@ compute_pap_change_points <- function(
         data_source[["PAP_roc"]],
         data_source[["dcca_scores"]]
       ),
-      .f = ~ fit_dataset(
-        mvrt_cp = ..1,
-        data_diversity = ..2,
-        data_levels = ..3,
-        data_roc = ..4,
-        data_dcca = ..5
-      )
+      .f = ~ {
+        set.seed(seed)
+
+        fit_dataset(
+          mvrt_cp = ..1,
+          data_diversity = ..2,
+          data_levels = ..3,
+          data_roc = ..4,
+          data_dcca = ..5
+        )
+      }
     )
 
   data_change_points <-
