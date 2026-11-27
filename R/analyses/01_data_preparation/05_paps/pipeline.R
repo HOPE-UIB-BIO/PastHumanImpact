@@ -149,6 +149,8 @@ list(
   ),
   # - calculate Rate-of-change (RoC)
   # Why: Prepare roc so downstream targets share one canonical dataset.
+  #   The project seed is reset before each dataset, so the randomisations
+  #   are reproducible whatever the number of cores.
   targets::tar_target(
     name = "data_roc",
     command = compute_roc(
@@ -165,12 +167,15 @@ list(
       n_individuals_to_standardise = 150,
       transformation_coef = "chisq",
       peak_point_method = "trend_non_linear",
-      sd_for_peak_detection = 2
+      sd_for_peak_detection = 2,
+      seed = as.integer(set_seed),
+      n_cores = max(1L, parallel::detectCores() - 1L)
     )
   ),
   # - run multivariate regression trees (MRT) to estimate compositional change
   # - use percentages without prior transformation
   # Why: Run MRT in isolated R 3.5 because mvpart cannot load in modern R.
+  #   The project seed makes the cross-validated pruning reproducible.
   targets::tar_target(
     name = "result_mrt_runtime",
     command = run_mvpart_runtime(
@@ -178,7 +183,8 @@ list(
       data_input = data_pollen,
       path_runner = file_mvpart_runner,
       path_installer = file_mvpart_installer,
-      path_function_files = files_mvpart_functions
+      path_function_files = files_mvpart_functions,
+      seed = as.integer(set_seed)
     )
   ),
   # Why: Expose the stable MRT table under its existing public target name.
@@ -205,6 +211,7 @@ list(
   ),
   # - calculate change points of all PAP variables by regression trees (RT)
   # Why: Run change-point trees in isolated R 3.5 for mvpart compatibility.
+  #   The project seed makes the cross-validated pruning reproducible.
   targets::tar_target(
     name = "result_change_point_runtime",
     command = run_mvpart_runtime(
@@ -212,7 +219,8 @@ list(
       data_input = data_prepared_cp,
       path_runner = file_mvpart_runner,
       path_installer = file_mvpart_installer,
-      path_function_files = files_mvpart_functions
+      path_function_files = files_mvpart_functions,
+      seed = as.integer(set_seed)
     )
   ),
   # Why: Expose the stable change-point table under its existing target name.

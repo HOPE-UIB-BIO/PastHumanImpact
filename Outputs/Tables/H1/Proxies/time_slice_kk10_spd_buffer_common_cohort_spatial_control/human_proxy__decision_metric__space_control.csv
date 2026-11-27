@@ -1,4 +1,4 @@
 profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
-time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,zero_truncated,-0.5673098036220607,-0.6063394200773053,-0.5348248756705067,-0.594041178742604,65,0,1999,0
-time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,signed,-0.574525017503141,-0.6165398587327274,-0.5400828763536858,-0.6053939085566605,65,0,1999,0
-time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,exclude_negative,-0.48501587526409584,-0.5256238864110965,-0.4451944736316149,-0.5068268007475994,51,0,1999,0
+time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,zero_truncated,-0.5627863823986065,-0.6059644861851466,-0.5311939916925081,-0.5925698069198051,65,0,1999,0
+time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,signed,-0.5699802176063304,-0.6151474072870275,-0.5373695597932163,-0.6045852456361344,65,0,1999,0
+time_slice_kk10_spd_buffer_common_cohort_spatial_control,temporal_h1,kk10,spd_buffer,common_cohort,common_cohort_2000_8000,exclude_negative,-0.492146538077221,-0.5372398677976946,-0.46216063245860084,-0.5144434930160515,53,0,1999,0

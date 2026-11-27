@@ -1,9 +1,9 @@
 gridded_support,age_window,analysis,n_units
-spd_buffer,common_cohort,spatial_h1,575
-spd_buffer,native,spatial_h1,806
+spd_buffer,common_cohort,spatial_h1,580
+spd_buffer,native,spatial_h1,807
 spd_buffer,common_cohort,temporal_h1,51
 spd_buffer,native,temporal_h1,51
-radius_50km,common_cohort,spatial_h1,541
-radius_50km,native,spatial_h1,722
+radius_50km,common_cohort,spatial_h1,544
+radius_50km,native,spatial_h1,725
 radius_50km,common_cohort,temporal_h1,51
 radius_50km,native,temporal_h1,51
