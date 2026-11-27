@@ -1,4 +1,4 @@
 profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
-within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,zero_truncated,0.03188318019615248,0.011427095651592984,0.05383499748430257,1246,691,1999,0,estimated,
-within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,signed,0.00839454358053031,0.0010930752937073408,0.015758582719404952,1246,691,1999,0,estimated,
-within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,exclude_negative,-0.001868615608029592,-0.023641459564603583,0.019871176922450513,1137,592,1999,0,estimated,
+within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,zero_truncated,0.030832755735736954,0.009949001335581333,0.05303336939090146,1246,696,1999,0,estimated,
+within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,signed,0.007571735010948401,2.1710349881410947e-4,0.015129601021777458,1246,696,1999,0,estimated,
+within_dataset_kk10_spd_buffer_native_time_control,spatial_h1,kk10,spd_buffer,native,native_500_8000,exclude_negative,-0.003915007561367195,-0.025923233361878163,0.017622603498579695,1136,599,1999,0,estimated,

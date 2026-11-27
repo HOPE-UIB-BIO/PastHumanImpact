@@ -1,4 +1,4 @@
 profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,adjusted_balance,lwr_95,upr_95,n_records,n_human_dominant,n_bootstrap,n_failed_replicates,fit_status,error_message
-within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,zero_truncated,-0.2715650203086804,-0.2977581920192897,-0.24617105768075703,784,221,1999,0,estimated,
-within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,signed,-0.08912863983191642,-0.09785746117927271,-0.08047406602250883,784,221,1999,0,estimated,
-within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,exclude_negative,-0.24535908126563016,-0.27140765765500996,-0.2207833593082294,730,206,1999,0,estimated,
+within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,zero_truncated,-0.2728220860763007,-0.29891262866227347,-0.2472186735627983,784,217,1999,0,estimated,
+within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,signed,-0.08944273716498209,-0.09824948276871748,-0.08100994034200697,784,217,1999,0,estimated,
+within_dataset_hyde_3_5_land_use_radius_50km_native_time_control,spatial_h1,hyde_3_5_land_use,radius_50km,native,native_500_11500,exclude_negative,-0.24856534719714163,-0.2759492386504077,-0.2237461299700764,731,202,1999,0,estimated,

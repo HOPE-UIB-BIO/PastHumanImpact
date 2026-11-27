@@ -1,43 +1,43 @@
 value,distance_km,n_records,n_connected,n_edges,moran_i,expected_i,p_greater,positive_autocorrelation,permutations,status,spatial_scope,spatial_group,stage,profile
-signed_difference,250,1142,1085,8665,0.12326677563342456,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,signed
-signed_difference_residual,250,1142,1085,8665,0.021617663004350196,-8.764241893076249e-4,0.018,TRUE,999,estimated,global,All,residual,signed
-zero_balance,250,1142,1085,8665,0.08978017557621451,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,zero_truncated
-zero_residual,250,1142,1085,8665,0.015975613593580424,-8.764241893076249e-4,0.046,TRUE,999,estimated,global,All,residual,zero_truncated
-signed_difference,500,1142,1130,22532,0.08033149500122608,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,signed
-signed_difference_residual,500,1142,1130,22532,-0.0032588479229695875,-8.764241893076249e-4,0.51,FALSE,999,estimated,global,All,residual,signed
-zero_balance,500,1142,1130,22532,0.06439223259479188,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,zero_truncated
-zero_residual,500,1142,1130,22532,0.0019364577788262402,-8.764241893076249e-4,0.214,FALSE,999,estimated,global,All,residual,zero_truncated
-signed_difference,411.41119655714897,389,389,8995,0.06860542224193115,-0.002577319587628866,0.001,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,signed
-signed_difference_residual,411.41119655714897,389,389,8995,-0.011140162836324682,-0.002577319587628866,0.885,FALSE,999,estimated,dbmem_connectivity,Europe,residual,signed
-zero_balance,411.41119655714897,389,389,8995,0.049822915883192265,-0.002577319587628866,0.002,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,zero_truncated
-zero_residual,411.41119655714897,389,389,8995,-0.009165138188690424,-0.002577319587628866,0.754,FALSE,999,estimated,dbmem_connectivity,Europe,residual,zero_truncated
-signed_difference,890.1172404285654,545,545,23620,0.058708994774450705,-0.001838235294117647,0.001,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,signed
-signed_difference_residual,890.1172404285654,545,545,23620,-0.0074123932937924285,-0.001838235294117647,0.871,FALSE,999,estimated,dbmem_connectivity,North America,residual,signed
-zero_balance,890.1172404285654,545,545,23620,0.07013179918089739,-0.001838235294117647,0.001,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,zero_truncated
-zero_residual,890.1172404285654,545,545,23620,0.009573079898319752,-0.001838235294117647,0.038,TRUE,999,estimated,dbmem_connectivity,North America,residual,zero_truncated
-signed_difference,1757.9132308461055,72,72,772,0.0514134994155325,-0.014084507042253521,0.03,TRUE,999,estimated,dbmem_connectivity,Latin America,unfiltered,signed
-signed_difference_residual,1757.9132308461055,72,72,772,-0.012871318873951567,-0.014084507042253521,0.367,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,signed
-zero_balance,1757.9132308461055,72,72,772,0.036841197732934,-0.014084507042253521,0.063,FALSE,999,estimated,dbmem_connectivity,Latin America,unfiltered,zero_truncated
-zero_residual,1757.9132308461055,72,72,772,-0.012607832118045286,-0.014084507042253521,0.391,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,zero_truncated
-signed_difference,1599.3272958494965,102,102,1223,0.05450395998083034,-0.009900990099009901,0.017,TRUE,999,estimated,dbmem_connectivity,Asia,unfiltered,signed
-signed_difference_residual,1599.3272958494965,102,102,1223,-0.03163592902633042,-0.009900990099009901,0.839,FALSE,999,estimated,dbmem_connectivity,Asia,residual,signed
-zero_balance,1599.3272958494965,102,102,1223,0.03547666626649088,-0.009900990099009901,0.029,TRUE,999,estimated,dbmem_connectivity,Asia,unfiltered,zero_truncated
-zero_residual,1599.3272958494965,102,102,1223,-0.02937876922269618,-0.009900990099009901,0.829,FALSE,999,estimated,dbmem_connectivity,Asia,residual,zero_truncated
-signed_difference,1178.1024675848141,34,34,319,-0.0055344737150436465,-0.030303030303030304,0.164,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,signed
-signed_difference_residual,1178.1024675848141,34,34,319,-0.06544181146058707,-0.030303030303030304,0.943,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,signed
-zero_balance,1178.1024675848141,34,34,319,-0.02056663408612952,-0.030303030303030304,0.274,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,zero_truncated
-zero_residual,1178.1024675848141,34,34,319,-0.06364787087382467,-0.030303030303030304,0.944,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,zero_truncated
-zero_balance,250,996,935,6788,0.10275990125788796,-0.0010050251256281408,0.001,TRUE,999,estimated,global,All,unfiltered,exclude_negative
-zero_residual,250,996,935,6788,0.012614511220448444,-0.0010050251256281408,0.091,FALSE,999,estimated,global,All,residual,exclude_negative
-zero_balance,500,996,980,17535,0.07989110532756813,-0.0010050251256281408,0.001,TRUE,999,estimated,global,All,unfiltered,exclude_negative
-zero_residual,500,996,980,17535,-6.932389282896834e-4,-0.0010050251256281408,0.337,FALSE,999,estimated,global,All,residual,exclude_negative
-zero_balance,411.41119655714897,334,334,6608,0.08151030151114091,-0.003003003003003003,0.001,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,exclude_negative
-zero_residual,411.41119655714897,334,334,6608,-0.008389149588660697,-0.003003003003003003,0.662,FALSE,999,estimated,dbmem_connectivity,Europe,residual,exclude_negative
-zero_balance,907.2390371707627,477,477,19422,0.02555282972419631,-0.0021008403361344537,0.003,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,exclude_negative
-zero_residual,907.2390371707627,477,477,19422,-0.0050896035901073985,-0.0021008403361344537,0.665,FALSE,999,estimated,dbmem_connectivity,North America,residual,exclude_negative
-zero_balance,1757.9132308461055,66,66,638,-0.0027562062379520662,-0.015384615384615385,0.269,FALSE,999,estimated,dbmem_connectivity,Latin America,unfiltered,exclude_negative
-zero_residual,1757.9132308461055,66,66,638,-0.04755489704515804,-0.015384615384615385,0.908,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,exclude_negative
-zero_balance,1599.3272958494965,89,89,899,0.040126260449041544,-0.011363636363636364,0.051,FALSE,999,estimated,dbmem_connectivity,Asia,unfiltered,exclude_negative
-zero_residual,1599.3272958494965,89,89,899,-0.042823821549423775,-0.011363636363636364,0.907,FALSE,999,estimated,dbmem_connectivity,Asia,residual,exclude_negative
-zero_balance,1412.6608992653814,30,30,290,-0.041680462696619396,-0.034482758620689655,0.543,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,exclude_negative
-zero_residual,1412.6608992653814,30,30,290,-0.05769082794747224,-0.034482758620689655,0.893,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,exclude_negative
+signed_difference,250,1142,1085,8641,0.12448404051233745,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,signed
+signed_difference_residual,250,1142,1085,8641,0.017246460194152765,-8.764241893076249e-4,0.048,TRUE,999,estimated,global,All,residual,signed
+zero_balance,250,1142,1085,8641,0.0924884432049259,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,zero_truncated
+zero_residual,250,1142,1085,8641,0.015371823786670473,-8.764241893076249e-4,0.059,FALSE,999,estimated,global,All,residual,zero_truncated
+signed_difference,500,1142,1130,22457,0.08224403935211778,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,signed
+signed_difference_residual,500,1142,1130,22457,-0.005776754089692911,-8.764241893076249e-4,0.703,FALSE,999,estimated,global,All,residual,signed
+zero_balance,500,1142,1130,22457,0.06848720948327235,-8.764241893076249e-4,0.001,TRUE,999,estimated,global,All,unfiltered,zero_truncated
+zero_residual,500,1142,1130,22457,0.001208040775395956,-8.764241893076249e-4,0.253,FALSE,999,estimated,global,All,residual,zero_truncated
+signed_difference,411.41119655714897,388,388,8935,0.06917193368997343,-0.002583979328165375,0.001,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,signed
+signed_difference_residual,411.41119655714897,388,388,8935,-0.010157972646056645,-0.002583979328165375,0.799,FALSE,999,estimated,dbmem_connectivity,Europe,residual,signed
+zero_balance,411.41119655714897,388,388,8935,0.0496264257690258,-0.002583979328165375,0.002,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,zero_truncated
+zero_residual,411.41119655714897,388,388,8935,-0.011611238277574324,-0.002583979328165375,0.851,FALSE,999,estimated,dbmem_connectivity,Europe,residual,zero_truncated
+signed_difference,890.1172404285654,546,546,23690,0.06064744711782158,-0.001834862385321101,0.001,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,signed
+signed_difference_residual,890.1172404285654,546,546,23690,-0.006593464340010368,-0.001834862385321101,0.809,FALSE,999,estimated,dbmem_connectivity,North America,residual,signed
+zero_balance,890.1172404285654,546,546,23690,0.07705040038901739,-0.001834862385321101,0.001,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,zero_truncated
+zero_residual,890.1172404285654,546,546,23690,0.01412126232705689,-0.001834862385321101,0.015,TRUE,999,estimated,dbmem_connectivity,North America,residual,zero_truncated
+signed_difference,1757.9132308461055,72,72,772,0.07204375473480655,-0.014084507042253521,0.017,TRUE,999,estimated,dbmem_connectivity,Latin America,unfiltered,signed
+signed_difference_residual,1757.9132308461055,72,72,772,-0.025260554323258657,-0.014084507042253521,0.6,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,signed
+zero_balance,1757.9132308461055,72,72,772,0.04943032543782553,-0.014084507042253521,0.039,TRUE,999,estimated,dbmem_connectivity,Latin America,unfiltered,zero_truncated
+zero_residual,1757.9132308461055,72,72,772,-0.024906002314460312,-0.014084507042253521,0.585,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,zero_truncated
+signed_difference,1599.3272958494965,102,102,1223,0.045832970496935924,-0.009900990099009901,0.03,TRUE,999,estimated,dbmem_connectivity,Asia,unfiltered,signed
+signed_difference_residual,1599.3272958494965,102,102,1223,-0.03477037688847106,-0.009900990099009901,0.879,FALSE,999,estimated,dbmem_connectivity,Asia,residual,signed
+zero_balance,1599.3272958494965,102,102,1223,0.038168166159490584,-0.009900990099009901,0.027,TRUE,999,estimated,dbmem_connectivity,Asia,unfiltered,zero_truncated
+zero_residual,1599.3272958494965,102,102,1223,-0.025954913726256384,-0.009900990099009901,0.767,FALSE,999,estimated,dbmem_connectivity,Asia,residual,zero_truncated
+signed_difference,1178.1024675848141,34,34,319,0.0014841196133065528,-0.030303030303030304,0.118,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,signed
+signed_difference_residual,1178.1024675848141,34,34,319,-0.06285228522067102,-0.030303030303030304,0.921,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,signed
+zero_balance,1178.1024675848141,34,34,319,-0.01790193470396208,-0.030303030303030304,0.266,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,zero_truncated
+zero_residual,1178.1024675848141,34,34,319,-0.061096804040680276,-0.030303030303030304,0.922,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,zero_truncated
+zero_balance,250,995,934,6655,0.1226601282032035,-0.001006036217303823,0.001,TRUE,999,estimated,global,All,unfiltered,exclude_negative
+zero_residual,250,995,934,6655,0.025829379345542223,-0.001006036217303823,0.012,TRUE,999,estimated,global,All,residual,exclude_negative
+zero_balance,500,995,979,17278,0.08730692277088911,-0.001006036217303823,0.001,TRUE,999,estimated,global,All,unfiltered,exclude_negative
+zero_residual,500,995,979,17278,0.0023704280850092995,-0.001006036217303823,0.211,FALSE,999,estimated,global,All,residual,exclude_negative
+zero_balance,411.41119655714897,332,332,6405,0.08585006411030505,-0.0030211480362537764,0.001,TRUE,999,estimated,dbmem_connectivity,Europe,unfiltered,exclude_negative
+zero_residual,411.41119655714897,332,332,6405,0.00309922494319699,-0.0030211480362537764,0.234,FALSE,999,estimated,dbmem_connectivity,Europe,residual,exclude_negative
+zero_balance,907.2390371707627,476,476,19498,0.027207834142244827,-0.002105263157894737,0.001,TRUE,999,estimated,dbmem_connectivity,North America,unfiltered,exclude_negative
+zero_residual,907.2390371707627,476,476,19498,-0.009113608600746833,-0.002105263157894737,0.894,FALSE,999,estimated,dbmem_connectivity,North America,residual,exclude_negative
+zero_balance,1757.9132308461055,66,66,638,0.030951625199084863,-0.015384615384615385,0.086,FALSE,999,estimated,dbmem_connectivity,Latin America,unfiltered,exclude_negative
+zero_residual,1757.9132308461055,66,66,638,-0.04127000468921883,-0.015384615384615385,0.825,FALSE,999,estimated,dbmem_connectivity,Latin America,residual,exclude_negative
+zero_balance,1609.6568852910232,91,91,968,0.017408544257820777,-0.011111111111111112,0.141,FALSE,999,estimated,dbmem_connectivity,Asia,unfiltered,exclude_negative
+zero_residual,1609.6568852910232,91,91,968,-0.04574792100630377,-0.011111111111111112,0.93,FALSE,999,estimated,dbmem_connectivity,Asia,residual,exclude_negative
+zero_balance,1412.6608992653814,30,30,290,-0.041277545043654,-0.034482758620689655,0.536,FALSE,999,estimated,dbmem_connectivity,Oceania,unfiltered,exclude_negative
+zero_residual,1412.6608992653814,30,30,290,-0.054663273831992466,-0.034482758620689655,0.849,FALSE,999,estimated,dbmem_connectivity,Oceania,residual,exclude_negative

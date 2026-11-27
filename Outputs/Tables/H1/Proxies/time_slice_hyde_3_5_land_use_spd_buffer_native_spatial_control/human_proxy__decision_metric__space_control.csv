@@ -1,4 +1,4 @@
 profile_id,analysis,human_proxy,proxy_support,age_window,window_id,profile,pooled_difference,lwr_95,upr_95,mean_difference,n_units,n_human_greater,n_bootstrap,n_failed_replicates
-time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,zero_truncated,-0.5021953574276959,-0.5582966319456394,-0.4386691308138734,-0.5476055265444975,79,2,1999,0
-time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,signed,-0.5149006061837516,-0.5691731743461756,-0.44994517770865,-0.575608854308074,79,2,1999,0
-time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,exclude_negative,-0.43623672966393595,-0.5084276283931823,-0.36500349153161815,-0.4625567888317896,61,2,1999,0
+time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,zero_truncated,-0.498102545406337,-0.555517159040273,-0.4341745618601239,-0.5424456040059457,79,2,1999,0
+time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,signed,-0.5089550993156402,-0.5646909738697536,-0.44382876028937623,-0.5640799718194096,79,2,1999,0
+time_slice_hyde_3_5_land_use_spd_buffer_native_spatial_control,temporal_h1,hyde_3_5_land_use,spd_buffer,native,native_500_11500,exclude_negative,-0.43183128267308035,-0.5054536962423664,-0.3601990800388364,-0.45468557245564856,61,2,1999,0

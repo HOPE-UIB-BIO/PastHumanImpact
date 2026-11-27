@@ -1,2 +1,2 @@
 n_reference,n_reference_human,n_compared,n_reproduced,n_differs,n_excluded_residual_df,n_estimated_without_balance,n_not_in_common_cohort,n_unexplained,n_human_new,n_human_reference_compared,max_abs_difference,tolerance,is_reproduced
-1069,305,1062,35,1027,0,5,2,0,310,304,2,1e-8,FALSE
+1069,305,1060,1,1059,0,7,2,0,315,301,2,1e-8,FALSE
