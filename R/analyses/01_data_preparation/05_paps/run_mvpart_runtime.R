@@ -22,6 +22,11 @@
 vec_arguments <-
   commandArgs(trailingOnly = TRUE)
 
+# Newer rig versions pass the "--" separator on to the script; older ones
+#   drop it. No path argument can be "--", so remove it before validating.
+vec_arguments <-
+  vec_arguments[vec_arguments != "--"]
+
 if (
   length(vec_arguments) != 3L
 ) {
